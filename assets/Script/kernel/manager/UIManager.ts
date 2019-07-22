@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Helloworld extends cc.Component {
+export default class UIManager extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
@@ -9,8 +9,13 @@ export default class Helloworld extends cc.Component {
     @property
     text: string = 'hello';
 
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {}
+
     start () {
-        // init logic
-        this.label.string = this.text;
+
     }
+
+    // update (dt) {}
 }
