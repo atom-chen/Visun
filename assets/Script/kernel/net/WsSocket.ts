@@ -1,3 +1,6 @@
+import { DataProcessor } from "../codec/DataProcessor";
+import JsonCodec from "../codec/JsonCodec";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -6,6 +9,12 @@ export default class WsSocket extends cc.Component {
 	private _connected:boolean = false;
 	private _ws:any;
 	private _url:string;
+	private _dataProcessor:DataProcessor = new JsonCodec();
+
+	public setDataProcessor(processor:DataProcessor)
+	{
+		this._dataProcessor = processor;
+	}
 
 	public connect(url:string) 
 	{
@@ -31,6 +40,8 @@ export default class WsSocket extends cc.Component {
 			ws.onmessage = function (event) {
 				cc.log("ws: onmessage");
 				var data = event.data;
+				var msg = self._dataProcessor.decode(data);
+				cc.log(msg);
 			}
 			ws.onclose = function () {
 				cc.log("ws: onclose");
@@ -62,7 +73,8 @@ export default class WsSocket extends cc.Component {
 			cc.log("no ws object");
 			return;
 		}
-		this._ws.send(data);
+		var msg = this._dataProcessor.encode(data);
+		this._ws.send(msg);
 	}
 
 }

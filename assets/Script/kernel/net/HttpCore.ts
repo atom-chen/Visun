@@ -4,7 +4,7 @@ import * as Consts from "../../looker/Consts";
 import EventCenter from "../manager/EventCenter";
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
-var HttpResponds = {};
+import HttpResponds from "../../logic/proxy/HttpResponds";
 
 @ccclass
 export default class HttpCore extends cc.Component {
@@ -90,7 +90,7 @@ export default class HttpCore extends cc.Component {
 		if(ptoinfo.addrparams && ptoinfo.addrparams.length > 0) {
 			if(!addr) { addr = ""; }
 			for(var j = 0,len = ptoinfo.addrparams.length; j < len; j++) {
-				if( typeof(tAddrParams[j]) != typeof(ptoinfo.addrparams[j]) ){
+				if( typeof(tAddrParams[j]) != ptoinfo.addrparams[j] ){
 					cc.error("地址参数类型错误");
 				}
 				addr += "/" + tAddrParams[j]
@@ -100,12 +100,12 @@ export default class HttpCore extends cc.Component {
 		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params)
 
 		if(ptoinfo.reqType === "GET") {
-			HttpCore.callGet(domain, addr, paramStr, null, function(iCode, data){
+			HttpCore.callGet(domain, addr, paramStr, null, function(iCode:number, data:any){
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
 		else if(ptoinfo.reqType === "POST") {
-			HttpCore.callPost(domain, addr, paramStr, null, function(iCode, data){
+			HttpCore.callPost(domain, addr, paramStr, null, function(iCode:number, data:any){
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
