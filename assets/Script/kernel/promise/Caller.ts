@@ -1,8 +1,5 @@
 import Procedure from "./Procedure";
 
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class Caller {
 	private _fn:Function;
 	private _target:any;
