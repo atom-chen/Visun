@@ -2,16 +2,16 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class EventCenter extends cc.Component {
-    private _events = {};
+	private _events = {};
 
-    private static _singleton:EventCenter = null;
-    public static instance() {
-        if(EventCenter._singleton){ return EventCenter._singleton; }
-        EventCenter._singleton = new EventCenter();
-        return EventCenter._singleton;
-    }
+	private static _singleton:EventCenter = null;
+	public static instance() {
+		if(EventCenter._singleton){ return EventCenter._singleton; }
+		EventCenter._singleton = new EventCenter();
+		return EventCenter._singleton;
+	}
 
-    //监听事件
+	//监听事件
 	public listen(evtName:string, cbFunc:Function, thisObj:any, bCall:boolean)
 	{
 		if(!evtName || !cbFunc)
@@ -101,6 +101,6 @@ export default class EventCenter extends cc.Component {
 				listener.callBack.apply(listener.target, ars);
 			}
 		}
-    }
-    
+	}
+	
 }

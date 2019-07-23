@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class HttpResponds extends cc.Component {
+export default class ProtobufCodec extends cc.Component {
 
 	@property
 	text: string = 'hello';

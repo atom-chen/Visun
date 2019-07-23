@@ -76,6 +76,9 @@
     "_components": [
       {
         "__id__": 8
+      },
+      {
+        "__id__": 9
       }
     ],
     "_prefab": null,
@@ -350,5 +353,17 @@
     "_fitWidth": true,
     "_fitHeight": true,
     "_id": "e0M6JEa+9Ky5swQz83yJQz"
+  },
+  {
+    "__type__": "bd972LrZVpOZoe8IlMOO3PS",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "label": null,
+    "text": "hello",
+    "_id": "97K24phGZF8rDPQKTzRRyv"
   }
 ]

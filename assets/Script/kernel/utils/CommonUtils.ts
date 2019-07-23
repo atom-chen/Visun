@@ -3,19 +3,19 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CommonUtils extends cc.Component {
 
-    @property(cc.Label)
-    label: cc.Label = null;
+	@property(cc.Label)
+	label: cc.Label = null;
 
-    @property
-    text: string = 'hello';
+	@property
+	text: string = 'hello';
 
-    // LIFE-CYCLE CALLBACKS:
+	// LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+	// onLoad () {}
 
-    start () {
+	start () {
 
-    }
+	}
 
-    // update (dt) {}
+	// update (dt) {}
 }

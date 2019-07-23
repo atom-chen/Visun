@@ -2,20 +2,35 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class PlatformUtil extends cc.Component {
+	
+	//获取设备ID
+	public static getDeviceId() : number {
+		return 0;
+	}
 
-    @property(cc.Label)
-    label: cc.Label = null;
+	//复制到粘贴板
+	public static copy(content:string) {
 
-    @property
-    text: string = 'hello';
+	}
 
-    // LIFE-CYCLE CALLBACKS:
+	//粘贴
+	public static paste(content:string) {
 
-    // onLoad () {}
+	}
 
-    start () {
+	//保存到相册
+	public static saveToPhotoAlbum() {
 
-    }
+	}
 
-    // update (dt) {}
+	//打开相册
+	public static openGallery() {
+
+	}
+
+	//手动设置横竖屏
+	public static setOrientation() {
+
+	}
+	
 }
