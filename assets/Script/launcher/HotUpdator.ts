@@ -1,14 +1,5 @@
 const {ccclass, property} = cc._decorator;
 
-var customManifestStr = JSON.stringify({
-	"packageUrl": "http://localhost/Vision/remote-assets/",
-	"remoteManifestUrl": "http://localhost/Vision/remote-assets/project.manifest",
-	"remoteVersionUrl": "http://localhost/Vision/remote-assets/version.manifest",
-	"version": "1.10",
-	"assets": {},
-	"searchPaths": []
-});
-
 @ccclass
 export default class HotUpdator extends cc.Component {
 
@@ -31,35 +22,6 @@ export default class HotUpdator extends cc.Component {
 	private _canRetry:boolean = false;
 	private _storagePath:string = "";
 
-
-	private checkCb(event:any) 
-	{
-		cc.log('checkCb Code: ' + event.getEventCode());
-		switch (event.getEventCode())
-		{
-			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-				cc.log("checkCb No local manifest file found, hot update skipped.");
-				break;
-			case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
-			case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-				cc.log("checkCb Fail to download manifest file, hot update skipped.");
-				break;
-			case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-				cc.log("checkCb Already up to date with the latest remote version.");
-				break;
-			case jsb.EventAssetsManager.NEW_VERSION_FOUND:
-				cc.log('checkCb New version found, please try to update.');
-				//this.panel.checkBtn.active = false;
-				this.fileProgress.progress = 0;
-				this.byteProgress.progress = 0;
-				break;
-			default:
-				return;
-		}
-		
-		this._am.setEventCallback(null);
-		this._updating = false;
-	}
 
 	private updateCb(event:any) 
 	{
@@ -141,14 +103,11 @@ export default class HotUpdator extends cc.Component {
 	retry() 
 	{
 		if (!this._updating && this._canRetry) {
-			//this.panel.retryBtn.active = false;
 			this._canRetry = false;
-			
 			cc.log('Retry failed Assets...');
 			this._am.downloadFailedAssets();
 		}
 	}
-	
 	
 	loadLocalManifest() : boolean
 	{
@@ -163,23 +122,6 @@ export default class HotUpdator extends cc.Component {
 			return true;
 		}
 		return false;
-	}
-
-	checkUpdate() 
-	{
-		if (this._updating) {
-			cc.log('Checking or updating ...');
-			return;
-		}
-		if( !this.loadLocalManifest() ) return;
-		if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) {
-			cc.log('Failed to load local manifest ...');
-			return;
-		}
-		this._am.setEventCallback(this.checkCb.bind(this));
-
-		this._am.checkUpdate();
-		this._updating = true;
 	}
 
 	hotUpdate() 
@@ -199,8 +141,6 @@ export default class HotUpdator extends cc.Component {
 	{
 		// Hot update is only available in Native build
 		if (!cc.sys.isNative) {
-			this.fileProgress.progress = 0;
-			this.byteProgress.progress = 0;
 			this.fileProgress.node.active = false;
 			this.byteProgress.node.active = false;
 			return;
@@ -215,7 +155,7 @@ export default class HotUpdator extends cc.Component {
 		// if the return value equals 0, versionA equals to B,
 		// if the return value smaller than 0, versionA is smaller than B.
 		var versionCompareHandle = function (versionA:string, versionB:string) {
-			cc.log("JS Custom Version Compare: version A is " + versionA + ', version B is ' + versionB);
+			cc.log("Version Compare: version A is " + versionA + ', version B is ' + versionB);
 			var vA = versionA.split('.');
 			var vB = versionB.split('.');
 			for (var i = 0; i < vA.length; ++i) {

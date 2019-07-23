@@ -4,18 +4,36 @@ const {ccclass, property} = cc._decorator;
 export default class ConfirmDlg extends cc.Component {
 
 	@property(cc.Label)
-	label: cc.Label = null;
+	labelContent: cc.Label = null;
 
-	@property
-	text: string = 'hello';
+	@property(cc.Label)
+	labelTitle: cc.Label = null;
 
-	// LIFE-CYCLE CALLBACKS:
+	@property(cc.Button)
+	btn_ok: cc.Button = null;
 
-	// onLoad () {}
+	@property(cc.Button)
+	btn_no: cc.Button = null;
 
-	start () {
+	private _callback:Function = null;
 
+	onLoad() {
+		var self = this;
+		this.btn_ok.node.on("click", function(){
+			self._callback(1);
+			self.node.destroy();
+		})
+		this.btn_no.node.on("click", function(){
+			self._callback(0);
+			self.node.destroy();
+		})
 	}
 
-	// update (dt) {}
+	
+	public reflesh(callback:Function, content:string, title:string, okTxt:string, cancelTxt:string) 
+	{
+		this._callback = callback;
+		this.labelContent.string = content;
+		this.labelTitle.string = title;
+	}
 }
