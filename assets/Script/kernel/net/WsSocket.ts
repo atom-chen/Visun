@@ -1,6 +1,8 @@
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 
+var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket; 
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -31,7 +33,7 @@ export default class WsSocket extends cc.Component {
 				return; 
 			}
 
-			var ws = new WebSocket(url, []);
+			var ws = new WebSocket(url, [], ""+loadedResource);
 			ws.binaryType = "arraybuffer";
 			ws.onopen = function () {
 				self._connected = true;
