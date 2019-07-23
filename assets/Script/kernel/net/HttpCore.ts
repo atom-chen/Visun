@@ -11,13 +11,15 @@ export default class HttpCore extends cc.Component {
 	private static g_timeout:number = 10;
 	private static g_allProtocol:object = {};
 	
-	public static addProtocol(ptoname:string) : void {
+	public static addProtocol(ptoname:string)
+	{
 		HttpCore[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
 
 		}
 	}
 
-	public static registProcotols() {
+	public static registProcotols()
+	{
 		for ( var ptoname in this.g_allProtocol ) {
 			this.addProtocol(ptoname);
 		}
@@ -25,7 +27,8 @@ export default class HttpCore extends cc.Component {
 
 	//-----------------------------------------------------------------
 
-	public static convertParam(param:any, rule:any) {
+	public static convertParam(param:any, rule:any) 
+	{
 		if( typeof(param) == typeof("") ){
 			return param;
 		}
@@ -70,7 +73,8 @@ export default class HttpCore extends cc.Component {
 	}
 
 	//根据协议规则文件发送请求
-	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:Function){
+	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:Function)
+	{
 		var ptoinfo = this.g_allProtocol[ptoname]
 		if(!ptoinfo) { cc.log("未定义该协议：", ptoname); return; }
 		cc.log("[请求]：", ptoname);
@@ -111,7 +115,8 @@ export default class HttpCore extends cc.Component {
 		}
 	}
 
-	private static onRespData(ptoname:string, iCode:number, data:any, unsafeCallback:Function) {
+	private static onRespData(ptoname:string, iCode:number, data:any, unsafeCallback:Function) 
+	{
 		cc.log("[响应]：", ptoname, iCode);
 		if(iCode===0){
 			var info = JsonCodec.decode(data);
@@ -129,7 +134,8 @@ export default class HttpCore extends cc.Component {
 
 	//-----------------------------------------------------------------
 
-	private static commonHead(xhr:any) {
+	private static commonHead(xhr:any) 
+	{
 		// if (cc.sys.isNative){
 		// 	xhr.setRequestHeader("Accept-Encoding","gzip,deflate","text/html;charset=UTF-8");
 		// }
@@ -142,7 +148,8 @@ export default class HttpCore extends cc.Component {
 		// xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
 	}
 
-	public static callGet(url:any, addr:any, params:any, respType:any, callback:Function) {
+	public static callGet(url:any, addr:any, params:any, respType:any, callback:Function) 
+	{
 		var finalUrl = url
 		if(addr && addr != "") {
 			finalUrl = url + "/" + addr
@@ -194,7 +201,8 @@ export default class HttpCore extends cc.Component {
 		xhr.send();
 	}
 
-	public static callPost(url:any, addr:any, params:any, respType:any, callback:Function) {
+	public static callPost(url:any, addr:any, params:any, respType:any, callback:Function) 
+	{
 		var finalUrl = url
 		if(addr && addr != "") {
 			finalUrl = url + "/" + addr
@@ -243,7 +251,8 @@ export default class HttpCore extends cc.Component {
 		xhr.send(paramStr);
 	}
 
-	public static callUpload(url:any, addr:any, params:any, respType:any, callback:Function){
+	public static callUpload(url:any, addr:any, params:any, respType:any, callback:Function)
+	{
 
 	}
 	

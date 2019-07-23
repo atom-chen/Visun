@@ -11,11 +11,7 @@ export default class HotUpdator extends cc.Component {
 
 	// LIFE-CYCLE CALLBACKS:
 
-	// onLoad () {}
-
-	start () {
+	onLoad () {
 
 	}
-
-	// update (dt) {}
 }

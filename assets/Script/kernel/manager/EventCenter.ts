@@ -5,7 +5,8 @@ export default class EventCenter extends cc.Component {
 	private _events = {};
 
 	private static _singleton:EventCenter = null;
-	public static instance() {
+	public static instance() 
+	{
 		if(EventCenter._singleton){ return EventCenter._singleton; }
 		EventCenter._singleton = new EventCenter();
 		return EventCenter._singleton;

@@ -7,7 +7,8 @@ export default class WsSocket extends cc.Component {
 	private _ws:any;
 	private _url:string;
 
-	public connect(url:string) {
+	public connect(url:string) 
+	{
 		this.close();
 		this._connected = false;
 		this._url = url;
@@ -45,7 +46,8 @@ export default class WsSocket extends cc.Component {
 		});
 	}
 
-	public close() {
+	public close() 
+	{
 		if(this._ws){
 			cc.log("关闭WebSocket");
 			this._ws.close();
@@ -54,7 +56,8 @@ export default class WsSocket extends cc.Component {
 		this._connected = false;
 	}
 
-	public sendMsg(data) {
+	public sendMsg(data:any) 
+	{
 		if(!this._ws) {
 			cc.log("no ws object");
 			return;
