@@ -56,7 +56,7 @@ export default class WsSocket extends cc.Component {
 		this._connected = false;
 	}
 
-	public sendMsg(data:any) 
+	public sendData(data:any) 
 	{
 		if(!this._ws) {
 			cc.log("no ws object");

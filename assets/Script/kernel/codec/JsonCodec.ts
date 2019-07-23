@@ -1,14 +1,16 @@
+import { DataProcessor } from "./DataProcessor";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class JsonCodec extends cc.Component {
-
-	public static encode(info:any) : string
+export default class JsonCodec implements DataProcessor {
+	
+	encode(data: any) 
 	{
-		return JSON.stringify(info);
+		return JSON.stringify(data);
 	}
 
-	public static decode(data:string) : object
+	decode(data: any) 
 	{
 		return JSON.parse(data);
 	}

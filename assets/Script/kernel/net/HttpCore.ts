@@ -1,8 +1,9 @@
 const {ccclass, property} = cc._decorator;
 
 import * as Consts from "../../looker/Consts";
-import JsonCodec from "../codec/JsonCodec";
 import EventCenter from "../manager/EventCenter";
+import { DataProcessor } from "../codec/DataProcessor";
+import JsonCodec from "../codec/JsonCodec";
 var HttpResponds = {};
 
 @ccclass
@@ -10,6 +11,7 @@ export default class HttpCore extends cc.Component {
 	public static token:string = "";
 	private static g_timeout:number = 10;
 	private static g_allProtocol:object = {};
+	private static _dataProcessor:DataProcessor = new JsonCodec;
 	
 	public static addProtocol(ptoname:string)
 	{
@@ -27,7 +29,7 @@ export default class HttpCore extends cc.Component {
 
 	//-----------------------------------------------------------------
 
-	public static convertParam(param:any, rule:any) 
+	public static convertParam(param:any, rule:any) : string
 	{
 		if( typeof(param) == typeof("") ){
 			return param;
@@ -97,20 +99,20 @@ export default class HttpCore extends cc.Component {
 
 		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params)
 
-		if(ptoinfo.reqType == "GET") {
+		if(ptoinfo.reqType === "GET") {
 			HttpCore.callGet(domain, addr, paramStr, null, function(iCode, data){
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
-		else if(ptoinfo.reqType == "POST") {
+		else if(ptoinfo.reqType === "POST") {
 			HttpCore.callPost(domain, addr, paramStr, null, function(iCode, data){
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
-		else if(ptoinfo.reqType == "UPLOAD") {
+		else if(ptoinfo.reqType === "UPLOAD") {
 
 		}
-		else if(ptoinfo.reqType == "DOWNLOAD") {
+		else if(ptoinfo.reqType === "DOWNLOAD") {
 
 		}
 	}
@@ -119,7 +121,7 @@ export default class HttpCore extends cc.Component {
 	{
 		cc.log("[响应]：", ptoname, iCode);
 		if(iCode===0){
-			var info = JsonCodec.decode(data);
+			var info = this._dataProcessor.decode(data);
 
 			//1 调用响应协议
 			if(HttpResponds[ptoname]) { HttpResponds[ptoname](info); }
@@ -139,7 +141,6 @@ export default class HttpCore extends cc.Component {
 		// if (cc.sys.isNative){
 		// 	xhr.setRequestHeader("Accept-Encoding","gzip,deflate","text/html;charset=UTF-8");
 		// }
-
 		//跨域访问
 		// xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
 		// xhr.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With");
@@ -162,16 +163,6 @@ export default class HttpCore extends cc.Component {
 
 		var xhr = cc.loader.getXMLHttpRequest();
 
-		// xhr.onloadstart = function() {
-		// 	//cc.log('[onloadstart]', finalUrl);
-		// }
-		// xhr.onload = function() {
-		// 	//cc.log('[onload]', finalUrl);
-		// }
-		// xhr.onloadend = function() {
-		// 	//cc.log('[onloadend]', finalUrl);
-		// }
-
 		xhr.onabort = function() {
 			cc.log('[onabort]', finalUrl);
 			callback(4, xhr.responseText);
@@ -184,7 +175,6 @@ export default class HttpCore extends cc.Component {
 			cc.log('[ontimeout]', finalUrl);
 			callback(2, xhr.responseText);
 		}
-		
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
 				cc.log("========http get resp========");
@@ -212,16 +202,6 @@ export default class HttpCore extends cc.Component {
 
 		var xhr = cc.loader.getXMLHttpRequest();
 
-		// xhr.onloadstart = function() {
-		// 	//cc.log('[onloadstart]', finalUrl);
-		// }
-		// xhr.onload = function() {
-		// 	//cc.log('[onload]', finalUrl);
-		// }
-		// xhr.onloadend = function() {
-		// 	//cc.log('[onloadend]', finalUrl);
-		// }
-
 		xhr.onabort = function() {
 			cc.log('[onabort]', finalUrl);
 			callback(4, xhr.responseText);
@@ -234,7 +214,6 @@ export default class HttpCore extends cc.Component {
 			cc.log('[ontimeout]', finalUrl);
 			callback(2, xhr.responseText);
 		}
-		
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
 				cc.log("========http post resp========");
