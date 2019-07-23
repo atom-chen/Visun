@@ -1170,7 +1170,9 @@
     "byteProgress": {
       "__id__": 12
     },
-    "manifestUrl": null,
+    "manifestUrl": {
+      "__uuid__": "a29458f9-e2e7-4675-b7db-bb275413c5bd"
+    },
     "_id": "3eisstPTZIR6a761rcnQlT"
   }
 ]

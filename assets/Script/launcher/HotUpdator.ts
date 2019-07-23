@@ -21,8 +21,10 @@ export default class HotUpdator extends cc.Component {
 	@property(cc.ProgressBar)
 	byteProgress: cc.ProgressBar = null;
 
-	@property
-	manifestUrl:cc.Asset = null;
+	@property({
+		type: cc.Asset
+	})
+	manifestUrl: cc.Asset = null;
 
 	private _am:any;
 	private _updating:boolean = false;
@@ -147,27 +149,20 @@ export default class HotUpdator extends cc.Component {
 		}
 	}
 	
-	loadCustomManifest() 
+	
+	loadLocalManifest() : boolean
 	{
-		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
-			var manifest = new jsb.Manifest(customManifestStr, this._storagePath);
-			this._am.loadLocalManifest(manifest, this._storagePath);
-		}
-	}
-	loadLocalManifest()
-	{
-		if(!this.manifestUrl){
-			this.loadCustomManifest();
-			return;
-		}
 		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
 			// Resolve md5 url
 			var url = this.manifestUrl.nativeUrl;
 			if (cc.loader.md5Pipe) {
 				url = cc.loader.md5Pipe.transformURL(url);
 			}
+			cc.log("local manifest path: ", url);
 			this._am.loadLocalManifest(url);
+			return true;
 		}
+		return false;
 	}
 
 	checkUpdate() 
@@ -176,7 +171,7 @@ export default class HotUpdator extends cc.Component {
 			cc.log('Checking or updating ...');
 			return;
 		}
-		this.loadLocalManifest();
+		if( !this.loadLocalManifest() ) return;
 		if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) {
 			cc.log('Failed to load local manifest ...');
 			return;
@@ -192,7 +187,7 @@ export default class HotUpdator extends cc.Component {
 		if (this._am && !this._updating) {
 			this._am.setEventCallback(this.updateCb.bind(this));
 
-			this.loadLocalManifest();
+			if(!this.loadLocalManifest()) return;
 
 			this._updating = true;
 			this._am.update();
