@@ -280,6 +280,8 @@ export default class HotUpdator extends cc.Component {
 
 	onDestroy() 
 	{
-		this._am.setEventCallback(null);
+		if(this._am){
+			this._am.setEventCallback(null);
+		}
 	}
 }

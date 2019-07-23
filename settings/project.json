@@ -23,13 +23,13 @@
   "group-list": [
     "default"
   ],
-  "last-module-event-record-time": 0,
+  "last-module-event-record-time": 1563875195737,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 720,
     "width": 1280
   },
+  "start-scene": "11c1a0a6-d692-42f8-9afa-45c7864f6d57",
   "use-customize-simulator": true,
-  "use-project-simulator-setting": false,
-  "start-scene": "current"
+  "use-project-simulator-setting": false
 }

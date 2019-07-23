@@ -6,11 +6,8 @@ import WsSocket from "../../kernel/net/WsSocket";
 @ccclass
 export default class WelcomeScene extends cc.Component {
 
-	@property(cc.Label)
-	label: cc.Label = null;
-
-	@property
-	text: string = 'hello';
+	@property(cc.Button)
+	btnEnter: cc.Button = null;
 
 	// LIFE-CYCLE CALLBACKS:
 
@@ -19,6 +16,10 @@ export default class WelcomeScene extends cc.Component {
 
 		var ws = new WsSocket();
 		ws.connect("wss://echo.websocket.org");
+
+		this.btnEnter.node.on("click", function(){
+			cc.director.loadScene("LobbyScene")
+		}, this);
 
 	}
 
