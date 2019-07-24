@@ -1,10 +1,6 @@
-const {ccclass, property} = cc._decorator;
+import { LoginState } from "../../looker/Consts";
 
-enum LoginState {
-	unlogin = 0,
-	logining = 1,
-	succ = 2
-}
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class LoginMgr extends cc.Component {

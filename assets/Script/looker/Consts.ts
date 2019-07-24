@@ -7,3 +7,9 @@ export enum LAYER {
 	Tips,
 	Loading,
 }
+
+export enum LoginState {
+	unlogin = 0,
+	logining = 1,
+	succ = 2
+}

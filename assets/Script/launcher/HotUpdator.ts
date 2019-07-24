@@ -23,7 +23,7 @@ export default class HotUpdator extends cc.Component {
 	private _storagePath:string = "";
 
 
-	private updateCb(event:any) 
+	protected updateCb(event:any) 
 	{
 		var needRestart = false;
 		var failed = false;
@@ -61,9 +61,9 @@ export default class HotUpdator extends cc.Component {
 				break;
 			case jsb.EventAssetsManager.UPDATE_FAILED:
 				cc.log('updateCb Update failed. ' + event.getMessage());
-				//this.panel.retryBtn.active = true;
 				this._updating = false;
 				this._canRetry = true;
+				this.retry();
 				break;
 			case jsb.EventAssetsManager.ERROR_UPDATING:
 				cc.log('updateCb Asset update error: ' + event.getAssetId() + ', ' + event.getMessage());
@@ -89,9 +89,6 @@ export default class HotUpdator extends cc.Component {
 			var newPaths = this._am.getLocalManifest().getSearchPaths();
 			console.log(JSON.stringify(newPaths));
 			Array.prototype.unshift.apply(searchPaths, newPaths);
-			// This value will be retrieved and appended to the default search path during game startup,
-			// please refer to samples/js-tests/main.js for detailed usage.
-			// !!! Re-add the search paths in main.js is very important, otherwise, new scripts won't take effect.
 			cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
 			jsb.fileUtils.setSearchPaths(searchPaths);
 
@@ -100,7 +97,7 @@ export default class HotUpdator extends cc.Component {
 		}
 	}
 	
-	retry() 
+	protected retry() 
 	{
 		if (!this._updating && this._canRetry) {
 			this._canRetry = false;
@@ -109,10 +106,9 @@ export default class HotUpdator extends cc.Component {
 		}
 	}
 	
-	loadLocalManifest() : boolean
+	protected loadLocalManifest() : boolean
 	{
 		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
-			// Resolve md5 url
 			var url = this.manifestUrl.nativeUrl;
 			if (cc.loader.md5Pipe) {
 				url = cc.loader.md5Pipe.transformURL(url);
@@ -124,27 +120,23 @@ export default class HotUpdator extends cc.Component {
 		return false;
 	}
 
-	hotUpdate() 
+	protected hotUpdate() 
 	{
 		if (this._am && !this._updating) {
 			this._am.setEventCallback(this.updateCb.bind(this));
-
 			if(!this.loadLocalManifest()) return;
-
 			this._updating = true;
 			this._am.update();
 		}
 	}
 
-	// use this for initialization
-	onLoad() 
-	{
-		// Hot update is only available in Native build
+	public beginUpdate() {
 		if (!cc.sys.isNative) {
 			this.fileProgress.node.active = false;
 			this.byteProgress.node.active = false;
 			return;
 		}
+
 		cc.log("---------hotupdate begin-----------");
 		
 		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate');
@@ -211,6 +203,12 @@ export default class HotUpdator extends cc.Component {
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
 		this.hotUpdate();
+	}
+
+	// use this for initialization
+	onLoad() 
+	{
+		this.beginUpdate();
 	}
 
 	onDestroy() 

@@ -13,21 +13,15 @@ export default class WelcomeScene extends cc.Component {
 	// LIFE-CYCLE CALLBACKS:
 
 	onLoad () {
-	//	HttpCore.callGet("www.baidu.com", null, null, null, function(){});
-
-		var ws = new WsSocket();
-		ws.connect("wss://echo.websocket.org");
-
 		this.btnEnter.node.on("click", function(){
-			//cc.director.loadScene("LobbyScene")
 			UIManager.showDialog("prefabs/ConfirmDlg", function(){
 				var scriptCpn = this.getComponent("ConfirmDlg");
 				scriptCpn.reflesh(function(menuId:number){
-					cc.log("select ", menuId);
+					if(menuId===0) return;
+					cc.director.loadScene("LobbyScene")
 				}, "我是内容哦", "温馨提示");
 			})
 		}, this);
-
 	}
 
 	start () {

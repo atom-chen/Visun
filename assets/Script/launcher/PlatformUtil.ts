@@ -4,9 +4,9 @@ const {ccclass, property} = cc._decorator;
 export default class PlatformUtil extends cc.Component {
 	
 	//获取设备ID
-	public static getDeviceId() : number 
+	public static getDeviceId() : string 
 	{
-		return 0;
+		return "";
 	}
 
 	//复制到粘贴板

@@ -359,8 +359,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -449.316,
-      "y": 54.783,
+      "x": -439.992,
+      "y": 60.111,
       "z": 0
     },
     "_scale": {
@@ -1408,6 +1408,18 @@
       "__id__": 2
     },
     "_enabled": true,
+    "btn_ddz": {
+      "__id__": 11
+    },
+    "btn_brnn": {
+      "__id__": 16
+    },
+    "btn_fqzs": {
+      "__id__": 21
+    },
+    "btn_zjh": {
+      "__id__": 26
+    },
     "_id": "a5GWiPUxdC5YLgUEqvkaLN"
   }
 ]

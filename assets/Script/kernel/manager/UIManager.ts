@@ -27,6 +27,13 @@ export default class UIManager extends cc.Component {
 				var obj = cc.instantiate(loadedResource);
 				
 				if(obj) {
+					var masklayer = new cc.Node("masklayer");
+					var sprite = masklayer.addComponent(cc.Layout)
+					obj.addChild(masklayer, -1);
+					masklayer.setContentSize(1280,720);
+					masklayer.on("touchstart", function(event:any){ event.stopPropagation(); });
+					masklayer.on("touchend", function(event:any){ event.stopPropagation(); });
+
 					cvs.addChild(obj, layerId);
 					UIManager._allUI[prefabName] = obj;
 					if(callback) { callback.apply(obj); }
