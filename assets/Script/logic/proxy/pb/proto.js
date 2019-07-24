@@ -9,20 +9,20 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.msg = (function() {
+$root.proto = (function() {
 
     /**
-     * Namespace msg.
-     * @exports msg
+     * Namespace proto.
+     * @exports proto
      * @namespace
      */
-    var msg = {};
+    var proto = {};
 
-    msg.Login = (function() {
+    proto.Login = (function() {
 
         /**
          * Properties of a Login.
-         * @memberof msg
+         * @memberof proto
          * @interface ILogin
          * @property {string|null} [name] Login name
          * @property {string|null} [pwd] Login pwd
@@ -30,11 +30,11 @@ $root.msg = (function() {
 
         /**
          * Constructs a new Login.
-         * @memberof msg
+         * @memberof proto
          * @classdesc Represents a Login.
          * @implements ILogin
          * @constructor
-         * @param {msg.ILogin=} [properties] Properties to set
+         * @param {proto.ILogin=} [properties] Properties to set
          */
         function Login(properties) {
             if (properties)
@@ -46,7 +46,7 @@ $root.msg = (function() {
         /**
          * Login name.
          * @member {string} name
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @instance
          */
         Login.prototype.name = "";
@@ -54,7 +54,7 @@ $root.msg = (function() {
         /**
          * Login pwd.
          * @member {string} pwd
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @instance
          */
         Login.prototype.pwd = "";
@@ -62,21 +62,21 @@ $root.msg = (function() {
         /**
          * Creates a new Login instance using the specified properties.
          * @function create
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
-         * @param {msg.ILogin=} [properties] Properties to set
-         * @returns {msg.Login} Login instance
+         * @param {proto.ILogin=} [properties] Properties to set
+         * @returns {proto.Login} Login instance
          */
         Login.create = function create(properties) {
             return new Login(properties);
         };
 
         /**
-         * Encodes the specified Login message. Does not implicitly {@link msg.Login.verify|verify} messages.
+         * Encodes the specified Login message. Does not implicitly {@link proto.Login.verify|verify} messages.
          * @function encode
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
-         * @param {msg.ILogin} message Login message or plain object to encode
+         * @param {proto.ILogin} message Login message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -91,11 +91,11 @@ $root.msg = (function() {
         };
 
         /**
-         * Encodes the specified Login message, length delimited. Does not implicitly {@link msg.Login.verify|verify} messages.
+         * Encodes the specified Login message, length delimited. Does not implicitly {@link proto.Login.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
-         * @param {msg.ILogin} message Login message or plain object to encode
+         * @param {proto.ILogin} message Login message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -106,18 +106,18 @@ $root.msg = (function() {
         /**
          * Decodes a Login message from the specified reader or buffer.
          * @function decode
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {msg.Login} Login
+         * @returns {proto.Login} Login
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Login.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.msg.Login();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Login();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -138,10 +138,10 @@ $root.msg = (function() {
         /**
          * Decodes a Login message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {msg.Login} Login
+         * @returns {proto.Login} Login
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -154,7 +154,7 @@ $root.msg = (function() {
         /**
          * Verifies a Login message.
          * @function verify
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -174,15 +174,15 @@ $root.msg = (function() {
         /**
          * Creates a Login message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {msg.Login} Login
+         * @returns {proto.Login} Login
          */
         Login.fromObject = function fromObject(object) {
-            if (object instanceof $root.msg.Login)
+            if (object instanceof $root.proto.Login)
                 return object;
-            var message = new $root.msg.Login();
+            var message = new $root.proto.Login();
             if (object.name != null)
                 message.name = String(object.name);
             if (object.pwd != null)
@@ -193,9 +193,9 @@ $root.msg = (function() {
         /**
          * Creates a plain object from a Login message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @static
-         * @param {msg.Login} message Login
+         * @param {proto.Login} message Login
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -217,7 +217,7 @@ $root.msg = (function() {
         /**
          * Converts this Login to JSON.
          * @function toJSON
-         * @memberof msg.Login
+         * @memberof proto.Login
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -228,7 +228,7 @@ $root.msg = (function() {
         return Login;
     })();
 
-    return msg;
+    return proto;
 })();
 
 module.exports = $root;
