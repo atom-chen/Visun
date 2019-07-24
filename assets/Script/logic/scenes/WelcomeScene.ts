@@ -19,7 +19,7 @@ export default class WelcomeScene extends cc.Component {
 				scriptCpn.reflesh(function(menuId:number){
 					if(menuId===0) return;
 					cc.director.loadScene("LobbyScene")
-				}, "我是内容哦", "温馨提示");
+				}, "我是内容我是内容我是内容我是内容我是", "温馨提示");
 			})
 		}, this);
 	}
