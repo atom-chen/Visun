@@ -1,4 +1,5 @@
-import UIManager from "../../kernel/manager/UIManager";
+import UIManager from "../../../kernel/manager/UIManager";
+import WsSocket from "../../../kernel/net/WsSocket";
 
 const {ccclass, property} = cc._decorator;
 

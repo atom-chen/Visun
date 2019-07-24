@@ -18,6 +18,34 @@ export default class WsSocket extends cc.Component {
 		this._dataProcessor = processor;
 	}
 
+	private initWs(url:string, cacertPath:string)
+	{
+		var self = this;
+		var ws = new WebSocket(url, [], cacertPath);
+		ws.binaryType = "arraybuffer";
+		ws.onopen = function () {
+			self._connected = true;
+			cc.log("ws: onopen");
+		}
+		ws.onmessage = function (event) {
+			cc.log("ws: onmessage");
+			var data = event.data;
+			var msg = self._dataProcessor.decode(data);
+			cc.log(msg);
+		}
+		ws.onclose = function () {
+			cc.log("ws: onclose");
+			self._connected = false;
+			self.close();
+		}
+		ws.onerror = function (err) {
+			cc.log("ws: onerror");
+			self._connected = false;
+			self.close();
+		}
+		self._ws = ws;
+	}
+
 	public connect(url:string) 
 	{
 		this.close();
@@ -27,36 +55,18 @@ export default class WsSocket extends cc.Component {
 		var self = this;
 
 		//注：native模式连接wss时需要cacert认证
-		cc.loader.loadRes("cacert", function(errorMessage,loadedResource){
-			if( errorMessage ) { 
-				cc.log( '载入cacert.pem失败, 原因:' + errorMessage ); 
-				return; 
-			}
-
-			var ws = new WebSocket(url, [], ""+loadedResource);
-			ws.binaryType = "arraybuffer";
-			ws.onopen = function () {
-				self._connected = true;
-				cc.log("ws: onopen");
-			}
-			ws.onmessage = function (event) {
-				cc.log("ws: onmessage");
-				var data = event.data;
-				var msg = self._dataProcessor.decode(data);
-				cc.log(msg);
-			}
-			ws.onclose = function () {
-				cc.log("ws: onclose");
-				self._connected = false;
-				self.close();
-			}
-			ws.onerror = function (err) {
-				cc.log("ws: onerror");
-				self._connected = false;
-				self.close();
-			}
-			self._ws = ws;
-		});
+		if(cc.sys.isNative){
+			cc.loader.loadRes("cacert", function(errorMessage, loadedResource){
+				if( errorMessage ) { 
+					cc.log( '载入cacert.pem失败, 原因:' + errorMessage ); 
+					return; 
+				}
+				self.initWs(url, ""+loadedResource);
+			});
+		}
+		else {
+			self.initWs(url, "");
+		}
 	}
 
 	public close() 

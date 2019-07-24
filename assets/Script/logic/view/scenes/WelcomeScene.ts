@@ -1,8 +1,6 @@
 const {ccclass, property} = cc._decorator;
 
-import HttpCore from "../../kernel/net/HttpCore";
-import WsSocket from "../../kernel/net/WsSocket";
-import UIManager from "../../kernel/manager/UIManager";
+import UIManager from "../../../kernel/manager/UIManager";
 
 @ccclass
 export default class WelcomeScene extends cc.Component {
@@ -23,10 +21,5 @@ export default class WelcomeScene extends cc.Component {
 			})
 		}, this);
 	}
-
-	start () {
-
-	}
-
-	// update (dt) {}
+	
 }
