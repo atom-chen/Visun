@@ -31,8 +31,7 @@ export default class WsSocket extends cc.Component {
 		}
 		ws.onmessage = function (event) {
 			cc.log("ws: onmessage");
-			var data = event.data;
-			var info = self._dataProcessor.decode(data);
+			var info = self._dataProcessor.decode(event.data);
 		}
 		ws.onclose = function () {
 			cc.log("ws: onclose");

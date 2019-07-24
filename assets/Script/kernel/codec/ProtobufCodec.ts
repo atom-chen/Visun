@@ -11,12 +11,13 @@ export default class ProtobufCodec implements DataProcessor {
 		return messageBuf;
 	}
 
-	decode(data: any) 
+	decode(bytes: any) 
 	{
-		cc.log(data);
-		// let message = proto.Login.create(data);//构造对象
-		// var info = proto.Login.decode(message);
-		return data;
+		var data = new Uint8Array(bytes)
+		var obj = proto.Login.decode(data);
+		var info = proto.Login.toObject(obj)
+		cc.log(info);
+		return info;
 	}
 
 }
