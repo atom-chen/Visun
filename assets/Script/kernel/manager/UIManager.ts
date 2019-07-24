@@ -7,7 +7,7 @@ const {ccclass, property} = cc._decorator;
 export default class UIManager extends cc.Component {
 	private static _allUI:object = {};
 
-	public static initWindow(layerId:Consts.LAYER, prefabName:string, callback:Function) {
+	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, callback:Function) {
 		if(cc.isValid(UIManager._allUI[prefabName])){
 			cc.log("allready exist: ", prefabName);
 			if(callback) { callback.apply(UIManager._allUI[prefabName]); }
@@ -28,7 +28,8 @@ export default class UIManager extends cc.Component {
 				var obj = cc.instantiate(loadedResource);
 				
 				if(obj) {
-					CommonUtils.setModal(obj, true);
+					if(bModal)
+						CommonUtils.setModal(obj, true);
 					
 					cvs.addChild(obj, layerId);
 					UIManager._allUI[prefabName] = obj;
@@ -38,15 +39,15 @@ export default class UIManager extends cc.Component {
 	}
 
 	public static showPanel(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Panel, prefabName, callback);
+		this.initWindow(Consts.LAYER.Panel, prefabName, false, callback);
 	}
 	
 	public static showPopwnd(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Popup, prefabName, callback);
+		this.initWindow(Consts.LAYER.Popup, prefabName, true, callback);
 	}
 	
 	public static showDialog(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Dialog, prefabName, callback);
+		this.initWindow(Consts.LAYER.Dialog, prefabName, true, callback);
 	}
 	
 		
