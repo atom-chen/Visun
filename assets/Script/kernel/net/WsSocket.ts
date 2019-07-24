@@ -1,6 +1,8 @@
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 
+import ProtobufCodec from "../codec/ProtobufCodec";
+
 var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket; 
 
 const {ccclass, property} = cc._decorator;
@@ -11,7 +13,7 @@ export default class WsSocket extends cc.Component {
 	private _connected:boolean = false;
 	private _ws:any;
 	private _url:string;
-	private _dataProcessor:DataProcessor = new JsonCodec();
+	private _dataProcessor:DataProcessor = new ProtobufCodec();
 
 	public setDataProcessor(processor:DataProcessor)
 	{
@@ -30,8 +32,7 @@ export default class WsSocket extends cc.Component {
 		ws.onmessage = function (event) {
 			cc.log("ws: onmessage");
 			var data = event.data;
-			var msg = self._dataProcessor.decode(data);
-			cc.log(msg);
+			var info = self._dataProcessor.decode(data);
 		}
 		ws.onclose = function () {
 			cc.log("ws: onclose");

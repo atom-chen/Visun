@@ -1,5 +1,6 @@
 import UIManager from "../../../kernel/manager/UIManager";
 import WsSocket from "../../../kernel/net/WsSocket";
+import Globals from "../../../looker/Globals";
 
 const {ccclass, property} = cc._decorator;
 
@@ -48,14 +49,12 @@ export default class NewClass extends cc.Component {
 			})
         }, this);
         this.btn_zjh.node.on("click", function(){
-			UIManager.showDialog("prefabs/ConfirmDlg", function(){
-				var scriptCpn = this.getComponent("ConfirmDlg");
-				scriptCpn.reflesh(function(menuId:number){
-					if(menuId===0) return;
-					cc.director.loadScene("WelcomeScene")
-				}, "我是内容哦", "温馨提示");
-			})
+			Globals.g_ws.sendData({name: "hello", pwd: "pwd"});
 		}, this);
+
+		var ws = new WsSocket();
+		ws.connect("wss://echo.websocket.org");
+		Globals.g_ws = ws;
     }
 
     // update (dt) {}
