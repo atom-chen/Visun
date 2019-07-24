@@ -13,6 +13,24 @@ export default class CommonUtils extends cc.Component {
 		}
 	}
 
+	public static setModal(obj:cc.Node, closeWhenClickMask:boolean)
+	{
+		if(!obj || !cc.isValid(obj)){
+			return;
+		}
+		var masklayer = new cc.Node("masklayer");
+		var sprite = masklayer.addComponent(cc.Layout)
+		obj.addChild(masklayer, -1);
+		masklayer.setContentSize(cc.game.canvas.width, cc.game.canvas.height);
+		masklayer.on("touchstart", function(event:any){ event.stopPropagation(); });
+		masklayer.on("touchend", function(event:any){ 
+			event.stopPropagation(); 
+			if(closeWhenClickMask){
+				obj.destroy();
+			}
+		});
+	}
+
 	public static isNil(obj:any) : boolean
 	{
 		if(obj===undefined || obj===null) {
