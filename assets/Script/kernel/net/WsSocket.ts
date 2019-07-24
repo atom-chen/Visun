@@ -1,9 +1,9 @@
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
-
 import ProtobufCodec from "../codec/ProtobufCodec";
 
-var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket; 
+//var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
+var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 
 
 const {ccclass, property} = cc._decorator;
 
