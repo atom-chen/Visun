@@ -16,16 +16,16 @@ export default class WelcomeScene extends cc.Component {
 	onLoad () {
 		EventCenter.instance().listen("req_hallinfo", function(data:any){
 			cc.director.loadScene("LobbyScene");
-			UIManager.showPanel("prefabs/LobbyUI", null);
+			UIManager.showPanel("lobby/prefabs/LobbyUI", null);
 		}, this, false);
 
 		this.btnEnter.node.on("click", function(){
 			if(LoginMgr.instance.isLoginSucc()){
 				cc.director.loadScene("LobbyScene")
-				UIManager.showPanel("prefabs/LobbyUI", null);
+				UIManager.showPanel("lobby/prefabs/LobbyUI", null);
 			}
 			else {
-				UIManager.showDialog("prefabs/ConfirmDlg", function(){
+				UIManager.showDialog("lobby/prefabs/ConfirmDlg", function(){
 					var scriptCpn = this.getComponent("ConfirmDlg");
 					scriptCpn.reflesh(function(menuId:number){
 						if(menuId===0) return;
