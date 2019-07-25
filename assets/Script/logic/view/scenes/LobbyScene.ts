@@ -1,12 +1,11 @@
 import UIManager from "../../../kernel/manager/UIManager";
 import WsSocket from "../../../kernel/net/WsSocket";
 import Globals from "../../../looker/Globals";
-import * as Consts from "../../../looker/Consts";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class LobbyScene extends cc.Component {
 
     @property(cc.Button)
     btn_ddz: cc.Button = null;
@@ -36,6 +35,7 @@ export default class NewClass extends cc.Component {
 		}, this);
 		
         this.btn_zjh.node.on("click", function(){
+            UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", function(){})
 			Globals.g_ws.sendData({name: "hello", pwd: "pwd"});
 		}, this);
 

@@ -28,9 +28,9 @@ export default class UIManager extends cc.Component {
 				var obj = cc.instantiate(loadedResource);
 				
 				if(obj) {
-					if(bModal)
+					if(bModal){
 						CommonUtils.setModal(obj, true);
-					
+					}
 					cvs.addChild(obj, layerId);
 					UIManager._allUI[prefabName] = obj;
 					if(callback) { callback.apply(obj); }

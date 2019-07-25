@@ -1,7 +1,7 @@
 {
   "ver": "1.0.1",
   "uuid": "819daedc-6970-4588-9979-bdc622745e61",
-  "isSubpackage": false,
-  "subpackageName": "",
+  "isSubpackage": true,
+  "subpackageName": "ddz",
   "subMetas": {}
 }

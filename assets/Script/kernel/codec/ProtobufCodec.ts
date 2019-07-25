@@ -1,5 +1,5 @@
 import { DataProcessor } from "./DataProcessor";
-import {proto} from "../../logic/proxy/pb/proto"
+import {proto} from "../../logic/proxy/pb/proto";
 
 export default class ProtobufCodec implements DataProcessor {
 

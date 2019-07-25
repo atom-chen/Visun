@@ -16,7 +16,7 @@ export default class HttpCore extends cc.Component {
 	public static addProtocol(ptoname:string)
 	{
 		HttpCore[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
-
+			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
@@ -31,7 +31,7 @@ export default class HttpCore extends cc.Component {
 
 	public static convertParam(param:any, rule:any) : string
 	{
-		if( typeof(param) == typeof("") ){
+		if( typeof(param) === typeof("") ){
 			return param;
 		}
 	
@@ -136,7 +136,7 @@ export default class HttpCore extends cc.Component {
 
 	//-----------------------------------------------------------------
 
-	private static commonHead(xhr:any) 
+	private static commonHead(xhr:XMLHttpRequest) 
 	{
 		// if (cc.sys.isNative){
 		// 	xhr.setRequestHeader("Accept-Encoding","gzip,deflate","text/html;charset=UTF-8");
