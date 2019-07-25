@@ -4,7 +4,6 @@ import UIManager from "../../../kernel/manager/UIManager";
 import HttpCore from "../../../kernel/net/HttpCore";
 import EventCenter from "../../../kernel/manager/EventCenter";
 import LoginMgr from "../../model/LoginMgr";
-import User from "../../model/User";
 
 @ccclass
 export default class WelcomeScene extends cc.Component {
@@ -16,12 +15,7 @@ export default class WelcomeScene extends cc.Component {
 
 	onLoad () {
 		EventCenter.instance().listen("req_hallinfo", function(data:any){
-			var info = data && data.data
-			if(!info) return;
-			LoginMgr.instance.token = info.serverData.token;
-			HttpCore.token = info.serverData.token;
-			User.updateUser(info.userData);
-			cc.director.loadScene("LobbyScene")
+			cc.director.loadScene("LobbyScene");
 			UIManager.showPanel("prefabs/LobbyUI", null);
 		}, this, false);
 
