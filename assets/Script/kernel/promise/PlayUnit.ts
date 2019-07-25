@@ -1,6 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class PlayUnit extends cc.Component {
-
+export default abstract class PlayUnit {
+	public abstract play() : void;
+	public stop(){}
 }
