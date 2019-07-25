@@ -23,19 +23,20 @@ export default class LobbyScene extends cc.Component {
 	start () 
 	{
         this.btn_ddz.node.on("click", function(){
-			UIManager.showPanel("subgames/ddz/prefabs/ddz_ui", function(){})
+			UIManager.showPanel("subgames/ddz/prefabs/ddz_ui", null);
 		}, this);
 		
         this.btn_brnn.node.on("click", function(){
-			UIManager.showPanel("subgames/brnn/prefabs/brnn_ui", function(){})
+			UIManager.showPanel("subgames/brnn/prefabs/brnn_ui", null);
 		}, this);
 		
         this.btn_fqzs.node.on("click", function(){
-			UIManager.showPanel("subgames/fqzs/prefabs/fqzs_ui", function(){})
+			UIManager.showPanel("subgames/fqzs/prefabs/fqzs_ui", null);
 		}, this);
 		
         this.btn_zjh.node.on("click", function(){
-            UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", function(){})
+            UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", null);
+            
 			Globals.g_ws.sendData({name: "hello", pwd: "pwd"});
 		}, this);
 
