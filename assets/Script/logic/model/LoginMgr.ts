@@ -1,11 +1,12 @@
 import { LoginState } from "../../looker/Consts";
 
-const {ccclass, property} = cc._decorator;
+export default class LoginMgr {
+	public static instance:LoginMgr = new LoginMgr();
 
-@ccclass
-export default class LoginMgr extends cc.Component {
+	private _curState:LoginState = LoginState.unlogin;
+	private _token:string = "";
 
-	@property
-	curState:LoginState = LoginState.unlogin;
-	
+	public get token() : string { return this._token; }
+	public set token(v:string) { this._token = v; }
+	public isLoginSucc() : boolean { return this._token !== ""; }
 }

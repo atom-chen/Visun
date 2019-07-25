@@ -9,18 +9,22 @@ import HttpResponds from "../../logic/proxy/HttpResponds";
 @ccclass
 export default class HttpCore extends cc.Component {
 	public static token:string = "";
-	private static g_timeout:number = 10;
-	private static g_allProtocol:object = {};
+	private static g_timeout:number = 8000;
 	private static _dataProcessor:DataProcessor = new JsonCodec;
+	public static g_allProtocol:object = {};
+
+	public static Init() {
+		this.registProcotols();
+	}
 	
-	public static addProtocol(ptoname:string)
+	private static addProtocol(ptoname:string)
 	{
 		HttpCore[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
-	public static registProcotols()
+	private static registProcotols()
 	{
 		for ( var ptoname in this.g_allProtocol ) {
 			this.addProtocol(ptoname);
@@ -177,8 +181,7 @@ export default class HttpCore extends cc.Component {
 		}
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
-				cc.log("========http get resp========");
-				cc.log(finalUrl);
+				cc.log("[RESP]", finalUrl);
 			//	cc.log(xhr.responseText);
 				callback(0, xhr.responseText);
 			}
@@ -216,8 +219,7 @@ export default class HttpCore extends cc.Component {
 		}
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
-				cc.log("========http post resp========");
-				cc.log(finalUrl);
+				cc.log("[RESP]", finalUrl);
 			//	cc.log(xhr.responseText);
 				callback(0, xhr.responseText);
 			}
