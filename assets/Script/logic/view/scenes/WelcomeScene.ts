@@ -4,6 +4,7 @@ import UIManager from "../../../kernel/manager/UIManager";
 import HttpCore from "../../../kernel/net/HttpCore";
 import EventCenter from "../../../kernel/manager/EventCenter";
 import LoginMgr from "../../model/LoginMgr";
+import HttpRequests from "../../proxy/HttpRequests";
 
 @ccclass
 export default class WelcomeScene extends cc.Component {
@@ -29,13 +30,13 @@ export default class WelcomeScene extends cc.Component {
 					var scriptCpn = this.getComponent("ConfirmDlg");
 					scriptCpn.reflesh(function(menuId:number){
 						if(menuId===0) return;
-						HttpCore.request("req_hallinfo", null, {token:"",mobileType:2}, null);
+						HttpRequests.req_hallinfo(null, {token:"",mobileType:2}, null);
 					}, "請先登錄", "温馨提示");
 				})
 			}
 		}, this);
 
-		HttpCore.request("req_hallinfo", null, {token:"",mobileType:2}, null);
+		HttpRequests.req_hallinfo(null, {token:"",mobileType:2}, null);
 	}
 
 	onDestroy() {

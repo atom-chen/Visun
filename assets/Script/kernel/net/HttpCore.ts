@@ -5,6 +5,7 @@ import EventCenter from "../manager/EventCenter";
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 import HttpResponds from "../../logic/proxy/HttpResponds";
+import HttpRequests from "../../logic/proxy/HttpRequests";
 
 @ccclass
 export default class HttpCore extends cc.Component {
@@ -19,7 +20,7 @@ export default class HttpCore extends cc.Component {
 	
 	private static addProtocol(ptoname:string)
 	{
-		HttpCore[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
+		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
