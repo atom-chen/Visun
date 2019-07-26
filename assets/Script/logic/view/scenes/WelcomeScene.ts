@@ -21,6 +21,8 @@ export default class WelcomeScene extends cc.Component {
 		}, this, false);
 
 		this.btnEnter.node.on("click", function(){
+			HttpRequests.req_hallinfo(null, {token:"",mobileType:2}, null);
+			
 			if(LoginMgr.instance.isLoginSucc()){
 				cc.director.loadScene("LobbyScene")
 				UIManager.showPanel("lobby/prefabs/LobbyUI", null);
@@ -35,8 +37,6 @@ export default class WelcomeScene extends cc.Component {
 				})
 			}
 		}, this);
-
-		HttpRequests.req_hallinfo(null, {token:"",mobileType:2}, null);
 	}
 
 	onDestroy() {

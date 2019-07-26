@@ -72,14 +72,19 @@ export default class HotUpdator extends cc.Component {
 				break;
 		}
 
-		if (failed) 
-		{
-			this._am.setEventCallback(null);
-			this._updating = false;
+		if (failed) {
+			this.onFail();
 		}
 
-		if (needRestart) 
-		{
+		if (needRestart) {
+			this.onSuccess();
+		}
+	}
+
+	protected onSuccess()
+	{
+		cc.log("热更成功");
+		if(this._am){
 			this._am.setEventCallback(null);
 			// Prepend the manifest's search path
 			var searchPaths = jsb.fileUtils.getSearchPaths();
@@ -88,19 +93,21 @@ export default class HotUpdator extends cc.Component {
 			Array.prototype.unshift.apply(searchPaths, newPaths);
 			cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
 			jsb.fileUtils.setSearchPaths(searchPaths);
+		}
 
-			cc.audioEngine.stopAll();
-			cc.game.restart();
-		}
+		this._updating = false;
+
+		cc.audioEngine.stopAll();
+		cc.game.restart();
 	}
-	
-	protected retry() 
+
+	protected onFail()
 	{
-		if (!this._updating && this._canRetry) {
-			this._canRetry = false;
-			cc.log('Retry failed Assets...');
-			this._am.downloadFailedAssets();
+		cc.log("热更失败");
+		if(this._am){
+			this._am.setEventCallback(null);
 		}
+		this._updating = false;
 	}
 
 	protected getLocalManifestPath() : string
@@ -123,22 +130,16 @@ export default class HotUpdator extends cc.Component {
 		return false;
 	}
 
-	protected hotUpdate() 
-	{
-		if (this._am && !this._updating) {
-			this._am.setEventCallback(this.updateCb.bind(this));
-			if(!this.loadLocalManifest()) {
-				return;
-			}
-			this._updating = true;
-			this._am.update();
-		}
-	}
-
 	public beginUpdate() {
 		if (!cc.sys.isNative) {
 			this.fileProgress.node.active = false;
 			this.byteProgress.node.active = false;
+			this.onFail();
+			return;
+		}
+
+		if(this._am && this._updating){
+			cc.log("已经在热更中");
 			return;
 		}
 
@@ -147,10 +148,9 @@ export default class HotUpdator extends cc.Component {
 		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate');
 		cc.log('Storage path for remote asset : ' + this._storagePath);
 
-		// Setup your own version compare handler, versionA and B is versions in string
-		// if the return value greater than 0, versionA is greater than B,
-		// if the return value equals 0, versionA equals to B,
-		// if the return value smaller than 0, versionA is smaller than B.
+		this.fileProgress.progress = 0;
+		this.byteProgress.progress = 0;
+
 		var versionCompareHandle = function (versionA:string, versionB:string) {
 			cc.log("Version Compare: version A is " + versionA + ', version B is ' + versionB);
 			var vA = versionA.split('.');
@@ -173,8 +173,7 @@ export default class HotUpdator extends cc.Component {
 			}
 		};
 
-		// Init with empty manifest url for testing custom manifest
-		this._am = new jsb.AssetsManager('', this._storagePath, versionCompareHandle);
+		this._am = new jsb.AssetsManager("", this._storagePath, versionCompareHandle);
 
 		// Setup the verification callback, but we don't have md5 check function yet, so only print some message
 		// Return true if the verification passed, otherwise return false
@@ -200,17 +199,35 @@ export default class HotUpdator extends cc.Component {
 		cc.log('Hot update is ready, please check or directly update.');
 
 		if (cc.sys.os === cc.sys.OS_ANDROID) {
-			// Some Android device may slow down the download process when concurrent tasks is too much.
-			// The value may not be accurate, please do more test and find what's most suitable for your game.
 			this._am.setMaxConcurrentTask(4);
 		}
 		
-		this.fileProgress.progress = 0;
-		this.byteProgress.progress = 0;
-		this.hotUpdate();
+		this.doUpdate();
 	}
 
-	// use this for initialization
+	protected doUpdate() 
+	{
+		if (this._am && !this._updating) {
+			this._am.setEventCallback(this.updateCb.bind(this));
+			if(!this.loadLocalManifest()) {
+				cc.log("加载本地manifest失败");
+				this.onFail();
+				return;
+			}
+			this._updating = true;
+			this._am.update();
+		}
+	}
+
+	protected retry() 
+	{
+		if (!this._updating && this._canRetry) {
+			this._canRetry = false;
+			cc.log('Retry failed Assets...');
+			this._am.downloadFailedAssets();
+		}
+	}
+
 	onLoad() 
 	{
 		this.beginUpdate();
@@ -219,7 +236,7 @@ export default class HotUpdator extends cc.Component {
 	onDestroy() 
 	{
 		if(this._am){
-			this._am.setEventCallback(null);
+			//this._am.setEventCallback(null);
 		}
 	}
 }
