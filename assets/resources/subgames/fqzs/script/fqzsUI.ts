@@ -1,7 +1,9 @@
+import BaseComp from "../../../../Script/launcher/view/BaseComp";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class FqzsUI extends cc.Component {
+export default class FqzsUI extends BaseComp {
 
     @property(cc.Button)
     btn_close: cc.Button = null;

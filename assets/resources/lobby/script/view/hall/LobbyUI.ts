@@ -5,11 +5,12 @@ import HttpCore from "../../../../../Script/kernel/net/HttpCore";
 import WsSocket from "../../../../../Script/kernel/net/WsSocket";
 import JsonCodec from "../../../../../Script/kernel/codec/JsonCodec";
 import EventCenter from "../../../../../Script/launcher/EventCenter";
+import BaseComp from "../../../../../Script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbyUI extends cc.Component {
+export default class LobbyUI extends BaseComp {
 
     @property(cc.Button)
     btn_ddz: cc.Button = null;

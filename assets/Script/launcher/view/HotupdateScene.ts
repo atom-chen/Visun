@@ -2,9 +2,10 @@ const {ccclass, property} = cc._decorator;
 
 import EventDef from "../../looker/EventDef";
 import EventCenter from "../EventCenter";
+import BaseComp from "./BaseComp";
 
 @ccclass
-export default class HotupdateScene extends cc.Component {
+export default class HotupdateScene extends BaseComp {
 
 	// LIFE-CYCLE CALLBACKS:
 
@@ -12,10 +13,6 @@ export default class HotupdateScene extends cc.Component {
 		EventCenter.instance().listen(EventDef.HOTUPDATE_OVER, function(){
 			this.leave();
 		}, this, false);
-	}
-
-	onDestroy() {
-		EventCenter.instance().removeByTarget(this);
 	}
 
 	private leave() {

@@ -1,7 +1,9 @@
+import BaseComp from "./BaseComp";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class ConfirmDlg extends cc.Component {
+export default class ConfirmDlg extends BaseComp {
 
 	@property(cc.Label)
 	labelContent: cc.Label = null;

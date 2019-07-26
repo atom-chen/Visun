@@ -67,6 +67,7 @@ export default class EventCenter extends cc.Component {
 				var listener = evtList[i];
 				if(listener.target === thisObj)
 				{
+					cc.log("remove by target: ")
 					evtList.splice(i, 1);
 				}
 			}
