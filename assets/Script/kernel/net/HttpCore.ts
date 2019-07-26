@@ -4,31 +4,35 @@ import * as Consts from "../../looker/Consts";
 import EventCenter from "../manager/EventCenter";
 import { DataProcessor } from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
-import HttpResponds from "../../logic/proxy/HttpResponds";
-import HttpRequests from "../../logic/proxy/HttpRequests";
+import HttpResponds from "./HttpResponds";
+import HttpRequests from "./HttpRequests";
 
 @ccclass
 export default class HttpCore extends cc.Component {
 	public static token:string = "";
 	private static g_timeout:number = 8000;
 	private static _dataProcessor:DataProcessor = new JsonCodec;
-	public static g_allProtocol:object = {};
-
-	public static Init() {
-		this.registProcotols();
-	}
+	private static g_allProtocol:object = {};
 	
 	private static addProtocol(ptoname:string)
 	{
-		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) : void{
+		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) {
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
-	private static registProcotols()
+	public static registProcotols(ruleList:any[])
 	{
-		for ( var ptoname in this.g_allProtocol ) {
-			this.addProtocol(ptoname);
+		for( var i=0; i<ruleList.length; i++){
+			var ptoname:string = ruleList[i].name
+			if(this.g_allProtocol[ptoname]){
+				cc.error("重复注册：", ptoname);
+			} 
+			else {
+				cc.log("注册协议：", ptoname);
+				this.g_allProtocol[ptoname] = ruleList[i];
+			//	this.addProtocol(ptoname);   // ts语法中未申明不可使用 HttpRequests.funcname()的形式，故注释掉了
+			}
 		}
 	}
 
