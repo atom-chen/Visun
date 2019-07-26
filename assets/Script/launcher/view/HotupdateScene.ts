@@ -5,13 +5,12 @@ import EventDef from "../../looker/EventDef";
 import EventCenter from "../EventCenter";
 
 @ccclass
-export default class WelcomeScene extends cc.Component {
+export default class HotupdateScene extends cc.Component {
 
 	// LIFE-CYCLE CALLBACKS:
 
 	onLoad () {
 		EventCenter.instance().listen(EventDef.HOTUPDATE_OVER, function(){
-			cc.log("========== leave ==========")
 			this.leave();
 		}, this, false);
 	}
