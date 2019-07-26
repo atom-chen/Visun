@@ -1,6 +1,5 @@
 const {ccclass, property} = cc._decorator;
 
-import UIManager from "../../kernel/manager/UIManager";
 import EventDef from "../../looker/EventDef";
 import EventCenter from "../EventCenter";
 
