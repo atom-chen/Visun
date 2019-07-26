@@ -74,7 +74,7 @@ export default class EventCenter extends cc.Component {
 	}
 
 	//触发
-	public fire(...any:any[])
+	public fire(...arglist:any[])
 	{
 		var evtName = arguments[0];
 

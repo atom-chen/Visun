@@ -1,11 +1,13 @@
 import UIManager from "../../../kernel/manager/UIManager";
 import WsSocket from "../../../kernel/net/WsSocket";
 import Globals from "../../../looker/Globals";
+import HttpCore from "../../../kernel/net/HttpCore";
+import LoginMgr from "../../model/LoginMgr";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbyScene extends cc.Component {
+export default class LobbyUI extends cc.Component {
 
     @property(cc.Button)
     btn_ddz: cc.Button = null;
@@ -42,7 +44,10 @@ export default class LobbyScene extends cc.Component {
 
 		var ws = new WsSocket();
 		ws.connect("wss://echo.websocket.org");
-		Globals.g_ws = ws;
+        Globals.g_ws = ws;
+        
+        HttpCore.request("req_hallinfo", null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
+        HttpCore.request("req_userinfo", null, {token:HttpCore.token}, null);
     }
 
     // update (dt) {}

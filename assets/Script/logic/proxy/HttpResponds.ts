@@ -3,6 +3,7 @@ import HttpCore from "../../kernel/net/HttpCore";
 import User from "../model/User";
 
 export default class HttpResponds {
+
 	public static req_hallinfo(data:any) {
 		var info = data && data.data
 		if(!info) return;
@@ -11,4 +12,11 @@ export default class HttpResponds {
 		User.setHeroId(info.userData.userId);
 		User.updateUser(info.userData);
 	}
+
+	public static req_userinfo(data:any) {
+		var info = data && data.data
+		if(!info) return;
+		User.updateUser(info.userData);
+	}
+	
 }
