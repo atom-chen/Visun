@@ -3,9 +3,6 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class HotUpdator extends cc.Component {
 
-	@property(cc.Label)
-	tipLabel: cc.Label = null;
-
 	@property(cc.ProgressBar)
 	fileProgress: cc.ProgressBar = null;
 
@@ -105,15 +102,21 @@ export default class HotUpdator extends cc.Component {
 			this._am.downloadFailedAssets();
 		}
 	}
+
+	protected getLocalManifestPath() : string
+	{
+		var url = this.manifestUrl.nativeUrl;
+		if (cc.loader.md5Pipe) {
+			url = cc.loader.md5Pipe.transformURL(url);
+		}
+		cc.log("local manifest path: ", url);
+		return url;
+	}
 	
 	protected loadLocalManifest() : boolean
 	{
 		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
-			var url = this.manifestUrl.nativeUrl;
-			if (cc.loader.md5Pipe) {
-				url = cc.loader.md5Pipe.transformURL(url);
-			}
-			cc.log("local manifest path: ", url);
+			var url = this.getLocalManifestPath();
 			this._am.loadLocalManifest(url);
 			return true;
 		}
@@ -124,7 +127,9 @@ export default class HotUpdator extends cc.Component {
 	{
 		if (this._am && !this._updating) {
 			this._am.setEventCallback(this.updateCb.bind(this));
-			if(!this.loadLocalManifest()) return;
+			if(!this.loadLocalManifest()) {
+				return;
+			}
 			this._updating = true;
 			this._am.update();
 		}

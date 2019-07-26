@@ -32,8 +32,9 @@ export default class HttpCore extends cc.Component {
 		}
 	}
 
-	//-----------------------------------------------------------------
+	//--------------------------------------------------------------------------------
 
+	//将表形式的数据转换成 "k1=v1&k2=v2&k3=v3" 格式的字符串
 	public static convertParam(param:any, rule:any) : string
 	{
 		if( typeof(param) === typeof("") ){
@@ -126,20 +127,21 @@ export default class HttpCore extends cc.Component {
 	{
 		cc.log("[响应]：", ptoname, iCode);
 		if(iCode===0){
+			// 解码
 			var info = this._dataProcessor.decode(data);
 
-			//1 调用响应协议
+			// 调用响应协议
 			if(HttpResponds[ptoname]) { HttpResponds[ptoname](info); }
 
-			//2 调用unsafeCallback
+			// 调用unsafeCallback
 			if(unsafeCallback) { unsafeCallback(info); }
 
-			//3 触发事件
+			// 触发事件
 			EventCenter.instance().fire( ptoname, info );
 		}
 	}
 
-	//-----------------------------------------------------------------
+	//--------------------------------------------------------------------------------
 
 	private static commonHead(xhr:XMLHttpRequest) 
 	{
