@@ -16,7 +16,7 @@ export default class HttpResponds {
 	public static req_userinfo(data:any) {
 		var info = data && data.data
 		if(!info) return;
-		User.updateUser(info.userData);
+		User.updateUser(info);
 	}
 	
 }

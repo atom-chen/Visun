@@ -4,6 +4,8 @@ import Globals from "../../../looker/Globals";
 import HttpCore from "../../../kernel/net/HttpCore";
 import LoginMgr from "../../model/LoginMgr";
 import HttpRequests from "../../proxy/HttpRequests";
+import JsonCodec from "../../../kernel/codec/JsonCodec";
+import ProtobufCodec from "../../../kernel/codec/ProtobufCodec";
 
 const {ccclass, property} = cc._decorator;
 
@@ -43,9 +45,9 @@ export default class LobbyUI extends cc.Component {
 			Globals.g_ws.sendData({name: "hello", pwd: "pwd"});
 		}, this);
 
-		var ws = new WsSocket();
-		ws.connect("wss://echo.websocket.org");
-        Globals.g_ws = ws;
+		Globals.g_ws = Globals.g_ws || new WsSocket();
+        //Globals.g_ws.connect("wss://echo.websocket.org", new ProtobufCodec());
+        Globals.g_ws.connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
         
         HttpRequests.req_hallinfo(null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
         HttpRequests.req_userinfo(null, {token:HttpCore.token}, null);

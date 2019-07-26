@@ -1,6 +1,4 @@
 import { DataProcessor } from "../codec/DataProcessor";
-import JsonCodec from "../codec/JsonCodec";
-import ProtobufCodec from "../codec/ProtobufCodec";
 
 //var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
 var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 
@@ -10,15 +8,10 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class WsSocket extends cc.Component {
 
-	private _connected:boolean = false;
 	private _ws:any;
 	private _url:string;
-	private _dataProcessor:DataProcessor = new ProtobufCodec();
-
-	public setDataProcessor(processor:DataProcessor)
-	{
-		this._dataProcessor = processor;
-	}
+	private _dataProcessor:DataProcessor = null;
+	
 
 	private initWs(url:string, cacertPath:string)
 	{
@@ -26,31 +19,29 @@ export default class WsSocket extends cc.Component {
 		var ws = new WebSocket(url, [], cacertPath);
 		ws.binaryType = "arraybuffer";
 		ws.onopen = function () {
-			self._connected = true;
 			cc.log("ws: onopen");
 		}
 		ws.onmessage = function (event) {
 			cc.log("ws: onmessage");
 			var info = self._dataProcessor.decode(event.data);
+			cc.log(info);
 		}
 		ws.onclose = function () {
 			cc.log("ws: onclose");
-			self._connected = false;
 			self.close();
 		}
 		ws.onerror = function (err) {
 			cc.log("ws: onerror");
-			self._connected = false;
 			self.close();
 		}
 		self._ws = ws;
 	}
 
-	public connect(url:string) 
+	public connect(url:string, processor:DataProcessor) 
 	{
 		this.close();
-		this._connected = false;
 		this._url = url;
+		this._dataProcessor = processor;
 		cc.log("连接WebSocket: ", url);
 		var self = this;
 
@@ -76,7 +67,6 @@ export default class WsSocket extends cc.Component {
 			this._ws.close();
 			this._ws = null;
 		}
-		this._connected = false;
 	}
 
 	public sendData(data:any) 

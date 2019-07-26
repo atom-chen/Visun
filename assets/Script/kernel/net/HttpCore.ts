@@ -45,7 +45,6 @@ export default class HttpCore extends cc.Component {
 		if(rule) {
 			if(param){
 				for(var j = 0,len = rule.length; j < len; j++) {
-					if(paramStr != "") { paramStr += "&" }
 					var k = rule[j][0];
 					var wantType = rule[j][1];
 					if(wantType && wantType != "" && typeof(param[k]) != wantType) {
@@ -57,6 +56,7 @@ export default class HttpCore extends cc.Component {
 						}
 					} 
 					else {
+						if(paramStr != "") { paramStr += "&" }
 						paramStr += k + "=" + param[k];
 					}
 				}
