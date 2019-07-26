@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class PlatformUtil extends cc.Component {
+export default class PlatformUtil {
 	
 	//获取设备ID
 	public static getDeviceId() : string 
