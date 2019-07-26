@@ -1,4 +1,5 @@
-import { LoginState } from "../../looker/Consts";
+import { LoginState } from "../../../../Script/looker/Consts";
+
 
 export default class LoginMgr {
 	public static instance:LoginMgr = new LoginMgr();

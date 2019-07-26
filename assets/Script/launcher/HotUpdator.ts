@@ -1,3 +1,6 @@
+import EventDef from "../looker/EventDef";
+import EventCenter from "./EventCenter";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -108,6 +111,7 @@ export default class HotUpdator extends cc.Component {
 			this._am.setEventCallback(null);
 		}
 		this._updating = false;
+		EventCenter.instance().fire(EventDef.HOTUPDATE_OVER)
 	}
 
 	protected getLocalManifestPath() : string
