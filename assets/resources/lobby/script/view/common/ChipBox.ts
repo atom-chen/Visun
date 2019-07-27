@@ -18,15 +18,6 @@ export default class ChipBox extends BaseComp {
 
     start () {
         this.setChipValues([1,3,5,300,800]);
-
-        cc.loader.loadRes("lobby/music/denglu", cc.AudioClip, (err, audioclip) => {
-            if (err) {
-                cc.log("音频加载失败"+err);
-                return;
-            }
-            cc.log("播放音频：", audioclip)
-            cc.audioEngine.playMusic(audioclip, true);
-        });
     }
 
     public setChipValues(values:number[]) {

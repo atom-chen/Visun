@@ -22,7 +22,11 @@ export default class HotupdateScene extends BaseComp {
 		if (!cc.sys.isNative) {
 			this.fileProgress.node.active = false;
 			this.byteProgress.node.active = false;
-			cc.director.loadScene("LobbyScene");
+			cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
+				cc.log("進度：", cpltCnt, totalCnt, ""+(typeof item));
+			}, (err:Error, resobj:any[], urls:string[])=>{
+				cc.director.loadScene("LobbyScene");
+			})
 		} 
 		else {
 			this.fileProgress.progress = 0;
