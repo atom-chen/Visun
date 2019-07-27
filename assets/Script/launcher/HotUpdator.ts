@@ -27,7 +27,7 @@ export default class HotUpdator {
 		this._manifestUrl = manifestUrl;
 		this._finishCallback = finishCallback;
 
-		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate');
+		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/' + this._id);
 		cc.log('Storage path for remote asset : ' + this._storagePath);
 	}
 
