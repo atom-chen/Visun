@@ -12,7 +12,7 @@ export default class Caller {
 		this._args = args;
 	}
 
-	public call(part:Procedure) 
+	public call(part:any=null) 
 	{
 		if(part) {
 			this._fn.apply(this._target, [part].concat(this._args));

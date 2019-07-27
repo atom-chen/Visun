@@ -12,74 +12,76 @@ enum PROCEDURE_STATE {
 
 @ccclass
 export default class Procedure {
-	_node_type = "unknown";
-	_cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
-	_play_overed:boolean = false;
-	_bAutoClean:boolean = true;
+	private _node_type:string = "unknown";
+	private _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
+	private _play_overed:boolean = false;
+	private _bAutoClean:boolean = true;
 
-	_context = null;
-	_argInfo:any[] = [];
-	_procFunc:Caller = null;
-	_stopFunc:Caller = null;
-	_partList:Procedure[] = [];
-	_belongTo:Procedure = null;
-	_next:Procedure = null;
+	private _context = null;
+	private _argInfo:any[] = [];
+	private _procFunc:Caller = null;
+	private _stopFunc:Caller = null;
+	private _partList:Array<Procedure> = [];
+	private _belongTo:Procedure = null;
+	private _next:Procedure = null;
 
-	clean() {
+	public constructor(procFunc:Caller=null, stopFunc:Caller=null) {
+		this._procFunc = procFunc;
+		this._stopFunc = stopFunc;
+	}
+
+	private clean() {
 		this._context = null;
 		this._argInfo.length = 0;
 		this._argInfo = null;
 		this._procFunc = null;
 		this._stopFunc = null;
 		this._partList.length = 0;
-		this._partList = [];
 		this._partList = null;
 	}
 
-	setStopFunc(stop_func:Caller) {
+	public setStopFunc(stop_func:Caller) : Procedure {
 		this._stopFunc = stop_func;
 		return this;
 	}
 
-	setProcFunc(proc_func:Caller) {
+	public setProcFunc(proc_func:Caller) : Procedure {
 		this._procFunc = proc_func;
 		return this;
 	}
 
-	setPlayUnit(playUnit:PlayUnit) {
+	public setPlayUnit(playUnit:PlayUnit) : Procedure {
 		this._procFunc = new Caller(playUnit.play, playUnit);
 		this._stopFunc = new Caller(playUnit.stop, playUnit);
 		return this;
 	}
 
-	addPart(part:Procedure) {
+	public addPart(part:Procedure) : Procedure {
 		part._belongTo = this;
 		this._partList.push(part);
 		return this;
 	}
 
-	addPartCaller(caller1:Caller, caller2:Caller) {
-		var part = new Procedure();
-		part.setProcFunc(caller1);
-		part.setStopFunc(caller2);
-		this.addPart(part);
+	public addPartCaller(caller1:Caller, caller2:Caller=null) : Procedure {
+		var part = new Procedure(caller1, caller2);
+		part._belongTo = this;
+		this._partList.push(part);
 		return this;
 	}
 
-	then(nextNode:Procedure) {
+	public then(nextNode:Procedure) : Procedure {
 		var last = this.getLast();
 		nextNode._belongTo = last._belongTo;
 		last._next = nextNode;
 		return nextNode;
 	}
 
-	thenCall(caller:Caller) {
-		var nextNode = new Procedure();
-		nextNode.setProcFunc(caller);
+	public thenCall(caller:Caller) : Procedure {
+		var nextNode = new Procedure(caller);
 		return this.then(nextNode);
 	}
 
-	getLast() {
+	public getLast() : Procedure {
 		var last:Procedure = this;
 		while(last._next) {
 			last = last._next;
@@ -87,7 +89,7 @@ export default class Procedure {
 		return last;
 	}
 
-	run() {
+	public run() : void {
 		if(this._cur_state === PROCEDURE_STATE.RUNNING) {
 			return;
 		}
@@ -110,7 +112,7 @@ export default class Procedure {
 			this._play_overed = true;
 		}
 		if(this._partList) {
-			for(var i=1, len=this._partList.length; i<len; i++) {
+			for(var i in this._partList) {
 				this._partList[i].run();
 			}
 		}
@@ -123,14 +125,14 @@ export default class Procedure {
 		}
 	}
 
-	onPartFinished() {
+	public onPartFinished() {
 		//自己的处理函数和所有子节点都完成，才正真结束
 		if(this._play_overed && this.isPartsFinished()){
 			this.resolve();
 		}
 	}
 
-	resolve() {
+	public resolve() {
 		this._play_overed = true;
 		if(!this.isPartsFinished()) { return; }  //等待子节点完成
 
@@ -152,7 +154,7 @@ export default class Procedure {
 		cc.log("本Procedure执行完成，整个Procedure执行完成");
 	}
 
-	stop() {
+	public stop() {
 		if(this._next) { this._next._belongTo = this._belongTo; }
 		if(this._cur_state===PROCEDURE_STATE.DONE || this._cur_state===PROCEDURE_STATE.STOPED){
 			if(this._next){
@@ -172,11 +174,11 @@ export default class Procedure {
 		if(this._next) { this._next.stop(); }
 	}
 
-	isFinished() {
+	public isFinished() {
 		return this._cur_state === PROCEDURE_STATE.DONE || this._cur_state === PROCEDURE_STATE.STOPED;
 	}
 
-	isPartsFinished() {
+	public isPartsFinished() {
 		if(!this._partList) { return true; }
 		for(var i in this._partList) {
 			if(!this._partList[i].isFullFinished()) {
@@ -186,7 +188,7 @@ export default class Procedure {
 		return true;
 	}
 	
-	isFullFinished() {
+	public isFullFinished() {
 		if(!this.isFinished()) { return false; }
 		if(this._next) { return this._next.isFullFinished(); }
 		return true;
