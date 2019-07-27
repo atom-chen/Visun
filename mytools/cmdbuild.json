@@ -1,0 +1,17 @@
+{
+	"platform" : "android",
+	"path" : "D:/Vision",
+	"debug" : true,
+	"sourceMaps" : false,
+	"inlineSpriteFrames" : false,
+	"optimizeHotUpdate" : false,
+	"useDebugKeystore" : true,
+	"template" : "link",
+	"apiLevel" : "android-29",
+	"appABIs" : ["armeabi-v7a"],
+	"md5Cache" : false,
+	"encryptJs" : false,
+	"xxteaKey" : "LIKEvisun1@3",
+	"zipCompressJs" : true,
+	"autoCompile" : true
+}

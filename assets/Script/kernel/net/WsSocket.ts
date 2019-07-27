@@ -48,7 +48,7 @@ export default class WsSocket extends BaseComp {
 
 		//注：native模式连接wss时需要cacert认证
 		if(cc.sys.isNative){
-			cc.loader.loadRes("cacert", function(errorMessage, loadedResource){
+			cc.loader.loadRes("launcher/cacert", function(errorMessage, loadedResource){
 				if( errorMessage ) { 
 					cc.log( '载入cacert.pem失败, 原因:' + errorMessage ); 
 					return; 
