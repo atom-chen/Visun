@@ -1,7 +1,9 @@
+import BaseComp from "../../../../../Script/launcher/view/BaseComp";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class ChipBox extends cc.Component {
+export default class ChipBox extends BaseComp {
     @property(cc.Button)
     chip1: cc.Button = null;
     @property(cc.Button)

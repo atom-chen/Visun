@@ -182,12 +182,18 @@ export default class HotUpdator {
 		if(this._am){
 			this._am.setEventCallback(null);
 			// Prepend the manifest's search path
-			var searchPaths = jsb.fileUtils.getSearchPaths();
+			var searchPaths = jsb.fileUtils.getSearchPaths() || [];
 			var newPaths = this._am.getLocalManifest().getSearchPaths();
-			console.log(JSON.stringify(newPaths));
-			Array.prototype.unshift.apply(searchPaths, newPaths);
-			cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
-			jsb.fileUtils.setSearchPaths(searchPaths);
+			if(newPaths){
+				console.log("--------resetSearchPaths:");
+				console.log(JSON.stringify(newPaths));
+				Array.prototype.unshift.apply(searchPaths, newPaths);
+				cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
+				jsb.fileUtils.setSearchPaths(searchPaths);
+			}
+			else {
+				console.log("---------resetSearchPaths: null");
+			}
 		}
 
 		cc.log("热更成功");

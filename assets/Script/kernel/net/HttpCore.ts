@@ -6,9 +6,10 @@ import JsonCodec from "../codec/JsonCodec";
 import HttpResponds from "./HttpResponds";
 import HttpRequests from "./HttpRequests";
 import EventCenter from "../../launcher/EventCenter";
+import BaseComp from "../../launcher/view/BaseComp";
 
 @ccclass
-export default class HttpCore extends cc.Component {
+export default class HttpCore extends BaseComp {
 	public static token:string = "";
 	private static g_timeout:number = 8000;
 	private static _dataProcessor:DataProcessor = new JsonCodec;

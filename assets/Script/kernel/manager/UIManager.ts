@@ -1,10 +1,11 @@
 import * as Consts from "../../looker/Consts";
 import CommonUtils from "../utils/CommonUtils";
+import BaseComp from "../../launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class UIManager extends cc.Component {
+export default class UIManager extends BaseComp {
 	private static _allUI:object = {};
 	//private static _viewStack = [];
 

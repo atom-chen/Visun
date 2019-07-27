@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CommonUtils extends cc.Component {
+export default class CommonUtils {
 
 	public static traverseNodes(root:any, tbl:any) 
 	{
