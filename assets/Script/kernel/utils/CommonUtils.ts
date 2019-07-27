@@ -41,6 +41,11 @@ export default class CommonUtils {
 		}
 	}
 
+	public static getFrameName(name:string) : string 
+	{
+		return name.replace(/\//g,"-");
+	}
+
 	public static utf8ArrayToString(array) : string
 	{
 		var out:string, i:number, len:number, c:number;
