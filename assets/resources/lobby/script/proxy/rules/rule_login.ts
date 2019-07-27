@@ -1,4 +1,4 @@
-var protocols = [
+var rule_login = [
 	{
 		name : "req_hallinfo",
 		reqType : "GET",
@@ -25,4 +25,4 @@ var protocols = [
 	}
 ];
 
-export default protocols;
+export default rule_login;

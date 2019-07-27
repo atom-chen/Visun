@@ -1,4 +1,4 @@
 export interface DataProcessor {
-    encode(data: any): any;
-    decode(data: any): any;
+    encode(...args:any[]): any;
+    decode(...args:any[]): any;
 }

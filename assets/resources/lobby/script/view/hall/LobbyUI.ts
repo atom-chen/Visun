@@ -1,4 +1,3 @@
-import protocols from "../../proxy/rules/rule_login";
 import UIManager from "../../../../../Script/kernel/manager/UIManager";
 import Globals from "../../../../../Script/looker/Globals";
 import HttpCore from "../../../../../Script/kernel/net/HttpCore";
@@ -6,6 +5,7 @@ import WsSocket from "../../../../../Script/kernel/net/WsSocket";
 import JsonCodec from "../../../../../Script/kernel/codec/JsonCodec";
 import EventCenter from "../../../../../Script/launcher/EventCenter";
 import BaseComp from "../../../../../Script/launcher/view/BaseComp";
+import rule_login from "../../proxy/rules/rule_login";
 
 const {ccclass, property} = cc._decorator;
 
@@ -46,10 +46,10 @@ export default class LobbyUI extends BaseComp {
         }, this);
         
 
-        HttpCore.registProcotols(protocols);
+        HttpCore.registProcotols(rule_login);
 		
-		EventCenter.instance().listen("req_hallinfo", this.req_hallinfo, this, false);
-        EventCenter.instance().listen("req_userinfo", this.req_userinfo, this, false);
+		EventCenter.instance().listen("req_hallinfo", this.req_hallinfo, this);
+        EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         
         HttpCore.request("req_hallinfo", null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
         HttpCore.request("req_userinfo", null, {token:HttpCore.token}, null);

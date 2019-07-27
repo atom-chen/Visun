@@ -1,134 +1,38 @@
-import EventDef from "../looker/EventDef";
-import EventCenter from "./EventCenter";
+enum HOT_STATE {
+	READY = 0,
+	UPENGINE = 1,		//下载引擎包
+	CHECKING = 2,		//检查更新
+	UPDATING = 3,		//下载资源
+	DOWNOVER = 4,		//下载完毕
+	UNZIPING = 5,		//解压资源
+	SUCCESS = 6,		//更新成功
+	FAIL = 7,			//更新失败
+	LOADINGRES = 8,		//加载资源
+}
 
-const {ccclass, property} = cc._decorator;
-
-@ccclass
-export default class HotUpdator extends cc.Component {
-
-	@property(cc.ProgressBar)
-	fileProgress: cc.ProgressBar = null;
-
-	@property(cc.ProgressBar)
-	byteProgress: cc.ProgressBar = null;
-
-	@property({
-		type: cc.Asset
-	})
-	manifestUrl: cc.Asset = null;
-
+export default class HotUpdator {
+	private _id:string;
+	private _manifestUrl:string;
+	private _finishCallback:Function;
+	private _curState:HOT_STATE = HOT_STATE.READY;
 	private _am:any;
-	private _updating:boolean = false;
 	private _canRetry:boolean = false;
 	private _storagePath:string = "";
 
 
-	protected updateCb(event:any) 
+	public constructor(id:string, manifestUrl:string, finishCallback:Function)
 	{
-		var needRestart = false;
-		var failed = false;
-		switch (event.getEventCode())
-		{
-			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-				cc.log('updateCb No local manifest file found, hot update skipped.');
-				failed = true;
-				break;
-			case jsb.EventAssetsManager.UPDATE_PROGRESSION:
-				this.byteProgress.progress = event.getPercent();
-				this.fileProgress.progress = event.getPercentByFile();
+		this._curState = HOT_STATE.READY;
+		this._id = id;
+		this._manifestUrl = manifestUrl;
+		this._finishCallback = finishCallback;
 
-				cc.log("progress by file: " + event.getDownloadedFiles() + ' / ' + event.getTotalFiles());
-				cc.log("progress by byte: " + event.getDownloadedBytes() + ' / ' + event.getTotalBytes());
-
-				var msg = event.getMessage();
-				if (msg) {
-					cc.log('Updated file: ' + msg);
-					cc.log(event.getPercent()/100 + '% : ' + msg);
-				}
-				break;
-			case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
-			case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-				cc.log('updateCb Fail to download manifest file, hot update skipped.');
-				failed = true;
-				break;
-			case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-				cc.log('updateCb Already up to date with the latest remote version.');
-				failed = true;
-				break;
-			case jsb.EventAssetsManager.UPDATE_FINISHED:
-				cc.log('updateCb Update finished. ' + event.getMessage());
-				needRestart = true;
-				break;
-			case jsb.EventAssetsManager.UPDATE_FAILED:
-				cc.log('updateCb Update failed. ' + event.getMessage());
-				this._updating = false;
-				this._canRetry = true;
-				this.retry();
-				break;
-			case jsb.EventAssetsManager.ERROR_UPDATING:
-				cc.log('updateCb Asset update error: ' + event.getAssetId() + ', ' + event.getMessage());
-				break;
-			case jsb.EventAssetsManager.ERROR_DECOMPRESS:
-				cc.log(event.getMessage());
-				break;
-			default:
-				break;
-		}
-
-		if (failed) {
-			this.onFail();
-		}
-
-		if (needRestart) {
-			this.onSuccess();
-		}
+		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate');
+		cc.log('Storage path for remote asset : ' + this._storagePath);
 	}
 
-	protected onSuccess()
-	{
-		cc.log("热更成功");
-		if(this._am){
-			this._am.setEventCallback(null);
-			// Prepend the manifest's search path
-			var searchPaths = jsb.fileUtils.getSearchPaths();
-			var newPaths = this._am.getLocalManifest().getSearchPaths();
-			console.log(JSON.stringify(newPaths));
-			Array.prototype.unshift.apply(searchPaths, newPaths);
-			cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
-			jsb.fileUtils.setSearchPaths(searchPaths);
-		}
-
-		this._updating = false;
-
-		cc.audioEngine.stopAll();
-		cc.game.restart();
-	}
-
-	protected onFail()
-	{
-		cc.log("热更失败");
-		if(this._am){
-			this._am.setEventCallback(null);
-		}
-		this._updating = false;
-		EventCenter.instance().fire(EventDef.HOTUPDATE_OVER)
-	}
-
-	protected getLocalManifestPath() : string
-	{
-		var url = this.manifestUrl.nativeUrl;
-		if (cc.loader.md5Pipe) {
-			url = cc.loader.md5Pipe.transformURL(url);
-		}
-		cc.log("local manifest path: ", url);
-		return url;
-	}
-	
-	protected loadLocalManifest() : boolean
-	{
-		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
-			var url = this.getLocalManifestPath();
-			this._am.loadLocalManifest(url);
+	public isUpdating() : boolean {
+		if(this._am && this._curState!==HOT_STATE.READY && this._curState!==HOT_STATE.SUCCESS && this._curState!==HOT_STATE.FAIL) {
 			return true;
 		}
 		return false;
@@ -136,24 +40,18 @@ export default class HotUpdator extends cc.Component {
 
 	public beginUpdate() {
 		if (!cc.sys.isNative) {
-			this.fileProgress.node.active = false;
-			this.byteProgress.node.active = false;
 			this.onFail();
 			return;
 		}
 
-		if(this._am && this._updating){
+		if(this.isUpdating()){
 			cc.log("已经在热更中");
 			return;
 		}
 
 		cc.log("---------hotupdate begin-----------");
-		
-		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate');
-		cc.log('Storage path for remote asset : ' + this._storagePath);
-
-		this.fileProgress.progress = 0;
-		this.byteProgress.progress = 0;
+		this._curState = HOT_STATE.UPDATING;
+		this.notifyState(this._curState, 0, 0);
 
 		var versionCompareHandle = function (versionA:string, versionB:string) {
 			cc.log("Version Compare: version A is " + versionA + ', version B is ' + versionB);
@@ -206,41 +104,138 @@ export default class HotUpdator extends cc.Component {
 			this._am.setMaxConcurrentTask(4);
 		}
 		
-		this.doUpdate();
+		this._am.setEventCallback(this.updateCb.bind(this));
+		if(!this.loadLocalManifest()) {
+			cc.log("加载本地manifest失败");
+			this.onFail();
+			return;
+		}
+		
+		this._am.update();
 	}
 
-	protected doUpdate() 
+
+	protected notifyState(nowState:HOT_STATE, progressByBytes:number=0, progressByFile:number=0)
 	{
-		if (this._am && !this._updating) {
-			this._am.setEventCallback(this.updateCb.bind(this));
-			if(!this.loadLocalManifest()) {
-				cc.log("加载本地manifest失败");
-				this.onFail();
-				return;
-			}
-			this._updating = true;
-			this._am.update();
+		cc.log("----热更进度", this._curState, nowState, progressByBytes, progressByFile);
+	}
+
+	protected updateCb(event:any) 
+	{
+		var needRestart = false;
+		var failed = false;
+		switch (event.getEventCode())
+		{
+			case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+				cc.log("progress by file: " + event.getDownloadedFiles() + ' / ' + event.getTotalFiles());
+				cc.log("progress by byte: " + event.getDownloadedBytes() + ' / ' + event.getTotalBytes());
+				var msg = event.getMessage();
+				if (msg) {
+					cc.log('Updated file: ' + msg);
+					cc.log(event.getPercent()/100 + '% : ' + msg);
+				}
+				this.notifyState(HOT_STATE.UPDATING, event.getPercent(), event.getPercentByFile());
+				break;
+			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
+				cc.log('updateCb No local manifest file found, hot update skipped.');
+				failed = true;
+				break;
+			case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
+			case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
+				cc.log('updateCb Fail to download manifest file, hot update skipped.');
+				failed = true;
+				break;
+			case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
+				cc.log('updateCb Already up to date with the latest remote version.');
+				failed = true;
+				break;
+			case jsb.EventAssetsManager.UPDATE_FINISHED:
+				cc.log('updateCb Update finished. ' + event.getMessage());
+				needRestart = true;
+				break;
+			case jsb.EventAssetsManager.UPDATE_FAILED:
+				cc.log('updateCb Update failed. ' + event.getMessage());
+				this._canRetry = true;
+				this.retry();
+				break;
+			case jsb.EventAssetsManager.ERROR_UPDATING:
+				cc.log('updateCb Asset update error: ' + event.getAssetId() + ', ' + event.getMessage());
+				break;
+			case jsb.EventAssetsManager.ERROR_DECOMPRESS:
+				cc.log(event.getMessage());
+				break;
+			default:
+				break;
 		}
+
+		if (failed) {
+			this.onFail();
+		}
+
+		if (needRestart) {
+			this.onSuccess();
+		}
+	}
+
+	protected onSuccess()
+	{
+		if(this._am){
+			this._am.setEventCallback(null);
+			// Prepend the manifest's search path
+			var searchPaths = jsb.fileUtils.getSearchPaths();
+			var newPaths = this._am.getLocalManifest().getSearchPaths();
+			console.log(JSON.stringify(newPaths));
+			Array.prototype.unshift.apply(searchPaths, newPaths);
+			cc.sys.localStorage.setItem('HotUpdateSearchPaths', JSON.stringify(searchPaths));
+			jsb.fileUtils.setSearchPaths(searchPaths);
+		}
+
+		cc.log("热更成功");
+		this._curState = HOT_STATE.SUCCESS;
+		this.notifyState(HOT_STATE.SUCCESS);
+		if(this._finishCallback) {
+			this._finishCallback(true);
+		}
+
+		cc.audioEngine.stopAll();
+		cc.game.restart();
+	}
+
+	protected onFail()
+	{
+		cc.log("热更失败");
+		if(this._am){
+			this._am.setEventCallback(null);
+		}
+		this._curState = HOT_STATE.FAIL;
+		this.notifyState(HOT_STATE.FAIL);
+		if(this._finishCallback) {
+			this._finishCallback(false);
+		}
+	}
+
+	protected getLocalManifestPath() : string
+	{
+		return this._manifestUrl;
+	}
+	
+	protected loadLocalManifest() : boolean
+	{
+		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
+			var url = this.getLocalManifestPath();
+			this._am.loadLocalManifest(url);
+			return true;
+		}
+		return false;
 	}
 
 	protected retry() 
 	{
-		if (!this._updating && this._canRetry) {
+		if (this._canRetry) {
 			this._canRetry = false;
 			cc.log('Retry failed Assets...');
 			this._am.downloadFailedAssets();
 		}
 	}
 
-	onLoad() 
-	{
-		this.beginUpdate();
-	}
-
-	onDestroy() 
-	{
-		if(this._am){
-			//this._am.setEventCallback(null);
-		}
-	}
 }

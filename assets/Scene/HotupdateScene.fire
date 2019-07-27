@@ -85,9 +85,6 @@
       },
       {
         "__id__": 19
-      },
-      {
-        "__id__": 20
       }
     ],
     "_prefab": null,
@@ -787,25 +784,15 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "97K24phGZF8rDPQKTzRRyv"
-  },
-  {
-    "__type__": "8f1f1rkHn1EcJiopih/cqwd",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "fileProgress": {
-      "__id__": 17
-    },
     "byteProgress": {
       "__id__": 12
+    },
+    "fileProgress": {
+      "__id__": 17
     },
     "manifestUrl": {
       "__uuid__": "a29458f9-e2e7-4675-b7db-bb275413c5bd"
     },
-    "_id": "3eisstPTZIR6a761rcnQlT"
+    "_id": "97K24phGZF8rDPQKTzRRyv"
   }
 ]

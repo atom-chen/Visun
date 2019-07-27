@@ -13,7 +13,7 @@ export default class EventCenter extends cc.Component {
 	}
 
 	//监听事件
-	public listen(evtName:string, cbFunc:Function, thisObj:any, bCall:boolean)
+	public listen(evtName:string, cbFunc:Function, thisObj:any, bCall:boolean=false)
 	{
 		if(!evtName || !cbFunc)
 		{
