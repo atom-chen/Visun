@@ -2,4 +2,4 @@
 -- 打包说明
 -------------------------------------------
 安装node.js
-node version_generator.js -v 1.12 -u http://localhost/Vision/remote-assets/ -s pack/ -d publish/
+node version_generator.js -v 1.13 -u http://localhost/Vision/remote-assets/ -s pack/ -d publish/

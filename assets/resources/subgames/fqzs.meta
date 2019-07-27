@@ -1,7 +1,7 @@
 {
   "ver": "1.0.1",
   "uuid": "142f7361-35db-487e-8381-919ee1b2c45b",
-  "isSubpackage": true,
+  "isSubpackage": false,
   "subpackageName": "fqzs",
   "subMetas": {}
 }

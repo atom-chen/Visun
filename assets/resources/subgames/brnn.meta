@@ -1,7 +1,7 @@
 {
   "ver": "1.0.1",
   "uuid": "ea2d9c8f-e909-48ef-acfb-301df486a5cf",
-  "isSubpackage": true,
+  "isSubpackage": false,
   "subpackageName": "brnn",
   "subMetas": {}
 }
