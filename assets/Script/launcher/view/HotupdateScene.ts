@@ -2,6 +2,7 @@ const {ccclass, property} = cc._decorator;
 
 import BaseComp from "./BaseComp";
 import HotUpdator from "../HotUpdator";
+import { HOT_STATE } from "../../looker/Consts";
 
 @ccclass
 export default class HotupdateScene extends BaseComp {
@@ -24,10 +25,15 @@ export default class HotupdateScene extends BaseComp {
 			cc.director.loadScene("LobbyScene");
 		} 
 		else {
+			this.fileProgress.progress = 0;
+			this.byteProgress.progress = 0;
 			var hotter = new HotUpdator("main", this.getLocalManifestPath(), (bSucc:boolean) => {
 				if(!bSucc){
 					cc.director.loadScene("LobbyScene");
 				}
+			}, (nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
+				this.fileProgress.progress = progressByFile;
+				this.byteProgress.progress = progressByBytes;
 			})
 			hotter.beginUpdate();
 		}

@@ -1,31 +1,24 @@
-enum HOT_STATE {
-	READY = 0,
-	UPENGINE = 1,		//下载引擎包
-	CHECKING = 2,		//检查更新
-	UPDATING = 3,		//下载资源
-	DOWNOVER = 4,		//下载完毕
-	UNZIPING = 5,		//解压资源
-	SUCCESS = 6,		//更新成功
-	FAIL = 7,			//更新失败
-	LOADINGRES = 8,		//加载资源
-}
+import { HOT_STATE } from "../looker/Consts";
+
 
 export default class HotUpdator {
 	private _id:string;
 	private _manifestUrl:string;
 	private _finishCallback:Function;
+	private _progressCallback:Function;
 	private _curState:HOT_STATE = HOT_STATE.READY;
 	private _am:any;
 	private _canRetry:boolean = false;
 	private _storagePath:string = "";
 
 
-	public constructor(id:string, manifestUrl:string, finishCallback:Function)
+	public constructor(id:string, manifestUrl:string, finishCallback:Function, progressCallback:Function)
 	{
 		this._curState = HOT_STATE.READY;
 		this._id = id;
 		this._manifestUrl = manifestUrl;
 		this._finishCallback = finishCallback;
+		this._progressCallback = progressCallback;
 
 		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/' + this._id);
 		cc.log('Storage path for remote asset : ' + this._storagePath);
@@ -115,9 +108,12 @@ export default class HotUpdator {
 	}
 
 
-	protected notifyState(nowState:HOT_STATE, progressByBytes:number=0, progressByFile:number=0)
+	protected notifyState(nowState:HOT_STATE, progressByFile:number, progressByBytes:number)
 	{
-		cc.log("----热更进度", this._curState, nowState, progressByBytes, progressByFile);
+		cc.log("----热更进度", this._curState, nowState, progressByFile, progressByBytes);
+		if(this._progressCallback) {
+			this._progressCallback(this._curState, progressByFile, progressByBytes);
+		}
 	}
 
 	protected updateCb(event:any) 
@@ -134,7 +130,7 @@ export default class HotUpdator {
 					cc.log('Updated file: ' + msg);
 					cc.log(event.getPercent()/100 + '% : ' + msg);
 				}
-				this.notifyState(HOT_STATE.UPDATING, event.getPercent(), event.getPercentByFile());
+				this.notifyState(HOT_STATE.UPDATING, event.getPercentByFile(), event.getPercent());
 				break;
 			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
 				cc.log('updateCb No local manifest file found, hot update skipped.');
@@ -198,7 +194,7 @@ export default class HotUpdator {
 
 		cc.log("热更成功");
 		this._curState = HOT_STATE.SUCCESS;
-		this.notifyState(HOT_STATE.SUCCESS);
+		this.notifyState(HOT_STATE.SUCCESS, 100, 100);
 		if(this._finishCallback) {
 			this._finishCallback(true);
 		}
@@ -214,7 +210,7 @@ export default class HotUpdator {
 			this._am.setEventCallback(null);
 		}
 		this._curState = HOT_STATE.FAIL;
-		this.notifyState(HOT_STATE.FAIL);
+		this.notifyState(HOT_STATE.FAIL, 100, 100);
 		if(this._finishCallback) {
 			this._finishCallback(false);
 		}
