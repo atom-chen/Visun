@@ -1,8 +1,6 @@
 import Caller from "./Caller";
 import PlayUnit from "./PlayUnit";
 
-const {ccclass, property} = cc._decorator;
-
 enum PROCEDURE_STATE {
 	READY = 1,
 	RUNNING,
@@ -10,7 +8,6 @@ enum PROCEDURE_STATE {
 	STOPED
 };
 
-@ccclass
 export default class Procedure {
 	private _node_type:string = "unknown";
 	private _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
