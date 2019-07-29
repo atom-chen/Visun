@@ -35,7 +35,7 @@ export default class BrnnUI extends BaseComp {
 				chip.addComponent(cc.Sprite);
 				chip.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name)
 				self.node.addChild(chip, 3);
-				GameUtil.flyChip(chip, cc.p(0,-300), cc.p(120,0), 0.2);
+				GameUtil.flyChip(chip, cc.v2(0,-300), cc.v2(120,0), 0.2);
 			}, 0.1, 1000, 0.2);
 		});
 	}

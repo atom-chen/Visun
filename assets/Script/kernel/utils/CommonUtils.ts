@@ -33,13 +33,13 @@ export default class CommonUtils {
 
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
-		var pt = srcObj.convertToWorldSpace(cc.p(x,y));
+		var pt = srcObj.convertToWorldSpace(cc.v2(x,y));
 		return dstObj.convertToNodeSpace(pt);
 	}
 
 	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
-		var pt = srcObj.convertToWorldSpaceAR(cc.p(x,y));
+		var pt = srcObj.convertToWorldSpaceAR(cc.v2(x,y));
 		return dstObj.convertToNodeSpace(pt);
 	}
 

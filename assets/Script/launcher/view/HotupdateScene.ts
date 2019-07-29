@@ -19,9 +19,10 @@ export default class HotupdateScene extends BaseComp {
 
 
 	onLoad () {
+		this.fileProgress.progress = 0;
+		this.byteProgress.progress = 0;
+
 		if (!cc.sys.isNative) {
-			this.fileProgress.node.active = false;
-			this.byteProgress.node.active = false;
 			cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
 				cc.log("进度：", cpltCnt, totalCnt);
 				this.fileProgress.progress = cpltCnt/totalCnt;
@@ -31,8 +32,6 @@ export default class HotupdateScene extends BaseComp {
 			})
 		} 
 		else {
-			this.fileProgress.progress = 0;
-			this.byteProgress.progress = 0;
 			var hotter = new HotUpdator("main", this.getLocalManifestPath(), (bSucc:boolean) => {
 				if(!bSucc){
 					cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
