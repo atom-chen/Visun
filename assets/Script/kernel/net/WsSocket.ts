@@ -1,5 +1,4 @@
 import { DataProcessor } from "../codec/DataProcessor";
-import BaseComp from "../../launcher/view/BaseComp";
 
 //var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
 var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 
@@ -7,7 +6,7 @@ var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"];
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class WsSocket extends BaseComp {
+export default class WsSocket {
 
 	private _ws:any;
 	private _url:string;

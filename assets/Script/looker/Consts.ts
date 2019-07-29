@@ -8,12 +8,6 @@ export enum LAYER {
 	Loading,
 }
 
-export enum LoginState {
-	unlogin = 0,
-	logining = 1,
-	succ = 2
-}
-
 export enum HOT_STATE {
 	READY = 0,
 	UPENGINE = 1,		//下载引擎包
