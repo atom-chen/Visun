@@ -1,5 +1,6 @@
-import BaseComp from "../../../../../Script/launcher/view/BaseComp";
-import CommonUtils from "../../../../../Script/kernel/utils/CommonUtils";
+import BaseComp from "../../../../Script/launcher/view/BaseComp";
+import CommonUtils from "../../../../Script/kernel/utils/CommonUtils";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -18,10 +19,10 @@ export default class ChipBox extends BaseComp {
 
     public setChipValues(values:number[]) {
         var self = this
-        cc.loader.loadRes("lobby/imgs/poker/chip", cc.SpriteAtlas, function (err, atlas) {
+        cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
             if(err) { cc.log("error: "+err); return; }
             for(var i=1; i<=5; i++){
-                var name = CommonUtils.getFrameName("lobby/imgs/poker/chip/chip_"+values[i-1]);
+                var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+values[i-1]);
                 self["chip"+i].normalSprite = atlas.getSpriteFrame(name);
                 self["chip"+i].hoverSprite = atlas.getSpriteFrame(name);
                 self["chip"+i].pressedSprite = atlas.getSpriteFrame(name);

@@ -4,7 +4,7 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>lobby/imgs/poker/poker/poker_0.png</key>
+			<key>common/imgs/poker/poker_0.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{928,271},{95,127}}</string>
@@ -15,7 +15,7 @@
 				<key>sourceSize</key>
 				<string>{95,127}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_101.png</key>
+			<key>common/imgs/poker/poker_101.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,271},{101,133}}</string>
@@ -26,7 +26,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_102.png</key>
+			<key>common/imgs/poker/poker_102.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,406},{101,133}}</string>
@@ -37,7 +37,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_103.png</key>
+			<key>common/imgs/poker/poker_103.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,541},{101,133}}</string>
@@ -48,7 +48,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_104.png</key>
+			<key>common/imgs/poker/poker_104.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,676},{101,133}}</string>
@@ -59,7 +59,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_11.png</key>
+			<key>common/imgs/poker/poker_11.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,811},{101,133}}</string>
@@ -70,7 +70,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_111.png</key>
+			<key>common/imgs/poker/poker_111.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{104,271},{101,133}}</string>
@@ -81,7 +81,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_112.png</key>
+			<key>common/imgs/poker/poker_112.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{105,136},{101,133}}</string>
@@ -92,7 +92,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_113.png</key>
+			<key>common/imgs/poker/poker_113.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{107,1},{101,133}}</string>
@@ -103,7 +103,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_114.png</key>
+			<key>common/imgs/poker/poker_114.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{104,406},{101,133}}</string>
@@ -114,7 +114,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_12.png</key>
+			<key>common/imgs/poker/poker_12.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{104,541},{101,133}}</string>
@@ -125,7 +125,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_121.png</key>
+			<key>common/imgs/poker/poker_121.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{104,676},{101,133}}</string>
@@ -136,7 +136,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_122.png</key>
+			<key>common/imgs/poker/poker_122.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,136},{102,133}}</string>
@@ -147,7 +147,7 @@
 				<key>sourceSize</key>
 				<string>{102,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_123.png</key>
+			<key>common/imgs/poker/poker_123.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{104,811},{101,133}}</string>
@@ -158,7 +158,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_124.png</key>
+			<key>common/imgs/poker/poker_124.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{207,271},{101,133}}</string>
@@ -169,7 +169,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_13.png</key>
+			<key>common/imgs/poker/poker_13.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{208,136},{101,133}}</string>
@@ -180,7 +180,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_131.png</key>
+			<key>common/imgs/poker/poker_131.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{1,1},{104,133}}</string>
@@ -191,7 +191,7 @@
 				<key>sourceSize</key>
 				<string>{104,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_132.png</key>
+			<key>common/imgs/poker/poker_132.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{516,811},{98,133}}</string>
@@ -202,7 +202,7 @@
 				<key>sourceSize</key>
 				<string>{98,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_133.png</key>
+			<key>common/imgs/poker/poker_133.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{616,811},{98,133}}</string>
@@ -213,7 +213,7 @@
 				<key>sourceSize</key>
 				<string>{98,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_134.png</key>
+			<key>common/imgs/poker/poker_134.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{516,676},{100,133}}</string>
@@ -224,7 +224,7 @@
 				<key>sourceSize</key>
 				<string>{100,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_14.png</key>
+			<key>common/imgs/poker/poker_14.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{210,1},{101,133}}</string>
@@ -235,7 +235,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_21.png</key>
+			<key>common/imgs/poker/poker_21.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{207,406},{101,133}}</string>
@@ -246,7 +246,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_22.png</key>
+			<key>common/imgs/poker/poker_22.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{207,541},{101,133}}</string>
@@ -257,7 +257,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_23.png</key>
+			<key>common/imgs/poker/poker_23.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{207,676},{101,133}}</string>
@@ -268,7 +268,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_24.png</key>
+			<key>common/imgs/poker/poker_24.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{207,811},{101,133}}</string>
@@ -279,7 +279,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_31.png</key>
+			<key>common/imgs/poker/poker_31.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{310,271},{101,133}}</string>
@@ -290,7 +290,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_32.png</key>
+			<key>common/imgs/poker/poker_32.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{311,136},{101,133}}</string>
@@ -301,7 +301,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_33.png</key>
+			<key>common/imgs/poker/poker_33.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{313,1},{101,133}}</string>
@@ -312,7 +312,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_34.png</key>
+			<key>common/imgs/poker/poker_34.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{310,406},{101,133}}</string>
@@ -323,7 +323,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_41.png</key>
+			<key>common/imgs/poker/poker_41.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{310,541},{101,133}}</string>
@@ -334,7 +334,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_42.png</key>
+			<key>common/imgs/poker/poker_42.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{310,676},{101,133}}</string>
@@ -345,7 +345,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_43.png</key>
+			<key>common/imgs/poker/poker_43.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{310,811},{101,133}}</string>
@@ -356,7 +356,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_44.png</key>
+			<key>common/imgs/poker/poker_44.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{413,271},{101,133}}</string>
@@ -367,7 +367,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_51.png</key>
+			<key>common/imgs/poker/poker_51.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{414,136},{101,133}}</string>
@@ -378,7 +378,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_52.png</key>
+			<key>common/imgs/poker/poker_52.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{416,1},{101,133}}</string>
@@ -389,7 +389,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_53.png</key>
+			<key>common/imgs/poker/poker_53.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{413,406},{101,133}}</string>
@@ -400,7 +400,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_54.png</key>
+			<key>common/imgs/poker/poker_54.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{413,541},{101,133}}</string>
@@ -411,7 +411,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_61.png</key>
+			<key>common/imgs/poker/poker_61.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{413,676},{101,133}}</string>
@@ -422,7 +422,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_62.png</key>
+			<key>common/imgs/poker/poker_62.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{413,811},{101,133}}</string>
@@ -433,7 +433,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_63.png</key>
+			<key>common/imgs/poker/poker_63.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{516,271},{101,133}}</string>
@@ -444,7 +444,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_64.png</key>
+			<key>common/imgs/poker/poker_64.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{517,136},{101,133}}</string>
@@ -455,7 +455,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_71.png</key>
+			<key>common/imgs/poker/poker_71.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{519,1},{101,133}}</string>
@@ -466,7 +466,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_72.png</key>
+			<key>common/imgs/poker/poker_72.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{619,271},{101,133}}</string>
@@ -477,7 +477,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_73.png</key>
+			<key>common/imgs/poker/poker_73.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{620,136},{101,133}}</string>
@@ -488,7 +488,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_74.png</key>
+			<key>common/imgs/poker/poker_74.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{622,1},{101,133}}</string>
@@ -499,7 +499,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_81.png</key>
+			<key>common/imgs/poker/poker_81.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{722,271},{101,133}}</string>
@@ -510,7 +510,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_82.png</key>
+			<key>common/imgs/poker/poker_82.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{723,136},{101,133}}</string>
@@ -521,7 +521,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_83.png</key>
+			<key>common/imgs/poker/poker_83.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{725,1},{101,133}}</string>
@@ -532,7 +532,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_84.png</key>
+			<key>common/imgs/poker/poker_84.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{825,271},{101,133}}</string>
@@ -543,7 +543,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_91.png</key>
+			<key>common/imgs/poker/poker_91.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{826,136},{101,133}}</string>
@@ -554,7 +554,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_92.png</key>
+			<key>common/imgs/poker/poker_92.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{828,1},{101,133}}</string>
@@ -565,7 +565,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_93.png</key>
+			<key>common/imgs/poker/poker_93.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{516,406},{101,133}}</string>
@@ -576,7 +576,7 @@
 				<key>sourceSize</key>
 				<string>{101,133}</string>
 			</dict>
-			<key>lobby/imgs/poker/poker/poker_94.png</key>
+			<key>common/imgs/poker/poker_94.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{516,541},{101,133}}</string>

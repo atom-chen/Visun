@@ -26,10 +26,10 @@ export default class BrnnUI extends BaseComp {
 
 		var self = this;
 
-		cc.loader.loadRes("lobby/imgs/poker/chip", cc.SpriteAtlas, function (err, atlas) {
+		cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
 			if(err) { cc.log("error: "+err); return; }
 			self.schedule(function() {
-				var name = CommonUtils.getFrameName("lobby/imgs/poker/chip/chip_"+1);
+				var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+1);
 				var chip = new cc.Node();
 				chip.scale = 0.4
 				chip.addComponent(cc.Sprite);

@@ -22,32 +22,34 @@ export default class HotupdateScene extends BaseComp {
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
 
-		if (!cc.sys.isNative) {
-			cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
-				cc.log("进度：", cpltCnt, totalCnt);
-				this.fileProgress.progress = cpltCnt/totalCnt;
-				this.byteProgress.progress = cpltCnt/totalCnt;
-			}, (err:Error, resobj:any[], urls:string[])=>{
-				cc.director.loadScene("LobbyScene");
-			})
+		if ( !cc.sys.isNative ) {
+			this.enterGame();
 		} 
 		else {
-			var hotter = new HotUpdator("main", this.getLocalManifestPath(), (bSucc:boolean) => {
+			var hotter = new HotUpdator("main", this.getLocalManifestPath(), 
+			(bSucc:boolean) => {
 				if(!bSucc){
-					cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
-						cc.log("进度：", cpltCnt, totalCnt);
-						this.fileProgress.progress = cpltCnt/totalCnt;
-						this.byteProgress.progress = cpltCnt/totalCnt;
-					}, (err:Error, resobj:any[], urls:string[])=>{
-						cc.director.loadScene("LobbyScene");
-					})
+					this.enterGame();
 				}
-			}, (nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
+			}, 
+			(nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
 				this.fileProgress.progress = progressByFile;
 				this.byteProgress.progress = progressByBytes;
-			})
+			});
 			hotter.beginUpdate();
 		}
+	}
+
+	protected enterGame() {
+		cc.loader.loadResDir("lobby", 
+		(cpltCnt:number, totalCnt:number, item:any)=>{
+			cc.log("进度：", cpltCnt, totalCnt);
+			this.fileProgress.progress = cpltCnt/totalCnt;
+			this.byteProgress.progress = cpltCnt/totalCnt;
+		}, 
+		(err:Error, resobj:any[], urls:string[])=>{
+			cc.director.loadScene("LobbyScene");
+		});
 	}
 
 	protected getLocalManifestPath() : string

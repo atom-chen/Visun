@@ -12,7 +12,7 @@ export default class HotUpdator {
 	private _storagePath:string = "";
 
 
-	public constructor(id:string, manifestUrl:string, finishCallback:Function, progressCallback:Function)
+	public constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null)
 	{
 		this._curState = HOT_STATE.READY;
 		this._id = id;
