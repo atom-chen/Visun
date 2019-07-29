@@ -20,6 +20,7 @@ export default class FqzsUI extends BaseComp {
 
         var node = cc.instantiate(this.chip_box);
         node.parent = this.node;
+        node.getComponent("ChipBox").setChipValues([1,3,5,8,10]);
     }
     
 }

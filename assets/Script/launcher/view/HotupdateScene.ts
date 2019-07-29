@@ -23,7 +23,9 @@ export default class HotupdateScene extends BaseComp {
 			this.fileProgress.node.active = false;
 			this.byteProgress.node.active = false;
 			cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
-				cc.log("進度：", cpltCnt, totalCnt, ""+(typeof item));
+				cc.log("进度：", cpltCnt, totalCnt);
+				this.fileProgress.progress = cpltCnt/totalCnt;
+				this.byteProgress.progress = cpltCnt/totalCnt;
 			}, (err:Error, resobj:any[], urls:string[])=>{
 				cc.director.loadScene("LobbyScene");
 			})
@@ -33,7 +35,13 @@ export default class HotupdateScene extends BaseComp {
 			this.byteProgress.progress = 0;
 			var hotter = new HotUpdator("main", this.getLocalManifestPath(), (bSucc:boolean) => {
 				if(!bSucc){
-					cc.director.loadScene("LobbyScene");
+					cc.loader.loadResDir("lobby", (cpltCnt:number, totalCnt:number, item:any)=>{
+						cc.log("进度：", cpltCnt, totalCnt);
+						this.fileProgress.progress = cpltCnt/totalCnt;
+						this.byteProgress.progress = cpltCnt/totalCnt;
+					}, (err:Error, resobj:any[], urls:string[])=>{
+						cc.director.loadScene("LobbyScene");
+					})
 				}
 			}, (nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
 				this.fileProgress.progress = progressByFile;

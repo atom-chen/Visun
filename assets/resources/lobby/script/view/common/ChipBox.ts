@@ -16,10 +16,6 @@ export default class ChipBox extends BaseComp {
     @property(cc.Button)
     chip5: cc.Button = null;
 
-    start () {
-        this.setChipValues([1,3,5,300,800]);
-    }
-
     public setChipValues(values:number[]) {
         var self = this
         cc.loader.loadRes("lobby/imgs/poker/chip", cc.SpriteAtlas, function (err, atlas) {
@@ -33,5 +29,5 @@ export default class ChipBox extends BaseComp {
             }
         });
     }
-    // update (dt) {}
+
 }
