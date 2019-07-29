@@ -94,7 +94,7 @@ export default class UIManager extends BaseComp {
 				this.node.destroy();
 			}, 2);
 		}
-		cc.loader.loadRes("launcher/prefabs/Toast", cc.Prefab, completeCallback);
+		cc.loader.loadRes("common/prefabs/Toast", cc.Prefab, completeCallback);
 	}
 	
 	public static announce() {
