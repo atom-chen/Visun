@@ -1,5 +1,3 @@
-import Procedure from "./Procedure";
-
 export default class Caller {
 	private _fn:Function;
 	private _target:any;

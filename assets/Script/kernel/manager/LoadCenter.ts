@@ -1,3 +1,9 @@
+/*
+load(resources, progressCallback, completeCallback)
+loadRes(url, type, progressCallback, completeCallback)
+loadResArray(urls, type, progressCallback, completeCallback)
+loadResDir(url, type, progressCallback, completeCallback)
+*/
 export default class LoadCenter {
 	public static loadRes(url: string, type: typeof cc.Asset, completeCallback:((resource: any) => void), progressCallback:((completedCount: number, totalCount: number, item: any) => void)|null)
 	{

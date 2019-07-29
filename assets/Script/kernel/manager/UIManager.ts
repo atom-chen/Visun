@@ -7,7 +7,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UIManager extends BaseComp {
 	private static _allUI:object = {};
-	//private static _viewStack = [];
+	private static _toastList:any[] = [];
 
 	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function) {
 		if(cc.isValid(UIManager._allUI[prefabName])){
@@ -62,9 +62,39 @@ export default class UIManager extends BaseComp {
 		}
 	}
 	
-		
-	public static toast() {
+	
+	public static toast(content:string) {
+		var completeCallback = function(errorMessage, loadedResource) {
+			if( errorMessage ) { cc.log( '载入预制资源失败:' + errorMessage ); return; }
+			var cvs = cc.find("Canvas");
+			if( !cvs ) { cc.log("没有Canvas"); return; }
+			var obj = cc.instantiate(loadedResource);
+			if(!obj) { cc.log("实例化失败"); return; }
 			
+			//往上挪
+			var idx = 1;
+			for(var j=UIManager._toastList.length-1; j>=0; j--){
+				UIManager._toastList[j].y = 38*idx;
+				idx++;
+			}
+			//插入
+			cvs.addChild(obj, Consts.LAYER.Tips);
+			UIManager._toastList.push(obj);
+			obj.y = 0;
+			//刷新数据并定时销毁
+			var scriptCpn = obj.getComponent("Toast");
+			scriptCpn.setContent(content);
+			scriptCpn.scheduleOnce(function() {
+				for(var i=0; i<UIManager._toastList.length; i++) {
+					if(UIManager._toastList[i]===obj) {
+						UIManager._toastList.splice(i,1);
+						break;
+					}
+				}
+				this.node.destroy();
+			}, 2);
+		}
+		cc.loader.loadRes("launcher/prefabs/Toast", cc.Prefab, completeCallback);
 	}
 	
 	public static announce() {
