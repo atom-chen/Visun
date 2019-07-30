@@ -1,4 +1,4 @@
-import { DataProcessor } from "../codec/DataProcessor";
+import DataProcessor from "../codec/DataProcessor";
 
 //var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
 var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 

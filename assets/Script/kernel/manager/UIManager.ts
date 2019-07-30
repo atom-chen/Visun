@@ -53,7 +53,7 @@ export default class UIManager {
 		this.initWindow(Consts.LAYER.Dialog, prefabName, true, false, callback);
 	}
 
-	public static hidePanelsExcept(obj) {
+	public static hidePanelsExcept(obj:cc.Node) {
 		for( var k in this._allUI) {
 			if(this._allUI[k] !== obj) {
 				this._allUI[k].active = false;

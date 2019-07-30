@@ -1,4 +1,4 @@
-import CommonUtils from "../../../../Script/kernel/utils/CommonUtils";
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 
 export default class GameUtil {
 

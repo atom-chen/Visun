@@ -1,10 +1,10 @@
-import UIManager from "../../../../../Script/kernel/manager/UIManager";
-import Globals from "../../../../../Script/looker/Globals";
-import HttpCore from "../../../../../Script/kernel/net/HttpCore";
-import WsSocket from "../../../../../Script/kernel/net/WsSocket";
-import JsonCodec from "../../../../../Script/kernel/codec/JsonCodec";
-import EventCenter from "../../../../../Script/launcher/EventCenter";
-import BaseComp from "../../../../../Script/launcher/view/BaseComp";
+import UIManager from "../../../../../script/kernel/manager/UIManager";
+import Globals from "../../../../../script/looker/Globals";
+import HttpCore from "../../../../../script/kernel/net/HttpCore";
+import WsSocket from "../../../../../script/kernel/net/WsSocket";
+import JsonCodec from "../../../../../script/kernel/codec/JsonCodec";
+import EventCenter from "../../../../../script/launcher/EventCenter";
+import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import rule_login from "../../proxy/rules/rule_login";
 
 const {ccclass, property} = cc._decorator;

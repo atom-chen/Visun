@@ -1,5 +1,5 @@
-import UIManager from "../../../../Script/kernel/manager/UIManager";
-import BaseComp from "../../../../Script/launcher/view/BaseComp";
+import UIManager from "../../../../script/kernel/manager/UIManager";
+import BaseComp from "../../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 

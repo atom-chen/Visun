@@ -1,7 +1,7 @@
 import LoginMgr from "../model/LoginMgr";
 import User from "../model/User";
-import HttpResponds from "../../../../Script/kernel/net/HttpResponds";
-import HttpCore from "../../../../Script/kernel/net/HttpCore";
+import HttpResponds from "../../../../script/kernel/net/HttpResponds";
+import HttpCore from "../../../../script/kernel/net/HttpCore";
 
 HttpResponds["req_hallinfo"] = function(data:any){
 	var info = data && data.data

@@ -1,4 +1,4 @@
-import BaseComp from "../../../../Script/launcher/view/BaseComp";
+import BaseComp from "../../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 

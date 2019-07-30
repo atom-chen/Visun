@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 import * as Consts from "../../looker/Consts";
-import { DataProcessor } from "../codec/DataProcessor";
+import DataProcessor from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 import HttpResponds from "./HttpResponds";
 import HttpRequests from "./HttpRequests";

@@ -1,5 +1,5 @@
-import BaseComp from "../../../../Script/launcher/view/BaseComp";
-import CommonUtils from "../../../../Script/kernel/utils/CommonUtils";
+import BaseComp from "../../../../script/launcher/view/BaseComp";
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 
 
 const {ccclass, property} = cc._decorator;

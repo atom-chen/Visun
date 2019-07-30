@@ -1,4 +1,4 @@
-import { DataProcessor } from "./DataProcessor";
+import DataProcessor from "./DataProcessor";
 
 export default class ProtobufCodec implements DataProcessor {
 
