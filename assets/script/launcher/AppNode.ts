@@ -15,6 +15,12 @@ export default class AppNode extends cc.Component {
             console.log("游戏进入前台");
             EventCenter.instance().fire("EVT_ENTER_FOREGROUND");
         });
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
+    onKeyDown (event) {
+        if(event.keyCode===cc.macro.KEY.back) {
+            cc.log("返回键");
+        }
+    }
 }
