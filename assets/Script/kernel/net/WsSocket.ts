@@ -1,5 +1,11 @@
 import DataProcessor from "../codec/DataProcessor";
 
+enum ConnState {
+	unconnect = 0,
+	connecting,
+	connected
+}
+
 //var WebSocket = WebSocket || window.WebSocket || window.MozWebSocket;
 var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 
 
@@ -7,10 +13,23 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class WsSocket {
+	private static _singleton:WsSocket = null;
 
+	private _curState:ConnState = ConnState.unconnect;
 	private _ws:any;
-	private _url:string;
+	private _url:string = "";
 	private _dataProcessor:DataProcessor = null;
+
+	private constructor() {
+		this._curState = ConnState.unconnect;
+	}
+	public static instance() : WsSocket
+	{
+		if(!WsSocket._singleton) {
+			WsSocket._singleton = new WsSocket();
+		}
+		return this._singleton;
+	}
 	
 
 	private initWs(url:string, cacertPath:string)
@@ -20,6 +39,7 @@ export default class WsSocket {
 		ws.binaryType = "arraybuffer";
 		ws.onopen = function () {
 			cc.log("ws: onopen");
+			self._curState = ConnState.connected;
 		}
 		ws.onmessage = function (event) {
 			cc.log("ws: onmessage");
@@ -28,9 +48,11 @@ export default class WsSocket {
 		}
 		ws.onclose = function () {
 			cc.log("ws: onclose");
+			self._curState = ConnState.unconnect;
 			self.close();
 		}
 		ws.onerror = function (err) {
+			self._curState = ConnState.unconnect;
 			cc.log("ws: onerror");
 			self.close();
 		}
@@ -39,7 +61,16 @@ export default class WsSocket {
 
 	public connect(url:string, processor:DataProcessor) 
 	{
+		if(this._url === url && this._ws !== null){
+			cc.log("the same url");
+			return;
+		}
+		if(this._curState!==ConnState.unconnect){
+			cc.log("连接中，请先关闭现有连接");
+			return;
+		}
 		this.close();
+		this._curState = ConnState.connecting;
 		this._url = url;
 		this._dataProcessor = processor;
 		cc.log("连接WebSocket: ", url);
@@ -64,13 +95,19 @@ export default class WsSocket {
 	{
 		if(this._ws){
 			cc.log("关闭WebSocket");
-			this._ws.close();
+			var ws = this._ws;
 			this._ws = null;
+			ws.close();
+			this._curState = ConnState.unconnect;
 		}
 	}
 
 	public sendData(data:any) 
 	{
+		if(this._curState !== ConnState.connected) {
+			cc.log("尚未建立连接");
+			return;
+		}
 		if(!this._ws) {
 			cc.log("no ws object");
 			return;

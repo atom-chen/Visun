@@ -20,8 +20,10 @@ export default class HotUpdator {
 		this._finishCallback = finishCallback;
 		this._progressCallback = progressCallback;
 
-		this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/' + this._id);
-		cc.log('Storage path for remote asset : ' + this._storagePath);
+		if(cc.sys.isNative) {
+			this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/' + this._id);
+			cc.log('Storage path for remote asset : ' + this._storagePath);
+		}
 	}
 
 	public isUpdating() : boolean {
