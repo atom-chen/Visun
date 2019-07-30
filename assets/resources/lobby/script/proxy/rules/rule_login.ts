@@ -2,7 +2,6 @@ var rule_login = [
 	{
 		name : "req_hallinfo",
 		reqType : "GET",
-		respType : 0,
 		domain : "",
 		addr : "user/getHallInfo",
 		addrparams : [],
@@ -15,7 +14,6 @@ var rule_login = [
 	{
 		name : "req_userinfo",
 		reqType : "GET",
-		respType : 0,
 		domain : "",
 		addr : "user/getUserInfo",
 		addrparams : [],

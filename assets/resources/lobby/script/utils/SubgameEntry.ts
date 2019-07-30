@@ -39,21 +39,23 @@ export default class SubgameEntry {
 				return;
 			}
 		}
-		if(this.isGameExist(gameId)) {
-			switch(gameId) {
-				case "ddz":
-					UIManager.showPanel("subgames/ddz/prefabs/ddz_ui", null);
-					break;
-				case "brnn":
-					UIManager.showPanel("subgames/brnn/prefabs/brnn_ui", null);
-					break;
-				case "fqzs":
-					UIManager.showPanel("subgames/fqzs/prefabs/fqzs_ui", null);
-					break;
-				case "zjh":
-					UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", null);
-					break;
-			}
+		if(!this.isGameExist(gameId)) {
+			UIManager.toast("游戏不存在");
+			return;
+		}
+		switch(gameId) {
+			case "ddz":
+				UIManager.showPanel("subgames/ddz/prefabs/ddz_ui", null);
+				break;
+			case "brnn":
+				UIManager.showPanel("subgames/brnn/prefabs/brnn_ui", null);
+				break;
+			case "fqzs":
+				UIManager.showPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+				break;
+			case "zjh":
+				UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", null);
+				break;
 		}
 	}
 }

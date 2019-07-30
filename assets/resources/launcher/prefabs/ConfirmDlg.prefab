@@ -1237,10 +1237,18 @@
       "__id__": 1
     },
     "_enabled": true,
-    "labelContent": null,
-    "labelTitle": null,
-    "btn_ok": null,
-    "btn_no": null,
+    "labelContent": {
+      "__id__": 7
+    },
+    "labelTitle": {
+      "__id__": 4
+    },
+    "btn_ok": {
+      "__id__": 18
+    },
+    "btn_no": {
+      "__id__": 28
+    },
     "_id": ""
   },
   {

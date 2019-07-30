@@ -16,7 +16,7 @@ export default class HttpCore {
 	
 	private static addProtocol(ptoname:string)
 	{
-		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:Function) {
+		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void) {
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
@@ -85,7 +85,7 @@ export default class HttpCore {
 	}
 
 	//根据协议规则文件发送请求
-	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:Function)
+	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void)
 	{
 		var ptoinfo = this.g_allProtocol[ptoname]
 		if(!ptoinfo) { cc.log("未定义该协议：", ptoname); return; }
@@ -110,12 +110,12 @@ export default class HttpCore {
 		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params)
 
 		if(ptoinfo.reqType === "GET") {
-			HttpCore.callGet(domain, addr, paramStr, null, function(iCode:number, data:any){
+			HttpCore.callGet(domain, addr, paramStr, (iCode:number, data:any)=>{
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
 		else if(ptoinfo.reqType === "POST") {
-			HttpCore.callPost(domain, addr, paramStr, null, function(iCode:number, data:any){
+			HttpCore.callPost(domain, addr, paramStr, (iCode:number, data:any)=>{
 				HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 			});
 		}
@@ -127,7 +127,7 @@ export default class HttpCore {
 		}
 	}
 
-	private static onRespData(ptoname:string, iCode:number, data:any, unsafeCallback:Function) 
+	private static onRespData(ptoname:string, iCode:number, data:any, unsafeCallback:(data:any)=>void) 
 	{
 		cc.log("[响应]：", ptoname, iCode);
 		if(iCode===0){
@@ -160,7 +160,7 @@ export default class HttpCore {
 		// xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
 	}
 
-	public static callGet(url:any, addr:any, params:any, respType:any, callback:Function) 
+	public static callGet(url:any, addr:any, params:any, callback:(iCode:number, data:any)=>void) 
 	{
 		var finalUrl = url
 		if(addr && addr != "") {
@@ -201,7 +201,7 @@ export default class HttpCore {
 		xhr.send();
 	}
 
-	public static callPost(url:any, addr:any, params:any, respType:any, callback:Function) 
+	public static callPost(url:any, addr:any, params:any, callback:(iCode:number, data:any)=>void) 
 	{
 		var finalUrl = url
 		if(addr && addr != "") {
@@ -239,7 +239,7 @@ export default class HttpCore {
 		xhr.send(paramStr);
 	}
 
-	public static callUpload(url:any, addr:any, params:any, respType:any, callback:Function)
+	public static callUpload(url:any, addr:any, params:any, callback:(iCode:number, data:any)=>void)
 	{
 
 	}

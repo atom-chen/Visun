@@ -3,7 +3,7 @@ import EventCenter from "./EventCenter";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class AppNode extends cc.Component {
 
     onLoad () {
         cc.game.addPersistRootNode(this.node);
