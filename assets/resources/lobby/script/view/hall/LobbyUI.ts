@@ -12,6 +12,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class LobbyUI extends BaseComp {
+    @property(cc.Button)
+    btn_user: cc.Button = null;
 
     @property(cc.Button)
     btn_ddz: cc.Button = null;
@@ -24,6 +26,10 @@ export default class LobbyUI extends BaseComp {
 
 	start () 
 	{
+        this.btn_user.node.on("click", function(){
+			UIManager.showPopwnd("lobby/prefabs/LoginUI", null);
+        }, this);
+        
         this.btn_ddz.node.on("click", function(){
 			SubgameEntry.instance().enterGame(GameConfig.ddz.id);
 		}, this);

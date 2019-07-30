@@ -18,12 +18,13 @@ export default class CommonUtils {
 		if(!obj || !cc.isValid(obj)){
 			return;
 		}
-		var masklayer = new cc.Node("masklayer");
-		var sprite = masklayer.addComponent(cc.Layout)
-		obj.addChild(masklayer, -1);
-		masklayer.setContentSize(cc.game.canvas.width, cc.game.canvas.height);
-		masklayer.on("touchstart", function(event:any){ event.stopPropagation(); });
-		masklayer.on("touchend", function(event:any){ 
+		var frame = cc.find("frame", obj);
+		if(frame){
+			frame.on("touchstart", function(event:any){ event.stopPropagation(); });
+			frame.on("touchend", function(event:any){ event.stopPropagation(); });
+		}
+		obj.on("touchstart", function(event:any){ event.stopPropagation(); });
+		obj.on("touchend", function(event:any){ 
 			event.stopPropagation(); 
 			if(closeWhenClickMask){
 				obj.destroy();
