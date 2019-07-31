@@ -9,7 +9,7 @@ export default class NewClass extends BaseComp {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        UIManager.showPanel("lobby/prefabs/LobbyUI", null);
+        UIManager.openPanel("lobby/prefabs/LobbyUI", null);
     }
 
     start () {

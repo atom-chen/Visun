@@ -5,7 +5,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIManager {
-	private static _allUI:object = {};
+	private static _allUI = {};
+	private static _allDialog = {};
 	private static _toastList:any[] = [];
 
 	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function) {
@@ -20,37 +21,41 @@ export default class UIManager {
 				cc.log("进度: ", completeCnt, totalCnt);
 			}, 
 			function(errorMessage, loadedResource){
-				if( errorMessage ) { cc.log( '载入预制资源失败, 原因:' + errorMessage ); return; }
-				if( !( loadedResource instanceof cc.Prefab ) ) { cc.log( '你载入的不是预制资源!' ); return; } 
+				if( errorMessage ) { 
+					cc.log( '载入预制资源失败:' + errorMessage ); 
+					return; 
+				}
 
 				var cvs = cc.find("Canvas");
-				if( !cvs ) { cc.log("没有Canvas"); return; }
+				if( !cvs ) { 
+					cc.log("没有Canvas"); 
+					return; 
+				}
 
 				var obj = cc.instantiate(loadedResource);
-				
-				if(obj) {
-					if(bModal){ CommonUtils.setModal(obj, bCloseWhenClickMask); }
-					cvs.addChild(obj, layerId);
-					UIManager._allUI[prefabName] = obj;
-					// if(layerId===Consts.LAYER.Panel) {
-					// 	UIManager.hidePanelsExcept(obj);
-					// }
-					if(callback) { callback.apply(obj); }
+				if(!obj) {
+					cc.log("实例化预制体失败");
+					return;
 				}
+
+				if(bModal){ CommonUtils.setModal(obj, bCloseWhenClickMask); }
+
+				cvs.addChild(obj, layerId);
+				UIManager._allUI[prefabName] = obj;
+				// if(layerId===Consts.LAYER.Panel) {
+				// 	UIManager.hidePanelsExcept(obj);
+				// }
+				if(callback) { callback.apply(obj); }
 			} 
 			);
 	}
 
-	public static showPanel(prefabName:string, callback:Function) {
+	public static openPanel(prefabName:string, callback:Function) {
 		this.initWindow(Consts.LAYER.Panel, prefabName, true, false, callback);
 	}
 	
-	public static showPopwnd(prefabName:string, callback:Function) {
+	public static openPopwnd(prefabName:string, callback:Function) {
 		this.initWindow(Consts.LAYER.Popup, prefabName, true, true, callback);
-	}
-	
-	public static showDialog(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Dialog, prefabName, true, false, callback);
 	}
 
 	public static hidePanelsExcept(obj:cc.Node) {
@@ -61,6 +66,44 @@ export default class UIManager {
 		}
 	}
 	
+
+	public static openDialog(dlgName:string, prefabName:string, callback:Function) {
+		if(cc.isValid(UIManager._allDialog[dlgName])){
+			cc.log("allready exist: ", dlgName);
+			if(callback) { callback.apply(UIManager._allDialog[dlgName]); }
+			return;
+		}
+		
+		cc.loader.loadRes(prefabName, cc.Prefab, 
+			function(completeCnt:number, totalCnt:number, item:any){
+				cc.log("进度: ", completeCnt, totalCnt);
+			}, 
+			function(errorMessage, loadedResource){
+				if( errorMessage ) { 
+					cc.log( '载入预制资源失败:' + errorMessage ); 
+					return; 
+				}
+
+				var cvs = cc.find("Canvas");
+				if( !cvs ) { 
+					cc.log("没有Canvas"); 
+					return; 
+				}
+
+				var obj = cc.instantiate(loadedResource);
+				if(!obj) {
+					cc.log("实例化预制体失败");
+					return;
+				}
+
+				CommonUtils.setModal(obj, true); 
+
+				cvs.addChild(obj, Consts.LAYER.Dialog);
+				UIManager._allDialog[dlgName] = obj;
+				if(callback) { callback.apply(obj); }
+			} 
+			);
+	}
 	
 	public static toast(content:string) {
 		var completeCallback = function(errorMessage, loadedResource) {

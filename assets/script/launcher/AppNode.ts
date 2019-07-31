@@ -19,7 +19,7 @@ export default class AppNode extends cc.Component {
     }
 
     onKeyDown (event) {
-        if(event.keyCode===cc.macro.KEY.back) {
+        if(event.keyCode===cc.macro.KEY.back || event.keyCode===cc.macro.KEY.escape) {
             cc.log("返回键");
         }
     }

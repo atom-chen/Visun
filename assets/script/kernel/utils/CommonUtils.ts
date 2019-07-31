@@ -9,6 +9,7 @@ export default class CommonUtils {
 		var childlist = root.children;
 		for (var i = 0; i < childlist.length; i++){
 			tbl[childlist[i].getName()] = childlist[i];
+		//	cc.log("----", childlist[i].getName());
 			CommonUtils.traverseNodes(childlist[i], tbl)
 		}
 	}

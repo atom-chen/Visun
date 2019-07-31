@@ -44,15 +44,24 @@ export default class HotupdateScene extends BaseComp {
 		this.byteProgress.node.active = false;
 
 		cc.loader.loadResDir( "lobby", 
-								(cpltCnt:number, totalCnt:number, item:any)=>{
-									cc.log("进度：", cpltCnt, totalCnt);
-									this.fileProgress.progress = cpltCnt/totalCnt;
-									//this.byteProgress.progress = cpltCnt/totalCnt;
-								}, 
-								(err:Error, resobj:any[], urls:string[])=>{
-									cc.director.loadScene("LobbyScene");
-								}
-							);
+		(cpltCnt, totalCnt, item)=>{
+			cc.log("进度：", cpltCnt, totalCnt);
+			if(totalCnt<=0){ totalCnt=1; }
+			this.fileProgress.progress = cpltCnt/totalCnt;
+			//this.byteProgress.progress = cpltCnt/totalCnt;
+		}, 
+		(err, resobj, urls)=>{
+			cc.loader.loadResDir("common", 
+			(cnt, tCnt, item)=>{
+				cc.log("进度：", cnt, tCnt);
+				if(tCnt<=0){ tCnt=1; }
+				this.fileProgress.progress = cnt/tCnt;
+			},
+			(err, res, ruls)=>{
+				cc.director.loadScene("LobbyScene");
+			});
+		}
+		);
 	}
 
 	protected getLocalManifestPath() : string

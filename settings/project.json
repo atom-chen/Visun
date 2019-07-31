@@ -2,7 +2,7 @@
   "assets-sort-type": "name",
   "collision-matrix": [
     [
-      true
+      false
     ]
   ],
   "design-resolution-height": 720,

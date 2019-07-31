@@ -14,7 +14,6 @@ const {ccclass, property} = cc._decorator;
 export default class LobbyUI extends BaseComp {
     @property(cc.Button)
     btn_user: cc.Button = null;
-
     @property(cc.Button)
     btn_ddz: cc.Button = null;
     @property(cc.Button)
@@ -23,31 +22,45 @@ export default class LobbyUI extends BaseComp {
     btn_fqzs: cc.Button = null;
     @property(cc.Button)
     btn_zjh: cc.Button = null;
+    @property(cc.Layout)
+    draglayyer: cc.Layout = null;
+    @property(cc.Node)
+    circlenode: cc.Node = null;
 
-	start () 
+	onLoad () 
 	{
         this.btn_user.node.on("click", function(){
-			UIManager.showPopwnd("lobby/prefabs/LoginUI", null);
+			UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
+
+        var gameBtnList = [
+            { id:GameConfig.ddz.id, btn:"btn_ddz" },
+            { id:GameConfig.brnn.id, btn:"btn_brnn" },
+            { id:GameConfig.fqzs.id, btn:"btn_fqzs" },
+            { id:GameConfig.zjh.id, btn:"btn_zjh" },
+        ]
         
-        this.btn_ddz.node.on("click", function(){
-			SubgameEntry.instance().enterGame(GameConfig.ddz.id);
-		}, this);
-		
-        this.btn_brnn.node.on("click", function(){
-			SubgameEntry.instance().enterGame(GameConfig.brnn.id);
-		}, this);
-		
-        this.btn_fqzs.node.on("click", function(){
-			SubgameEntry.instance().enterGame(GameConfig.fqzs.id);
-		}, this);
-		
-        this.btn_zjh.node.on("click", function(){
-            SubgameEntry.instance().enterGame(GameConfig.zjh.id);
-			WsSocket.instance().sendData({name: "hello", pwd: "pwd"});
-        }, this);
+        var dtAngle = 360/12;
+        var startAngle = 180-dtAngle/2;
+        var R = 500;
+        for(var i=0; i<gameBtnList.length; i++) {
+            var cfg = gameBtnList[i];
+            var bton = this[cfg.btn];
+            bton.gameId = cfg.id;
+            bton.node.on("click", function(){
+                SubgameEntry.instance().enterGame(this.gameId);
+            }, bton);
+            var curAngle = startAngle - i * dtAngle;
+            // bton.node.x = R * Math.cos(curAngle * Math.PI / 180);
+            // bton.node.y = R * Math.sin(curAngle * Math.PI / 180);
+        }
         
         this.initNet();
+
+        this.draglayyer.node.on(cc.Node.EventType.TOUCH_MOVE, function(event){
+            var dx = event.touch.getDelta().x;
+            this.circlenode.angle -= dx*0.05;
+        }, this);
     }
 
     private initNet() {

@@ -45,16 +45,16 @@ export default class SubgameEntry {
 		}
 		switch(gameId) {
 			case "ddz":
-				UIManager.showPanel("subgames/ddz/prefabs/ddz_ui", null);
+				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
 				break;
 			case "brnn":
-				UIManager.showPanel("subgames/brnn/prefabs/brnn_ui", null);
+				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
 				break;
 			case "fqzs":
-				UIManager.showPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
 				break;
 			case "zjh":
-				UIManager.showPanel("subgames/zjh/prefabs/zjh_ui", null);
+				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
 				break;
 		}
 	}
