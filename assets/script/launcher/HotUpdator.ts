@@ -1,5 +1,7 @@
+//---------------------------------
+// 热更
+//---------------------------------
 import { HOT_STATE } from "../looker/Consts";
-
 
 export default class HotUpdator {
 	private _id:string;

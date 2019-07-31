@@ -1,3 +1,6 @@
+//---------------------------------
+// 所有组建的父类
+//---------------------------------
 import EventCenter from "../EventCenter";
 
 const {ccclass, property} = cc._decorator;

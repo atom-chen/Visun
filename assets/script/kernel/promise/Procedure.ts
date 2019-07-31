@@ -1,3 +1,6 @@
+//---------------------------------
+// 仿js promise，将过程组织成树形结构，自根往叶播放
+//---------------------------------
 import Caller from "./Caller";
 import PlayUnit from "./PlayUnit";
 

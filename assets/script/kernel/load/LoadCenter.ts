@@ -1,3 +1,6 @@
+//---------------------------------
+// cc.load封装
+//---------------------------------
 /*
 load(resources, progressCallback, completeCallback)
 loadRes(url, type, progressCallback, completeCallback)

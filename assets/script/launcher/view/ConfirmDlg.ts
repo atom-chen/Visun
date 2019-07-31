@@ -1,3 +1,6 @@
+//---------------------------------
+// 确认框
+//---------------------------------
 import BaseComp from "./BaseComp";
 
 const {ccclass, property} = cc._decorator;

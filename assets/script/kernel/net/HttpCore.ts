@@ -1,3 +1,6 @@
+//---------------------------------
+// Http接口
+//---------------------------------
 const {ccclass, property} = cc._decorator;
 
 import * as Consts from "../../looker/Consts";

@@ -1,3 +1,6 @@
+//---------------------------------
+// 永驻节点
+//---------------------------------
 import EventCenter from "./EventCenter";
 
 const {ccclass, property} = cc._decorator;

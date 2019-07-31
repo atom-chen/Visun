@@ -1,3 +1,6 @@
+//---------------------------------
+// 常量
+//---------------------------------
 export const MAIN_URL:string = "http://gameser.lg98.tech";
 
 export enum LAYER {

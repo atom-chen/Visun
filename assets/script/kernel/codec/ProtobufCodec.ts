@@ -1,3 +1,6 @@
+//---------------------------------
+// protobuf格式数据编码解码
+//---------------------------------
 import DataProcessor from "./DataProcessor";
 
 export default class ProtobufCodec implements DataProcessor {

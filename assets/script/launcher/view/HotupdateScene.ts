@@ -1,3 +1,6 @@
+//---------------------------------
+// 热更界面
+//---------------------------------
 const {ccclass, property} = cc._decorator;
 
 import BaseComp from "./BaseComp";

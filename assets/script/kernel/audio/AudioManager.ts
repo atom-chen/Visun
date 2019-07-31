@@ -1,3 +1,6 @@
+//---------------------------------
+// 音频管理
+//---------------------------------
 export default class AudioManager {
     // static singleInstance: AudioManager = null;
     // static getInstance(): AudioManager {

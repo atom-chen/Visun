@@ -1,3 +1,6 @@
+//---------------------------------
+// websocket封装
+//---------------------------------
 import DataProcessor from "../codec/DataProcessor";
 
 enum ConnState {

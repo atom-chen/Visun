@@ -1,3 +1,6 @@
+//---------------------------------
+// 回调封装
+//---------------------------------
 export default class Caller {
 	private _fn:Function;
 	private _target:any;

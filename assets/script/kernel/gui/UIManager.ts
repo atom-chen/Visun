@@ -1,3 +1,6 @@
+//---------------------------------
+// UI管理器
+//---------------------------------
 import * as Consts from "../../looker/Consts";
 import CommonUtils from "../utils/CommonUtils";
 
