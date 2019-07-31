@@ -12,15 +12,14 @@ export default class Procedure {
 	private _node_type:string = "unknown";
 	private _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
 	private _play_overed:boolean = false;
-	private _bAutoClean:boolean = true;
+	private _bAutoClean:boolean = false;
 
-	private _context = null;
-	private _argInfo:any[] = [];
 	private _procFunc:Caller = null;
 	private _stopFunc:Caller = null;
 	private _partList:Array<Procedure> = [];
 	private _belongTo:Procedure = null;
 	private _next:Procedure = null;
+
 
 	public constructor(procFunc:Caller=null, stopFunc:Caller=null) {
 		this._procFunc = procFunc;
@@ -28,14 +27,16 @@ export default class Procedure {
 	}
 
 	private clean() {
-		this._context = null;
-		this._argInfo.length = 0;
-		this._argInfo = null;
 		this._procFunc = null;
 		this._stopFunc = null;
 		this._partList.length = 0;
 		this._partList = null;
 	}
+
+	public getType() : string {
+		return this._node_type;
+	}
+
 
 	public setStopFunc(stop_func:Caller) : Procedure {
 		this._stopFunc = stop_func;
@@ -53,18 +54,20 @@ export default class Procedure {
 		return this;
 	}
 
+
 	public addPart(part:Procedure) : Procedure {
 		part._belongTo = this;
 		this._partList.push(part);
 		return this;
 	}
 
-	public addPartCaller(caller1:Caller, caller2:Caller=null) : Procedure {
-		var part = new Procedure(caller1, caller2);
+	public addPartCaller(procFunc:Caller, stopFunc:Caller=null) : Procedure {
+		var part = new Procedure(procFunc, stopFunc);
 		part._belongTo = this;
 		this._partList.push(part);
 		return this;
 	}
+
 
 	public then(nextNode:Procedure) : Procedure {
 		var last = this.getLast();
@@ -73,10 +76,17 @@ export default class Procedure {
 		return nextNode;
 	}
 
-	public thenCall(caller:Caller) : Procedure {
-		var nextNode = new Procedure(caller);
+	public thenCaller(procFunc:Caller, stopFunc:Caller|null=null) : Procedure {
+		var nextNode = new Procedure(procFunc, stopFunc);
 		return this.then(nextNode);
 	}
+
+	public thenFunc(fn:Function, target:any, ...args:any[]) : Procedure {
+		var procFunc:Caller = new Caller(fn, target, ...args);
+		var nextNode = new Procedure(procFunc);
+		return this.then(nextNode);
+	}
+
 
 	public getLast() : Procedure {
 		var last:Procedure = this;
@@ -86,6 +96,7 @@ export default class Procedure {
 		return last;
 	}
 
+	
 	public run() : void {
 		if(this._cur_state === PROCEDURE_STATE.RUNNING) {
 			return;
