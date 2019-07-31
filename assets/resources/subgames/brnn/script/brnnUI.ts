@@ -1,5 +1,6 @@
-import BaseComp from "../../../../script/launcher/view/BaseComp";
 import GameUtil from "../../../lobby/script/utils/GameUtil";
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+import BaseComp from "../../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 
@@ -24,7 +25,7 @@ export default class BrnnUI extends BaseComp {
 		
 		cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
 			if(err) { cc.log("error: "+err); return; }
-			var name = vsun.CommonUtils.getFrameName("common/imgs/chip/chip_"+rule[idx-1]);
+			var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+rule[idx-1]);
 			var chip = new cc.Node();
 			chip.scale = 0.4
 			chip.addComponent(cc.Sprite);
@@ -37,7 +38,7 @@ export default class BrnnUI extends BaseComp {
 	
 	onLoad () {
 		var allNodes = {};
-		vsun.CommonUtils.traverseNodes(this.node, allNodes);
+		CommonUtils.traverseNodes(this.node, allNodes);
 		this.all_nodes = allNodes;
 
 		this.btn_close.node.on("click", function(){

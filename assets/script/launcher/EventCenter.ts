@@ -1,11 +1,11 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class EventCenter extends cc.Component {
+export default class EventCenter {
 	private _events = {};
-
 	private static _singleton:EventCenter = null;
-	public static instance() 
+	
+	public static instance() : EventCenter
 	{
 		if(EventCenter._singleton){ return EventCenter._singleton; }
 		EventCenter._singleton = new EventCenter();

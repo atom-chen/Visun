@@ -1,8 +1,12 @@
-import EventCenter from "../../../../../script/launcher/EventCenter";
-import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import rule_login from "../../proxy/rules/rule_login";
 import SubgameEntry from "../../utils/SubgameEntry";
 import GameConfig from "../../utils/GameConfig";
+import UIManager from "../../../../../script/kernel/gui/UIManager";
+import HttpCore from "../../../../../script/kernel/net/HttpCore";
+import EventCenter from "../../../../../script/launcher/EventCenter";
+import WsSocket from "../../../../../script/kernel/net/WsSocket";
+import JsonCodec from "../../../../../script/kernel/codec/JsonCodec";
+import BaseComp from "../../../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,7 +30,7 @@ export default class LobbyUI extends BaseComp {
 	onLoad () 
 	{
         this.btn_user.node.on("click", function(){
-            vsun.UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
+            UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
 
         var gameBtnList = [
@@ -60,19 +64,19 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initNet() {
-        vsun.HttpCore.registProcotols(rule_login);
+        HttpCore.registProcotols(rule_login);
 		
 		EventCenter.instance().listen("req_hallinfo", this.req_hallinfo, this);
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         
-        vsun.HttpCore.request("req_hallinfo", null, {token:vsun.HttpCore.token,mobileType:3,gameType:0}, null);
+        HttpCore.request("req_hallinfo", null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
         
-        //vsun.WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
-        vsun.WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new vsun.JsonCodec());
+        //WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
+        WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
     }
 
     private req_hallinfo(data:any) {
-        vsun.HttpCore.request("req_userinfo", null, {token:vsun.HttpCore.token}, null);
+        HttpCore.request("req_userinfo", null, {token:HttpCore.token}, null);
     }
 
     private req_userinfo(data:any) {

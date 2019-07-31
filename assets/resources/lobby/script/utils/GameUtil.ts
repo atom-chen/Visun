@@ -1,3 +1,5 @@
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+
 export default class GameUtil {
 
 	public static parseChip(total:number, chipRule:number[]) {
@@ -28,7 +30,7 @@ export default class GameUtil {
 		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
-		var fromPos = vsun.CommonUtils.convertSpaceAR(fromObj, parent);
+		var fromPos = CommonUtils.convertSpaceAR(fromObj, parent);
 		this.flyChip(chipSpr, fromPos, toPos, duration);
 	}
 
@@ -37,7 +39,7 @@ export default class GameUtil {
 		var szDst = dstObj.getContentSize();
 		var srcScale = srcObj.scale;
 		var dstScale = dstObj.scale;
-		var toPos = vsun.CommonUtils.convertSpaceAR(dstObj, parent);
+		var toPos = CommonUtils.convertSpaceAR(dstObj, parent);
 		var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
 		var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
 		toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );

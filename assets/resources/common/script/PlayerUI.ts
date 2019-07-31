@@ -1,9 +1,10 @@
 import User from "../../lobby/script/model/User";
+import BaseComp from "../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class PlayerUI extends cc.Component {
+export default class PlayerUI extends BaseComp {
 
     @property(cc.Label)
     label_name: cc.Label = null;
