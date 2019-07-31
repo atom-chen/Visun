@@ -1,5 +1,4 @@
 import BaseComp from "../../../script/launcher/view/BaseComp";
-import CommonUtils from "../../../script/kernel/utils/CommonUtils";
 
 
 const {ccclass, property} = cc._decorator;
@@ -47,7 +46,7 @@ export default class ChipBox extends BaseComp {
         cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
             if(err) { cc.log("error: "+err); return; }
             for(var i=1; i<=5; i++){
-                var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+values[i-1]);
+                var name = vsun.CommonUtils.getFrameName("common/imgs/chip/chip_"+values[i-1]);
                 self["chip"+i].normalSprite = atlas.getSpriteFrame(name);
                 self["chip"+i].hoverSprite = atlas.getSpriteFrame(name);
                 self["chip"+i].pressedSprite = atlas.getSpriteFrame(name);

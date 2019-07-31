@@ -102,18 +102,18 @@ export default class WsSocket {
 		}
 	}
 
-	public sendData(data:any) 
+	public sendData(data:any) : boolean
 	{
 		if(this._curState !== ConnState.connected) {
 			cc.log("尚未建立连接");
-			return;
+			return false;
 		}
 		if(!this._ws) {
 			cc.log("no ws object");
-			return;
+			return false;
 		}
 		var msg = this._dataProcessor.encode(data);
-		this._ws.send(msg);
+		return this._ws.send(msg);
 	}
 
 }

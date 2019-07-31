@@ -1,5 +1,4 @@
 import HotUpdator from "../../../../script/launcher/HotUpdator";
-import UIManager from "../../../../script/kernel/manager/UIManager";
 import GameConfig from "./GameConfig";
 
 
@@ -29,32 +28,32 @@ export default class SubgameEntry {
 
 	public enterGame(gameId:string) {
 		if(!GameConfig[gameId]) {
-			UIManager.toast("敬请期待");
+			vsun.UIManager.toast("敬请期待");
 			return;
 		}
 		var updator = this.getUpdator(gameId);
 		if(updator) {
 			if(updator.isUpdating()) {
-				UIManager.toast("正在更新中，请稍等");
+				vsun.UIManager.toast("正在更新中，请稍等");
 				return;
 			}
 		}
 		if(!this.isGameExist(gameId)) {
-			UIManager.toast("游戏不存在");
+			vsun.UIManager.toast("游戏不存在");
 			return;
 		}
 		switch(gameId) {
 			case "ddz":
-				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+				vsun.UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
 				break;
 			case "brnn":
-				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+				vsun.UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
 				break;
 			case "fqzs":
-				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+				vsun.UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
 				break;
 			case "zjh":
-				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+				vsun.UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
 				break;
 		}
 	}

@@ -171,11 +171,11 @@ export default class Procedure {
 		if(this._next) { this._next.stop(); }
 	}
 
-	public isFinished() {
+	public isFinished() : boolean {
 		return this._cur_state === PROCEDURE_STATE.DONE || this._cur_state === PROCEDURE_STATE.STOPED;
 	}
 
-	public isPartsFinished() {
+	public isPartsFinished() : boolean {
 		if(!this._partList) { return true; }
 		for(var i in this._partList) {
 			if(!this._partList[i].isFullFinished()) {
@@ -185,7 +185,7 @@ export default class Procedure {
 		return true;
 	}
 	
-	public isFullFinished() {
+	public isFullFinished() : boolean {
 		if(!this.isFinished()) { return false; }
 		if(this._next) { return this._next.isFullFinished(); }
 		return true;

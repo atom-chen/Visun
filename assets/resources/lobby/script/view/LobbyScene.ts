@@ -1,4 +1,3 @@
-import UIManager from "../../../../script/kernel/manager/UIManager";
 import BaseComp from "../../../../script/launcher/view/BaseComp";
 
 const {ccclass, property} = cc._decorator;
@@ -9,7 +8,7 @@ export default class NewClass extends BaseComp {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        UIManager.openPanel("lobby/prefabs/LobbyUI", null);
+        vsun.UIManager.openPanel("lobby/prefabs/LobbyUI", null);
     }
 
     start () {

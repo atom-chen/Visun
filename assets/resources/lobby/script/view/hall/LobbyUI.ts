@@ -1,7 +1,3 @@
-import UIManager from "../../../../../script/kernel/manager/UIManager";
-import HttpCore from "../../../../../script/kernel/net/HttpCore";
-import WsSocket from "../../../../../script/kernel/net/WsSocket";
-import JsonCodec from "../../../../../script/kernel/codec/JsonCodec";
 import EventCenter from "../../../../../script/launcher/EventCenter";
 import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import rule_login from "../../proxy/rules/rule_login";
@@ -30,7 +26,7 @@ export default class LobbyUI extends BaseComp {
 	onLoad () 
 	{
         this.btn_user.node.on("click", function(){
-			UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
+            vsun.UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
 
         var gameBtnList = [
@@ -64,19 +60,19 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initNet() {
-        HttpCore.registProcotols(rule_login);
+        vsun.HttpCore.registProcotols(rule_login);
 		
 		EventCenter.instance().listen("req_hallinfo", this.req_hallinfo, this);
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         
-        HttpCore.request("req_hallinfo", null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
+        vsun.HttpCore.request("req_hallinfo", null, {token:vsun.HttpCore.token,mobileType:3,gameType:0}, null);
         
-        //WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
-        WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
+        //vsun.WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
+        vsun.WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new vsun.JsonCodec());
     }
 
     private req_hallinfo(data:any) {
-        HttpCore.request("req_userinfo", null, {token:HttpCore.token}, null);
+        vsun.HttpCore.request("req_userinfo", null, {token:vsun.HttpCore.token}, null);
     }
 
     private req_userinfo(data:any) {
