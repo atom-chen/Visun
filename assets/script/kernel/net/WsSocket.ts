@@ -57,8 +57,8 @@ export default class WsSocket {
 			if(info.data) {
 				data = self._dataProcessor.decode(info.data);
 			}
-
-			if(10000!==cmdId || 30400!=cmdId){
+			
+			if(10000!==cmdId && 30400!=cmdId){
 				cc.log(cmdId, data);
 			}
 			if(data.code === 200) {
@@ -70,15 +70,21 @@ export default class WsSocket {
 		}
 		ws.onclose = function () {
 			cc.log("ws: onclose", url);
-			this._ws.close();
-			this._ws = null;
+			if(this._ws){
+				var ws = this._ws;
+				this._ws = null;
+				ws.close();
+			}
 			this._curState = ConnState.unconnect;
 			if(on_fail) { on_fail(); }
 		}
 		ws.onerror = function (err) {
 			cc.log("ws: onerror", url);
-			this._ws.close();
-			this._ws = null;
+			if(this._ws){
+				var ws = this._ws;
+				this._ws = null;
+				ws.close();
+			}
 			this._curState = ConnState.unconnect;
 			if(on_fail) { on_fail(); }
 		}
