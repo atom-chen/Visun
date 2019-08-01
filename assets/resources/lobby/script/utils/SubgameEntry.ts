@@ -43,17 +43,18 @@ export default class SubgameEntry {
 			UIManager.toast("游戏不存在");
 			return;
 		}
+		
 		switch(gameId) {
-			case "ddz":
+			case "40000040":
 				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
 				break;
-			case "brnn":
+			case "90000040":
 				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
 				break;
-			case "fqzs":
+			case "80000044":
 				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
 				break;
-			case "zjh":
+			case "40070012":
 				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
 				break;
 		}

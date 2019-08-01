@@ -37,10 +37,10 @@ export default class LobbyUI extends BaseComp {
         }, this);
 
         var gameBtnList = [
-            { id:GameConfig.ddz.id, btn:"btn_ddz" },
-            { id:GameConfig.brnn.id, btn:"btn_brnn" },
-            { id:GameConfig.fqzs.id, btn:"btn_fqzs" },
-            { id:GameConfig.zjh.id, btn:"btn_zjh" },
+            { id:GameConfig["40000040"].id, btn:"btn_ddz" },
+            { id:GameConfig["90000040"].id, btn:"btn_brnn" },
+            { id:GameConfig["80000044"].id, btn:"btn_fqzs" },
+            { id:GameConfig["40070012"].id, btn:"btn_zjh" },
         ]
         
         var dtAngle = 360/12;
@@ -69,7 +69,8 @@ export default class LobbyUI extends BaseComp {
     private initNet() {
         HttpCore.registProcotols(rule_login);
 
-		EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
+        EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
+        EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
 
         var param = { 
             deviceID : PlatformUtil.getDeviceId(), 
@@ -83,6 +84,13 @@ export default class LobbyUI extends BaseComp {
         var allNodes = {};
         CommonUtils.traverseNodes(this.node, allNodes);
         allNodes["HeroUI"].getComponent("HeroUI").setUserInfo(User.getHero());
+
+        //点击游戏按钮，进入选房界面
+        HttpCore.request("req_room_select_info", null, {gameId:80000041,channelId:1003});
+    }
+
+    private req_room_select_info(info){
+        cc.log(info);
     }
 
 }

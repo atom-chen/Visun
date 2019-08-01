@@ -12,6 +12,7 @@ HttpResponds["req_youke_login"] = function(data:any){
 	LoginMgr.instance.token = info.sid;
 	HttpCore.token = info.sid;
 	HttpCore.request("req_userinfo", null, {userId:info.userId});
+	HttpCore.request("req_game_list", null, {sid:info.sid});
 }
 
 HttpResponds["req_userinfo"] = function(data:any) {
@@ -24,3 +25,8 @@ HttpResponds["req_userinfo"] = function(data:any) {
 	WsSocket.instance().connect(url, new JsonCodec());
 }
 
+HttpResponds["req_game_list"] = function(data:any) {
+	var info = data 
+	if(!info) return;
+	cc.log(info)
+}

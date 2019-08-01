@@ -59,7 +59,7 @@ export default class WsSocket {
 		}
 		ws.onerror = function (err) {
 			self._curState = ConnState.unconnect;
-			cc.log("ws: onerror");
+			cc.log("ws: onerror", err);
 			self.close();
 		}
 		self._ws = ws;
@@ -108,6 +108,21 @@ export default class WsSocket {
 		}
 	}
 
+	public sendMsg(cmdId:number, data:any) : boolean
+	{
+		if(data===undefined || data===null){
+			data = {};
+		}
+
+		var info = {
+			cmd : cmdId,
+			data : data
+		}
+
+		var msg = this._dataProcessor.encode(info);
+		return this.sendData(msg);
+	}
+
 	public sendData(data:any) : boolean
 	{
 		if(this._curState !== ConnState.connected) {
@@ -118,8 +133,8 @@ export default class WsSocket {
 			cc.log("no ws object");
 			return false;
 		}
-		var msg = this._dataProcessor.encode(data);
-		return this._ws.send(msg);
+
+		return this._ws.send(data);
 	}
 
 }
