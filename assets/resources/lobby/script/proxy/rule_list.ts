@@ -1,4 +1,4 @@
-var rule_login = [
+var rule_list = [
 	{
 		name : "req_youke_login",
 		reqType : "GET",
@@ -54,4 +54,4 @@ var rule_login = [
 	},
 ];
 
-export default rule_login;
+export default rule_list;

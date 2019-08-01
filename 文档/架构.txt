@@ -8,11 +8,13 @@ launcher[启动器]
 	PlatformUtil（平台导出的接口）
 
 kernel[核心框架]
-	codec[数据流的编码解码]
-	manager[资源管理、音频管理、UI管理等]
-	net[网络库：Http Tcp WebSocket]
+	load[资源管理]
+	audio[音频相关]
 	promise[串行并行执行器]
+	codec[数据流的编码解码]
+	net[网络库：Http Tcp WebSocket]
 	utils[通用辅助函数]
+	gui[UI相关]
 
 looker[]
 	配置表

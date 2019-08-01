@@ -1,6 +1,8 @@
+import BaseComp from "../../../../script/launcher/view/BaseComp";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class bjleUI extends cc.Component {
+export default class bjleUI extends BaseComp {
 
 }

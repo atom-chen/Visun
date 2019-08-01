@@ -1,11 +1,9 @@
-import rule_login from "../../proxy/rules/rule_login";
+import rule_list from "../../proxy/rule_list";
 import SubgameEntry from "../../utils/SubgameEntry";
 import GameConfig from "../../utils/GameConfig";
 import UIManager from "../../../../../script/kernel/gui/UIManager";
 import HttpCore from "../../../../../script/kernel/net/HttpCore";
 import EventCenter from "../../../../../script/launcher/EventCenter";
-import WsSocket from "../../../../../script/kernel/net/WsSocket";
-import JsonCodec from "../../../../../script/kernel/codec/JsonCodec";
 import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import PlatformUtil from "../../../../../script/launcher/PlatformUtil";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
@@ -67,7 +65,7 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initNet() {
-        HttpCore.registProcotols(rule_login);
+        HttpCore.registProcotols(rule_list);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
