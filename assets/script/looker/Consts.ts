@@ -1,7 +1,8 @@
 //---------------------------------
 // 常量
 //---------------------------------
-export const MAIN_URL:string = "http://gameser.lg98.tech";
+export const MAIN_URL:string = "http://njzuanshui.com";
+export const WS_URL:string = "ws://hdyshiye.com:9999/client/";
 
 export enum LAYER {
 	Panel = 0,

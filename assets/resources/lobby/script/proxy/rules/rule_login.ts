@@ -1,14 +1,13 @@
 var rule_login = [
 	{
-		name : "req_hallinfo",
+		name : "req_youke_login",
 		reqType : "GET",
 		domain : "",
-		addr : "user/getHallInfo",
+		addr : "user/login",
 		addrparams : [],
 		params : [
-			[ "token", "string" ],
-			[ "mobileType", "number" ],
-			[ "gameType", "number", 0 ],
+			[ "deviceID", "string" ],
+			[ "platformId", "number" ],
 		]
 	},
 	{
@@ -18,7 +17,7 @@ var rule_login = [
 		addr : "user/getUserInfo",
 		addrparams : [],
 		params : [
-			[ "token", "string" ],
+			[ "userId", "number" ]
 		]
 	}
 ];

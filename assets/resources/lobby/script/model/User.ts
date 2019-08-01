@@ -2,15 +2,35 @@ export default class User {
 	private static _userList:object = {};
 	private static _heroId:number = 0;
 
-	public channelId:number = 0;
-	public coin:number = 0;
-	public headImg:string = "";
-	public loginTime:number = 0;
-	public nickname:string = "";
-	public regTime:number = 0;
-	public sex:number = 1;
-	public userId:number = 0;
-	public username:string = "";
+	banRank: 0
+	bankcoin: 0
+	baseBankCoin: 0
+	bindStatus: 1
+	binderId: 0
+	channelId: 1003
+	code: 200
+	coin: 28
+	dailyRecharge: 0
+	dailyRechargeMax: 0
+	diamond: 0
+	headImg: "m_1.png"
+	ip: "127.0.0.1"
+	isInTable: 0
+	level: 0
+	loginTime: 1564645229000
+	msg: "OK"
+	nickname: "??"
+	openid: "625896525"
+	platformId: 0
+	pos: ""
+	psword: ""
+	regTime: 1564641596000
+	sex: 0
+	ticket: 0
+	userId: 10034
+	userType: 2
+	username: "10034"
+
 
 	public static setHeroId(uid:number)
 	{

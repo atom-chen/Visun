@@ -88,7 +88,7 @@ export default class HttpCore {
 	}
 
 	//根据协议规则文件发送请求
-	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void)
+	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void = null)
 	{
 		var ptoinfo = this.g_allProtocol[ptoname]
 		if(!ptoinfo) { cc.log("未定义该协议：", ptoname); return; }

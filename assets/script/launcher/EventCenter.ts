@@ -80,7 +80,7 @@ export default class EventCenter {
 	//触发
 	public fire(...arglist:any[])
 	{
-		var evtName = arguments[0];
+		var evtName:string = arguments[0];
 
 		var evtList = this._events[evtName];
 		if(!evtList){ return; }

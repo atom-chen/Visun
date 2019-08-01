@@ -1,5 +1,8 @@
 //---------------------------------
 // websocket封装
+//
+// WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
+// WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
 //---------------------------------
 import DataProcessor from "../codec/DataProcessor";
 

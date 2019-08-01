@@ -9,7 +9,7 @@ export default class PlatformUtil {
 	//获取设备ID
 	public static getDeviceId() : string 
 	{
-		return "";
+		return "625896525";
 	}
 
 	//复制到粘贴板

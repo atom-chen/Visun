@@ -7,6 +7,9 @@ import EventCenter from "../../../../../script/launcher/EventCenter";
 import WsSocket from "../../../../../script/kernel/net/WsSocket";
 import JsonCodec from "../../../../../script/kernel/codec/JsonCodec";
 import BaseComp from "../../../../../script/launcher/view/BaseComp";
+import PlatformUtil from "../../../../../script/launcher/PlatformUtil";
+import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
+import User from "../../model/User";
 
 const {ccclass, property} = cc._decorator;
 
@@ -65,22 +68,21 @@ export default class LobbyUI extends BaseComp {
 
     private initNet() {
         HttpCore.registProcotols(rule_login);
-		
-		EventCenter.instance().listen("req_hallinfo", this.req_hallinfo, this);
-        EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
-        
-        HttpCore.request("req_hallinfo", null, {token:HttpCore.token,mobileType:3,gameType:0}, null);
-        
-        //WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
-        WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
-    }
 
-    private req_hallinfo(data:any) {
-        HttpCore.request("req_userinfo", null, {token:HttpCore.token}, null);
+		EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
+
+        var param = { 
+            deviceID : PlatformUtil.getDeviceId(), 
+            platformId : 3
+        };
+        HttpCore.request("req_youke_login", null, param);
     }
 
     private req_userinfo(data:any) {
-        cc.log(data);
+        UIManager.toast("登录成功");
+        var allNodes = {};
+        CommonUtils.traverseNodes(this.node, allNodes);
+        allNodes["HeroUI"].getComponent("HeroUI").setUserInfo(User.getHero());
     }
 
 }
