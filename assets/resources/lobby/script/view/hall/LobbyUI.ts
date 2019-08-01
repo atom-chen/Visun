@@ -85,20 +85,6 @@ export default class LobbyUI extends BaseComp {
         var allNodes = {};
         CommonUtils.traverseNodes(this.node, allNodes);
         allNodes["HeroUI"].getComponent("HeroUI").setUserInfo(User.getHero());
-
-        //点击游戏按钮，进入选房界面
-        HttpCore.request("req_room_select_info", null, {gameId:80000041,channelId:User.getHero().channelId});
-
-        //获得游戏的ws地址
-        var param = {
-            sid : HttpCore.token,
-            gameId: 80000041,
-            tableType: 0,
-            gameType: 0,
-            clientVersion: "9.9.9",
-            channelId: User.getHero().channelId
-        }
-        HttpCore.request("req_enter_room", null, {data:JSON.stringify(param)});
     }
 
     private req_room_select_info(info){

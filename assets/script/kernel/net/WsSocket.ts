@@ -58,7 +58,7 @@ export default class WsSocket {
 				data = self._dataProcessor.decode(info.data);
 			}
 
-			if(10000!==cmdId){
+			if(10000!==cmdId || 30400!=cmdId){
 				cc.log(cmdId, data);
 			}
 			if(data.code === 200) {

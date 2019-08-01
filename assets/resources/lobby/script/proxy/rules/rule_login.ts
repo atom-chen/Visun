@@ -38,7 +38,7 @@ var rule_login = [
 		addr : "table/getCoinTableInfo",
 		addrparams : [],
 		params : [
-			[ "gameId", "number" ],
+			[ "gameId", "string" ],
 			[ "channelId", "number" ]
 		]
 	},

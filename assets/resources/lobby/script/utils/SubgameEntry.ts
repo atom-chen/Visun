@@ -1,6 +1,8 @@
 import HotUpdator from "../../../../script/launcher/HotUpdator";
 import GameConfig from "./GameConfig";
 import UIManager from "../../../../script/kernel/gui/UIManager";
+import HttpCore from "../../../../script/kernel/net/HttpCore";
+import User from "../model/User";
 
 
 export default class SubgameEntry {
@@ -44,19 +46,33 @@ export default class SubgameEntry {
 			return;
 		}
 		
-		switch(gameId) {
-			case "40000040":
-				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
-				break;
-			case "90000040":
-				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
-				break;
-			case "80000044":
-				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
-				break;
-			case "40070012":
-				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
-				break;
-		}
+		//点击游戏按钮，进入选房界面
+        HttpCore.request("req_room_select_info", null, {gameId:gameId,channelId:User.getHero().channelId});
+
+        //获得游戏的ws地址
+        var param = {
+            sid : HttpCore.token,
+            gameId: gameId,
+            tableType: 0,
+            gameType: 0,
+            clientVersion: "9.9.9",
+            channelId: User.getHero().channelId
+        }
+		HttpCore.request("req_enter_room", null, {data:JSON.stringify(param)});
+		
+		// switch(gameId) {
+		// 	case "40000040":
+		// 		UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+		// 		break;
+		// 	case "90000040":
+		// 		UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+		// 		break;
+		// 	case "80000044":
+		// 		UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+		// 		break;
+		// 	case "40070012":
+		// 		UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+		// 		break;
+		// }
 	}
 }
