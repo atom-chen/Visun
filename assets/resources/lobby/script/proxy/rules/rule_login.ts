@@ -42,6 +42,16 @@ var rule_login = [
 			[ "channelId", "number" ]
 		]
 	},
+	{
+		name : "req_enter_room",
+		reqType : "POST",
+		domain : "",
+		addr : "table/joinBRNN",
+		addrparams : [],
+		params : [
+			[ "data", "string" ]
+		]
+	},
 ];
 
 export default rule_login;

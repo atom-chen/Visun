@@ -71,6 +71,7 @@ export default class LobbyUI extends BaseComp {
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
+        EventCenter.instance().listen("req_enter_room", this.req_enter_room, this);
 
         var param = { 
             deviceID : PlatformUtil.getDeviceId(), 
@@ -86,10 +87,26 @@ export default class LobbyUI extends BaseComp {
         allNodes["HeroUI"].getComponent("HeroUI").setUserInfo(User.getHero());
 
         //点击游戏按钮，进入选房界面
-        HttpCore.request("req_room_select_info", null, {gameId:80000041,channelId:1003});
+        HttpCore.request("req_room_select_info", null, {gameId:80000041,channelId:User.getHero().channelId});
+
+        //获得游戏的ws地址
+        var param = {
+            sid : HttpCore.token,
+            gameId: 80000041,
+            tableType: 0,
+            gameType: 0,
+            clientVersion: "9.9.9",
+            channelId: User.getHero().channelId
+        }
+        HttpCore.request("req_enter_room", null, {data:JSON.stringify(param)});
     }
 
     private req_room_select_info(info){
+        cc.log(info);
+    }
+
+    private req_enter_room(info) {
+        cc.log("------------------");
         cc.log(info);
     }
 

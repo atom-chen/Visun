@@ -109,6 +109,7 @@ export default class UIManager {
 	}
 	
 	public static toast(content:string) {
+		if(content===undefined||content===null) { return; }
 		var completeCallback = function(errorMessage, loadedResource) {
 			if( errorMessage ) { cc.log( '载入预制资源失败:' + errorMessage ); return; }
 			var cvs = cc.find("Canvas");

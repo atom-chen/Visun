@@ -5,6 +5,7 @@
 // WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
 //---------------------------------
 import DataProcessor from "../codec/DataProcessor";
+import UIManager from "../gui/UIManager";
 
 enum ConnState {
 	unconnect = 0,
@@ -38,34 +39,53 @@ export default class WsSocket {
 	}
 	
 
-	private initWs(url:string, cacertPath:string)
+	private initWs(url:string, cacertPath:string, on_success:Function = null, on_fail:Function = null)
 	{
 		var self = this;
 		var ws = new WebSocket(url, [], cacertPath);
 		ws.binaryType = "arraybuffer";
 		ws.onopen = function () {
-			cc.log("ws: onopen");
+			cc.log("ws: onopen", url);
 			self._curState = ConnState.connected;
+			if(on_success) { on_success(); }
 		}
 		ws.onmessage = function (event) {
-			cc.log("ws: onmessage");
+			//cc.log("ws: onmessage");
 			var info = self._dataProcessor.decode(event.data);
-			cc.log(info);
+			var cmdId = info.cmd;
+			var data = info.data;
+			if(info.data) {
+				data = self._dataProcessor.decode(info.data);
+			}
+
+			if(10000!==cmdId){
+				cc.log(cmdId, data);
+			}
+			if(data.code === 200) {
+
+			}
+			else {
+				UIManager.toast(data.msg);
+			}
 		}
 		ws.onclose = function () {
-			cc.log("ws: onclose");
-			self._curState = ConnState.unconnect;
-			self.close();
+			cc.log("ws: onclose", url);
+			this._ws.close();
+			this._ws = null;
+			this._curState = ConnState.unconnect;
+			if(on_fail) { on_fail(); }
 		}
 		ws.onerror = function (err) {
-			self._curState = ConnState.unconnect;
-			cc.log("ws: onerror", err);
-			self.close();
+			cc.log("ws: onerror", url);
+			this._ws.close();
+			this._ws = null;
+			this._curState = ConnState.unconnect;
+			if(on_fail) { on_fail(); }
 		}
 		self._ws = ws;
 	}
 
-	public connect(url:string, processor:DataProcessor) 
+	public connect(url:string, processor:DataProcessor, on_success:Function = null, on_fail:Function = null) 
 	{
 		if(this._url === url && this._ws !== null){
 			cc.log("the same url");
@@ -89,11 +109,11 @@ export default class WsSocket {
 					cc.log( '载入cacert.pem失败, 原因:' + errorMessage ); 
 					return; 
 				}
-				self.initWs(url, ""+loadedResource);
+				self.initWs(url, ""+loadedResource, on_success, on_fail);
 			});
 		}
 		else {
-			self.initWs(url, "");
+			self.initWs(url, "", on_success, on_fail);
 		}
 	}
 
@@ -134,7 +154,9 @@ export default class WsSocket {
 			return false;
 		}
 
-		return this._ws.send(data);
+		this._ws.send(data);
+		cc.log("【发送】", data);
+		return true;
 	}
 
 }

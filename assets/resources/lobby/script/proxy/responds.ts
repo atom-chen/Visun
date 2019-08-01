@@ -30,3 +30,21 @@ HttpResponds["req_game_list"] = function(data:any) {
 	if(!info) return;
 	cc.log(info)
 }
+
+HttpResponds["req_enter_room"] = function(data:any) {
+	var info = data 
+	if(!info) return;
+	cc.log(info);
+	var url = "ws://" + info.addr + "/websocket";
+	WsSocket.instance().close();
+	WsSocket.instance().connect(url, new JsonCodec(), function(){
+		var param = {
+			sid: HttpCore.token,
+			gameNo: "80000041",
+			tableType: 0,
+			channelId: User.getHero().channelId,
+			gameType: 0
+		}
+		WsSocket.instance().sendMsg(20006, param);
+	});
+}
