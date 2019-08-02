@@ -6,8 +6,7 @@ const {ccclass, property} = cc._decorator;
 import * as Consts from "../../looker/Consts";
 import DataProcessor from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
-import HttpResponds from "./HttpResponds";
-import HttpRequests from "./HttpRequests";
+import NetRequest from "./NetRequest";
 import EventCenter from "../../launcher/EventCenter";
 
 @ccclass
@@ -16,27 +15,36 @@ export default class HttpCore {
 	private static g_timeout:number = 8000;
 	private static _dataProcessor:DataProcessor = new JsonCodec;
 	private static g_allProtocol:object = {};
+	private static _responder:any;
 	
 	private static _regist(ptoname:string)
 	{
-		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void) {
+		NetRequest[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void) {
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
-	public static registProcotol(ruleList:any[])
+	public static registProcotol(ruleList:any[], respondor:any)
 	{
-		for( var i=0; i<ruleList.length; i++){
+		this._responder = respondor;
+		
+		for( var i=0; i<ruleList.length; i++) {
 			var ptoname:string = ruleList[i].name
-			if(this.g_allProtocol[ptoname]){
-				cc.error("重复注册：", ptoname);
+
+			if(this.g_allProtocol[ptoname]) {
+				cc.error("重新注册：", ptoname);
 			} 
 			else {
 				cc.log("注册协议：", ptoname);
-				this.g_allProtocol[ptoname] = ruleList[i];
-			//	this._regist(ptoname);   // ts语法中未申明不可使用 HttpRequests.funcname()的形式，故注释掉了
 			}
+
+			this.g_allProtocol[ptoname] = ruleList[i];
+		//	this._regist(ptoname);
 		}
+	}
+
+	public static unregistAll() {
+
 	}
 
 	//--------------------------------------------------------------------------------
@@ -138,7 +146,7 @@ export default class HttpCore {
 			var info = this._dataProcessor.decode(data);
 
 			// 调用响应协议
-			if(HttpResponds[ptoname]) { HttpResponds[ptoname](info); }
+			if(this._responder[ptoname]) { this._responder[ptoname](info); }
 
 			// 调用unsafeCallback
 			if(unsafeCallback) { unsafeCallback(info); }

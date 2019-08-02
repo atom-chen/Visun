@@ -1,4 +1,3 @@
-import http_rules from "../../proxy/http_rules";
 import SubgameEntry from "../../utils/SubgameEntry";
 import GameConfig from "../../utils/GameConfig";
 import UIManager from "../../../../../script/kernel/gui/UIManager";
@@ -8,8 +7,10 @@ import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import PlatformUtil from "../../../../../script/launcher/PlatformUtil";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 import User from "../../model/User";
-import WsHandler from "../../../../../script/kernel/net/WsHandler";
-import ws_rules from "../../proxy/ws_rules";
+import WsCore from "../../../../../script/kernel/net/WsCore";
+import http_rules from "../../proxy/rule/http_rules";
+import ws_rules from "../../proxy/rule/ws_rules";
+import http_responds from "../../proxy/http_responds";
 import ws_responds from "../../proxy/ws_responds";
 
 const {ccclass, property} = cc._decorator;
@@ -68,8 +69,8 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initNet() {
-        HttpCore.registProcotol(http_rules);
-        WsHandler.registProtocol(ws_rules, ws_responds);
+        HttpCore.registProcotol(http_rules, http_responds);
+        WsCore.registProtocol(ws_rules, ws_responds);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);

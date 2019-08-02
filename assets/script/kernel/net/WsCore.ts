@@ -1,27 +1,29 @@
 import WsSocket from "./WsSocket";
 import EventCenter from "../../launcher/EventCenter";
-import WsRequests from "./WsRequests";
+import NetRequest from "./NetRequest";
 
-export default class WsHandler {
+export default class WsCore {
 	private static _protocolTbl: any;
 	private static _responder: {};
 
 	private static _regist(ptoname:string, cmdId:number) {
-		WsRequests[ptoname] = function(data:any) {
+		NetRequest[ptoname] = function(data:any) {
 			WsSocket.instance().sendMsg(cmdId, data);
 		}
 	}
 
-	public static registProtocol(tbl:any, responder:any){
+	public static registProtocol(tbl:any, responder:any) {
 		this._protocolTbl = tbl;
 		this._responder = responder;
 
 		for(var ptoname in tbl.names) {
-			if(!this._responder[ptoname]) {
-				cc.log("未定义ws响应：", ptoname);
-			}
+			cc.log("注册ws协议：", ptoname);
 		//	this._regist(ptoname, tbl.names[ptoname].cmdId);
 		}
+	}
+
+	public static unregistAll() {
+		
 	}
 
 	public static setRespondor(tbl:any){

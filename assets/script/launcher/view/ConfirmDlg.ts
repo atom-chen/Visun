@@ -35,10 +35,10 @@ export default class ConfirmDlg extends BaseComp {
 	}
 
 	
-	public reflesh(callback:Function, content:string, title:string, okTxt:string, cancelTxt:string) 
+	public reflesh(callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) 
 	{
 		this._callback = callback;
 		this.labelContent.string = content;
-		this.labelTitle.string = title;
+		if(title){ this.labelTitle.string = title; }
 	}
 }

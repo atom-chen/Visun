@@ -21,7 +21,7 @@ export default class UIManager {
 		
 		cc.loader.loadRes(prefabName, cc.Prefab, 
 			function(completeCnt:number, totalCnt:number, item:any){
-				cc.log("进度: ", completeCnt, totalCnt);
+				//cc.log("进度: ", completeCnt, totalCnt);
 			}, 
 			function(errorMessage, loadedResource){
 				if( errorMessage ) { 
@@ -70,14 +70,13 @@ export default class UIManager {
 	}
 	
 
-	public static openDialog(dlgName:string, prefabName:string, callback:Function) {
+	public static openDialog(dlgName:string, callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){
 			cc.log("allready exist: ", dlgName);
-			if(callback) { callback.apply(UIManager._allDialog[dlgName]); }
 			return;
 		}
 		
-		cc.loader.loadRes(prefabName, cc.Prefab, 
+		cc.loader.loadRes("launcher/prefabs/ConfirmDlg", cc.Prefab, 
 			function(completeCnt:number, totalCnt:number, item:any){
 				//cc.log("进度: ", completeCnt, totalCnt);
 			}, 
@@ -99,11 +98,11 @@ export default class UIManager {
 					return;
 				}
 
-				CommonUtils.setModal(obj, true); 
+				CommonUtils.setModal(obj, false); 
 
 				cvs.addChild(obj, Consts.LAYER.Dialog);
 				UIManager._allDialog[dlgName] = obj;
-				if(callback) { callback.apply(obj); }
+				obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
 			} 
 			);
 	}

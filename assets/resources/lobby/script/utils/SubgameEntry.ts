@@ -6,6 +6,7 @@ import User from "../model/User";
 
 
 export default class SubgameEntry {
+	private _gamelist:any[];
 	private static _singleton:SubgameEntry;
 	private constructor() {}
 	public static instance() : SubgameEntry {
@@ -14,6 +15,10 @@ export default class SubgameEntry {
 		}
 		return SubgameEntry._singleton;
 	}
+
+	public setServerGames(gameList:any[]) {
+		this._gamelist = gameList;
+	} 
 
 	public isGameExist(gameId:string) : boolean {
 		if(!GameConfig[gameId]) {

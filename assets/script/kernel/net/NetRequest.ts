@@ -1,6 +1,6 @@
 //---------------------------------
 // http请求句柄
 //---------------------------------
-var HttpRequests:any;
-HttpRequests = {};
-export default HttpRequests;
+var NetRequest:any;
+NetRequest = {};
+export default NetRequest;

@@ -6,7 +6,7 @@
 //---------------------------------
 import DataProcessor from "../codec/DataProcessor";
 import UIManager from "../gui/UIManager";
-import WsHandler from "./WsHandler";
+import WsCore from "./WsCore";
 
 enum ConnState {
 	unconnect = 0,
@@ -63,7 +63,7 @@ export default class WsSocket {
 				cc.log(cmdId, data);
 			}
 			if(data.code === 200) {
-				WsHandler.respond(cmdId, data);
+				WsCore.respond(cmdId, data);
 			}
 			else {
 				UIManager.toast(data.msg);
@@ -113,7 +113,7 @@ export default class WsSocket {
 		if(cc.sys.isNative){
 			cc.loader.loadRes("launcher/cacert", function(errorMessage, loadedResource){
 				if( errorMessage ) { 
-					cc.log( '载入cacert.pem失败, 原因:' + errorMessage ); 
+					cc.log( '载入cacert.pem失败:' + errorMessage ); 
 					return; 
 				}
 				self.initWs(url, ""+loadedResource, on_success, on_fail);

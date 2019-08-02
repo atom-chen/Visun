@@ -1,12 +1,15 @@
 import User from "../model/User";
-import HttpResponds from "../../../../script/kernel/net/HttpResponds";
 import HttpCore from "../../../../script/kernel/net/HttpCore";
 import WsSocket from "../../../../script/kernel/net/WsSocket";
 import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
 import { WS_URL } from "../../../../script/looker/Consts";
-import WsHandler from "../../../../script/kernel/net/WsHandler";
+import WsCore from "../../../../script/kernel/net/WsCore";
+import SubgameEntry from "../utils/SubgameEntry";
 
-HttpResponds["req_youke_login"] = function(data:any){
+var http_responds:any;
+http_responds = {};
+
+http_responds.req_youke_login = function(data:any){
 	var info = data 
 	if(!info) return;
 	HttpCore.token = info.sid;
@@ -14,7 +17,7 @@ HttpResponds["req_youke_login"] = function(data:any){
 	HttpCore.request("req_game_list", null, {sid:info.sid});
 }
 
-HttpResponds["req_userinfo"] = function(info:any) {
+http_responds.req_userinfo = function(info:any) {
 	if(!info) return;
 	User.setHeroId(info.userId);
 	User.updateUser(info);
@@ -23,12 +26,12 @@ HttpResponds["req_userinfo"] = function(info:any) {
 	WsSocket.instance().connect(url, new JsonCodec());
 }
 
-HttpResponds["req_game_list"] = function(info:any) {
+http_responds.req_game_list = function(info:any) {
 	if(!info) return;
-	cc.log(info)
+	SubgameEntry.instance().setServerGames(info.data);
 }
 
-HttpResponds["req_enter_room"] = function(info:any) {
+http_responds.req_enter_room = function(info:any) {
 	if(!info) return;
 	cc.log(info);
 	var url = "ws://" + info.addr + "/websocket";
@@ -39,6 +42,8 @@ HttpResponds["req_enter_room"] = function(info:any) {
 			gameId: "80000041",
 			channelId: User.getHero().channelId,
 		}
-		WsHandler.request("MSG_JOIN_COIN_REQUEST", param);
+		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
 	});
 }
+
+export default http_responds;
