@@ -39,7 +39,7 @@ http_responds.req_enter_room = function(info:any) {
 	WsSocket.instance().connect(url, new JsonCodec(), function(){
 		var param = {
 			sid: HttpCore.token,
-			gameId: "80000041",
+			gameId: info.gameId,
 			channelId: User.getHero().channelId,
 		}
 		WsCore.request("MSG_JOIN_COIN_REQUEST", param);

@@ -64,20 +64,24 @@ export default class SubgameEntry {
             channelId: User.getHero().channelId
         }
 		HttpCore.request("req_enter_room", null, {data:JSON.stringify(param)});
-		
-		// switch(gameId) {
-		// 	case "40000040":
-		// 		UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
-		// 		break;
-		// 	case "90000040":
-		// 		UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
-		// 		break;
-		// 	case "80000044":
-		// 		UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
-		// 		break;
-		// 	case "40070012":
-		// 		UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
-		// 		break;
-		// }
 	}
+
+	public enterGameScene(gameId) {
+		gameId = gameId.toString();
+		switch(gameId) {
+			case "40000040":
+				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+				break;
+			case "90000040":
+				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+				break;
+			case "80000044":
+				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+				break;
+			case "40070012":
+				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+				break;
+		}
+	}
+
 }
