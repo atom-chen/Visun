@@ -6,6 +6,7 @@
 //---------------------------------
 import DataProcessor from "../codec/DataProcessor";
 import UIManager from "../gui/UIManager";
+import WsHandler from "./WsHandler";
 
 enum ConnState {
 	unconnect = 0,
@@ -37,7 +38,7 @@ export default class WsSocket {
 		}
 		return this._singleton;
 	}
-	
+
 
 	private initWs(url:string, cacertPath:string, on_success:Function = null, on_fail:Function = null)
 	{
@@ -62,7 +63,7 @@ export default class WsSocket {
 				cc.log(cmdId, data);
 			}
 			if(data.code === 200) {
-
+				WsHandler.respond(cmdId, data);
 			}
 			else {
 				UIManager.toast(data.msg);

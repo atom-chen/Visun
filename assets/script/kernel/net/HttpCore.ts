@@ -17,14 +17,14 @@ export default class HttpCore {
 	private static _dataProcessor:DataProcessor = new JsonCodec;
 	private static g_allProtocol:object = {};
 	
-	private static addProtocol(ptoname:string)
+	private static _regist(ptoname:string)
 	{
 		HttpRequests[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void) {
 			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
-	public static registProcotols(ruleList:any[])
+	public static registProcotol(ruleList:any[])
 	{
 		for( var i=0; i<ruleList.length; i++){
 			var ptoname:string = ruleList[i].name
@@ -34,7 +34,7 @@ export default class HttpCore {
 			else {
 				cc.log("注册协议：", ptoname);
 				this.g_allProtocol[ptoname] = ruleList[i];
-			//	this.addProtocol(ptoname);   // ts语法中未申明不可使用 HttpRequests.funcname()的形式，故注释掉了
+			//	this._regist(ptoname);   // ts语法中未申明不可使用 HttpRequests.funcname()的形式，故注释掉了
 			}
 		}
 	}

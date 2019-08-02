@@ -79,7 +79,7 @@ export default class UIManager {
 		
 		cc.loader.loadRes(prefabName, cc.Prefab, 
 			function(completeCnt:number, totalCnt:number, item:any){
-				cc.log("进度: ", completeCnt, totalCnt);
+				//cc.log("进度: ", completeCnt, totalCnt);
 			}, 
 			function(errorMessage, loadedResource){
 				if( errorMessage ) { 

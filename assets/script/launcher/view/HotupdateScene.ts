@@ -48,7 +48,7 @@ export default class HotupdateScene extends BaseComp {
 
 		cc.loader.loadResDir( "lobby", 
 		(cpltCnt, totalCnt, item)=>{
-			cc.log("进度：", cpltCnt, totalCnt);
+			//cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
 			this.fileProgress.progress = cpltCnt/totalCnt;
 			//this.byteProgress.progress = cpltCnt/totalCnt;
@@ -56,7 +56,7 @@ export default class HotupdateScene extends BaseComp {
 		(err, resobj, urls)=>{
 			cc.loader.loadResDir("common", 
 			(cnt, tCnt, item)=>{
-				cc.log("进度：", cnt, tCnt);
+				//cc.log("进度：", cnt, tCnt);
 				if(tCnt<=0){ tCnt=1; }
 				this.fileProgress.progress = cnt/tCnt;
 			},

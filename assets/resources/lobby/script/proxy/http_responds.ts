@@ -4,6 +4,7 @@ import HttpCore from "../../../../script/kernel/net/HttpCore";
 import WsSocket from "../../../../script/kernel/net/WsSocket";
 import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
 import { WS_URL } from "../../../../script/looker/Consts";
+import WsHandler from "../../../../script/kernel/net/WsHandler";
 
 HttpResponds["req_youke_login"] = function(data:any){
 	var info = data 
@@ -13,8 +14,7 @@ HttpResponds["req_youke_login"] = function(data:any){
 	HttpCore.request("req_game_list", null, {sid:info.sid});
 }
 
-HttpResponds["req_userinfo"] = function(data:any) {
-	var info = data 
+HttpResponds["req_userinfo"] = function(info:any) {
 	if(!info) return;
 	User.setHeroId(info.userId);
 	User.updateUser(info);
@@ -23,14 +23,12 @@ HttpResponds["req_userinfo"] = function(data:any) {
 	WsSocket.instance().connect(url, new JsonCodec());
 }
 
-HttpResponds["req_game_list"] = function(data:any) {
-	var info = data 
+HttpResponds["req_game_list"] = function(info:any) {
 	if(!info) return;
 	cc.log(info)
 }
 
-HttpResponds["req_enter_room"] = function(data:any) {
-	var info = data 
+HttpResponds["req_enter_room"] = function(info:any) {
 	if(!info) return;
 	cc.log(info);
 	var url = "ws://" + info.addr + "/websocket";
@@ -38,11 +36,9 @@ HttpResponds["req_enter_room"] = function(data:any) {
 	WsSocket.instance().connect(url, new JsonCodec(), function(){
 		var param = {
 			sid: HttpCore.token,
-			gameNo: "80000041",
-			tableType: 0,
+			gameId: "80000041",
 			channelId: User.getHero().channelId,
-			gameType: 0
 		}
-		WsSocket.instance().sendMsg(20006, param);
+		WsHandler.request("MSG_JOIN_COIN_REQUEST", param);
 	});
 }
