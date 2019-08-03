@@ -20,7 +20,7 @@ export default class HttpCore {
 	private static _regist(ptoname:string)
 	{
 		NetRequest[ptoname] = function(tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void) {
-			this.request(ptoname, tAddrParams, tParams, unsafeCallback);
+			HttpCore.request(ptoname, tAddrParams, tParams, unsafeCallback);
 		}
 	}
 
