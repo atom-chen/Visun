@@ -12,6 +12,7 @@ import http_rules from "../../proxy/rule/http_rules";
 import ws_rules from "../../proxy/rule/ws_rules";
 import http_responds from "../../proxy/http_responds";
 import ws_responds from "../../proxy/ws_responds";
+import PokerCard from "../../../../common/script/PokerCard";
 
 const {ccclass, property} = cc._decorator;
 
@@ -66,6 +67,8 @@ export default class LobbyUI extends BaseComp {
             var dx = event.touch.getDelta().x;
             this.circlenode.angle -= dx*0.05;
         }, this);
+
+        this.tests();
     }
 
     private initNet() {
@@ -97,6 +100,21 @@ export default class LobbyUI extends BaseComp {
     private req_enter_room(info) {
         cc.log("------------------");
         cc.log(info);
+    }
+
+    private tests() {
+        //加载spine
+        var self = this;
+        cc.loader.loadRes("common/spines/bairenniuniu_kaishixiazhu.json", sp.SkeletonData, 
+		function(err, resc){
+			if( err ) { cc.log( '载入spine失败:' + err ); return; }
+            //var obj = cc.instantiate(resc);
+            var obj = new cc.Node();
+            var sk = obj.addComponent(sp.Skeleton);
+            sk.skeletonData = resc;
+            self.node.addChild(obj, 10);
+            sk.setAnimation(1, "animation", true);
+		});
     }
 
 }
