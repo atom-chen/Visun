@@ -114,6 +114,23 @@ export default class LobbyUI extends BaseComp {
             sk.skeletonData = resc;
             self.node.addChild(obj, 10);
             sk.setAnimation(1, "animation", true);
+        });
+        cc.loader.loadRes("common/prefabs/PokerCard", cc.Prefab, 
+		function(err, resc){
+			if( err ) { cc.log( '载入prefab失败:' + err ); return; }
+            var obj = cc.instantiate(resc);
+            var cpn = obj.getComponent("PokerCard");
+            cpn.state = 1;
+            self.node.addChild(obj, 10);
+            // cpn.node.on("touchstart", function(event:any){ if(cpn.state===1) cpn.state=0; else cpn.state=1; });
+        });
+        cc.loader.loadRes("common/prefabs/HandCard", cc.Prefab, 
+		function(err, resc){
+			if( err ) { cc.log( '载入prefab失败:' + err ); return; }
+            var obj = cc.instantiate(resc);
+            var cpn = obj.getComponent("HandCard");
+            self.node.addChild(obj, 10);
+            // cpn.node.on("touchstart", function(event:any){ if(cpn.state===1) cpn.state=0; else cpn.state=1; });
 		});
     }
 
