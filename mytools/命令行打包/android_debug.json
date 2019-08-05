@@ -1,6 +1,5 @@
 {
 	"platform" : "android",
-	"path" : "D:/Vision",
 	"debug" : true,
 	"sourceMaps" : false,
 	"inlineSpriteFrames" : false,

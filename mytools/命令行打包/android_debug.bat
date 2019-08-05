@@ -1,0 +1,1 @@
+C:/CocosCreator_2.1.2/CocosCreator.exe --path D:/Visun --build "configPath=android_debug.json"

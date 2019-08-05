@@ -1,1 +1,0 @@
-C:\CocosCreator_2.1.2/CocosCreator.exe --configPath "cmdbuild.json"
