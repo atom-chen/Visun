@@ -28,7 +28,16 @@ export default class PokerCard extends cc.Component {
         return this._state;
     }
 
-    setFace(bFront:boolean, duradion:number=0) {
+    public toggleState() : void {
+        if(this._state===0) {
+            this.state = 1;
+        }
+        else {
+            this.state = 0;
+        }
+    }
+
+    public setFace(bFront:boolean, duradion:number=0) {
         if(duradion <= 0) {
             this._curFace = bFront;
             if(bFront) {

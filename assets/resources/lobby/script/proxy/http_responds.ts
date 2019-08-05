@@ -31,7 +31,26 @@ http_responds.req_game_list = function(info:any) {
 	SubgameEntry.instance().setServerGames(info.data);
 }
 
-http_responds.req_enter_room = function(info:any) {
+http_responds.req_enter_br_room = function(info:any) {
+	if(!info) return;
+	cc.log(info);
+	if(info.code != 200) {
+		UIManager.toast(info.msg);
+		return;
+	}
+	var url = "ws://" + info.addr + "/websocket";
+	WsSocket.instance().close();
+	WsSocket.instance().connect(url, new JsonCodec(), function(){
+		var param = {
+			sid: HttpCore.token,
+			gameId: info.gameId,
+			channelId: User.getHero().channelId,
+		}
+		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
+	});
+}
+
+http_responds.req_enter_coin_room = function(info:any) {
 	if(!info) return;
 	cc.log(info);
 	if(info.code != 200) {

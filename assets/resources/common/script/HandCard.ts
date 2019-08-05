@@ -5,7 +5,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class HandCard extends BaseComp {
 	private _touchBegan:cc.Vec2;
-	private _touchMoved:cc.Vec2;
+    private _touchMoved:cc.Vec2;
+    private _nowState:number = 0;
 
 	onLoad() {
 		this.node.on(cc.Node.EventType.TOUCH_START, this.touchBegan, this);
@@ -14,52 +15,47 @@ export default class HandCard extends BaseComp {
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.touchMoved, this);
 	}
 
-	_getCardForTouch (touch) {
+	private _findTouchedCards (touch:cc.Vec2) : void {
 		var cardArr = this.node.children;
-        for (var k in cardArr) {
-			var box:cc.Rect = cardArr[k].getBoundingBox();   //获取card覆盖坐标范围
-            if (box.contains(touch)) {      //判断触摸的点，是否在当前牌的范围内
-                cardArr[k].getComponent("PokerCard").state = 1;
+        for (var k=0; k<cardArr.length; k++) {
+            var box:cc.Rect = cardArr[k].getBoundingBox();
+            if (box.contains(touch)) {
+                if(k<cardArr.length-1){
+                    if(cardArr[k+1].getBoundingBox().xMin > touch.x){
+                        cardArr[k].getComponent("PokerCard").state = this._nowState;
+                    }
+                }
+                else {
+                    cardArr[k].getComponent("PokerCard").state = this._nowState;
+                }
 			}
         }
     }
 
-	/**
-     * 开始点击  TOUCH_START回调函数
-     * */
-    private touchBegan(event):void {
-        cc.log("Touch begin");
+    touchBegan(event:any) : void {
+        if(this._nowState===0) this._nowState = 1; else this._nowState = 0;
         var touches = event.getTouches();
         var touchLoc = touches[0].getLocation();
-        cc.log("touch begin location: "+touchLoc);
-        this._touchBegan = this.node.convertToNodeSpace(touchLoc);
-		this._getCardForTouch( this._touchBegan);
+        this._touchBegan = this.node.convertToNodeSpaceAR(touchLoc);
+		this._findTouchedCards( this._touchBegan);
     }
 
-    /**
-     * 移动  TOUCH_MOVE回调函数
-     * */
-    touchMoved (event):void {
-        cc.log("Touch move");
+    touchMoved (event:any) : void {
         var touches = event.getTouches();
         var touchLoc = touches[0].getLocation();
-        this._touchMoved = this.node.convertToNodeSpace(touchLoc);
-        this._getCardForTouch(this._touchMoved);
-        
+        this._touchMoved = this.node.convertToNodeSpaceAR(touchLoc);
+        this._findTouchedCards(this._touchMoved);
     }
 
-    touchCancel () {
-
-    }
-
-    /**
-     * 点击结束  TOUCH_END回调函数
-     * */
-    touchEnd (event) {
-        cc.log("Touch end");
+    touchEnd (event:any) {
         var touches = event.getTouches();
         var touchLoc = touches[0].getLocation();
-        
-	}
+        this._touchMoved = this.node.convertToNodeSpaceAR(touchLoc);
+        this._findTouchedCards(this._touchMoved);
+    }
+    
+    touchCancel(event:any) : void {
+
+    }
 	
 }

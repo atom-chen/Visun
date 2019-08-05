@@ -48,7 +48,10 @@ export default class CommonUtils {
 		return dstObj.convertToNodeSpace(pt);
 	}
 
-
+	public static getFrameName(name:string) : string 
+	{
+		return name.replace(/\//g,"-");
+	}
 
 	public static isNil(obj:any) : boolean
 	{
@@ -60,9 +63,9 @@ export default class CommonUtils {
 		}
 	}
 
-	public static getFrameName(name:string) : string 
-	{
-		return name.replace(/\//g,"-");
+	// Returns a random integer between min (included) and max (excluded)
+	public static getRandomInt(min:number, max:number) : number {
+		return Math.floor(Math.random() * (max - min)) + min;
 	}
 
 	public static shuffle(array: Array<any>) {

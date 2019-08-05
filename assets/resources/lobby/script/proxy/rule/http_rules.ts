@@ -43,13 +43,33 @@ var http_rules = [
 		]
 	},
 	{
-		name : "req_enter_room",
+		name : "req_enter_br_room",
 		reqType : "POST",
 		domain : "",
 		addr : "table/joinBRNN",
 		addrparams : [],
 		params : [
-			[ "data", "string" ]
+			["sid" , "string"],
+            ["gameId", "string"],
+            ["tableType", "number"],
+            ["gameType", "number"],
+            ["clientVersion", "string"],
+            ["channelId", "number"]
+		]
+	},
+	{
+		name : "req_enter_coin_room",
+		reqType : "POST",
+		domain : "",
+		addr : "table/coinjoin",
+		addrparams : [],
+		params : [
+			["sid" , "string"],
+            ["gameId", "string"],
+            ["tableType", "number"],
+            ["gameType", "number"],
+            ["clientVersion", "string"],
+            ["channelId", "number"]
 		]
 	},
 ];

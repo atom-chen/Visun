@@ -1,6 +1,7 @@
 //---------------------------------
 // 常量
 //---------------------------------
+export const CLIENT_VERSION = "9.9.9";
 export const MAIN_URL:string = "http://njzuanshui.com";
 export const WS_URL:string = "ws://hdyshiye.com:9999/client/";
 

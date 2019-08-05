@@ -12,7 +12,6 @@ import http_rules from "../../proxy/rule/http_rules";
 import ws_rules from "../../proxy/rule/ws_rules";
 import http_responds from "../../proxy/http_responds";
 import ws_responds from "../../proxy/ws_responds";
-import PokerCard from "../../../../common/script/PokerCard";
 
 const {ccclass, property} = cc._decorator;
 
@@ -77,7 +76,7 @@ export default class LobbyUI extends BaseComp {
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
-        EventCenter.instance().listen("req_enter_room", this.req_enter_room, this);
+        EventCenter.instance().listen("req_enter_br_room", this.req_enter_br_room, this);
 
         var param = { 
             deviceID : PlatformUtil.getDeviceId(), 
@@ -97,7 +96,7 @@ export default class LobbyUI extends BaseComp {
         cc.log(info);
     }
 
-    private req_enter_room(info) {
+    private req_enter_br_room(info) {
         cc.log("------------------");
         cc.log(info);
     }
@@ -122,7 +121,6 @@ export default class LobbyUI extends BaseComp {
             var cpn = obj.getComponent("PokerCard");
             cpn.state = 1;
             self.node.addChild(obj, 10);
-            // cpn.node.on("touchstart", function(event:any){ if(cpn.state===1) cpn.state=0; else cpn.state=1; });
         });
         cc.loader.loadRes("common/prefabs/HandCard", cc.Prefab, 
 		function(err, resc){
@@ -130,7 +128,6 @@ export default class LobbyUI extends BaseComp {
             var obj = cc.instantiate(resc);
             var cpn = obj.getComponent("HandCard");
             self.node.addChild(obj, 10);
-            // cpn.node.on("touchstart", function(event:any){ if(cpn.state===1) cpn.state=0; else cpn.state=1; });
 		});
     }
 

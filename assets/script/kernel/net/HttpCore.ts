@@ -104,7 +104,7 @@ export default class HttpCore {
 
 		var domain = Consts.MAIN_URL;
 		if(ptoinfo.domain && ptoinfo.domain != "") {
-			domain = ptoinfo.domain
+			domain = ptoinfo.domain;
 		}
 
 		var addr = ptoinfo.addr
@@ -114,11 +114,14 @@ export default class HttpCore {
 				if( typeof(tAddrParams[j]) != ptoinfo.addrparams[j] ){
 					cc.error("地址参数类型错误");
 				}
-				addr += "/" + tAddrParams[j]
+				addr += "/" + tAddrParams[j];
 			}
 		}
 
-		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params)
+		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params);
+		if(ptoinfo.reqType==="POST") {
+			paramStr = "data="+JSON.stringify(tParams);
+		}
 
 		if(ptoinfo.reqType === "GET") {
 			HttpCore.callGet(domain, addr, paramStr, (iCode:number, data:any)=>{
