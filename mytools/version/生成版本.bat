@@ -1,1 +1,1 @@
-node version_generator.js -v 1.13 -u http://localhost/Vision/remote-assets/ -s pack/ -d publish/
+node version_generator.js -v 1.1 -u http://localhost/visun/assets/ -s pack/ -d publish/
