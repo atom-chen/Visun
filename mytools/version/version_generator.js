@@ -96,6 +96,50 @@ var mkdirSync = function (path) {
     }
 }
 
+//接口：拷贝文件夹
+function copyDirectory(src, dest) {
+    if (IsFileExist(dest) == false) {
+        fs.mkdirSync(dest);
+    }
+    if (fs.existsSync(src) == false) {
+        return false;
+    }
+    // console.log("src:" + src + ", dest:" + dest);
+    // 拷贝新的内容进去
+    var dirs = fs.readdirSync(src);
+    dirs.forEach(function(item){
+        var item_path = path.join(src, item);
+        var temp = fs.statSync(item_path);
+        if (temp.isFile()) { // 是文件
+           // console.log("Item Is File:" + item);
+            fs.copyFileSync(item_path, path.join(dest, item));
+        } else if (temp.isDirectory()){ // 是目录
+            // console.log("Item Is Directory:" + item);
+            copyDirectory(item_path, path.join(dest, item));
+        }
+    });
+}
+
+//接口：删除文件夹
+function deleteDirectory(dir) {
+    if (fs.existsSync(dir) == true) {
+        var files = fs.readdirSync(dir);
+        files.forEach(function(item){
+            var item_path = path.join(dir, item);
+           // console.log(item_path);
+            if (fs.statSync(item_path).isDirectory()) {
+                deleteDirectory(item_path);
+            }
+            else {
+                fs.unlinkSync(item_path);
+            }
+        });
+        fs.rmdirSync(dir);
+    }
+}
+
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 
 // 遍历src和res文件夹，生成manifest的assets列表
 // todo: 暂时没有做源码和资源的加密处理，需加上
