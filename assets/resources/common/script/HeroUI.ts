@@ -4,7 +4,7 @@ import User from "../../lobby/script/model/User";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends BaseComp {
+export default class HeroUI extends BaseComp {
 
     @property(cc.Label)
     label_name: cc.Label = null;
