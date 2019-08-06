@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "icon_wrnn",
+    "texture": "2dmhguRIRAgZqWG7Ha0I5/",
+    "rect": [
+      1,
+      0,
+      264,
+      216
+    ],
+    "offset": [
+      0.5,
+      0.5
+    ],
+    "originalSize": [
+      265,
+      217
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

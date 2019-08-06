@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "icon_lhd",
+    "texture": "8du1dFsQdF3b9pA3OY5Orm",
+    "rect": [
+      5,
+      0,
+      224,
+      228
+    ],
+    "offset": [
+      2,
+      0
+    ],
+    "originalSize": [
+      230,
+      228
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

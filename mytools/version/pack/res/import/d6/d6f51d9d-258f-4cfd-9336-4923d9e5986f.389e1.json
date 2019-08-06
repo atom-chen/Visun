@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "icon_ddz",
+    "texture": "8aWKWTACZPlI2K2Li13G3v",
+    "rect": [
+      2,
+      22,
+      238,
+      266
+    ],
+    "offset": [
+      -4.5,
+      -10
+    ],
+    "originalSize": [
+      251,
+      290
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

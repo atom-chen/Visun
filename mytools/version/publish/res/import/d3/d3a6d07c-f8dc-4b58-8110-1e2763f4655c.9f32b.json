@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "main_an_jq8",
+    "texture": "96OpgnFgdAbp/zS3uo2OZ3",
+    "rect": [
+      0,
+      4,
+      92,
+      82
+    ],
+    "offset": [
+      -0.5,
+      -1.5
+    ],
+    "originalSize": [
+      93,
+      87
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

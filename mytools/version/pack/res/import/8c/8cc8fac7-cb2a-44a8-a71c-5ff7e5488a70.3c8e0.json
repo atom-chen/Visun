@@ -1,0 +1,90 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "chip.plist",
+  "_spriteFrames": {
+    "common-imgs-chip-chip_1": {
+      "__uuid__": "fd1+rTTxJJJpxpEojlb/WA"
+    },
+    "common-imgs-chip-chip_10": {
+      "__uuid__": "b8Xrj8RihKc6fpl31qw5U6"
+    },
+    "common-imgs-chip-chip_100": {
+      "__uuid__": "30EVZTI5BAeK453NLQsdcR"
+    },
+    "common-imgs-chip-chip_1000": {
+      "__uuid__": "9foSy8MjNIZ7fckSwaV6xf"
+    },
+    "common-imgs-chip-chip_10000": {
+      "__uuid__": "b6F0rNiU5IQoabvD0iASnd"
+    },
+    "common-imgs-chip-chip_100000": {
+      "__uuid__": "6650xLx6ZCQK+Jo2mBtccx"
+    },
+    "common-imgs-chip-chip_1000000": {
+      "__uuid__": "88fiXXD/ZO3JsHJiNiQwc/"
+    },
+    "common-imgs-chip-chip_150000": {
+      "__uuid__": "1eWW7uQX5LRIvtR2yOkCSo"
+    },
+    "common-imgs-chip-chip_20": {
+      "__uuid__": "0ddws2yDVEO7M0yHs7YfiX"
+    },
+    "common-imgs-chip-chip_240000": {
+      "__uuid__": "b8F95Bqv9Jl732vBwMU651"
+    },
+    "common-imgs-chip-chip_3": {
+      "__uuid__": "58LbsjSEdFuoerkyq97UXH"
+    },
+    "common-imgs-chip-chip_300": {
+      "__uuid__": "a6yYakpaRGhaqVztuvvV/z"
+    },
+    "common-imgs-chip-chip_3000": {
+      "__uuid__": "38FoxgquZCE63ijlvlKIlg"
+    },
+    "common-imgs-chip-chip_30000": {
+      "__uuid__": "9aQsk7D6RAYpM8oZJnbIYl"
+    },
+    "common-imgs-chip-chip_300000": {
+      "__uuid__": "715OeaL8BBbKHpJdbw+Vcn"
+    },
+    "common-imgs-chip-chip_5": {
+      "__uuid__": "3bnThQtbBKubvK1A4y5S8U"
+    },
+    "common-imgs-chip-chip_500": {
+      "__uuid__": "660NeeBw1OHLujNBiCgv3E"
+    },
+    "common-imgs-chip-chip_5000": {
+      "__uuid__": "73BMOCKYNPyrZtBL3tNXqQ"
+    },
+    "common-imgs-chip-chip_50000": {
+      "__uuid__": "5dQ7XOof9FYrk9mf967tkb"
+    },
+    "common-imgs-chip-chip_500000": {
+      "__uuid__": "1fWQaGV+1G0pFmCL6ppGSb"
+    },
+    "common-imgs-chip-chip_8": {
+      "__uuid__": "d6kfPxPfJDrKPp0KuiSUNm"
+    },
+    "common-imgs-chip-chip_800": {
+      "__uuid__": "4fi0AodipOBqDuoUHYlMGF"
+    },
+    "common-imgs-chip-chip_8000": {
+      "__uuid__": "2dPi1dIXRFo47Rzf9Agca5"
+    },
+    "common-imgs-chip-chip_80000": {
+      "__uuid__": "4bp5IcO7hMUZvbVksw6eTp"
+    },
+    "common-imgs-chip-chip_800000": {
+      "__uuid__": "37VV6yqVlHp6HJD2Qn8m0D"
+    },
+    "common-imgs-chip-chip_90000": {
+      "__uuid__": "66UNN1jiNJpqCnpkPgBN79"
+    },
+    "common-imgs-chip-chip_bg": {
+      "__uuid__": "6dLy1a4kBLUJ2mYBR6QDTo"
+    },
+    "common-imgs-chip-selectchip": {
+      "__uuid__": "1cBAG3hVBKkr2UGeIQLGLm"
+    }
+  }
+}

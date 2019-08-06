@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "icon_hhdz",
+    "texture": "16LyjlNdtHsYebcjqijm9J",
+    "rect": [
+      6,
+      1,
+      274,
+      218
+    ],
+    "offset": [
+      2.5,
+      0
+    ],
+    "originalSize": [
+      281,
+      220
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

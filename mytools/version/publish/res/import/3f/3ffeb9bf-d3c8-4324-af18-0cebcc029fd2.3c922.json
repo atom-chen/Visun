@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "bairenniuniu_tingzhixiazhu",
+    "texture": "d7k6SulJxPmothrk4QLiXl",
+    "rect": [
+      0,
+      0,
+      499,
+      314
+    ],
+    "offset": [
+      -1,
+      1
+    ],
+    "originalSize": [
+      501,
+      316
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}
