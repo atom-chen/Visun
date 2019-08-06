@@ -2,6 +2,7 @@
 // 热更
 //---------------------------------
 import { HOT_STATE } from "../looker/Consts";
+import UIManager from "../kernel/gui/UIManager";
 
 export default class HotUpdator {
 	private _id:string;
@@ -237,11 +238,21 @@ export default class HotUpdator {
 
 	protected retry() 
 	{
-		if (this._canRetry) {
-			this._canRetry = false;
-			cc.log('Retry failed Assets...');
-			this._am.downloadFailedAssets();
+		if(!this._canRetry) {
+			this.onFail();
+			return;
 		}
+		
+		UIManager.openDialog("hotretry", (menuId:number)=>{
+			if(menuId===1){
+				cc.log('Retry failed Assets...');
+				this._canRetry = false;
+				this._am.downloadFailedAssets();
+			}
+			else {
+				this.onFail();
+			}
+		}, "更新失败，是否重试？");
 	}
 
 }
