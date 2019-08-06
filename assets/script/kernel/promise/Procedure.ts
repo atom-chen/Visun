@@ -29,7 +29,7 @@ export default class Procedure {
 		this._stopFunc = stopFunc;
 	}
 
-	private clean() {
+	private clean() : void {
 		this._procFunc = null;
 		this._stopFunc = null;
 		this._partList.length = 0;
@@ -136,14 +136,14 @@ export default class Procedure {
 		}
 	}
 
-	public onPartFinished() {
+	public onPartFinished() : void {
 		//自己的处理函数和所有子节点都完成，才正真结束
 		if(this._play_overed && this.isPartsFinished()){
 			this.resolve();
 		}
 	}
 
-	public resolve() {
+	public resolve() : void {
 		this._play_overed = true;
 		if(!this.isPartsFinished()) { return; }  //等待子节点完成
 
@@ -165,7 +165,7 @@ export default class Procedure {
 		cc.log("本Procedure执行完成，整个Procedure执行完成");
 	}
 
-	public stop() {
+	public stop() : void {
 		if(this._next) { this._next._belongTo = this._belongTo; }
 		if(this._cur_state===PROCEDURE_STATE.DONE || this._cur_state===PROCEDURE_STATE.STOPED){
 			if(this._next){

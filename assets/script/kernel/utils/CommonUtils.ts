@@ -19,6 +19,7 @@ export default class CommonUtils {
 
 	public static setModal(obj:cc.Node, closeWhenClickMask:boolean)
 	{
+		// 直接add一个layer然后设置localZOrder为-1的方式，在手机浏览器上有时候挡不住事件，改为这样了
 		if(!obj || !cc.isValid(obj)){
 			return;
 		}

@@ -13,7 +13,7 @@ export default class Caller {
 		this._args = args;
 	}
 
-	public call(part:any=null) 
+	public call(part:any=null) : void
 	{
 		if(part) {
 			this._fn.apply(this._target, [part].concat(this._args));
@@ -25,7 +25,7 @@ export default class Caller {
 		}
 	}
 
-	public clear() 
+	public clear() : void
 	{
 		this._fn = null;
 		this._target = null;
@@ -33,7 +33,7 @@ export default class Caller {
 		this._args = null;
 	}
 
-	public setAutoClean(bFlag:boolean) 
+	public setAutoClean(bFlag:boolean) : void 
 	{
 		this._autoClean = bFlag;
 	}
