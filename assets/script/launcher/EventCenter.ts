@@ -78,19 +78,12 @@ export default class EventCenter {
 	}
 
 	//触发
-	public fire(...arglist:any[])
+	public fire(evtName, ...arglist:any[])
 	{
-		var evtName:string = arguments[0];
-
 		var evtList = this._events[evtName];
 		if(!evtList){ return; }
 
-		var ars = [];
-		for(var i=1; i<arguments.length; i++) {
-			ars.push(arguments[i]);
-		}
-
-		if(ars.length < 1) 
+		if(arglist.length < 1) 
 		{
 			for(var i = 0, len = evtList.length; i < len; i++)
 			{
@@ -103,7 +96,7 @@ export default class EventCenter {
 			for(var i = 0, len = evtList.length; i < len; i++)
 			{
 				var listener = evtList[i];
-				listener.callBack.apply(listener.target, ars);
+				listener.callBack.apply(listener.target, arglist);
 			}
 		}
 	}

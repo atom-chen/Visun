@@ -1,5 +1,7 @@
 //---------------------------------
 // Http接口
+// 注意，unsafeCallback之所以称其unsafe，是因为请求是异步的，
+// 如果在里面调用了ui操作，而ui可能在响应前已经关闭销毁了,这时候在回调里使用的就是野指针。
 //---------------------------------
 const {ccclass, property} = cc._decorator;
 
@@ -95,7 +97,7 @@ export default class HttpCore {
 		return paramStr;
 	}
 
-	//根据协议规则文件发送请求
+	//根据协议规则发送请求
 	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void = null)
 	{
 		var ptoinfo = this.g_allProtocol[ptoname]
