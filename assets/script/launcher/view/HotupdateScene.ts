@@ -6,6 +6,7 @@ const {ccclass, property} = cc._decorator;
 import BaseComp from "./BaseComp";
 import HotUpdator from "../HotUpdator";
 import { HOT_STATE } from "../../looker/Consts";
+import PlatformUtil from "../PlatformUtil";
 
 @ccclass
 export default class HotupdateScene extends BaseComp {
@@ -22,6 +23,8 @@ export default class HotupdateScene extends BaseComp {
 
 
 	onLoad () {
+		PlatformUtil.adaptScreen();
+		
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
 

@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 22
+        "__id__": 23
       }
     ],
     "_active": true,
@@ -88,6 +88,9 @@
       },
       {
         "__id__": 21
+      },
+      {
+        "__id__": 22
       }
     ],
     "_prefab": null,
@@ -835,8 +838,8 @@
       "width": 1280,
       "height": 720
     },
-    "_fitWidth": true,
-    "_fitHeight": true,
+    "_fitWidth": false,
+    "_fitHeight": false,
     "_id": "e0M6JEa+9Ky5swQz83yJQz"
   },
   {
@@ -859,6 +862,33 @@
     "_id": "97K24phGZF8rDPQKTzRRyv"
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 1280,
+    "_originalHeight": 720,
+    "_id": "3eADU0T5lAXqpTbgCnoEsX"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "AppNode",
     "_objFlags": 0,
@@ -870,7 +900,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 23
+        "__id__": 24
       }
     ],
     "_prefab": null,
@@ -921,7 +951,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 22
+      "__id__": 23
     },
     "_enabled": true,
     "_id": "3bQzeagJxDwrQ+hJlS+tPA"

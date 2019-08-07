@@ -9,7 +9,7 @@ export default class PlatformUtil {
 	//获取设备ID
 	public static getDeviceId() : string 
 	{
-		return "625896525";
+		return "622892525";
 	}
 
 	//复制到粘贴板
@@ -40,6 +40,21 @@ export default class PlatformUtil {
 	public static setOrientation() 
 	{
 
+	}
+
+	public static adaptScreen() {
+		var fs = cc.view.getFrameSize();
+        var aa = 1280/720;
+        var bb = fs.width/fs.height;
+        if ( aa === bb ){
+            cc.view.setDesignResolutionSize( 1280,720, cc.ResolutionPolicy.SHOW_ALL);
+        }
+        else if (aa > bb) {
+			cc.view.setDesignResolutionSize( 1280,fs.height, cc.ResolutionPolicy.FIXED_WIDTH);
+        }
+        else {
+            cc.view.setDesignResolutionSize( fs.width,720, cc.ResolutionPolicy.FIXED_HEIGHT);
+		}
 	}
 	
 }

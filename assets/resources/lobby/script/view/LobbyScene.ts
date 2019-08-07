@@ -1,5 +1,6 @@
 import UIManager from "../../../../script/kernel/gui/UIManager";
 import BaseComp from "../../../../script/launcher/view/BaseComp";
+import PlatformUtil from "../../../../script/launcher/PlatformUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -9,6 +10,7 @@ export default class LobbyScene extends BaseComp {
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        PlatformUtil.adaptScreen();
         UIManager.openPanel("lobby/prefabs/LobbyUI", null);
     }
 
