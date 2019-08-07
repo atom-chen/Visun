@@ -12,53 +12,55 @@ export default class UIManager {
 	private static _allDialog = {};
 	private static _toastList:any[] = [];
 
-	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function) {
+	public static callReflesh(obj:any, args:any[]){
+		var compList = obj["_components"];
+		if(compList) {
+			for (var i in compList) {
+				if(compList[i].reflesh) {
+					cc.log("reflesh", args);
+					compList[i].reflesh.apply(compList[i], args);
+				}
+			}
+		}
+	}
+
+	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
 		if(cc.isValid(UIManager._allUI[prefabName])){
 			cc.log("allready exist: ", prefabName);
+			UIManager.callReflesh(UIManager._allUI[prefabName], args);
 			if(callback) { callback.apply(UIManager._allUI[prefabName]); }
 			return;
 		}
 		
 		cc.loader.loadRes(prefabName, cc.Prefab, 
-			function(completeCnt:number, totalCnt:number, item:any){
-				//cc.log("进度: ", completeCnt, totalCnt);
-			}, 
-			function(errorMessage, loadedResource){
-				if( errorMessage ) { 
-					cc.log( '载入预制资源失败:' + errorMessage ); 
-					return; 
-				}
+		(completeCnt:number, totalCnt:number, item:any)=>{
+			//cc.log("进度: ", completeCnt, totalCnt);
+		}, 
+		(err, loadedResource)=>{
+			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
+			var cvs = cc.find("Canvas");
+			if( !cvs ) { cc.log("没有Canvas"); return; }
+			var obj = cc.instantiate(loadedResource);
+			if(!obj) { cc.log("实例化预制体失败"); return; }
 
-				var cvs = cc.find("Canvas");
-				if( !cvs ) { 
-					cc.log("没有Canvas"); 
-					return; 
-				}
+			if(bModal) { 
+				CommonUtils.setModal(obj, bCloseWhenClickMask); 
+			}
 
-				var obj = cc.instantiate(loadedResource);
-				if(!obj) {
-					cc.log("实例化预制体失败");
-					return;
-				}
+			cvs.addChild(obj, layerId);
+			UIManager._allUI[prefabName] = obj;
 
-				if(bModal){ CommonUtils.setModal(obj, bCloseWhenClickMask); }
-
-				cvs.addChild(obj, layerId);
-				UIManager._allUI[prefabName] = obj;
-				// if(layerId===Consts.LAYER.Panel) {
-				// 	UIManager.hidePanelsExcept(obj);
-				// }
-				if(callback) { callback.apply(obj); }
-			} 
-			);
+			UIManager.callReflesh(obj, args);
+			if(callback) { callback.apply(obj); }
+		});
 	}
 
-	public static openPanel(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Panel, prefabName, true, false, callback);
+	public static openPanel(prefabName:string, callback:Function, ...args:any[]) {
+		this.initWindow(Consts.LAYER.Panel, prefabName, true, false, callback, args);
 	}
 	
-	public static openPopwnd(prefabName:string, callback:Function) {
-		this.initWindow(Consts.LAYER.Popup, prefabName, true, true, callback);
+	public static openPopwnd(prefabName:string, callback:Function, ...args:any[]) {
+		this.initWindow(Consts.LAYER.Popup, prefabName, true, true, callback, args);
 	}
 
 	public static hidePanelsExcept(obj:cc.Node) {
@@ -77,34 +79,23 @@ export default class UIManager {
 		}
 		
 		cc.loader.loadRes("launcher/prefabs/ConfirmDlg", cc.Prefab, 
-			function(completeCnt:number, totalCnt:number, item:any){
-				//cc.log("进度: ", completeCnt, totalCnt);
-			}, 
-			function(errorMessage, loadedResource){
-				if( errorMessage ) { 
-					cc.log( '载入预制资源失败:' + errorMessage ); 
-					return; 
-				}
+		(completeCnt:number, totalCnt:number, item:any)=>{
+			//cc.log("进度: ", completeCnt, totalCnt);
+		}, 
+		(err, loadedResource)=>{
+			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
+			var cvs = cc.find("Canvas");
+			if( !cvs ) { cc.log("没有Canvas"); return; }
+			var obj = cc.instantiate(loadedResource);
+			if(!obj) { cc.log("实例化预制体失败"); return; }
 
-				var cvs = cc.find("Canvas");
-				if( !cvs ) { 
-					cc.log("没有Canvas"); 
-					return; 
-				}
+			CommonUtils.setModal(obj, false); 
 
-				var obj = cc.instantiate(loadedResource);
-				if(!obj) {
-					cc.log("实例化预制体失败");
-					return;
-				}
-
-				CommonUtils.setModal(obj, false); 
-
-				cvs.addChild(obj, Consts.LAYER.Dialog);
-				UIManager._allDialog[dlgName] = obj;
-				obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
-			} 
-			);
+			cvs.addChild(obj, Consts.LAYER.Dialog);
+			UIManager._allDialog[dlgName] = obj;
+			
+			obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
+		});
 	}
 	
 	public static toast(content:string) {
