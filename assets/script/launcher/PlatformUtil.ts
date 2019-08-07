@@ -44,16 +44,16 @@ export default class PlatformUtil {
 
 	public static adaptScreen() {
 		var fs = cc.view.getFrameSize();
-        var aa = 1280/720;
-        var bb = fs.width/fs.height;
-        if ( aa === bb ){
-            cc.view.setDesignResolutionSize( 1280,720, cc.ResolutionPolicy.SHOW_ALL);
-        }
-        else if (aa > bb) {
+		var aa = 1280/720;
+		var bb = fs.width/fs.height;
+		if ( aa === bb ){
+			cc.view.setDesignResolutionSize( 1280,720, cc.ResolutionPolicy.SHOW_ALL);
+		}
+		else if (aa > bb) {
 			cc.view.setDesignResolutionSize( 1280,fs.height, cc.ResolutionPolicy.FIXED_WIDTH);
-        }
-        else {
-            cc.view.setDesignResolutionSize( fs.width,720, cc.ResolutionPolicy.FIXED_HEIGHT);
+		}
+		else {
+			cc.view.setDesignResolutionSize( fs.width,720, cc.ResolutionPolicy.FIXED_HEIGHT);
 		}
 	}
 	
