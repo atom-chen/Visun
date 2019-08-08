@@ -1,8 +1,9 @@
+import { HOT_STATE } from "../../looker/Consts";
+import UIManager from "../gui/UIManager";
+
 //---------------------------------
 // 热更
 //---------------------------------
-import { HOT_STATE } from "../looker/Consts";
-import UIManager from "../kernel/gui/UIManager";
 
 export default class HotUpdator {
 	private _id:string;

@@ -1,6 +1,6 @@
 import UIManager from "../../../../script/kernel/gui/UIManager";
-import BaseComp from "../../../../script/launcher/view/BaseComp";
-import PlatformUtil from "../../../../script/launcher/PlatformUtil";
+import BaseComp from "../../../../script/kernel/gui/BaseComp";
+import PlatformUtil from "../../../../script/kernel/utils/PlatformUtil";
 
 const {ccclass, property} = cc._decorator;
 

@@ -1,6 +1,6 @@
 import WsSocket from "./WsSocket";
-import EventCenter from "../../launcher/EventCenter";
 import NetRequest from "./NetRequest";
+import EventCenter from "../event/EventCenter";
 
 export default class WsCore {
 	private static _protocolTbl: any;

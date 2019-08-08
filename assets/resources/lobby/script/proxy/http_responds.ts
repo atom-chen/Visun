@@ -19,11 +19,16 @@ http_responds.req_youke_login = function(info:any){
 
 http_responds.req_userinfo = function(info:any) {
 	if(!info) return;
+	cc.log("登录成功")
 	User.setHeroId(info.userId);
 	User.updateUser(info);
 
 	var url = WS_URL + HttpCore.token;
 	WsSocket.instance().connect(url, new JsonCodec());
+}
+
+http_responds.req_ranklist = function(info:any) {
+	cc.log(info);
 }
 
 http_responds.req_game_list = function(info:any) {

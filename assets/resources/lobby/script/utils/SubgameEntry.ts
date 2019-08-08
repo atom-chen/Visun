@@ -1,9 +1,10 @@
-import HotUpdator from "../../../../script/launcher/HotUpdator";
+
 import GameConfig from "./GameConfig";
 import UIManager from "../../../../script/kernel/gui/UIManager";
 import HttpCore from "../../../../script/kernel/net/HttpCore";
 import User from "../model/User";
 import { CLIENT_VERSION } from "../../../../script/looker/Consts";
+import HotUpdator from "../../../../script/kernel/hotupdator/HotUpdator";
 
 
 export default class SubgameEntry {

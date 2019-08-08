@@ -2,8 +2,6 @@ import SubgameEntry from "../../utils/SubgameEntry";
 import GameConfig from "../../utils/GameConfig";
 import UIManager from "../../../../../script/kernel/gui/UIManager";
 import HttpCore from "../../../../../script/kernel/net/HttpCore";
-import EventCenter from "../../../../../script/launcher/EventCenter";
-import BaseComp from "../../../../../script/launcher/view/BaseComp";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 import User from "../../model/User";
 import WsCore from "../../../../../script/kernel/net/WsCore";
@@ -11,7 +9,9 @@ import http_rules from "../../proxy/rule/http_rules";
 import ws_rules from "../../proxy/rule/ws_rules";
 import http_responds from "../../proxy/http_responds";
 import ws_responds from "../../proxy/ws_responds";
-import PlatformUtil from "../../../../../script/launcher/PlatformUtil";
+import EventCenter from "../../../../../script/kernel/event/EventCenter";
+import BaseComp from "../../../../../script/kernel/gui/BaseComp";
+import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 
 const {ccclass, property} = cc._decorator;
 

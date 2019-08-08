@@ -9,7 +9,7 @@ import * as Consts from "../../looker/Consts";
 import DataProcessor from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 import NetRequest from "./NetRequest";
-import EventCenter from "../../launcher/EventCenter";
+import EventCenter from "../event/EventCenter";
 
 @ccclass
 export default class HttpCore {
