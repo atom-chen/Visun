@@ -1,4 +1,5 @@
 import EventCenter from "../event/EventCenter";
+import TimerManager from "../timer/TimerManager";
 
 
 //---------------------------------
@@ -11,5 +12,6 @@ const {ccclass, property} = cc._decorator;
 export default class BaseComp extends cc.Component {
     onDestroy() {
         EventCenter.instance().removeByTarget(this);
+        TimerManager.instance().removeByTarget(this);
     }
 }
