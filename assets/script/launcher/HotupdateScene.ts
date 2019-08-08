@@ -7,6 +7,7 @@ import { HOT_STATE } from "../looker/Consts";
 import BaseComp from "../kernel/gui/BaseComp";
 import PlatformUtil from "../kernel/utils/PlatformUtil";
 import HotUpdator from "../kernel/hotupdator/HotUpdator";
+import SceneManager from "../kernel/gui/SceneManager";
 
 @ccclass
 export default class HotupdateScene extends BaseComp {
@@ -64,7 +65,7 @@ export default class HotupdateScene extends BaseComp {
 				this.fileProgress.progress = cnt/tCnt;
 			},
 			(err, res, ruls)=>{
-				cc.director.loadScene("LobbyScene");
+				SceneManager.turn2Scene("LobbyScene");
 			});
 		}
 		);
