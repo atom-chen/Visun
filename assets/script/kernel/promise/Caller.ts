@@ -29,7 +29,7 @@ export default class Caller {
 	{
 		this._fn = null;
 		this._target = null;
-		if(this._args) { this._args.splice(0, this._args.length); this._args.length = 0; }
+		if(this._args) { this._args.length = 0; }
 		this._args = null;
 	}
 
