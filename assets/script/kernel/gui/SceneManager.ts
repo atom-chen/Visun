@@ -1,4 +1,7 @@
 import LoadCenter from "../load/LoadCenter";
+import EventCenter from "../event/EventCenter";
+import EventDef from "../../looker/EventDef";
+import UIManager from "./UIManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -7,6 +10,12 @@ export default class SceneManager {
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
 		LoadCenter.dump();
-		return cc.director.loadScene(sceneName, onLaunched);
+		EventCenter.instance().fire(EventDef.SCENE_BEFORE_SWITCH);
+		UIManager.clear();
+		var afterLaunch = function() {
+			if(onLaunched) { onLaunched(); }
+			EventCenter.instance().fire(EventDef.SCENE_AFTER_SWITCH);
+		}
+		return cc.director.loadScene(sceneName, afterLaunch);
 	}
 }

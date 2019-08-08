@@ -12,6 +12,13 @@ export default class UIManager {
 	private static _allDialog = {};
 	private static _toastList:any[] = [];
 
+	public static clear() {
+		this._toastList.length = 0;
+		this._toastList = [];
+		this._allDialog = {};
+		this._allUI = {};
+	}
+
 	public static callReflesh(obj:any, args:any[]){
 		var compList = obj["_components"];
 		if(compList) {
