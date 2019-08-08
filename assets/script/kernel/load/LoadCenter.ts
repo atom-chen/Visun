@@ -18,11 +18,11 @@ export default class LoadCenter {
 	}
 	
 	public static dump() : void {
-		cc.log("-----------------------------------", cc.loader["_cache"].length);
+		cc.log("-----------------------------------", LoadCenter.instance().getCacheCount());
 		for (var kk in cc.loader["_cache"]) {
 			cc.log(kk, cc.loader["_cache"][kk]);
 		}
-		cc.log("-----------------------------------", cc.loader["_cache"].length);
+		cc.log("-----------------------------------", LoadCenter.instance().getCacheCount());
 	}
 
 	

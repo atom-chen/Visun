@@ -10,6 +10,7 @@ import DataProcessor from "../codec/DataProcessor";
 import JsonCodec from "../codec/JsonCodec";
 import NetRequest from "./NetRequest";
 import EventCenter from "../event/EventCenter";
+import UIManager from "../gui/UIManager";
 
 @ccclass
 export default class HttpCore {
@@ -18,6 +19,7 @@ export default class HttpCore {
 	private static _dataProcessor:DataProcessor = new JsonCodec;
 	private static g_allProtocol:object = {};
 	private static _responder:any;
+	private static _hooks:Function[] = [];
 	
 	private static _regist(ptoname:string)
 	{
@@ -97,9 +99,32 @@ export default class HttpCore {
 		return paramStr;
 	}
 
+	public static addRequestHook(hookFunc:Function)
+	{
+		this._hooks.push(hookFunc);
+	}
+
+	private static checkHooks(tParams:object) : boolean 
+	{
+		if(this._hooks.length<=0) { return false; }
+		var flag:boolean = false;
+		for(var i=0; i<this._hooks.length; i++) {
+			if(this._hooks[i](tParams)){
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
 	//根据协议规则发送请求
 	public static request(ptoname:string, tAddrParams:object, tParams:object, unsafeCallback:(data:any)=>void = null)
 	{
+		if(this.checkHooks(tParams)) {
+			cc.log("hook fail");
+			return;
+		}
+
 		var ptoinfo = this.g_allProtocol[ptoname]
 		if(!ptoinfo) { cc.log("未定义该协议：", ptoname); return; }
 		cc.log("[请求]：", ptoname);
@@ -150,14 +175,18 @@ export default class HttpCore {
 			// 解码
 			var info = this._dataProcessor.decode(data);
 
-			// 调用响应协议
-			if(this._responder[ptoname]) { this._responder[ptoname](info); }
-
-			// 调用unsafeCallback
-			if(unsafeCallback) { unsafeCallback(info); }
-
-			// 触发事件
-			EventCenter.instance().fire( ptoname, info );
+			if(info.code === 200) {
+				// 调用响应协议
+				if(this._responder[ptoname]) { this._responder[ptoname](info); }
+				// 调用unsafeCallback
+				if(unsafeCallback) { unsafeCallback(info); }
+				// 触发事件
+				EventCenter.instance().fire( ptoname, info );
+			}
+			else {
+				cc.log(info);
+				UIManager.toast(info.msg);
+			}
 		}
 	}
 

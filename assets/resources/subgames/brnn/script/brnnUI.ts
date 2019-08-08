@@ -1,6 +1,7 @@
 import GameUtil from "../../../lobby/script/utils/GameUtil";
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 import BaseComp from "../../../../script/kernel/gui/BaseComp";
+import SceneManager from "../../../../script/kernel/gui/SceneManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -42,7 +43,7 @@ export default class BrnnUI extends BaseComp {
 		this.all_nodes = allNodes;
 
 		this.btn_close.node.on("click", function(){
-			this.node.destroy();
+			SceneManager.turn2Scene("LobbyScene");
 		}, this);
 
 		allNodes["area1"].on("click", function(){ this.bet(1); }, this);

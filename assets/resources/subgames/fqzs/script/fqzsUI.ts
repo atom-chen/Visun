@@ -1,4 +1,5 @@
 import BaseComp from "../../../../script/kernel/gui/BaseComp";
+import SceneManager from "../../../../script/kernel/gui/SceneManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,7 +16,7 @@ export default class FqzsUI extends BaseComp {
     
     start () {
         this.btn_close.node.on("click", function(){
-			this.node.destroy();
+			SceneManager.turn2Scene("LobbyScene");
         }, this);
 
         var node = cc.instantiate(this.chip_box);

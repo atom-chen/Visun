@@ -1,4 +1,5 @@
 import EventCenter from "../kernel/event/EventCenter";
+import EventDef from "../looker/EventDef";
 
 //---------------------------------
 // 永驻节点
@@ -25,7 +26,7 @@ export default class AppNode extends cc.Component {
     onKeyDown (event) {
         if(event.keyCode===cc.macro.KEY.back || event.keyCode===cc.macro.KEY.escape) {
             cc.log("返回键");
-            EventCenter.instance().fire("keyboard_esc");
+            EventCenter.instance().fire(EventDef.keyboard_esc);
         }
     }
 }

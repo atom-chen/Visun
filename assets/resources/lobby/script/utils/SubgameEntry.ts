@@ -5,6 +5,7 @@ import HttpCore from "../../../../script/kernel/net/HttpCore";
 import User from "../model/User";
 import { CLIENT_VERSION } from "../../../../script/looker/Consts";
 import HotUpdator from "../../../../script/kernel/hotupdator/HotUpdator";
+import SceneManager from "../../../../script/kernel/gui/SceneManager";
 
 
 export default class SubgameEntry {
@@ -54,6 +55,8 @@ export default class SubgameEntry {
 			return;
 		}
 		
+		this.enterGameScene(gameId);
+		
 		if(cfg.game_type===1){
 			//点击游戏按钮，进入选房界面
 			HttpCore.request("req_room_select_info", null, {gameId:gameId,channelId:User.getHero().channelId});
@@ -87,21 +90,23 @@ export default class SubgameEntry {
 	}
 
 	public enterGameScene(gameId) {
-		gameId = gameId.toString();
-		switch(gameId) {
-			case "40000040":
-				UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
-				break;
-			case "90000040":
-				UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
-				break;
-			case "80000044":
-				UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
-				break;
-			case "40070012":
-				UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
-				break;
-		}
+		SceneManager.turn2Scene("GameScene", ()=>{
+			gameId = gameId.toString();
+			switch(gameId) {
+				case "40000040":
+					UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+					break;
+				case "90000040":
+					UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+					break;
+				case "80000044":
+					UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+					break;
+				case "40070012":
+					UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+					break;
+			}
+		});
 	}
 
 }
