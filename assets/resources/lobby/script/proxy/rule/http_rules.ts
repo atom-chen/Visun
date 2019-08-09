@@ -69,6 +69,71 @@ var http_rules = [
 			["userId" , "number"]
 		]
 	},
+	{
+		//推广代理：我的分享
+		name : "req_spread_myshare",
+		reqType : "GET",
+		domain : "",
+		addr : "testPay/getPromotionLinks",
+		addrparams : [],
+		params : [
+			["userId" , "number"]
+		]
+	},
+	{
+		//推广代理：我的佣金
+		name : "req_spread_mycommission",
+		reqType : "GET",
+		domain : "",
+		addr : "testPay/queryAgent",
+		addrparams : [],
+		params : [
+			["userId" , "number"],
+			["type", "number"] // type===1
+		]
+	},
+	{
+		//推广代理：我的团队
+		name : "req_spread_myteam",
+		reqType : "GET",
+		domain : "",
+		addr : "testPay/queryAgent",
+		addrparams : [],
+		params : [
+			["userId" , "number"],
+			["type", "number"], // type===2
+			["page", "number"],
+			["size", "number"]
+		]
+	},
+	{
+		//推广代理：我的提现
+		name : "req_spread_mywithdraw",
+		reqType : "GET",
+		domain : "",
+		addr : "testPay/queryAgent",
+		addrparams : [],
+		params : [
+			["userId" , "number"],
+			["type", "number"] // type===3
+		]
+	},
+	{
+		//战绩
+		name : "req_record_fight",
+		reqType : "GET",
+		domain : "",
+		addr : "record/getRecordRoundCoin",
+		addrparams : [],
+		params : [
+			["userId" , "number"],
+			["pageSize", "number"],
+			["pageNo", "number"],
+			["gameId", "string"],
+			["channelId", "number"],
+			["tableType", "number"]
+		]
+	},
 	//------------------------------------------------------------------
 	{
 		//大厅游戏列表

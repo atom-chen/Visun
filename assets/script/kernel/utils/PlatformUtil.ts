@@ -59,5 +59,15 @@ export default class PlatformUtil {
 			cc.view.setDesignResolutionSize( fs.width, DESIGN_SIZE.height, cc.ResolutionPolicy.FIXED_HEIGHT);
 		}
 	}
+
+	public static adaptScreen2(){
+		var fs = cc.view.getFrameSize();
+		var scaleX = fs.width / DESIGN_SIZE.width;
+		var scaleY = fs.height / DESIGN_SIZE.height;
+		var fitScale = Math.min(scaleX, scaleY);
+		var width = fs.width / fitScale;
+		var height = fs.height / fitScale;
+		cc.view.setDesignResolutionSize( width, height, cc.ResolutionPolicy.SHOW_ALL);
+	}
 	
 }
