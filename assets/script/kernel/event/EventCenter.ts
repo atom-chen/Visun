@@ -30,10 +30,7 @@ export default class EventCenter {
 			this._events[evtName] = evtList;
 		}
 
-		var listener = {
-			callBack    : cbFunc,
-			target      : thisObj
-		}
+		let listener = { callBack : cbFunc, target : thisObj };
 
 		evtList.push(listener);
 

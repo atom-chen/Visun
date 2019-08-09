@@ -1,6 +1,7 @@
 import EventCenter from "../kernel/event/EventCenter";
 import EventDef from "../looker/EventDef";
 import PlatformUtil from "../kernel/utils/PlatformUtil";
+import TimerManager from "../kernel/timer/TimerManager";
 
 //---------------------------------
 // 永驻节点
@@ -29,6 +30,10 @@ export default class AppNode extends cc.Component {
         cc.view.setResizeCallback(()=>{
             PlatformUtil.adaptScreen();
         })
+
+        this.schedule(function(dt){
+            TimerManager.instance().update(dt)
+        }, 1, cc.macro.REPEAT_FOREVER);
     }
 
     onKeyDown (event:any) {

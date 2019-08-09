@@ -4,21 +4,22 @@ import LoadCenter from "../load/LoadCenter";
 // 音频管理
 //---------------------------------
 export default class AudioManager {
-	static singleInstance: AudioManager = null;
-	static instance(): AudioManager {
+	private static singleInstance: AudioManager = null;
+	public static instance(): AudioManager {
 		if (AudioManager.singleInstance == null) {
 			AudioManager.singleInstance = new AudioManager();
 		}
 		return AudioManager.singleInstance;
 	}
 	
-	effects: Array<cc.AudioClip> = null;
+	private effects: Array<cc.AudioClip> = null;
 
-	_currentMusicId: number = -1;
-	_currentMusicCacheUrl: string = null;
+	private _currentMusicId: number = -1;
+	private _currentMusicCacheUrl: string = null;
 
-	_currentEffectId: number = -1;
-	_currentEffectCacheUrl: string = null;
+	private _currentEffectId: number = -1;
+	private _currentEffectCacheUrl: string = null;
+	private _mute: boolean = true;
 
 	constructor() {
 		this.effects = [];
@@ -51,6 +52,7 @@ export default class AudioManager {
 	}
 	
 	public playMusic(audioclip: cc.AudioClip, loop: boolean) {
+		if(this._mute) { return; }
 		this._currentMusicCacheUrl = audioclip.nativeUrl;
 		LoadCenter.instance().retatinRes(this._currentMusicCacheUrl);
 		this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
@@ -62,13 +64,15 @@ export default class AudioManager {
 	}
 
 	public playMusicSync(path: string, loop: boolean) {
-		LoadCenter.instance().loadAudioClip(path, function(audioclip) {
+		if(this._mute) { return; }
+		LoadCenter.instance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
 			this.playMusic(audioclip, loop, true)
 		}.bind(this));
 	}
 	
 
 	public playEffect(audioclip: cc.AudioClip, immediately: boolean, sync: boolean) {
+		if(this._mute) { return; }
 		if (immediately) {
 			this._playEffect(audioclip, sync);
 			return;
@@ -78,12 +82,14 @@ export default class AudioManager {
 	}
 
 	public playEffectSync(path: string, immediately: boolean) {
-		LoadCenter.instance().loadAudioClip(path, function(audioclip) {
+		if(this._mute) { return; }
+		LoadCenter.instance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
 			this.playEffect(audioclip, immediately, true);
 		}.bind(this));
 	}
 
 	private _playEffect(audioclip: cc.AudioClip = null, sync: boolean = false) {
+		if(this._mute) { return; }
 		if (audioclip) {
 			this._play(audioclip);
 			return;
@@ -96,6 +102,7 @@ export default class AudioManager {
 	}
 
 	private _play(audioclip: cc.AudioClip) {
+		if(this._mute) { return; }
 		this._currentEffectCacheUrl = audioclip.nativeUrl;
 		LoadCenter.instance().retatinRes(this._currentEffectCacheUrl);
 		this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
