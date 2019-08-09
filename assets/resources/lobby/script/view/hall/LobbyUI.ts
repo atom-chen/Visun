@@ -31,6 +31,8 @@ export default class LobbyUI extends BaseComp {
     draglayyer: cc.Layout = null;
     @property(cc.Node)
     circlenode: cc.Node = null;
+    @property(cc.Button)
+    btn_buyu: cc.Button = null;
 
 	onLoad () 
 	{
@@ -43,6 +45,7 @@ export default class LobbyUI extends BaseComp {
             { id:GameConfig["90000040"].id, btn:"btn_brnn" },
             { id:GameConfig["80000044"].id, btn:"btn_fqzs" },
             { id:GameConfig["40070012"].id, btn:"btn_zjh" },
+            { id:GameConfig["80000041"].id, btn:"btn_buyu" }
         ]
         
         var dtAngle = 360/12;

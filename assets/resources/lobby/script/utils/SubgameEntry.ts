@@ -80,7 +80,7 @@ export default class SubgameEntry {
 			var param = {
 				sid : HttpCore.token,
 				gameId: gameId,
-				tableType: 0,
+				tableType: 1,
 				gameType: 0,
 				clientVersion: CLIENT_VERSION,
 				channelId: User.getHero().channelId
@@ -104,6 +104,9 @@ export default class SubgameEntry {
 					break;
 				case "40070012":
 					UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+					break;
+				case "80000041":
+					UIManager.openPanel("subgames/bjle/prefabs/bjle_ui", null);
 					break;
 			}
 		});
