@@ -45,6 +45,10 @@ export default class PlatformUtil {
 		cc.view.setOrientation(n);
 	}
 
+	public static adaptUI(node:cc.Node) {
+		node.setContentSize(cc.view.getFrameSize());
+	}
+
 	public static adaptScreen() {
 		var fs = cc.view.getFrameSize();
 		var aa = DESIGN_SIZE.crown;
