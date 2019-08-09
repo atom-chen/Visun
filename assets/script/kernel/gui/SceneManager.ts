@@ -9,9 +9,10 @@ const {ccclass, property} = cc._decorator;
 export default class SceneManager {
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
-		LoadCenter.dump();
+	//	LoadCenter.dump();
 		EventCenter.instance().fire(EventDef.SCENE_BEFORE_SWITCH);
 		UIManager.clear();
+		LoadCenter.instance().gc();
 		var afterLaunch = function() {
 			if(onLaunched) { onLaunched(); }
 			EventCenter.instance().fire(EventDef.SCENE_AFTER_SWITCH);

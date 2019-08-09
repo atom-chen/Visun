@@ -61,4 +61,11 @@ export default class User {
 	{
 		return this._userList[this._heroId];
 	}
+
+	public static getHeroId() : number {
+		if(this._heroId===null || this._heroId===undefined){
+			return null;
+		}
+		return this._heroId;
+	}
 }

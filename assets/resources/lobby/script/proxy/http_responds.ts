@@ -50,7 +50,7 @@ http_responds.req_enter_br_room = function(info:any) {
 			sid: HttpCore.token,
 			gameId: info.gameId,
 			channelId: User.getHero().channelId,
-		}
+		};
 		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
 	});
 }
@@ -69,7 +69,7 @@ http_responds.req_enter_coin_room = function(info:any) {
 			sid: HttpCore.token,
 			gameId: info.gameId,
 			channelId: User.getHero().channelId,
-		}
+		};
 		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
 	});
 }

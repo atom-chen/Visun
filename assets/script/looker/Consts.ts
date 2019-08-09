@@ -24,3 +24,9 @@ export enum HOT_STATE {
 	FAIL = 7,			//更新失败
 	LOADINGRES = 8,		//加载资源
 }
+
+export const DESIGN_SIZE = {
+	width : 1280,
+	height : 720,
+	crown : 1280/720
+}

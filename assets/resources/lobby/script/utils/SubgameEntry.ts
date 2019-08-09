@@ -21,6 +21,7 @@ export default class SubgameEntry {
 
 	public setServerGames(gameList:any[]) {
 		this._gamelist = gameList;
+		cc.log(gameList);
 	} 
 
 	public isGameExist(gameId:string) : boolean {

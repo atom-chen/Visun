@@ -1,3 +1,5 @@
+import { DESIGN_SIZE } from "../../looker/Consts";
+
 //---------------------------------
 // 平台相关接口导出
 //---------------------------------
@@ -37,23 +39,24 @@ export default class PlatformUtil {
 	}
 
 	//手动设置横竖屏
-	public static setOrientation() 
+	public static setOrientation(bLandspace:boolean) 
 	{
-
+		let n:number = bLandspace ? cc.macro.ORIENTATION_LANDSCAPE : cc.macro.ORIENTATION_PORTRAIT;
+		cc.view.setOrientation(n);
 	}
 
 	public static adaptScreen() {
 		var fs = cc.view.getFrameSize();
-		var aa = 1280/720;
+		var aa = DESIGN_SIZE.crown;
 		var bb = fs.width/fs.height;
 		if ( aa === bb ){
-			cc.view.setDesignResolutionSize( 1280,720, cc.ResolutionPolicy.SHOW_ALL);
+			cc.view.setDesignResolutionSize( DESIGN_SIZE.width, DESIGN_SIZE.height, cc.ResolutionPolicy.SHOW_ALL);
 		}
 		else if (aa > bb) {
-			cc.view.setDesignResolutionSize( 1280,fs.height, cc.ResolutionPolicy.FIXED_WIDTH);
+			cc.view.setDesignResolutionSize( DESIGN_SIZE.width, fs.height, cc.ResolutionPolicy.FIXED_WIDTH);
 		}
 		else {
-			cc.view.setDesignResolutionSize( fs.width,720, cc.ResolutionPolicy.FIXED_HEIGHT);
+			cc.view.setDesignResolutionSize( fs.width, DESIGN_SIZE.height, cc.ResolutionPolicy.FIXED_HEIGHT);
 		}
 	}
 	
