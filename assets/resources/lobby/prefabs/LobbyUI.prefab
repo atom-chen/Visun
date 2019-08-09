@@ -2355,7 +2355,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_kefu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56
@@ -2396,7 +2396,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -546.686,
-      "y": -1.35,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -2637,7 +2637,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_safebox",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56
@@ -2678,7 +2678,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -371.246,
-      "y": -1.35,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -2919,7 +2919,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_withdraw",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56
@@ -2960,7 +2960,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -188.789,
-      "y": -1.202,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -3201,7 +3201,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_email",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56
@@ -3242,7 +3242,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -1.654,
-      "y": -1.35,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -3483,7 +3483,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_spread",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56
@@ -3523,8 +3523,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -188.789,
-      "y": 323.798,
+      "x": 158.685,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -3588,8 +3588,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 348.54,
-      "y": -322.809,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -3654,7 +3654,7 @@
     "_enabled": true,
     "alignMode": 0,
     "_target": null,
-    "_alignFlags": 18,
+    "_alignFlags": 0,
     "_left": 10,
     "_right": 10,
     "_top": 6,
@@ -3765,7 +3765,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_shop",
     "_objFlags": 0,
     "_parent": {
       "__id__": 56

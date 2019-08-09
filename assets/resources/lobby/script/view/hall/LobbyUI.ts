@@ -33,9 +33,35 @@ export default class LobbyUI extends BaseComp {
     circlenode: cc.Node = null;
     @property(cc.Button)
     btn_buyu: cc.Button = null;
+    m_ui:any;
 
 	onLoad () 
 	{
+        this.m_ui = {};
+        CommonUtils.traverseNodes(this.node, this.m_ui);
+
+        this.m_ui.btn_safebox.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/SafeboxUI", null);
+        }, this);
+        this.m_ui.btn_email.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/EmailUI", null);
+        }, this);
+        this.m_ui.btn_shop.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/ShopUI", null);
+        }, this);
+        this.m_ui.btn_kefu.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/KefuUI", null);
+        }, this);
+        this.m_ui.btn_withdraw.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/WithdrawUI", null);
+        }, this);
+        this.m_ui.btn_spread.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/SpreadUI", null);
+        }, this);
+        this.m_ui.HeroUI.on("click", function(){
+            UIManager.openPopwnd("lobby/prefabs/PersonUI", null);
+        }, this.m_ui.HeroUI);
+
         this.btn_user.node.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
@@ -70,7 +96,7 @@ export default class LobbyUI extends BaseComp {
             this.circlenode.angle -= dx*0.05;
         }, this);
 
-        this.tests();
+        // this.tests();
     }
 
     private initNet() {
@@ -90,9 +116,7 @@ export default class LobbyUI extends BaseComp {
 
     private req_userinfo(data:any) {
         UIManager.toast("登录成功");
-        var allNodes = {};
-        CommonUtils.traverseNodes(this.node, allNodes);
-        allNodes["HeroUI"].getComponent("HeroUI").setUserInfo(User.getHero());
+        this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(User.getHero());
     }
 
     private req_room_select_info(info){
