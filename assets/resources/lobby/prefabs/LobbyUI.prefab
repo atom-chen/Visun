@@ -2326,12 +2326,12 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
+      "x": -640,
       "y": -325,
       "z": 0
     },
@@ -2395,8 +2395,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -546.686,
-      "y": 0,
+      "x": 93.947,
+      "y": -1.681,
       "z": 0
     },
     "_scale": {
@@ -2461,7 +2461,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 6,
       "z": 0
     },
     "_scale": {
@@ -2531,7 +2531,7 @@
     "_right": 10,
     "_top": 6,
     "_bottom": 6,
-    "_verticalCenter": 0,
+    "_verticalCenter": 6,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
     "_isAbsRight": true,
@@ -2677,8 +2677,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -371.246,
-      "y": 0,
+      "x": 269.387,
+      "y": -1.681,
       "z": 0
     },
     "_scale": {
@@ -2959,8 +2959,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -188.789,
-      "y": 0,
+      "x": 452.844,
+      "y": -1.681,
       "z": 0
     },
     "_scale": {
@@ -3025,7 +3025,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 4,
       "z": 0
     },
     "_scale": {
@@ -3095,7 +3095,7 @@
     "_right": 10,
     "_top": 6,
     "_bottom": 6,
-    "_verticalCenter": 0,
+    "_verticalCenter": 4,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
     "_isAbsRight": true,
@@ -3241,8 +3241,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -1.654,
-      "y": 0,
+      "x": 630.979,
+      "y": -1.681,
       "z": 0
     },
     "_scale": {
@@ -3523,8 +3523,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 158.685,
-      "y": 0,
+      "x": 811.318,
+      "y": -1.681,
       "z": 0
     },
     "_scale": {
@@ -3589,7 +3589,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": 2,
       "z": 0
     },
     "_scale": {
@@ -3808,7 +3808,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 522,
+      "x": 1162,
       "y": 19.5,
       "z": 0
     },
