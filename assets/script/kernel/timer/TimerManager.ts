@@ -162,7 +162,7 @@ export default class TimerManager {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getId()===id) {
 				this._timerPool.delObject(this._timers[i]);
-				cc.log("deltimer: ", id, i);
+			//	cc.log("deltimer: ", id, i, this.count());
 				this._timers.splice(i, 1);
 			}
 		}
@@ -172,10 +172,29 @@ export default class TimerManager {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getTarget()===target) {
 				this._timerPool.delObject(this._timers[i]);
-				cc.log("deltimer: ", i);
+			//	cc.log("deltimer: ", i, this.count());
 				this._timers.splice(i, 1);
 			}
 		}
+	}
+
+	public count() : number {
+		return this._timers.length;
+	}
+
+	public test() {
+		var xs = [];
+        console.time('===testtmr');//测试
+        for(var i=1; i<=8000000; i++){
+            for(var j=1; j<=2; j++){
+                var x = TimerManager.instance().addFrameTimer(1, new Caller( ()=>{}, null ) , 10);
+                xs[j-1] = x;
+            }
+            for(var jj=1; jj<=2; jj++){
+                TimerManager.instance().delTimer(xs[jj-1]);
+            }
+        }
+        console.timeEnd('===testtmr');//测试
 	}
 
 }

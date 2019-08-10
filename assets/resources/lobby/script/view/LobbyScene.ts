@@ -10,14 +10,9 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class LobbyScene extends BaseComp {
 
-    // LIFE-CYCLE CALLBACKS:
-
     onLoad () {
         PlatformUtil.adaptScreen();
         UIManager.openPanel("lobby/prefabs/LobbyUI", null);
-        TimerManager.instance().addFrameTimer(1, new Caller(function(looptimes:number){
-            cc.log("aaaa", looptimes);
-        }, null) , 10);
     }
 
     start () {

@@ -42,7 +42,7 @@ export default class User {
 		this._userList[info.userId] = this._userList[info.userId] || new User();
 		var obj = this._userList[info.userId];
 		for (var attr in info) {
-			cc.log("----", attr, info[attr]);
+		//	cc.log("----", attr, info[attr]);
 			obj[attr] = info[attr];
 		}
 	}
