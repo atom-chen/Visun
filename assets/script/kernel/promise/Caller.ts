@@ -13,16 +13,43 @@ export default class Caller {
 		this._args = args;
 	}
 
+	public getTarget() { return this._target; }
+
 	public call(part:any=null) : void
 	{
+		var ret:any;
 		if(part) {
-			this._fn.apply(this._target, [part].concat(this._args));
+			ret = this._fn.apply(this._target, [part].concat(this._args));
 		} else {
-			this._fn.apply(this._target, this._args);
+			ret = this._fn.apply(this._target, this._args);
 		}
 		if(this._autoClean) {
 			this.clear();
 		}
+		return ret;
+	}
+
+	public callWith(...extra:any[]) {
+		var ret:any;
+		if(this._args && this._args.length>0){
+			if(extra) {
+				ret = this._fn.apply(this._target, this._args.concat(...extra));
+			} else {
+				ret = this._fn.apply(this._target, this._args);
+			}
+		}
+		else {
+			if(extra) {
+				ret = this._fn.apply(this._target, extra);
+			} else {
+				ret = this._fn.call(this._target);
+			}
+		}
+		
+		if(this._autoClean) {
+			this.clear();
+		}
+		return ret;
 	}
 
 	public clear() : void

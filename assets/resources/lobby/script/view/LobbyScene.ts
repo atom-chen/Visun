@@ -15,8 +15,8 @@ export default class LobbyScene extends BaseComp {
     onLoad () {
         PlatformUtil.adaptScreen();
         UIManager.openPanel("lobby/prefabs/LobbyUI", null);
-        TimerManager.instance().addFrameTimer(1, new Caller(function(){
-            cc.log("aaaa");
+        TimerManager.instance().addFrameTimer(1, new Caller(function(looptimes:number){
+            cc.log("aaaa", looptimes);
         }, null) , 10);
     }
 

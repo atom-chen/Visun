@@ -31,9 +31,9 @@ export default class AppNode extends cc.Component {
             PlatformUtil.adaptScreen();
         })
 
-        this.schedule(function(dt){
+        this.schedule(function(dt:number){
             TimerManager.instance().update(dt)
-        }, 1, cc.macro.REPEAT_FOREVER);
+        }, 0, cc.macro.REPEAT_FOREVER);
     }
 
     onKeyDown (event:any) {
