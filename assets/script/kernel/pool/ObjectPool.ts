@@ -7,7 +7,7 @@ export default class ObjectPool {
 	private _onUse:Function;
 	private _onUnuse:Function;
 
-	public constructor(creatFunc:Function, destroyFunc:Function, onUse:Function, onUnuse:Function){
+	public constructor(creatFunc:Function, destroyFunc:Function, onUse?:Function, onUnuse?:Function){
 		this._createFunc = creatFunc;
 		this._destroyFunc = destroyFunc;
 		this._onUse = onUse;

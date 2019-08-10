@@ -1,5 +1,5 @@
 import Caller from "../promise/Caller";
-import ObjectPool from "../object_pool/ObjectPool";
+import ObjectPool from "../pool/ObjectPool";
 
 enum TimerType {
 	frame = 1,

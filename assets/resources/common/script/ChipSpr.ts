@@ -11,4 +11,12 @@ export default class ChipSpr extends cc.Component {
     get value() : number {
         return this._value;
     }
+
+    reuse() {
+
+    }
+
+    unuse() {
+
+    }
 }
