@@ -4,5 +4,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class KefuUI extends BaseComp {
-
+	onLoad() {
+		
+	}
 }

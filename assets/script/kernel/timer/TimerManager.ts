@@ -19,7 +19,7 @@ class BaseTimer {
 	protected _paused:boolean = false;
 
 	constructor(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
-		this.onUse(type, id, interval, func, looptimes);
+		this.reuse(type, id, interval, func, looptimes);
 	}
 
 	public getId() : number {
@@ -48,7 +48,7 @@ class BaseTimer {
 		this._paused = bPause;
 	}
 
-	public onUse(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
+	public reuse(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
@@ -60,7 +60,7 @@ class BaseTimer {
 		this._isLimit = looptimes > 0;
 	}
 
-	public onUnuse(){
+	public unuse(){
 		this._stoped = true;
 		this._func = null;
 	}
@@ -111,15 +111,6 @@ export default class TimerManager {
 		this._timerPool = new ObjectPool(
 			function(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
 				return new BaseTimer(type, id, interval, func, looptimes);
-			},
-			function(){
-				this.destroy();
-			},
-			function(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
-				this.onUse(type, id, interval, func, looptimes);
-			},
-			function() {
-				this.onUnuse();
 			}
 		);
 	}

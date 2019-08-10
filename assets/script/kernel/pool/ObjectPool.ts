@@ -3,15 +3,10 @@ import Caller from "../promise/Caller";
 export default class ObjectPool {
 	private _pool:any[] = [];
 	private _createFunc:Function;
-	private _destroyFunc:Function;
-	private _onUse:Function;
-	private _onUnuse:Function;
 
-	public constructor(creatFunc:Function, destroyFunc:Function, onUse?:Function, onUnuse?:Function){
+
+	public constructor(creatFunc:Function){
 		this._createFunc = creatFunc;
-		this._destroyFunc = destroyFunc;
-		this._onUse = onUse;
-		this._onUnuse = onUnuse;
 	}
 
 	public size() : number {
@@ -20,8 +15,8 @@ export default class ObjectPool {
 
 	public clear() : void {
 		for(var i=0, cnt=this._pool.length; i<cnt; ++i) {
-			this._onUnuse.apply(this._pool[i]);
-			this._destroyFunc.apply(this._pool[i]);
+			this._pool[i].unuse();
+			this._pool[i].destroy();
 		}
 		this._pool.length = 0;
 	}
@@ -30,18 +25,18 @@ export default class ObjectPool {
 		var last = this._pool.length-1;
 		if(last < 0) {
 			var obj = this._createFunc(...args);
-			this._onUse.apply(obj, args);
+			obj.reuse.apply(obj, args);
 			return obj;
 		}
 		var obj = this._pool[last];
 		this._pool.length = last;
-		this._onUse.apply(obj, args);
+		obj.reuse.apply(obj, args);
 		return obj;
 	}
 
 	public delObject(obj:any) {
 		if(obj && this._pool.indexOf(obj)===-1) {
-			this._onUnuse.apply(obj);
+			obj.unuse();
 			this._pool.push(obj);
 		}
 	}
