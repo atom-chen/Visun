@@ -17,9 +17,7 @@ export default class BaseComp extends cc.Component implements IPoolObject {
     reuse(): void {
        
     }
-    destructor(): void {
-        
-    }
+
     onDestroy() {
         EventCenter.instance().removeByTarget(this);
         TimerManager.instance().removeByTarget(this);
