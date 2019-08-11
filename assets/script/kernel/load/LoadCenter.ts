@@ -413,8 +413,6 @@ export default class LoadCenter {
 		}
 	}
 
-
-
 	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
 		if (target[attrName] === newNormalSprite) {
 			return;
@@ -426,11 +424,13 @@ export default class LoadCenter {
 		target[attrName] = newNormalSprite;
 	}
 
-	_parserNodeRes(node: cc.Node, number: number) {
+	//------------------------------------------------------------------------
+	
+	_parserNodeRes(node: cc.Node, num: number) {
 		let children = node.children;
-		this._parserNodeComponentRes(node, number);
+		this._parserNodeComponentRes(node, num);
 		children.forEach((child) => {
-			this._parserNodeRes(child, number);
+			this._parserNodeRes(child, num);
 		});
 	}
 
@@ -443,8 +443,6 @@ export default class LoadCenter {
 		this._parserComponentPageViewIndicator(node, num);
 		this._parserComponentEditBox(node, num);
 		this._parserComponentMask(node, num);
-
-		// TODO 释放其他组件附带的资源
 	}
 
 	_parserComponentSprite(node: cc.Node, num: number) {
@@ -580,7 +578,6 @@ export default class LoadCenter {
 			return;
 		}
 		this.releaseRes(mask.spriteFrame["_textureFilename"]);
-
 	}
 
 }

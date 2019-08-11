@@ -7,6 +7,12 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class PlatformUtil {
+
+	//是否支持webp
+	public static isSupportWebp() : boolean
+	{
+		return true;
+	}
 	
 	//获取设备ID
 	public static getDeviceId() : string 
@@ -45,10 +51,12 @@ export default class PlatformUtil {
 		cc.view.setOrientation(n);
 	}
 
+	//手动对指定节点进行全屏适配（没什么用，统一用adaptScreen方案，然后在编辑器中编辑控件的布局即可）
 	public static adaptUI(node:cc.Node) {
 		node.setContentSize(cc.view.getFrameSize());
 	}
 
+	//全屏适配
 	public static adaptScreen() {
 		var fs = cc.view.getFrameSize();
 		var aa = DESIGN_SIZE.crown;
@@ -64,6 +72,7 @@ export default class PlatformUtil {
 		}
 	}
 
+	//全屏适配
 	public static adaptScreen2(){
 		var fs = cc.view.getFrameSize();
 		var scaleX = fs.width / DESIGN_SIZE.width;
