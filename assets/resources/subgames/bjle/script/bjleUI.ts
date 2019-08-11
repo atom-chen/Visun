@@ -41,5 +41,7 @@ export default class bjleUI extends BaseComp {
 			this.m_ui["richman"+(i+1)].getComponent("PlayerUI").label_name.string = info.richManList[i].nickname;
 			this.m_ui["richman"+(i+1)].getComponent("PlayerUI").label_money.string = info.richManList[i].coin.toString();
 		}
+		this.m_ui.HeroUI.getComponent("HeroUI").label_name.string = info.player.nickname
+		this.m_ui.HeroUI.getComponent("HeroUI").label_id.string = info.player.coin.toString();
 	}
 }
