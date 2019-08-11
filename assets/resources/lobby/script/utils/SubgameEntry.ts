@@ -66,8 +66,8 @@ export default class SubgameEntry {
 			var param = {
 				sid : HttpCore.token,
 				gameId: gameId,
-				tableType: 1,
-				gameType: 1,
+				tableType: 0,
+				gameType: 0,
 				clientVersion: CLIENT_VERSION,
 				channelId: User.getHero().channelId
 			}

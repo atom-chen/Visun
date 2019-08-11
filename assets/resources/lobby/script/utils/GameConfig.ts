@@ -17,7 +17,7 @@ var GameConfig = {
 	"80000041" : {
 		id: "80000041",
 		name: "百家乐",
-		game_type: 2
+		game_type: 1
 	},
 	"40000040" : {
 		id: "40000040",

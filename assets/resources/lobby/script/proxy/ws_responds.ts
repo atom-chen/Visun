@@ -22,4 +22,8 @@ ws_responds.MSG_RECONNECT_ENTER_ACK = function(info) {
 	SubgameEntry.instance().enterGameScene(info.gameId);
 }
 
+ws_responds.MSG_JOIN_COIN_ACK = function(info) {
+	cc.log(info);
+}
+
 export default ws_responds;

@@ -6,7 +6,11 @@ ws_rules["names"] = {
     MSG_CENTER_QUIT_LOGIN : { cmdId : 30500 },
     MSG_JOIN_COIN_REQUEST : { cmdId : 20006 },
     MSG_JOIN_COIN_ACK : { cmdId : 20007 },
-    MSG_RECONNECT_ENTER_ACK : { cmdId : 2033 }
+    MSG_RECONNECT_ENTER_ACK : { cmdId : 2033 },
+    MSG_USER_SOLUTION_RESLUT_PUSH : { cmdId : 2047 },
+    MSG_GAME_ROOM_START_PUSH : { cmdId : 2009 },
+    MSG_USER_LEAVE_ROOM_REQUEST : { cmdId : 2044},
+    MSG_USER_LEAVE_ROOM_PUSH : { cmdId : 2045 }
 }
 
 ws_rules["cmds"] = {}

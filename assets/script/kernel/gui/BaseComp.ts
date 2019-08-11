@@ -1,5 +1,6 @@
 import EventCenter from "../event/EventCenter";
 import TimerManager from "../timer/TimerManager";
+import IPoolObject from "../pool/IPoolObject";
 
 
 //---------------------------------
@@ -9,7 +10,16 @@ import TimerManager from "../timer/TimerManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class BaseComp extends cc.Component {
+export default class BaseComp extends cc.Component implements IPoolObject {
+    unuse(): void {
+        
+    }
+    reuse(): void {
+       
+    }
+    destructor(): void {
+        
+    }
     onDestroy() {
         EventCenter.instance().removeByTarget(this);
         TimerManager.instance().removeByTarget(this);
