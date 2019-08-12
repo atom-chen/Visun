@@ -22,7 +22,7 @@ http_responds.req_youke_login = function(info:any){
 
 http_responds.req_userinfo = function(info:any) {
 	if(!info) return;
-	cc.log("登录成功")
+	cc.log("登录成功", info)
 	UserMgr.instance().setHeroId(info.userId);
 	UserMgr.instance().updateUser(info);
 
