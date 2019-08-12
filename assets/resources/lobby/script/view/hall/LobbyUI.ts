@@ -68,12 +68,6 @@ export default class LobbyUI extends BaseComp {
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
 
-        //
-        this.m_ui.draglayer.on(cc.Node.EventType.TOUCH_MOVE, function(event){
-            var dx = event.touch.getDelta().x;
-            this.m_ui.circlenode.angle -= dx*0.05;
-        }, this);
-
         // 
         var gameBtnList = [
             { id:GameConfig["40000040"].id, btn:"btn_ddz" },
@@ -83,9 +77,6 @@ export default class LobbyUI extends BaseComp {
             { id:GameConfig["80000041"].id, btn:"btn_buyu" }
         ]
         
-        var dtAngle = 360/12;
-        var startAngle = 180-dtAngle/2;
-        var R = 500;
         for(var i=0; i<gameBtnList.length; i++) {
             var cfg = gameBtnList[i];
             var bton = this.m_ui[cfg.btn];
@@ -93,9 +84,6 @@ export default class LobbyUI extends BaseComp {
             bton.on("click", function(){
                 SubgameEntry.instance().enterGame(this.gameId);
             }, bton);
-            var curAngle = startAngle - i * dtAngle;
-            // bton.node.x = R * Math.cos(curAngle * Math.PI / 180);
-            // bton.node.y = R * Math.sin(curAngle * Math.PI / 180);
         }
     }
 
