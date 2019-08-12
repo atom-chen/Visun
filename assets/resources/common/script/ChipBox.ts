@@ -5,36 +5,27 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class ChipBox extends BaseComp {
-    @property(cc.Button)
-    chip1: cc.Button = null;
-    @property(cc.Button)
-    chip2: cc.Button = null;
-    @property(cc.Button)
-    chip3: cc.Button = null;
-    @property(cc.Button)
-    chip4: cc.Button = null;
-    @property(cc.Button)
-    chip5: cc.Button = null;
-    @property(cc.Sprite)
-    hilightSpr: cc.Sprite = null;
 
     private selectedIndex:number = 1;
+    private m_ui:any;
 
     onLoad() {
-        this["chip1"].node.on("click", function(){ this.onSelect(1); }, this);
-        this["chip2"].node.on("click", function(){ this.onSelect(2); }, this);
-        this["chip3"].node.on("click", function(){ this.onSelect(3); }, this);
-        this["chip4"].node.on("click", function(){ this.onSelect(4); }, this);
-        this["chip5"].node.on("click", function(){ this.onSelect(5); }, this);
+        this.m_ui = {};
+        CommonUtils.traverseNodes(this.node, this.m_ui);
+        this.m_ui["chip1"].on("click", function(){ this.onSelect(1); }, this);
+        this.m_ui["chip2"].on("click", function(){ this.onSelect(2); }, this);
+        this.m_ui["chip3"].on("click", function(){ this.onSelect(3); }, this);
+        this.m_ui["chip4"].on("click", function(){ this.onSelect(4); }, this);
+        this.m_ui["chip5"].on("click", function(){ this.onSelect(5); }, this);
     }
 
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
-        this.hilightSpr.node.parent = this["chip"+idx].node;
+        this.m_ui.hilightSpr.position = this.m_ui["chip"+idx].position;
     }
 
     public getButton(idx:number) : cc.Node {
-        return this["chip"+idx].node;
+        return this.m_ui["chip"+idx];
     }
 
     public getSelectedIndex() : number {
@@ -47,10 +38,10 @@ export default class ChipBox extends BaseComp {
             if(err) { cc.log("error: "+err); return; }
             for(var i=1; i<=5; i++){
                 var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+values[i-1]);
-                self["chip"+i].normalSprite = atlas.getSpriteFrame(name);
-                self["chip"+i].hoverSprite = atlas.getSpriteFrame(name);
-                self["chip"+i].pressedSprite = atlas.getSpriteFrame(name);
-                self["chip"+i].disabledSprite = atlas.getSpriteFrame(name);
+                self.m_ui["chip"+i].getComponent(cc.Button).normalSprite = atlas.getSpriteFrame(name);
+                self.m_ui["chip"+i].getComponent(cc.Button).hoverSprite = atlas.getSpriteFrame(name);
+                self.m_ui["chip"+i].getComponent(cc.Button).pressedSprite = atlas.getSpriteFrame(name);
+                self.m_ui["chip"+i].getComponent(cc.Button).disabledSprite = atlas.getSpriteFrame(name);
             }
         });
     }
