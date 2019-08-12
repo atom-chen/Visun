@@ -6,6 +6,7 @@ import { WS_URL } from "../../../../script/looker/Consts";
 import WsCore from "../../../../script/kernel/net/WsCore";
 import SubgameEntry from "../utils/SubgameEntry";
 import UIManager from "../../../../script/kernel/gui/UIManager";
+import UserMgr from "../model/UserMgr";
 
 var http_responds:any;
 http_responds = {};
@@ -20,8 +21,8 @@ http_responds.req_youke_login = function(info:any){
 http_responds.req_userinfo = function(info:any) {
 	if(!info) return;
 	cc.log("登录成功")
-	User.setHeroId(info.userId);
-	User.updateUser(info);
+	UserMgr.instance().setHeroId(info.userId);
+	UserMgr.instance().updateUser(info);
 
 	var url = WS_URL + HttpCore.token;
 	WsSocket.instance().connect(url, new JsonCodec());
@@ -49,7 +50,7 @@ http_responds.req_enter_br_room = function(info:any) {
 		var param = {
 			sid: HttpCore.token,
 			gameId: info.gameId,
-			channelId: User.getHero().channelId
+			channelId: UserMgr.instance().getHero().channelId
 		};
 		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
 	});

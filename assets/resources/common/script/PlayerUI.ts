@@ -11,7 +11,7 @@ export default class PlayerUI extends BaseComp {
     @property(cc.Label)
     label_money: cc.Label = null;
 
-    public userId:number = 0;
+    public _userId:number = 0;
 
     onLoad () {
         this.node.on("click", function(){
@@ -19,8 +19,16 @@ export default class PlayerUI extends BaseComp {
         }, this);
     }
 
+    public setUserId(userId:number) {
+        this._userId = userId;
+    }
+
+    public getUserId() : number {
+        return this._userId;
+    }
+
     public setUserInfo(userObj:User) {
-        this.userId = userObj.userId;
+        this._userId = userObj.userId;
         this.label_name.string = userObj.nickname;
         this.label_money.string = userObj.coin.toString();
     }

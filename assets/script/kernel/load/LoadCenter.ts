@@ -8,13 +8,13 @@ loadResArray(urls, type, progressCallback, completeCallback)
 loadResDir(url, type, progressCallback, completeCallback)
 */
 export default class LoadCenter {
+	
+	static _instance: LoadCenter = null;
 	private constructor() { }
-	static singleInstance: LoadCenter = null;
 	static instance(): LoadCenter {
-		if (LoadCenter.singleInstance == null) {
-			LoadCenter.singleInstance = new LoadCenter();
-		}
-		return LoadCenter.singleInstance;
+		if (LoadCenter._instance) { return LoadCenter._instance; }
+		LoadCenter._instance = new LoadCenter();
+		return LoadCenter._instance;
 	}
 	
 	public static dump() : void {

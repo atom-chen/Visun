@@ -1,8 +1,12 @@
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 
 export default class GameUtil {
+	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
 
-	public static parseChip(total:number, chipRule:number[]) {
+	public static parseChip(total:number, chipRule?:number[]) {
+		if(!chipRule) {
+			chipRule = this.CHIP_RULE;
+		}
 		var chips:number[] = [];
 		while(total>0) {
 			if(total<chipRule[0]) {
@@ -10,7 +14,7 @@ export default class GameUtil {
 			}
 			for(var i=chipRule.length; i>=0; i--) {
 				if(total >= chipRule[i]) {
-					total = total-chipRule[i];
+					total -= chipRule[i];
 					chips.push(chipRule[i]);
 				}
 			}

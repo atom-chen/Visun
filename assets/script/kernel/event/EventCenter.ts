@@ -10,9 +10,11 @@ export default class EventCenter {
 	
 	public static instance() : EventCenter
 	{
-		if(EventCenter._singleton){ return EventCenter._singleton; }
-		EventCenter._singleton = new EventCenter();
+		if(!EventCenter._singleton){ EventCenter._singleton = new EventCenter(); }
 		return EventCenter._singleton;
+	}
+	public static destroy(){
+		EventCenter._singleton = null;
 	}
 
 	//监听事件
