@@ -2,6 +2,7 @@ import GameUtil from "../../../lobby/script/utils/GameUtil";
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 import BaseComp from "../../../../script/kernel/gui/BaseComp";
 import SceneManager from "../../../../script/kernel/gui/SceneManager";
+import ObjectPool from "../../../../script/kernel/pool/ObjectPool";
 
 const {ccclass, property} = cc._decorator;
 
@@ -16,29 +17,45 @@ export default class BrnnUI extends BaseComp {
 	compBox:any = null;
 	m_ui:any;
 
+	_loadedRes:any;
+	_pool:ObjectPool = new ObjectPool(():cc.Prefab=>{
+		var obj = cc.instantiate(this._loadedRes);
+		obj.scale = 0.4;
+		return obj;
+	});
+
 	private bet(areaId:number) {
 		var self = this;
 		var rule = [1,3,5,300,800];
 		var margin = { left:5,right:5,bottom:40,top:5 };
 		var idx = self.compBox.getSelectedIndex();
-		
-		cc.loader.loadRes("common/prefabs/ChipSpr", cc.Prefab, function (err, loadedRes) {
-			if(err) { cc.log("error: "+err); return; }
-			var chip = cc.instantiate(loadedRes);
-			chip.scale = 0.4;
-			chip.getComponent("ChipSpr").value = rule[idx-1];
-			self.m_ui["chiplayer"].addChild(chip);
-			GameUtil.flyChip2(chip, self.compBox.getButton(idx), self.m_ui["area"+areaId], 0.25, margin);
-		});
+		var chip = this._pool.newObject();
+		chip.getComponent("ChipSpr").value = rule[idx-1];
+		self.m_ui["chiplayer"].addChild(chip);
+		GameUtil.flyChip2(chip, self.compBox.getButton(idx), self.m_ui["area"+areaId], 0.25, margin);
 	}
 
 	
 	onLoad () {
+		var self = this;
+		cc.loader.loadRes("common/prefabs/ChipSpr", cc.Prefab, function (err, loadedRes) {
+			if(err) { cc.log("error: "+err); return; }
+			self._loadedRes = cc.instantiate(loadedRes);
+		});
+
 		this.m_ui = {};
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
 		this.btn_close.node.on("click", function(){
 			SceneManager.turn2Scene("LobbyScene");
+		}, this);
+		this.btn_help.node.on("click", function(){
+			var childs = this.m_ui.chiplayer.children
+			var len = childs.length;
+			for(var i=len-1; i>=0; i--){
+				childs[i].removeFromParent(false);
+				this._pool.delObject(childs[i]);
+			}
 		}, this);
 
 		this.m_ui["area1"].on("click", function(){ this.bet(1); }, this);
@@ -50,6 +67,11 @@ export default class BrnnUI extends BaseComp {
 		var compBox = this.m_ui.ChipBox.getComponent("ChipBox");
 		compBox.getComponent("ChipBox").setChipValues(rule);
 		this.compBox = compBox;
+	}
+
+	onDestroy(){
+		super.onDestroy();
+		this._pool.clear();
 	}
 
 }

@@ -65,7 +65,7 @@ export default class SubgameEntry {
 		}
 		
 		cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
-			//cc.log("进度：", cpltCnt, totalCnt);
+			cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
 			//this.byteProgress.progress = cpltCnt/totalCnt;
 		}, 
