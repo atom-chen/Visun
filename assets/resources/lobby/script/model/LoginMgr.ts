@@ -11,7 +11,9 @@ export default class LoginMgr {
         return LoginMgr._instance;
 	}
 	public static destroy() {
-		LoginMgr._instance = null;
+		if(LoginMgr._instance){
+			LoginMgr._instance = null;
+		}
 	}
 
 	public get token() : string { return this._token; }

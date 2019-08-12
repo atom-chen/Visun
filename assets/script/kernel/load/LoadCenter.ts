@@ -17,8 +17,9 @@ export default class LoadCenter {
 		return LoadCenter._instance;
 	}
 	
-	public static dump() : void {
+	public static dump(level:number) : void {
 		cc.log("-----------------------------------", LoadCenter.instance().getCacheCount());
+		if(level<=0){ return; }
 		for (var kk in cc.loader["_cache"]) {
 			cc.log(kk, cc.loader["_cache"][kk]);
 		}

@@ -47,7 +47,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
+      "width": 300,
       "height": 36
     },
     "_anchorPoint": {
@@ -252,7 +252,7 @@
     "asset": {
       "__uuid__": "802014b8-0f80-4f63-b437-4ba3cdc56e03"
     },
-    "fileId": "3fcq8qiudBp5zEqnkPEXRy",
+    "fileId": "65Or86LaRDwYf+eUL61IC0",
     "sync": false
   },
   {
@@ -354,7 +354,7 @@
     "asset": {
       "__uuid__": "802014b8-0f80-4f63-b437-4ba3cdc56e03"
     },
-    "fileId": "1cv5psDRRPyJMdzyLXy0gf",
+    "fileId": "25vAWJWtVDSrwjQWwQyAzG",
     "sync": false
   },
   {

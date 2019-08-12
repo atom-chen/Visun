@@ -10,6 +10,7 @@ import UserMgr from "../model/UserMgr";
 
 export default class SubgameEntry {
 	private _gamelist:any[];
+	
 	private static _singleton:SubgameEntry;
 	private constructor() {}
 	public static instance() : SubgameEntry {
@@ -17,6 +18,13 @@ export default class SubgameEntry {
 			SubgameEntry._singleton = new SubgameEntry;
 		}
 		return SubgameEntry._singleton;
+	}
+	public static destroy(){
+		if(SubgameEntry._singleton) {
+			SubgameEntry._singleton._gamelist.length = 0;
+			SubgameEntry._singleton._gamelist = null;
+			SubgameEntry._singleton = null;
+		}
 	}
 
 	public setServerGames(gameList:any[]) {
@@ -56,7 +64,15 @@ export default class SubgameEntry {
 			return;
 		}
 		
-		this.enterGameScene(gameId);
+		cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
+			//cc.log("进度：", cpltCnt, totalCnt);
+			if(totalCnt<=0){ totalCnt=1; }
+			//this.byteProgress.progress = cpltCnt/totalCnt;
+		}, 
+		(err, resobj, urls)=>{
+			this.enterGameScene(gameId);
+		}
+		);
 		
 		if(cfg.game_type===1){
 			//点击游戏按钮，进入选房界面

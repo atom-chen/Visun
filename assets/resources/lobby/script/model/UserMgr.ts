@@ -11,8 +11,10 @@ export default class UserMgr {
         return UserMgr._instance;
     }
     public static destroy() {
-        UserMgr._instance._userList = null;
-		UserMgr._instance = null;
+		if(UserMgr._instance){
+			UserMgr._instance._userList = null;
+			UserMgr._instance = null;
+		}
 	}
 
     public updateUser(info:User)

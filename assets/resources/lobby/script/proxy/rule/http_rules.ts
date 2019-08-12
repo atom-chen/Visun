@@ -175,7 +175,7 @@ var http_rules = [
 		]
 	},
 	{
-		//申请进入金币玩法类房间
+		//申请进入金币玩法类房间，会返回房间的ws地址
 		name : "req_enter_coin_room",
 		reqType : "POST",
 		domain : "",
