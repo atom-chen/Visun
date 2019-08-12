@@ -18,8 +18,7 @@ export default class bjleUI extends BaseComp {
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
 		this.m_ui.btn_close.on("click", function(){
-			//WsCore.request("MSG_USER_LEAVE_ROOM_REQUEST", {});
-			SceneManager.turn2Scene("LobbyScene");
+			WsCore.request("MSG_USER_LEAVE_ROOM_REQUEST", {});
 		}, this);
 
 		var rule = [1,10,20,100,500];

@@ -3,7 +3,6 @@ import GameConfig from "../../utils/GameConfig";
 import UIManager from "../../../../../script/kernel/gui/UIManager";
 import HttpCore from "../../../../../script/kernel/net/HttpCore";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
-import User from "../../model/User";
 import WsCore from "../../../../../script/kernel/net/WsCore";
 import http_rules from "../../proxy/rule/http_rules";
 import ws_rules from "../../proxy/rule/ws_rules";
@@ -12,27 +11,12 @@ import ws_responds from "../../proxy/ws_responds";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
 import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
+import UserMgr from "../../model/UserMgr";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class LobbyUI extends BaseComp {
-    @property(cc.Button)
-    btn_user: cc.Button = null;
-    @property(cc.Button)
-    btn_ddz: cc.Button = null;
-    @property(cc.Button)
-    btn_brnn: cc.Button = null;
-    @property(cc.Button)
-    btn_fqzs: cc.Button = null;
-    @property(cc.Button)
-    btn_zjh: cc.Button = null;
-    @property(cc.Layout)
-    draglayyer: cc.Layout = null;
-    @property(cc.Node)
-    circlenode: cc.Node = null;
-    @property(cc.Button)
-    btn_buyu: cc.Button = null;
     m_ui:any;
 
 	onLoad () 
@@ -40,32 +24,57 @@ export default class LobbyUI extends BaseComp {
         this.m_ui = {};
         CommonUtils.traverseNodes(this.node, this.m_ui);
 
+        this.initUiEvents();
+        this.initNet();
+        // this.tests();
+
+        var param = { 
+            deviceID : PlatformUtil.getDeviceId(), 
+            platformId : 3
+        };
+        HttpCore.request("req_youke_login", null, param);
+    }
+
+    private initUiEvents(){
         this.m_ui.btn_safebox.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/SafeboxUI", null);
         }, this);
+
         this.m_ui.btn_email.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/EmailUI", null);
         }, this);
+
         this.m_ui.btn_shop.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/ShopUI", null);
         }, this);
+
         this.m_ui.btn_kefu.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/KefuUI", null);
         }, this);
+
         this.m_ui.btn_withdraw.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/WithdrawUI", null);
         }, this);
+
         this.m_ui.btn_spread.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/SpreadUI", null);
         }, this);
+
         this.m_ui.HeroUI.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/PersonUI", null);
         }, this.m_ui.HeroUI);
 
-        this.btn_user.node.on("click", function(){
+        this.m_ui.btn_user.on("click", function(){
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
 
+        //
+        this.m_ui.draglayer.on(cc.Node.EventType.TOUCH_MOVE, function(event){
+            var dx = event.touch.getDelta().x;
+            this.m_ui.circlenode.angle -= dx*0.05;
+        }, this);
+
+        // 
         var gameBtnList = [
             { id:GameConfig["40000040"].id, btn:"btn_ddz" },
             { id:GameConfig["90000040"].id, btn:"btn_brnn" },
@@ -79,24 +88,15 @@ export default class LobbyUI extends BaseComp {
         var R = 500;
         for(var i=0; i<gameBtnList.length; i++) {
             var cfg = gameBtnList[i];
-            var bton = this[cfg.btn];
+            var bton = this.m_ui[cfg.btn];
             bton.gameId = cfg.id;
-            bton.node.on("click", function(){
+            bton.on("click", function(){
                 SubgameEntry.instance().enterGame(this.gameId);
             }, bton);
             var curAngle = startAngle - i * dtAngle;
             // bton.node.x = R * Math.cos(curAngle * Math.PI / 180);
             // bton.node.y = R * Math.sin(curAngle * Math.PI / 180);
         }
-        
-        this.initNet();
-
-        this.draglayyer.node.on(cc.Node.EventType.TOUCH_MOVE, function(event){
-            var dx = event.touch.getDelta().x;
-            this.circlenode.angle -= dx*0.05;
-        }, this);
-
-        // this.tests();
     }
 
     private initNet() {
@@ -106,17 +106,11 @@ export default class LobbyUI extends BaseComp {
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
         EventCenter.instance().listen("req_enter_br_room", this.req_enter_br_room, this);
-
-        var param = { 
-            deviceID : PlatformUtil.getDeviceId(), 
-            platformId : 3
-        };
-        HttpCore.request("req_youke_login", null, param);
     }
 
     private req_userinfo(data:any) {
         UIManager.toast("登录成功");
-        this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(User.getHero());
+        this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.instance().getHero());
     }
 
     private req_room_select_info(info){
