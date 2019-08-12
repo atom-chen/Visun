@@ -4,6 +4,11 @@ import UserMgr from "./UserMgr";
 
 export default class Logic {
     private static _instance:Logic = null;
+
+    g_EventMgr:EventCenter;
+    g_LoginMgr:LoginMgr;
+    g_UserMgr:UserMgr;
+
     private constructor() {}
     public static instance() : Logic {
         if(!Logic._instance){ Logic._instance = new Logic; }
@@ -14,10 +19,9 @@ export default class Logic {
     //调用时机：登录前
     public initDatas(){
         this.clearDatas();
-
-        EventCenter.instance();
-        LoginMgr.instance();
-        UserMgr.instance();
+        this.g_EventMgr = EventCenter.instance();
+        this.g_LoginMgr = LoginMgr.instance();
+        this.g_UserMgr = UserMgr.instance();
     }
 
     //清理逻辑数据
@@ -26,5 +30,8 @@ export default class Logic {
         EventCenter.destroy();
         LoginMgr.destroy();
         UserMgr.destroy();
+        this.g_EventMgr = null;
+        this.g_UserMgr = null;
+        this.g_LoginMgr = null;
     }
 }

@@ -7,12 +7,14 @@ import WsCore from "../../../../script/kernel/net/WsCore";
 import SubgameEntry from "../utils/SubgameEntry";
 import UIManager from "../../../../script/kernel/gui/UIManager";
 import UserMgr from "../model/UserMgr";
+import Logic from "../model/Logic";
 
 var http_responds:any;
 http_responds = {};
 
 http_responds.req_youke_login = function(info:any){
 	if(!info) return;
+	Logic.instance().clearDatas(); //清理数据
 	HttpCore.token = info.sid;
 	HttpCore.request("req_userinfo", null, {userId:info.userId});
 	HttpCore.request("req_game_list", null, {sid:info.sid});
