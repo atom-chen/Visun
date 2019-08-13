@@ -9,11 +9,6 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BrnnUI extends BaseComp {
 
-	@property(cc.Button)
-	btn_close: cc.Button = null;
-	@property(cc.Button)
-	btn_help: cc.Button = null;
-
 	compBox:any = null;
 	m_ui:any;
 
@@ -46,10 +41,11 @@ export default class BrnnUI extends BaseComp {
 		this.m_ui = {};
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
-		this.btn_close.node.on("click", function(){
+		this.m_ui.btn_close.on("click", function(){
 			SceneManager.turn2Scene("LobbyScene");
 		}, this);
-		this.btn_help.node.on("click", function(){
+		
+		this.m_ui.btn_help.on("click", function(){
 			var childs = this.m_ui.chiplayer.children
 			var len = childs.length;
 			for(var i=len-1; i>=0; i--){
@@ -58,10 +54,10 @@ export default class BrnnUI extends BaseComp {
 			}
 		}, this);
 
-		this.m_ui["area1"].on("click", function(){ this.bet(1); }, this);
-		this.m_ui["area2"].on("click", function(){ this.bet(2); }, this);
-		this.m_ui["area3"].on("click", function(){ this.bet(3); }, this);
-		this.m_ui["area4"].on("click", function(){ this.bet(4); }, this);
+		this.m_ui.area1.on("click", function(){ this.bet(1); }, this);
+		this.m_ui.area2.on("click", function(){ this.bet(2); }, this);
+		this.m_ui.area3.on("click", function(){ this.bet(3); }, this);
+		this.m_ui.area4.on("click", function(){ this.bet(4); }, this);
 		
 		var rule = [1,3,5,300,800];
 		var compBox = this.m_ui.ChipBox.getComponent("ChipBox");

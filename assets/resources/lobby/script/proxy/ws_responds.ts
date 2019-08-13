@@ -23,7 +23,7 @@ ws_responds.MSG_RECONNECT_ENTER_ACK = function(info) {
 }
 
 ws_responds.MSG_JOIN_COIN_ACK = function(info) {
-	cc.log("进入游戏房间")
+	cc.log("进入游戏房间");
 }
 
 export default ws_responds;

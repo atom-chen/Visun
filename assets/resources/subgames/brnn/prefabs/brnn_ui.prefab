@@ -1018,7 +1018,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_close",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1340,7 +1340,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_help",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1723,7 +1723,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 6.120000000000005,
+      "x": 0,
       "y": -301.44,
       "z": 0
     },
@@ -3371,7 +3371,7 @@
     "_top": 0,
     "_bottom": -4.32,
     "_verticalCenter": 0,
-    "_horizontalCenter": 0,
+    "_horizontalCenter": -6.120000000000005,
     "_isAbsLeft": true,
     "_isAbsRight": true,
     "_isAbsTop": true,
@@ -3444,13 +3444,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "btn_close": {
-      "__id__": 28
-    },
-    "btn_help": {
-      "__id__": 36
-    },
-    "chip_box": null,
     "_id": ""
   },
   {

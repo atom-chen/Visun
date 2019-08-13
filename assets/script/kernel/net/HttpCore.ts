@@ -5,18 +5,18 @@
 //---------------------------------
 const {ccclass, property} = cc._decorator;
 
-import * as Consts from "../../looker/Consts";
 import DataProcessor from "../codec/DataProcessor";
-import JsonCodec from "../codec/JsonCodec";
+import HttpCodec from "../codec/HttpCodec";
 import NetRequest from "./NetRequest";
 import EventCenter from "../event/EventCenter";
 import UIManager from "../gui/UIManager";
+import { MAIN_URL } from "../../looker/Consts";
 
 @ccclass
 export default class HttpCore {
 	public static token:string = "";
 	private static g_timeout:number = 8000;
-	private static _dataProcessor:DataProcessor = new JsonCodec;
+	private static _dataProcessor:DataProcessor = new HttpCodec;
 	private static g_allProtocol:object = {};
 	private static _responder:any;
 	private static _hooks:Function[] = [];
@@ -53,52 +53,6 @@ export default class HttpCore {
 
 	//--------------------------------------------------------------------------------
 
-	//将表形式的数据转换成 "k1=v1&k2=v2&k3=v3" 格式的字符串
-	public static convertParam(param:any, rule:any) : string
-	{
-		if( typeof(param) === typeof("") ){
-			return param;
-		}
-	
-		var paramStr = "";
-	
-		if(rule) {
-			if(param){
-				for(var j = 0,len = rule.length; j < len; j++) {
-					var k = rule[j][0];
-					var wantType = rule[j][1];
-					if(wantType && wantType != "" && typeof(param[k]) != wantType) {
-						if( (rule[j][2]!=undefined && rule[j][2]!=null) && rule[j][2]===0 && (param[k]==undefined || param[k]==null) ) {
-	
-						} 
-						else {
-							cc.error("参数类型错误", k, param[k]);
-						}
-					} 
-					else {
-						if(paramStr != "") { paramStr += "&" }
-						paramStr += k + "=" + param[k];
-					}
-				}
-			}
-			else{
-				if(rule.length > 0){
-					cc.error("参数不符合规则");
-				}
-			}
-		}
-		else {
-			if(param) {
-				for (var kk in param) {
-					if(paramStr != "") { paramStr += "&" }
-					paramStr += kk + "=" + param[kk];
-				}
-			}
-		}
-	
-		return paramStr;
-	}
-
 	public static addRequestHook(hookFunc:Function)
 	{
 		this._hooks.push(hookFunc);
@@ -129,7 +83,7 @@ export default class HttpCore {
 		if(!ptoinfo) { cc.log("未定义该协议：", ptoname); return; }
 		cc.log("[请求]：", ptoname);
 
-		var domain = Consts.MAIN_URL;
+		var domain = MAIN_URL;
 		if(ptoinfo.domain && ptoinfo.domain != "") {
 			domain = ptoinfo.domain;
 		}
@@ -145,7 +99,7 @@ export default class HttpCore {
 			}
 		}
 
-		var paramStr = HttpCore.convertParam(tParams, ptoinfo.params);
+		var paramStr = this._dataProcessor.encode(tParams, ptoinfo.params);
 		if(ptoinfo.reqType==="POST") {
 			paramStr = "data="+JSON.stringify(tParams);
 		}
@@ -171,7 +125,7 @@ export default class HttpCore {
 	private static onRespData(ptoname:string, iCode:number, data:any, unsafeCallback:(data:any)=>void) 
 	{
 		cc.log("[响应]：", ptoname, iCode);
-		if(iCode===0){
+		if(iCode===0) {
 			// 解码
 			var info = this._dataProcessor.decode(data);
 
@@ -207,14 +161,14 @@ export default class HttpCore {
 
 	public static callGet(url:any, addr:any, params:any, callback:(iCode:number, data:any)=>void) 
 	{
-		var finalUrl = url
+		var finalUrl = url;
 		if(addr && addr != "") {
-			finalUrl = url + "/" + addr
+			finalUrl = url + "/" + addr;
 		}
 
-		var paramStr = this.convertParam(params, null);
+		var paramStr = this._dataProcessor.encode(params, null);
 		if(paramStr && paramStr != "") {
-			finalUrl = finalUrl + "?" + paramStr
+			finalUrl = finalUrl + "?" + paramStr;
 		}
 
 		var xhr = cc.loader.getXMLHttpRequest();
@@ -239,7 +193,7 @@ export default class HttpCore {
 			}
 		};
 
-		cc.log("[GET]: ", finalUrl)
+		cc.log("[GET]: ", finalUrl);
 		xhr.open("GET", finalUrl, true);
 		xhr.timeout = this.g_timeout;
 		this.commonHead(xhr);
@@ -248,12 +202,12 @@ export default class HttpCore {
 
 	public static callPost(url:any, addr:any, params:any, callback:(iCode:number, data:any)=>void) 
 	{
-		var finalUrl = url
+		var finalUrl = url;
 		if(addr && addr != "") {
-			finalUrl = url + "/" + addr
+			finalUrl = url + "/" + addr;
 		}
 
-		var paramStr = this.convertParam(params, null);
+		var paramStr = this._dataProcessor.encode(params, null);
 
 		var xhr = cc.loader.getXMLHttpRequest();
 
@@ -277,7 +231,7 @@ export default class HttpCore {
 			}
 		};
 		
-		cc.log("[POST]: ", finalUrl, paramStr)
+		cc.log("[POST]: ", finalUrl, paramStr);
 		xhr.open("POST", finalUrl, true);
 		xhr.timeout = this.g_timeout;
 		this.commonHead(xhr);

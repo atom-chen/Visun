@@ -75,7 +75,7 @@ export default class LobbyUI extends BaseComp {
             { id:GameConfig["80000044"].id, btn:"btn_fqzs" },
             { id:GameConfig["40070012"].id, btn:"btn_zjh" },
             { id:GameConfig["80000041"].id, btn:"btn_buyu" }
-        ]
+        ];
         
         for(var i=0; i<gameBtnList.length; i++) {
             var cfg = gameBtnList[i];
