@@ -7,16 +7,14 @@ const {ccclass, property} = cc._decorator;
 export default class ChipBox extends BaseComp {
 
     private selectedIndex:number = 1;
-    private m_ui:any;
 
     onLoad() {
-        this.m_ui = {};
         CommonUtils.traverseNodes(this.node, this.m_ui);
-        this.m_ui["chip1"].on("click", function(){ this.onSelect(1); }, this);
-        this.m_ui["chip2"].on("click", function(){ this.onSelect(2); }, this);
-        this.m_ui["chip3"].on("click", function(){ this.onSelect(3); }, this);
-        this.m_ui["chip4"].on("click", function(){ this.onSelect(4); }, this);
-        this.m_ui["chip5"].on("click", function(){ this.onSelect(5); }, this);
+        CommonUtils.addClickEvent(this.m_ui.chip1, function(){ this.onSelect(1); }, this);
+        CommonUtils.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
+        CommonUtils.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
+        CommonUtils.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
+        CommonUtils.addClickEvent(this.m_ui.chip5, function(){ this.onSelect(5); }, this);
     }
 
     private onSelect(idx:number) {

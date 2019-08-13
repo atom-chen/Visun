@@ -1,5 +1,6 @@
 import User from "../../lobby/script/model/User";
 import BaseComp from "../../../script/kernel/gui/BaseComp";
+import CommonUtils from "../../../script/kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,9 +15,7 @@ export default class HeroUI extends BaseComp {
     public userId:number = 0;
 
     onLoad () {
-        this.node.on("click", function(){
-            cc.log("click ", this.userId);
-        }, this);
+        CommonUtils.addClickEvent(this.node, function(){ cc.log("click hero head"); }, this);
     }
 
     public setUserInfo(userObj:User) {

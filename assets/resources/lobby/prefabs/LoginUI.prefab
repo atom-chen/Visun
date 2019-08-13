@@ -1399,7 +1399,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_login",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1798,7 +1798,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_youke",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -2056,7 +2056,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_regist",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -2455,15 +2455,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "btn_login": {
-      "__id__": 47
-    },
-    "btn_youke": {
-      "__id__": 53
-    },
-    "btn_regist": {
-      "__id__": 59
-    },
+    "btn_login": null,
+    "btn_youke": null,
+    "btn_regist": null,
     "_id": ""
   },
   {

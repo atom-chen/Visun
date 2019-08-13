@@ -1,28 +1,22 @@
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
+import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class LoginUI extends BaseComp {
 
-    @property(cc.Button)
-    btn_login: cc.Button = null;
-
-    @property(cc.Button)
-    btn_youke: cc.Button = null;
-
-    @property(cc.Button)
-    btn_regist: cc.Button = null;
-
     start () {
-        this.btn_login.node.on("click", function(){
-			
+        CommonUtils.traverseNodes(this.node, this.m_ui);
+
+        CommonUtils.addClickEvent(this.m_ui.btn_login, function(){ 
+            cc.log("click ");
         }, this);
-        this.btn_youke.node.on("click", function(){
-			
+        CommonUtils.addClickEvent(this.m_ui.btn_youke, function(){ 
+            cc.log("click ");
         }, this);
-        this.btn_regist.node.on("click", function(){
-			
+        CommonUtils.addClickEvent(this.m_ui.btn_regist, function(){ 
+            cc.log("click ");
         }, this);
     }
 

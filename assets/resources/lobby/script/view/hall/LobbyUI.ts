@@ -17,16 +17,14 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class LobbyUI extends BaseComp {
-    m_ui:any;
 
 	onLoad () 
 	{
-        this.m_ui = {};
         CommonUtils.traverseNodes(this.node, this.m_ui);
 
         this.initUiEvents();
         this.initNet();
-        // this.tests();
+    //    this.tests();
 
         var param = { 
             deviceID : PlatformUtil.getDeviceId(), 
@@ -36,35 +34,35 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initUiEvents(){
-        this.m_ui.btn_safebox.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_safebox, function(){ 
             UIManager.openPopwnd("lobby/prefabs/SafeboxUI", null);
         }, this);
 
-        this.m_ui.btn_email.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_email, function(){ 
             UIManager.openPopwnd("lobby/prefabs/EmailUI", null);
         }, this);
 
-        this.m_ui.btn_shop.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_shop, function(){ 
             UIManager.openPopwnd("lobby/prefabs/ShopUI", null);
         }, this);
 
-        this.m_ui.btn_kefu.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_kefu, function(){ 
             UIManager.openPopwnd("lobby/prefabs/KefuUI", null);
         }, this);
 
-        this.m_ui.btn_withdraw.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_withdraw, function(){ 
             UIManager.openPopwnd("lobby/prefabs/WithdrawUI", null);
         }, this);
 
-        this.m_ui.btn_spread.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_spread, function(){ 
             UIManager.openPopwnd("lobby/prefabs/SpreadUI", null);
         }, this);
 
-        this.m_ui.HeroUI.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.HeroUI, function(){ 
             UIManager.openPopwnd("lobby/prefabs/PersonUI", null);
-        }, this.m_ui.HeroUI);
+        }, this);
 
-        this.m_ui.btn_user.on("click", function(){
+        CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
         }, this);
 
@@ -81,7 +79,7 @@ export default class LobbyUI extends BaseComp {
             var cfg = gameBtnList[i];
             var bton = this.m_ui[cfg.btn];
             bton.gameId = cfg.id;
-            bton.on("click", function(){
+            CommonUtils.addClickEvent(bton, function(){ 
                 SubgameEntry.instance().enterGame(this.gameId);
             }, bton);
         }
@@ -111,9 +109,10 @@ export default class LobbyUI extends BaseComp {
     }
 
     private tests() {
-        //加载spine
         var self = this;
-        cc.loader.loadRes("common/spines/bairenniuniu_kaishixiazhu.json", sp.SkeletonData, 
+
+        //加载spine
+        cc.loader.loadRes("common/spines/raptor.json", sp.SkeletonData, 
 		function(err, resc){
 			if( err ) { cc.log( '载入spine失败:' + err ); return; }
             //var obj = cc.instantiate(resc);
@@ -121,23 +120,9 @@ export default class LobbyUI extends BaseComp {
             var sk = obj.addComponent(sp.Skeleton);
             sk.skeletonData = resc;
             self.node.addChild(obj, 10);
-            sk.setAnimation(1, "animation", true);
+            obj.scale = 0.2;
+            sk.setAnimation(1, "Jump", true);
         });
-        cc.loader.loadRes("common/prefabs/PokerCard", cc.Prefab, 
-		function(err, resc){
-			if( err ) { cc.log( '载入prefab失败:' + err ); return; }
-            var obj = cc.instantiate(resc);
-            var cpn = obj.getComponent("PokerCard");
-            cpn.state = 1;
-            self.node.addChild(obj, 10);
-        });
-        cc.loader.loadRes("common/prefabs/HandCard", cc.Prefab, 
-		function(err, resc){
-			if( err ) { cc.log( '载入prefab失败:' + err ); return; }
-            var obj = cc.instantiate(resc);
-            var cpn = obj.getComponent("HandCard");
-            self.node.addChild(obj, 10);
-		});
     }
 
 }

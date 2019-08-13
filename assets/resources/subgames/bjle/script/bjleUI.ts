@@ -9,17 +9,14 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class bjleUI extends BaseComp {
-	m_ui:any;
 	_players : any[] = [];
 
 	onLoad () {
-		this.m_ui = {};
-		this._players = [];
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
-		this.m_ui.btn_close.on("click", function(){
-			WsCore.request("MSG_USER_LEAVE_ROOM_REQUEST", {});
-		}, this);
+		CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
+            WsCore.request("MSG_USER_LEAVE_ROOM_REQUEST", {});
+        }, this);
 
 		var rule = [1,10,20,100,500];
 		this.m_ui.ChipBox.getComponent("ChipBox").setChipValues(rule);

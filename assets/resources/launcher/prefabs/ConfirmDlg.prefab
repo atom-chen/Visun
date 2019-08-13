@@ -154,7 +154,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label",
+    "_name": "labelTitle",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -257,7 +257,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label",
+    "_name": "labelContent",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -390,7 +390,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_ok",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -789,7 +789,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_no",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -1237,18 +1237,10 @@
       "__id__": 1
     },
     "_enabled": true,
-    "labelContent": {
-      "__id__": 7
-    },
-    "labelTitle": {
-      "__id__": 4
-    },
-    "btn_ok": {
-      "__id__": 18
-    },
-    "btn_no": {
-      "__id__": 28
-    },
+    "labelContent": null,
+    "labelTitle": null,
+    "btn_ok": null,
+    "btn_no": null,
     "_id": ""
   },
   {

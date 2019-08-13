@@ -82,5 +82,30 @@ export default class PlatformUtil {
 		var height = fs.height / fitScale;
 		cc.view.setDesignResolutionSize( width, height, cc.ResolutionPolicy.SHOW_ALL);
 	}
+
+	//进入全屏
+	public static setFullScreen(bFull:boolean) {
+		if(cc.sys.isNative){ return; }
+		if(bFull) {
+			var de = document.documentElement;
+			if (de.requestFullscreen) {
+				de.requestFullscreen();
+			} else if (de.mozRequestFullScreen) {
+				de.mozRequestFullScreen();
+			} else if (de.webkitRequestFullScreen) {
+				de.webkitRequestFullScreen();
+			}
+		}
+		else {
+			var dc = document;
+			if (dc.exitFullscreen) {
+				dc.exitFullscreen();
+			} else if (dc.mozCancelFullScreen) {
+				dc.mozCancelFullScreen();
+			} else if (dc.webkitCancelFullScreen) {
+				dc.webkitCancelFullScreen();
+			}
+		}
+	}
 	
 }

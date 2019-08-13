@@ -1,1 +1,1 @@
-pbjs -t static-module -w commonjs -o proto.js in/*.proto
+pbjs -t static-module -w commonjs -o d:/proto.js in/*.proto

@@ -11,7 +11,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class BaseComp extends cc.Component implements IPoolObject {
-
+    protected m_ui:any = {};
+    
     //放回对象池时回调
     unuse(): void {
         EventCenter.instance().removeByTarget(this);
