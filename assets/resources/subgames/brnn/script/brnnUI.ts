@@ -11,6 +11,7 @@ export default class BrnnUI extends BaseComp {
 
 	compBox:any = null;
 	m_ui:any;
+	_rule:[1,3,5,300,800];
 
 	_loadedRes:any;
 	_pool:ObjectPool = new ObjectPool(():cc.Prefab=>{
@@ -21,15 +22,13 @@ export default class BrnnUI extends BaseComp {
 
 	private bet(areaId:number) {
 		var self = this;
-		var rule = [1,3,5,300,800];
 		var margin = { left:5,right:5,bottom:40,top:5 };
 		var idx = self.compBox.getSelectedIndex();
 		var chip = this._pool.newObject();
-		chip.getComponent("ChipSpr").value = rule[idx-1];
+		chip.getComponent("ChipSpr").value = this._rule[idx-1];
 		self.m_ui["chiplayer"].addChild(chip);
 		GameUtil.flyChip2(chip, self.compBox.getButton(idx), self.m_ui["area"+areaId], 0.25, margin);
 	}
-
 	
 	onLoad () {
 		var self = this;
@@ -59,9 +58,8 @@ export default class BrnnUI extends BaseComp {
 		this.m_ui.area3.on("click", function(){ this.bet(3); }, this);
 		this.m_ui.area4.on("click", function(){ this.bet(4); }, this);
 		
-		var rule = [1,3,5,300,800];
 		var compBox = this.m_ui.ChipBox.getComponent("ChipBox");
-		compBox.getComponent("ChipBox").setChipValues(rule);
+		compBox.getComponent("ChipBox").setChipValues(this._rule);
 		this.compBox = compBox;
 	}
 
