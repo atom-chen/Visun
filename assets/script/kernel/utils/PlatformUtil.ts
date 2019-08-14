@@ -90,20 +90,20 @@ export default class PlatformUtil {
 			var de = document.documentElement;
 			if (de.requestFullscreen) {
 				de.requestFullscreen();
-			} else if (de.mozRequestFullScreen) {
-				de.mozRequestFullScreen();
-			} else if (de.webkitRequestFullScreen) {
-				de.webkitRequestFullScreen();
+			} else if (de["mozRequestFullScreen"]) {
+				de["mozRequestFullScreen"]();
+			} else if (de["webkitRequestFullScreen"]) {
+				de["webkitRequestFullScreen"]();
 			}
 		}
 		else {
 			var dc = document;
 			if (dc.exitFullscreen) {
 				dc.exitFullscreen();
-			} else if (dc.mozCancelFullScreen) {
-				dc.mozCancelFullScreen();
-			} else if (dc.webkitCancelFullScreen) {
-				dc.webkitCancelFullScreen();
+			} else if (dc["mozCancelFullScreen"]) {
+				dc["mozCancelFullScreen"]();
+			} else if (dc["webkitCancelFullScreen"]) {
+				dc["webkitCancelFullScreen"]();
 			}
 		}
 	}

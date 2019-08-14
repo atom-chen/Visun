@@ -1,5 +1,9 @@
 //---------------------------------
 // protobuf格式数据编码解码
+// pbjs -t static-module -w commonjs -o template.js template.proto
+// pbts -o template.d.ts template.js　
+// https://blog.csdn.net/NRatel/article/details/84251138
+// https://www.jianshu.com/p/1598bde2bb97
 //---------------------------------
 import DataProcessor from "./DataProcessor";
 
