@@ -1,4 +1,3 @@
-import User from "../model/User";
 import HttpCore from "../../../../script/kernel/net/HttpCore";
 import WsSocket from "../../../../script/kernel/net/WsSocket";
 import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
@@ -8,6 +7,7 @@ import SubgameEntry from "../utils/SubgameEntry";
 import UIManager from "../../../../script/kernel/gui/UIManager";
 import UserMgr from "../model/UserMgr";
 import Logic from "../model/Logic";
+import HallRequest from "./HallRequest";
 
 var http_responds:any;
 http_responds = {};
@@ -16,8 +16,8 @@ http_responds.req_youke_login = function(info:any){
 	if(!info) return;
 	Logic.instance().clearDatas(); //清理数据
 	HttpCore.token = info.sid;
-	HttpCore.request("req_userinfo", {userId:info.userId});
-	HttpCore.request("req_game_list", {sid:info.sid});
+	HallRequest.req_userinfo({ userId:info.userId });
+	HallRequest.req_game_list({ sid:info.sid });
 }
 
 http_responds.req_userinfo = function(info:any) {

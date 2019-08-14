@@ -18,20 +18,10 @@ export default class HttpCore {
 	private static _mainUrl:string = "";
 	private static _dataProcessor:DataProcessor = new HttpCodec;	//编码解码器
 	private static g_allProtocol:object = {};	//规则
-	private static _requester:any;				//请求句柄
 	private static _responder:any;				//响应句柄
 	private static _hooks:Function[] = [];		//请求钩子
 	private static _cacheAbles:any = {};
 	private static _localCache:LocalCache = new LocalCache(null);
-	
-
-	//注册一条协议
-	private static _regist(ptoname:string)
-	{
-		this._requester[ptoname] = function(tParams:object, tAddrParams?:any[], unsafeCallback?:(data:any)=>void) {
-			HttpCore.request(ptoname, tParams, tAddrParams, unsafeCallback);
-		}
-	}
 
 	//@注册一组协议
 	//ruleList:  规则
@@ -39,7 +29,6 @@ export default class HttpCore {
 	//responder: 响应句柄
 	public static registProcotol(ruleList:any[], requestor:any, respondor:any)
 	{
-		this._requester = requestor;
 		this._responder = respondor;
 		
 		for( var i=0, len=ruleList.length; i<len; i++) {
@@ -51,9 +40,11 @@ export default class HttpCore {
 			else {
 				cc.log("注册协议：", ptoname);
 			}
+			if(!requestor[ptoname]) {
+				cc.error("没有请求接口", ptoname);
+			}
 
 			this.g_allProtocol[ptoname] = ruleList[i];
-			this._regist(ptoname);
 			this.setCacheAble(ptoname, ruleList[i].cacheAble===1);
 			//this.setCacheAble(ptoname, true); //测试用
 		}

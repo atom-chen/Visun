@@ -1,7 +1,7 @@
 import UIManager from "../../../../script/kernel/gui/UIManager";
 import SubgameEntry from "../utils/SubgameEntry";
 import PlatformUtil from "../../../../script/kernel/utils/PlatformUtil";
-import HttpCore from "../../../../script/kernel/net/HttpCore";
+import HallRequest from "./HallRequest";
 
 var ws_responds:any;
 ws_responds = {};
@@ -13,7 +13,7 @@ ws_responds.MSG_CENTER_QUIT_LOGIN = function(info) {
 				deviceID : PlatformUtil.getDeviceId(), 
 				platformId : 3
 			};
-			HttpCore.request("req_youke_login", param);
+			HallRequest.req_youke_login(param);
 		}
 	}, "账号在其他地方登陆，是否重新登陆？");
 }

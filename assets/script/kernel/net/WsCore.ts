@@ -1,16 +1,9 @@
 import WsSocket from "./WsSocket";
-import NetRequest from "./NetRequest";
 import EventCenter from "../event/EventCenter";
 
 export default class WsCore {
 	private static _protocolTbl: any;
 	private static _responder: {};
-
-	private static _regist(ptoname:string, cmdId:number) {
-		NetRequest[ptoname] = function(data:any) {
-			WsSocket.instance().sendMsg(cmdId, data);
-		}
-	}
 
 	public static registProtocol(tbl:any, responder:any) {
 		this._protocolTbl = tbl;
@@ -18,7 +11,6 @@ export default class WsCore {
 
 		for(var ptoname in tbl.names) {
 			cc.log("注册ws协议：", ptoname);
-		//	this._regist(ptoname, tbl.names[ptoname].cmdId);
 		}
 	}
 
