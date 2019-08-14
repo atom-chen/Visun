@@ -12,6 +12,8 @@ import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
 import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 import UserMgr from "../../model/UserMgr";
+import NetRequest from "../../../../../script/kernel/net/NetRequest";
+import { MAIN_URL } from "../../../../../script/looker/Consts";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,7 +32,7 @@ export default class LobbyUI extends BaseComp {
             deviceID : PlatformUtil.getDeviceId(), 
             platformId : 3
         };
-        HttpCore.request("req_youke_login", null, param);
+        HttpCore.request("req_youke_login", param);
     }
 
     private initUiEvents(){
@@ -86,7 +88,8 @@ export default class LobbyUI extends BaseComp {
     }
 
     private initNet() {
-        HttpCore.registProcotol(http_rules, http_responds);
+        HttpCore.setMainUrl(MAIN_URL);
+        HttpCore.registProcotol(http_rules, NetRequest, http_responds);
         WsCore.registProtocol(ws_rules, ws_responds);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);

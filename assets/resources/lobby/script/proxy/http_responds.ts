@@ -16,8 +16,8 @@ http_responds.req_youke_login = function(info:any){
 	if(!info) return;
 	Logic.instance().clearDatas(); //清理数据
 	HttpCore.token = info.sid;
-	HttpCore.request("req_userinfo", null, {userId:info.userId});
-	HttpCore.request("req_game_list", null, {sid:info.sid});
+	HttpCore.request("req_userinfo", {userId:info.userId});
+	HttpCore.request("req_game_list", {sid:info.sid});
 }
 
 http_responds.req_userinfo = function(info:any) {

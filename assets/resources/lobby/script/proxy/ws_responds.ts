@@ -13,7 +13,7 @@ ws_responds.MSG_CENTER_QUIT_LOGIN = function(info) {
 				deviceID : PlatformUtil.getDeviceId(), 
 				platformId : 3
 			};
-			HttpCore.request("req_youke_login", null, param);
+			HttpCore.request("req_youke_login", param);
 		}
 	}, "账号在其他地方登陆，是否重新登陆？");
 }
