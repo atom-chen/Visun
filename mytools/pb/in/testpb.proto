@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package proto;
 
-message Login {
+message TestPB {
     string name = 1;
     string pwd = 2;
 }

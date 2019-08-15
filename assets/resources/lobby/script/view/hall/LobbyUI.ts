@@ -10,10 +10,10 @@ import http_responds from "../../proxy/http_responds";
 import ws_responds from "../../proxy/ws_responds";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
-import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 import UserMgr from "../../model/UserMgr";
 import { MAIN_URL } from "../../../../../script/looker/Consts";
 import HallRequest from "../../proxy/HallRequest";
+import {proto} from "../../proxy/pb/proto";
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,11 +28,100 @@ export default class LobbyUI extends BaseComp {
         this.initNet();
     //    this.tests();
 
-        var param = { 
-            deviceID : PlatformUtil.getDeviceId(), 
+        // var param = { 
+        //     deviceID : PlatformUtil.getDeviceId(), 
+        //     platformId : 3
+        // };
+        // HallRequest.req_youke_login(param)
+
+        this.testPB();
+    }
+
+    private testPB(){
+        var info = {
+            name : "sssss",
+            pwd : "ddddd"
+        }
+        let message = proto.TestPB.create(info);
+        let messageBuf = proto.TestPB.encode(message).finish();
+        cc.log("---------------")
+        cc.log(messageBuf);
+
+        var arr = new Uint8Array(messageBuf);
+		var obj = proto.TestPB.decode(arr);
+		var info1 = proto.TestPB.toObject(obj);
+        cc.log(info1);
+        
+
+
+        var param11 = {
+            phoneOrUsername : "14645547345",
+            psword : "age543SSdfd",
+            deviceID : "a58c60b61643277c18b0805ca22abfcc",
+            channelId : 4,
+            agentCode : 2,
             platformId : 3
-        };
-        HallRequest.req_youke_login(param)
+        }
+        let message1 = proto.LoginRequest.create(param11);
+        let messageBuf1 = proto.LoginRequest.encode(message1).finish();
+        cc.log("---------------");
+        cc.log(messageBuf1);
+
+        var arr1 = new Uint8Array(messageBuf1);
+		var obj1 = proto.LoginRequest.decode(arr1);
+		var info11 = proto.LoginRequest.toObject(obj1)
+        cc.log(info11);
+    }
+
+    private testHttp(){
+        var param11 = {
+            phoneOrUsername : "",
+            psword : "",
+            deviceID : "a58c60b61643277c18b0805ca22abfcc",
+            channelId : 0,
+            agentCode : 0,
+            platformId : 0
+        }
+        let message = proto.LoginRequest.create(param11);
+        let messageBuf = proto.LoginRequest.encode(message).finish();
+        var arr = messageBuf;
+
+
+        var finalUrl = "http://172.18.11.148:80/user/login";
+      //  finalUrl = finalUrl + "?" + arr;
+        var xhr = cc.loader.getXMLHttpRequest();
+
+		xhr.onabort = function() {
+			cc.log('[onabort]', finalUrl);
+		}
+		xhr.onerror = function() {
+			cc.log('[onerror]', finalUrl);
+		}
+		xhr.ontimeout = function() {
+			cc.log('[ontimeout]', finalUrl);
+		}
+		xhr.onreadystatechange = function () {
+            cc.log("onreadystatechange", xhr.readyState, xhr.status, xhr.responseText);
+			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
+				cc.log("[RESP]", finalUrl);
+				cc.log(xhr.responseText);
+			}
+		};
+
+		cc.log("---------", finalUrl);
+        xhr.open("POST", finalUrl, true);
+     //   xhr.responseType = 'arraybuffer';
+        // xhr.setRequestHeader("Content-Type:", "application/octet-stream");
+        // xhr.setRequestHeader("Accept:", "application/octet-stream");
+        // xhr.setRequestHeader("Content-Type","application/x-protobuf");
+		// xhr.setRequestHeader("Accept","application/x-protobuf");
+        // if (xhr.overrideMimeType){
+		// 	//这个是必须的，否则返回的是字符串，导致protobuf解码错误
+		// 	xhr.overrideMimeType("text/plain; charset=x-user-defined");
+		// }
+		xhr.timeout = 8000;
+		
+        xhr.send(arr);
     }
 
     private initUiEvents(){
@@ -66,6 +155,7 @@ export default class LobbyUI extends BaseComp {
 
         CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
+            this.testHttp();
         }, this);
 
         // 
