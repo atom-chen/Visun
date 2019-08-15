@@ -9,10 +9,10 @@ import UserMgr from "../model/UserMgr";
 import Logic from "../model/Logic";
 import HallRequest from "./HallRequest";
 
-var http_responds:any;
-http_responds = {};
+var HallRespond:any;
+HallRespond = {};
 
-http_responds.req_youke_login = function(info:any){
+HallRespond.req_youke_login = function(info:any){
 	if(!info) return;
 	Logic.instance().clearDatas(); //清理数据
 	HttpCore.token = info.sid;
@@ -20,7 +20,7 @@ http_responds.req_youke_login = function(info:any){
 	HallRequest.req_game_list({ sid:info.sid });
 }
 
-http_responds.req_userinfo = function(info:any) {
+HallRespond.req_userinfo = function(info:any) {
 	if(!info) return;
 	cc.log("登录成功", info)
 	UserMgr.instance().setHeroId(info.userId);
@@ -30,16 +30,16 @@ http_responds.req_userinfo = function(info:any) {
 	WsSocket.instance().connect(url, new JsonCodec());
 }
 
-http_responds.req_ranklist = function(info:any) {
+HallRespond.req_ranklist = function(info:any) {
 	cc.log(info);
 }
 
-http_responds.req_game_list = function(info:any) {
+HallRespond.req_game_list = function(info:any) {
 	if(!info) return;
 	SubgameEntry.instance().setServerGames(info.data);
 }
 
-http_responds.req_enter_br_room = function(info:any) {
+HallRespond.req_enter_br_room = function(info:any) {
 	if(!info) return;
 	cc.log(info);
 	if(info.code != 200) {
@@ -58,7 +58,7 @@ http_responds.req_enter_br_room = function(info:any) {
 	});
 }
 
-http_responds.req_enter_coin_room = function(info:any) {
+HallRespond.req_enter_coin_room = function(info:any) {
 	if(!info) return;
 	cc.log(info);
 	if(info.code != 200) {
@@ -77,4 +77,4 @@ http_responds.req_enter_coin_room = function(info:any) {
 	});
 }
 
-export default http_responds;
+export default HallRespond;

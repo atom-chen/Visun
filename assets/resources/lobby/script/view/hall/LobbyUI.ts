@@ -6,7 +6,7 @@ import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 import WsCore from "../../../../../script/kernel/net/WsCore";
 import http_rules from "../../proxy/rule/http_rules";
 import ws_rules from "../../proxy/rule/ws_rules";
-import http_responds from "../../proxy/http_responds";
+import HallRespond from "../../proxy/HallRespond";
 import ws_responds from "../../proxy/ws_responds";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
@@ -179,7 +179,7 @@ export default class LobbyUI extends BaseComp {
 
     private initNet() {
         HttpCore.setMainUrl(MAIN_URL);
-        HttpCore.registProcotol(http_rules, HallRequest, http_responds);
+        HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
         WsCore.registProtocol(ws_rules, ws_responds);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
