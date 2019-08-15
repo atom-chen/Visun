@@ -11,9 +11,11 @@ import { MAIN_URL } from "../../../../../script/looker/Consts";
 import http_rules from "../../proxy/rule/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
-import {proto} from "../../proxy/pb/proto";
+import {GameProto} from "../../proxy/pb/GameProto";
+import {SdkProto} from "../../proxy/pb/SdkProto";
 import ws_rules from "../../proxy/rule/ws_rules";
 import ws_responds from "../../proxy/ws_responds";
+import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -32,7 +34,7 @@ export default class LobbyUI extends BaseComp {
         //     deviceID : PlatformUtil.getDeviceId(), 
         //     platformId : 3
         // };
-        // HallRequest.req_youke_login(param)
+        // HallRequest.req_youke_login(param);
     }
 
     private initUiEvents(){
@@ -139,18 +141,19 @@ export default class LobbyUI extends BaseComp {
             agentCode : 0,
             platformId : 0
         }
-        var req = proto.Request.create();
-        req.cmd = proto.Request.CMD.Login;
-        req.loginRequest = proto.LoginRequest.create(param11);
-        var buff = proto.Request.encode(req).finish();
+        var req = SdkProto.Request.create();
+        req.cmd = SdkProto.Request.CMD.Login;
+        req.loginRequest = SdkProto.LoginRequest.create(param11);
+        var buff = SdkProto.Request.encode(req).finish();
 
         //二进制流 转 obj
-		var obj1 = proto.Request.decode(buff);
-		var info11 = proto.Request.toObject(obj1);
+		var obj1 = SdkProto.Request.decode(buff);
+		var info11 = SdkProto.Request.toObject(obj1);
         cc.log(info11);
 
         //--------------------------------------------------------
 
+        /*
         var finalUrl = "http://172.18.11.148:80/user/login";
         // finalUrl = finalUrl + "?" + arr;
 
@@ -173,7 +176,7 @@ export default class LobbyUI extends BaseComp {
 			}
 		};
         xhr.open("POST", finalUrl, true);
-     //   xhr.responseType = 'arraybuffer';
+        // xhr.responseType = 'arraybuffer';
         // xhr.setRequestHeader("Content-Type:", "application/octet-stream");
         // xhr.setRequestHeader("Accept:", "application/octet-stream");
         // xhr.setRequestHeader("Content-Type","application/x-protobuf");
@@ -184,6 +187,7 @@ export default class LobbyUI extends BaseComp {
 		// }
 		xhr.timeout = 8000;
         xhr.send(buff);
+        */
     }
 
 }

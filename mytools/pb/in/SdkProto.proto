@@ -1,9 +1,6 @@
 syntax = "proto3";
 
-package proto;
-
-option java_package = "com.beiyou.proto";
-option java_outer_classname = "SdkProto";
+package SdkProto;
 
 /*********************  基础对象 ************************/
 message User{

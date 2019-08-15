@@ -1,0 +1,1 @@
+pbts -o ../../SdkProto.d.ts SdkProto.js

@@ -1,0 +1,1 @@
+pbts -o ../../GameProto.d.ts GameProto.js

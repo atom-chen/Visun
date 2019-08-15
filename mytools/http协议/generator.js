@@ -83,7 +83,30 @@ function gen_define_file(rules, outPath, clsName) {
 	fs.writeFileSync(outPath, content);
 }
 
-gen_define_file(hall_rules, "./HallRequest.ts", "HallRequest");
+function gen_rule_file(rules, outPath) {
+	var check = {};		//用于查重
 
-gen_declare_file(hall_rules, "../../http_requests.d.ts");
+	var content = "//---------------------------------------------------------\n";
+	content += "// 该文件自动生成，不要手动更改\n"
+	content += "//---------------------------------------------------------\n";
+	content += "export default ";
 
+	for(var i=0; i<rules.length; i++){
+		var info = rules[i];
+		if(check[info.name]) {
+			console.log("有重复命名：", info.name);
+		}
+		check[info.name] = info;
+	}
+
+	content += JSON.stringify(check, null, "\t");
+
+	fs.writeFileSync(outPath, content);
+}
+
+//gen_define_file(hall_rules, "./HallRequest.ts", "HallRequest");
+
+//gen_declare_file(hall_rules, "../../HallRequest.d.ts");
+
+
+gen_rule_file(hall_rules, "./hall_rules.ts");

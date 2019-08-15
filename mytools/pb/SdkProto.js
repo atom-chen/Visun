@@ -1,7 +1,7 @@
 /*eslint-disable block-scoped-var, id-length, no-control-regex, no-magic-numbers, no-prototype-builtins, no-redeclare, no-shadow, no-var, sort-vars*/
 "use strict";
 
-var $protobuf = protobuf;
+var $protobuf = require("protobufjs/minimal");
 
 // Common aliases
 var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
@@ -9,20 +9,20 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.proto = (function() {
+$root.SdkProto = (function() {
 
     /**
-     * Namespace proto.
-     * @exports proto
+     * Namespace SdkProto.
+     * @exports SdkProto
      * @namespace
      */
-    var proto = {};
+    var SdkProto = {};
 
-    proto.User = (function() {
+    SdkProto.User = (function() {
 
         /**
          * Properties of a User.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUser
          * @property {string|null} [sessionId] User sessionId
          * @property {number|null} [userId] User userId
@@ -61,11 +61,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new User.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc 基础对象 ***********************
          * @implements IUser
          * @constructor
-         * @param {proto.IUser=} [properties] Properties to set
+         * @param {SdkProto.IUser=} [properties] Properties to set
          */
         function User(properties) {
             if (properties)
@@ -77,7 +77,7 @@ $root.proto = (function() {
         /**
          * User sessionId.
          * @member {string} sessionId
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.sessionId = "";
@@ -85,7 +85,7 @@ $root.proto = (function() {
         /**
          * User userId.
          * @member {number} userId
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.userId = 0;
@@ -93,7 +93,7 @@ $root.proto = (function() {
         /**
          * User nickname.
          * @member {string} nickname
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.nickname = "";
@@ -101,7 +101,7 @@ $root.proto = (function() {
         /**
          * User headImg.
          * @member {string} headImg
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.headImg = "";
@@ -109,7 +109,7 @@ $root.proto = (function() {
         /**
          * User sex.
          * @member {number} sex
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.sex = 0;
@@ -117,7 +117,7 @@ $root.proto = (function() {
         /**
          * User openid.
          * @member {string} openid
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.openid = "";
@@ -125,7 +125,7 @@ $root.proto = (function() {
         /**
          * User diamond.
          * @member {number} diamond
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.diamond = 0;
@@ -133,7 +133,7 @@ $root.proto = (function() {
         /**
          * User coin.
          * @member {number} coin
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.coin = 0;
@@ -141,7 +141,7 @@ $root.proto = (function() {
         /**
          * User ticket.
          * @member {number} ticket
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.ticket = 0;
@@ -149,7 +149,7 @@ $root.proto = (function() {
         /**
          * User bankcoin.
          * @member {number} bankcoin
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bankcoin = 0;
@@ -157,7 +157,7 @@ $root.proto = (function() {
         /**
          * User userName.
          * @member {string} userName
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.userName = "";
@@ -165,7 +165,7 @@ $root.proto = (function() {
         /**
          * User aliAccount.
          * @member {string} aliAccount
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.aliAccount = "";
@@ -173,7 +173,7 @@ $root.proto = (function() {
         /**
          * User userType.
          * @member {number} userType
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.userType = 0;
@@ -181,7 +181,7 @@ $root.proto = (function() {
         /**
          * User aliName.
          * @member {string} aliName
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.aliName = "";
@@ -189,7 +189,7 @@ $root.proto = (function() {
         /**
          * User bankAccount.
          * @member {string} bankAccount
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bankAccount = "";
@@ -197,7 +197,7 @@ $root.proto = (function() {
         /**
          * User bankName.
          * @member {string} bankName
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bankName = "";
@@ -205,7 +205,7 @@ $root.proto = (function() {
         /**
          * User ip.
          * @member {string} ip
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.ip = "";
@@ -213,7 +213,7 @@ $root.proto = (function() {
         /**
          * User bindStatus.
          * @member {number} bindStatus
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bindStatus = 0;
@@ -221,7 +221,7 @@ $root.proto = (function() {
         /**
          * User phone.
          * @member {string} phone
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.phone = "";
@@ -229,7 +229,7 @@ $root.proto = (function() {
         /**
          * User level.
          * @member {number} level
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.level = 0;
@@ -237,7 +237,7 @@ $root.proto = (function() {
         /**
          * User isInTable.
          * @member {number} isInTable
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.isInTable = 0;
@@ -245,7 +245,7 @@ $root.proto = (function() {
         /**
          * User addr.
          * @member {string} addr
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.addr = "";
@@ -253,7 +253,7 @@ $root.proto = (function() {
         /**
          * User gameId.
          * @member {number} gameId
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.gameId = 0;
@@ -261,7 +261,7 @@ $root.proto = (function() {
         /**
          * User pos.
          * @member {string} pos
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.pos = "";
@@ -269,7 +269,7 @@ $root.proto = (function() {
         /**
          * User showAd.
          * @member {boolean} showAd
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.showAd = false;
@@ -277,7 +277,7 @@ $root.proto = (function() {
         /**
          * User isNewUser.
          * @member {boolean} isNewUser
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.isNewUser = false;
@@ -285,7 +285,7 @@ $root.proto = (function() {
         /**
          * User registerCoin.
          * @member {number} registerCoin
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.registerCoin = 0;
@@ -293,7 +293,7 @@ $root.proto = (function() {
         /**
          * User bindphoneCoin.
          * @member {number} bindphoneCoin
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bindphoneCoin = 0;
@@ -301,7 +301,7 @@ $root.proto = (function() {
         /**
          * User fissionCoin.
          * @member {number} fissionCoin
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.fissionCoin = 0;
@@ -309,7 +309,7 @@ $root.proto = (function() {
         /**
          * User bannerAlert.
          * @member {number} bannerAlert
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.bannerAlert = 0;
@@ -317,7 +317,7 @@ $root.proto = (function() {
         /**
          * User agent.
          * @member {number} agent
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.agent = 0;
@@ -325,7 +325,7 @@ $root.proto = (function() {
         /**
          * User isBind.
          * @member {number} isBind
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.isBind = 0;
@@ -333,7 +333,7 @@ $root.proto = (function() {
         /**
          * User isRecharge.
          * @member {number} isRecharge
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          */
         User.prototype.isRecharge = 0;
@@ -341,21 +341,21 @@ $root.proto = (function() {
         /**
          * Creates a new User instance using the specified properties.
          * @function create
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
-         * @param {proto.IUser=} [properties] Properties to set
-         * @returns {proto.User} User instance
+         * @param {SdkProto.IUser=} [properties] Properties to set
+         * @returns {SdkProto.User} User instance
          */
         User.create = function create(properties) {
             return new User(properties);
         };
 
         /**
-         * Encodes the specified User message. Does not implicitly {@link proto.User.verify|verify} messages.
+         * Encodes the specified User message. Does not implicitly {@link SdkProto.User.verify|verify} messages.
          * @function encode
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
-         * @param {proto.IUser} message User message or plain object to encode
+         * @param {SdkProto.IUser} message User message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -432,11 +432,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified User message, length delimited. Does not implicitly {@link proto.User.verify|verify} messages.
+         * Encodes the specified User message, length delimited. Does not implicitly {@link SdkProto.User.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
-         * @param {proto.IUser} message User message or plain object to encode
+         * @param {SdkProto.IUser} message User message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -447,18 +447,18 @@ $root.proto = (function() {
         /**
          * Decodes a User message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.User} User
+         * @returns {SdkProto.User} User
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         User.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.User();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.User();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -572,10 +572,10 @@ $root.proto = (function() {
         /**
          * Decodes a User message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.User} User
+         * @returns {SdkProto.User} User
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -588,7 +588,7 @@ $root.proto = (function() {
         /**
          * Verifies a User message.
          * @function verify
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -701,15 +701,15 @@ $root.proto = (function() {
         /**
          * Creates a User message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.User} User
+         * @returns {SdkProto.User} User
          */
         User.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.User)
+            if (object instanceof $root.SdkProto.User)
                 return object;
-            var message = new $root.proto.User();
+            var message = new $root.SdkProto.User();
             if (object.sessionId != null)
                 message.sessionId = String(object.sessionId);
             if (object.userId != null)
@@ -782,9 +782,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a User message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @static
-         * @param {proto.User} message User
+         * @param {SdkProto.User} message User
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -899,7 +899,7 @@ $root.proto = (function() {
         /**
          * Converts this User to JSON.
          * @function toJSON
-         * @memberof proto.User
+         * @memberof SdkProto.User
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -910,11 +910,11 @@ $root.proto = (function() {
         return User;
     })();
 
-    proto.UserInfo = (function() {
+    SdkProto.UserInfo = (function() {
 
         /**
          * Properties of a UserInfo.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserInfo
          * @property {number|null} [isInTable] UserInfo isInTable
          * @property {string|null} [addr] UserInfo addr
@@ -925,11 +925,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new UserInfo.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserInfo.
          * @implements IUserInfo
          * @constructor
-         * @param {proto.IUserInfo=} [properties] Properties to set
+         * @param {SdkProto.IUserInfo=} [properties] Properties to set
          */
         function UserInfo(properties) {
             if (properties)
@@ -941,7 +941,7 @@ $root.proto = (function() {
         /**
          * UserInfo isInTable.
          * @member {number} isInTable
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          */
         UserInfo.prototype.isInTable = 0;
@@ -949,7 +949,7 @@ $root.proto = (function() {
         /**
          * UserInfo addr.
          * @member {string} addr
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          */
         UserInfo.prototype.addr = "";
@@ -957,7 +957,7 @@ $root.proto = (function() {
         /**
          * UserInfo baseBankCoin.
          * @member {number} baseBankCoin
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          */
         UserInfo.prototype.baseBankCoin = 0;
@@ -965,7 +965,7 @@ $root.proto = (function() {
         /**
          * UserInfo dailyRecharge.
          * @member {number} dailyRecharge
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          */
         UserInfo.prototype.dailyRecharge = 0;
@@ -973,7 +973,7 @@ $root.proto = (function() {
         /**
          * UserInfo dailyRechargeMax.
          * @member {number} dailyRechargeMax
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          */
         UserInfo.prototype.dailyRechargeMax = 0;
@@ -981,21 +981,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserInfo instance using the specified properties.
          * @function create
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
-         * @param {proto.IUserInfo=} [properties] Properties to set
-         * @returns {proto.UserInfo} UserInfo instance
+         * @param {SdkProto.IUserInfo=} [properties] Properties to set
+         * @returns {SdkProto.UserInfo} UserInfo instance
          */
         UserInfo.create = function create(properties) {
             return new UserInfo(properties);
         };
 
         /**
-         * Encodes the specified UserInfo message. Does not implicitly {@link proto.UserInfo.verify|verify} messages.
+         * Encodes the specified UserInfo message. Does not implicitly {@link SdkProto.UserInfo.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
-         * @param {proto.IUserInfo} message UserInfo message or plain object to encode
+         * @param {SdkProto.IUserInfo} message UserInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1016,11 +1016,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link proto.UserInfo.verify|verify} messages.
+         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link SdkProto.UserInfo.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
-         * @param {proto.IUserInfo} message UserInfo message or plain object to encode
+         * @param {SdkProto.IUserInfo} message UserInfo message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1031,18 +1031,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserInfo message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserInfo} UserInfo
+         * @returns {SdkProto.UserInfo} UserInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1072,10 +1072,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserInfo message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserInfo} UserInfo
+         * @returns {SdkProto.UserInfo} UserInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -1088,7 +1088,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserInfo message.
          * @function verify
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -1117,15 +1117,15 @@ $root.proto = (function() {
         /**
          * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserInfo} UserInfo
+         * @returns {SdkProto.UserInfo} UserInfo
          */
         UserInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserInfo)
+            if (object instanceof $root.SdkProto.UserInfo)
                 return object;
-            var message = new $root.proto.UserInfo();
+            var message = new $root.SdkProto.UserInfo();
             if (object.isInTable != null)
                 message.isInTable = object.isInTable | 0;
             if (object.addr != null)
@@ -1142,9 +1142,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @static
-         * @param {proto.UserInfo} message UserInfo
+         * @param {SdkProto.UserInfo} message UserInfo
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -1175,7 +1175,7 @@ $root.proto = (function() {
         /**
          * Converts this UserInfo to JSON.
          * @function toJSON
-         * @memberof proto.UserInfo
+         * @memberof SdkProto.UserInfo
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -1186,11 +1186,11 @@ $root.proto = (function() {
         return UserInfo;
     })();
 
-    proto.UserReady = (function() {
+    SdkProto.UserReady = (function() {
 
         /**
          * Properties of a UserReady.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserReady
          * @property {number|null} [userId] UserReady userId
          * @property {number|null} [state] UserReady state
@@ -1198,11 +1198,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new UserReady.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserReady.
          * @implements IUserReady
          * @constructor
-         * @param {proto.IUserReady=} [properties] Properties to set
+         * @param {SdkProto.IUserReady=} [properties] Properties to set
          */
         function UserReady(properties) {
             if (properties)
@@ -1214,7 +1214,7 @@ $root.proto = (function() {
         /**
          * UserReady userId.
          * @member {number} userId
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @instance
          */
         UserReady.prototype.userId = 0;
@@ -1222,7 +1222,7 @@ $root.proto = (function() {
         /**
          * UserReady state.
          * @member {number} state
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @instance
          */
         UserReady.prototype.state = 0;
@@ -1230,21 +1230,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserReady instance using the specified properties.
          * @function create
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
-         * @param {proto.IUserReady=} [properties] Properties to set
-         * @returns {proto.UserReady} UserReady instance
+         * @param {SdkProto.IUserReady=} [properties] Properties to set
+         * @returns {SdkProto.UserReady} UserReady instance
          */
         UserReady.create = function create(properties) {
             return new UserReady(properties);
         };
 
         /**
-         * Encodes the specified UserReady message. Does not implicitly {@link proto.UserReady.verify|verify} messages.
+         * Encodes the specified UserReady message. Does not implicitly {@link SdkProto.UserReady.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
-         * @param {proto.IUserReady} message UserReady message or plain object to encode
+         * @param {SdkProto.IUserReady} message UserReady message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1259,11 +1259,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserReady message, length delimited. Does not implicitly {@link proto.UserReady.verify|verify} messages.
+         * Encodes the specified UserReady message, length delimited. Does not implicitly {@link SdkProto.UserReady.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
-         * @param {proto.IUserReady} message UserReady message or plain object to encode
+         * @param {SdkProto.IUserReady} message UserReady message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1274,18 +1274,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserReady message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserReady} UserReady
+         * @returns {SdkProto.UserReady} UserReady
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserReady.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserReady();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserReady();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1306,10 +1306,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserReady message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserReady} UserReady
+         * @returns {SdkProto.UserReady} UserReady
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -1322,7 +1322,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserReady message.
          * @function verify
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -1342,15 +1342,15 @@ $root.proto = (function() {
         /**
          * Creates a UserReady message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserReady} UserReady
+         * @returns {SdkProto.UserReady} UserReady
          */
         UserReady.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserReady)
+            if (object instanceof $root.SdkProto.UserReady)
                 return object;
-            var message = new $root.proto.UserReady();
+            var message = new $root.SdkProto.UserReady();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.state != null)
@@ -1361,9 +1361,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserReady message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @static
-         * @param {proto.UserReady} message UserReady
+         * @param {SdkProto.UserReady} message UserReady
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -1385,7 +1385,7 @@ $root.proto = (function() {
         /**
          * Converts this UserReady to JSON.
          * @function toJSON
-         * @memberof proto.UserReady
+         * @memberof SdkProto.UserReady
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -1396,11 +1396,11 @@ $root.proto = (function() {
         return UserReady;
     })();
 
-    proto.ResultData = (function() {
+    SdkProto.ResultData = (function() {
 
         /**
          * Properties of a ResultData.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IResultData
          * @property {number|null} [isOver] ResultData isOver
          * @property {string|null} [time] ResultData time
@@ -1410,11 +1410,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new ResultData.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a ResultData.
          * @implements IResultData
          * @constructor
-         * @param {proto.IResultData=} [properties] Properties to set
+         * @param {SdkProto.IResultData=} [properties] Properties to set
          */
         function ResultData(properties) {
             if (properties)
@@ -1426,7 +1426,7 @@ $root.proto = (function() {
         /**
          * ResultData isOver.
          * @member {number} isOver
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @instance
          */
         ResultData.prototype.isOver = 0;
@@ -1434,7 +1434,7 @@ $root.proto = (function() {
         /**
          * ResultData time.
          * @member {string} time
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @instance
          */
         ResultData.prototype.time = "";
@@ -1442,7 +1442,7 @@ $root.proto = (function() {
         /**
          * ResultData winners.
          * @member {number} winners
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @instance
          */
         ResultData.prototype.winners = 0;
@@ -1450,7 +1450,7 @@ $root.proto = (function() {
         /**
          * ResultData springInfo.
          * @member {number} springInfo
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @instance
          */
         ResultData.prototype.springInfo = 0;
@@ -1458,21 +1458,21 @@ $root.proto = (function() {
         /**
          * Creates a new ResultData instance using the specified properties.
          * @function create
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
-         * @param {proto.IResultData=} [properties] Properties to set
-         * @returns {proto.ResultData} ResultData instance
+         * @param {SdkProto.IResultData=} [properties] Properties to set
+         * @returns {SdkProto.ResultData} ResultData instance
          */
         ResultData.create = function create(properties) {
             return new ResultData(properties);
         };
 
         /**
-         * Encodes the specified ResultData message. Does not implicitly {@link proto.ResultData.verify|verify} messages.
+         * Encodes the specified ResultData message. Does not implicitly {@link SdkProto.ResultData.verify|verify} messages.
          * @function encode
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
-         * @param {proto.IResultData} message ResultData message or plain object to encode
+         * @param {SdkProto.IResultData} message ResultData message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1491,11 +1491,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified ResultData message, length delimited. Does not implicitly {@link proto.ResultData.verify|verify} messages.
+         * Encodes the specified ResultData message, length delimited. Does not implicitly {@link SdkProto.ResultData.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
-         * @param {proto.IResultData} message ResultData message or plain object to encode
+         * @param {SdkProto.IResultData} message ResultData message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1506,18 +1506,18 @@ $root.proto = (function() {
         /**
          * Decodes a ResultData message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.ResultData} ResultData
+         * @returns {SdkProto.ResultData} ResultData
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         ResultData.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.ResultData();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.ResultData();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1544,10 +1544,10 @@ $root.proto = (function() {
         /**
          * Decodes a ResultData message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.ResultData} ResultData
+         * @returns {SdkProto.ResultData} ResultData
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -1560,7 +1560,7 @@ $root.proto = (function() {
         /**
          * Verifies a ResultData message.
          * @function verify
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -1586,15 +1586,15 @@ $root.proto = (function() {
         /**
          * Creates a ResultData message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.ResultData} ResultData
+         * @returns {SdkProto.ResultData} ResultData
          */
         ResultData.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.ResultData)
+            if (object instanceof $root.SdkProto.ResultData)
                 return object;
-            var message = new $root.proto.ResultData();
+            var message = new $root.SdkProto.ResultData();
             if (object.isOver != null)
                 message.isOver = object.isOver | 0;
             if (object.time != null)
@@ -1609,9 +1609,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a ResultData message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @static
-         * @param {proto.ResultData} message ResultData
+         * @param {SdkProto.ResultData} message ResultData
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -1639,7 +1639,7 @@ $root.proto = (function() {
         /**
          * Converts this ResultData to JSON.
          * @function toJSON
-         * @memberof proto.ResultData
+         * @memberof SdkProto.ResultData
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -1650,11 +1650,11 @@ $root.proto = (function() {
         return ResultData;
     })();
 
-    proto.LoginRequest = (function() {
+    SdkProto.LoginRequest = (function() {
 
         /**
          * Properties of a LoginRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ILoginRequest
          * @property {string|null} [phoneOrUsername] LoginRequest phoneOrUsername
          * @property {string|null} [psword] LoginRequest psword
@@ -1666,11 +1666,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new LoginRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc 请求对象 ***********************
          * @implements ILoginRequest
          * @constructor
-         * @param {proto.ILoginRequest=} [properties] Properties to set
+         * @param {SdkProto.ILoginRequest=} [properties] Properties to set
          */
         function LoginRequest(properties) {
             if (properties)
@@ -1682,7 +1682,7 @@ $root.proto = (function() {
         /**
          * LoginRequest phoneOrUsername.
          * @member {string} phoneOrUsername
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.phoneOrUsername = "";
@@ -1690,7 +1690,7 @@ $root.proto = (function() {
         /**
          * LoginRequest psword.
          * @member {string} psword
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.psword = "";
@@ -1698,7 +1698,7 @@ $root.proto = (function() {
         /**
          * LoginRequest deviceID.
          * @member {string} deviceID
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.deviceID = "";
@@ -1706,7 +1706,7 @@ $root.proto = (function() {
         /**
          * LoginRequest channelId.
          * @member {number} channelId
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.channelId = 0;
@@ -1714,7 +1714,7 @@ $root.proto = (function() {
         /**
          * LoginRequest agentCode.
          * @member {string} agentCode
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.agentCode = "";
@@ -1722,7 +1722,7 @@ $root.proto = (function() {
         /**
          * LoginRequest platformId.
          * @member {number} platformId
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          */
         LoginRequest.prototype.platformId = 0;
@@ -1730,21 +1730,21 @@ $root.proto = (function() {
         /**
          * Creates a new LoginRequest instance using the specified properties.
          * @function create
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
-         * @param {proto.ILoginRequest=} [properties] Properties to set
-         * @returns {proto.LoginRequest} LoginRequest instance
+         * @param {SdkProto.ILoginRequest=} [properties] Properties to set
+         * @returns {SdkProto.LoginRequest} LoginRequest instance
          */
         LoginRequest.create = function create(properties) {
             return new LoginRequest(properties);
         };
 
         /**
-         * Encodes the specified LoginRequest message. Does not implicitly {@link proto.LoginRequest.verify|verify} messages.
+         * Encodes the specified LoginRequest message. Does not implicitly {@link SdkProto.LoginRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
-         * @param {proto.ILoginRequest} message LoginRequest message or plain object to encode
+         * @param {SdkProto.ILoginRequest} message LoginRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1767,11 +1767,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified LoginRequest message, length delimited. Does not implicitly {@link proto.LoginRequest.verify|verify} messages.
+         * Encodes the specified LoginRequest message, length delimited. Does not implicitly {@link SdkProto.LoginRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
-         * @param {proto.ILoginRequest} message LoginRequest message or plain object to encode
+         * @param {SdkProto.ILoginRequest} message LoginRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -1782,18 +1782,18 @@ $root.proto = (function() {
         /**
          * Decodes a LoginRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.LoginRequest} LoginRequest
+         * @returns {SdkProto.LoginRequest} LoginRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LoginRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.LoginRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.LoginRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1826,10 +1826,10 @@ $root.proto = (function() {
         /**
          * Decodes a LoginRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.LoginRequest} LoginRequest
+         * @returns {SdkProto.LoginRequest} LoginRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -1842,7 +1842,7 @@ $root.proto = (function() {
         /**
          * Verifies a LoginRequest message.
          * @function verify
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -1874,15 +1874,15 @@ $root.proto = (function() {
         /**
          * Creates a LoginRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.LoginRequest} LoginRequest
+         * @returns {SdkProto.LoginRequest} LoginRequest
          */
         LoginRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.LoginRequest)
+            if (object instanceof $root.SdkProto.LoginRequest)
                 return object;
-            var message = new $root.proto.LoginRequest();
+            var message = new $root.SdkProto.LoginRequest();
             if (object.phoneOrUsername != null)
                 message.phoneOrUsername = String(object.phoneOrUsername);
             if (object.psword != null)
@@ -1901,9 +1901,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a LoginRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @static
-         * @param {proto.LoginRequest} message LoginRequest
+         * @param {SdkProto.LoginRequest} message LoginRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -1937,7 +1937,7 @@ $root.proto = (function() {
         /**
          * Converts this LoginRequest to JSON.
          * @function toJSON
-         * @memberof proto.LoginRequest
+         * @memberof SdkProto.LoginRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -1948,11 +1948,11 @@ $root.proto = (function() {
         return LoginRequest;
     })();
 
-    proto.RegisterPhoneRequest = (function() {
+    SdkProto.RegisterPhoneRequest = (function() {
 
         /**
          * Properties of a RegisterPhoneRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IRegisterPhoneRequest
          * @property {string|null} [phone] RegisterPhoneRequest phone
          * @property {string|null} [psword] RegisterPhoneRequest psword
@@ -1961,11 +1961,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new RegisterPhoneRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a RegisterPhoneRequest.
          * @implements IRegisterPhoneRequest
          * @constructor
-         * @param {proto.IRegisterPhoneRequest=} [properties] Properties to set
+         * @param {SdkProto.IRegisterPhoneRequest=} [properties] Properties to set
          */
         function RegisterPhoneRequest(properties) {
             if (properties)
@@ -1977,7 +1977,7 @@ $root.proto = (function() {
         /**
          * RegisterPhoneRequest phone.
          * @member {string} phone
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @instance
          */
         RegisterPhoneRequest.prototype.phone = "";
@@ -1985,7 +1985,7 @@ $root.proto = (function() {
         /**
          * RegisterPhoneRequest psword.
          * @member {string} psword
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @instance
          */
         RegisterPhoneRequest.prototype.psword = "";
@@ -1993,7 +1993,7 @@ $root.proto = (function() {
         /**
          * RegisterPhoneRequest msgCode.
          * @member {string} msgCode
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @instance
          */
         RegisterPhoneRequest.prototype.msgCode = "";
@@ -2001,21 +2001,21 @@ $root.proto = (function() {
         /**
          * Creates a new RegisterPhoneRequest instance using the specified properties.
          * @function create
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
-         * @param {proto.IRegisterPhoneRequest=} [properties] Properties to set
-         * @returns {proto.RegisterPhoneRequest} RegisterPhoneRequest instance
+         * @param {SdkProto.IRegisterPhoneRequest=} [properties] Properties to set
+         * @returns {SdkProto.RegisterPhoneRequest} RegisterPhoneRequest instance
          */
         RegisterPhoneRequest.create = function create(properties) {
             return new RegisterPhoneRequest(properties);
         };
 
         /**
-         * Encodes the specified RegisterPhoneRequest message. Does not implicitly {@link proto.RegisterPhoneRequest.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRequest message. Does not implicitly {@link SdkProto.RegisterPhoneRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
-         * @param {proto.IRegisterPhoneRequest} message RegisterPhoneRequest message or plain object to encode
+         * @param {SdkProto.IRegisterPhoneRequest} message RegisterPhoneRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2032,11 +2032,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified RegisterPhoneRequest message, length delimited. Does not implicitly {@link proto.RegisterPhoneRequest.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRequest message, length delimited. Does not implicitly {@link SdkProto.RegisterPhoneRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
-         * @param {proto.IRegisterPhoneRequest} message RegisterPhoneRequest message or plain object to encode
+         * @param {SdkProto.IRegisterPhoneRequest} message RegisterPhoneRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2047,18 +2047,18 @@ $root.proto = (function() {
         /**
          * Decodes a RegisterPhoneRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.RegisterPhoneRequest} RegisterPhoneRequest
+         * @returns {SdkProto.RegisterPhoneRequest} RegisterPhoneRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         RegisterPhoneRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.RegisterPhoneRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.RegisterPhoneRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2082,10 +2082,10 @@ $root.proto = (function() {
         /**
          * Decodes a RegisterPhoneRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.RegisterPhoneRequest} RegisterPhoneRequest
+         * @returns {SdkProto.RegisterPhoneRequest} RegisterPhoneRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -2098,7 +2098,7 @@ $root.proto = (function() {
         /**
          * Verifies a RegisterPhoneRequest message.
          * @function verify
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2121,15 +2121,15 @@ $root.proto = (function() {
         /**
          * Creates a RegisterPhoneRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.RegisterPhoneRequest} RegisterPhoneRequest
+         * @returns {SdkProto.RegisterPhoneRequest} RegisterPhoneRequest
          */
         RegisterPhoneRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.RegisterPhoneRequest)
+            if (object instanceof $root.SdkProto.RegisterPhoneRequest)
                 return object;
-            var message = new $root.proto.RegisterPhoneRequest();
+            var message = new $root.SdkProto.RegisterPhoneRequest();
             if (object.phone != null)
                 message.phone = String(object.phone);
             if (object.psword != null)
@@ -2142,9 +2142,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a RegisterPhoneRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @static
-         * @param {proto.RegisterPhoneRequest} message RegisterPhoneRequest
+         * @param {SdkProto.RegisterPhoneRequest} message RegisterPhoneRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -2169,7 +2169,7 @@ $root.proto = (function() {
         /**
          * Converts this RegisterPhoneRequest to JSON.
          * @function toJSON
-         * @memberof proto.RegisterPhoneRequest
+         * @memberof SdkProto.RegisterPhoneRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -2180,22 +2180,22 @@ $root.proto = (function() {
         return RegisterPhoneRequest;
     })();
 
-    proto.GetUserInfoRequest = (function() {
+    SdkProto.GetUserInfoRequest = (function() {
 
         /**
          * Properties of a GetUserInfoRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IGetUserInfoRequest
          * @property {number|null} [userId] GetUserInfoRequest userId
          */
 
         /**
          * Constructs a new GetUserInfoRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a GetUserInfoRequest.
          * @implements IGetUserInfoRequest
          * @constructor
-         * @param {proto.IGetUserInfoRequest=} [properties] Properties to set
+         * @param {SdkProto.IGetUserInfoRequest=} [properties] Properties to set
          */
         function GetUserInfoRequest(properties) {
             if (properties)
@@ -2207,7 +2207,7 @@ $root.proto = (function() {
         /**
          * GetUserInfoRequest userId.
          * @member {number} userId
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @instance
          */
         GetUserInfoRequest.prototype.userId = 0;
@@ -2215,21 +2215,21 @@ $root.proto = (function() {
         /**
          * Creates a new GetUserInfoRequest instance using the specified properties.
          * @function create
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
-         * @param {proto.IGetUserInfoRequest=} [properties] Properties to set
-         * @returns {proto.GetUserInfoRequest} GetUserInfoRequest instance
+         * @param {SdkProto.IGetUserInfoRequest=} [properties] Properties to set
+         * @returns {SdkProto.GetUserInfoRequest} GetUserInfoRequest instance
          */
         GetUserInfoRequest.create = function create(properties) {
             return new GetUserInfoRequest(properties);
         };
 
         /**
-         * Encodes the specified GetUserInfoRequest message. Does not implicitly {@link proto.GetUserInfoRequest.verify|verify} messages.
+         * Encodes the specified GetUserInfoRequest message. Does not implicitly {@link SdkProto.GetUserInfoRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
-         * @param {proto.IGetUserInfoRequest} message GetUserInfoRequest message or plain object to encode
+         * @param {SdkProto.IGetUserInfoRequest} message GetUserInfoRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2242,11 +2242,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified GetUserInfoRequest message, length delimited. Does not implicitly {@link proto.GetUserInfoRequest.verify|verify} messages.
+         * Encodes the specified GetUserInfoRequest message, length delimited. Does not implicitly {@link SdkProto.GetUserInfoRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
-         * @param {proto.IGetUserInfoRequest} message GetUserInfoRequest message or plain object to encode
+         * @param {SdkProto.IGetUserInfoRequest} message GetUserInfoRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2257,18 +2257,18 @@ $root.proto = (function() {
         /**
          * Decodes a GetUserInfoRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.GetUserInfoRequest} GetUserInfoRequest
+         * @returns {SdkProto.GetUserInfoRequest} GetUserInfoRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         GetUserInfoRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.GetUserInfoRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.GetUserInfoRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2286,10 +2286,10 @@ $root.proto = (function() {
         /**
          * Decodes a GetUserInfoRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.GetUserInfoRequest} GetUserInfoRequest
+         * @returns {SdkProto.GetUserInfoRequest} GetUserInfoRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -2302,7 +2302,7 @@ $root.proto = (function() {
         /**
          * Verifies a GetUserInfoRequest message.
          * @function verify
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2319,15 +2319,15 @@ $root.proto = (function() {
         /**
          * Creates a GetUserInfoRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.GetUserInfoRequest} GetUserInfoRequest
+         * @returns {SdkProto.GetUserInfoRequest} GetUserInfoRequest
          */
         GetUserInfoRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.GetUserInfoRequest)
+            if (object instanceof $root.SdkProto.GetUserInfoRequest)
                 return object;
-            var message = new $root.proto.GetUserInfoRequest();
+            var message = new $root.SdkProto.GetUserInfoRequest();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             return message;
@@ -2336,9 +2336,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a GetUserInfoRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @static
-         * @param {proto.GetUserInfoRequest} message GetUserInfoRequest
+         * @param {SdkProto.GetUserInfoRequest} message GetUserInfoRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -2356,7 +2356,7 @@ $root.proto = (function() {
         /**
          * Converts this GetUserInfoRequest to JSON.
          * @function toJSON
-         * @memberof proto.GetUserInfoRequest
+         * @memberof SdkProto.GetUserInfoRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -2367,11 +2367,11 @@ $root.proto = (function() {
         return GetUserInfoRequest;
     })();
 
-    proto.CoinBankRequest = (function() {
+    SdkProto.CoinBankRequest = (function() {
 
         /**
          * Properties of a CoinBankRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ICoinBankRequest
          * @property {number|null} [userId] CoinBankRequest userId
          * @property {number|null} [type] CoinBankRequest type
@@ -2380,11 +2380,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new CoinBankRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a CoinBankRequest.
          * @implements ICoinBankRequest
          * @constructor
-         * @param {proto.ICoinBankRequest=} [properties] Properties to set
+         * @param {SdkProto.ICoinBankRequest=} [properties] Properties to set
          */
         function CoinBankRequest(properties) {
             if (properties)
@@ -2396,7 +2396,7 @@ $root.proto = (function() {
         /**
          * CoinBankRequest userId.
          * @member {number} userId
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @instance
          */
         CoinBankRequest.prototype.userId = 0;
@@ -2404,7 +2404,7 @@ $root.proto = (function() {
         /**
          * CoinBankRequest type.
          * @member {number} type
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @instance
          */
         CoinBankRequest.prototype.type = 0;
@@ -2412,7 +2412,7 @@ $root.proto = (function() {
         /**
          * CoinBankRequest coin.
          * @member {number} coin
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @instance
          */
         CoinBankRequest.prototype.coin = 0;
@@ -2420,21 +2420,21 @@ $root.proto = (function() {
         /**
          * Creates a new CoinBankRequest instance using the specified properties.
          * @function create
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
-         * @param {proto.ICoinBankRequest=} [properties] Properties to set
-         * @returns {proto.CoinBankRequest} CoinBankRequest instance
+         * @param {SdkProto.ICoinBankRequest=} [properties] Properties to set
+         * @returns {SdkProto.CoinBankRequest} CoinBankRequest instance
          */
         CoinBankRequest.create = function create(properties) {
             return new CoinBankRequest(properties);
         };
 
         /**
-         * Encodes the specified CoinBankRequest message. Does not implicitly {@link proto.CoinBankRequest.verify|verify} messages.
+         * Encodes the specified CoinBankRequest message. Does not implicitly {@link SdkProto.CoinBankRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
-         * @param {proto.ICoinBankRequest} message CoinBankRequest message or plain object to encode
+         * @param {SdkProto.ICoinBankRequest} message CoinBankRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2451,11 +2451,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified CoinBankRequest message, length delimited. Does not implicitly {@link proto.CoinBankRequest.verify|verify} messages.
+         * Encodes the specified CoinBankRequest message, length delimited. Does not implicitly {@link SdkProto.CoinBankRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
-         * @param {proto.ICoinBankRequest} message CoinBankRequest message or plain object to encode
+         * @param {SdkProto.ICoinBankRequest} message CoinBankRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2466,18 +2466,18 @@ $root.proto = (function() {
         /**
          * Decodes a CoinBankRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.CoinBankRequest} CoinBankRequest
+         * @returns {SdkProto.CoinBankRequest} CoinBankRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CoinBankRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.CoinBankRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.CoinBankRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2501,10 +2501,10 @@ $root.proto = (function() {
         /**
          * Decodes a CoinBankRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.CoinBankRequest} CoinBankRequest
+         * @returns {SdkProto.CoinBankRequest} CoinBankRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -2517,7 +2517,7 @@ $root.proto = (function() {
         /**
          * Verifies a CoinBankRequest message.
          * @function verify
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2540,15 +2540,15 @@ $root.proto = (function() {
         /**
          * Creates a CoinBankRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.CoinBankRequest} CoinBankRequest
+         * @returns {SdkProto.CoinBankRequest} CoinBankRequest
          */
         CoinBankRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.CoinBankRequest)
+            if (object instanceof $root.SdkProto.CoinBankRequest)
                 return object;
-            var message = new $root.proto.CoinBankRequest();
+            var message = new $root.SdkProto.CoinBankRequest();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.type != null)
@@ -2561,9 +2561,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a CoinBankRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @static
-         * @param {proto.CoinBankRequest} message CoinBankRequest
+         * @param {SdkProto.CoinBankRequest} message CoinBankRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -2588,7 +2588,7 @@ $root.proto = (function() {
         /**
          * Converts this CoinBankRequest to JSON.
          * @function toJSON
-         * @memberof proto.CoinBankRequest
+         * @memberof SdkProto.CoinBankRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -2599,11 +2599,11 @@ $root.proto = (function() {
         return CoinBankRequest;
     })();
 
-    proto.ChangeSignRequest = (function() {
+    SdkProto.ChangeSignRequest = (function() {
 
         /**
          * Properties of a ChangeSignRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IChangeSignRequest
          * @property {string|null} [sid] ChangeSignRequest sid
          * @property {string|null} [sign] ChangeSignRequest sign
@@ -2611,11 +2611,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new ChangeSignRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a ChangeSignRequest.
          * @implements IChangeSignRequest
          * @constructor
-         * @param {proto.IChangeSignRequest=} [properties] Properties to set
+         * @param {SdkProto.IChangeSignRequest=} [properties] Properties to set
          */
         function ChangeSignRequest(properties) {
             if (properties)
@@ -2627,7 +2627,7 @@ $root.proto = (function() {
         /**
          * ChangeSignRequest sid.
          * @member {string} sid
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @instance
          */
         ChangeSignRequest.prototype.sid = "";
@@ -2635,7 +2635,7 @@ $root.proto = (function() {
         /**
          * ChangeSignRequest sign.
          * @member {string} sign
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @instance
          */
         ChangeSignRequest.prototype.sign = "";
@@ -2643,21 +2643,21 @@ $root.proto = (function() {
         /**
          * Creates a new ChangeSignRequest instance using the specified properties.
          * @function create
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
-         * @param {proto.IChangeSignRequest=} [properties] Properties to set
-         * @returns {proto.ChangeSignRequest} ChangeSignRequest instance
+         * @param {SdkProto.IChangeSignRequest=} [properties] Properties to set
+         * @returns {SdkProto.ChangeSignRequest} ChangeSignRequest instance
          */
         ChangeSignRequest.create = function create(properties) {
             return new ChangeSignRequest(properties);
         };
 
         /**
-         * Encodes the specified ChangeSignRequest message. Does not implicitly {@link proto.ChangeSignRequest.verify|verify} messages.
+         * Encodes the specified ChangeSignRequest message. Does not implicitly {@link SdkProto.ChangeSignRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
-         * @param {proto.IChangeSignRequest} message ChangeSignRequest message or plain object to encode
+         * @param {SdkProto.IChangeSignRequest} message ChangeSignRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2672,11 +2672,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified ChangeSignRequest message, length delimited. Does not implicitly {@link proto.ChangeSignRequest.verify|verify} messages.
+         * Encodes the specified ChangeSignRequest message, length delimited. Does not implicitly {@link SdkProto.ChangeSignRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
-         * @param {proto.IChangeSignRequest} message ChangeSignRequest message or plain object to encode
+         * @param {SdkProto.IChangeSignRequest} message ChangeSignRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2687,18 +2687,18 @@ $root.proto = (function() {
         /**
          * Decodes a ChangeSignRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.ChangeSignRequest} ChangeSignRequest
+         * @returns {SdkProto.ChangeSignRequest} ChangeSignRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         ChangeSignRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.ChangeSignRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.ChangeSignRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2719,10 +2719,10 @@ $root.proto = (function() {
         /**
          * Decodes a ChangeSignRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.ChangeSignRequest} ChangeSignRequest
+         * @returns {SdkProto.ChangeSignRequest} ChangeSignRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -2735,7 +2735,7 @@ $root.proto = (function() {
         /**
          * Verifies a ChangeSignRequest message.
          * @function verify
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2755,15 +2755,15 @@ $root.proto = (function() {
         /**
          * Creates a ChangeSignRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.ChangeSignRequest} ChangeSignRequest
+         * @returns {SdkProto.ChangeSignRequest} ChangeSignRequest
          */
         ChangeSignRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.ChangeSignRequest)
+            if (object instanceof $root.SdkProto.ChangeSignRequest)
                 return object;
-            var message = new $root.proto.ChangeSignRequest();
+            var message = new $root.SdkProto.ChangeSignRequest();
             if (object.sid != null)
                 message.sid = String(object.sid);
             if (object.sign != null)
@@ -2774,9 +2774,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a ChangeSignRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @static
-         * @param {proto.ChangeSignRequest} message ChangeSignRequest
+         * @param {SdkProto.ChangeSignRequest} message ChangeSignRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -2798,7 +2798,7 @@ $root.proto = (function() {
         /**
          * Converts this ChangeSignRequest to JSON.
          * @function toJSON
-         * @memberof proto.ChangeSignRequest
+         * @memberof SdkProto.ChangeSignRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -2809,11 +2809,11 @@ $root.proto = (function() {
         return ChangeSignRequest;
     })();
 
-    proto.TestDeviceIDRequest = (function() {
+    SdkProto.TestDeviceIDRequest = (function() {
 
         /**
          * Properties of a TestDeviceIDRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ITestDeviceIDRequest
          * @property {string|null} [deviceID] TestDeviceIDRequest deviceID
          * @property {number|null} [channelId] TestDeviceIDRequest channelId
@@ -2823,11 +2823,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new TestDeviceIDRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a TestDeviceIDRequest.
          * @implements ITestDeviceIDRequest
          * @constructor
-         * @param {proto.ITestDeviceIDRequest=} [properties] Properties to set
+         * @param {SdkProto.ITestDeviceIDRequest=} [properties] Properties to set
          */
         function TestDeviceIDRequest(properties) {
             if (properties)
@@ -2839,7 +2839,7 @@ $root.proto = (function() {
         /**
          * TestDeviceIDRequest deviceID.
          * @member {string} deviceID
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @instance
          */
         TestDeviceIDRequest.prototype.deviceID = "";
@@ -2847,7 +2847,7 @@ $root.proto = (function() {
         /**
          * TestDeviceIDRequest channelId.
          * @member {number} channelId
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @instance
          */
         TestDeviceIDRequest.prototype.channelId = 0;
@@ -2855,7 +2855,7 @@ $root.proto = (function() {
         /**
          * TestDeviceIDRequest platformId.
          * @member {number} platformId
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @instance
          */
         TestDeviceIDRequest.prototype.platformId = 0;
@@ -2863,7 +2863,7 @@ $root.proto = (function() {
         /**
          * TestDeviceIDRequest agentCode.
          * @member {string} agentCode
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @instance
          */
         TestDeviceIDRequest.prototype.agentCode = "";
@@ -2871,21 +2871,21 @@ $root.proto = (function() {
         /**
          * Creates a new TestDeviceIDRequest instance using the specified properties.
          * @function create
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
-         * @param {proto.ITestDeviceIDRequest=} [properties] Properties to set
-         * @returns {proto.TestDeviceIDRequest} TestDeviceIDRequest instance
+         * @param {SdkProto.ITestDeviceIDRequest=} [properties] Properties to set
+         * @returns {SdkProto.TestDeviceIDRequest} TestDeviceIDRequest instance
          */
         TestDeviceIDRequest.create = function create(properties) {
             return new TestDeviceIDRequest(properties);
         };
 
         /**
-         * Encodes the specified TestDeviceIDRequest message. Does not implicitly {@link proto.TestDeviceIDRequest.verify|verify} messages.
+         * Encodes the specified TestDeviceIDRequest message. Does not implicitly {@link SdkProto.TestDeviceIDRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
-         * @param {proto.ITestDeviceIDRequest} message TestDeviceIDRequest message or plain object to encode
+         * @param {SdkProto.ITestDeviceIDRequest} message TestDeviceIDRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2904,11 +2904,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified TestDeviceIDRequest message, length delimited. Does not implicitly {@link proto.TestDeviceIDRequest.verify|verify} messages.
+         * Encodes the specified TestDeviceIDRequest message, length delimited. Does not implicitly {@link SdkProto.TestDeviceIDRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
-         * @param {proto.ITestDeviceIDRequest} message TestDeviceIDRequest message or plain object to encode
+         * @param {SdkProto.ITestDeviceIDRequest} message TestDeviceIDRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -2919,18 +2919,18 @@ $root.proto = (function() {
         /**
          * Decodes a TestDeviceIDRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.TestDeviceIDRequest} TestDeviceIDRequest
+         * @returns {SdkProto.TestDeviceIDRequest} TestDeviceIDRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         TestDeviceIDRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TestDeviceIDRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.TestDeviceIDRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2957,10 +2957,10 @@ $root.proto = (function() {
         /**
          * Decodes a TestDeviceIDRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.TestDeviceIDRequest} TestDeviceIDRequest
+         * @returns {SdkProto.TestDeviceIDRequest} TestDeviceIDRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -2973,7 +2973,7 @@ $root.proto = (function() {
         /**
          * Verifies a TestDeviceIDRequest message.
          * @function verify
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -2999,15 +2999,15 @@ $root.proto = (function() {
         /**
          * Creates a TestDeviceIDRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.TestDeviceIDRequest} TestDeviceIDRequest
+         * @returns {SdkProto.TestDeviceIDRequest} TestDeviceIDRequest
          */
         TestDeviceIDRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.TestDeviceIDRequest)
+            if (object instanceof $root.SdkProto.TestDeviceIDRequest)
                 return object;
-            var message = new $root.proto.TestDeviceIDRequest();
+            var message = new $root.SdkProto.TestDeviceIDRequest();
             if (object.deviceID != null)
                 message.deviceID = String(object.deviceID);
             if (object.channelId != null)
@@ -3022,9 +3022,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a TestDeviceIDRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @static
-         * @param {proto.TestDeviceIDRequest} message TestDeviceIDRequest
+         * @param {SdkProto.TestDeviceIDRequest} message TestDeviceIDRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -3052,7 +3052,7 @@ $root.proto = (function() {
         /**
          * Converts this TestDeviceIDRequest to JSON.
          * @function toJSON
-         * @memberof proto.TestDeviceIDRequest
+         * @memberof SdkProto.TestDeviceIDRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -3063,11 +3063,11 @@ $root.proto = (function() {
         return TestDeviceIDRequest;
     })();
 
-    proto.CreateTableRequest = (function() {
+    SdkProto.CreateTableRequest = (function() {
 
         /**
          * Properties of a CreateTableRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ICreateTableRequest
          * @property {string|null} [sid] CreateTableRequest sid
          * @property {string|null} [tableId] CreateTableRequest tableId
@@ -3076,11 +3076,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new CreateTableRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a CreateTableRequest.
          * @implements ICreateTableRequest
          * @constructor
-         * @param {proto.ICreateTableRequest=} [properties] Properties to set
+         * @param {SdkProto.ICreateTableRequest=} [properties] Properties to set
          */
         function CreateTableRequest(properties) {
             if (properties)
@@ -3092,7 +3092,7 @@ $root.proto = (function() {
         /**
          * CreateTableRequest sid.
          * @member {string} sid
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @instance
          */
         CreateTableRequest.prototype.sid = "";
@@ -3100,7 +3100,7 @@ $root.proto = (function() {
         /**
          * CreateTableRequest tableId.
          * @member {string} tableId
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @instance
          */
         CreateTableRequest.prototype.tableId = "";
@@ -3108,7 +3108,7 @@ $root.proto = (function() {
         /**
          * CreateTableRequest gps.
          * @member {string} gps
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @instance
          */
         CreateTableRequest.prototype.gps = "";
@@ -3116,21 +3116,21 @@ $root.proto = (function() {
         /**
          * Creates a new CreateTableRequest instance using the specified properties.
          * @function create
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
-         * @param {proto.ICreateTableRequest=} [properties] Properties to set
-         * @returns {proto.CreateTableRequest} CreateTableRequest instance
+         * @param {SdkProto.ICreateTableRequest=} [properties] Properties to set
+         * @returns {SdkProto.CreateTableRequest} CreateTableRequest instance
          */
         CreateTableRequest.create = function create(properties) {
             return new CreateTableRequest(properties);
         };
 
         /**
-         * Encodes the specified CreateTableRequest message. Does not implicitly {@link proto.CreateTableRequest.verify|verify} messages.
+         * Encodes the specified CreateTableRequest message. Does not implicitly {@link SdkProto.CreateTableRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
-         * @param {proto.ICreateTableRequest} message CreateTableRequest message or plain object to encode
+         * @param {SdkProto.ICreateTableRequest} message CreateTableRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3147,11 +3147,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified CreateTableRequest message, length delimited. Does not implicitly {@link proto.CreateTableRequest.verify|verify} messages.
+         * Encodes the specified CreateTableRequest message, length delimited. Does not implicitly {@link SdkProto.CreateTableRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
-         * @param {proto.ICreateTableRequest} message CreateTableRequest message or plain object to encode
+         * @param {SdkProto.ICreateTableRequest} message CreateTableRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3162,18 +3162,18 @@ $root.proto = (function() {
         /**
          * Decodes a CreateTableRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.CreateTableRequest} CreateTableRequest
+         * @returns {SdkProto.CreateTableRequest} CreateTableRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CreateTableRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.CreateTableRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.CreateTableRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3197,10 +3197,10 @@ $root.proto = (function() {
         /**
          * Decodes a CreateTableRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.CreateTableRequest} CreateTableRequest
+         * @returns {SdkProto.CreateTableRequest} CreateTableRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -3213,7 +3213,7 @@ $root.proto = (function() {
         /**
          * Verifies a CreateTableRequest message.
          * @function verify
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3236,15 +3236,15 @@ $root.proto = (function() {
         /**
          * Creates a CreateTableRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.CreateTableRequest} CreateTableRequest
+         * @returns {SdkProto.CreateTableRequest} CreateTableRequest
          */
         CreateTableRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.CreateTableRequest)
+            if (object instanceof $root.SdkProto.CreateTableRequest)
                 return object;
-            var message = new $root.proto.CreateTableRequest();
+            var message = new $root.SdkProto.CreateTableRequest();
             if (object.sid != null)
                 message.sid = String(object.sid);
             if (object.tableId != null)
@@ -3257,9 +3257,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a CreateTableRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @static
-         * @param {proto.CreateTableRequest} message CreateTableRequest
+         * @param {SdkProto.CreateTableRequest} message CreateTableRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -3284,7 +3284,7 @@ $root.proto = (function() {
         /**
          * Converts this CreateTableRequest to JSON.
          * @function toJSON
-         * @memberof proto.CreateTableRequest
+         * @memberof SdkProto.CreateTableRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -3295,11 +3295,11 @@ $root.proto = (function() {
         return CreateTableRequest;
     })();
 
-    proto.JoinTableRequest = (function() {
+    SdkProto.JoinTableRequest = (function() {
 
         /**
          * Properties of a JoinTableRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IJoinTableRequest
          * @property {string|null} [sid] JoinTableRequest sid
          * @property {string|null} [tableId] JoinTableRequest tableId
@@ -3308,11 +3308,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new JoinTableRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a JoinTableRequest.
          * @implements IJoinTableRequest
          * @constructor
-         * @param {proto.IJoinTableRequest=} [properties] Properties to set
+         * @param {SdkProto.IJoinTableRequest=} [properties] Properties to set
          */
         function JoinTableRequest(properties) {
             if (properties)
@@ -3324,7 +3324,7 @@ $root.proto = (function() {
         /**
          * JoinTableRequest sid.
          * @member {string} sid
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @instance
          */
         JoinTableRequest.prototype.sid = "";
@@ -3332,7 +3332,7 @@ $root.proto = (function() {
         /**
          * JoinTableRequest tableId.
          * @member {string} tableId
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @instance
          */
         JoinTableRequest.prototype.tableId = "";
@@ -3340,7 +3340,7 @@ $root.proto = (function() {
         /**
          * JoinTableRequest gps.
          * @member {string} gps
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @instance
          */
         JoinTableRequest.prototype.gps = "";
@@ -3348,21 +3348,21 @@ $root.proto = (function() {
         /**
          * Creates a new JoinTableRequest instance using the specified properties.
          * @function create
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
-         * @param {proto.IJoinTableRequest=} [properties] Properties to set
-         * @returns {proto.JoinTableRequest} JoinTableRequest instance
+         * @param {SdkProto.IJoinTableRequest=} [properties] Properties to set
+         * @returns {SdkProto.JoinTableRequest} JoinTableRequest instance
          */
         JoinTableRequest.create = function create(properties) {
             return new JoinTableRequest(properties);
         };
 
         /**
-         * Encodes the specified JoinTableRequest message. Does not implicitly {@link proto.JoinTableRequest.verify|verify} messages.
+         * Encodes the specified JoinTableRequest message. Does not implicitly {@link SdkProto.JoinTableRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
-         * @param {proto.IJoinTableRequest} message JoinTableRequest message or plain object to encode
+         * @param {SdkProto.IJoinTableRequest} message JoinTableRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3379,11 +3379,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified JoinTableRequest message, length delimited. Does not implicitly {@link proto.JoinTableRequest.verify|verify} messages.
+         * Encodes the specified JoinTableRequest message, length delimited. Does not implicitly {@link SdkProto.JoinTableRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
-         * @param {proto.IJoinTableRequest} message JoinTableRequest message or plain object to encode
+         * @param {SdkProto.IJoinTableRequest} message JoinTableRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3394,18 +3394,18 @@ $root.proto = (function() {
         /**
          * Decodes a JoinTableRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.JoinTableRequest} JoinTableRequest
+         * @returns {SdkProto.JoinTableRequest} JoinTableRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         JoinTableRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.JoinTableRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.JoinTableRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3429,10 +3429,10 @@ $root.proto = (function() {
         /**
          * Decodes a JoinTableRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.JoinTableRequest} JoinTableRequest
+         * @returns {SdkProto.JoinTableRequest} JoinTableRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -3445,7 +3445,7 @@ $root.proto = (function() {
         /**
          * Verifies a JoinTableRequest message.
          * @function verify
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3468,15 +3468,15 @@ $root.proto = (function() {
         /**
          * Creates a JoinTableRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.JoinTableRequest} JoinTableRequest
+         * @returns {SdkProto.JoinTableRequest} JoinTableRequest
          */
         JoinTableRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.JoinTableRequest)
+            if (object instanceof $root.SdkProto.JoinTableRequest)
                 return object;
-            var message = new $root.proto.JoinTableRequest();
+            var message = new $root.SdkProto.JoinTableRequest();
             if (object.sid != null)
                 message.sid = String(object.sid);
             if (object.tableId != null)
@@ -3489,9 +3489,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a JoinTableRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @static
-         * @param {proto.JoinTableRequest} message JoinTableRequest
+         * @param {SdkProto.JoinTableRequest} message JoinTableRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -3516,7 +3516,7 @@ $root.proto = (function() {
         /**
          * Converts this JoinTableRequest to JSON.
          * @function toJSON
-         * @memberof proto.JoinTableRequest
+         * @memberof SdkProto.JoinTableRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -3527,21 +3527,21 @@ $root.proto = (function() {
         return JoinTableRequest;
     })();
 
-    proto.UserReadyRequest = (function() {
+    SdkProto.UserReadyRequest = (function() {
 
         /**
          * Properties of a UserReadyRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserReadyRequest
          */
 
         /**
          * Constructs a new UserReadyRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserReadyRequest.
          * @implements IUserReadyRequest
          * @constructor
-         * @param {proto.IUserReadyRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserReadyRequest=} [properties] Properties to set
          */
         function UserReadyRequest(properties) {
             if (properties)
@@ -3553,21 +3553,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserReadyRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
-         * @param {proto.IUserReadyRequest=} [properties] Properties to set
-         * @returns {proto.UserReadyRequest} UserReadyRequest instance
+         * @param {SdkProto.IUserReadyRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserReadyRequest} UserReadyRequest instance
          */
         UserReadyRequest.create = function create(properties) {
             return new UserReadyRequest(properties);
         };
 
         /**
-         * Encodes the specified UserReadyRequest message. Does not implicitly {@link proto.UserReadyRequest.verify|verify} messages.
+         * Encodes the specified UserReadyRequest message. Does not implicitly {@link SdkProto.UserReadyRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
-         * @param {proto.IUserReadyRequest} message UserReadyRequest message or plain object to encode
+         * @param {SdkProto.IUserReadyRequest} message UserReadyRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3578,11 +3578,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserReadyRequest message, length delimited. Does not implicitly {@link proto.UserReadyRequest.verify|verify} messages.
+         * Encodes the specified UserReadyRequest message, length delimited. Does not implicitly {@link SdkProto.UserReadyRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
-         * @param {proto.IUserReadyRequest} message UserReadyRequest message or plain object to encode
+         * @param {SdkProto.IUserReadyRequest} message UserReadyRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3593,18 +3593,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserReadyRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserReadyRequest} UserReadyRequest
+         * @returns {SdkProto.UserReadyRequest} UserReadyRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserReadyRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserReadyRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserReadyRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3619,10 +3619,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserReadyRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserReadyRequest} UserReadyRequest
+         * @returns {SdkProto.UserReadyRequest} UserReadyRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -3635,7 +3635,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserReadyRequest message.
          * @function verify
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3649,23 +3649,23 @@ $root.proto = (function() {
         /**
          * Creates a UserReadyRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserReadyRequest} UserReadyRequest
+         * @returns {SdkProto.UserReadyRequest} UserReadyRequest
          */
         UserReadyRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserReadyRequest)
+            if (object instanceof $root.SdkProto.UserReadyRequest)
                 return object;
-            return new $root.proto.UserReadyRequest();
+            return new $root.SdkProto.UserReadyRequest();
         };
 
         /**
          * Creates a plain object from a UserReadyRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @static
-         * @param {proto.UserReadyRequest} message UserReadyRequest
+         * @param {SdkProto.UserReadyRequest} message UserReadyRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -3676,7 +3676,7 @@ $root.proto = (function() {
         /**
          * Converts this UserReadyRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserReadyRequest
+         * @memberof SdkProto.UserReadyRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -3687,22 +3687,22 @@ $root.proto = (function() {
         return UserReadyRequest;
     })();
 
-    proto.DisCardRequest = (function() {
+    SdkProto.DisCardRequest = (function() {
 
         /**
          * Properties of a DisCardRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IDisCardRequest
          * @property {Array.<number>|null} [outCard] DisCardRequest outCard
          */
 
         /**
          * Constructs a new DisCardRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a DisCardRequest.
          * @implements IDisCardRequest
          * @constructor
-         * @param {proto.IDisCardRequest=} [properties] Properties to set
+         * @param {SdkProto.IDisCardRequest=} [properties] Properties to set
          */
         function DisCardRequest(properties) {
             this.outCard = [];
@@ -3715,7 +3715,7 @@ $root.proto = (function() {
         /**
          * DisCardRequest outCard.
          * @member {Array.<number>} outCard
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @instance
          */
         DisCardRequest.prototype.outCard = $util.emptyArray;
@@ -3723,21 +3723,21 @@ $root.proto = (function() {
         /**
          * Creates a new DisCardRequest instance using the specified properties.
          * @function create
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
-         * @param {proto.IDisCardRequest=} [properties] Properties to set
-         * @returns {proto.DisCardRequest} DisCardRequest instance
+         * @param {SdkProto.IDisCardRequest=} [properties] Properties to set
+         * @returns {SdkProto.DisCardRequest} DisCardRequest instance
          */
         DisCardRequest.create = function create(properties) {
             return new DisCardRequest(properties);
         };
 
         /**
-         * Encodes the specified DisCardRequest message. Does not implicitly {@link proto.DisCardRequest.verify|verify} messages.
+         * Encodes the specified DisCardRequest message. Does not implicitly {@link SdkProto.DisCardRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
-         * @param {proto.IDisCardRequest} message DisCardRequest message or plain object to encode
+         * @param {SdkProto.IDisCardRequest} message DisCardRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3754,11 +3754,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified DisCardRequest message, length delimited. Does not implicitly {@link proto.DisCardRequest.verify|verify} messages.
+         * Encodes the specified DisCardRequest message, length delimited. Does not implicitly {@link SdkProto.DisCardRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
-         * @param {proto.IDisCardRequest} message DisCardRequest message or plain object to encode
+         * @param {SdkProto.IDisCardRequest} message DisCardRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3769,18 +3769,18 @@ $root.proto = (function() {
         /**
          * Decodes a DisCardRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.DisCardRequest} DisCardRequest
+         * @returns {SdkProto.DisCardRequest} DisCardRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DisCardRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.DisCardRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.DisCardRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3805,10 +3805,10 @@ $root.proto = (function() {
         /**
          * Decodes a DisCardRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.DisCardRequest} DisCardRequest
+         * @returns {SdkProto.DisCardRequest} DisCardRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -3821,7 +3821,7 @@ $root.proto = (function() {
         /**
          * Verifies a DisCardRequest message.
          * @function verify
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -3842,18 +3842,18 @@ $root.proto = (function() {
         /**
          * Creates a DisCardRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.DisCardRequest} DisCardRequest
+         * @returns {SdkProto.DisCardRequest} DisCardRequest
          */
         DisCardRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.DisCardRequest)
+            if (object instanceof $root.SdkProto.DisCardRequest)
                 return object;
-            var message = new $root.proto.DisCardRequest();
+            var message = new $root.SdkProto.DisCardRequest();
             if (object.outCard) {
                 if (!Array.isArray(object.outCard))
-                    throw TypeError(".proto.DisCardRequest.outCard: array expected");
+                    throw TypeError(".SdkProto.DisCardRequest.outCard: array expected");
                 message.outCard = [];
                 for (var i = 0; i < object.outCard.length; ++i)
                     message.outCard[i] = object.outCard[i] | 0;
@@ -3864,9 +3864,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a DisCardRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @static
-         * @param {proto.DisCardRequest} message DisCardRequest
+         * @param {SdkProto.DisCardRequest} message DisCardRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -3887,7 +3887,7 @@ $root.proto = (function() {
         /**
          * Converts this DisCardRequest to JSON.
          * @function toJSON
-         * @memberof proto.DisCardRequest
+         * @memberof SdkProto.DisCardRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -3898,21 +3898,21 @@ $root.proto = (function() {
         return DisCardRequest;
     })();
 
-    proto.PassPaiRequest = (function() {
+    SdkProto.PassPaiRequest = (function() {
 
         /**
          * Properties of a PassPaiRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IPassPaiRequest
          */
 
         /**
          * Constructs a new PassPaiRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a PassPaiRequest.
          * @implements IPassPaiRequest
          * @constructor
-         * @param {proto.IPassPaiRequest=} [properties] Properties to set
+         * @param {SdkProto.IPassPaiRequest=} [properties] Properties to set
          */
         function PassPaiRequest(properties) {
             if (properties)
@@ -3924,21 +3924,21 @@ $root.proto = (function() {
         /**
          * Creates a new PassPaiRequest instance using the specified properties.
          * @function create
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
-         * @param {proto.IPassPaiRequest=} [properties] Properties to set
-         * @returns {proto.PassPaiRequest} PassPaiRequest instance
+         * @param {SdkProto.IPassPaiRequest=} [properties] Properties to set
+         * @returns {SdkProto.PassPaiRequest} PassPaiRequest instance
          */
         PassPaiRequest.create = function create(properties) {
             return new PassPaiRequest(properties);
         };
 
         /**
-         * Encodes the specified PassPaiRequest message. Does not implicitly {@link proto.PassPaiRequest.verify|verify} messages.
+         * Encodes the specified PassPaiRequest message. Does not implicitly {@link SdkProto.PassPaiRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
-         * @param {proto.IPassPaiRequest} message PassPaiRequest message or plain object to encode
+         * @param {SdkProto.IPassPaiRequest} message PassPaiRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3949,11 +3949,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified PassPaiRequest message, length delimited. Does not implicitly {@link proto.PassPaiRequest.verify|verify} messages.
+         * Encodes the specified PassPaiRequest message, length delimited. Does not implicitly {@link SdkProto.PassPaiRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
-         * @param {proto.IPassPaiRequest} message PassPaiRequest message or plain object to encode
+         * @param {SdkProto.IPassPaiRequest} message PassPaiRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -3964,18 +3964,18 @@ $root.proto = (function() {
         /**
          * Decodes a PassPaiRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.PassPaiRequest} PassPaiRequest
+         * @returns {SdkProto.PassPaiRequest} PassPaiRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         PassPaiRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.PassPaiRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.PassPaiRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3990,10 +3990,10 @@ $root.proto = (function() {
         /**
          * Decodes a PassPaiRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.PassPaiRequest} PassPaiRequest
+         * @returns {SdkProto.PassPaiRequest} PassPaiRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4006,7 +4006,7 @@ $root.proto = (function() {
         /**
          * Verifies a PassPaiRequest message.
          * @function verify
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4020,23 +4020,23 @@ $root.proto = (function() {
         /**
          * Creates a PassPaiRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.PassPaiRequest} PassPaiRequest
+         * @returns {SdkProto.PassPaiRequest} PassPaiRequest
          */
         PassPaiRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.PassPaiRequest)
+            if (object instanceof $root.SdkProto.PassPaiRequest)
                 return object;
-            return new $root.proto.PassPaiRequest();
+            return new $root.SdkProto.PassPaiRequest();
         };
 
         /**
          * Creates a plain object from a PassPaiRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @static
-         * @param {proto.PassPaiRequest} message PassPaiRequest
+         * @param {SdkProto.PassPaiRequest} message PassPaiRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4047,7 +4047,7 @@ $root.proto = (function() {
         /**
          * Converts this PassPaiRequest to JSON.
          * @function toJSON
-         * @memberof proto.PassPaiRequest
+         * @memberof SdkProto.PassPaiRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4058,22 +4058,22 @@ $root.proto = (function() {
         return PassPaiRequest;
     })();
 
-    proto.UserQDZRequest = (function() {
+    SdkProto.UserQDZRequest = (function() {
 
         /**
          * Properties of a UserQDZRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserQDZRequest
          * @property {number|null} [score] UserQDZRequest score
          */
 
         /**
          * Constructs a new UserQDZRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserQDZRequest.
          * @implements IUserQDZRequest
          * @constructor
-         * @param {proto.IUserQDZRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserQDZRequest=} [properties] Properties to set
          */
         function UserQDZRequest(properties) {
             if (properties)
@@ -4085,7 +4085,7 @@ $root.proto = (function() {
         /**
          * UserQDZRequest score.
          * @member {number} score
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @instance
          */
         UserQDZRequest.prototype.score = 0;
@@ -4093,21 +4093,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserQDZRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
-         * @param {proto.IUserQDZRequest=} [properties] Properties to set
-         * @returns {proto.UserQDZRequest} UserQDZRequest instance
+         * @param {SdkProto.IUserQDZRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserQDZRequest} UserQDZRequest instance
          */
         UserQDZRequest.create = function create(properties) {
             return new UserQDZRequest(properties);
         };
 
         /**
-         * Encodes the specified UserQDZRequest message. Does not implicitly {@link proto.UserQDZRequest.verify|verify} messages.
+         * Encodes the specified UserQDZRequest message. Does not implicitly {@link SdkProto.UserQDZRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
-         * @param {proto.IUserQDZRequest} message UserQDZRequest message or plain object to encode
+         * @param {SdkProto.IUserQDZRequest} message UserQDZRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4120,11 +4120,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserQDZRequest message, length delimited. Does not implicitly {@link proto.UserQDZRequest.verify|verify} messages.
+         * Encodes the specified UserQDZRequest message, length delimited. Does not implicitly {@link SdkProto.UserQDZRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
-         * @param {proto.IUserQDZRequest} message UserQDZRequest message or plain object to encode
+         * @param {SdkProto.IUserQDZRequest} message UserQDZRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4135,18 +4135,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserQDZRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserQDZRequest} UserQDZRequest
+         * @returns {SdkProto.UserQDZRequest} UserQDZRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserQDZRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserQDZRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserQDZRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4164,10 +4164,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserQDZRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserQDZRequest} UserQDZRequest
+         * @returns {SdkProto.UserQDZRequest} UserQDZRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4180,7 +4180,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserQDZRequest message.
          * @function verify
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4197,15 +4197,15 @@ $root.proto = (function() {
         /**
          * Creates a UserQDZRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserQDZRequest} UserQDZRequest
+         * @returns {SdkProto.UserQDZRequest} UserQDZRequest
          */
         UserQDZRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserQDZRequest)
+            if (object instanceof $root.SdkProto.UserQDZRequest)
                 return object;
-            var message = new $root.proto.UserQDZRequest();
+            var message = new $root.SdkProto.UserQDZRequest();
             if (object.score != null)
                 message.score = object.score | 0;
             return message;
@@ -4214,9 +4214,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserQDZRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @static
-         * @param {proto.UserQDZRequest} message UserQDZRequest
+         * @param {SdkProto.UserQDZRequest} message UserQDZRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4234,7 +4234,7 @@ $root.proto = (function() {
         /**
          * Converts this UserQDZRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserQDZRequest
+         * @memberof SdkProto.UserQDZRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4245,22 +4245,22 @@ $root.proto = (function() {
         return UserQDZRequest;
     })();
 
-    proto.UserMPRequest = (function() {
+    SdkProto.UserMPRequest = (function() {
 
         /**
          * Properties of a UserMPRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserMPRequest
          * @property {number|null} [showAll] UserMPRequest showAll
          */
 
         /**
          * Constructs a new UserMPRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserMPRequest.
          * @implements IUserMPRequest
          * @constructor
-         * @param {proto.IUserMPRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserMPRequest=} [properties] Properties to set
          */
         function UserMPRequest(properties) {
             if (properties)
@@ -4272,7 +4272,7 @@ $root.proto = (function() {
         /**
          * UserMPRequest showAll.
          * @member {number} showAll
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @instance
          */
         UserMPRequest.prototype.showAll = 0;
@@ -4280,21 +4280,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserMPRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
-         * @param {proto.IUserMPRequest=} [properties] Properties to set
-         * @returns {proto.UserMPRequest} UserMPRequest instance
+         * @param {SdkProto.IUserMPRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserMPRequest} UserMPRequest instance
          */
         UserMPRequest.create = function create(properties) {
             return new UserMPRequest(properties);
         };
 
         /**
-         * Encodes the specified UserMPRequest message. Does not implicitly {@link proto.UserMPRequest.verify|verify} messages.
+         * Encodes the specified UserMPRequest message. Does not implicitly {@link SdkProto.UserMPRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
-         * @param {proto.IUserMPRequest} message UserMPRequest message or plain object to encode
+         * @param {SdkProto.IUserMPRequest} message UserMPRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4307,11 +4307,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserMPRequest message, length delimited. Does not implicitly {@link proto.UserMPRequest.verify|verify} messages.
+         * Encodes the specified UserMPRequest message, length delimited. Does not implicitly {@link SdkProto.UserMPRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
-         * @param {proto.IUserMPRequest} message UserMPRequest message or plain object to encode
+         * @param {SdkProto.IUserMPRequest} message UserMPRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4322,18 +4322,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserMPRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserMPRequest} UserMPRequest
+         * @returns {SdkProto.UserMPRequest} UserMPRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserMPRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserMPRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserMPRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4351,10 +4351,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserMPRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserMPRequest} UserMPRequest
+         * @returns {SdkProto.UserMPRequest} UserMPRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4367,7 +4367,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserMPRequest message.
          * @function verify
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4384,15 +4384,15 @@ $root.proto = (function() {
         /**
          * Creates a UserMPRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserMPRequest} UserMPRequest
+         * @returns {SdkProto.UserMPRequest} UserMPRequest
          */
         UserMPRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserMPRequest)
+            if (object instanceof $root.SdkProto.UserMPRequest)
                 return object;
-            var message = new $root.proto.UserMPRequest();
+            var message = new $root.SdkProto.UserMPRequest();
             if (object.showAll != null)
                 message.showAll = object.showAll | 0;
             return message;
@@ -4401,9 +4401,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserMPRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @static
-         * @param {proto.UserMPRequest} message UserMPRequest
+         * @param {SdkProto.UserMPRequest} message UserMPRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4421,7 +4421,7 @@ $root.proto = (function() {
         /**
          * Converts this UserMPRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserMPRequest
+         * @memberof SdkProto.UserMPRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4432,22 +4432,22 @@ $root.proto = (function() {
         return UserMPRequest;
     })();
 
-    proto.UserReconnectRequest = (function() {
+    SdkProto.UserReconnectRequest = (function() {
 
         /**
          * Properties of a UserReconnectRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserReconnectRequest
          * @property {number|null} [userId] UserReconnectRequest userId
          */
 
         /**
          * Constructs a new UserReconnectRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserReconnectRequest.
          * @implements IUserReconnectRequest
          * @constructor
-         * @param {proto.IUserReconnectRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserReconnectRequest=} [properties] Properties to set
          */
         function UserReconnectRequest(properties) {
             if (properties)
@@ -4459,7 +4459,7 @@ $root.proto = (function() {
         /**
          * UserReconnectRequest userId.
          * @member {number} userId
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @instance
          */
         UserReconnectRequest.prototype.userId = 0;
@@ -4467,21 +4467,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserReconnectRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
-         * @param {proto.IUserReconnectRequest=} [properties] Properties to set
-         * @returns {proto.UserReconnectRequest} UserReconnectRequest instance
+         * @param {SdkProto.IUserReconnectRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserReconnectRequest} UserReconnectRequest instance
          */
         UserReconnectRequest.create = function create(properties) {
             return new UserReconnectRequest(properties);
         };
 
         /**
-         * Encodes the specified UserReconnectRequest message. Does not implicitly {@link proto.UserReconnectRequest.verify|verify} messages.
+         * Encodes the specified UserReconnectRequest message. Does not implicitly {@link SdkProto.UserReconnectRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
-         * @param {proto.IUserReconnectRequest} message UserReconnectRequest message or plain object to encode
+         * @param {SdkProto.IUserReconnectRequest} message UserReconnectRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4494,11 +4494,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserReconnectRequest message, length delimited. Does not implicitly {@link proto.UserReconnectRequest.verify|verify} messages.
+         * Encodes the specified UserReconnectRequest message, length delimited. Does not implicitly {@link SdkProto.UserReconnectRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
-         * @param {proto.IUserReconnectRequest} message UserReconnectRequest message or plain object to encode
+         * @param {SdkProto.IUserReconnectRequest} message UserReconnectRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4509,18 +4509,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserReconnectRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserReconnectRequest} UserReconnectRequest
+         * @returns {SdkProto.UserReconnectRequest} UserReconnectRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserReconnectRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserReconnectRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserReconnectRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4538,10 +4538,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserReconnectRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserReconnectRequest} UserReconnectRequest
+         * @returns {SdkProto.UserReconnectRequest} UserReconnectRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4554,7 +4554,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserReconnectRequest message.
          * @function verify
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4571,15 +4571,15 @@ $root.proto = (function() {
         /**
          * Creates a UserReconnectRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserReconnectRequest} UserReconnectRequest
+         * @returns {SdkProto.UserReconnectRequest} UserReconnectRequest
          */
         UserReconnectRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserReconnectRequest)
+            if (object instanceof $root.SdkProto.UserReconnectRequest)
                 return object;
-            var message = new $root.proto.UserReconnectRequest();
+            var message = new $root.SdkProto.UserReconnectRequest();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             return message;
@@ -4588,9 +4588,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserReconnectRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @static
-         * @param {proto.UserReconnectRequest} message UserReconnectRequest
+         * @param {SdkProto.UserReconnectRequest} message UserReconnectRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4608,7 +4608,7 @@ $root.proto = (function() {
         /**
          * Converts this UserReconnectRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserReconnectRequest
+         * @memberof SdkProto.UserReconnectRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4619,21 +4619,21 @@ $root.proto = (function() {
         return UserReconnectRequest;
     })();
 
-    proto.ApplyDismissRequest = (function() {
+    SdkProto.ApplyDismissRequest = (function() {
 
         /**
          * Properties of an ApplyDismissRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IApplyDismissRequest
          */
 
         /**
          * Constructs a new ApplyDismissRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents an ApplyDismissRequest.
          * @implements IApplyDismissRequest
          * @constructor
-         * @param {proto.IApplyDismissRequest=} [properties] Properties to set
+         * @param {SdkProto.IApplyDismissRequest=} [properties] Properties to set
          */
         function ApplyDismissRequest(properties) {
             if (properties)
@@ -4645,21 +4645,21 @@ $root.proto = (function() {
         /**
          * Creates a new ApplyDismissRequest instance using the specified properties.
          * @function create
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
-         * @param {proto.IApplyDismissRequest=} [properties] Properties to set
-         * @returns {proto.ApplyDismissRequest} ApplyDismissRequest instance
+         * @param {SdkProto.IApplyDismissRequest=} [properties] Properties to set
+         * @returns {SdkProto.ApplyDismissRequest} ApplyDismissRequest instance
          */
         ApplyDismissRequest.create = function create(properties) {
             return new ApplyDismissRequest(properties);
         };
 
         /**
-         * Encodes the specified ApplyDismissRequest message. Does not implicitly {@link proto.ApplyDismissRequest.verify|verify} messages.
+         * Encodes the specified ApplyDismissRequest message. Does not implicitly {@link SdkProto.ApplyDismissRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
-         * @param {proto.IApplyDismissRequest} message ApplyDismissRequest message or plain object to encode
+         * @param {SdkProto.IApplyDismissRequest} message ApplyDismissRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4670,11 +4670,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified ApplyDismissRequest message, length delimited. Does not implicitly {@link proto.ApplyDismissRequest.verify|verify} messages.
+         * Encodes the specified ApplyDismissRequest message, length delimited. Does not implicitly {@link SdkProto.ApplyDismissRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
-         * @param {proto.IApplyDismissRequest} message ApplyDismissRequest message or plain object to encode
+         * @param {SdkProto.IApplyDismissRequest} message ApplyDismissRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4685,18 +4685,18 @@ $root.proto = (function() {
         /**
          * Decodes an ApplyDismissRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.ApplyDismissRequest} ApplyDismissRequest
+         * @returns {SdkProto.ApplyDismissRequest} ApplyDismissRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         ApplyDismissRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.ApplyDismissRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.ApplyDismissRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4711,10 +4711,10 @@ $root.proto = (function() {
         /**
          * Decodes an ApplyDismissRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.ApplyDismissRequest} ApplyDismissRequest
+         * @returns {SdkProto.ApplyDismissRequest} ApplyDismissRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4727,7 +4727,7 @@ $root.proto = (function() {
         /**
          * Verifies an ApplyDismissRequest message.
          * @function verify
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4741,23 +4741,23 @@ $root.proto = (function() {
         /**
          * Creates an ApplyDismissRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.ApplyDismissRequest} ApplyDismissRequest
+         * @returns {SdkProto.ApplyDismissRequest} ApplyDismissRequest
          */
         ApplyDismissRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.ApplyDismissRequest)
+            if (object instanceof $root.SdkProto.ApplyDismissRequest)
                 return object;
-            return new $root.proto.ApplyDismissRequest();
+            return new $root.SdkProto.ApplyDismissRequest();
         };
 
         /**
          * Creates a plain object from an ApplyDismissRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @static
-         * @param {proto.ApplyDismissRequest} message ApplyDismissRequest
+         * @param {SdkProto.ApplyDismissRequest} message ApplyDismissRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4768,7 +4768,7 @@ $root.proto = (function() {
         /**
          * Converts this ApplyDismissRequest to JSON.
          * @function toJSON
-         * @memberof proto.ApplyDismissRequest
+         * @memberof SdkProto.ApplyDismissRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4779,22 +4779,22 @@ $root.proto = (function() {
         return ApplyDismissRequest;
     })();
 
-    proto.AgreeDismissRequest = (function() {
+    SdkProto.AgreeDismissRequest = (function() {
 
         /**
          * Properties of an AgreeDismissRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IAgreeDismissRequest
          * @property {number|null} [agree] AgreeDismissRequest agree
          */
 
         /**
          * Constructs a new AgreeDismissRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents an AgreeDismissRequest.
          * @implements IAgreeDismissRequest
          * @constructor
-         * @param {proto.IAgreeDismissRequest=} [properties] Properties to set
+         * @param {SdkProto.IAgreeDismissRequest=} [properties] Properties to set
          */
         function AgreeDismissRequest(properties) {
             if (properties)
@@ -4806,7 +4806,7 @@ $root.proto = (function() {
         /**
          * AgreeDismissRequest agree.
          * @member {number} agree
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @instance
          */
         AgreeDismissRequest.prototype.agree = 0;
@@ -4814,21 +4814,21 @@ $root.proto = (function() {
         /**
          * Creates a new AgreeDismissRequest instance using the specified properties.
          * @function create
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
-         * @param {proto.IAgreeDismissRequest=} [properties] Properties to set
-         * @returns {proto.AgreeDismissRequest} AgreeDismissRequest instance
+         * @param {SdkProto.IAgreeDismissRequest=} [properties] Properties to set
+         * @returns {SdkProto.AgreeDismissRequest} AgreeDismissRequest instance
          */
         AgreeDismissRequest.create = function create(properties) {
             return new AgreeDismissRequest(properties);
         };
 
         /**
-         * Encodes the specified AgreeDismissRequest message. Does not implicitly {@link proto.AgreeDismissRequest.verify|verify} messages.
+         * Encodes the specified AgreeDismissRequest message. Does not implicitly {@link SdkProto.AgreeDismissRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
-         * @param {proto.IAgreeDismissRequest} message AgreeDismissRequest message or plain object to encode
+         * @param {SdkProto.IAgreeDismissRequest} message AgreeDismissRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4841,11 +4841,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified AgreeDismissRequest message, length delimited. Does not implicitly {@link proto.AgreeDismissRequest.verify|verify} messages.
+         * Encodes the specified AgreeDismissRequest message, length delimited. Does not implicitly {@link SdkProto.AgreeDismissRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
-         * @param {proto.IAgreeDismissRequest} message AgreeDismissRequest message or plain object to encode
+         * @param {SdkProto.IAgreeDismissRequest} message AgreeDismissRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -4856,18 +4856,18 @@ $root.proto = (function() {
         /**
          * Decodes an AgreeDismissRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.AgreeDismissRequest} AgreeDismissRequest
+         * @returns {SdkProto.AgreeDismissRequest} AgreeDismissRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         AgreeDismissRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.AgreeDismissRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.AgreeDismissRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4885,10 +4885,10 @@ $root.proto = (function() {
         /**
          * Decodes an AgreeDismissRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.AgreeDismissRequest} AgreeDismissRequest
+         * @returns {SdkProto.AgreeDismissRequest} AgreeDismissRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -4901,7 +4901,7 @@ $root.proto = (function() {
         /**
          * Verifies an AgreeDismissRequest message.
          * @function verify
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -4918,15 +4918,15 @@ $root.proto = (function() {
         /**
          * Creates an AgreeDismissRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.AgreeDismissRequest} AgreeDismissRequest
+         * @returns {SdkProto.AgreeDismissRequest} AgreeDismissRequest
          */
         AgreeDismissRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.AgreeDismissRequest)
+            if (object instanceof $root.SdkProto.AgreeDismissRequest)
                 return object;
-            var message = new $root.proto.AgreeDismissRequest();
+            var message = new $root.SdkProto.AgreeDismissRequest();
             if (object.agree != null)
                 message.agree = object.agree | 0;
             return message;
@@ -4935,9 +4935,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from an AgreeDismissRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @static
-         * @param {proto.AgreeDismissRequest} message AgreeDismissRequest
+         * @param {SdkProto.AgreeDismissRequest} message AgreeDismissRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -4955,7 +4955,7 @@ $root.proto = (function() {
         /**
          * Converts this AgreeDismissRequest to JSON.
          * @function toJSON
-         * @memberof proto.AgreeDismissRequest
+         * @memberof SdkProto.AgreeDismissRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -4966,21 +4966,21 @@ $root.proto = (function() {
         return AgreeDismissRequest;
     })();
 
-    proto.UserQuitRequest = (function() {
+    SdkProto.UserQuitRequest = (function() {
 
         /**
          * Properties of a UserQuitRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserQuitRequest
          */
 
         /**
          * Constructs a new UserQuitRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserQuitRequest.
          * @implements IUserQuitRequest
          * @constructor
-         * @param {proto.IUserQuitRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserQuitRequest=} [properties] Properties to set
          */
         function UserQuitRequest(properties) {
             if (properties)
@@ -4992,21 +4992,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserQuitRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
-         * @param {proto.IUserQuitRequest=} [properties] Properties to set
-         * @returns {proto.UserQuitRequest} UserQuitRequest instance
+         * @param {SdkProto.IUserQuitRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserQuitRequest} UserQuitRequest instance
          */
         UserQuitRequest.create = function create(properties) {
             return new UserQuitRequest(properties);
         };
 
         /**
-         * Encodes the specified UserQuitRequest message. Does not implicitly {@link proto.UserQuitRequest.verify|verify} messages.
+         * Encodes the specified UserQuitRequest message. Does not implicitly {@link SdkProto.UserQuitRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
-         * @param {proto.IUserQuitRequest} message UserQuitRequest message or plain object to encode
+         * @param {SdkProto.IUserQuitRequest} message UserQuitRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5017,11 +5017,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserQuitRequest message, length delimited. Does not implicitly {@link proto.UserQuitRequest.verify|verify} messages.
+         * Encodes the specified UserQuitRequest message, length delimited. Does not implicitly {@link SdkProto.UserQuitRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
-         * @param {proto.IUserQuitRequest} message UserQuitRequest message or plain object to encode
+         * @param {SdkProto.IUserQuitRequest} message UserQuitRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5032,18 +5032,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserQuitRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserQuitRequest} UserQuitRequest
+         * @returns {SdkProto.UserQuitRequest} UserQuitRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserQuitRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserQuitRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserQuitRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -5058,10 +5058,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserQuitRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserQuitRequest} UserQuitRequest
+         * @returns {SdkProto.UserQuitRequest} UserQuitRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -5074,7 +5074,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserQuitRequest message.
          * @function verify
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5088,23 +5088,23 @@ $root.proto = (function() {
         /**
          * Creates a UserQuitRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserQuitRequest} UserQuitRequest
+         * @returns {SdkProto.UserQuitRequest} UserQuitRequest
          */
         UserQuitRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserQuitRequest)
+            if (object instanceof $root.SdkProto.UserQuitRequest)
                 return object;
-            return new $root.proto.UserQuitRequest();
+            return new $root.SdkProto.UserQuitRequest();
         };
 
         /**
          * Creates a plain object from a UserQuitRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @static
-         * @param {proto.UserQuitRequest} message UserQuitRequest
+         * @param {SdkProto.UserQuitRequest} message UserQuitRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -5115,7 +5115,7 @@ $root.proto = (function() {
         /**
          * Converts this UserQuitRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserQuitRequest
+         * @memberof SdkProto.UserQuitRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -5126,11 +5126,11 @@ $root.proto = (function() {
         return UserQuitRequest;
     })();
 
-    proto.MessageRequest = (function() {
+    SdkProto.MessageRequest = (function() {
 
         /**
          * Properties of a MessageRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IMessageRequest
          * @property {string|null} [content] MessageRequest content
          * @property {number|null} [toUserId] MessageRequest toUserId
@@ -5138,11 +5138,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new MessageRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a MessageRequest.
          * @implements IMessageRequest
          * @constructor
-         * @param {proto.IMessageRequest=} [properties] Properties to set
+         * @param {SdkProto.IMessageRequest=} [properties] Properties to set
          */
         function MessageRequest(properties) {
             if (properties)
@@ -5154,7 +5154,7 @@ $root.proto = (function() {
         /**
          * MessageRequest content.
          * @member {string} content
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @instance
          */
         MessageRequest.prototype.content = "";
@@ -5162,7 +5162,7 @@ $root.proto = (function() {
         /**
          * MessageRequest toUserId.
          * @member {number} toUserId
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @instance
          */
         MessageRequest.prototype.toUserId = 0;
@@ -5170,21 +5170,21 @@ $root.proto = (function() {
         /**
          * Creates a new MessageRequest instance using the specified properties.
          * @function create
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
-         * @param {proto.IMessageRequest=} [properties] Properties to set
-         * @returns {proto.MessageRequest} MessageRequest instance
+         * @param {SdkProto.IMessageRequest=} [properties] Properties to set
+         * @returns {SdkProto.MessageRequest} MessageRequest instance
          */
         MessageRequest.create = function create(properties) {
             return new MessageRequest(properties);
         };
 
         /**
-         * Encodes the specified MessageRequest message. Does not implicitly {@link proto.MessageRequest.verify|verify} messages.
+         * Encodes the specified MessageRequest message. Does not implicitly {@link SdkProto.MessageRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
-         * @param {proto.IMessageRequest} message MessageRequest message or plain object to encode
+         * @param {SdkProto.IMessageRequest} message MessageRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5199,11 +5199,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified MessageRequest message, length delimited. Does not implicitly {@link proto.MessageRequest.verify|verify} messages.
+         * Encodes the specified MessageRequest message, length delimited. Does not implicitly {@link SdkProto.MessageRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
-         * @param {proto.IMessageRequest} message MessageRequest message or plain object to encode
+         * @param {SdkProto.IMessageRequest} message MessageRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5214,18 +5214,18 @@ $root.proto = (function() {
         /**
          * Decodes a MessageRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.MessageRequest} MessageRequest
+         * @returns {SdkProto.MessageRequest} MessageRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         MessageRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.MessageRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.MessageRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -5246,10 +5246,10 @@ $root.proto = (function() {
         /**
          * Decodes a MessageRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.MessageRequest} MessageRequest
+         * @returns {SdkProto.MessageRequest} MessageRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -5262,7 +5262,7 @@ $root.proto = (function() {
         /**
          * Verifies a MessageRequest message.
          * @function verify
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5282,15 +5282,15 @@ $root.proto = (function() {
         /**
          * Creates a MessageRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.MessageRequest} MessageRequest
+         * @returns {SdkProto.MessageRequest} MessageRequest
          */
         MessageRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.MessageRequest)
+            if (object instanceof $root.SdkProto.MessageRequest)
                 return object;
-            var message = new $root.proto.MessageRequest();
+            var message = new $root.SdkProto.MessageRequest();
             if (object.content != null)
                 message.content = String(object.content);
             if (object.toUserId != null)
@@ -5301,9 +5301,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a MessageRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @static
-         * @param {proto.MessageRequest} message MessageRequest
+         * @param {SdkProto.MessageRequest} message MessageRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -5325,7 +5325,7 @@ $root.proto = (function() {
         /**
          * Converts this MessageRequest to JSON.
          * @function toJSON
-         * @memberof proto.MessageRequest
+         * @memberof SdkProto.MessageRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -5336,22 +5336,22 @@ $root.proto = (function() {
         return MessageRequest;
     })();
 
-    proto.UserOnBackRequest = (function() {
+    SdkProto.UserOnBackRequest = (function() {
 
         /**
          * Properties of a UserOnBackRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserOnBackRequest
          * @property {number|null} [leaveState] UserOnBackRequest leaveState
          */
 
         /**
          * Constructs a new UserOnBackRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserOnBackRequest.
          * @implements IUserOnBackRequest
          * @constructor
-         * @param {proto.IUserOnBackRequest=} [properties] Properties to set
+         * @param {SdkProto.IUserOnBackRequest=} [properties] Properties to set
          */
         function UserOnBackRequest(properties) {
             if (properties)
@@ -5363,7 +5363,7 @@ $root.proto = (function() {
         /**
          * UserOnBackRequest leaveState.
          * @member {number} leaveState
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @instance
          */
         UserOnBackRequest.prototype.leaveState = 0;
@@ -5371,21 +5371,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserOnBackRequest instance using the specified properties.
          * @function create
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
-         * @param {proto.IUserOnBackRequest=} [properties] Properties to set
-         * @returns {proto.UserOnBackRequest} UserOnBackRequest instance
+         * @param {SdkProto.IUserOnBackRequest=} [properties] Properties to set
+         * @returns {SdkProto.UserOnBackRequest} UserOnBackRequest instance
          */
         UserOnBackRequest.create = function create(properties) {
             return new UserOnBackRequest(properties);
         };
 
         /**
-         * Encodes the specified UserOnBackRequest message. Does not implicitly {@link proto.UserOnBackRequest.verify|verify} messages.
+         * Encodes the specified UserOnBackRequest message. Does not implicitly {@link SdkProto.UserOnBackRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
-         * @param {proto.IUserOnBackRequest} message UserOnBackRequest message or plain object to encode
+         * @param {SdkProto.IUserOnBackRequest} message UserOnBackRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5398,11 +5398,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserOnBackRequest message, length delimited. Does not implicitly {@link proto.UserOnBackRequest.verify|verify} messages.
+         * Encodes the specified UserOnBackRequest message, length delimited. Does not implicitly {@link SdkProto.UserOnBackRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
-         * @param {proto.IUserOnBackRequest} message UserOnBackRequest message or plain object to encode
+         * @param {SdkProto.IUserOnBackRequest} message UserOnBackRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5413,18 +5413,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserOnBackRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserOnBackRequest} UserOnBackRequest
+         * @returns {SdkProto.UserOnBackRequest} UserOnBackRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserOnBackRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserOnBackRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserOnBackRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -5442,10 +5442,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserOnBackRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserOnBackRequest} UserOnBackRequest
+         * @returns {SdkProto.UserOnBackRequest} UserOnBackRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -5458,7 +5458,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserOnBackRequest message.
          * @function verify
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5475,15 +5475,15 @@ $root.proto = (function() {
         /**
          * Creates a UserOnBackRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserOnBackRequest} UserOnBackRequest
+         * @returns {SdkProto.UserOnBackRequest} UserOnBackRequest
          */
         UserOnBackRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserOnBackRequest)
+            if (object instanceof $root.SdkProto.UserOnBackRequest)
                 return object;
-            var message = new $root.proto.UserOnBackRequest();
+            var message = new $root.SdkProto.UserOnBackRequest();
             if (object.leaveState != null)
                 message.leaveState = object.leaveState | 0;
             return message;
@@ -5492,9 +5492,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserOnBackRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @static
-         * @param {proto.UserOnBackRequest} message UserOnBackRequest
+         * @param {SdkProto.UserOnBackRequest} message UserOnBackRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -5512,7 +5512,7 @@ $root.proto = (function() {
         /**
          * Converts this UserOnBackRequest to JSON.
          * @function toJSON
-         * @memberof proto.UserOnBackRequest
+         * @memberof SdkProto.UserOnBackRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -5523,22 +5523,22 @@ $root.proto = (function() {
         return UserOnBackRequest;
     })();
 
-    proto.DelayCheckRequest = (function() {
+    SdkProto.DelayCheckRequest = (function() {
 
         /**
          * Properties of a DelayCheckRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IDelayCheckRequest
          * @property {string|null} [content] DelayCheckRequest content
          */
 
         /**
          * Constructs a new DelayCheckRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a DelayCheckRequest.
          * @implements IDelayCheckRequest
          * @constructor
-         * @param {proto.IDelayCheckRequest=} [properties] Properties to set
+         * @param {SdkProto.IDelayCheckRequest=} [properties] Properties to set
          */
         function DelayCheckRequest(properties) {
             if (properties)
@@ -5550,7 +5550,7 @@ $root.proto = (function() {
         /**
          * DelayCheckRequest content.
          * @member {string} content
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @instance
          */
         DelayCheckRequest.prototype.content = "";
@@ -5558,21 +5558,21 @@ $root.proto = (function() {
         /**
          * Creates a new DelayCheckRequest instance using the specified properties.
          * @function create
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
-         * @param {proto.IDelayCheckRequest=} [properties] Properties to set
-         * @returns {proto.DelayCheckRequest} DelayCheckRequest instance
+         * @param {SdkProto.IDelayCheckRequest=} [properties] Properties to set
+         * @returns {SdkProto.DelayCheckRequest} DelayCheckRequest instance
          */
         DelayCheckRequest.create = function create(properties) {
             return new DelayCheckRequest(properties);
         };
 
         /**
-         * Encodes the specified DelayCheckRequest message. Does not implicitly {@link proto.DelayCheckRequest.verify|verify} messages.
+         * Encodes the specified DelayCheckRequest message. Does not implicitly {@link SdkProto.DelayCheckRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
-         * @param {proto.IDelayCheckRequest} message DelayCheckRequest message or plain object to encode
+         * @param {SdkProto.IDelayCheckRequest} message DelayCheckRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5585,11 +5585,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified DelayCheckRequest message, length delimited. Does not implicitly {@link proto.DelayCheckRequest.verify|verify} messages.
+         * Encodes the specified DelayCheckRequest message, length delimited. Does not implicitly {@link SdkProto.DelayCheckRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
-         * @param {proto.IDelayCheckRequest} message DelayCheckRequest message or plain object to encode
+         * @param {SdkProto.IDelayCheckRequest} message DelayCheckRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5600,18 +5600,18 @@ $root.proto = (function() {
         /**
          * Decodes a DelayCheckRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.DelayCheckRequest} DelayCheckRequest
+         * @returns {SdkProto.DelayCheckRequest} DelayCheckRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DelayCheckRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.DelayCheckRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.DelayCheckRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -5629,10 +5629,10 @@ $root.proto = (function() {
         /**
          * Decodes a DelayCheckRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.DelayCheckRequest} DelayCheckRequest
+         * @returns {SdkProto.DelayCheckRequest} DelayCheckRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -5645,7 +5645,7 @@ $root.proto = (function() {
         /**
          * Verifies a DelayCheckRequest message.
          * @function verify
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5662,15 +5662,15 @@ $root.proto = (function() {
         /**
          * Creates a DelayCheckRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.DelayCheckRequest} DelayCheckRequest
+         * @returns {SdkProto.DelayCheckRequest} DelayCheckRequest
          */
         DelayCheckRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.DelayCheckRequest)
+            if (object instanceof $root.SdkProto.DelayCheckRequest)
                 return object;
-            var message = new $root.proto.DelayCheckRequest();
+            var message = new $root.SdkProto.DelayCheckRequest();
             if (object.content != null)
                 message.content = String(object.content);
             return message;
@@ -5679,9 +5679,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a DelayCheckRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @static
-         * @param {proto.DelayCheckRequest} message DelayCheckRequest
+         * @param {SdkProto.DelayCheckRequest} message DelayCheckRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -5699,7 +5699,7 @@ $root.proto = (function() {
         /**
          * Converts this DelayCheckRequest to JSON.
          * @function toJSON
-         * @memberof proto.DelayCheckRequest
+         * @memberof SdkProto.DelayCheckRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -5710,21 +5710,21 @@ $root.proto = (function() {
         return DelayCheckRequest;
     })();
 
-    proto.CancelAutoRequest = (function() {
+    SdkProto.CancelAutoRequest = (function() {
 
         /**
          * Properties of a CancelAutoRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ICancelAutoRequest
          */
 
         /**
          * Constructs a new CancelAutoRequest.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a CancelAutoRequest.
          * @implements ICancelAutoRequest
          * @constructor
-         * @param {proto.ICancelAutoRequest=} [properties] Properties to set
+         * @param {SdkProto.ICancelAutoRequest=} [properties] Properties to set
          */
         function CancelAutoRequest(properties) {
             if (properties)
@@ -5736,21 +5736,21 @@ $root.proto = (function() {
         /**
          * Creates a new CancelAutoRequest instance using the specified properties.
          * @function create
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
-         * @param {proto.ICancelAutoRequest=} [properties] Properties to set
-         * @returns {proto.CancelAutoRequest} CancelAutoRequest instance
+         * @param {SdkProto.ICancelAutoRequest=} [properties] Properties to set
+         * @returns {SdkProto.CancelAutoRequest} CancelAutoRequest instance
          */
         CancelAutoRequest.create = function create(properties) {
             return new CancelAutoRequest(properties);
         };
 
         /**
-         * Encodes the specified CancelAutoRequest message. Does not implicitly {@link proto.CancelAutoRequest.verify|verify} messages.
+         * Encodes the specified CancelAutoRequest message. Does not implicitly {@link SdkProto.CancelAutoRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
-         * @param {proto.ICancelAutoRequest} message CancelAutoRequest message or plain object to encode
+         * @param {SdkProto.ICancelAutoRequest} message CancelAutoRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5761,11 +5761,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified CancelAutoRequest message, length delimited. Does not implicitly {@link proto.CancelAutoRequest.verify|verify} messages.
+         * Encodes the specified CancelAutoRequest message, length delimited. Does not implicitly {@link SdkProto.CancelAutoRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
-         * @param {proto.ICancelAutoRequest} message CancelAutoRequest message or plain object to encode
+         * @param {SdkProto.ICancelAutoRequest} message CancelAutoRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -5776,18 +5776,18 @@ $root.proto = (function() {
         /**
          * Decodes a CancelAutoRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.CancelAutoRequest} CancelAutoRequest
+         * @returns {SdkProto.CancelAutoRequest} CancelAutoRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CancelAutoRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.CancelAutoRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.CancelAutoRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -5802,10 +5802,10 @@ $root.proto = (function() {
         /**
          * Decodes a CancelAutoRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.CancelAutoRequest} CancelAutoRequest
+         * @returns {SdkProto.CancelAutoRequest} CancelAutoRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -5818,7 +5818,7 @@ $root.proto = (function() {
         /**
          * Verifies a CancelAutoRequest message.
          * @function verify
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -5832,23 +5832,23 @@ $root.proto = (function() {
         /**
          * Creates a CancelAutoRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.CancelAutoRequest} CancelAutoRequest
+         * @returns {SdkProto.CancelAutoRequest} CancelAutoRequest
          */
         CancelAutoRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.CancelAutoRequest)
+            if (object instanceof $root.SdkProto.CancelAutoRequest)
                 return object;
-            return new $root.proto.CancelAutoRequest();
+            return new $root.SdkProto.CancelAutoRequest();
         };
 
         /**
          * Creates a plain object from a CancelAutoRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @static
-         * @param {proto.CancelAutoRequest} message CancelAutoRequest
+         * @param {SdkProto.CancelAutoRequest} message CancelAutoRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -5859,7 +5859,7 @@ $root.proto = (function() {
         /**
          * Converts this CancelAutoRequest to JSON.
          * @function toJSON
-         * @memberof proto.CancelAutoRequest
+         * @memberof SdkProto.CancelAutoRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -5870,38 +5870,38 @@ $root.proto = (function() {
         return CancelAutoRequest;
     })();
 
-    proto.Request = (function() {
+    SdkProto.Request = (function() {
 
         /**
          * Properties of a Request.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IRequest
-         * @property {proto.Request.CMD|null} [cmd] Request cmd
-         * @property {proto.ILoginRequest|null} [loginRequest] Request loginRequest
-         * @property {proto.IRegisterPhoneRequest|null} [registerPhone] Request registerPhone
-         * @property {proto.IGetUserInfoRequest|null} [getUserInfoRequest] Request getUserInfoRequest
-         * @property {proto.ICoinBankRequest|null} [coinBankRequest] Request coinBankRequest
-         * @property {proto.IChangeSignRequest|null} [changeSignRequest] Request changeSignRequest
-         * @property {proto.ITestDeviceIDRequest|null} [testDeviceIDRequest] Request testDeviceIDRequest
-         * @property {proto.IUserMPRequest|null} [userMPRequest] Request userMPRequest
-         * @property {proto.IPassPaiRequest|null} [passPaiRequest] Request passPaiRequest
-         * @property {proto.IUserReconnectRequest|null} [userReconnectRequest] Request userReconnectRequest
-         * @property {proto.IApplyDismissRequest|null} [applyDismissRequest] Request applyDismissRequest
-         * @property {proto.IAgreeDismissRequest|null} [agreeDismissRequest] Request agreeDismissRequest
-         * @property {proto.IUserQuitRequest|null} [userQuitRequest] Request userQuitRequest
-         * @property {proto.IMessageRequest|null} [messageRequest] Request messageRequest
-         * @property {proto.IUserOnBackRequest|null} [userOnBackRequest] Request userOnBackRequest
-         * @property {proto.IDelayCheckRequest|null} [delayCheckRequest] Request delayCheckRequest
-         * @property {proto.ICancelAutoRequest|null} [cancelAutoRequest] Request cancelAutoRequest
+         * @property {SdkProto.Request.CMD|null} [cmd] Request cmd
+         * @property {SdkProto.ILoginRequest|null} [loginRequest] Request loginRequest
+         * @property {SdkProto.IRegisterPhoneRequest|null} [registerPhone] Request registerPhone
+         * @property {SdkProto.IGetUserInfoRequest|null} [getUserInfoRequest] Request getUserInfoRequest
+         * @property {SdkProto.ICoinBankRequest|null} [coinBankRequest] Request coinBankRequest
+         * @property {SdkProto.IChangeSignRequest|null} [changeSignRequest] Request changeSignRequest
+         * @property {SdkProto.ITestDeviceIDRequest|null} [testDeviceIDRequest] Request testDeviceIDRequest
+         * @property {SdkProto.IUserMPRequest|null} [userMPRequest] Request userMPRequest
+         * @property {SdkProto.IPassPaiRequest|null} [passPaiRequest] Request passPaiRequest
+         * @property {SdkProto.IUserReconnectRequest|null} [userReconnectRequest] Request userReconnectRequest
+         * @property {SdkProto.IApplyDismissRequest|null} [applyDismissRequest] Request applyDismissRequest
+         * @property {SdkProto.IAgreeDismissRequest|null} [agreeDismissRequest] Request agreeDismissRequest
+         * @property {SdkProto.IUserQuitRequest|null} [userQuitRequest] Request userQuitRequest
+         * @property {SdkProto.IMessageRequest|null} [messageRequest] Request messageRequest
+         * @property {SdkProto.IUserOnBackRequest|null} [userOnBackRequest] Request userOnBackRequest
+         * @property {SdkProto.IDelayCheckRequest|null} [delayCheckRequest] Request delayCheckRequest
+         * @property {SdkProto.ICancelAutoRequest|null} [cancelAutoRequest] Request cancelAutoRequest
          */
 
         /**
          * Constructs a new Request.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a Request.
          * @implements IRequest
          * @constructor
-         * @param {proto.IRequest=} [properties] Properties to set
+         * @param {SdkProto.IRequest=} [properties] Properties to set
          */
         function Request(properties) {
             if (properties)
@@ -5912,136 +5912,136 @@ $root.proto = (function() {
 
         /**
          * Request cmd.
-         * @member {proto.Request.CMD} cmd
-         * @memberof proto.Request
+         * @member {SdkProto.Request.CMD} cmd
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.cmd = 0;
 
         /**
          * Request loginRequest.
-         * @member {proto.ILoginRequest|null|undefined} loginRequest
-         * @memberof proto.Request
+         * @member {SdkProto.ILoginRequest|null|undefined} loginRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.loginRequest = null;
 
         /**
          * Request registerPhone.
-         * @member {proto.IRegisterPhoneRequest|null|undefined} registerPhone
-         * @memberof proto.Request
+         * @member {SdkProto.IRegisterPhoneRequest|null|undefined} registerPhone
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.registerPhone = null;
 
         /**
          * Request getUserInfoRequest.
-         * @member {proto.IGetUserInfoRequest|null|undefined} getUserInfoRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IGetUserInfoRequest|null|undefined} getUserInfoRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.getUserInfoRequest = null;
 
         /**
          * Request coinBankRequest.
-         * @member {proto.ICoinBankRequest|null|undefined} coinBankRequest
-         * @memberof proto.Request
+         * @member {SdkProto.ICoinBankRequest|null|undefined} coinBankRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.coinBankRequest = null;
 
         /**
          * Request changeSignRequest.
-         * @member {proto.IChangeSignRequest|null|undefined} changeSignRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IChangeSignRequest|null|undefined} changeSignRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.changeSignRequest = null;
 
         /**
          * Request testDeviceIDRequest.
-         * @member {proto.ITestDeviceIDRequest|null|undefined} testDeviceIDRequest
-         * @memberof proto.Request
+         * @member {SdkProto.ITestDeviceIDRequest|null|undefined} testDeviceIDRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.testDeviceIDRequest = null;
 
         /**
          * Request userMPRequest.
-         * @member {proto.IUserMPRequest|null|undefined} userMPRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IUserMPRequest|null|undefined} userMPRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.userMPRequest = null;
 
         /**
          * Request passPaiRequest.
-         * @member {proto.IPassPaiRequest|null|undefined} passPaiRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IPassPaiRequest|null|undefined} passPaiRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.passPaiRequest = null;
 
         /**
          * Request userReconnectRequest.
-         * @member {proto.IUserReconnectRequest|null|undefined} userReconnectRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IUserReconnectRequest|null|undefined} userReconnectRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.userReconnectRequest = null;
 
         /**
          * Request applyDismissRequest.
-         * @member {proto.IApplyDismissRequest|null|undefined} applyDismissRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IApplyDismissRequest|null|undefined} applyDismissRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.applyDismissRequest = null;
 
         /**
          * Request agreeDismissRequest.
-         * @member {proto.IAgreeDismissRequest|null|undefined} agreeDismissRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IAgreeDismissRequest|null|undefined} agreeDismissRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.agreeDismissRequest = null;
 
         /**
          * Request userQuitRequest.
-         * @member {proto.IUserQuitRequest|null|undefined} userQuitRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IUserQuitRequest|null|undefined} userQuitRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.userQuitRequest = null;
 
         /**
          * Request messageRequest.
-         * @member {proto.IMessageRequest|null|undefined} messageRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IMessageRequest|null|undefined} messageRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.messageRequest = null;
 
         /**
          * Request userOnBackRequest.
-         * @member {proto.IUserOnBackRequest|null|undefined} userOnBackRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IUserOnBackRequest|null|undefined} userOnBackRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.userOnBackRequest = null;
 
         /**
          * Request delayCheckRequest.
-         * @member {proto.IDelayCheckRequest|null|undefined} delayCheckRequest
-         * @memberof proto.Request
+         * @member {SdkProto.IDelayCheckRequest|null|undefined} delayCheckRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.delayCheckRequest = null;
 
         /**
          * Request cancelAutoRequest.
-         * @member {proto.ICancelAutoRequest|null|undefined} cancelAutoRequest
-         * @memberof proto.Request
+         * @member {SdkProto.ICancelAutoRequest|null|undefined} cancelAutoRequest
+         * @memberof SdkProto.Request
          * @instance
          */
         Request.prototype.cancelAutoRequest = null;
@@ -6049,21 +6049,21 @@ $root.proto = (function() {
         /**
          * Creates a new Request instance using the specified properties.
          * @function create
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
-         * @param {proto.IRequest=} [properties] Properties to set
-         * @returns {proto.Request} Request instance
+         * @param {SdkProto.IRequest=} [properties] Properties to set
+         * @returns {SdkProto.Request} Request instance
          */
         Request.create = function create(properties) {
             return new Request(properties);
         };
 
         /**
-         * Encodes the specified Request message. Does not implicitly {@link proto.Request.verify|verify} messages.
+         * Encodes the specified Request message. Does not implicitly {@link SdkProto.Request.verify|verify} messages.
          * @function encode
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
-         * @param {proto.IRequest} message Request message or plain object to encode
+         * @param {SdkProto.IRequest} message Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -6073,46 +6073,46 @@ $root.proto = (function() {
             if (message.cmd != null && message.hasOwnProperty("cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.loginRequest != null && message.hasOwnProperty("loginRequest"))
-                $root.proto.LoginRequest.encode(message.loginRequest, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                $root.SdkProto.LoginRequest.encode(message.loginRequest, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             if (message.registerPhone != null && message.hasOwnProperty("registerPhone"))
-                $root.proto.RegisterPhoneRequest.encode(message.registerPhone, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                $root.SdkProto.RegisterPhoneRequest.encode(message.registerPhone, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.getUserInfoRequest != null && message.hasOwnProperty("getUserInfoRequest"))
-                $root.proto.GetUserInfoRequest.encode(message.getUserInfoRequest, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                $root.SdkProto.GetUserInfoRequest.encode(message.getUserInfoRequest, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             if (message.coinBankRequest != null && message.hasOwnProperty("coinBankRequest"))
-                $root.proto.CoinBankRequest.encode(message.coinBankRequest, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                $root.SdkProto.CoinBankRequest.encode(message.coinBankRequest, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.changeSignRequest != null && message.hasOwnProperty("changeSignRequest"))
-                $root.proto.ChangeSignRequest.encode(message.changeSignRequest, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                $root.SdkProto.ChangeSignRequest.encode(message.changeSignRequest, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.testDeviceIDRequest != null && message.hasOwnProperty("testDeviceIDRequest"))
-                $root.proto.TestDeviceIDRequest.encode(message.testDeviceIDRequest, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                $root.SdkProto.TestDeviceIDRequest.encode(message.testDeviceIDRequest, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.userMPRequest != null && message.hasOwnProperty("userMPRequest"))
-                $root.proto.UserMPRequest.encode(message.userMPRequest, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                $root.SdkProto.UserMPRequest.encode(message.userMPRequest, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             if (message.passPaiRequest != null && message.hasOwnProperty("passPaiRequest"))
-                $root.proto.PassPaiRequest.encode(message.passPaiRequest, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                $root.SdkProto.PassPaiRequest.encode(message.passPaiRequest, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
             if (message.userReconnectRequest != null && message.hasOwnProperty("userReconnectRequest"))
-                $root.proto.UserReconnectRequest.encode(message.userReconnectRequest, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                $root.SdkProto.UserReconnectRequest.encode(message.userReconnectRequest, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
             if (message.applyDismissRequest != null && message.hasOwnProperty("applyDismissRequest"))
-                $root.proto.ApplyDismissRequest.encode(message.applyDismissRequest, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                $root.SdkProto.ApplyDismissRequest.encode(message.applyDismissRequest, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             if (message.agreeDismissRequest != null && message.hasOwnProperty("agreeDismissRequest"))
-                $root.proto.AgreeDismissRequest.encode(message.agreeDismissRequest, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                $root.SdkProto.AgreeDismissRequest.encode(message.agreeDismissRequest, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
             if (message.userQuitRequest != null && message.hasOwnProperty("userQuitRequest"))
-                $root.proto.UserQuitRequest.encode(message.userQuitRequest, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                $root.SdkProto.UserQuitRequest.encode(message.userQuitRequest, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
             if (message.messageRequest != null && message.hasOwnProperty("messageRequest"))
-                $root.proto.MessageRequest.encode(message.messageRequest, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                $root.SdkProto.MessageRequest.encode(message.messageRequest, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
             if (message.userOnBackRequest != null && message.hasOwnProperty("userOnBackRequest"))
-                $root.proto.UserOnBackRequest.encode(message.userOnBackRequest, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                $root.SdkProto.UserOnBackRequest.encode(message.userOnBackRequest, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
             if (message.delayCheckRequest != null && message.hasOwnProperty("delayCheckRequest"))
-                $root.proto.DelayCheckRequest.encode(message.delayCheckRequest, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                $root.SdkProto.DelayCheckRequest.encode(message.delayCheckRequest, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
             if (message.cancelAutoRequest != null && message.hasOwnProperty("cancelAutoRequest"))
-                $root.proto.CancelAutoRequest.encode(message.cancelAutoRequest, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                $root.SdkProto.CancelAutoRequest.encode(message.cancelAutoRequest, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified Request message, length delimited. Does not implicitly {@link proto.Request.verify|verify} messages.
+         * Encodes the specified Request message, length delimited. Does not implicitly {@link SdkProto.Request.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
-         * @param {proto.IRequest} message Request message or plain object to encode
+         * @param {SdkProto.IRequest} message Request message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -6123,18 +6123,18 @@ $root.proto = (function() {
         /**
          * Decodes a Request message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.Request} Request
+         * @returns {SdkProto.Request} Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Request.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Request();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.Request();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -6142,52 +6142,52 @@ $root.proto = (function() {
                     message.cmd = reader.int32();
                     break;
                 case 11:
-                    message.loginRequest = $root.proto.LoginRequest.decode(reader, reader.uint32());
+                    message.loginRequest = $root.SdkProto.LoginRequest.decode(reader, reader.uint32());
                     break;
                 case 12:
-                    message.registerPhone = $root.proto.RegisterPhoneRequest.decode(reader, reader.uint32());
+                    message.registerPhone = $root.SdkProto.RegisterPhoneRequest.decode(reader, reader.uint32());
                     break;
                 case 13:
-                    message.getUserInfoRequest = $root.proto.GetUserInfoRequest.decode(reader, reader.uint32());
+                    message.getUserInfoRequest = $root.SdkProto.GetUserInfoRequest.decode(reader, reader.uint32());
                     break;
                 case 14:
-                    message.coinBankRequest = $root.proto.CoinBankRequest.decode(reader, reader.uint32());
+                    message.coinBankRequest = $root.SdkProto.CoinBankRequest.decode(reader, reader.uint32());
                     break;
                 case 15:
-                    message.changeSignRequest = $root.proto.ChangeSignRequest.decode(reader, reader.uint32());
+                    message.changeSignRequest = $root.SdkProto.ChangeSignRequest.decode(reader, reader.uint32());
                     break;
                 case 16:
-                    message.testDeviceIDRequest = $root.proto.TestDeviceIDRequest.decode(reader, reader.uint32());
+                    message.testDeviceIDRequest = $root.SdkProto.TestDeviceIDRequest.decode(reader, reader.uint32());
                     break;
                 case 17:
-                    message.userMPRequest = $root.proto.UserMPRequest.decode(reader, reader.uint32());
+                    message.userMPRequest = $root.SdkProto.UserMPRequest.decode(reader, reader.uint32());
                     break;
                 case 19:
-                    message.passPaiRequest = $root.proto.PassPaiRequest.decode(reader, reader.uint32());
+                    message.passPaiRequest = $root.SdkProto.PassPaiRequest.decode(reader, reader.uint32());
                     break;
                 case 20:
-                    message.userReconnectRequest = $root.proto.UserReconnectRequest.decode(reader, reader.uint32());
+                    message.userReconnectRequest = $root.SdkProto.UserReconnectRequest.decode(reader, reader.uint32());
                     break;
                 case 21:
-                    message.applyDismissRequest = $root.proto.ApplyDismissRequest.decode(reader, reader.uint32());
+                    message.applyDismissRequest = $root.SdkProto.ApplyDismissRequest.decode(reader, reader.uint32());
                     break;
                 case 22:
-                    message.agreeDismissRequest = $root.proto.AgreeDismissRequest.decode(reader, reader.uint32());
+                    message.agreeDismissRequest = $root.SdkProto.AgreeDismissRequest.decode(reader, reader.uint32());
                     break;
                 case 23:
-                    message.userQuitRequest = $root.proto.UserQuitRequest.decode(reader, reader.uint32());
+                    message.userQuitRequest = $root.SdkProto.UserQuitRequest.decode(reader, reader.uint32());
                     break;
                 case 24:
-                    message.messageRequest = $root.proto.MessageRequest.decode(reader, reader.uint32());
+                    message.messageRequest = $root.SdkProto.MessageRequest.decode(reader, reader.uint32());
                     break;
                 case 25:
-                    message.userOnBackRequest = $root.proto.UserOnBackRequest.decode(reader, reader.uint32());
+                    message.userOnBackRequest = $root.SdkProto.UserOnBackRequest.decode(reader, reader.uint32());
                     break;
                 case 26:
-                    message.delayCheckRequest = $root.proto.DelayCheckRequest.decode(reader, reader.uint32());
+                    message.delayCheckRequest = $root.SdkProto.DelayCheckRequest.decode(reader, reader.uint32());
                     break;
                 case 27:
-                    message.cancelAutoRequest = $root.proto.CancelAutoRequest.decode(reader, reader.uint32());
+                    message.cancelAutoRequest = $root.SdkProto.CancelAutoRequest.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6200,10 +6200,10 @@ $root.proto = (function() {
         /**
          * Decodes a Request message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.Request} Request
+         * @returns {SdkProto.Request} Request
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -6216,7 +6216,7 @@ $root.proto = (function() {
         /**
          * Verifies a Request message.
          * @function verify
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -6277,82 +6277,82 @@ $root.proto = (function() {
                     break;
                 }
             if (message.loginRequest != null && message.hasOwnProperty("loginRequest")) {
-                var error = $root.proto.LoginRequest.verify(message.loginRequest);
+                var error = $root.SdkProto.LoginRequest.verify(message.loginRequest);
                 if (error)
                     return "loginRequest." + error;
             }
             if (message.registerPhone != null && message.hasOwnProperty("registerPhone")) {
-                var error = $root.proto.RegisterPhoneRequest.verify(message.registerPhone);
+                var error = $root.SdkProto.RegisterPhoneRequest.verify(message.registerPhone);
                 if (error)
                     return "registerPhone." + error;
             }
             if (message.getUserInfoRequest != null && message.hasOwnProperty("getUserInfoRequest")) {
-                var error = $root.proto.GetUserInfoRequest.verify(message.getUserInfoRequest);
+                var error = $root.SdkProto.GetUserInfoRequest.verify(message.getUserInfoRequest);
                 if (error)
                     return "getUserInfoRequest." + error;
             }
             if (message.coinBankRequest != null && message.hasOwnProperty("coinBankRequest")) {
-                var error = $root.proto.CoinBankRequest.verify(message.coinBankRequest);
+                var error = $root.SdkProto.CoinBankRequest.verify(message.coinBankRequest);
                 if (error)
                     return "coinBankRequest." + error;
             }
             if (message.changeSignRequest != null && message.hasOwnProperty("changeSignRequest")) {
-                var error = $root.proto.ChangeSignRequest.verify(message.changeSignRequest);
+                var error = $root.SdkProto.ChangeSignRequest.verify(message.changeSignRequest);
                 if (error)
                     return "changeSignRequest." + error;
             }
             if (message.testDeviceIDRequest != null && message.hasOwnProperty("testDeviceIDRequest")) {
-                var error = $root.proto.TestDeviceIDRequest.verify(message.testDeviceIDRequest);
+                var error = $root.SdkProto.TestDeviceIDRequest.verify(message.testDeviceIDRequest);
                 if (error)
                     return "testDeviceIDRequest." + error;
             }
             if (message.userMPRequest != null && message.hasOwnProperty("userMPRequest")) {
-                var error = $root.proto.UserMPRequest.verify(message.userMPRequest);
+                var error = $root.SdkProto.UserMPRequest.verify(message.userMPRequest);
                 if (error)
                     return "userMPRequest." + error;
             }
             if (message.passPaiRequest != null && message.hasOwnProperty("passPaiRequest")) {
-                var error = $root.proto.PassPaiRequest.verify(message.passPaiRequest);
+                var error = $root.SdkProto.PassPaiRequest.verify(message.passPaiRequest);
                 if (error)
                     return "passPaiRequest." + error;
             }
             if (message.userReconnectRequest != null && message.hasOwnProperty("userReconnectRequest")) {
-                var error = $root.proto.UserReconnectRequest.verify(message.userReconnectRequest);
+                var error = $root.SdkProto.UserReconnectRequest.verify(message.userReconnectRequest);
                 if (error)
                     return "userReconnectRequest." + error;
             }
             if (message.applyDismissRequest != null && message.hasOwnProperty("applyDismissRequest")) {
-                var error = $root.proto.ApplyDismissRequest.verify(message.applyDismissRequest);
+                var error = $root.SdkProto.ApplyDismissRequest.verify(message.applyDismissRequest);
                 if (error)
                     return "applyDismissRequest." + error;
             }
             if (message.agreeDismissRequest != null && message.hasOwnProperty("agreeDismissRequest")) {
-                var error = $root.proto.AgreeDismissRequest.verify(message.agreeDismissRequest);
+                var error = $root.SdkProto.AgreeDismissRequest.verify(message.agreeDismissRequest);
                 if (error)
                     return "agreeDismissRequest." + error;
             }
             if (message.userQuitRequest != null && message.hasOwnProperty("userQuitRequest")) {
-                var error = $root.proto.UserQuitRequest.verify(message.userQuitRequest);
+                var error = $root.SdkProto.UserQuitRequest.verify(message.userQuitRequest);
                 if (error)
                     return "userQuitRequest." + error;
             }
             if (message.messageRequest != null && message.hasOwnProperty("messageRequest")) {
-                var error = $root.proto.MessageRequest.verify(message.messageRequest);
+                var error = $root.SdkProto.MessageRequest.verify(message.messageRequest);
                 if (error)
                     return "messageRequest." + error;
             }
             if (message.userOnBackRequest != null && message.hasOwnProperty("userOnBackRequest")) {
-                var error = $root.proto.UserOnBackRequest.verify(message.userOnBackRequest);
+                var error = $root.SdkProto.UserOnBackRequest.verify(message.userOnBackRequest);
                 if (error)
                     return "userOnBackRequest." + error;
             }
             if (message.delayCheckRequest != null && message.hasOwnProperty("delayCheckRequest")) {
-                var error = $root.proto.DelayCheckRequest.verify(message.delayCheckRequest);
+                var error = $root.SdkProto.DelayCheckRequest.verify(message.delayCheckRequest);
                 if (error)
                     return "delayCheckRequest." + error;
             }
             if (message.cancelAutoRequest != null && message.hasOwnProperty("cancelAutoRequest")) {
-                var error = $root.proto.CancelAutoRequest.verify(message.cancelAutoRequest);
+                var error = $root.SdkProto.CancelAutoRequest.verify(message.cancelAutoRequest);
                 if (error)
                     return "cancelAutoRequest." + error;
             }
@@ -6362,15 +6362,15 @@ $root.proto = (function() {
         /**
          * Creates a Request message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.Request} Request
+         * @returns {SdkProto.Request} Request
          */
         Request.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.Request)
+            if (object instanceof $root.SdkProto.Request)
                 return object;
-            var message = new $root.proto.Request();
+            var message = new $root.SdkProto.Request();
             switch (object.cmd) {
             case "UNKNOWN":
             case 0:
@@ -6559,83 +6559,83 @@ $root.proto = (function() {
             }
             if (object.loginRequest != null) {
                 if (typeof object.loginRequest !== "object")
-                    throw TypeError(".proto.Request.loginRequest: object expected");
-                message.loginRequest = $root.proto.LoginRequest.fromObject(object.loginRequest);
+                    throw TypeError(".SdkProto.Request.loginRequest: object expected");
+                message.loginRequest = $root.SdkProto.LoginRequest.fromObject(object.loginRequest);
             }
             if (object.registerPhone != null) {
                 if (typeof object.registerPhone !== "object")
-                    throw TypeError(".proto.Request.registerPhone: object expected");
-                message.registerPhone = $root.proto.RegisterPhoneRequest.fromObject(object.registerPhone);
+                    throw TypeError(".SdkProto.Request.registerPhone: object expected");
+                message.registerPhone = $root.SdkProto.RegisterPhoneRequest.fromObject(object.registerPhone);
             }
             if (object.getUserInfoRequest != null) {
                 if (typeof object.getUserInfoRequest !== "object")
-                    throw TypeError(".proto.Request.getUserInfoRequest: object expected");
-                message.getUserInfoRequest = $root.proto.GetUserInfoRequest.fromObject(object.getUserInfoRequest);
+                    throw TypeError(".SdkProto.Request.getUserInfoRequest: object expected");
+                message.getUserInfoRequest = $root.SdkProto.GetUserInfoRequest.fromObject(object.getUserInfoRequest);
             }
             if (object.coinBankRequest != null) {
                 if (typeof object.coinBankRequest !== "object")
-                    throw TypeError(".proto.Request.coinBankRequest: object expected");
-                message.coinBankRequest = $root.proto.CoinBankRequest.fromObject(object.coinBankRequest);
+                    throw TypeError(".SdkProto.Request.coinBankRequest: object expected");
+                message.coinBankRequest = $root.SdkProto.CoinBankRequest.fromObject(object.coinBankRequest);
             }
             if (object.changeSignRequest != null) {
                 if (typeof object.changeSignRequest !== "object")
-                    throw TypeError(".proto.Request.changeSignRequest: object expected");
-                message.changeSignRequest = $root.proto.ChangeSignRequest.fromObject(object.changeSignRequest);
+                    throw TypeError(".SdkProto.Request.changeSignRequest: object expected");
+                message.changeSignRequest = $root.SdkProto.ChangeSignRequest.fromObject(object.changeSignRequest);
             }
             if (object.testDeviceIDRequest != null) {
                 if (typeof object.testDeviceIDRequest !== "object")
-                    throw TypeError(".proto.Request.testDeviceIDRequest: object expected");
-                message.testDeviceIDRequest = $root.proto.TestDeviceIDRequest.fromObject(object.testDeviceIDRequest);
+                    throw TypeError(".SdkProto.Request.testDeviceIDRequest: object expected");
+                message.testDeviceIDRequest = $root.SdkProto.TestDeviceIDRequest.fromObject(object.testDeviceIDRequest);
             }
             if (object.userMPRequest != null) {
                 if (typeof object.userMPRequest !== "object")
-                    throw TypeError(".proto.Request.userMPRequest: object expected");
-                message.userMPRequest = $root.proto.UserMPRequest.fromObject(object.userMPRequest);
+                    throw TypeError(".SdkProto.Request.userMPRequest: object expected");
+                message.userMPRequest = $root.SdkProto.UserMPRequest.fromObject(object.userMPRequest);
             }
             if (object.passPaiRequest != null) {
                 if (typeof object.passPaiRequest !== "object")
-                    throw TypeError(".proto.Request.passPaiRequest: object expected");
-                message.passPaiRequest = $root.proto.PassPaiRequest.fromObject(object.passPaiRequest);
+                    throw TypeError(".SdkProto.Request.passPaiRequest: object expected");
+                message.passPaiRequest = $root.SdkProto.PassPaiRequest.fromObject(object.passPaiRequest);
             }
             if (object.userReconnectRequest != null) {
                 if (typeof object.userReconnectRequest !== "object")
-                    throw TypeError(".proto.Request.userReconnectRequest: object expected");
-                message.userReconnectRequest = $root.proto.UserReconnectRequest.fromObject(object.userReconnectRequest);
+                    throw TypeError(".SdkProto.Request.userReconnectRequest: object expected");
+                message.userReconnectRequest = $root.SdkProto.UserReconnectRequest.fromObject(object.userReconnectRequest);
             }
             if (object.applyDismissRequest != null) {
                 if (typeof object.applyDismissRequest !== "object")
-                    throw TypeError(".proto.Request.applyDismissRequest: object expected");
-                message.applyDismissRequest = $root.proto.ApplyDismissRequest.fromObject(object.applyDismissRequest);
+                    throw TypeError(".SdkProto.Request.applyDismissRequest: object expected");
+                message.applyDismissRequest = $root.SdkProto.ApplyDismissRequest.fromObject(object.applyDismissRequest);
             }
             if (object.agreeDismissRequest != null) {
                 if (typeof object.agreeDismissRequest !== "object")
-                    throw TypeError(".proto.Request.agreeDismissRequest: object expected");
-                message.agreeDismissRequest = $root.proto.AgreeDismissRequest.fromObject(object.agreeDismissRequest);
+                    throw TypeError(".SdkProto.Request.agreeDismissRequest: object expected");
+                message.agreeDismissRequest = $root.SdkProto.AgreeDismissRequest.fromObject(object.agreeDismissRequest);
             }
             if (object.userQuitRequest != null) {
                 if (typeof object.userQuitRequest !== "object")
-                    throw TypeError(".proto.Request.userQuitRequest: object expected");
-                message.userQuitRequest = $root.proto.UserQuitRequest.fromObject(object.userQuitRequest);
+                    throw TypeError(".SdkProto.Request.userQuitRequest: object expected");
+                message.userQuitRequest = $root.SdkProto.UserQuitRequest.fromObject(object.userQuitRequest);
             }
             if (object.messageRequest != null) {
                 if (typeof object.messageRequest !== "object")
-                    throw TypeError(".proto.Request.messageRequest: object expected");
-                message.messageRequest = $root.proto.MessageRequest.fromObject(object.messageRequest);
+                    throw TypeError(".SdkProto.Request.messageRequest: object expected");
+                message.messageRequest = $root.SdkProto.MessageRequest.fromObject(object.messageRequest);
             }
             if (object.userOnBackRequest != null) {
                 if (typeof object.userOnBackRequest !== "object")
-                    throw TypeError(".proto.Request.userOnBackRequest: object expected");
-                message.userOnBackRequest = $root.proto.UserOnBackRequest.fromObject(object.userOnBackRequest);
+                    throw TypeError(".SdkProto.Request.userOnBackRequest: object expected");
+                message.userOnBackRequest = $root.SdkProto.UserOnBackRequest.fromObject(object.userOnBackRequest);
             }
             if (object.delayCheckRequest != null) {
                 if (typeof object.delayCheckRequest !== "object")
-                    throw TypeError(".proto.Request.delayCheckRequest: object expected");
-                message.delayCheckRequest = $root.proto.DelayCheckRequest.fromObject(object.delayCheckRequest);
+                    throw TypeError(".SdkProto.Request.delayCheckRequest: object expected");
+                message.delayCheckRequest = $root.SdkProto.DelayCheckRequest.fromObject(object.delayCheckRequest);
             }
             if (object.cancelAutoRequest != null) {
                 if (typeof object.cancelAutoRequest !== "object")
-                    throw TypeError(".proto.Request.cancelAutoRequest: object expected");
-                message.cancelAutoRequest = $root.proto.CancelAutoRequest.fromObject(object.cancelAutoRequest);
+                    throw TypeError(".SdkProto.Request.cancelAutoRequest: object expected");
+                message.cancelAutoRequest = $root.SdkProto.CancelAutoRequest.fromObject(object.cancelAutoRequest);
             }
             return message;
         };
@@ -6643,9 +6643,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a Request message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @static
-         * @param {proto.Request} message Request
+         * @param {SdkProto.Request} message Request
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -6673,46 +6673,46 @@ $root.proto = (function() {
                 object.cancelAutoRequest = null;
             }
             if (message.cmd != null && message.hasOwnProperty("cmd"))
-                object.cmd = options.enums === String ? $root.proto.Request.CMD[message.cmd] : message.cmd;
+                object.cmd = options.enums === String ? $root.SdkProto.Request.CMD[message.cmd] : message.cmd;
             if (message.loginRequest != null && message.hasOwnProperty("loginRequest"))
-                object.loginRequest = $root.proto.LoginRequest.toObject(message.loginRequest, options);
+                object.loginRequest = $root.SdkProto.LoginRequest.toObject(message.loginRequest, options);
             if (message.registerPhone != null && message.hasOwnProperty("registerPhone"))
-                object.registerPhone = $root.proto.RegisterPhoneRequest.toObject(message.registerPhone, options);
+                object.registerPhone = $root.SdkProto.RegisterPhoneRequest.toObject(message.registerPhone, options);
             if (message.getUserInfoRequest != null && message.hasOwnProperty("getUserInfoRequest"))
-                object.getUserInfoRequest = $root.proto.GetUserInfoRequest.toObject(message.getUserInfoRequest, options);
+                object.getUserInfoRequest = $root.SdkProto.GetUserInfoRequest.toObject(message.getUserInfoRequest, options);
             if (message.coinBankRequest != null && message.hasOwnProperty("coinBankRequest"))
-                object.coinBankRequest = $root.proto.CoinBankRequest.toObject(message.coinBankRequest, options);
+                object.coinBankRequest = $root.SdkProto.CoinBankRequest.toObject(message.coinBankRequest, options);
             if (message.changeSignRequest != null && message.hasOwnProperty("changeSignRequest"))
-                object.changeSignRequest = $root.proto.ChangeSignRequest.toObject(message.changeSignRequest, options);
+                object.changeSignRequest = $root.SdkProto.ChangeSignRequest.toObject(message.changeSignRequest, options);
             if (message.testDeviceIDRequest != null && message.hasOwnProperty("testDeviceIDRequest"))
-                object.testDeviceIDRequest = $root.proto.TestDeviceIDRequest.toObject(message.testDeviceIDRequest, options);
+                object.testDeviceIDRequest = $root.SdkProto.TestDeviceIDRequest.toObject(message.testDeviceIDRequest, options);
             if (message.userMPRequest != null && message.hasOwnProperty("userMPRequest"))
-                object.userMPRequest = $root.proto.UserMPRequest.toObject(message.userMPRequest, options);
+                object.userMPRequest = $root.SdkProto.UserMPRequest.toObject(message.userMPRequest, options);
             if (message.passPaiRequest != null && message.hasOwnProperty("passPaiRequest"))
-                object.passPaiRequest = $root.proto.PassPaiRequest.toObject(message.passPaiRequest, options);
+                object.passPaiRequest = $root.SdkProto.PassPaiRequest.toObject(message.passPaiRequest, options);
             if (message.userReconnectRequest != null && message.hasOwnProperty("userReconnectRequest"))
-                object.userReconnectRequest = $root.proto.UserReconnectRequest.toObject(message.userReconnectRequest, options);
+                object.userReconnectRequest = $root.SdkProto.UserReconnectRequest.toObject(message.userReconnectRequest, options);
             if (message.applyDismissRequest != null && message.hasOwnProperty("applyDismissRequest"))
-                object.applyDismissRequest = $root.proto.ApplyDismissRequest.toObject(message.applyDismissRequest, options);
+                object.applyDismissRequest = $root.SdkProto.ApplyDismissRequest.toObject(message.applyDismissRequest, options);
             if (message.agreeDismissRequest != null && message.hasOwnProperty("agreeDismissRequest"))
-                object.agreeDismissRequest = $root.proto.AgreeDismissRequest.toObject(message.agreeDismissRequest, options);
+                object.agreeDismissRequest = $root.SdkProto.AgreeDismissRequest.toObject(message.agreeDismissRequest, options);
             if (message.userQuitRequest != null && message.hasOwnProperty("userQuitRequest"))
-                object.userQuitRequest = $root.proto.UserQuitRequest.toObject(message.userQuitRequest, options);
+                object.userQuitRequest = $root.SdkProto.UserQuitRequest.toObject(message.userQuitRequest, options);
             if (message.messageRequest != null && message.hasOwnProperty("messageRequest"))
-                object.messageRequest = $root.proto.MessageRequest.toObject(message.messageRequest, options);
+                object.messageRequest = $root.SdkProto.MessageRequest.toObject(message.messageRequest, options);
             if (message.userOnBackRequest != null && message.hasOwnProperty("userOnBackRequest"))
-                object.userOnBackRequest = $root.proto.UserOnBackRequest.toObject(message.userOnBackRequest, options);
+                object.userOnBackRequest = $root.SdkProto.UserOnBackRequest.toObject(message.userOnBackRequest, options);
             if (message.delayCheckRequest != null && message.hasOwnProperty("delayCheckRequest"))
-                object.delayCheckRequest = $root.proto.DelayCheckRequest.toObject(message.delayCheckRequest, options);
+                object.delayCheckRequest = $root.SdkProto.DelayCheckRequest.toObject(message.delayCheckRequest, options);
             if (message.cancelAutoRequest != null && message.hasOwnProperty("cancelAutoRequest"))
-                object.cancelAutoRequest = $root.proto.CancelAutoRequest.toObject(message.cancelAutoRequest, options);
+                object.cancelAutoRequest = $root.SdkProto.CancelAutoRequest.toObject(message.cancelAutoRequest, options);
             return object;
         };
 
         /**
          * Converts this Request to JSON.
          * @function toJSON
-         * @memberof proto.Request
+         * @memberof SdkProto.Request
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -6722,7 +6722,7 @@ $root.proto = (function() {
 
         /**
          * CMD enum.
-         * @name proto.Request.CMD
+         * @name SdkProto.Request.CMD
          * @enum {string}
          * @property {number} UNKNOWN=0 UNKNOWN value
          * @property {number} Login=2000 Login value
@@ -6825,22 +6825,22 @@ $root.proto = (function() {
         return Request;
     })();
 
-    proto.LoginResponse = (function() {
+    SdkProto.LoginResponse = (function() {
 
         /**
          * Properties of a LoginResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ILoginResponse
-         * @property {proto.IUser|null} [user] LoginResponse user
+         * @property {SdkProto.IUser|null} [user] LoginResponse user
          */
 
         /**
          * Constructs a new LoginResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a LoginResponse.
          * @implements ILoginResponse
          * @constructor
-         * @param {proto.ILoginResponse=} [properties] Properties to set
+         * @param {SdkProto.ILoginResponse=} [properties] Properties to set
          */
         function LoginResponse(properties) {
             if (properties)
@@ -6851,8 +6851,8 @@ $root.proto = (function() {
 
         /**
          * LoginResponse user.
-         * @member {proto.IUser|null|undefined} user
-         * @memberof proto.LoginResponse
+         * @member {SdkProto.IUser|null|undefined} user
+         * @memberof SdkProto.LoginResponse
          * @instance
          */
         LoginResponse.prototype.user = null;
@@ -6860,21 +6860,21 @@ $root.proto = (function() {
         /**
          * Creates a new LoginResponse instance using the specified properties.
          * @function create
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
-         * @param {proto.ILoginResponse=} [properties] Properties to set
-         * @returns {proto.LoginResponse} LoginResponse instance
+         * @param {SdkProto.ILoginResponse=} [properties] Properties to set
+         * @returns {SdkProto.LoginResponse} LoginResponse instance
          */
         LoginResponse.create = function create(properties) {
             return new LoginResponse(properties);
         };
 
         /**
-         * Encodes the specified LoginResponse message. Does not implicitly {@link proto.LoginResponse.verify|verify} messages.
+         * Encodes the specified LoginResponse message. Does not implicitly {@link SdkProto.LoginResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
-         * @param {proto.ILoginResponse} message LoginResponse message or plain object to encode
+         * @param {SdkProto.ILoginResponse} message LoginResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -6882,16 +6882,16 @@ $root.proto = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.user != null && message.hasOwnProperty("user"))
-                $root.proto.User.encode(message.user, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                $root.SdkProto.User.encode(message.user, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified LoginResponse message, length delimited. Does not implicitly {@link proto.LoginResponse.verify|verify} messages.
+         * Encodes the specified LoginResponse message, length delimited. Does not implicitly {@link SdkProto.LoginResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
-         * @param {proto.ILoginResponse} message LoginResponse message or plain object to encode
+         * @param {SdkProto.ILoginResponse} message LoginResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -6902,23 +6902,23 @@ $root.proto = (function() {
         /**
          * Decodes a LoginResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.LoginResponse} LoginResponse
+         * @returns {SdkProto.LoginResponse} LoginResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         LoginResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.LoginResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.LoginResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.user = $root.proto.User.decode(reader, reader.uint32());
+                    message.user = $root.SdkProto.User.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -6931,10 +6931,10 @@ $root.proto = (function() {
         /**
          * Decodes a LoginResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.LoginResponse} LoginResponse
+         * @returns {SdkProto.LoginResponse} LoginResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -6947,7 +6947,7 @@ $root.proto = (function() {
         /**
          * Verifies a LoginResponse message.
          * @function verify
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -6956,7 +6956,7 @@ $root.proto = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.user != null && message.hasOwnProperty("user")) {
-                var error = $root.proto.User.verify(message.user);
+                var error = $root.SdkProto.User.verify(message.user);
                 if (error)
                     return "user." + error;
             }
@@ -6966,19 +6966,19 @@ $root.proto = (function() {
         /**
          * Creates a LoginResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.LoginResponse} LoginResponse
+         * @returns {SdkProto.LoginResponse} LoginResponse
          */
         LoginResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.LoginResponse)
+            if (object instanceof $root.SdkProto.LoginResponse)
                 return object;
-            var message = new $root.proto.LoginResponse();
+            var message = new $root.SdkProto.LoginResponse();
             if (object.user != null) {
                 if (typeof object.user !== "object")
-                    throw TypeError(".proto.LoginResponse.user: object expected");
-                message.user = $root.proto.User.fromObject(object.user);
+                    throw TypeError(".SdkProto.LoginResponse.user: object expected");
+                message.user = $root.SdkProto.User.fromObject(object.user);
             }
             return message;
         };
@@ -6986,9 +6986,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a LoginResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @static
-         * @param {proto.LoginResponse} message LoginResponse
+         * @param {SdkProto.LoginResponse} message LoginResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -6999,14 +6999,14 @@ $root.proto = (function() {
             if (options.defaults)
                 object.user = null;
             if (message.user != null && message.hasOwnProperty("user"))
-                object.user = $root.proto.User.toObject(message.user, options);
+                object.user = $root.SdkProto.User.toObject(message.user, options);
             return object;
         };
 
         /**
          * Converts this LoginResponse to JSON.
          * @function toJSON
-         * @memberof proto.LoginResponse
+         * @memberof SdkProto.LoginResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7017,22 +7017,22 @@ $root.proto = (function() {
         return LoginResponse;
     })();
 
-    proto.RegisterPhoneRespone = (function() {
+    SdkProto.RegisterPhoneRespone = (function() {
 
         /**
          * Properties of a RegisterPhoneRespone.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IRegisterPhoneRespone
          * @property {number|null} [username] RegisterPhoneRespone username
          */
 
         /**
          * Constructs a new RegisterPhoneRespone.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a RegisterPhoneRespone.
          * @implements IRegisterPhoneRespone
          * @constructor
-         * @param {proto.IRegisterPhoneRespone=} [properties] Properties to set
+         * @param {SdkProto.IRegisterPhoneRespone=} [properties] Properties to set
          */
         function RegisterPhoneRespone(properties) {
             if (properties)
@@ -7044,7 +7044,7 @@ $root.proto = (function() {
         /**
          * RegisterPhoneRespone username.
          * @member {number} username
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @instance
          */
         RegisterPhoneRespone.prototype.username = 0;
@@ -7052,21 +7052,21 @@ $root.proto = (function() {
         /**
          * Creates a new RegisterPhoneRespone instance using the specified properties.
          * @function create
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
-         * @param {proto.IRegisterPhoneRespone=} [properties] Properties to set
-         * @returns {proto.RegisterPhoneRespone} RegisterPhoneRespone instance
+         * @param {SdkProto.IRegisterPhoneRespone=} [properties] Properties to set
+         * @returns {SdkProto.RegisterPhoneRespone} RegisterPhoneRespone instance
          */
         RegisterPhoneRespone.create = function create(properties) {
             return new RegisterPhoneRespone(properties);
         };
 
         /**
-         * Encodes the specified RegisterPhoneRespone message. Does not implicitly {@link proto.RegisterPhoneRespone.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRespone message. Does not implicitly {@link SdkProto.RegisterPhoneRespone.verify|verify} messages.
          * @function encode
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
-         * @param {proto.IRegisterPhoneRespone} message RegisterPhoneRespone message or plain object to encode
+         * @param {SdkProto.IRegisterPhoneRespone} message RegisterPhoneRespone message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7079,11 +7079,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified RegisterPhoneRespone message, length delimited. Does not implicitly {@link proto.RegisterPhoneRespone.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRespone message, length delimited. Does not implicitly {@link SdkProto.RegisterPhoneRespone.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
-         * @param {proto.IRegisterPhoneRespone} message RegisterPhoneRespone message or plain object to encode
+         * @param {SdkProto.IRegisterPhoneRespone} message RegisterPhoneRespone message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7094,18 +7094,18 @@ $root.proto = (function() {
         /**
          * Decodes a RegisterPhoneRespone message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.RegisterPhoneRespone} RegisterPhoneRespone
+         * @returns {SdkProto.RegisterPhoneRespone} RegisterPhoneRespone
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         RegisterPhoneRespone.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.RegisterPhoneRespone();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.RegisterPhoneRespone();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7123,10 +7123,10 @@ $root.proto = (function() {
         /**
          * Decodes a RegisterPhoneRespone message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.RegisterPhoneRespone} RegisterPhoneRespone
+         * @returns {SdkProto.RegisterPhoneRespone} RegisterPhoneRespone
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -7139,7 +7139,7 @@ $root.proto = (function() {
         /**
          * Verifies a RegisterPhoneRespone message.
          * @function verify
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -7156,15 +7156,15 @@ $root.proto = (function() {
         /**
          * Creates a RegisterPhoneRespone message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.RegisterPhoneRespone} RegisterPhoneRespone
+         * @returns {SdkProto.RegisterPhoneRespone} RegisterPhoneRespone
          */
         RegisterPhoneRespone.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.RegisterPhoneRespone)
+            if (object instanceof $root.SdkProto.RegisterPhoneRespone)
                 return object;
-            var message = new $root.proto.RegisterPhoneRespone();
+            var message = new $root.SdkProto.RegisterPhoneRespone();
             if (object.username != null)
                 message.username = object.username | 0;
             return message;
@@ -7173,9 +7173,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a RegisterPhoneRespone message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @static
-         * @param {proto.RegisterPhoneRespone} message RegisterPhoneRespone
+         * @param {SdkProto.RegisterPhoneRespone} message RegisterPhoneRespone
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -7193,7 +7193,7 @@ $root.proto = (function() {
         /**
          * Converts this RegisterPhoneRespone to JSON.
          * @function toJSON
-         * @memberof proto.RegisterPhoneRespone
+         * @memberof SdkProto.RegisterPhoneRespone
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7204,22 +7204,22 @@ $root.proto = (function() {
         return RegisterPhoneRespone;
     })();
 
-    proto.GetUserInfoResponse = (function() {
+    SdkProto.GetUserInfoResponse = (function() {
 
         /**
          * Properties of a GetUserInfoResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IGetUserInfoResponse
-         * @property {proto.IUserInfo|null} [userInfo] GetUserInfoResponse userInfo
+         * @property {SdkProto.IUserInfo|null} [userInfo] GetUserInfoResponse userInfo
          */
 
         /**
          * Constructs a new GetUserInfoResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a GetUserInfoResponse.
          * @implements IGetUserInfoResponse
          * @constructor
-         * @param {proto.IGetUserInfoResponse=} [properties] Properties to set
+         * @param {SdkProto.IGetUserInfoResponse=} [properties] Properties to set
          */
         function GetUserInfoResponse(properties) {
             if (properties)
@@ -7230,8 +7230,8 @@ $root.proto = (function() {
 
         /**
          * GetUserInfoResponse userInfo.
-         * @member {proto.IUserInfo|null|undefined} userInfo
-         * @memberof proto.GetUserInfoResponse
+         * @member {SdkProto.IUserInfo|null|undefined} userInfo
+         * @memberof SdkProto.GetUserInfoResponse
          * @instance
          */
         GetUserInfoResponse.prototype.userInfo = null;
@@ -7239,21 +7239,21 @@ $root.proto = (function() {
         /**
          * Creates a new GetUserInfoResponse instance using the specified properties.
          * @function create
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
-         * @param {proto.IGetUserInfoResponse=} [properties] Properties to set
-         * @returns {proto.GetUserInfoResponse} GetUserInfoResponse instance
+         * @param {SdkProto.IGetUserInfoResponse=} [properties] Properties to set
+         * @returns {SdkProto.GetUserInfoResponse} GetUserInfoResponse instance
          */
         GetUserInfoResponse.create = function create(properties) {
             return new GetUserInfoResponse(properties);
         };
 
         /**
-         * Encodes the specified GetUserInfoResponse message. Does not implicitly {@link proto.GetUserInfoResponse.verify|verify} messages.
+         * Encodes the specified GetUserInfoResponse message. Does not implicitly {@link SdkProto.GetUserInfoResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
-         * @param {proto.IGetUserInfoResponse} message GetUserInfoResponse message or plain object to encode
+         * @param {SdkProto.IGetUserInfoResponse} message GetUserInfoResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7261,16 +7261,16 @@ $root.proto = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.userInfo != null && message.hasOwnProperty("userInfo"))
-                $root.proto.UserInfo.encode(message.userInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                $root.SdkProto.UserInfo.encode(message.userInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified GetUserInfoResponse message, length delimited. Does not implicitly {@link proto.GetUserInfoResponse.verify|verify} messages.
+         * Encodes the specified GetUserInfoResponse message, length delimited. Does not implicitly {@link SdkProto.GetUserInfoResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
-         * @param {proto.IGetUserInfoResponse} message GetUserInfoResponse message or plain object to encode
+         * @param {SdkProto.IGetUserInfoResponse} message GetUserInfoResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7281,23 +7281,23 @@ $root.proto = (function() {
         /**
          * Decodes a GetUserInfoResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.GetUserInfoResponse} GetUserInfoResponse
+         * @returns {SdkProto.GetUserInfoResponse} GetUserInfoResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         GetUserInfoResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.GetUserInfoResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.GetUserInfoResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.userInfo = $root.proto.UserInfo.decode(reader, reader.uint32());
+                    message.userInfo = $root.SdkProto.UserInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7310,10 +7310,10 @@ $root.proto = (function() {
         /**
          * Decodes a GetUserInfoResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.GetUserInfoResponse} GetUserInfoResponse
+         * @returns {SdkProto.GetUserInfoResponse} GetUserInfoResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -7326,7 +7326,7 @@ $root.proto = (function() {
         /**
          * Verifies a GetUserInfoResponse message.
          * @function verify
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -7335,7 +7335,7 @@ $root.proto = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.userInfo != null && message.hasOwnProperty("userInfo")) {
-                var error = $root.proto.UserInfo.verify(message.userInfo);
+                var error = $root.SdkProto.UserInfo.verify(message.userInfo);
                 if (error)
                     return "userInfo." + error;
             }
@@ -7345,19 +7345,19 @@ $root.proto = (function() {
         /**
          * Creates a GetUserInfoResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.GetUserInfoResponse} GetUserInfoResponse
+         * @returns {SdkProto.GetUserInfoResponse} GetUserInfoResponse
          */
         GetUserInfoResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.GetUserInfoResponse)
+            if (object instanceof $root.SdkProto.GetUserInfoResponse)
                 return object;
-            var message = new $root.proto.GetUserInfoResponse();
+            var message = new $root.SdkProto.GetUserInfoResponse();
             if (object.userInfo != null) {
                 if (typeof object.userInfo !== "object")
-                    throw TypeError(".proto.GetUserInfoResponse.userInfo: object expected");
-                message.userInfo = $root.proto.UserInfo.fromObject(object.userInfo);
+                    throw TypeError(".SdkProto.GetUserInfoResponse.userInfo: object expected");
+                message.userInfo = $root.SdkProto.UserInfo.fromObject(object.userInfo);
             }
             return message;
         };
@@ -7365,9 +7365,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a GetUserInfoResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @static
-         * @param {proto.GetUserInfoResponse} message GetUserInfoResponse
+         * @param {SdkProto.GetUserInfoResponse} message GetUserInfoResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -7378,14 +7378,14 @@ $root.proto = (function() {
             if (options.defaults)
                 object.userInfo = null;
             if (message.userInfo != null && message.hasOwnProperty("userInfo"))
-                object.userInfo = $root.proto.UserInfo.toObject(message.userInfo, options);
+                object.userInfo = $root.SdkProto.UserInfo.toObject(message.userInfo, options);
             return object;
         };
 
         /**
          * Converts this GetUserInfoResponse to JSON.
          * @function toJSON
-         * @memberof proto.GetUserInfoResponse
+         * @memberof SdkProto.GetUserInfoResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7396,21 +7396,21 @@ $root.proto = (function() {
         return GetUserInfoResponse;
     })();
 
-    proto.CoinBankResponse = (function() {
+    SdkProto.CoinBankResponse = (function() {
 
         /**
          * Properties of a CoinBankResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ICoinBankResponse
          */
 
         /**
          * Constructs a new CoinBankResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a CoinBankResponse.
          * @implements ICoinBankResponse
          * @constructor
-         * @param {proto.ICoinBankResponse=} [properties] Properties to set
+         * @param {SdkProto.ICoinBankResponse=} [properties] Properties to set
          */
         function CoinBankResponse(properties) {
             if (properties)
@@ -7422,21 +7422,21 @@ $root.proto = (function() {
         /**
          * Creates a new CoinBankResponse instance using the specified properties.
          * @function create
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
-         * @param {proto.ICoinBankResponse=} [properties] Properties to set
-         * @returns {proto.CoinBankResponse} CoinBankResponse instance
+         * @param {SdkProto.ICoinBankResponse=} [properties] Properties to set
+         * @returns {SdkProto.CoinBankResponse} CoinBankResponse instance
          */
         CoinBankResponse.create = function create(properties) {
             return new CoinBankResponse(properties);
         };
 
         /**
-         * Encodes the specified CoinBankResponse message. Does not implicitly {@link proto.CoinBankResponse.verify|verify} messages.
+         * Encodes the specified CoinBankResponse message. Does not implicitly {@link SdkProto.CoinBankResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
-         * @param {proto.ICoinBankResponse} message CoinBankResponse message or plain object to encode
+         * @param {SdkProto.ICoinBankResponse} message CoinBankResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7447,11 +7447,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified CoinBankResponse message, length delimited. Does not implicitly {@link proto.CoinBankResponse.verify|verify} messages.
+         * Encodes the specified CoinBankResponse message, length delimited. Does not implicitly {@link SdkProto.CoinBankResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
-         * @param {proto.ICoinBankResponse} message CoinBankResponse message or plain object to encode
+         * @param {SdkProto.ICoinBankResponse} message CoinBankResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7462,18 +7462,18 @@ $root.proto = (function() {
         /**
          * Decodes a CoinBankResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.CoinBankResponse} CoinBankResponse
+         * @returns {SdkProto.CoinBankResponse} CoinBankResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CoinBankResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.CoinBankResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.CoinBankResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7488,10 +7488,10 @@ $root.proto = (function() {
         /**
          * Decodes a CoinBankResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.CoinBankResponse} CoinBankResponse
+         * @returns {SdkProto.CoinBankResponse} CoinBankResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -7504,7 +7504,7 @@ $root.proto = (function() {
         /**
          * Verifies a CoinBankResponse message.
          * @function verify
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -7518,23 +7518,23 @@ $root.proto = (function() {
         /**
          * Creates a CoinBankResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.CoinBankResponse} CoinBankResponse
+         * @returns {SdkProto.CoinBankResponse} CoinBankResponse
          */
         CoinBankResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.CoinBankResponse)
+            if (object instanceof $root.SdkProto.CoinBankResponse)
                 return object;
-            return new $root.proto.CoinBankResponse();
+            return new $root.SdkProto.CoinBankResponse();
         };
 
         /**
          * Creates a plain object from a CoinBankResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @static
-         * @param {proto.CoinBankResponse} message CoinBankResponse
+         * @param {SdkProto.CoinBankResponse} message CoinBankResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -7545,7 +7545,7 @@ $root.proto = (function() {
         /**
          * Converts this CoinBankResponse to JSON.
          * @function toJSON
-         * @memberof proto.CoinBankResponse
+         * @memberof SdkProto.CoinBankResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7556,21 +7556,21 @@ $root.proto = (function() {
         return CoinBankResponse;
     })();
 
-    proto.ChangeSignResponse = (function() {
+    SdkProto.ChangeSignResponse = (function() {
 
         /**
          * Properties of a ChangeSignResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IChangeSignResponse
          */
 
         /**
          * Constructs a new ChangeSignResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a ChangeSignResponse.
          * @implements IChangeSignResponse
          * @constructor
-         * @param {proto.IChangeSignResponse=} [properties] Properties to set
+         * @param {SdkProto.IChangeSignResponse=} [properties] Properties to set
          */
         function ChangeSignResponse(properties) {
             if (properties)
@@ -7582,21 +7582,21 @@ $root.proto = (function() {
         /**
          * Creates a new ChangeSignResponse instance using the specified properties.
          * @function create
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
-         * @param {proto.IChangeSignResponse=} [properties] Properties to set
-         * @returns {proto.ChangeSignResponse} ChangeSignResponse instance
+         * @param {SdkProto.IChangeSignResponse=} [properties] Properties to set
+         * @returns {SdkProto.ChangeSignResponse} ChangeSignResponse instance
          */
         ChangeSignResponse.create = function create(properties) {
             return new ChangeSignResponse(properties);
         };
 
         /**
-         * Encodes the specified ChangeSignResponse message. Does not implicitly {@link proto.ChangeSignResponse.verify|verify} messages.
+         * Encodes the specified ChangeSignResponse message. Does not implicitly {@link SdkProto.ChangeSignResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
-         * @param {proto.IChangeSignResponse} message ChangeSignResponse message or plain object to encode
+         * @param {SdkProto.IChangeSignResponse} message ChangeSignResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7607,11 +7607,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified ChangeSignResponse message, length delimited. Does not implicitly {@link proto.ChangeSignResponse.verify|verify} messages.
+         * Encodes the specified ChangeSignResponse message, length delimited. Does not implicitly {@link SdkProto.ChangeSignResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
-         * @param {proto.IChangeSignResponse} message ChangeSignResponse message or plain object to encode
+         * @param {SdkProto.IChangeSignResponse} message ChangeSignResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7622,18 +7622,18 @@ $root.proto = (function() {
         /**
          * Decodes a ChangeSignResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.ChangeSignResponse} ChangeSignResponse
+         * @returns {SdkProto.ChangeSignResponse} ChangeSignResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         ChangeSignResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.ChangeSignResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.ChangeSignResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7648,10 +7648,10 @@ $root.proto = (function() {
         /**
          * Decodes a ChangeSignResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.ChangeSignResponse} ChangeSignResponse
+         * @returns {SdkProto.ChangeSignResponse} ChangeSignResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -7664,7 +7664,7 @@ $root.proto = (function() {
         /**
          * Verifies a ChangeSignResponse message.
          * @function verify
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -7678,23 +7678,23 @@ $root.proto = (function() {
         /**
          * Creates a ChangeSignResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.ChangeSignResponse} ChangeSignResponse
+         * @returns {SdkProto.ChangeSignResponse} ChangeSignResponse
          */
         ChangeSignResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.ChangeSignResponse)
+            if (object instanceof $root.SdkProto.ChangeSignResponse)
                 return object;
-            return new $root.proto.ChangeSignResponse();
+            return new $root.SdkProto.ChangeSignResponse();
         };
 
         /**
          * Creates a plain object from a ChangeSignResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @static
-         * @param {proto.ChangeSignResponse} message ChangeSignResponse
+         * @param {SdkProto.ChangeSignResponse} message ChangeSignResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -7705,7 +7705,7 @@ $root.proto = (function() {
         /**
          * Converts this ChangeSignResponse to JSON.
          * @function toJSON
-         * @memberof proto.ChangeSignResponse
+         * @memberof SdkProto.ChangeSignResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7716,21 +7716,21 @@ $root.proto = (function() {
         return ChangeSignResponse;
     })();
 
-    proto.TestDeviceIDResponse = (function() {
+    SdkProto.TestDeviceIDResponse = (function() {
 
         /**
          * Properties of a TestDeviceIDResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ITestDeviceIDResponse
          */
 
         /**
          * Constructs a new TestDeviceIDResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a TestDeviceIDResponse.
          * @implements ITestDeviceIDResponse
          * @constructor
-         * @param {proto.ITestDeviceIDResponse=} [properties] Properties to set
+         * @param {SdkProto.ITestDeviceIDResponse=} [properties] Properties to set
          */
         function TestDeviceIDResponse(properties) {
             if (properties)
@@ -7742,21 +7742,21 @@ $root.proto = (function() {
         /**
          * Creates a new TestDeviceIDResponse instance using the specified properties.
          * @function create
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
-         * @param {proto.ITestDeviceIDResponse=} [properties] Properties to set
-         * @returns {proto.TestDeviceIDResponse} TestDeviceIDResponse instance
+         * @param {SdkProto.ITestDeviceIDResponse=} [properties] Properties to set
+         * @returns {SdkProto.TestDeviceIDResponse} TestDeviceIDResponse instance
          */
         TestDeviceIDResponse.create = function create(properties) {
             return new TestDeviceIDResponse(properties);
         };
 
         /**
-         * Encodes the specified TestDeviceIDResponse message. Does not implicitly {@link proto.TestDeviceIDResponse.verify|verify} messages.
+         * Encodes the specified TestDeviceIDResponse message. Does not implicitly {@link SdkProto.TestDeviceIDResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
-         * @param {proto.ITestDeviceIDResponse} message TestDeviceIDResponse message or plain object to encode
+         * @param {SdkProto.ITestDeviceIDResponse} message TestDeviceIDResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7767,11 +7767,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified TestDeviceIDResponse message, length delimited. Does not implicitly {@link proto.TestDeviceIDResponse.verify|verify} messages.
+         * Encodes the specified TestDeviceIDResponse message, length delimited. Does not implicitly {@link SdkProto.TestDeviceIDResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
-         * @param {proto.ITestDeviceIDResponse} message TestDeviceIDResponse message or plain object to encode
+         * @param {SdkProto.ITestDeviceIDResponse} message TestDeviceIDResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -7782,18 +7782,18 @@ $root.proto = (function() {
         /**
          * Decodes a TestDeviceIDResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.TestDeviceIDResponse} TestDeviceIDResponse
+         * @returns {SdkProto.TestDeviceIDResponse} TestDeviceIDResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         TestDeviceIDResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TestDeviceIDResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.TestDeviceIDResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7808,10 +7808,10 @@ $root.proto = (function() {
         /**
          * Decodes a TestDeviceIDResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.TestDeviceIDResponse} TestDeviceIDResponse
+         * @returns {SdkProto.TestDeviceIDResponse} TestDeviceIDResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -7824,7 +7824,7 @@ $root.proto = (function() {
         /**
          * Verifies a TestDeviceIDResponse message.
          * @function verify
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -7838,23 +7838,23 @@ $root.proto = (function() {
         /**
          * Creates a TestDeviceIDResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.TestDeviceIDResponse} TestDeviceIDResponse
+         * @returns {SdkProto.TestDeviceIDResponse} TestDeviceIDResponse
          */
         TestDeviceIDResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.TestDeviceIDResponse)
+            if (object instanceof $root.SdkProto.TestDeviceIDResponse)
                 return object;
-            return new $root.proto.TestDeviceIDResponse();
+            return new $root.SdkProto.TestDeviceIDResponse();
         };
 
         /**
          * Creates a plain object from a TestDeviceIDResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @static
-         * @param {proto.TestDeviceIDResponse} message TestDeviceIDResponse
+         * @param {SdkProto.TestDeviceIDResponse} message TestDeviceIDResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -7865,7 +7865,7 @@ $root.proto = (function() {
         /**
          * Converts this TestDeviceIDResponse to JSON.
          * @function toJSON
-         * @memberof proto.TestDeviceIDResponse
+         * @memberof SdkProto.TestDeviceIDResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -7876,11 +7876,11 @@ $root.proto = (function() {
         return TestDeviceIDResponse;
     })();
 
-    proto.CreateTableResponse = (function() {
+    SdkProto.CreateTableResponse = (function() {
 
         /**
          * Properties of a CreateTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ICreateTableResponse
          * @property {string|null} [tableId] CreateTableResponse tableId
          * @property {number|null} [gameId] CreateTableResponse gameId
@@ -7892,16 +7892,16 @@ $root.proto = (function() {
          * @property {number|null} [applicant] CreateTableResponse applicant
          * @property {number|null} [applyTime] CreateTableResponse applyTime
          * @property {number|Long|null} [startApplyTime] CreateTableResponse startApplyTime
-         * @property {Array.<proto.IUser>|null} [users] CreateTableResponse users
+         * @property {Array.<SdkProto.IUser>|null} [users] CreateTableResponse users
          */
 
         /**
          * Constructs a new CreateTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a CreateTableResponse.
          * @implements ICreateTableResponse
          * @constructor
-         * @param {proto.ICreateTableResponse=} [properties] Properties to set
+         * @param {SdkProto.ICreateTableResponse=} [properties] Properties to set
          */
         function CreateTableResponse(properties) {
             this.users = [];
@@ -7914,7 +7914,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse tableId.
          * @member {string} tableId
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.tableId = "";
@@ -7922,7 +7922,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse gameId.
          * @member {number} gameId
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.gameId = 0;
@@ -7930,7 +7930,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse state.
          * @member {number} state
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.state = 0;
@@ -7938,7 +7938,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse owner.
          * @member {number} owner
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.owner = 0;
@@ -7946,7 +7946,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.currentRound = 0;
@@ -7954,7 +7954,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.totalRound = 0;
@@ -7962,7 +7962,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse gameInfo.
          * @member {string} gameInfo
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.gameInfo = "";
@@ -7970,7 +7970,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse applicant.
          * @member {number} applicant
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.applicant = 0;
@@ -7978,7 +7978,7 @@ $root.proto = (function() {
         /**
          * CreateTableResponse applyTime.
          * @member {number} applyTime
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.applyTime = 0;
@@ -7986,15 +7986,15 @@ $root.proto = (function() {
         /**
          * CreateTableResponse startApplyTime.
          * @member {number|Long} startApplyTime
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.startApplyTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * CreateTableResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.CreateTableResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          */
         CreateTableResponse.prototype.users = $util.emptyArray;
@@ -8002,21 +8002,21 @@ $root.proto = (function() {
         /**
          * Creates a new CreateTableResponse instance using the specified properties.
          * @function create
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
-         * @param {proto.ICreateTableResponse=} [properties] Properties to set
-         * @returns {proto.CreateTableResponse} CreateTableResponse instance
+         * @param {SdkProto.ICreateTableResponse=} [properties] Properties to set
+         * @returns {SdkProto.CreateTableResponse} CreateTableResponse instance
          */
         CreateTableResponse.create = function create(properties) {
             return new CreateTableResponse(properties);
         };
 
         /**
-         * Encodes the specified CreateTableResponse message. Does not implicitly {@link proto.CreateTableResponse.verify|verify} messages.
+         * Encodes the specified CreateTableResponse message. Does not implicitly {@link SdkProto.CreateTableResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
-         * @param {proto.ICreateTableResponse} message CreateTableResponse message or plain object to encode
+         * @param {SdkProto.ICreateTableResponse} message CreateTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8045,16 +8045,16 @@ $root.proto = (function() {
                 writer.uint32(/* id 10, wireType 0 =*/80).int64(message.startApplyTime);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified CreateTableResponse message, length delimited. Does not implicitly {@link proto.CreateTableResponse.verify|verify} messages.
+         * Encodes the specified CreateTableResponse message, length delimited. Does not implicitly {@link SdkProto.CreateTableResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
-         * @param {proto.ICreateTableResponse} message CreateTableResponse message or plain object to encode
+         * @param {SdkProto.ICreateTableResponse} message CreateTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8065,18 +8065,18 @@ $root.proto = (function() {
         /**
          * Decodes a CreateTableResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.CreateTableResponse} CreateTableResponse
+         * @returns {SdkProto.CreateTableResponse} CreateTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         CreateTableResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.CreateTableResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.CreateTableResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -8113,7 +8113,7 @@ $root.proto = (function() {
                 case 11:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8126,10 +8126,10 @@ $root.proto = (function() {
         /**
          * Decodes a CreateTableResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.CreateTableResponse} CreateTableResponse
+         * @returns {SdkProto.CreateTableResponse} CreateTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -8142,7 +8142,7 @@ $root.proto = (function() {
         /**
          * Verifies a CreateTableResponse message.
          * @function verify
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -8184,7 +8184,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -8195,15 +8195,15 @@ $root.proto = (function() {
         /**
          * Creates a CreateTableResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.CreateTableResponse} CreateTableResponse
+         * @returns {SdkProto.CreateTableResponse} CreateTableResponse
          */
         CreateTableResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.CreateTableResponse)
+            if (object instanceof $root.SdkProto.CreateTableResponse)
                 return object;
-            var message = new $root.proto.CreateTableResponse();
+            var message = new $root.SdkProto.CreateTableResponse();
             if (object.tableId != null)
                 message.tableId = String(object.tableId);
             if (object.gameId != null)
@@ -8233,12 +8233,12 @@ $root.proto = (function() {
                     message.startApplyTime = new $util.LongBits(object.startApplyTime.low >>> 0, object.startApplyTime.high >>> 0).toNumber();
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.CreateTableResponse.users: array expected");
+                    throw TypeError(".SdkProto.CreateTableResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.CreateTableResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.CreateTableResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             return message;
@@ -8247,9 +8247,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a CreateTableResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @static
-         * @param {proto.CreateTableResponse} message CreateTableResponse
+         * @param {SdkProto.CreateTableResponse} message CreateTableResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -8301,7 +8301,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             return object;
         };
@@ -8309,7 +8309,7 @@ $root.proto = (function() {
         /**
          * Converts this CreateTableResponse to JSON.
          * @function toJSON
-         * @memberof proto.CreateTableResponse
+         * @memberof SdkProto.CreateTableResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -8320,11 +8320,11 @@ $root.proto = (function() {
         return CreateTableResponse;
     })();
 
-    proto.JoinTableResponse = (function() {
+    SdkProto.JoinTableResponse = (function() {
 
         /**
          * Properties of a JoinTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IJoinTableResponse
          * @property {string|null} [tableId] JoinTableResponse tableId
          * @property {number|null} [gameId] JoinTableResponse gameId
@@ -8336,16 +8336,16 @@ $root.proto = (function() {
          * @property {number|null} [applicant] JoinTableResponse applicant
          * @property {number|null} [applyTime] JoinTableResponse applyTime
          * @property {number|Long|null} [startApplyTime] JoinTableResponse startApplyTime
-         * @property {Array.<proto.IUser>|null} [users] JoinTableResponse users
+         * @property {Array.<SdkProto.IUser>|null} [users] JoinTableResponse users
          */
 
         /**
          * Constructs a new JoinTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a JoinTableResponse.
          * @implements IJoinTableResponse
          * @constructor
-         * @param {proto.IJoinTableResponse=} [properties] Properties to set
+         * @param {SdkProto.IJoinTableResponse=} [properties] Properties to set
          */
         function JoinTableResponse(properties) {
             this.users = [];
@@ -8358,7 +8358,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse tableId.
          * @member {string} tableId
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.tableId = "";
@@ -8366,7 +8366,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse gameId.
          * @member {number} gameId
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.gameId = 0;
@@ -8374,7 +8374,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse state.
          * @member {number} state
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.state = 0;
@@ -8382,7 +8382,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse owner.
          * @member {number} owner
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.owner = 0;
@@ -8390,7 +8390,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.currentRound = 0;
@@ -8398,7 +8398,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.totalRound = 0;
@@ -8406,7 +8406,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse gameInfo.
          * @member {string} gameInfo
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.gameInfo = "";
@@ -8414,7 +8414,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse applicant.
          * @member {number} applicant
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.applicant = 0;
@@ -8422,7 +8422,7 @@ $root.proto = (function() {
         /**
          * JoinTableResponse applyTime.
          * @member {number} applyTime
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.applyTime = 0;
@@ -8430,15 +8430,15 @@ $root.proto = (function() {
         /**
          * JoinTableResponse startApplyTime.
          * @member {number|Long} startApplyTime
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.startApplyTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * JoinTableResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.JoinTableResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          */
         JoinTableResponse.prototype.users = $util.emptyArray;
@@ -8446,21 +8446,21 @@ $root.proto = (function() {
         /**
          * Creates a new JoinTableResponse instance using the specified properties.
          * @function create
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
-         * @param {proto.IJoinTableResponse=} [properties] Properties to set
-         * @returns {proto.JoinTableResponse} JoinTableResponse instance
+         * @param {SdkProto.IJoinTableResponse=} [properties] Properties to set
+         * @returns {SdkProto.JoinTableResponse} JoinTableResponse instance
          */
         JoinTableResponse.create = function create(properties) {
             return new JoinTableResponse(properties);
         };
 
         /**
-         * Encodes the specified JoinTableResponse message. Does not implicitly {@link proto.JoinTableResponse.verify|verify} messages.
+         * Encodes the specified JoinTableResponse message. Does not implicitly {@link SdkProto.JoinTableResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
-         * @param {proto.IJoinTableResponse} message JoinTableResponse message or plain object to encode
+         * @param {SdkProto.IJoinTableResponse} message JoinTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8489,16 +8489,16 @@ $root.proto = (function() {
                 writer.uint32(/* id 10, wireType 0 =*/80).int64(message.startApplyTime);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified JoinTableResponse message, length delimited. Does not implicitly {@link proto.JoinTableResponse.verify|verify} messages.
+         * Encodes the specified JoinTableResponse message, length delimited. Does not implicitly {@link SdkProto.JoinTableResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
-         * @param {proto.IJoinTableResponse} message JoinTableResponse message or plain object to encode
+         * @param {SdkProto.IJoinTableResponse} message JoinTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8509,18 +8509,18 @@ $root.proto = (function() {
         /**
          * Decodes a JoinTableResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.JoinTableResponse} JoinTableResponse
+         * @returns {SdkProto.JoinTableResponse} JoinTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         JoinTableResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.JoinTableResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.JoinTableResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -8557,7 +8557,7 @@ $root.proto = (function() {
                 case 11:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8570,10 +8570,10 @@ $root.proto = (function() {
         /**
          * Decodes a JoinTableResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.JoinTableResponse} JoinTableResponse
+         * @returns {SdkProto.JoinTableResponse} JoinTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -8586,7 +8586,7 @@ $root.proto = (function() {
         /**
          * Verifies a JoinTableResponse message.
          * @function verify
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -8628,7 +8628,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -8639,15 +8639,15 @@ $root.proto = (function() {
         /**
          * Creates a JoinTableResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.JoinTableResponse} JoinTableResponse
+         * @returns {SdkProto.JoinTableResponse} JoinTableResponse
          */
         JoinTableResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.JoinTableResponse)
+            if (object instanceof $root.SdkProto.JoinTableResponse)
                 return object;
-            var message = new $root.proto.JoinTableResponse();
+            var message = new $root.SdkProto.JoinTableResponse();
             if (object.tableId != null)
                 message.tableId = String(object.tableId);
             if (object.gameId != null)
@@ -8677,12 +8677,12 @@ $root.proto = (function() {
                     message.startApplyTime = new $util.LongBits(object.startApplyTime.low >>> 0, object.startApplyTime.high >>> 0).toNumber();
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.JoinTableResponse.users: array expected");
+                    throw TypeError(".SdkProto.JoinTableResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.JoinTableResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.JoinTableResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             return message;
@@ -8691,9 +8691,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a JoinTableResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @static
-         * @param {proto.JoinTableResponse} message JoinTableResponse
+         * @param {SdkProto.JoinTableResponse} message JoinTableResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -8745,7 +8745,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             return object;
         };
@@ -8753,7 +8753,7 @@ $root.proto = (function() {
         /**
          * Converts this JoinTableResponse to JSON.
          * @function toJSON
-         * @memberof proto.JoinTableResponse
+         * @memberof SdkProto.JoinTableResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -8764,22 +8764,22 @@ $root.proto = (function() {
         return JoinTableResponse;
     })();
 
-    proto.SendJoinTableResponse = (function() {
+    SdkProto.SendJoinTableResponse = (function() {
 
         /**
          * Properties of a SendJoinTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendJoinTableResponse
-         * @property {proto.IUser|null} [user] SendJoinTableResponse user
+         * @property {SdkProto.IUser|null} [user] SendJoinTableResponse user
          */
 
         /**
          * Constructs a new SendJoinTableResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendJoinTableResponse.
          * @implements ISendJoinTableResponse
          * @constructor
-         * @param {proto.ISendJoinTableResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendJoinTableResponse=} [properties] Properties to set
          */
         function SendJoinTableResponse(properties) {
             if (properties)
@@ -8790,8 +8790,8 @@ $root.proto = (function() {
 
         /**
          * SendJoinTableResponse user.
-         * @member {proto.IUser|null|undefined} user
-         * @memberof proto.SendJoinTableResponse
+         * @member {SdkProto.IUser|null|undefined} user
+         * @memberof SdkProto.SendJoinTableResponse
          * @instance
          */
         SendJoinTableResponse.prototype.user = null;
@@ -8799,21 +8799,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendJoinTableResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
-         * @param {proto.ISendJoinTableResponse=} [properties] Properties to set
-         * @returns {proto.SendJoinTableResponse} SendJoinTableResponse instance
+         * @param {SdkProto.ISendJoinTableResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendJoinTableResponse} SendJoinTableResponse instance
          */
         SendJoinTableResponse.create = function create(properties) {
             return new SendJoinTableResponse(properties);
         };
 
         /**
-         * Encodes the specified SendJoinTableResponse message. Does not implicitly {@link proto.SendJoinTableResponse.verify|verify} messages.
+         * Encodes the specified SendJoinTableResponse message. Does not implicitly {@link SdkProto.SendJoinTableResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
-         * @param {proto.ISendJoinTableResponse} message SendJoinTableResponse message or plain object to encode
+         * @param {SdkProto.ISendJoinTableResponse} message SendJoinTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8821,16 +8821,16 @@ $root.proto = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.user != null && message.hasOwnProperty("user"))
-                $root.proto.User.encode(message.user, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                $root.SdkProto.User.encode(message.user, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified SendJoinTableResponse message, length delimited. Does not implicitly {@link proto.SendJoinTableResponse.verify|verify} messages.
+         * Encodes the specified SendJoinTableResponse message, length delimited. Does not implicitly {@link SdkProto.SendJoinTableResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
-         * @param {proto.ISendJoinTableResponse} message SendJoinTableResponse message or plain object to encode
+         * @param {SdkProto.ISendJoinTableResponse} message SendJoinTableResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -8841,23 +8841,23 @@ $root.proto = (function() {
         /**
          * Decodes a SendJoinTableResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendJoinTableResponse} SendJoinTableResponse
+         * @returns {SdkProto.SendJoinTableResponse} SendJoinTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendJoinTableResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendJoinTableResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendJoinTableResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.user = $root.proto.User.decode(reader, reader.uint32());
+                    message.user = $root.SdkProto.User.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -8870,10 +8870,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendJoinTableResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendJoinTableResponse} SendJoinTableResponse
+         * @returns {SdkProto.SendJoinTableResponse} SendJoinTableResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -8886,7 +8886,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendJoinTableResponse message.
          * @function verify
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -8895,7 +8895,7 @@ $root.proto = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.user != null && message.hasOwnProperty("user")) {
-                var error = $root.proto.User.verify(message.user);
+                var error = $root.SdkProto.User.verify(message.user);
                 if (error)
                     return "user." + error;
             }
@@ -8905,19 +8905,19 @@ $root.proto = (function() {
         /**
          * Creates a SendJoinTableResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendJoinTableResponse} SendJoinTableResponse
+         * @returns {SdkProto.SendJoinTableResponse} SendJoinTableResponse
          */
         SendJoinTableResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendJoinTableResponse)
+            if (object instanceof $root.SdkProto.SendJoinTableResponse)
                 return object;
-            var message = new $root.proto.SendJoinTableResponse();
+            var message = new $root.SdkProto.SendJoinTableResponse();
             if (object.user != null) {
                 if (typeof object.user !== "object")
-                    throw TypeError(".proto.SendJoinTableResponse.user: object expected");
-                message.user = $root.proto.User.fromObject(object.user);
+                    throw TypeError(".SdkProto.SendJoinTableResponse.user: object expected");
+                message.user = $root.SdkProto.User.fromObject(object.user);
             }
             return message;
         };
@@ -8925,9 +8925,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendJoinTableResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @static
-         * @param {proto.SendJoinTableResponse} message SendJoinTableResponse
+         * @param {SdkProto.SendJoinTableResponse} message SendJoinTableResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -8938,14 +8938,14 @@ $root.proto = (function() {
             if (options.defaults)
                 object.user = null;
             if (message.user != null && message.hasOwnProperty("user"))
-                object.user = $root.proto.User.toObject(message.user, options);
+                object.user = $root.SdkProto.User.toObject(message.user, options);
             return object;
         };
 
         /**
          * Converts this SendJoinTableResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendJoinTableResponse
+         * @memberof SdkProto.SendJoinTableResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -8956,24 +8956,24 @@ $root.proto = (function() {
         return SendJoinTableResponse;
     })();
 
-    proto.SendUserReadyResponse = (function() {
+    SdkProto.SendUserReadyResponse = (function() {
 
         /**
          * Properties of a SendUserReadyResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserReadyResponse
          * @property {number|null} [userId] SendUserReadyResponse userId
          * @property {number|null} [state] SendUserReadyResponse state
-         * @property {Array.<proto.IUserReady>|null} [users] SendUserReadyResponse users
+         * @property {Array.<SdkProto.IUserReady>|null} [users] SendUserReadyResponse users
          */
 
         /**
          * Constructs a new SendUserReadyResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserReadyResponse.
          * @implements ISendUserReadyResponse
          * @constructor
-         * @param {proto.ISendUserReadyResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserReadyResponse=} [properties] Properties to set
          */
         function SendUserReadyResponse(properties) {
             this.users = [];
@@ -8986,7 +8986,7 @@ $root.proto = (function() {
         /**
          * SendUserReadyResponse userId.
          * @member {number} userId
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @instance
          */
         SendUserReadyResponse.prototype.userId = 0;
@@ -8994,15 +8994,15 @@ $root.proto = (function() {
         /**
          * SendUserReadyResponse state.
          * @member {number} state
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @instance
          */
         SendUserReadyResponse.prototype.state = 0;
 
         /**
          * SendUserReadyResponse users.
-         * @member {Array.<proto.IUserReady>} users
-         * @memberof proto.SendUserReadyResponse
+         * @member {Array.<SdkProto.IUserReady>} users
+         * @memberof SdkProto.SendUserReadyResponse
          * @instance
          */
         SendUserReadyResponse.prototype.users = $util.emptyArray;
@@ -9010,21 +9010,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserReadyResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
-         * @param {proto.ISendUserReadyResponse=} [properties] Properties to set
-         * @returns {proto.SendUserReadyResponse} SendUserReadyResponse instance
+         * @param {SdkProto.ISendUserReadyResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserReadyResponse} SendUserReadyResponse instance
          */
         SendUserReadyResponse.create = function create(properties) {
             return new SendUserReadyResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserReadyResponse message. Does not implicitly {@link proto.SendUserReadyResponse.verify|verify} messages.
+         * Encodes the specified SendUserReadyResponse message. Does not implicitly {@link SdkProto.SendUserReadyResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
-         * @param {proto.ISendUserReadyResponse} message SendUserReadyResponse message or plain object to encode
+         * @param {SdkProto.ISendUserReadyResponse} message SendUserReadyResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9037,16 +9037,16 @@ $root.proto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.UserReady.encode(message.users[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    $root.SdkProto.UserReady.encode(message.users[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified SendUserReadyResponse message, length delimited. Does not implicitly {@link proto.SendUserReadyResponse.verify|verify} messages.
+         * Encodes the specified SendUserReadyResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserReadyResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
-         * @param {proto.ISendUserReadyResponse} message SendUserReadyResponse message or plain object to encode
+         * @param {SdkProto.ISendUserReadyResponse} message SendUserReadyResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9057,18 +9057,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserReadyResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserReadyResponse} SendUserReadyResponse
+         * @returns {SdkProto.SendUserReadyResponse} SendUserReadyResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserReadyResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserReadyResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserReadyResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -9081,7 +9081,7 @@ $root.proto = (function() {
                 case 3:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.UserReady.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.UserReady.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9094,10 +9094,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserReadyResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserReadyResponse} SendUserReadyResponse
+         * @returns {SdkProto.SendUserReadyResponse} SendUserReadyResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -9110,7 +9110,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserReadyResponse message.
          * @function verify
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -9128,7 +9128,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.UserReady.verify(message.users[i]);
+                    var error = $root.SdkProto.UserReady.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -9139,27 +9139,27 @@ $root.proto = (function() {
         /**
          * Creates a SendUserReadyResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserReadyResponse} SendUserReadyResponse
+         * @returns {SdkProto.SendUserReadyResponse} SendUserReadyResponse
          */
         SendUserReadyResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserReadyResponse)
+            if (object instanceof $root.SdkProto.SendUserReadyResponse)
                 return object;
-            var message = new $root.proto.SendUserReadyResponse();
+            var message = new $root.SdkProto.SendUserReadyResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.state != null)
                 message.state = object.state | 0;
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.SendUserReadyResponse.users: array expected");
+                    throw TypeError(".SdkProto.SendUserReadyResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.SendUserReadyResponse.users: object expected");
-                    message.users[i] = $root.proto.UserReady.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.SendUserReadyResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.UserReady.fromObject(object.users[i]);
                 }
             }
             return message;
@@ -9168,9 +9168,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserReadyResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @static
-         * @param {proto.SendUserReadyResponse} message SendUserReadyResponse
+         * @param {SdkProto.SendUserReadyResponse} message SendUserReadyResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -9191,7 +9191,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.UserReady.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.UserReady.toObject(message.users[j], options);
             }
             return object;
         };
@@ -9199,7 +9199,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserReadyResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserReadyResponse
+         * @memberof SdkProto.SendUserReadyResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -9210,11 +9210,11 @@ $root.proto = (function() {
         return SendUserReadyResponse;
     })();
 
-    proto.SendCardsResponse = (function() {
+    SdkProto.SendCardsResponse = (function() {
 
         /**
          * Properties of a SendCardsResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendCardsResponse
          * @property {number|null} [zhuangPos] SendCardsResponse zhuangPos
          * @property {number|null} [currentRound] SendCardsResponse currentRound
@@ -9222,18 +9222,18 @@ $root.proto = (function() {
          * @property {number|null} [nextDiscardPos] SendCardsResponse nextDiscardPos
          * @property {string|null} [gameInfo] SendCardsResponse gameInfo
          * @property {number|null} [totalRound] SendCardsResponse totalRound
-         * @property {Array.<proto.IUser>|null} [users] SendCardsResponse users
+         * @property {Array.<SdkProto.IUser>|null} [users] SendCardsResponse users
          * @property {number|null} [piaoPai] SendCardsResponse piaoPai
          * @property {number|null} [piaoPaiPosition] SendCardsResponse piaoPaiPosition
          */
 
         /**
          * Constructs a new SendCardsResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendCardsResponse.
          * @implements ISendCardsResponse
          * @constructor
-         * @param {proto.ISendCardsResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendCardsResponse=} [properties] Properties to set
          */
         function SendCardsResponse(properties) {
             this.users = [];
@@ -9246,7 +9246,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse zhuangPos.
          * @member {number} zhuangPos
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.zhuangPos = 0;
@@ -9254,7 +9254,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.currentRound = 0;
@@ -9262,7 +9262,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse state.
          * @member {number} state
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.state = 0;
@@ -9270,7 +9270,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse nextDiscardPos.
          * @member {number} nextDiscardPos
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.nextDiscardPos = 0;
@@ -9278,7 +9278,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse gameInfo.
          * @member {string} gameInfo
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.gameInfo = "";
@@ -9286,15 +9286,15 @@ $root.proto = (function() {
         /**
          * SendCardsResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.totalRound = 0;
 
         /**
          * SendCardsResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.SendCardsResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.users = $util.emptyArray;
@@ -9302,7 +9302,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse piaoPai.
          * @member {number} piaoPai
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.piaoPai = 0;
@@ -9310,7 +9310,7 @@ $root.proto = (function() {
         /**
          * SendCardsResponse piaoPaiPosition.
          * @member {number} piaoPaiPosition
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          */
         SendCardsResponse.prototype.piaoPaiPosition = 0;
@@ -9318,21 +9318,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendCardsResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
-         * @param {proto.ISendCardsResponse=} [properties] Properties to set
-         * @returns {proto.SendCardsResponse} SendCardsResponse instance
+         * @param {SdkProto.ISendCardsResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendCardsResponse} SendCardsResponse instance
          */
         SendCardsResponse.create = function create(properties) {
             return new SendCardsResponse(properties);
         };
 
         /**
-         * Encodes the specified SendCardsResponse message. Does not implicitly {@link proto.SendCardsResponse.verify|verify} messages.
+         * Encodes the specified SendCardsResponse message. Does not implicitly {@link SdkProto.SendCardsResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
-         * @param {proto.ISendCardsResponse} message SendCardsResponse message or plain object to encode
+         * @param {SdkProto.ISendCardsResponse} message SendCardsResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9353,7 +9353,7 @@ $root.proto = (function() {
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.totalRound);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             if (message.piaoPai != null && message.hasOwnProperty("piaoPai"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int32(message.piaoPai);
             if (message.piaoPaiPosition != null && message.hasOwnProperty("piaoPaiPosition"))
@@ -9362,11 +9362,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendCardsResponse message, length delimited. Does not implicitly {@link proto.SendCardsResponse.verify|verify} messages.
+         * Encodes the specified SendCardsResponse message, length delimited. Does not implicitly {@link SdkProto.SendCardsResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
-         * @param {proto.ISendCardsResponse} message SendCardsResponse message or plain object to encode
+         * @param {SdkProto.ISendCardsResponse} message SendCardsResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9377,18 +9377,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendCardsResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendCardsResponse} SendCardsResponse
+         * @returns {SdkProto.SendCardsResponse} SendCardsResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendCardsResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendCardsResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendCardsResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -9413,7 +9413,7 @@ $root.proto = (function() {
                 case 7:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 case 8:
                     message.piaoPai = reader.int32();
@@ -9432,10 +9432,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendCardsResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendCardsResponse} SendCardsResponse
+         * @returns {SdkProto.SendCardsResponse} SendCardsResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -9448,7 +9448,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendCardsResponse message.
          * @function verify
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -9478,7 +9478,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -9495,15 +9495,15 @@ $root.proto = (function() {
         /**
          * Creates a SendCardsResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendCardsResponse} SendCardsResponse
+         * @returns {SdkProto.SendCardsResponse} SendCardsResponse
          */
         SendCardsResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendCardsResponse)
+            if (object instanceof $root.SdkProto.SendCardsResponse)
                 return object;
-            var message = new $root.proto.SendCardsResponse();
+            var message = new $root.SdkProto.SendCardsResponse();
             if (object.zhuangPos != null)
                 message.zhuangPos = object.zhuangPos | 0;
             if (object.currentRound != null)
@@ -9518,12 +9518,12 @@ $root.proto = (function() {
                 message.totalRound = object.totalRound | 0;
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.SendCardsResponse.users: array expected");
+                    throw TypeError(".SdkProto.SendCardsResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.SendCardsResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.SendCardsResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             if (object.piaoPai != null)
@@ -9536,9 +9536,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendCardsResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @static
-         * @param {proto.SendCardsResponse} message SendCardsResponse
+         * @param {SdkProto.SendCardsResponse} message SendCardsResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -9573,7 +9573,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             if (message.piaoPai != null && message.hasOwnProperty("piaoPai"))
                 object.piaoPai = message.piaoPai;
@@ -9585,7 +9585,7 @@ $root.proto = (function() {
         /**
          * Converts this SendCardsResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendCardsResponse
+         * @memberof SdkProto.SendCardsResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -9596,11 +9596,11 @@ $root.proto = (function() {
         return SendCardsResponse;
     })();
 
-    proto.SendDisCardResponse = (function() {
+    SdkProto.SendDisCardResponse = (function() {
 
         /**
          * Properties of a SendDisCardResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendDisCardResponse
          * @property {number|null} [userId] SendDisCardResponse userId
          * @property {Array.<number>|null} [handCards] SendDisCardResponse handCards
@@ -9613,11 +9613,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendDisCardResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendDisCardResponse.
          * @implements ISendDisCardResponse
          * @constructor
-         * @param {proto.ISendDisCardResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendDisCardResponse=} [properties] Properties to set
          */
         function SendDisCardResponse(properties) {
             this.handCards = [];
@@ -9632,7 +9632,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse userId.
          * @member {number} userId
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.userId = 0;
@@ -9640,7 +9640,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse handCards.
          * @member {Array.<number>} handCards
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.handCards = $util.emptyArray;
@@ -9648,7 +9648,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse outCards.
          * @member {Array.<number>} outCards
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.outCards = $util.emptyArray;
@@ -9656,7 +9656,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse changeCards.
          * @member {Array.<number>} changeCards
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.changeCards = $util.emptyArray;
@@ -9664,7 +9664,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse nextPlayer.
          * @member {number} nextPlayer
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.nextPlayer = 0;
@@ -9672,7 +9672,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse lastPlayer.
          * @member {number} lastPlayer
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.lastPlayer = 0;
@@ -9680,7 +9680,7 @@ $root.proto = (function() {
         /**
          * SendDisCardResponse currTimes.
          * @member {number} currTimes
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          */
         SendDisCardResponse.prototype.currTimes = 0;
@@ -9688,21 +9688,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendDisCardResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
-         * @param {proto.ISendDisCardResponse=} [properties] Properties to set
-         * @returns {proto.SendDisCardResponse} SendDisCardResponse instance
+         * @param {SdkProto.ISendDisCardResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendDisCardResponse} SendDisCardResponse instance
          */
         SendDisCardResponse.create = function create(properties) {
             return new SendDisCardResponse(properties);
         };
 
         /**
-         * Encodes the specified SendDisCardResponse message. Does not implicitly {@link proto.SendDisCardResponse.verify|verify} messages.
+         * Encodes the specified SendDisCardResponse message. Does not implicitly {@link SdkProto.SendDisCardResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
-         * @param {proto.ISendDisCardResponse} message SendDisCardResponse message or plain object to encode
+         * @param {SdkProto.ISendDisCardResponse} message SendDisCardResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9739,11 +9739,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendDisCardResponse message, length delimited. Does not implicitly {@link proto.SendDisCardResponse.verify|verify} messages.
+         * Encodes the specified SendDisCardResponse message, length delimited. Does not implicitly {@link SdkProto.SendDisCardResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
-         * @param {proto.ISendDisCardResponse} message SendDisCardResponse message or plain object to encode
+         * @param {SdkProto.ISendDisCardResponse} message SendDisCardResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -9754,18 +9754,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendDisCardResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendDisCardResponse} SendDisCardResponse
+         * @returns {SdkProto.SendDisCardResponse} SendDisCardResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendDisCardResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendDisCardResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendDisCardResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -9822,10 +9822,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendDisCardResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendDisCardResponse} SendDisCardResponse
+         * @returns {SdkProto.SendDisCardResponse} SendDisCardResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -9838,7 +9838,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendDisCardResponse message.
          * @function verify
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -9885,34 +9885,34 @@ $root.proto = (function() {
         /**
          * Creates a SendDisCardResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendDisCardResponse} SendDisCardResponse
+         * @returns {SdkProto.SendDisCardResponse} SendDisCardResponse
          */
         SendDisCardResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendDisCardResponse)
+            if (object instanceof $root.SdkProto.SendDisCardResponse)
                 return object;
-            var message = new $root.proto.SendDisCardResponse();
+            var message = new $root.SdkProto.SendDisCardResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.handCards) {
                 if (!Array.isArray(object.handCards))
-                    throw TypeError(".proto.SendDisCardResponse.handCards: array expected");
+                    throw TypeError(".SdkProto.SendDisCardResponse.handCards: array expected");
                 message.handCards = [];
                 for (var i = 0; i < object.handCards.length; ++i)
                     message.handCards[i] = object.handCards[i] | 0;
             }
             if (object.outCards) {
                 if (!Array.isArray(object.outCards))
-                    throw TypeError(".proto.SendDisCardResponse.outCards: array expected");
+                    throw TypeError(".SdkProto.SendDisCardResponse.outCards: array expected");
                 message.outCards = [];
                 for (var i = 0; i < object.outCards.length; ++i)
                     message.outCards[i] = object.outCards[i] | 0;
             }
             if (object.changeCards) {
                 if (!Array.isArray(object.changeCards))
-                    throw TypeError(".proto.SendDisCardResponse.changeCards: array expected");
+                    throw TypeError(".SdkProto.SendDisCardResponse.changeCards: array expected");
                 message.changeCards = [];
                 for (var i = 0; i < object.changeCards.length; ++i)
                     message.changeCards[i] = object.changeCards[i] | 0;
@@ -9929,9 +9929,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendDisCardResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @static
-         * @param {proto.SendDisCardResponse} message SendDisCardResponse
+         * @param {SdkProto.SendDisCardResponse} message SendDisCardResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -9979,7 +9979,7 @@ $root.proto = (function() {
         /**
          * Converts this SendDisCardResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendDisCardResponse
+         * @memberof SdkProto.SendDisCardResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -9990,11 +9990,11 @@ $root.proto = (function() {
         return SendDisCardResponse;
     })();
 
-    proto.SendPassPaiResponse = (function() {
+    SdkProto.SendPassPaiResponse = (function() {
 
         /**
          * Properties of a SendPassPaiResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendPassPaiResponse
          * @property {number|null} [userId] SendPassPaiResponse userId
          * @property {number|null} [nextPlayer] SendPassPaiResponse nextPlayer
@@ -10003,11 +10003,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendPassPaiResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendPassPaiResponse.
          * @implements ISendPassPaiResponse
          * @constructor
-         * @param {proto.ISendPassPaiResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendPassPaiResponse=} [properties] Properties to set
          */
         function SendPassPaiResponse(properties) {
             if (properties)
@@ -10019,7 +10019,7 @@ $root.proto = (function() {
         /**
          * SendPassPaiResponse userId.
          * @member {number} userId
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @instance
          */
         SendPassPaiResponse.prototype.userId = 0;
@@ -10027,7 +10027,7 @@ $root.proto = (function() {
         /**
          * SendPassPaiResponse nextPlayer.
          * @member {number} nextPlayer
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @instance
          */
         SendPassPaiResponse.prototype.nextPlayer = 0;
@@ -10035,7 +10035,7 @@ $root.proto = (function() {
         /**
          * SendPassPaiResponse lastPlayer.
          * @member {number} lastPlayer
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @instance
          */
         SendPassPaiResponse.prototype.lastPlayer = 0;
@@ -10043,21 +10043,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendPassPaiResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
-         * @param {proto.ISendPassPaiResponse=} [properties] Properties to set
-         * @returns {proto.SendPassPaiResponse} SendPassPaiResponse instance
+         * @param {SdkProto.ISendPassPaiResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendPassPaiResponse} SendPassPaiResponse instance
          */
         SendPassPaiResponse.create = function create(properties) {
             return new SendPassPaiResponse(properties);
         };
 
         /**
-         * Encodes the specified SendPassPaiResponse message. Does not implicitly {@link proto.SendPassPaiResponse.verify|verify} messages.
+         * Encodes the specified SendPassPaiResponse message. Does not implicitly {@link SdkProto.SendPassPaiResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
-         * @param {proto.ISendPassPaiResponse} message SendPassPaiResponse message or plain object to encode
+         * @param {SdkProto.ISendPassPaiResponse} message SendPassPaiResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10074,11 +10074,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendPassPaiResponse message, length delimited. Does not implicitly {@link proto.SendPassPaiResponse.verify|verify} messages.
+         * Encodes the specified SendPassPaiResponse message, length delimited. Does not implicitly {@link SdkProto.SendPassPaiResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
-         * @param {proto.ISendPassPaiResponse} message SendPassPaiResponse message or plain object to encode
+         * @param {SdkProto.ISendPassPaiResponse} message SendPassPaiResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10089,18 +10089,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendPassPaiResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendPassPaiResponse} SendPassPaiResponse
+         * @returns {SdkProto.SendPassPaiResponse} SendPassPaiResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendPassPaiResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendPassPaiResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendPassPaiResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -10124,10 +10124,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendPassPaiResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendPassPaiResponse} SendPassPaiResponse
+         * @returns {SdkProto.SendPassPaiResponse} SendPassPaiResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -10140,7 +10140,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendPassPaiResponse message.
          * @function verify
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -10163,15 +10163,15 @@ $root.proto = (function() {
         /**
          * Creates a SendPassPaiResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendPassPaiResponse} SendPassPaiResponse
+         * @returns {SdkProto.SendPassPaiResponse} SendPassPaiResponse
          */
         SendPassPaiResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendPassPaiResponse)
+            if (object instanceof $root.SdkProto.SendPassPaiResponse)
                 return object;
-            var message = new $root.proto.SendPassPaiResponse();
+            var message = new $root.SdkProto.SendPassPaiResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.nextPlayer != null)
@@ -10184,9 +10184,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendPassPaiResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @static
-         * @param {proto.SendPassPaiResponse} message SendPassPaiResponse
+         * @param {SdkProto.SendPassPaiResponse} message SendPassPaiResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -10211,7 +10211,7 @@ $root.proto = (function() {
         /**
          * Converts this SendPassPaiResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendPassPaiResponse
+         * @memberof SdkProto.SendPassPaiResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -10222,22 +10222,22 @@ $root.proto = (function() {
         return SendPassPaiResponse;
     })();
 
-    proto.SendReconnectQuitResponse = (function() {
+    SdkProto.SendReconnectQuitResponse = (function() {
 
         /**
          * Properties of a SendReconnectQuitResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendReconnectQuitResponse
          * @property {number|null} [userId] SendReconnectQuitResponse userId
          */
 
         /**
          * Constructs a new SendReconnectQuitResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendReconnectQuitResponse.
          * @implements ISendReconnectQuitResponse
          * @constructor
-         * @param {proto.ISendReconnectQuitResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendReconnectQuitResponse=} [properties] Properties to set
          */
         function SendReconnectQuitResponse(properties) {
             if (properties)
@@ -10249,7 +10249,7 @@ $root.proto = (function() {
         /**
          * SendReconnectQuitResponse userId.
          * @member {number} userId
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @instance
          */
         SendReconnectQuitResponse.prototype.userId = 0;
@@ -10257,21 +10257,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendReconnectQuitResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
-         * @param {proto.ISendReconnectQuitResponse=} [properties] Properties to set
-         * @returns {proto.SendReconnectQuitResponse} SendReconnectQuitResponse instance
+         * @param {SdkProto.ISendReconnectQuitResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendReconnectQuitResponse} SendReconnectQuitResponse instance
          */
         SendReconnectQuitResponse.create = function create(properties) {
             return new SendReconnectQuitResponse(properties);
         };
 
         /**
-         * Encodes the specified SendReconnectQuitResponse message. Does not implicitly {@link proto.SendReconnectQuitResponse.verify|verify} messages.
+         * Encodes the specified SendReconnectQuitResponse message. Does not implicitly {@link SdkProto.SendReconnectQuitResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
-         * @param {proto.ISendReconnectQuitResponse} message SendReconnectQuitResponse message or plain object to encode
+         * @param {SdkProto.ISendReconnectQuitResponse} message SendReconnectQuitResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10284,11 +10284,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendReconnectQuitResponse message, length delimited. Does not implicitly {@link proto.SendReconnectQuitResponse.verify|verify} messages.
+         * Encodes the specified SendReconnectQuitResponse message, length delimited. Does not implicitly {@link SdkProto.SendReconnectQuitResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
-         * @param {proto.ISendReconnectQuitResponse} message SendReconnectQuitResponse message or plain object to encode
+         * @param {SdkProto.ISendReconnectQuitResponse} message SendReconnectQuitResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10299,18 +10299,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendReconnectQuitResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendReconnectQuitResponse} SendReconnectQuitResponse
+         * @returns {SdkProto.SendReconnectQuitResponse} SendReconnectQuitResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendReconnectQuitResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendReconnectQuitResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendReconnectQuitResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -10328,10 +10328,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendReconnectQuitResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendReconnectQuitResponse} SendReconnectQuitResponse
+         * @returns {SdkProto.SendReconnectQuitResponse} SendReconnectQuitResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -10344,7 +10344,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendReconnectQuitResponse message.
          * @function verify
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -10361,15 +10361,15 @@ $root.proto = (function() {
         /**
          * Creates a SendReconnectQuitResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendReconnectQuitResponse} SendReconnectQuitResponse
+         * @returns {SdkProto.SendReconnectQuitResponse} SendReconnectQuitResponse
          */
         SendReconnectQuitResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendReconnectQuitResponse)
+            if (object instanceof $root.SdkProto.SendReconnectQuitResponse)
                 return object;
-            var message = new $root.proto.SendReconnectQuitResponse();
+            var message = new $root.SdkProto.SendReconnectQuitResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             return message;
@@ -10378,9 +10378,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendReconnectQuitResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @static
-         * @param {proto.SendReconnectQuitResponse} message SendReconnectQuitResponse
+         * @param {SdkProto.SendReconnectQuitResponse} message SendReconnectQuitResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -10398,7 +10398,7 @@ $root.proto = (function() {
         /**
          * Converts this SendReconnectQuitResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendReconnectQuitResponse
+         * @memberof SdkProto.SendReconnectQuitResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -10409,11 +10409,11 @@ $root.proto = (function() {
         return SendReconnectQuitResponse;
     })();
 
-    proto.UserReconnectResponse = (function() {
+    SdkProto.UserReconnectResponse = (function() {
 
         /**
          * Properties of a UserReconnectResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IUserReconnectResponse
          * @property {string|null} [tableId] UserReconnectResponse tableId
          * @property {number|null} [gameId] UserReconnectResponse gameId
@@ -10434,19 +10434,19 @@ $root.proto = (function() {
          * @property {Array.<number>|null} [callScoreInfo] UserReconnectResponse callScoreInfo
          * @property {number|null} [currBaseScore] UserReconnectResponse currBaseScore
          * @property {number|null} [currTimes] UserReconnectResponse currTimes
-         * @property {proto.IResultData|null} [resultData] UserReconnectResponse resultData
-         * @property {Array.<proto.IUser>|null} [users] UserReconnectResponse users
+         * @property {SdkProto.IResultData|null} [resultData] UserReconnectResponse resultData
+         * @property {Array.<SdkProto.IUser>|null} [users] UserReconnectResponse users
          * @property {number|null} [beilv] UserReconnectResponse beilv
          * @property {number|null} [passPaiCount] UserReconnectResponse passPaiCount
          */
 
         /**
          * Constructs a new UserReconnectResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a UserReconnectResponse.
          * @implements IUserReconnectResponse
          * @constructor
-         * @param {proto.IUserReconnectResponse=} [properties] Properties to set
+         * @param {SdkProto.IUserReconnectResponse=} [properties] Properties to set
          */
         function UserReconnectResponse(properties) {
             this.leftCards = [];
@@ -10461,7 +10461,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse tableId.
          * @member {string} tableId
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.tableId = "";
@@ -10469,7 +10469,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse gameId.
          * @member {number} gameId
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.gameId = 0;
@@ -10477,7 +10477,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse state.
          * @member {number} state
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.state = 0;
@@ -10485,7 +10485,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse owner.
          * @member {number} owner
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.owner = 0;
@@ -10493,7 +10493,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.currentRound = 0;
@@ -10501,7 +10501,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.totalRound = 0;
@@ -10509,7 +10509,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse gameInfo.
          * @member {string} gameInfo
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.gameInfo = "";
@@ -10517,7 +10517,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse applicant.
          * @member {number} applicant
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.applicant = 0;
@@ -10525,7 +10525,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse applyTime.
          * @member {number} applyTime
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.applyTime = 0;
@@ -10533,7 +10533,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse startApplyTime.
          * @member {number|Long} startApplyTime
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.startApplyTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -10541,7 +10541,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse zhuangPos.
          * @member {number} zhuangPos
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.zhuangPos = 0;
@@ -10549,7 +10549,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse discardPos.
          * @member {number} discardPos
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.discardPos = 0;
@@ -10557,7 +10557,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse nextDiscardPos.
          * @member {number} nextDiscardPos
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.nextDiscardPos = 0;
@@ -10565,7 +10565,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse curQDZPos.
          * @member {number} curQDZPos
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.curQDZPos = 0;
@@ -10573,7 +10573,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse godCard.
          * @member {number} godCard
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.godCard = 0;
@@ -10581,7 +10581,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse leftCards.
          * @member {Array.<number>} leftCards
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.leftCards = $util.emptyArray;
@@ -10589,7 +10589,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse callScoreInfo.
          * @member {Array.<number>} callScoreInfo
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.callScoreInfo = $util.emptyArray;
@@ -10597,7 +10597,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse currBaseScore.
          * @member {number} currBaseScore
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.currBaseScore = 0;
@@ -10605,23 +10605,23 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse currTimes.
          * @member {number} currTimes
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.currTimes = 0;
 
         /**
          * UserReconnectResponse resultData.
-         * @member {proto.IResultData|null|undefined} resultData
-         * @memberof proto.UserReconnectResponse
+         * @member {SdkProto.IResultData|null|undefined} resultData
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.resultData = null;
 
         /**
          * UserReconnectResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.UserReconnectResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.users = $util.emptyArray;
@@ -10629,7 +10629,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse beilv.
          * @member {number} beilv
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.beilv = 0;
@@ -10637,7 +10637,7 @@ $root.proto = (function() {
         /**
          * UserReconnectResponse passPaiCount.
          * @member {number} passPaiCount
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          */
         UserReconnectResponse.prototype.passPaiCount = 0;
@@ -10645,21 +10645,21 @@ $root.proto = (function() {
         /**
          * Creates a new UserReconnectResponse instance using the specified properties.
          * @function create
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
-         * @param {proto.IUserReconnectResponse=} [properties] Properties to set
-         * @returns {proto.UserReconnectResponse} UserReconnectResponse instance
+         * @param {SdkProto.IUserReconnectResponse=} [properties] Properties to set
+         * @returns {SdkProto.UserReconnectResponse} UserReconnectResponse instance
          */
         UserReconnectResponse.create = function create(properties) {
             return new UserReconnectResponse(properties);
         };
 
         /**
-         * Encodes the specified UserReconnectResponse message. Does not implicitly {@link proto.UserReconnectResponse.verify|verify} messages.
+         * Encodes the specified UserReconnectResponse message. Does not implicitly {@link SdkProto.UserReconnectResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
-         * @param {proto.IUserReconnectResponse} message UserReconnectResponse message or plain object to encode
+         * @param {SdkProto.IUserReconnectResponse} message UserReconnectResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10713,10 +10713,10 @@ $root.proto = (function() {
             if (message.currTimes != null && message.hasOwnProperty("currTimes"))
                 writer.uint32(/* id 19, wireType 0 =*/152).int32(message.currTimes);
             if (message.resultData != null && message.hasOwnProperty("resultData"))
-                $root.proto.ResultData.encode(message.resultData, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                $root.SdkProto.ResultData.encode(message.resultData, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             if (message.beilv != null && message.hasOwnProperty("beilv"))
                 writer.uint32(/* id 22, wireType 0 =*/176).int32(message.beilv);
             if (message.passPaiCount != null && message.hasOwnProperty("passPaiCount"))
@@ -10725,11 +10725,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified UserReconnectResponse message, length delimited. Does not implicitly {@link proto.UserReconnectResponse.verify|verify} messages.
+         * Encodes the specified UserReconnectResponse message, length delimited. Does not implicitly {@link SdkProto.UserReconnectResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
-         * @param {proto.IUserReconnectResponse} message UserReconnectResponse message or plain object to encode
+         * @param {SdkProto.IUserReconnectResponse} message UserReconnectResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -10740,18 +10740,18 @@ $root.proto = (function() {
         /**
          * Decodes a UserReconnectResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.UserReconnectResponse} UserReconnectResponse
+         * @returns {SdkProto.UserReconnectResponse} UserReconnectResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         UserReconnectResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserReconnectResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.UserReconnectResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -10827,12 +10827,12 @@ $root.proto = (function() {
                     message.currTimes = reader.int32();
                     break;
                 case 20:
-                    message.resultData = $root.proto.ResultData.decode(reader, reader.uint32());
+                    message.resultData = $root.SdkProto.ResultData.decode(reader, reader.uint32());
                     break;
                 case 21:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 case 22:
                     message.beilv = reader.int32();
@@ -10851,10 +10851,10 @@ $root.proto = (function() {
         /**
          * Decodes a UserReconnectResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.UserReconnectResponse} UserReconnectResponse
+         * @returns {SdkProto.UserReconnectResponse} UserReconnectResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -10867,7 +10867,7 @@ $root.proto = (function() {
         /**
          * Verifies a UserReconnectResponse message.
          * @function verify
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -10941,7 +10941,7 @@ $root.proto = (function() {
                 if (!$util.isInteger(message.currTimes))
                     return "currTimes: integer expected";
             if (message.resultData != null && message.hasOwnProperty("resultData")) {
-                var error = $root.proto.ResultData.verify(message.resultData);
+                var error = $root.SdkProto.ResultData.verify(message.resultData);
                 if (error)
                     return "resultData." + error;
             }
@@ -10949,7 +10949,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -10966,15 +10966,15 @@ $root.proto = (function() {
         /**
          * Creates a UserReconnectResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.UserReconnectResponse} UserReconnectResponse
+         * @returns {SdkProto.UserReconnectResponse} UserReconnectResponse
          */
         UserReconnectResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.UserReconnectResponse)
+            if (object instanceof $root.SdkProto.UserReconnectResponse)
                 return object;
-            var message = new $root.proto.UserReconnectResponse();
+            var message = new $root.SdkProto.UserReconnectResponse();
             if (object.tableId != null)
                 message.tableId = String(object.tableId);
             if (object.gameId != null)
@@ -11014,14 +11014,14 @@ $root.proto = (function() {
                 message.godCard = object.godCard | 0;
             if (object.leftCards) {
                 if (!Array.isArray(object.leftCards))
-                    throw TypeError(".proto.UserReconnectResponse.leftCards: array expected");
+                    throw TypeError(".SdkProto.UserReconnectResponse.leftCards: array expected");
                 message.leftCards = [];
                 for (var i = 0; i < object.leftCards.length; ++i)
                     message.leftCards[i] = object.leftCards[i] | 0;
             }
             if (object.callScoreInfo) {
                 if (!Array.isArray(object.callScoreInfo))
-                    throw TypeError(".proto.UserReconnectResponse.callScoreInfo: array expected");
+                    throw TypeError(".SdkProto.UserReconnectResponse.callScoreInfo: array expected");
                 message.callScoreInfo = [];
                 for (var i = 0; i < object.callScoreInfo.length; ++i)
                     message.callScoreInfo[i] = object.callScoreInfo[i] | 0;
@@ -11032,17 +11032,17 @@ $root.proto = (function() {
                 message.currTimes = object.currTimes | 0;
             if (object.resultData != null) {
                 if (typeof object.resultData !== "object")
-                    throw TypeError(".proto.UserReconnectResponse.resultData: object expected");
-                message.resultData = $root.proto.ResultData.fromObject(object.resultData);
+                    throw TypeError(".SdkProto.UserReconnectResponse.resultData: object expected");
+                message.resultData = $root.SdkProto.ResultData.fromObject(object.resultData);
             }
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.UserReconnectResponse.users: array expected");
+                    throw TypeError(".SdkProto.UserReconnectResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.UserReconnectResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.UserReconnectResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             if (object.beilv != null)
@@ -11055,9 +11055,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a UserReconnectResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @static
-         * @param {proto.UserReconnectResponse} message UserReconnectResponse
+         * @param {SdkProto.UserReconnectResponse} message UserReconnectResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -11144,11 +11144,11 @@ $root.proto = (function() {
             if (message.currTimes != null && message.hasOwnProperty("currTimes"))
                 object.currTimes = message.currTimes;
             if (message.resultData != null && message.hasOwnProperty("resultData"))
-                object.resultData = $root.proto.ResultData.toObject(message.resultData, options);
+                object.resultData = $root.SdkProto.ResultData.toObject(message.resultData, options);
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             if (message.beilv != null && message.hasOwnProperty("beilv"))
                 object.beilv = message.beilv;
@@ -11160,7 +11160,7 @@ $root.proto = (function() {
         /**
          * Converts this UserReconnectResponse to JSON.
          * @function toJSON
-         * @memberof proto.UserReconnectResponse
+         * @memberof SdkProto.UserReconnectResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -11171,11 +11171,11 @@ $root.proto = (function() {
         return UserReconnectResponse;
     })();
 
-    proto.SendUserReconnectResponse = (function() {
+    SdkProto.SendUserReconnectResponse = (function() {
 
         /**
          * Properties of a SendUserReconnectResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserReconnectResponse
          * @property {number|null} [userId] SendUserReconnectResponse userId
          * @property {number|null} [onLine] SendUserReconnectResponse onLine
@@ -11183,11 +11183,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserReconnectResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserReconnectResponse.
          * @implements ISendUserReconnectResponse
          * @constructor
-         * @param {proto.ISendUserReconnectResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserReconnectResponse=} [properties] Properties to set
          */
         function SendUserReconnectResponse(properties) {
             if (properties)
@@ -11199,7 +11199,7 @@ $root.proto = (function() {
         /**
          * SendUserReconnectResponse userId.
          * @member {number} userId
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @instance
          */
         SendUserReconnectResponse.prototype.userId = 0;
@@ -11207,7 +11207,7 @@ $root.proto = (function() {
         /**
          * SendUserReconnectResponse onLine.
          * @member {number} onLine
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @instance
          */
         SendUserReconnectResponse.prototype.onLine = 0;
@@ -11215,21 +11215,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserReconnectResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
-         * @param {proto.ISendUserReconnectResponse=} [properties] Properties to set
-         * @returns {proto.SendUserReconnectResponse} SendUserReconnectResponse instance
+         * @param {SdkProto.ISendUserReconnectResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserReconnectResponse} SendUserReconnectResponse instance
          */
         SendUserReconnectResponse.create = function create(properties) {
             return new SendUserReconnectResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserReconnectResponse message. Does not implicitly {@link proto.SendUserReconnectResponse.verify|verify} messages.
+         * Encodes the specified SendUserReconnectResponse message. Does not implicitly {@link SdkProto.SendUserReconnectResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
-         * @param {proto.ISendUserReconnectResponse} message SendUserReconnectResponse message or plain object to encode
+         * @param {SdkProto.ISendUserReconnectResponse} message SendUserReconnectResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11244,11 +11244,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserReconnectResponse message, length delimited. Does not implicitly {@link proto.SendUserReconnectResponse.verify|verify} messages.
+         * Encodes the specified SendUserReconnectResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserReconnectResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
-         * @param {proto.ISendUserReconnectResponse} message SendUserReconnectResponse message or plain object to encode
+         * @param {SdkProto.ISendUserReconnectResponse} message SendUserReconnectResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11259,18 +11259,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserReconnectResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserReconnectResponse} SendUserReconnectResponse
+         * @returns {SdkProto.SendUserReconnectResponse} SendUserReconnectResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserReconnectResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserReconnectResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserReconnectResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -11291,10 +11291,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserReconnectResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserReconnectResponse} SendUserReconnectResponse
+         * @returns {SdkProto.SendUserReconnectResponse} SendUserReconnectResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -11307,7 +11307,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserReconnectResponse message.
          * @function verify
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -11327,15 +11327,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserReconnectResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserReconnectResponse} SendUserReconnectResponse
+         * @returns {SdkProto.SendUserReconnectResponse} SendUserReconnectResponse
          */
         SendUserReconnectResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserReconnectResponse)
+            if (object instanceof $root.SdkProto.SendUserReconnectResponse)
                 return object;
-            var message = new $root.proto.SendUserReconnectResponse();
+            var message = new $root.SdkProto.SendUserReconnectResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.onLine != null)
@@ -11346,9 +11346,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserReconnectResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @static
-         * @param {proto.SendUserReconnectResponse} message SendUserReconnectResponse
+         * @param {SdkProto.SendUserReconnectResponse} message SendUserReconnectResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -11370,7 +11370,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserReconnectResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserReconnectResponse
+         * @memberof SdkProto.SendUserReconnectResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -11381,11 +11381,11 @@ $root.proto = (function() {
         return SendUserReconnectResponse;
     })();
 
-    proto.SendApplyDismissResponse = (function() {
+    SdkProto.SendApplyDismissResponse = (function() {
 
         /**
          * Properties of a SendApplyDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendApplyDismissResponse
          * @property {number|null} [userId] SendApplyDismissResponse userId
          * @property {number|null} [applicant] SendApplyDismissResponse applicant
@@ -11396,11 +11396,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendApplyDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendApplyDismissResponse.
          * @implements ISendApplyDismissResponse
          * @constructor
-         * @param {proto.ISendApplyDismissResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendApplyDismissResponse=} [properties] Properties to set
          */
         function SendApplyDismissResponse(properties) {
             if (properties)
@@ -11412,7 +11412,7 @@ $root.proto = (function() {
         /**
          * SendApplyDismissResponse userId.
          * @member {number} userId
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          */
         SendApplyDismissResponse.prototype.userId = 0;
@@ -11420,7 +11420,7 @@ $root.proto = (function() {
         /**
          * SendApplyDismissResponse applicant.
          * @member {number} applicant
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          */
         SendApplyDismissResponse.prototype.applicant = 0;
@@ -11428,7 +11428,7 @@ $root.proto = (function() {
         /**
          * SendApplyDismissResponse agree.
          * @member {number} agree
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          */
         SendApplyDismissResponse.prototype.agree = 0;
@@ -11436,7 +11436,7 @@ $root.proto = (function() {
         /**
          * SendApplyDismissResponse applyTime.
          * @member {number} applyTime
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          */
         SendApplyDismissResponse.prototype.applyTime = 0;
@@ -11444,7 +11444,7 @@ $root.proto = (function() {
         /**
          * SendApplyDismissResponse startApplyTime.
          * @member {number|Long} startApplyTime
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          */
         SendApplyDismissResponse.prototype.startApplyTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -11452,21 +11452,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendApplyDismissResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
-         * @param {proto.ISendApplyDismissResponse=} [properties] Properties to set
-         * @returns {proto.SendApplyDismissResponse} SendApplyDismissResponse instance
+         * @param {SdkProto.ISendApplyDismissResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendApplyDismissResponse} SendApplyDismissResponse instance
          */
         SendApplyDismissResponse.create = function create(properties) {
             return new SendApplyDismissResponse(properties);
         };
 
         /**
-         * Encodes the specified SendApplyDismissResponse message. Does not implicitly {@link proto.SendApplyDismissResponse.verify|verify} messages.
+         * Encodes the specified SendApplyDismissResponse message. Does not implicitly {@link SdkProto.SendApplyDismissResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
-         * @param {proto.ISendApplyDismissResponse} message SendApplyDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendApplyDismissResponse} message SendApplyDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11487,11 +11487,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendApplyDismissResponse message, length delimited. Does not implicitly {@link proto.SendApplyDismissResponse.verify|verify} messages.
+         * Encodes the specified SendApplyDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendApplyDismissResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
-         * @param {proto.ISendApplyDismissResponse} message SendApplyDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendApplyDismissResponse} message SendApplyDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11502,18 +11502,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendApplyDismissResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendApplyDismissResponse} SendApplyDismissResponse
+         * @returns {SdkProto.SendApplyDismissResponse} SendApplyDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendApplyDismissResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendApplyDismissResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendApplyDismissResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -11543,10 +11543,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendApplyDismissResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendApplyDismissResponse} SendApplyDismissResponse
+         * @returns {SdkProto.SendApplyDismissResponse} SendApplyDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -11559,7 +11559,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendApplyDismissResponse message.
          * @function verify
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -11588,15 +11588,15 @@ $root.proto = (function() {
         /**
          * Creates a SendApplyDismissResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendApplyDismissResponse} SendApplyDismissResponse
+         * @returns {SdkProto.SendApplyDismissResponse} SendApplyDismissResponse
          */
         SendApplyDismissResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendApplyDismissResponse)
+            if (object instanceof $root.SdkProto.SendApplyDismissResponse)
                 return object;
-            var message = new $root.proto.SendApplyDismissResponse();
+            var message = new $root.SdkProto.SendApplyDismissResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.applicant != null)
@@ -11620,9 +11620,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendApplyDismissResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @static
-         * @param {proto.SendApplyDismissResponse} message SendApplyDismissResponse
+         * @param {SdkProto.SendApplyDismissResponse} message SendApplyDismissResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -11660,7 +11660,7 @@ $root.proto = (function() {
         /**
          * Converts this SendApplyDismissResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendApplyDismissResponse
+         * @memberof SdkProto.SendApplyDismissResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -11671,11 +11671,11 @@ $root.proto = (function() {
         return SendApplyDismissResponse;
     })();
 
-    proto.SendAgreeDismissResponse = (function() {
+    SdkProto.SendAgreeDismissResponse = (function() {
 
         /**
          * Properties of a SendAgreeDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendAgreeDismissResponse
          * @property {number|null} [agree] SendAgreeDismissResponse agree
          * @property {number|null} [userId] SendAgreeDismissResponse userId
@@ -11684,11 +11684,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendAgreeDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendAgreeDismissResponse.
          * @implements ISendAgreeDismissResponse
          * @constructor
-         * @param {proto.ISendAgreeDismissResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendAgreeDismissResponse=} [properties] Properties to set
          */
         function SendAgreeDismissResponse(properties) {
             if (properties)
@@ -11700,7 +11700,7 @@ $root.proto = (function() {
         /**
          * SendAgreeDismissResponse agree.
          * @member {number} agree
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @instance
          */
         SendAgreeDismissResponse.prototype.agree = 0;
@@ -11708,7 +11708,7 @@ $root.proto = (function() {
         /**
          * SendAgreeDismissResponse userId.
          * @member {number} userId
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @instance
          */
         SendAgreeDismissResponse.prototype.userId = 0;
@@ -11716,7 +11716,7 @@ $root.proto = (function() {
         /**
          * SendAgreeDismissResponse applicant.
          * @member {number} applicant
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @instance
          */
         SendAgreeDismissResponse.prototype.applicant = 0;
@@ -11724,21 +11724,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendAgreeDismissResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
-         * @param {proto.ISendAgreeDismissResponse=} [properties] Properties to set
-         * @returns {proto.SendAgreeDismissResponse} SendAgreeDismissResponse instance
+         * @param {SdkProto.ISendAgreeDismissResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendAgreeDismissResponse} SendAgreeDismissResponse instance
          */
         SendAgreeDismissResponse.create = function create(properties) {
             return new SendAgreeDismissResponse(properties);
         };
 
         /**
-         * Encodes the specified SendAgreeDismissResponse message. Does not implicitly {@link proto.SendAgreeDismissResponse.verify|verify} messages.
+         * Encodes the specified SendAgreeDismissResponse message. Does not implicitly {@link SdkProto.SendAgreeDismissResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
-         * @param {proto.ISendAgreeDismissResponse} message SendAgreeDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendAgreeDismissResponse} message SendAgreeDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11755,11 +11755,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendAgreeDismissResponse message, length delimited. Does not implicitly {@link proto.SendAgreeDismissResponse.verify|verify} messages.
+         * Encodes the specified SendAgreeDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendAgreeDismissResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
-         * @param {proto.ISendAgreeDismissResponse} message SendAgreeDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendAgreeDismissResponse} message SendAgreeDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11770,18 +11770,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendAgreeDismissResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendAgreeDismissResponse} SendAgreeDismissResponse
+         * @returns {SdkProto.SendAgreeDismissResponse} SendAgreeDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendAgreeDismissResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendAgreeDismissResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendAgreeDismissResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -11805,10 +11805,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendAgreeDismissResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendAgreeDismissResponse} SendAgreeDismissResponse
+         * @returns {SdkProto.SendAgreeDismissResponse} SendAgreeDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -11821,7 +11821,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendAgreeDismissResponse message.
          * @function verify
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -11844,15 +11844,15 @@ $root.proto = (function() {
         /**
          * Creates a SendAgreeDismissResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendAgreeDismissResponse} SendAgreeDismissResponse
+         * @returns {SdkProto.SendAgreeDismissResponse} SendAgreeDismissResponse
          */
         SendAgreeDismissResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendAgreeDismissResponse)
+            if (object instanceof $root.SdkProto.SendAgreeDismissResponse)
                 return object;
-            var message = new $root.proto.SendAgreeDismissResponse();
+            var message = new $root.SdkProto.SendAgreeDismissResponse();
             if (object.agree != null)
                 message.agree = object.agree | 0;
             if (object.userId != null)
@@ -11865,9 +11865,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendAgreeDismissResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @static
-         * @param {proto.SendAgreeDismissResponse} message SendAgreeDismissResponse
+         * @param {SdkProto.SendAgreeDismissResponse} message SendAgreeDismissResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -11892,7 +11892,7 @@ $root.proto = (function() {
         /**
          * Converts this SendAgreeDismissResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendAgreeDismissResponse
+         * @memberof SdkProto.SendAgreeDismissResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -11903,11 +11903,11 @@ $root.proto = (function() {
         return SendAgreeDismissResponse;
     })();
 
-    proto.SendDismissResultResponse = (function() {
+    SdkProto.SendDismissResultResponse = (function() {
 
         /**
          * Properties of a SendDismissResultResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendDismissResultResponse
          * @property {number|null} [applicant] SendDismissResultResponse applicant
          * @property {number|null} [res] SendDismissResultResponse res
@@ -11916,11 +11916,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendDismissResultResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendDismissResultResponse.
          * @implements ISendDismissResultResponse
          * @constructor
-         * @param {proto.ISendDismissResultResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendDismissResultResponse=} [properties] Properties to set
          */
         function SendDismissResultResponse(properties) {
             if (properties)
@@ -11932,7 +11932,7 @@ $root.proto = (function() {
         /**
          * SendDismissResultResponse applicant.
          * @member {number} applicant
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @instance
          */
         SendDismissResultResponse.prototype.applicant = 0;
@@ -11940,7 +11940,7 @@ $root.proto = (function() {
         /**
          * SendDismissResultResponse res.
          * @member {number} res
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @instance
          */
         SendDismissResultResponse.prototype.res = 0;
@@ -11948,7 +11948,7 @@ $root.proto = (function() {
         /**
          * SendDismissResultResponse notAgreeUserId.
          * @member {number} notAgreeUserId
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @instance
          */
         SendDismissResultResponse.prototype.notAgreeUserId = 0;
@@ -11956,21 +11956,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendDismissResultResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
-         * @param {proto.ISendDismissResultResponse=} [properties] Properties to set
-         * @returns {proto.SendDismissResultResponse} SendDismissResultResponse instance
+         * @param {SdkProto.ISendDismissResultResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendDismissResultResponse} SendDismissResultResponse instance
          */
         SendDismissResultResponse.create = function create(properties) {
             return new SendDismissResultResponse(properties);
         };
 
         /**
-         * Encodes the specified SendDismissResultResponse message. Does not implicitly {@link proto.SendDismissResultResponse.verify|verify} messages.
+         * Encodes the specified SendDismissResultResponse message. Does not implicitly {@link SdkProto.SendDismissResultResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
-         * @param {proto.ISendDismissResultResponse} message SendDismissResultResponse message or plain object to encode
+         * @param {SdkProto.ISendDismissResultResponse} message SendDismissResultResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -11987,11 +11987,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendDismissResultResponse message, length delimited. Does not implicitly {@link proto.SendDismissResultResponse.verify|verify} messages.
+         * Encodes the specified SendDismissResultResponse message, length delimited. Does not implicitly {@link SdkProto.SendDismissResultResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
-         * @param {proto.ISendDismissResultResponse} message SendDismissResultResponse message or plain object to encode
+         * @param {SdkProto.ISendDismissResultResponse} message SendDismissResultResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12002,18 +12002,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendDismissResultResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendDismissResultResponse} SendDismissResultResponse
+         * @returns {SdkProto.SendDismissResultResponse} SendDismissResultResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendDismissResultResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendDismissResultResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendDismissResultResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12037,10 +12037,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendDismissResultResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendDismissResultResponse} SendDismissResultResponse
+         * @returns {SdkProto.SendDismissResultResponse} SendDismissResultResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -12053,7 +12053,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendDismissResultResponse message.
          * @function verify
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -12076,15 +12076,15 @@ $root.proto = (function() {
         /**
          * Creates a SendDismissResultResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendDismissResultResponse} SendDismissResultResponse
+         * @returns {SdkProto.SendDismissResultResponse} SendDismissResultResponse
          */
         SendDismissResultResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendDismissResultResponse)
+            if (object instanceof $root.SdkProto.SendDismissResultResponse)
                 return object;
-            var message = new $root.proto.SendDismissResultResponse();
+            var message = new $root.SdkProto.SendDismissResultResponse();
             if (object.applicant != null)
                 message.applicant = object.applicant | 0;
             if (object.res != null)
@@ -12097,9 +12097,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendDismissResultResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @static
-         * @param {proto.SendDismissResultResponse} message SendDismissResultResponse
+         * @param {SdkProto.SendDismissResultResponse} message SendDismissResultResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -12124,7 +12124,7 @@ $root.proto = (function() {
         /**
          * Converts this SendDismissResultResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendDismissResultResponse
+         * @memberof SdkProto.SendDismissResultResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -12135,11 +12135,11 @@ $root.proto = (function() {
         return SendDismissResultResponse;
     })();
 
-    proto.SendUserQuitResponse = (function() {
+    SdkProto.SendUserQuitResponse = (function() {
 
         /**
          * Properties of a SendUserQuitResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserQuitResponse
          * @property {number|null} [userId] SendUserQuitResponse userId
          * @property {boolean|null} [isOwnerQuit] SendUserQuitResponse isOwnerQuit
@@ -12151,11 +12151,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserQuitResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserQuitResponse.
          * @implements ISendUserQuitResponse
          * @constructor
-         * @param {proto.ISendUserQuitResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserQuitResponse=} [properties] Properties to set
          */
         function SendUserQuitResponse(properties) {
             if (properties)
@@ -12167,7 +12167,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse userId.
          * @member {number} userId
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.userId = 0;
@@ -12175,7 +12175,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse isOwnerQuit.
          * @member {boolean} isOwnerQuit
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.isOwnerQuit = false;
@@ -12183,7 +12183,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse nickname.
          * @member {string} nickname
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.nickname = "";
@@ -12191,7 +12191,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse position.
          * @member {number} position
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.position = 0;
@@ -12199,7 +12199,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse message.
          * @member {string} message
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.message = "";
@@ -12207,7 +12207,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitResponse tableId.
          * @member {string} tableId
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          */
         SendUserQuitResponse.prototype.tableId = "";
@@ -12215,21 +12215,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserQuitResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
-         * @param {proto.ISendUserQuitResponse=} [properties] Properties to set
-         * @returns {proto.SendUserQuitResponse} SendUserQuitResponse instance
+         * @param {SdkProto.ISendUserQuitResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserQuitResponse} SendUserQuitResponse instance
          */
         SendUserQuitResponse.create = function create(properties) {
             return new SendUserQuitResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserQuitResponse message. Does not implicitly {@link proto.SendUserQuitResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitResponse message. Does not implicitly {@link SdkProto.SendUserQuitResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
-         * @param {proto.ISendUserQuitResponse} message SendUserQuitResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQuitResponse} message SendUserQuitResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12252,11 +12252,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserQuitResponse message, length delimited. Does not implicitly {@link proto.SendUserQuitResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQuitResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
-         * @param {proto.ISendUserQuitResponse} message SendUserQuitResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQuitResponse} message SendUserQuitResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12267,18 +12267,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQuitResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserQuitResponse} SendUserQuitResponse
+         * @returns {SdkProto.SendUserQuitResponse} SendUserQuitResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserQuitResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserQuitResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserQuitResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12311,10 +12311,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQuitResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserQuitResponse} SendUserQuitResponse
+         * @returns {SdkProto.SendUserQuitResponse} SendUserQuitResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -12327,7 +12327,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserQuitResponse message.
          * @function verify
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -12359,15 +12359,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserQuitResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserQuitResponse} SendUserQuitResponse
+         * @returns {SdkProto.SendUserQuitResponse} SendUserQuitResponse
          */
         SendUserQuitResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserQuitResponse)
+            if (object instanceof $root.SdkProto.SendUserQuitResponse)
                 return object;
-            var message = new $root.proto.SendUserQuitResponse();
+            var message = new $root.SdkProto.SendUserQuitResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.isOwnerQuit != null)
@@ -12386,9 +12386,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserQuitResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @static
-         * @param {proto.SendUserQuitResponse} message SendUserQuitResponse
+         * @param {SdkProto.SendUserQuitResponse} message SendUserQuitResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -12422,7 +12422,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserQuitResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserQuitResponse
+         * @memberof SdkProto.SendUserQuitResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -12433,11 +12433,11 @@ $root.proto = (function() {
         return SendUserQuitResponse;
     })();
 
-    proto.SendMessageResponse = (function() {
+    SdkProto.SendMessageResponse = (function() {
 
         /**
          * Properties of a SendMessageResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendMessageResponse
          * @property {number|null} [userId] SendMessageResponse userId
          * @property {string|null} [content] SendMessageResponse content
@@ -12446,11 +12446,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendMessageResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendMessageResponse.
          * @implements ISendMessageResponse
          * @constructor
-         * @param {proto.ISendMessageResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendMessageResponse=} [properties] Properties to set
          */
         function SendMessageResponse(properties) {
             if (properties)
@@ -12462,7 +12462,7 @@ $root.proto = (function() {
         /**
          * SendMessageResponse userId.
          * @member {number} userId
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @instance
          */
         SendMessageResponse.prototype.userId = 0;
@@ -12470,7 +12470,7 @@ $root.proto = (function() {
         /**
          * SendMessageResponse content.
          * @member {string} content
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @instance
          */
         SendMessageResponse.prototype.content = "";
@@ -12478,7 +12478,7 @@ $root.proto = (function() {
         /**
          * SendMessageResponse toUserId.
          * @member {number} toUserId
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @instance
          */
         SendMessageResponse.prototype.toUserId = 0;
@@ -12486,21 +12486,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendMessageResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
-         * @param {proto.ISendMessageResponse=} [properties] Properties to set
-         * @returns {proto.SendMessageResponse} SendMessageResponse instance
+         * @param {SdkProto.ISendMessageResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendMessageResponse} SendMessageResponse instance
          */
         SendMessageResponse.create = function create(properties) {
             return new SendMessageResponse(properties);
         };
 
         /**
-         * Encodes the specified SendMessageResponse message. Does not implicitly {@link proto.SendMessageResponse.verify|verify} messages.
+         * Encodes the specified SendMessageResponse message. Does not implicitly {@link SdkProto.SendMessageResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
-         * @param {proto.ISendMessageResponse} message SendMessageResponse message or plain object to encode
+         * @param {SdkProto.ISendMessageResponse} message SendMessageResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12517,11 +12517,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendMessageResponse message, length delimited. Does not implicitly {@link proto.SendMessageResponse.verify|verify} messages.
+         * Encodes the specified SendMessageResponse message, length delimited. Does not implicitly {@link SdkProto.SendMessageResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
-         * @param {proto.ISendMessageResponse} message SendMessageResponse message or plain object to encode
+         * @param {SdkProto.ISendMessageResponse} message SendMessageResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12532,18 +12532,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendMessageResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendMessageResponse} SendMessageResponse
+         * @returns {SdkProto.SendMessageResponse} SendMessageResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendMessageResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendMessageResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendMessageResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12567,10 +12567,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendMessageResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendMessageResponse} SendMessageResponse
+         * @returns {SdkProto.SendMessageResponse} SendMessageResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -12583,7 +12583,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendMessageResponse message.
          * @function verify
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -12606,15 +12606,15 @@ $root.proto = (function() {
         /**
          * Creates a SendMessageResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendMessageResponse} SendMessageResponse
+         * @returns {SdkProto.SendMessageResponse} SendMessageResponse
          */
         SendMessageResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendMessageResponse)
+            if (object instanceof $root.SdkProto.SendMessageResponse)
                 return object;
-            var message = new $root.proto.SendMessageResponse();
+            var message = new $root.SdkProto.SendMessageResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.content != null)
@@ -12627,9 +12627,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendMessageResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @static
-         * @param {proto.SendMessageResponse} message SendMessageResponse
+         * @param {SdkProto.SendMessageResponse} message SendMessageResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -12654,7 +12654,7 @@ $root.proto = (function() {
         /**
          * Converts this SendMessageResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendMessageResponse
+         * @memberof SdkProto.SendMessageResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -12665,11 +12665,11 @@ $root.proto = (function() {
         return SendMessageResponse;
     })();
 
-    proto.SendCoinRefreshResponse = (function() {
+    SdkProto.SendCoinRefreshResponse = (function() {
 
         /**
          * Properties of a SendCoinRefreshResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendCoinRefreshResponse
          * @property {number|null} [userId] SendCoinRefreshResponse userId
          * @property {number|null} [coin] SendCoinRefreshResponse coin
@@ -12677,11 +12677,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendCoinRefreshResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendCoinRefreshResponse.
          * @implements ISendCoinRefreshResponse
          * @constructor
-         * @param {proto.ISendCoinRefreshResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendCoinRefreshResponse=} [properties] Properties to set
          */
         function SendCoinRefreshResponse(properties) {
             if (properties)
@@ -12693,7 +12693,7 @@ $root.proto = (function() {
         /**
          * SendCoinRefreshResponse userId.
          * @member {number} userId
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @instance
          */
         SendCoinRefreshResponse.prototype.userId = 0;
@@ -12701,7 +12701,7 @@ $root.proto = (function() {
         /**
          * SendCoinRefreshResponse coin.
          * @member {number} coin
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @instance
          */
         SendCoinRefreshResponse.prototype.coin = 0;
@@ -12709,21 +12709,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendCoinRefreshResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
-         * @param {proto.ISendCoinRefreshResponse=} [properties] Properties to set
-         * @returns {proto.SendCoinRefreshResponse} SendCoinRefreshResponse instance
+         * @param {SdkProto.ISendCoinRefreshResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendCoinRefreshResponse} SendCoinRefreshResponse instance
          */
         SendCoinRefreshResponse.create = function create(properties) {
             return new SendCoinRefreshResponse(properties);
         };
 
         /**
-         * Encodes the specified SendCoinRefreshResponse message. Does not implicitly {@link proto.SendCoinRefreshResponse.verify|verify} messages.
+         * Encodes the specified SendCoinRefreshResponse message. Does not implicitly {@link SdkProto.SendCoinRefreshResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
-         * @param {proto.ISendCoinRefreshResponse} message SendCoinRefreshResponse message or plain object to encode
+         * @param {SdkProto.ISendCoinRefreshResponse} message SendCoinRefreshResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12738,11 +12738,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendCoinRefreshResponse message, length delimited. Does not implicitly {@link proto.SendCoinRefreshResponse.verify|verify} messages.
+         * Encodes the specified SendCoinRefreshResponse message, length delimited. Does not implicitly {@link SdkProto.SendCoinRefreshResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
-         * @param {proto.ISendCoinRefreshResponse} message SendCoinRefreshResponse message or plain object to encode
+         * @param {SdkProto.ISendCoinRefreshResponse} message SendCoinRefreshResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12753,18 +12753,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendCoinRefreshResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendCoinRefreshResponse} SendCoinRefreshResponse
+         * @returns {SdkProto.SendCoinRefreshResponse} SendCoinRefreshResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendCoinRefreshResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendCoinRefreshResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendCoinRefreshResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12785,10 +12785,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendCoinRefreshResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendCoinRefreshResponse} SendCoinRefreshResponse
+         * @returns {SdkProto.SendCoinRefreshResponse} SendCoinRefreshResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -12801,7 +12801,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendCoinRefreshResponse message.
          * @function verify
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -12821,15 +12821,15 @@ $root.proto = (function() {
         /**
          * Creates a SendCoinRefreshResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendCoinRefreshResponse} SendCoinRefreshResponse
+         * @returns {SdkProto.SendCoinRefreshResponse} SendCoinRefreshResponse
          */
         SendCoinRefreshResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendCoinRefreshResponse)
+            if (object instanceof $root.SdkProto.SendCoinRefreshResponse)
                 return object;
-            var message = new $root.proto.SendCoinRefreshResponse();
+            var message = new $root.SdkProto.SendCoinRefreshResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.coin != null)
@@ -12840,9 +12840,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendCoinRefreshResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @static
-         * @param {proto.SendCoinRefreshResponse} message SendCoinRefreshResponse
+         * @param {SdkProto.SendCoinRefreshResponse} message SendCoinRefreshResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -12864,7 +12864,7 @@ $root.proto = (function() {
         /**
          * Converts this SendCoinRefreshResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendCoinRefreshResponse
+         * @memberof SdkProto.SendCoinRefreshResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -12875,11 +12875,11 @@ $root.proto = (function() {
         return SendCoinRefreshResponse;
     })();
 
-    proto.SendUserOnBackResponse = (function() {
+    SdkProto.SendUserOnBackResponse = (function() {
 
         /**
          * Properties of a SendUserOnBackResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserOnBackResponse
          * @property {number|null} [userId] SendUserOnBackResponse userId
          * @property {number|null} [leaveState] SendUserOnBackResponse leaveState
@@ -12887,11 +12887,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserOnBackResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserOnBackResponse.
          * @implements ISendUserOnBackResponse
          * @constructor
-         * @param {proto.ISendUserOnBackResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserOnBackResponse=} [properties] Properties to set
          */
         function SendUserOnBackResponse(properties) {
             if (properties)
@@ -12903,7 +12903,7 @@ $root.proto = (function() {
         /**
          * SendUserOnBackResponse userId.
          * @member {number} userId
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @instance
          */
         SendUserOnBackResponse.prototype.userId = 0;
@@ -12911,7 +12911,7 @@ $root.proto = (function() {
         /**
          * SendUserOnBackResponse leaveState.
          * @member {number} leaveState
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @instance
          */
         SendUserOnBackResponse.prototype.leaveState = 0;
@@ -12919,21 +12919,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserOnBackResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
-         * @param {proto.ISendUserOnBackResponse=} [properties] Properties to set
-         * @returns {proto.SendUserOnBackResponse} SendUserOnBackResponse instance
+         * @param {SdkProto.ISendUserOnBackResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserOnBackResponse} SendUserOnBackResponse instance
          */
         SendUserOnBackResponse.create = function create(properties) {
             return new SendUserOnBackResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserOnBackResponse message. Does not implicitly {@link proto.SendUserOnBackResponse.verify|verify} messages.
+         * Encodes the specified SendUserOnBackResponse message. Does not implicitly {@link SdkProto.SendUserOnBackResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
-         * @param {proto.ISendUserOnBackResponse} message SendUserOnBackResponse message or plain object to encode
+         * @param {SdkProto.ISendUserOnBackResponse} message SendUserOnBackResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12948,11 +12948,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserOnBackResponse message, length delimited. Does not implicitly {@link proto.SendUserOnBackResponse.verify|verify} messages.
+         * Encodes the specified SendUserOnBackResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserOnBackResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
-         * @param {proto.ISendUserOnBackResponse} message SendUserOnBackResponse message or plain object to encode
+         * @param {SdkProto.ISendUserOnBackResponse} message SendUserOnBackResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -12963,18 +12963,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserOnBackResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserOnBackResponse} SendUserOnBackResponse
+         * @returns {SdkProto.SendUserOnBackResponse} SendUserOnBackResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserOnBackResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserOnBackResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserOnBackResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -12995,10 +12995,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserOnBackResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserOnBackResponse} SendUserOnBackResponse
+         * @returns {SdkProto.SendUserOnBackResponse} SendUserOnBackResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -13011,7 +13011,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserOnBackResponse message.
          * @function verify
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -13031,15 +13031,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserOnBackResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserOnBackResponse} SendUserOnBackResponse
+         * @returns {SdkProto.SendUserOnBackResponse} SendUserOnBackResponse
          */
         SendUserOnBackResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserOnBackResponse)
+            if (object instanceof $root.SdkProto.SendUserOnBackResponse)
                 return object;
-            var message = new $root.proto.SendUserOnBackResponse();
+            var message = new $root.SdkProto.SendUserOnBackResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.leaveState != null)
@@ -13050,9 +13050,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserOnBackResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @static
-         * @param {proto.SendUserOnBackResponse} message SendUserOnBackResponse
+         * @param {SdkProto.SendUserOnBackResponse} message SendUserOnBackResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -13074,7 +13074,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserOnBackResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserOnBackResponse
+         * @memberof SdkProto.SendUserOnBackResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -13085,11 +13085,11 @@ $root.proto = (function() {
         return SendUserOnBackResponse;
     })();
 
-    proto.SendRoundRecordResponse = (function() {
+    SdkProto.SendRoundRecordResponse = (function() {
 
         /**
          * Properties of a SendRoundRecordResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendRoundRecordResponse
          * @property {string|null} [tableId] SendRoundRecordResponse tableId
          * @property {number|null} [gameId] SendRoundRecordResponse gameId
@@ -13114,16 +13114,16 @@ $root.proto = (function() {
          * @property {string|null} [time] SendRoundRecordResponse time
          * @property {number|null} [winners] SendRoundRecordResponse winners
          * @property {number|null} [springInfo] SendRoundRecordResponse springInfo
-         * @property {Array.<proto.IUser>|null} [users] SendRoundRecordResponse users
+         * @property {Array.<SdkProto.IUser>|null} [users] SendRoundRecordResponse users
          */
 
         /**
          * Constructs a new SendRoundRecordResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendRoundRecordResponse.
          * @implements ISendRoundRecordResponse
          * @constructor
-         * @param {proto.ISendRoundRecordResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendRoundRecordResponse=} [properties] Properties to set
          */
         function SendRoundRecordResponse(properties) {
             this.leftCards = [];
@@ -13138,7 +13138,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse tableId.
          * @member {string} tableId
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.tableId = "";
@@ -13146,7 +13146,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse gameId.
          * @member {number} gameId
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.gameId = 0;
@@ -13154,7 +13154,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse state.
          * @member {number} state
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.state = 0;
@@ -13162,7 +13162,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse owner.
          * @member {number} owner
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.owner = 0;
@@ -13170,7 +13170,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.currentRound = 0;
@@ -13178,7 +13178,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.totalRound = 0;
@@ -13186,7 +13186,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse gameInfo.
          * @member {string} gameInfo
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.gameInfo = "";
@@ -13194,7 +13194,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse applicant.
          * @member {number} applicant
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.applicant = 0;
@@ -13202,7 +13202,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse applyTime.
          * @member {number} applyTime
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.applyTime = 0;
@@ -13210,7 +13210,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse startApplyTime.
          * @member {number|Long} startApplyTime
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.startApplyTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -13218,7 +13218,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse zhuangPos.
          * @member {number} zhuangPos
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.zhuangPos = 0;
@@ -13226,7 +13226,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse discardPos.
          * @member {number} discardPos
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.discardPos = 0;
@@ -13234,7 +13234,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse nextDiscardPos.
          * @member {number} nextDiscardPos
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.nextDiscardPos = 0;
@@ -13242,7 +13242,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse curQDZPos.
          * @member {number} curQDZPos
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.curQDZPos = 0;
@@ -13250,7 +13250,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse godCard.
          * @member {number} godCard
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.godCard = 0;
@@ -13258,7 +13258,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse leftCards.
          * @member {Array.<number>} leftCards
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.leftCards = $util.emptyArray;
@@ -13266,7 +13266,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse callScoreInfo.
          * @member {Array.<number>} callScoreInfo
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.callScoreInfo = $util.emptyArray;
@@ -13274,7 +13274,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse currBaseScore.
          * @member {number} currBaseScore
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.currBaseScore = 0;
@@ -13282,7 +13282,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse currTimes.
          * @member {number} currTimes
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.currTimes = 0;
@@ -13290,7 +13290,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse isOver.
          * @member {number} isOver
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.isOver = 0;
@@ -13298,7 +13298,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse time.
          * @member {string} time
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.time = "";
@@ -13306,7 +13306,7 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse winners.
          * @member {number} winners
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.winners = 0;
@@ -13314,15 +13314,15 @@ $root.proto = (function() {
         /**
          * SendRoundRecordResponse springInfo.
          * @member {number} springInfo
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.springInfo = 0;
 
         /**
          * SendRoundRecordResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.SendRoundRecordResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          */
         SendRoundRecordResponse.prototype.users = $util.emptyArray;
@@ -13330,21 +13330,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendRoundRecordResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
-         * @param {proto.ISendRoundRecordResponse=} [properties] Properties to set
-         * @returns {proto.SendRoundRecordResponse} SendRoundRecordResponse instance
+         * @param {SdkProto.ISendRoundRecordResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendRoundRecordResponse} SendRoundRecordResponse instance
          */
         SendRoundRecordResponse.create = function create(properties) {
             return new SendRoundRecordResponse(properties);
         };
 
         /**
-         * Encodes the specified SendRoundRecordResponse message. Does not implicitly {@link proto.SendRoundRecordResponse.verify|verify} messages.
+         * Encodes the specified SendRoundRecordResponse message. Does not implicitly {@link SdkProto.SendRoundRecordResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
-         * @param {proto.ISendRoundRecordResponse} message SendRoundRecordResponse message or plain object to encode
+         * @param {SdkProto.ISendRoundRecordResponse} message SendRoundRecordResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -13407,16 +13407,16 @@ $root.proto = (function() {
                 writer.uint32(/* id 23, wireType 0 =*/184).int32(message.springInfo);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified SendRoundRecordResponse message, length delimited. Does not implicitly {@link proto.SendRoundRecordResponse.verify|verify} messages.
+         * Encodes the specified SendRoundRecordResponse message, length delimited. Does not implicitly {@link SdkProto.SendRoundRecordResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
-         * @param {proto.ISendRoundRecordResponse} message SendRoundRecordResponse message or plain object to encode
+         * @param {SdkProto.ISendRoundRecordResponse} message SendRoundRecordResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -13427,18 +13427,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendRoundRecordResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendRoundRecordResponse} SendRoundRecordResponse
+         * @returns {SdkProto.SendRoundRecordResponse} SendRoundRecordResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendRoundRecordResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendRoundRecordResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendRoundRecordResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -13528,7 +13528,7 @@ $root.proto = (function() {
                 case 24:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -13541,10 +13541,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendRoundRecordResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendRoundRecordResponse} SendRoundRecordResponse
+         * @returns {SdkProto.SendRoundRecordResponse} SendRoundRecordResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -13557,7 +13557,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendRoundRecordResponse message.
          * @function verify
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -13646,7 +13646,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -13657,15 +13657,15 @@ $root.proto = (function() {
         /**
          * Creates a SendRoundRecordResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendRoundRecordResponse} SendRoundRecordResponse
+         * @returns {SdkProto.SendRoundRecordResponse} SendRoundRecordResponse
          */
         SendRoundRecordResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendRoundRecordResponse)
+            if (object instanceof $root.SdkProto.SendRoundRecordResponse)
                 return object;
-            var message = new $root.proto.SendRoundRecordResponse();
+            var message = new $root.SdkProto.SendRoundRecordResponse();
             if (object.tableId != null)
                 message.tableId = String(object.tableId);
             if (object.gameId != null)
@@ -13705,14 +13705,14 @@ $root.proto = (function() {
                 message.godCard = object.godCard | 0;
             if (object.leftCards) {
                 if (!Array.isArray(object.leftCards))
-                    throw TypeError(".proto.SendRoundRecordResponse.leftCards: array expected");
+                    throw TypeError(".SdkProto.SendRoundRecordResponse.leftCards: array expected");
                 message.leftCards = [];
                 for (var i = 0; i < object.leftCards.length; ++i)
                     message.leftCards[i] = object.leftCards[i] | 0;
             }
             if (object.callScoreInfo) {
                 if (!Array.isArray(object.callScoreInfo))
-                    throw TypeError(".proto.SendRoundRecordResponse.callScoreInfo: array expected");
+                    throw TypeError(".SdkProto.SendRoundRecordResponse.callScoreInfo: array expected");
                 message.callScoreInfo = [];
                 for (var i = 0; i < object.callScoreInfo.length; ++i)
                     message.callScoreInfo[i] = object.callScoreInfo[i] | 0;
@@ -13731,12 +13731,12 @@ $root.proto = (function() {
                 message.springInfo = object.springInfo | 0;
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.SendRoundRecordResponse.users: array expected");
+                    throw TypeError(".SdkProto.SendRoundRecordResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.SendRoundRecordResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.SendRoundRecordResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             return message;
@@ -13745,9 +13745,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendRoundRecordResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @static
-         * @param {proto.SendRoundRecordResponse} message SendRoundRecordResponse
+         * @param {SdkProto.SendRoundRecordResponse} message SendRoundRecordResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -13845,7 +13845,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             return object;
         };
@@ -13853,7 +13853,7 @@ $root.proto = (function() {
         /**
          * Converts this SendRoundRecordResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendRoundRecordResponse
+         * @memberof SdkProto.SendRoundRecordResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -13864,11 +13864,11 @@ $root.proto = (function() {
         return SendRoundRecordResponse;
     })();
 
-    proto.SendGameOverResponse = (function() {
+    SdkProto.SendGameOverResponse = (function() {
 
         /**
          * Properties of a SendGameOverResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendGameOverResponse
          * @property {number|null} [state] SendGameOverResponse state
          * @property {number|null} [owner] SendGameOverResponse owner
@@ -13877,16 +13877,16 @@ $root.proto = (function() {
          * @property {string|null} [time] SendGameOverResponse time
          * @property {number|null} [agId] SendGameOverResponse agId
          * @property {number|null} [ruleId] SendGameOverResponse ruleId
-         * @property {Array.<proto.IUser>|null} [users] SendGameOverResponse users
+         * @property {Array.<SdkProto.IUser>|null} [users] SendGameOverResponse users
          */
 
         /**
          * Constructs a new SendGameOverResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendGameOverResponse.
          * @implements ISendGameOverResponse
          * @constructor
-         * @param {proto.ISendGameOverResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendGameOverResponse=} [properties] Properties to set
          */
         function SendGameOverResponse(properties) {
             this.users = [];
@@ -13899,7 +13899,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse state.
          * @member {number} state
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.state = 0;
@@ -13907,7 +13907,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse owner.
          * @member {number} owner
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.owner = 0;
@@ -13915,7 +13915,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse totalRound.
          * @member {number} totalRound
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.totalRound = 0;
@@ -13923,7 +13923,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse currentRound.
          * @member {number} currentRound
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.currentRound = 0;
@@ -13931,7 +13931,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse time.
          * @member {string} time
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.time = "";
@@ -13939,7 +13939,7 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse agId.
          * @member {number} agId
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.agId = 0;
@@ -13947,15 +13947,15 @@ $root.proto = (function() {
         /**
          * SendGameOverResponse ruleId.
          * @member {number} ruleId
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.ruleId = 0;
 
         /**
          * SendGameOverResponse users.
-         * @member {Array.<proto.IUser>} users
-         * @memberof proto.SendGameOverResponse
+         * @member {Array.<SdkProto.IUser>} users
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          */
         SendGameOverResponse.prototype.users = $util.emptyArray;
@@ -13963,21 +13963,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendGameOverResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
-         * @param {proto.ISendGameOverResponse=} [properties] Properties to set
-         * @returns {proto.SendGameOverResponse} SendGameOverResponse instance
+         * @param {SdkProto.ISendGameOverResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendGameOverResponse} SendGameOverResponse instance
          */
         SendGameOverResponse.create = function create(properties) {
             return new SendGameOverResponse(properties);
         };
 
         /**
-         * Encodes the specified SendGameOverResponse message. Does not implicitly {@link proto.SendGameOverResponse.verify|verify} messages.
+         * Encodes the specified SendGameOverResponse message. Does not implicitly {@link SdkProto.SendGameOverResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
-         * @param {proto.ISendGameOverResponse} message SendGameOverResponse message or plain object to encode
+         * @param {SdkProto.ISendGameOverResponse} message SendGameOverResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14000,16 +14000,16 @@ $root.proto = (function() {
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.ruleId);
             if (message.users != null && message.users.length)
                 for (var i = 0; i < message.users.length; ++i)
-                    $root.proto.User.encode(message.users[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    $root.SdkProto.User.encode(message.users[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified SendGameOverResponse message, length delimited. Does not implicitly {@link proto.SendGameOverResponse.verify|verify} messages.
+         * Encodes the specified SendGameOverResponse message, length delimited. Does not implicitly {@link SdkProto.SendGameOverResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
-         * @param {proto.ISendGameOverResponse} message SendGameOverResponse message or plain object to encode
+         * @param {SdkProto.ISendGameOverResponse} message SendGameOverResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14020,18 +14020,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendGameOverResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendGameOverResponse} SendGameOverResponse
+         * @returns {SdkProto.SendGameOverResponse} SendGameOverResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendGameOverResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendGameOverResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendGameOverResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -14059,7 +14059,7 @@ $root.proto = (function() {
                 case 8:
                     if (!(message.users && message.users.length))
                         message.users = [];
-                    message.users.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.users.push($root.SdkProto.User.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -14072,10 +14072,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendGameOverResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendGameOverResponse} SendGameOverResponse
+         * @returns {SdkProto.SendGameOverResponse} SendGameOverResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -14088,7 +14088,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendGameOverResponse message.
          * @function verify
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -14121,7 +14121,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.users))
                     return "users: array expected";
                 for (var i = 0; i < message.users.length; ++i) {
-                    var error = $root.proto.User.verify(message.users[i]);
+                    var error = $root.SdkProto.User.verify(message.users[i]);
                     if (error)
                         return "users." + error;
                 }
@@ -14132,15 +14132,15 @@ $root.proto = (function() {
         /**
          * Creates a SendGameOverResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendGameOverResponse} SendGameOverResponse
+         * @returns {SdkProto.SendGameOverResponse} SendGameOverResponse
          */
         SendGameOverResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendGameOverResponse)
+            if (object instanceof $root.SdkProto.SendGameOverResponse)
                 return object;
-            var message = new $root.proto.SendGameOverResponse();
+            var message = new $root.SdkProto.SendGameOverResponse();
             if (object.state != null)
                 message.state = object.state | 0;
             if (object.owner != null)
@@ -14157,12 +14157,12 @@ $root.proto = (function() {
                 message.ruleId = object.ruleId | 0;
             if (object.users) {
                 if (!Array.isArray(object.users))
-                    throw TypeError(".proto.SendGameOverResponse.users: array expected");
+                    throw TypeError(".SdkProto.SendGameOverResponse.users: array expected");
                 message.users = [];
                 for (var i = 0; i < object.users.length; ++i) {
                     if (typeof object.users[i] !== "object")
-                        throw TypeError(".proto.SendGameOverResponse.users: object expected");
-                    message.users[i] = $root.proto.User.fromObject(object.users[i]);
+                        throw TypeError(".SdkProto.SendGameOverResponse.users: object expected");
+                    message.users[i] = $root.SdkProto.User.fromObject(object.users[i]);
                 }
             }
             return message;
@@ -14171,9 +14171,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendGameOverResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @static
-         * @param {proto.SendGameOverResponse} message SendGameOverResponse
+         * @param {SdkProto.SendGameOverResponse} message SendGameOverResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -14209,7 +14209,7 @@ $root.proto = (function() {
             if (message.users && message.users.length) {
                 object.users = [];
                 for (var j = 0; j < message.users.length; ++j)
-                    object.users[j] = $root.proto.User.toObject(message.users[j], options);
+                    object.users[j] = $root.SdkProto.User.toObject(message.users[j], options);
             }
             return object;
         };
@@ -14217,7 +14217,7 @@ $root.proto = (function() {
         /**
          * Converts this SendGameOverResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendGameOverResponse
+         * @memberof SdkProto.SendGameOverResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -14228,11 +14228,11 @@ $root.proto = (function() {
         return SendGameOverResponse;
     })();
 
-    proto.SendUserQDZResponse = (function() {
+    SdkProto.SendUserQDZResponse = (function() {
 
         /**
          * Properties of a SendUserQDZResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserQDZResponse
          * @property {number|null} [round] SendUserQDZResponse round
          * @property {number|null} [difen] SendUserQDZResponse difen
@@ -14245,11 +14245,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserQDZResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserQDZResponse.
          * @implements ISendUserQDZResponse
          * @constructor
-         * @param {proto.ISendUserQDZResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserQDZResponse=} [properties] Properties to set
          */
         function SendUserQDZResponse(properties) {
             if (properties)
@@ -14261,7 +14261,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse round.
          * @member {number} round
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.round = 0;
@@ -14269,7 +14269,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse difen.
          * @member {number} difen
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.difen = 0;
@@ -14277,7 +14277,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse score.
          * @member {number} score
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.score = 0;
@@ -14285,7 +14285,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse position.
          * @member {number} position
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.position = 0;
@@ -14293,7 +14293,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse nextPosition.
          * @member {number} nextPosition
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.nextPosition = 0;
@@ -14301,7 +14301,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse lastPosition.
          * @member {number} lastPosition
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.lastPosition = 0;
@@ -14309,7 +14309,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZResponse passPaiCount.
          * @member {number} passPaiCount
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          */
         SendUserQDZResponse.prototype.passPaiCount = 0;
@@ -14317,21 +14317,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserQDZResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
-         * @param {proto.ISendUserQDZResponse=} [properties] Properties to set
-         * @returns {proto.SendUserQDZResponse} SendUserQDZResponse instance
+         * @param {SdkProto.ISendUserQDZResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserQDZResponse} SendUserQDZResponse instance
          */
         SendUserQDZResponse.create = function create(properties) {
             return new SendUserQDZResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserQDZResponse message. Does not implicitly {@link proto.SendUserQDZResponse.verify|verify} messages.
+         * Encodes the specified SendUserQDZResponse message. Does not implicitly {@link SdkProto.SendUserQDZResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
-         * @param {proto.ISendUserQDZResponse} message SendUserQDZResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQDZResponse} message SendUserQDZResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14356,11 +14356,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserQDZResponse message, length delimited. Does not implicitly {@link proto.SendUserQDZResponse.verify|verify} messages.
+         * Encodes the specified SendUserQDZResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQDZResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
-         * @param {proto.ISendUserQDZResponse} message SendUserQDZResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQDZResponse} message SendUserQDZResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14371,18 +14371,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQDZResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserQDZResponse} SendUserQDZResponse
+         * @returns {SdkProto.SendUserQDZResponse} SendUserQDZResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserQDZResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserQDZResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserQDZResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -14418,10 +14418,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQDZResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserQDZResponse} SendUserQDZResponse
+         * @returns {SdkProto.SendUserQDZResponse} SendUserQDZResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -14434,7 +14434,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserQDZResponse message.
          * @function verify
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -14469,15 +14469,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserQDZResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserQDZResponse} SendUserQDZResponse
+         * @returns {SdkProto.SendUserQDZResponse} SendUserQDZResponse
          */
         SendUserQDZResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserQDZResponse)
+            if (object instanceof $root.SdkProto.SendUserQDZResponse)
                 return object;
-            var message = new $root.proto.SendUserQDZResponse();
+            var message = new $root.SdkProto.SendUserQDZResponse();
             if (object.round != null)
                 message.round = object.round | 0;
             if (object.difen != null)
@@ -14498,9 +14498,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserQDZResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @static
-         * @param {proto.SendUserQDZResponse} message SendUserQDZResponse
+         * @param {SdkProto.SendUserQDZResponse} message SendUserQDZResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -14537,7 +14537,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserQDZResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserQDZResponse
+         * @memberof SdkProto.SendUserQDZResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -14548,11 +14548,11 @@ $root.proto = (function() {
         return SendUserQDZResponse;
     })();
 
-    proto.SendUserQDZ2Response = (function() {
+    SdkProto.SendUserQDZ2Response = (function() {
 
         /**
          * Properties of a SendUserQDZ2Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserQDZ2Response
          * @property {number|null} [round] SendUserQDZ2Response round
          * @property {number|null} [difen] SendUserQDZ2Response difen
@@ -14564,11 +14564,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserQDZ2Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserQDZ2Response.
          * @implements ISendUserQDZ2Response
          * @constructor
-         * @param {proto.ISendUserQDZ2Response=} [properties] Properties to set
+         * @param {SdkProto.ISendUserQDZ2Response=} [properties] Properties to set
          */
         function SendUserQDZ2Response(properties) {
             this.leftCards = [];
@@ -14582,7 +14582,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response round.
          * @member {number} round
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.round = 0;
@@ -14590,7 +14590,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response difen.
          * @member {number} difen
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.difen = 0;
@@ -14598,7 +14598,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response position.
          * @member {number} position
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.position = 0;
@@ -14606,7 +14606,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response godCard.
          * @member {number} godCard
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.godCard = 0;
@@ -14614,7 +14614,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response leftCards.
          * @member {Array.<number>} leftCards
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.leftCards = $util.emptyArray;
@@ -14622,7 +14622,7 @@ $root.proto = (function() {
         /**
          * SendUserQDZ2Response lordHandCards.
          * @member {Array.<number>} lordHandCards
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          */
         SendUserQDZ2Response.prototype.lordHandCards = $util.emptyArray;
@@ -14630,21 +14630,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserQDZ2Response instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
-         * @param {proto.ISendUserQDZ2Response=} [properties] Properties to set
-         * @returns {proto.SendUserQDZ2Response} SendUserQDZ2Response instance
+         * @param {SdkProto.ISendUserQDZ2Response=} [properties] Properties to set
+         * @returns {SdkProto.SendUserQDZ2Response} SendUserQDZ2Response instance
          */
         SendUserQDZ2Response.create = function create(properties) {
             return new SendUserQDZ2Response(properties);
         };
 
         /**
-         * Encodes the specified SendUserQDZ2Response message. Does not implicitly {@link proto.SendUserQDZ2Response.verify|verify} messages.
+         * Encodes the specified SendUserQDZ2Response message. Does not implicitly {@link SdkProto.SendUserQDZ2Response.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
-         * @param {proto.ISendUserQDZ2Response} message SendUserQDZ2Response message or plain object to encode
+         * @param {SdkProto.ISendUserQDZ2Response} message SendUserQDZ2Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14675,11 +14675,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserQDZ2Response message, length delimited. Does not implicitly {@link proto.SendUserQDZ2Response.verify|verify} messages.
+         * Encodes the specified SendUserQDZ2Response message, length delimited. Does not implicitly {@link SdkProto.SendUserQDZ2Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
-         * @param {proto.ISendUserQDZ2Response} message SendUserQDZ2Response message or plain object to encode
+         * @param {SdkProto.ISendUserQDZ2Response} message SendUserQDZ2Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14690,18 +14690,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQDZ2Response message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserQDZ2Response} SendUserQDZ2Response
+         * @returns {SdkProto.SendUserQDZ2Response} SendUserQDZ2Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserQDZ2Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserQDZ2Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserQDZ2Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -14748,10 +14748,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQDZ2Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserQDZ2Response} SendUserQDZ2Response
+         * @returns {SdkProto.SendUserQDZ2Response} SendUserQDZ2Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -14764,7 +14764,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserQDZ2Response message.
          * @function verify
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -14804,15 +14804,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserQDZ2Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserQDZ2Response} SendUserQDZ2Response
+         * @returns {SdkProto.SendUserQDZ2Response} SendUserQDZ2Response
          */
         SendUserQDZ2Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserQDZ2Response)
+            if (object instanceof $root.SdkProto.SendUserQDZ2Response)
                 return object;
-            var message = new $root.proto.SendUserQDZ2Response();
+            var message = new $root.SdkProto.SendUserQDZ2Response();
             if (object.round != null)
                 message.round = object.round | 0;
             if (object.difen != null)
@@ -14823,14 +14823,14 @@ $root.proto = (function() {
                 message.godCard = object.godCard | 0;
             if (object.leftCards) {
                 if (!Array.isArray(object.leftCards))
-                    throw TypeError(".proto.SendUserQDZ2Response.leftCards: array expected");
+                    throw TypeError(".SdkProto.SendUserQDZ2Response.leftCards: array expected");
                 message.leftCards = [];
                 for (var i = 0; i < object.leftCards.length; ++i)
                     message.leftCards[i] = object.leftCards[i] | 0;
             }
             if (object.lordHandCards) {
                 if (!Array.isArray(object.lordHandCards))
-                    throw TypeError(".proto.SendUserQDZ2Response.lordHandCards: array expected");
+                    throw TypeError(".SdkProto.SendUserQDZ2Response.lordHandCards: array expected");
                 message.lordHandCards = [];
                 for (var i = 0; i < object.lordHandCards.length; ++i)
                     message.lordHandCards[i] = object.lordHandCards[i] | 0;
@@ -14841,9 +14841,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserQDZ2Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @static
-         * @param {proto.SendUserQDZ2Response} message SendUserQDZ2Response
+         * @param {SdkProto.SendUserQDZ2Response} message SendUserQDZ2Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -14885,7 +14885,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserQDZ2Response to JSON.
          * @function toJSON
-         * @memberof proto.SendUserQDZ2Response
+         * @memberof SdkProto.SendUserQDZ2Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -14896,11 +14896,11 @@ $root.proto = (function() {
         return SendUserQDZ2Response;
     })();
 
-    proto.SendUserMPResponse = (function() {
+    SdkProto.SendUserMPResponse = (function() {
 
         /**
          * Properties of a SendUserMPResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserMPResponse
          * @property {number|null} [showAll] SendUserMPResponse showAll
          * @property {Array.<number>|null} [cards] SendUserMPResponse cards
@@ -14910,11 +14910,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserMPResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserMPResponse.
          * @implements ISendUserMPResponse
          * @constructor
-         * @param {proto.ISendUserMPResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserMPResponse=} [properties] Properties to set
          */
         function SendUserMPResponse(properties) {
             this.cards = [];
@@ -14927,7 +14927,7 @@ $root.proto = (function() {
         /**
          * SendUserMPResponse showAll.
          * @member {number} showAll
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @instance
          */
         SendUserMPResponse.prototype.showAll = 0;
@@ -14935,7 +14935,7 @@ $root.proto = (function() {
         /**
          * SendUserMPResponse cards.
          * @member {Array.<number>} cards
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @instance
          */
         SendUserMPResponse.prototype.cards = $util.emptyArray;
@@ -14943,7 +14943,7 @@ $root.proto = (function() {
         /**
          * SendUserMPResponse position.
          * @member {number} position
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @instance
          */
         SendUserMPResponse.prototype.position = 0;
@@ -14951,7 +14951,7 @@ $root.proto = (function() {
         /**
          * SendUserMPResponse currTimes.
          * @member {number} currTimes
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @instance
          */
         SendUserMPResponse.prototype.currTimes = 0;
@@ -14959,21 +14959,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserMPResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
-         * @param {proto.ISendUserMPResponse=} [properties] Properties to set
-         * @returns {proto.SendUserMPResponse} SendUserMPResponse instance
+         * @param {SdkProto.ISendUserMPResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserMPResponse} SendUserMPResponse instance
          */
         SendUserMPResponse.create = function create(properties) {
             return new SendUserMPResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserMPResponse message. Does not implicitly {@link proto.SendUserMPResponse.verify|verify} messages.
+         * Encodes the specified SendUserMPResponse message. Does not implicitly {@link SdkProto.SendUserMPResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
-         * @param {proto.ISendUserMPResponse} message SendUserMPResponse message or plain object to encode
+         * @param {SdkProto.ISendUserMPResponse} message SendUserMPResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -14996,11 +14996,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserMPResponse message, length delimited. Does not implicitly {@link proto.SendUserMPResponse.verify|verify} messages.
+         * Encodes the specified SendUserMPResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserMPResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
-         * @param {proto.ISendUserMPResponse} message SendUserMPResponse message or plain object to encode
+         * @param {SdkProto.ISendUserMPResponse} message SendUserMPResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15011,18 +15011,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserMPResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserMPResponse} SendUserMPResponse
+         * @returns {SdkProto.SendUserMPResponse} SendUserMPResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserMPResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserMPResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserMPResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15056,10 +15056,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserMPResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserMPResponse} SendUserMPResponse
+         * @returns {SdkProto.SendUserMPResponse} SendUserMPResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -15072,7 +15072,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserMPResponse message.
          * @function verify
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -15102,20 +15102,20 @@ $root.proto = (function() {
         /**
          * Creates a SendUserMPResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserMPResponse} SendUserMPResponse
+         * @returns {SdkProto.SendUserMPResponse} SendUserMPResponse
          */
         SendUserMPResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserMPResponse)
+            if (object instanceof $root.SdkProto.SendUserMPResponse)
                 return object;
-            var message = new $root.proto.SendUserMPResponse();
+            var message = new $root.SdkProto.SendUserMPResponse();
             if (object.showAll != null)
                 message.showAll = object.showAll | 0;
             if (object.cards) {
                 if (!Array.isArray(object.cards))
-                    throw TypeError(".proto.SendUserMPResponse.cards: array expected");
+                    throw TypeError(".SdkProto.SendUserMPResponse.cards: array expected");
                 message.cards = [];
                 for (var i = 0; i < object.cards.length; ++i)
                     message.cards[i] = object.cards[i] | 0;
@@ -15130,9 +15130,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserMPResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @static
-         * @param {proto.SendUserMPResponse} message SendUserMPResponse
+         * @param {SdkProto.SendUserMPResponse} message SendUserMPResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -15164,7 +15164,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserMPResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserMPResponse
+         * @memberof SdkProto.SendUserMPResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -15175,11 +15175,11 @@ $root.proto = (function() {
         return SendUserMPResponse;
     })();
 
-    proto.SendUserMP2Response = (function() {
+    SdkProto.SendUserMP2Response = (function() {
 
         /**
          * Properties of a SendUserMP2Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserMP2Response
          * @property {number|null} [round] SendUserMP2Response round
          * @property {number|null} [difen] SendUserMP2Response difen
@@ -15191,11 +15191,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendUserMP2Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserMP2Response.
          * @implements ISendUserMP2Response
          * @constructor
-         * @param {proto.ISendUserMP2Response=} [properties] Properties to set
+         * @param {SdkProto.ISendUserMP2Response=} [properties] Properties to set
          */
         function SendUserMP2Response(properties) {
             this.leftCards = [];
@@ -15208,7 +15208,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response round.
          * @member {number} round
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.round = 0;
@@ -15216,7 +15216,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response difen.
          * @member {number} difen
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.difen = 0;
@@ -15224,7 +15224,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response position.
          * @member {number} position
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.position = 0;
@@ -15232,7 +15232,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response godCard.
          * @member {number} godCard
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.godCard = 0;
@@ -15240,7 +15240,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response leftCards.
          * @member {Array.<number>} leftCards
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.leftCards = $util.emptyArray;
@@ -15248,7 +15248,7 @@ $root.proto = (function() {
         /**
          * SendUserMP2Response start.
          * @member {boolean} start
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          */
         SendUserMP2Response.prototype.start = false;
@@ -15256,21 +15256,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserMP2Response instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
-         * @param {proto.ISendUserMP2Response=} [properties] Properties to set
-         * @returns {proto.SendUserMP2Response} SendUserMP2Response instance
+         * @param {SdkProto.ISendUserMP2Response=} [properties] Properties to set
+         * @returns {SdkProto.SendUserMP2Response} SendUserMP2Response instance
          */
         SendUserMP2Response.create = function create(properties) {
             return new SendUserMP2Response(properties);
         };
 
         /**
-         * Encodes the specified SendUserMP2Response message. Does not implicitly {@link proto.SendUserMP2Response.verify|verify} messages.
+         * Encodes the specified SendUserMP2Response message. Does not implicitly {@link SdkProto.SendUserMP2Response.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
-         * @param {proto.ISendUserMP2Response} message SendUserMP2Response message or plain object to encode
+         * @param {SdkProto.ISendUserMP2Response} message SendUserMP2Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15297,11 +15297,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserMP2Response message, length delimited. Does not implicitly {@link proto.SendUserMP2Response.verify|verify} messages.
+         * Encodes the specified SendUserMP2Response message, length delimited. Does not implicitly {@link SdkProto.SendUserMP2Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
-         * @param {proto.ISendUserMP2Response} message SendUserMP2Response message or plain object to encode
+         * @param {SdkProto.ISendUserMP2Response} message SendUserMP2Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15312,18 +15312,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserMP2Response message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserMP2Response} SendUserMP2Response
+         * @returns {SdkProto.SendUserMP2Response} SendUserMP2Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserMP2Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserMP2Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserMP2Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15363,10 +15363,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserMP2Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserMP2Response} SendUserMP2Response
+         * @returns {SdkProto.SendUserMP2Response} SendUserMP2Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -15379,7 +15379,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserMP2Response message.
          * @function verify
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -15415,15 +15415,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserMP2Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserMP2Response} SendUserMP2Response
+         * @returns {SdkProto.SendUserMP2Response} SendUserMP2Response
          */
         SendUserMP2Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserMP2Response)
+            if (object instanceof $root.SdkProto.SendUserMP2Response)
                 return object;
-            var message = new $root.proto.SendUserMP2Response();
+            var message = new $root.SdkProto.SendUserMP2Response();
             if (object.round != null)
                 message.round = object.round | 0;
             if (object.difen != null)
@@ -15434,7 +15434,7 @@ $root.proto = (function() {
                 message.godCard = object.godCard | 0;
             if (object.leftCards) {
                 if (!Array.isArray(object.leftCards))
-                    throw TypeError(".proto.SendUserMP2Response.leftCards: array expected");
+                    throw TypeError(".SdkProto.SendUserMP2Response.leftCards: array expected");
                 message.leftCards = [];
                 for (var i = 0; i < object.leftCards.length; ++i)
                     message.leftCards[i] = object.leftCards[i] | 0;
@@ -15447,9 +15447,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserMP2Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @static
-         * @param {proto.SendUserMP2Response} message SendUserMP2Response
+         * @param {SdkProto.SendUserMP2Response} message SendUserMP2Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -15487,7 +15487,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserMP2Response to JSON.
          * @function toJSON
-         * @memberof proto.SendUserMP2Response
+         * @memberof SdkProto.SendUserMP2Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -15498,11 +15498,11 @@ $root.proto = (function() {
         return SendUserMP2Response;
     })();
 
-    proto.SendDiamondChangeResponse = (function() {
+    SdkProto.SendDiamondChangeResponse = (function() {
 
         /**
          * Properties of a SendDiamondChangeResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendDiamondChangeResponse
          * @property {number|null} [userId] SendDiamondChangeResponse userId
          * @property {number|null} [diamond] SendDiamondChangeResponse diamond
@@ -15510,11 +15510,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendDiamondChangeResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendDiamondChangeResponse.
          * @implements ISendDiamondChangeResponse
          * @constructor
-         * @param {proto.ISendDiamondChangeResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendDiamondChangeResponse=} [properties] Properties to set
          */
         function SendDiamondChangeResponse(properties) {
             if (properties)
@@ -15526,7 +15526,7 @@ $root.proto = (function() {
         /**
          * SendDiamondChangeResponse userId.
          * @member {number} userId
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @instance
          */
         SendDiamondChangeResponse.prototype.userId = 0;
@@ -15534,7 +15534,7 @@ $root.proto = (function() {
         /**
          * SendDiamondChangeResponse diamond.
          * @member {number} diamond
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @instance
          */
         SendDiamondChangeResponse.prototype.diamond = 0;
@@ -15542,21 +15542,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendDiamondChangeResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
-         * @param {proto.ISendDiamondChangeResponse=} [properties] Properties to set
-         * @returns {proto.SendDiamondChangeResponse} SendDiamondChangeResponse instance
+         * @param {SdkProto.ISendDiamondChangeResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendDiamondChangeResponse} SendDiamondChangeResponse instance
          */
         SendDiamondChangeResponse.create = function create(properties) {
             return new SendDiamondChangeResponse(properties);
         };
 
         /**
-         * Encodes the specified SendDiamondChangeResponse message. Does not implicitly {@link proto.SendDiamondChangeResponse.verify|verify} messages.
+         * Encodes the specified SendDiamondChangeResponse message. Does not implicitly {@link SdkProto.SendDiamondChangeResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
-         * @param {proto.ISendDiamondChangeResponse} message SendDiamondChangeResponse message or plain object to encode
+         * @param {SdkProto.ISendDiamondChangeResponse} message SendDiamondChangeResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15571,11 +15571,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendDiamondChangeResponse message, length delimited. Does not implicitly {@link proto.SendDiamondChangeResponse.verify|verify} messages.
+         * Encodes the specified SendDiamondChangeResponse message, length delimited. Does not implicitly {@link SdkProto.SendDiamondChangeResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
-         * @param {proto.ISendDiamondChangeResponse} message SendDiamondChangeResponse message or plain object to encode
+         * @param {SdkProto.ISendDiamondChangeResponse} message SendDiamondChangeResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15586,18 +15586,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendDiamondChangeResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendDiamondChangeResponse} SendDiamondChangeResponse
+         * @returns {SdkProto.SendDiamondChangeResponse} SendDiamondChangeResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendDiamondChangeResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendDiamondChangeResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendDiamondChangeResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15618,10 +15618,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendDiamondChangeResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendDiamondChangeResponse} SendDiamondChangeResponse
+         * @returns {SdkProto.SendDiamondChangeResponse} SendDiamondChangeResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -15634,7 +15634,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendDiamondChangeResponse message.
          * @function verify
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -15654,15 +15654,15 @@ $root.proto = (function() {
         /**
          * Creates a SendDiamondChangeResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendDiamondChangeResponse} SendDiamondChangeResponse
+         * @returns {SdkProto.SendDiamondChangeResponse} SendDiamondChangeResponse
          */
         SendDiamondChangeResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendDiamondChangeResponse)
+            if (object instanceof $root.SdkProto.SendDiamondChangeResponse)
                 return object;
-            var message = new $root.proto.SendDiamondChangeResponse();
+            var message = new $root.SdkProto.SendDiamondChangeResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.diamond != null)
@@ -15673,9 +15673,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendDiamondChangeResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @static
-         * @param {proto.SendDiamondChangeResponse} message SendDiamondChangeResponse
+         * @param {SdkProto.SendDiamondChangeResponse} message SendDiamondChangeResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -15697,7 +15697,7 @@ $root.proto = (function() {
         /**
          * Converts this SendDiamondChangeResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendDiamondChangeResponse
+         * @memberof SdkProto.SendDiamondChangeResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -15708,11 +15708,11 @@ $root.proto = (function() {
         return SendDiamondChangeResponse;
     })();
 
-    proto.SendCancelAutoResponse = (function() {
+    SdkProto.SendCancelAutoResponse = (function() {
 
         /**
          * Properties of a SendCancelAutoResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendCancelAutoResponse
          * @property {number|null} [userId] SendCancelAutoResponse userId
          * @property {boolean|null} [isAuto] SendCancelAutoResponse isAuto
@@ -15720,11 +15720,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendCancelAutoResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendCancelAutoResponse.
          * @implements ISendCancelAutoResponse
          * @constructor
-         * @param {proto.ISendCancelAutoResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendCancelAutoResponse=} [properties] Properties to set
          */
         function SendCancelAutoResponse(properties) {
             if (properties)
@@ -15736,7 +15736,7 @@ $root.proto = (function() {
         /**
          * SendCancelAutoResponse userId.
          * @member {number} userId
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @instance
          */
         SendCancelAutoResponse.prototype.userId = 0;
@@ -15744,7 +15744,7 @@ $root.proto = (function() {
         /**
          * SendCancelAutoResponse isAuto.
          * @member {boolean} isAuto
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @instance
          */
         SendCancelAutoResponse.prototype.isAuto = false;
@@ -15752,21 +15752,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendCancelAutoResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
-         * @param {proto.ISendCancelAutoResponse=} [properties] Properties to set
-         * @returns {proto.SendCancelAutoResponse} SendCancelAutoResponse instance
+         * @param {SdkProto.ISendCancelAutoResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendCancelAutoResponse} SendCancelAutoResponse instance
          */
         SendCancelAutoResponse.create = function create(properties) {
             return new SendCancelAutoResponse(properties);
         };
 
         /**
-         * Encodes the specified SendCancelAutoResponse message. Does not implicitly {@link proto.SendCancelAutoResponse.verify|verify} messages.
+         * Encodes the specified SendCancelAutoResponse message. Does not implicitly {@link SdkProto.SendCancelAutoResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
-         * @param {proto.ISendCancelAutoResponse} message SendCancelAutoResponse message or plain object to encode
+         * @param {SdkProto.ISendCancelAutoResponse} message SendCancelAutoResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15781,11 +15781,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendCancelAutoResponse message, length delimited. Does not implicitly {@link proto.SendCancelAutoResponse.verify|verify} messages.
+         * Encodes the specified SendCancelAutoResponse message, length delimited. Does not implicitly {@link SdkProto.SendCancelAutoResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
-         * @param {proto.ISendCancelAutoResponse} message SendCancelAutoResponse message or plain object to encode
+         * @param {SdkProto.ISendCancelAutoResponse} message SendCancelAutoResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15796,18 +15796,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendCancelAutoResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendCancelAutoResponse} SendCancelAutoResponse
+         * @returns {SdkProto.SendCancelAutoResponse} SendCancelAutoResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendCancelAutoResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendCancelAutoResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendCancelAutoResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -15828,10 +15828,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendCancelAutoResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendCancelAutoResponse} SendCancelAutoResponse
+         * @returns {SdkProto.SendCancelAutoResponse} SendCancelAutoResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -15844,7 +15844,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendCancelAutoResponse message.
          * @function verify
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -15864,15 +15864,15 @@ $root.proto = (function() {
         /**
          * Creates a SendCancelAutoResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendCancelAutoResponse} SendCancelAutoResponse
+         * @returns {SdkProto.SendCancelAutoResponse} SendCancelAutoResponse
          */
         SendCancelAutoResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendCancelAutoResponse)
+            if (object instanceof $root.SdkProto.SendCancelAutoResponse)
                 return object;
-            var message = new $root.proto.SendCancelAutoResponse();
+            var message = new $root.SdkProto.SendCancelAutoResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             if (object.isAuto != null)
@@ -15883,9 +15883,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendCancelAutoResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @static
-         * @param {proto.SendCancelAutoResponse} message SendCancelAutoResponse
+         * @param {SdkProto.SendCancelAutoResponse} message SendCancelAutoResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -15907,7 +15907,7 @@ $root.proto = (function() {
         /**
          * Converts this SendCancelAutoResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendCancelAutoResponse
+         * @memberof SdkProto.SendCancelAutoResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -15918,22 +15918,22 @@ $root.proto = (function() {
         return SendCancelAutoResponse;
     })();
 
-    proto.DelayCheckResponse = (function() {
+    SdkProto.DelayCheckResponse = (function() {
 
         /**
          * Properties of a DelayCheckResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IDelayCheckResponse
          * @property {string|null} [content] DelayCheckResponse content
          */
 
         /**
          * Constructs a new DelayCheckResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a DelayCheckResponse.
          * @implements IDelayCheckResponse
          * @constructor
-         * @param {proto.IDelayCheckResponse=} [properties] Properties to set
+         * @param {SdkProto.IDelayCheckResponse=} [properties] Properties to set
          */
         function DelayCheckResponse(properties) {
             if (properties)
@@ -15945,7 +15945,7 @@ $root.proto = (function() {
         /**
          * DelayCheckResponse content.
          * @member {string} content
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @instance
          */
         DelayCheckResponse.prototype.content = "";
@@ -15953,21 +15953,21 @@ $root.proto = (function() {
         /**
          * Creates a new DelayCheckResponse instance using the specified properties.
          * @function create
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
-         * @param {proto.IDelayCheckResponse=} [properties] Properties to set
-         * @returns {proto.DelayCheckResponse} DelayCheckResponse instance
+         * @param {SdkProto.IDelayCheckResponse=} [properties] Properties to set
+         * @returns {SdkProto.DelayCheckResponse} DelayCheckResponse instance
          */
         DelayCheckResponse.create = function create(properties) {
             return new DelayCheckResponse(properties);
         };
 
         /**
-         * Encodes the specified DelayCheckResponse message. Does not implicitly {@link proto.DelayCheckResponse.verify|verify} messages.
+         * Encodes the specified DelayCheckResponse message. Does not implicitly {@link SdkProto.DelayCheckResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
-         * @param {proto.IDelayCheckResponse} message DelayCheckResponse message or plain object to encode
+         * @param {SdkProto.IDelayCheckResponse} message DelayCheckResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15980,11 +15980,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified DelayCheckResponse message, length delimited. Does not implicitly {@link proto.DelayCheckResponse.verify|verify} messages.
+         * Encodes the specified DelayCheckResponse message, length delimited. Does not implicitly {@link SdkProto.DelayCheckResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
-         * @param {proto.IDelayCheckResponse} message DelayCheckResponse message or plain object to encode
+         * @param {SdkProto.IDelayCheckResponse} message DelayCheckResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -15995,18 +15995,18 @@ $root.proto = (function() {
         /**
          * Decodes a DelayCheckResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.DelayCheckResponse} DelayCheckResponse
+         * @returns {SdkProto.DelayCheckResponse} DelayCheckResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         DelayCheckResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.DelayCheckResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.DelayCheckResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16024,10 +16024,10 @@ $root.proto = (function() {
         /**
          * Decodes a DelayCheckResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.DelayCheckResponse} DelayCheckResponse
+         * @returns {SdkProto.DelayCheckResponse} DelayCheckResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -16040,7 +16040,7 @@ $root.proto = (function() {
         /**
          * Verifies a DelayCheckResponse message.
          * @function verify
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -16057,15 +16057,15 @@ $root.proto = (function() {
         /**
          * Creates a DelayCheckResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.DelayCheckResponse} DelayCheckResponse
+         * @returns {SdkProto.DelayCheckResponse} DelayCheckResponse
          */
         DelayCheckResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.DelayCheckResponse)
+            if (object instanceof $root.SdkProto.DelayCheckResponse)
                 return object;
-            var message = new $root.proto.DelayCheckResponse();
+            var message = new $root.SdkProto.DelayCheckResponse();
             if (object.content != null)
                 message.content = String(object.content);
             return message;
@@ -16074,9 +16074,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a DelayCheckResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @static
-         * @param {proto.DelayCheckResponse} message DelayCheckResponse
+         * @param {SdkProto.DelayCheckResponse} message DelayCheckResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -16094,7 +16094,7 @@ $root.proto = (function() {
         /**
          * Converts this DelayCheckResponse to JSON.
          * @function toJSON
-         * @memberof proto.DelayCheckResponse
+         * @memberof SdkProto.DelayCheckResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -16105,22 +16105,22 @@ $root.proto = (function() {
         return DelayCheckResponse;
     })();
 
-    proto.SendNoticeClientDismissResponse = (function() {
+    SdkProto.SendNoticeClientDismissResponse = (function() {
 
         /**
          * Properties of a SendNoticeClientDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendNoticeClientDismissResponse
          * @property {number|null} [userId] SendNoticeClientDismissResponse userId
          */
 
         /**
          * Constructs a new SendNoticeClientDismissResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendNoticeClientDismissResponse.
          * @implements ISendNoticeClientDismissResponse
          * @constructor
-         * @param {proto.ISendNoticeClientDismissResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendNoticeClientDismissResponse=} [properties] Properties to set
          */
         function SendNoticeClientDismissResponse(properties) {
             if (properties)
@@ -16132,7 +16132,7 @@ $root.proto = (function() {
         /**
          * SendNoticeClientDismissResponse userId.
          * @member {number} userId
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @instance
          */
         SendNoticeClientDismissResponse.prototype.userId = 0;
@@ -16140,21 +16140,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendNoticeClientDismissResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
-         * @param {proto.ISendNoticeClientDismissResponse=} [properties] Properties to set
-         * @returns {proto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse instance
+         * @param {SdkProto.ISendNoticeClientDismissResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse instance
          */
         SendNoticeClientDismissResponse.create = function create(properties) {
             return new SendNoticeClientDismissResponse(properties);
         };
 
         /**
-         * Encodes the specified SendNoticeClientDismissResponse message. Does not implicitly {@link proto.SendNoticeClientDismissResponse.verify|verify} messages.
+         * Encodes the specified SendNoticeClientDismissResponse message. Does not implicitly {@link SdkProto.SendNoticeClientDismissResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
-         * @param {proto.ISendNoticeClientDismissResponse} message SendNoticeClientDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendNoticeClientDismissResponse} message SendNoticeClientDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16167,11 +16167,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendNoticeClientDismissResponse message, length delimited. Does not implicitly {@link proto.SendNoticeClientDismissResponse.verify|verify} messages.
+         * Encodes the specified SendNoticeClientDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendNoticeClientDismissResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
-         * @param {proto.ISendNoticeClientDismissResponse} message SendNoticeClientDismissResponse message or plain object to encode
+         * @param {SdkProto.ISendNoticeClientDismissResponse} message SendNoticeClientDismissResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16182,18 +16182,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendNoticeClientDismissResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
+         * @returns {SdkProto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendNoticeClientDismissResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendNoticeClientDismissResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendNoticeClientDismissResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16211,10 +16211,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendNoticeClientDismissResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
+         * @returns {SdkProto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -16227,7 +16227,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendNoticeClientDismissResponse message.
          * @function verify
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -16244,15 +16244,15 @@ $root.proto = (function() {
         /**
          * Creates a SendNoticeClientDismissResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
+         * @returns {SdkProto.SendNoticeClientDismissResponse} SendNoticeClientDismissResponse
          */
         SendNoticeClientDismissResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendNoticeClientDismissResponse)
+            if (object instanceof $root.SdkProto.SendNoticeClientDismissResponse)
                 return object;
-            var message = new $root.proto.SendNoticeClientDismissResponse();
+            var message = new $root.SdkProto.SendNoticeClientDismissResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             return message;
@@ -16261,9 +16261,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendNoticeClientDismissResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @static
-         * @param {proto.SendNoticeClientDismissResponse} message SendNoticeClientDismissResponse
+         * @param {SdkProto.SendNoticeClientDismissResponse} message SendNoticeClientDismissResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -16281,7 +16281,7 @@ $root.proto = (function() {
         /**
          * Converts this SendNoticeClientDismissResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendNoticeClientDismissResponse
+         * @memberof SdkProto.SendNoticeClientDismissResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -16292,11 +16292,11 @@ $root.proto = (function() {
         return SendNoticeClientDismissResponse;
     })();
 
-    proto.SendRemainTimeResponse = (function() {
+    SdkProto.SendRemainTimeResponse = (function() {
 
         /**
          * Properties of a SendRemainTimeResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendRemainTimeResponse
          * @property {number|null} [time] SendRemainTimeResponse time
          * @property {number|null} [type] SendRemainTimeResponse type
@@ -16305,11 +16305,11 @@ $root.proto = (function() {
 
         /**
          * Constructs a new SendRemainTimeResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendRemainTimeResponse.
          * @implements ISendRemainTimeResponse
          * @constructor
-         * @param {proto.ISendRemainTimeResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendRemainTimeResponse=} [properties] Properties to set
          */
         function SendRemainTimeResponse(properties) {
             if (properties)
@@ -16321,7 +16321,7 @@ $root.proto = (function() {
         /**
          * SendRemainTimeResponse time.
          * @member {number} time
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @instance
          */
         SendRemainTimeResponse.prototype.time = 0;
@@ -16329,7 +16329,7 @@ $root.proto = (function() {
         /**
          * SendRemainTimeResponse type.
          * @member {number} type
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @instance
          */
         SendRemainTimeResponse.prototype.type = 0;
@@ -16337,7 +16337,7 @@ $root.proto = (function() {
         /**
          * SendRemainTimeResponse userId.
          * @member {number} userId
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @instance
          */
         SendRemainTimeResponse.prototype.userId = 0;
@@ -16345,21 +16345,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendRemainTimeResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
-         * @param {proto.ISendRemainTimeResponse=} [properties] Properties to set
-         * @returns {proto.SendRemainTimeResponse} SendRemainTimeResponse instance
+         * @param {SdkProto.ISendRemainTimeResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendRemainTimeResponse} SendRemainTimeResponse instance
          */
         SendRemainTimeResponse.create = function create(properties) {
             return new SendRemainTimeResponse(properties);
         };
 
         /**
-         * Encodes the specified SendRemainTimeResponse message. Does not implicitly {@link proto.SendRemainTimeResponse.verify|verify} messages.
+         * Encodes the specified SendRemainTimeResponse message. Does not implicitly {@link SdkProto.SendRemainTimeResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
-         * @param {proto.ISendRemainTimeResponse} message SendRemainTimeResponse message or plain object to encode
+         * @param {SdkProto.ISendRemainTimeResponse} message SendRemainTimeResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16376,11 +16376,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendRemainTimeResponse message, length delimited. Does not implicitly {@link proto.SendRemainTimeResponse.verify|verify} messages.
+         * Encodes the specified SendRemainTimeResponse message, length delimited. Does not implicitly {@link SdkProto.SendRemainTimeResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
-         * @param {proto.ISendRemainTimeResponse} message SendRemainTimeResponse message or plain object to encode
+         * @param {SdkProto.ISendRemainTimeResponse} message SendRemainTimeResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16391,18 +16391,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendRemainTimeResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendRemainTimeResponse} SendRemainTimeResponse
+         * @returns {SdkProto.SendRemainTimeResponse} SendRemainTimeResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendRemainTimeResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendRemainTimeResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendRemainTimeResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16426,10 +16426,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendRemainTimeResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendRemainTimeResponse} SendRemainTimeResponse
+         * @returns {SdkProto.SendRemainTimeResponse} SendRemainTimeResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -16442,7 +16442,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendRemainTimeResponse message.
          * @function verify
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -16465,15 +16465,15 @@ $root.proto = (function() {
         /**
          * Creates a SendRemainTimeResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendRemainTimeResponse} SendRemainTimeResponse
+         * @returns {SdkProto.SendRemainTimeResponse} SendRemainTimeResponse
          */
         SendRemainTimeResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendRemainTimeResponse)
+            if (object instanceof $root.SdkProto.SendRemainTimeResponse)
                 return object;
-            var message = new $root.proto.SendRemainTimeResponse();
+            var message = new $root.SdkProto.SendRemainTimeResponse();
             if (object.time != null)
                 message.time = object.time | 0;
             if (object.type != null)
@@ -16486,9 +16486,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendRemainTimeResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @static
-         * @param {proto.SendRemainTimeResponse} message SendRemainTimeResponse
+         * @param {SdkProto.SendRemainTimeResponse} message SendRemainTimeResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -16513,7 +16513,7 @@ $root.proto = (function() {
         /**
          * Converts this SendRemainTimeResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendRemainTimeResponse
+         * @memberof SdkProto.SendRemainTimeResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -16524,22 +16524,22 @@ $root.proto = (function() {
         return SendRemainTimeResponse;
     })();
 
-    proto.SendUserQuitByAdminResponse = (function() {
+    SdkProto.SendUserQuitByAdminResponse = (function() {
 
         /**
          * Properties of a SendUserQuitByAdminResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendUserQuitByAdminResponse
          * @property {number|null} [userId] SendUserQuitByAdminResponse userId
          */
 
         /**
          * Constructs a new SendUserQuitByAdminResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendUserQuitByAdminResponse.
          * @implements ISendUserQuitByAdminResponse
          * @constructor
-         * @param {proto.ISendUserQuitByAdminResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendUserQuitByAdminResponse=} [properties] Properties to set
          */
         function SendUserQuitByAdminResponse(properties) {
             if (properties)
@@ -16551,7 +16551,7 @@ $root.proto = (function() {
         /**
          * SendUserQuitByAdminResponse userId.
          * @member {number} userId
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @instance
          */
         SendUserQuitByAdminResponse.prototype.userId = 0;
@@ -16559,21 +16559,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendUserQuitByAdminResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
-         * @param {proto.ISendUserQuitByAdminResponse=} [properties] Properties to set
-         * @returns {proto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse instance
+         * @param {SdkProto.ISendUserQuitByAdminResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse instance
          */
         SendUserQuitByAdminResponse.create = function create(properties) {
             return new SendUserQuitByAdminResponse(properties);
         };
 
         /**
-         * Encodes the specified SendUserQuitByAdminResponse message. Does not implicitly {@link proto.SendUserQuitByAdminResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitByAdminResponse message. Does not implicitly {@link SdkProto.SendUserQuitByAdminResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
-         * @param {proto.ISendUserQuitByAdminResponse} message SendUserQuitByAdminResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQuitByAdminResponse} message SendUserQuitByAdminResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16586,11 +16586,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendUserQuitByAdminResponse message, length delimited. Does not implicitly {@link proto.SendUserQuitByAdminResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitByAdminResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQuitByAdminResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
-         * @param {proto.ISendUserQuitByAdminResponse} message SendUserQuitByAdminResponse message or plain object to encode
+         * @param {SdkProto.ISendUserQuitByAdminResponse} message SendUserQuitByAdminResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16601,18 +16601,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQuitByAdminResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
+         * @returns {SdkProto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendUserQuitByAdminResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendUserQuitByAdminResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendUserQuitByAdminResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16630,10 +16630,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendUserQuitByAdminResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
+         * @returns {SdkProto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -16646,7 +16646,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendUserQuitByAdminResponse message.
          * @function verify
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -16663,15 +16663,15 @@ $root.proto = (function() {
         /**
          * Creates a SendUserQuitByAdminResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
+         * @returns {SdkProto.SendUserQuitByAdminResponse} SendUserQuitByAdminResponse
          */
         SendUserQuitByAdminResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendUserQuitByAdminResponse)
+            if (object instanceof $root.SdkProto.SendUserQuitByAdminResponse)
                 return object;
-            var message = new $root.proto.SendUserQuitByAdminResponse();
+            var message = new $root.SdkProto.SendUserQuitByAdminResponse();
             if (object.userId != null)
                 message.userId = object.userId | 0;
             return message;
@@ -16680,9 +16680,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendUserQuitByAdminResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @static
-         * @param {proto.SendUserQuitByAdminResponse} message SendUserQuitByAdminResponse
+         * @param {SdkProto.SendUserQuitByAdminResponse} message SendUserQuitByAdminResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -16700,7 +16700,7 @@ $root.proto = (function() {
         /**
          * Converts this SendUserQuitByAdminResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendUserQuitByAdminResponse
+         * @memberof SdkProto.SendUserQuitByAdminResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -16711,22 +16711,22 @@ $root.proto = (function() {
         return SendUserQuitByAdminResponse;
     })();
 
-    proto.SendHeartBeatResponse = (function() {
+    SdkProto.SendHeartBeatResponse = (function() {
 
         /**
          * Properties of a SendHeartBeatResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface ISendHeartBeatResponse
          * @property {number|Long|null} [currentTime] SendHeartBeatResponse currentTime
          */
 
         /**
          * Constructs a new SendHeartBeatResponse.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a SendHeartBeatResponse.
          * @implements ISendHeartBeatResponse
          * @constructor
-         * @param {proto.ISendHeartBeatResponse=} [properties] Properties to set
+         * @param {SdkProto.ISendHeartBeatResponse=} [properties] Properties to set
          */
         function SendHeartBeatResponse(properties) {
             if (properties)
@@ -16738,7 +16738,7 @@ $root.proto = (function() {
         /**
          * SendHeartBeatResponse currentTime.
          * @member {number|Long} currentTime
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @instance
          */
         SendHeartBeatResponse.prototype.currentTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -16746,21 +16746,21 @@ $root.proto = (function() {
         /**
          * Creates a new SendHeartBeatResponse instance using the specified properties.
          * @function create
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
-         * @param {proto.ISendHeartBeatResponse=} [properties] Properties to set
-         * @returns {proto.SendHeartBeatResponse} SendHeartBeatResponse instance
+         * @param {SdkProto.ISendHeartBeatResponse=} [properties] Properties to set
+         * @returns {SdkProto.SendHeartBeatResponse} SendHeartBeatResponse instance
          */
         SendHeartBeatResponse.create = function create(properties) {
             return new SendHeartBeatResponse(properties);
         };
 
         /**
-         * Encodes the specified SendHeartBeatResponse message. Does not implicitly {@link proto.SendHeartBeatResponse.verify|verify} messages.
+         * Encodes the specified SendHeartBeatResponse message. Does not implicitly {@link SdkProto.SendHeartBeatResponse.verify|verify} messages.
          * @function encode
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
-         * @param {proto.ISendHeartBeatResponse} message SendHeartBeatResponse message or plain object to encode
+         * @param {SdkProto.ISendHeartBeatResponse} message SendHeartBeatResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16773,11 +16773,11 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified SendHeartBeatResponse message, length delimited. Does not implicitly {@link proto.SendHeartBeatResponse.verify|verify} messages.
+         * Encodes the specified SendHeartBeatResponse message, length delimited. Does not implicitly {@link SdkProto.SendHeartBeatResponse.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
-         * @param {proto.ISendHeartBeatResponse} message SendHeartBeatResponse message or plain object to encode
+         * @param {SdkProto.ISendHeartBeatResponse} message SendHeartBeatResponse message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -16788,18 +16788,18 @@ $root.proto = (function() {
         /**
          * Decodes a SendHeartBeatResponse message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.SendHeartBeatResponse} SendHeartBeatResponse
+         * @returns {SdkProto.SendHeartBeatResponse} SendHeartBeatResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         SendHeartBeatResponse.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SendHeartBeatResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.SendHeartBeatResponse();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -16817,10 +16817,10 @@ $root.proto = (function() {
         /**
          * Decodes a SendHeartBeatResponse message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.SendHeartBeatResponse} SendHeartBeatResponse
+         * @returns {SdkProto.SendHeartBeatResponse} SendHeartBeatResponse
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -16833,7 +16833,7 @@ $root.proto = (function() {
         /**
          * Verifies a SendHeartBeatResponse message.
          * @function verify
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -16850,15 +16850,15 @@ $root.proto = (function() {
         /**
          * Creates a SendHeartBeatResponse message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.SendHeartBeatResponse} SendHeartBeatResponse
+         * @returns {SdkProto.SendHeartBeatResponse} SendHeartBeatResponse
          */
         SendHeartBeatResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.SendHeartBeatResponse)
+            if (object instanceof $root.SdkProto.SendHeartBeatResponse)
                 return object;
-            var message = new $root.proto.SendHeartBeatResponse();
+            var message = new $root.SdkProto.SendHeartBeatResponse();
             if (object.currentTime != null)
                 if ($util.Long)
                     (message.currentTime = $util.Long.fromValue(object.currentTime)).unsigned = false;
@@ -16874,9 +16874,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a SendHeartBeatResponse message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @static
-         * @param {proto.SendHeartBeatResponse} message SendHeartBeatResponse
+         * @param {SdkProto.SendHeartBeatResponse} message SendHeartBeatResponse
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -16901,7 +16901,7 @@ $root.proto = (function() {
         /**
          * Converts this SendHeartBeatResponse to JSON.
          * @function toJSON
-         * @memberof proto.SendHeartBeatResponse
+         * @memberof SdkProto.SendHeartBeatResponse
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -16912,55 +16912,55 @@ $root.proto = (function() {
         return SendHeartBeatResponse;
     })();
 
-    proto.Response = (function() {
+    SdkProto.Response = (function() {
 
         /**
          * Properties of a Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @interface IResponse
          * @property {string|null} [msg] Response msg
-         * @property {proto.Response.ErrorCode|null} [code] Response code
+         * @property {SdkProto.Response.ErrorCode|null} [code] Response code
          * @property {number|Long|null} [serverTime] Response serverTime
-         * @property {proto.Request.CMD|null} [cmd] Response cmd
-         * @property {proto.ILoginResponse|null} [loginResponse] Response loginResponse
-         * @property {proto.IRegisterPhoneRespone|null} [registerPhoneResponse] Response registerPhoneResponse
-         * @property {proto.IGetUserInfoResponse|null} [getUserInfoResponse] Response getUserInfoResponse
-         * @property {proto.ICoinBankResponse|null} [coinBankResponse] Response coinBankResponse
-         * @property {proto.IChangeSignResponse|null} [changeSignResponse] Response changeSignResponse
-         * @property {proto.ISendDisCardResponse|null} [sendDisCardResponse] Response sendDisCardResponse
-         * @property {proto.ISendPassPaiResponse|null} [sendPassPaiResponse] Response sendPassPaiResponse
-         * @property {proto.ISendUserQDZResponse|null} [sendUserQDZResponse] Response sendUserQDZResponse
-         * @property {proto.ISendUserQDZ2Response|null} [sendUserQDZ2Response] Response sendUserQDZ2Response
-         * @property {proto.ISendUserMPResponse|null} [sendUserMPResponse] Response sendUserMPResponse
-         * @property {proto.ISendUserMP2Response|null} [sendUserMP2Response] Response sendUserMP2Response
-         * @property {proto.ISendRoundRecordResponse|null} [sendRoundRecordResponse] Response sendRoundRecordResponse
-         * @property {proto.ISendReconnectQuitResponse|null} [sendReconnectQuitResponse] Response sendReconnectQuitResponse
-         * @property {proto.IUserReconnectResponse|null} [userReconnectResponse] Response userReconnectResponse
-         * @property {proto.ISendUserReconnectResponse|null} [sendUserReconnectResponse] Response sendUserReconnectResponse
-         * @property {proto.ISendApplyDismissResponse|null} [sendApplyDismissResponse] Response sendApplyDismissResponse
-         * @property {proto.ISendAgreeDismissResponse|null} [sendAgreeDismissResponse] Response sendAgreeDismissResponse
-         * @property {proto.ISendDismissResultResponse|null} [sendDismissResultResponse] Response sendDismissResultResponse
-         * @property {proto.ISendUserQuitResponse|null} [sendUserQuitResponse] Response sendUserQuitResponse
-         * @property {proto.ISendMessageResponse|null} [sendMessageResponse] Response sendMessageResponse
-         * @property {proto.ISendUserOnBackResponse|null} [sendUserOnBackResponse] Response sendUserOnBackResponse
-         * @property {proto.ISendGameOverResponse|null} [sendGameOverResponse] Response sendGameOverResponse
-         * @property {proto.ISendDiamondChangeResponse|null} [sendDiamondChangeResponse] Response sendDiamondChangeResponse
-         * @property {proto.ISendCancelAutoResponse|null} [sendCancelAutoResponse] Response sendCancelAutoResponse
-         * @property {proto.IDelayCheckResponse|null} [delayCheckResponse] Response delayCheckResponse
-         * @property {proto.ISendRemainTimeResponse|null} [sendRemainTimeResponse] Response sendRemainTimeResponse
-         * @property {proto.ISendNoticeClientDismissResponse|null} [sendNoticeClientDismissResponse] Response sendNoticeClientDismissResponse
-         * @property {proto.ISendUserQuitByAdminResponse|null} [sendUserQuitByAdminResponse] Response sendUserQuitByAdminResponse
-         * @property {proto.ISendCoinRefreshResponse|null} [sendCoinRefreshResponse] Response sendCoinRefreshResponse
-         * @property {proto.ISendHeartBeatResponse|null} [sendHeartBeatResponse] Response sendHeartBeatResponse
+         * @property {SdkProto.Request.CMD|null} [cmd] Response cmd
+         * @property {SdkProto.ILoginResponse|null} [loginResponse] Response loginResponse
+         * @property {SdkProto.IRegisterPhoneRespone|null} [registerPhoneResponse] Response registerPhoneResponse
+         * @property {SdkProto.IGetUserInfoResponse|null} [getUserInfoResponse] Response getUserInfoResponse
+         * @property {SdkProto.ICoinBankResponse|null} [coinBankResponse] Response coinBankResponse
+         * @property {SdkProto.IChangeSignResponse|null} [changeSignResponse] Response changeSignResponse
+         * @property {SdkProto.ISendDisCardResponse|null} [sendDisCardResponse] Response sendDisCardResponse
+         * @property {SdkProto.ISendPassPaiResponse|null} [sendPassPaiResponse] Response sendPassPaiResponse
+         * @property {SdkProto.ISendUserQDZResponse|null} [sendUserQDZResponse] Response sendUserQDZResponse
+         * @property {SdkProto.ISendUserQDZ2Response|null} [sendUserQDZ2Response] Response sendUserQDZ2Response
+         * @property {SdkProto.ISendUserMPResponse|null} [sendUserMPResponse] Response sendUserMPResponse
+         * @property {SdkProto.ISendUserMP2Response|null} [sendUserMP2Response] Response sendUserMP2Response
+         * @property {SdkProto.ISendRoundRecordResponse|null} [sendRoundRecordResponse] Response sendRoundRecordResponse
+         * @property {SdkProto.ISendReconnectQuitResponse|null} [sendReconnectQuitResponse] Response sendReconnectQuitResponse
+         * @property {SdkProto.IUserReconnectResponse|null} [userReconnectResponse] Response userReconnectResponse
+         * @property {SdkProto.ISendUserReconnectResponse|null} [sendUserReconnectResponse] Response sendUserReconnectResponse
+         * @property {SdkProto.ISendApplyDismissResponse|null} [sendApplyDismissResponse] Response sendApplyDismissResponse
+         * @property {SdkProto.ISendAgreeDismissResponse|null} [sendAgreeDismissResponse] Response sendAgreeDismissResponse
+         * @property {SdkProto.ISendDismissResultResponse|null} [sendDismissResultResponse] Response sendDismissResultResponse
+         * @property {SdkProto.ISendUserQuitResponse|null} [sendUserQuitResponse] Response sendUserQuitResponse
+         * @property {SdkProto.ISendMessageResponse|null} [sendMessageResponse] Response sendMessageResponse
+         * @property {SdkProto.ISendUserOnBackResponse|null} [sendUserOnBackResponse] Response sendUserOnBackResponse
+         * @property {SdkProto.ISendGameOverResponse|null} [sendGameOverResponse] Response sendGameOverResponse
+         * @property {SdkProto.ISendDiamondChangeResponse|null} [sendDiamondChangeResponse] Response sendDiamondChangeResponse
+         * @property {SdkProto.ISendCancelAutoResponse|null} [sendCancelAutoResponse] Response sendCancelAutoResponse
+         * @property {SdkProto.IDelayCheckResponse|null} [delayCheckResponse] Response delayCheckResponse
+         * @property {SdkProto.ISendRemainTimeResponse|null} [sendRemainTimeResponse] Response sendRemainTimeResponse
+         * @property {SdkProto.ISendNoticeClientDismissResponse|null} [sendNoticeClientDismissResponse] Response sendNoticeClientDismissResponse
+         * @property {SdkProto.ISendUserQuitByAdminResponse|null} [sendUserQuitByAdminResponse] Response sendUserQuitByAdminResponse
+         * @property {SdkProto.ISendCoinRefreshResponse|null} [sendCoinRefreshResponse] Response sendCoinRefreshResponse
+         * @property {SdkProto.ISendHeartBeatResponse|null} [sendHeartBeatResponse] Response sendHeartBeatResponse
          */
 
         /**
          * Constructs a new Response.
-         * @memberof proto
+         * @memberof SdkProto
          * @classdesc Represents a Response.
          * @implements IResponse
          * @constructor
-         * @param {proto.IResponse=} [properties] Properties to set
+         * @param {SdkProto.IResponse=} [properties] Properties to set
          */
         function Response(properties) {
             if (properties)
@@ -16972,15 +16972,15 @@ $root.proto = (function() {
         /**
          * Response msg.
          * @member {string} msg
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.msg = "OK";
 
         /**
          * Response code.
-         * @member {proto.Response.ErrorCode} code
-         * @memberof proto.Response
+         * @member {SdkProto.Response.ErrorCode} code
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.code = 200;
@@ -16988,255 +16988,255 @@ $root.proto = (function() {
         /**
          * Response serverTime.
          * @member {number|Long} serverTime
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.serverTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Response cmd.
-         * @member {proto.Request.CMD} cmd
-         * @memberof proto.Response
+         * @member {SdkProto.Request.CMD} cmd
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.cmd = 0;
 
         /**
          * Response loginResponse.
-         * @member {proto.ILoginResponse|null|undefined} loginResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ILoginResponse|null|undefined} loginResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.loginResponse = null;
 
         /**
          * Response registerPhoneResponse.
-         * @member {proto.IRegisterPhoneRespone|null|undefined} registerPhoneResponse
-         * @memberof proto.Response
+         * @member {SdkProto.IRegisterPhoneRespone|null|undefined} registerPhoneResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.registerPhoneResponse = null;
 
         /**
          * Response getUserInfoResponse.
-         * @member {proto.IGetUserInfoResponse|null|undefined} getUserInfoResponse
-         * @memberof proto.Response
+         * @member {SdkProto.IGetUserInfoResponse|null|undefined} getUserInfoResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.getUserInfoResponse = null;
 
         /**
          * Response coinBankResponse.
-         * @member {proto.ICoinBankResponse|null|undefined} coinBankResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ICoinBankResponse|null|undefined} coinBankResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.coinBankResponse = null;
 
         /**
          * Response changeSignResponse.
-         * @member {proto.IChangeSignResponse|null|undefined} changeSignResponse
-         * @memberof proto.Response
+         * @member {SdkProto.IChangeSignResponse|null|undefined} changeSignResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.changeSignResponse = null;
 
         /**
          * Response sendDisCardResponse.
-         * @member {proto.ISendDisCardResponse|null|undefined} sendDisCardResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendDisCardResponse|null|undefined} sendDisCardResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendDisCardResponse = null;
 
         /**
          * Response sendPassPaiResponse.
-         * @member {proto.ISendPassPaiResponse|null|undefined} sendPassPaiResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendPassPaiResponse|null|undefined} sendPassPaiResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendPassPaiResponse = null;
 
         /**
          * Response sendUserQDZResponse.
-         * @member {proto.ISendUserQDZResponse|null|undefined} sendUserQDZResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserQDZResponse|null|undefined} sendUserQDZResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserQDZResponse = null;
 
         /**
          * Response sendUserQDZ2Response.
-         * @member {proto.ISendUserQDZ2Response|null|undefined} sendUserQDZ2Response
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserQDZ2Response|null|undefined} sendUserQDZ2Response
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserQDZ2Response = null;
 
         /**
          * Response sendUserMPResponse.
-         * @member {proto.ISendUserMPResponse|null|undefined} sendUserMPResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserMPResponse|null|undefined} sendUserMPResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserMPResponse = null;
 
         /**
          * Response sendUserMP2Response.
-         * @member {proto.ISendUserMP2Response|null|undefined} sendUserMP2Response
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserMP2Response|null|undefined} sendUserMP2Response
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserMP2Response = null;
 
         /**
          * Response sendRoundRecordResponse.
-         * @member {proto.ISendRoundRecordResponse|null|undefined} sendRoundRecordResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendRoundRecordResponse|null|undefined} sendRoundRecordResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendRoundRecordResponse = null;
 
         /**
          * Response sendReconnectQuitResponse.
-         * @member {proto.ISendReconnectQuitResponse|null|undefined} sendReconnectQuitResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendReconnectQuitResponse|null|undefined} sendReconnectQuitResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendReconnectQuitResponse = null;
 
         /**
          * Response userReconnectResponse.
-         * @member {proto.IUserReconnectResponse|null|undefined} userReconnectResponse
-         * @memberof proto.Response
+         * @member {SdkProto.IUserReconnectResponse|null|undefined} userReconnectResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.userReconnectResponse = null;
 
         /**
          * Response sendUserReconnectResponse.
-         * @member {proto.ISendUserReconnectResponse|null|undefined} sendUserReconnectResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserReconnectResponse|null|undefined} sendUserReconnectResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserReconnectResponse = null;
 
         /**
          * Response sendApplyDismissResponse.
-         * @member {proto.ISendApplyDismissResponse|null|undefined} sendApplyDismissResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendApplyDismissResponse|null|undefined} sendApplyDismissResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendApplyDismissResponse = null;
 
         /**
          * Response sendAgreeDismissResponse.
-         * @member {proto.ISendAgreeDismissResponse|null|undefined} sendAgreeDismissResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendAgreeDismissResponse|null|undefined} sendAgreeDismissResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendAgreeDismissResponse = null;
 
         /**
          * Response sendDismissResultResponse.
-         * @member {proto.ISendDismissResultResponse|null|undefined} sendDismissResultResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendDismissResultResponse|null|undefined} sendDismissResultResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendDismissResultResponse = null;
 
         /**
          * Response sendUserQuitResponse.
-         * @member {proto.ISendUserQuitResponse|null|undefined} sendUserQuitResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserQuitResponse|null|undefined} sendUserQuitResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserQuitResponse = null;
 
         /**
          * Response sendMessageResponse.
-         * @member {proto.ISendMessageResponse|null|undefined} sendMessageResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendMessageResponse|null|undefined} sendMessageResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendMessageResponse = null;
 
         /**
          * Response sendUserOnBackResponse.
-         * @member {proto.ISendUserOnBackResponse|null|undefined} sendUserOnBackResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserOnBackResponse|null|undefined} sendUserOnBackResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserOnBackResponse = null;
 
         /**
          * Response sendGameOverResponse.
-         * @member {proto.ISendGameOverResponse|null|undefined} sendGameOverResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendGameOverResponse|null|undefined} sendGameOverResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendGameOverResponse = null;
 
         /**
          * Response sendDiamondChangeResponse.
-         * @member {proto.ISendDiamondChangeResponse|null|undefined} sendDiamondChangeResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendDiamondChangeResponse|null|undefined} sendDiamondChangeResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendDiamondChangeResponse = null;
 
         /**
          * Response sendCancelAutoResponse.
-         * @member {proto.ISendCancelAutoResponse|null|undefined} sendCancelAutoResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendCancelAutoResponse|null|undefined} sendCancelAutoResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendCancelAutoResponse = null;
 
         /**
          * Response delayCheckResponse.
-         * @member {proto.IDelayCheckResponse|null|undefined} delayCheckResponse
-         * @memberof proto.Response
+         * @member {SdkProto.IDelayCheckResponse|null|undefined} delayCheckResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.delayCheckResponse = null;
 
         /**
          * Response sendRemainTimeResponse.
-         * @member {proto.ISendRemainTimeResponse|null|undefined} sendRemainTimeResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendRemainTimeResponse|null|undefined} sendRemainTimeResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendRemainTimeResponse = null;
 
         /**
          * Response sendNoticeClientDismissResponse.
-         * @member {proto.ISendNoticeClientDismissResponse|null|undefined} sendNoticeClientDismissResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendNoticeClientDismissResponse|null|undefined} sendNoticeClientDismissResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendNoticeClientDismissResponse = null;
 
         /**
          * Response sendUserQuitByAdminResponse.
-         * @member {proto.ISendUserQuitByAdminResponse|null|undefined} sendUserQuitByAdminResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendUserQuitByAdminResponse|null|undefined} sendUserQuitByAdminResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendUserQuitByAdminResponse = null;
 
         /**
          * Response sendCoinRefreshResponse.
-         * @member {proto.ISendCoinRefreshResponse|null|undefined} sendCoinRefreshResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendCoinRefreshResponse|null|undefined} sendCoinRefreshResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendCoinRefreshResponse = null;
 
         /**
          * Response sendHeartBeatResponse.
-         * @member {proto.ISendHeartBeatResponse|null|undefined} sendHeartBeatResponse
-         * @memberof proto.Response
+         * @member {SdkProto.ISendHeartBeatResponse|null|undefined} sendHeartBeatResponse
+         * @memberof SdkProto.Response
          * @instance
          */
         Response.prototype.sendHeartBeatResponse = null;
@@ -17244,21 +17244,21 @@ $root.proto = (function() {
         /**
          * Creates a new Response instance using the specified properties.
          * @function create
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
-         * @param {proto.IResponse=} [properties] Properties to set
-         * @returns {proto.Response} Response instance
+         * @param {SdkProto.IResponse=} [properties] Properties to set
+         * @returns {SdkProto.Response} Response instance
          */
         Response.create = function create(properties) {
             return new Response(properties);
         };
 
         /**
-         * Encodes the specified Response message. Does not implicitly {@link proto.Response.verify|verify} messages.
+         * Encodes the specified Response message. Does not implicitly {@link SdkProto.Response.verify|verify} messages.
          * @function encode
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
-         * @param {proto.IResponse} message Response message or plain object to encode
+         * @param {SdkProto.IResponse} message Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -17274,74 +17274,74 @@ $root.proto = (function() {
             if (message.cmd != null && message.hasOwnProperty("cmd"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cmd);
             if (message.loginResponse != null && message.hasOwnProperty("loginResponse"))
-                $root.proto.LoginResponse.encode(message.loginResponse, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                $root.SdkProto.LoginResponse.encode(message.loginResponse, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             if (message.registerPhoneResponse != null && message.hasOwnProperty("registerPhoneResponse"))
-                $root.proto.RegisterPhoneRespone.encode(message.registerPhoneResponse, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                $root.SdkProto.RegisterPhoneRespone.encode(message.registerPhoneResponse, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.getUserInfoResponse != null && message.hasOwnProperty("getUserInfoResponse"))
-                $root.proto.GetUserInfoResponse.encode(message.getUserInfoResponse, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                $root.SdkProto.GetUserInfoResponse.encode(message.getUserInfoResponse, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             if (message.coinBankResponse != null && message.hasOwnProperty("coinBankResponse"))
-                $root.proto.CoinBankResponse.encode(message.coinBankResponse, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                $root.SdkProto.CoinBankResponse.encode(message.coinBankResponse, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.changeSignResponse != null && message.hasOwnProperty("changeSignResponse"))
-                $root.proto.ChangeSignResponse.encode(message.changeSignResponse, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                $root.SdkProto.ChangeSignResponse.encode(message.changeSignResponse, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.sendDisCardResponse != null && message.hasOwnProperty("sendDisCardResponse"))
-                $root.proto.SendDisCardResponse.encode(message.sendDisCardResponse, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                $root.SdkProto.SendDisCardResponse.encode(message.sendDisCardResponse, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.sendPassPaiResponse != null && message.hasOwnProperty("sendPassPaiResponse"))
-                $root.proto.SendPassPaiResponse.encode(message.sendPassPaiResponse, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                $root.SdkProto.SendPassPaiResponse.encode(message.sendPassPaiResponse, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             if (message.sendUserQDZResponse != null && message.hasOwnProperty("sendUserQDZResponse"))
-                $root.proto.SendUserQDZResponse.encode(message.sendUserQDZResponse, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                $root.SdkProto.SendUserQDZResponse.encode(message.sendUserQDZResponse, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
             if (message.sendUserQDZ2Response != null && message.hasOwnProperty("sendUserQDZ2Response"))
-                $root.proto.SendUserQDZ2Response.encode(message.sendUserQDZ2Response, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                $root.SdkProto.SendUserQDZ2Response.encode(message.sendUserQDZ2Response, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
             if (message.sendUserMPResponse != null && message.hasOwnProperty("sendUserMPResponse"))
-                $root.proto.SendUserMPResponse.encode(message.sendUserMPResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                $root.SdkProto.SendUserMPResponse.encode(message.sendUserMPResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
             if (message.sendUserMP2Response != null && message.hasOwnProperty("sendUserMP2Response"))
-                $root.proto.SendUserMP2Response.encode(message.sendUserMP2Response, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                $root.SdkProto.SendUserMP2Response.encode(message.sendUserMP2Response, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
             if (message.sendRoundRecordResponse != null && message.hasOwnProperty("sendRoundRecordResponse"))
-                $root.proto.SendRoundRecordResponse.encode(message.sendRoundRecordResponse, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                $root.SdkProto.SendRoundRecordResponse.encode(message.sendRoundRecordResponse, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
             if (message.sendReconnectQuitResponse != null && message.hasOwnProperty("sendReconnectQuitResponse"))
-                $root.proto.SendReconnectQuitResponse.encode(message.sendReconnectQuitResponse, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                $root.SdkProto.SendReconnectQuitResponse.encode(message.sendReconnectQuitResponse, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
             if (message.userReconnectResponse != null && message.hasOwnProperty("userReconnectResponse"))
-                $root.proto.UserReconnectResponse.encode(message.userReconnectResponse, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                $root.SdkProto.UserReconnectResponse.encode(message.userReconnectResponse, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
             if (message.sendUserReconnectResponse != null && message.hasOwnProperty("sendUserReconnectResponse"))
-                $root.proto.SendUserReconnectResponse.encode(message.sendUserReconnectResponse, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                $root.SdkProto.SendUserReconnectResponse.encode(message.sendUserReconnectResponse, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
             if (message.sendApplyDismissResponse != null && message.hasOwnProperty("sendApplyDismissResponse"))
-                $root.proto.SendApplyDismissResponse.encode(message.sendApplyDismissResponse, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                $root.SdkProto.SendApplyDismissResponse.encode(message.sendApplyDismissResponse, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
             if (message.sendAgreeDismissResponse != null && message.hasOwnProperty("sendAgreeDismissResponse"))
-                $root.proto.SendAgreeDismissResponse.encode(message.sendAgreeDismissResponse, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                $root.SdkProto.SendAgreeDismissResponse.encode(message.sendAgreeDismissResponse, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
             if (message.sendDismissResultResponse != null && message.hasOwnProperty("sendDismissResultResponse"))
-                $root.proto.SendDismissResultResponse.encode(message.sendDismissResultResponse, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                $root.SdkProto.SendDismissResultResponse.encode(message.sendDismissResultResponse, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
             if (message.sendUserQuitResponse != null && message.hasOwnProperty("sendUserQuitResponse"))
-                $root.proto.SendUserQuitResponse.encode(message.sendUserQuitResponse, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                $root.SdkProto.SendUserQuitResponse.encode(message.sendUserQuitResponse, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
             if (message.sendMessageResponse != null && message.hasOwnProperty("sendMessageResponse"))
-                $root.proto.SendMessageResponse.encode(message.sendMessageResponse, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                $root.SdkProto.SendMessageResponse.encode(message.sendMessageResponse, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
             if (message.sendUserOnBackResponse != null && message.hasOwnProperty("sendUserOnBackResponse"))
-                $root.proto.SendUserOnBackResponse.encode(message.sendUserOnBackResponse, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                $root.SdkProto.SendUserOnBackResponse.encode(message.sendUserOnBackResponse, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
             if (message.sendGameOverResponse != null && message.hasOwnProperty("sendGameOverResponse"))
-                $root.proto.SendGameOverResponse.encode(message.sendGameOverResponse, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                $root.SdkProto.SendGameOverResponse.encode(message.sendGameOverResponse, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
             if (message.sendDiamondChangeResponse != null && message.hasOwnProperty("sendDiamondChangeResponse"))
-                $root.proto.SendDiamondChangeResponse.encode(message.sendDiamondChangeResponse, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                $root.SdkProto.SendDiamondChangeResponse.encode(message.sendDiamondChangeResponse, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
             if (message.sendCancelAutoResponse != null && message.hasOwnProperty("sendCancelAutoResponse"))
-                $root.proto.SendCancelAutoResponse.encode(message.sendCancelAutoResponse, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
+                $root.SdkProto.SendCancelAutoResponse.encode(message.sendCancelAutoResponse, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
             if (message.delayCheckResponse != null && message.hasOwnProperty("delayCheckResponse"))
-                $root.proto.DelayCheckResponse.encode(message.delayCheckResponse, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+                $root.SdkProto.DelayCheckResponse.encode(message.delayCheckResponse, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
             if (message.sendRemainTimeResponse != null && message.hasOwnProperty("sendRemainTimeResponse"))
-                $root.proto.SendRemainTimeResponse.encode(message.sendRemainTimeResponse, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
+                $root.SdkProto.SendRemainTimeResponse.encode(message.sendRemainTimeResponse, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
             if (message.sendNoticeClientDismissResponse != null && message.hasOwnProperty("sendNoticeClientDismissResponse"))
-                $root.proto.SendNoticeClientDismissResponse.encode(message.sendNoticeClientDismissResponse, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+                $root.SdkProto.SendNoticeClientDismissResponse.encode(message.sendNoticeClientDismissResponse, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
             if (message.sendUserQuitByAdminResponse != null && message.hasOwnProperty("sendUserQuitByAdminResponse"))
-                $root.proto.SendUserQuitByAdminResponse.encode(message.sendUserQuitByAdminResponse, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
+                $root.SdkProto.SendUserQuitByAdminResponse.encode(message.sendUserQuitByAdminResponse, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
             if (message.sendCoinRefreshResponse != null && message.hasOwnProperty("sendCoinRefreshResponse"))
-                $root.proto.SendCoinRefreshResponse.encode(message.sendCoinRefreshResponse, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                $root.SdkProto.SendCoinRefreshResponse.encode(message.sendCoinRefreshResponse, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
             if (message.sendHeartBeatResponse != null && message.hasOwnProperty("sendHeartBeatResponse"))
-                $root.proto.SendHeartBeatResponse.encode(message.sendHeartBeatResponse, writer.uint32(/* id 233, wireType 2 =*/1866).fork()).ldelim();
+                $root.SdkProto.SendHeartBeatResponse.encode(message.sendHeartBeatResponse, writer.uint32(/* id 233, wireType 2 =*/1866).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Encodes the specified Response message, length delimited. Does not implicitly {@link proto.Response.verify|verify} messages.
+         * Encodes the specified Response message, length delimited. Does not implicitly {@link SdkProto.Response.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
-         * @param {proto.IResponse} message Response message or plain object to encode
+         * @param {SdkProto.IResponse} message Response message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
@@ -17352,18 +17352,18 @@ $root.proto = (function() {
         /**
          * Decodes a Response message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.Response} Response
+         * @returns {SdkProto.Response} Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         Response.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Response();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SdkProto.Response();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -17380,94 +17380,94 @@ $root.proto = (function() {
                     message.cmd = reader.int32();
                     break;
                 case 11:
-                    message.loginResponse = $root.proto.LoginResponse.decode(reader, reader.uint32());
+                    message.loginResponse = $root.SdkProto.LoginResponse.decode(reader, reader.uint32());
                     break;
                 case 12:
-                    message.registerPhoneResponse = $root.proto.RegisterPhoneRespone.decode(reader, reader.uint32());
+                    message.registerPhoneResponse = $root.SdkProto.RegisterPhoneRespone.decode(reader, reader.uint32());
                     break;
                 case 13:
-                    message.getUserInfoResponse = $root.proto.GetUserInfoResponse.decode(reader, reader.uint32());
+                    message.getUserInfoResponse = $root.SdkProto.GetUserInfoResponse.decode(reader, reader.uint32());
                     break;
                 case 14:
-                    message.coinBankResponse = $root.proto.CoinBankResponse.decode(reader, reader.uint32());
+                    message.coinBankResponse = $root.SdkProto.CoinBankResponse.decode(reader, reader.uint32());
                     break;
                 case 15:
-                    message.changeSignResponse = $root.proto.ChangeSignResponse.decode(reader, reader.uint32());
+                    message.changeSignResponse = $root.SdkProto.ChangeSignResponse.decode(reader, reader.uint32());
                     break;
                 case 16:
-                    message.sendDisCardResponse = $root.proto.SendDisCardResponse.decode(reader, reader.uint32());
+                    message.sendDisCardResponse = $root.SdkProto.SendDisCardResponse.decode(reader, reader.uint32());
                     break;
                 case 17:
-                    message.sendPassPaiResponse = $root.proto.SendPassPaiResponse.decode(reader, reader.uint32());
+                    message.sendPassPaiResponse = $root.SdkProto.SendPassPaiResponse.decode(reader, reader.uint32());
                     break;
                 case 18:
-                    message.sendUserQDZResponse = $root.proto.SendUserQDZResponse.decode(reader, reader.uint32());
+                    message.sendUserQDZResponse = $root.SdkProto.SendUserQDZResponse.decode(reader, reader.uint32());
                     break;
                 case 19:
-                    message.sendUserQDZ2Response = $root.proto.SendUserQDZ2Response.decode(reader, reader.uint32());
+                    message.sendUserQDZ2Response = $root.SdkProto.SendUserQDZ2Response.decode(reader, reader.uint32());
                     break;
                 case 20:
-                    message.sendUserMPResponse = $root.proto.SendUserMPResponse.decode(reader, reader.uint32());
+                    message.sendUserMPResponse = $root.SdkProto.SendUserMPResponse.decode(reader, reader.uint32());
                     break;
                 case 21:
-                    message.sendUserMP2Response = $root.proto.SendUserMP2Response.decode(reader, reader.uint32());
+                    message.sendUserMP2Response = $root.SdkProto.SendUserMP2Response.decode(reader, reader.uint32());
                     break;
                 case 24:
-                    message.sendRoundRecordResponse = $root.proto.SendRoundRecordResponse.decode(reader, reader.uint32());
+                    message.sendRoundRecordResponse = $root.SdkProto.SendRoundRecordResponse.decode(reader, reader.uint32());
                     break;
                 case 25:
-                    message.sendReconnectQuitResponse = $root.proto.SendReconnectQuitResponse.decode(reader, reader.uint32());
+                    message.sendReconnectQuitResponse = $root.SdkProto.SendReconnectQuitResponse.decode(reader, reader.uint32());
                     break;
                 case 26:
-                    message.userReconnectResponse = $root.proto.UserReconnectResponse.decode(reader, reader.uint32());
+                    message.userReconnectResponse = $root.SdkProto.UserReconnectResponse.decode(reader, reader.uint32());
                     break;
                 case 27:
-                    message.sendUserReconnectResponse = $root.proto.SendUserReconnectResponse.decode(reader, reader.uint32());
+                    message.sendUserReconnectResponse = $root.SdkProto.SendUserReconnectResponse.decode(reader, reader.uint32());
                     break;
                 case 28:
-                    message.sendApplyDismissResponse = $root.proto.SendApplyDismissResponse.decode(reader, reader.uint32());
+                    message.sendApplyDismissResponse = $root.SdkProto.SendApplyDismissResponse.decode(reader, reader.uint32());
                     break;
                 case 29:
-                    message.sendAgreeDismissResponse = $root.proto.SendAgreeDismissResponse.decode(reader, reader.uint32());
+                    message.sendAgreeDismissResponse = $root.SdkProto.SendAgreeDismissResponse.decode(reader, reader.uint32());
                     break;
                 case 30:
-                    message.sendDismissResultResponse = $root.proto.SendDismissResultResponse.decode(reader, reader.uint32());
+                    message.sendDismissResultResponse = $root.SdkProto.SendDismissResultResponse.decode(reader, reader.uint32());
                     break;
                 case 31:
-                    message.sendUserQuitResponse = $root.proto.SendUserQuitResponse.decode(reader, reader.uint32());
+                    message.sendUserQuitResponse = $root.SdkProto.SendUserQuitResponse.decode(reader, reader.uint32());
                     break;
                 case 32:
-                    message.sendMessageResponse = $root.proto.SendMessageResponse.decode(reader, reader.uint32());
+                    message.sendMessageResponse = $root.SdkProto.SendMessageResponse.decode(reader, reader.uint32());
                     break;
                 case 33:
-                    message.sendUserOnBackResponse = $root.proto.SendUserOnBackResponse.decode(reader, reader.uint32());
+                    message.sendUserOnBackResponse = $root.SdkProto.SendUserOnBackResponse.decode(reader, reader.uint32());
                     break;
                 case 34:
-                    message.sendGameOverResponse = $root.proto.SendGameOverResponse.decode(reader, reader.uint32());
+                    message.sendGameOverResponse = $root.SdkProto.SendGameOverResponse.decode(reader, reader.uint32());
                     break;
                 case 35:
-                    message.sendDiamondChangeResponse = $root.proto.SendDiamondChangeResponse.decode(reader, reader.uint32());
+                    message.sendDiamondChangeResponse = $root.SdkProto.SendDiamondChangeResponse.decode(reader, reader.uint32());
                     break;
                 case 36:
-                    message.sendCancelAutoResponse = $root.proto.SendCancelAutoResponse.decode(reader, reader.uint32());
+                    message.sendCancelAutoResponse = $root.SdkProto.SendCancelAutoResponse.decode(reader, reader.uint32());
                     break;
                 case 37:
-                    message.delayCheckResponse = $root.proto.DelayCheckResponse.decode(reader, reader.uint32());
+                    message.delayCheckResponse = $root.SdkProto.DelayCheckResponse.decode(reader, reader.uint32());
                     break;
                 case 38:
-                    message.sendRemainTimeResponse = $root.proto.SendRemainTimeResponse.decode(reader, reader.uint32());
+                    message.sendRemainTimeResponse = $root.SdkProto.SendRemainTimeResponse.decode(reader, reader.uint32());
                     break;
                 case 39:
-                    message.sendNoticeClientDismissResponse = $root.proto.SendNoticeClientDismissResponse.decode(reader, reader.uint32());
+                    message.sendNoticeClientDismissResponse = $root.SdkProto.SendNoticeClientDismissResponse.decode(reader, reader.uint32());
                     break;
                 case 40:
-                    message.sendUserQuitByAdminResponse = $root.proto.SendUserQuitByAdminResponse.decode(reader, reader.uint32());
+                    message.sendUserQuitByAdminResponse = $root.SdkProto.SendUserQuitByAdminResponse.decode(reader, reader.uint32());
                     break;
                 case 41:
-                    message.sendCoinRefreshResponse = $root.proto.SendCoinRefreshResponse.decode(reader, reader.uint32());
+                    message.sendCoinRefreshResponse = $root.SdkProto.SendCoinRefreshResponse.decode(reader, reader.uint32());
                     break;
                 case 233:
-                    message.sendHeartBeatResponse = $root.proto.SendHeartBeatResponse.decode(reader, reader.uint32());
+                    message.sendHeartBeatResponse = $root.SdkProto.SendHeartBeatResponse.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -17480,10 +17480,10 @@ $root.proto = (function() {
         /**
          * Decodes a Response message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.Response} Response
+         * @returns {SdkProto.Response} Response
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
@@ -17496,7 +17496,7 @@ $root.proto = (function() {
         /**
          * Verifies a Response message.
          * @function verify
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
@@ -17631,152 +17631,152 @@ $root.proto = (function() {
                     break;
                 }
             if (message.loginResponse != null && message.hasOwnProperty("loginResponse")) {
-                var error = $root.proto.LoginResponse.verify(message.loginResponse);
+                var error = $root.SdkProto.LoginResponse.verify(message.loginResponse);
                 if (error)
                     return "loginResponse." + error;
             }
             if (message.registerPhoneResponse != null && message.hasOwnProperty("registerPhoneResponse")) {
-                var error = $root.proto.RegisterPhoneRespone.verify(message.registerPhoneResponse);
+                var error = $root.SdkProto.RegisterPhoneRespone.verify(message.registerPhoneResponse);
                 if (error)
                     return "registerPhoneResponse." + error;
             }
             if (message.getUserInfoResponse != null && message.hasOwnProperty("getUserInfoResponse")) {
-                var error = $root.proto.GetUserInfoResponse.verify(message.getUserInfoResponse);
+                var error = $root.SdkProto.GetUserInfoResponse.verify(message.getUserInfoResponse);
                 if (error)
                     return "getUserInfoResponse." + error;
             }
             if (message.coinBankResponse != null && message.hasOwnProperty("coinBankResponse")) {
-                var error = $root.proto.CoinBankResponse.verify(message.coinBankResponse);
+                var error = $root.SdkProto.CoinBankResponse.verify(message.coinBankResponse);
                 if (error)
                     return "coinBankResponse." + error;
             }
             if (message.changeSignResponse != null && message.hasOwnProperty("changeSignResponse")) {
-                var error = $root.proto.ChangeSignResponse.verify(message.changeSignResponse);
+                var error = $root.SdkProto.ChangeSignResponse.verify(message.changeSignResponse);
                 if (error)
                     return "changeSignResponse." + error;
             }
             if (message.sendDisCardResponse != null && message.hasOwnProperty("sendDisCardResponse")) {
-                var error = $root.proto.SendDisCardResponse.verify(message.sendDisCardResponse);
+                var error = $root.SdkProto.SendDisCardResponse.verify(message.sendDisCardResponse);
                 if (error)
                     return "sendDisCardResponse." + error;
             }
             if (message.sendPassPaiResponse != null && message.hasOwnProperty("sendPassPaiResponse")) {
-                var error = $root.proto.SendPassPaiResponse.verify(message.sendPassPaiResponse);
+                var error = $root.SdkProto.SendPassPaiResponse.verify(message.sendPassPaiResponse);
                 if (error)
                     return "sendPassPaiResponse." + error;
             }
             if (message.sendUserQDZResponse != null && message.hasOwnProperty("sendUserQDZResponse")) {
-                var error = $root.proto.SendUserQDZResponse.verify(message.sendUserQDZResponse);
+                var error = $root.SdkProto.SendUserQDZResponse.verify(message.sendUserQDZResponse);
                 if (error)
                     return "sendUserQDZResponse." + error;
             }
             if (message.sendUserQDZ2Response != null && message.hasOwnProperty("sendUserQDZ2Response")) {
-                var error = $root.proto.SendUserQDZ2Response.verify(message.sendUserQDZ2Response);
+                var error = $root.SdkProto.SendUserQDZ2Response.verify(message.sendUserQDZ2Response);
                 if (error)
                     return "sendUserQDZ2Response." + error;
             }
             if (message.sendUserMPResponse != null && message.hasOwnProperty("sendUserMPResponse")) {
-                var error = $root.proto.SendUserMPResponse.verify(message.sendUserMPResponse);
+                var error = $root.SdkProto.SendUserMPResponse.verify(message.sendUserMPResponse);
                 if (error)
                     return "sendUserMPResponse." + error;
             }
             if (message.sendUserMP2Response != null && message.hasOwnProperty("sendUserMP2Response")) {
-                var error = $root.proto.SendUserMP2Response.verify(message.sendUserMP2Response);
+                var error = $root.SdkProto.SendUserMP2Response.verify(message.sendUserMP2Response);
                 if (error)
                     return "sendUserMP2Response." + error;
             }
             if (message.sendRoundRecordResponse != null && message.hasOwnProperty("sendRoundRecordResponse")) {
-                var error = $root.proto.SendRoundRecordResponse.verify(message.sendRoundRecordResponse);
+                var error = $root.SdkProto.SendRoundRecordResponse.verify(message.sendRoundRecordResponse);
                 if (error)
                     return "sendRoundRecordResponse." + error;
             }
             if (message.sendReconnectQuitResponse != null && message.hasOwnProperty("sendReconnectQuitResponse")) {
-                var error = $root.proto.SendReconnectQuitResponse.verify(message.sendReconnectQuitResponse);
+                var error = $root.SdkProto.SendReconnectQuitResponse.verify(message.sendReconnectQuitResponse);
                 if (error)
                     return "sendReconnectQuitResponse." + error;
             }
             if (message.userReconnectResponse != null && message.hasOwnProperty("userReconnectResponse")) {
-                var error = $root.proto.UserReconnectResponse.verify(message.userReconnectResponse);
+                var error = $root.SdkProto.UserReconnectResponse.verify(message.userReconnectResponse);
                 if (error)
                     return "userReconnectResponse." + error;
             }
             if (message.sendUserReconnectResponse != null && message.hasOwnProperty("sendUserReconnectResponse")) {
-                var error = $root.proto.SendUserReconnectResponse.verify(message.sendUserReconnectResponse);
+                var error = $root.SdkProto.SendUserReconnectResponse.verify(message.sendUserReconnectResponse);
                 if (error)
                     return "sendUserReconnectResponse." + error;
             }
             if (message.sendApplyDismissResponse != null && message.hasOwnProperty("sendApplyDismissResponse")) {
-                var error = $root.proto.SendApplyDismissResponse.verify(message.sendApplyDismissResponse);
+                var error = $root.SdkProto.SendApplyDismissResponse.verify(message.sendApplyDismissResponse);
                 if (error)
                     return "sendApplyDismissResponse." + error;
             }
             if (message.sendAgreeDismissResponse != null && message.hasOwnProperty("sendAgreeDismissResponse")) {
-                var error = $root.proto.SendAgreeDismissResponse.verify(message.sendAgreeDismissResponse);
+                var error = $root.SdkProto.SendAgreeDismissResponse.verify(message.sendAgreeDismissResponse);
                 if (error)
                     return "sendAgreeDismissResponse." + error;
             }
             if (message.sendDismissResultResponse != null && message.hasOwnProperty("sendDismissResultResponse")) {
-                var error = $root.proto.SendDismissResultResponse.verify(message.sendDismissResultResponse);
+                var error = $root.SdkProto.SendDismissResultResponse.verify(message.sendDismissResultResponse);
                 if (error)
                     return "sendDismissResultResponse." + error;
             }
             if (message.sendUserQuitResponse != null && message.hasOwnProperty("sendUserQuitResponse")) {
-                var error = $root.proto.SendUserQuitResponse.verify(message.sendUserQuitResponse);
+                var error = $root.SdkProto.SendUserQuitResponse.verify(message.sendUserQuitResponse);
                 if (error)
                     return "sendUserQuitResponse." + error;
             }
             if (message.sendMessageResponse != null && message.hasOwnProperty("sendMessageResponse")) {
-                var error = $root.proto.SendMessageResponse.verify(message.sendMessageResponse);
+                var error = $root.SdkProto.SendMessageResponse.verify(message.sendMessageResponse);
                 if (error)
                     return "sendMessageResponse." + error;
             }
             if (message.sendUserOnBackResponse != null && message.hasOwnProperty("sendUserOnBackResponse")) {
-                var error = $root.proto.SendUserOnBackResponse.verify(message.sendUserOnBackResponse);
+                var error = $root.SdkProto.SendUserOnBackResponse.verify(message.sendUserOnBackResponse);
                 if (error)
                     return "sendUserOnBackResponse." + error;
             }
             if (message.sendGameOverResponse != null && message.hasOwnProperty("sendGameOverResponse")) {
-                var error = $root.proto.SendGameOverResponse.verify(message.sendGameOverResponse);
+                var error = $root.SdkProto.SendGameOverResponse.verify(message.sendGameOverResponse);
                 if (error)
                     return "sendGameOverResponse." + error;
             }
             if (message.sendDiamondChangeResponse != null && message.hasOwnProperty("sendDiamondChangeResponse")) {
-                var error = $root.proto.SendDiamondChangeResponse.verify(message.sendDiamondChangeResponse);
+                var error = $root.SdkProto.SendDiamondChangeResponse.verify(message.sendDiamondChangeResponse);
                 if (error)
                     return "sendDiamondChangeResponse." + error;
             }
             if (message.sendCancelAutoResponse != null && message.hasOwnProperty("sendCancelAutoResponse")) {
-                var error = $root.proto.SendCancelAutoResponse.verify(message.sendCancelAutoResponse);
+                var error = $root.SdkProto.SendCancelAutoResponse.verify(message.sendCancelAutoResponse);
                 if (error)
                     return "sendCancelAutoResponse." + error;
             }
             if (message.delayCheckResponse != null && message.hasOwnProperty("delayCheckResponse")) {
-                var error = $root.proto.DelayCheckResponse.verify(message.delayCheckResponse);
+                var error = $root.SdkProto.DelayCheckResponse.verify(message.delayCheckResponse);
                 if (error)
                     return "delayCheckResponse." + error;
             }
             if (message.sendRemainTimeResponse != null && message.hasOwnProperty("sendRemainTimeResponse")) {
-                var error = $root.proto.SendRemainTimeResponse.verify(message.sendRemainTimeResponse);
+                var error = $root.SdkProto.SendRemainTimeResponse.verify(message.sendRemainTimeResponse);
                 if (error)
                     return "sendRemainTimeResponse." + error;
             }
             if (message.sendNoticeClientDismissResponse != null && message.hasOwnProperty("sendNoticeClientDismissResponse")) {
-                var error = $root.proto.SendNoticeClientDismissResponse.verify(message.sendNoticeClientDismissResponse);
+                var error = $root.SdkProto.SendNoticeClientDismissResponse.verify(message.sendNoticeClientDismissResponse);
                 if (error)
                     return "sendNoticeClientDismissResponse." + error;
             }
             if (message.sendUserQuitByAdminResponse != null && message.hasOwnProperty("sendUserQuitByAdminResponse")) {
-                var error = $root.proto.SendUserQuitByAdminResponse.verify(message.sendUserQuitByAdminResponse);
+                var error = $root.SdkProto.SendUserQuitByAdminResponse.verify(message.sendUserQuitByAdminResponse);
                 if (error)
                     return "sendUserQuitByAdminResponse." + error;
             }
             if (message.sendCoinRefreshResponse != null && message.hasOwnProperty("sendCoinRefreshResponse")) {
-                var error = $root.proto.SendCoinRefreshResponse.verify(message.sendCoinRefreshResponse);
+                var error = $root.SdkProto.SendCoinRefreshResponse.verify(message.sendCoinRefreshResponse);
                 if (error)
                     return "sendCoinRefreshResponse." + error;
             }
             if (message.sendHeartBeatResponse != null && message.hasOwnProperty("sendHeartBeatResponse")) {
-                var error = $root.proto.SendHeartBeatResponse.verify(message.sendHeartBeatResponse);
+                var error = $root.SdkProto.SendHeartBeatResponse.verify(message.sendHeartBeatResponse);
                 if (error)
                     return "sendHeartBeatResponse." + error;
             }
@@ -17786,15 +17786,15 @@ $root.proto = (function() {
         /**
          * Creates a Response message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.Response} Response
+         * @returns {SdkProto.Response} Response
          */
         Response.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.Response)
+            if (object instanceof $root.SdkProto.Response)
                 return object;
-            var message = new $root.proto.Response();
+            var message = new $root.SdkProto.Response();
             if (object.msg != null)
                 message.msg = String(object.msg);
             switch (object.code) {
@@ -18244,153 +18244,153 @@ $root.proto = (function() {
             }
             if (object.loginResponse != null) {
                 if (typeof object.loginResponse !== "object")
-                    throw TypeError(".proto.Response.loginResponse: object expected");
-                message.loginResponse = $root.proto.LoginResponse.fromObject(object.loginResponse);
+                    throw TypeError(".SdkProto.Response.loginResponse: object expected");
+                message.loginResponse = $root.SdkProto.LoginResponse.fromObject(object.loginResponse);
             }
             if (object.registerPhoneResponse != null) {
                 if (typeof object.registerPhoneResponse !== "object")
-                    throw TypeError(".proto.Response.registerPhoneResponse: object expected");
-                message.registerPhoneResponse = $root.proto.RegisterPhoneRespone.fromObject(object.registerPhoneResponse);
+                    throw TypeError(".SdkProto.Response.registerPhoneResponse: object expected");
+                message.registerPhoneResponse = $root.SdkProto.RegisterPhoneRespone.fromObject(object.registerPhoneResponse);
             }
             if (object.getUserInfoResponse != null) {
                 if (typeof object.getUserInfoResponse !== "object")
-                    throw TypeError(".proto.Response.getUserInfoResponse: object expected");
-                message.getUserInfoResponse = $root.proto.GetUserInfoResponse.fromObject(object.getUserInfoResponse);
+                    throw TypeError(".SdkProto.Response.getUserInfoResponse: object expected");
+                message.getUserInfoResponse = $root.SdkProto.GetUserInfoResponse.fromObject(object.getUserInfoResponse);
             }
             if (object.coinBankResponse != null) {
                 if (typeof object.coinBankResponse !== "object")
-                    throw TypeError(".proto.Response.coinBankResponse: object expected");
-                message.coinBankResponse = $root.proto.CoinBankResponse.fromObject(object.coinBankResponse);
+                    throw TypeError(".SdkProto.Response.coinBankResponse: object expected");
+                message.coinBankResponse = $root.SdkProto.CoinBankResponse.fromObject(object.coinBankResponse);
             }
             if (object.changeSignResponse != null) {
                 if (typeof object.changeSignResponse !== "object")
-                    throw TypeError(".proto.Response.changeSignResponse: object expected");
-                message.changeSignResponse = $root.proto.ChangeSignResponse.fromObject(object.changeSignResponse);
+                    throw TypeError(".SdkProto.Response.changeSignResponse: object expected");
+                message.changeSignResponse = $root.SdkProto.ChangeSignResponse.fromObject(object.changeSignResponse);
             }
             if (object.sendDisCardResponse != null) {
                 if (typeof object.sendDisCardResponse !== "object")
-                    throw TypeError(".proto.Response.sendDisCardResponse: object expected");
-                message.sendDisCardResponse = $root.proto.SendDisCardResponse.fromObject(object.sendDisCardResponse);
+                    throw TypeError(".SdkProto.Response.sendDisCardResponse: object expected");
+                message.sendDisCardResponse = $root.SdkProto.SendDisCardResponse.fromObject(object.sendDisCardResponse);
             }
             if (object.sendPassPaiResponse != null) {
                 if (typeof object.sendPassPaiResponse !== "object")
-                    throw TypeError(".proto.Response.sendPassPaiResponse: object expected");
-                message.sendPassPaiResponse = $root.proto.SendPassPaiResponse.fromObject(object.sendPassPaiResponse);
+                    throw TypeError(".SdkProto.Response.sendPassPaiResponse: object expected");
+                message.sendPassPaiResponse = $root.SdkProto.SendPassPaiResponse.fromObject(object.sendPassPaiResponse);
             }
             if (object.sendUserQDZResponse != null) {
                 if (typeof object.sendUserQDZResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserQDZResponse: object expected");
-                message.sendUserQDZResponse = $root.proto.SendUserQDZResponse.fromObject(object.sendUserQDZResponse);
+                    throw TypeError(".SdkProto.Response.sendUserQDZResponse: object expected");
+                message.sendUserQDZResponse = $root.SdkProto.SendUserQDZResponse.fromObject(object.sendUserQDZResponse);
             }
             if (object.sendUserQDZ2Response != null) {
                 if (typeof object.sendUserQDZ2Response !== "object")
-                    throw TypeError(".proto.Response.sendUserQDZ2Response: object expected");
-                message.sendUserQDZ2Response = $root.proto.SendUserQDZ2Response.fromObject(object.sendUserQDZ2Response);
+                    throw TypeError(".SdkProto.Response.sendUserQDZ2Response: object expected");
+                message.sendUserQDZ2Response = $root.SdkProto.SendUserQDZ2Response.fromObject(object.sendUserQDZ2Response);
             }
             if (object.sendUserMPResponse != null) {
                 if (typeof object.sendUserMPResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserMPResponse: object expected");
-                message.sendUserMPResponse = $root.proto.SendUserMPResponse.fromObject(object.sendUserMPResponse);
+                    throw TypeError(".SdkProto.Response.sendUserMPResponse: object expected");
+                message.sendUserMPResponse = $root.SdkProto.SendUserMPResponse.fromObject(object.sendUserMPResponse);
             }
             if (object.sendUserMP2Response != null) {
                 if (typeof object.sendUserMP2Response !== "object")
-                    throw TypeError(".proto.Response.sendUserMP2Response: object expected");
-                message.sendUserMP2Response = $root.proto.SendUserMP2Response.fromObject(object.sendUserMP2Response);
+                    throw TypeError(".SdkProto.Response.sendUserMP2Response: object expected");
+                message.sendUserMP2Response = $root.SdkProto.SendUserMP2Response.fromObject(object.sendUserMP2Response);
             }
             if (object.sendRoundRecordResponse != null) {
                 if (typeof object.sendRoundRecordResponse !== "object")
-                    throw TypeError(".proto.Response.sendRoundRecordResponse: object expected");
-                message.sendRoundRecordResponse = $root.proto.SendRoundRecordResponse.fromObject(object.sendRoundRecordResponse);
+                    throw TypeError(".SdkProto.Response.sendRoundRecordResponse: object expected");
+                message.sendRoundRecordResponse = $root.SdkProto.SendRoundRecordResponse.fromObject(object.sendRoundRecordResponse);
             }
             if (object.sendReconnectQuitResponse != null) {
                 if (typeof object.sendReconnectQuitResponse !== "object")
-                    throw TypeError(".proto.Response.sendReconnectQuitResponse: object expected");
-                message.sendReconnectQuitResponse = $root.proto.SendReconnectQuitResponse.fromObject(object.sendReconnectQuitResponse);
+                    throw TypeError(".SdkProto.Response.sendReconnectQuitResponse: object expected");
+                message.sendReconnectQuitResponse = $root.SdkProto.SendReconnectQuitResponse.fromObject(object.sendReconnectQuitResponse);
             }
             if (object.userReconnectResponse != null) {
                 if (typeof object.userReconnectResponse !== "object")
-                    throw TypeError(".proto.Response.userReconnectResponse: object expected");
-                message.userReconnectResponse = $root.proto.UserReconnectResponse.fromObject(object.userReconnectResponse);
+                    throw TypeError(".SdkProto.Response.userReconnectResponse: object expected");
+                message.userReconnectResponse = $root.SdkProto.UserReconnectResponse.fromObject(object.userReconnectResponse);
             }
             if (object.sendUserReconnectResponse != null) {
                 if (typeof object.sendUserReconnectResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserReconnectResponse: object expected");
-                message.sendUserReconnectResponse = $root.proto.SendUserReconnectResponse.fromObject(object.sendUserReconnectResponse);
+                    throw TypeError(".SdkProto.Response.sendUserReconnectResponse: object expected");
+                message.sendUserReconnectResponse = $root.SdkProto.SendUserReconnectResponse.fromObject(object.sendUserReconnectResponse);
             }
             if (object.sendApplyDismissResponse != null) {
                 if (typeof object.sendApplyDismissResponse !== "object")
-                    throw TypeError(".proto.Response.sendApplyDismissResponse: object expected");
-                message.sendApplyDismissResponse = $root.proto.SendApplyDismissResponse.fromObject(object.sendApplyDismissResponse);
+                    throw TypeError(".SdkProto.Response.sendApplyDismissResponse: object expected");
+                message.sendApplyDismissResponse = $root.SdkProto.SendApplyDismissResponse.fromObject(object.sendApplyDismissResponse);
             }
             if (object.sendAgreeDismissResponse != null) {
                 if (typeof object.sendAgreeDismissResponse !== "object")
-                    throw TypeError(".proto.Response.sendAgreeDismissResponse: object expected");
-                message.sendAgreeDismissResponse = $root.proto.SendAgreeDismissResponse.fromObject(object.sendAgreeDismissResponse);
+                    throw TypeError(".SdkProto.Response.sendAgreeDismissResponse: object expected");
+                message.sendAgreeDismissResponse = $root.SdkProto.SendAgreeDismissResponse.fromObject(object.sendAgreeDismissResponse);
             }
             if (object.sendDismissResultResponse != null) {
                 if (typeof object.sendDismissResultResponse !== "object")
-                    throw TypeError(".proto.Response.sendDismissResultResponse: object expected");
-                message.sendDismissResultResponse = $root.proto.SendDismissResultResponse.fromObject(object.sendDismissResultResponse);
+                    throw TypeError(".SdkProto.Response.sendDismissResultResponse: object expected");
+                message.sendDismissResultResponse = $root.SdkProto.SendDismissResultResponse.fromObject(object.sendDismissResultResponse);
             }
             if (object.sendUserQuitResponse != null) {
                 if (typeof object.sendUserQuitResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserQuitResponse: object expected");
-                message.sendUserQuitResponse = $root.proto.SendUserQuitResponse.fromObject(object.sendUserQuitResponse);
+                    throw TypeError(".SdkProto.Response.sendUserQuitResponse: object expected");
+                message.sendUserQuitResponse = $root.SdkProto.SendUserQuitResponse.fromObject(object.sendUserQuitResponse);
             }
             if (object.sendMessageResponse != null) {
                 if (typeof object.sendMessageResponse !== "object")
-                    throw TypeError(".proto.Response.sendMessageResponse: object expected");
-                message.sendMessageResponse = $root.proto.SendMessageResponse.fromObject(object.sendMessageResponse);
+                    throw TypeError(".SdkProto.Response.sendMessageResponse: object expected");
+                message.sendMessageResponse = $root.SdkProto.SendMessageResponse.fromObject(object.sendMessageResponse);
             }
             if (object.sendUserOnBackResponse != null) {
                 if (typeof object.sendUserOnBackResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserOnBackResponse: object expected");
-                message.sendUserOnBackResponse = $root.proto.SendUserOnBackResponse.fromObject(object.sendUserOnBackResponse);
+                    throw TypeError(".SdkProto.Response.sendUserOnBackResponse: object expected");
+                message.sendUserOnBackResponse = $root.SdkProto.SendUserOnBackResponse.fromObject(object.sendUserOnBackResponse);
             }
             if (object.sendGameOverResponse != null) {
                 if (typeof object.sendGameOverResponse !== "object")
-                    throw TypeError(".proto.Response.sendGameOverResponse: object expected");
-                message.sendGameOverResponse = $root.proto.SendGameOverResponse.fromObject(object.sendGameOverResponse);
+                    throw TypeError(".SdkProto.Response.sendGameOverResponse: object expected");
+                message.sendGameOverResponse = $root.SdkProto.SendGameOverResponse.fromObject(object.sendGameOverResponse);
             }
             if (object.sendDiamondChangeResponse != null) {
                 if (typeof object.sendDiamondChangeResponse !== "object")
-                    throw TypeError(".proto.Response.sendDiamondChangeResponse: object expected");
-                message.sendDiamondChangeResponse = $root.proto.SendDiamondChangeResponse.fromObject(object.sendDiamondChangeResponse);
+                    throw TypeError(".SdkProto.Response.sendDiamondChangeResponse: object expected");
+                message.sendDiamondChangeResponse = $root.SdkProto.SendDiamondChangeResponse.fromObject(object.sendDiamondChangeResponse);
             }
             if (object.sendCancelAutoResponse != null) {
                 if (typeof object.sendCancelAutoResponse !== "object")
-                    throw TypeError(".proto.Response.sendCancelAutoResponse: object expected");
-                message.sendCancelAutoResponse = $root.proto.SendCancelAutoResponse.fromObject(object.sendCancelAutoResponse);
+                    throw TypeError(".SdkProto.Response.sendCancelAutoResponse: object expected");
+                message.sendCancelAutoResponse = $root.SdkProto.SendCancelAutoResponse.fromObject(object.sendCancelAutoResponse);
             }
             if (object.delayCheckResponse != null) {
                 if (typeof object.delayCheckResponse !== "object")
-                    throw TypeError(".proto.Response.delayCheckResponse: object expected");
-                message.delayCheckResponse = $root.proto.DelayCheckResponse.fromObject(object.delayCheckResponse);
+                    throw TypeError(".SdkProto.Response.delayCheckResponse: object expected");
+                message.delayCheckResponse = $root.SdkProto.DelayCheckResponse.fromObject(object.delayCheckResponse);
             }
             if (object.sendRemainTimeResponse != null) {
                 if (typeof object.sendRemainTimeResponse !== "object")
-                    throw TypeError(".proto.Response.sendRemainTimeResponse: object expected");
-                message.sendRemainTimeResponse = $root.proto.SendRemainTimeResponse.fromObject(object.sendRemainTimeResponse);
+                    throw TypeError(".SdkProto.Response.sendRemainTimeResponse: object expected");
+                message.sendRemainTimeResponse = $root.SdkProto.SendRemainTimeResponse.fromObject(object.sendRemainTimeResponse);
             }
             if (object.sendNoticeClientDismissResponse != null) {
                 if (typeof object.sendNoticeClientDismissResponse !== "object")
-                    throw TypeError(".proto.Response.sendNoticeClientDismissResponse: object expected");
-                message.sendNoticeClientDismissResponse = $root.proto.SendNoticeClientDismissResponse.fromObject(object.sendNoticeClientDismissResponse);
+                    throw TypeError(".SdkProto.Response.sendNoticeClientDismissResponse: object expected");
+                message.sendNoticeClientDismissResponse = $root.SdkProto.SendNoticeClientDismissResponse.fromObject(object.sendNoticeClientDismissResponse);
             }
             if (object.sendUserQuitByAdminResponse != null) {
                 if (typeof object.sendUserQuitByAdminResponse !== "object")
-                    throw TypeError(".proto.Response.sendUserQuitByAdminResponse: object expected");
-                message.sendUserQuitByAdminResponse = $root.proto.SendUserQuitByAdminResponse.fromObject(object.sendUserQuitByAdminResponse);
+                    throw TypeError(".SdkProto.Response.sendUserQuitByAdminResponse: object expected");
+                message.sendUserQuitByAdminResponse = $root.SdkProto.SendUserQuitByAdminResponse.fromObject(object.sendUserQuitByAdminResponse);
             }
             if (object.sendCoinRefreshResponse != null) {
                 if (typeof object.sendCoinRefreshResponse !== "object")
-                    throw TypeError(".proto.Response.sendCoinRefreshResponse: object expected");
-                message.sendCoinRefreshResponse = $root.proto.SendCoinRefreshResponse.fromObject(object.sendCoinRefreshResponse);
+                    throw TypeError(".SdkProto.Response.sendCoinRefreshResponse: object expected");
+                message.sendCoinRefreshResponse = $root.SdkProto.SendCoinRefreshResponse.fromObject(object.sendCoinRefreshResponse);
             }
             if (object.sendHeartBeatResponse != null) {
                 if (typeof object.sendHeartBeatResponse !== "object")
-                    throw TypeError(".proto.Response.sendHeartBeatResponse: object expected");
-                message.sendHeartBeatResponse = $root.proto.SendHeartBeatResponse.fromObject(object.sendHeartBeatResponse);
+                    throw TypeError(".SdkProto.Response.sendHeartBeatResponse: object expected");
+                message.sendHeartBeatResponse = $root.SdkProto.SendHeartBeatResponse.fromObject(object.sendHeartBeatResponse);
             }
             return message;
         };
@@ -18398,9 +18398,9 @@ $root.proto = (function() {
         /**
          * Creates a plain object from a Response message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @static
-         * @param {proto.Response} message Response
+         * @param {SdkProto.Response} message Response
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
@@ -18451,81 +18451,81 @@ $root.proto = (function() {
             if (message.msg != null && message.hasOwnProperty("msg"))
                 object.msg = message.msg;
             if (message.code != null && message.hasOwnProperty("code"))
-                object.code = options.enums === String ? $root.proto.Response.ErrorCode[message.code] : message.code;
+                object.code = options.enums === String ? $root.SdkProto.Response.ErrorCode[message.code] : message.code;
             if (message.serverTime != null && message.hasOwnProperty("serverTime"))
                 if (typeof message.serverTime === "number")
                     object.serverTime = options.longs === String ? String(message.serverTime) : message.serverTime;
                 else
                     object.serverTime = options.longs === String ? $util.Long.prototype.toString.call(message.serverTime) : options.longs === Number ? new $util.LongBits(message.serverTime.low >>> 0, message.serverTime.high >>> 0).toNumber() : message.serverTime;
             if (message.cmd != null && message.hasOwnProperty("cmd"))
-                object.cmd = options.enums === String ? $root.proto.Request.CMD[message.cmd] : message.cmd;
+                object.cmd = options.enums === String ? $root.SdkProto.Request.CMD[message.cmd] : message.cmd;
             if (message.loginResponse != null && message.hasOwnProperty("loginResponse"))
-                object.loginResponse = $root.proto.LoginResponse.toObject(message.loginResponse, options);
+                object.loginResponse = $root.SdkProto.LoginResponse.toObject(message.loginResponse, options);
             if (message.registerPhoneResponse != null && message.hasOwnProperty("registerPhoneResponse"))
-                object.registerPhoneResponse = $root.proto.RegisterPhoneRespone.toObject(message.registerPhoneResponse, options);
+                object.registerPhoneResponse = $root.SdkProto.RegisterPhoneRespone.toObject(message.registerPhoneResponse, options);
             if (message.getUserInfoResponse != null && message.hasOwnProperty("getUserInfoResponse"))
-                object.getUserInfoResponse = $root.proto.GetUserInfoResponse.toObject(message.getUserInfoResponse, options);
+                object.getUserInfoResponse = $root.SdkProto.GetUserInfoResponse.toObject(message.getUserInfoResponse, options);
             if (message.coinBankResponse != null && message.hasOwnProperty("coinBankResponse"))
-                object.coinBankResponse = $root.proto.CoinBankResponse.toObject(message.coinBankResponse, options);
+                object.coinBankResponse = $root.SdkProto.CoinBankResponse.toObject(message.coinBankResponse, options);
             if (message.changeSignResponse != null && message.hasOwnProperty("changeSignResponse"))
-                object.changeSignResponse = $root.proto.ChangeSignResponse.toObject(message.changeSignResponse, options);
+                object.changeSignResponse = $root.SdkProto.ChangeSignResponse.toObject(message.changeSignResponse, options);
             if (message.sendDisCardResponse != null && message.hasOwnProperty("sendDisCardResponse"))
-                object.sendDisCardResponse = $root.proto.SendDisCardResponse.toObject(message.sendDisCardResponse, options);
+                object.sendDisCardResponse = $root.SdkProto.SendDisCardResponse.toObject(message.sendDisCardResponse, options);
             if (message.sendPassPaiResponse != null && message.hasOwnProperty("sendPassPaiResponse"))
-                object.sendPassPaiResponse = $root.proto.SendPassPaiResponse.toObject(message.sendPassPaiResponse, options);
+                object.sendPassPaiResponse = $root.SdkProto.SendPassPaiResponse.toObject(message.sendPassPaiResponse, options);
             if (message.sendUserQDZResponse != null && message.hasOwnProperty("sendUserQDZResponse"))
-                object.sendUserQDZResponse = $root.proto.SendUserQDZResponse.toObject(message.sendUserQDZResponse, options);
+                object.sendUserQDZResponse = $root.SdkProto.SendUserQDZResponse.toObject(message.sendUserQDZResponse, options);
             if (message.sendUserQDZ2Response != null && message.hasOwnProperty("sendUserQDZ2Response"))
-                object.sendUserQDZ2Response = $root.proto.SendUserQDZ2Response.toObject(message.sendUserQDZ2Response, options);
+                object.sendUserQDZ2Response = $root.SdkProto.SendUserQDZ2Response.toObject(message.sendUserQDZ2Response, options);
             if (message.sendUserMPResponse != null && message.hasOwnProperty("sendUserMPResponse"))
-                object.sendUserMPResponse = $root.proto.SendUserMPResponse.toObject(message.sendUserMPResponse, options);
+                object.sendUserMPResponse = $root.SdkProto.SendUserMPResponse.toObject(message.sendUserMPResponse, options);
             if (message.sendUserMP2Response != null && message.hasOwnProperty("sendUserMP2Response"))
-                object.sendUserMP2Response = $root.proto.SendUserMP2Response.toObject(message.sendUserMP2Response, options);
+                object.sendUserMP2Response = $root.SdkProto.SendUserMP2Response.toObject(message.sendUserMP2Response, options);
             if (message.sendRoundRecordResponse != null && message.hasOwnProperty("sendRoundRecordResponse"))
-                object.sendRoundRecordResponse = $root.proto.SendRoundRecordResponse.toObject(message.sendRoundRecordResponse, options);
+                object.sendRoundRecordResponse = $root.SdkProto.SendRoundRecordResponse.toObject(message.sendRoundRecordResponse, options);
             if (message.sendReconnectQuitResponse != null && message.hasOwnProperty("sendReconnectQuitResponse"))
-                object.sendReconnectQuitResponse = $root.proto.SendReconnectQuitResponse.toObject(message.sendReconnectQuitResponse, options);
+                object.sendReconnectQuitResponse = $root.SdkProto.SendReconnectQuitResponse.toObject(message.sendReconnectQuitResponse, options);
             if (message.userReconnectResponse != null && message.hasOwnProperty("userReconnectResponse"))
-                object.userReconnectResponse = $root.proto.UserReconnectResponse.toObject(message.userReconnectResponse, options);
+                object.userReconnectResponse = $root.SdkProto.UserReconnectResponse.toObject(message.userReconnectResponse, options);
             if (message.sendUserReconnectResponse != null && message.hasOwnProperty("sendUserReconnectResponse"))
-                object.sendUserReconnectResponse = $root.proto.SendUserReconnectResponse.toObject(message.sendUserReconnectResponse, options);
+                object.sendUserReconnectResponse = $root.SdkProto.SendUserReconnectResponse.toObject(message.sendUserReconnectResponse, options);
             if (message.sendApplyDismissResponse != null && message.hasOwnProperty("sendApplyDismissResponse"))
-                object.sendApplyDismissResponse = $root.proto.SendApplyDismissResponse.toObject(message.sendApplyDismissResponse, options);
+                object.sendApplyDismissResponse = $root.SdkProto.SendApplyDismissResponse.toObject(message.sendApplyDismissResponse, options);
             if (message.sendAgreeDismissResponse != null && message.hasOwnProperty("sendAgreeDismissResponse"))
-                object.sendAgreeDismissResponse = $root.proto.SendAgreeDismissResponse.toObject(message.sendAgreeDismissResponse, options);
+                object.sendAgreeDismissResponse = $root.SdkProto.SendAgreeDismissResponse.toObject(message.sendAgreeDismissResponse, options);
             if (message.sendDismissResultResponse != null && message.hasOwnProperty("sendDismissResultResponse"))
-                object.sendDismissResultResponse = $root.proto.SendDismissResultResponse.toObject(message.sendDismissResultResponse, options);
+                object.sendDismissResultResponse = $root.SdkProto.SendDismissResultResponse.toObject(message.sendDismissResultResponse, options);
             if (message.sendUserQuitResponse != null && message.hasOwnProperty("sendUserQuitResponse"))
-                object.sendUserQuitResponse = $root.proto.SendUserQuitResponse.toObject(message.sendUserQuitResponse, options);
+                object.sendUserQuitResponse = $root.SdkProto.SendUserQuitResponse.toObject(message.sendUserQuitResponse, options);
             if (message.sendMessageResponse != null && message.hasOwnProperty("sendMessageResponse"))
-                object.sendMessageResponse = $root.proto.SendMessageResponse.toObject(message.sendMessageResponse, options);
+                object.sendMessageResponse = $root.SdkProto.SendMessageResponse.toObject(message.sendMessageResponse, options);
             if (message.sendUserOnBackResponse != null && message.hasOwnProperty("sendUserOnBackResponse"))
-                object.sendUserOnBackResponse = $root.proto.SendUserOnBackResponse.toObject(message.sendUserOnBackResponse, options);
+                object.sendUserOnBackResponse = $root.SdkProto.SendUserOnBackResponse.toObject(message.sendUserOnBackResponse, options);
             if (message.sendGameOverResponse != null && message.hasOwnProperty("sendGameOverResponse"))
-                object.sendGameOverResponse = $root.proto.SendGameOverResponse.toObject(message.sendGameOverResponse, options);
+                object.sendGameOverResponse = $root.SdkProto.SendGameOverResponse.toObject(message.sendGameOverResponse, options);
             if (message.sendDiamondChangeResponse != null && message.hasOwnProperty("sendDiamondChangeResponse"))
-                object.sendDiamondChangeResponse = $root.proto.SendDiamondChangeResponse.toObject(message.sendDiamondChangeResponse, options);
+                object.sendDiamondChangeResponse = $root.SdkProto.SendDiamondChangeResponse.toObject(message.sendDiamondChangeResponse, options);
             if (message.sendCancelAutoResponse != null && message.hasOwnProperty("sendCancelAutoResponse"))
-                object.sendCancelAutoResponse = $root.proto.SendCancelAutoResponse.toObject(message.sendCancelAutoResponse, options);
+                object.sendCancelAutoResponse = $root.SdkProto.SendCancelAutoResponse.toObject(message.sendCancelAutoResponse, options);
             if (message.delayCheckResponse != null && message.hasOwnProperty("delayCheckResponse"))
-                object.delayCheckResponse = $root.proto.DelayCheckResponse.toObject(message.delayCheckResponse, options);
+                object.delayCheckResponse = $root.SdkProto.DelayCheckResponse.toObject(message.delayCheckResponse, options);
             if (message.sendRemainTimeResponse != null && message.hasOwnProperty("sendRemainTimeResponse"))
-                object.sendRemainTimeResponse = $root.proto.SendRemainTimeResponse.toObject(message.sendRemainTimeResponse, options);
+                object.sendRemainTimeResponse = $root.SdkProto.SendRemainTimeResponse.toObject(message.sendRemainTimeResponse, options);
             if (message.sendNoticeClientDismissResponse != null && message.hasOwnProperty("sendNoticeClientDismissResponse"))
-                object.sendNoticeClientDismissResponse = $root.proto.SendNoticeClientDismissResponse.toObject(message.sendNoticeClientDismissResponse, options);
+                object.sendNoticeClientDismissResponse = $root.SdkProto.SendNoticeClientDismissResponse.toObject(message.sendNoticeClientDismissResponse, options);
             if (message.sendUserQuitByAdminResponse != null && message.hasOwnProperty("sendUserQuitByAdminResponse"))
-                object.sendUserQuitByAdminResponse = $root.proto.SendUserQuitByAdminResponse.toObject(message.sendUserQuitByAdminResponse, options);
+                object.sendUserQuitByAdminResponse = $root.SdkProto.SendUserQuitByAdminResponse.toObject(message.sendUserQuitByAdminResponse, options);
             if (message.sendCoinRefreshResponse != null && message.hasOwnProperty("sendCoinRefreshResponse"))
-                object.sendCoinRefreshResponse = $root.proto.SendCoinRefreshResponse.toObject(message.sendCoinRefreshResponse, options);
+                object.sendCoinRefreshResponse = $root.SdkProto.SendCoinRefreshResponse.toObject(message.sendCoinRefreshResponse, options);
             if (message.sendHeartBeatResponse != null && message.hasOwnProperty("sendHeartBeatResponse"))
-                object.sendHeartBeatResponse = $root.proto.SendHeartBeatResponse.toObject(message.sendHeartBeatResponse, options);
+                object.sendHeartBeatResponse = $root.SdkProto.SendHeartBeatResponse.toObject(message.sendHeartBeatResponse, options);
             return object;
         };
 
         /**
          * Converts this Response to JSON.
          * @function toJSON
-         * @memberof proto.Response
+         * @memberof SdkProto.Response
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
@@ -18535,7 +18535,7 @@ $root.proto = (function() {
 
         /**
          * ErrorCode enum.
-         * @name proto.Response.ErrorCode
+         * @name SdkProto.Response.ErrorCode
          * @enum {string}
          * @property {number} OK=200 OK value
          * @property {number} DATA_CHECK_FAIL=400 DATA_CHECK_FAIL value
@@ -18670,7 +18670,7 @@ $root.proto = (function() {
         return Response;
     })();
 
-    return proto;
+    return SdkProto;
 })();
 
 module.exports = $root;

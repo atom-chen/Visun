@@ -1,0 +1,1 @@
+pbjs -t static-module -w commonjs -o SdkProto.js in/SdkProto.proto

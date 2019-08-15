@@ -1,0 +1,227 @@
+syntax = "proto3";
+
+package GameProto;
+
+/*********************  基础对象 ************************/
+
+message User{
+    optional int32 userId                = 1; //用户ID
+    optional int32 state                 = 2; //状态 
+    optional string tableId              = 3; //
+    optional string nickname             = 4;
+    optional string headImg              = 5;
+    optional int32 sex                   = 6;
+    optional string ip                   = 7;
+    optional int32 onLine                = 8;
+    optional int32 coin                  = 9;
+    
+}
+
+
+/*********************  请求对象 ************************/
+
+
+
+//加入桌子
+message JoinTableRequest {
+   optional string sid                  = 1; //
+}
+
+
+//打地鼠
+message HitRequest {
+   optional int32 type                  = 1; //锤子 1, 2, 3, 4 
+}
+
+//玩家退出
+message UserQuitRequest {
+
+}
+
+
+
+
+//退到后台
+message UserOnBackRequest {
+
+}
+
+//延时检测
+message DelayCheckRequest {
+      optional string content          = 1;//内容
+}
+
+
+//重连 
+message UserReconnectRequest {
+      optional int32 userId            = 1; //
+}
+
+
+
+
+//所有请求接口
+message Request {
+    enum CMD {
+      UNKNOWN                      = 0;
+      JOIN_TABLE                   = 2002;  //加入桌子 JoinTableRequest, JoinTableResponse
+      HIT                          = 2006;  //打地鼠 HitRequest, HitResponse          
+      USER_QUIT                    = 2044;  //玩家退出 UserQuitRequest
+      USER_ONBACK                  = 2080;  //用户退到后台  UserOnBackRequest
+      DELAY_CHECK                  = 20010; //客户端延时检测  DelayCheckRequest, DelayCheckResponse 
+      USER_RECONNECT               = 2030;  //玩家重连 UserReconnectRequest, UserReconnectResponse
+       
+      SEND_JOIN_TABLE              = 2005;  //推送 加入桌子信息       SendJoinTableResponse
+      SEND_HIT                     = 2007;  //推送打地鼠消息 SendHitResponse
+      SEND_USER_QUIT               = 2045;  //玩家退出 SendUserQuitResponse
+      SEND_MESSAGE                 = 2061;  //推送聊天信息 SendMessageResponse
+      SEND_DIAMOND_CHANGE          = 2071;  //推送钻石变化 SendDiamondChangeResponse
+      SEND_USER_ONBACK             = 2081;  //退到后台 SendUserOnBackResponse
+      SEND_USER_RECONNECT          = 2031;  //推送重连信息 SendUserReconnectResponse
+      SEND_RECONNECT_QUIT          = 2035;  //玩家重连回到大厅 SendReconnectQuitResponse
+      SEND_HEART_BEAT              = 10000; //推送心跳 SendHeartBeatResponse
+      
+      
+    }
+    optional CMD   cmd                                      = 1;      //访问接口
+    optional JoinTableRequest joinTableRequest              = 11;     //加入桌子
+    optional HitRequest hitRequest                          = 12;     //
+    optional UserQuitRequest userQuitRequest                = 13;     //玩家退出
+   
+    optional DelayCheckRequest delayCheckRequest            = 15;     //延时检测
+    optional UserOnBackRequest userOnBackRequest            = 16;     //退到后台
+    optional UserReconnectRequest userReconnectRequest      = 17;     //重连
+
+	extensions 500 to 1000;
+}
+
+
+
+/*********************  返回数据 ************************/
+
+
+
+
+//加入桌子返回信息
+message JoinTableResponse {
+     repeated User users               = 1;  
+}
+
+
+//加入桌子--推送信息
+message SendJoinTableResponse {
+     optional User user                = 1;
+}
+
+//打地鼠
+message HitResponse {
+     optional bool success             = 1; //是否命中
+     optional int32 coin               = 2; //当前金币
+     optional int32 awardCoin          = 3; //奖励金币 
+     optional bool crit                = 4; //是否暴击
+}
+
+//推送打地鼠信息
+message  SendHitResponse {
+     optional int32 userId             = 1; //用户ID
+     optional int32 coin               = 2; //当前金币
+     optional int32 awardCoin          = 3; //奖励金币 
+}
+
+
+//退出--推送消息
+message SendUserQuitResponse {
+      optional int32 userId           = 1;
+      optional string nickname        = 2;
+      optional string message         = 3;
+}
+
+
+
+
+//推送钻石变化
+message SendDiamondChangeResponse {
+      optional int32 userId            = 1;
+      optional int32 diamond           = 2;
+}
+
+//退到后台
+message SendUserOnBackResponse {
+      optional int32 userId            = 1;
+}
+
+
+
+message DelayCheckResponse {
+      optional string content          = 1;
+}
+
+//推送聊天内容
+message SendMessageResponse {
+      optional string content          = 1;  
+}
+
+
+//推送重连信息
+message SendUserReconnectResponse {
+      optional int32 userId            = 1;
+      optional int32 onLine            = 2;
+}
+
+//玩家重连回到大厅
+message SendReconnectQuitResponse {
+      optional int32 userId            = 1;
+}
+
+//重连
+message UserReconnectResponse {
+     repeated User users               = 1;
+}
+
+//心跳
+message SendHeartBeatResponse {
+     optional  int64 currentTime       = 1;
+}
+
+
+//所有应答接口
+message Response {
+    enum ErrorCode {
+        NO_ERROR                                            = 0;                        // 返回没有错误发生       
+        
+        COIN_NOT_ENOUGH                                     = 10;                       //金币不足
+        
+        JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
+        HIT_ERROR                                           = 3008;                     //打地鼠异常
+        NOCHARGE_ERROR                                      = 3009;                     //请充值后再游戏
+       
+		USER_QUIT_ERROR                                     = 3013;                     // 玩家退出异常
+        RECONNET_ERROR                                      = 3025;                     // 重连错误
+        SEND_MESSAGE_ERROR                                  = 3040;                     // 发送信息失败
+        USER_ONBACK_ERROR                                   = 3056;                     // 用户退后台消息
+        DELAY_CHECK_ERROR                                   = 3201;                     // 延时检测异常
+    }
+    optional ErrorCode error                                = 1 [default = NO_ERROR];   // 表示本次请求状态
+    optional int64 serverTime                               = 2;                        // 服务器时间
+    optional Request.CMD     cmd                            = 3;                        // 接口
+ 
+    optional JoinTableResponse joinTableResponse            = 11;                       //加入桌子 
+    optional SendJoinTableResponse sendJoinTableResponse    = 12;                       //推送加入桌子信息
+    optional HitResponse hitResponse                        = 13;                       //打地鼠
+    optional SendHitResponse sendHitResponse                = 14;                       //推送打地鼠消息
+    optional SendMessageResponse sendMessageResponse        = 15;                       //推送聊天信息
+
+    optional SendUserQuitResponse sendUserQuitResponse      = 16;                       //推送玩家退出消息
+
+
+    optional SendDiamondChangeResponse sendDiamondChangeResponse  = 17;                 //推送钻石变化
+    optional SendUserOnBackResponse sendUserOnBackResponse  = 18;                       //退到后台
+    optional DelayCheckResponse delayCheckResponse          = 19;                       //延时检测
+    optional SendUserReconnectResponse sendUserReconnectResponse   = 20;
+    optional UserReconnectResponse userReconnectResponse    = 21;                       //重连
+    optional SendReconnectQuitResponse sendReconnectQuitResponse   = 22;                //重连退回大厅
+    optional SendHeartBeatResponse sendHeartBeatResponse    = 23;                       //心跳
+    
+    extensions 500 to 1000;
+}
+

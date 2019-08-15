@@ -27,11 +27,11 @@ export default class HttpCore {
 	//ruleList:  规则
 	//requestor: 请求句柄
 	//responder: 响应句柄
-	public static registProcotol(ruleList:any[], requestor:any, respondor:any)
+	public static registProcotol(ruleList:object, requestor:any, respondor:any)
 	{
 		this._responder = respondor;
 		
-		for( var i=0, len=ruleList.length; i<len; i++) {
+		for( var i in ruleList) {
 			var ptoname:string = ruleList[i].name
 
 			if(this.g_allProtocol[ptoname]) {
@@ -44,10 +44,11 @@ export default class HttpCore {
 				cc.error("没有请求接口", ptoname);
 			}
 
-			this.g_allProtocol[ptoname] = ruleList[i];
 			this.setCacheAble(ptoname, ruleList[i].cacheAble===1);
 			//this.setCacheAble(ptoname, true); //测试用
 		}
+
+		this.g_allProtocol = ruleList;
 	}
 
 	//卸载所有协议

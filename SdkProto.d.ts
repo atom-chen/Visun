@@ -1,6 +1,6 @@
 import * as $protobuf from "protobufjs";
-/** Namespace proto. */
-export namespace proto {
+/** Namespace SdkProto. */
+export namespace SdkProto {
 
     /** Properties of a User. */
     interface IUser {
@@ -112,7 +112,7 @@ export namespace proto {
          * Constructs a new User.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUser);
+        constructor(properties?: SdkProto.IUser);
 
         /** User sessionId. */
         public sessionId: string;
@@ -218,23 +218,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns User instance
          */
-        public static create(properties?: proto.IUser): proto.User;
+        public static create(properties?: SdkProto.IUser): SdkProto.User;
 
         /**
-         * Encodes the specified User message. Does not implicitly {@link proto.User.verify|verify} messages.
+         * Encodes the specified User message. Does not implicitly {@link SdkProto.User.verify|verify} messages.
          * @param message User message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified User message, length delimited. Does not implicitly {@link proto.User.verify|verify} messages.
+         * Encodes the specified User message, length delimited. Does not implicitly {@link SdkProto.User.verify|verify} messages.
          * @param message User message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a User message from the specified reader or buffer.
@@ -244,7 +244,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.User;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.User;
 
         /**
          * Decodes a User message from the specified reader or buffer, length delimited.
@@ -253,7 +253,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.User;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.User;
 
         /**
          * Verifies a User message.
@@ -267,7 +267,7 @@ export namespace proto {
          * @param object Plain object
          * @returns User
          */
-        public static fromObject(object: { [k: string]: any }): proto.User;
+        public static fromObject(object: { [k: string]: any }): SdkProto.User;
 
         /**
          * Creates a plain object from a User message. Also converts values to other types if specified.
@@ -275,7 +275,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this User to JSON.
@@ -310,7 +310,7 @@ export namespace proto {
          * Constructs a new UserInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserInfo);
+        constructor(properties?: SdkProto.IUserInfo);
 
         /** UserInfo isInTable. */
         public isInTable: number;
@@ -332,23 +332,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserInfo instance
          */
-        public static create(properties?: proto.IUserInfo): proto.UserInfo;
+        public static create(properties?: SdkProto.IUserInfo): SdkProto.UserInfo;
 
         /**
-         * Encodes the specified UserInfo message. Does not implicitly {@link proto.UserInfo.verify|verify} messages.
+         * Encodes the specified UserInfo message. Does not implicitly {@link SdkProto.UserInfo.verify|verify} messages.
          * @param message UserInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link proto.UserInfo.verify|verify} messages.
+         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link SdkProto.UserInfo.verify|verify} messages.
          * @param message UserInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserInfo message from the specified reader or buffer.
@@ -358,7 +358,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserInfo;
 
         /**
          * Decodes a UserInfo message from the specified reader or buffer, length delimited.
@@ -367,7 +367,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserInfo;
 
         /**
          * Verifies a UserInfo message.
@@ -381,7 +381,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserInfo
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserInfo;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserInfo;
 
         /**
          * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
@@ -389,7 +389,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserInfo to JSON.
@@ -415,7 +415,7 @@ export namespace proto {
          * Constructs a new UserReady.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserReady);
+        constructor(properties?: SdkProto.IUserReady);
 
         /** UserReady userId. */
         public userId: number;
@@ -428,23 +428,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserReady instance
          */
-        public static create(properties?: proto.IUserReady): proto.UserReady;
+        public static create(properties?: SdkProto.IUserReady): SdkProto.UserReady;
 
         /**
-         * Encodes the specified UserReady message. Does not implicitly {@link proto.UserReady.verify|verify} messages.
+         * Encodes the specified UserReady message. Does not implicitly {@link SdkProto.UserReady.verify|verify} messages.
          * @param message UserReady message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserReady, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserReady, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserReady message, length delimited. Does not implicitly {@link proto.UserReady.verify|verify} messages.
+         * Encodes the specified UserReady message, length delimited. Does not implicitly {@link SdkProto.UserReady.verify|verify} messages.
          * @param message UserReady message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserReady, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserReady, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserReady message from the specified reader or buffer.
@@ -454,7 +454,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserReady;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserReady;
 
         /**
          * Decodes a UserReady message from the specified reader or buffer, length delimited.
@@ -463,7 +463,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserReady;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserReady;
 
         /**
          * Verifies a UserReady message.
@@ -477,7 +477,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserReady
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserReady;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserReady;
 
         /**
          * Creates a plain object from a UserReady message. Also converts values to other types if specified.
@@ -485,7 +485,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserReady, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserReady, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserReady to JSON.
@@ -517,7 +517,7 @@ export namespace proto {
          * Constructs a new ResultData.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IResultData);
+        constructor(properties?: SdkProto.IResultData);
 
         /** ResultData isOver. */
         public isOver: number;
@@ -536,23 +536,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns ResultData instance
          */
-        public static create(properties?: proto.IResultData): proto.ResultData;
+        public static create(properties?: SdkProto.IResultData): SdkProto.ResultData;
 
         /**
-         * Encodes the specified ResultData message. Does not implicitly {@link proto.ResultData.verify|verify} messages.
+         * Encodes the specified ResultData message. Does not implicitly {@link SdkProto.ResultData.verify|verify} messages.
          * @param message ResultData message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IResultData, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IResultData, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ResultData message, length delimited. Does not implicitly {@link proto.ResultData.verify|verify} messages.
+         * Encodes the specified ResultData message, length delimited. Does not implicitly {@link SdkProto.ResultData.verify|verify} messages.
          * @param message ResultData message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IResultData, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IResultData, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a ResultData message from the specified reader or buffer.
@@ -562,7 +562,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.ResultData;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.ResultData;
 
         /**
          * Decodes a ResultData message from the specified reader or buffer, length delimited.
@@ -571,7 +571,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.ResultData;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.ResultData;
 
         /**
          * Verifies a ResultData message.
@@ -585,7 +585,7 @@ export namespace proto {
          * @param object Plain object
          * @returns ResultData
          */
-        public static fromObject(object: { [k: string]: any }): proto.ResultData;
+        public static fromObject(object: { [k: string]: any }): SdkProto.ResultData;
 
         /**
          * Creates a plain object from a ResultData message. Also converts values to other types if specified.
@@ -593,7 +593,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.ResultData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.ResultData, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this ResultData to JSON.
@@ -631,7 +631,7 @@ export namespace proto {
          * Constructs a new LoginRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ILoginRequest);
+        constructor(properties?: SdkProto.ILoginRequest);
 
         /** LoginRequest phoneOrUsername. */
         public phoneOrUsername: string;
@@ -656,23 +656,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns LoginRequest instance
          */
-        public static create(properties?: proto.ILoginRequest): proto.LoginRequest;
+        public static create(properties?: SdkProto.ILoginRequest): SdkProto.LoginRequest;
 
         /**
-         * Encodes the specified LoginRequest message. Does not implicitly {@link proto.LoginRequest.verify|verify} messages.
+         * Encodes the specified LoginRequest message. Does not implicitly {@link SdkProto.LoginRequest.verify|verify} messages.
          * @param message LoginRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LoginRequest message, length delimited. Does not implicitly {@link proto.LoginRequest.verify|verify} messages.
+         * Encodes the specified LoginRequest message, length delimited. Does not implicitly {@link SdkProto.LoginRequest.verify|verify} messages.
          * @param message LoginRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ILoginRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a LoginRequest message from the specified reader or buffer.
@@ -682,7 +682,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.LoginRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.LoginRequest;
 
         /**
          * Decodes a LoginRequest message from the specified reader or buffer, length delimited.
@@ -691,7 +691,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.LoginRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.LoginRequest;
 
         /**
          * Verifies a LoginRequest message.
@@ -705,7 +705,7 @@ export namespace proto {
          * @param object Plain object
          * @returns LoginRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.LoginRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.LoginRequest;
 
         /**
          * Creates a plain object from a LoginRequest message. Also converts values to other types if specified.
@@ -713,7 +713,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.LoginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.LoginRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this LoginRequest to JSON.
@@ -742,7 +742,7 @@ export namespace proto {
          * Constructs a new RegisterPhoneRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IRegisterPhoneRequest);
+        constructor(properties?: SdkProto.IRegisterPhoneRequest);
 
         /** RegisterPhoneRequest phone. */
         public phone: string;
@@ -758,23 +758,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns RegisterPhoneRequest instance
          */
-        public static create(properties?: proto.IRegisterPhoneRequest): proto.RegisterPhoneRequest;
+        public static create(properties?: SdkProto.IRegisterPhoneRequest): SdkProto.RegisterPhoneRequest;
 
         /**
-         * Encodes the specified RegisterPhoneRequest message. Does not implicitly {@link proto.RegisterPhoneRequest.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRequest message. Does not implicitly {@link SdkProto.RegisterPhoneRequest.verify|verify} messages.
          * @param message RegisterPhoneRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IRegisterPhoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IRegisterPhoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RegisterPhoneRequest message, length delimited. Does not implicitly {@link proto.RegisterPhoneRequest.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRequest message, length delimited. Does not implicitly {@link SdkProto.RegisterPhoneRequest.verify|verify} messages.
          * @param message RegisterPhoneRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IRegisterPhoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IRegisterPhoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a RegisterPhoneRequest message from the specified reader or buffer.
@@ -784,7 +784,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.RegisterPhoneRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.RegisterPhoneRequest;
 
         /**
          * Decodes a RegisterPhoneRequest message from the specified reader or buffer, length delimited.
@@ -793,7 +793,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.RegisterPhoneRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.RegisterPhoneRequest;
 
         /**
          * Verifies a RegisterPhoneRequest message.
@@ -807,7 +807,7 @@ export namespace proto {
          * @param object Plain object
          * @returns RegisterPhoneRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.RegisterPhoneRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.RegisterPhoneRequest;
 
         /**
          * Creates a plain object from a RegisterPhoneRequest message. Also converts values to other types if specified.
@@ -815,7 +815,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.RegisterPhoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.RegisterPhoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this RegisterPhoneRequest to JSON.
@@ -838,7 +838,7 @@ export namespace proto {
          * Constructs a new GetUserInfoRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IGetUserInfoRequest);
+        constructor(properties?: SdkProto.IGetUserInfoRequest);
 
         /** GetUserInfoRequest userId. */
         public userId: number;
@@ -848,23 +848,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns GetUserInfoRequest instance
          */
-        public static create(properties?: proto.IGetUserInfoRequest): proto.GetUserInfoRequest;
+        public static create(properties?: SdkProto.IGetUserInfoRequest): SdkProto.GetUserInfoRequest;
 
         /**
-         * Encodes the specified GetUserInfoRequest message. Does not implicitly {@link proto.GetUserInfoRequest.verify|verify} messages.
+         * Encodes the specified GetUserInfoRequest message. Does not implicitly {@link SdkProto.GetUserInfoRequest.verify|verify} messages.
          * @param message GetUserInfoRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IGetUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IGetUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GetUserInfoRequest message, length delimited. Does not implicitly {@link proto.GetUserInfoRequest.verify|verify} messages.
+         * Encodes the specified GetUserInfoRequest message, length delimited. Does not implicitly {@link SdkProto.GetUserInfoRequest.verify|verify} messages.
          * @param message GetUserInfoRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IGetUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IGetUserInfoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a GetUserInfoRequest message from the specified reader or buffer.
@@ -874,7 +874,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.GetUserInfoRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.GetUserInfoRequest;
 
         /**
          * Decodes a GetUserInfoRequest message from the specified reader or buffer, length delimited.
@@ -883,7 +883,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.GetUserInfoRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.GetUserInfoRequest;
 
         /**
          * Verifies a GetUserInfoRequest message.
@@ -897,7 +897,7 @@ export namespace proto {
          * @param object Plain object
          * @returns GetUserInfoRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.GetUserInfoRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.GetUserInfoRequest;
 
         /**
          * Creates a plain object from a GetUserInfoRequest message. Also converts values to other types if specified.
@@ -905,7 +905,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.GetUserInfoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.GetUserInfoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this GetUserInfoRequest to JSON.
@@ -934,7 +934,7 @@ export namespace proto {
          * Constructs a new CoinBankRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ICoinBankRequest);
+        constructor(properties?: SdkProto.ICoinBankRequest);
 
         /** CoinBankRequest userId. */
         public userId: number;
@@ -950,23 +950,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns CoinBankRequest instance
          */
-        public static create(properties?: proto.ICoinBankRequest): proto.CoinBankRequest;
+        public static create(properties?: SdkProto.ICoinBankRequest): SdkProto.CoinBankRequest;
 
         /**
-         * Encodes the specified CoinBankRequest message. Does not implicitly {@link proto.CoinBankRequest.verify|verify} messages.
+         * Encodes the specified CoinBankRequest message. Does not implicitly {@link SdkProto.CoinBankRequest.verify|verify} messages.
          * @param message CoinBankRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ICoinBankRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ICoinBankRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CoinBankRequest message, length delimited. Does not implicitly {@link proto.CoinBankRequest.verify|verify} messages.
+         * Encodes the specified CoinBankRequest message, length delimited. Does not implicitly {@link SdkProto.CoinBankRequest.verify|verify} messages.
          * @param message CoinBankRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ICoinBankRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ICoinBankRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a CoinBankRequest message from the specified reader or buffer.
@@ -976,7 +976,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.CoinBankRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.CoinBankRequest;
 
         /**
          * Decodes a CoinBankRequest message from the specified reader or buffer, length delimited.
@@ -985,7 +985,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.CoinBankRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.CoinBankRequest;
 
         /**
          * Verifies a CoinBankRequest message.
@@ -999,7 +999,7 @@ export namespace proto {
          * @param object Plain object
          * @returns CoinBankRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.CoinBankRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.CoinBankRequest;
 
         /**
          * Creates a plain object from a CoinBankRequest message. Also converts values to other types if specified.
@@ -1007,7 +1007,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.CoinBankRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.CoinBankRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this CoinBankRequest to JSON.
@@ -1033,7 +1033,7 @@ export namespace proto {
          * Constructs a new ChangeSignRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IChangeSignRequest);
+        constructor(properties?: SdkProto.IChangeSignRequest);
 
         /** ChangeSignRequest sid. */
         public sid: string;
@@ -1046,23 +1046,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns ChangeSignRequest instance
          */
-        public static create(properties?: proto.IChangeSignRequest): proto.ChangeSignRequest;
+        public static create(properties?: SdkProto.IChangeSignRequest): SdkProto.ChangeSignRequest;
 
         /**
-         * Encodes the specified ChangeSignRequest message. Does not implicitly {@link proto.ChangeSignRequest.verify|verify} messages.
+         * Encodes the specified ChangeSignRequest message. Does not implicitly {@link SdkProto.ChangeSignRequest.verify|verify} messages.
          * @param message ChangeSignRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IChangeSignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IChangeSignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ChangeSignRequest message, length delimited. Does not implicitly {@link proto.ChangeSignRequest.verify|verify} messages.
+         * Encodes the specified ChangeSignRequest message, length delimited. Does not implicitly {@link SdkProto.ChangeSignRequest.verify|verify} messages.
          * @param message ChangeSignRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IChangeSignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IChangeSignRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a ChangeSignRequest message from the specified reader or buffer.
@@ -1072,7 +1072,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.ChangeSignRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.ChangeSignRequest;
 
         /**
          * Decodes a ChangeSignRequest message from the specified reader or buffer, length delimited.
@@ -1081,7 +1081,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.ChangeSignRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.ChangeSignRequest;
 
         /**
          * Verifies a ChangeSignRequest message.
@@ -1095,7 +1095,7 @@ export namespace proto {
          * @param object Plain object
          * @returns ChangeSignRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.ChangeSignRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.ChangeSignRequest;
 
         /**
          * Creates a plain object from a ChangeSignRequest message. Also converts values to other types if specified.
@@ -1103,7 +1103,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.ChangeSignRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.ChangeSignRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this ChangeSignRequest to JSON.
@@ -1135,7 +1135,7 @@ export namespace proto {
          * Constructs a new TestDeviceIDRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ITestDeviceIDRequest);
+        constructor(properties?: SdkProto.ITestDeviceIDRequest);
 
         /** TestDeviceIDRequest deviceID. */
         public deviceID: string;
@@ -1154,23 +1154,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns TestDeviceIDRequest instance
          */
-        public static create(properties?: proto.ITestDeviceIDRequest): proto.TestDeviceIDRequest;
+        public static create(properties?: SdkProto.ITestDeviceIDRequest): SdkProto.TestDeviceIDRequest;
 
         /**
-         * Encodes the specified TestDeviceIDRequest message. Does not implicitly {@link proto.TestDeviceIDRequest.verify|verify} messages.
+         * Encodes the specified TestDeviceIDRequest message. Does not implicitly {@link SdkProto.TestDeviceIDRequest.verify|verify} messages.
          * @param message TestDeviceIDRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ITestDeviceIDRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ITestDeviceIDRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified TestDeviceIDRequest message, length delimited. Does not implicitly {@link proto.TestDeviceIDRequest.verify|verify} messages.
+         * Encodes the specified TestDeviceIDRequest message, length delimited. Does not implicitly {@link SdkProto.TestDeviceIDRequest.verify|verify} messages.
          * @param message TestDeviceIDRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ITestDeviceIDRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ITestDeviceIDRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a TestDeviceIDRequest message from the specified reader or buffer.
@@ -1180,7 +1180,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.TestDeviceIDRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.TestDeviceIDRequest;
 
         /**
          * Decodes a TestDeviceIDRequest message from the specified reader or buffer, length delimited.
@@ -1189,7 +1189,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.TestDeviceIDRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.TestDeviceIDRequest;
 
         /**
          * Verifies a TestDeviceIDRequest message.
@@ -1203,7 +1203,7 @@ export namespace proto {
          * @param object Plain object
          * @returns TestDeviceIDRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.TestDeviceIDRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.TestDeviceIDRequest;
 
         /**
          * Creates a plain object from a TestDeviceIDRequest message. Also converts values to other types if specified.
@@ -1211,7 +1211,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.TestDeviceIDRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.TestDeviceIDRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this TestDeviceIDRequest to JSON.
@@ -1240,7 +1240,7 @@ export namespace proto {
          * Constructs a new CreateTableRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ICreateTableRequest);
+        constructor(properties?: SdkProto.ICreateTableRequest);
 
         /** CreateTableRequest sid. */
         public sid: string;
@@ -1256,23 +1256,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns CreateTableRequest instance
          */
-        public static create(properties?: proto.ICreateTableRequest): proto.CreateTableRequest;
+        public static create(properties?: SdkProto.ICreateTableRequest): SdkProto.CreateTableRequest;
 
         /**
-         * Encodes the specified CreateTableRequest message. Does not implicitly {@link proto.CreateTableRequest.verify|verify} messages.
+         * Encodes the specified CreateTableRequest message. Does not implicitly {@link SdkProto.CreateTableRequest.verify|verify} messages.
          * @param message CreateTableRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ICreateTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ICreateTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CreateTableRequest message, length delimited. Does not implicitly {@link proto.CreateTableRequest.verify|verify} messages.
+         * Encodes the specified CreateTableRequest message, length delimited. Does not implicitly {@link SdkProto.CreateTableRequest.verify|verify} messages.
          * @param message CreateTableRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ICreateTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ICreateTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a CreateTableRequest message from the specified reader or buffer.
@@ -1282,7 +1282,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.CreateTableRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.CreateTableRequest;
 
         /**
          * Decodes a CreateTableRequest message from the specified reader or buffer, length delimited.
@@ -1291,7 +1291,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.CreateTableRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.CreateTableRequest;
 
         /**
          * Verifies a CreateTableRequest message.
@@ -1305,7 +1305,7 @@ export namespace proto {
          * @param object Plain object
          * @returns CreateTableRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.CreateTableRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.CreateTableRequest;
 
         /**
          * Creates a plain object from a CreateTableRequest message. Also converts values to other types if specified.
@@ -1313,7 +1313,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.CreateTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.CreateTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this CreateTableRequest to JSON.
@@ -1342,7 +1342,7 @@ export namespace proto {
          * Constructs a new JoinTableRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IJoinTableRequest);
+        constructor(properties?: SdkProto.IJoinTableRequest);
 
         /** JoinTableRequest sid. */
         public sid: string;
@@ -1358,23 +1358,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns JoinTableRequest instance
          */
-        public static create(properties?: proto.IJoinTableRequest): proto.JoinTableRequest;
+        public static create(properties?: SdkProto.IJoinTableRequest): SdkProto.JoinTableRequest;
 
         /**
-         * Encodes the specified JoinTableRequest message. Does not implicitly {@link proto.JoinTableRequest.verify|verify} messages.
+         * Encodes the specified JoinTableRequest message. Does not implicitly {@link SdkProto.JoinTableRequest.verify|verify} messages.
          * @param message JoinTableRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IJoinTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IJoinTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified JoinTableRequest message, length delimited. Does not implicitly {@link proto.JoinTableRequest.verify|verify} messages.
+         * Encodes the specified JoinTableRequest message, length delimited. Does not implicitly {@link SdkProto.JoinTableRequest.verify|verify} messages.
          * @param message JoinTableRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IJoinTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IJoinTableRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a JoinTableRequest message from the specified reader or buffer.
@@ -1384,7 +1384,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.JoinTableRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.JoinTableRequest;
 
         /**
          * Decodes a JoinTableRequest message from the specified reader or buffer, length delimited.
@@ -1393,7 +1393,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.JoinTableRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.JoinTableRequest;
 
         /**
          * Verifies a JoinTableRequest message.
@@ -1407,7 +1407,7 @@ export namespace proto {
          * @param object Plain object
          * @returns JoinTableRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.JoinTableRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.JoinTableRequest;
 
         /**
          * Creates a plain object from a JoinTableRequest message. Also converts values to other types if specified.
@@ -1415,7 +1415,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.JoinTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.JoinTableRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this JoinTableRequest to JSON.
@@ -1435,30 +1435,30 @@ export namespace proto {
          * Constructs a new UserReadyRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserReadyRequest);
+        constructor(properties?: SdkProto.IUserReadyRequest);
 
         /**
          * Creates a new UserReadyRequest instance using the specified properties.
          * @param [properties] Properties to set
          * @returns UserReadyRequest instance
          */
-        public static create(properties?: proto.IUserReadyRequest): proto.UserReadyRequest;
+        public static create(properties?: SdkProto.IUserReadyRequest): SdkProto.UserReadyRequest;
 
         /**
-         * Encodes the specified UserReadyRequest message. Does not implicitly {@link proto.UserReadyRequest.verify|verify} messages.
+         * Encodes the specified UserReadyRequest message. Does not implicitly {@link SdkProto.UserReadyRequest.verify|verify} messages.
          * @param message UserReadyRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserReadyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserReadyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserReadyRequest message, length delimited. Does not implicitly {@link proto.UserReadyRequest.verify|verify} messages.
+         * Encodes the specified UserReadyRequest message, length delimited. Does not implicitly {@link SdkProto.UserReadyRequest.verify|verify} messages.
          * @param message UserReadyRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserReadyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserReadyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserReadyRequest message from the specified reader or buffer.
@@ -1468,7 +1468,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserReadyRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserReadyRequest;
 
         /**
          * Decodes a UserReadyRequest message from the specified reader or buffer, length delimited.
@@ -1477,7 +1477,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserReadyRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserReadyRequest;
 
         /**
          * Verifies a UserReadyRequest message.
@@ -1491,7 +1491,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserReadyRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserReadyRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserReadyRequest;
 
         /**
          * Creates a plain object from a UserReadyRequest message. Also converts values to other types if specified.
@@ -1499,7 +1499,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserReadyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserReadyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserReadyRequest to JSON.
@@ -1522,7 +1522,7 @@ export namespace proto {
          * Constructs a new DisCardRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IDisCardRequest);
+        constructor(properties?: SdkProto.IDisCardRequest);
 
         /** DisCardRequest outCard. */
         public outCard: number[];
@@ -1532,23 +1532,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns DisCardRequest instance
          */
-        public static create(properties?: proto.IDisCardRequest): proto.DisCardRequest;
+        public static create(properties?: SdkProto.IDisCardRequest): SdkProto.DisCardRequest;
 
         /**
-         * Encodes the specified DisCardRequest message. Does not implicitly {@link proto.DisCardRequest.verify|verify} messages.
+         * Encodes the specified DisCardRequest message. Does not implicitly {@link SdkProto.DisCardRequest.verify|verify} messages.
          * @param message DisCardRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IDisCardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IDisCardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified DisCardRequest message, length delimited. Does not implicitly {@link proto.DisCardRequest.verify|verify} messages.
+         * Encodes the specified DisCardRequest message, length delimited. Does not implicitly {@link SdkProto.DisCardRequest.verify|verify} messages.
          * @param message DisCardRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IDisCardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IDisCardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a DisCardRequest message from the specified reader or buffer.
@@ -1558,7 +1558,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.DisCardRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.DisCardRequest;
 
         /**
          * Decodes a DisCardRequest message from the specified reader or buffer, length delimited.
@@ -1567,7 +1567,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.DisCardRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.DisCardRequest;
 
         /**
          * Verifies a DisCardRequest message.
@@ -1581,7 +1581,7 @@ export namespace proto {
          * @param object Plain object
          * @returns DisCardRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.DisCardRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.DisCardRequest;
 
         /**
          * Creates a plain object from a DisCardRequest message. Also converts values to other types if specified.
@@ -1589,7 +1589,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.DisCardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.DisCardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this DisCardRequest to JSON.
@@ -1609,30 +1609,30 @@ export namespace proto {
          * Constructs a new PassPaiRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IPassPaiRequest);
+        constructor(properties?: SdkProto.IPassPaiRequest);
 
         /**
          * Creates a new PassPaiRequest instance using the specified properties.
          * @param [properties] Properties to set
          * @returns PassPaiRequest instance
          */
-        public static create(properties?: proto.IPassPaiRequest): proto.PassPaiRequest;
+        public static create(properties?: SdkProto.IPassPaiRequest): SdkProto.PassPaiRequest;
 
         /**
-         * Encodes the specified PassPaiRequest message. Does not implicitly {@link proto.PassPaiRequest.verify|verify} messages.
+         * Encodes the specified PassPaiRequest message. Does not implicitly {@link SdkProto.PassPaiRequest.verify|verify} messages.
          * @param message PassPaiRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IPassPaiRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IPassPaiRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified PassPaiRequest message, length delimited. Does not implicitly {@link proto.PassPaiRequest.verify|verify} messages.
+         * Encodes the specified PassPaiRequest message, length delimited. Does not implicitly {@link SdkProto.PassPaiRequest.verify|verify} messages.
          * @param message PassPaiRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IPassPaiRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IPassPaiRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a PassPaiRequest message from the specified reader or buffer.
@@ -1642,7 +1642,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.PassPaiRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.PassPaiRequest;
 
         /**
          * Decodes a PassPaiRequest message from the specified reader or buffer, length delimited.
@@ -1651,7 +1651,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.PassPaiRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.PassPaiRequest;
 
         /**
          * Verifies a PassPaiRequest message.
@@ -1665,7 +1665,7 @@ export namespace proto {
          * @param object Plain object
          * @returns PassPaiRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.PassPaiRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.PassPaiRequest;
 
         /**
          * Creates a plain object from a PassPaiRequest message. Also converts values to other types if specified.
@@ -1673,7 +1673,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.PassPaiRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.PassPaiRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this PassPaiRequest to JSON.
@@ -1696,7 +1696,7 @@ export namespace proto {
          * Constructs a new UserQDZRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserQDZRequest);
+        constructor(properties?: SdkProto.IUserQDZRequest);
 
         /** UserQDZRequest score. */
         public score: number;
@@ -1706,23 +1706,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserQDZRequest instance
          */
-        public static create(properties?: proto.IUserQDZRequest): proto.UserQDZRequest;
+        public static create(properties?: SdkProto.IUserQDZRequest): SdkProto.UserQDZRequest;
 
         /**
-         * Encodes the specified UserQDZRequest message. Does not implicitly {@link proto.UserQDZRequest.verify|verify} messages.
+         * Encodes the specified UserQDZRequest message. Does not implicitly {@link SdkProto.UserQDZRequest.verify|verify} messages.
          * @param message UserQDZRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserQDZRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserQDZRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserQDZRequest message, length delimited. Does not implicitly {@link proto.UserQDZRequest.verify|verify} messages.
+         * Encodes the specified UserQDZRequest message, length delimited. Does not implicitly {@link SdkProto.UserQDZRequest.verify|verify} messages.
          * @param message UserQDZRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserQDZRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserQDZRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserQDZRequest message from the specified reader or buffer.
@@ -1732,7 +1732,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserQDZRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserQDZRequest;
 
         /**
          * Decodes a UserQDZRequest message from the specified reader or buffer, length delimited.
@@ -1741,7 +1741,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserQDZRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserQDZRequest;
 
         /**
          * Verifies a UserQDZRequest message.
@@ -1755,7 +1755,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserQDZRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserQDZRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserQDZRequest;
 
         /**
          * Creates a plain object from a UserQDZRequest message. Also converts values to other types if specified.
@@ -1763,7 +1763,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserQDZRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserQDZRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserQDZRequest to JSON.
@@ -1786,7 +1786,7 @@ export namespace proto {
          * Constructs a new UserMPRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserMPRequest);
+        constructor(properties?: SdkProto.IUserMPRequest);
 
         /** UserMPRequest showAll. */
         public showAll: number;
@@ -1796,23 +1796,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserMPRequest instance
          */
-        public static create(properties?: proto.IUserMPRequest): proto.UserMPRequest;
+        public static create(properties?: SdkProto.IUserMPRequest): SdkProto.UserMPRequest;
 
         /**
-         * Encodes the specified UserMPRequest message. Does not implicitly {@link proto.UserMPRequest.verify|verify} messages.
+         * Encodes the specified UserMPRequest message. Does not implicitly {@link SdkProto.UserMPRequest.verify|verify} messages.
          * @param message UserMPRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserMPRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserMPRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserMPRequest message, length delimited. Does not implicitly {@link proto.UserMPRequest.verify|verify} messages.
+         * Encodes the specified UserMPRequest message, length delimited. Does not implicitly {@link SdkProto.UserMPRequest.verify|verify} messages.
          * @param message UserMPRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserMPRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserMPRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserMPRequest message from the specified reader or buffer.
@@ -1822,7 +1822,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserMPRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserMPRequest;
 
         /**
          * Decodes a UserMPRequest message from the specified reader or buffer, length delimited.
@@ -1831,7 +1831,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserMPRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserMPRequest;
 
         /**
          * Verifies a UserMPRequest message.
@@ -1845,7 +1845,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserMPRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserMPRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserMPRequest;
 
         /**
          * Creates a plain object from a UserMPRequest message. Also converts values to other types if specified.
@@ -1853,7 +1853,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserMPRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserMPRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserMPRequest to JSON.
@@ -1876,7 +1876,7 @@ export namespace proto {
          * Constructs a new UserReconnectRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserReconnectRequest);
+        constructor(properties?: SdkProto.IUserReconnectRequest);
 
         /** UserReconnectRequest userId. */
         public userId: number;
@@ -1886,23 +1886,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserReconnectRequest instance
          */
-        public static create(properties?: proto.IUserReconnectRequest): proto.UserReconnectRequest;
+        public static create(properties?: SdkProto.IUserReconnectRequest): SdkProto.UserReconnectRequest;
 
         /**
-         * Encodes the specified UserReconnectRequest message. Does not implicitly {@link proto.UserReconnectRequest.verify|verify} messages.
+         * Encodes the specified UserReconnectRequest message. Does not implicitly {@link SdkProto.UserReconnectRequest.verify|verify} messages.
          * @param message UserReconnectRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserReconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserReconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserReconnectRequest message, length delimited. Does not implicitly {@link proto.UserReconnectRequest.verify|verify} messages.
+         * Encodes the specified UserReconnectRequest message, length delimited. Does not implicitly {@link SdkProto.UserReconnectRequest.verify|verify} messages.
          * @param message UserReconnectRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserReconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserReconnectRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserReconnectRequest message from the specified reader or buffer.
@@ -1912,7 +1912,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserReconnectRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserReconnectRequest;
 
         /**
          * Decodes a UserReconnectRequest message from the specified reader or buffer, length delimited.
@@ -1921,7 +1921,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserReconnectRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserReconnectRequest;
 
         /**
          * Verifies a UserReconnectRequest message.
@@ -1935,7 +1935,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserReconnectRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserReconnectRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserReconnectRequest;
 
         /**
          * Creates a plain object from a UserReconnectRequest message. Also converts values to other types if specified.
@@ -1943,7 +1943,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserReconnectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserReconnectRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserReconnectRequest to JSON.
@@ -1963,30 +1963,30 @@ export namespace proto {
          * Constructs a new ApplyDismissRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IApplyDismissRequest);
+        constructor(properties?: SdkProto.IApplyDismissRequest);
 
         /**
          * Creates a new ApplyDismissRequest instance using the specified properties.
          * @param [properties] Properties to set
          * @returns ApplyDismissRequest instance
          */
-        public static create(properties?: proto.IApplyDismissRequest): proto.ApplyDismissRequest;
+        public static create(properties?: SdkProto.IApplyDismissRequest): SdkProto.ApplyDismissRequest;
 
         /**
-         * Encodes the specified ApplyDismissRequest message. Does not implicitly {@link proto.ApplyDismissRequest.verify|verify} messages.
+         * Encodes the specified ApplyDismissRequest message. Does not implicitly {@link SdkProto.ApplyDismissRequest.verify|verify} messages.
          * @param message ApplyDismissRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IApplyDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IApplyDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ApplyDismissRequest message, length delimited. Does not implicitly {@link proto.ApplyDismissRequest.verify|verify} messages.
+         * Encodes the specified ApplyDismissRequest message, length delimited. Does not implicitly {@link SdkProto.ApplyDismissRequest.verify|verify} messages.
          * @param message ApplyDismissRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IApplyDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IApplyDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes an ApplyDismissRequest message from the specified reader or buffer.
@@ -1996,7 +1996,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.ApplyDismissRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.ApplyDismissRequest;
 
         /**
          * Decodes an ApplyDismissRequest message from the specified reader or buffer, length delimited.
@@ -2005,7 +2005,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.ApplyDismissRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.ApplyDismissRequest;
 
         /**
          * Verifies an ApplyDismissRequest message.
@@ -2019,7 +2019,7 @@ export namespace proto {
          * @param object Plain object
          * @returns ApplyDismissRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.ApplyDismissRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.ApplyDismissRequest;
 
         /**
          * Creates a plain object from an ApplyDismissRequest message. Also converts values to other types if specified.
@@ -2027,7 +2027,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.ApplyDismissRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.ApplyDismissRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this ApplyDismissRequest to JSON.
@@ -2050,7 +2050,7 @@ export namespace proto {
          * Constructs a new AgreeDismissRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IAgreeDismissRequest);
+        constructor(properties?: SdkProto.IAgreeDismissRequest);
 
         /** AgreeDismissRequest agree. */
         public agree: number;
@@ -2060,23 +2060,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns AgreeDismissRequest instance
          */
-        public static create(properties?: proto.IAgreeDismissRequest): proto.AgreeDismissRequest;
+        public static create(properties?: SdkProto.IAgreeDismissRequest): SdkProto.AgreeDismissRequest;
 
         /**
-         * Encodes the specified AgreeDismissRequest message. Does not implicitly {@link proto.AgreeDismissRequest.verify|verify} messages.
+         * Encodes the specified AgreeDismissRequest message. Does not implicitly {@link SdkProto.AgreeDismissRequest.verify|verify} messages.
          * @param message AgreeDismissRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IAgreeDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IAgreeDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified AgreeDismissRequest message, length delimited. Does not implicitly {@link proto.AgreeDismissRequest.verify|verify} messages.
+         * Encodes the specified AgreeDismissRequest message, length delimited. Does not implicitly {@link SdkProto.AgreeDismissRequest.verify|verify} messages.
          * @param message AgreeDismissRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IAgreeDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IAgreeDismissRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes an AgreeDismissRequest message from the specified reader or buffer.
@@ -2086,7 +2086,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.AgreeDismissRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.AgreeDismissRequest;
 
         /**
          * Decodes an AgreeDismissRequest message from the specified reader or buffer, length delimited.
@@ -2095,7 +2095,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.AgreeDismissRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.AgreeDismissRequest;
 
         /**
          * Verifies an AgreeDismissRequest message.
@@ -2109,7 +2109,7 @@ export namespace proto {
          * @param object Plain object
          * @returns AgreeDismissRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.AgreeDismissRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.AgreeDismissRequest;
 
         /**
          * Creates a plain object from an AgreeDismissRequest message. Also converts values to other types if specified.
@@ -2117,7 +2117,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.AgreeDismissRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.AgreeDismissRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this AgreeDismissRequest to JSON.
@@ -2137,30 +2137,30 @@ export namespace proto {
          * Constructs a new UserQuitRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserQuitRequest);
+        constructor(properties?: SdkProto.IUserQuitRequest);
 
         /**
          * Creates a new UserQuitRequest instance using the specified properties.
          * @param [properties] Properties to set
          * @returns UserQuitRequest instance
          */
-        public static create(properties?: proto.IUserQuitRequest): proto.UserQuitRequest;
+        public static create(properties?: SdkProto.IUserQuitRequest): SdkProto.UserQuitRequest;
 
         /**
-         * Encodes the specified UserQuitRequest message. Does not implicitly {@link proto.UserQuitRequest.verify|verify} messages.
+         * Encodes the specified UserQuitRequest message. Does not implicitly {@link SdkProto.UserQuitRequest.verify|verify} messages.
          * @param message UserQuitRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserQuitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserQuitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserQuitRequest message, length delimited. Does not implicitly {@link proto.UserQuitRequest.verify|verify} messages.
+         * Encodes the specified UserQuitRequest message, length delimited. Does not implicitly {@link SdkProto.UserQuitRequest.verify|verify} messages.
          * @param message UserQuitRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserQuitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserQuitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserQuitRequest message from the specified reader or buffer.
@@ -2170,7 +2170,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserQuitRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserQuitRequest;
 
         /**
          * Decodes a UserQuitRequest message from the specified reader or buffer, length delimited.
@@ -2179,7 +2179,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserQuitRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserQuitRequest;
 
         /**
          * Verifies a UserQuitRequest message.
@@ -2193,7 +2193,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserQuitRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserQuitRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserQuitRequest;
 
         /**
          * Creates a plain object from a UserQuitRequest message. Also converts values to other types if specified.
@@ -2201,7 +2201,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserQuitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserQuitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserQuitRequest to JSON.
@@ -2227,7 +2227,7 @@ export namespace proto {
          * Constructs a new MessageRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IMessageRequest);
+        constructor(properties?: SdkProto.IMessageRequest);
 
         /** MessageRequest content. */
         public content: string;
@@ -2240,23 +2240,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns MessageRequest instance
          */
-        public static create(properties?: proto.IMessageRequest): proto.MessageRequest;
+        public static create(properties?: SdkProto.IMessageRequest): SdkProto.MessageRequest;
 
         /**
-         * Encodes the specified MessageRequest message. Does not implicitly {@link proto.MessageRequest.verify|verify} messages.
+         * Encodes the specified MessageRequest message. Does not implicitly {@link SdkProto.MessageRequest.verify|verify} messages.
          * @param message MessageRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IMessageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IMessageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified MessageRequest message, length delimited. Does not implicitly {@link proto.MessageRequest.verify|verify} messages.
+         * Encodes the specified MessageRequest message, length delimited. Does not implicitly {@link SdkProto.MessageRequest.verify|verify} messages.
          * @param message MessageRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IMessageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IMessageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a MessageRequest message from the specified reader or buffer.
@@ -2266,7 +2266,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.MessageRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.MessageRequest;
 
         /**
          * Decodes a MessageRequest message from the specified reader or buffer, length delimited.
@@ -2275,7 +2275,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.MessageRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.MessageRequest;
 
         /**
          * Verifies a MessageRequest message.
@@ -2289,7 +2289,7 @@ export namespace proto {
          * @param object Plain object
          * @returns MessageRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.MessageRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.MessageRequest;
 
         /**
          * Creates a plain object from a MessageRequest message. Also converts values to other types if specified.
@@ -2297,7 +2297,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.MessageRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.MessageRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this MessageRequest to JSON.
@@ -2320,7 +2320,7 @@ export namespace proto {
          * Constructs a new UserOnBackRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserOnBackRequest);
+        constructor(properties?: SdkProto.IUserOnBackRequest);
 
         /** UserOnBackRequest leaveState. */
         public leaveState: number;
@@ -2330,23 +2330,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserOnBackRequest instance
          */
-        public static create(properties?: proto.IUserOnBackRequest): proto.UserOnBackRequest;
+        public static create(properties?: SdkProto.IUserOnBackRequest): SdkProto.UserOnBackRequest;
 
         /**
-         * Encodes the specified UserOnBackRequest message. Does not implicitly {@link proto.UserOnBackRequest.verify|verify} messages.
+         * Encodes the specified UserOnBackRequest message. Does not implicitly {@link SdkProto.UserOnBackRequest.verify|verify} messages.
          * @param message UserOnBackRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserOnBackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserOnBackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserOnBackRequest message, length delimited. Does not implicitly {@link proto.UserOnBackRequest.verify|verify} messages.
+         * Encodes the specified UserOnBackRequest message, length delimited. Does not implicitly {@link SdkProto.UserOnBackRequest.verify|verify} messages.
          * @param message UserOnBackRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserOnBackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserOnBackRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserOnBackRequest message from the specified reader or buffer.
@@ -2356,7 +2356,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserOnBackRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserOnBackRequest;
 
         /**
          * Decodes a UserOnBackRequest message from the specified reader or buffer, length delimited.
@@ -2365,7 +2365,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserOnBackRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserOnBackRequest;
 
         /**
          * Verifies a UserOnBackRequest message.
@@ -2379,7 +2379,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserOnBackRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserOnBackRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserOnBackRequest;
 
         /**
          * Creates a plain object from a UserOnBackRequest message. Also converts values to other types if specified.
@@ -2387,7 +2387,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserOnBackRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserOnBackRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserOnBackRequest to JSON.
@@ -2410,7 +2410,7 @@ export namespace proto {
          * Constructs a new DelayCheckRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IDelayCheckRequest);
+        constructor(properties?: SdkProto.IDelayCheckRequest);
 
         /** DelayCheckRequest content. */
         public content: string;
@@ -2420,23 +2420,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns DelayCheckRequest instance
          */
-        public static create(properties?: proto.IDelayCheckRequest): proto.DelayCheckRequest;
+        public static create(properties?: SdkProto.IDelayCheckRequest): SdkProto.DelayCheckRequest;
 
         /**
-         * Encodes the specified DelayCheckRequest message. Does not implicitly {@link proto.DelayCheckRequest.verify|verify} messages.
+         * Encodes the specified DelayCheckRequest message. Does not implicitly {@link SdkProto.DelayCheckRequest.verify|verify} messages.
          * @param message DelayCheckRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IDelayCheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IDelayCheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified DelayCheckRequest message, length delimited. Does not implicitly {@link proto.DelayCheckRequest.verify|verify} messages.
+         * Encodes the specified DelayCheckRequest message, length delimited. Does not implicitly {@link SdkProto.DelayCheckRequest.verify|verify} messages.
          * @param message DelayCheckRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IDelayCheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IDelayCheckRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a DelayCheckRequest message from the specified reader or buffer.
@@ -2446,7 +2446,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.DelayCheckRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.DelayCheckRequest;
 
         /**
          * Decodes a DelayCheckRequest message from the specified reader or buffer, length delimited.
@@ -2455,7 +2455,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.DelayCheckRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.DelayCheckRequest;
 
         /**
          * Verifies a DelayCheckRequest message.
@@ -2469,7 +2469,7 @@ export namespace proto {
          * @param object Plain object
          * @returns DelayCheckRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.DelayCheckRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.DelayCheckRequest;
 
         /**
          * Creates a plain object from a DelayCheckRequest message. Also converts values to other types if specified.
@@ -2477,7 +2477,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.DelayCheckRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.DelayCheckRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this DelayCheckRequest to JSON.
@@ -2497,30 +2497,30 @@ export namespace proto {
          * Constructs a new CancelAutoRequest.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ICancelAutoRequest);
+        constructor(properties?: SdkProto.ICancelAutoRequest);
 
         /**
          * Creates a new CancelAutoRequest instance using the specified properties.
          * @param [properties] Properties to set
          * @returns CancelAutoRequest instance
          */
-        public static create(properties?: proto.ICancelAutoRequest): proto.CancelAutoRequest;
+        public static create(properties?: SdkProto.ICancelAutoRequest): SdkProto.CancelAutoRequest;
 
         /**
-         * Encodes the specified CancelAutoRequest message. Does not implicitly {@link proto.CancelAutoRequest.verify|verify} messages.
+         * Encodes the specified CancelAutoRequest message. Does not implicitly {@link SdkProto.CancelAutoRequest.verify|verify} messages.
          * @param message CancelAutoRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ICancelAutoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ICancelAutoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CancelAutoRequest message, length delimited. Does not implicitly {@link proto.CancelAutoRequest.verify|verify} messages.
+         * Encodes the specified CancelAutoRequest message, length delimited. Does not implicitly {@link SdkProto.CancelAutoRequest.verify|verify} messages.
          * @param message CancelAutoRequest message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ICancelAutoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ICancelAutoRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a CancelAutoRequest message from the specified reader or buffer.
@@ -2530,7 +2530,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.CancelAutoRequest;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.CancelAutoRequest;
 
         /**
          * Decodes a CancelAutoRequest message from the specified reader or buffer, length delimited.
@@ -2539,7 +2539,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.CancelAutoRequest;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.CancelAutoRequest;
 
         /**
          * Verifies a CancelAutoRequest message.
@@ -2553,7 +2553,7 @@ export namespace proto {
          * @param object Plain object
          * @returns CancelAutoRequest
          */
-        public static fromObject(object: { [k: string]: any }): proto.CancelAutoRequest;
+        public static fromObject(object: { [k: string]: any }): SdkProto.CancelAutoRequest;
 
         /**
          * Creates a plain object from a CancelAutoRequest message. Also converts values to other types if specified.
@@ -2561,7 +2561,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.CancelAutoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.CancelAutoRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this CancelAutoRequest to JSON.
@@ -2574,55 +2574,55 @@ export namespace proto {
     interface IRequest {
 
         /** Request cmd */
-        cmd?: (proto.Request.CMD|null);
+        cmd?: (SdkProto.Request.CMD|null);
 
         /** Request loginRequest */
-        loginRequest?: (proto.ILoginRequest|null);
+        loginRequest?: (SdkProto.ILoginRequest|null);
 
         /** Request registerPhone */
-        registerPhone?: (proto.IRegisterPhoneRequest|null);
+        registerPhone?: (SdkProto.IRegisterPhoneRequest|null);
 
         /** Request getUserInfoRequest */
-        getUserInfoRequest?: (proto.IGetUserInfoRequest|null);
+        getUserInfoRequest?: (SdkProto.IGetUserInfoRequest|null);
 
         /** Request coinBankRequest */
-        coinBankRequest?: (proto.ICoinBankRequest|null);
+        coinBankRequest?: (SdkProto.ICoinBankRequest|null);
 
         /** Request changeSignRequest */
-        changeSignRequest?: (proto.IChangeSignRequest|null);
+        changeSignRequest?: (SdkProto.IChangeSignRequest|null);
 
         /** Request testDeviceIDRequest */
-        testDeviceIDRequest?: (proto.ITestDeviceIDRequest|null);
+        testDeviceIDRequest?: (SdkProto.ITestDeviceIDRequest|null);
 
         /** Request userMPRequest */
-        userMPRequest?: (proto.IUserMPRequest|null);
+        userMPRequest?: (SdkProto.IUserMPRequest|null);
 
         /** Request passPaiRequest */
-        passPaiRequest?: (proto.IPassPaiRequest|null);
+        passPaiRequest?: (SdkProto.IPassPaiRequest|null);
 
         /** Request userReconnectRequest */
-        userReconnectRequest?: (proto.IUserReconnectRequest|null);
+        userReconnectRequest?: (SdkProto.IUserReconnectRequest|null);
 
         /** Request applyDismissRequest */
-        applyDismissRequest?: (proto.IApplyDismissRequest|null);
+        applyDismissRequest?: (SdkProto.IApplyDismissRequest|null);
 
         /** Request agreeDismissRequest */
-        agreeDismissRequest?: (proto.IAgreeDismissRequest|null);
+        agreeDismissRequest?: (SdkProto.IAgreeDismissRequest|null);
 
         /** Request userQuitRequest */
-        userQuitRequest?: (proto.IUserQuitRequest|null);
+        userQuitRequest?: (SdkProto.IUserQuitRequest|null);
 
         /** Request messageRequest */
-        messageRequest?: (proto.IMessageRequest|null);
+        messageRequest?: (SdkProto.IMessageRequest|null);
 
         /** Request userOnBackRequest */
-        userOnBackRequest?: (proto.IUserOnBackRequest|null);
+        userOnBackRequest?: (SdkProto.IUserOnBackRequest|null);
 
         /** Request delayCheckRequest */
-        delayCheckRequest?: (proto.IDelayCheckRequest|null);
+        delayCheckRequest?: (SdkProto.IDelayCheckRequest|null);
 
         /** Request cancelAutoRequest */
-        cancelAutoRequest?: (proto.ICancelAutoRequest|null);
+        cancelAutoRequest?: (SdkProto.ICancelAutoRequest|null);
     }
 
     /** Represents a Request. */
@@ -2632,81 +2632,81 @@ export namespace proto {
          * Constructs a new Request.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IRequest);
+        constructor(properties?: SdkProto.IRequest);
 
         /** Request cmd. */
-        public cmd: proto.Request.CMD;
+        public cmd: SdkProto.Request.CMD;
 
         /** Request loginRequest. */
-        public loginRequest?: (proto.ILoginRequest|null);
+        public loginRequest?: (SdkProto.ILoginRequest|null);
 
         /** Request registerPhone. */
-        public registerPhone?: (proto.IRegisterPhoneRequest|null);
+        public registerPhone?: (SdkProto.IRegisterPhoneRequest|null);
 
         /** Request getUserInfoRequest. */
-        public getUserInfoRequest?: (proto.IGetUserInfoRequest|null);
+        public getUserInfoRequest?: (SdkProto.IGetUserInfoRequest|null);
 
         /** Request coinBankRequest. */
-        public coinBankRequest?: (proto.ICoinBankRequest|null);
+        public coinBankRequest?: (SdkProto.ICoinBankRequest|null);
 
         /** Request changeSignRequest. */
-        public changeSignRequest?: (proto.IChangeSignRequest|null);
+        public changeSignRequest?: (SdkProto.IChangeSignRequest|null);
 
         /** Request testDeviceIDRequest. */
-        public testDeviceIDRequest?: (proto.ITestDeviceIDRequest|null);
+        public testDeviceIDRequest?: (SdkProto.ITestDeviceIDRequest|null);
 
         /** Request userMPRequest. */
-        public userMPRequest?: (proto.IUserMPRequest|null);
+        public userMPRequest?: (SdkProto.IUserMPRequest|null);
 
         /** Request passPaiRequest. */
-        public passPaiRequest?: (proto.IPassPaiRequest|null);
+        public passPaiRequest?: (SdkProto.IPassPaiRequest|null);
 
         /** Request userReconnectRequest. */
-        public userReconnectRequest?: (proto.IUserReconnectRequest|null);
+        public userReconnectRequest?: (SdkProto.IUserReconnectRequest|null);
 
         /** Request applyDismissRequest. */
-        public applyDismissRequest?: (proto.IApplyDismissRequest|null);
+        public applyDismissRequest?: (SdkProto.IApplyDismissRequest|null);
 
         /** Request agreeDismissRequest. */
-        public agreeDismissRequest?: (proto.IAgreeDismissRequest|null);
+        public agreeDismissRequest?: (SdkProto.IAgreeDismissRequest|null);
 
         /** Request userQuitRequest. */
-        public userQuitRequest?: (proto.IUserQuitRequest|null);
+        public userQuitRequest?: (SdkProto.IUserQuitRequest|null);
 
         /** Request messageRequest. */
-        public messageRequest?: (proto.IMessageRequest|null);
+        public messageRequest?: (SdkProto.IMessageRequest|null);
 
         /** Request userOnBackRequest. */
-        public userOnBackRequest?: (proto.IUserOnBackRequest|null);
+        public userOnBackRequest?: (SdkProto.IUserOnBackRequest|null);
 
         /** Request delayCheckRequest. */
-        public delayCheckRequest?: (proto.IDelayCheckRequest|null);
+        public delayCheckRequest?: (SdkProto.IDelayCheckRequest|null);
 
         /** Request cancelAutoRequest. */
-        public cancelAutoRequest?: (proto.ICancelAutoRequest|null);
+        public cancelAutoRequest?: (SdkProto.ICancelAutoRequest|null);
 
         /**
          * Creates a new Request instance using the specified properties.
          * @param [properties] Properties to set
          * @returns Request instance
          */
-        public static create(properties?: proto.IRequest): proto.Request;
+        public static create(properties?: SdkProto.IRequest): SdkProto.Request;
 
         /**
-         * Encodes the specified Request message. Does not implicitly {@link proto.Request.verify|verify} messages.
+         * Encodes the specified Request message. Does not implicitly {@link SdkProto.Request.verify|verify} messages.
          * @param message Request message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Request message, length delimited. Does not implicitly {@link proto.Request.verify|verify} messages.
+         * Encodes the specified Request message, length delimited. Does not implicitly {@link SdkProto.Request.verify|verify} messages.
          * @param message Request message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a Request message from the specified reader or buffer.
@@ -2716,7 +2716,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.Request;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.Request;
 
         /**
          * Decodes a Request message from the specified reader or buffer, length delimited.
@@ -2725,7 +2725,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.Request;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.Request;
 
         /**
          * Verifies a Request message.
@@ -2739,7 +2739,7 @@ export namespace proto {
          * @param object Plain object
          * @returns Request
          */
-        public static fromObject(object: { [k: string]: any }): proto.Request;
+        public static fromObject(object: { [k: string]: any }): SdkProto.Request;
 
         /**
          * Creates a plain object from a Request message. Also converts values to other types if specified.
@@ -2747,7 +2747,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.Request, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this Request to JSON.
@@ -2813,7 +2813,7 @@ export namespace proto {
     interface ILoginResponse {
 
         /** LoginResponse user */
-        user?: (proto.IUser|null);
+        user?: (SdkProto.IUser|null);
     }
 
     /** Represents a LoginResponse. */
@@ -2823,33 +2823,33 @@ export namespace proto {
          * Constructs a new LoginResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ILoginResponse);
+        constructor(properties?: SdkProto.ILoginResponse);
 
         /** LoginResponse user. */
-        public user?: (proto.IUser|null);
+        public user?: (SdkProto.IUser|null);
 
         /**
          * Creates a new LoginResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns LoginResponse instance
          */
-        public static create(properties?: proto.ILoginResponse): proto.LoginResponse;
+        public static create(properties?: SdkProto.ILoginResponse): SdkProto.LoginResponse;
 
         /**
-         * Encodes the specified LoginResponse message. Does not implicitly {@link proto.LoginResponse.verify|verify} messages.
+         * Encodes the specified LoginResponse message. Does not implicitly {@link SdkProto.LoginResponse.verify|verify} messages.
          * @param message LoginResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LoginResponse message, length delimited. Does not implicitly {@link proto.LoginResponse.verify|verify} messages.
+         * Encodes the specified LoginResponse message, length delimited. Does not implicitly {@link SdkProto.LoginResponse.verify|verify} messages.
          * @param message LoginResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ILoginResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a LoginResponse message from the specified reader or buffer.
@@ -2859,7 +2859,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.LoginResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.LoginResponse;
 
         /**
          * Decodes a LoginResponse message from the specified reader or buffer, length delimited.
@@ -2868,7 +2868,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.LoginResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.LoginResponse;
 
         /**
          * Verifies a LoginResponse message.
@@ -2882,7 +2882,7 @@ export namespace proto {
          * @param object Plain object
          * @returns LoginResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.LoginResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.LoginResponse;
 
         /**
          * Creates a plain object from a LoginResponse message. Also converts values to other types if specified.
@@ -2890,7 +2890,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.LoginResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.LoginResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this LoginResponse to JSON.
@@ -2913,7 +2913,7 @@ export namespace proto {
          * Constructs a new RegisterPhoneRespone.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IRegisterPhoneRespone);
+        constructor(properties?: SdkProto.IRegisterPhoneRespone);
 
         /** RegisterPhoneRespone username. */
         public username: number;
@@ -2923,23 +2923,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns RegisterPhoneRespone instance
          */
-        public static create(properties?: proto.IRegisterPhoneRespone): proto.RegisterPhoneRespone;
+        public static create(properties?: SdkProto.IRegisterPhoneRespone): SdkProto.RegisterPhoneRespone;
 
         /**
-         * Encodes the specified RegisterPhoneRespone message. Does not implicitly {@link proto.RegisterPhoneRespone.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRespone message. Does not implicitly {@link SdkProto.RegisterPhoneRespone.verify|verify} messages.
          * @param message RegisterPhoneRespone message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IRegisterPhoneRespone, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IRegisterPhoneRespone, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RegisterPhoneRespone message, length delimited. Does not implicitly {@link proto.RegisterPhoneRespone.verify|verify} messages.
+         * Encodes the specified RegisterPhoneRespone message, length delimited. Does not implicitly {@link SdkProto.RegisterPhoneRespone.verify|verify} messages.
          * @param message RegisterPhoneRespone message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IRegisterPhoneRespone, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IRegisterPhoneRespone, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a RegisterPhoneRespone message from the specified reader or buffer.
@@ -2949,7 +2949,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.RegisterPhoneRespone;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.RegisterPhoneRespone;
 
         /**
          * Decodes a RegisterPhoneRespone message from the specified reader or buffer, length delimited.
@@ -2958,7 +2958,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.RegisterPhoneRespone;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.RegisterPhoneRespone;
 
         /**
          * Verifies a RegisterPhoneRespone message.
@@ -2972,7 +2972,7 @@ export namespace proto {
          * @param object Plain object
          * @returns RegisterPhoneRespone
          */
-        public static fromObject(object: { [k: string]: any }): proto.RegisterPhoneRespone;
+        public static fromObject(object: { [k: string]: any }): SdkProto.RegisterPhoneRespone;
 
         /**
          * Creates a plain object from a RegisterPhoneRespone message. Also converts values to other types if specified.
@@ -2980,7 +2980,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.RegisterPhoneRespone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.RegisterPhoneRespone, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this RegisterPhoneRespone to JSON.
@@ -2993,7 +2993,7 @@ export namespace proto {
     interface IGetUserInfoResponse {
 
         /** GetUserInfoResponse userInfo */
-        userInfo?: (proto.IUserInfo|null);
+        userInfo?: (SdkProto.IUserInfo|null);
     }
 
     /** Represents a GetUserInfoResponse. */
@@ -3003,33 +3003,33 @@ export namespace proto {
          * Constructs a new GetUserInfoResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IGetUserInfoResponse);
+        constructor(properties?: SdkProto.IGetUserInfoResponse);
 
         /** GetUserInfoResponse userInfo. */
-        public userInfo?: (proto.IUserInfo|null);
+        public userInfo?: (SdkProto.IUserInfo|null);
 
         /**
          * Creates a new GetUserInfoResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns GetUserInfoResponse instance
          */
-        public static create(properties?: proto.IGetUserInfoResponse): proto.GetUserInfoResponse;
+        public static create(properties?: SdkProto.IGetUserInfoResponse): SdkProto.GetUserInfoResponse;
 
         /**
-         * Encodes the specified GetUserInfoResponse message. Does not implicitly {@link proto.GetUserInfoResponse.verify|verify} messages.
+         * Encodes the specified GetUserInfoResponse message. Does not implicitly {@link SdkProto.GetUserInfoResponse.verify|verify} messages.
          * @param message GetUserInfoResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IGetUserInfoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IGetUserInfoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GetUserInfoResponse message, length delimited. Does not implicitly {@link proto.GetUserInfoResponse.verify|verify} messages.
+         * Encodes the specified GetUserInfoResponse message, length delimited. Does not implicitly {@link SdkProto.GetUserInfoResponse.verify|verify} messages.
          * @param message GetUserInfoResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IGetUserInfoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IGetUserInfoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a GetUserInfoResponse message from the specified reader or buffer.
@@ -3039,7 +3039,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.GetUserInfoResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.GetUserInfoResponse;
 
         /**
          * Decodes a GetUserInfoResponse message from the specified reader or buffer, length delimited.
@@ -3048,7 +3048,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.GetUserInfoResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.GetUserInfoResponse;
 
         /**
          * Verifies a GetUserInfoResponse message.
@@ -3062,7 +3062,7 @@ export namespace proto {
          * @param object Plain object
          * @returns GetUserInfoResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.GetUserInfoResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.GetUserInfoResponse;
 
         /**
          * Creates a plain object from a GetUserInfoResponse message. Also converts values to other types if specified.
@@ -3070,7 +3070,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.GetUserInfoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.GetUserInfoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this GetUserInfoResponse to JSON.
@@ -3090,30 +3090,30 @@ export namespace proto {
          * Constructs a new CoinBankResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ICoinBankResponse);
+        constructor(properties?: SdkProto.ICoinBankResponse);
 
         /**
          * Creates a new CoinBankResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns CoinBankResponse instance
          */
-        public static create(properties?: proto.ICoinBankResponse): proto.CoinBankResponse;
+        public static create(properties?: SdkProto.ICoinBankResponse): SdkProto.CoinBankResponse;
 
         /**
-         * Encodes the specified CoinBankResponse message. Does not implicitly {@link proto.CoinBankResponse.verify|verify} messages.
+         * Encodes the specified CoinBankResponse message. Does not implicitly {@link SdkProto.CoinBankResponse.verify|verify} messages.
          * @param message CoinBankResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ICoinBankResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ICoinBankResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CoinBankResponse message, length delimited. Does not implicitly {@link proto.CoinBankResponse.verify|verify} messages.
+         * Encodes the specified CoinBankResponse message, length delimited. Does not implicitly {@link SdkProto.CoinBankResponse.verify|verify} messages.
          * @param message CoinBankResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ICoinBankResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ICoinBankResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a CoinBankResponse message from the specified reader or buffer.
@@ -3123,7 +3123,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.CoinBankResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.CoinBankResponse;
 
         /**
          * Decodes a CoinBankResponse message from the specified reader or buffer, length delimited.
@@ -3132,7 +3132,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.CoinBankResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.CoinBankResponse;
 
         /**
          * Verifies a CoinBankResponse message.
@@ -3146,7 +3146,7 @@ export namespace proto {
          * @param object Plain object
          * @returns CoinBankResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.CoinBankResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.CoinBankResponse;
 
         /**
          * Creates a plain object from a CoinBankResponse message. Also converts values to other types if specified.
@@ -3154,7 +3154,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.CoinBankResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.CoinBankResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this CoinBankResponse to JSON.
@@ -3174,30 +3174,30 @@ export namespace proto {
          * Constructs a new ChangeSignResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IChangeSignResponse);
+        constructor(properties?: SdkProto.IChangeSignResponse);
 
         /**
          * Creates a new ChangeSignResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns ChangeSignResponse instance
          */
-        public static create(properties?: proto.IChangeSignResponse): proto.ChangeSignResponse;
+        public static create(properties?: SdkProto.IChangeSignResponse): SdkProto.ChangeSignResponse;
 
         /**
-         * Encodes the specified ChangeSignResponse message. Does not implicitly {@link proto.ChangeSignResponse.verify|verify} messages.
+         * Encodes the specified ChangeSignResponse message. Does not implicitly {@link SdkProto.ChangeSignResponse.verify|verify} messages.
          * @param message ChangeSignResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IChangeSignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IChangeSignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ChangeSignResponse message, length delimited. Does not implicitly {@link proto.ChangeSignResponse.verify|verify} messages.
+         * Encodes the specified ChangeSignResponse message, length delimited. Does not implicitly {@link SdkProto.ChangeSignResponse.verify|verify} messages.
          * @param message ChangeSignResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IChangeSignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IChangeSignResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a ChangeSignResponse message from the specified reader or buffer.
@@ -3207,7 +3207,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.ChangeSignResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.ChangeSignResponse;
 
         /**
          * Decodes a ChangeSignResponse message from the specified reader or buffer, length delimited.
@@ -3216,7 +3216,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.ChangeSignResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.ChangeSignResponse;
 
         /**
          * Verifies a ChangeSignResponse message.
@@ -3230,7 +3230,7 @@ export namespace proto {
          * @param object Plain object
          * @returns ChangeSignResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.ChangeSignResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.ChangeSignResponse;
 
         /**
          * Creates a plain object from a ChangeSignResponse message. Also converts values to other types if specified.
@@ -3238,7 +3238,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.ChangeSignResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.ChangeSignResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this ChangeSignResponse to JSON.
@@ -3258,30 +3258,30 @@ export namespace proto {
          * Constructs a new TestDeviceIDResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ITestDeviceIDResponse);
+        constructor(properties?: SdkProto.ITestDeviceIDResponse);
 
         /**
          * Creates a new TestDeviceIDResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns TestDeviceIDResponse instance
          */
-        public static create(properties?: proto.ITestDeviceIDResponse): proto.TestDeviceIDResponse;
+        public static create(properties?: SdkProto.ITestDeviceIDResponse): SdkProto.TestDeviceIDResponse;
 
         /**
-         * Encodes the specified TestDeviceIDResponse message. Does not implicitly {@link proto.TestDeviceIDResponse.verify|verify} messages.
+         * Encodes the specified TestDeviceIDResponse message. Does not implicitly {@link SdkProto.TestDeviceIDResponse.verify|verify} messages.
          * @param message TestDeviceIDResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ITestDeviceIDResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ITestDeviceIDResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified TestDeviceIDResponse message, length delimited. Does not implicitly {@link proto.TestDeviceIDResponse.verify|verify} messages.
+         * Encodes the specified TestDeviceIDResponse message, length delimited. Does not implicitly {@link SdkProto.TestDeviceIDResponse.verify|verify} messages.
          * @param message TestDeviceIDResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ITestDeviceIDResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ITestDeviceIDResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a TestDeviceIDResponse message from the specified reader or buffer.
@@ -3291,7 +3291,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.TestDeviceIDResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.TestDeviceIDResponse;
 
         /**
          * Decodes a TestDeviceIDResponse message from the specified reader or buffer, length delimited.
@@ -3300,7 +3300,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.TestDeviceIDResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.TestDeviceIDResponse;
 
         /**
          * Verifies a TestDeviceIDResponse message.
@@ -3314,7 +3314,7 @@ export namespace proto {
          * @param object Plain object
          * @returns TestDeviceIDResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.TestDeviceIDResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.TestDeviceIDResponse;
 
         /**
          * Creates a plain object from a TestDeviceIDResponse message. Also converts values to other types if specified.
@@ -3322,7 +3322,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.TestDeviceIDResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.TestDeviceIDResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this TestDeviceIDResponse to JSON.
@@ -3365,7 +3365,7 @@ export namespace proto {
         startApplyTime?: (number|Long|null);
 
         /** CreateTableResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
     }
 
     /** Represents a CreateTableResponse. */
@@ -3375,7 +3375,7 @@ export namespace proto {
          * Constructs a new CreateTableResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ICreateTableResponse);
+        constructor(properties?: SdkProto.ICreateTableResponse);
 
         /** CreateTableResponse tableId. */
         public tableId: string;
@@ -3408,30 +3408,30 @@ export namespace proto {
         public startApplyTime: (number|Long);
 
         /** CreateTableResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /**
          * Creates a new CreateTableResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns CreateTableResponse instance
          */
-        public static create(properties?: proto.ICreateTableResponse): proto.CreateTableResponse;
+        public static create(properties?: SdkProto.ICreateTableResponse): SdkProto.CreateTableResponse;
 
         /**
-         * Encodes the specified CreateTableResponse message. Does not implicitly {@link proto.CreateTableResponse.verify|verify} messages.
+         * Encodes the specified CreateTableResponse message. Does not implicitly {@link SdkProto.CreateTableResponse.verify|verify} messages.
          * @param message CreateTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ICreateTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ICreateTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CreateTableResponse message, length delimited. Does not implicitly {@link proto.CreateTableResponse.verify|verify} messages.
+         * Encodes the specified CreateTableResponse message, length delimited. Does not implicitly {@link SdkProto.CreateTableResponse.verify|verify} messages.
          * @param message CreateTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ICreateTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ICreateTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a CreateTableResponse message from the specified reader or buffer.
@@ -3441,7 +3441,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.CreateTableResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.CreateTableResponse;
 
         /**
          * Decodes a CreateTableResponse message from the specified reader or buffer, length delimited.
@@ -3450,7 +3450,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.CreateTableResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.CreateTableResponse;
 
         /**
          * Verifies a CreateTableResponse message.
@@ -3464,7 +3464,7 @@ export namespace proto {
          * @param object Plain object
          * @returns CreateTableResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.CreateTableResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.CreateTableResponse;
 
         /**
          * Creates a plain object from a CreateTableResponse message. Also converts values to other types if specified.
@@ -3472,7 +3472,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.CreateTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.CreateTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this CreateTableResponse to JSON.
@@ -3515,7 +3515,7 @@ export namespace proto {
         startApplyTime?: (number|Long|null);
 
         /** JoinTableResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
     }
 
     /** Represents a JoinTableResponse. */
@@ -3525,7 +3525,7 @@ export namespace proto {
          * Constructs a new JoinTableResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IJoinTableResponse);
+        constructor(properties?: SdkProto.IJoinTableResponse);
 
         /** JoinTableResponse tableId. */
         public tableId: string;
@@ -3558,30 +3558,30 @@ export namespace proto {
         public startApplyTime: (number|Long);
 
         /** JoinTableResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /**
          * Creates a new JoinTableResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns JoinTableResponse instance
          */
-        public static create(properties?: proto.IJoinTableResponse): proto.JoinTableResponse;
+        public static create(properties?: SdkProto.IJoinTableResponse): SdkProto.JoinTableResponse;
 
         /**
-         * Encodes the specified JoinTableResponse message. Does not implicitly {@link proto.JoinTableResponse.verify|verify} messages.
+         * Encodes the specified JoinTableResponse message. Does not implicitly {@link SdkProto.JoinTableResponse.verify|verify} messages.
          * @param message JoinTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified JoinTableResponse message, length delimited. Does not implicitly {@link proto.JoinTableResponse.verify|verify} messages.
+         * Encodes the specified JoinTableResponse message, length delimited. Does not implicitly {@link SdkProto.JoinTableResponse.verify|verify} messages.
          * @param message JoinTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a JoinTableResponse message from the specified reader or buffer.
@@ -3591,7 +3591,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.JoinTableResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.JoinTableResponse;
 
         /**
          * Decodes a JoinTableResponse message from the specified reader or buffer, length delimited.
@@ -3600,7 +3600,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.JoinTableResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.JoinTableResponse;
 
         /**
          * Verifies a JoinTableResponse message.
@@ -3614,7 +3614,7 @@ export namespace proto {
          * @param object Plain object
          * @returns JoinTableResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.JoinTableResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.JoinTableResponse;
 
         /**
          * Creates a plain object from a JoinTableResponse message. Also converts values to other types if specified.
@@ -3622,7 +3622,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.JoinTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.JoinTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this JoinTableResponse to JSON.
@@ -3635,7 +3635,7 @@ export namespace proto {
     interface ISendJoinTableResponse {
 
         /** SendJoinTableResponse user */
-        user?: (proto.IUser|null);
+        user?: (SdkProto.IUser|null);
     }
 
     /** Represents a SendJoinTableResponse. */
@@ -3645,33 +3645,33 @@ export namespace proto {
          * Constructs a new SendJoinTableResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendJoinTableResponse);
+        constructor(properties?: SdkProto.ISendJoinTableResponse);
 
         /** SendJoinTableResponse user. */
-        public user?: (proto.IUser|null);
+        public user?: (SdkProto.IUser|null);
 
         /**
          * Creates a new SendJoinTableResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns SendJoinTableResponse instance
          */
-        public static create(properties?: proto.ISendJoinTableResponse): proto.SendJoinTableResponse;
+        public static create(properties?: SdkProto.ISendJoinTableResponse): SdkProto.SendJoinTableResponse;
 
         /**
-         * Encodes the specified SendJoinTableResponse message. Does not implicitly {@link proto.SendJoinTableResponse.verify|verify} messages.
+         * Encodes the specified SendJoinTableResponse message. Does not implicitly {@link SdkProto.SendJoinTableResponse.verify|verify} messages.
          * @param message SendJoinTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendJoinTableResponse message, length delimited. Does not implicitly {@link proto.SendJoinTableResponse.verify|verify} messages.
+         * Encodes the specified SendJoinTableResponse message, length delimited. Does not implicitly {@link SdkProto.SendJoinTableResponse.verify|verify} messages.
          * @param message SendJoinTableResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendJoinTableResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendJoinTableResponse message from the specified reader or buffer.
@@ -3681,7 +3681,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendJoinTableResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendJoinTableResponse;
 
         /**
          * Decodes a SendJoinTableResponse message from the specified reader or buffer, length delimited.
@@ -3690,7 +3690,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendJoinTableResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendJoinTableResponse;
 
         /**
          * Verifies a SendJoinTableResponse message.
@@ -3704,7 +3704,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendJoinTableResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendJoinTableResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendJoinTableResponse;
 
         /**
          * Creates a plain object from a SendJoinTableResponse message. Also converts values to other types if specified.
@@ -3712,7 +3712,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendJoinTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendJoinTableResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendJoinTableResponse to JSON.
@@ -3731,7 +3731,7 @@ export namespace proto {
         state?: (number|null);
 
         /** SendUserReadyResponse users */
-        users?: (proto.IUserReady[]|null);
+        users?: (SdkProto.IUserReady[]|null);
     }
 
     /** Represents a SendUserReadyResponse. */
@@ -3741,7 +3741,7 @@ export namespace proto {
          * Constructs a new SendUserReadyResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserReadyResponse);
+        constructor(properties?: SdkProto.ISendUserReadyResponse);
 
         /** SendUserReadyResponse userId. */
         public userId: number;
@@ -3750,30 +3750,30 @@ export namespace proto {
         public state: number;
 
         /** SendUserReadyResponse users. */
-        public users: proto.IUserReady[];
+        public users: SdkProto.IUserReady[];
 
         /**
          * Creates a new SendUserReadyResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns SendUserReadyResponse instance
          */
-        public static create(properties?: proto.ISendUserReadyResponse): proto.SendUserReadyResponse;
+        public static create(properties?: SdkProto.ISendUserReadyResponse): SdkProto.SendUserReadyResponse;
 
         /**
-         * Encodes the specified SendUserReadyResponse message. Does not implicitly {@link proto.SendUserReadyResponse.verify|verify} messages.
+         * Encodes the specified SendUserReadyResponse message. Does not implicitly {@link SdkProto.SendUserReadyResponse.verify|verify} messages.
          * @param message SendUserReadyResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserReadyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserReadyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserReadyResponse message, length delimited. Does not implicitly {@link proto.SendUserReadyResponse.verify|verify} messages.
+         * Encodes the specified SendUserReadyResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserReadyResponse.verify|verify} messages.
          * @param message SendUserReadyResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserReadyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserReadyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserReadyResponse message from the specified reader or buffer.
@@ -3783,7 +3783,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserReadyResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserReadyResponse;
 
         /**
          * Decodes a SendUserReadyResponse message from the specified reader or buffer, length delimited.
@@ -3792,7 +3792,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserReadyResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserReadyResponse;
 
         /**
          * Verifies a SendUserReadyResponse message.
@@ -3806,7 +3806,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserReadyResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserReadyResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserReadyResponse;
 
         /**
          * Creates a plain object from a SendUserReadyResponse message. Also converts values to other types if specified.
@@ -3814,7 +3814,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserReadyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserReadyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserReadyResponse to JSON.
@@ -3845,7 +3845,7 @@ export namespace proto {
         totalRound?: (number|null);
 
         /** SendCardsResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
 
         /** SendCardsResponse piaoPai */
         piaoPai?: (number|null);
@@ -3861,7 +3861,7 @@ export namespace proto {
          * Constructs a new SendCardsResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendCardsResponse);
+        constructor(properties?: SdkProto.ISendCardsResponse);
 
         /** SendCardsResponse zhuangPos. */
         public zhuangPos: number;
@@ -3882,7 +3882,7 @@ export namespace proto {
         public totalRound: number;
 
         /** SendCardsResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /** SendCardsResponse piaoPai. */
         public piaoPai: number;
@@ -3895,23 +3895,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendCardsResponse instance
          */
-        public static create(properties?: proto.ISendCardsResponse): proto.SendCardsResponse;
+        public static create(properties?: SdkProto.ISendCardsResponse): SdkProto.SendCardsResponse;
 
         /**
-         * Encodes the specified SendCardsResponse message. Does not implicitly {@link proto.SendCardsResponse.verify|verify} messages.
+         * Encodes the specified SendCardsResponse message. Does not implicitly {@link SdkProto.SendCardsResponse.verify|verify} messages.
          * @param message SendCardsResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendCardsResponse message, length delimited. Does not implicitly {@link proto.SendCardsResponse.verify|verify} messages.
+         * Encodes the specified SendCardsResponse message, length delimited. Does not implicitly {@link SdkProto.SendCardsResponse.verify|verify} messages.
          * @param message SendCardsResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendCardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendCardsResponse message from the specified reader or buffer.
@@ -3921,7 +3921,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendCardsResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendCardsResponse;
 
         /**
          * Decodes a SendCardsResponse message from the specified reader or buffer, length delimited.
@@ -3930,7 +3930,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendCardsResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendCardsResponse;
 
         /**
          * Verifies a SendCardsResponse message.
@@ -3944,7 +3944,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendCardsResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendCardsResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendCardsResponse;
 
         /**
          * Creates a plain object from a SendCardsResponse message. Also converts values to other types if specified.
@@ -3952,7 +3952,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendCardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendCardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendCardsResponse to JSON.
@@ -3993,7 +3993,7 @@ export namespace proto {
          * Constructs a new SendDisCardResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendDisCardResponse);
+        constructor(properties?: SdkProto.ISendDisCardResponse);
 
         /** SendDisCardResponse userId. */
         public userId: number;
@@ -4021,23 +4021,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendDisCardResponse instance
          */
-        public static create(properties?: proto.ISendDisCardResponse): proto.SendDisCardResponse;
+        public static create(properties?: SdkProto.ISendDisCardResponse): SdkProto.SendDisCardResponse;
 
         /**
-         * Encodes the specified SendDisCardResponse message. Does not implicitly {@link proto.SendDisCardResponse.verify|verify} messages.
+         * Encodes the specified SendDisCardResponse message. Does not implicitly {@link SdkProto.SendDisCardResponse.verify|verify} messages.
          * @param message SendDisCardResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendDisCardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendDisCardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendDisCardResponse message, length delimited. Does not implicitly {@link proto.SendDisCardResponse.verify|verify} messages.
+         * Encodes the specified SendDisCardResponse message, length delimited. Does not implicitly {@link SdkProto.SendDisCardResponse.verify|verify} messages.
          * @param message SendDisCardResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendDisCardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendDisCardResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendDisCardResponse message from the specified reader or buffer.
@@ -4047,7 +4047,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendDisCardResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendDisCardResponse;
 
         /**
          * Decodes a SendDisCardResponse message from the specified reader or buffer, length delimited.
@@ -4056,7 +4056,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendDisCardResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendDisCardResponse;
 
         /**
          * Verifies a SendDisCardResponse message.
@@ -4070,7 +4070,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendDisCardResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendDisCardResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendDisCardResponse;
 
         /**
          * Creates a plain object from a SendDisCardResponse message. Also converts values to other types if specified.
@@ -4078,7 +4078,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendDisCardResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendDisCardResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendDisCardResponse to JSON.
@@ -4107,7 +4107,7 @@ export namespace proto {
          * Constructs a new SendPassPaiResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendPassPaiResponse);
+        constructor(properties?: SdkProto.ISendPassPaiResponse);
 
         /** SendPassPaiResponse userId. */
         public userId: number;
@@ -4123,23 +4123,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendPassPaiResponse instance
          */
-        public static create(properties?: proto.ISendPassPaiResponse): proto.SendPassPaiResponse;
+        public static create(properties?: SdkProto.ISendPassPaiResponse): SdkProto.SendPassPaiResponse;
 
         /**
-         * Encodes the specified SendPassPaiResponse message. Does not implicitly {@link proto.SendPassPaiResponse.verify|verify} messages.
+         * Encodes the specified SendPassPaiResponse message. Does not implicitly {@link SdkProto.SendPassPaiResponse.verify|verify} messages.
          * @param message SendPassPaiResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendPassPaiResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendPassPaiResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendPassPaiResponse message, length delimited. Does not implicitly {@link proto.SendPassPaiResponse.verify|verify} messages.
+         * Encodes the specified SendPassPaiResponse message, length delimited. Does not implicitly {@link SdkProto.SendPassPaiResponse.verify|verify} messages.
          * @param message SendPassPaiResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendPassPaiResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendPassPaiResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendPassPaiResponse message from the specified reader or buffer.
@@ -4149,7 +4149,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendPassPaiResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendPassPaiResponse;
 
         /**
          * Decodes a SendPassPaiResponse message from the specified reader or buffer, length delimited.
@@ -4158,7 +4158,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendPassPaiResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendPassPaiResponse;
 
         /**
          * Verifies a SendPassPaiResponse message.
@@ -4172,7 +4172,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendPassPaiResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendPassPaiResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendPassPaiResponse;
 
         /**
          * Creates a plain object from a SendPassPaiResponse message. Also converts values to other types if specified.
@@ -4180,7 +4180,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendPassPaiResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendPassPaiResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendPassPaiResponse to JSON.
@@ -4203,7 +4203,7 @@ export namespace proto {
          * Constructs a new SendReconnectQuitResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendReconnectQuitResponse);
+        constructor(properties?: SdkProto.ISendReconnectQuitResponse);
 
         /** SendReconnectQuitResponse userId. */
         public userId: number;
@@ -4213,23 +4213,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendReconnectQuitResponse instance
          */
-        public static create(properties?: proto.ISendReconnectQuitResponse): proto.SendReconnectQuitResponse;
+        public static create(properties?: SdkProto.ISendReconnectQuitResponse): SdkProto.SendReconnectQuitResponse;
 
         /**
-         * Encodes the specified SendReconnectQuitResponse message. Does not implicitly {@link proto.SendReconnectQuitResponse.verify|verify} messages.
+         * Encodes the specified SendReconnectQuitResponse message. Does not implicitly {@link SdkProto.SendReconnectQuitResponse.verify|verify} messages.
          * @param message SendReconnectQuitResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendReconnectQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendReconnectQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendReconnectQuitResponse message, length delimited. Does not implicitly {@link proto.SendReconnectQuitResponse.verify|verify} messages.
+         * Encodes the specified SendReconnectQuitResponse message, length delimited. Does not implicitly {@link SdkProto.SendReconnectQuitResponse.verify|verify} messages.
          * @param message SendReconnectQuitResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendReconnectQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendReconnectQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendReconnectQuitResponse message from the specified reader or buffer.
@@ -4239,7 +4239,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendReconnectQuitResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendReconnectQuitResponse;
 
         /**
          * Decodes a SendReconnectQuitResponse message from the specified reader or buffer, length delimited.
@@ -4248,7 +4248,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendReconnectQuitResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendReconnectQuitResponse;
 
         /**
          * Verifies a SendReconnectQuitResponse message.
@@ -4262,7 +4262,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendReconnectQuitResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendReconnectQuitResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendReconnectQuitResponse;
 
         /**
          * Creates a plain object from a SendReconnectQuitResponse message. Also converts values to other types if specified.
@@ -4270,7 +4270,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendReconnectQuitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendReconnectQuitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendReconnectQuitResponse to JSON.
@@ -4340,10 +4340,10 @@ export namespace proto {
         currTimes?: (number|null);
 
         /** UserReconnectResponse resultData */
-        resultData?: (proto.IResultData|null);
+        resultData?: (SdkProto.IResultData|null);
 
         /** UserReconnectResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
 
         /** UserReconnectResponse beilv */
         beilv?: (number|null);
@@ -4359,7 +4359,7 @@ export namespace proto {
          * Constructs a new UserReconnectResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IUserReconnectResponse);
+        constructor(properties?: SdkProto.IUserReconnectResponse);
 
         /** UserReconnectResponse tableId. */
         public tableId: string;
@@ -4419,10 +4419,10 @@ export namespace proto {
         public currTimes: number;
 
         /** UserReconnectResponse resultData. */
-        public resultData?: (proto.IResultData|null);
+        public resultData?: (SdkProto.IResultData|null);
 
         /** UserReconnectResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /** UserReconnectResponse beilv. */
         public beilv: number;
@@ -4435,23 +4435,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns UserReconnectResponse instance
          */
-        public static create(properties?: proto.IUserReconnectResponse): proto.UserReconnectResponse;
+        public static create(properties?: SdkProto.IUserReconnectResponse): SdkProto.UserReconnectResponse;
 
         /**
-         * Encodes the specified UserReconnectResponse message. Does not implicitly {@link proto.UserReconnectResponse.verify|verify} messages.
+         * Encodes the specified UserReconnectResponse message. Does not implicitly {@link SdkProto.UserReconnectResponse.verify|verify} messages.
          * @param message UserReconnectResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserReconnectResponse message, length delimited. Does not implicitly {@link proto.UserReconnectResponse.verify|verify} messages.
+         * Encodes the specified UserReconnectResponse message, length delimited. Does not implicitly {@link SdkProto.UserReconnectResponse.verify|verify} messages.
          * @param message UserReconnectResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a UserReconnectResponse message from the specified reader or buffer.
@@ -4461,7 +4461,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.UserReconnectResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.UserReconnectResponse;
 
         /**
          * Decodes a UserReconnectResponse message from the specified reader or buffer, length delimited.
@@ -4470,7 +4470,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.UserReconnectResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.UserReconnectResponse;
 
         /**
          * Verifies a UserReconnectResponse message.
@@ -4484,7 +4484,7 @@ export namespace proto {
          * @param object Plain object
          * @returns UserReconnectResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.UserReconnectResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.UserReconnectResponse;
 
         /**
          * Creates a plain object from a UserReconnectResponse message. Also converts values to other types if specified.
@@ -4492,7 +4492,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.UserReconnectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.UserReconnectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this UserReconnectResponse to JSON.
@@ -4518,7 +4518,7 @@ export namespace proto {
          * Constructs a new SendUserReconnectResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserReconnectResponse);
+        constructor(properties?: SdkProto.ISendUserReconnectResponse);
 
         /** SendUserReconnectResponse userId. */
         public userId: number;
@@ -4531,23 +4531,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserReconnectResponse instance
          */
-        public static create(properties?: proto.ISendUserReconnectResponse): proto.SendUserReconnectResponse;
+        public static create(properties?: SdkProto.ISendUserReconnectResponse): SdkProto.SendUserReconnectResponse;
 
         /**
-         * Encodes the specified SendUserReconnectResponse message. Does not implicitly {@link proto.SendUserReconnectResponse.verify|verify} messages.
+         * Encodes the specified SendUserReconnectResponse message. Does not implicitly {@link SdkProto.SendUserReconnectResponse.verify|verify} messages.
          * @param message SendUserReconnectResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserReconnectResponse message, length delimited. Does not implicitly {@link proto.SendUserReconnectResponse.verify|verify} messages.
+         * Encodes the specified SendUserReconnectResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserReconnectResponse.verify|verify} messages.
          * @param message SendUserReconnectResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserReconnectResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserReconnectResponse message from the specified reader or buffer.
@@ -4557,7 +4557,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserReconnectResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserReconnectResponse;
 
         /**
          * Decodes a SendUserReconnectResponse message from the specified reader or buffer, length delimited.
@@ -4566,7 +4566,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserReconnectResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserReconnectResponse;
 
         /**
          * Verifies a SendUserReconnectResponse message.
@@ -4580,7 +4580,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserReconnectResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserReconnectResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserReconnectResponse;
 
         /**
          * Creates a plain object from a SendUserReconnectResponse message. Also converts values to other types if specified.
@@ -4588,7 +4588,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserReconnectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserReconnectResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserReconnectResponse to JSON.
@@ -4623,7 +4623,7 @@ export namespace proto {
          * Constructs a new SendApplyDismissResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendApplyDismissResponse);
+        constructor(properties?: SdkProto.ISendApplyDismissResponse);
 
         /** SendApplyDismissResponse userId. */
         public userId: number;
@@ -4645,23 +4645,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendApplyDismissResponse instance
          */
-        public static create(properties?: proto.ISendApplyDismissResponse): proto.SendApplyDismissResponse;
+        public static create(properties?: SdkProto.ISendApplyDismissResponse): SdkProto.SendApplyDismissResponse;
 
         /**
-         * Encodes the specified SendApplyDismissResponse message. Does not implicitly {@link proto.SendApplyDismissResponse.verify|verify} messages.
+         * Encodes the specified SendApplyDismissResponse message. Does not implicitly {@link SdkProto.SendApplyDismissResponse.verify|verify} messages.
          * @param message SendApplyDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendApplyDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendApplyDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendApplyDismissResponse message, length delimited. Does not implicitly {@link proto.SendApplyDismissResponse.verify|verify} messages.
+         * Encodes the specified SendApplyDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendApplyDismissResponse.verify|verify} messages.
          * @param message SendApplyDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendApplyDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendApplyDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendApplyDismissResponse message from the specified reader or buffer.
@@ -4671,7 +4671,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendApplyDismissResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendApplyDismissResponse;
 
         /**
          * Decodes a SendApplyDismissResponse message from the specified reader or buffer, length delimited.
@@ -4680,7 +4680,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendApplyDismissResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendApplyDismissResponse;
 
         /**
          * Verifies a SendApplyDismissResponse message.
@@ -4694,7 +4694,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendApplyDismissResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendApplyDismissResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendApplyDismissResponse;
 
         /**
          * Creates a plain object from a SendApplyDismissResponse message. Also converts values to other types if specified.
@@ -4702,7 +4702,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendApplyDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendApplyDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendApplyDismissResponse to JSON.
@@ -4731,7 +4731,7 @@ export namespace proto {
          * Constructs a new SendAgreeDismissResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendAgreeDismissResponse);
+        constructor(properties?: SdkProto.ISendAgreeDismissResponse);
 
         /** SendAgreeDismissResponse agree. */
         public agree: number;
@@ -4747,23 +4747,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendAgreeDismissResponse instance
          */
-        public static create(properties?: proto.ISendAgreeDismissResponse): proto.SendAgreeDismissResponse;
+        public static create(properties?: SdkProto.ISendAgreeDismissResponse): SdkProto.SendAgreeDismissResponse;
 
         /**
-         * Encodes the specified SendAgreeDismissResponse message. Does not implicitly {@link proto.SendAgreeDismissResponse.verify|verify} messages.
+         * Encodes the specified SendAgreeDismissResponse message. Does not implicitly {@link SdkProto.SendAgreeDismissResponse.verify|verify} messages.
          * @param message SendAgreeDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendAgreeDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendAgreeDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendAgreeDismissResponse message, length delimited. Does not implicitly {@link proto.SendAgreeDismissResponse.verify|verify} messages.
+         * Encodes the specified SendAgreeDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendAgreeDismissResponse.verify|verify} messages.
          * @param message SendAgreeDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendAgreeDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendAgreeDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendAgreeDismissResponse message from the specified reader or buffer.
@@ -4773,7 +4773,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendAgreeDismissResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendAgreeDismissResponse;
 
         /**
          * Decodes a SendAgreeDismissResponse message from the specified reader or buffer, length delimited.
@@ -4782,7 +4782,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendAgreeDismissResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendAgreeDismissResponse;
 
         /**
          * Verifies a SendAgreeDismissResponse message.
@@ -4796,7 +4796,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendAgreeDismissResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendAgreeDismissResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendAgreeDismissResponse;
 
         /**
          * Creates a plain object from a SendAgreeDismissResponse message. Also converts values to other types if specified.
@@ -4804,7 +4804,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendAgreeDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendAgreeDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendAgreeDismissResponse to JSON.
@@ -4833,7 +4833,7 @@ export namespace proto {
          * Constructs a new SendDismissResultResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendDismissResultResponse);
+        constructor(properties?: SdkProto.ISendDismissResultResponse);
 
         /** SendDismissResultResponse applicant. */
         public applicant: number;
@@ -4849,23 +4849,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendDismissResultResponse instance
          */
-        public static create(properties?: proto.ISendDismissResultResponse): proto.SendDismissResultResponse;
+        public static create(properties?: SdkProto.ISendDismissResultResponse): SdkProto.SendDismissResultResponse;
 
         /**
-         * Encodes the specified SendDismissResultResponse message. Does not implicitly {@link proto.SendDismissResultResponse.verify|verify} messages.
+         * Encodes the specified SendDismissResultResponse message. Does not implicitly {@link SdkProto.SendDismissResultResponse.verify|verify} messages.
          * @param message SendDismissResultResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendDismissResultResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendDismissResultResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendDismissResultResponse message, length delimited. Does not implicitly {@link proto.SendDismissResultResponse.verify|verify} messages.
+         * Encodes the specified SendDismissResultResponse message, length delimited. Does not implicitly {@link SdkProto.SendDismissResultResponse.verify|verify} messages.
          * @param message SendDismissResultResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendDismissResultResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendDismissResultResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendDismissResultResponse message from the specified reader or buffer.
@@ -4875,7 +4875,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendDismissResultResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendDismissResultResponse;
 
         /**
          * Decodes a SendDismissResultResponse message from the specified reader or buffer, length delimited.
@@ -4884,7 +4884,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendDismissResultResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendDismissResultResponse;
 
         /**
          * Verifies a SendDismissResultResponse message.
@@ -4898,7 +4898,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendDismissResultResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendDismissResultResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendDismissResultResponse;
 
         /**
          * Creates a plain object from a SendDismissResultResponse message. Also converts values to other types if specified.
@@ -4906,7 +4906,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendDismissResultResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendDismissResultResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendDismissResultResponse to JSON.
@@ -4944,7 +4944,7 @@ export namespace proto {
          * Constructs a new SendUserQuitResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserQuitResponse);
+        constructor(properties?: SdkProto.ISendUserQuitResponse);
 
         /** SendUserQuitResponse userId. */
         public userId: number;
@@ -4969,23 +4969,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserQuitResponse instance
          */
-        public static create(properties?: proto.ISendUserQuitResponse): proto.SendUserQuitResponse;
+        public static create(properties?: SdkProto.ISendUserQuitResponse): SdkProto.SendUserQuitResponse;
 
         /**
-         * Encodes the specified SendUserQuitResponse message. Does not implicitly {@link proto.SendUserQuitResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitResponse message. Does not implicitly {@link SdkProto.SendUserQuitResponse.verify|verify} messages.
          * @param message SendUserQuitResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserQuitResponse message, length delimited. Does not implicitly {@link proto.SendUserQuitResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQuitResponse.verify|verify} messages.
          * @param message SendUserQuitResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserQuitResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserQuitResponse message from the specified reader or buffer.
@@ -4995,7 +4995,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserQuitResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserQuitResponse;
 
         /**
          * Decodes a SendUserQuitResponse message from the specified reader or buffer, length delimited.
@@ -5004,7 +5004,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserQuitResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserQuitResponse;
 
         /**
          * Verifies a SendUserQuitResponse message.
@@ -5018,7 +5018,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserQuitResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserQuitResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserQuitResponse;
 
         /**
          * Creates a plain object from a SendUserQuitResponse message. Also converts values to other types if specified.
@@ -5026,7 +5026,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserQuitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserQuitResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserQuitResponse to JSON.
@@ -5055,7 +5055,7 @@ export namespace proto {
          * Constructs a new SendMessageResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendMessageResponse);
+        constructor(properties?: SdkProto.ISendMessageResponse);
 
         /** SendMessageResponse userId. */
         public userId: number;
@@ -5071,23 +5071,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendMessageResponse instance
          */
-        public static create(properties?: proto.ISendMessageResponse): proto.SendMessageResponse;
+        public static create(properties?: SdkProto.ISendMessageResponse): SdkProto.SendMessageResponse;
 
         /**
-         * Encodes the specified SendMessageResponse message. Does not implicitly {@link proto.SendMessageResponse.verify|verify} messages.
+         * Encodes the specified SendMessageResponse message. Does not implicitly {@link SdkProto.SendMessageResponse.verify|verify} messages.
          * @param message SendMessageResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendMessageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendMessageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendMessageResponse message, length delimited. Does not implicitly {@link proto.SendMessageResponse.verify|verify} messages.
+         * Encodes the specified SendMessageResponse message, length delimited. Does not implicitly {@link SdkProto.SendMessageResponse.verify|verify} messages.
          * @param message SendMessageResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendMessageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendMessageResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendMessageResponse message from the specified reader or buffer.
@@ -5097,7 +5097,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendMessageResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendMessageResponse;
 
         /**
          * Decodes a SendMessageResponse message from the specified reader or buffer, length delimited.
@@ -5106,7 +5106,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendMessageResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendMessageResponse;
 
         /**
          * Verifies a SendMessageResponse message.
@@ -5120,7 +5120,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendMessageResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendMessageResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendMessageResponse;
 
         /**
          * Creates a plain object from a SendMessageResponse message. Also converts values to other types if specified.
@@ -5128,7 +5128,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendMessageResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendMessageResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendMessageResponse to JSON.
@@ -5154,7 +5154,7 @@ export namespace proto {
          * Constructs a new SendCoinRefreshResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendCoinRefreshResponse);
+        constructor(properties?: SdkProto.ISendCoinRefreshResponse);
 
         /** SendCoinRefreshResponse userId. */
         public userId: number;
@@ -5167,23 +5167,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendCoinRefreshResponse instance
          */
-        public static create(properties?: proto.ISendCoinRefreshResponse): proto.SendCoinRefreshResponse;
+        public static create(properties?: SdkProto.ISendCoinRefreshResponse): SdkProto.SendCoinRefreshResponse;
 
         /**
-         * Encodes the specified SendCoinRefreshResponse message. Does not implicitly {@link proto.SendCoinRefreshResponse.verify|verify} messages.
+         * Encodes the specified SendCoinRefreshResponse message. Does not implicitly {@link SdkProto.SendCoinRefreshResponse.verify|verify} messages.
          * @param message SendCoinRefreshResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendCoinRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendCoinRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendCoinRefreshResponse message, length delimited. Does not implicitly {@link proto.SendCoinRefreshResponse.verify|verify} messages.
+         * Encodes the specified SendCoinRefreshResponse message, length delimited. Does not implicitly {@link SdkProto.SendCoinRefreshResponse.verify|verify} messages.
          * @param message SendCoinRefreshResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendCoinRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendCoinRefreshResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendCoinRefreshResponse message from the specified reader or buffer.
@@ -5193,7 +5193,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendCoinRefreshResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendCoinRefreshResponse;
 
         /**
          * Decodes a SendCoinRefreshResponse message from the specified reader or buffer, length delimited.
@@ -5202,7 +5202,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendCoinRefreshResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendCoinRefreshResponse;
 
         /**
          * Verifies a SendCoinRefreshResponse message.
@@ -5216,7 +5216,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendCoinRefreshResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendCoinRefreshResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendCoinRefreshResponse;
 
         /**
          * Creates a plain object from a SendCoinRefreshResponse message. Also converts values to other types if specified.
@@ -5224,7 +5224,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendCoinRefreshResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendCoinRefreshResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendCoinRefreshResponse to JSON.
@@ -5250,7 +5250,7 @@ export namespace proto {
          * Constructs a new SendUserOnBackResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserOnBackResponse);
+        constructor(properties?: SdkProto.ISendUserOnBackResponse);
 
         /** SendUserOnBackResponse userId. */
         public userId: number;
@@ -5263,23 +5263,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserOnBackResponse instance
          */
-        public static create(properties?: proto.ISendUserOnBackResponse): proto.SendUserOnBackResponse;
+        public static create(properties?: SdkProto.ISendUserOnBackResponse): SdkProto.SendUserOnBackResponse;
 
         /**
-         * Encodes the specified SendUserOnBackResponse message. Does not implicitly {@link proto.SendUserOnBackResponse.verify|verify} messages.
+         * Encodes the specified SendUserOnBackResponse message. Does not implicitly {@link SdkProto.SendUserOnBackResponse.verify|verify} messages.
          * @param message SendUserOnBackResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserOnBackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserOnBackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserOnBackResponse message, length delimited. Does not implicitly {@link proto.SendUserOnBackResponse.verify|verify} messages.
+         * Encodes the specified SendUserOnBackResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserOnBackResponse.verify|verify} messages.
          * @param message SendUserOnBackResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserOnBackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserOnBackResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserOnBackResponse message from the specified reader or buffer.
@@ -5289,7 +5289,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserOnBackResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserOnBackResponse;
 
         /**
          * Decodes a SendUserOnBackResponse message from the specified reader or buffer, length delimited.
@@ -5298,7 +5298,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserOnBackResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserOnBackResponse;
 
         /**
          * Verifies a SendUserOnBackResponse message.
@@ -5312,7 +5312,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserOnBackResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserOnBackResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserOnBackResponse;
 
         /**
          * Creates a plain object from a SendUserOnBackResponse message. Also converts values to other types if specified.
@@ -5320,7 +5320,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserOnBackResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserOnBackResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserOnBackResponse to JSON.
@@ -5402,7 +5402,7 @@ export namespace proto {
         springInfo?: (number|null);
 
         /** SendRoundRecordResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
     }
 
     /** Represents a SendRoundRecordResponse. */
@@ -5412,7 +5412,7 @@ export namespace proto {
          * Constructs a new SendRoundRecordResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendRoundRecordResponse);
+        constructor(properties?: SdkProto.ISendRoundRecordResponse);
 
         /** SendRoundRecordResponse tableId. */
         public tableId: string;
@@ -5484,30 +5484,30 @@ export namespace proto {
         public springInfo: number;
 
         /** SendRoundRecordResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /**
          * Creates a new SendRoundRecordResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns SendRoundRecordResponse instance
          */
-        public static create(properties?: proto.ISendRoundRecordResponse): proto.SendRoundRecordResponse;
+        public static create(properties?: SdkProto.ISendRoundRecordResponse): SdkProto.SendRoundRecordResponse;
 
         /**
-         * Encodes the specified SendRoundRecordResponse message. Does not implicitly {@link proto.SendRoundRecordResponse.verify|verify} messages.
+         * Encodes the specified SendRoundRecordResponse message. Does not implicitly {@link SdkProto.SendRoundRecordResponse.verify|verify} messages.
          * @param message SendRoundRecordResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendRoundRecordResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendRoundRecordResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendRoundRecordResponse message, length delimited. Does not implicitly {@link proto.SendRoundRecordResponse.verify|verify} messages.
+         * Encodes the specified SendRoundRecordResponse message, length delimited. Does not implicitly {@link SdkProto.SendRoundRecordResponse.verify|verify} messages.
          * @param message SendRoundRecordResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendRoundRecordResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendRoundRecordResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendRoundRecordResponse message from the specified reader or buffer.
@@ -5517,7 +5517,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendRoundRecordResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendRoundRecordResponse;
 
         /**
          * Decodes a SendRoundRecordResponse message from the specified reader or buffer, length delimited.
@@ -5526,7 +5526,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendRoundRecordResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendRoundRecordResponse;
 
         /**
          * Verifies a SendRoundRecordResponse message.
@@ -5540,7 +5540,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendRoundRecordResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendRoundRecordResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendRoundRecordResponse;
 
         /**
          * Creates a plain object from a SendRoundRecordResponse message. Also converts values to other types if specified.
@@ -5548,7 +5548,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendRoundRecordResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendRoundRecordResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendRoundRecordResponse to JSON.
@@ -5582,7 +5582,7 @@ export namespace proto {
         ruleId?: (number|null);
 
         /** SendGameOverResponse users */
-        users?: (proto.IUser[]|null);
+        users?: (SdkProto.IUser[]|null);
     }
 
     /** Represents a SendGameOverResponse. */
@@ -5592,7 +5592,7 @@ export namespace proto {
          * Constructs a new SendGameOverResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendGameOverResponse);
+        constructor(properties?: SdkProto.ISendGameOverResponse);
 
         /** SendGameOverResponse state. */
         public state: number;
@@ -5616,30 +5616,30 @@ export namespace proto {
         public ruleId: number;
 
         /** SendGameOverResponse users. */
-        public users: proto.IUser[];
+        public users: SdkProto.IUser[];
 
         /**
          * Creates a new SendGameOverResponse instance using the specified properties.
          * @param [properties] Properties to set
          * @returns SendGameOverResponse instance
          */
-        public static create(properties?: proto.ISendGameOverResponse): proto.SendGameOverResponse;
+        public static create(properties?: SdkProto.ISendGameOverResponse): SdkProto.SendGameOverResponse;
 
         /**
-         * Encodes the specified SendGameOverResponse message. Does not implicitly {@link proto.SendGameOverResponse.verify|verify} messages.
+         * Encodes the specified SendGameOverResponse message. Does not implicitly {@link SdkProto.SendGameOverResponse.verify|verify} messages.
          * @param message SendGameOverResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendGameOverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendGameOverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendGameOverResponse message, length delimited. Does not implicitly {@link proto.SendGameOverResponse.verify|verify} messages.
+         * Encodes the specified SendGameOverResponse message, length delimited. Does not implicitly {@link SdkProto.SendGameOverResponse.verify|verify} messages.
          * @param message SendGameOverResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendGameOverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendGameOverResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendGameOverResponse message from the specified reader or buffer.
@@ -5649,7 +5649,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendGameOverResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendGameOverResponse;
 
         /**
          * Decodes a SendGameOverResponse message from the specified reader or buffer, length delimited.
@@ -5658,7 +5658,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendGameOverResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendGameOverResponse;
 
         /**
          * Verifies a SendGameOverResponse message.
@@ -5672,7 +5672,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendGameOverResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendGameOverResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendGameOverResponse;
 
         /**
          * Creates a plain object from a SendGameOverResponse message. Also converts values to other types if specified.
@@ -5680,7 +5680,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendGameOverResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendGameOverResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendGameOverResponse to JSON.
@@ -5721,7 +5721,7 @@ export namespace proto {
          * Constructs a new SendUserQDZResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserQDZResponse);
+        constructor(properties?: SdkProto.ISendUserQDZResponse);
 
         /** SendUserQDZResponse round. */
         public round: number;
@@ -5749,23 +5749,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserQDZResponse instance
          */
-        public static create(properties?: proto.ISendUserQDZResponse): proto.SendUserQDZResponse;
+        public static create(properties?: SdkProto.ISendUserQDZResponse): SdkProto.SendUserQDZResponse;
 
         /**
-         * Encodes the specified SendUserQDZResponse message. Does not implicitly {@link proto.SendUserQDZResponse.verify|verify} messages.
+         * Encodes the specified SendUserQDZResponse message. Does not implicitly {@link SdkProto.SendUserQDZResponse.verify|verify} messages.
          * @param message SendUserQDZResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserQDZResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserQDZResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserQDZResponse message, length delimited. Does not implicitly {@link proto.SendUserQDZResponse.verify|verify} messages.
+         * Encodes the specified SendUserQDZResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQDZResponse.verify|verify} messages.
          * @param message SendUserQDZResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserQDZResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserQDZResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserQDZResponse message from the specified reader or buffer.
@@ -5775,7 +5775,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserQDZResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserQDZResponse;
 
         /**
          * Decodes a SendUserQDZResponse message from the specified reader or buffer, length delimited.
@@ -5784,7 +5784,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserQDZResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserQDZResponse;
 
         /**
          * Verifies a SendUserQDZResponse message.
@@ -5798,7 +5798,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserQDZResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserQDZResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserQDZResponse;
 
         /**
          * Creates a plain object from a SendUserQDZResponse message. Also converts values to other types if specified.
@@ -5806,7 +5806,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserQDZResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserQDZResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserQDZResponse to JSON.
@@ -5844,7 +5844,7 @@ export namespace proto {
          * Constructs a new SendUserQDZ2Response.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserQDZ2Response);
+        constructor(properties?: SdkProto.ISendUserQDZ2Response);
 
         /** SendUserQDZ2Response round. */
         public round: number;
@@ -5869,23 +5869,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserQDZ2Response instance
          */
-        public static create(properties?: proto.ISendUserQDZ2Response): proto.SendUserQDZ2Response;
+        public static create(properties?: SdkProto.ISendUserQDZ2Response): SdkProto.SendUserQDZ2Response;
 
         /**
-         * Encodes the specified SendUserQDZ2Response message. Does not implicitly {@link proto.SendUserQDZ2Response.verify|verify} messages.
+         * Encodes the specified SendUserQDZ2Response message. Does not implicitly {@link SdkProto.SendUserQDZ2Response.verify|verify} messages.
          * @param message SendUserQDZ2Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserQDZ2Response, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserQDZ2Response, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserQDZ2Response message, length delimited. Does not implicitly {@link proto.SendUserQDZ2Response.verify|verify} messages.
+         * Encodes the specified SendUserQDZ2Response message, length delimited. Does not implicitly {@link SdkProto.SendUserQDZ2Response.verify|verify} messages.
          * @param message SendUserQDZ2Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserQDZ2Response, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserQDZ2Response, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserQDZ2Response message from the specified reader or buffer.
@@ -5895,7 +5895,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserQDZ2Response;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserQDZ2Response;
 
         /**
          * Decodes a SendUserQDZ2Response message from the specified reader or buffer, length delimited.
@@ -5904,7 +5904,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserQDZ2Response;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserQDZ2Response;
 
         /**
          * Verifies a SendUserQDZ2Response message.
@@ -5918,7 +5918,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserQDZ2Response
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserQDZ2Response;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserQDZ2Response;
 
         /**
          * Creates a plain object from a SendUserQDZ2Response message. Also converts values to other types if specified.
@@ -5926,7 +5926,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserQDZ2Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserQDZ2Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserQDZ2Response to JSON.
@@ -5958,7 +5958,7 @@ export namespace proto {
          * Constructs a new SendUserMPResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserMPResponse);
+        constructor(properties?: SdkProto.ISendUserMPResponse);
 
         /** SendUserMPResponse showAll. */
         public showAll: number;
@@ -5977,23 +5977,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserMPResponse instance
          */
-        public static create(properties?: proto.ISendUserMPResponse): proto.SendUserMPResponse;
+        public static create(properties?: SdkProto.ISendUserMPResponse): SdkProto.SendUserMPResponse;
 
         /**
-         * Encodes the specified SendUserMPResponse message. Does not implicitly {@link proto.SendUserMPResponse.verify|verify} messages.
+         * Encodes the specified SendUserMPResponse message. Does not implicitly {@link SdkProto.SendUserMPResponse.verify|verify} messages.
          * @param message SendUserMPResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserMPResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserMPResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserMPResponse message, length delimited. Does not implicitly {@link proto.SendUserMPResponse.verify|verify} messages.
+         * Encodes the specified SendUserMPResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserMPResponse.verify|verify} messages.
          * @param message SendUserMPResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserMPResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserMPResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserMPResponse message from the specified reader or buffer.
@@ -6003,7 +6003,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserMPResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserMPResponse;
 
         /**
          * Decodes a SendUserMPResponse message from the specified reader or buffer, length delimited.
@@ -6012,7 +6012,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserMPResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserMPResponse;
 
         /**
          * Verifies a SendUserMPResponse message.
@@ -6026,7 +6026,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserMPResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserMPResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserMPResponse;
 
         /**
          * Creates a plain object from a SendUserMPResponse message. Also converts values to other types if specified.
@@ -6034,7 +6034,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserMPResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserMPResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserMPResponse to JSON.
@@ -6072,7 +6072,7 @@ export namespace proto {
          * Constructs a new SendUserMP2Response.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserMP2Response);
+        constructor(properties?: SdkProto.ISendUserMP2Response);
 
         /** SendUserMP2Response round. */
         public round: number;
@@ -6097,23 +6097,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserMP2Response instance
          */
-        public static create(properties?: proto.ISendUserMP2Response): proto.SendUserMP2Response;
+        public static create(properties?: SdkProto.ISendUserMP2Response): SdkProto.SendUserMP2Response;
 
         /**
-         * Encodes the specified SendUserMP2Response message. Does not implicitly {@link proto.SendUserMP2Response.verify|verify} messages.
+         * Encodes the specified SendUserMP2Response message. Does not implicitly {@link SdkProto.SendUserMP2Response.verify|verify} messages.
          * @param message SendUserMP2Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserMP2Response, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserMP2Response, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserMP2Response message, length delimited. Does not implicitly {@link proto.SendUserMP2Response.verify|verify} messages.
+         * Encodes the specified SendUserMP2Response message, length delimited. Does not implicitly {@link SdkProto.SendUserMP2Response.verify|verify} messages.
          * @param message SendUserMP2Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserMP2Response, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserMP2Response, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserMP2Response message from the specified reader or buffer.
@@ -6123,7 +6123,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserMP2Response;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserMP2Response;
 
         /**
          * Decodes a SendUserMP2Response message from the specified reader or buffer, length delimited.
@@ -6132,7 +6132,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserMP2Response;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserMP2Response;
 
         /**
          * Verifies a SendUserMP2Response message.
@@ -6146,7 +6146,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserMP2Response
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserMP2Response;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserMP2Response;
 
         /**
          * Creates a plain object from a SendUserMP2Response message. Also converts values to other types if specified.
@@ -6154,7 +6154,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserMP2Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserMP2Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserMP2Response to JSON.
@@ -6180,7 +6180,7 @@ export namespace proto {
          * Constructs a new SendDiamondChangeResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendDiamondChangeResponse);
+        constructor(properties?: SdkProto.ISendDiamondChangeResponse);
 
         /** SendDiamondChangeResponse userId. */
         public userId: number;
@@ -6193,23 +6193,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendDiamondChangeResponse instance
          */
-        public static create(properties?: proto.ISendDiamondChangeResponse): proto.SendDiamondChangeResponse;
+        public static create(properties?: SdkProto.ISendDiamondChangeResponse): SdkProto.SendDiamondChangeResponse;
 
         /**
-         * Encodes the specified SendDiamondChangeResponse message. Does not implicitly {@link proto.SendDiamondChangeResponse.verify|verify} messages.
+         * Encodes the specified SendDiamondChangeResponse message. Does not implicitly {@link SdkProto.SendDiamondChangeResponse.verify|verify} messages.
          * @param message SendDiamondChangeResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendDiamondChangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendDiamondChangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendDiamondChangeResponse message, length delimited. Does not implicitly {@link proto.SendDiamondChangeResponse.verify|verify} messages.
+         * Encodes the specified SendDiamondChangeResponse message, length delimited. Does not implicitly {@link SdkProto.SendDiamondChangeResponse.verify|verify} messages.
          * @param message SendDiamondChangeResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendDiamondChangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendDiamondChangeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendDiamondChangeResponse message from the specified reader or buffer.
@@ -6219,7 +6219,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendDiamondChangeResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendDiamondChangeResponse;
 
         /**
          * Decodes a SendDiamondChangeResponse message from the specified reader or buffer, length delimited.
@@ -6228,7 +6228,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendDiamondChangeResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendDiamondChangeResponse;
 
         /**
          * Verifies a SendDiamondChangeResponse message.
@@ -6242,7 +6242,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendDiamondChangeResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendDiamondChangeResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendDiamondChangeResponse;
 
         /**
          * Creates a plain object from a SendDiamondChangeResponse message. Also converts values to other types if specified.
@@ -6250,7 +6250,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendDiamondChangeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendDiamondChangeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendDiamondChangeResponse to JSON.
@@ -6276,7 +6276,7 @@ export namespace proto {
          * Constructs a new SendCancelAutoResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendCancelAutoResponse);
+        constructor(properties?: SdkProto.ISendCancelAutoResponse);
 
         /** SendCancelAutoResponse userId. */
         public userId: number;
@@ -6289,23 +6289,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendCancelAutoResponse instance
          */
-        public static create(properties?: proto.ISendCancelAutoResponse): proto.SendCancelAutoResponse;
+        public static create(properties?: SdkProto.ISendCancelAutoResponse): SdkProto.SendCancelAutoResponse;
 
         /**
-         * Encodes the specified SendCancelAutoResponse message. Does not implicitly {@link proto.SendCancelAutoResponse.verify|verify} messages.
+         * Encodes the specified SendCancelAutoResponse message. Does not implicitly {@link SdkProto.SendCancelAutoResponse.verify|verify} messages.
          * @param message SendCancelAutoResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendCancelAutoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendCancelAutoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendCancelAutoResponse message, length delimited. Does not implicitly {@link proto.SendCancelAutoResponse.verify|verify} messages.
+         * Encodes the specified SendCancelAutoResponse message, length delimited. Does not implicitly {@link SdkProto.SendCancelAutoResponse.verify|verify} messages.
          * @param message SendCancelAutoResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendCancelAutoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendCancelAutoResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendCancelAutoResponse message from the specified reader or buffer.
@@ -6315,7 +6315,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendCancelAutoResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendCancelAutoResponse;
 
         /**
          * Decodes a SendCancelAutoResponse message from the specified reader or buffer, length delimited.
@@ -6324,7 +6324,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendCancelAutoResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendCancelAutoResponse;
 
         /**
          * Verifies a SendCancelAutoResponse message.
@@ -6338,7 +6338,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendCancelAutoResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendCancelAutoResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendCancelAutoResponse;
 
         /**
          * Creates a plain object from a SendCancelAutoResponse message. Also converts values to other types if specified.
@@ -6346,7 +6346,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendCancelAutoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendCancelAutoResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendCancelAutoResponse to JSON.
@@ -6369,7 +6369,7 @@ export namespace proto {
          * Constructs a new DelayCheckResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IDelayCheckResponse);
+        constructor(properties?: SdkProto.IDelayCheckResponse);
 
         /** DelayCheckResponse content. */
         public content: string;
@@ -6379,23 +6379,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns DelayCheckResponse instance
          */
-        public static create(properties?: proto.IDelayCheckResponse): proto.DelayCheckResponse;
+        public static create(properties?: SdkProto.IDelayCheckResponse): SdkProto.DelayCheckResponse;
 
         /**
-         * Encodes the specified DelayCheckResponse message. Does not implicitly {@link proto.DelayCheckResponse.verify|verify} messages.
+         * Encodes the specified DelayCheckResponse message. Does not implicitly {@link SdkProto.DelayCheckResponse.verify|verify} messages.
          * @param message DelayCheckResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IDelayCheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IDelayCheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified DelayCheckResponse message, length delimited. Does not implicitly {@link proto.DelayCheckResponse.verify|verify} messages.
+         * Encodes the specified DelayCheckResponse message, length delimited. Does not implicitly {@link SdkProto.DelayCheckResponse.verify|verify} messages.
          * @param message DelayCheckResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IDelayCheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IDelayCheckResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a DelayCheckResponse message from the specified reader or buffer.
@@ -6405,7 +6405,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.DelayCheckResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.DelayCheckResponse;
 
         /**
          * Decodes a DelayCheckResponse message from the specified reader or buffer, length delimited.
@@ -6414,7 +6414,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.DelayCheckResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.DelayCheckResponse;
 
         /**
          * Verifies a DelayCheckResponse message.
@@ -6428,7 +6428,7 @@ export namespace proto {
          * @param object Plain object
          * @returns DelayCheckResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.DelayCheckResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.DelayCheckResponse;
 
         /**
          * Creates a plain object from a DelayCheckResponse message. Also converts values to other types if specified.
@@ -6436,7 +6436,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.DelayCheckResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.DelayCheckResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this DelayCheckResponse to JSON.
@@ -6459,7 +6459,7 @@ export namespace proto {
          * Constructs a new SendNoticeClientDismissResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendNoticeClientDismissResponse);
+        constructor(properties?: SdkProto.ISendNoticeClientDismissResponse);
 
         /** SendNoticeClientDismissResponse userId. */
         public userId: number;
@@ -6469,23 +6469,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendNoticeClientDismissResponse instance
          */
-        public static create(properties?: proto.ISendNoticeClientDismissResponse): proto.SendNoticeClientDismissResponse;
+        public static create(properties?: SdkProto.ISendNoticeClientDismissResponse): SdkProto.SendNoticeClientDismissResponse;
 
         /**
-         * Encodes the specified SendNoticeClientDismissResponse message. Does not implicitly {@link proto.SendNoticeClientDismissResponse.verify|verify} messages.
+         * Encodes the specified SendNoticeClientDismissResponse message. Does not implicitly {@link SdkProto.SendNoticeClientDismissResponse.verify|verify} messages.
          * @param message SendNoticeClientDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendNoticeClientDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendNoticeClientDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendNoticeClientDismissResponse message, length delimited. Does not implicitly {@link proto.SendNoticeClientDismissResponse.verify|verify} messages.
+         * Encodes the specified SendNoticeClientDismissResponse message, length delimited. Does not implicitly {@link SdkProto.SendNoticeClientDismissResponse.verify|verify} messages.
          * @param message SendNoticeClientDismissResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendNoticeClientDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendNoticeClientDismissResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendNoticeClientDismissResponse message from the specified reader or buffer.
@@ -6495,7 +6495,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendNoticeClientDismissResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendNoticeClientDismissResponse;
 
         /**
          * Decodes a SendNoticeClientDismissResponse message from the specified reader or buffer, length delimited.
@@ -6504,7 +6504,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendNoticeClientDismissResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendNoticeClientDismissResponse;
 
         /**
          * Verifies a SendNoticeClientDismissResponse message.
@@ -6518,7 +6518,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendNoticeClientDismissResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendNoticeClientDismissResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendNoticeClientDismissResponse;
 
         /**
          * Creates a plain object from a SendNoticeClientDismissResponse message. Also converts values to other types if specified.
@@ -6526,7 +6526,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendNoticeClientDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendNoticeClientDismissResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendNoticeClientDismissResponse to JSON.
@@ -6555,7 +6555,7 @@ export namespace proto {
          * Constructs a new SendRemainTimeResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendRemainTimeResponse);
+        constructor(properties?: SdkProto.ISendRemainTimeResponse);
 
         /** SendRemainTimeResponse time. */
         public time: number;
@@ -6571,23 +6571,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendRemainTimeResponse instance
          */
-        public static create(properties?: proto.ISendRemainTimeResponse): proto.SendRemainTimeResponse;
+        public static create(properties?: SdkProto.ISendRemainTimeResponse): SdkProto.SendRemainTimeResponse;
 
         /**
-         * Encodes the specified SendRemainTimeResponse message. Does not implicitly {@link proto.SendRemainTimeResponse.verify|verify} messages.
+         * Encodes the specified SendRemainTimeResponse message. Does not implicitly {@link SdkProto.SendRemainTimeResponse.verify|verify} messages.
          * @param message SendRemainTimeResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendRemainTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendRemainTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendRemainTimeResponse message, length delimited. Does not implicitly {@link proto.SendRemainTimeResponse.verify|verify} messages.
+         * Encodes the specified SendRemainTimeResponse message, length delimited. Does not implicitly {@link SdkProto.SendRemainTimeResponse.verify|verify} messages.
          * @param message SendRemainTimeResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendRemainTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendRemainTimeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendRemainTimeResponse message from the specified reader or buffer.
@@ -6597,7 +6597,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendRemainTimeResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendRemainTimeResponse;
 
         /**
          * Decodes a SendRemainTimeResponse message from the specified reader or buffer, length delimited.
@@ -6606,7 +6606,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendRemainTimeResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendRemainTimeResponse;
 
         /**
          * Verifies a SendRemainTimeResponse message.
@@ -6620,7 +6620,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendRemainTimeResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendRemainTimeResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendRemainTimeResponse;
 
         /**
          * Creates a plain object from a SendRemainTimeResponse message. Also converts values to other types if specified.
@@ -6628,7 +6628,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendRemainTimeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendRemainTimeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendRemainTimeResponse to JSON.
@@ -6651,7 +6651,7 @@ export namespace proto {
          * Constructs a new SendUserQuitByAdminResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendUserQuitByAdminResponse);
+        constructor(properties?: SdkProto.ISendUserQuitByAdminResponse);
 
         /** SendUserQuitByAdminResponse userId. */
         public userId: number;
@@ -6661,23 +6661,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendUserQuitByAdminResponse instance
          */
-        public static create(properties?: proto.ISendUserQuitByAdminResponse): proto.SendUserQuitByAdminResponse;
+        public static create(properties?: SdkProto.ISendUserQuitByAdminResponse): SdkProto.SendUserQuitByAdminResponse;
 
         /**
-         * Encodes the specified SendUserQuitByAdminResponse message. Does not implicitly {@link proto.SendUserQuitByAdminResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitByAdminResponse message. Does not implicitly {@link SdkProto.SendUserQuitByAdminResponse.verify|verify} messages.
          * @param message SendUserQuitByAdminResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendUserQuitByAdminResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendUserQuitByAdminResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendUserQuitByAdminResponse message, length delimited. Does not implicitly {@link proto.SendUserQuitByAdminResponse.verify|verify} messages.
+         * Encodes the specified SendUserQuitByAdminResponse message, length delimited. Does not implicitly {@link SdkProto.SendUserQuitByAdminResponse.verify|verify} messages.
          * @param message SendUserQuitByAdminResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendUserQuitByAdminResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendUserQuitByAdminResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendUserQuitByAdminResponse message from the specified reader or buffer.
@@ -6687,7 +6687,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendUserQuitByAdminResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendUserQuitByAdminResponse;
 
         /**
          * Decodes a SendUserQuitByAdminResponse message from the specified reader or buffer, length delimited.
@@ -6696,7 +6696,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendUserQuitByAdminResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendUserQuitByAdminResponse;
 
         /**
          * Verifies a SendUserQuitByAdminResponse message.
@@ -6710,7 +6710,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendUserQuitByAdminResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendUserQuitByAdminResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendUserQuitByAdminResponse;
 
         /**
          * Creates a plain object from a SendUserQuitByAdminResponse message. Also converts values to other types if specified.
@@ -6718,7 +6718,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendUserQuitByAdminResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendUserQuitByAdminResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendUserQuitByAdminResponse to JSON.
@@ -6741,7 +6741,7 @@ export namespace proto {
          * Constructs a new SendHeartBeatResponse.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.ISendHeartBeatResponse);
+        constructor(properties?: SdkProto.ISendHeartBeatResponse);
 
         /** SendHeartBeatResponse currentTime. */
         public currentTime: (number|Long);
@@ -6751,23 +6751,23 @@ export namespace proto {
          * @param [properties] Properties to set
          * @returns SendHeartBeatResponse instance
          */
-        public static create(properties?: proto.ISendHeartBeatResponse): proto.SendHeartBeatResponse;
+        public static create(properties?: SdkProto.ISendHeartBeatResponse): SdkProto.SendHeartBeatResponse;
 
         /**
-         * Encodes the specified SendHeartBeatResponse message. Does not implicitly {@link proto.SendHeartBeatResponse.verify|verify} messages.
+         * Encodes the specified SendHeartBeatResponse message. Does not implicitly {@link SdkProto.SendHeartBeatResponse.verify|verify} messages.
          * @param message SendHeartBeatResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.ISendHeartBeatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.ISendHeartBeatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SendHeartBeatResponse message, length delimited. Does not implicitly {@link proto.SendHeartBeatResponse.verify|verify} messages.
+         * Encodes the specified SendHeartBeatResponse message, length delimited. Does not implicitly {@link SdkProto.SendHeartBeatResponse.verify|verify} messages.
          * @param message SendHeartBeatResponse message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.ISendHeartBeatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.ISendHeartBeatResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a SendHeartBeatResponse message from the specified reader or buffer.
@@ -6777,7 +6777,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.SendHeartBeatResponse;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.SendHeartBeatResponse;
 
         /**
          * Decodes a SendHeartBeatResponse message from the specified reader or buffer, length delimited.
@@ -6786,7 +6786,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.SendHeartBeatResponse;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.SendHeartBeatResponse;
 
         /**
          * Verifies a SendHeartBeatResponse message.
@@ -6800,7 +6800,7 @@ export namespace proto {
          * @param object Plain object
          * @returns SendHeartBeatResponse
          */
-        public static fromObject(object: { [k: string]: any }): proto.SendHeartBeatResponse;
+        public static fromObject(object: { [k: string]: any }): SdkProto.SendHeartBeatResponse;
 
         /**
          * Creates a plain object from a SendHeartBeatResponse message. Also converts values to other types if specified.
@@ -6808,7 +6808,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.SendHeartBeatResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.SendHeartBeatResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this SendHeartBeatResponse to JSON.
@@ -6824,103 +6824,103 @@ export namespace proto {
         msg?: (string|null);
 
         /** Response code */
-        code?: (proto.Response.ErrorCode|null);
+        code?: (SdkProto.Response.ErrorCode|null);
 
         /** Response serverTime */
         serverTime?: (number|Long|null);
 
         /** Response cmd */
-        cmd?: (proto.Request.CMD|null);
+        cmd?: (SdkProto.Request.CMD|null);
 
         /** Response loginResponse */
-        loginResponse?: (proto.ILoginResponse|null);
+        loginResponse?: (SdkProto.ILoginResponse|null);
 
         /** Response registerPhoneResponse */
-        registerPhoneResponse?: (proto.IRegisterPhoneRespone|null);
+        registerPhoneResponse?: (SdkProto.IRegisterPhoneRespone|null);
 
         /** Response getUserInfoResponse */
-        getUserInfoResponse?: (proto.IGetUserInfoResponse|null);
+        getUserInfoResponse?: (SdkProto.IGetUserInfoResponse|null);
 
         /** Response coinBankResponse */
-        coinBankResponse?: (proto.ICoinBankResponse|null);
+        coinBankResponse?: (SdkProto.ICoinBankResponse|null);
 
         /** Response changeSignResponse */
-        changeSignResponse?: (proto.IChangeSignResponse|null);
+        changeSignResponse?: (SdkProto.IChangeSignResponse|null);
 
         /** Response sendDisCardResponse */
-        sendDisCardResponse?: (proto.ISendDisCardResponse|null);
+        sendDisCardResponse?: (SdkProto.ISendDisCardResponse|null);
 
         /** Response sendPassPaiResponse */
-        sendPassPaiResponse?: (proto.ISendPassPaiResponse|null);
+        sendPassPaiResponse?: (SdkProto.ISendPassPaiResponse|null);
 
         /** Response sendUserQDZResponse */
-        sendUserQDZResponse?: (proto.ISendUserQDZResponse|null);
+        sendUserQDZResponse?: (SdkProto.ISendUserQDZResponse|null);
 
         /** Response sendUserQDZ2Response */
-        sendUserQDZ2Response?: (proto.ISendUserQDZ2Response|null);
+        sendUserQDZ2Response?: (SdkProto.ISendUserQDZ2Response|null);
 
         /** Response sendUserMPResponse */
-        sendUserMPResponse?: (proto.ISendUserMPResponse|null);
+        sendUserMPResponse?: (SdkProto.ISendUserMPResponse|null);
 
         /** Response sendUserMP2Response */
-        sendUserMP2Response?: (proto.ISendUserMP2Response|null);
+        sendUserMP2Response?: (SdkProto.ISendUserMP2Response|null);
 
         /** Response sendRoundRecordResponse */
-        sendRoundRecordResponse?: (proto.ISendRoundRecordResponse|null);
+        sendRoundRecordResponse?: (SdkProto.ISendRoundRecordResponse|null);
 
         /** Response sendReconnectQuitResponse */
-        sendReconnectQuitResponse?: (proto.ISendReconnectQuitResponse|null);
+        sendReconnectQuitResponse?: (SdkProto.ISendReconnectQuitResponse|null);
 
         /** Response userReconnectResponse */
-        userReconnectResponse?: (proto.IUserReconnectResponse|null);
+        userReconnectResponse?: (SdkProto.IUserReconnectResponse|null);
 
         /** Response sendUserReconnectResponse */
-        sendUserReconnectResponse?: (proto.ISendUserReconnectResponse|null);
+        sendUserReconnectResponse?: (SdkProto.ISendUserReconnectResponse|null);
 
         /** Response sendApplyDismissResponse */
-        sendApplyDismissResponse?: (proto.ISendApplyDismissResponse|null);
+        sendApplyDismissResponse?: (SdkProto.ISendApplyDismissResponse|null);
 
         /** Response sendAgreeDismissResponse */
-        sendAgreeDismissResponse?: (proto.ISendAgreeDismissResponse|null);
+        sendAgreeDismissResponse?: (SdkProto.ISendAgreeDismissResponse|null);
 
         /** Response sendDismissResultResponse */
-        sendDismissResultResponse?: (proto.ISendDismissResultResponse|null);
+        sendDismissResultResponse?: (SdkProto.ISendDismissResultResponse|null);
 
         /** Response sendUserQuitResponse */
-        sendUserQuitResponse?: (proto.ISendUserQuitResponse|null);
+        sendUserQuitResponse?: (SdkProto.ISendUserQuitResponse|null);
 
         /** Response sendMessageResponse */
-        sendMessageResponse?: (proto.ISendMessageResponse|null);
+        sendMessageResponse?: (SdkProto.ISendMessageResponse|null);
 
         /** Response sendUserOnBackResponse */
-        sendUserOnBackResponse?: (proto.ISendUserOnBackResponse|null);
+        sendUserOnBackResponse?: (SdkProto.ISendUserOnBackResponse|null);
 
         /** Response sendGameOverResponse */
-        sendGameOverResponse?: (proto.ISendGameOverResponse|null);
+        sendGameOverResponse?: (SdkProto.ISendGameOverResponse|null);
 
         /** Response sendDiamondChangeResponse */
-        sendDiamondChangeResponse?: (proto.ISendDiamondChangeResponse|null);
+        sendDiamondChangeResponse?: (SdkProto.ISendDiamondChangeResponse|null);
 
         /** Response sendCancelAutoResponse */
-        sendCancelAutoResponse?: (proto.ISendCancelAutoResponse|null);
+        sendCancelAutoResponse?: (SdkProto.ISendCancelAutoResponse|null);
 
         /** Response delayCheckResponse */
-        delayCheckResponse?: (proto.IDelayCheckResponse|null);
+        delayCheckResponse?: (SdkProto.IDelayCheckResponse|null);
 
         /** Response sendRemainTimeResponse */
-        sendRemainTimeResponse?: (proto.ISendRemainTimeResponse|null);
+        sendRemainTimeResponse?: (SdkProto.ISendRemainTimeResponse|null);
 
         /** Response sendNoticeClientDismissResponse */
-        sendNoticeClientDismissResponse?: (proto.ISendNoticeClientDismissResponse|null);
+        sendNoticeClientDismissResponse?: (SdkProto.ISendNoticeClientDismissResponse|null);
 
         /** Response sendUserQuitByAdminResponse */
-        sendUserQuitByAdminResponse?: (proto.ISendUserQuitByAdminResponse|null);
+        sendUserQuitByAdminResponse?: (SdkProto.ISendUserQuitByAdminResponse|null);
 
         /** Response sendCoinRefreshResponse */
-        sendCoinRefreshResponse?: (proto.ISendCoinRefreshResponse|null);
+        sendCoinRefreshResponse?: (SdkProto.ISendCoinRefreshResponse|null);
 
         /** Response sendHeartBeatResponse */
-        sendHeartBeatResponse?: (proto.ISendHeartBeatResponse|null);
+        sendHeartBeatResponse?: (SdkProto.ISendHeartBeatResponse|null);
     }
 
     /** Represents a Response. */
@@ -6930,132 +6930,132 @@ export namespace proto {
          * Constructs a new Response.
          * @param [properties] Properties to set
          */
-        constructor(properties?: proto.IResponse);
+        constructor(properties?: SdkProto.IResponse);
 
         /** Response msg. */
         public msg: string;
 
         /** Response code. */
-        public code: proto.Response.ErrorCode;
+        public code: SdkProto.Response.ErrorCode;
 
         /** Response serverTime. */
         public serverTime: (number|Long);
 
         /** Response cmd. */
-        public cmd: proto.Request.CMD;
+        public cmd: SdkProto.Request.CMD;
 
         /** Response loginResponse. */
-        public loginResponse?: (proto.ILoginResponse|null);
+        public loginResponse?: (SdkProto.ILoginResponse|null);
 
         /** Response registerPhoneResponse. */
-        public registerPhoneResponse?: (proto.IRegisterPhoneRespone|null);
+        public registerPhoneResponse?: (SdkProto.IRegisterPhoneRespone|null);
 
         /** Response getUserInfoResponse. */
-        public getUserInfoResponse?: (proto.IGetUserInfoResponse|null);
+        public getUserInfoResponse?: (SdkProto.IGetUserInfoResponse|null);
 
         /** Response coinBankResponse. */
-        public coinBankResponse?: (proto.ICoinBankResponse|null);
+        public coinBankResponse?: (SdkProto.ICoinBankResponse|null);
 
         /** Response changeSignResponse. */
-        public changeSignResponse?: (proto.IChangeSignResponse|null);
+        public changeSignResponse?: (SdkProto.IChangeSignResponse|null);
 
         /** Response sendDisCardResponse. */
-        public sendDisCardResponse?: (proto.ISendDisCardResponse|null);
+        public sendDisCardResponse?: (SdkProto.ISendDisCardResponse|null);
 
         /** Response sendPassPaiResponse. */
-        public sendPassPaiResponse?: (proto.ISendPassPaiResponse|null);
+        public sendPassPaiResponse?: (SdkProto.ISendPassPaiResponse|null);
 
         /** Response sendUserQDZResponse. */
-        public sendUserQDZResponse?: (proto.ISendUserQDZResponse|null);
+        public sendUserQDZResponse?: (SdkProto.ISendUserQDZResponse|null);
 
         /** Response sendUserQDZ2Response. */
-        public sendUserQDZ2Response?: (proto.ISendUserQDZ2Response|null);
+        public sendUserQDZ2Response?: (SdkProto.ISendUserQDZ2Response|null);
 
         /** Response sendUserMPResponse. */
-        public sendUserMPResponse?: (proto.ISendUserMPResponse|null);
+        public sendUserMPResponse?: (SdkProto.ISendUserMPResponse|null);
 
         /** Response sendUserMP2Response. */
-        public sendUserMP2Response?: (proto.ISendUserMP2Response|null);
+        public sendUserMP2Response?: (SdkProto.ISendUserMP2Response|null);
 
         /** Response sendRoundRecordResponse. */
-        public sendRoundRecordResponse?: (proto.ISendRoundRecordResponse|null);
+        public sendRoundRecordResponse?: (SdkProto.ISendRoundRecordResponse|null);
 
         /** Response sendReconnectQuitResponse. */
-        public sendReconnectQuitResponse?: (proto.ISendReconnectQuitResponse|null);
+        public sendReconnectQuitResponse?: (SdkProto.ISendReconnectQuitResponse|null);
 
         /** Response userReconnectResponse. */
-        public userReconnectResponse?: (proto.IUserReconnectResponse|null);
+        public userReconnectResponse?: (SdkProto.IUserReconnectResponse|null);
 
         /** Response sendUserReconnectResponse. */
-        public sendUserReconnectResponse?: (proto.ISendUserReconnectResponse|null);
+        public sendUserReconnectResponse?: (SdkProto.ISendUserReconnectResponse|null);
 
         /** Response sendApplyDismissResponse. */
-        public sendApplyDismissResponse?: (proto.ISendApplyDismissResponse|null);
+        public sendApplyDismissResponse?: (SdkProto.ISendApplyDismissResponse|null);
 
         /** Response sendAgreeDismissResponse. */
-        public sendAgreeDismissResponse?: (proto.ISendAgreeDismissResponse|null);
+        public sendAgreeDismissResponse?: (SdkProto.ISendAgreeDismissResponse|null);
 
         /** Response sendDismissResultResponse. */
-        public sendDismissResultResponse?: (proto.ISendDismissResultResponse|null);
+        public sendDismissResultResponse?: (SdkProto.ISendDismissResultResponse|null);
 
         /** Response sendUserQuitResponse. */
-        public sendUserQuitResponse?: (proto.ISendUserQuitResponse|null);
+        public sendUserQuitResponse?: (SdkProto.ISendUserQuitResponse|null);
 
         /** Response sendMessageResponse. */
-        public sendMessageResponse?: (proto.ISendMessageResponse|null);
+        public sendMessageResponse?: (SdkProto.ISendMessageResponse|null);
 
         /** Response sendUserOnBackResponse. */
-        public sendUserOnBackResponse?: (proto.ISendUserOnBackResponse|null);
+        public sendUserOnBackResponse?: (SdkProto.ISendUserOnBackResponse|null);
 
         /** Response sendGameOverResponse. */
-        public sendGameOverResponse?: (proto.ISendGameOverResponse|null);
+        public sendGameOverResponse?: (SdkProto.ISendGameOverResponse|null);
 
         /** Response sendDiamondChangeResponse. */
-        public sendDiamondChangeResponse?: (proto.ISendDiamondChangeResponse|null);
+        public sendDiamondChangeResponse?: (SdkProto.ISendDiamondChangeResponse|null);
 
         /** Response sendCancelAutoResponse. */
-        public sendCancelAutoResponse?: (proto.ISendCancelAutoResponse|null);
+        public sendCancelAutoResponse?: (SdkProto.ISendCancelAutoResponse|null);
 
         /** Response delayCheckResponse. */
-        public delayCheckResponse?: (proto.IDelayCheckResponse|null);
+        public delayCheckResponse?: (SdkProto.IDelayCheckResponse|null);
 
         /** Response sendRemainTimeResponse. */
-        public sendRemainTimeResponse?: (proto.ISendRemainTimeResponse|null);
+        public sendRemainTimeResponse?: (SdkProto.ISendRemainTimeResponse|null);
 
         /** Response sendNoticeClientDismissResponse. */
-        public sendNoticeClientDismissResponse?: (proto.ISendNoticeClientDismissResponse|null);
+        public sendNoticeClientDismissResponse?: (SdkProto.ISendNoticeClientDismissResponse|null);
 
         /** Response sendUserQuitByAdminResponse. */
-        public sendUserQuitByAdminResponse?: (proto.ISendUserQuitByAdminResponse|null);
+        public sendUserQuitByAdminResponse?: (SdkProto.ISendUserQuitByAdminResponse|null);
 
         /** Response sendCoinRefreshResponse. */
-        public sendCoinRefreshResponse?: (proto.ISendCoinRefreshResponse|null);
+        public sendCoinRefreshResponse?: (SdkProto.ISendCoinRefreshResponse|null);
 
         /** Response sendHeartBeatResponse. */
-        public sendHeartBeatResponse?: (proto.ISendHeartBeatResponse|null);
+        public sendHeartBeatResponse?: (SdkProto.ISendHeartBeatResponse|null);
 
         /**
          * Creates a new Response instance using the specified properties.
          * @param [properties] Properties to set
          * @returns Response instance
          */
-        public static create(properties?: proto.IResponse): proto.Response;
+        public static create(properties?: SdkProto.IResponse): SdkProto.Response;
 
         /**
-         * Encodes the specified Response message. Does not implicitly {@link proto.Response.verify|verify} messages.
+         * Encodes the specified Response message. Does not implicitly {@link SdkProto.Response.verify|verify} messages.
          * @param message Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: proto.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: SdkProto.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Response message, length delimited. Does not implicitly {@link proto.Response.verify|verify} messages.
+         * Encodes the specified Response message, length delimited. Does not implicitly {@link SdkProto.Response.verify|verify} messages.
          * @param message Response message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: proto.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: SdkProto.IResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
          * Decodes a Response message from the specified reader or buffer.
@@ -7065,7 +7065,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.Response;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SdkProto.Response;
 
         /**
          * Decodes a Response message from the specified reader or buffer, length delimited.
@@ -7074,7 +7074,7 @@ export namespace proto {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.Response;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SdkProto.Response;
 
         /**
          * Verifies a Response message.
@@ -7088,7 +7088,7 @@ export namespace proto {
          * @param object Plain object
          * @returns Response
          */
-        public static fromObject(object: { [k: string]: any }): proto.Response;
+        public static fromObject(object: { [k: string]: any }): SdkProto.Response;
 
         /**
          * Creates a plain object from a Response message. Also converts values to other types if specified.
@@ -7096,7 +7096,7 @@ export namespace proto {
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: proto.Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: SdkProto.Response, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
          * Converts this Response to JSON.
