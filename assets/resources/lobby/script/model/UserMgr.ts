@@ -1,6 +1,7 @@
 import User from "./User";
+import BaseModel from "../../../../script/kernel/model/BaseModel";
 
-export default class UserMgr {
+export default class UserMgr implements BaseModel{
     private static _instance:UserMgr = null;
     private _userList:object = {};
     private _heroId:number = 0;
@@ -10,11 +11,8 @@ export default class UserMgr {
         if(!UserMgr._instance) { UserMgr._instance = new UserMgr; }
         return UserMgr._instance;
     }
-    public static destroy() {
-		if(UserMgr._instance){
-			UserMgr._instance._userList = null;
-			UserMgr._instance = null;
-		}
+    public clear() {
+		this._userList = null;
 	}
 
     public updateUser(info:User)

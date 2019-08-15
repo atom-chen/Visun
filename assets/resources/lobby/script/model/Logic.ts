@@ -12,6 +12,7 @@ export default class Logic {
     private constructor() {
         this.g_EventMgr = EventCenter.instance();
     }
+    
     public static instance() : Logic {
         if(!Logic._instance){ Logic._instance = new Logic; }
         return Logic._instance;
@@ -19,17 +20,17 @@ export default class Logic {
 
     //初始化逻辑数据
     //调用时机：登录前
-    public initDatas(){
-        this.clearDatas();
+    public init(){
+        this.clear();
         this.g_LoginMgr = LoginMgr.instance();
         this.g_UserMgr = UserMgr.instance();
     }
 
     //清理逻辑数据
     //调用时机：重新登录时
-    public clearDatas(){
-        LoginMgr.destroy();
-        UserMgr.destroy();
+    public clear(){
+        LoginMgr.instance().clear();
+        UserMgr.instance().clear();
         this.g_UserMgr = null;
         this.g_LoginMgr = null;
     }

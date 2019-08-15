@@ -1,6 +1,7 @@
-import UserMgr from "./UserMgr";
+import BaseModel from "../../../../script/kernel/model/BaseModel";
+import Logic from "./Logic";
 
-export default class LoginMgr {
+export default class LoginMgr implements BaseModel {
 	private static _instance:LoginMgr = null;
 
 	private constructor(){}
@@ -8,13 +9,11 @@ export default class LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
         return LoginMgr._instance;
 	}
-	public static destroy() {
-		if(LoginMgr._instance){
-			LoginMgr._instance = null;
-		}
+	public clear() {
+		
 	}
 
 	public isLoginSucc() : boolean { 
-		return UserMgr.instance().getHeroId()!==null; 
+		return Logic.instance().g_UserMgr.getHeroId() !== null;
 	}
 }

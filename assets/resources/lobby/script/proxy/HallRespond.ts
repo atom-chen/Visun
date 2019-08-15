@@ -5,7 +5,6 @@ import { WS_URL } from "../../../../script/looker/Consts";
 import WsCore from "../../../../script/kernel/net/WsCore";
 import SubgameEntry from "../utils/SubgameEntry";
 import UIManager from "../../../../script/kernel/gui/UIManager";
-import UserMgr from "../model/UserMgr";
 import Logic from "../model/Logic";
 import HallRequest from "./HallRequest";
 
@@ -14,7 +13,8 @@ HallRespond = {};
 
 HallRespond.req_youke_login = function(info:any){
 	if(!info) return;
-	Logic.instance().clearDatas(); //清理数据
+	Logic.instance().clear(); //清理数据
+	Logic.instance().init();
 	HttpCore.token = info.sid;
 	HallRequest.req_userinfo({ userId:info.userId });
 	HallRequest.req_game_list({ sid:info.sid });
@@ -22,9 +22,9 @@ HallRespond.req_youke_login = function(info:any){
 
 HallRespond.req_userinfo = function(info:any) {
 	if(!info) return;
-	cc.log("登录成功", info)
-	UserMgr.instance().setHeroId(info.userId);
-	UserMgr.instance().updateUser(info);
+	cc.log("登录成功", info);
+	Logic.instance().g_UserMgr.setHeroId(info.userId);
+	Logic.instance().g_UserMgr.updateUser(info);
 
 	var url = WS_URL + HttpCore.token;
 	WsSocket.instance().connect(url, new JsonCodec());
@@ -52,7 +52,7 @@ HallRespond.req_enter_br_room = function(info:any) {
 		var param = {
 			sid: HttpCore.token,
 			gameId: info.gameId,
-			channelId: UserMgr.instance().getHero().channelId
+			channelId: Logic.instance().g_UserMgr.getHero().channelId
 		};
 		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
 	});

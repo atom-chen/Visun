@@ -5,8 +5,8 @@ import HttpCore from "../../../../script/kernel/net/HttpCore";
 import { CLIENT_VERSION } from "../../../../script/looker/Consts";
 import HotUpdator from "../../../../script/kernel/hotupdator/HotUpdator";
 import SceneManager from "../../../../script/kernel/gui/SceneManager";
-import UserMgr from "../model/UserMgr";
 import HallRequest from "../proxy/HallRequest";
+import Logic from "../model/Logic";
 
 
 export default class SubgameEntry {
@@ -66,7 +66,7 @@ export default class SubgameEntry {
 		}
 		
 		cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
-			cc.log("进度：", cpltCnt, totalCnt);
+		//	cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
 			//this.byteProgress.progress = cpltCnt/totalCnt;
 		}, 
@@ -77,7 +77,7 @@ export default class SubgameEntry {
 		
 		if(cfg.game_type===1){
 			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.instance().getHero().channelId})
+			HallRequest.req_room_select_info({gameId:gameId,channelId:Logic.instance().g_UserMgr.getHero().channelId})
 
 			//获得游戏的ws地址
 			var param = {
@@ -86,13 +86,13 @@ export default class SubgameEntry {
 				tableType: 0,
 				gameType: 0,
 				clientVersion: CLIENT_VERSION,
-				channelId: UserMgr.instance().getHero().channelId
+				channelId: Logic.instance().g_UserMgr.getHero().channelId
 			}
 			HallRequest.req_enter_coin_room(param);
 		}
 		else {
 			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.instance().getHero().channelId});
+			HallRequest.req_room_select_info({gameId:gameId,channelId:Logic.instance().g_UserMgr.getHero().channelId});
 
 			//获得游戏的ws地址
 			var param = {
@@ -101,7 +101,7 @@ export default class SubgameEntry {
 				tableType: 1,
 				gameType: 0,
 				clientVersion: CLIENT_VERSION,
-				channelId: UserMgr.instance().getHero().channelId
+				channelId: Logic.instance().g_UserMgr.getHero().channelId
 			}
 			HallRequest.req_enter_br_room(param);
 		}

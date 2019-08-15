@@ -6,7 +6,6 @@ import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 import WsCore from "../../../../../script/kernel/net/WsCore";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/gui/BaseComp";
-import UserMgr from "../../model/UserMgr";
 import { MAIN_URL } from "../../../../../script/looker/Consts";
 import http_rules from "../../proxy/rule/http_rules";
 import HallRequest from "../../proxy/HallRequest";
@@ -15,7 +14,7 @@ import {GameProto} from "../../proxy/pb/GameProto";
 import {SdkProto} from "../../proxy/pb/SdkProto";
 import ws_rules from "../../proxy/rule/ws_rules";
 import ws_responds from "../../proxy/ws_responds";
-import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
+import Logic from "../../model/Logic";
 
 const {ccclass, property} = cc._decorator;
 
@@ -102,7 +101,7 @@ export default class LobbyUI extends BaseComp {
 
     private req_userinfo(data:any) {
         UIManager.toast("登录成功");
-        this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.instance().getHero());
+        this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(Logic.instance().g_UserMgr.getHero());
     }
 
     private req_room_select_info(info){
