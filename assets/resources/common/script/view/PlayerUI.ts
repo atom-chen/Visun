@@ -1,6 +1,7 @@
-import User from "../../lobby/script/model/User";
-import BaseComp from "../../../script/kernel/gui/BaseComp";
-import CommonUtils from "../../../script/kernel/utils/CommonUtils";
+import BaseComp from "../../../../script/kernel/view/BaseComp";
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+import User from "../model/User";
+
 
 const {ccclass, property} = cc._decorator;
 

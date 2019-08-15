@@ -1,7 +1,7 @@
 import GameUtil from "../../../lobby/script/utils/GameUtil";
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
-import BaseComp from "../../../../script/kernel/gui/BaseComp";
-import SceneManager from "../../../../script/kernel/gui/SceneManager";
+import BaseComp from "../../../../script/kernel/view/BaseComp";
+import SceneManager from "../../../../script/kernel/view/SceneManager";
 import ObjectPool from "../../../../script/kernel/pool/ObjectPool";
 
 const {ccclass, property} = cc._decorator;

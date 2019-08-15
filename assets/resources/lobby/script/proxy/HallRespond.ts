@@ -4,9 +4,9 @@ import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
 import { WS_URL } from "../../../../script/looker/Consts";
 import WsCore from "../../../../script/kernel/net/WsCore";
 import SubgameEntry from "../utils/SubgameEntry";
-import UIManager from "../../../../script/kernel/gui/UIManager";
-import Logic from "../model/Logic";
 import HallRequest from "./HallRequest";
+import Logic from "../../../common/script/model/Logic";
+import UIManager from "../../../../script/kernel/view/UIManager";
 
 var HallRespond:any;
 HallRespond = {};

@@ -5,7 +5,7 @@
 // WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
 //---------------------------------
 import DataProcessor from "../codec/DataProcessor";
-import UIManager from "../gui/UIManager";
+import UIManager from "../view/UIManager";
 import WsCore from "./WsCore";
 
 enum ConnState {

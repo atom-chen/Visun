@@ -1,4 +1,3 @@
-import EventCenter from "../../../../script/kernel/event/EventCenter";
 import LoginMgr from "./LoginMgr";
 import UserMgr from "./UserMgr";
 

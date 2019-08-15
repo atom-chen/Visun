@@ -1,11 +1,11 @@
 import SubgameEntry from "../../utils/SubgameEntry";
 import GameConfig from "../../utils/GameConfig";
-import UIManager from "../../../../../script/kernel/gui/UIManager";
+import UIManager from "../../../../../script/kernel/view/UIManager";
 import HttpCore from "../../../../../script/kernel/net/HttpCore";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
 import WsCore from "../../../../../script/kernel/net/WsCore";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
-import BaseComp from "../../../../../script/kernel/gui/BaseComp";
+import BaseComp from "../../../../../script/kernel/view/BaseComp";
 import { MAIN_URL } from "../../../../../script/looker/Consts";
 import http_rules from "../../proxy/rule/http_rules";
 import HallRequest from "../../proxy/HallRequest";
@@ -14,7 +14,8 @@ import {GameProto} from "../../proxy/pb/GameProto";
 import {SdkProto} from "../../proxy/pb/SdkProto";
 import ws_rules from "../../proxy/rule/ws_rules";
 import ws_responds from "../../proxy/ws_responds";
-import Logic from "../../model/Logic";
+import Logic from "../../../../common/script/model/Logic";
+
 
 const {ccclass, property} = cc._decorator;
 

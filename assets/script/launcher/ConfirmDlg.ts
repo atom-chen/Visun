@@ -1,7 +1,7 @@
 //---------------------------------
 // 确认框
 //---------------------------------
-import BaseComp from "../kernel/gui/BaseComp";
+import BaseComp from "../kernel/view/BaseComp";
 import CommonUtils from "../kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;

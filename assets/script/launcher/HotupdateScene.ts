@@ -4,9 +4,9 @@
 const {ccclass, property} = cc._decorator;
 
 import { HOT_STATE } from "../looker/Consts";
-import BaseComp from "../kernel/gui/BaseComp";
+import BaseComp from "../kernel/view/BaseComp";
 import HotUpdator from "../kernel/hotupdator/HotUpdator";
-import SceneManager from "../kernel/gui/SceneManager";
+import SceneManager from "../kernel/view/SceneManager";
 
 @ccclass
 export default class HotupdateScene extends BaseComp {

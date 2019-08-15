@@ -1,5 +1,5 @@
-import UIManager from "../../../../script/kernel/gui/UIManager";
-import BaseComp from "../../../../script/kernel/gui/BaseComp";
+import UIManager from "../../../../script/kernel/view/UIManager";
+import BaseComp from "../../../../script/kernel/view/BaseComp";
 import AudioManager from "../../../../script/kernel/audio/AudioManager";
 
 const {ccclass, property} = cc._decorator;

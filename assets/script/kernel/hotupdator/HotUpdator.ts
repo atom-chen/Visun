@@ -1,5 +1,5 @@
 import { HOT_STATE } from "../../looker/Consts";
-import UIManager from "../gui/UIManager";
+import UIManager from "../view/UIManager";
 
 //---------------------------------
 // 热更

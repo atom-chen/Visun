@@ -1,4 +1,4 @@
-import UIManager from "../../../../script/kernel/gui/UIManager";
+import UIManager from "../../../../script/kernel/view/UIManager";
 import SubgameEntry from "../utils/SubgameEntry";
 import PlatformUtil from "../../../../script/kernel/utils/PlatformUtil";
 import HallRequest from "./HallRequest";
