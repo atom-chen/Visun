@@ -2,7 +2,7 @@ import LoadCenter from "../load/LoadCenter";
 import EventCenter from "../event/EventCenter";
 import EventDef from "../../looker/EventDef";
 import UIManager from "./UIManager";
-import PlatformUtil from "../utils/PlatformUtil";
+import Adaptor from "../adaptor/Adaptor";
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,7 +25,7 @@ export default class SceneManager {
 				cc.loader.releaseResDir("subgames");
 			}
 			LoadCenter.dump(0);
-			PlatformUtil.adaptScreen();
+			Adaptor.adaptScreen();
 			if(onLaunched) { onLaunched(); }
 			EventCenter.instance().fire(EventDef.SCENE_AFTER_SWITCH);
 		}
