@@ -5,13 +5,8 @@ import UserMgr from "./UserMgr";
 export default class Logic {
     private static _instance:Logic = null;
 
-    g_EventMgr:EventCenter;
     g_LoginMgr:LoginMgr;
     g_UserMgr:UserMgr;
-
-    private constructor() {
-        this.g_EventMgr = EventCenter.instance();
-    }
     
     public static instance() : Logic {
         if(!Logic._instance){ Logic._instance = new Logic; }
