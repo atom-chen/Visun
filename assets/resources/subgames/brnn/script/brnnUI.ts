@@ -3,6 +3,7 @@ import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 import BaseComp from "../../../../script/kernel/view/BaseComp";
 import SceneManager from "../../../../script/kernel/view/SceneManager";
 import ObjectPool from "../../../../script/kernel/pool/ObjectPool";
+import TimerManager from "../../../../script/kernel/timer/TimerManager";
 
 const {ccclass, property} = cc._decorator;
 

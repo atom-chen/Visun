@@ -1,4 +1,5 @@
-import CommonUtils from "../../../script/kernel/utils/CommonUtils";
+import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -19,13 +20,5 @@ export default class ChipSpr extends cc.Component {
 
     get value() : number {
         return this._value;
-    }
-
-    reuse() {
-
-    }
-
-    unuse() {
-
     }
 }

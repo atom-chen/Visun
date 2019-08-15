@@ -1,12 +1,11 @@
 import Caller from "../promise/Caller";
-import IPoolObject from "../pool/IPoolObject";
 
 export enum TimerType {
 	frame = 1,
 	second = 2
 };
 
-export class BaseTimer implements IPoolObject {
+export class BaseTimer {
 	protected _id:number;
 	protected _interval:number;
 	protected _func:Caller;
@@ -17,12 +16,8 @@ export class BaseTimer implements IPoolObject {
 	protected _passedTime:number = 0;
 	protected _stoped:boolean = false;
 	protected _paused:boolean = false;
-
-	constructor(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
-		this.reuse(type, id, interval, func, looptimes);
-    }
     
-    public reuse(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
+    public reset(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
@@ -34,29 +29,6 @@ export class BaseTimer implements IPoolObject {
 		this._isLimit = looptimes > 0;
 	}
 
-	public unuse(){
-		this._stoped = true;
-		this._func = null;
-    }
-    
-    public destroy(){
-		this._stoped = true;
-		this._func = null;
-	}
-
-	public getId() : number {
-		return this._id
-	}
-
-	public getTarget() : any {
-		return this._func && this._func.getTarget();
-	}
-
-	public isStoped() : boolean {
-		return this._stoped;
-	}
-
-    
 	public stop() {
 		this._stoped = true;
 		this._func = null;
@@ -94,5 +66,17 @@ export class BaseTimer implements IPoolObject {
 			}
 		}
 		return false;
-	};
+	}
+
+	public getId() : number {
+		return this._id
+	}
+
+	public getTarget() : any {
+		return this._func && this._func.getTarget();
+	}
+
+	public isStoped() : boolean {
+		return this._stoped;
+	}
 }

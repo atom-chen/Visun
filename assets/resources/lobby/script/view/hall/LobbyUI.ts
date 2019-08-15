@@ -15,6 +15,7 @@ import {SdkProto} from "../../proxy/pb/SdkProto";
 import ws_rules from "../../proxy/rule/ws_rules";
 import ws_responds from "../../proxy/ws_responds";
 import Logic from "../../../../common/script/model/Logic";
+import TimerManager from "../../../../../script/kernel/timer/TimerManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -56,6 +57,7 @@ export default class LobbyUI extends BaseComp {
 
         CommonUtils.addClickEvent(this.m_ui.btn_withdraw, function(){ 
             UIManager.openPopwnd("lobby/prefabs/WithdrawUI", null);
+            TimerManager.instance().test();
         }, this);
 
         CommonUtils.addClickEvent(this.m_ui.btn_spread, function(){ 

@@ -29,3 +29,5 @@ export default class Logic {
         this.g_LoginMgr = null;
     }
 }
+
+Logic.instance().init();
