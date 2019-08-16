@@ -1,9 +1,6 @@
 //---------------------------------
 // 通用辅助接口
 //---------------------------------
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class CommonUtils {
 
 	public static traverseNodes(root:any, tbl:any) 
