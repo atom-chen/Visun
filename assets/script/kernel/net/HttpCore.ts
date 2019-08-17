@@ -5,7 +5,7 @@
 //    如果在里面调用了ui操作，而ui可能在响应前已经关闭销毁了,这时候在回调里使用的就是野指针。
 // 2. 如果设置了缓存，会收到两次响应，第一次是从缓存获取的数据，第二次是从服务端拉取的数据。
 //---------------------------------
-import DataProcessor from "../codec/DataProcessor";
+import ICodec from "../codec/ICodec";
 import HttpCodec from "../codec/HttpCodec";
 import LocalCache from "../localcache/LocalCache";
 import EventCenter from "../event/EventCenter";
@@ -23,7 +23,7 @@ export default class HttpCore {
 	public static token:string = "";
 
 	private static _mainUrl:string = "";
-	private static _dataProcessor:DataProcessor = new HttpCodec;	//编码解码器
+	private static _coder:ICodec = new HttpCodec;	//编码解码器
 	private static g_allProtocol:object = {};	//规则
 	private static _responder:any;				//响应句柄
 	private static _hooks:Function[] = [];		//请求钩子
@@ -140,7 +140,7 @@ export default class HttpCore {
 			}
 		}
 
-		var paramStr = this._dataProcessor.encode(tParams, ptoinfo.params);
+		var paramStr = this._coder.encode(tParams, ptoinfo.params);
 
 		if(ptoinfo.reqType==="POST") {
 			paramStr = "data=" + JSON.stringify(tParams);
@@ -188,7 +188,7 @@ export default class HttpCore {
 
 		if( iCode === NetResult.Succ ) {
 			// 解码
-			var info = this._dataProcessor.decode(data);
+			var info = this._coder.decode(data);
 
 			if(info.code === 200) {
 				// 调用响应协议
@@ -230,7 +230,7 @@ export default class HttpCore {
 			finalUrl = url + "/" + addr;
 		}
 
-		var paramStr = this._dataProcessor.encode(params, null);
+		var paramStr = this._coder.encode(params, null);
 		if(paramStr && paramStr != "") {
 			finalUrl = finalUrl + "?" + paramStr;
 		}
@@ -271,7 +271,7 @@ export default class HttpCore {
 			finalUrl = url + "/" + addr;
 		}
 
-		var paramStr = this._dataProcessor.encode(params, null);
+		var paramStr = this._coder.encode(params, null);
 
 		var xhr = cc.loader.getXMLHttpRequest();
 

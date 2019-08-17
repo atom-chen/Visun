@@ -1,9 +1,9 @@
 //---------------------------------
 // Json格式数据编码解码
 //---------------------------------
-import DataProcessor from "./DataProcessor";
+import ICodec from "./ICodec";
 
-export default class JsonCodec implements DataProcessor {
+export default class JsonCodec implements ICodec {
 	
 	encode(data: any) 
 	{
