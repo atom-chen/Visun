@@ -3,14 +3,21 @@
 //------------------------------------------
 export default class LocalCache 
 {
+    private static _all_cache:{[key:string]:any};
     private _secret:any;
     private _filename:string;
     private _datas:object = {};
 
-    constructor(filename:string) 
+    private constructor(filename:string) 
     {
         this._filename = filename;
         this.load();
+    }
+
+    public static instance(key:string) : LocalCache
+    {
+        if(!LocalCache._all_cache[key]){ LocalCache[key] = new LocalCache(key); }
+        return LocalCache._all_cache[key];
     }
 
     //设置密匙

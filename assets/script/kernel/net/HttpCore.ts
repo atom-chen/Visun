@@ -28,7 +28,7 @@ export default class HttpCore {
 	private static _responder:any;				//响应句柄
 	private static _hooks:Function[] = [];		//请求钩子
 	private static _cacheAbles:any = {};
-	private static _localCache:LocalCache = new LocalCache(null);
+	private static _localCache:LocalCache = LocalCache.instance("http");
 
 	//@注册一组协议
 	//ruleList:  规则
