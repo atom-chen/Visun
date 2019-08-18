@@ -5,9 +5,9 @@
 // https://blog.csdn.net/NRatel/article/details/84251138
 // https://www.jianshu.com/p/1598bde2bb97
 //---------------------------------
-import DataProcessor from "./DataProcessor";
+import ICodec from "./ICodec";
 
-export default class ProtobufCodec implements DataProcessor {
+export default class ProtobufCodec implements ICodec {
 
 	encode(pkg:any, mud:string, tsObj:any) 
 	{

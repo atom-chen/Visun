@@ -4,7 +4,7 @@
 // WsSocket.instance().connect("wss://echo.websocket.org", new ProtobufCodec());
 // WsSocket.instance().connect("ws://s1vce.lg98.tech:9920/websocket", new JsonCodec());
 //---------------------------------
-import DataProcessor from "../codec/DataProcessor";
+import ICodec from "../codec/ICodec";
 import UIManager from "../view/UIManager";
 import WsCore from "./WsCore";
 
@@ -26,7 +26,7 @@ export default class WsSocket {
 	private _curState:ConnState = ConnState.unconnect;
 	private _ws:any;
 	private _url:string = "";
-	private _dataProcessor:DataProcessor = null;
+	private _coder:ICodec = null;
 
 	private constructor() {
 		this._curState = ConnState.unconnect;
@@ -52,11 +52,11 @@ export default class WsSocket {
 		}
 		ws.onmessage = function (event) {
 			//cc.log("ws: onmessage");
-			var info = self._dataProcessor.decode(event.data);
+			var info = self._coder.decode(event.data);
 			var cmdId = info.cmd;
 			var data = info.data;
 			if(info.data) {
-				data = self._dataProcessor.decode(info.data);
+				data = self._coder.decode(info.data);
 			}
 			
 			if(10000!==cmdId && 30400!=cmdId){
@@ -92,7 +92,7 @@ export default class WsSocket {
 		self._ws = ws;
 	}
 
-	public connect(url:string, processor:DataProcessor, on_success:Function = null, on_fail:Function = null) 
+	public connect(url:string, processor:ICodec, on_success:Function = null, on_fail:Function = null) 
 	{
 		if(this._url === url && this._ws !== null){
 			cc.log("the same url");
@@ -105,7 +105,7 @@ export default class WsSocket {
 		this.close();
 		this._curState = ConnState.connecting;
 		this._url = url;
-		this._dataProcessor = processor;
+		this._coder = processor;
 		cc.log("连接WebSocket: ", url);
 		var self = this;
 
@@ -146,7 +146,7 @@ export default class WsSocket {
 			data : data
 		}
 
-		var msg = this._dataProcessor.encode(info);
+		var msg = this._coder.encode(info);
 		return this.sendData(msg);
 	}
 

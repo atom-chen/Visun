@@ -1,9 +1,9 @@
 //---------------------------------
 // Json格式数据编码解码
 //---------------------------------
-import DataProcessor from "./DataProcessor";
+import ICodec from "./ICodec";
 
-export default class HttpCodec implements DataProcessor {
+export default class HttpCodec implements ICodec {
     
     //将表形式的数据转换成 "k1=v1&k2=v2&k3=v3" 格式的字符串
 	encode(param:any, rule:any) : string
@@ -24,7 +24,9 @@ export default class HttpCodec implements DataProcessor {
 	
 						} 
 						else {
-							cc.error("参数类型错误", k, param[k]);
+							cc.error("参数类型错误", k, wantType, typeof(param[k]));
+							if(paramStr != "") { paramStr += "&" }
+							paramStr += k + "=" + param[k];
 						}
 					} 
 					else {
