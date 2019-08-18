@@ -12,7 +12,8 @@ export default class UserMgr implements BaseModel{
         return UserMgr._instance;
     }
     public clear() {
-		this._userList = null;
+		this._userList = {};
+		this._heroId = 0;
 	}
 
     public updateUser(info:User)

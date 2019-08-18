@@ -6,27 +6,27 @@ import IChannel from "../channel/IChannel";
 
 export default class StreamProcessor implements IProcessor {
 
-    registProtocol(protocol: any): void {
+    public registProtocol(protocol: any): void {
         
     }
     
-    setResponder(responder: any): void {
+    public setResponder(responder: any): void {
         
     }
 
-    clear(): void {
+    public clear(): void {
         
     }
 
-    setChannel(cluster: IChannel) {
+    public setChannel(cluster: IChannel) {
         
     }
 
-    sendMessage(cmd: number|string, info: any): boolean {
+    public sendMessage(cmd: number|string, info: any): boolean {
         return false;
     }
 
-    onrecvBuff(buff: any): void {
+    public onrecvBuff(buff: any): void {
         
     }
 

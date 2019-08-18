@@ -27,7 +27,7 @@ export default class HttpCore {
 	private static g_allProtocol:object = {};	//规则
 	private static _responder:any;				//响应句柄
 	private static _hooks:Function[] = [];		//请求钩子
-	private static _cacheAbles:any = {};
+	private static _forbitCache:any = {};
 	private static _localCache:LocalCache = LocalCache.instance("http");
 
 	//@注册一组协议
@@ -50,9 +50,6 @@ export default class HttpCore {
 			if(!requestor[ptoname]) {
 				cc.error("没有请求接口", ptoname);
 			}
-
-			this.setCacheAble(ptoname, ruleList[i].cacheAble===1);
-			//this.setCacheAble(ptoname, true); //测试用
 		}
 
 		this.g_allProtocol = ruleList;
@@ -73,7 +70,7 @@ export default class HttpCore {
 	//设置某条协议是否缓存
 	public static setCacheAble(ptoname:string, bFlag:boolean)
 	{
-		this._cacheAbles[ptoname] = bFlag;
+		this._forbitCache[ptoname] = !bFlag;
 	}
 
 	//--------------------------------------------------------------------------------
@@ -113,7 +110,7 @@ export default class HttpCore {
 
 		cc.log("[请求]：", ptoname);
 
-		var cacheData = this._localCache.get(ptoname);
+		var cacheData = HttpCore._localCache.getData(ptoname);
 		if(cacheData){
 			cc.log("---- 从缓存获取http数据: ", ptoname);
 			this.onRespData(ptoname, 0, cacheData, unsafeCallback);
@@ -151,16 +148,16 @@ export default class HttpCore {
 			case "GET":
 					HttpCore.callGet(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
-						if(this._cacheAbles[ptoname]){
-							this._localCache.update(ptoname, data);
+						if(!this._forbitCache[ptoname]){
+							HttpCore._localCache.update(ptoname, data);
 						}
 					});
 					break;
 			case "POST":
 					HttpCore.callPost(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
-						if(this._cacheAbles[ptoname]){
-							this._localCache.update(ptoname, data);
+						if(!this._forbitCache[ptoname]){
+							HttpCore._localCache.update(ptoname, data);
 						}
 					});
 					break;
@@ -192,7 +189,9 @@ export default class HttpCore {
 
 			if(info.code === 200) {
 				// 调用响应协议
-				if(this._responder && this._responder[ptoname]) { this._responder[ptoname](info); }
+				if(this._responder && this._responder[ptoname]) { 
+					this._responder[ptoname](info); 
+				}
 				// 调用unsafeCallback
 				if(unsafeCallback) { unsafeCallback(info); }
 				// 触发事件

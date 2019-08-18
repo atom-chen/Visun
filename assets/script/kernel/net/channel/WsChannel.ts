@@ -129,7 +129,7 @@ export default class WsChannel implements IChannel {
 		}
     }
     
-    sendMessage(cmd:string|number, info:any) : boolean
+    public sendMessage(cmd:string|number, info:any) : boolean
     {
         return this._dataProcessor.sendMessage(cmd, info);
     }

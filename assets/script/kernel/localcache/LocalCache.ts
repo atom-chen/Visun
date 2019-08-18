@@ -11,12 +11,16 @@ export default class LocalCache
     private constructor(filename:string) 
     {
         this._filename = filename;
+        this._datas = {};
         this.load();
     }
 
     public static instance(key:string) : LocalCache
     {
-        if(!LocalCache._all_cache[key]){ LocalCache[key] = new LocalCache(key); }
+        if(!LocalCache._all_cache[key]){ 
+            LocalCache._all_cache = {};
+            LocalCache._all_cache[key] = new LocalCache(key); 
+        }
         return LocalCache._all_cache[key];
     }
 
@@ -57,7 +61,7 @@ export default class LocalCache
     }
 
     //获取
-    public get(key:string|number) : any
+    public getData(key:string|number) : any
     {
         return this._datas[key];
     }

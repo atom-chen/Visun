@@ -11,10 +11,9 @@ import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
 import {GameProto} from "../../proxy/pb/GameProto";
 import {SdkProto} from "../../proxy/pb/SdkProto";
-import ws_rules from "../../proxy/rule/ws_rules";
-import ws_responds from "../../proxy/ws_responds";
 import Logic from "../../../../common/script/model/Logic";
 import TimerManager from "../../../../../script/kernel/timer/TimerManager";
+import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 
 
 const {ccclass, property} = cc._decorator;
@@ -30,11 +29,11 @@ export default class LobbyUI extends BaseComp {
         this.initNet();
     //    this.testSpine();
 
-        // var param = { 
-        //     deviceID : PlatformUtil.getDeviceId(), 
-        //     platformId : 3
-        // };
-        // HallRequest.req_youke_login(param);
+        var param = { 
+            deviceID : PlatformUtil.getDeviceId(), 
+            platformId : 3
+        };
+        HallRequest.req_youke_login(param);
     }
 
     private initUiEvents(){
@@ -94,6 +93,7 @@ export default class LobbyUI extends BaseComp {
     private initNet() {
         HttpCore.setMainUrl(MAIN_URL);
         HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
+        HttpCore.setCacheAble("req_youke_login", false);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
@@ -150,44 +150,6 @@ export default class LobbyUI extends BaseComp {
 		var obj1 = SdkProto.Request.decode(buff);
 		var info11 = SdkProto.Request.toObject(obj1);
         cc.log(info11);
-
-        //--------------------------------------------------------
-
-        /*
-        var finalUrl = "http://172.18.11.148:80/user/login";
-        // finalUrl = finalUrl + "?" + arr;
-
-        cc.log("---------", finalUrl);
-        var xhr = cc.loader.getXMLHttpRequest();
-		xhr.onabort = function() {
-			cc.log('[onabort]', finalUrl);
-		}
-		xhr.onerror = function() {
-			cc.log('[onerror]', finalUrl);
-		}
-		xhr.ontimeout = function() {
-			cc.log('[ontimeout]', finalUrl);
-		}
-		xhr.onreadystatechange = function () {
-            cc.log("onreadystatechange", xhr.readyState, xhr.status, xhr.responseText);
-			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
-				cc.log("[RESP]", finalUrl);
-				cc.log(xhr.responseText);
-			}
-		};
-        xhr.open("POST", finalUrl, true);
-        // xhr.responseType = 'arraybuffer';
-        // xhr.setRequestHeader("Content-Type:", "application/octet-stream");
-        // xhr.setRequestHeader("Accept:", "application/octet-stream");
-        // xhr.setRequestHeader("Content-Type","application/x-protobuf");
-		// xhr.setRequestHeader("Accept","application/x-protobuf");
-        // if (xhr.overrideMimeType){
-		// 	//这个是必须的，否则返回的是字符串，导致protobuf解码错误
-		// 	xhr.overrideMimeType("text/plain; charset=x-user-defined");
-		// }
-		xhr.timeout = 8000;
-        xhr.send(buff);
-        */
     }
 
 }
