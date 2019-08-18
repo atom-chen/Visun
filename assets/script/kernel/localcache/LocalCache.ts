@@ -18,7 +18,6 @@ export default class LocalCache
     public static instance(key:string) : LocalCache
     {
         if(!LocalCache._all_cache[key]){ 
-            LocalCache._all_cache = {};
             LocalCache._all_cache[key] = new LocalCache(key); 
         }
         return LocalCache._all_cache[key];
