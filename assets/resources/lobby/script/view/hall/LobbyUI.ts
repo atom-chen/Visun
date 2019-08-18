@@ -3,7 +3,6 @@ import GameConfig from "../../utils/GameConfig";
 import UIManager from "../../../../../script/kernel/view/UIManager";
 import HttpCore from "../../../../../script/kernel/net/HttpCore";
 import CommonUtils from "../../../../../script/kernel/utils/CommonUtils";
-import WsCore from "../../../../../script/kernel/net/WsCore";
 import EventCenter from "../../../../../script/kernel/event/EventCenter";
 import BaseComp from "../../../../../script/kernel/view/BaseComp";
 import { MAIN_URL } from "../../../../../script/looker/Consts";
@@ -95,7 +94,6 @@ export default class LobbyUI extends BaseComp {
     private initNet() {
         HttpCore.setMainUrl(MAIN_URL);
         HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
-        WsCore.registProtocol(ws_rules, ws_responds);
 
         EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
         EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);

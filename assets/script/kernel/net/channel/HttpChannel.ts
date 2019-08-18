@@ -1,19 +1,40 @@
+//---------------------------------------
+// Tcp Socket封装
+//---------------------------------------
 import IChannel from "./IChannel";
+import IProcessor from "../processor/IProcessor";
+
 
 export default class HttpChannel implements IChannel {
-    public connect(url: string, port: number, processor: import("../processor/IProcessor").default, on_success?: Function, on_fail?: Function): void {
-        throw new Error("Method not implemented.");
-    }    
-    public close(): void {
-        throw new Error("Method not implemented.");
+
+    connect(url: string, port: number, processor: IProcessor, on_success?: Function, on_fail?: Function): void 
+    {
+        
     }
-    public setProcessor(): void {
-        throw new Error("Method not implemented.");
+
+    close(): void 
+    {
+        
     }
-    public sendBuff(buff: any): void {
-        throw new Error("Method not implemented.");
+
+    sendBuff(buff: any): boolean 
+    {
+        return false;
     }
-    public sendMessage(cmd: string | number, info: any): boolean {
-        throw new Error("Method not implemented.");
+
+    sendMessage(cmd:string|number, info:any) : boolean
+    {
+        return false;
     }
+
+    setProcessor(porcessor: IProcessor): void 
+    {
+        
+    }
+
+    destroy(): void 
+    {
+        
+    }
+
 }

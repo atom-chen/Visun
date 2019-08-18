@@ -3,7 +3,7 @@
 //------------------------------------------
 export default class LocalCache 
 {
-    private static _all_cache:{[key:string]:any};
+    private static _all_cache:{[key:string]:any} = {};
     private _secret:any;
     private _filename:string;
     private _datas:object = {};

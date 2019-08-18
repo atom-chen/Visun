@@ -1,8 +1,6 @@
 import HttpCore from "../../../../script/kernel/net/HttpCore";
-import WsSocket from "../../../../script/kernel/net/WsSocket";
 import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
 import { WS_URL } from "../../../../script/looker/Consts";
-import WsCore from "../../../../script/kernel/net/WsCore";
 import SubgameEntry from "../utils/SubgameEntry";
 import HallRequest from "./HallRequest";
 import Logic from "../../../common/script/model/Logic";
@@ -27,7 +25,7 @@ HallRespond.req_userinfo = function(info:any) {
 	Logic.instance().g_UserMgr.updateUser(info);
 
 	var url = WS_URL + HttpCore.token;
-	WsSocket.instance().connect(url, new JsonCodec());
+	
 }
 
 HallRespond.req_ranklist = function(info:any) {
@@ -47,15 +45,7 @@ HallRespond.req_enter_br_room = function(info:any) {
 		return;
 	}
 	var url = "ws://" + info.addr + "/websocket";
-	WsSocket.instance().close();
-	WsSocket.instance().connect(url, new JsonCodec(), function(){
-		var param = {
-			sid: HttpCore.token,
-			gameId: info.gameId,
-			channelId: Logic.instance().g_UserMgr.getHero().channelId
-		};
-		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
-	});
+	
 }
 
 HallRespond.req_enter_coin_room = function(info:any) {
@@ -66,15 +56,7 @@ HallRespond.req_enter_coin_room = function(info:any) {
 		return;
 	}
 	var url = "ws://" + info.addr + "/websocket";
-	WsSocket.instance().close();
-	WsSocket.instance().connect(url, new JsonCodec(), function(){
-		var param = {
-			sid: HttpCore.token,
-			gameId: info.gameId,
-			tableType: 1
-		};
-		WsCore.request("MSG_JOIN_COIN_REQUEST", param);
-	});
+	
 }
 
 export default HallRespond;

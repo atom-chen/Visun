@@ -1,7 +1,6 @@
 import BaseComp from "../../../../script/kernel/view/BaseComp";
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 import SceneManager from "../../../../script/kernel/view/SceneManager";
-import WsCore from "../../../../script/kernel/net/WsCore";
 import EventCenter from "../../../../script/kernel/event/EventCenter";
 import GameUtil from "../../../lobby/script/utils/GameUtil";
 
@@ -15,7 +14,7 @@ export default class bjleUI extends BaseComp {
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
-            WsCore.request("MSG_USER_LEAVE_ROOM_REQUEST", {});
+            
         }, this);
 
 		var rule = [1,10,20,100,500];
