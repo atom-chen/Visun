@@ -190,7 +190,7 @@ export default class HttpCore {
 			if(info.code === 200) {
 				// 调用响应协议
 				if(this._responder && this._responder[ptoname]) { 
-					this._responder[ptoname](info); 
+					this._responder[ptoname].call(this._responder, info); 
 				}
 				// 调用unsafeCallback
 				if(unsafeCallback) { unsafeCallback(info); }

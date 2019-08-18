@@ -3,10 +3,12 @@
 //--------------------------------------
 import IChannel from "./IChannel";
 import WsChannel from "./WsChannel";
+import TcpChannel from "./TcpChannel";
+import HttpChannel from "./HttpChannel";
 
 export default class ChannelMgr {
     private static _instance:ChannelMgr = null;
-    private _channels:{[key: string]: IChannel; } = {};
+    private _channels:{[key: string]: IChannel;} = {};
 
     public static instance() : ChannelMgr
     {
@@ -33,7 +35,7 @@ export default class ChannelMgr {
     public createTcpChannel(key:string) : IChannel
     {
         if(!this._channels[key]) {
-            this._channels[key] = new WsChannel;
+            this._channels[key] = new TcpChannel;
         }
         return this._channels[key];
     }
@@ -41,7 +43,7 @@ export default class ChannelMgr {
     public createHttpChannel(key:string) : IChannel
     {
         if(!this._channels[key]) {
-            this._channels[key] = new WsChannel;
+            this._channels[key] = new HttpChannel;
         }
         return this._channels[key];
     }

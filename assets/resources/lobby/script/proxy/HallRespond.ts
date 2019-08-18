@@ -1,5 +1,4 @@
 import HttpCore from "../../../../script/kernel/net/HttpCore";
-import JsonCodec from "../../../../script/kernel/codec/JsonCodec";
 import { WS_URL } from "../../../../script/looker/Consts";
 import SubgameEntry from "../utils/SubgameEntry";
 import HallRequest from "./HallRequest";
