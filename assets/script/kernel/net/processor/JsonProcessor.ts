@@ -5,20 +5,15 @@ import IProcessor from "./IProcessor";
 import JsonCodec from "../../codec/JsonCodec";
 import IChannel from "../channel/IChannel";
 import EventCenter from "../../event/EventCenter";
+import SingleDispatcher from "../SingleDispatcher";
 
-export default class JsonProcessor implements IProcessor {
+export default class JsonProcessor extends SingleDispatcher implements IProcessor {
     private _working:boolean = true;
     private _channel:IChannel = null;
     private _coder:JsonCodec = new JsonCodec;
     private _pb_package:any;
-    private _responder:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
-
-    public constructor(pbPackage:any, responder:object) {
-        this.setResponder(responder);
-        this.registProtocol(pbPackage);
-    }
 
     public registProtocol(protocol:any) : void
     {
@@ -38,11 +33,6 @@ export default class JsonProcessor implements IProcessor {
         }
     }
 
-    public setResponder(responder:any) : void
-    {
-        this._responder = responder;
-    }
-
     public setChannel(cluster:IChannel) : void
     {
         this._channel = cluster;
@@ -50,9 +40,9 @@ export default class JsonProcessor implements IProcessor {
 
     public clear(): void 
     {
+        this.removeAllResponder();
         this._working = false;
         this._channel = null;
-        this._responder = null;
         this.name_2_cmd = null;
         this.cmd_2_name = null;
         this._pb_package = null;
@@ -99,9 +89,7 @@ export default class JsonProcessor implements IProcessor {
             data = this._coder.decode(data);
         }
 
-        if(this._responder) {
-            this._responder[cmd](data);
-        }
+        this.response(cmd, data);
 
         EventCenter.instance().fire(cmd, data);
     }

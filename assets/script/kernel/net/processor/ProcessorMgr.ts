@@ -9,7 +9,7 @@ import { ProcessorType } from "../Define";
 export default class ProcessorMgr {
     private static _instance:ProcessorMgr = null;
 
-    private _all_processors:object = {};
+    private _all_processors:{[key: string]: IProcessor;} = {};
 
     public static instance() : ProcessorMgr {
         if(!ProcessorMgr._instance) { ProcessorMgr._instance = new ProcessorMgr; }
@@ -25,13 +25,14 @@ export default class ProcessorMgr {
         if(!this._all_processors[key]) {
             if(type == ProcessorType.Json) 
             {
-                this._all_processors[key] = new JsonProcessor(pbPackage, responder);
+                this._all_processors[key] = new JsonProcessor();
             }
             else if(type == ProcessorType.Protobuff) 
             {
-                this._all_processors[key] = new ProtobufProcessor(pbPackage, responder);
+                this._all_processors[key] = new ProtobufProcessor();
             }
         }
+        this._all_processors[key].registProtocol(pbPackage);
         return this._all_processors[key];
     }
 

@@ -3,22 +3,19 @@
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
+import SingleDispatcher from "../SingleDispatcher";
 
-export default class StreamProcessor implements IProcessor {
+export default class StreamProcessor extends SingleDispatcher implements IProcessor {
 
     public registProtocol(protocol: any): void {
         
     }
-    
-    public setResponder(responder: any): void {
+
+    public setChannel(cluster: IChannel) {
         
     }
 
     public clear(): void {
-        
-    }
-
-    public setChannel(cluster: IChannel) {
         
     }
 

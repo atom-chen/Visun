@@ -1,9 +1,6 @@
 //---------------------------------
 // 全局事件中心
 //---------------------------------
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class EventCenter {
 	private _events = {};
 	private static _singleton:EventCenter = null;
