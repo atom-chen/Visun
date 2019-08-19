@@ -162,8 +162,9 @@ export default class WsChannel implements IChannel {
 			return false;
 		}
 
+        cc.log("【send】", buff);
 		this._ws.send(buff);
-		cc.log("【发送】", buff);
+		
 		return true;
 	}
 }

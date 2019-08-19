@@ -129,7 +129,12 @@ export default class LobbyUI extends BaseComp {
             var req = GameProto.Request.create();
             req.cmd = GameProto.Request.CMD.DELAY_CHECK;
             req.delayCheckRequest = data;
-            var buff = GameProto.DelayCheckRequest.encode(data).finish();
+            var buff = GameProto.Request.encode(data).finish();
+
+            var obj1 = GameProto.Request.decode(buff);
+            var info = GameProto.Request.toObject(obj1);
+            cc.log("发送", info);
+
             hall_channel.sendBuff(buff);
         });
     }
