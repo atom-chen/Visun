@@ -14,6 +14,9 @@ import {SdkProto} from "../../proxy/pb/SdkProto";
 import Logic from "../../../../common/script/model/Logic";
 import TimerManager from "../../../../../script/kernel/timer/TimerManager";
 import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
+import ProcessorMgr from "../../../../../script/kernel/net/processor/ProcessorMgr";
+import { ProcessorType } from "../../../../../script/kernel/net/Define";
+import ChannelMgr from "../../../../../script/kernel/net/channel/ChannelMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -27,7 +30,8 @@ export default class LobbyUI extends BaseComp {
 
         this.initUiEvents();
         this.initNet();
-    //    this.testSpine();
+        //this.testSpine();
+        this.testWs()
 
         var param = { 
             deviceID : PlatformUtil.getDeviceId(), 
@@ -68,7 +72,7 @@ export default class LobbyUI extends BaseComp {
 
         CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
             UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
-            this.testHttp();
+            this.testProtobuf();
         }, this);
 
         // 
@@ -114,6 +118,22 @@ export default class LobbyUI extends BaseComp {
         cc.log(info);
     }
 
+
+    private testWs() {
+        var processor = ProcessorMgr.instance().create("hall", ProcessorType.Protobuff, GameProto, null);
+        var hall_channel = ChannelMgr.instance().createWsChannel("hall");
+        hall_channel.setProcessor(processor);
+        hall_channel.connect("wss://echo.websocket.org", 0, ()=>{
+            var data:GameProto.IDelayCheckRequest = new GameProto.DelayCheckRequest;
+            data.content = "ssss";
+            var req = GameProto.Request.create();
+            req.cmd = GameProto.Request.CMD.DELAY_CHECK;
+            req.delayCheckRequest = data;
+            var buff = GameProto.DelayCheckRequest.encode(data).finish();
+            hall_channel.sendBuff(buff);
+        });
+    }
+
     private testSpine() {
         var self = this;
 
@@ -131,7 +151,7 @@ export default class LobbyUI extends BaseComp {
         });
     }
 
-    private testHttp() {
+    private testProtobuf() {
         //obj 转 二进制流
         var param11 = {
             phoneOrUsername : "",

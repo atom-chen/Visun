@@ -11,10 +11,10 @@
 import IProcessor from "../processor/IProcessor";
 
 export default interface IChannel {
+    setProcessor(porcessor:IProcessor) : void;
     connect(url:string, port:number, on_success?:Function, on_fail?:Function) : void;
     close() : void;
     sendBuff(buff:any) : boolean;
     sendMessage(cmd:string|number, info:any) : boolean;
-    setProcessor(porcessor:IProcessor) : void;
     destroy() : void;
 }

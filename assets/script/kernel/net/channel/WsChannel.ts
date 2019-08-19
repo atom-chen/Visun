@@ -1,5 +1,18 @@
 //---------------------------------------
 // WebSocket封装
+// 示例：
+// var processor = ProcessorMgr.instance().create("hall", ProcessorType.Protobuff, GameProto, null);
+// var hall_channel = ChannelMgr.instance().createWsChannel("hall");
+// hall_channel.setProcessor(processor);
+// hall_channel.connect("wss://echo.websocket.org", 0);
+
+// var data:GameProto.IDelayCheckRequest = new GameProto.DelayCheckRequest;
+// data.content = "ssss";
+// var req = GameProto.Request.create();
+// req.cmd = GameProto.Request.CMD.DELAY_CHECK;
+// req.delayCheckRequest = data;
+// var buff = GameProto.DelayCheckRequest.encode(data).finish();
+// hall_channel.sendBuff(buff);
 //---------------------------------------
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";

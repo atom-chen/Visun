@@ -3,6 +3,7 @@
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
+import EventCenter from "../../event/EventCenter";
 
 export default class ProtobufProcessor implements IProcessor {
     private _working:boolean = true;
@@ -89,18 +90,19 @@ export default class ProtobufProcessor implements IProcessor {
             cc.log("已经停止");
             return;
         }
+        
         //二进制流 转 obj
-		// var obj = this._pbPackage.Response.decode(buff);
-		// var info = this._pbPackage.Response.toObject(obj);
-        // cc.log(info);
+		var obj = this._pbPackage.Response.decode(buff);
+		var info = this._pbPackage.Response.toObject(obj);
+        cc.log(info);
 
-        // var cmd = info.cmd;
-        // var data = info.data;
+        var cmd = info.cmd;
+        var data = info.data;
 
-        // if(this._responder) {
-        //     this._responder[cmd](data);
-        // }
+        if(this._responder) {
+            this._responder[cmd](data);
+        }
 
-        // bb.EventManager.dispatchEvent(cmd, data);
+        EventCenter.instance().fire(cmd, data);
     }
 }
