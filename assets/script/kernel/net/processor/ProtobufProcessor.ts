@@ -33,9 +33,6 @@ export default class ProtobufProcessor implements IProcessor {
                 this.cmd_2_name[value] = key;
             }
         }
-
-        cc.log(this.name_2_cmd);
-        cc.log(this.cmd_2_name);
     }
 
     public setResponder(responder:any) : void
@@ -51,6 +48,7 @@ export default class ProtobufProcessor implements IProcessor {
     public clear() : void
     {
         this._working = false;
+        this._channel = null;
         this._responder = null;
         this.name_2_cmd = null;
         this.cmd_2_name = null;

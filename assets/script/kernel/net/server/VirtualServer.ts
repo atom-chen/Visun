@@ -2,4 +2,5 @@
 export default interface VirtualServer {
     sendMessage(cmd:string|number, info:any) : void
     onRecvBuff(buff:any) : void;
+    destroy() : void;
 }

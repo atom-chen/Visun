@@ -10,7 +10,7 @@ export default class TcpChannel implements IChannel {
 
     private _curState:ConnState = ConnState.unconnect;
 
-    public connect(url: string, port: number, processor: IProcessor, on_success?: Function, on_fail?: Function): void 
+    public connect(url: string, port: number, on_success?: Function, on_fail?: Function): void 
     {
         
     }

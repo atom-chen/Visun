@@ -14,4 +14,19 @@ export default class ServerManager implements BaseModel {
 		
 	}
 	
+	addService(name:string, service:VirtualServer) {
+		this.delService(name);
+		this._all_service[name] = service;
+	}
+
+	delService(name:string) {
+		if(this._all_service[name]){
+			this._all_service[name].destroy();
+			this._all_service[name] = null;
+		}
+	}
+
+	getService(name:string) {
+		return this._all_service[name];
+	}
 }

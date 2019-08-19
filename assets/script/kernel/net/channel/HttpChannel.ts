@@ -7,7 +7,7 @@ import IProcessor from "../processor/IProcessor";
 
 export default class HttpChannel implements IChannel {
 
-    public connect(url: string, port: number, processor: IProcessor, on_success?: Function, on_fail?: Function): void 
+    public connect(url: string, port: number, on_success?: Function, on_fail?: Function): void 
     {
         
     }

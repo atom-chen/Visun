@@ -16,7 +16,12 @@ export default class ChannelMgr {
         return ChannelMgr._instance;
     }
 
-    public del(key:string) : void
+    public getChannel(key:string) : IChannel 
+    {
+        return this._channels[key];
+    }
+
+    public delChannel(key:string) : void
     {
         if(this._channels[key]) {
             this._channels[key].destroy();

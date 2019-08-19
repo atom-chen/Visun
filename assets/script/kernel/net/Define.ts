@@ -9,3 +9,10 @@ export enum ProcessorType {
 	Protobuff,
 	Stream
 }
+
+export enum ChannelType {
+	Ws,
+	Tcp,
+	Udp,
+	Http,
+}

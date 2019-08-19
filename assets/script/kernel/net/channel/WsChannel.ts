@@ -34,24 +34,24 @@ export default class WsChannel implements IChannel {
 
     private _on_close(event) {
         cc.log("ws: onclose", this._url);
-        if (this._ws) {
-            this.close();
-        }
         if(this._onConnFail) {
             this._onConnFail();
             this._onConnFail = null;
         }
         this._onConnSuccess = null;
+        this.close();
+        this._curState = ConnState.unconnect;
     }
 
     private _on_error(event) {
         cc.log("ws: onerror", this._url);
-        this.close();
         if(this._onConnFail) {
             this._onConnFail();
             this._onConnFail = null;
         }
         this._onConnSuccess = null;
+        this.close();
+        this._curState = ConnState.unconnect;
     }
     
     private initWs(url:string, cacertPath:string, on_success:Function = null, on_fail:Function = null)
@@ -71,6 +71,7 @@ export default class WsChannel implements IChannel {
     public destroy(): void 
     {
         this.close();
+        this._dataProcessor.clear();
         this._dataProcessor = null;
         this._onConnFail = null;
         this._onConnSuccess = null;
@@ -82,7 +83,7 @@ export default class WsChannel implements IChannel {
         this._dataProcessor.setChannel(this);
     }
     
-    public connect(url:string, port:number, processor:IProcessor, on_success:Function = null, on_fail:Function = null) : void
+    public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
 	{
 		if(this._url === url && this._ws !== null){
 			cc.log("the same url");
@@ -98,7 +99,6 @@ export default class WsChannel implements IChannel {
         
 		this._curState = ConnState.connecting;
 		this._url = url;
-        this.setProcessor(processor);
         var self = this;
         
         cc.log("连接WebSocket: ", url);
@@ -125,8 +125,8 @@ export default class WsChannel implements IChannel {
 			var ws = this._ws;
 			this._ws = null;
 			ws.close();
-			this._curState = ConnState.unconnect;
-		}
+        }
+        this._curState = ConnState.unconnect;
     }
     
     public sendMessage(cmd:string|number, info:any) : boolean

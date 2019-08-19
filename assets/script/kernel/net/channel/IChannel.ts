@@ -11,7 +11,7 @@
 import IProcessor from "../processor/IProcessor";
 
 export default interface IChannel {
-    connect(url:string, port:number, processor:IProcessor, on_success?:Function, on_fail?:Function) : void;
+    connect(url:string, port:number, on_success?:Function, on_fail?:Function) : void;
     close() : void;
     sendBuff(buff:any) : boolean;
     sendMessage(cmd:string|number, info:any) : boolean;
