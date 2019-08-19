@@ -9,14 +9,27 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UIManager {
 	private static _allUI = {};
+	private static _ui_stack:any[] = [];
+
 	private static _allDialog = {};
 	private static _toastList:any[] = [];
 
 	public static clear() {
 		this._toastList.length = 0;
 		this._toastList = [];
+		this._ui_stack.length = 0;
+		this._ui_stack = [];
 		this._allDialog = {};
 		this._allUI = {};
+	}
+
+
+	public static hidePanelsExcept(obj:any) {
+		for( var k in this._allUI) {
+			if(this._allUI[k] !== obj) {
+				this._allUI[k].active = false;
+			}
+		}
 	}
 
 	public static callReflesh(obj:any, args:any[]){
@@ -57,27 +70,79 @@ export default class UIManager {
 			cvs.addChild(obj, layerId);
 			UIManager._allUI[prefabName] = obj;
 
+			if(layerId===Consts.LAYER.Panel){
+				UIManager._ui_stack.push(obj);
+			}
+
 			UIManager.callReflesh(obj, args);
 			if(callback) { callback.apply(obj); }
 		});
 	}
 
+	//打开面板
 	public static openPanel(prefabName:string, callback:Function, ...args:any[]) {
 		this.initWindow(Consts.LAYER.Panel, prefabName, true, false, callback, args);
 	}
 	
+	//打开弹窗
 	public static openPopwnd(prefabName:string, callback:Function, ...args:any[]) {
 		this.initWindow(Consts.LAYER.Popup, prefabName, true, true, callback, args);
 	}
 
-	public static hidePanelsExcept(obj:cc.Node) {
-		for( var k in this._allUI) {
-			if(this._allUI[k] !== obj) {
-				this._allUI[k].active = false;
+	//关闭窗口
+	public static closeWindow(prefabName:string) {
+		var obj = this._allUI[prefabName];
+
+		for(var i=this._ui_stack.length-1; i>=0; i--){
+			if(obj===this._ui_stack[i] || !cc.isValid(this._ui_stack[i], true)){
+				this._ui_stack.splice(i, 1);
+				this.showLastPanel();
+			}
+		}
+		if(this._allUI[prefabName]) {
+			this._allUI[prefabName].destroy();
+			this._allUI[prefabName] = null;
+		}
+	}
+
+	//关闭窗口
+	public static closeWindowNode(obj:any) {
+		this.onWindowClose(obj);
+		obj.destroy();
+	}
+
+	//监听到UI销毁时调用
+	public static onWindowClose(obj:any) {
+		for(var i=this._ui_stack.length-1; i>=0; i--){
+			if(obj===this._ui_stack[i] || !cc.isValid(this._ui_stack[i], true)){
+				this._ui_stack.splice(i, 1);
+				cc.log("_ui_stack 监听到UI销毁时调用");
+				this.showLastPanel();
+			}
+		}
+		for(var prefabName in this._allUI) {
+			if(obj===this._allUI[prefabName]){
+				this._allUI[prefabName] = null;
+				cc.log("_allUI 监听到UI销毁时调用");
+			}
+		}
+		for(var dlgName in this._allDialog) {
+			if(obj===this._allDialog[dlgName]){
+				this._allDialog[dlgName] = null;
+				cc.log("_allDialog 监听到UI销毁时调用");
 			}
 		}
 	}
+
+	public static showLastPanel(){
+		if(this._ui_stack.length <= 0) { return; }
+		var last = this._ui_stack[this._ui_stack.length-1];
+		last.active = true;
+	}
 	
+
+	//-----------------------------------------------------------------
+
 
 	public static openDialog(dlgName:string, callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){

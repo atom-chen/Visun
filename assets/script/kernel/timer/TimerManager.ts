@@ -1,5 +1,3 @@
-import Caller from "../promise/Caller";
-import ObjectPool from "../pool/ObjectPool";
 import { BaseTimer, TimerType } from "./BaseTimer";
 
 
@@ -19,11 +17,16 @@ export default class TimerManager {
 	}
 
 	public update(dt:number) {
-		for(var i=0, len=this._timers.length; i<len; i++) {
-			this._timers[i].tick(dt);
-			if(this._timers[i].isStoped()) {
-				this.delTimer(this._timers[i].getId());
+		try{
+			for(var i=0, len=this._timers.length; i<len; i++) {
+				this._timers[i].tick(dt);
+				if(this._timers[i].isStoped()) {
+					this.delTimer(this._timers[i].getId());
+				}
 			}
+		}
+		catch(err) {
+			cc.log(err)
 		}
 	}
 
@@ -48,7 +51,6 @@ export default class TimerManager {
 	public delTimer(id:number) {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getId()===id) {
-			//	cc.log("deltimer: ", id, i, this.count());
 				this._timers.splice(i, 1);
 			}
 		}
@@ -57,7 +59,6 @@ export default class TimerManager {
 	public removeByTarget(target:any) {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getTarget()===target) {
-			//	cc.log("deltimer: ", i, this.count());
 				this._timers.splice(i, 1);
 			}
 		}

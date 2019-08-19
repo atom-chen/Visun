@@ -1,5 +1,6 @@
 import EventCenter from "../event/EventCenter";
 import TimerManager from "../timer/TimerManager";
+import UIManager from "./UIManager";
 
 
 //---------------------------------
@@ -26,5 +27,6 @@ export default class BaseComp extends cc.Component {
     onDestroy() {
         EventCenter.instance().removeByTarget(this);
         TimerManager.instance().removeByTarget(this);
+        UIManager.onWindowClose(this.node);
     }
 }
