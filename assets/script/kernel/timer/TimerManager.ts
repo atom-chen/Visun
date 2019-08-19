@@ -27,20 +27,20 @@ export default class TimerManager {
 		}
 	}
 
-	public addFrameTimer(interval:number, func:Caller, looptimes:number) {
+	public addFrameTimer(interval:number, func:Function, thisObj:any, looptimes:number) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
-		tmr.reset(TimerType.frame, id, interval, func, looptimes);
+		tmr.reset(TimerType.frame, id, interval, func, thisObj, looptimes);
 		this._timers.push(tmr);
 		return id;
 	}
 
-	public addSecondTimer(interval:number, func:Caller, looptimes:number) {
+	public addSecondTimer(interval:number, func:Function, thisObj:any, looptimes:number) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
-		tmr.reset(TimerType.second, id, interval, func, looptimes);
+		tmr.reset(TimerType.second, id, interval, func, thisObj, looptimes);
 		this._timers.push(tmr);
 		return id;
 	}
@@ -72,7 +72,7 @@ export default class TimerManager {
         console.time('===testtmr');//测试
         for(var i=1; i<=8000000; i++){
             for(var j=1; j<=2; j++){
-                var x = TimerManager.instance().addFrameTimer(1, new Caller( ()=>{}, null ) , 10);
+                var x = TimerManager.instance().addFrameTimer(1, ()=>{}, null , 10);
                 xs[j-1] = x;
             }
             for(var jj=1; jj<=2; jj++){

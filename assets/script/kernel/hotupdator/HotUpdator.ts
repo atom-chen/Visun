@@ -6,6 +6,7 @@ import UIManager from "../view/UIManager";
 //---------------------------------
 
 export default class HotUpdator {
+	private static _all_updators:{[key: string]: HotUpdator;} = {};
 	private _id:string;
 	private _manifestUrl:string;
 	private _finishCallback:Function;
@@ -16,7 +17,15 @@ export default class HotUpdator {
 	private _storagePath:string = "";
 
 
-	public constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null)
+	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null) : HotUpdator
+	{
+		if(!HotUpdator._all_updators[id]){
+			HotUpdator._all_updators[id] = new HotUpdator(id, manifestUrl, finishCallback, progressCallback);
+		}
+		return HotUpdator._all_updators[id];
+	}
+
+	private constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null)
 	{
 		this._curState = HOT_STATE.READY;
 		this._id = id;

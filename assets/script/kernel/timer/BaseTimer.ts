@@ -8,7 +8,8 @@ export enum TimerType {
 export class BaseTimer {
 	protected _id:number;
 	protected _interval:number;
-	protected _func:Caller;
+	protected _func:Function;
+	protected _thisObj:any;
 	protected _looptimes:number;
 	protected _type:TimerType;
 	protected _isLimit:boolean;
@@ -17,11 +18,12 @@ export class BaseTimer {
 	protected _stoped:boolean = false;
 	protected _paused:boolean = false;
     
-    public reset(type:TimerType, id:number, interval:number, func:Caller, looptimes:number){
+    public reset(type:TimerType, id:number, interval:number, func:Function, thisObj:any, looptimes:number){
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
 		this._func = func;
+		this._thisObj = thisObj;
 		this._looptimes = looptimes;
 		this._passedTime = 0;
 		this._stoped = false;
@@ -32,6 +34,7 @@ export class BaseTimer {
 	public stop() {
 		this._stoped = true;
 		this._func = null;
+		this._thisObj = null;
 	}
 
 	public pause(bPause:boolean) {
@@ -54,7 +57,7 @@ export class BaseTimer {
 
 		if(this._passedTime >= this._interval) {
 			this._passedTime = this._passedTime - this._interval;
-			this._func.callWith(this._looptimes);
+			this._func.call(this._thisObj, this._looptimes);
 
 			if(this._isLimit) {
 				this._looptimes--;
@@ -73,7 +76,7 @@ export class BaseTimer {
 	}
 
 	public getTarget() : any {
-		return this._func && this._func.getTarget();
+		return this._thisObj;
 	}
 
 	public isStoped() : boolean {

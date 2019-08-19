@@ -8,8 +8,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class EmailUI extends BaseComp {
 	onLoad() {
-		TimerManager.instance().addFrameTimer(1, new Caller(function(a){
+		TimerManager.instance().addFrameTimer(1, function(a){
 			UIManager.toast("----"+a)
-		}, null), 5);
+		}, null, 5);
 	}
 }

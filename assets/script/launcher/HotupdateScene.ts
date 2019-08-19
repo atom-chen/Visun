@@ -30,7 +30,7 @@ export default class HotupdateScene extends BaseComp {
 			this.enterGame();
 		} 
 		else {
-			var hotter = new HotUpdator("main", this.getLocalManifestPath(), 
+			var hotter = HotUpdator.create("main", this.getLocalManifestPath(), 
 			(bSucc:boolean) => {
 				if(!bSucc){
 					this.enterGame();

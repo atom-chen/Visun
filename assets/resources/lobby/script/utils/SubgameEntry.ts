@@ -44,7 +44,7 @@ export default class SubgameEntry {
 		if(!GameConfig[gameId]) {
 			return null;
 		}
-		return new HotUpdator(gameId, "", (bSucc:boolean)=>{}, null);
+		return HotUpdator.create(gameId, "", (bSucc:boolean)=>{}, null);
 	}
 
 	public enterGame(gameId:string) {
