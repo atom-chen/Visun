@@ -10,13 +10,9 @@ import HttpCodec from "../codec/HttpCodec";
 import LocalCache from "../localcache/LocalCache";
 import EventCenter from "../event/EventCenter";
 import UIManager from "../view/UIManager";
+import { NetResult } from "./Define";
 
-enum NetResult {
-	Succ = 0,
-	Timeout,
-	Aborted,
-	Error
-}
+
 
 export default class HttpCore {
 	private static g_timeout:number = 8000;		//超时

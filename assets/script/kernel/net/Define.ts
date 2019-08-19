@@ -16,3 +16,10 @@ export enum ChannelType {
 	Udp,
 	Http,
 }
+
+export enum NetResult {
+	Succ = 0,
+	Timeout,
+	Aborted,
+	Error
+}
