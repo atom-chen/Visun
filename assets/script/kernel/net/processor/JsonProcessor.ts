@@ -10,7 +10,7 @@ export default class JsonProcessor implements IProcessor {
     private _working:boolean = true;
     private _channel:IChannel = null;
     private _coder:JsonCodec = new JsonCodec;
-    private _pbPackage:any;
+    private _pb_package:any;
     private _responder:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
@@ -22,7 +22,7 @@ export default class JsonProcessor implements IProcessor {
 
     public registProtocol(protocol:any) : void
     {
-        this._pbPackage = protocol;
+        this._pb_package = protocol;
 
         this.name_2_cmd = {};
         this.cmd_2_name = {};
@@ -55,7 +55,7 @@ export default class JsonProcessor implements IProcessor {
         this._responder = null;
         this.name_2_cmd = null;
         this.cmd_2_name = null;
-        this._pbPackage = null;
+        this._pb_package = null;
     }
 
     public sendMessage(cmd: number|string, info: any): boolean 

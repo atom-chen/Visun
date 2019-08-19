@@ -124,35 +124,18 @@ export default class LobbyUI extends BaseComp {
         var hall_channel = ChannelMgr.instance().createWsChannel("hall");
         hall_channel.setProcessor(processor);
         hall_channel.connect("wss://echo.websocket.org", 0, ()=>{
-            var data:GameProto.IDelayCheckRequest = new GameProto.DelayCheckRequest;
-            data.content = "ssss";
+            var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
+            data.content = "dsfdfdse";
             var req = GameProto.Request.create();
             req.cmd = GameProto.Request.CMD.DELAY_CHECK;
             req.delayCheckRequest = data;
-            var buff = GameProto.Request.encode(data).finish();
+            var buff = GameProto.Request.encode(req).finish();
 
             var obj1 = GameProto.Request.decode(buff);
             var info = GameProto.Request.toObject(obj1);
             cc.log("发送", info);
 
             hall_channel.sendBuff(buff);
-        });
-    }
-
-    private testSpine() {
-        var self = this;
-
-        //加载spine
-        cc.loader.loadRes("common/spines/raptor.json", sp.SkeletonData, 
-		function(err, resc){
-			if( err ) { cc.log( '载入spine失败:' + err ); return; }
-            //var obj = cc.instantiate(resc);
-            var obj = new cc.Node();
-            var sk = obj.addComponent(sp.Skeleton);
-            sk.skeletonData = resc;
-            self.node.addChild(obj, 10);
-            obj.scale = 0.2;
-            sk.setAnimation(1, "Jump", true);
         });
     }
 
@@ -175,6 +158,23 @@ export default class LobbyUI extends BaseComp {
 		var obj1 = SdkProto.Request.decode(buff);
 		var info11 = SdkProto.Request.toObject(obj1);
         cc.log(info11);
+    }
+
+    private testSpine() {
+        var self = this;
+
+        //加载spine
+        cc.loader.loadRes("common/spines/raptor.json", sp.SkeletonData, 
+		function(err, resc){
+			if( err ) { cc.log( '载入spine失败:' + err ); return; }
+            //var obj = cc.instantiate(resc);
+            var obj = new cc.Node();
+            var sk = obj.addComponent(sp.Skeleton);
+            sk.skeletonData = resc;
+            self.node.addChild(obj, 10);
+            obj.scale = 0.2;
+            sk.setAnimation(1, "Jump", true);
+        });
     }
 
 }

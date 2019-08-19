@@ -8,7 +8,7 @@ import EventCenter from "../../event/EventCenter";
 export default class ProtobufProcessor implements IProcessor {
     private _working:boolean = true;
     private _channel:IChannel = null;
-    private _pbPackage:any;
+    private _pb_package:any;
     private _responder:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
@@ -20,7 +20,7 @@ export default class ProtobufProcessor implements IProcessor {
 
     public registProtocol(protocol:any) : void
     {
-        this._pbPackage = protocol;
+        this._pb_package = protocol;
 
         this.name_2_cmd = {};
         this.cmd_2_name = {};
@@ -53,7 +53,7 @@ export default class ProtobufProcessor implements IProcessor {
         this._responder = null;
         this.name_2_cmd = null;
         this.cmd_2_name = null;
-        this._pbPackage = null;
+        this._pb_package = null;
     }
 
     public sendMessage(cmd:number|string, info:any) : boolean
@@ -71,14 +71,14 @@ export default class ProtobufProcessor implements IProcessor {
             cmd : 20010,
             msg : "ssdddddf",
         }
-        var req = this._pbPackage.Request.create();
-        req.cmd = this._pbPackage.Request.CMD.DELAY_CHECK;
-        req.delayCheckRequest = this._pbPackage.DelayCheckRequest.create(param11);
-        var buff = this._pbPackage.Request.encode(req).finish();
+        var req = this._pb_package.Request.create();
+        req.cmd = this._pb_package.Request.CMD.DELAY_CHECK;
+        req.delayCheckRequest = this._pb_package.DelayCheckRequest.create(param11);
+        var buff = this._pb_package.Request.encode(req).finish();
 
-        var obj = this._pbPackage.Request.decode(buff);
-		var info = this._pbPackage.Request.toObject(obj);
-        cc.log("---- send: ", info);
+        var obj = this._pb_package.Request.decode(buff);
+		var info = this._pb_package.Request.toObject(obj);
+        cc.log("[send]", info);
         
         this._channel.sendBuff(buff);
         return true;
@@ -92,9 +92,10 @@ export default class ProtobufProcessor implements IProcessor {
         }
         
         //二进制流 转 obj
-		var obj = this._pbPackage.Response.decode(buff);
-		var info = this._pbPackage.Response.toObject(obj);
-        cc.log(info);
+        var bytes = new Uint8Array(buff);
+		var obj = this._pb_package.Response.decode(bytes);
+		var info = this._pb_package.Response.toObject(obj);
+        cc.log("[recv]", info);
 
         var cmd = info.cmd;
         var data = info.data;
