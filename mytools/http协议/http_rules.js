@@ -1,4 +1,4 @@
-var rules = [
+var http_rules = [
 	{
 		//游客登录
 		name : "req_youke_login",
@@ -192,4 +192,4 @@ var rules = [
 	}
 ];
 
-module.exports = rules;
+module.exports = http_rules;
