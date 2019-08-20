@@ -5,7 +5,7 @@ export default class Caller {
 	private _fn:Function;
 	private _target:any;
 	private _args:any[];
-	private _autoClean:boolean;
+	private _autoClean:boolean = false;
 
 	public constructor(fn:Function, target:any, ...args:any[]) {
 		this._fn = fn;
@@ -33,7 +33,7 @@ export default class Caller {
 		var ret:any;
 		if(this._args && this._args.length>0){
 			if(extra) {
-				ret = this._fn.apply(this._target, this._args.concat(...extra));
+				ret = this._fn.apply(this._target, this._args.concat(extra));
 			} else {
 				ret = this._fn.apply(this._target, this._args);
 			}
