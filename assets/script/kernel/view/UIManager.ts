@@ -8,28 +8,22 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIManager {
-	private static _allUI = {};
-	private static _ui_stack:any[] = [];
+	private static _allUI = {};  //面板和弹窗
+	private static _panel_stack:any[] = [];  //面板栈
 
 	private static _allDialog = {};
+
 	private static _toastList:any[] = [];
+
+
 
 	public static clear() {
 		this._toastList.length = 0;
 		this._toastList = [];
-		this._ui_stack.length = 0;
-		this._ui_stack = [];
+		this._panel_stack.length = 0;
+		this._panel_stack = [];
 		this._allDialog = {};
 		this._allUI = {};
-	}
-
-
-	public static hidePanelsExcept(obj:any) {
-		for( var k in this._allUI) {
-			if(this._allUI[k] !== obj) {
-				this._allUI[k].active = false;
-			}
-		}
 	}
 
 	public static callReflesh(obj:any, args:any[]){
@@ -44,11 +38,26 @@ export default class UIManager {
 		}
 	}
 
+	//创建窗口的唯一接口
 	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
 		if(cc.isValid(UIManager._allUI[prefabName])){
 			cc.log("allready exist: ", prefabName);
-			UIManager.callReflesh(UIManager._allUI[prefabName], args);
-			if(callback) { callback.apply(UIManager._allUI[prefabName]); }
+			var wnd = UIManager._allUI[prefabName];
+			wnd.zIndex = layerId;
+			wnd.active = true;
+			if(layerId==Consts.LAYER.Panel){
+				if(UIManager._panel_stack.indexOf(wnd) < 0) {
+					UIManager._panel_stack.push(wnd);
+				}
+			}
+			if(layerId!=Consts.LAYER.Panel){
+				var idx = UIManager._panel_stack.indexOf(wnd);
+				if(idx >= 0) {
+					UIManager._panel_stack.splice(idx, 1);
+				}
+			}
+			UIManager.callReflesh(wnd, args);
+			if(callback) { callback(wnd); }
 			return;
 		}
 		
@@ -71,7 +80,7 @@ export default class UIManager {
 			UIManager._allUI[prefabName] = obj;
 
 			if(layerId===Consts.LAYER.Panel){
-				UIManager._ui_stack.push(obj);
+				UIManager._panel_stack.push(obj);
 			}
 
 			UIManager.callReflesh(obj, args);
@@ -91,13 +100,11 @@ export default class UIManager {
 
 	//关闭窗口
 	public static closeWindow(prefabName:string) {
-		var obj = this._allUI[prefabName];
-
-		for(var i=this._ui_stack.length-1; i>=0; i--){
-			if(obj===this._ui_stack[i] || !cc.isValid(this._ui_stack[i], true)){
-				this._ui_stack.splice(i, 1);
-				this.showLastPanel();
-			}
+		var wnd = this._allUI[prefabName];
+		var idx = this._panel_stack.indexOf(wnd);
+		if(idx >= 0) {
+			this._panel_stack.splice(idx, 1);
+			this.showLastPanel();
 		}
 		if(this._allUI[prefabName]) {
 			this._allUI[prefabName].destroy();
@@ -113,31 +120,45 @@ export default class UIManager {
 
 	//监听到UI销毁时调用
 	public static onWindowClose(obj:any) {
-		for(var i=this._ui_stack.length-1; i>=0; i--){
-			if(obj===this._ui_stack[i] || !cc.isValid(this._ui_stack[i], true)){
-				this._ui_stack.splice(i, 1);
-				cc.log("_ui_stack 监听到UI销毁时调用");
-				this.showLastPanel();
+		var isPanel:boolean = false;
+		for(var i=this._panel_stack.length-1; i>=0; i--){
+			if(obj===this._panel_stack[i] || !cc.isValid(this._panel_stack[i], true)){
+				this._panel_stack.splice(i, 1);
+				cc.log("_panel_stack 监听到UI销毁时调用");
+				isPanel = true;
+				break;
 			}
 		}
 		for(var prefabName in this._allUI) {
 			if(obj===this._allUI[prefabName]){
 				this._allUI[prefabName] = null;
 				cc.log("_allUI 监听到UI销毁时调用");
+				break;
 			}
 		}
 		for(var dlgName in this._allDialog) {
 			if(obj===this._allDialog[dlgName]){
 				this._allDialog[dlgName] = null;
 				cc.log("_allDialog 监听到UI销毁时调用");
+				break;
 			}
+		}
+		if(isPanel) {
+			this.showLastPanel();
 		}
 	}
 
 	public static showLastPanel(){
-		if(this._ui_stack.length <= 0) { return; }
-		var last = this._ui_stack[this._ui_stack.length-1];
+		if(this._panel_stack.length <= 0) { return; }
+		this.hideAllPanels();
+		var last = this._panel_stack[this._panel_stack.length-1];
 		last.active = true;
+	}
+
+	public static hideAllPanels() {
+		for( var k=0; k<this._panel_stack.length; k++) {
+			this._panel_stack[k].active = false;
+		}
 	}
 	
 
