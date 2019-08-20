@@ -28,18 +28,23 @@ export default class CommonUtils {
 		if(!obj || !cc.isValid(obj)){
 			return;
 		}
+
 		var frame = cc.find("frame", obj);
+		if(!frame && obj.childrenCount == 1) {
+			frame = obj.children[0];
+		}
 		if(frame){
 			frame.on("touchstart", function(event:any){ event.stopPropagation(); });
 			frame.on("touchend", function(event:any){ event.stopPropagation(); });
 		}
+
 		obj.on("touchstart", function(event:any){ event.stopPropagation(); });
 		obj.on("touchend", function(event:any){ 
 			event.stopPropagation(); 
 			if(closeWhenClickMask){
-				obj.destroy();
+				this.destroy();
 			}
-		});
+		}, obj);
 	}
 
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
