@@ -1,11 +1,15 @@
 import Caller from "../promise/Caller";
+import { JTIPoolObject } from "../pool/JTIPoolObject";
 
 export enum TimerType {
 	frame = 1,
 	second = 2
 };
 
-export class BaseTimer {
+export class BaseTimer implements JTIPoolObject {
+	recycle(): void {
+		this.stop();
+	}
 	protected _id:number;
 	protected _interval:number;
 	protected _func:Function;
