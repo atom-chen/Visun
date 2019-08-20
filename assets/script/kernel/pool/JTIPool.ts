@@ -4,23 +4,24 @@
 
 export interface JTIPool
 {
-        cls:any;
+	totalCount:number;
 
-        items:any[];
+	cls:any;
 
-        get():any
+	items:any[];
 
-        getObject(createClassName:string):any
+	get():any
 
-        put(obj:any):void
+	getObject(createClassName:string):any
 
-        length():number;
+	put(obj:any):void
 
-        remove(item:any):any
+	length():number;
 
-        dispose():void
+	remove(item:any):any
 
-        isAvailable():boolean
+	dispose():void
 
-        totalCount:number;
+	isAvailable():boolean
+
 }
