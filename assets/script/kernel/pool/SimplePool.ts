@@ -1,6 +1,5 @@
-import Caller from "../promise/Caller";
-
-export default class ObjectPool {
+// pool for cc.Node with no reuse and no unuse
+export default class SimplePool {
 	private _pool:any[] = [];
 	private _createFunc:Function;
 
@@ -11,15 +10,14 @@ export default class ObjectPool {
 
 	public newObject() {
 		var last = this._pool.length-1;
-		var obj:any = null;
 		if(last < 0) {
-			obj = this._createFunc();
+			return this._createFunc();
 		}
 		else {
-			obj = this._pool[last];
+			var obj = this._pool[last];
 			this._pool.length = last;
+			return obj;
 		}
-		return obj;
 	}
 
 	public delObject(obj:any) {
@@ -30,10 +28,10 @@ export default class ObjectPool {
 
 	public clear() : void {
 		for(var i=0, cnt=this._pool.length; i<cnt; ++i) {
-			var obj = this._pool[i];
-			if(obj.destroy){ obj.destroy(); }
+			this._pool[i].destroy();
 		}
 		this._pool.length = 0;
+		this._pool = [];
 	}
 
 }

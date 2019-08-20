@@ -2,7 +2,7 @@ import GameUtil from "../../../lobby/script/utils/GameUtil";
 import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
 import BaseComp from "../../../../script/kernel/view/BaseComp";
 import SceneManager from "../../../../script/kernel/view/SceneManager";
-import ObjectPool from "../../../../script/kernel/pool/ObjectPool";
+import SimplePool from "../../../../script/kernel/pool/SimplePool";
 import TimerManager from "../../../../script/kernel/timer/TimerManager";
 
 const {ccclass, property} = cc._decorator;
@@ -14,7 +14,7 @@ export default class BrnnUI extends BaseComp {
 	_rule:number[] = [1,3,5,300,800];
 
 	_loadedRes:any;
-	_pool:ObjectPool = new ObjectPool(():cc.Prefab=>{
+	_pool:SimplePool = new SimplePool(():cc.Prefab=>{
 		var obj = cc.instantiate(this._loadedRes);
 		obj.scale = 0.4;
 		return obj;
@@ -65,8 +65,8 @@ export default class BrnnUI extends BaseComp {
 	}
 
 	onDestroy(){
-		super.onDestroy();
 		this._pool.clear();
+		super.onDestroy();
 	}
 
 }
