@@ -104,6 +104,11 @@ export default class WsChannel implements IChannel {
 		this._dataProcessor = porcessor;
 		this._dataProcessor.setChannel(this);
 	}
+
+	public registProtocol(protocol:any) : void
+	{
+		this._dataProcessor.registProtocol(protocol);
+	}
 	
 	public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
 	{

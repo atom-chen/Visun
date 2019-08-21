@@ -46,9 +46,9 @@ export default class HttpCore {
 			if(!requestor[ptoname]) {
 				cc.error("没有请求接口", ptoname);
 			}
-		}
 
-		this.g_allProtocol = ruleList;
+			this.g_allProtocol[ptoname] = ruleList[i];
+		}
 	}
 
 	//卸载所有协议

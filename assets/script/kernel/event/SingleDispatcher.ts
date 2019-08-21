@@ -1,4 +1,7 @@
-export default class SingleDispatcher {
+import EventCenter from "./EventCenter";
+import ISingleDispatcher from "./ISingleDispatcher";
+
+export default class SingleDispatcher implements ISingleDispatcher {
 	protected _responders = {};
 
 	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void
@@ -25,10 +28,14 @@ export default class SingleDispatcher {
 		this._responders = {};
 	}
 
-	public response(ptoname:string|number, info:any) : void
+	public response(cmd:string|number, info:any) : void
 	{
-		if(this._responders[ptoname]) {
-			var callback = this._responders[ptoname];
+		if(cmd===null || cmd===undefined){
+			cc.log("无效的cmd");
+			return;
+		}
+		if(this._responders[cmd]) {
+			var callback = this._responders[cmd];
 			if(callback.thisObj){
 				callback.func.call(callback.thisObj, info);
 			}
@@ -36,5 +43,6 @@ export default class SingleDispatcher {
 				callback.func(info);
 			}
 		}
+		EventCenter.instance().fire(cmd.toString(), info);
 	}
 }

@@ -4,8 +4,7 @@
 import IProcessor from "./IProcessor";
 import JsonCodec from "../../codec/JsonCodec";
 import IChannel from "../channel/IChannel";
-import EventCenter from "../../event/EventCenter";
-import SingleDispatcher from "../SingleDispatcher";
+import SingleDispatcher from "../../event/SingleDispatcher";
 
 export default class JsonProcessor extends SingleDispatcher implements IProcessor {
     private _working:boolean = true;
@@ -72,6 +71,11 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
         return true;
     }
 
+    public sendPacket(cmd: number|string, packet: any): boolean 
+    {
+        return this.sendMessage(cmd, packet);
+    }
+
     public onrecvBuff(buff: any): void 
     {
         if(!this._working) {
@@ -90,8 +94,6 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
         }
 
         this.response(cmd, data);
-
-        EventCenter.instance().fire(cmd, data);
     }
 
 }

@@ -3,12 +3,13 @@
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
-import EventCenter from "../../event/EventCenter";
-import SingleDispatcher from "../SingleDispatcher";
+import SingleDispatcher from "../../event/SingleDispatcher";
+import ProtobufCodec from "../../codec/ProtobufCodec";
 
 export default class ProtobufProcessor extends SingleDispatcher implements IProcessor {
     private _working:boolean = true;
     private _channel:IChannel = null;
+    private _coder:ProtobufCodec = new ProtobufCodec;
     private _pb_package:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
@@ -46,6 +47,10 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
         this._pb_package = null;
     }
 
+    // this._pb_package.my_packer.pack_obj(cmd, info)做了下面这些事情:
+    // var req = this._pb_package.Request.create();
+    // req.cmd = this._pb_package.Request.CMD.DELAY_CHECK;
+    // req.delayCheckRequest = this._pb_package.DelayCheckRequest.create(info);
     public sendMessage(cmd:number|string, info:any) : boolean
     {
         if(!this._working) {
@@ -57,18 +62,38 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
         
-        var param11 = {
-            cmd : 20010,
-            msg : "ssdddddf",
-        }
-        var req = this._pb_package.Request.create();
-        req.cmd = this._pb_package.Request.CMD.DELAY_CHECK;
-        req.delayCheckRequest = this._pb_package.DelayCheckRequest.create(param11);
+        var req = this._pb_package.my_packer(cmd, info);
         var buff = this._pb_package.Request.encode(req).finish();
 
-        var obj = this._pb_package.Request.decode(buff);
-		var info = this._pb_package.Request.toObject(obj);
-        cc.log("[send]", info);
+        // var obj = this._pb_package.Request.decode(buff);
+		// var info = this._pb_package.Request.toObject(obj);
+        // cc.log("[send]", info);
+        
+        this._channel.sendBuff(buff);
+        return true;
+    }
+
+    // this._pb_package.my_packer.pack_pbobj(cmd, pbobj)做了下面这些事情:
+    // var req = this._pb_package.Request.create();
+    // req.cmd = this._pb_package.Request.CMD.DELAY_CHECK;
+    // req.delayCheckRequest = pbobj;
+    public sendPacket(cmd:number|string, pbobj:any) : boolean
+    {
+        if(!this._working) {
+            cc.log("已经停止");
+            return;
+        }
+        if(!this.cmd_2_name[cmd]) {
+            cc.error("未定义该协议", cmd);
+            return;
+        }
+        
+        var req = this._pb_package.my_packer(cmd, pbobj);
+        var buff = this._pb_package.Request.encode(req).finish();
+
+        // var obj = this._pb_package.Request.decode(buff);
+		// var info = this._pb_package.Request.toObject(obj);
+        // cc.log("[send]", info);
         
         this._channel.sendBuff(buff);
         return true;
@@ -91,7 +116,5 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
         var data = info.data;
 
         this.response(cmd, data);
-
-        EventCenter.instance().fire(cmd, data);
     }
 }

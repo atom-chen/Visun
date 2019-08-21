@@ -3,7 +3,7 @@
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
-import SingleDispatcher from "../SingleDispatcher";
+import SingleDispatcher from "../../event/SingleDispatcher";
 
 export default class StreamProcessor extends SingleDispatcher implements IProcessor {
 
