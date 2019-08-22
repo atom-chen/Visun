@@ -131,11 +131,11 @@ export default class LobbyUI extends BaseComp {
 		var req = GameProto.Request.create();
 		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
 		req.delayCheckRequest = data;
+		hall_channel.sendPacket(req.cmd, req);
 		var buff = GameProto.Request.encode(req).finish();
 		var obj1 = GameProto.Request.decode(buff);
 		var info = GameProto.Request.toObject(obj1);
 		cc.log("发送", info);
-		hall_channel.sendBuff(buff);
 	}
 
 	private testProtobuf() {

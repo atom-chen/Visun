@@ -35,6 +35,11 @@ export default class TcpChannel implements IChannel {
         return false;
     }
 
+    public sendPacket(cmd:string|number, packet:any) : boolean
+	{
+		return false;
+	}
+
     public sendBuff(buff: any): boolean 
     {
         return false;

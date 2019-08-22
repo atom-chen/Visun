@@ -138,6 +138,11 @@ export default class WsChannel implements IChannel {
 		return this._dataProcessor.sendMessage(cmd, info);
 	}
 
+	public sendPacket(cmd:string|number, packet:any) : boolean
+	{
+		return this._dataProcessor.sendPacket(cmd, packet);
+	}
+
 	public sendBuff(buff:any) : boolean
 	{
 		if(!buff) {

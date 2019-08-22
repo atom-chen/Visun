@@ -45,6 +45,8 @@ export default class ChannelMgr {
         else if(chanType === ChannelType.Http) {
             this._channels[key] = new HttpChannel;
         }
+
+        return this._channels[key];
     }
-    
+
 }
