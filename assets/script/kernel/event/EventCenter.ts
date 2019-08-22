@@ -2,8 +2,9 @@
 // 全局事件中心
 //---------------------------------
 export default class EventCenter {
-	private _events = {};
 	private static _singleton:EventCenter = null;
+	private _events = {};
+	
 	
 	public static instance() : EventCenter
 	{
