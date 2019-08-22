@@ -9,6 +9,7 @@
 //          也不用关心消息是用json还是protobuf或自定义二进制流
 //--------------------------------------
 import IProcessor from "../processor/IProcessor";
+import { ConnState } from "../Define";
 
 export default interface IChannel {
     setProcessor(porcessor:IProcessor) : void;
@@ -17,5 +18,6 @@ export default interface IChannel {
     close() : void;
     sendMessage(cmd:string|number, info:any) : boolean;
     sendBuff(buff:any) : boolean;
+    getState() : ConnState;
     destroy() : void;
 }

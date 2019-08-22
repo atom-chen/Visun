@@ -5,6 +5,7 @@ import IChannel from "./IChannel";
 import WsChannel from "./WsChannel";
 import TcpChannel from "./TcpChannel";
 import HttpChannel from "./HttpChannel";
+import { ChannelType } from "../Define";
 
 export default class ChannelMgr {
     private static _instance:ChannelMgr = null;
@@ -29,27 +30,21 @@ export default class ChannelMgr {
         }
     }
 
-    public createWsChannel(key:string) : IChannel
+    public createChannel(key:string, chanType:ChannelType) : IChannel
     {
-        if(!this._channels[key]) {
+        if(this._channels[key]) {
+            return this._channels[key];
+        }
+
+        if(chanType === ChannelType.Ws){
             this._channels[key] = new WsChannel;
         }
-        return this._channels[key];
-    }
-
-    public createTcpChannel(key:string) : IChannel
-    {
-        if(!this._channels[key]) {
+        else if(chanType === ChannelType.Tcp) {
             this._channels[key] = new TcpChannel;
         }
-        return this._channels[key];
-    }
-
-    public createHttpChannel(key:string) : IChannel
-    {
-        if(!this._channels[key]) {
+        else if(chanType === ChannelType.Http) {
             this._channels[key] = new HttpChannel;
         }
-        return this._channels[key];
     }
+    
 }

@@ -20,7 +20,7 @@ export default class ProcessorMgr {
 
     }
 
-    public create(key:string, type:ProcessorType, pbPackage:any, responder:object) : IProcessor
+    public create(key:string, type:ProcessorType) : IProcessor
     {
         if(!this._all_processors[key]) {
             if(type == ProcessorType.Json) 
@@ -32,7 +32,6 @@ export default class ProcessorMgr {
                 this._all_processors[key] = new ProtobufProcessor();
             }
         }
-        this._all_processors[key].registProtocol(pbPackage);
         return this._all_processors[key];
     }
 

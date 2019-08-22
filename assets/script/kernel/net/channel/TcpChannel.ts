@@ -45,4 +45,9 @@ export default class TcpChannel implements IChannel {
         
     }
 
+    public getState() : ConnState 
+	{
+		return this._curState;
+	}
+
 }

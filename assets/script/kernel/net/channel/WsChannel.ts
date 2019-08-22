@@ -24,6 +24,7 @@ export default class WsChannel implements IChannel {
 			this._onConnSuccess();
 			this._onConnSuccess = null;
 		}
+		this._dataProcessor.flush();
 		this._onConnFail = null;
 	}
 
@@ -65,8 +66,6 @@ export default class WsChannel implements IChannel {
 		this._ws.onclose = this._on_close.bind(this);
 		this._ws.onerror = this._on_error.bind(this);
 	}
-
-
 
 	public destroy(): void 
 	{
@@ -158,5 +157,10 @@ export default class WsChannel implements IChannel {
 		this._ws.send(buff);
 		
 		return true;
+	}
+
+	public getState() : ConnState 
+	{
+		return this._curState;
 	}
 }

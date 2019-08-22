@@ -5,6 +5,7 @@ import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
 import ProtobufCodec from "../../codec/ProtobufCodec";
+import { ConnState } from "../Define";
 
 export default class ProtobufProcessor extends SingleDispatcher implements IProcessor {
     private _working:boolean = true;
@@ -13,6 +14,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
     private _pb_package:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
+    public _send_list = [];
 
     public registProtocol(protocol:any) : void
     {
@@ -68,7 +70,11 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
         // var obj = this._pb_package.Request.decode(buff);
 		// var info = this._pb_package.Request.toObject(obj);
         // cc.log("[send]", info);
-        
+        if(this._channel.getState() === ConnState.connecting){
+            this._send_list.push(buff);
+            return;
+        }
+
         this._channel.sendBuff(buff);
         return true;
     }
@@ -91,12 +97,24 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
         var req = this._pb_package.my_packer.pack_pbobj(cmd, pbobj);
         var buff = this._pb_package.Request.encode(req).finish();
 
+        if(this._channel.getState() === ConnState.connecting){
+            this._send_list.push(buff);
+            return;
+        }
+
         // var obj = this._pb_package.Request.decode(buff);
 		// var info = this._pb_package.Request.toObject(obj);
         // cc.log("[send]", info);
         
         this._channel.sendBuff(buff);
         return true;
+    }
+
+    public flush() 
+    {
+        for(var i=1; i<this._send_list.length; i++){
+            this._channel.sendBuff(this._send_list[i]);
+        }
     }
 
     public onrecvBuff(buff:any) : void

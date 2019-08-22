@@ -5,6 +5,7 @@ import IProcessor from "./IProcessor";
 import JsonCodec from "../../codec/JsonCodec";
 import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
+import { ConnState } from "../Define";
 
 export default class JsonProcessor extends SingleDispatcher implements IProcessor {
     private _working:boolean = true;
@@ -13,6 +14,7 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
     private _pb_package:any;
     public name_2_cmd:object = {};
     public cmd_2_name:object = {};
+    public _send_list = [];
 
     public registProtocol(protocol:any) : void
     {
@@ -67,6 +69,12 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
         };
         
         var buff = this._coder.encode(req);
+
+        if(this._channel.getState() === ConnState.connecting){
+            this._send_list.push(buff);
+            return;
+        }
+        
         this._channel.sendBuff(buff);
         return true;
     }
@@ -74,6 +82,13 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
     public sendPacket(cmd: number|string, packet: any): boolean 
     {
         return this.sendMessage(cmd, packet);
+    }
+
+    public flush() 
+    {
+        for(var i=1; i<this._send_list.length; i++){
+            this._channel.sendBuff(this._send_list[i]);
+        }
     }
 
     public onrecvBuff(buff: any): void 

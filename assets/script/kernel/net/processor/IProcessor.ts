@@ -10,5 +10,6 @@ export default interface IProcessor extends ISingleDispatcher {
     clear() : void
     sendMessage(cmd:number|string, info:any) : boolean;
     sendPacket(cmd:number|string, packet:any) : boolean;
+    flush() : void;
     onrecvBuff(buff:any) : void;
 }

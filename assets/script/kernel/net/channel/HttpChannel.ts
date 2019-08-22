@@ -3,9 +3,12 @@
 //---------------------------------------
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
+import { ConnState } from "../Define";
 
 
 export default class HttpChannel implements IChannel {
+
+    private _curState:ConnState = ConnState.unconnect;
 
     public setProcessor(porcessor: IProcessor): void 
     {
@@ -41,5 +44,10 @@ export default class HttpChannel implements IChannel {
     {
         
     }
+
+    public getState() : ConnState 
+	{
+		return this._curState;
+	}
 
 }

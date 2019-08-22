@@ -15,8 +15,9 @@ import Logic from "../../../../common/script/model/Logic";
 import TimerManager from "../../../../../script/kernel/timer/TimerManager";
 import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
 import ProcessorMgr from "../../../../../script/kernel/net/processor/ProcessorMgr";
-import { ProcessorType } from "../../../../../script/kernel/net/Define";
+import { ProcessorType, ChannelType } from "../../../../../script/kernel/net/Define";
 import ChannelMgr from "../../../../../script/kernel/net/channel/ChannelMgr";
+import Globals from "../../../../../script/looker/Globals";
 
 
 const {ccclass, property} = cc._decorator;
@@ -119,23 +120,22 @@ export default class LobbyUI extends BaseComp {
 
 
 	private testWs() {
-		var processor = ProcessorMgr.instance().create("hall", ProcessorType.Protobuff, GameProto, null);
-		var hall_channel = ChannelMgr.instance().createWsChannel("hall");
+		var processor = ProcessorMgr.instance().create(Globals.HallChannel, ProcessorType.Protobuff);
+		var hall_channel = ChannelMgr.instance().createChannel(Globals.HallChannel, ChannelType.Ws);
 		hall_channel.setProcessor(processor);
-		hall_channel.connect("wss://echo.websocket.org", 0, ()=>{
-			var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
-			data.content = "dsfdfdse";
-			var req = GameProto.Request.create();
-			req.cmd = GameProto.Request.CMD.DELAY_CHECK;
-			req.delayCheckRequest = data;
-			var buff = GameProto.Request.encode(req).finish();
+		hall_channel.registProtocol(GameProto);
+		hall_channel.connect("wss://echo.websocket.org", 0);
 
-			var obj1 = GameProto.Request.decode(buff);
-			var info = GameProto.Request.toObject(obj1);
-			cc.log("发送", info);
-
-			hall_channel.sendBuff(buff);
-		});
+		var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
+		data.content = "dsfdfdse";
+		var req = GameProto.Request.create();
+		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
+		req.delayCheckRequest = data;
+		var buff = GameProto.Request.encode(req).finish();
+		var obj1 = GameProto.Request.decode(buff);
+		var info = GameProto.Request.toObject(obj1);
+		cc.log("发送", info);
+		hall_channel.sendBuff(buff);
 	}
 
 	private testProtobuf() {
