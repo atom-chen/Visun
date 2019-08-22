@@ -71,24 +71,6 @@ export default class HttpCore {
 
 	//--------------------------------------------------------------------------------
 
-	private static checkHooks(tParams:object) : boolean 
-	{
-		if(this._hooks.length<=0) { return false; }
-		var flag:boolean = false;
-		for(var i=0; i<this._hooks.length; i++) {
-			if(this._hooks[i](tParams)){
-				flag = true;
-				break;
-			}
-		}
-		return flag;
-	}
-
-	public static addRequestHook(hookFunc:Function)
-	{
-		this._hooks.push(hookFunc);
-	}
-
 	//根据协议规则发送请求
 	public static request(ptoname:string, tParams:object, tAddrParams?:any[], unsafeCallback?:(data:any)=>void)
 	{
@@ -97,11 +79,6 @@ export default class HttpCore {
 		if(!ptoinfo) { 
 			cc.log("未定义该协议或改协议已卸载：", ptoname); 
 			return; 
-		}
-
-		if(this.checkHooks(tParams)) {
-			cc.log("hook fail");
-			return;
 		}
 
 		cc.log("[请求]：", ptoname);
