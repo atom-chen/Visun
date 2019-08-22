@@ -89,8 +89,8 @@ export default class WsChannel implements IChannel {
 	
 	public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
 	{
-		if(this._url === url && this._ws !== null){
-			cc.log("the same url");
+		if(this._url === url && this._curState === ConnState.connected && this._ws !== null){
+			cc.log("already connected: ", url);
 			return;
 		}
 		if(this._curState !== ConnState.unconnect){

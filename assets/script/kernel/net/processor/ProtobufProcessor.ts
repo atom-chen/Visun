@@ -94,8 +94,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
         
-        var req = this._pb_package.my_packer.pack_pbobj(cmd, pbobj);
-        var buff = this._pb_package.Request.encode(req).finish();
+        var buff = this._pb_package.Request.encode(pbobj).finish();
 
         if(this._channel.getState() === ConnState.connecting){
             this._send_list.push(buff);

@@ -127,7 +127,24 @@ export default class LobbyUI extends BaseComp {
 		hall_channel.connect("wss://echo.websocket.org", 0);
 
 		var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
-		data.content = "dsfdfdse";
+		data.content = "data from hall";
+		var req = GameProto.Request.create();
+		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
+		req.delayCheckRequest = data;
+		hall_channel.sendPacket(req.cmd, req);
+		var buff = GameProto.Request.encode(req).finish();
+		var obj1 = GameProto.Request.decode(buff);
+		var info = GameProto.Request.toObject(obj1);
+		cc.log("发送", info);
+
+		var processor = ProcessorMgr.instance().create(Globals.GameChannel, ProcessorType.Protobuff);
+		var hall_channel = ChannelMgr.instance().createChannel(Globals.GameChannel, ChannelType.Ws);
+		hall_channel.setProcessor(processor);
+		hall_channel.registProtocol(GameProto);
+		hall_channel.connect("wss://echo.websocket.org", 0);
+
+		var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
+		data.content = "data from game";
 		var req = GameProto.Request.create();
 		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
 		req.delayCheckRequest = data;
