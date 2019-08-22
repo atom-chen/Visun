@@ -62,7 +62,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
         
-        var req = this._pb_package.my_packer(cmd, info);
+        var req = this._pb_package.my_packer.pack_obj(cmd, info);
         var buff = this._pb_package.Request.encode(req).finish();
 
         // var obj = this._pb_package.Request.decode(buff);
@@ -88,7 +88,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
         
-        var req = this._pb_package.my_packer(cmd, pbobj);
+        var req = this._pb_package.my_packer.pack_pbobj(cmd, pbobj);
         var buff = this._pb_package.Request.encode(req).finish();
 
         // var obj = this._pb_package.Request.decode(buff);
