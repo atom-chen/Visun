@@ -9,20 +9,19 @@ import ICodec from "./ICodec";
 
 export default class ProtobufCodec implements ICodec {
 
-	encode(pkg:any, mud:string, tsObj:any) 
+	encode(pkg:any, clsname:string, tsObj:any) 
 	{
-		cc.log(tsObj);
-		let message = pkg[mud].create(tsObj);
-		let buff = pkg[mud].encode(message).finish();
+		let message = pkg[clsname].create(tsObj);
+		let buff = pkg[clsname].encode(message).finish();
 		return buff;
 	}
 
-	decode(pkg:any, mud:string, bytes:any) 
+	decode(pkg:any, clsname:string, bytes:any) 
 	{
+		if(bytes === null){ return null; }
 		var data = new Uint8Array(bytes);
-		var obj = pkg[mud].decode(data);
-		var info = pkg[mud].toObject(obj);
-		cc.log(info);
+		var obj = pkg[clsname].decode(data);
+		var info = pkg[clsname].toObject(obj);
 		return info;
 	}
 
