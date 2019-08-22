@@ -1,7 +1,6 @@
 import EventCenter from "./EventCenter";
-import ISingleDispatcher from "./ISingleDispatcher";
 
-export default class SingleDispatcher implements ISingleDispatcher {
+export default class SingleDispatcher {
 	protected _responders = {};
 
 	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void

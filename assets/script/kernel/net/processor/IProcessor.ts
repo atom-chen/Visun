@@ -2,9 +2,8 @@
 // 网络消息处理器
 //--------------------------------------
 import IChannel from "../channel/IChannel";
-import ISingleDispatcher from "../../event/ISingleDispatcher";
 
-export default interface IProcessor extends ISingleDispatcher {
+export default interface IProcessor {
     registProtocol(protocol:any) : void;
     setChannel(cluster:IChannel) : void;
     clear() : void
