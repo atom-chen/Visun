@@ -22,7 +22,6 @@ export default class HttpCore {
 	private static _coder:ICodec = new HttpCodec;	//编码解码器
 	private static g_allProtocol:object = {};	//规则
 	private static _responder:any;				//响应句柄
-	private static _hooks:Function[] = [];		//请求钩子
 	private static _forbitCache:any = {};
 	private static _localCache:LocalCache = LocalCache.instance("http");
 
