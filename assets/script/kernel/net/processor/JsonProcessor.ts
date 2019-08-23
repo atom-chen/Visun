@@ -79,11 +79,6 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
         return true;
     }
 
-    public sendPacket(cmd: number|string, packet: any): boolean 
-    {
-        return this.sendMessage(cmd, packet);
-    }
-
     public flush() 
     {
         for(var i=1; i<this._send_list.length; i++){

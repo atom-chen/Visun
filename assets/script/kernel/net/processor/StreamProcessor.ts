@@ -23,8 +23,8 @@ export default class StreamProcessor extends SingleDispatcher implements IProces
         return false;
     }
 
-    public sendPacket(cmd: string | number, packet: any): boolean {
-        return false;
+    public flush(): void {
+        
     }
 
     public onrecvBuff(buff: any): void {

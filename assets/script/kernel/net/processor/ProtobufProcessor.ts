@@ -64,8 +64,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
         
-        var req = this._pb_package.my_packer.pack_obj(cmd, info);
-        var buff = this._pb_package.Request.encode(req).finish();
+        var buff = this._pb_package.Request.encode(info).finish();
 
         // var obj = this._pb_package.Request.decode(buff);
 		// var info = this._pb_package.Request.toObject(obj);
@@ -75,36 +74,6 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
             return;
         }
 
-        this._channel.sendBuff(buff);
-        return true;
-    }
-
-    // this._pb_package.my_packer.pack_pbobj(cmd, pbobj)做了下面这些事情:
-    // var req = this._pb_package.Request.create();
-    // req.cmd = this._pb_package.Request.CMD.DELAY_CHECK;
-    // req.delayCheckRequest = pbobj;
-    public sendPacket(cmd:number|string, pbobj:any) : boolean
-    {
-        if(!this._working) {
-            cc.log("已经停止");
-            return;
-        }
-        if(!this.cmd_2_name[cmd]) {
-            cc.error("未定义该协议", cmd);
-            return;
-        }
-        
-        var buff = this._pb_package.Request.encode(pbobj).finish();
-
-        if(this._channel.getState() === ConnState.connecting){
-            this._send_list.push(buff);
-            return;
-        }
-
-        // var obj = this._pb_package.Request.decode(buff);
-		// var info = this._pb_package.Request.toObject(obj);
-        // cc.log("[send]", info);
-        
         this._channel.sendBuff(buff);
         return true;
     }

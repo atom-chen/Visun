@@ -8,7 +8,6 @@ export default interface IProcessor {
     setChannel(cluster:IChannel) : void;
     clear() : void
     sendMessage(cmd:number|string, info:any) : boolean;
-    sendPacket(cmd:number|string, packet:any) : boolean;
     flush() : void;
     onrecvBuff(buff:any) : void;
 }
