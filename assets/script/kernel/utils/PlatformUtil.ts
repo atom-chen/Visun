@@ -1,9 +1,6 @@
 //---------------------------------
 // 平台相关接口导出
 //---------------------------------
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class PlatformUtil {
 
 	//是否支持webp

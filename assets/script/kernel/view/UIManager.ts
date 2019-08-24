@@ -4,12 +4,9 @@
 import * as Consts from "../../looker/Consts";
 import CommonUtils from "../utils/CommonUtils";
 
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class UIManager {
-	private static _allUI = {};  //面板和弹窗
-	private static _panel_stack:any[] = [];  //面板栈
+	private static _allUI = {};  				//面板和弹窗
+	private static _panel_stack:any[] = [];  	//面板栈
 
 	private static _allDialog = {};
 
@@ -190,6 +187,8 @@ export default class UIManager {
 			obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
 		});
 	}
+
+	//-----------------------------------------------------------------
 	
 	public static toast(content:string) {
 		if(content===undefined||content===null) { return; }
@@ -225,10 +224,14 @@ export default class UIManager {
 		}
 		cc.loader.loadRes("common/prefabs/Toast", cc.Prefab, completeCallback);
 	}
+
+	//-----------------------------------------------------------------
 	
 	public static announce() {
 		
 	}
+
+	//-----------------------------------------------------------------
 	
 	public static barrage() {
 		

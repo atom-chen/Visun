@@ -4,9 +4,6 @@ import EventDef from "../../looker/EventDef";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
 
-const {ccclass, property} = cc._decorator;
-
-@ccclass
 export default class SceneManager {
 	public static preSceneName:string;
 	public static curSceneName:string;
