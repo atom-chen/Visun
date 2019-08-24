@@ -81,9 +81,12 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
 
     public flush() 
     {
+        if(this._send_list.length <= 0) { return; }
         for(var i=1; i<this._send_list.length; i++){
             this._channel.sendBuff(this._send_list[i]);
         }
+        this._send_list.length = 0;
+        this._send_list = [];
     }
 
     public onrecvBuff(buff: any): void 
