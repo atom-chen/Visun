@@ -20,12 +20,14 @@ export default class WsChannel implements IChannel {
 	private _on_opened(event) {
 		cc.log("ws: onopen", this._url);
 		this._curState = ConnState.connected;
+
+		this._onConnFail = null;
 		if(this._onConnSuccess) {
 			this._onConnSuccess();
 			this._onConnSuccess = null;
 		}
+
 		this._dataProcessor.flush();
-		this._onConnFail = null;
 	}
 
 	private _on_recv_data(event) {
@@ -35,24 +37,26 @@ export default class WsChannel implements IChannel {
 
 	private _on_close(event) {
 		cc.log("ws: onclose", this._url);
+
+		this._onConnSuccess = null;
 		if(this._onConnFail) {
 			this._onConnFail();
 			this._onConnFail = null;
 		}
-		this._onConnSuccess = null;
-		this.close();
-		this._curState = ConnState.unconnect;
+		
+		this.on_closed();
 	}
 
 	private _on_error(event) {
 		cc.log("ws: onerror", this._url);
+
+		this._onConnSuccess = null;
 		if(this._onConnFail) {
 			this._onConnFail();
 			this._onConnFail = null;
 		}
-		this._onConnSuccess = null;
-		this.close();
-		this._curState = ConnState.unconnect;
+		
+		this.on_closed();
 	}
 	
 	private initWs(url:string, cacertPath:string, on_success:Function = null, on_fail:Function = null)
@@ -93,11 +97,6 @@ export default class WsChannel implements IChannel {
 			cc.log("already connected: ", url);
 			return;
 		}
-		if(this._curState !== ConnState.unconnect){
-			//这里应该是挂起，然后重连，暂时这样处理，后面优化
-			cc.log("连接中，请先关闭现有连接");
-			return;
-		}
 		
 		this.close();
 		
@@ -121,8 +120,9 @@ export default class WsChannel implements IChannel {
 			self.initWs(url, "", on_success, on_fail);
 		}
 	}
-	
-	public close() 
+
+	//被动关闭WebSocket
+	private on_closed()
 	{
 		if(this._ws){
 			cc.log("关闭WebSocket");
@@ -133,14 +133,27 @@ export default class WsChannel implements IChannel {
 		this._curState = ConnState.unconnect;
 	}
 	
+	//主动关闭WebSocket
+	public close() 
+	{
+		if(this._ws){
+			cc.log("主动关闭WebSocket");
+			this._onConnSuccess = null;
+			this._onConnFail = null;
+			this._ws.onopen = null;
+			this._ws.onmessage = null;
+			this._ws.onclose = null;
+			this._ws.onerror = null;
+			var ws = this._ws;
+			this._ws = null;
+			ws.close();
+		}
+		this._curState = ConnState.unconnect;
+	}
+	
 	public sendMessage(cmd:string|number, info:any) : boolean
 	{
 		return this._dataProcessor.sendMessage(cmd, info);
-	}
-
-	public sendPacket(cmd:string|number, packet:any) : boolean
-	{
-		return this._dataProcessor.sendPacket(cmd, packet);
 	}
 
 	public sendBuff(buff:any) : boolean
