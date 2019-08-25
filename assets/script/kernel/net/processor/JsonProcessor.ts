@@ -19,10 +19,11 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
     public registProtocol(protocol:any) : void
     {
         this._pb_package = protocol;
-
         this.name_2_cmd = {};
         this.cmd_2_name = {};
 
+        cc.log("-------------------------------------");
+        cc.log("注册[Json]协议");
         var info = protocol.Request.CMD;
         for(var key in info) {
             if(isNaN(key as any)) {
@@ -95,9 +96,10 @@ export default class JsonProcessor extends SingleDispatcher implements IProcesso
             cc.log("已经停止");
             return;
         }
+
         //二进制流 转 obj
         var info = this._coder.decode(buff);
-        cc.log(info);
+        cc.log("[recv]", info);
 
         var cmd = info.cmd;
         var data = info.data;
