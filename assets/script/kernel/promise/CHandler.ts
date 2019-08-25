@@ -1,19 +1,23 @@
 //---------------------------------
 // 回调封装
 //---------------------------------
-export default class Caller {
+export default class CHandler {
 	private _fn:Function;
 	private _target:any;
 	private _args:any[];
 	private _autoClean:boolean = false;
 
-	public constructor(fn:Function, target:any, ...args:any[]) {
+	public constructor(fn:Function, target:any, ...args:any[]) 
+	{
 		this._fn = fn;
 		this._target = target;
 		this._args = args;
 	}
 
-	public getTarget() { return this._target; }
+	public getTarget() : any 
+	{ 
+		return this._target; 
+	}
 
 	public call(part:any=null) : void
 	{
@@ -29,7 +33,8 @@ export default class Caller {
 		return ret;
 	}
 
-	public callWith(...extra:any[]) {
+	public callWith(...extra:any[]) 
+	{
 		var ret:any;
 		if(this._args && this._args.length>0){
 			if(extra) {

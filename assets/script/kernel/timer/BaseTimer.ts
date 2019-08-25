@@ -1,4 +1,3 @@
-import Caller from "../promise/Caller";
 import { JTIPoolObject } from "../pool/JTIPoolObject";
 
 export enum TimerType {
