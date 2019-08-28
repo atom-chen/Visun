@@ -13,16 +13,15 @@ import sys
 import time
 
 
-
 def excuteCmd(cmdStr):
 	os.system(cmdStr)
 
 def gen_proto(Proto):
 	print("=====Begin:" + Proto)
 	print("gen " + Proto + ".js")
-	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/scripts/proto/" + Proto + ".js in/" + Proto + ".proto")
+	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/resources/common/script/proto/" + Proto + ".js in/" + Proto + ".proto")
 	print("gen "+Proto+".ts")
-	excuteCmd("pbts -o ../../" + Proto + ".d.ts ../../assets/common/scripts/proto/" + Proto + ".js")
+	excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/resources/common/script/proto/" + Proto + ".js")
 	time.sleep(0.5)
 	print("fix "+Proto+".js")
 	excuteCmd("node fix.js " + Proto)
@@ -30,7 +29,8 @@ def gen_proto(Proto):
 	#excuteCmd("node gen_request.js " + Proto)
 	print("=====Finish: " + Proto + "\n")
 
-gen_proto("GameProto")
-gen_proto("SdkProto")
+
 gen_proto("qhb")
 gen_proto("kpqznn")
+gen_proto("bjl")
+gen_proto("ttz")

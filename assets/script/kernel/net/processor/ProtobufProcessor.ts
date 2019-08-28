@@ -67,14 +67,16 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
 		
 		var buff = this._pb_package.Request.encode(info).finish();
 
-		if(this._channel.getState() === ConnState.connecting){
+		if(this._channel.getState() !== ConnState.connected){
+			cc.log("消息推入队列。 当前连接状态：", this._channel.getState());
 			this._send_list.push(buff);
 			return;
 		}
 
-		// var obj = this._pb_package.Request.decode(buff);
-		// var info = this._pb_package.Request.toObject(obj);
-		// cc.log("[send]", info);
+		// for debug
+		var obj = this._pb_package.Request.decode(buff);
+		var info = this._pb_package.Request.toObject(obj);
+		cc.log("[send]", info);
 
 		this._channel.sendBuff(buff);
 		return true;
@@ -83,6 +85,7 @@ export default class ProtobufProcessor extends SingleDispatcher implements IProc
 	public flush() 
 	{
 		if(this._send_list.length <= 0) { return; }
+		cc.log("flush sendlist: ", this._send_list.length);
 		for(var i=1; i<this._send_list.length; i++){
 			this._channel.sendBuff(this._send_list[i]);
 		}

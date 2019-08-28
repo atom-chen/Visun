@@ -9,8 +9,6 @@ import { MAIN_URL } from "../../../../../script/looker/Consts";
 import http_rules from "../../proxy/proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
-import {GameProto} from "../../proxy/proto/GameProto";
-import {SdkProto} from "../../proxy/proto/SdkProto";
 import Logic from "../../../../common/script/model/Logic";
 import TimerManager from "../../../../../script/kernel/timer/TimerManager";
 import PlatformUtil from "../../../../../script/kernel/utils/PlatformUtil";
@@ -18,6 +16,9 @@ import ProcessorMgr from "../../../../../script/kernel/net/processor/ProcessorMg
 import { ProcessorType, ChannelType } from "../../../../../script/kernel/net/Define";
 import ChannelMgr from "../../../../../script/kernel/net/channel/ChannelMgr";
 import Globals from "../../../../../script/looker/Globals";
+import { qhb } from "../../../../common/script/proto/qhb";
+import { qhb_request } from "../../../../common/script/proxy/net_qhb";
+import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -120,61 +121,15 @@ export default class LobbyUI extends BaseComp {
 
 
 	private testWs() {
-		var processor = ProcessorMgr.instance().create(Globals.HallChannel, ProcessorType.Protobuff);
-		var hall_channel = ChannelMgr.instance().createChannel(Globals.HallChannel, ChannelType.Ws);
+		var processor = ProcessorMgr.instance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
+		var hall_channel = ChannelMgr.instance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		hall_channel.setProcessor(processor);
-		hall_channel.registProtocol(GameProto);
+		hall_channel.registProtocol(qhb);
 		hall_channel.connect("wss://echo.websocket.org", 0);
 
-		var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
-		data.content = "data from hall";
-		var req = GameProto.Request.create();
-		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
-		req.delayCheckRequest = data;
-		hall_channel.sendMessage(req.cmd, req);
-		var buff = GameProto.Request.encode(req).finish();
-		var obj1 = GameProto.Request.decode(buff);
-		var info = GameProto.Request.toObject(obj1);
-		cc.log("发送", info);
-
-		var processor = ProcessorMgr.instance().create(Globals.GameChannel, ProcessorType.Protobuff);
-		var hall_channel = ChannelMgr.instance().createChannel(Globals.GameChannel, ChannelType.Ws);
-		hall_channel.setProcessor(processor);
-		hall_channel.registProtocol(GameProto);
-		hall_channel.connect("wss://echo.websocket.org", 0);
-
-		var data:GameProto.IDelayCheckRequest = GameProto.DelayCheckRequest.create();
-		data.content = "data from game";
-		var req = GameProto.Request.create();
-		req.cmd = GameProto.Request.CMD.DELAY_CHECK;
-		req.delayCheckRequest = data;
-		hall_channel.sendMessage(req.cmd, req);
-		var buff = GameProto.Request.encode(req).finish();
-		var obj1 = GameProto.Request.decode(buff);
-		var info = GameProto.Request.toObject(obj1);
-		cc.log("发送", info);
+		qhb_request.JOIN_COIN_TABLE_REQ({sid:"sssssdddd",tableType:0}, false);
 	}
 
-	private testProtobuf() {
-		//obj 转 二进制流
-		var param11 = {
-			phoneOrUsername : "",
-			psword : "",
-			deviceID : "a58c60b61643277c18b0805ca22abfcc",
-			channelId : 0,
-			agentCode : 0,
-			platformId : 0
-		}
-		var req = SdkProto.Request.create();
-		req.cmd = SdkProto.Request.CMD.Login;
-		req.loginRequest = SdkProto.LoginRequest.create(param11);
-		var buff = SdkProto.Request.encode(req).finish();
-
-		//二进制流 转 obj
-		var obj1 = SdkProto.Request.decode(buff);
-		var info11 = SdkProto.Request.toObject(obj1);
-		cc.log(info11);
-	}
 
 	private testSpine() {
 		var self = this;

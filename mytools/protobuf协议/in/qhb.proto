@@ -1,0 +1,380 @@
+syntax = "proto3";
+package qhb;
+
+// 统一回复数据格式
+message Reply
+{
+    int32 code = 1;
+    string msg = 2;
+}
+
+// 数组
+message IntArr
+{
+    repeated int32 arr= 1;
+}
+
+message Player
+{
+    int32 userId = 1;
+    string nickName = 2;
+    string headImg = 3;
+    int32 sex = 4;
+    string ip = 5;
+    int32 isApply = 6;
+    double coin = 7;
+    int32 state = 8;
+    bool canDeal = 9;
+    double currentScore = 10;
+    double revenue = 11;
+    double totalScore = 12;
+    int32 bagBoom = 13;
+    int32 bagMoney = 14;
+    int32 money = 15;
+}
+
+message TableInfo
+{
+    string tableId = 1;      
+    string seq = 2;  
+    int32 gameId = 3;         
+    int32 gameNo = 4;
+    int32 minLimit = 5;
+    int32 maxLimit = 6;
+    repeated int32 bagMoneys = 7;
+    int32 mult = 8;
+    int32 state = 9;
+    int32 bagNum = 10;
+    repeated Player bingoUsers = 11;
+    int32 currentMoney = 12;
+    int32 currentBoom = 13;
+    string bankerName = 14;
+    string bankerHeadImg = 15;
+    double bankerCoin = 16;
+    int32 selfIndexInApplyList = 17;  // 进入桌子时命名为 remainNum；断线重连时竟然命名为 applyUserSize （狗屎）   
+    Player selfInfo = 18;
+}
+
+message TableOutCard
+{
+    int32 type = 1;
+    repeated int32 handCards = 2;
+    repeated int32 cardsNum = 3;
+    int32 pos = 4;
+    int32 userPos = 5;
+    int32 index = 6;
+    bool hasStopped = 7;
+    int32 betCoin = 8;
+}
+
+//1文本 2玩家ID 3游戏名 4获胜金额 5获胜牌型
+message Prize
+{
+    string one = 1;
+    string two = 2;
+}
+
+/* ------------------------------------------------------------- *
+ * ------------------------------------------------------------- *
+ * -------------  如果发生错误则会回复 Reply 结构  --------------- *
+ * ------------------------------------------------------------- *
+ *---------------------------------------------------------------*/
+
+// 此游戏未注册消息 但是包含此消息实现
+// 消息类                    消息号                                    注册此消息游戏
+// BindGameNoHandler        BIND_GAME_NO_HANDLER =2002                  骰宝
+// GetAllUserHandler        GETUSERLIST_REQ = 2020                      奔驰宝马，龙虎，飞禽走兽
+// GetRomeListHandler       GET_ROME_LIST = 20004                       三公，十三水，骰宝
+
+// common 层消息
+// 检测客户端延迟
+// int DELAY_CHECK_REQ = 20010
+message c2s_delayCheck
+{
+
+}
+//DELAY_CHECK_RESP = 20011
+message s2c_delayCheck
+{
+    Reply ret = 1;
+}
+
+// 挤下线
+//FOUCED_OFFLINE_REQ = 3000
+message c2s_foucedOffline
+{
+    int32 userId = 1;
+}
+
+//FOUCED_OFFLINE_RESP = 3001
+message s2c_foucedOffline
+{
+    Reply ret = 1;
+    //固定回复  账号在其他地方登录,连接断开,请重新登录
+}
+
+// 后台来的强制踢出用户
+// 大厅踢出
+// ADMIN_KICKEDOUT = 200
+message c2s_adminKickedOut
+{
+    int32 userId = 1;
+}
+
+// 是不是傻
+// 异常回复 ADMIN_KICKEDOUT = 200 
+// 非异常回复 PUSH_KICKEDOUT = 4001
+message s2c_adminKickedOut
+{
+    Reply ret = 1;
+   // string desc = 1; // 非异常回复 // 这点设计的不好 可以直接用 ret 结构
+}
+
+// 后台通知金币？
+// 通知客户端刷新金币
+// HALL_REFRESH_COIN = 100
+message c2s_refreshCoin
+{
+    int32 userId = 1;
+    int32 type = 2;
+    int32 coin = 3;
+}
+
+// 异常 HALL_REFRESH_COIN = 100
+// HALL_REFRESH_COIN = 100 回复来源
+// 推送至客户端 PUSH_REFRESH_COIN = 2501
+message s2c_refreshCoin
+{
+    int32 userId = 1;
+    int32 coin = 2;
+    bool isInTable = 3;     // 1-3 回复来源 
+    int32 type =4;
+    int32 addCoin = 5;      // 1-5 推送至客户端
+}
+
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+
+// APPLY_REQ = 2004;        // 埋雷申请
+message c2s_apply
+{
+    int32 boom = 1;
+    int32 money = 2;
+    int32 totalCount = 3;
+}
+        
+// APPLY_RESP = 2005;       // 埋雷申请 - 返回
+message s2c_apply
+{
+    int32 boom = 1;
+    int32 money = 2;
+    int32 totalCount = 3;
+    int32 userId = 4;
+    string nickName = 5;
+    string headImg = 6;
+    double coin = 7;
+}
+
+// DISAPPLY_REQ = 2006;     // 取消埋雷申请
+message c2s_disApply
+{
+
+}
+// DISAPPLY_RESP = 2007;    // 取消埋雷申请 - 返回
+message s2c_disApply
+{
+    double coin = 1; 
+}
+
+/** 加入牌桌请求 */
+// JOIN_COIN_TABLE_REQ = 20006;
+message c2s_joinTable
+{
+    string sid = 1;
+    int32 tableType = 2;
+}
+
+/** 加入牌桌返回 */
+// JOIN_COIN_TABLE_RESP = 20007;
+message s2c_joinTable
+{
+    TableInfo tableInfo = 1;
+}
+
+/**获取玩家列表*/
+// GET_USERLIST_REQ = 2020;
+message c2s_getUserList
+{
+    int32 type = 1;  // 0 获取申请玩家列表 ;  1 获取所有玩家列表
+}
+
+// GET_USERLIST_RESP = 2021
+message s2c_getUserList
+{
+    repeated Player users = 1;
+    Player selfInfo = 2;                // 获取所有玩家信息时，没有这项
+}
+
+/** 抢红包请求 */
+// QIANG_REQ = 2000;
+message c2s_qiang
+{
+
+}
+
+/** 玩家抢红包返回 */
+// QIANG_RESP = 2001;
+message s2c_qiang
+{
+    double money = 1;
+    double coin = 2;
+}
+
+/** 玩家抢红包推送 */
+// PUSHBET_RESP = 2003;
+message s2c_qiangPush
+{
+    double money = 1;
+    int32 userId = 2;
+    string headImg = 3;
+    string nickName = 4;
+}
+
+/** 玩家点击重新连接 */
+// PUSH_USER_RECONNECT_REQ = 2030;
+message c2s_reconnect
+{
+    int32 userId = 1;   
+}
+
+// PUSH_USER_RECONNECT_RESP = 2031;
+/** 推送玩家重连数据2033 */
+// PUSH_RECONNECT_DATA_RESP = 2033
+message s2c_reconnect
+{
+    TableInfo tableInfo = 1;
+}
+
+ /**用户退后台*/
+// USER_ONBACK_REQ = 2080;
+message c2s_userOnBack
+{
+    int32 onBack = 1;
+}
+
+// USER_ONBACK_RESP = 2081;
+message s2c_userOnBack
+{
+    int32 userId = 1;
+}
+
+/** 玩家退出 */
+// USER_QUIT_REQ = 2044;
+message c2s_userQuit
+{
+
+}
+// USER_QUIT_RESP = 2045;
+message s2c_userQuit
+{
+    int32 userId = 1;
+}
+
+//所有请求接口
+message Request {
+    enum CMD 
+    {
+        UNKNOWN                             = 0;
+
+        // ** 申请埋雷
+        APPLY_REQ = 2004;
+        APPLY_RESP = 2005;
+
+        /** 取消申请埋雷 */
+        DISAPPLY_REQ = 2006;
+        DISAPPLY_RESP = 2007;
+        
+        /** 加入牌桌请求 */
+	    JOIN_COIN_TABLE_REQ = 20006;
+        JOIN_COIN_TABLE_RESP = 20007;
+        
+        /**获取玩家列表*/
+        GET_USERLIST_REQ = 2020;
+        GET_USERLIST_RESP = 2021;
+
+        /** 抢红包请求 */
+	    QIANG_REQ = 2000;
+	    QIANG_RESP = 2001;
+	    /** 玩家抢红包推送 */
+        PUSHBET_RESP = 2003;
+    
+        /** 玩家点击重新连接2030 */
+	    PUSH_USER_RECONNECT_REQ = 2030;
+        PUSH_USER_RECONNECT_RESP = 2031;
+        
+        /**用户退后台*/
+        USER_ONBACK_REQ = 2080;
+        USER_ONBACK_RESP = 2081;
+
+        /** 玩家退出 */
+	    USER_QUIT_REQ = 2044;
+	    USER_QUIT_RESP = 2045;
+    }
+
+    CMD   cmd                           = 1;      //访问接口
+    c2s_apply apply	                    = 11;	
+    c2s_disApply disApply               = 12;     
+    c2s_joinTable joinTable		        = 13;	  
+    c2s_getUserList getUserList         = 14;
+    c2s_qiang qiang                     = 15;	 
+    c2s_reconnect reconnect				= 16;	
+    c2s_userOnBack userOnBack			= 17;	  
+    c2s_userQuit userQuit				= 18;	  
+
+}
+
+//所有应答接口
+message Response {
+    enum ErrorCode {
+        NO_ERROR                        = 0;       
+        
+        APPLY_ERROR                     = 3084;         // 当前房间人数已满~请选择其他房间加入试试
+        TABLE_NOT_FOIND_ERROR           = 3008;         // 牌桌不存在")
+        NO_CHARGE_ERROR                 = 3091;         // 请充值后游戏")
+        USERBAN                         = 30002;        // 账号异常...无法开始游戏,请联系客服"),
+        NOT_IN_TABLE                    = 3011;         // 未加入此房间,或者未坐下")
+        ACCOUNT_NOT_ENOUGH_ERROR        = 3004;         // 当前余额不足")
+        APPLY_HAS_ERROR                 = 3085;         // 您已经申请过了,请先取消申请")
+        QIANG_ERROR                     = 3082;         // 手慢了,红包已经被抢空了")
+        JOIN_TABLE_ERROR                = 3007;         // 加入牌桌失败")
+        USER_LOGIN_ERROR                = 3001;         // token失效,登录校验失败")
+        CHANNELID_GAMENO_ERROR          = 3003;         // channelId或gameNo错误")
+        JOIN_MAX_ERROR                  = 3083;         // 当前房间人数已满~请选择其他房间加入试试")
+        DISAPPLY_ERROR                  = 3087;         // 取消失败,该红包正在开抢中..")
+        GETUSERLIST_ERROR               = 3081;         // 获取玩家列表")
+        QIANG_STATE_ERROR               = 3089;         // 当前没有红包..")
+        QIANG_SELF_ERROR                = 3088;         // 不能抢自己的红包..")
+        RECONNET_ERROR                  = 3025;         // 重连失败"),
+        FOUCEDOFFLINE                   = 30001;        // 账号在其他地方登录,连接断开,请重新登录")
+        USER_ONBACK_ERROR               = 3056;         // 用户退后台消息异常")
+        TABLE_QUIT_ERROR                = 3013;         // 游戏中无法退出~")
+
+    }
+    ErrorCode error                     = 1;// [default = NO_ERROR];   // 表示本次请求状态
+    int64 serverTime                    = 2;                        // 服务器时间
+    Request.CMD     cmd                 = 3;                        // 接口
+ 
+    Reply ret                           = 4;
+
+    s2c_apply sendApply                     = 11;
+    s2c_disApply sendDisApply               = 12;	
+    s2c_joinTable sendJoinTable             = 13;
+    s2c_getUserList sendGetUserList         = 14;
+    s2c_qiang sendQiang                     = 15;
+    s2c_qiangPush sendQiangPush             = 16;					
+    s2c_reconnect sendReconnect			    = 17;	
+    s2c_userOnBack sendUserOnBack		    = 18;			
+    s2c_userQuit sendUserQuit		        = 19;						
+
+}

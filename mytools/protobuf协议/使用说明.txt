@@ -1,0 +1,16 @@
+-------------------------------------------
+-- protobuf使用说明
+-------------------------------------------
+安装node.js
+安装protobufjs到全局, 控制台输入： npm install -g protobufjs
+把protobuf.js文件拖到Creator工程中并且导入为插件（已经导入，忽略这一步）
+
+
+将xxxxxx.proto文件放入in目录
+打开xxxxxx.proto文件，加上下面两条
+	syntax = "proto3";
+	package xxxxxx;
+打开gen_proto.py，将要生成的新协议xxxxxx添加进去
+执行一键生成所有
+仿照“生成rpc qhb.bat”，写一个生成自己的rpc接口的bat
+执行自己的bat

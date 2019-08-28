@@ -59,10 +59,8 @@ export default class WsChannel implements IChannel {
 		this.on_closed();
 	}
 	
-	private initWs(url:string, cacertPath:string, on_success:Function = null, on_fail:Function = null)
+	private initWs(url:string, cacertPath:string)
 	{
-		this._onConnSuccess = on_success;
-		this._onConnFail = on_fail;
 		this._ws = new WebSocket(url, [], cacertPath);
 		this._ws.binaryType = "arraybuffer";
 		this._ws.onopen = this._on_opened.bind(this);
@@ -101,6 +99,8 @@ export default class WsChannel implements IChannel {
 		this.close();
 		
 		this._curState = ConnState.connecting;
+		this._onConnSuccess = on_success;
+		this._onConnFail = on_fail;
 		this._url = url;
 		var self = this;
 		
@@ -113,11 +113,11 @@ export default class WsChannel implements IChannel {
 					cc.log( '载入cacert.pem失败:' + errorMessage ); 
 					return; 
 				}
-				self.initWs(url, ""+loadedResource, on_success, on_fail);
+				self.initWs(url, ""+loadedResource);
 			});
 		}
 		else {
-			self.initWs(url, "", on_success, on_fail);
+			self.initWs(url, "");
 		}
 	}
 
@@ -125,7 +125,7 @@ export default class WsChannel implements IChannel {
 	private on_closed()
 	{
 		if(this._ws){
-			cc.log("关闭WebSocket");
+			cc.log("断网了or连接失败了");
 			var ws = this._ws;
 			this._ws = null;
 			ws.close();
@@ -171,7 +171,6 @@ export default class WsChannel implements IChannel {
 			return false;
 		}
 
-		//cc.log("[send]", buff);
 		this._ws.send(buff);
 		
 		return true;

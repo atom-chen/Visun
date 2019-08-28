@@ -20,7 +20,7 @@ export default class ProcessorMgr {
 
     }
 
-    public create(key:string, type:ProcessorType) : IProcessor
+    public createProcessor(key:string, type:ProcessorType) : IProcessor
     {
         if(!this._all_processors[key]) {
             if(type == ProcessorType.Json) 
@@ -35,7 +35,7 @@ export default class ProcessorMgr {
         return this._all_processors[key];
     }
 
-    public get(key:string) : IProcessor {
+    public getProcessor(key:string) : IProcessor {
         return this._all_processors[key];
     } 
 }

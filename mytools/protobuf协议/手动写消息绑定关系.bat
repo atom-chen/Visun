@@ -1,0 +1,1 @@
+node gen_foolish.js aaaaa

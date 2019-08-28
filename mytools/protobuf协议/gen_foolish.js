@@ -38,7 +38,7 @@ console.log(infos);
 //-----------------------------------------------------------------
 // 第二步： 生成代码
 //-----------------------------------------------------------------
-var outpath = "../../assets/common/scripts/proxy/net_" + mudname + ".ts";
+var outpath = "../../assets/resources/common/script/proxy/net_" + mudname + ".ts";
 var outstr = "//---------------------------------\n";
 outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
@@ -49,31 +49,35 @@ outstr += "import PacketDefine from \"../../../framework/net/PacketDefine\";\n\n
 outstr += "export class " + mudname + "_packet_define {\n";
 for(var enumKey in infos) {
 	var curDef = infos[enumKey];
-	outstr += "    public static " + enumKey + " = new PacketDefine("+mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\");\n";
+	outstr += "    public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\");\n";
 }
 outstr += "}\n\n";
 
-outstr += "export class "+mudname+"_packet {\n";
-for(var enumKey in infos) {
-	outstr += "    public static "+enumKey+"(data:any, bIsPbObj:boolean) : any \n";
-	outstr += "    {\n";
-	outstr += "        var packDef = "+mudname+"_packet_define."+enumKey+";\n";
-	outstr += "        var req = "+mudname+".Request.create();\n";
-	outstr += "        req.cmd = packDef.cmd;\n";
-	outstr += "        if(bIsPbObj) { req[packDef.fieldName] = data; } else { req[packDef.fieldName] = packDef.data_struct.create(data); }\n";
-	outstr += "        return req;\n"
-	outstr += "    }\n";
-}
-outstr += "}\n\n";
+// outstr += "export class "+mudname+"_packet {\n";
+// for(var enumKey in infos) {
+// 	outstr += "    public static "+enumKey+"(data:any, bIsPbObj:boolean) : any \n";
+// 	outstr += "    {\n";
+// 	outstr += "        var packDef = "+mudname+"_packet_define."+enumKey+";\n";
+// 	outstr += "        var req = "+mudname+".Request.create();\n";
+// 	outstr += "        req.cmd = packDef.cmd;\n";
+// 	outstr += "        if(bIsPbObj) { req[packDef.fieldName] = data; } else { req[packDef.fieldName] = packDef.data_struct.create(data); }\n";
+// 	outstr += "        return req;\n"
+// 	outstr += "    }\n";
+// }
+// outstr += "}\n\n";
 
 outstr += "export class "+mudname+"_request {\n";
 for(var enumKey in infos) {
+	// outstr += "    public static "+enumKey+"(data:any, bIsPbObj:boolean) : void \n";
+	// outstr += "    {\n";
+	// outstr += "        var channel_game:bb.WsChannel = bb.ChannelMgr.instance().getChannel(ChannelDefine.game);\n";
+	// outstr += "        if(!channel_game) { return; }\n";
+	// outstr += "        var req = "+mudname+"_packet_define."+enumKey+".createPacket(data, bIsPbObj);\n";
+	// outstr += "        channel_game.sendMessage(req.cmd, req);\n"
+	// outstr += "    }\n";
 	outstr += "    public static "+enumKey+"(data:any, bIsPbObj:boolean) : void \n";
 	outstr += "    {\n";
-	outstr += "        var channel_game:bb.WsChannel = bb.ChannelMgr.instance().getChannel(ChannelDefine.game);\n";
-	outstr += "        if(!channel_game) { return; }\n";
-	outstr += "        var req = "+mudname+"_packet."+enumKey+"(data, bIsPbObj);\n";
-	outstr += "        channel_game.sendMessage(req.cmd, req);\n"
+	outstr += "        "+ mudname+"_packet_define."+enumKey+".sendToChannel(ChannelDefine.game, data, bIsPbObj);\n";
 	outstr += "    }\n";
 }
 outstr += "}\n";
