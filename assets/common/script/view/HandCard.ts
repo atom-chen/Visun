@@ -1,9 +1,9 @@
-import BaseComp from "../../../kernel/view/BaseComp";
+import BaseComponent from "../../../kernel/view/BaseComponent";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class HandCard extends BaseComp {
+export default class HandCard extends BaseComponent {
 	private _touchBegan:cc.Vec2;
     private _touchMoved:cc.Vec2;
     private _nowState:number = 0;

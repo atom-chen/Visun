@@ -1,13 +1,13 @@
 //---------------------------------
 // 确认框
 //---------------------------------
-import BaseComp from "../../kernel/view/BaseComp";
+import BaseComponent from "../../kernel/view/BaseComponent";
 import CommonUtils from "../../kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class ConfirmDlg extends BaseComp {
+export default class ConfirmDlg extends BaseComponent {
 
 	private _callback:Function = null;
 

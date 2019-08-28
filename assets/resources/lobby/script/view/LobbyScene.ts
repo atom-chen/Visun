@@ -1,11 +1,11 @@
 import UIManager from "../../../../kernel/view/UIManager";
-import BaseComp from "../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
 import AudioManager from "../../../../kernel/audio/AudioManager";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbyScene extends BaseComp {
+export default class LobbyScene extends BaseComponent {
 
     onLoad () {
         UIManager.openPanel("lobby/prefabs/LobbyUI", null);

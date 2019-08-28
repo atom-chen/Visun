@@ -4,12 +4,12 @@
 const {ccclass, property} = cc._decorator;
 
 import { HOT_STATE } from "../../kernel/looker/KernelDefine";
-import BaseComp from "../../kernel/view/BaseComp";
+import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 
 @ccclass
-export default class HotupdateScene extends BaseComp {
+export default class HotupdateScene extends BaseComponent {
 	@property(cc.ProgressBar)
 	byteProgress: cc.ProgressBar = null;
 

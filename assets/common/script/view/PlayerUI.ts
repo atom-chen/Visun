@@ -1,4 +1,4 @@
-import BaseComp from "../../../kernel/view/BaseComp";
+import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtils from "../../../kernel/utils/CommonUtils";
 import User from "../model/User";
 
@@ -6,7 +6,7 @@ import User from "../model/User";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class PlayerUI extends BaseComp {
+export default class PlayerUI extends BaseComponent {
 
     @property(cc.Label)
     label_name: cc.Label = null;

@@ -1,11 +1,11 @@
-import BaseComp from "../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import CommonUtils from "../../../../kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class DdzUI extends BaseComp {
+export default class DdzUI extends BaseComponent {
     
     start () {
         CommonUtils.traverseNodes(this.node, this.m_ui);

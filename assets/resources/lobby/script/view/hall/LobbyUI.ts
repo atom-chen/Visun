@@ -4,7 +4,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 import HttpCore from "../../../../../kernel/net/HttpCore";
 import CommonUtils from "../../../../../kernel/utils/CommonUtils";
 import EventCenter from "../../../../../kernel/event/EventCenter";
-import BaseComp from "../../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import http_rules from "../../proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
@@ -22,7 +22,7 @@ import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbyUI extends BaseComp {
+export default class LobbyUI extends BaseComponent {
 
 	onLoad () 
 	{

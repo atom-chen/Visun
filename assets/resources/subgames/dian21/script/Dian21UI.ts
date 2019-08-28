@@ -1,8 +1,8 @@
-import BaseComp from "../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Dian21UI extends BaseComp {
+export default class Dian21UI extends BaseComponent {
 
 }

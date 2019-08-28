@@ -1,10 +1,10 @@
 import CommonUtils from "../../../kernel/utils/CommonUtils";
-import BaseComp from "../../../kernel/view/BaseComp";
+import BaseComponent from "../../../kernel/view/BaseComponent";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class ChipBox extends BaseComp {
+export default class ChipBox extends BaseComponent {
 
     private selectedIndex:number = 1;
 

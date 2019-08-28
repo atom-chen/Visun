@@ -1,9 +1,9 @@
-import BaseComp from "../../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../../kernel/view/BaseComponent";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class KefuUI extends BaseComp {
+export default class KefuUI extends BaseComponent {
 	onLoad() {
 		
 	}

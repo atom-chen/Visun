@@ -1,4 +1,4 @@
-import BaseComp from "../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtils from "../../../../kernel/utils/CommonUtils";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import EventCenter from "../../../../kernel/event/EventCenter";
@@ -7,7 +7,7 @@ import GameUtil from "../../../../common/script/utils/GameUtil";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class bjleUI extends BaseComp {
+export default class bjleUI extends BaseComponent {
 	_players : any[] = [];
 
 	onLoad () {

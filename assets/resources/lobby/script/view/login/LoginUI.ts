@@ -1,10 +1,10 @@
-import BaseComp from "../../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtils from "../../../../../kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LoginUI extends BaseComp {
+export default class LoginUI extends BaseComponent {
 
     start () {
         CommonUtils.traverseNodes(this.node, this.m_ui);

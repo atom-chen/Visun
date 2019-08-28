@@ -1,6 +1,6 @@
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import CommonUtils from "../../../../kernel/utils/CommonUtils";
-import BaseComp from "../../../../kernel/view/BaseComp";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import SimplePool from "../../../../kernel/pool/SimplePool";
 import TimerManager from "../../../../kernel/timer/TimerManager";
@@ -8,7 +8,7 @@ import TimerManager from "../../../../kernel/timer/TimerManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class BrnnUI extends BaseComp {
+export default class BrnnUI extends BaseComponent {
 
 	compBox:any = null;
 	_rule:number[] = [1,3,5,300,800];
