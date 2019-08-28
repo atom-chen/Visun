@@ -1,4 +1,4 @@
-import GameUtil from "../../../lobby/script/utils/GameUtil";
+import GameUtil from "../../../../common/script/utils/GameUtil";
 import CommonUtils from "../../../../kernel/utils/CommonUtils";
 import BaseComp from "../../../../kernel/view/BaseComp";
 import SceneManager from "../../../../kernel/view/SceneManager";

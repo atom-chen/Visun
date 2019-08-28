@@ -1,31 +1,35 @@
+import GameConfig from "../definer/GameConfig";
+import HttpCore from "../../../kernel/net/HttpCore";
+import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
+import HallRequest from "../../../resources/lobby/script/proxy/HallRequest";
+import LogicCenter from "./LogicCenter";
+import UIManager from "../../../kernel/view/UIManager";
+import SceneManager from "../../../kernel/view/SceneManager";
+import { CLIENT_VERSION } from "../definer/Consts";
+import BaseModel from "../../../kernel/model/BaseModel";
 
-import GameConfig from "./GameConfig";
-import HttpCore from "../../../../kernel/net/HttpCore";
-import HotUpdator from "../../../../kernel/hotupdator/HotUpdator";
-import HallRequest from "../proxy/HallRequest";
-import LogicCenter from "../../../../common/script/model/LogicCenter";
-import UIManager from "../../../../kernel/view/UIManager";
-import SceneManager from "../../../../kernel/view/SceneManager";
-import { CLIENT_VERSION } from "../../../../common/script/definer/Consts";
 
-
-export default class SubgameEntry {
+export default class GameManager implements BaseModel {
+	private static _singleton:GameManager;
 	private _gamelist:any[];
 	
-	private static _singleton:SubgameEntry;
-	private constructor() {}
-	public static instance() : SubgameEntry {
-		if(!SubgameEntry._singleton){
-			SubgameEntry._singleton = new SubgameEntry;
-		}
-		return SubgameEntry._singleton;
+	
+	private constructor() {
+		this._gamelist = [];
+	}
+	public static instance() : GameManager {
+		if(!GameManager._singleton){ GameManager._singleton = new GameManager; }
+		return GameManager._singleton;
 	}
 	public static destroy(){
-		if(SubgameEntry._singleton) {
-			SubgameEntry._singleton._gamelist.length = 0;
-			SubgameEntry._singleton._gamelist = null;
-			SubgameEntry._singleton = null;
+		if(GameManager._singleton) {
+			GameManager._singleton.clear();
+			GameManager._singleton = null;
 		}
+	}
+
+	public clear() {
+		this._gamelist.length = 0;
 	}
 
 	public setServerGames(gameList:any[]) {

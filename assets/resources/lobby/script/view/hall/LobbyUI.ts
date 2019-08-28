@@ -1,5 +1,5 @@
-import SubgameEntry from "../../utils/SubgameEntry";
-import GameConfig from "../../utils/GameConfig";
+import GameManager from "../../../../../common/script/model/GameManager";
+import GameConfig from "../../../../../common/script/definer/GameConfig";
 import UIManager from "../../../../../kernel/view/UIManager";
 import HttpCore from "../../../../../kernel/net/HttpCore";
 import CommonUtils from "../../../../../kernel/utils/CommonUtils";
@@ -87,7 +87,7 @@ export default class LobbyUI extends BaseComp {
 			var bton = this.m_ui[cfg.btn];
 			bton.gameId = cfg.id;
 			CommonUtils.addClickEvent(bton, function(){ 
-				SubgameEntry.instance().enterGame(this.gameId);
+				GameManager.instance().enterGame(this.gameId);
 			}, bton);
 		}
 	}

@@ -1,5 +1,5 @@
 import HttpCore from "../../../../kernel/net/HttpCore";
-import SubgameEntry from "../utils/SubgameEntry";
+import GameManager from "../../../../common/script/model/GameManager";
 import HallRequest from "./HallRequest";
 import LogicCenter from "../../../../common/script/model/LogicCenter";
 import UIManager from "../../../../kernel/view/UIManager";
@@ -29,7 +29,7 @@ HallRespond.req_ranklist = function(info:any) {
 
 HallRespond.req_game_list = function(info:any) {
 	if(!info) return;
-	SubgameEntry.instance().setServerGames(info.data);
+	GameManager.instance().setServerGames(info.data);
 }
 
 HallRespond.req_enter_br_room = function(info:any) {
