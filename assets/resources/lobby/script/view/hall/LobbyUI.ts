@@ -5,7 +5,7 @@ import HttpCore from "../../../../../kernel/net/HttpCore";
 import CommonUtils from "../../../../../kernel/utils/CommonUtils";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import BaseComp from "../../../../../kernel/view/BaseComp";
-import http_rules from "../../proxy/proto/http_rules";
+import http_rules from "../../proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
 import LogicCenter from "../../../../../common/script/model/LogicCenter";
