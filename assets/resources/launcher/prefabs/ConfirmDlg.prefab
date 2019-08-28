@@ -1230,20 +1230,6 @@
     "sync": false
   },
   {
-    "__type__": "838ddISPM9Os45Y4npJRnRn",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "labelContent": null,
-    "labelTitle": null,
-    "btn_ok": null,
-    "btn_no": null,
-    "_id": ""
-  },
-  {
     "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
@@ -1300,6 +1286,16 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 1280,
     "_originalHeight": 720,
+    "_id": ""
+  },
+  {
+    "__type__": "f5392s7KItDybRVCAXENBqY",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {

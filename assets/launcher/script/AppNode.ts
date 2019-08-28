@@ -1,7 +1,7 @@
-import EventCenter from "../kernel/event/EventCenter";
-import EventDef from "../looker/EventDef";
-import TimerManager from "../kernel/timer/TimerManager";
-import Adaptor from "../kernel/adaptor/Adaptor";
+import EventCenter from "../../script/kernel/event/EventCenter";
+import EventDef from "../../script/looker/EventDef";
+import TimerManager from "../../script/kernel/timer/TimerManager";
+import Adaptor from "../../script/kernel/adaptor/Adaptor";
 
 //---------------------------------
 // 永驻节点
