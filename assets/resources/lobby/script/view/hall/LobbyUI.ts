@@ -73,7 +73,6 @@ export default class LobbyUI extends BaseComp {
 
 		CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
 			UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
-			this.testProtobuf();
 		}, this);
 
 		// 
