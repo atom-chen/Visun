@@ -2,7 +2,7 @@ import HttpCore from "../../../../kernel/net/HttpCore";
 import { WS_URL } from "../../../../kernel/looker/Consts";
 import SubgameEntry from "../utils/SubgameEntry";
 import HallRequest from "./HallRequest";
-import Logic from "../../../common/script/model/Logic";
+import Logic from "../../../../common/script/model/Logic";
 import UIManager from "../../../../kernel/view/UIManager";
 
 var HallRespond:any;

@@ -4,7 +4,7 @@ import HttpCore from "../../../../kernel/net/HttpCore";
 import { CLIENT_VERSION } from "../../../../kernel/looker/Consts";
 import HotUpdator from "../../../../kernel/hotupdator/HotUpdator";
 import HallRequest from "../proxy/HallRequest";
-import Logic from "../../../common/script/model/Logic";
+import Logic from "../../../../common/script/model/Logic";
 import UIManager from "../../../../kernel/view/UIManager";
 import SceneManager from "../../../../kernel/view/SceneManager";
 

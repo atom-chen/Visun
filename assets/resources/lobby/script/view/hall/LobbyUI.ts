@@ -9,16 +9,14 @@ import { MAIN_URL } from "../../../../../kernel/looker/Consts";
 import http_rules from "../../proxy/proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
-import Logic from "../../../../common/script/model/Logic";
-import TimerManager from "../../../../../kernel/timer/TimerManager";
+import Logic from "../../../../../common/script/model/Logic";
 import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import { ProcessorType, ChannelType } from "../../../../../kernel/net/Define";
 import ChannelMgr from "../../../../../kernel/net/channel/ChannelMgr";
-import Globals from "../../../../../kernel/looker/Globals";
-import { qhb } from "../../../../common/script/proto/qhb";
-import { qhb_request } from "../../../../common/script/proxy/net_qhb";
-import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
+import { qhb } from "../../../../../common/script/proto/qhb";
+import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 
 
 const {ccclass, property} = cc._decorator;
