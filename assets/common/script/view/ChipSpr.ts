@@ -1,4 +1,4 @@
-import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import CommonUtils from "../../../kernel/utils/CommonUtils";
 
 
 const {ccclass, property} = cc._decorator;

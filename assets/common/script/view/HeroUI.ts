@@ -1,5 +1,5 @@
-import BaseComp from "../../../../kernel/view/BaseComp";
-import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import BaseComp from "../../../kernel/view/BaseComp";
+import CommonUtils from "../../../kernel/utils/CommonUtils";
 import User from "../model/User";
 
 
