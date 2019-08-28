@@ -1,4 +1,4 @@
-import BaseModel from "../../../../script/kernel/model/BaseModel";
+import BaseModel from "../../../../kernel/model/BaseModel";
 import Logic from "./Logic";
 
 export default class LoginMgr implements BaseModel {

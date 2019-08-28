@@ -1,9 +1,9 @@
-import HttpCore from "../../../../script/kernel/net/HttpCore";
-import { WS_URL } from "../../../../script/looker/Consts";
+import HttpCore from "../../../../kernel/net/HttpCore";
+import { WS_URL } from "../../../../kernel/looker/Consts";
 import SubgameEntry from "../utils/SubgameEntry";
 import HallRequest from "./HallRequest";
 import Logic from "../../../common/script/model/Logic";
-import UIManager from "../../../../script/kernel/view/UIManager";
+import UIManager from "../../../../kernel/view/UIManager";
 
 var HallRespond:any;
 HallRespond = {};

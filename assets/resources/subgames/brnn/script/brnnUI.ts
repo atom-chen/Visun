@@ -1,9 +1,9 @@
 import GameUtil from "../../../lobby/script/utils/GameUtil";
-import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
-import BaseComp from "../../../../script/kernel/view/BaseComp";
-import SceneManager from "../../../../script/kernel/view/SceneManager";
-import SimplePool from "../../../../script/kernel/pool/SimplePool";
-import TimerManager from "../../../../script/kernel/timer/TimerManager";
+import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import BaseComp from "../../../../kernel/view/BaseComp";
+import SceneManager from "../../../../kernel/view/SceneManager";
+import SimplePool from "../../../../kernel/pool/SimplePool";
+import TimerManager from "../../../../kernel/timer/TimerManager";
 
 const {ccclass, property} = cc._decorator;
 

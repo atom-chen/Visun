@@ -1,6 +1,6 @@
-import BaseComp from "../../../../../script/kernel/view/BaseComp";
-import TimerManager from "../../../../../script/kernel/timer/TimerManager";
-import UIManager from "../../../../../script/kernel/view/UIManager";
+import BaseComp from "../../../../../kernel/view/BaseComp";
+import TimerManager from "../../../../../kernel/timer/TimerManager";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 const {ccclass, property} = cc._decorator;
 

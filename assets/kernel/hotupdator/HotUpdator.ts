@@ -1,4 +1,4 @@
-import { HOT_STATE } from "../../looker/Consts";
+import { HOT_STATE } from "../../kernel/looker/Consts";
 import UIManager from "../view/UIManager";
 
 //---------------------------------

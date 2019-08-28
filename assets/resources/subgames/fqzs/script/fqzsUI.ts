@@ -1,6 +1,6 @@
-import BaseComp from "../../../../script/kernel/view/BaseComp";
-import SceneManager from "../../../../script/kernel/view/SceneManager";
-import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+import BaseComp from "../../../../kernel/view/BaseComp";
+import SceneManager from "../../../../kernel/view/SceneManager";
+import CommonUtils from "../../../../kernel/utils/CommonUtils";
 
 const {ccclass, property} = cc._decorator;
 

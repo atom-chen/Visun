@@ -1,4 +1,4 @@
-import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
+import CommonUtils from "../../../../kernel/utils/CommonUtils";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];

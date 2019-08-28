@@ -1,4 +1,4 @@
-import BaseModel from "../../../../script/kernel/model/BaseModel";
+import BaseModel from "../../../../kernel/model/BaseModel";
 
 export default class EmailMgr implements BaseModel {
     private static _instance:EmailMgr = null;

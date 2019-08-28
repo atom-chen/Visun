@@ -2,7 +2,7 @@
 //该文件自动生成，请勿手动更改
 //---------------------------------
 import { qhb } from "../proto/qhb";
-import PacketDefine from "../../../../script/kernel/net/PacketDefine";
+import PacketDefine from "../../../../kernel/net/PacketDefine";
 import ChannelDefine from "../definer/ChannelDefine";
 
 

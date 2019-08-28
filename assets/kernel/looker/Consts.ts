@@ -11,7 +11,7 @@ export const DESIGN_SIZE = {
 	crown : 1280/720
 }
 
-export enum LAYER {
+export enum LayerDefine {
 	Panel = 0,
 	Popup,
 	Dialog,

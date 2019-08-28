@@ -1,7 +1,7 @@
-import BaseComp from "../../../../script/kernel/view/BaseComp";
-import CommonUtils from "../../../../script/kernel/utils/CommonUtils";
-import SceneManager from "../../../../script/kernel/view/SceneManager";
-import EventCenter from "../../../../script/kernel/event/EventCenter";
+import BaseComp from "../../../../kernel/view/BaseComp";
+import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import SceneManager from "../../../../kernel/view/SceneManager";
+import EventCenter from "../../../../kernel/event/EventCenter";
 import GameUtil from "../../../lobby/script/utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;

@@ -1,12 +1,12 @@
 
 import GameConfig from "./GameConfig";
-import HttpCore from "../../../../script/kernel/net/HttpCore";
-import { CLIENT_VERSION } from "../../../../script/looker/Consts";
-import HotUpdator from "../../../../script/kernel/hotupdator/HotUpdator";
+import HttpCore from "../../../../kernel/net/HttpCore";
+import { CLIENT_VERSION } from "../../../../kernel/looker/Consts";
+import HotUpdator from "../../../../kernel/hotupdator/HotUpdator";
 import HallRequest from "../proxy/HallRequest";
 import Logic from "../../../common/script/model/Logic";
-import UIManager from "../../../../script/kernel/view/UIManager";
-import SceneManager from "../../../../script/kernel/view/SceneManager";
+import UIManager from "../../../../kernel/view/UIManager";
+import SceneManager from "../../../../kernel/view/SceneManager";
 
 
 export default class SubgameEntry {

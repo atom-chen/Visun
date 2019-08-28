@@ -1,8 +1,8 @@
 //---------------------------------
 // UI管理器
 //---------------------------------
-import * as Consts from "../../looker/Consts";
 import CommonUtils from "../utils/CommonUtils";
+import { LayerDefine } from "../looker/Consts";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -36,18 +36,18 @@ export default class UIManager {
 	}
 
 	//创建窗口的唯一接口
-	public static initWindow(layerId:Consts.LAYER, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
+	public static initWindow(layerId:LayerDefine, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
 		if(cc.isValid(UIManager._allUI[prefabName])){
 			cc.log("allready exist: ", prefabName);
 			var wnd = UIManager._allUI[prefabName];
 			wnd.zIndex = layerId;
 			wnd.active = true;
-			if(layerId==Consts.LAYER.Panel){
+			if(layerId==LayerDefine.Panel){
 				if(UIManager._panel_stack.indexOf(wnd) < 0) {
 					UIManager._panel_stack.push(wnd);
 				}
 			}
-			if(layerId!=Consts.LAYER.Panel){
+			if(layerId!=LayerDefine.Panel){
 				var idx = UIManager._panel_stack.indexOf(wnd);
 				if(idx >= 0) {
 					UIManager._panel_stack.splice(idx, 1);
@@ -76,7 +76,7 @@ export default class UIManager {
 			cvs.addChild(obj, layerId);
 			UIManager._allUI[prefabName] = obj;
 
-			if(layerId===Consts.LAYER.Panel){
+			if(layerId===LayerDefine.Panel){
 				UIManager._panel_stack.push(obj);
 			}
 
@@ -87,12 +87,12 @@ export default class UIManager {
 
 	//打开面板
 	public static openPanel(prefabName:string, callback:Function, ...args:any[]) {
-		this.initWindow(Consts.LAYER.Panel, prefabName, true, false, callback, args);
+		this.initWindow(LayerDefine.Panel, prefabName, true, false, callback, args);
 	}
 	
 	//打开弹窗
 	public static openPopwnd(prefabName:string, callback:Function, ...args:any[]) {
-		this.initWindow(Consts.LAYER.Popup, prefabName, true, true, callback, args);
+		this.initWindow(LayerDefine.Popup, prefabName, true, true, callback, args);
 	}
 
 	//关闭窗口
@@ -181,7 +181,7 @@ export default class UIManager {
 
 			CommonUtils.setModal(obj, false); 
 
-			cvs.addChild(obj, Consts.LAYER.Dialog);
+			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
 			
 			obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
@@ -206,7 +206,7 @@ export default class UIManager {
 				idx++;
 			}
 			//插入
-			cvs.addChild(obj, Consts.LAYER.Tips);
+			cvs.addChild(obj, LayerDefine.Tips);
 			UIManager._toastList.push(obj);
 			obj.y = 0;
 			//刷新数据并定时销毁

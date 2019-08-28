@@ -1,6 +1,6 @@
 import LoadCenter from "../load/LoadCenter";
 import EventCenter from "../event/EventCenter";
-import EventDef from "../../looker/EventDef";
+import EventDef from "../../kernel/looker/EventDef";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
 

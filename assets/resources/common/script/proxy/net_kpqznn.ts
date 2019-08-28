@@ -2,7 +2,7 @@
 //该文件自动生成，请勿手动更改
 //---------------------------------
 import { kpqznn } from "../proto/kpqznn";
-import PacketDefine from "../../../../script/kernel/net/PacketDefine";
+import PacketDefine from "../../../../kernel/net/PacketDefine";
 import ChannelDefine from "../definer/ChannelDefine";
 
 
