@@ -47,25 +47,34 @@ export default class HotupdateScene extends BaseComp {
 	protected enterGame() {
 		this.byteProgress.node.active = false;
 
-		cc.loader.loadResDir( "lobby", 
-		(cpltCnt, totalCnt, item)=>{
+		// cc.loader.loadResDir( "lobby", 
+		// (cpltCnt, totalCnt, item)=>{
+		// 	//cc.log("进度：", cpltCnt, totalCnt);
+		// 	if(totalCnt<=0){ totalCnt=1; }
+		// 	this.fileProgress.progress = cpltCnt/totalCnt;
+		// 	//this.byteProgress.progress = cpltCnt/totalCnt;
+		// }, 
+		// (err, resobj, urls)=>{
+		// 	cc.loader.loadResDir("common", 
+		// 	(cnt, tCnt, item)=>{
+		// 		//cc.log("进度：", cnt, tCnt);
+		// 		if(tCnt<=0){ tCnt=1; }
+		// 		this.fileProgress.progress = cnt/tCnt;
+		// 	},
+		// 	(err, res, ruls)=>{
+		// 		SceneManager.turn2Scene("LobbyScene");
+		// 	});
+		// }
+		// );
+		cc.director.preloadScene("LobbyScene", (cpltCnt, totalCnt, item)=>{
 			//cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
 			this.fileProgress.progress = cpltCnt/totalCnt;
 			//this.byteProgress.progress = cpltCnt/totalCnt;
-		}, 
-		(err, resobj, urls)=>{
-			cc.loader.loadResDir("common", 
-			(cnt, tCnt, item)=>{
-				//cc.log("进度：", cnt, tCnt);
-				if(tCnt<=0){ tCnt=1; }
-				this.fileProgress.progress = cnt/tCnt;
-			},
-			(err, res, ruls)=>{
-				SceneManager.turn2Scene("LobbyScene");
-			});
-		}
-		);
+		},
+		(err, resobj)=>{
+			SceneManager.turn2Scene("LobbyScene");
+		})
 	}
 
 	protected getLocalManifestPath() : string

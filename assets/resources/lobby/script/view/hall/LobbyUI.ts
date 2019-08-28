@@ -16,7 +16,7 @@ import ChannelMgr from "../../../../../kernel/net/channel/ChannelMgr";
 import { qhb } from "../../../../../common/script/proto/qhb";
 import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
-import { MAIN_HTTP_URL } from "../../../../../common/script/definer/Consts";
+import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/Consts";
 
 
 const {ccclass, property} = cc._decorator;
@@ -122,7 +122,7 @@ export default class LobbyUI extends BaseComp {
 		var hall_channel = ChannelMgr.instance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		hall_channel.setProcessor(processor);
 		hall_channel.registProtocol(qhb);
-		hall_channel.connect("wss://echo.websocket.org", 0);
+		hall_channel.connect(MAIN_WS_URL, 0);
 
 		qhb_request.JOIN_COIN_TABLE_REQ({sid:"sssssdddd",tableType:0}, false);
 	}

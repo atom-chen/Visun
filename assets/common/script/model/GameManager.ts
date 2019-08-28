@@ -69,15 +69,25 @@ export default class GameManager implements BaseModel {
 			return;
 		}
 		
-		cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
-		//	cc.log("进度：", cpltCnt, totalCnt);
+		// cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
+		// //	cc.log("进度：", cpltCnt, totalCnt);
+		// 	if(totalCnt<=0){ totalCnt=1; }
+		// 	//this.byteProgress.progress = cpltCnt/totalCnt;
+		// }, 
+		// (err, resobj, urls)=>{
+		// 	this.enterGameScene(gameId);
+		// }
+		// );
+		cc.director.preloadScene("GameScene", (cpltCnt, totalCnt, item)=>{
+			//cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
+			//this.fileProgress.progress = cpltCnt/totalCnt;
 			//this.byteProgress.progress = cpltCnt/totalCnt;
-		}, 
-		(err, resobj, urls)=>{
+		},
+		(err, resobj)=>{
 			this.enterGameScene(gameId);
-		}
-		);
+		})
+		
 		
 		if(cfg.game_type===1){
 			//点击游戏按钮，进入选房界面
