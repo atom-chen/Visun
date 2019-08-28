@@ -18,12 +18,16 @@ export default class TimerManager {
 		return TimerManager._instance;
 	}
 
+	private delByIndex(idx:number) {
+		this._timers.splice(idx, 1);
+	}
+
 	public update(dt:number) {
 		try{
 			for(var i=0, len=this._timers.length; i<len; i++) {
 				this._timers[i].tick(dt);
 				if(this._timers[i].isStoped()) {
-					this.delTimer(this._timers[i].getId());
+					this.delByIndex(i);
 				}
 			}
 		}
