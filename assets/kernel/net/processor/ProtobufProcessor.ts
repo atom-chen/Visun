@@ -1,8 +1,8 @@
 //--------------------------------------
 // Protobuf消息处理器
 //--------------------------------------
-import { ConnState } from "../Define";
 import BaseProcessor from "./BaseProcessor";
+import { ConnState } from "../../looker/KernelDefine";
 
 export default class ProtobufProcessor extends BaseProcessor {
 

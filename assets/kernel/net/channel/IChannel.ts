@@ -9,7 +9,7 @@
 //          也不用关心消息是用json还是protobuf或自定义二进制流
 //--------------------------------------
 import IProcessor from "../processor/IProcessor";
-import { ConnState } from "../Define";
+import { ConnState } from "../../looker/KernelDefine";
 
 export default interface IChannel {
     setProcessor(porcessor:IProcessor) : void;

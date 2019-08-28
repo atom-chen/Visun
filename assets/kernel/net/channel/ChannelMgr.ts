@@ -5,7 +5,7 @@ import IChannel from "./IChannel";
 import WsChannel from "./WsChannel";
 import TcpChannel from "./TcpChannel";
 import HttpChannel from "./HttpChannel";
-import { ChannelType } from "../Define";
+import { ChannelType } from "../../looker/KernelDefine";
 
 export default class ChannelMgr {
     private static _instance:ChannelMgr = null;

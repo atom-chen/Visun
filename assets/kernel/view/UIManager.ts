@@ -2,7 +2,7 @@
 // UI管理器
 //---------------------------------
 import CommonUtils from "../utils/CommonUtils";
-import { LayerDefine } from "../looker/Consts";
+import { LayerDefine } from "../looker/KernelDefine";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗

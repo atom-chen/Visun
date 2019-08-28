@@ -2,8 +2,8 @@
 // Json消息处理器
 //--------------------------------------
 import JsonCodec from "../../codec/JsonCodec";
-import { ConnState } from "../Define";
 import BaseProcessor from "./BaseProcessor";
+import { ConnState } from "../../looker/KernelDefine";
 
 export default class JsonProcessor extends BaseProcessor {
     private _coder:JsonCodec = new JsonCodec;

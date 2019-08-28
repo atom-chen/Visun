@@ -5,18 +5,18 @@ import HttpCore from "../../../../../kernel/net/HttpCore";
 import CommonUtils from "../../../../../kernel/utils/CommonUtils";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import BaseComp from "../../../../../kernel/view/BaseComp";
-import { MAIN_URL } from "../../../../../kernel/looker/Consts";
 import http_rules from "../../proxy/proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
-import Logic from "../../../../../common/script/model/Logic";
+import LogicCenter from "../../../../../common/script/model/LogicCenter";
 import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
-import { ProcessorType, ChannelType } from "../../../../../kernel/net/Define";
+import { ProcessorType, ChannelType } from "../../../../../kernel/looker/KernelDefine";
 import ChannelMgr from "../../../../../kernel/net/channel/ChannelMgr";
 import { qhb } from "../../../../../common/script/proto/qhb";
 import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import { MAIN_HTTP_URL } from "../../../../../common/script/definer/Consts";
 
 
 const {ccclass, property} = cc._decorator;
@@ -93,7 +93,7 @@ export default class LobbyUI extends BaseComp {
 	}
 
 	private initNet() {
-		HttpCore.setMainUrl(MAIN_URL);
+		HttpCore.setMainUrl(MAIN_HTTP_URL);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 		HttpCore.setCacheAble("req_youke_login", false);
 
@@ -104,7 +104,7 @@ export default class LobbyUI extends BaseComp {
 
 	private req_userinfo(data:any) {
 		UIManager.toast("登录成功");
-		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(Logic.instance().g_UserMgr.getHero());
+		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(LogicCenter.instance().g_UserMgr.getHero());
 	}
 
 	private req_room_select_info(info){

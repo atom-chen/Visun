@@ -1,5 +1,5 @@
 import User from "./User";
-import BaseModel from "../../../../kernel/model/BaseModel";
+import BaseModel from "../../../kernel/model/BaseModel";
 
 export default class UserMgr implements BaseModel{
     private static _instance:UserMgr = null;

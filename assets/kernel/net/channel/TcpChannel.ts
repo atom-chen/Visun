@@ -3,7 +3,7 @@
 //---------------------------------------
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
-import { ConnState } from "../Define";
+import { ConnState } from "../../looker/KernelDefine";
 
 
 export default class TcpChannel implements IChannel {

@@ -1,5 +1,5 @@
 import EventCenter from "../../kernel/event/EventCenter";
-import EventDef from "../../kernel/looker/EventDef";
+import KernelEvent from "../../kernel/looker/KernelEvent";
 import TimerManager from "../../kernel/timer/TimerManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 
@@ -39,7 +39,7 @@ export default class AppNode extends cc.Component {
     onKeyDown (event:any) {
         if(event.keyCode===cc.macro.KEY.back || event.keyCode===cc.macro.KEY.escape) {
             cc.log("返回键");
-            EventCenter.instance().fire(EventDef.keyboard_esc);
+            EventCenter.instance().fire(KernelEvent.keyboard_esc);
         }
     }
 }

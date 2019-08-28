@@ -1,10 +1,6 @@
 //---------------------------------
 // 常量
 //---------------------------------
-export const CLIENT_VERSION = "9.9.9";
-export const MAIN_URL:string = "http://njzuanshui.com";
-export const WS_URL:string = "ws://hdyshiye.com:9999/client/";
-
 export const DESIGN_SIZE = {
 	width : 1280,
 	height : 720,
@@ -29,4 +25,30 @@ export enum HOT_STATE {
 	SUCCESS = 6,		//更新成功
 	FAIL = 7,			//更新失败
 	LOADINGRES = 8,		//加载资源
+}
+
+export enum ConnState {
+	unconnect = 0,
+	connecting,
+	connected
+}
+
+export enum ProcessorType {
+	Json,
+	Protobuff,
+	Stream
+}
+
+export enum ChannelType {
+	Ws,
+	Tcp,
+	Udp,
+	Http,
+}
+
+export enum NetResult {
+	Succ = 0,
+	Timeout,
+	Aborted,
+	Error
 }

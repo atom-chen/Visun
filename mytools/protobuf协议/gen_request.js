@@ -214,12 +214,12 @@ console.log("================================")
 //-----------------------------------------------------------------
 // 第二步： 生成代码
 //-----------------------------------------------------------------
-var outpath = "../../assets/resources/common/script/proxy/net_" + mudname + ".ts";
+var outpath = "../../assets/common/script/proxy/net_" + mudname + ".ts";
 var outstr = "//---------------------------------\n";
 outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
 outstr += "import { " + mudname + " } from \"../proto/" + mudname + "\";\n";
-outstr += "import PacketDefine from \"../../../../kernel/net/PacketDefine\";\n";
+outstr += "import PacketDefine from \"../../../kernel/net/PacketDefine\";\n";
 outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n\n\n";
 
 // PackageDefine

@@ -1,5 +1,5 @@
-import BaseModel from "../../../../kernel/model/BaseModel";
-import Logic from "./Logic";
+import LogicCenter from "./LogicCenter";
+import BaseModel from "../../../kernel/model/BaseModel";
 
 export default class LoginMgr implements BaseModel {
 	private static _instance:LoginMgr = null;
@@ -14,6 +14,6 @@ export default class LoginMgr implements BaseModel {
 	}
 
 	public isLoginSucc() : boolean { 
-		return Logic.instance().g_UserMgr.getHeroId() !== null;
+		return LogicCenter.instance().g_UserMgr.getHeroId() !== null;
 	}
 }

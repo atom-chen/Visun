@@ -1,4 +1,4 @@
-import { DESIGN_SIZE } from "../../kernel/looker/Consts";
+import { DESIGN_SIZE } from "../../kernel/looker/KernelDefine";
 
 export default class Adaptor {
 

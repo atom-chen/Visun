@@ -3,7 +3,7 @@
 //---------------------------------
 const {ccclass, property} = cc._decorator;
 
-import { HOT_STATE } from "../../kernel/looker/Consts";
+import { HOT_STATE } from "../../kernel/looker/KernelDefine";
 import BaseComp from "../../kernel/view/BaseComp";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";

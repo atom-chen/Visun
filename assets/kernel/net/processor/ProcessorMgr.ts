@@ -1,7 +1,7 @@
 import IProcessor from "./IProcessor";
 import JsonProcessor from "./JsonProcessor";
 import ProtobufProcessor from "./ProtobufProcessor";
-import { ProcessorType } from "../Define";
+import { ProcessorType } from "../../looker/KernelDefine";
 
 //-----------------------------------------
 // 消息处理器总管

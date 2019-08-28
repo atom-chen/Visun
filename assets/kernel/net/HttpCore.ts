@@ -10,7 +10,7 @@ import HttpCodec from "../codec/HttpCodec";
 import LocalCache from "../localcache/LocalCache";
 import EventCenter from "../event/EventCenter";
 import UIManager from "../view/UIManager";
-import { NetResult } from "./Define";
+import { NetResult } from "../looker/KernelDefine";
 
 
 

@@ -1,15 +1,15 @@
 import LoginMgr from "./LoginMgr";
 import UserMgr from "./UserMgr";
 
-export default class Logic {
-    private static _instance:Logic = null;
+export default class LogicCenter {
+    private static _instance:LogicCenter = null;
 
     g_LoginMgr:LoginMgr;
     g_UserMgr:UserMgr;
     
-    public static instance() : Logic {
-        if(!Logic._instance){ Logic._instance = new Logic; }
-        return Logic._instance;
+    public static instance() : LogicCenter {
+        if(!LogicCenter._instance){ LogicCenter._instance = new LogicCenter; }
+        return LogicCenter._instance;
     }
 
     //初始化逻辑数据
@@ -30,4 +30,4 @@ export default class Logic {
     }
 }
 
-Logic.instance().init();
+LogicCenter.instance().init();

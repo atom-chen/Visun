@@ -2,7 +2,7 @@
 //该文件自动生成，请勿手动更改
 //---------------------------------
 import { ttz } from "../proto/ttz";
-import PacketDefine from "../../../../kernel/net/PacketDefine";
+import PacketDefine from "../../../kernel/net/PacketDefine";
 import ChannelDefine from "../definer/ChannelDefine";
 
 

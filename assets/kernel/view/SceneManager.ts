@@ -1,6 +1,6 @@
 import LoadCenter from "../load/LoadCenter";
 import EventCenter from "../event/EventCenter";
-import EventDef from "../../kernel/looker/EventDef";
+import KernelEvent from "../../kernel/looker/KernelEvent";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
 
@@ -11,7 +11,7 @@ export default class SceneManager {
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
 		LoadCenter.dump(0);
-		EventCenter.instance().fire(EventDef.SCENE_BEFORE_SWITCH);
+		EventCenter.instance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
 		UIManager.clear();
 		LoadCenter.instance().gc();
 		
@@ -24,7 +24,7 @@ export default class SceneManager {
 			LoadCenter.dump(0);
 			Adaptor.adaptScreen();
 			if(onLaunched) { onLaunched(); }
-			EventCenter.instance().fire(EventDef.SCENE_AFTER_SWITCH);
+			EventCenter.instance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 		}
 		return cc.director.loadScene(sceneName, afterLaunch.bind(this));
 	}

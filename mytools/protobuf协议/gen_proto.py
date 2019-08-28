@@ -19,9 +19,9 @@ def excuteCmd(cmdStr):
 def gen_proto(Proto):
 	print("=====Begin:" + Proto)
 	print("gen " + Proto + ".js")
-	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/resources/common/script/proto/" + Proto + ".js in/" + Proto + ".proto")
+	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/script/proto/" + Proto + ".js in/" + Proto + ".proto")
 	print("gen "+Proto+".ts")
-	excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/resources/common/script/proto/" + Proto + ".js")
+	excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/common/script/proto/" + Proto + ".js")
 	time.sleep(0.5)
 	print("fix "+Proto+".js")
 	excuteCmd("node fix.js " + Proto)
