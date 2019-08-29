@@ -17,14 +17,14 @@ export default class SceneManager {
 		LoadCenter.instance().retainNodeRes(cvs);
 		LoadCenter.instance().releaseNodeRes(cvs);
 		UIManager.clear();
-		cvs.removeAllChildren();
-		LoadCenter.instance().gc();
+	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
 		
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
 
 		var afterLaunch = function() {
 			Adaptor.adaptScreen();
+			LoadCenter.instance().gc();
 			if(onLaunched) { onLaunched(); }
 			EventCenter.instance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 		}
