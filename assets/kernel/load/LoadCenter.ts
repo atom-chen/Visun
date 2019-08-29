@@ -18,17 +18,18 @@ export default class LoadCenter {
 	}
 	
 	public static dump(level:number) : void {
-		cc.log("-----------------------------------", LoadCenter.instance().getCacheCount());
-		if(level<=0){ return; }
+		cc.log("-----------------------begin", LoadCenter.instance().getCacheCount());
 		for (var kk in cc.loader["_cache"]) {
-			cc.log(kk, cc.loader["_cache"][kk]);
+			cc.log(kk);
+			cc.log(cc.loader["_cache"][kk]);
 		}
-		cc.log("-----------------------------------", LoadCenter.instance().getCacheCount());
+		
+		cc.log("-----------------------end", LoadCenter.instance().getCacheCount());
 	}
 
 	
 
-	// 资源加载到内存不会进行引用计数管理
+	// 不会进行引用计数管理
 	loadRes(url: string, type: typeof cc.Asset, callback): void {
 		if (!url || !type || !callback) {
 			cc.log("参数错误");
@@ -44,6 +45,7 @@ export default class LoadCenter {
 		});
 	}
 
+	// 不会进行引用计数管理
 	loadResArr(paths: Array<string>, callfun: Function) {
 		cc.loader.loadResArray(paths, function(err, assets){
 			if (err) {
@@ -54,7 +56,57 @@ export default class LoadCenter {
 		}.bind(this));
 	}
 
-   
+	// 不会进行引用计数管理
+	loadAudioClip(path: string, callfun) {
+		cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
+			if (err) {
+				cc.log(err);
+				return;
+			}
+			callfun(audioclip);
+		});
+	}
+
+	// 选择性进行引用计数管理
+	loadSpriteFrame(path: string, callfun: Function, retainRes: boolean = false) {
+		cc.loader.loadRes(path, cc.SpriteFrame, (err, spriteFrame) => {
+			if (err) {
+				cc.log(err);
+				return;
+			}
+			if (retainRes) {
+				this.retatinRes(spriteFrame._textureFilename);
+			}
+			callfun(spriteFrame);
+		});
+	}
+
+	// 选择性进行引用计数管理
+	loadSpriteFrames(paths: Array<string>, callfun: Function, retainRes: boolean = false) {
+		cc.loader.loadResArray(paths, cc.SpriteFrame, function(err, spriteFrames){
+			if (err) {
+				cc.log(err);
+				return;
+			}
+			if (retainRes) {
+				spriteFrames.forEach((spriteFrame) => {
+					this.retatinRes(spriteFrame._textureFilename);
+				});
+				
+			}
+			callfun(spriteFrames);
+		}.bind(this));
+	}
+
+	// 进行引用计数管理
+	releaseMusicRes(res: string): void {
+		this.releaseRes(res);
+		this.gc();
+	}
+
+
+
+	// 进行引用计数管理
 	loadStaticRes(url: string, type: typeof cc.Asset, tag: string, callback) {
 		if (!url || !type || !callback) {
 			cc.log("参数错误");
@@ -66,6 +118,7 @@ export default class LoadCenter {
 		});
 	}
 
+	// 进行引用计数管理
 	loadStaticResArr(paths: Array<string>, tag: string, callfun: Function) {
 		if (!paths || !tag || !callfun) {
 			cc.log("参数错误");
@@ -84,56 +137,7 @@ export default class LoadCenter {
 		}.bind(this));
 	}
 
-
-	
-	loadAudioClip(path: string, callfun) {
-		cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			callfun(audioclip);
-		});
-	}
-
-	loadSpriteFrame(path: string, callfun: Function, retainRes: boolean = false) {
-		cc.loader.loadRes(path, cc.SpriteFrame, (err, spriteFrame) => {
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			if (retainRes) {
-				this.retatinRes(spriteFrame._textureFilename);
-			}
-			callfun(spriteFrame);
-		});
-	}
-
-
-	loadSpriteFrames(paths: Array<string>, callfun: Function, retainRes: boolean = false) {
-		cc.loader.loadResArray(paths, cc.SpriteFrame, function(err, spriteFrames){
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			if (retainRes) {
-				spriteFrames.forEach((spriteFrame) => {
-					this.retatinRes(spriteFrame._textureFilename);
-				});
-				
-			}
-			callfun(spriteFrames);
-		}.bind(this));
-	}
-
-	
-	releaseMusicRes(res: string): void {
-		this.releaseRes(res);
-		this.gc();
-	}
-
-
-
+	// 进行引用计数管理
 	releaseStaticRes(tag: string): void {
 		var texturesInCache = cc.loader["_cache"];
 		var release_key = [];
@@ -180,21 +184,6 @@ export default class LoadCenter {
 		}
 		cc.loader["_cache"][res].bk_count += 1;
 	}
-
-	retainArrayRes(res: string[]) {
-		res.forEach((item) => {
-			this.retatinRes(item);
-		});
-	}
-
-	retainNodeRes(node: cc.Node) {
-		this._parserNodeRes(node, 1);
-	}
-
-	releaseNodeRes(node: cc.Node) {
-		this._parserNodeRes(node, -1);
-	}
-
 	releaseRes(res: string) {
 		if (!cc.loader["_cache"][res]) {
 			return;
@@ -206,14 +195,25 @@ export default class LoadCenter {
 		cc.loader["_cache"][res].bk_count -= 1;
 	}
 
+	retainArrayRes(res: string[]) {
+		res.forEach((item) => {
+			this.retatinRes(item);
+		});
+	}
 	releaseArrayRes(res: string[]) {
 		res.forEach((item) => {
 			this.releaseRes(item);
 		});
 	}
 
-	
-   
+	retainNodeRes(node: cc.Node) {
+		this._parserNodeRes(node, 1);
+	}
+	releaseNodeRes(node: cc.Node) {
+		this._parserNodeRes(node, -1);
+	}
+
+
 
 	gc(){
 		var texturesInCache = cc.loader["_cache"];
@@ -233,6 +233,31 @@ export default class LoadCenter {
 			this._depthGC(release_key);
 		}
 	}
+
+	_depthGC(strs: Array<string>) {
+		var texturesInCache = cc.loader["_cache"];
+		var release_json = [];
+		for (var asset in texturesInCache) {
+			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
+				var is_release = false;
+				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
+					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
+						is_release = true;
+					}
+				}
+				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
+					release_json.push(texturesInCache[asset].url);
+					cc.log(`释放资源:${texturesInCache[asset].url}`);
+					cc.loader.release(texturesInCache[asset].url);
+				}
+			}
+		}
+
+		if (release_json.length > 0) {
+			this._depthGC(release_json);
+		}
+	}
+
 
 
 	updateSpriteTexture(target: cc.Node, spriteFrame: cc.SpriteFrame) {
@@ -274,29 +299,17 @@ export default class LoadCenter {
 		this.gc();
 	}
 
-	_depthGC(strs: Array<string>) {
-		var texturesInCache = cc.loader["_cache"];
-		var release_json = [];
-		for (var asset in texturesInCache) {
-			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
-				var is_release = false;
-				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
-					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
-						is_release = true;
-					}
-				}
-				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
-					release_json.push(texturesInCache[asset].url);
-					cc.log(`释放资源:${texturesInCache[asset].url}`);
-					cc.loader.release(texturesInCache[asset].url);
-				}
-			}
+	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
+		if (target[attrName] === newNormalSprite) {
+			return;
 		}
-
-		if (release_json.length > 0) {
-			this._depthGC(release_json);
+		if (target[attrName]) {
+			this.releaseRes(target[attrName]._textureFilename);
 		}
+		this.retatinRes(newNormalSprite["_textureFilename"]);
+		target[attrName] = newNormalSprite;
 	}
+
 
 
 	_parseStaticRes(item:  typeof cc.Asset, tag: string) {
@@ -414,16 +427,6 @@ export default class LoadCenter {
 		}
 	}
 
-	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
-		if (target[attrName] === newNormalSprite) {
-			return;
-		}
-		if (target[attrName]) {
-			this.releaseRes(target[attrName]._textureFilename);
-		}
-		this.retatinRes(newNormalSprite["_textureFilename"]);
-		target[attrName] = newNormalSprite;
-	}
 
 	//------------------------------------------------------------------------
 	
@@ -451,6 +454,7 @@ export default class LoadCenter {
 		if (!sprite) {
 			return;
 		}
+
 		if (num > 0) {
 			this.retatinRes(sprite.spriteFrame["_textureFilename"]);
 			return;

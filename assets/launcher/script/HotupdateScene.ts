@@ -66,15 +66,7 @@ export default class HotupdateScene extends BaseComponent {
 		// 	});
 		// }
 		// );
-		cc.director.preloadScene("LobbyScene", (cpltCnt, totalCnt, item)=>{
-			//cc.log("进度：", cpltCnt, totalCnt);
-			if(totalCnt<=0){ totalCnt=1; }
-			this.fileProgress.progress = cpltCnt/totalCnt;
-			//this.byteProgress.progress = cpltCnt/totalCnt;
-		},
-		(err, resobj)=>{
-			SceneManager.turn2Scene("LobbyScene");
-		})
+		SceneManager.turn2Scene("LobbyScene");
 	}
 
 	protected getLocalManifestPath() : string
