@@ -69,15 +69,7 @@ export default class GameManager implements BaseModel {
 			return;
 		}
 		
-		cc.director.preloadScene("GameScene", (cpltCnt, totalCnt, item)=>{
-			//cc.log("进度：", cpltCnt, totalCnt);
-			if(totalCnt<=0){ totalCnt=1; }
-			//this.fileProgress.progress = cpltCnt/totalCnt;
-			//this.byteProgress.progress = cpltCnt/totalCnt;
-		},
-		(err, resobj)=>{
-			this.enterGameScene(gameId);
-		})
+		this.enterGameScene(gameId);
 		
 		
 		if(cfg.game_type===1){
@@ -113,26 +105,35 @@ export default class GameManager implements BaseModel {
 	}
 
 	public enterGameScene(gameId) {
-		SceneManager.turn2Scene("GameScene", ()=>{
-			gameId = gameId.toString();
-			switch(gameId) {
-				case "40000040":
-					UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
-					break;
-				case "90000040":
-					UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
-					break;
-				case "80000044":
-					UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
-					break;
-				case "40070012":
-					UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
-					break;
-				case "80000041":
-					UIManager.openPanel("subgames/bjle/prefabs/bjle_ui", null);
-					break;
-			}
-		});
+		cc.director.preloadScene("GameScene", 
+		(cpltCnt, totalCnt, item)=>{
+			//cc.log("进度：", cpltCnt, totalCnt);
+			if(totalCnt<=0){ totalCnt=1; }
+			//this.fileProgress.progress = cpltCnt/totalCnt;
+			//this.byteProgress.progress = cpltCnt/totalCnt;
+		},
+		(err, resobj)=>{
+			SceneManager.turn2Scene("GameScene", ()=>{
+				gameId = gameId.toString();
+				switch(gameId) {
+					case "40000040":
+						UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+						break;
+					case "90000040":
+						UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+						break;
+					case "80000044":
+						UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+						break;
+					case "40070012":
+						UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+						break;
+					case "80000041":
+						UIManager.openPanel("subgames/bjle/prefabs/bjle_ui", null);
+						break;
+				}
+			});
+		})
 	}
 
 }
