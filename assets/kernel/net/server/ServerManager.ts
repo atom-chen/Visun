@@ -1,7 +1,7 @@
-import BaseModel from "../../model/BaseModel";
+import ModelInterface from "../../model/ModelInterface";
 import VirtualServer from "./VirtualServer";
 
-export default class ServerManager implements BaseModel {
+export default class ServerManager implements ModelInterface {
 	private static _instance:ServerManager = null;
 	private _all_service:{[key: string]: VirtualServer;} = {};
 

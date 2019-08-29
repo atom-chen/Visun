@@ -1,6 +1,6 @@
-import BaseModel from "../../../../kernel/model/BaseModel";
+import ModelInterface from "../../../../kernel/model/ModelInterface";
 
-export default class RechargeMgr implements BaseModel {
+export default class RechargeMgr implements ModelInterface {
     private static _instance:RechargeMgr = null;
     private constructor() {}
     public static instance() : RechargeMgr {

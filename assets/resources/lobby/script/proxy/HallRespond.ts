@@ -3,6 +3,7 @@ import GameManager from "../../../../common/script/model/GameManager";
 import HallRequest from "./HallRequest";
 import LogicCenter from "../../../../common/script/model/LogicCenter";
 import UIManager from "../../../../kernel/view/UIManager";
+import UserMgr from "../../../../common/script/model/UserMgr";
 
 var HallRespond:any;
 HallRespond = {};
@@ -19,8 +20,8 @@ HallRespond.req_youke_login = function(info:any){
 HallRespond.req_userinfo = function(info:any) {
 	if(!info) return;
 	cc.log("登录成功", info);
-	LogicCenter.instance().g_UserMgr.setHeroId(info.userId);
-	LogicCenter.instance().g_UserMgr.updateUser(info);
+	UserMgr.instance().setHeroId(info.userId);
+	UserMgr.instance().updateUser(info);
 }
 
 HallRespond.req_ranklist = function(info:any) {

@@ -1,6 +1,6 @@
-import BaseModel from "../../../../kernel/model/BaseModel";
+import ModelInterface from "../../../../kernel/model/ModelInterface";
 
-export default class RankMgr implements BaseModel {
+export default class RankMgr implements ModelInterface {
     private static _instance:RankMgr = null;
     private constructor() {}
     public static instance() : RankMgr {

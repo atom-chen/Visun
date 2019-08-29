@@ -2,14 +2,14 @@ import GameConfig from "../definer/GameConfig";
 import HttpCore from "../../../kernel/net/HttpCore";
 import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
 import HallRequest from "../../../resources/lobby/script/proxy/HallRequest";
-import LogicCenter from "./LogicCenter";
 import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
 import { CLIENT_VERSION } from "../definer/Consts";
-import BaseModel from "../../../kernel/model/BaseModel";
+import ModelInterface from "../../../kernel/model/ModelInterface";
+import UserMgr from "./UserMgr";
 
 
-export default class GameManager implements BaseModel {
+export default class GameManager implements ModelInterface {
 	private static _singleton:GameManager;
 	private _gamelist:any[];
 	
@@ -74,7 +74,7 @@ export default class GameManager implements BaseModel {
 		
 		if(cfg.game_type===1){
 			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:LogicCenter.instance().g_UserMgr.getHero().channelId})
+			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.instance().getHero().channelId})
 
 			//获得游戏的ws地址
 			var param = {
@@ -83,13 +83,13 @@ export default class GameManager implements BaseModel {
 				tableType: 0,
 				gameType: 0,
 				clientVersion: CLIENT_VERSION,
-				channelId: LogicCenter.instance().g_UserMgr.getHero().channelId
+				channelId: UserMgr.instance().getHero().channelId
 			}
 			HallRequest.req_enter_coin_room(param);
 		}
 		else {
 			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:LogicCenter.instance().g_UserMgr.getHero().channelId});
+			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.instance().getHero().channelId});
 
 			//获得游戏的ws地址
 			var param = {
@@ -98,7 +98,7 @@ export default class GameManager implements BaseModel {
 				tableType: 1,
 				gameType: 0,
 				clientVersion: CLIENT_VERSION,
-				channelId: LogicCenter.instance().g_UserMgr.getHero().channelId
+				channelId: UserMgr.instance().getHero().channelId
 			}
 			HallRequest.req_enter_br_room(param);
 		}

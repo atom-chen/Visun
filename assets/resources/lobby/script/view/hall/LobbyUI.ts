@@ -8,7 +8,6 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import http_rules from "../../proto/http_rules";
 import HallRequest from "../../proxy/HallRequest";
 import HallRespond from "../../proxy/HallRespond";
-import LogicCenter from "../../../../../common/script/model/LogicCenter";
 import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import { ProcessorType, ChannelType } from "../../../../../kernel/looker/KernelDefine";
@@ -17,6 +16,7 @@ import { qhb } from "../../../../../common/script/proto/qhb";
 import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/Consts";
+import UserMgr from "../../../../../common/script/model/UserMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -104,7 +104,7 @@ export default class LobbyUI extends BaseComponent {
 
 	private req_userinfo(data:any) {
 		UIManager.toast("登录成功");
-		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(LogicCenter.instance().g_UserMgr.getHero());
+		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.instance().getHero());
 	}
 
 	private req_room_select_info(info){

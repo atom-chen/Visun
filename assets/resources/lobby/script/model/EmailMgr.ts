@@ -1,6 +1,6 @@
-import BaseModel from "../../../../kernel/model/BaseModel";
+import ModelInterface from "../../../../kernel/model/ModelInterface";
 
-export default class EmailMgr implements BaseModel {
+export default class EmailMgr implements ModelInterface {
     private static _instance:EmailMgr = null;
     private constructor() {}
     public static instance() : EmailMgr {

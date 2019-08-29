@@ -1,7 +1,7 @@
 import User from "./User";
-import BaseModel from "../../../kernel/model/BaseModel";
+import ModelInterface from "../../../kernel/model/ModelInterface";
 
-export default class UserMgr implements BaseModel{
+export default class UserMgr implements ModelInterface{
     private static _instance:UserMgr = null;
     private _userList:object = {};
     private _heroId:number = 0;
