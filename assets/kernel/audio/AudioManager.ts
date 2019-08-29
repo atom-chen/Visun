@@ -57,7 +57,7 @@ export default class AudioManager {
 		LoadCenter.instance().retatinRes(this._currentMusicCacheUrl);
 		this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
 		cc.audioEngine.setFinishCallback(this._currentMusicId , () =>{
-			LoadCenter.instance().releaseMusicRes(this._currentMusicCacheUrl);
+			LoadCenter.instance().releaseRes(this._currentMusicCacheUrl);
 			this._currentMusicCacheUrl = null;
 			this._currentMusicId = -1;
 		});
@@ -107,7 +107,7 @@ export default class AudioManager {
 		LoadCenter.instance().retatinRes(this._currentEffectCacheUrl);
 		this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
 		cc.audioEngine.setFinishCallback(this._currentEffectId, () =>{
-			LoadCenter.instance().releaseMusicRes(this._currentEffectCacheUrl);
+			LoadCenter.instance().releaseRes(this._currentEffectCacheUrl);
 			this._currentEffectId = -1;
 			this._currentEffectCacheUrl = null;
 			this._playEffect();

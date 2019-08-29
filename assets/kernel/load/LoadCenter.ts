@@ -8,13 +8,15 @@ loadResArray(urls, type, progressCallback, completeCallback)
 loadResDir(url, type, progressCallback, completeCallback)
 */
 export default class LoadCenter {
-	
 	static _instance: LoadCenter = null;
-	private constructor() { }
+
 	static instance(): LoadCenter {
 		if (LoadCenter._instance) { return LoadCenter._instance; }
 		LoadCenter._instance = new LoadCenter();
 		return LoadCenter._instance;
+	}
+	private constructor() { 
+
 	}
 	
 	public static dump(level:number) : void {
@@ -27,7 +29,77 @@ export default class LoadCenter {
 		cc.log("-----------------------end", LoadCenter.instance().getCacheCount());
 	}
 
-	
+	public getCacheCount() {
+		return Object.keys(cc.loader["_cache"]).length;
+	}
+
+	//-----------------------------------------------------------------------------------
+
+	retatinRes(res: string) {
+		if (!cc.loader["_cache"][res]) {
+			return;
+		}
+
+		if (!cc.loader["_cache"][res].bk_count) {
+			cc.loader["_cache"][res].bk_count = 0;
+		}
+		cc.loader["_cache"][res].bk_count += 1;
+		cc.log("retatinRes ++++", res, cc.loader["_cache"][res].bk_count);
+	}
+
+	releaseRes(res: string) {
+		if (!cc.loader["_cache"][res]) {
+			return;
+		}
+
+		if (!cc.loader["_cache"][res].bk_count) {
+			cc.loader["_cache"][res].bk_count = 0;
+		}
+		cc.loader["_cache"][res].bk_count -= 1;
+		cc.log("releaseRes ----", res, cc.loader["_cache"][res].bk_count);
+	}
+
+	retainArrayRes(res: string[]) {
+		res.forEach((item) => {
+			this.retatinRes(item);
+		});
+	}
+
+	releaseArrayRes(res: string[]) {
+		res.forEach((item) => {
+			this.releaseRes(item);
+		});
+	}
+
+	retainNodeRes(node: cc.Node) {
+		this._parserNodeRes(node, 1);
+	}
+
+	releaseNodeRes(node: cc.Node) {
+		this._parserNodeRes(node, -1);
+	}
+
+	gc()
+	{
+		var texturesInCache = cc.loader["_cache"];
+		var release_key = [];
+		for (var asset in texturesInCache) {
+			if (texturesInCache[asset].uStatic) {
+				continue;
+			}
+			if (texturesInCache[asset].bk_count <= 0) {
+				release_key.push(texturesInCache[asset].url);
+				cc.log(`释放资源:${texturesInCache[asset].url}`);
+				cc.loader.release(texturesInCache[asset].url);
+			}
+		}
+
+		if (release_key.length > 0) {
+			this._depthGC(release_key);
+		}
+	}
+
+	//------------------------------------------------------------------------------
 
 	// 不会进行引用计数管理
 	loadRes(url: string, type: typeof cc.Asset, callback): void {
@@ -99,14 +171,6 @@ export default class LoadCenter {
 	}
 
 	// 进行引用计数管理
-	releaseMusicRes(res: string): void {
-		this.releaseRes(res);
-		this.gc();
-	}
-
-
-
-	// 进行引用计数管理
 	loadStaticRes(url: string, type: typeof cc.Asset, tag: string, callback) {
 		if (!url || !type || !callback) {
 			cc.log("参数错误");
@@ -165,101 +229,7 @@ export default class LoadCenter {
 		}
 	}
 
-
-
-
-	getCacheCount() {
-		return Object.keys(cc.loader["_cache"]).length;
-	}
-
-  
-
-	retatinRes(res: string) {
-		if (!cc.loader["_cache"][res]) {
-			return;
-		}
-
-		if (!cc.loader["_cache"][res].bk_count) {
-			cc.loader["_cache"][res].bk_count = 0;
-		}
-		cc.loader["_cache"][res].bk_count += 1;
-	}
-	releaseRes(res: string) {
-		if (!cc.loader["_cache"][res]) {
-			return;
-		}
-
-		if (!cc.loader["_cache"][res].bk_count) {
-			cc.loader["_cache"][res].bk_count = 0;
-		}
-		cc.loader["_cache"][res].bk_count -= 1;
-	}
-
-	retainArrayRes(res: string[]) {
-		res.forEach((item) => {
-			this.retatinRes(item);
-		});
-	}
-	releaseArrayRes(res: string[]) {
-		res.forEach((item) => {
-			this.releaseRes(item);
-		});
-	}
-
-	retainNodeRes(node: cc.Node) {
-		this._parserNodeRes(node, 1);
-	}
-	releaseNodeRes(node: cc.Node) {
-		this._parserNodeRes(node, -1);
-	}
-
-
-
-	gc(){
-		var texturesInCache = cc.loader["_cache"];
-		var release_key = [];
-		for (var asset in texturesInCache) {
-			if (texturesInCache[asset].uStatic) {
-				continue;
-			}
-			if (texturesInCache[asset].bk_count <= 0) {
-				release_key.push(texturesInCache[asset].url);
-				cc.log(`释放资源:${texturesInCache[asset].url}`);
-				cc.loader.release(texturesInCache[asset].url);
-			}
-		}
-
-		if (release_key.length > 0) {
-			this._depthGC(release_key);
-		}
-	}
-
-	_depthGC(strs: Array<string>) {
-		var texturesInCache = cc.loader["_cache"];
-		var release_json = [];
-		for (var asset in texturesInCache) {
-			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
-				var is_release = false;
-				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
-					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
-						is_release = true;
-					}
-				}
-				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
-					release_json.push(texturesInCache[asset].url);
-					cc.log(`释放资源:${texturesInCache[asset].url}`);
-					cc.loader.release(texturesInCache[asset].url);
-				}
-			}
-		}
-
-		if (release_json.length > 0) {
-			this._depthGC(release_json);
-		}
-	}
-
-
-
+	// 进行引用计数管理
 	updateSpriteTexture(target: cc.Node, spriteFrame: cc.SpriteFrame) {
 		if (!target || !spriteFrame || !target.getComponent(cc.Sprite)) {
 			return;
@@ -269,6 +239,7 @@ export default class LoadCenter {
 		this.gc();
 	}
 
+	// 进行引用计数管理
 	updateButtonTexture(target: cc.Node, normalSprite?: cc.SpriteFrame, pressedSprite?: cc.SpriteFrame, hoverSprite?: cc.SpriteFrame, disabledSprite?: cc.SpriteFrame) {
 		if (!target || !normalSprite) {
 			cc.log("参数错误")
@@ -299,6 +270,35 @@ export default class LoadCenter {
 		this.gc();
 	}
 
+
+	//------------------------------------------------------------------------------
+
+
+	_depthGC(strs: Array<string>) {
+		var texturesInCache = cc.loader["_cache"];
+		var release_json = [];
+		for (var asset in texturesInCache) {
+			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
+				var is_release = false;
+				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
+					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
+						is_release = true;
+					}
+				}
+				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
+					release_json.push(texturesInCache[asset].url);
+					cc.log(`释放资源:${texturesInCache[asset].url}`);
+					cc.loader.release(texturesInCache[asset].url);
+				}
+			}
+		}
+
+		if (release_json.length > 0) {
+			this._depthGC(release_json);
+		}
+	}
+
+
 	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
 		if (target[attrName] === newNormalSprite) {
 			return;
@@ -309,8 +309,6 @@ export default class LoadCenter {
 		this.retatinRes(newNormalSprite["_textureFilename"]);
 		target[attrName] = newNormalSprite;
 	}
-
-
 
 	_parseStaticRes(item:  typeof cc.Asset, tag: string) {
 		if (item instanceof cc.Texture2D) {
@@ -429,7 +427,8 @@ export default class LoadCenter {
 
 
 	//------------------------------------------------------------------------
-	
+
+
 	_parserNodeRes(node: cc.Node, num: number) {
 		let children = node.children;
 		this._parserNodeComponentRes(node, num);
@@ -451,7 +450,7 @@ export default class LoadCenter {
 
 	_parserComponentSprite(node: cc.Node, num: number) {
 		let sprite = node.getComponent(cc.Sprite);
-		if (!sprite) {
+		if (!sprite || !sprite.spriteFrame) {
 			return;
 		}
 

@@ -5,23 +5,25 @@ import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
 
 export default class SceneManager {
+	private constructor() {}
 	public static preSceneName:string;
 	public static curSceneName:string;
 
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
-		LoadCenter.dump(0);
 		EventCenter.instance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
+
+		var cvs = cc.find("Canvas");
+		LoadCenter.instance().retainNodeRes(cvs);
+		LoadCenter.instance().releaseNodeRes(cvs);
 		UIManager.clear();
+		cvs.removeAllChildren();
 		LoadCenter.instance().gc();
 		
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
+
 		var afterLaunch = function() {
-			if(this.preSceneName==="GameScene"){
-				cc.loader.releaseResDir("subgames");
-			}
-			LoadCenter.dump(0);
 			Adaptor.adaptScreen();
 			if(onLaunched) { onLaunched(); }
 			EventCenter.instance().fire(KernelEvent.SCENE_AFTER_SWITCH);

@@ -23,7 +23,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 		for(var key in info) {
 			if(isNaN(key as any)) {
 				var value = info[key];
-				cc.log(key, value);
+			//	cc.log(key, value);
 				this.name_2_cmd[key] = value;
 				this.cmd_2_name[value] = key;
 			}

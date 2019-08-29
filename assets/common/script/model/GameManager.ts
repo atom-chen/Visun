@@ -69,15 +69,6 @@ export default class GameManager implements BaseModel {
 			return;
 		}
 		
-		// cc.loader.loadResDir("subgames", (cpltCnt, totalCnt, item)=>{
-		// //	cc.log("进度：", cpltCnt, totalCnt);
-		// 	if(totalCnt<=0){ totalCnt=1; }
-		// 	//this.byteProgress.progress = cpltCnt/totalCnt;
-		// }, 
-		// (err, resobj, urls)=>{
-		// 	this.enterGameScene(gameId);
-		// }
-		// );
 		cc.director.preloadScene("GameScene", (cpltCnt, totalCnt, item)=>{
 			//cc.log("进度：", cpltCnt, totalCnt);
 			if(totalCnt<=0){ totalCnt=1; }
