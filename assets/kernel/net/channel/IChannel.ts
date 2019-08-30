@@ -16,6 +16,7 @@ export default interface IChannel {
     registProtocol(protocol:any) : void;
     connect(url:string, port:number, on_success?:Function, on_fail?:Function) : void;
     reconnect() : void;
+    force_reconnect() : void;
     close() : void;
     sendMessage(cmd:string|number, info:any) : boolean;
     sendBuff(buff:any) : boolean;

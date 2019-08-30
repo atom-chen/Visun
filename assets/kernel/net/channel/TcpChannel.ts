@@ -26,10 +26,15 @@ export default class TcpChannel implements IChannel {
         
     }
 
-    public reconnect()
+    public reconnect() : void
 	{
 		
-	}
+    }
+    
+    public force_reconnect() : void
+    {
+        
+    }
 
     public close(): void 
     {

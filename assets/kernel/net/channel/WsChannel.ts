@@ -24,7 +24,8 @@ export default class WsChannel implements IChannel {
 	private _name : string;
 	private _heartTmr: any;
 
-	private notifyState() {
+	private notifyState() : void
+	{
 		EventCenter.instance().fire(KernelEvent.NET_STATE, this);
 	}
 
@@ -71,7 +72,7 @@ export default class WsChannel implements IChannel {
 		// this.ws_closed();
 	}
 	
-	private initWs(url:string, cacertPath:string)
+	private initWs(url:string, cacertPath:string) : void
 	{
 		this._ws = new WebSocket(url, [], cacertPath);
 		this._ws.binaryType = "arraybuffer";
@@ -126,7 +127,7 @@ export default class WsChannel implements IChannel {
 		this.do_connect();
 	}
 
-	public reconnect()
+	public reconnect() : void
 	{
 		this._reconnectTimes = MAX_RECONNECT;
 		if(this._curState != ConnState.reconnectfail) {
@@ -138,7 +139,20 @@ export default class WsChannel implements IChannel {
 		this.do_connect();
 	}
 
-	private do_connect() {
+	public force_reconnect() : void
+	{
+		this._reconnectTimes = MAX_RECONNECT;
+		if(this._curState == ConnState.connectsucc || this._curState == ConnState.reconnectsucc || this._curState == ConnState.reconnectfail) {
+			this.stopHeartBeat();
+			this.clear_ws();
+			cc.log(this._name, "强制重连", this._curState, this._url);
+			this._curState = ConnState.reconnecting;
+			this.do_connect();
+		}
+	}
+
+	private do_connect() : void
+	{
 		var self = this;
 		//注：native模式连接wss时需要cacert认证
 		if(cc.sys.isNative){
@@ -154,14 +168,25 @@ export default class WsChannel implements IChannel {
 		}
 	}
 
+	private clear_ws() : void
+	{
+		if(this._ws) {
+			var ws = this._ws;
+			this._ws = null;
+			ws.onopen = null;
+			ws.onmessage = null;
+			ws.onclose = null;
+			ws.onerror = null;
+			ws.close();
+		}
+	}
+
 	//被动关闭WebSocket
-	private ws_closed()
+	private ws_closed() : void
 	{
 		if(this._ws){
 			cc.log(this._name, "断网了or连接失败了");
-			var ws = this._ws;
-			this._ws = null;
-			ws.close();
+			this.clear_ws();
 		}
 		
 		//自动重连
@@ -202,25 +227,21 @@ export default class WsChannel implements IChannel {
 	}
 	
 	//主动关闭WebSocket
-	public close() 
+	public close() : void
 	{
-		if(this._ws){
-			cc.log(this._name, "主动关闭WebSocket");
-			this._reconnectTimes = 0;
-			this._ws.onopen = null;
-			this._ws.onmessage = null;
-			this._ws.onclose = null;
-			this._ws.onerror = null;
-			var ws = this._ws;
-			this._ws = null;
-			ws.close();
-		}
+		this.stopHeartBeat();
+		this._reconnectTimes = 0;
 		this._onConnSuccess = null;
 		this._onConnFail = null;
 		this._dataProcessor.clearSendlist();
 		this._dataProcessor.clearRecvlist();
+
+		if(this._ws){
+			cc.log(this._name, "主动关闭WebSocket");
+			this.clear_ws();
+		}
+		
 		this._curState = ConnState.unconnect;
-		this.stopHeartBeat();
 	}
 	
 	public sendMessage(cmd:string|number, info:any) : boolean
@@ -255,7 +276,7 @@ export default class WsChannel implements IChannel {
 		this._heartTmr = TimerManager.instance().addSecondTimer(8, this.sendHeartBeat, this, -1);
 	}
 
-	private sendHeartBeat()
+	private sendHeartBeat() : void
 	{
 		cc.log(this._name, "---------- send heart beat");
 		this._dataProcessor.sendHeartBeat();
@@ -270,7 +291,7 @@ export default class WsChannel implements IChannel {
 
 	public setPaused(bPause:boolean) : void
 	{
-		if(this._dataProcessor){
+		if(this._dataProcessor) {
 			this._dataProcessor.setPaused(bPause);
 		}
 	}
@@ -285,11 +306,13 @@ export default class WsChannel implements IChannel {
 		return this._curState;
 	}
 
-	public setName(name:string) {
+	public setName(name:string) : void 
+	{
 		this._name = name;
 	}
 
-	public getName() : string {
+	public getName() : string 
+	{
 		return this._name;
 	}
 
