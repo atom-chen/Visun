@@ -103,14 +103,23 @@ export default class WsChannel implements IChannel {
 	
 	public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
 	{
-		if(this._url === url && this._curState != ConnState.unconnect && this._ws !== null) {
+		if(this._url === url && this._ws !== null) {
 			if(this._curState==ConnState.connecting){
-				cc.log(this._name, "already in connecting: ", url);
+				cc.log(this._name, "connecting: ", url);
+				return;
 			}
-			else{
-				cc.log(this._name, "already connected: ", url);
+			else if(this._curState==ConnState.connectsucc){
+				cc.log(this._name, "connected: ", url);
+				return;
 			}
-			return;
+			else if(this._curState==ConnState.reconnecting){
+				cc.log(this._name, "reconnecting: ", url);
+				return;
+			}
+			else if(this._curState==ConnState.reconnectsucc){
+				cc.log(this._name, "reconnected: ", url);
+				return;
+			}
 		}
 		
 		this.close();
@@ -185,6 +194,8 @@ export default class WsChannel implements IChannel {
 	//被动关闭WebSocket
 	private ws_closed() : void
 	{
+		this.stopHeartBeat();
+
 		cc.log(this._name, "断网了or连接失败了");
 		this.clear_ws();
 		

@@ -80,6 +80,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 	{
 		if(this._paused) { return; }
 		if(this._fire_list.length <= 0) { return; }
+
 		cc.log(this._channel.getName(), "flush firelist", this._fire_list.length);
 		for(var i=0, len=this._fire_list.length; i<len; i++){
 			this.response(this._fire_list[i].cmd, this._fire_list[i].data);
@@ -92,6 +93,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 	{
 		if(this._paused) { return; }
 		if(this._send_list.length <= 0) { return; }
+
 		cc.log(this._channel.getName(), "flush sendlist: ", this._send_list.length);
 		for(var i=1; i<this._send_list.length; i++){
 			this._channel.sendBuff(this._send_list[i]);
@@ -102,16 +104,17 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 
 	public sendMessage(cmd:number|string, info:any) : boolean
 	{
+		cc.log("子类须重载该方法");
 		return false;
 	}
 
 	public onrecvBuff(buff:any) : void
 	{	
-		
+		cc.log("子类须重载该方法");
 	}
 
 	sendHeartBeat() : void
 	{
-		
+		cc.log("子类须重载该方法");
 	}
 }
