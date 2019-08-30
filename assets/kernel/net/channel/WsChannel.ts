@@ -48,6 +48,7 @@ export default class WsChannel implements IChannel {
 		}
 		this._onConnFail = null;
 
+		this._dataProcessor.flushRecvlist();
 		this._dataProcessor.flushSendlist();
 
 		this.notifyState();
