@@ -9,6 +9,7 @@ import { ConnState } from "../../looker/KernelDefine";
 export default class TcpChannel implements IChannel {
 
     private _curState:ConnState = ConnState.unconnect;
+    private _name : string;
 
     public setProcessor(porcessor: IProcessor): void 
     {
@@ -24,6 +25,11 @@ export default class TcpChannel implements IChannel {
     {
         
     }
+
+    public reconnect()
+	{
+		
+	}
 
     public close(): void 
     {
@@ -48,6 +54,14 @@ export default class TcpChannel implements IChannel {
     public getState() : ConnState 
 	{
 		return this._curState;
+    }
+    
+    public setName(name:string) {
+		this._name = name;
+	}
+
+	public getName() : string {
+		return this._name;
 	}
 
 }

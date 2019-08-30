@@ -8,6 +8,12 @@ export default interface IProcessor {
     setChannel(cluster:IChannel) : void;
     clear() : void
     sendMessage(cmd:number|string, info:any) : boolean;
-    flush() : void;
     onrecvBuff(buff:any) : void;
+    
+    sendHeartBeat() : void;
+    setPaused(bPause:boolean) : void;
+    flushSendlist() : void;
+    flushRecvlist() : void;
+    clearSendlist() : void;
+    clearRecvlist() : void;
 }

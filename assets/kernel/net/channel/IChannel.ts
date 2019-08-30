@@ -15,9 +15,12 @@ export default interface IChannel {
     setProcessor(porcessor:IProcessor) : void;
     registProtocol(protocol:any) : void;
     connect(url:string, port:number, on_success?:Function, on_fail?:Function) : void;
+    reconnect() : void;
     close() : void;
     sendMessage(cmd:string|number, info:any) : boolean;
     sendBuff(buff:any) : boolean;
     getState() : ConnState;
     destroy() : void;
+    setName(name:string) : void;
+    getName() : string;
 }

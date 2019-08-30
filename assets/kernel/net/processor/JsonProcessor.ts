@@ -10,10 +10,8 @@ export default class JsonProcessor extends BaseProcessor {
 
     public sendMessage(cmd: number|string, info: any): boolean 
     {
-        if(!this.cmd_2_name[cmd]) {
-            cc.error("未定义该协议", cmd);
-            return;
-        }
+        if(!this.isValidCmd(cmd)) { return; }
+
         if(info===undefined || info===null){
 			info = {};
 		}
@@ -25,10 +23,14 @@ export default class JsonProcessor extends BaseProcessor {
         
         var buff = this._coder.encode(req);
 
-        if(this._channel.getState() === ConnState.connecting){
+        if (this._channel.getState() != ConnState.connectsucc && this._channel.getState() != ConnState.reconnectsucc || this._paused) {
+			cc.log(this._channel.getName(), "消息推入队列：", this._channel.getState(), this._paused);
             this._send_list.push(buff);
             return;
         }
+        
+        //for debug
+		cc.log(this._channel.getName(), "[send]", info);
         
         this._channel.sendBuff(buff);
         return true;
@@ -38,7 +40,8 @@ export default class JsonProcessor extends BaseProcessor {
     {
         //二进制流 转 obj
         var info = this._coder.decode(buff);
-        cc.log("[recv]", info);
+
+        cc.log(this._channel.getName(), "[recv]", info);
 
         var cmd = info.cmd;
         var data = info.data;
@@ -47,7 +50,13 @@ export default class JsonProcessor extends BaseProcessor {
             data = this._coder.decode(data);
         }
 
-        this.response(cmd, data);
+        if(this._paused){
+			this._fire_list.push({cmd:cmd,data:data});
+			cc.log("push fire", this._fire_list.length);
+		}
+		else{
+			this.response(cmd, data);
+		}
     }
 
 }

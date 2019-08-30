@@ -4,7 +4,11 @@
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
 import { ConnState } from "../../looker/KernelDefine";
+import EventCenter from "../../event/EventCenter";
+import KernelEvent from "../../looker/KernelEvent";
+import TimerManager from "../../timer/TimerManager";
 
+var MAX_RECONNECT = 3;
 
 var WebSocket = WebSocket || window["WebSocket"] || window["MozWebSocket"]; 
 
@@ -16,18 +20,38 @@ export default class WsChannel implements IChannel {
 	private _dataProcessor:IProcessor = null;
 	private _onConnSuccess:Function;
 	private _onConnFail:Function;
+	private _reconnectTimes:number = MAX_RECONNECT;
+	private _name : string;
+	private _heartTmr: any;
+
+	private notifyState() {
+		EventCenter.instance().fire(KernelEvent.NET_STATE, this);
+	}
 
 	private _on_opened(event) {
-		cc.log("ws: onopen", this._url);
-		this._curState = ConnState.connected;
+		cc.log(this._name, "ws: onopen", this._url);
+		if(this._curState == ConnState.connecting) {
+			this._curState = ConnState.connectsucc;
+			cc.log(this._name, "连接成功", this._url);
+		}
+		else {
+			this._curState = ConnState.reconnectsucc;
+			cc.log(this._name, "重连成功", this._url);
+		}
 
-		this._onConnFail = null;
+		this._reconnectTimes = MAX_RECONNECT;
+
 		if(this._onConnSuccess) {
 			this._onConnSuccess();
 			this._onConnSuccess = null;
 		}
+		this._onConnFail = null;
 
-		this._dataProcessor.flush();
+		this._dataProcessor.flushSendlist();
+
+		this.notifyState();
+
+		this.startHeartBeat();
 	}
 
 	private _on_recv_data(event) {
@@ -36,27 +60,15 @@ export default class WsChannel implements IChannel {
 	}
 
 	private _on_close(event) {
-		cc.log("ws: onclose", this._url);
-
-		this._onConnSuccess = null;
-		if(this._onConnFail) {
-			this._onConnFail();
-			this._onConnFail = null;
-		}
-		
-		this.on_closed();
+		cc.log(this._name, "ws: onclose", this._url);
+		this.stopHeartBeat();
+		this.ws_closed();
 	}
 
 	private _on_error(event) {
-		cc.log("ws: onerror", this._url);
-
-		this._onConnSuccess = null;
-		if(this._onConnFail) {
-			this._onConnFail();
-			this._onConnFail = null;
-		}
-		
-		this.on_closed();
+		cc.log(this._name, "ws: onerror", this._url);
+		this.stopHeartBeat();
+		// this.ws_closed();
 	}
 	
 	private initWs(url:string, cacertPath:string)
@@ -74,8 +86,6 @@ export default class WsChannel implements IChannel {
 		this.close();
 		this._dataProcessor.clear();
 		this._dataProcessor = null;
-		this._onConnFail = null;
-		this._onConnSuccess = null;
 	}
 
 	public setProcessor(porcessor: IProcessor): void 
@@ -91,55 +101,112 @@ export default class WsChannel implements IChannel {
 	
 	public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
 	{
-		if(this._url === url && this._curState === ConnState.connected && this._ws !== null){
-			cc.log("already connected: ", url);
+		if(this._url === url && this._curState != ConnState.unconnect && this._ws !== null) {
+			if(this._curState==ConnState.connecting){
+				cc.log(this._name, "already in connecting: ", url);
+			}
+			else{
+				cc.log(this._name, "already connected: ", url);
+			}
 			return;
 		}
 		
 		this.close();
 		
 		this._curState = ConnState.connecting;
+		this._dataProcessor.clearSendlist();
+		this._dataProcessor.clearRecvlist();
+		this._dataProcessor.setPaused(false);
 		this._onConnSuccess = on_success;
 		this._onConnFail = on_fail;
 		this._url = url;
-		var self = this;
-		
-		cc.log("连接WebSocket: ", url);
+		this._reconnectTimes = MAX_RECONNECT;
+		cc.log(this._name, "连接WebSocket: ", url);
 
+		this.do_connect();
+	}
+
+	public reconnect()
+	{
+		this._reconnectTimes = MAX_RECONNECT;
+		if(this._curState != ConnState.reconnectfail) {
+			cc.log(this._name, "当前状态无法重连：", this._curState);
+			return;
+		}
+		this._curState = ConnState.reconnecting;
+		cc.log(this._name, "断线重连: ", this._reconnectTimes, this._url);
+		this.do_connect();
+	}
+
+	private do_connect() {
+		var self = this;
 		//注：native模式连接wss时需要cacert认证
 		if(cc.sys.isNative){
 			cc.loader.loadRes("launcher/cacert", function(errorMessage, loadedResource){
 				if( errorMessage ) { 
-					cc.log( '载入cacert.pem失败:' + errorMessage ); 
-					return; 
+					cc.log( self._name, '载入cacert.pem失败: ' + errorMessage ); 
 				}
-				self.initWs(url, ""+loadedResource);
+				self.initWs(self._url, ""+loadedResource);
 			});
 		}
 		else {
-			self.initWs(url, "");
+			self.initWs(self._url, "");
 		}
 	}
 
 	//被动关闭WebSocket
-	private on_closed()
+	private ws_closed()
 	{
 		if(this._ws){
-			cc.log("断网了or连接失败了");
+			cc.log(this._name, "断网了or连接失败了");
 			var ws = this._ws;
 			this._ws = null;
 			ws.close();
 		}
-		this._curState = ConnState.unconnect;
+		
+		//自动重连
+		if(this._reconnectTimes > 0) {
+			this._reconnectTimes--;
+
+			if(this._curState == ConnState.connecting) {
+				this._curState = ConnState.connecting;
+				cc.log(this._name, "再次尝试建立连接: ", this._reconnectTimes, this._url);
+				this.do_connect();
+			}
+			else {
+				this._curState = ConnState.reconnecting;
+				cc.log(this._name, "断线重连: ", this._reconnectTimes, this._url);
+				this.do_connect();
+			}
+		}
+		//超过了重连次数就主动关闭网络
+		else {
+			this._onConnSuccess = null;
+			if(this._onConnFail) {
+				this._onConnFail();
+				this._onConnFail = null;
+			}
+
+			if(this._curState == ConnState.connecting) {
+				this._curState = ConnState.connectfail;
+				cc.log(this._name, "连接失败: ", this._reconnectTimes, this._url);
+			}
+			else {
+				this._curState = ConnState.reconnectfail;
+				cc.log(this._name, "重连失败: ", this._reconnectTimes, this._url);
+			}
+
+			cc.log(this._name, "网络断开", this._url);
+			this.notifyState();
+		}
 	}
 	
 	//主动关闭WebSocket
 	public close() 
 	{
 		if(this._ws){
-			cc.log("主动关闭WebSocket");
-			this._onConnSuccess = null;
-			this._onConnFail = null;
+			cc.log(this._name, "主动关闭WebSocket");
+			this._reconnectTimes = 0;
 			this._ws.onopen = null;
 			this._ws.onmessage = null;
 			this._ws.onclose = null;
@@ -148,7 +215,12 @@ export default class WsChannel implements IChannel {
 			this._ws = null;
 			ws.close();
 		}
+		this._onConnSuccess = null;
+		this._onConnFail = null;
+		this._dataProcessor.clearSendlist();
+		this._dataProcessor.clearRecvlist();
 		this._curState = ConnState.unconnect;
+		this.stopHeartBeat();
 	}
 	
 	public sendMessage(cmd:string|number, info:any) : boolean
@@ -162,8 +234,8 @@ export default class WsChannel implements IChannel {
 			cc.log("数据为空");
 			return false;
 		}
-		if(this._curState !== ConnState.connected) {
-			cc.log("尚未建立连接");
+		if(this._curState !== ConnState.connectsucc && this._curState !== ConnState.reconnectsucc) {
+			cc.log(this._name, "尚未建立连接");
 			return false;
 		}
 		if(!this._ws) {
@@ -176,8 +248,49 @@ export default class WsChannel implements IChannel {
 		return true;
 	}
 
+
+
+	private startHeartBeat() : void
+	{
+		this._heartTmr = TimerManager.instance().addSecondTimer(8, this.sendHeartBeat, this, -1);
+	}
+
+	private sendHeartBeat()
+	{
+		cc.log(this._name, "---------- send heart beat");
+		this._dataProcessor.sendHeartBeat();
+	}
+
+	private stopHeartBeat() : void
+	{
+		TimerManager.instance().delTimer(this._heartTmr);
+	}
+
+
+
+	public setPaused(bPause:boolean) : void
+	{
+		if(this._dataProcessor){
+			this._dataProcessor.setPaused(bPause);
+		}
+	}
+
+	public getProcessor() : IProcessor
+	{
+		return this._dataProcessor;
+	}
+
 	public getState() : ConnState 
 	{
 		return this._curState;
 	}
+
+	public setName(name:string) {
+		this._name = name;
+	}
+
+	public getName() : string {
+		return this._name;
+	}
+
 }

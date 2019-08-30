@@ -28,9 +28,14 @@ export enum HOT_STATE {
 }
 
 export enum ConnState {
-	unconnect = 0,
-	connecting,
-	connected
+	unconnect = 0, 	//尚未连接
+	connecting,		//正在连接
+	connectsucc,	//连接成功
+	connectfail,	//连接失败
+
+	reconnecting,	//正在重连
+	reconnectsucc,	//重连成功
+	reconnectfail,	//重连失败
 }
 
 export enum ProcessorType {
