@@ -34,11 +34,20 @@ export default class Adaptor {
 	}
 
 	//横竖屏适配
-	//方式1，横屏时采用横版UI 竖屏时采用竖版UI
-	//方式2：旋转手机时保持原样
 	public static adaptOrientation(bLandspace:boolean) : void
 	{
-
+		if(bLandspace) {
+			DESIGN_SIZE.width = 1280;
+			DESIGN_SIZE.height = 720;
+			cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+		}
+		else {
+			DESIGN_SIZE.width = 720;
+			DESIGN_SIZE.height = 1280;
+			cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+		}
+		DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
+		Adaptor.adaptScreen();
 	}
 
 	//进入全屏
