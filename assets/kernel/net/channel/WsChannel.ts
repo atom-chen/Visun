@@ -184,10 +184,8 @@ export default class WsChannel implements IChannel {
 	//被动关闭WebSocket
 	private ws_closed() : void
 	{
-		if(this._ws){
-			cc.log(this._name, "断网了or连接失败了");
-			this.clear_ws();
-		}
+		cc.log(this._name, "断网了or连接失败了");
+		this.clear_ws();
 		
 		//自动重连
 		if(this._reconnectTimes > 0) {
@@ -229,18 +227,14 @@ export default class WsChannel implements IChannel {
 	//主动关闭WebSocket
 	public close() : void
 	{
+		cc.log(this._name, "主动关闭WebSocket");
 		this.stopHeartBeat();
 		this._reconnectTimes = 0;
 		this._onConnSuccess = null;
 		this._onConnFail = null;
 		this._dataProcessor.clearSendlist();
 		this._dataProcessor.clearRecvlist();
-
-		if(this._ws){
-			cc.log(this._name, "主动关闭WebSocket");
-			this.clear_ws();
-		}
-		
+		this.clear_ws();
 		this._curState = ConnState.unconnect;
 	}
 	
