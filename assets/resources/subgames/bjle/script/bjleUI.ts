@@ -14,7 +14,7 @@ export default class bjleUI extends BaseComponent {
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
-            
+            SceneManager.turn2Scene("LobbyScene");
         }, this);
 
 		var rule = [1,10,20,100,500];
