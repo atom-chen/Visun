@@ -20,6 +20,7 @@ export default class TimerManager {
 	}
 
 	private delByIndex(idx:number) {
+		this._timers[idx].stop();
 		this._timers.splice(idx, 1);
 	}
 
@@ -62,6 +63,7 @@ export default class TimerManager {
 	public delTimer(id:number) {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getId()===id) {
+				this._timers[i].stop();
 			//	TimerManager._pool.put(this._timers[i]);
 				this._timers.splice(i, 1);
 				break;
@@ -72,6 +74,7 @@ export default class TimerManager {
 	public removeByTarget(target:any) {
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getTarget()===target) {
+				this._timers[i].stop();
 				this._timers.splice(i, 1);
 			}
 		}
