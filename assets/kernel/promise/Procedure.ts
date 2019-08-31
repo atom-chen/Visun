@@ -3,18 +3,12 @@
 //---------------------------------
 import CHandler from "./CHandler";
 import PlayUnit from "./PlayUnit";
+import { PROCEDURE_STATE } from "../looker/KernelDefine";
 
-enum PROCEDURE_STATE {
-	READY = 1,
-	RUNNING,
-	DONE,
-	STOPED
-};
 
 export default class Procedure {
 	private _node_type:string = "unknown";
 	private _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
-	private _play_overed:boolean = false;
 	private _bAutoClean:boolean = false;
 
 	private _procFunc:CHandler = null;
@@ -106,94 +100,96 @@ export default class Procedure {
 	}
 
 	
-
-	public run() : void 
-	{
-		if(this._cur_state === PROCEDURE_STATE.RUNNING) {
-			return;
-		}
-		else if(this._cur_state === PROCEDURE_STATE.DONE || this._cur_state === PROCEDURE_STATE.STOPED) {
-			if(this._next) {
-				this._next._belongTo = this._belongTo;
-				return this._next.run();
-			}
-			return;
-		}
-		this._cur_state = PROCEDURE_STATE.RUNNING;
-
-		if(this._next) {
-			this._next._belongTo = this._belongTo;
-		}
-
+	protected onProc() {
 		if(this._procFunc) {
 			this._procFunc.call(this);
-		} else {
-			this._play_overed = true;
 		}
+		else {
+			this._cur_state = PROCEDURE_STATE.DONE;
+		}
+	}
+
+	public run() : PROCEDURE_STATE 
+	{
+		if(this._cur_state === PROCEDURE_STATE.READY) {
+			this._cur_state = PROCEDURE_STATE.RUNNING;
+			this.onProc();
+		}
+		
 		if(this._partList) {
 			for(var i in this._partList) {
 				this._partList[i].run();
 			}
 		}
 
-		if(this._cur_state === PROCEDURE_STATE.RUNNING) {
-			if( (this._partList==null || this._partList.length==0) && !this._procFunc ){
-				//console.log("【警告】该节点是个空节点");
-				this.resolve();
+		if(this._next) {
+			if(this.isFinished() && this.isPartsDone()) {
+				this._next._belongTo = this._belongTo;
+				return this._next.run();
 			}
 		}
 	}
 
 	public onPartFinished() : void 
 	{
-		//自己的处理函数和所有子节点都完成，才正真结束
-		if(this._play_overed && this.isPartsFinished()){
-			this.resolve();
+		if (this.isFinished()) {
+			if(this._next) {
+				if(this.isPartsDone()) {
+					this._next._belongTo = this._belongTo;
+					this._next.run();
+				}
+			}
+			else if(this.isPartsDone()) {
+				cc.log("本Procedure执行完成，整个Procedure执行完成");
+			}
 		}
+		
 	}
 
 	public resolve() : void 
 	{
-		this._play_overed = true;
-		if(!this.isPartsFinished()) { return; }  //等待子节点完成
+		if(this.isFinished()) { return; }
 
-		if(this._cur_state===PROCEDURE_STATE.DONE || this._cur_state===PROCEDURE_STATE.STOPED){ return; }
 		this._cur_state = PROCEDURE_STATE.DONE;
 
 		if(this._bAutoClean) { this.clean(); }
 
-        if(this._next){
-			//cc.log("本Procedure执行完成，执行下一个节点");
-			this._next._belongTo = this._belongTo;
-			return this._next.run();
-		}
-
 		if(this._belongTo) {
 			return this._belongTo.onPartFinished();
+		}
+		else if(this._next) {
+			if(this.isPartsDone()) {
+				this._next._belongTo = this._belongTo;
+				this._next.run();
+				return;
+			}
 		}
 
 		cc.log("本Procedure执行完成，整个Procedure执行完成");
 	}
 
-	public stop() : void 
-	{
-		if(this._next) { this._next._belongTo = this._belongTo; }
-		if(this._cur_state===PROCEDURE_STATE.DONE || this._cur_state===PROCEDURE_STATE.STOPED){
-			if(this._next){
-				return this._next.stop();
-			}
-		}
-		this._cur_state = PROCEDURE_STATE.STOPED;
+	public onStop() {
 		if(this._stopFunc){
 			this._stopFunc.call(this);
 		}
-		if(this._partList) {
-			for(var i in this._partList) {
-				this._partList[i].stop();
+	}
+
+	public stop() : void 
+	{
+		if( !this.isFinished() ) {
+			this._cur_state = PROCEDURE_STATE.STOPED;
+			this.onStop();
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i].stop();
+				}
 			}
+			if(this._bAutoClean) { this.clean(); }
 		}
-		if(this._bAutoClean) { this.clean(); }
-		if(this._next) { this._next.stop(); }
+		
+		if(this._next) { 
+			this._next.stop(); 
+		}
 	}
 
 
@@ -212,21 +208,33 @@ export default class Procedure {
 		return this._cur_state === PROCEDURE_STATE.DONE || this._cur_state === PROCEDURE_STATE.STOPED;
 	}
 
-	public isPartsFinished() : boolean 
+	public isPartsDone() : boolean 
 	{
-		if(!this._partList) { return true; }
-		for(var i in this._partList) {
-			if(!this._partList[i].isFullFinished()) {
-				return false;
+		if(this._partList) {
+			for(var i in this._partList) {
+				if(!this._partList[i].isDone()){
+					return false;
+				}
 			}
 		}
 		return true;
 	}
 	
-	public isFullFinished() : boolean 
+	public isDone() : boolean 
 	{
 		if(!this.isFinished()) { return false; }
-		if(this._next) { return this._next.isFullFinished(); }
+		if(this._partList) {
+			for(var i in this._partList) {
+				if(!this._partList[i].isDone()){
+					return false;
+				}
+			}
+		}
+		if(this._next) { 
+			if(!this._next.isDone()) { 
+				return false; 
+			} 
+		}
 		return true;
 	}
 

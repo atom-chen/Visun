@@ -57,3 +57,10 @@ export enum NetResult {
 	Aborted,
 	Error
 }
+
+export enum PROCEDURE_STATE {
+	READY = 1,
+	RUNNING,
+	DONE,
+	STOPED
+};
