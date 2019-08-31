@@ -92,12 +92,6 @@ export default class Procedure {
 		return this.then(nextNode);
 	}
 
-	public thenFunc(fn:Function, target:any, ...args:any[]) : Procedure 
-	{
-		var procFunc:CHandler = new CHandler(fn, target, ...args);
-		var nextNode = new Procedure(procFunc);
-		return this.then(nextNode);
-	}
 
 	
 	protected onProc() {
