@@ -19,9 +19,10 @@ export default class Procedure {
 
 	private _procFunc:CHandler = null;
 	private _stopFunc:CHandler = null;
-	private _partList:Array<Procedure> = [];
+	
 	private _belongTo:Procedure = null;
 	private _next:Procedure = null;
+	private _partList:Array<Procedure> = null;
 
 
 
@@ -35,8 +36,10 @@ export default class Procedure {
 	{
 		this._procFunc = null;
 		this._stopFunc = null;
-		this._partList.length = 0;
-		this._partList = null;
+		if(this._partList){
+			this._partList.length = 0;
+			this._partList = null;
+		}
 	}
 
 
@@ -65,6 +68,7 @@ export default class Procedure {
 	public addPart(part:Procedure) : Procedure 
 	{
 		part._belongTo = this;
+		if(!this._partList) { this._partList = []; }
 		this._partList.push(part);
 		return this;
 	}
@@ -73,6 +77,7 @@ export default class Procedure {
 	{
 		var part = new Procedure(procFunc, stopFunc);
 		part._belongTo = this;
+		if(!this._partList) { this._partList = []; }
 		this._partList.push(part);
 		return this;
 	}
