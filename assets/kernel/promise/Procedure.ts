@@ -126,62 +126,48 @@ export default class Procedure {
 
 	public onPartFinished() : void 
 	{
-		if (this.isFinished()) {
+		if (this.isFinished() && this.isPartsDone()) {
 			if(this._nextNode) {
-				if(this.isPartsDone()) {
-					this._nextNode._groupNode = this._groupNode;
-					this._nextNode.run();
-				}
+				this._nextNode._groupNode = this._groupNode;
+				this._nextNode.run();
 			}
-			else if(this.isPartsDone()) {
+			else {
 				cc.log("本Procedure执行完成，整个Procedure执行完成");
 			}
 		}
+	}
+
+	private resolve(rlt:PROCEDURE_STATE) : void
+	{
+		if(this.isFinished()) { return; }
+
+		this._cur_state = rlt;
+
+		if(this._bAutoClean) { this.clean(); }
+
+		if(this._groupNode) {
+			return this._groupNode.onPartFinished();
+		}
 		
+		if(this._nextNode) {
+			if(this.isPartsDone()) {
+				this._nextNode._groupNode = this._groupNode;
+				this._nextNode.run();
+				return;
+			}
+		}
+
+		cc.log("本Procedure执行完成，整个Procedure执行完成");
 	}
 
 	public resolve_fail() : void
 	{
-		if(this.isFinished()) { return; }
-
-		this._cur_state = PROCEDURE_STATE.FAIL;
-
-		if(this._bAutoClean) { this.clean(); }
-
-		if(this._groupNode) {
-			return this._groupNode.onPartFinished();
-		}
-		else if(this._nextNode) {
-			if(this.isPartsDone()) {
-				this._nextNode._groupNode = this._groupNode;
-				this._nextNode.run();
-				return;
-			}
-		}
-
-		cc.log("本Procedure执行完成，整个Procedure执行完成");
+		this.resolve(PROCEDURE_STATE.FAIL);
 	}
 
 	public resolve_succ() : void 
 	{
-		if(this.isFinished()) { return; }
-
-		this._cur_state = PROCEDURE_STATE.SUCC;
-
-		if(this._bAutoClean) { this.clean(); }
-
-		if(this._groupNode) {
-			return this._groupNode.onPartFinished();
-		}
-		else if(this._nextNode) {
-			if(this.isPartsDone()) {
-				this._nextNode._groupNode = this._groupNode;
-				this._nextNode.run();
-				return;
-			}
-		}
-
-		cc.log("本Procedure执行完成，整个Procedure执行完成");
+		this.resolve(PROCEDURE_STATE.SUCC);
 	}
 
 	public onStop() {
