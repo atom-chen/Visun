@@ -14,8 +14,8 @@ export default class Procedure {
 	private _procFunc:CHandler = null;
 	private _stopFunc:CHandler = null;
 	
-	private _belongTo:Procedure = null;
-	private _next:Procedure = null;
+	private _nextNode:Procedure = null;
+	private _groupNode:Procedure = null;
 	private _partList:Array<Procedure> = null;
 
 
@@ -61,7 +61,7 @@ export default class Procedure {
 
 	public addPart(part:Procedure) : Procedure 
 	{
-		part._belongTo = this;
+		part._groupNode = this;
 		if(!this._partList) { this._partList = []; }
 		this._partList.push(part);
 		return this;
@@ -70,7 +70,7 @@ export default class Procedure {
 	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
 	{
 		var part = new Procedure(procFunc, stopFunc);
-		part._belongTo = this;
+		part._groupNode = this;
 		if(!this._partList) { this._partList = []; }
 		this._partList.push(part);
 		return this;
@@ -81,8 +81,8 @@ export default class Procedure {
 	public then(nextNode:Procedure) : Procedure 
 	{
 		var last = this.getLast();
-		nextNode._belongTo = last._belongTo;
-		last._next = nextNode;
+		nextNode._groupNode = last._groupNode;
+		last._nextNode = nextNode;
 		return nextNode;
 	}
 
@@ -105,7 +105,7 @@ export default class Procedure {
 			this._procFunc.call(this);
 		}
 		else {
-			this._cur_state = PROCEDURE_STATE.DONE;
+			this._cur_state = PROCEDURE_STATE.SUCC;
 		}
 	}
 
@@ -122,10 +122,10 @@ export default class Procedure {
 			}
 		}
 
-		if(this._next) {
+		if(this._nextNode) {
 			if(this.isFinished() && this.isPartsDone()) {
-				this._next._belongTo = this._belongTo;
-				return this._next.run();
+				this._nextNode._groupNode = this._groupNode;
+				return this._nextNode.run();
 			}
 		}
 	}
@@ -133,10 +133,10 @@ export default class Procedure {
 	public onPartFinished() : void 
 	{
 		if (this.isFinished()) {
-			if(this._next) {
+			if(this._nextNode) {
 				if(this.isPartsDone()) {
-					this._next._belongTo = this._belongTo;
-					this._next.run();
+					this._nextNode._groupNode = this._groupNode;
+					this._nextNode.run();
 				}
 			}
 			else if(this.isPartsDone()) {
@@ -146,21 +146,43 @@ export default class Procedure {
 		
 	}
 
-	public resolve() : void 
+	public resolve_fail() : void
 	{
 		if(this.isFinished()) { return; }
 
-		this._cur_state = PROCEDURE_STATE.DONE;
+		this._cur_state = PROCEDURE_STATE.FAIL;
 
 		if(this._bAutoClean) { this.clean(); }
 
-		if(this._belongTo) {
-			return this._belongTo.onPartFinished();
+		if(this._groupNode) {
+			return this._groupNode.onPartFinished();
 		}
-		else if(this._next) {
+		else if(this._nextNode) {
 			if(this.isPartsDone()) {
-				this._next._belongTo = this._belongTo;
-				this._next.run();
+				this._nextNode._groupNode = this._groupNode;
+				this._nextNode.run();
+				return;
+			}
+		}
+
+		cc.log("本Procedure执行完成，整个Procedure执行完成");
+	}
+
+	public resolve_succ() : void 
+	{
+		if(this.isFinished()) { return; }
+
+		this._cur_state = PROCEDURE_STATE.SUCC;
+
+		if(this._bAutoClean) { this.clean(); }
+
+		if(this._groupNode) {
+			return this._groupNode.onPartFinished();
+		}
+		else if(this._nextNode) {
+			if(this.isPartsDone()) {
+				this._nextNode._groupNode = this._groupNode;
+				this._nextNode.run();
 				return;
 			}
 		}
@@ -187,8 +209,8 @@ export default class Procedure {
 			if(this._bAutoClean) { this.clean(); }
 		}
 		
-		if(this._next) { 
-			this._next.stop(); 
+		if(this._nextNode) { 
+			this._nextNode.stop(); 
 		}
 	}
 
@@ -197,15 +219,15 @@ export default class Procedure {
 	public getLast() : Procedure 
 	{
 		var last:Procedure = this;
-		while(last._next) {
-			last = last._next;
+		while(last._nextNode) {
+			last = last._nextNode;
 		}
 		return last;
 	}
 
 	public isFinished() : boolean 
 	{
-		return this._cur_state === PROCEDURE_STATE.DONE || this._cur_state === PROCEDURE_STATE.STOPED;
+		return this._cur_state === PROCEDURE_STATE.SUCC || this._cur_state === PROCEDURE_STATE.FAIL || this._cur_state === PROCEDURE_STATE.STOPED;
 	}
 
 	public isPartsDone() : boolean 
@@ -230,8 +252,8 @@ export default class Procedure {
 				}
 			}
 		}
-		if(this._next) { 
-			if(!this._next.isDone()) { 
+		if(this._nextNode) { 
+			if(!this._nextNode.isDone()) { 
 				return false; 
 			} 
 		}

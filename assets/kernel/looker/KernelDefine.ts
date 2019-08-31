@@ -61,6 +61,7 @@ export enum NetResult {
 export enum PROCEDURE_STATE {
 	READY = 1,
 	RUNNING,
-	DONE,
+	SUCC,
+	FAIL,
 	STOPED
 };
