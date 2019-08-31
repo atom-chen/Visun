@@ -1,7 +1,6 @@
 import EventCenter from "../event/EventCenter";
 import TimerManager from "../timer/TimerManager";
 import UIManager from "./UIManager";
-import CHandler from "../promise/CHandler";
 
 
 //---------------------------------

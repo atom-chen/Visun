@@ -1,4 +1,5 @@
 import { JTIPoolObject } from "../pool/JTIPoolObject";
+import CHandler from "../basic/CHandler";
 
 export enum TimerType {
 	frame = 1,
@@ -6,13 +7,9 @@ export enum TimerType {
 };
 
 export class BaseTimer implements JTIPoolObject {
-	recycle(): void {
-		this.stop();
-	}
 	protected _id:number;
 	protected _interval:number;
-	protected _func:Function;
-	protected _thisObj:any;
+	protected _callback:CHandler;
 	protected _looptimes:number;
 	protected _type:TimerType;
 	protected _isLimit:boolean;
@@ -20,13 +17,16 @@ export class BaseTimer implements JTIPoolObject {
 	protected _passedTime:number = 0;
 	protected _stoped:boolean = false;
 	protected _paused:boolean = false;
+
+	recycle(): void {
+		this.stop();
+	}
     
-    public reset(type:TimerType, id:number, interval:number, func:Function, thisObj:any, looptimes:number){
+    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler){
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
-		this._func = func;
-		this._thisObj = thisObj;
+		this._callback = callback;
 		this._looptimes = looptimes;
 		this._passedTime = 0;
 		this._stoped = false;
@@ -36,8 +36,8 @@ export class BaseTimer implements JTIPoolObject {
 
 	public stop() {
 		this._stoped = true;
-		this._func = null;
-		this._thisObj = null;
+		this._callback.clear();
+		this._callback = null;
 	}
 
 	public pause(bPause:boolean) {
@@ -46,7 +46,6 @@ export class BaseTimer implements JTIPoolObject {
 
 	public tick(dt:number) : boolean{
 		if(this._stoped) {
-			this._func = null;
 			return true;
 		}
 		if(this._paused) { return false; }
@@ -60,13 +59,12 @@ export class BaseTimer implements JTIPoolObject {
 
 		if(this._passedTime >= this._interval) {
 			this._passedTime = this._passedTime - this._interval;
-			this._func.call(this._thisObj, this._looptimes);
+			this._callback.call(this);
 
 			if(this._isLimit) {
 				this._looptimes--;
 				if(this._looptimes<=0){
-					this._func = null;
-					this._stoped = true;
+					this.stop();
 					return true;
 				}
 			}
@@ -79,10 +77,18 @@ export class BaseTimer implements JTIPoolObject {
 	}
 
 	public getTarget() : any {
-		return this._thisObj;
+		if(this._callback){
+			return this._callback.getTarget();
+		}
+		return null;
 	}
 
 	public isStoped() : boolean {
 		return this._stoped;
 	}
+
+	public getLooptimes(){
+		return this._looptimes;
+	}
+
 }

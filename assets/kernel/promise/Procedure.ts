@@ -1,7 +1,7 @@
 //---------------------------------
 // 仿js promise，将过程组织成树形结构，自根往叶播放
 //---------------------------------
-import CHandler from "./CHandler";
+import CHandler from "../basic/CHandler";
 import PlayUnit from "./PlayUnit";
 import { PROCEDURE_STATE } from "../looker/KernelDefine";
 

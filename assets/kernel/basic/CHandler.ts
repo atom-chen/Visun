@@ -22,10 +22,19 @@ export default class CHandler {
 	public call(part:any=null) : void
 	{
 		var ret:any;
-		if(part) {
-			ret = this._fn.apply(this._target, [part].concat(this._args));
-		} else {
-			ret = this._fn.apply(this._target, this._args);
+		if(this._args && this._args.length > 0) {
+			if(part) {
+				ret = this._fn.apply(this._target, [part].concat(this._args));
+			} else {
+				ret = this._fn.apply(this._target, this._args);
+			}
+		}
+		else {
+			if(part) {
+				ret = this._fn.call(this._target, part);
+			} else {
+				ret = this._fn.call(this._target);
+			}
 		}
 		if(this._autoClean) {
 			this.clear();

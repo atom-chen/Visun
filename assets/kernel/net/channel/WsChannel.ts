@@ -7,6 +7,7 @@ import { ConnState } from "../../looker/KernelDefine";
 import EventCenter from "../../event/EventCenter";
 import KernelEvent from "../../looker/KernelEvent";
 import TimerManager from "../../timer/TimerManager";
+import CHandler from "../../basic/CHandler";
 
 var MAX_RECONNECT = 3;
 
@@ -279,7 +280,7 @@ export default class WsChannel implements IChannel {
 
 	private startHeartBeat() : void
 	{
-		this._heartTmr = TimerManager.instance().addSecondTimer(8, this.sendHeartBeat, this, -1);
+		this._heartTmr = TimerManager.instance().addSecondTimer(8, -1, new CHandler(this.sendHeartBeat, this));
 	}
 
 	private sendHeartBeat() : void

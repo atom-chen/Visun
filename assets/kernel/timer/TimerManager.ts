@@ -1,4 +1,5 @@
 import { BaseTimer, TimerType } from "./BaseTimer";
+import CHandler from "../basic/CHandler";
 //import JTPool from "../pool/JTPool";
 
 
@@ -28,6 +29,8 @@ export default class TimerManager {
 				this._timers[i].tick(dt);
 				if(this._timers[i].isStoped()) {
 					this.delByIndex(i);
+					i--;
+					len--;
 				}
 			}
 		}
@@ -36,22 +39,22 @@ export default class TimerManager {
 		}
 	}
 
-	public addFrameTimer(interval:number, func:Function, thisObj:any, looptimes:number) {
+	public addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
 	//	var tmr = TimerManager._pool.get();
-		tmr.reset(TimerType.frame, id, interval, func, thisObj, looptimes);
+		tmr.reset(TimerType.frame, id, interval, looptimes, callback);
 		this._timers.push(tmr);
 		return id;
 	}
 
-	public addSecondTimer(interval:number, func:Function, thisObj:any, looptimes:number) {
+	public addSecondTimer(interval:number, looptimes:number, callback:CHandler) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
 	//	var tmr = TimerManager._pool.get();
-		tmr.reset(TimerType.second, id, interval, func, thisObj, looptimes);
+		tmr.reset(TimerType.second, id, interval, looptimes, callback);
 		this._timers.push(tmr);
 		return id;
 	}
@@ -72,10 +75,6 @@ export default class TimerManager {
 				this._timers.splice(i, 1);
 			}
 		}
-	}
-
-	public count() : number {
-		return this._timers.length;
 	}
 
 }
