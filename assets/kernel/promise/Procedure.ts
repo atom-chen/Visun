@@ -30,9 +30,13 @@ export default class Procedure {
 	{
 		this._procFunc = null;
 		this._stopFunc = null;
-		if(this._partList){
-			this._partList.length = 0;
-			this._partList = null;
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].clean();
+			}
+		}
+		if(this._nextNode) { 
+			this._nextNode.clean(); 
 		}
 	}
 
@@ -124,7 +128,7 @@ export default class Procedure {
 		}
 	}
 
-	public onPartFinished() : void 
+	protected onPartFinished() : void 
 	{
 		if (this.isFinished() && this.isPartsDone()) {
 			if(this._nextNode) {
@@ -143,7 +147,10 @@ export default class Procedure {
 
 		this._cur_state = rlt;
 
-		if(this._bAutoClean) { this.clean(); }
+		if(this._bAutoClean) { 
+			this._procFunc = null;
+			this._stopFunc = null;
+		}
 
 		if(this._groupNode) {
 			return this._groupNode.onPartFinished();
@@ -170,7 +177,7 @@ export default class Procedure {
 		this.resolve(PROCEDURE_STATE.SUCC);
 	}
 
-	public onStop() {
+	protected onStop() {
 		if(this._stopFunc){
 			this._stopFunc.call(this);
 		}
@@ -191,6 +198,19 @@ export default class Procedure {
 		
 		if(this._nextNode) { 
 			this._nextNode.stop(); 
+		}
+	}
+
+	public recover() : void 
+	{
+		this._cur_state = PROCEDURE_STATE.STOPED;
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].recover();
+			}
+		}
+		if(this._nextNode) { 
+			this._nextNode.recover(); 
 		}
 	}
 
