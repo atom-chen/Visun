@@ -7,16 +7,16 @@ import { PROCEDURE_STATE } from "../looker/KernelDefine";
 
 
 export default class Procedure {
-	private _node_type:string = "unknown";
-	private _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
-	private _bAutoClean:boolean = false;
+	protected _node_type:string = "unknown";
+	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
+	protected _bAutoClean:boolean = false;
 
-	private _procFunc:CHandler = null;
-	private _stopFunc:CHandler = null;
+	protected _procFunc:CHandler = null;
+	protected _stopFunc:CHandler = null;
 	
-	private _nextNode:Procedure = null;
-	private _groupNode:Procedure = null;
-	private _partList:Array<Procedure> = null;
+	protected _nextNode:Procedure = null;
+	protected _groupNode:Procedure = null;
+	protected _partList:Array<Procedure> = null;
 
 
 
