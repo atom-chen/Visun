@@ -14,6 +14,7 @@ export default class TimerManager {
 	private constructor() {
 		
 	}
+	
 	public static instance() {
 		if(!TimerManager._instance) { TimerManager._instance = new TimerManager; }
 		return TimerManager._instance;
@@ -61,6 +62,7 @@ export default class TimerManager {
 	}
 
 	public delTimer(id:number) {
+		if(id===null || id===undefined){ return; }
 		for(var i=this._timers.length-1; i>=0; i--) {
 			if(this._timers[i].getId()===id) {
 				this._timers[i].stop();

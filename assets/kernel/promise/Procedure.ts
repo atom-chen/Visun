@@ -26,7 +26,7 @@ export default class Procedure {
 		this._stopFunc = stopFunc;
 	}
 
-	private clean() : void 
+	public clean() : void 
 	{
 		this._procFunc = null;
 		this._stopFunc = null;
