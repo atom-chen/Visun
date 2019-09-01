@@ -4,7 +4,7 @@ import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
 import HallRequest from "../../../resources/lobby/script/proxy/HallRequest";
 import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
-import { CLIENT_VERSION } from "../definer/Consts";
+import { CLIENT_VERSION } from "../definer/ConstDefine";
 import ModelInterface from "../../../kernel/model/ModelInterface";
 import UserMgr from "./UserMgr";
 

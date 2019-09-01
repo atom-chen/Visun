@@ -40,9 +40,9 @@ export default class PacketDefine {
 
 	public sendToChannel(channelKey:string, data:any, bIsPbObj:boolean)
 	{
-		var channel_game:IChannel = ChannelMgr.instance().getChannel(channelKey);
-        if(!channel_game) { return; }
+		var cur_channel:IChannel = ChannelMgr.instance().getChannel(channelKey);
+        if(!cur_channel) { return; }
         var req = this.createPacket(data, bIsPbObj);
-        channel_game.sendMessage(req.cmd, req);
+        cur_channel.sendMessage(req.cmd, req);
 	}
 }

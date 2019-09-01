@@ -15,7 +15,7 @@ import ChannelMgr from "../../../../../kernel/net/channel/ChannelMgr";
 import { qhb } from "../../../../../common/script/proto/qhb";
 import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
-import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/Consts";
+import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/ConstDefine";
 import UserMgr from "../../../../../common/script/model/UserMgr";
 
 
