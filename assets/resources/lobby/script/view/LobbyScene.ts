@@ -1,6 +1,7 @@
 import UIManager from "../../../../kernel/view/UIManager";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import AudioManager from "../../../../kernel/audio/AudioManager";
+import CommonUIDefine from "../../../../common/script/definer/CommonUIDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -8,7 +9,7 @@ const {ccclass, property} = cc._decorator;
 export default class LobbyScene extends BaseComponent {
 
     onLoad () {
-        UIManager.openPanel("lobby/prefabs/LobbyUI", null);
+        UIManager.openPanel(CommonUIDefine.LobbyUI.path, null);
     }
 
     start () {

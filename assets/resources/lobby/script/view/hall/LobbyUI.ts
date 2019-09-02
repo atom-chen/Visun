@@ -17,6 +17,7 @@ import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/ConstDefine";
 import UserMgr from "../../../../../common/script/model/UserMgr";
+import CommonUIDefine from "../../../../../common/script/definer/CommonUIDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -42,35 +43,35 @@ export default class LobbyUI extends BaseComponent {
 
 	private initUiEvents(){
 		CommonUtils.addClickEvent(this.m_ui.btn_safebox, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/SafeboxUI", null);
+			UIManager.openPopwnd(CommonUIDefine.SafeboxUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_email, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/EmailUI", null);
+			UIManager.openPopwnd(CommonUIDefine.EmailUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_shop, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/ShopUI", null);
+			UIManager.openPopwnd(CommonUIDefine.ShopUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_kefu, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/KefuUI", null);
+			UIManager.openPopwnd(CommonUIDefine.KefuUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_withdraw, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/WithdrawUI", null);
+			UIManager.openPopwnd(CommonUIDefine.WithdrawUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_spread, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/SpreadUI", null);
+			UIManager.openPopwnd(CommonUIDefine.SpreadUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.HeroUI, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/PersonUI", null);
+			UIManager.openPopwnd(CommonUIDefine.PersonUI.path, null);
 		}, this);
 
 		CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
-			UIManager.openPopwnd("lobby/prefabs/LoginUI", null);
+			UIManager.openPopwnd(CommonUIDefine.LoginUI.path, null);
 		}, this);
 
 		// 

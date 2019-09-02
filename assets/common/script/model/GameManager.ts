@@ -7,6 +7,7 @@ import SceneManager from "../../../kernel/view/SceneManager";
 import { CLIENT_VERSION } from "../definer/ConstDefine";
 import UserMgr from "./UserMgr";
 import ModelBase from "../../../kernel/model/ModelBase";
+import CommonUIDefine from "../definer/CommonUIDefine";
 
 
 export default class GameManager extends ModelBase {
@@ -118,19 +119,19 @@ export default class GameManager extends ModelBase {
 				gameId = gameId.toString();
 				switch(gameId) {
 					case "40000040":
-						UIManager.openPanel("subgames/ddz/prefabs/ddz_ui", null);
+						UIManager.openPanel(CommonUIDefine.ddzUI.path, null);
 						break;
 					case "90000040":
-						UIManager.openPanel("subgames/brnn/prefabs/brnn_ui", null);
+						UIManager.openPanel(CommonUIDefine.brnnUI.path, null);
 						break;
 					case "80000044":
-						UIManager.openPanel("subgames/fqzs/prefabs/fqzs_ui", null);
+						UIManager.openPanel(CommonUIDefine.fqzsUI.path, null);
 						break;
 					case "40070012":
-						UIManager.openPanel("subgames/zjh/prefabs/zjh_ui", null);
+						UIManager.openPanel(CommonUIDefine.zjhUI.path, null);
 						break;
 					case "80000041":
-						UIManager.openPanel("subgames/bjle/prefabs/bjle_ui", null);
+						UIManager.openPanel(CommonUIDefine.bjleUI.path, null);
 						break;
 				}
 			});

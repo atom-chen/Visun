@@ -3,6 +3,7 @@
 //---------------------------------
 import CommonUtils from "../utils/CommonUtils";
 import { LayerDefine } from "../looker/KernelDefine";
+import CoreUIDefine from "../looker/CoreUIDefine";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -168,7 +169,7 @@ export default class UIManager {
 			return;
 		}
 		
-		cc.loader.loadRes("launcher/prefabs/ConfirmDlg", cc.Prefab, 
+		cc.loader.loadRes(CoreUIDefine.dialog.path, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
 			//cc.log("进度: ", completeCnt, totalCnt);
 		}, 
@@ -184,7 +185,7 @@ export default class UIManager {
 			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
 			
-			obj.getComponent("ConfirmDlg").reflesh(callback, content, title, okTxt, cancelTxt); 
+			obj.getComponent(CoreUIDefine.dialog.comp).reflesh(callback, content, title, okTxt, cancelTxt); 
 		});
 	}
 
@@ -192,7 +193,7 @@ export default class UIManager {
 	
 	public static toast(content:string) {
 		if(content===undefined||content===null) { return; }
-		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent("Toast").label_cont.string === content){
+		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(CoreUIDefine.toast.comp).label_cont.string === content){
 			return;
 		}
 		
@@ -214,7 +215,7 @@ export default class UIManager {
 			UIManager._toastList.push(obj);
 			obj.y = 0;
 			//刷新数据并定时销毁
-			var scriptCpn = obj.getComponent("Toast");
+			var scriptCpn = obj.getComponent(CoreUIDefine.toast.comp);
 			scriptCpn.setContent(content);
 			scriptCpn.scheduleOnce(function() {
 				for(var i=0; i<UIManager._toastList.length; i++) {
@@ -226,7 +227,7 @@ export default class UIManager {
 				this.node.destroy();
 			}, 2);
 		}
-		cc.loader.loadRes("common/prefabs/Toast", cc.Prefab, completeCallback);
+		cc.loader.loadRes(CoreUIDefine.toast.path, cc.Prefab, completeCallback);
 	}
 
 	//-----------------------------------------------------------------
