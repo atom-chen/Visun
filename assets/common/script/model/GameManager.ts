@@ -5,16 +5,17 @@ import HallRequest from "../../../resources/lobby/script/proxy/HallRequest";
 import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
 import { CLIENT_VERSION } from "../definer/ConstDefine";
-import ModelInterface from "../../../kernel/model/ModelInterface";
 import UserMgr from "./UserMgr";
+import ModelBase from "../../../kernel/model/ModelBase";
 
 
-export default class GameManager implements ModelInterface {
+export default class GameManager extends ModelBase {
 	private static _singleton:GameManager;
 	private _gamelist:any[];
 	
 	
 	private constructor() {
+		super();
 		this._gamelist = [];
 	}
 	public static instance() : GameManager {
@@ -28,7 +29,7 @@ export default class GameManager implements ModelInterface {
 		}
 	}
 
-	public clear() {
+	public on_clear() {
 		this._gamelist.length = 0;
 	}
 

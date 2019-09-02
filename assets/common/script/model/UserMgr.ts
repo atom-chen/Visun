@@ -1,17 +1,19 @@
 import User from "./User";
-import ModelInterface from "../../../kernel/model/ModelInterface";
+import ModelBase from "../../../kernel/model/ModelBase";
 
-export default class UserMgr implements ModelInterface{
+export default class UserMgr extends ModelBase{
     private static _instance:UserMgr = null;
     private _userList:object = {};
     private _heroId:number = 0;
     
-    private constructor(){}
+    private constructor(){
+		super();
+	}
     public static instance() : UserMgr {
         if(!UserMgr._instance) { UserMgr._instance = new UserMgr; }
         return UserMgr._instance;
     }
-    public clear() {
+    public on_clear() {
 		this._userList = {};
 		this._heroId = 0;
 	}

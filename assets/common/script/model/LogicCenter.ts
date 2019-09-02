@@ -1,12 +1,12 @@
-import ModelInterface from "../../../kernel/model/ModelInterface";
 import LoginMgr from "./LoginMgr";
 import UserMgr from "./UserMgr";
+import ModelBase from "../../../kernel/model/ModelBase";
 
 
 export default class LogicCenter {
     private static _instance:LogicCenter = null;
 
-    private _managers:ModelInterface[] = [];
+    private _managers:ModelBase[] = [];
     
     public static instance() : LogicCenter {
         if(!LogicCenter._instance){ LogicCenter._instance = new LogicCenter; }

@@ -1,15 +1,17 @@
-import ModelInterface from "../../../kernel/model/ModelInterface";
 import UserMgr from "./UserMgr";
+import ModelBase from "../../../kernel/model/ModelBase";
 
-export default class LoginMgr implements ModelInterface {
+export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 
-	private constructor(){}
+	private constructor(){
+		super();
+	}
     public static instance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
         return LoginMgr._instance;
 	}
-	public clear() {
+	public on_clear() {
 		
 	}
 

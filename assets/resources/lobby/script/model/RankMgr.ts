@@ -1,13 +1,15 @@
-import ModelInterface from "../../../../kernel/model/ModelInterface";
+import ModelBase from "../../../../kernel/model/ModelBase";
 
-export default class RankMgr implements ModelInterface {
+export default class RankMgr extends ModelBase {
     private static _instance:RankMgr = null;
-    private constructor() {}
+    private constructor() {
+        super();
+    }
     public static instance() : RankMgr {
         if(!RankMgr._instance) { RankMgr._instance = new RankMgr; }
         return RankMgr._instance;
     }
-    clear(): void {
+    on_clear(): void {
 
     }
     

@@ -82,10 +82,12 @@ export default class HttpCore {
 
 		cc.log("[请求]：", ptoname);
 
-		var cacheData = HttpCore._localCache.getData(ptoname);
-		if(cacheData){
-			cc.log("---- 从缓存获取http数据: ", ptoname);
-			this.onRespData(ptoname, 0, cacheData, unsafeCallback);
+		if(!this._forbitCache[ptoname]){
+			var cacheData = HttpCore._localCache.get(ptoname);
+			if(cacheData){
+				cc.log("---- 从缓存获取http数据: ", ptoname);
+				this.onRespData(ptoname, 0, cacheData, unsafeCallback);
+			}
 		}
 
 		var domain = this._mainUrl;
@@ -121,7 +123,7 @@ export default class HttpCore {
 					HttpCore.callGet(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 						if(!this._forbitCache[ptoname]){
-							HttpCore._localCache.update(ptoname, data);
+							HttpCore._localCache.set(ptoname, data);
 						}
 					});
 					break;
@@ -129,7 +131,7 @@ export default class HttpCore {
 					HttpCore.callPost(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 						if(!this._forbitCache[ptoname]){
-							HttpCore._localCache.update(ptoname, data);
+							HttpCore._localCache.set(ptoname, data);
 						}
 					});
 					break;
