@@ -9,6 +9,12 @@ export default class EmailMgr extends ModelBase {
         if(!EmailMgr._instance) { EmailMgr._instance = new EmailMgr; }
         return EmailMgr._instance;
     }
+    public static destroy() : void {
+		if(EmailMgr._instance) {
+			EmailMgr._instance.clear();
+			EmailMgr._instance = null;
+		}
+	}
     on_clear(): void {
 
     }

@@ -11,7 +11,7 @@ import ViewDefine from "../definer/ViewDefine";
 
 
 export default class GameManager extends ModelBase {
-	private static _singleton:GameManager;
+	private static _instance:GameManager;
 	private _gamelist:any[];
 	
 	
@@ -20,13 +20,13 @@ export default class GameManager extends ModelBase {
 		this._gamelist = [];
 	}
 	public static instance() : GameManager {
-		if(!GameManager._singleton){ GameManager._singleton = new GameManager; }
-		return GameManager._singleton;
+		if(!GameManager._instance){ GameManager._instance = new GameManager; }
+		return GameManager._instance;
 	}
-	public static destroy(){
-		if(GameManager._singleton) {
-			GameManager._singleton.clear();
-			GameManager._singleton = null;
+	public static destroy() : void {
+		if(GameManager._instance) {
+			GameManager._instance.clear();
+			GameManager._instance = null;
 		}
 	}
 

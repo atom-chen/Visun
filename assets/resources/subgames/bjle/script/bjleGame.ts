@@ -1,15 +1,25 @@
+import ModelBase from "../../../../kernel/model/ModelBase";
 
-export default class bjleGame {
-
+export default class bjleGame extends ModelBase {
     private static _instance:bjleGame = null;
-    private constructor() {}
+    private constructor() {
+        super();
+    }
     public static instance() : bjleGame{
         if(!bjleGame._instance) { bjleGame._instance = new bjleGame; }
         return bjleGame._instance;
     }
     public static destroy() {
+        if(bjleGame._instance) { 
+            bjleGame._instance.clear(); 
+            bjleGame._instance = null;
+        } 
+    }
+    on_clear(): void {
         
     }
+
+    //-------------------------------------------------------------
 
     private _players : {};
 

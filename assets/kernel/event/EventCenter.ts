@@ -2,17 +2,18 @@
 // 全局事件中心
 //---------------------------------
 export default class EventCenter {
-	private static _singleton:EventCenter = null;
+	private static _instance:EventCenter = null;
 	private _events = {};
 	
 	
 	public static instance() : EventCenter
 	{
-		if(!EventCenter._singleton){ EventCenter._singleton = new EventCenter(); }
-		return EventCenter._singleton;
+		if(!EventCenter._instance){ EventCenter._instance = new EventCenter(); }
+		return EventCenter._instance;
 	}
-	public static destroy(){
-		EventCenter._singleton = null;
+	public static destroy() {
+		EventCenter._instance._events = null;
+		EventCenter._instance = null;
 	}
 
 	//监听事件

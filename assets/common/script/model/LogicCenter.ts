@@ -12,6 +12,12 @@ export default class LogicCenter {
         if(!LogicCenter._instance){ LogicCenter._instance = new LogicCenter; }
         return LogicCenter._instance;
     }
+    public static destroy() : void {
+		if(LogicCenter._instance) {
+			LogicCenter._instance.clear();
+			LogicCenter._instance = null;
+		}
+	}
 
     //初始化逻辑数据
     //调用时机：登录前

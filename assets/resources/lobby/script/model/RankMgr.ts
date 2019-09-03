@@ -9,6 +9,12 @@ export default class RankMgr extends ModelBase {
         if(!RankMgr._instance) { RankMgr._instance = new RankMgr; }
         return RankMgr._instance;
     }
+    public static destroy() : void {
+		if(RankMgr._instance) {
+			RankMgr._instance.clear();
+			RankMgr._instance = null;
+		}
+	}
     on_clear(): void {
 
     }

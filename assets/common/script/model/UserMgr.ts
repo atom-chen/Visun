@@ -12,7 +12,13 @@ export default class UserMgr extends ModelBase{
     public static instance() : UserMgr {
         if(!UserMgr._instance) { UserMgr._instance = new UserMgr; }
         return UserMgr._instance;
-    }
+	}
+	public static destroy() : void {
+		if(UserMgr._instance) {
+			UserMgr._instance.clear();
+			UserMgr._instance = null;
+		}
+	}
     public on_clear() {
 		this._userList = {};
 		this._heroId = 0;

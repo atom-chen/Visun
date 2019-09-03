@@ -11,6 +11,12 @@ export default class LoginMgr extends ModelBase {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
         return LoginMgr._instance;
 	}
+	public static destroy() : void {
+		if(LoginMgr._instance) {
+			LoginMgr._instance.clear();
+			LoginMgr._instance = null;
+		}
+	}
 	public on_clear() {
 		
 	}
