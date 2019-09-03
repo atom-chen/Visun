@@ -7,7 +7,7 @@ import SceneManager from "../../../kernel/view/SceneManager";
 import { CLIENT_VERSION } from "../definer/ConstDefine";
 import UserMgr from "./UserMgr";
 import ModelBase from "../../../kernel/model/ModelBase";
-import CommonUIDefine from "../definer/CommonUIDefine";
+import ViewDefine from "../definer/ViewDefine";
 
 
 export default class GameManager extends ModelBase {
@@ -119,19 +119,19 @@ export default class GameManager extends ModelBase {
 				gameId = gameId.toString();
 				switch(gameId) {
 					case "40000040":
-						UIManager.openPanel(CommonUIDefine.ddzUI.path, null);
+						UIManager.openPanel(ViewDefine.ddzUI.path, null);
 						break;
 					case "90000040":
-						UIManager.openPanel(CommonUIDefine.brnnUI.path, null);
+						UIManager.openPanel(ViewDefine.brnnUI.path, null);
 						break;
 					case "80000044":
-						UIManager.openPanel(CommonUIDefine.fqzsUI.path, null);
+						UIManager.openPanel(ViewDefine.fqzsUI.path, null);
 						break;
 					case "40070012":
-						UIManager.openPanel(CommonUIDefine.zjhUI.path, null);
+						UIManager.openPanel(ViewDefine.zjhUI.path, null);
 						break;
 					case "80000041":
-						UIManager.openPanel(CommonUIDefine.bjleUI.path, null);
+						UIManager.openPanel(ViewDefine.bjleUI.path, null);
 						break;
 				}
 			});

@@ -74,9 +74,9 @@ export default class CommonUtils {
 		}
 	}
 
-	// Returns a random integer between min (included) and max (excluded)
+	// Returns a random integer between min and max
 	public static getRandomInt(min:number, max:number) : number {
-		return Math.floor(Math.random() * (max - min)) + min;
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
 	public static shuffle(array: Array<any>) {

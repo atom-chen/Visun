@@ -1,4 +1,4 @@
-export default class CommonUIDefine {
+export default class ViewDefine {
 	public static ddzUI = { path:"subgames/ddz/prefabs/ddz_ui", comp:"ddzUI" };
 	public static brnnUI = { path:"subgames/brnn/prefabs/brnn_ui", comp:"brnnUI" };
 	public static fqzsUI = { path:"subgames/fqzs/prefabs/fqzs_ui", comp:"fqzsUI" };

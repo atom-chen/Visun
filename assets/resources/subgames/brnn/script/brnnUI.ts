@@ -4,7 +4,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import SimplePool from "../../../../kernel/pool/SimplePool";
 import TimerManager from "../../../../kernel/timer/TimerManager";
-import CommonUIDefine from "../../../../common/script/definer/CommonUIDefine";
+import ViewDefine from "../../../../common/script/definer/ViewDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -35,7 +35,7 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtils.traverseNodes(this.node, this.m_ui);
 
 		var self = this;
-		cc.loader.loadRes(CommonUIDefine.ChipSpr.path, cc.Prefab, function (err, loadedRes) {
+		cc.loader.loadRes(ViewDefine.ChipSpr.path, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
 			self._loadedRes = cc.instantiate(loadedRes);
 		});
