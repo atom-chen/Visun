@@ -129,13 +129,17 @@ export default class Procedure {
 			}
 		}
 
-		return this.onPartFinished();
+		if (this.isFinished() && this.isPartsDone()) {
+			if(this._nextNode) {
+				return this._nextNode.run();
+			}
+		}
 	}
 
 	protected onPartFinished() : PROCEDURE_STATE 
 	{
 		if (this.isFinished() && this.isPartsDone()) {
-			if(this._nextNode) {
+			if(this._nextNode && !this._nextNode.isDone()) {
 				return this._nextNode.run();
 			}
 
@@ -146,7 +150,7 @@ export default class Procedure {
 				}
 				else{
 					cc.log(this.fixedName(), "finished  but ", this._groupNode._name, "is waiting parts");
-					return PROCEDURE_STATE.RUNNING;
+					return this._groupNode.run();
 				}
 			}
 
