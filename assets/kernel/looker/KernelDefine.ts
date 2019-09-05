@@ -63,5 +63,12 @@ export enum PROCEDURE_STATE {
 	RUNNING,
 	SUCC,
 	FAIL,
+	DONE,
 	STOPED
 };
+
+export enum PROCEDURE_LOGIC {
+	And = 1,
+	Or,
+	Parallel,
+}

@@ -3,7 +3,7 @@
 //---------------------------------
 import CHandler from "../basic/CHandler";
 import PlayUnit from "./PlayUnit";
-import { PROCEDURE_STATE } from "../looker/KernelDefine";
+import { PROCEDURE_STATE, PROCEDURE_LOGIC } from "../looker/KernelDefine";
 
 
 export default class Procedure {
@@ -18,6 +18,8 @@ export default class Procedure {
 	protected _nextNode:Procedure = null;
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
+
+	protected _logic_strateby:PROCEDURE_LOGIC = PROCEDURE_LOGIC.Parallel;
 
 
 
@@ -105,6 +107,11 @@ export default class Procedure {
 	}
 
 
+	public setLogicStrategy(strategy:PROCEDURE_LOGIC)
+	{
+		this._logic_strateby = strategy;
+	}
+
 	
 	protected onProc() {
 		if(this._procFunc) {
@@ -124,7 +131,8 @@ export default class Procedure {
 
 			if(this._partList) {
 				for(var i in this._partList) {
-					this._partList[i].run();
+					this._partList[i]._cur_state = PROCEDURE_STATE.RUNNING;
+					this._partList[i].onProc();
 				}
 			}
 		}
@@ -134,7 +142,9 @@ export default class Procedure {
 
 	protected onPartFinished() : PROCEDURE_STATE 
 	{
-		if (this.isFinished() && this.isPartsDone()) {
+		var bFinished = this.isFinished();
+		var bPartsDone = this.isPartsDone();
+		if (bFinished && bPartsDone) {
 			if(this._nextNode && !this._nextNode.isDone()) {
 				return this._nextNode.run();
 			}
@@ -153,10 +163,10 @@ export default class Procedure {
 			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成");
 			return this._cur_state;
 		}
-		else if(this.isFinished()){
+		else if(bFinished){
 			cc.log(this.fixedName(), "finished bug pasts is runnig");
 		}
-		else if(this.isPartsDone()) {
+		else if(bPartsDone) {
 			cc.log(this.fixedName(), "not finished when pasts done");
 		}
 	}
@@ -236,7 +246,7 @@ export default class Procedure {
 
 	public isFinished() : boolean 
 	{
-		return this._cur_state === PROCEDURE_STATE.SUCC || this._cur_state === PROCEDURE_STATE.FAIL || this._cur_state === PROCEDURE_STATE.STOPED;
+		return this._cur_state===PROCEDURE_STATE.SUCC || this._cur_state===PROCEDURE_STATE.FAIL || this._cur_state===PROCEDURE_STATE.STOPED;
 	}
 
 	public isPartsDone() : boolean 
