@@ -1,29 +1,21 @@
 import BehaviorTree from "./BehaviorTree";
 import RoleAgent from "./RoleAgent";
 import { BT_STATE } from "./AIConst";
+import Procedure from "../promise/Procedure";
 
 //--------------------------------------------------------------------------------------------
 // 行为树节点
 // 具体实现要继承自 DecoratorNode ConditionNode ActionNode
 //--------------------------------------------------------------------------------------------
 //所有节点类型的基类
-export default abstract class BehaviorNodeBase {
-	protected clsName:string = "BehaviorNodeBase";
-	protected leftNode:BehaviorNodeBase;	//当本节点返回失败时，走向左节点
-	protected rightNode:BehaviorNodeBase;	//当本节点返回成功时，走向右节点
-	protected preNode:BehaviorNodeBase;		//父节点
-	protected mBTTree:BehaviorTree;			//节点所在的树
-	protected compNode:ParallelNode;		//所在组
+export default abstract class BehaviorNodeBase extends Procedure {
+	protected _node_type:string = "BehaviorNodeBase";
+	protected leftNode:BehaviorNodeBase = null;		//当本节点返回失败时，走向左节点
+	protected rightNode:BehaviorNodeBase = null;	//当本节点返回成功时，走向右节点
+	protected preNode:BehaviorNodeBase = null;		//父节点
+	protected mBTTree:BehaviorTree = null;			//节点所在的树
+	protected compNode:ParallelNode = null;			//所在组
 	
-	public constructor() {
-		this.leftNode = null;
-		this.rightNode = null;
-		this.preNode = null;
-		this.mBTTree = null;
-		this.compNode = null;
-	}
-
-	public getClassName() { return this.clsName; }
 
 	public abstract Proc(theOwner:RoleAgent):BT_STATE;
 
@@ -36,7 +28,7 @@ export default abstract class BehaviorNodeBase {
 		}
 
 		if(theOwner.getBlackboard().hasRunningNode(this)) {
-			console.log(this.clsName,"is running !!!");
+			console.log(this._node_type,"is running !!!");
 			return BT_STATE.RUNNING;
 		}
 		
@@ -60,7 +52,7 @@ export default abstract class BehaviorNodeBase {
 		// 标记为非运行中节点
 		theOwner.getBlackboard().delRunningNode(this)
 
-		console.log("---", this.clsName, result);
+		console.log("---", this._node_type, result);
 
 		// 如果被中断，不再执行后面的节点，直接返回失败
 		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
@@ -231,7 +223,7 @@ export class ParallelNode extends CompositeNodeBase {
 		}
 
 		if(theOwner.getBlackboard().hasRunningNode(this)) {
-			console.log(this.getClassName(),"is running !!!");
+			console.log(this._node_type,"is running !!!");
 			return BT_STATE.RUNNING;
 		}
 		

@@ -121,19 +121,15 @@ export default class Procedure {
 			this._cur_state = PROCEDURE_STATE.RUNNING;
 			cc.log("begin", this.fixedName());
 			this.onProc();
-		}
-		
-		if(this._partList) {
-			for(var i in this._partList) {
-				this._partList[i].run();
+
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i].run();
+				}
 			}
 		}
 
-		if (this.isFinished() && this.isPartsDone()) {
-			if(this._nextNode) {
-				return this._nextNode.run();
-			}
-		}
+		return this.onPartFinished();
 	}
 
 	protected onPartFinished() : PROCEDURE_STATE 

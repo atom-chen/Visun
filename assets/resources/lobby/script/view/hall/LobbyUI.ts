@@ -153,13 +153,20 @@ export default class LobbyUI extends BaseComponent {
 
 	private createProcedure(duration:number, name:string) {
 		var node = new Procedure(
-			new CHandler((part?:Procedure)=>{ 
-				TimerManager.instance().addSecondTimer(duration, 1, new CHandler(
-					function(tmr){ 
-						this.resolve_succ();
-					}, part));
-				}, 
-				null),
+			new CHandler((part?:Procedure)=>{
+				if(duration>0){
+					TimerManager.instance().addSecondTimer(duration, 1, new CHandler(
+						function(tmr){ 
+							this.resolve_succ();
+						}, part)
+					);
+				}
+				else{
+					part.resolve_succ();
+				}
+			}, 
+			null
+			),
 			new CHandler((part?:Procedure)=>{ cc.log(part.getName()+" stoped") }, null)
 		);
 		node.setName(name)
@@ -188,11 +195,8 @@ export default class LobbyUI extends BaseComponent {
 		aaa.then(ddd);
 		ddd.then(eee);
 		eee.addPart(iii);
-		root.run();
-		root.run();
-		root.run();
-		root.run();
-		root.run();
+		ccc.run();
+		//root.thenCaller(new CHandler((part:Procedure)=>{ root.stop(); }, null)).setName("last");
 	}
 
 }
