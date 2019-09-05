@@ -8,6 +8,7 @@ import { PROCEDURE_STATE } from "../looker/KernelDefine";
 
 export default class Procedure {
 	protected _node_type:string = "unknown";
+	protected _name:string = "";
 	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
 	protected _bAutoClean:boolean = false;
 
@@ -24,6 +25,16 @@ export default class Procedure {
 	{
 		this._procFunc = procFunc;
 		this._stopFunc = stopFunc;
+	}
+
+	public setName(name:string)
+	{
+		this._name = name;
+		return this;
+	}
+	public getName() : string
+	{
+		return this._name;
 	}
 
 	public clean() : void 
@@ -74,10 +85,7 @@ export default class Procedure {
 	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
 	{
 		var part = new Procedure(procFunc, stopFunc);
-		part._groupNode = this;
-		if(!this._partList) { this._partList = []; }
-		this._partList.push(part);
-		return this;
+		return this.addPart(part);
 	}
 
 
@@ -85,8 +93,8 @@ export default class Procedure {
 	public then(nextNode:Procedure) : Procedure 
 	{
 		var last = this.getLast();
-		nextNode._groupNode = last._groupNode;
 		last._nextNode = nextNode;
+		nextNode._groupNode = last._groupNode;
 		return nextNode;
 	}
 
@@ -111,6 +119,7 @@ export default class Procedure {
 	{
 		if(this._cur_state === PROCEDURE_STATE.READY) {
 			this._cur_state = PROCEDURE_STATE.RUNNING;
+			cc.log("begin", this.fixedName());
 			this.onProc();
 		}
 		
@@ -120,28 +129,39 @@ export default class Procedure {
 			}
 		}
 
-		if(this._nextNode) {
-			if(this.isFinished() && this.isPartsDone()) {
-				this._nextNode._groupNode = this._groupNode;
-				return this._nextNode.run();
-			}
-		}
+		return this.onPartFinished();
 	}
 
-	protected onPartFinished() : void 
+	protected onPartFinished() : PROCEDURE_STATE 
 	{
 		if (this.isFinished() && this.isPartsDone()) {
 			if(this._nextNode) {
-				this._nextNode._groupNode = this._groupNode;
-				this._nextNode.run();
+				return this._nextNode.run();
 			}
-			else {
-				cc.log("本Procedure执行完成，整个Procedure执行完成");
+
+			if(this._groupNode){
+				if(this._groupNode.isFinished()&&this._groupNode.isPartsDone()){
+					cc.log("group ", this._groupNode._name, "finished when", this.fixedName(), "finished");
+					return this._groupNode.onPartFinished();
+				}
+				else{
+					cc.log(this.fixedName(), "finished  but ", this._groupNode._name, "is waiting parts");
+					return PROCEDURE_STATE.RUNNING;
+				}
 			}
+
+			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成");
+			return this._cur_state;
+		}
+		else if(this.isFinished()){
+			cc.log(this.fixedName(), "finished bug pasts is runnig");
+		}
+		else if(this.isPartsDone()) {
+			cc.log(this.fixedName(), "not finished when pasts done");
 		}
 	}
 
-	private resolve(rlt:PROCEDURE_STATE) : void
+	protected resolve(rlt:PROCEDURE_STATE) : void
 	{
 		if(this.isFinished()) { return; }
 
@@ -151,20 +171,9 @@ export default class Procedure {
 			this._procFunc = null;
 			this._stopFunc = null;
 		}
+		cc.log("end", this.fixedName());
 
-		if(this._groupNode) {
-			return this._groupNode.onPartFinished();
-		}
-		
-		if(this._nextNode) {
-			if(this.isPartsDone()) {
-				this._nextNode._groupNode = this._groupNode;
-				this._nextNode.run();
-				return;
-			}
-		}
-
-		cc.log("本Procedure执行完成，整个Procedure执行完成");
+		this.onPartFinished();
 	}
 
 	public resolve_fail() : void
@@ -263,6 +272,13 @@ export default class Procedure {
 	public getType() : string 
 	{
 		return this._node_type;
+	}
+
+	protected fixedName() :string {
+		if(this._groupNode)
+			return this._groupNode._name + "." + this._name;
+		else 
+			return "null."+this._name;
 	}
 	
 }

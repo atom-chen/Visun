@@ -18,6 +18,9 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/ConstDefine";
 import UserMgr from "../../../../../common/script/model/UserMgr";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import Procedure from "../../../../../kernel/promise/Procedure";
+import CHandler from "../../../../../kernel/basic/CHandler";
+import TimerManager from "../../../../../kernel/timer/TimerManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -32,7 +35,8 @@ export default class LobbyUI extends BaseComponent {
 		this.initUiEvents();
 		this.initNet();
 		//this.testSpine();
-		this.testWs()
+		//this.testWs()
+		TimerManager.instance().addSecondTimer(2, 1, new CHandler(this.testProcedure, this));
 
 		var param = { 
 			deviceID : PlatformUtil.getDeviceId(), 
@@ -98,13 +102,13 @@ export default class LobbyUI extends BaseComponent {
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 		HttpCore.setCacheAble("req_youke_login", false);
 
+		EventCenter.instance().listen("req_youke_login", this.req_userinfo, this);
 		EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
 		EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
 		EventCenter.instance().listen("req_enter_br_room", this.req_enter_br_room, this);
 	}
 
 	private req_userinfo(data:any) {
-		UIManager.toast("登录成功");
 		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.instance().getHero());
 	}
 
@@ -144,6 +148,51 @@ export default class LobbyUI extends BaseComponent {
 			obj.scale = 0.2;
 			sk.setAnimation(1, "Jump", true);
 		});
+	}
+
+
+	private createProcedure(duration:number, name:string) {
+		var node = new Procedure(
+			new CHandler((part?:Procedure)=>{ 
+				TimerManager.instance().addSecondTimer(duration, 1, new CHandler(
+					function(tmr){ 
+						this.resolve_succ();
+					}, part));
+				}, 
+				null),
+			new CHandler((part?:Procedure)=>{ cc.log(part.getName()+" stoped") }, null)
+		);
+		node.setName(name)
+		return node;
+	}
+	private _flag = false;
+	private testProcedure() {
+		if(this._flag) { return; }
+		this._flag = true;
+		var root = this.createProcedure(1, "root");
+		var aaa = this.createProcedure(1, "aaa");
+		var bbb = this.createProcedure(2, "bbb");
+		var ccc = this.createProcedure(1.2, "ccc");
+		var ddd = this.createProcedure(1, "ddd");
+		var eee = this.createProcedure(1.4, "eee");
+		var fff = this.createProcedure(1.4, "fff");
+		var ggg = this.createProcedure(1.4, "ggg");
+		var hhh = this.createProcedure(1.4, "hhh");
+		var iii = this.createProcedure(1.4, "iii");
+		root.then(aaa);
+		aaa.addPart(bbb);
+		aaa.addPart(ccc);
+		ccc.addPart(fff);
+		ccc.addPart(ggg);
+		ggg.then(hhh);
+		aaa.then(ddd);
+		ddd.then(eee);
+		eee.addPart(iii);
+		root.run();
+		root.run();
+		root.run();
+		root.run();
+		root.run();
 	}
 
 }

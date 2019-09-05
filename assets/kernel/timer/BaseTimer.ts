@@ -36,8 +36,10 @@ export class BaseTimer implements JTIPoolObject {
 
 	public stop() {
 		this._stoped = true;
-		this._callback.clear();
-		this._callback = null;
+		if(this._callback){
+			this._callback.clear();
+			this._callback = null;
+		}
 	}
 
 	public pause(bPause:boolean) {

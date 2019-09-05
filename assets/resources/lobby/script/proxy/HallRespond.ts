@@ -13,6 +13,8 @@ HallRespond.req_youke_login = function(info:any){
 	LogicCenter.instance().clear(); //清理数据
 	LogicCenter.instance().init();
 	HttpCore.token = info.sid;
+	UIManager.toast("登录成功");
+
 	HallRequest.req_userinfo({ userId:info.userId });
 	HallRequest.req_game_list({ sid:info.sid });
 }
