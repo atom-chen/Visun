@@ -15,10 +15,9 @@ export default class Procedure {
 	protected _procFunc:CHandler = null;
 	protected _stopFunc:CHandler = null;
 	
-	// protected _succNode:Procedure = null;
-	// protected _failNode:Procedure = null;
-	// protected _alwaysNode:Procedure = null;
-	protected _nextNode:Procedure = null;
+	protected _succNode:Procedure = null;
+	protected _failNode:Procedure = null;
+	protected _alwaysNode:Procedure = null;
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
 
@@ -52,8 +51,8 @@ export default class Procedure {
 				this._partList[i].clean();
 			}
 		}
-		if(this._nextNode) { 
-			this._nextNode.clean(); 
+		if(this._alwaysNode) { 
+			this._alwaysNode.clean(); 
 		}
 	}
 
@@ -99,7 +98,7 @@ export default class Procedure {
 	public then(nextNode:Procedure) : Procedure 
 	{
 		var last = this.getLast();
-		last._nextNode = nextNode;
+		last._alwaysNode = nextNode;
 		nextNode._groupNode = last._groupNode;
 		return nextNode;
 	}
@@ -108,6 +107,16 @@ export default class Procedure {
 	{
 		var nextNode = new Procedure(procFunc, stopFunc);
 		return this.then(nextNode);
+	}
+
+	public succThen(succNode:Procedure) : void
+	{
+		this._succNode = succNode;
+	}
+
+	public failThen(failNode:Procedure) : void
+	{
+		this._failNode = failNode;
 	}
 
 
@@ -162,8 +171,8 @@ export default class Procedure {
 		var bFinished = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();
 		if (bFinished && bPartsDone) {
-			if(this._nextNode && !this._nextNode.isDone()) {
-				return this._nextNode.run();
+			if(this._alwaysNode && !this._alwaysNode.isDone()) {
+				return this._alwaysNode.run();
 			}
 
 			if(this._groupNode){
@@ -233,8 +242,8 @@ export default class Procedure {
 			}
 		}
 		
-		if(this._nextNode) { 
-			this._nextNode.stop(); 
+		if(this._alwaysNode) { 
+			this._alwaysNode.stop(); 
 		}
 	}
 
@@ -248,8 +257,8 @@ export default class Procedure {
 			}
 		}
 
-		if(this._nextNode) { 
-			this._nextNode.recover(); 
+		if(this._alwaysNode) { 
+			this._alwaysNode.recover(); 
 		}
 	}
 
@@ -316,7 +325,7 @@ export default class Procedure {
 			if(myState===PROCEDURE_STATE.READY || myState===PROCEDURE_STATE.RUNNING){
 				return myState;
 			}
-			last = last._nextNode;
+			last = last._alwaysNode;
 		}
 		return last._cur_state;
 	}
@@ -344,8 +353,8 @@ export default class Procedure {
 	{
 		if(!this.isSelfDone()) { return false; }
 		if(!this.isPartsDone()) { return false; }
-		if(this._nextNode) { 
-			if(!this._nextNode.isDone()) { 
+		if(this._alwaysNode) { 
+			if(!this._alwaysNode.isDone()) { 
 				return false; 
 			} 
 		}
@@ -357,8 +366,8 @@ export default class Procedure {
 	public getLast() : Procedure 
 	{
 		var last:Procedure = this;
-		while(last._nextNode) {
-			last = last._nextNode;
+		while(last._alwaysNode) {
+			last = last._alwaysNode;
 		}
 		return last;
 	}
