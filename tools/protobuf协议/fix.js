@@ -1,4 +1,5 @@
-// 异步读取 readFile
+"use strict";
+
 const fs = require("fs");
 
 var arguments = process.argv.splice(2);

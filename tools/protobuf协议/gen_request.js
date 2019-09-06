@@ -1,4 +1,5 @@
-// 异步读取 readFile
+"use strict";
+
 const fs = require("fs");
 
 var arguments = process.argv.splice(2);
@@ -176,7 +177,7 @@ for(var i=0, len=data.length; i<len; i++) {
 						str = str.slice(0, str.indexOf(';')); //去分号
 					}
 					str = str.replace(/\/+/, ' '); 	//去注释
-					str = str.replace('=', '= ');
+					str = str.replace('=', ' = ');
 					var arr = str.split(/\s+/); 	//去空白字符
 					var enumKey;
 					var enumValue;
