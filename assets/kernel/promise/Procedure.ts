@@ -10,6 +10,7 @@ export default class Procedure {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
 	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
+	protected _self_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
 	protected _bAutoClean:boolean = false;
 
 	protected _procFunc:CHandler = null;
@@ -207,12 +208,13 @@ export default class Procedure {
 		if( !this.isFinished() ) {
 			this._cur_state = PROCEDURE_STATE.STOPED;
 			this.onStop();
-			if(this._partList) {
-				for(var i in this._partList) {
-					this._partList[i].stop();
-				}
-			}
 			if(this._bAutoClean) { this.clean(); }
+		}
+
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].stop();
+			}
 		}
 		
 		if(this._nextNode) { 
@@ -222,27 +224,19 @@ export default class Procedure {
 
 	public recover() : void 
 	{
-		this._cur_state = PROCEDURE_STATE.STOPED;
+		this._cur_state = PROCEDURE_STATE.READY;
+
 		if(this._partList) {
 			for(var i in this._partList) {
 				this._partList[i].recover();
 			}
 		}
+
 		if(this._nextNode) { 
 			this._nextNode.recover(); 
 		}
 	}
 
-
-
-	public getLast() : Procedure 
-	{
-		var last:Procedure = this;
-		while(last._nextNode) {
-			last = last._nextNode;
-		}
-		return last;
-	}
 
 	public isFinished() : boolean 
 	{
@@ -277,6 +271,15 @@ export default class Procedure {
 			} 
 		}
 		return true;
+	}
+
+	public getLast() : Procedure 
+	{
+		var last:Procedure = this;
+		while(last._nextNode) {
+			last = last._nextNode;
+		}
+		return last;
 	}
 
 	public getType() : string 
