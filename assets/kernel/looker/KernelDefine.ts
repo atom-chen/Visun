@@ -63,7 +63,6 @@ export enum PROCEDURE_STATE {
 	RUNNING,
 	SUCC,
 	FAIL,
-	DONE,
 	STOPED
 };
 
