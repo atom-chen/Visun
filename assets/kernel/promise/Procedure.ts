@@ -15,8 +15,6 @@ export default class Procedure {
 	protected _procFunc:CHandler = null;
 	protected _stopFunc:CHandler = null;
 	
-	protected _succNode:Procedure = null;
-	protected _failNode:Procedure = null;
 	protected _nextNode:Procedure = null;
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
@@ -99,42 +97,19 @@ export default class Procedure {
 		return this.then(nextNode);
 	}
 
-	public succThen(succNode:Procedure) : void
-	{
-		this._succNode = succNode;
-	}
-
-	public failThen(failNode:Procedure) : void
-	{
-		this._failNode = failNode;
-	}
-
-
-	public setLogicStrategy(strategy:PROCEDURE_LOGIC) : void
-	{
-		this._logic_strateby = strategy;
-	}
 
 	
-	protected onProc() : void
+	protected onProc(arg?:any) : void
 	{
 		if(this._procFunc) {
 			this._procFunc.call(this);
 		}
 		else {
-			if(this._logic_strateby===PROCEDURE_LOGIC.And){
-				this._cur_state = PROCEDURE_STATE.SUCC;
-			}
-			else if(this._logic_strateby===PROCEDURE_LOGIC.Or){
-				this._cur_state = PROCEDURE_STATE.FAIL;
-			}
-			else {
-				this._cur_state = PROCEDURE_STATE.SUCC;
-			}
+			this._cur_state = PROCEDURE_STATE.SUCC;
 		}
 	}
 
-	public run() : PROCEDURE_STATE 
+	public run(arg?:any) : PROCEDURE_STATE 
 	{
 		if(this._cur_state === PROCEDURE_STATE.READY) {
 			this._cur_state = PROCEDURE_STATE.RUNNING;
@@ -146,10 +121,10 @@ export default class Procedure {
 				}
 			}
 
-			this.onProc();
+			this.onProc(arg);
 			if(this._partList) {
 				for(var i in this._partList) {
-					this._partList[i].onProc();
+					this._partList[i].onProc(arg);
 				}
 			}
 		}
