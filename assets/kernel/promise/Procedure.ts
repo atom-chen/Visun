@@ -17,7 +17,7 @@ export default class Procedure {
 	
 	protected _succNode:Procedure = null;
 	protected _failNode:Procedure = null;
-	protected _alwaysNode:Procedure = null;
+	protected _nextNode:Procedure = null;
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
 
@@ -32,16 +32,6 @@ export default class Procedure {
 		this._name = this._node_type;
 	}
 
-	public setName(name:string)
-	{
-		this._name = name;
-		return this;
-	}
-	public getName() : string
-	{
-		return this._name;
-	}
-
 	public clean() : void 
 	{
 		this._procFunc = null;
@@ -51,8 +41,8 @@ export default class Procedure {
 				this._partList[i].clean();
 			}
 		}
-		if(this._alwaysNode) { 
-			this._alwaysNode.clean(); 
+		if(this._nextNode) { 
+			this._nextNode.clean(); 
 		}
 	}
 
@@ -98,7 +88,7 @@ export default class Procedure {
 	public then(nextNode:Procedure) : Procedure 
 	{
 		var last = this.getLast();
-		last._alwaysNode = nextNode;
+		last._nextNode = nextNode;
 		nextNode._groupNode = last._groupNode;
 		return nextNode;
 	}
@@ -120,13 +110,14 @@ export default class Procedure {
 	}
 
 
-	public setLogicStrategy(strategy:PROCEDURE_LOGIC)
+	public setLogicStrategy(strategy:PROCEDURE_LOGIC) : void
 	{
 		this._logic_strateby = strategy;
 	}
 
 	
-	protected onProc() {
+	protected onProc() : void
+	{
 		if(this._procFunc) {
 			this._procFunc.call(this);
 		}
@@ -171,8 +162,9 @@ export default class Procedure {
 		var bSelfDone = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();
 		if (bSelfDone && bPartsDone) {
-			if(this._alwaysNode && !this._alwaysNode.isDone()) {
-				return this._alwaysNode.run();
+			if(this._nextNode && !this._nextNode.isDone()) {
+				this._nextNode._groupNode = this._groupNode;
+				return this._nextNode.run();
 			}
 
 			if(this._groupNode){
@@ -191,12 +183,11 @@ export default class Procedure {
 		}
 		else if(bSelfDone){
 			cc.log(this.fixedName(), "finished bug pasts is runnig");
-			return PROCEDURE_STATE.RUNNING;
 		}
 		else if(bPartsDone) {
 			cc.log(this.fixedName(), "not finished when pasts done");
-			return PROCEDURE_STATE.RUNNING;
 		}
+		return PROCEDURE_STATE.RUNNING;
 	}
 
 	protected resolve(rlt:PROCEDURE_STATE) : void
@@ -224,7 +215,8 @@ export default class Procedure {
 		this.resolve(PROCEDURE_STATE.SUCC);
 	}
 
-	protected onStop() {
+	protected onStop() : void
+	{
 		if(this._stopFunc){
 			this._stopFunc.call(this);
 		}
@@ -244,8 +236,8 @@ export default class Procedure {
 			}
 		}
 		
-		if(this._alwaysNode) { 
-			this._alwaysNode.stop(); 
+		if(this._nextNode) { 
+			this._nextNode.stop(); 
 		}
 	}
 
@@ -259,8 +251,8 @@ export default class Procedure {
 			}
 		}
 
-		if(this._alwaysNode) { 
-			this._alwaysNode.recover(); 
+		if(this._nextNode) { 
+			this._nextNode.recover(); 
 		}
 	}
 
@@ -322,8 +314,8 @@ export default class Procedure {
 			if(partsRlt !== PROCEDURE_STATE.SUCC){
 				return partsRlt;
 			}
-			if(this._alwaysNode) {
-				let nextRlt = this._alwaysNode.getResult();
+			if(this._nextNode) {
+				let nextRlt = this._nextNode.getResult();
 				if(nextRlt !== PROCEDURE_STATE.SUCC) {
 					return nextRlt;
 				}
@@ -339,8 +331,8 @@ export default class Procedure {
 			if(partsRlt === PROCEDURE_STATE.SUCC){
 				return partsRlt;
 			}
-			if(this._alwaysNode) {
-				let nextRlt = this._alwaysNode.getResult();
+			if(this._nextNode) {
+				let nextRlt = this._nextNode.getResult();
 				if(nextRlt === PROCEDURE_STATE.SUCC) {
 					return nextRlt;
 				}
@@ -375,8 +367,8 @@ export default class Procedure {
 	{
 		if(!this.isSelfDone()) { return false; }
 		if(!this.isPartsDone()) { return false; }
-		if(this._alwaysNode) { 
-			if(!this._alwaysNode.isDone()) { 
+		if(this._nextNode) { 
+			if(!this._nextNode.isDone()) { 
 				return false; 
 			} 
 		}
@@ -388,8 +380,8 @@ export default class Procedure {
 	public getLast() : Procedure 
 	{
 		var last:Procedure = this;
-		while(last._alwaysNode) {
-			last = last._alwaysNode;
+		while(last._nextNode) {
+			last = last._nextNode;
 		}
 		return last;
 	}
@@ -399,11 +391,23 @@ export default class Procedure {
 		return this._node_type;
 	}
 
-	protected fixedName() :string {
+	protected fixedName() :string 
+	{
 		if(this._groupNode)
 			return this._groupNode._name + "." + this._name;
 		else 
 			return "null."+this._name;
+	}
+
+	public setName(name:string) : Procedure
+	{
+		this._name = name;
+		return this;
+	}
+
+	public getName() : string
+	{
+		return this._name;
 	}
 	
 }
