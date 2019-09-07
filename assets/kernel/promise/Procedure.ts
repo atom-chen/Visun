@@ -163,14 +163,14 @@ export default class Procedure {
 			}
 		}
 
-		return this.onPartFinished();
+		return this.checkDone();
 	}
 
-	protected onPartFinished() : PROCEDURE_STATE 
+	protected checkDone() : PROCEDURE_STATE 
 	{
-		var bFinished = this.isSelfDone();
+		var bSelfDone = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();
-		if (bFinished && bPartsDone) {
+		if (bSelfDone && bPartsDone) {
 			if(this._alwaysNode && !this._alwaysNode.isDone()) {
 				return this._alwaysNode.run();
 			}
@@ -178,7 +178,7 @@ export default class Procedure {
 			if(this._groupNode){
 				if(this._groupNode.isSelfDone()&&this._groupNode.isPartsDone()){
 					cc.log("group ", this._groupNode._name, "finished when", this.fixedName(), "finished");
-					return this._groupNode.onPartFinished();
+					return this._groupNode.checkDone();
 				}
 				else{
 					cc.log(this.fixedName(), "finished  but ", this._groupNode._name, "is waiting parts");
@@ -186,14 +186,16 @@ export default class Procedure {
 				}
 			}
 
-			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成");
+			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成", this._cur_state);
 			return this._cur_state;
 		}
-		else if(bFinished){
+		else if(bSelfDone){
 			cc.log(this.fixedName(), "finished bug pasts is runnig");
+			return PROCEDURE_STATE.RUNNING;
 		}
 		else if(bPartsDone) {
 			cc.log(this.fixedName(), "not finished when pasts done");
+			return PROCEDURE_STATE.RUNNING;
 		}
 	}
 
@@ -209,7 +211,7 @@ export default class Procedure {
 		}
 		cc.log("end", this.fixedName());
 
-		this.onPartFinished();
+		this.checkDone();
 	}
 
 	public resolve_fail() : void
@@ -277,17 +279,13 @@ export default class Procedure {
 		}
 	}
 
-	public getResult() : PROCEDURE_STATE
+	public getPartsResult() : PROCEDURE_STATE
 	{
 		if(this._logic_strateby === PROCEDURE_LOGIC.And)
 		{
-			var selfRlt = this.getSelfResult();
-			if(selfRlt!==PROCEDURE_STATE.SUCC){
-				return selfRlt;
-			}
 			if(this._partList) {
 				for(var i in this._partList) {
-					var partRlt = this._partList[i].getSelfResult();
+					var partRlt = this._partList[i].getResult();
 					if(partRlt!==PROCEDURE_STATE.SUCC){
 						return partRlt;
 					}
@@ -297,13 +295,9 @@ export default class Procedure {
 		}
 		else if(this._logic_strateby === PROCEDURE_LOGIC.Or)
 		{
-			var selfRlt = this.getSelfResult();
-			if(selfRlt===PROCEDURE_STATE.SUCC || selfRlt!==PROCEDURE_STATE.FAIL){
-				return selfRlt;
-			}
 			if(this._partList) {
 				for(var i in this._partList) {
-					var partRlt = this._partList[i].getSelfResult();
+					var partRlt = this._partList[i].getResult();
 					if(partRlt===PROCEDURE_STATE.SUCC || partRlt!==PROCEDURE_STATE.FAIL){
 						return partRlt;
 					}
@@ -317,17 +311,45 @@ export default class Procedure {
 		}
 	}
 
-	public checkResult() : PROCEDURE_STATE
+	public getResult() : PROCEDURE_STATE
 	{
-		var last:Procedure = this;
-		while(last) {
-			var myState = last.getResult();
-			if(myState===PROCEDURE_STATE.READY || myState===PROCEDURE_STATE.RUNNING){
-				return myState;
+		if(this._logic_strateby===PROCEDURE_LOGIC.And) {
+			let selfRlt = this.getSelfResult()
+			if(selfRlt !== PROCEDURE_STATE.SUCC){
+				return selfRlt;
 			}
-			last = last._alwaysNode;
+			let partsRlt = this.getPartsResult();
+			if(partsRlt !== PROCEDURE_STATE.SUCC){
+				return partsRlt;
+			}
+			if(this._alwaysNode) {
+				let nextRlt = this._alwaysNode.getResult();
+				if(nextRlt !== PROCEDURE_STATE.SUCC) {
+					return nextRlt;
+				}
+			}
+			return PROCEDURE_STATE.SUCC;
 		}
-		return last._cur_state;
+		else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
+			let selfRlt = this.getSelfResult()
+			if(selfRlt === PROCEDURE_STATE.SUCC){
+				return selfRlt;
+			}
+			let partsRlt = this.getPartsResult();
+			if(partsRlt === PROCEDURE_STATE.SUCC){
+				return partsRlt;
+			}
+			if(this._alwaysNode) {
+				let nextRlt = this._alwaysNode.getResult();
+				if(nextRlt === PROCEDURE_STATE.SUCC) {
+					return nextRlt;
+				}
+			}
+			return PROCEDURE_STATE.FAIL;
+		}
+		else {
+			return this._cur_state;
+		}
 	}
 
 	
