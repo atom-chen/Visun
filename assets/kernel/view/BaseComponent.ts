@@ -33,7 +33,7 @@ export default class BaseComponent extends cc.Component {
         EventCenter.instance().removeByTarget(this);
         TimerManager.removeByTarget(this);
         if(this.m_dtor_listeners){
-            for(var i=1; i<this.m_dtor_listeners.length; i++){
+            for(var i=0; i<this.m_dtor_listeners.length; i++){
                 this.m_dtor_listeners[i].callback.call(this.m_dtor_listeners[i].target, this, this.node);
             }
             this.m_dtor_listeners.length = 0;

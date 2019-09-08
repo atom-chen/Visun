@@ -4,6 +4,8 @@
 import CommonUtils from "../utils/CommonUtils";
 import { LayerDefine } from "../looker/KernelDefine";
 import CoreUIDefine from "../looker/CoreUIDefine";
+import LoadCenter from "../load/LoadCenter";
+import BaseComponent from "./BaseComponent";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
