@@ -44,7 +44,7 @@ export default class LoadCenter {
 			cc.loader["_cache"][res].bk_count = 0;
 		}
 		cc.loader["_cache"][res].bk_count += 1;
-		cc.log("retatinRes ++++", res, cc.loader["_cache"][res].bk_count);
+	//	cc.log("retatinRes ++++", res, cc.loader["_cache"][res].bk_count);
 	}
 
 	releaseRes(res: string) {
@@ -56,7 +56,7 @@ export default class LoadCenter {
 			cc.loader["_cache"][res].bk_count = 0;
 		}
 		cc.loader["_cache"][res].bk_count -= 1;
-		cc.log("releaseRes ----", res, cc.loader["_cache"][res].bk_count);
+	//	cc.log("releaseRes ----", res, cc.loader["_cache"][res].bk_count);
 	}
 
 	retainArrayRes(res: string[]) {
