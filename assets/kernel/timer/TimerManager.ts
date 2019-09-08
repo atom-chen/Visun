@@ -8,29 +8,28 @@ export default class TimerManager {
 	private static autoId:number = 0;
 	private static _instance:TimerManager = null;
 
-	private _timers:BaseTimer[] = [];
+	private static _timers:BaseTimer[] = [];
 //	private static _pool:JTPool<BaseTimer> = JTPool.instance(BaseTimer) as JTPool<BaseTimer>;
 	
 	private constructor() {
 		
 	}
-	
-	public static instance() {
-		if(!TimerManager._instance) { TimerManager._instance = new TimerManager; }
-		return TimerManager._instance;
+
+	public static start(node:cc.Component) {
+		node.schedule(TimerManager.update, 0, cc.macro.REPEAT_FOREVER);
 	}
 
-	private delByIndex(idx:number) {
-		this._timers[idx].stop();
-		this._timers.splice(idx, 1);
+	private static delByIndex(idx:number) {
+		TimerManager._timers[idx].stop();
+		TimerManager._timers.splice(idx, 1);
 	}
 
-	public update(dt:number) {
+	private static update(dt:number) {
 		try{
-			for(var i=0, len=this._timers.length; i<len; i++) {
-				this._timers[i].tick(dt);
-				if(this._timers[i].isStoped()) {
-					this.delByIndex(i);
+			for(var i=0, len=TimerManager._timers.length; i<len; i++) {
+				TimerManager._timers[i].tick(dt);
+				if(TimerManager._timers[i].isStoped()) {
+					TimerManager.delByIndex(i);
 					i--;
 					len--;
 				}
@@ -41,43 +40,43 @@ export default class TimerManager {
 		}
 	}
 
-	public addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
+	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
 	//	var tmr = TimerManager._pool.get();
 		tmr.reset(TimerType.frame, id, interval, looptimes, callback);
-		this._timers.push(tmr);
+		TimerManager._timers.push(tmr);
 		return id;
 	}
 
-	public addSecondTimer(interval:number, looptimes:number, callback:CHandler) {
+	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler) {
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
 	//	var tmr = TimerManager._pool.get();
 		tmr.reset(TimerType.second, id, interval, looptimes, callback);
-		this._timers.push(tmr);
+		TimerManager._timers.push(tmr);
 		return id;
 	}
 
-	public delTimer(id:number) {
+	public static delTimer(id:number) {
 		if(id===null || id===undefined){ return; }
-		for(var i=this._timers.length-1; i>=0; i--) {
-			if(this._timers[i].getId()===id) {
-				this._timers[i].stop();
-			//	TimerManager._pool.put(this._timers[i]);
-				this._timers.splice(i, 1);
+		for(var i=TimerManager._timers.length-1; i>=0; i--) {
+			if(TimerManager._timers[i].getId()===id) {
+				TimerManager._timers[i].stop();
+			//	TimerManager._pool.put(TimerManager._timers[i]);
+				TimerManager._timers.splice(i, 1);
 				break;
 			}
 		}
 	}
 
-	public removeByTarget(target:any) {
-		for(var i=this._timers.length-1; i>=0; i--) {
-			if(this._timers[i].getTarget()===target) {
-				this._timers[i].stop();
-				this._timers.splice(i, 1);
+	public static removeByTarget(target:any) {
+		for(var i=TimerManager._timers.length-1; i>=0; i--) {
+			if(TimerManager._timers[i].getTarget()===target) {
+				TimerManager._timers[i].stop();
+				TimerManager._timers.splice(i, 1);
 			}
 		}
 	}

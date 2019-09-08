@@ -17,7 +17,7 @@ export default class BaseComponent extends cc.Component {
     //放回对象池时回调
     unuse(): void {
         EventCenter.instance().removeByTarget(this);
-        TimerManager.instance().removeByTarget(this);
+        TimerManager.removeByTarget(this);
     }
 
     //从对象池取出时回调
@@ -31,7 +31,7 @@ export default class BaseComponent extends cc.Component {
 
     onDestroy() {
         EventCenter.instance().removeByTarget(this);
-        TimerManager.instance().removeByTarget(this);
+        TimerManager.removeByTarget(this);
         if(this.m_dtor_listeners){
             for(var i=1; i<this.m_dtor_listeners.length; i++){
                 this.m_dtor_listeners[i].callback.call(this.m_dtor_listeners[i].target, this, this.node);

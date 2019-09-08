@@ -36,7 +36,7 @@ export default class LobbyUI extends BaseComponent {
 		this.initNet();
 		//this.testSpine();
 		//this.testWs()
-		TimerManager.instance().addSecondTimer(2, 1, new CHandler(this.testProcedure, this));
+		TimerManager.addSecondTimer(2, 1, new CHandler(this.testProcedure, this));
 
 		var param = { 
 			deviceID : PlatformUtil.getDeviceId(), 
@@ -155,7 +155,7 @@ export default class LobbyUI extends BaseComponent {
 		var node = new Procedure(
 			new CHandler((part?:Procedure)=>{
 				if(duration>0){
-					TimerManager.instance().addSecondTimer(duration, 1, new CHandler(
+					TimerManager.addSecondTimer(duration, 1, new CHandler(
 						function(tmr){ 
 							this.resolve_succ();
 						}, part)

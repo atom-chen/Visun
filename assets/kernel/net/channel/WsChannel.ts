@@ -280,7 +280,7 @@ export default class WsChannel implements IChannel {
 
 	private startHeartBeat() : void
 	{
-		this._heartTmr = TimerManager.instance().addSecondTimer(8, -1, new CHandler(this.sendHeartBeat, this));
+		this._heartTmr = TimerManager.addSecondTimer(8, -1, new CHandler(this.sendHeartBeat, this));
 	}
 
 	private sendHeartBeat() : void
@@ -291,7 +291,7 @@ export default class WsChannel implements IChannel {
 
 	private stopHeartBeat() : void
 	{
-		TimerManager.instance().delTimer(this._heartTmr);
+		TimerManager.delTimer(this._heartTmr);
 	}
 
 
