@@ -99,6 +99,30 @@ export default class LoadCenter {
 		}
 	}
 
+	_depthGC(strs: Array<string>) {
+		var texturesInCache = cc.loader["_cache"];
+		var release_json = [];
+		for (var asset in texturesInCache) {
+			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
+				var is_release = false;
+				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
+					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
+						is_release = true;
+					}
+				}
+				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
+					release_json.push(texturesInCache[asset].url);
+					cc.log(`释放资源:${texturesInCache[asset].url}`);
+					cc.loader.release(texturesInCache[asset].url);
+				}
+			}
+		}
+
+		if (release_json.length > 0) {
+			this._depthGC(release_json);
+		}
+	}
+
 	//------------------------------------------------------------------------------
 
 	// 不会进行引用计数管理
@@ -272,31 +296,6 @@ export default class LoadCenter {
 
 
 	//------------------------------------------------------------------------------
-
-
-	_depthGC(strs: Array<string>) {
-		var texturesInCache = cc.loader["_cache"];
-		var release_json = [];
-		for (var asset in texturesInCache) {
-			if (texturesInCache[asset].dependKeys && texturesInCache[asset].dependKeys.length > 0) {
-				var is_release = false;
-				for (var i = 0; i < texturesInCache[asset].dependKeys.length; i++) {
-					if (strs.indexOf(texturesInCache[asset].dependKeys[i]) !== -1) {
-						is_release = true;
-					}
-				}
-				if (is_release /*&& texturesInCache[asset].bk_count <= 0*/) {
-					release_json.push(texturesInCache[asset].url);
-					cc.log(`释放资源:${texturesInCache[asset].url}`);
-					cc.loader.release(texturesInCache[asset].url);
-				}
-			}
-		}
-
-		if (release_json.length > 0) {
-			this._depthGC(release_json);
-		}
-	}
 
 
 	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
