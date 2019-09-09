@@ -105,7 +105,15 @@ export default class Procedure {
 			this._procFunc.call(this);
 		}
 		else {
-			this._cur_state = PROCEDURE_STATE.SUCC;
+			if(this._logic_strateby===PROCEDURE_LOGIC.And) {
+				this._cur_state = PROCEDURE_STATE.SUCC;
+			}
+			else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
+				this._cur_state = PROCEDURE_STATE.FAIL;
+			}
+			else {
+				this._cur_state = PROCEDURE_STATE.SUCC;
+			}
 		}
 	}
 
@@ -265,7 +273,7 @@ export default class Procedure {
 			if(this._partList) {
 				for(var i in this._partList) {
 					var partRlt = this._partList[i].getResult();
-					if(partRlt===PROCEDURE_STATE.SUCC || partRlt!==PROCEDURE_STATE.FAIL){
+					if(partRlt!==PROCEDURE_STATE.FAIL){
 						return partRlt;
 					}
 				}
@@ -274,7 +282,14 @@ export default class Procedure {
 		}
 		else
 		{
-			return this._cur_state;
+			if(this._partList) {
+				for(var i in this._partList) {
+					if(!this._partList[i].isDone()){
+						return this._partList[i]._cur_state;
+					}
+				}
+			}
+			return PROCEDURE_STATE.SUCC;
 		}
 	}
 
@@ -299,23 +314,30 @@ export default class Procedure {
 		}
 		else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
 			let selfRlt = this.getSelfResult()
-			if(selfRlt === PROCEDURE_STATE.SUCC){
+			if(selfRlt != PROCEDURE_STATE.FAIL){
 				return selfRlt;
 			}
 			let partsRlt = this.getPartsResult();
-			if(partsRlt === PROCEDURE_STATE.SUCC){
+			if(partsRlt != PROCEDURE_STATE.FAIL){
 				return partsRlt;
 			}
 			if(this._nextNode) {
 				let nextRlt = this._nextNode.getResult();
-				if(nextRlt === PROCEDURE_STATE.SUCC) {
+				if(nextRlt != PROCEDURE_STATE.FAIL) {
 					return nextRlt;
 				}
 			}
 			return PROCEDURE_STATE.FAIL;
 		}
 		else {
-			return this._cur_state;
+			if(!this.isSelfDone()) { return this._cur_state; }
+			if(!this.isPartsDone()) { return PROCEDURE_STATE.RUNNING; }
+			if(this._nextNode) { 
+				if(!this._nextNode.isDone()) { 
+					return PROCEDURE_STATE.RUNNING; 
+				} 
+			}
+			return PROCEDURE_STATE.SUCC;
 		}
 	}
 
