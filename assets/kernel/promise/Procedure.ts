@@ -99,7 +99,7 @@ export default class Procedure {
 
 
 	
-	protected onProc(arg?:any) : void
+	protected onProc() : void
 	{
 		if(this._procFunc) {
 			this._procFunc.call(this);
@@ -117,7 +117,7 @@ export default class Procedure {
 		}
 	}
 
-	public run(arg?:any) : PROCEDURE_STATE 
+	public run() : PROCEDURE_STATE 
 	{
 		if(this._cur_state === PROCEDURE_STATE.READY) {
 			this._cur_state = PROCEDURE_STATE.RUNNING;
@@ -129,10 +129,10 @@ export default class Procedure {
 				}
 			}
 
-			this.onProc(arg);
+			this.onProc();
 			if(this._partList) {
 				for(var i in this._partList) {
-					this._partList[i].onProc(arg);
+					this._partList[i].onProc();
 				}
 			}
 		}

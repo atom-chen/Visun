@@ -34,8 +34,8 @@ export default class LobbyUI extends BaseComponent {
 
 		this.initUiEvents();
 		this.initNet();
-		//this.testSpine();
-		//this.testWs()
+	//	this.testSpine();
+	//	this.testWs()
 		TimerManager.addSecondTimer(2, 1, new CHandler(this.testProcedure, this));
 
 		var param = { 
@@ -134,10 +134,11 @@ export default class LobbyUI extends BaseComponent {
 
 
 	private testSpine() {
+		cc.view.enableAntiAlias(true);
 		var self = this;
 
 		//加载spine
-		cc.loader.loadRes("common/spines/raptor.json", sp.SkeletonData, 
+		cc.loader.loadRes("common/spines/bairenniuniu_kaishixiazhu.json", sp.SkeletonData, 
 		function(err, resc){
 			if( err ) { cc.log( '载入spine失败:' + err ); return; }
 			//var obj = cc.instantiate(resc);
@@ -145,8 +146,8 @@ export default class LobbyUI extends BaseComponent {
 			var sk = obj.addComponent(sp.Skeleton);
 			sk.skeletonData = resc;
 			self.node.addChild(obj, 10);
-			obj.scale = 0.2;
-			sk.setAnimation(1, "Jump", true);
+			//obj.scale = 0.2;
+			sk.setAnimation(1, "animation", true);
 		});
 	}
 
