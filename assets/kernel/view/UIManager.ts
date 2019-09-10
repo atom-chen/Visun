@@ -6,6 +6,8 @@ import { LayerDefine } from "../looker/KernelDefine";
 import CoreUIDefine from "../looker/CoreUIDefine";
 import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
+import TimerManager from "../timer/TimerManager";
+import CHandler from "../basic/CHandler";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -74,6 +76,27 @@ export default class UIManager {
 
 			if(bModal) { 
 				CommonUtils.setModal(obj, bCloseWhenClickMask); 
+			}
+
+			if(layerId!==LayerDefine.Panel) {
+				if(CommonUtils.hasEditbox(obj)) {
+					cc.log("----- yes has editbox");
+				}
+				else {
+					let key = cc.loader["_getReferenceKey"](loadedResource);
+					LoadCenter.instance().retatinRes(key);
+					LoadCenter.instance().retainNodeRes(obj);
+					LoadCenter.instance().releaseRes(key);
+					LoadCenter.instance().releaseNodeRes(obj);
+					var baseComp = obj.getComponent(BaseComponent);
+					if(baseComp) {
+						baseComp.listenDestory((comp)=>{
+							TimerManager.addFrameTimer(2,1, new CHandler(()=>{
+								LoadCenter.instance().gc();
+							}, null));
+						})
+					}
+				}
 			}
 
 			cvs.addChild(obj, layerId);

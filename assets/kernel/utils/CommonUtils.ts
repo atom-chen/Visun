@@ -14,6 +14,19 @@ export default class CommonUtils {
 		}
 	}
 
+	public static hasEditbox(root:any) 
+	{
+		if(!root || !root.children) { return false; }
+		var childlist = root.children;
+		for (var i = 0; i < childlist.length; i++){
+			if(childlist[i].getComponent(cc.EditBox)) {
+				return true;
+			}
+			return CommonUtils.hasEditbox(childlist[i]);
+		}
+		return false;
+	}
+
 	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any) {
 		target.on("click", callback, thisObj);
 	}

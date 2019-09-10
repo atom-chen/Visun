@@ -416,6 +416,9 @@ export default class LoadCenter {
 		if (editBox && editBox.backgroundImage) {
 			this._retatinStaticRes(editBox.backgroundImage["_textureFilename"], tag);
 		}
+		// if(editBox && editBox.background && editBox.background.spriteFrame) {
+		// 	this._retatinStaticRes(editBox.background.spriteFrame["_textureFilename"], tag);
+		// }
 	
 		// Mask
 		let mask = node.getComponent(cc.Mask);
