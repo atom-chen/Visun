@@ -4,9 +4,10 @@
 import CHandler from "../basic/CHandler";
 import PlayUnit from "./PlayUnit";
 import { PROCEDURE_STATE, PROCEDURE_LOGIC } from "../looker/KernelDefine";
+import BahaviorBase from "./BehaviorBase";
 
 
-export default class Procedure {
+export default class Procedure extends BahaviorBase {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
 	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
@@ -19,12 +20,11 @@ export default class Procedure {
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
 
-	protected _logic_strateby:PROCEDURE_LOGIC = PROCEDURE_LOGIC.Parallel;
-
 
 
 	public constructor(procFunc:CHandler=null, stopFunc:CHandler=null) 
 	{
+		super();
 		this._procFunc = procFunc;
 		this._stopFunc = stopFunc;
 		this._name = this._node_type;
@@ -99,25 +99,17 @@ export default class Procedure {
 
 
 	
-	protected onProc() : void
+	protected Proc() : void
 	{
 		if(this._procFunc) {
 			this._procFunc.call(this);
 		}
 		else {
-			if(this._logic_strateby===PROCEDURE_LOGIC.And) {
-				this._cur_state = PROCEDURE_STATE.SUCC;
-			}
-			else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
-				this._cur_state = PROCEDURE_STATE.FAIL;
-			}
-			else {
-				this._cur_state = PROCEDURE_STATE.SUCC;
-			}
+			this._cur_state = PROCEDURE_STATE.SUCC;
 		}
 	}
 
-	public run() : PROCEDURE_STATE 
+	public run(arg?:any) : PROCEDURE_STATE 
 	{
 		if(this._cur_state === PROCEDURE_STATE.READY) {
 			this._cur_state = PROCEDURE_STATE.RUNNING;
@@ -129,10 +121,10 @@ export default class Procedure {
 				}
 			}
 
-			this.onProc();
+			this.Proc();
 			if(this._partList) {
 				for(var i in this._partList) {
-					this._partList[i].onProc();
+					this._partList[i].Proc();
 				}
 			}
 		}
@@ -256,31 +248,31 @@ export default class Procedure {
 
 	public getPartsResult() : PROCEDURE_STATE
 	{
-		if(this._logic_strateby === PROCEDURE_LOGIC.And)
-		{
-			if(this._partList) {
-				for(var i in this._partList) {
-					var partRlt = this._partList[i].getResult();
-					if(partRlt!==PROCEDURE_STATE.SUCC){
-						return partRlt;
-					}
-				}
-			}
-			return PROCEDURE_STATE.SUCC;
-		}
-		else if(this._logic_strateby === PROCEDURE_LOGIC.Or)
-		{
-			if(this._partList) {
-				for(var i in this._partList) {
-					var partRlt = this._partList[i].getResult();
-					if(partRlt!==PROCEDURE_STATE.FAIL){
-						return partRlt;
-					}
-				}
-			}
-			return PROCEDURE_STATE.FAIL;
-		}
-		else
+		// if(this._logic_strateby === PROCEDURE_LOGIC.And)
+		// {
+		// 	if(this._partList) {
+		// 		for(var i in this._partList) {
+		// 			var partRlt = this._partList[i].getResult();
+		// 			if(partRlt!==PROCEDURE_STATE.SUCC){
+		// 				return partRlt;
+		// 			}
+		// 		}
+		// 	}
+		// 	return PROCEDURE_STATE.SUCC;
+		// }
+		// else if(this._logic_strateby === PROCEDURE_LOGIC.Or)
+		// {
+		// 	if(this._partList) {
+		// 		for(var i in this._partList) {
+		// 			var partRlt = this._partList[i].getResult();
+		// 			if(partRlt!==PROCEDURE_STATE.FAIL){
+		// 				return partRlt;
+		// 			}
+		// 		}
+		// 	}
+		// 	return PROCEDURE_STATE.FAIL;
+		// }
+		// else
 		{
 			if(this._partList) {
 				for(var i in this._partList) {
@@ -295,41 +287,42 @@ export default class Procedure {
 
 	public getResult() : PROCEDURE_STATE
 	{
-		if(this._logic_strateby===PROCEDURE_LOGIC.And) {
-			let selfRlt = this.getSelfResult()
-			if(selfRlt !== PROCEDURE_STATE.SUCC){
-				return selfRlt;
-			}
-			let partsRlt = this.getPartsResult();
-			if(partsRlt !== PROCEDURE_STATE.SUCC){
-				return partsRlt;
-			}
-			if(this._nextNode) {
-				let nextRlt = this._nextNode.getResult();
-				if(nextRlt !== PROCEDURE_STATE.SUCC) {
-					return nextRlt;
-				}
-			}
-			return PROCEDURE_STATE.SUCC;
-		}
-		else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
-			let selfRlt = this.getSelfResult()
-			if(selfRlt != PROCEDURE_STATE.FAIL){
-				return selfRlt;
-			}
-			let partsRlt = this.getPartsResult();
-			if(partsRlt != PROCEDURE_STATE.FAIL){
-				return partsRlt;
-			}
-			if(this._nextNode) {
-				let nextRlt = this._nextNode.getResult();
-				if(nextRlt != PROCEDURE_STATE.FAIL) {
-					return nextRlt;
-				}
-			}
-			return PROCEDURE_STATE.FAIL;
-		}
-		else {
+		// if(this._logic_strateby===PROCEDURE_LOGIC.And) {
+		// 	let selfRlt = this.getSelfResult()
+		// 	if(selfRlt !== PROCEDURE_STATE.SUCC){
+		// 		return selfRlt;
+		// 	}
+		// 	let partsRlt = this.getPartsResult();
+		// 	if(partsRlt !== PROCEDURE_STATE.SUCC){
+		// 		return partsRlt;
+		// 	}
+		// 	if(this._nextNode) {
+		// 		let nextRlt = this._nextNode.getResult();
+		// 		if(nextRlt !== PROCEDURE_STATE.SUCC) {
+		// 			return nextRlt;
+		// 		}
+		// 	}
+		// 	return PROCEDURE_STATE.SUCC;
+		// }
+		// else if(this._logic_strateby===PROCEDURE_LOGIC.Or) {
+		// 	let selfRlt = this.getSelfResult()
+		// 	if(selfRlt != PROCEDURE_STATE.FAIL){
+		// 		return selfRlt;
+		// 	}
+		// 	let partsRlt = this.getPartsResult();
+		// 	if(partsRlt != PROCEDURE_STATE.FAIL){
+		// 		return partsRlt;
+		// 	}
+		// 	if(this._nextNode) {
+		// 		let nextRlt = this._nextNode.getResult();
+		// 		if(nextRlt != PROCEDURE_STATE.FAIL) {
+		// 			return nextRlt;
+		// 		}
+		// 	}
+		// 	return PROCEDURE_STATE.FAIL;
+		// }
+		// else 
+		{
 			if(!this.isSelfDone()) { return this._cur_state; }
 			if(!this.isPartsDone()) { return PROCEDURE_STATE.RUNNING; }
 			if(this._nextNode) { 
