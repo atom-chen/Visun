@@ -568,9 +568,15 @@ export default class LoadCenter {
 
 		if (num > 0) {
 			this.retatinRes(editBox.backgroundImage["_textureFilename"]);
+			// if(editBox && editBox.background && editBox.background.spriteFrame) {
+			// 	this.retatinRes(editBox.background.spriteFrame["_textureFilename"]);
+			// }
 			return;
 		}
 		this.releaseRes(editBox.backgroundImage["_textureFilename"]);
+		// if(editBox && editBox.background && editBox.background.spriteFrame) {
+		// 	this.releaseRes(editBox.background.spriteFrame["_textureFilename"]);
+		// }
 	}
 
 	_parserComponentMask(node: cc.Node, num: number) {
