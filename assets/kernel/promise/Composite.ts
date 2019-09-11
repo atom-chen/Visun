@@ -1,7 +1,7 @@
-import BranchNode from "./BranchNode";
+import BehaviorNode from "./BehaviorNode";
 
 // 复合节点基类
-export default abstract class Composite extends BranchNode {
+export default abstract class Composite extends BehaviorNode {
 
 	public constructor() {
 		super();

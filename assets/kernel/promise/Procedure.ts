@@ -2,12 +2,11 @@
 // 仿js promise，将过程组织成树形结构，自根往叶播放
 //---------------------------------
 import CHandler from "../basic/CHandler";
-import PlayUnit from "./PlayUnit";
 import { PROCEDURE_STATE, PROCEDURE_LOGIC } from "../looker/KernelDefine";
-import BahaviorBase from "./BehaviorBase";
+import BehaviorBase from "./BehaviorBase";
 
 
-export default class Procedure extends BahaviorBase {
+export default class Procedure extends BehaviorBase {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
 	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
@@ -58,13 +57,6 @@ export default class Procedure extends BahaviorBase {
 		return this;
 	}
 
-	public setPlayUnit(playUnit:PlayUnit) : Procedure 
-	{
-		this._procFunc = new CHandler(playUnit.play, playUnit);
-		this._stopFunc = new CHandler(playUnit.stop, playUnit);
-		return this;
-	}
-
 
 
 	public addPart(part:Procedure) : Procedure 
@@ -98,140 +90,42 @@ export default class Procedure extends BahaviorBase {
 	}
 
 
-	
-	protected Proc() : void
+
+	public getLast() : Procedure 
 	{
-		if(this._procFunc) {
-			this._procFunc.call(this);
+		var last:Procedure = this;
+		while(last._nextNode) {
+			last = last._nextNode;
 		}
-		else {
-			this._cur_state = PROCEDURE_STATE.SUCC;
-		}
+		return last;
 	}
 
-	public run(arg?:any) : PROCEDURE_STATE 
+	public getType() : string 
 	{
-		if(this._cur_state === PROCEDURE_STATE.READY) {
-			this._cur_state = PROCEDURE_STATE.RUNNING;
-			cc.log("begin", this.fixedName());
-			if(this._partList) {
-				for(var i in this._partList) {
-					this._partList[i]._cur_state = PROCEDURE_STATE.RUNNING;
-					cc.log("begin", this._partList[i].fixedName());
-				}
-			}
-
-			this.Proc();
-			if(this._partList) {
-				for(var i in this._partList) {
-					this._partList[i].Proc();
-				}
-			}
-		}
-
-		return this.checkDone();
+		return this._node_type;
 	}
 
-	protected checkDone() : PROCEDURE_STATE 
+	protected fixedName() :string 
 	{
-		var bSelfDone = this.isSelfDone();
-		var bPartsDone = this.isPartsDone();
-		if (bSelfDone && bPartsDone) {
-			if(this._nextNode && !this._nextNode.isDone()) {
-				this._nextNode._groupNode = this._groupNode;
-				return this._nextNode.run();
-			}
-
-			if(this._groupNode){
-				if(this._groupNode.isSelfDone()&&this._groupNode.isPartsDone()){
-					cc.log("group ", this._groupNode._name, "finished when", this.fixedName(), "finished");
-					return this._groupNode.checkDone();
-				}
-				else{
-					cc.log(this.fixedName(), "finished  but ", this._groupNode._name, "is waiting parts");
-					return this._groupNode.run();
-				}
-			}
-
-			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成", this._cur_state);
-			return this._cur_state;
-		}
-		else if(bSelfDone){
-			cc.log(this.fixedName(), "finished bug pasts is runnig");
-		}
-		else if(bPartsDone) {
-			cc.log(this.fixedName(), "not finished when pasts done");
-		}
-		return PROCEDURE_STATE.RUNNING;
+		if(this._groupNode)
+			return this._groupNode._name + "." + this._name;
+		else 
+			return "null."+this._name;
 	}
 
-	protected resolve(rlt:PROCEDURE_STATE) : void
+	public setName(name:string) : Procedure
 	{
-		if(this.isSelfDone()) { return; }
-
-		this._cur_state = rlt;
-
-		if(this._bAutoClean) { 
-			this._procFunc = null;
-			this._stopFunc = null;
-		}
-		cc.log("end", this.fixedName());
-
-		this.checkDone();
+		this._name = name;
+		return this;
 	}
 
-	public resolve_fail() : void
+	public getName() : string
 	{
-		this.resolve(PROCEDURE_STATE.FAIL);
+		return this._name;
 	}
 
-	public resolve_succ() : void 
-	{
-		this.resolve(PROCEDURE_STATE.SUCC);
-	}
-
-	protected onStop() : void
-	{
-		if(this._stopFunc){
-			this._stopFunc.call(this);
-		}
-	}
-
-	public stop() : void 
-	{
-		if( !this.isSelfDone() ) {
-			this._cur_state = PROCEDURE_STATE.STOPED;
-			this.onStop();
-			if(this._bAutoClean) { this.clean(); }
-		}
-
-		if(this._partList) {
-			for(var i in this._partList) {
-				this._partList[i].stop();
-			}
-		}
-		
-		if(this._nextNode) { 
-			this._nextNode.stop(); 
-		}
-	}
-
-	public recover() : void 
-	{
-		this._cur_state = PROCEDURE_STATE.READY;
-
-		if(this._partList) {
-			for(var i in this._partList) {
-				this._partList[i].recover();
-			}
-		}
-
-		if(this._nextNode) { 
-			this._nextNode.recover(); 
-		}
-	}
-
-
+	//----------------------------------------------------------------------------
+	//----------------------------------------------------------------------------
 
 	public getSelfResult() : PROCEDURE_STATE
 	{
@@ -334,8 +228,6 @@ export default class Procedure extends BahaviorBase {
 		}
 	}
 
-	
-
 	public isSelfDone() : boolean 
 	{
 		return this._cur_state===PROCEDURE_STATE.SUCC || this._cur_state===PROCEDURE_STATE.FAIL || this._cur_state===PROCEDURE_STATE.STOPED;
@@ -365,39 +257,145 @@ export default class Procedure extends BahaviorBase {
 		return true;
 	}
 
-
-
-	public getLast() : Procedure 
+	//@overrided
+	protected Proc() : void
 	{
-		var last:Procedure = this;
-		while(last._nextNode) {
-			last = last._nextNode;
+		if(this._procFunc) {
+			this._procFunc.call(this);
 		}
-		return last;
+		else {
+			this._cur_state = PROCEDURE_STATE.SUCC;
+		}
 	}
 
-	public getType() : string 
+	//@overrided
+	public run(arg?:any) : PROCEDURE_STATE 
 	{
-		return this._node_type;
+		if(this._cur_state === PROCEDURE_STATE.READY) {
+			this._cur_state = PROCEDURE_STATE.RUNNING;
+			cc.log("begin", this.fixedName());
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i]._cur_state = PROCEDURE_STATE.RUNNING;
+					cc.log("begin", this._partList[i].fixedName());
+				}
+			}
+
+			this.Proc();
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i].Proc();
+				}
+			}
+		}
+
+		return this.checkDone();
 	}
 
-	protected fixedName() :string 
+	//@overrided
+	protected checkDone() : PROCEDURE_STATE 
 	{
-		if(this._groupNode)
-			return this._groupNode._name + "." + this._name;
-		else 
-			return "null."+this._name;
+		var bSelfDone = this.isSelfDone();
+		var bPartsDone = this.isPartsDone();
+		if (bSelfDone && bPartsDone) {
+			if(this._nextNode && !this._nextNode.isDone()) {
+				this._nextNode._groupNode = this._groupNode;
+				return this._nextNode.run();
+			}
+
+			if(this._groupNode){
+				if(this._groupNode.isSelfDone()&&this._groupNode.isPartsDone()){
+					cc.log("group ", this._groupNode.fixedName(), "finished when", this.fixedName(), "finished");
+					return this._groupNode.checkDone();
+				}
+				else{
+					cc.log(this.fixedName(), "finished  but ", this._groupNode.fixedName(), "is waiting parts");
+					return this._groupNode.run();
+				}
+			}
+
+			cc.log(this.fixedName(), "执行完成，整个Procedure执行完成", this._cur_state);
+			return this._cur_state;
+		}
+		else if(bSelfDone){
+			cc.log(this.fixedName(), "finished bug pasts is runnig");
+		}
+		else if(bPartsDone) {
+			cc.log(this.fixedName(), "not finished when pasts done");
+		}
+		return PROCEDURE_STATE.RUNNING;
 	}
 
-	public setName(name:string) : Procedure
+	//@overrided
+	protected resolve(rlt:PROCEDURE_STATE) : void
 	{
-		this._name = name;
-		return this;
+		if(this.isSelfDone()) { return; }
+
+		this._cur_state = rlt;
+
+		if(this._bAutoClean) { 
+			this._procFunc = null;
+			this._stopFunc = null;
+		}
+		cc.log("end", this.fixedName());
+
+		this.checkDone();
 	}
 
-	public getName() : string
+	//@overrided
+	public resolve_fail() : void
 	{
-		return this._name;
+		this.resolve(PROCEDURE_STATE.FAIL);
+	}
+
+	//@overrided
+	public resolve_succ() : void 
+	{
+		this.resolve(PROCEDURE_STATE.SUCC);
+	}
+
+	//@overrided
+	protected onStop() : void
+	{
+		if(this._stopFunc){
+			this._stopFunc.call(this);
+		}
+	}
+
+	//@overrided
+	public stop() : void 
+	{
+		if( !this.isSelfDone() ) {
+			this._cur_state = PROCEDURE_STATE.STOPED;
+			this.onStop();
+			if(this._bAutoClean) { this.clean(); }
+		}
+
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].stop();
+			}
+		}
+		
+		if(this._nextNode) { 
+			this._nextNode.stop(); 
+		}
+	}
+
+	//@overrided
+	public recover() : void 
+	{
+		this._cur_state = PROCEDURE_STATE.READY;
+
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].recover();
+			}
+		}
+
+		if(this._nextNode) { 
+			this._nextNode.recover(); 
+		}
 	}
 	
 }
