@@ -1,11 +1,11 @@
+//---------------------------------
+// 永驻节点
+//---------------------------------
 import EventCenter from "../../kernel/event/EventCenter";
 import KernelEvent from "../../kernel/looker/KernelEvent";
 import TimerManager from "../../kernel/timer/TimerManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 
-//---------------------------------
-// 永驻节点
-//---------------------------------
 
 const {ccclass, property} = cc._decorator;
 

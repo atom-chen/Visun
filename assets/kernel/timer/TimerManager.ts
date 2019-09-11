@@ -6,8 +6,7 @@ import CHandler from "../basic/CHandler";
 export default class TimerManager {
 	
 	private static autoId:number = 0;
-	private static _instance:TimerManager = null;
-
+	private static s_updating:boolean = false;
 	private static _timers:BaseTimer[] = [];
 //	private static _pool:JTPool<BaseTimer> = JTPool.instance(BaseTimer) as JTPool<BaseTimer>;
 	
@@ -25,9 +24,17 @@ export default class TimerManager {
 	}
 
 	private static update(dt:number) {
+		TimerManager.s_updating = true;
 		try{
 			for(var i=0, len=TimerManager._timers.length; i<len; i++) {
-				TimerManager._timers[i].tick(dt);
+				try{
+					TimerManager._timers[i].tick(dt);
+				}
+				catch(err) {
+					TimerManager._timers[i].stop();
+					cc.log(err);
+				}
+
 				if(TimerManager._timers[i].isStoped()) {
 					TimerManager.delByIndex(i);
 					i--;
@@ -38,6 +45,7 @@ export default class TimerManager {
 		catch(err) {
 			cc.log(err)
 		}
+		TimerManager.s_updating = false;
 	}
 
 	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
@@ -66,7 +74,9 @@ export default class TimerManager {
 			if(TimerManager._timers[i].getId()===id) {
 				TimerManager._timers[i].stop();
 			//	TimerManager._pool.put(TimerManager._timers[i]);
-				TimerManager._timers.splice(i, 1);
+				if(!TimerManager.s_updating) {
+					TimerManager._timers.splice(i, 1);
+				}
 				break;
 			}
 		}
