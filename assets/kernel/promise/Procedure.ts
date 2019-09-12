@@ -3,7 +3,6 @@
 //---------------------------------
 import CHandler from "../basic/CHandler";
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
-import BehaviorBase from "./BehaviorBase";
 
 
 export default class Procedure {
@@ -112,7 +111,7 @@ export default class Procedure {
 		return this._node_type;
 	}
 
-	protected fixedName() :string 
+	public fixedName() :string 
 	{
 		if(this._groupNode)
 			return this._groupNode._name + "." + this._name;
@@ -131,12 +130,22 @@ export default class Procedure {
 		return this._name;
 	}
 
+	public get groupNode() : Procedure
+	{
+		return this._groupNode;
+	}
+
+	public set groupNode(v:Procedure)
+	{
+		this._groupNode = v;
+	}
+
 	//----------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
 
 
 	//@overrided
-	protected Proc() : void
+	public Proc() : void
 	{
 		if(this._procFunc) {
 			this._procFunc.call(this);
@@ -171,7 +180,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	protected checkDone() : BEHAVIOR_STATE 
+	public checkDone() : BEHAVIOR_STATE 
 	{
 		var bSelfDone = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();

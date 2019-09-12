@@ -1,16 +1,17 @@
-import BehaviorBase from "./BehaviorBase";
+import Procedure from "./Procedure";
+
 
 export default class VContext {
 
-	protected _root_node:BehaviorBase = null;
+	protected _root_node:Procedure = null;
 	protected _tmp_data:{[key:string]:any;} = {};
 
-	public setRootBehavior(root:BehaviorBase)
+	public setRootBehavior(root:Procedure)
 	{
 		this._root_node = root;
 	}
 
-	public getRootBehavior() : BehaviorBase
+	public getRootBehavior() : Procedure
 	{
 		return this._root_node;
 	}

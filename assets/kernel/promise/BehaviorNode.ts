@@ -1,17 +1,17 @@
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
-import BehaviorBase from "./BehaviorBase";
+import Procedure from "./Procedure";
 
-export default class BehaviorNode extends BehaviorBase {
-	protected _succNode:BehaviorBase = null;
-	protected _failNode:BehaviorBase = null;
+export default class BehaviorNode extends Procedure {
+	protected _succNode:Procedure = null;
+	protected _failNode:Procedure = null;
 
 	
-	public succThen(succNode:BehaviorBase) : void
+	public succThen(succNode:Procedure) : void
 	{
 		this._succNode = succNode;
 	}
 
-	public failThen(failNode:BehaviorBase) : void
+	public failThen(failNode:Procedure) : void
 	{
 		this._failNode = failNode;
 	}

@@ -1,4 +1,3 @@
-import BehaviorBase from "./BehaviorBase";
 import BehaviorNode from "./BehaviorNode";
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
 
