@@ -9,13 +9,14 @@ import BehaviorBase from "./BehaviorBase";
 export default class Procedure extends BehaviorBase {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
-	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
+//	protected _cur_state:PROCEDURE_STATE = PROCEDURE_STATE.READY;
 	protected _bAutoClean:boolean = false;
 
 	protected _procFunc:CHandler = null;
 	protected _stopFunc:CHandler = null;
 	
 	protected _nextNode:Procedure = null;
+	
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
 
@@ -127,6 +128,7 @@ export default class Procedure extends BehaviorBase {
 	//----------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
 
+	//@overrided
 	public getSelfResult() : PROCEDURE_STATE
 	{
 		if(this._cur_state===PROCEDURE_STATE.SUCC){
@@ -140,6 +142,7 @@ export default class Procedure extends BehaviorBase {
 		}
 	}
 
+	//@overrided
 	public getPartsResult() : PROCEDURE_STATE
 	{
 		// if(this._logic_strateby === PROCEDURE_LOGIC.And)
@@ -179,6 +182,7 @@ export default class Procedure extends BehaviorBase {
 		}
 	}
 
+	//@overrided
 	public getResult() : PROCEDURE_STATE
 	{
 		// if(this._logic_strateby===PROCEDURE_LOGIC.And) {
@@ -228,11 +232,13 @@ export default class Procedure extends BehaviorBase {
 		}
 	}
 
+	//@overrided
 	public isSelfDone() : boolean 
 	{
 		return this._cur_state===PROCEDURE_STATE.SUCC || this._cur_state===PROCEDURE_STATE.FAIL || this._cur_state===PROCEDURE_STATE.STOPED;
 	}
 
+	//@overrided
 	public isPartsDone() : boolean 
 	{
 		if(this._partList) {
@@ -245,6 +251,7 @@ export default class Procedure extends BehaviorBase {
 		return true;
 	}
 	
+	//@overrided
 	public isDone() : boolean 
 	{
 		if(!this.isSelfDone()) { return false; }
