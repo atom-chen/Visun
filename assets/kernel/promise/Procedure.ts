@@ -278,10 +278,7 @@ export default class Procedure {
 	//@overrided
 	public getSelfResult() : BEHAVIOR_STATE
 	{
-		if(this._cur_state===BEHAVIOR_STATE.SUCC){
-			return BEHAVIOR_STATE.SUCC;
-		}
-		else if(this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED){
+		if(this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED){
 			return BEHAVIOR_STATE.FAIL;
 		}
 		else {
