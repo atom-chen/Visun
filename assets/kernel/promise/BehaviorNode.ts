@@ -1,35 +1,150 @@
-import Procedure from "./Procedure";
-import { PROCEDURE_STATE, PROCEDURE_LOGIC } from "../looker/KernelDefine";
+import { BEHAVIOR_STATE } from "../looker/KernelDefine";
 import BehaviorBase from "./BehaviorBase";
 
 export default class BehaviorNode extends BehaviorBase {
-	protected _succNode:Procedure = null;
-	protected _failNode:Procedure = null;
+	protected _succNode:BehaviorBase = null;
+	protected _failNode:BehaviorBase = null;
 
-	protected _groupNode:BehaviorBase = null;
-	protected _partList:Array<BehaviorBase> = null;
-
-	public succThen(succNode:Procedure) : void
+	
+	public succThen(succNode:BehaviorBase) : void
 	{
 		this._succNode = succNode;
 	}
 
-	public failThen(failNode:Procedure) : void
+	public failThen(failNode:BehaviorBase) : void
 	{
 		this._failNode = failNode;
 	}
 
+
 	//----------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
 
+
 	//@overrided
-	public getSelfResult() : PROCEDURE_STATE
-	{
-		if(this._cur_state===PROCEDURE_STATE.SUCC){
-			return PROCEDURE_STATE.SUCC;
+	public Proc(): void {
+		throw new Error("Method not implemented.");
+	}
+
+	//@overrided
+	public run(arg?: any): BEHAVIOR_STATE {
+		if(this._cur_state === BEHAVIOR_STATE.READY) {
+			this._cur_state = BEHAVIOR_STATE.RUNNING;
+			cc.log("begin", this.fixedName());
+			this.Proc();
 		}
-		else if(this._cur_state===PROCEDURE_STATE.FAIL || this._cur_state===PROCEDURE_STATE.STOPED){
-			return PROCEDURE_STATE.FAIL;
+
+		return this.checkDone();
+	}
+
+	//@overrided
+	public checkDone() : BEHAVIOR_STATE 
+	{
+		var selfRlt = this.getSelfResult();
+		if (selfRlt===BEHAVIOR_STATE.SUCC || selfRlt===BEHAVIOR_STATE.FAIL) {
+			if(selfRlt===BEHAVIOR_STATE.SUCC) {
+				if(this._succNode && !this._succNode.isDone()) {
+					this._succNode.groupNode = this._groupNode;
+					return this._succNode.run();
+				}
+			}
+			else if(selfRlt===BEHAVIOR_STATE.FAIL) {
+				if(this._failNode && !this._failNode.isDone()) {
+					this._failNode.groupNode = this._groupNode;
+					return this._failNode.run();
+				}
+			}
+
+			if(this._groupNode){
+				if(this._groupNode.isSelfDone()&&this._groupNode.isPartsDone()){
+					cc.log("group ", this._groupNode.fixedName(), "finished when", this.fixedName(), "finished");
+					return this._groupNode.checkDone();
+				}
+				else{
+					cc.log(this.fixedName(), "finished  but ", this._groupNode.fixedName(), "is waiting parts");
+					return this._groupNode.run();
+				}
+			}
+
+			cc.log(this.fixedName(), "执行完成，整个Behavior执行完成", this._cur_state);
+			return this._cur_state;
+		}
+		return BEHAVIOR_STATE.RUNNING;
+	}
+
+	//@overrided
+	public resolve(rlt: BEHAVIOR_STATE): void {
+		if(this.isSelfDone()) { return; }
+
+		this._cur_state = rlt;
+
+		cc.log("end", this.fixedName());
+
+		this.checkDone();
+	}
+
+	//@overrided
+	public resolve_succ(): void {
+		this.resolve(BEHAVIOR_STATE.SUCC);
+	}
+
+	//@overrided
+	public resolve_fail(): void {
+		this.resolve(BEHAVIOR_STATE.FAIL);
+	}
+
+	//@overrided
+	public onStop(): void {
+		throw new Error("Method not implemented.");
+	}
+
+	//@overrided
+	public stop(): void {
+		if( !this.isSelfDone() ) {
+			this._cur_state = BEHAVIOR_STATE.STOPED;
+			this.onStop();
+		}
+
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].stop();
+			}
+		}
+		
+		if(this._succNode) { 
+			this._succNode.stop(); 
+		}
+		if(this._failNode) { 
+			this._failNode.stop(); 
+		}
+	}
+
+	//@overrided
+	public recover(): void {
+		this._cur_state = BEHAVIOR_STATE.READY;
+
+		if(this._partList) {
+			for(var i in this._partList) {
+				this._partList[i].recover();
+			}
+		}
+
+		if(this._succNode) { 
+			this._succNode.recover(); 
+		}
+		if(this._failNode) { 
+			this._failNode.recover(); 
+		}
+	}
+
+	//@overrided
+	public getSelfResult() : BEHAVIOR_STATE
+	{
+		if(this._cur_state===BEHAVIOR_STATE.SUCC){
+			return BEHAVIOR_STATE.SUCC;
+		}
+		else if(this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED){
+			return BEHAVIOR_STATE.FAIL;
 		}
 		else {
 			return this._cur_state;
@@ -37,20 +152,20 @@ export default class BehaviorNode extends BehaviorBase {
 	}
 
 	//@overrided
-	public getPartsResult() : PROCEDURE_STATE
+	public getPartsResult() : BEHAVIOR_STATE
 	{
-		return PROCEDURE_STATE.SUCC;
+		return BEHAVIOR_STATE.SUCC;
 	}
 
 	//@overrided
-	public getResult(): PROCEDURE_STATE {
+	public getResult(): BEHAVIOR_STATE {
 		var rlt = this.getSelfResult();
-		if(rlt===PROCEDURE_STATE.SUCC) {
+		if(rlt===BEHAVIOR_STATE.SUCC) {
 			if(this._succNode) {
 				return this._succNode.getResult();
 			}
 		}
-		else if(rlt===PROCEDURE_STATE.FAIL) {
+		else if(rlt===BEHAVIOR_STATE.FAIL) {
 			if(this._failNode) {
 				return this._failNode.getResult();
 			}
@@ -61,7 +176,7 @@ export default class BehaviorNode extends BehaviorBase {
 	//@overrided
 	public isSelfDone() : boolean 
 	{
-		return this._cur_state===PROCEDURE_STATE.SUCC || this._cur_state===PROCEDURE_STATE.FAIL || this._cur_state===PROCEDURE_STATE.STOPED;
+		return this._cur_state===BEHAVIOR_STATE.SUCC || this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED;
 	}
 
 	//@overrided
@@ -74,53 +189,8 @@ export default class BehaviorNode extends BehaviorBase {
 	public isDone() : boolean 
 	{
 		var rlt = this.getResult();
-		return rlt===PROCEDURE_STATE.SUCC || rlt===PROCEDURE_STATE.FAIL || rlt===PROCEDURE_STATE.STOPED;
+		return rlt===BEHAVIOR_STATE.SUCC || rlt===BEHAVIOR_STATE.FAIL || rlt===BEHAVIOR_STATE.STOPED;
 	}
 
-	//@overrided
-	protected Proc(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	public run(arg?: any): PROCEDURE_STATE {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	protected resolve(rlt: PROCEDURE_STATE): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	public resolve_succ(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	public resolve_fail(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	protected onStop(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	public stop(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	public recover(): void {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	protected checkDone() : PROCEDURE_STATE 
-	{
-		return PROCEDURE_STATE.SUCC;
-	}
 }
 

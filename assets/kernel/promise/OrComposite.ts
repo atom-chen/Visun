@@ -1,27 +1,45 @@
 import BehaviorBase from "./BehaviorBase";
 import BehaviorNode from "./BehaviorNode";
-import { PROCEDURE_STATE } from "../looker/KernelDefine";
+import { BEHAVIOR_STATE } from "../looker/KernelDefine";
 
 // 复合节点基类
 export default class OrComposite extends BehaviorNode {
 
 	//@overrided
-	protected Proc(): void {
+	public Proc(): void {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	public run(arg?: any): import("../looker/KernelDefine").PROCEDURE_STATE {
+	public run(arg?: any): import("../looker/KernelDefine").BEHAVIOR_STATE {
+		if(this._cur_state === BEHAVIOR_STATE.READY) {
+			this._cur_state = BEHAVIOR_STATE.RUNNING;
+			cc.log("begin", this.fixedName());
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i]["_cur_state"] = BEHAVIOR_STATE.RUNNING;
+					cc.log("begin", this._partList[i].fixedName());
+				}
+			}
+
+			this.Proc();
+			if(this._partList) {
+				for(var i in this._partList) {
+					this._partList[i].Proc();
+				}
+			}
+		}
+
+		return this.checkDone();
+	}
+
+	//@overrided
+	public checkDone(): import("../looker/KernelDefine").BEHAVIOR_STATE {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	protected checkDone(): import("../looker/KernelDefine").PROCEDURE_STATE {
-		throw new Error("Method not implemented.");
-	}
-
-	//@overrided
-	protected resolve(rlt: import("../looker/KernelDefine").PROCEDURE_STATE): void {
+	public resolve(rlt: import("../looker/KernelDefine").BEHAVIOR_STATE): void {
 		throw new Error("Method not implemented.");
 	}
 
@@ -36,7 +54,7 @@ export default class OrComposite extends BehaviorNode {
 	}
 
 	//@overrided
-	protected onStop(): void {
+	public onStop(): void {
 		throw new Error("Method not implemented.");
 	}
 
@@ -51,36 +69,36 @@ export default class OrComposite extends BehaviorNode {
 	}
 
 	//@overrided
-	public getSelfResult(): PROCEDURE_STATE {
-		return PROCEDURE_STATE.FAIL;
+	public getSelfResult(): BEHAVIOR_STATE {
+		return BEHAVIOR_STATE.FAIL;
 	}
 
 	//@overrided
-	public getPartsResult(): PROCEDURE_STATE {
+	public getPartsResult(): BEHAVIOR_STATE {
 		if(this._partList) {
 			for(var i in this._partList) {
 				var partRlt = this._partList[i].getResult();
-				if(partRlt === PROCEDURE_STATE.SUCC) {
+				if(partRlt === BEHAVIOR_STATE.SUCC) {
 					return partRlt;
 				}
-				else if(partRlt!==PROCEDURE_STATE.FAIL) {
+				else if(partRlt!==BEHAVIOR_STATE.FAIL) {
 					return partRlt;
 				}
 			}
-			return PROCEDURE_STATE.FAIL;
+			return BEHAVIOR_STATE.FAIL;
 		}
-		return PROCEDURE_STATE.SUCC;
+		return BEHAVIOR_STATE.SUCC;
 	}
 
 	//@overrided
-	public getResult(): PROCEDURE_STATE {
+	public getResult(): BEHAVIOR_STATE {
 		let rlt = this.getPartsResult();
-		if(rlt === PROCEDURE_STATE.SUCC){
+		if(rlt === BEHAVIOR_STATE.SUCC){
 			if(this._succNode) {
 				return this._succNode.getResult();
 			}
 		}
-		else if(rlt===PROCEDURE_STATE.FAIL) {
+		else if(rlt===BEHAVIOR_STATE.FAIL) {
 			if(this._failNode) {
 				return this._failNode.getResult();
 			}
@@ -108,7 +126,7 @@ export default class OrComposite extends BehaviorNode {
 	//@overrided
 	public isDone(): boolean {
 		var rlt = this.getResult();
-		return rlt===PROCEDURE_STATE.SUCC || rlt===PROCEDURE_STATE.FAIL || rlt===PROCEDURE_STATE.STOPED;
+		return rlt===BEHAVIOR_STATE.SUCC || rlt===BEHAVIOR_STATE.FAIL || rlt===BEHAVIOR_STATE.STOPED;
 	}
 
 }

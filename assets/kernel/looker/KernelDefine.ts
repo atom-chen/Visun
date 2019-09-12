@@ -58,16 +58,10 @@ export enum NetResult {
 	Error
 }
 
-export enum PROCEDURE_STATE {
+export enum BEHAVIOR_STATE {
 	READY = 1,
 	RUNNING,
 	SUCC,
 	FAIL,
 	STOPED
 };
-
-export enum PROCEDURE_LOGIC {
-	And = 1,
-	Or,
-	Parallel,
-}
