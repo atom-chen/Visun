@@ -41,6 +41,11 @@ export default class Procedure {
 		}
 	}
 
+	public cleanSelf() : void 
+	{
+		this._procFunc = null;
+		this._stopFunc = null;
+	}
 
 
 	public setStopFunc(stop_func:CHandler) : Procedure 
@@ -206,10 +211,8 @@ export default class Procedure {
 
 		this._cur_state = rlt;
 
-		if(this._bAutoClean) { 
-			this._procFunc = null;
-			this._stopFunc = null;
-		}
+		if(this._bAutoClean) { this.cleanSelf(); }
+		
 		cc.log("end", this.fixedName());
 
 		this.checkDone();
@@ -241,7 +244,7 @@ export default class Procedure {
 		if( !this.isSelfDone() ) {
 			this._cur_state = BEHAVIOR_STATE.STOPED;
 			this.onStop();
-			if(this._bAutoClean) { this.clean(); }
+			if(this._bAutoClean) { this.cleanSelf(); }
 		}
 
 		if(this._partList) {
