@@ -22,10 +22,8 @@ export default class Procedure {
 
 
 
-	public constructor(procFunc:CHandler=null, stopFunc:CHandler=null) 
+	public constructor() 
 	{
-		this._procFunc = procFunc;
-		this._stopFunc = stopFunc;
 		this._name = this._node_type;
 	}
 
@@ -69,7 +67,9 @@ export default class Procedure {
 
 	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
 	{
-		var part = new Procedure(procFunc, stopFunc);
+		var part = new Procedure();
+		part.setProcFunc(procFunc);
+		part.setStopFunc(stopFunc);
 		return this.addPart(part);
 	}
 
@@ -85,7 +85,9 @@ export default class Procedure {
 
 	public thenCaller(procFunc:CHandler, stopFunc:CHandler|null=null) : Procedure 
 	{
-		var nextNode = new Procedure(procFunc, stopFunc);
+		var nextNode = new Procedure();
+		nextNode.setProcFunc(procFunc);
+		nextNode.setStopFunc(stopFunc);
 		return this.then(nextNode);
 	}
 

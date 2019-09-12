@@ -91,9 +91,9 @@ export default class UIManager {
 					var baseComp = obj.getComponent(BaseComponent);
 					if(baseComp) {
 						baseComp.listenDestory((comp)=>{
-							TimerManager.addFrameTimer(2,1, new CHandler(()=>{
+							TimerManager.addFrameTimer(2,1, new CHandler(null, ()=>{
 								LoadCenter.instance().gc();
-							}, null));
+							}));
 						})
 					}
 				}

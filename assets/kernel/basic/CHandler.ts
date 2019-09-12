@@ -7,7 +7,7 @@ export default class CHandler {
 	private _args:any[];
 	private _autoClean:boolean = false;
 
-	public constructor(fn:Function, target:any, ...args:any[]) 
+	public constructor(target:any, fn:Function, ...args:any[]) 
 	{
 		this._fn = fn;
 		this._target = target;

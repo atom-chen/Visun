@@ -36,7 +36,7 @@ export default class LobbyUI extends BaseComponent {
 		this.initNet();
 	//	this.testSpine();
 	//	this.testWs()
-		TimerManager.addSecondTimer(2, 1, new CHandler(this.testProcedure, this));
+		TimerManager.addSecondTimer(2, 1, new CHandler(this, this.testProcedure));
 
 		var param = { 
 			deviceID : PlatformUtil.getDeviceId(), 
@@ -153,23 +153,22 @@ export default class LobbyUI extends BaseComponent {
 
 
 	private createProcedure(duration:number, name:string) {
-		var node = new Procedure(
-			new CHandler((part?:Procedure)=>{
+		var node = new Procedure();
+		node.setProcFunc(new CHandler( null,
+			(part?:Procedure)=>{
 				if(duration>0){
-					TimerManager.addSecondTimer(duration, 1, new CHandler(
+					TimerManager.addSecondTimer(duration, 1, new CHandler( part,
 						function(tmr){ 
 							this.resolve_succ();
-						}, part)
+						})
 					);
 				}
 				else{
 					part.resolve_succ();
 				}
-			}, 
-			null
-			),
-			new CHandler((part?:Procedure)=>{ cc.log(part.getName()+" stoped") }, null)
-		);
+			} 
+		));
+		node.setStopFunc(new CHandler(null, (part?:Procedure)=>{ cc.log(part.getName()+" stoped") }));
 		node.setName(name)
 		return node;
 	}
@@ -197,7 +196,7 @@ export default class LobbyUI extends BaseComponent {
 		ddd.then(eee);
 		eee.addPart(iii);
 		ccc.run();
-		//root.thenCaller(new CHandler((part:Procedure)=>{ root.stop(); }, null)).setName("last");
+		//root.thenCaller(new CHandler(null, (part:Procedure)=>{ root.stop(); })).setName("last");
 	}
 
 }

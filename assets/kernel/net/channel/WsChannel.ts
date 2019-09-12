@@ -280,7 +280,7 @@ export default class WsChannel implements IChannel {
 
 	private startHeartBeat() : void
 	{
-		this._heartTmr = TimerManager.addSecondTimer(8, -1, new CHandler(this.sendHeartBeat, this));
+		this._heartTmr = TimerManager.addSecondTimer(8, -1, new CHandler(this, this.sendHeartBeat));
 	}
 
 	private sendHeartBeat() : void

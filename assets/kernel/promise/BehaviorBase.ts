@@ -3,18 +3,13 @@ import CHandler from "../basic/CHandler";
 
 export default abstract class BehaviorBase {
 	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;
-
+	
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
-	
+
 	protected _groupNode:BehaviorBase = null;
 	protected _partList:Array<BehaviorBase> = null;
 
-
-	public clean() : void
-	{
-
-	}
 
 	public get groupNode() : BehaviorBase
 	{
@@ -25,8 +20,6 @@ export default abstract class BehaviorBase {
 	{
 		this._groupNode = v;
 	}
-
-	
 
 	public setName(name:string) : BehaviorBase
 	{
