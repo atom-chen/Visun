@@ -20,7 +20,6 @@ export default class Procedure {
 	protected _partList:Array<Procedure> = null;
 
 
-
 	public constructor() 
 	{
 		this._name = this._node_type;
@@ -39,7 +38,6 @@ export default class Procedure {
 			this._nextNode.clean(); 
 		}
 	}
-
 	public cleanSelf() : void 
 	{
 		this._procFunc = null;
@@ -47,56 +45,36 @@ export default class Procedure {
 	}
 
 
-	public setStopFunc(stop_func:CHandler) : Procedure 
+	public getType() : string 
 	{
-		this._stopFunc = stop_func;
+		return this._node_type;
+	}
+	public fixedName() :string 
+	{
+		if(this._groupNode)
+			return this._groupNode._name + "." + this._name;
+		else 
+			return "null."+this._name;
+	}
+	public setName(name:string) : Procedure
+	{
+		this._name = name;
 		return this;
 	}
-
-	public setProcFunc(proc_func:CHandler) : Procedure 
+	public getName() : string
 	{
-		this._procFunc = proc_func;
-		return this;
+		return this._name;
 	}
 
 
-
-	public addPart(part:Procedure) : Procedure 
+	public get groupNode() : Procedure
 	{
-		part._groupNode = this;
-		if(!this._partList) { this._partList = []; }
-		this._partList.push(part);
-		return this;
+		return this._groupNode;
 	}
-
-	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
+	public set groupNode(v:Procedure)
 	{
-		var part = new Procedure();
-		part.setProcFunc(procFunc);
-		part.setStopFunc(stopFunc);
-		return this.addPart(part);
+		this._groupNode = v;
 	}
-
-
-
-	public then(nextNode:Procedure) : Procedure 
-	{
-		var last = this.getLast();
-		last._nextNode = nextNode;
-		nextNode._groupNode = last._groupNode;
-		return nextNode;
-	}
-
-	public thenCaller(procFunc:CHandler, stopFunc:CHandler|null=null) : Procedure 
-	{
-		var nextNode = new Procedure();
-		nextNode.setProcFunc(procFunc);
-		nextNode.setStopFunc(stopFunc);
-		return this.then(nextNode);
-	}
-
-
-
 	public getLast() : Procedure 
 	{
 		var last:Procedure = this;
@@ -106,39 +84,48 @@ export default class Procedure {
 		return last;
 	}
 
-	public getType() : string 
-	{
-		return this._node_type;
-	}
 
-	public fixedName() :string 
+	public setStopFunc(stop_func:CHandler) : Procedure 
 	{
-		if(this._groupNode)
-			return this._groupNode._name + "." + this._name;
-		else 
-			return "null."+this._name;
+		this._stopFunc = stop_func;
+		return this;
 	}
-
-	public setName(name:string) : Procedure
+	public setProcFunc(proc_func:CHandler) : Procedure 
 	{
-		this._name = name;
+		this._procFunc = proc_func;
 		return this;
 	}
 
-	public getName() : string
+
+	public addPart(part:Procedure) : Procedure 
 	{
-		return this._name;
+		part._groupNode = this;
+		if(!this._partList) { this._partList = []; }
+		this._partList.push(part);
+		return this;
+	}
+	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
+	{
+		var part = new Procedure();
+		part.setProcFunc(procFunc);
+		part.setStopFunc(stopFunc);
+		return this.addPart(part);
+	}
+	public then(nextNode:Procedure) : Procedure 
+	{
+		var last = this.getLast();
+		last._nextNode = nextNode;
+		nextNode._groupNode = last._groupNode;
+		return nextNode;
+	}
+	public thenCaller(procFunc:CHandler, stopFunc:CHandler|null=null) : Procedure 
+	{
+		var nextNode = new Procedure();
+		nextNode.setProcFunc(procFunc);
+		nextNode.setStopFunc(stopFunc);
+		return this.then(nextNode);
 	}
 
-	public get groupNode() : Procedure
-	{
-		return this._groupNode;
-	}
-
-	public set groupNode(v:Procedure)
-	{
-		this._groupNode = v;
-	}
 
 	//----------------------------------------------------------------------------
 	//----------------------------------------------------------------------------

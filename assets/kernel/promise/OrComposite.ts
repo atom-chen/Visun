@@ -1,16 +1,36 @@
 import BehaviorNode from "./BehaviorNode";
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
+import Procedure from "./Procedure";
+import CHandler from "../basic/CHandler";
 
 // 复合节点基类
 export default class OrComposite extends BehaviorNode {
 
 	//@overrided
-	public Proc(): void {
-		throw new Error("Method not implemented.");
+	public addPart(part:Procedure) : Procedure 
+	{
+		part.groupNode = this;
+		if(!this._partList) { this._partList = []; }
+		this._partList.push(part);
+		return this;
 	}
 
 	//@overrided
-	public run(arg?: any): import("../looker/KernelDefine").BEHAVIOR_STATE {
+	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
+	{
+		var part = new Procedure();
+		part.setProcFunc(procFunc);
+		part.setStopFunc(stopFunc);
+		return this.addPart(part);
+	}
+
+	//@overrided
+	public Proc(): void {
+		
+	}
+
+	//@overrided
+	public run(arg?: any): BEHAVIOR_STATE {
 		if(this._cur_state === BEHAVIOR_STATE.READY) {
 			this._cur_state = BEHAVIOR_STATE.RUNNING;
 			cc.log("begin", this.fixedName());
@@ -21,7 +41,6 @@ export default class OrComposite extends BehaviorNode {
 				}
 			}
 
-			this.Proc();
 			if(this._partList) {
 				for(var i in this._partList) {
 					this._partList[i].Proc();
@@ -33,12 +52,12 @@ export default class OrComposite extends BehaviorNode {
 	}
 
 	//@overrided
-	public checkDone(): import("../looker/KernelDefine").BEHAVIOR_STATE {
+	public checkDone(): BEHAVIOR_STATE {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	public resolve(rlt: import("../looker/KernelDefine").BEHAVIOR_STATE): void {
+	public resolve(rlt: BEHAVIOR_STATE): void {
 		throw new Error("Method not implemented.");
 	}
 

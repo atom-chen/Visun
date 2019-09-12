@@ -1,25 +1,46 @@
 import BehaviorNode from "./BehaviorNode";
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
+import Procedure from "./Procedure";
+import CHandler from "../basic/CHandler";
 
 // 复合节点基类
 export default class AndComposite extends BehaviorNode {
+
+	//@overrided
+	public addPart(part:Procedure) : Procedure 
+	{
+		part.groupNode = this;
+		if(!this._partList) { this._partList = []; }
+		this._partList.push(part);
+		return this;
+	}
+
+	//@overrided
+	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
+	{
+		var part = new Procedure();
+		part.setProcFunc(procFunc);
+		part.setStopFunc(stopFunc);
+		return this.addPart(part);
+	}
+	
 	//@overrided
 	public Proc(): void {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	public run(arg?: any): import("../looker/KernelDefine").BEHAVIOR_STATE {
+	public run(arg?: any): BEHAVIOR_STATE {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	public checkDone(): import("../looker/KernelDefine").BEHAVIOR_STATE {
+	public checkDone(): BEHAVIOR_STATE {
 		throw new Error("Method not implemented.");
 	}
 
 	//@overrided
-	public resolve(rlt: import("../looker/KernelDefine").BEHAVIOR_STATE): void {
+	public resolve(rlt: BEHAVIOR_STATE): void {
 		throw new Error("Method not implemented.");
 	}
 

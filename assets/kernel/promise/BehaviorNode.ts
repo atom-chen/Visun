@@ -1,5 +1,6 @@
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
 import Procedure from "./Procedure";
+import CHandler from "../basic/CHandler";
 
 export default class BehaviorNode extends Procedure {
 	protected _succNode:Procedure = null;
@@ -14,6 +15,30 @@ export default class BehaviorNode extends Procedure {
 	public failThen(failNode:Procedure) : void
 	{
 		this._failNode = failNode;
+	}
+
+	//@overrided
+	public then(nextNode:Procedure) : Procedure 
+	{
+		throw new Error("Method not implemented.");
+	}
+
+	//@overrided
+	public thenCaller(procFunc:CHandler, stopFunc:CHandler|null=null) : Procedure 
+	{
+		throw new Error("Method not implemented.");
+	}
+
+	//@overrided
+	public addPart(part:Procedure) : Procedure 
+	{
+		throw new Error("Method not implemented.");
+	}
+
+	//@overrided
+	public addPartCaller(procFunc:CHandler, stopFunc:CHandler=null) : Procedure 
+	{
+		throw new Error("Method not implemented.");
 	}
 
 

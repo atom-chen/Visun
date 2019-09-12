@@ -1,5 +1,4 @@
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
-import CHandler from "../basic/CHandler";
 
 export default abstract class BehaviorBase {
 	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;
