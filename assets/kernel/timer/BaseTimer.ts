@@ -61,7 +61,7 @@ export class BaseTimer implements JTIPoolObject {
 
 		if(this._passedTime >= this._interval) {
 			this._passedTime = this._passedTime - this._interval;
-			this._callback.call(this);
+			this._callback.invoke(this);
 
 			if(this._isLimit) {
 				this._looptimes--;

@@ -19,7 +19,7 @@ export default class CHandler {
 		return this._target; 
 	}
 
-	public call(part:any=null) : void
+	public invoke(part:any=null) : void
 	{
 		var ret:any;
 		if(this._args && this._args.length > 0) {
@@ -42,7 +42,7 @@ export default class CHandler {
 		return ret;
 	}
 
-	public callWith(...extra:any[]) 
+	public invokeWith(...extra:any[]) 
 	{
 		var ret:any;
 		if(this._args && this._args.length>0){

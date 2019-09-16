@@ -135,7 +135,7 @@ export default class Procedure {
 	public Proc() : void
 	{
 		if(this._procFunc) {
-			this._procFunc.call(this);
+			this._procFunc.invoke(this);
 		}
 		else {
 			this._cur_state = BEHAVIOR_STATE.SUCC;
@@ -230,7 +230,7 @@ export default class Procedure {
 	protected onStop() : void
 	{
 		if(this._stopFunc){
-			this._stopFunc.call(this);
+			this._stopFunc.invoke(this);
 		}
 	}
 
