@@ -1,8 +1,9 @@
 import { BEHAVIOR_STATE } from "../looker/KernelDefine";
 import Procedure from "./Procedure";
 import CHandler from "../basic/CHandler";
+import RoleAgent from "./RoleAgent";
 
-export default class BehaviorNode extends Procedure {
+export default abstract class BehaviorNode extends Procedure {
 	protected _succNode:Procedure = null;
 	protected _failNode:Procedure = null;
 
@@ -10,11 +11,13 @@ export default class BehaviorNode extends Procedure {
 	public succThen(succNode:Procedure) : void
 	{
 		this._succNode = succNode;
+		this._succNode.groupNode = this.groupNode;
 	}
 
 	public failThen(failNode:Procedure) : void
 	{
 		this._failNode = failNode;
+		this._failNode.groupNode = this.groupNode;
 	}
 
 	//@overrided
@@ -47,16 +50,14 @@ export default class BehaviorNode extends Procedure {
 
 
 	//@overrided
-	public Proc(): void {
-		throw new Error("Method not implemented.");
-	}
+	public abstract Proc(agent:RoleAgent): void;
 
 	//@overrided
-	public run(arg?: any): BEHAVIOR_STATE {
+	public run(agent:RoleAgent): BEHAVIOR_STATE {
 		if(this._cur_state === BEHAVIOR_STATE.READY) {
 			this._cur_state = BEHAVIOR_STATE.RUNNING;
 			cc.log("begin", this.fixedName());
-			this.Proc();
+			this.Proc(agent);
 		}
 
 		return this.checkDone();
