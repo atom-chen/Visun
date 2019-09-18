@@ -20,7 +20,7 @@ if(!ArrayBuffer["transfer"]) {
 };
 
 export default class MemoryStream {
-	public buffer:ArrayBuffer = null;
+	protected buffer:ArrayBuffer = null;
 	protected data_view:DataView = null;
 	protected little_endian:boolean = true;
 
@@ -30,12 +30,6 @@ export default class MemoryStream {
 			this.buffer = new ArrayBuffer(size);
 			this.data_view = new DataView(this.buffer);
 		}
-	}
-
-	public setBuffer(buff:ArrayBuffer) 
-	{
-		this.buffer = buff;
-		this.data_view = new DataView(this.buffer);
 	}
 
 	public read_int8(offset:number): number 
@@ -109,8 +103,9 @@ export default class MemoryStream {
 			
 			i++;
 			
-			if(rpos + i >= this.buffer.byteLength)
+			if(rpos + i >= this.buffer.byteLength) {
 				throw(new Error("MemoryStream::readString: rpos(" + (rpos + i) + ")>=" + this.buffer.byteLength + " overflow!"));
+			}
 		}
 		
 		rpos += i;
@@ -146,6 +141,13 @@ export default class MemoryStream {
 		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
 		dvPtr.set(buff);
 	}
+
+
+	public setBuffer(buff:ArrayBuffer) 
+	{
+		this.buffer = buff;
+		this.data_view = new DataView(this.buffer);
+	}
 	
 	public expand(offset:number, src:Uint8Array)
 	{
@@ -156,4 +158,5 @@ export default class MemoryStream {
 		var buf = new Uint8Array(this.buffer);
 		buf.set(new Uint8Array(src), 0);
 	}
+
 }
