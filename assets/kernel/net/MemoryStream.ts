@@ -1,3 +1,24 @@
+if(!ArrayBuffer["transfer"]) {
+    ArrayBuffer["transfer"] = function (source, length) {
+        source = Object(source);
+		var dest = new ArrayBuffer(length);
+		
+        if(!(source instanceof ArrayBuffer) || !(dest instanceof ArrayBuffer)) {
+            throw new TypeError("ArrayBuffer.transfer, error: Source and destination must be ArrayBuffer instances");
+		}
+		
+        if(dest.byteLength >= source.byteLength) {
+			var buf = new Uint8Array(dest);
+			buf.set(new Uint8Array(source), 0);
+		}
+		else {
+			throw new RangeError("ArrayBuffer.transfer, error: destination has not enough space");
+		}
+		
+		return dest;
+    };
+};
+
 export default class MemoryStream {
 	public buffer:ArrayBuffer = null;
 	protected data_view:DataView = null;
@@ -7,6 +28,7 @@ export default class MemoryStream {
 	{
 		if(size > 0) {
 			this.buffer = new ArrayBuffer(size);
+			this.data_view = new DataView(this.buffer);
 		}
 	}
 
@@ -125,4 +147,13 @@ export default class MemoryStream {
 		dvPtr.set(buff);
 	}
 	
+	public expand(offset:number, src:Uint8Array)
+	{
+		if(!this.buffer || this.buffer.byteLength-offset < src.length){
+			this.buffer = new ArrayBuffer(length);
+			this.data_view = new DataView(this.buffer);
+		}
+		var buf = new Uint8Array(this.buffer);
+		buf.set(new Uint8Array(src), 0);
+	}
 }
