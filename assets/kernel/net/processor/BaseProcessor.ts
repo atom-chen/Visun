@@ -99,7 +99,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 		if(this._send_list.length <= 0) { return; }
 
 		cc.log(this._channel.getName(), "flush sendlist: ", this._send_list.length);
-		for(var i=1; i<this._send_list.length; i++){
+		for(var i=0; i<this._send_list.length; i++){
 			this._channel.sendBuff(this._send_list[i]);
 		}
 		this._send_list.length = 0;

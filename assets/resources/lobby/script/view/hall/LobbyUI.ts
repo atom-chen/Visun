@@ -19,6 +19,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Procedure from "../../../../../kernel/promise/Procedure";
 import CHandler from "../../../../../kernel/basic/CHandler";
 import TimerManager from "../../../../../kernel/timer/TimerManager";
+import ServerConfig from "../../../../../common/script/definer/ServerConfig";
 
 
 const {ccclass, property} = cc._decorator;
@@ -96,7 +97,7 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private initNet() {
-		HttpCore.setMainUrl(MAIN_HTTP_URL);
+		HttpCore.setMainUrl(ServerConfig.loginServer);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 		HttpCore.setCacheAble("req_youke_login", false);
 

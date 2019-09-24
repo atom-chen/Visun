@@ -107,35 +107,26 @@ export default class GameManager extends ModelBase {
 	}
 
 	public enterGameScene(gameId) {
-		cc.director.preloadScene("GameScene", 
-		(cpltCnt, totalCnt, item)=>{
-			//cc.log("进度：", cpltCnt, totalCnt);
-			if(totalCnt<=0){ totalCnt=1; }
-			//this.fileProgress.progress = cpltCnt/totalCnt;
-			//this.byteProgress.progress = cpltCnt/totalCnt;
-		},
-		(err, resobj)=>{
-			SceneManager.turn2Scene("GameScene", ()=>{
-				gameId = gameId.toString();
-				switch(gameId) {
-					case "40000040":
-						UIManager.openPanel(ViewDefine.ddzUI.path, null);
-						break;
-					case "90000040":
-						UIManager.openPanel(ViewDefine.brnnUI.path, null);
-						break;
-					case "80000044":
-						UIManager.openPanel(ViewDefine.fqzsUI.path, null);
-						break;
-					case "40070012":
-						UIManager.openPanel(ViewDefine.zjhUI.path, null);
-						break;
-					case "80000041":
-						UIManager.openPanel(ViewDefine.bjleUI.path, null);
-						break;
-				}
-			});
-		})
+		SceneManager.turn2Scene("GameScene", ()=>{
+			gameId = gameId.toString();
+			switch(gameId) {
+				case "40000040":
+					UIManager.openPanel(ViewDefine.ddzUI.path, null);
+					break;
+				case "90000040":
+					UIManager.openPanel(ViewDefine.brnnUI.path, null);
+					break;
+				case "80000044":
+					UIManager.openPanel(ViewDefine.fqzsUI.path, null);
+					break;
+				case "40070012":
+					UIManager.openPanel(ViewDefine.zjhUI.path, null);
+					break;
+				case "80000041":
+					UIManager.openPanel(ViewDefine.bjleUI.path, null);
+					break;
+			}
+		});
 	}
 
 }

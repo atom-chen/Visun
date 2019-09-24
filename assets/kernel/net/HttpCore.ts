@@ -188,6 +188,7 @@ export default class HttpCore {
 		// if (cc.sys.isNative){
 		// 	xhr.setRequestHeader("Accept-Encoding","gzip,deflate","text/html;charset=UTF-8");
 		// }
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		//跨域访问
 		// xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
 		// xhr.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With");
