@@ -11,11 +11,11 @@ export default class SceneManager {
 
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
-		EventCenter.instance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
+		EventCenter.getInstance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
 
 		var cvs = cc.find("Canvas");
-		LoadCenter.instance().retainNodeRes(cvs);
-		LoadCenter.instance().releaseNodeRes(cvs);
+		LoadCenter.getInstance().retainNodeRes(cvs);
+		LoadCenter.getInstance().releaseNodeRes(cvs);
 		UIManager.clear();
 	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
 		
@@ -24,9 +24,9 @@ export default class SceneManager {
 
 		var afterLaunch = function() {
 			Adaptor.adaptScreen();
-			LoadCenter.instance().gc();
+			LoadCenter.getInstance().gc();
 			if(onLaunched) { onLaunched(); }
-			EventCenter.instance().fire(KernelEvent.SCENE_AFTER_SWITCH);
+			EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 		}
 		return cc.director.loadScene(sceneName, afterLaunch.bind(this));
 	}

@@ -8,7 +8,7 @@ export default class TimerManager {
 	private static autoId:number = 0;
 	private static s_updating:boolean = false;
 	private static _timers:BaseTimer[] = [];
-//	private static _pool:JTPool<BaseTimer> = JTPool.instance(BaseTimer) as JTPool<BaseTimer>;
+//	private static _pool:JTPool<BaseTimer> = JTPool.getInstance(BaseTimer) as JTPool<BaseTimer>;
 	
 	private constructor() {
 		

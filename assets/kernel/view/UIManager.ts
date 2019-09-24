@@ -84,15 +84,15 @@ export default class UIManager {
 				}
 				else {
 					let key = cc.loader["_getReferenceKey"](loadedResource);
-					LoadCenter.instance().retatinRes(key);
-					LoadCenter.instance().retainNodeRes(obj);
-					LoadCenter.instance().releaseRes(key);
-					LoadCenter.instance().releaseNodeRes(obj);
+					LoadCenter.getInstance().retatinRes(key);
+					LoadCenter.getInstance().retainNodeRes(obj);
+					LoadCenter.getInstance().releaseRes(key);
+					LoadCenter.getInstance().releaseNodeRes(obj);
 					var baseComp = obj.getComponent(BaseComponent);
 					if(baseComp) {
 						baseComp.listenDestory((comp)=>{
 							TimerManager.addFrameTimer(2,1, new CHandler(null, ()=>{
-								LoadCenter.instance().gc();
+								LoadCenter.getInstance().gc();
 							}));
 						})
 					}

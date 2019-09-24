@@ -17,7 +17,7 @@ export default class LocalCache
 		this._dataMap = {};
 	}
 
-	public static instance(name:string) : LocalCache
+	public static getInstance(name:string) : LocalCache
 	{	
 		let localCache:LocalCache = this._cacheMap[name] as LocalCache;
 		if (!localCache)

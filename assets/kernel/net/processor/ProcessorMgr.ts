@@ -11,7 +11,7 @@ export default class ProcessorMgr {
 
     private _all_processors:{[key: string]: IProcessor;} = {};
 
-    public static instance() : ProcessorMgr {
+    public static getInstance() : ProcessorMgr {
         if(!ProcessorMgr._instance) { ProcessorMgr._instance = new ProcessorMgr; }
         return ProcessorMgr._instance;
     }

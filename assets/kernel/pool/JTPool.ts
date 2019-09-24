@@ -164,7 +164,7 @@ export default class JTPool<T extends JTIPoolObject> implements JTIPool
 	 * 能过Class类型来实例化对象池
 	 * @param cls Class类型
 	 */
-	public static instance(cls:any):JTIPool
+	public static getInstance(cls:any):JTIPool
 	{
 		let pool:JTIPool = this.poolMap.get(cls)
 		if (!pool) 
@@ -181,7 +181,7 @@ export default class JTPool<T extends JTIPoolObject> implements JTIPool
 	 */
 	public static dispose(cls:any):void
 	{
-		let pool:JTIPool = this.instance(cls);
+		let pool:JTIPool = this.getInstance(cls);
 		this.poolMap.remove(cls);
 		pool.dispose();
 	}

@@ -155,7 +155,7 @@ export default class JTHashMap implements JTIPoolObject
     {
         if (!this._pool)
         {
-                this._pool = JTPool.instance(JTHashMap) as JTPool<JTHashMap>
+                this._pool = JTPool.getInstance(JTHashMap) as JTPool<JTHashMap>
         }
         return this._pool.get();
     }

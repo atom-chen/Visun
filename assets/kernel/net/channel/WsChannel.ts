@@ -27,7 +27,7 @@ export default class WsChannel implements IChannel {
 
 	private notifyState() : void
 	{
-		EventCenter.instance().fire(KernelEvent.NET_STATE, this);
+		EventCenter.getInstance().fire(KernelEvent.NET_STATE, this);
 	}
 
 	private _on_opened(event) {

@@ -23,7 +23,7 @@ export default class HttpCore {
 	private static g_allProtocol:object = {};	//规则
 	private static _responder:any;				//响应句柄
 	private static _forbitCache:any = {};
-	private static _localCache:LocalCache = LocalCache.instance("http");
+	private static _localCache:LocalCache = LocalCache.getInstance("http");
 
 	//@注册一组协议
 	//ruleList:  规则
@@ -169,7 +169,7 @@ export default class HttpCore {
 				// 调用unsafeCallback
 				if(unsafeCallback) { unsafeCallback(info); }
 				// 触发事件
-				EventCenter.instance().fire( ptoname, info );
+				EventCenter.getInstance().fire( ptoname, info );
 			}
 			else {
 				cc.log(info);

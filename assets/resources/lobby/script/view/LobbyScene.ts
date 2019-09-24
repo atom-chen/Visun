@@ -13,7 +13,7 @@ export default class LobbyScene extends BaseComponent {
     }
 
     start () {
-        AudioManager.instance().playMusicSync("lobby/music/denglu", true);
+        AudioManager.getInstance().playMusicSync("lobby/music/denglu", true);
     }
 
     // update (dt) {}

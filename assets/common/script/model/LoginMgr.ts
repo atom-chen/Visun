@@ -26,11 +26,11 @@ export default class LoginMgr extends ModelBase {
 		hallgw_packet_define[login_msgs.Msg_GsPackage] = login_packet_define[login_msgs.Msg_GsPackage];
 		hallgw_packet_define[login_msgs.Msg_UserLogInResp] = login_packet_define[login_msgs.Msg_UserLogInResp];
 	}
-    public static instance() : LoginMgr {
+    public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
         return LoginMgr._instance;
 	}
-	public static destroy() : void {
+	public static delInstance() : void {
 		if(LoginMgr._instance) {
 			LoginMgr._instance.clear();
 			LoginMgr._instance = null;
@@ -41,7 +41,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	public isLoginSucc() : boolean { 
-		return UserMgr.instance().getHeroId() !== null;
+		return UserMgr.getInstance().getHeroId() !== null;
 	}
 
 
@@ -56,7 +56,7 @@ export default class LoginMgr extends ModelBase {
 	
 	public connectLoginServer() {
 		HttpCore.callGet(ServerConfig.gateServer, null, null, (iCode:HttpResult, data:any)=>{
-			EventCenter.instance().listen(KernelEvent.NET_WS_FAIL, this.onNetFail, this);
+			EventCenter.getInstance().listen(KernelEvent.NET_WS_FAIL, this.onNetFail, this);
 
 			//获取可用服务器列表
 			cc.log(iCode, data);
@@ -75,8 +75,8 @@ export default class LoginMgr extends ModelBase {
 
 			//建立大厅通道 
 			cc.log("连接大厅", wsAddr);
-			var g_HallProcessor = ProcessorMgr.instance().createProcessor(ChannelDefine.hall, ProcessorType.Protobuff);
-			var channel_hall = ChannelMgr.instance().createChannel(ChannelDefine.hall, ChannelType.Ws);
+			var g_HallProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.hall, ProcessorType.Protobuff);
+			var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.hall, ChannelType.Ws);
 			channel_hall.setProcessor(g_HallProcessor);
 			channel_hall.registProtocol(null);
 			channel_hall.getProcessor().registCmds(hallgw_packet_define);

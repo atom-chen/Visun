@@ -5,11 +5,11 @@ export default class RechargeMgr extends ModelBase {
     private constructor() {
         super();
     }
-    public static instance() : RechargeMgr {
+    public static getInstance() : RechargeMgr {
         if(!RechargeMgr._instance) { RechargeMgr._instance = new RechargeMgr; }
         return RechargeMgr._instance;
     }
-    public static destroy() : void {
+    public static delInstance() : void {
 		if(RechargeMgr._instance) {
 			RechargeMgr._instance.clear();
 			RechargeMgr._instance = null;

@@ -11,7 +11,7 @@ export default class ChannelMgr {
     private static _instance:ChannelMgr = null;
     private _channels:{[key: string]: IChannel;} = {};
 
-    public static instance() : ChannelMgr
+    public static getInstance() : ChannelMgr
     {
         if(!ChannelMgr._instance){ ChannelMgr._instance = new ChannelMgr; }
         return ChannelMgr._instance;

@@ -6,12 +6,12 @@ export default class EventCenter {
 	private _events = {};
 	
 	
-	public static instance() : EventCenter
+	public static getInstance() : EventCenter
 	{
 		if(!EventCenter._instance){ EventCenter._instance = new EventCenter(); }
 		return EventCenter._instance;
 	}
-	public static destroy() {
+	public static delInstance() {
 		EventCenter._instance._events = null;
 		EventCenter._instance = null;
 	}

@@ -6,13 +6,13 @@ import ModelBase from "../../../kernel/model/ModelBase";
 export default class LogicCenter {
     private static _instance:LogicCenter = null;
 
-    private _managers:ModelBase[] = [];
+    private _managers:any[] = [];
     
-    public static instance() : LogicCenter {
+    public static getInstance() : LogicCenter {
         if(!LogicCenter._instance){ LogicCenter._instance = new LogicCenter; }
         return LogicCenter._instance;
     }
-    public static destroy() : void {
+    public static delInstance() : void {
 		if(LogicCenter._instance) {
 			LogicCenter._instance.clear();
 			LogicCenter._instance = null;
@@ -31,20 +31,19 @@ export default class LogicCenter {
     //调用时机：重新登录时
     public clear() {
         for(var i=0; i<this._managers.length; i++){
-            this._managers[i].clear();
-            if(this._managers[i]["destroy"]){
-                this._managers[i]["destroy"]();
-            }
+            this._managers[i].getInstance().clear();
+            this._managers[i].delInstance();
         }
         this._managers.length = 0;
         this._managers = [];
     }
 
     public registModel(cls:any) {
-        if(this._managers.indexOf( cls.instance() ) < 0){
-            this._managers.push(cls.instance());
+        cls.getInstance();
+        if(this._managers.indexOf(cls) < 0){
+            this._managers.push(cls);
         }
     }
 }
 
-LogicCenter.instance().init();
+LogicCenter.getInstance().init();

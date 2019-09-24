@@ -74,7 +74,7 @@ export default class NetPacket {
 
 	public sendToChannel(channelKey:string, data:any, bIsPbObj:boolean)
 	{
-		var dstChannel = ChannelMgr.instance().getChannel(channelKey);
+		var dstChannel = ChannelMgr.getInstance().getChannel(channelKey);
         if(!dstChannel) { cc.log("channel not created: ", channelKey); return; }
         var buff = this.pack(data, bIsPbObj);
         dstChannel.sendMessage(this.cmd, buff);

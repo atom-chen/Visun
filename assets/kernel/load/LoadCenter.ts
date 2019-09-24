@@ -10,7 +10,7 @@ loadResDir(url, type, progressCallback, completeCallback)
 export default class LoadCenter {
 	static _instance: LoadCenter = null;
 
-	static instance(): LoadCenter {
+	static getInstance(): LoadCenter {
 		if (LoadCenter._instance) { return LoadCenter._instance; }
 		LoadCenter._instance = new LoadCenter();
 		return LoadCenter._instance;
@@ -20,13 +20,13 @@ export default class LoadCenter {
 	}
 	
 	public static dump(level:number) : void {
-		cc.log("-----------------------begin", LoadCenter.instance().getCacheCount());
+		cc.log("-----------------------begin", LoadCenter.getInstance().getCacheCount());
 		for (var kk in cc.loader["_cache"]) {
 			cc.log(kk);
 			cc.log(cc.loader["_cache"][kk]);
 		}
 		
-		cc.log("-----------------------end", LoadCenter.instance().getCacheCount());
+		cc.log("-----------------------end", LoadCenter.getInstance().getCacheCount());
 	}
 
 	public getCacheCount() {

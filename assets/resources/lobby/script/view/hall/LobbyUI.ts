@@ -91,7 +91,7 @@ export default class LobbyUI extends BaseComponent {
 			var bton = this.m_ui[cfg.btn];
 			bton.gameId = cfg.id;
 			CommonUtil.addClickEvent(bton, function(){ 
-				GameManager.instance().enterGame(this.gameId);
+				GameManager.getInstance().enterGame(this.gameId);
 			}, bton);
 		}
 	}
@@ -101,14 +101,14 @@ export default class LobbyUI extends BaseComponent {
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 		HttpCore.setCacheAble("req_youke_login", false);
 
-		EventCenter.instance().listen("req_youke_login", this.req_userinfo, this);
-		EventCenter.instance().listen("req_userinfo", this.req_userinfo, this);
-		EventCenter.instance().listen("req_room_select_info", this.req_room_select_info, this);
-		EventCenter.instance().listen("req_enter_br_room", this.req_enter_br_room, this);
+		EventCenter.getInstance().listen("req_youke_login", this.req_userinfo, this);
+		EventCenter.getInstance().listen("req_userinfo", this.req_userinfo, this);
+		EventCenter.getInstance().listen("req_room_select_info", this.req_room_select_info, this);
+		EventCenter.getInstance().listen("req_enter_br_room", this.req_enter_br_room, this);
 	}
 
 	private req_userinfo(data:any) {
-		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.instance().getHero());
+		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.getInstance().getHero());
 	}
 
 	private req_room_select_info(info){
@@ -122,8 +122,8 @@ export default class LobbyUI extends BaseComponent {
 
 
 	private testWs() {
-		var processor = ProcessorMgr.instance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
-		var hall_channel = ChannelMgr.instance().createChannel(ChannelDefine.game, ChannelType.Ws);
+		var processor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
+		var hall_channel = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		hall_channel.setProcessor(processor);
 		hall_channel.registProtocol(null);
 		hall_channel.connect(MAIN_WS_URL, 0);

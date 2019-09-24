@@ -20,11 +20,11 @@ export default class bjleUI extends BaseComponent {
 		var rule = [1,10,20,100,500];
 		this.m_ui.ChipBox.getComponent("ChipBox").setChipValues(rule);
 
-		EventCenter.instance().listen("MSG_USER_LEAVE_ROOM_PUSH", this.MSG_USER_LEAVE_ROOM_PUSH, this);
-		EventCenter.instance().listen("MSG_GAME_OTHER_BET_ACK", this.MSG_GAME_OTHER_BET_ACK, this);
-		EventCenter.instance().listen("MSG_GAME_ROOM_START_PUSH", this.MSG_GAME_ROOM_START_PUSH, this);
-		EventCenter.instance().listen("MSG_JOIN_COIN_ACK", this.MSG_JOIN_COIN_ACK, this);
-		EventCenter.instance().listen("MSG_GAME_ADD_BET_ACK", this.MSG_GAME_ADD_BET_ACK, this);
+		EventCenter.getInstance().listen("MSG_USER_LEAVE_ROOM_PUSH", this.MSG_USER_LEAVE_ROOM_PUSH, this);
+		EventCenter.getInstance().listen("MSG_GAME_OTHER_BET_ACK", this.MSG_GAME_OTHER_BET_ACK, this);
+		EventCenter.getInstance().listen("MSG_GAME_ROOM_START_PUSH", this.MSG_GAME_ROOM_START_PUSH, this);
+		EventCenter.getInstance().listen("MSG_JOIN_COIN_ACK", this.MSG_JOIN_COIN_ACK, this);
+		EventCenter.getInstance().listen("MSG_GAME_ADD_BET_ACK", this.MSG_GAME_ADD_BET_ACK, this);
 	}
 
 	private findPlayer(userId) {

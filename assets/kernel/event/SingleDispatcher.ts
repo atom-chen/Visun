@@ -54,6 +54,6 @@ export default class SingleDispatcher {
 			}
 		}
 
-		EventCenter.instance().fire(cmd.toString(), info);
+		EventCenter.getInstance().fire(cmd.toString(), info);
 	}
 }

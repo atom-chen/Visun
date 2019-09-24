@@ -3,7 +3,7 @@ import TimerManager from "../timer/TimerManager";
 
 export default abstract class ModelBase{
 	clear(): void {
-		EventCenter.instance().removeByTarget(this);
+		EventCenter.getInstance().removeByTarget(this);
 		TimerManager.removeByTarget(this);
 		this.on_clear();
 	}

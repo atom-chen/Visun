@@ -5,11 +5,11 @@ export default class bjleGame extends ModelBase {
     private constructor() {
         super();
     }
-    public static instance() : bjleGame{
+    public static getInstance() : bjleGame{
         if(!bjleGame._instance) { bjleGame._instance = new bjleGame; }
         return bjleGame._instance;
     }
-    public static destroy() {
+    public static delInstance() {
         if(bjleGame._instance) { 
             bjleGame._instance.clear(); 
             bjleGame._instance = null;

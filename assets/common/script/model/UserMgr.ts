@@ -9,11 +9,11 @@ export default class UserMgr extends ModelBase{
     private constructor(){
 		super();
 	}
-    public static instance() : UserMgr {
+    public static getInstance() : UserMgr {
         if(!UserMgr._instance) { UserMgr._instance = new UserMgr; }
         return UserMgr._instance;
 	}
-	public static destroy() : void {
+	public static delInstance() : void {
 		if(UserMgr._instance) {
 			UserMgr._instance.clear();
 			UserMgr._instance = null;

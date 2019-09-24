@@ -12,7 +12,7 @@ export default class LoginUI extends BaseComponent {
 
         CommonUtil.addClickEvent(this.m_ui.btn_login, function(){ 
             cc.log("click ");
-            LoginMgr.instance().loginAsYouke();
+            LoginMgr.getInstance().loginAsYouke();
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_youke, function(){ 
             cc.log("click ");

@@ -10,8 +10,8 @@ HallRespond = {};
 
 HallRespond.req_youke_login = function(info:any){
 	if(!info) return;
-	LogicCenter.instance().clear(); //清理数据
-	LogicCenter.instance().init();
+	LogicCenter.getInstance().clear(); //清理数据
+	LogicCenter.getInstance().init();
 	HttpCore.token = info.sid;
 	UIManager.toast("登录成功");
 
@@ -22,8 +22,8 @@ HallRespond.req_youke_login = function(info:any){
 HallRespond.req_userinfo = function(info:any) {
 	if(!info) return;
 	cc.log("登录成功", info);
-	UserMgr.instance().setHeroId(info.userId);
-	UserMgr.instance().updateUser(info);
+	UserMgr.getInstance().setHeroId(info.userId);
+	UserMgr.getInstance().updateUser(info);
 }
 
 HallRespond.req_ranklist = function(info:any) {
@@ -32,7 +32,7 @@ HallRespond.req_ranklist = function(info:any) {
 
 HallRespond.req_game_list = function(info:any) {
 	if(!info) return;
-	GameManager.instance().setServerGames(info.data);
+	GameManager.getInstance().setServerGames(info.data);
 }
 
 HallRespond.req_enter_br_room = function(info:any) {

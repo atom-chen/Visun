@@ -5,7 +5,7 @@ import LoadCenter from "../load/LoadCenter";
 //---------------------------------
 export default class AudioManager {
 	private static singleInstance: AudioManager = null;
-	public static instance(): AudioManager {
+	public static getInstance(): AudioManager {
 		if (AudioManager.singleInstance == null) {
 			AudioManager.singleInstance = new AudioManager();
 		}
@@ -54,10 +54,10 @@ export default class AudioManager {
 	public playMusic(audioclip: cc.AudioClip, loop: boolean) {
 		if(this._mute) { return; }
 		this._currentMusicCacheUrl = audioclip.nativeUrl;
-		LoadCenter.instance().retatinRes(this._currentMusicCacheUrl);
+		LoadCenter.getInstance().retatinRes(this._currentMusicCacheUrl);
 		this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
 		cc.audioEngine.setFinishCallback(this._currentMusicId , () =>{
-			LoadCenter.instance().releaseRes(this._currentMusicCacheUrl);
+			LoadCenter.getInstance().releaseRes(this._currentMusicCacheUrl);
 			this._currentMusicCacheUrl = null;
 			this._currentMusicId = -1;
 		});
@@ -65,7 +65,7 @@ export default class AudioManager {
 
 	public playMusicSync(path: string, loop: boolean) {
 		if(this._mute) { return; }
-		LoadCenter.instance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
+		LoadCenter.getInstance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
 			this.playMusic(audioclip, loop, true)
 		}.bind(this));
 	}
@@ -83,7 +83,7 @@ export default class AudioManager {
 
 	public playEffectSync(path: string, immediately: boolean) {
 		if(this._mute) { return; }
-		LoadCenter.instance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
+		LoadCenter.getInstance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
 			this.playEffect(audioclip, immediately, true);
 		}.bind(this));
 	}
@@ -104,10 +104,10 @@ export default class AudioManager {
 	private _play(audioclip: cc.AudioClip) {
 		if(this._mute) { return; }
 		this._currentEffectCacheUrl = audioclip.nativeUrl;
-		LoadCenter.instance().retatinRes(this._currentEffectCacheUrl);
+		LoadCenter.getInstance().retatinRes(this._currentEffectCacheUrl);
 		this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
 		cc.audioEngine.setFinishCallback(this._currentEffectId, () =>{
-			LoadCenter.instance().releaseRes(this._currentEffectCacheUrl);
+			LoadCenter.getInstance().releaseRes(this._currentEffectCacheUrl);
 			this._currentEffectId = -1;
 			this._currentEffectCacheUrl = null;
 			this._playEffect();
