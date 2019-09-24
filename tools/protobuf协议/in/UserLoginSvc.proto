@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+// 后台管理 => 会员登录服务
+
+package login;
+
+service UserLoginSvc {
+    // 会员登录
+    rpc userLogIn(UserLogInReq) returns (UserLogInResp) {}
+}
+
+message GsPackage {
+    bytes enBody = 1;  // 加密后的消息体
+    string sign = 2;    // 签名字段
+}
+
+message UserInfo {
+  int64 memberId = 1;          //会员id
+  string memberAccount = 2;     //会员账号
+  string memberName = 3;        //会员名称
+  int64 merchantId = 4;         //商户id
+  int64 merchantMemberId = 5;   //商户会员id
+  string merchantName = 6;      //商户名称
+  string merchantAccount = 7;   //商户账号
+  int32 memberStatus = 8;       //会员状态
+  string identity = 9;          //身份
+  string memberAvatar = 10;     //会员头像
+  string token = 11;            //token
+  string money = 12;            //以上分金额
+}
+
+message UserLogInReq {
+    string address = 1;             // 登录地址: 由LoginSvc提供
+    int32 logType = 2;              // 登录类型: 由客户端提供??? 或者写死???
+    int64 memberId = 3;             // 会员ID: 由客户端提供
+    int32 memberLoginDevice = 4;    // 登录设备: 由客户端提供
+    string memberLoginIp = 5;       // 登录IP: 由网关提供
+    string memberLoginTime = 6;     // 登录时间: 由LoginSvc提供
+    string memberLogOutTime = 7;    // 登出时间: 由LoginSvc提供
+    int64 merchantId = 8;           // 平台ID: 由客户端提供
+    int64 merchantMemberId = 9;     // 平台会员ID: ???
+    string merchantName = 10;       // 平台名称
+    string remark = 11;             // 备注
+	string token = 12;				// token
+	string ipAddress = 13;
+}
+
+message UserLogInResp {
+    int32 code = 1;      // 返回码: 成功为0, 否则为-1
+    string msg = 2;      // 返回信息: 成功为"OK", 否则为错误信息
+    UserInfo data = 3;   // 返回数据: 成功时返回玩家数据, 否则为空
+}

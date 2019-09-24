@@ -1,0 +1,1 @@
+C:\Python27\python gen_proto.py blackjack game

@@ -1,5 +1,7 @@
 syntax = "proto3";
 package qhb;
+option java_package = "com.beiyou.game.proto";
+option java_outer_classname = "GameProto";
 
 // 统一回复数据格式
 message Reply
@@ -8,10 +10,11 @@ message Reply
     string msg = 2;
 }
 
-// 数组
-message IntArr
+message RedBag
 {
-    repeated int32 arr= 1;
+    int32 boom = 1;
+    int32 money = 2;
+    int32 totalCount = 3;
 }
 
 message Player
@@ -21,23 +24,34 @@ message Player
     string headImg = 3;
     int32 sex = 4;
     string ip = 5;
-    int32 isApply = 6;
+    bool isApply = 6;
     double coin = 7;
     int32 state = 8;
     bool canDeal = 9;
-    double currentScore = 10;
+    double currentScore = 10;           // user.getRoundScore() // 当前回合分
     double revenue = 11;
-    double totalScore = 12;
-    int32 bagBoom = 13;
-    int32 bagMoney = 14;
-    int32 money = 15;
+    double totalScore = 12;              // 玩家总盈利
+    RedBag redBag = 13;
+    double money = 14;                   // 玩家金币
+    bool  isBoom = 15;                   // 玩家是否中雷
+    double totalSendRedBag = 16;         // 玩家发包总额
+    double totalGrabRedBag = 17;         // 玩家抢包总额
+    int32 indexOfApplyList = 18;
+}
+
+message BankerInfo
+{
+    string bankerName = 1;
+    string bankerHeadImg = 2;
+    double bankerCoin = 3;
+    double bankerCurrentScore = 4;
 }
 
 message TableInfo
 {
-    string tableId = 1;      
-    string seq = 2;  
-    int32 gameId = 3;         
+    string tableId = 1;
+    string seq = 2;
+    int32 gameId = 3;
     int32 gameNo = 4;
     int32 minLimit = 5;
     int32 maxLimit = 6;
@@ -46,37 +60,28 @@ message TableInfo
     int32 state = 9;
     int32 bagNum = 10;
     repeated Player bingoUsers = 11;
-    int32 currentMoney = 12;
-    int32 currentBoom = 13;
-    string bankerName = 14;
-    string bankerHeadImg = 15;
-    double bankerCoin = 16;
-    int32 selfIndexInApplyList = 17;  // 进入桌子时命名为 remainNum；断线重连时竟然命名为 applyUserSize （狗屎）   
-    Player selfInfo = 18;
+    RedBag redBag = 12;
+    BankerInfo bankerInfo = 13;
+    int32 selfIndexInApplyList = 14;  // 进入桌子时命名为 remainNum；断线重连时竟然命名为 applyUserSize （狗屎）
+    Player selfInfo = 15;
 }
 
-message TableOutCard
+message ResultPlayer
 {
-    int32 type = 1;
-    repeated int32 handCards = 2;
-    repeated int32 cardsNum = 3;
-    int32 pos = 4;
-    int32 userPos = 5;
-    int32 index = 6;
-    bool hasStopped = 7;
-    int32 betCoin = 8;
-}
-
-//1文本 2玩家ID 3游戏名 4获胜金额 5获胜牌型
-message Prize
-{
-    string one = 1;
-    string two = 2;
+    int32 userId = 1;
+    string nickName = 2;
+    string headImg = 3;
+    int32 sex = 4;
+    double startScore = 5;
+    double currentScore = 6;
+    double endScore = 7;
+    double coin = 8;
+    double money = 9;
 }
 
 /* ------------------------------------------------------------- *
  * ------------------------------------------------------------- *
- * -------------  如果发生错误则会回复 Reply 结构  --------------- *
+ * -------------  如果发生异常则会回复 Reply 结构  --------------- *
  * ------------------------------------------------------------- *
  *---------------------------------------------------------------*/
 
@@ -122,7 +127,7 @@ message c2s_adminKickedOut
 }
 
 // 是不是傻
-// 异常回复 ADMIN_KICKEDOUT = 200 
+// 异常回复 ADMIN_KICKEDOUT = 200
 // 非异常回复 PUSH_KICKEDOUT = 4001
 message s2c_adminKickedOut
 {
@@ -147,7 +152,7 @@ message s2c_refreshCoin
 {
     int32 userId = 1;
     int32 coin = 2;
-    bool isInTable = 3;     // 1-3 回复来源 
+    bool isInTable = 3;     // 1-3 回复来源
     int32 type =4;
     int32 addCoin = 5;      // 1-5 推送至客户端
 }
@@ -159,21 +164,13 @@ message s2c_refreshCoin
 // APPLY_REQ = 2004;        // 埋雷申请
 message c2s_apply
 {
-    int32 boom = 1;
-    int32 money = 2;
-    int32 totalCount = 3;
+    RedBag redBag = 1;
 }
-        
+
 // APPLY_RESP = 2005;       // 埋雷申请 - 返回
 message s2c_apply
 {
-    int32 boom = 1;
-    int32 money = 2;
-    int32 totalCount = 3;
-    int32 userId = 4;
-    string nickName = 5;
-    string headImg = 6;
-    double coin = 7;
+    Player applyPlayer = 1;
 }
 
 // DISAPPLY_REQ = 2006;     // 取消埋雷申请
@@ -184,7 +181,7 @@ message c2s_disApply
 // DISAPPLY_RESP = 2007;    // 取消埋雷申请 - 返回
 message s2c_disApply
 {
-    double coin = 1; 
+    double coin = 1;
 }
 
 /** 加入牌桌请求 */
@@ -229,23 +226,38 @@ message s2c_qiang
 {
     double money = 1;
     double coin = 2;
+    bool  isBoom = 3;
 }
 
 /** 玩家抢红包推送 */
 // PUSHBET_RESP = 2003;
 message s2c_qiangPush
 {
-    double money = 1;
-    int32 userId = 2;
-    string headImg = 3;
-    string nickName = 4;
+    Player qiangPlayer = 1;
+}
+
+/** 推送回合结算2015 */
+// PUSH_ROUND_RESULT_RESP = 2015;
+message s2c_roundResult
+{
+    repeated ResultPlayer resultPlayer = 1;     // bingoUsers
+    string tableId = 2;
+    int32 state = 3;
+    string seq = 4;
+    int32 gameId = 5;
+    int32 gameNo = 6;
+    RedBag redBag = 7;
+    BankerInfo bankerInfo = 8;
+    string time = 9;
+    int32 selfIndexInApplyList = 10;
+    Player player = 11;                 // 被推送的玩家信息
 }
 
 /** 玩家点击重新连接 */
 // PUSH_USER_RECONNECT_REQ = 2030;
 message c2s_reconnect
 {
-    int32 userId = 1;   
+    int32 userId = 1;
 }
 
 // PUSH_USER_RECONNECT_RESP = 2031;
@@ -281,11 +293,99 @@ message s2c_userQuit
     int32 userId = 1;
 }
 
+
+/* 超时操作反馈 */
+// SEND_OPERATE_REQ = 2070;
+message c2s_sendOperate
+{
+    int32 opType = 1;
+}
+
+/* 超时操作反馈返回 */
+// SEND_OPERATE_RESP = 2071;
+message s2c_sendOperate
+{
+
+}
+
+/* 玩家配牌请求 */
+// SET_CARDS_TEST = 20000;
+message SetCardsTest
+{
+    int32 gameId = 1;
+    int32 tabletype = 2;
+    int32 deskNo = 3;
+    string sendData = 4;
+    string extraData = 5;
+}
+
+/** 同步玩家数据 **/
+//SYNC_PALYER_INFO_REQ = 2072;
+message c2s_SyncPlayerInfo
+{
+    int32 userId = 1;
+}
+//SYNC_PALYER_INFO_RESP = 2073;
+message s2c_SyncPlayerInfo
+{
+    Player player = 1;
+}
+
+
+message KickedOutRequest{
+    int32 userId    = 1;
+}
+
+message DelayQuitOfflineResponse{
+    int32 userId              = 1;
+}
+
+message KickedOutResponse{
+    string desc     = 1;
+}
+
+message SendRemainTimeResponse {
+     int32 time               = 1;
+     int32 type               = 2;
+}
+
+message HallRefreshCoinRequest{
+    int32 userId    = 1;
+    int32 type      = 2;
+}
+
+message HallRefreshCoinResponse{
+    int32 userId        = 1;
+    double coin         = 2;
+    bool isInTable      = 3;
+}
+
+message SendStateChangeResponse{
+    string tableId = 1;
+    int32 state = 2;
+    string seq = 3;
+    int32 currentMoney = 4;
+    int32 currentBoom = 5;
+    string bankerName = 6;
+    string bankerHeadImg = 7;
+    double bankerCoin = 8;
+}
+
+//推送金币刷新
+message SendCoinRefreshResponse {
+	int32 userId            = 1;
+	double coin             = 2;
+	bool isInTable          = 3;
+	bool type               = 4;
+	int32 addCoin           = 5;
+}
+
 //所有请求接口
 message Request {
-    enum CMD 
+    enum CMD
     {
         UNKNOWN                             = 0;
+        HALL_REFRESH_COIN            = 100;   //HallRefreshCoinRequest, HallRefreshCoinResponse
 
         // ** 申请埋雷
         APPLY_REQ = 2004;
@@ -294,11 +394,13 @@ message Request {
         /** 取消申请埋雷 */
         DISAPPLY_REQ = 2006;
         DISAPPLY_RESP = 2007;
-        
+
+        PUSH_STATE_CHANGE_RESP = 2009;
+
         /** 加入牌桌请求 */
 	    JOIN_COIN_TABLE_REQ = 20006;
         JOIN_COIN_TABLE_RESP = 20007;
-        
+
         /**获取玩家列表*/
         GET_USERLIST_REQ = 2020;
         GET_USERLIST_RESP = 2021;
@@ -308,11 +410,29 @@ message Request {
 	    QIANG_RESP = 2001;
 	    /** 玩家抢红包推送 */
         PUSHBET_RESP = 2003;
-    
+
+        /** 推送回合结算2015 */
+	    PUSH_ROUND_RESULT_RESP = 2015;
+
         /** 玩家点击重新连接2030 */
 	    PUSH_USER_RECONNECT_REQ = 2030;
         PUSH_USER_RECONNECT_RESP = 2031;
-        
+	    PUSH_RECONNECT_DATA_RESP = 2033;/** 推送玩家重连数据2033 */   // 2031 和 2033 合并成一个结构体
+	    DELAYQUIT_OFFLINE_RESP       = 3003;    //超时踢出
+        KICKEDOUT                    = 4001;    //KickedOutRequest,KickedOutResponse
+        SEND_COIN_REFRESH            = 2062;  //推送金币刷新 SendCoinRefreshResponse
+
+        /** 超时操作反馈 */
+        SEND_OPERATE_REQ      = 2070;
+        SEND_OPERATE_RESP     = 2071;
+
+        /** 配牌器 **/
+        SET_CARDS_TEST        = 20000;
+
+        /** 同步玩家数据 **/
+        SYNC_PALYER_INFO_REQ = 2072;
+        SYNC_PALYER_INFO_RESP = 2073;
+
         /**用户退后台*/
         USER_ONBACK_REQ = 2080;
         USER_ONBACK_RESP = 2081;
@@ -320,25 +440,32 @@ message Request {
         /** 玩家退出 */
 	    USER_QUIT_REQ = 2044;
 	    USER_QUIT_RESP = 2045;
+
+	    SEND_REMAIN_TIME             = 20015; //推送延时 SendRemainTimeResponse
     }
 
     CMD   cmd                           = 1;      //访问接口
-    c2s_apply apply	                    = 11;	
-    c2s_disApply disApply               = 12;     
-    c2s_joinTable joinTable		        = 13;	  
+    c2s_apply apply	                    = 11;
+    c2s_disApply disApply               = 12;
+    c2s_joinTable joinTable		        = 13;
     c2s_getUserList getUserList         = 14;
-    c2s_qiang qiang                     = 15;	 
-    c2s_reconnect reconnect				= 16;	
-    c2s_userOnBack userOnBack			= 17;	  
-    c2s_userQuit userQuit				= 18;	  
-
+    c2s_qiang qiang                     = 15;
+    c2s_reconnect reconnect				= 16;
+    c2s_userOnBack userOnBack			= 17;
+    c2s_userQuit userQuit				= 18;
+    KickedOutRequest kickedOutRequest              = 19;
+    HallRefreshCoinRequest hallRefreshCoinRequest  = 20;
+    c2s_sendOperate sendOperate         = 21;
+    SetCardsTest  setCardsTest          = 22;
+    c2s_SyncPlayerInfo syncPlayerInfo   = 23;
 }
 
 //所有应答接口
 message Response {
     enum ErrorCode {
-        NO_ERROR                        = 0;       
-        
+        NO_ERROR                        = 0;
+        OK                              = 200;
+        ERROR                           = 400;
         APPLY_ERROR                     = 3084;         // 当前房间人数已满~请选择其他房间加入试试
         TABLE_NOT_FOIND_ERROR           = 3008;         // 牌桌不存在")
         NO_CHARGE_ERROR                 = 3091;         // 请充值后游戏")
@@ -364,17 +491,25 @@ message Response {
     ErrorCode error                     = 1;// [default = NO_ERROR];   // 表示本次请求状态
     int64 serverTime                    = 2;                        // 服务器时间
     Request.CMD     cmd                 = 3;                        // 接口
- 
+
     Reply ret                           = 4;
 
     s2c_apply sendApply                     = 11;
-    s2c_disApply sendDisApply               = 12;	
+    s2c_disApply sendDisApply               = 12;
     s2c_joinTable sendJoinTable             = 13;
     s2c_getUserList sendGetUserList         = 14;
     s2c_qiang sendQiang                     = 15;
-    s2c_qiangPush sendQiangPush             = 16;					
-    s2c_reconnect sendReconnect			    = 17;	
-    s2c_userOnBack sendUserOnBack		    = 18;			
-    s2c_userQuit sendUserQuit		        = 19;						
-
+    s2c_qiangPush sendQiangPush             = 16;
+    s2c_reconnect sendReconnect			    = 17;
+    s2c_userOnBack sendUserOnBack		    = 18;
+    s2c_userQuit sendUserQuit		        = 19;
+    s2c_roundResult sendRoundResult         = 20;
+    KickedOutResponse kickedOutResponse                                 = 21;
+    DelayQuitOfflineResponse delayQuitOfflineResponse                   = 22;
+    SendStateChangeResponse sendStateChangeResponse                     = 23;
+    SendRemainTimeResponse sendRemainTimeResponse                       = 24;                       //推送延时
+    SendCoinRefreshResponse sendCoinRefreshResponse                     = 25;
+    HallRefreshCoinResponse hallRefreshCoinResponse                     = 26;
+    s2c_sendOperate sendOperate             = 27;
+    s2c_SyncPlayerInfo syncPlayerInfoResponse = 28 ;
 }

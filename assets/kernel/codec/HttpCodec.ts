@@ -8,6 +8,9 @@ export default class HttpCodec implements ICodec {
     //将表形式的数据转换成 "k1=v1&k2=v2&k3=v3" 格式的字符串
 	encode(param:any, rule:any) : string
 	{
+		if(param === undefined || param === null) {
+			return null;
+		}
 		if( typeof(param) === typeof("") ){
 			return param;
 		}

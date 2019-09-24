@@ -14,36 +14,36 @@ message UserCards {
 }
 
 message User{
-    int32 userId                = 1; //用户ID
-    int32 state                 = 2; //状态
-    string nickname             = 3;
-    string headImg              = 4;
-    int32 sex                   = 5;
-    string ip                   = 6;
-    int32 position              = 7;
-    int32 agree                 = 8;
-    int32 onLine                = 9;
-    int64 coin                  = 10;
-    int32 betCoin               = 11;
-    int32 qiang                 = 12; //抢庄
-    repeated int32 remainCards           = 13;
-    OutCard bestOutCardDto      = 14;
-    repeated int32 allowQiang            = 15;
-    repeated int32 allowBet              = 16;
-    bool tongsha                = 17;
-    bool tongpei                = 18;
-    double startScore           = 19;
-    double endScore             = 20;
-    double currentScore         = 21;
-    int32 score                 = 22;
-    double revenue              = 23;
-    bool noCoin                 = 24;
-    double totalScore           = 25;
-    bool hasShowCard			= 26;
-
-    OutCard outCardDto          = 27;
-    UserCards cards             = 28;
-}
+      int32 userId                = 1; //用户ID
+      int32 state                 = 2; //状态
+      string nickname             = 3;
+      string headImg              = 4;
+      int32 sex                   = 5;
+      string ip                   = 6;
+      int32 position              = 7;
+      int32 agree                 = 8;
+      int32 onLine                = 9;
+      double coin                  = 10;
+      int32 betCoin               = 11;
+      int32 qiang                 = 12; //抢庄
+      repeated int32 remainCards           = 13;
+      OutCard bestOutCardDto      = 14;
+      repeated int32 allowQiang            = 15;
+      repeated int32 allowBet              = 16;
+      bool tongsha                = 17;
+      bool tongpei                = 18;
+      double startScore           = 19;
+      double endScore             = 20;
+      double currentScore         = 21;
+      int32 score                 = 22;
+      double revenue              = 23;
+      bool noCoin                 = 24;
+      double totalScore           = 25;
+      bool hasShowCard			= 26;
+  
+      OutCard outCardDto          = 27;
+      UserCards cards             = 28;
+  }
 
 
 
@@ -52,7 +52,7 @@ message User{
 //用户准备
 //USER_READY = 2106;
 message UserReadyRequest{
-
+      int32  tableType            = 1;
 }
 
 
@@ -91,7 +91,7 @@ message DelayCheckRequest {
 }
 
 //重连
-//PUSH_RECONNECT_DATA_RESP = 2033;
+//USER_RECONNECT = 2030;
 message UserReconnectRequest {
       int32 userId            = 1; //
 }
@@ -177,6 +177,22 @@ message RoomListResponse{
     repeated RoomList roomList          = 1;
 }
 
+// SETCARDSTEST = 20000;
+message SetCardsTest
+{
+    int32 gameId = 1;
+    int32 tabletype = 2;
+    int32 deskNo = 3;
+    string sendData = 4;
+    string extraData = 5;
+}
+
+//配牌返回
+message S2C_SetGameData
+{
+    string data  = 1;
+}
+
 //所有请求接口
 message Request {
     enum CMD {
@@ -216,6 +232,7 @@ message Request {
       DELAY_CHECK                  = 20010; //客户端延时检测  DelayCheckRequest, DelayCheckResponse
       SEND_LEAVE_TABLE			   = 20019; //推送玩家离开桌子 SendLeaveTableResponse
       SEND_COIN_TABLE_INFO         = 20017; //玩家中途加入游戏时推送当前桌子信息 SendCoinTableInfoResponse
+      SETCARDSTEST = 20000;	//配牌 C2S_SetGameData S2C_SetGameData
 
     }
     CMD   cmd                                      = 1;      //访问接口
@@ -234,6 +251,7 @@ message Request {
     UserOnBackRequest userOnBackRequest            = 30;     //
     RoomListRequest roomListRequest                = 31;
     HallRefreshCoinRequest hallRefreshCoinRequest  = 32;
+    SetCardsTest setCardsTest                      = 33;
 }
 
 
@@ -425,37 +443,36 @@ message SendLeaveTableResponse {
 //所有应答接口
 message Response {
     enum ErrorCode {
-        NO_ERROR                                            = 0;
-        ERROR                                               = 400;// 返回没有错误发生
-        USER_READY_ERROR                                    = 3010;                     // 玩家准备异常
-        ACCOUNT_NOT_ENOUGH                                  = 3006;
-        TABLE_NOT_FIND_ERROR                                = 3008;                     // 牌桌不存在
-        NOT_IN_TABLE                                        = 3011;                     // 未加入此房间
-        JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
-        TABLE_NO_POSITION                                   = 3009;                     // 此房间已经人满
-
-        USER_QUIT_ERROR                                     = 3013;                     // 玩家退出异常
-        NOT_ALLOW_QUIT                                      = 3014;                     // 无法退出房间
-
-        WAITING_RESPONSE                                    = 3043;                     // 等待其他玩家响应
-        USER_MP_ERROR                                       = 3200;                     // 明牌失败
-
-        TABLE_HASSTART_POSITION                             = 3071;                     // 此房间游戏已开始
-        RECONNET_ERROR                                      = 3025;                     // 重连错误
-        SEND_MESSAGE_ERROR                                  = 3040;                     // 发送信息失败
-        USER_ONBACK_ERROR                                   = 3056;                     // 用户退后台消息
-        DELAY_CHECK_ERROR                                   = 3201;                     // 延时检测异常
-        RE_JOIN_TABLE_ERROR                                 = 3026;                     // 重新加入桌子失败
-        USER_BET_ERROR                                      = 3077;                     // 用户下注失败
-        USER_SHOWCARD_ERROR                                 = 3076;                     // 用户亮牌失败
-        QIANG_ZHUANG_ERROR                                  = 3075;                     // 抢庄
-        USER_CHANGE_TABLE_ERROR                             = 3069;                     // 玩家换桌异常
-        USER_CHANGE_TABLE_STATE_ERROR                       = 3070;                     //玩家该状态下不能换桌
-                ROOM_LIST_ERROR                                     = 3091;
-                        CHANNELID_GAMENO_ERROR                              = 3092;                     //
-                USER_BAN                                            = 30002;                    //账号异常...无法开始游戏,请联系客服
-        USER_NOT_FOUND_ERROR                                = 3005;                     //玩家不存在
-                FORCED_OFFLINE                                      = 30001;                    //账号在其他地方登录,连接断开,请重新登录
+      NO_ERROR                                            = 0;
+      ERROR                                               = 400;// 返回没有错误发生
+      USER_READY_ERROR                                    = 3010;                     // 玩家准备异常
+      ACCOUNT_NOT_ENOUGH                                  = 3006;
+      TABLE_NOT_FIND_ERROR                                = 3008;                     // 牌桌不存在
+      NOT_IN_TABLE                                        = 3011;                     // 未加入此房间
+      JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
+      TABLE_NO_POSITION                                   = 3009;                     // 此房间已经人满
+      USER_QUIT_ERROR                                     = 3013;                     // 玩家退出异常
+      NOT_ALLOW_QUIT                                      = 3014;                     // 无法退出房间
+      WAITING_RESPONSE                                    = 3043;                     // 等待其他玩家响应
+      USER_MP_ERROR                                       = 3200;                     // 明牌失败
+      TABLE_HASSTART_POSITION                             = 3071;                     // 此房间游戏已开始
+      RECONNET_ERROR                                      = 3025;                     // 重连错误
+      SEND_MESSAGE_ERROR                                  = 3040;                     // 发送信息失败
+      USER_ONBACK_ERROR                                   = 3056;                     // 用户退后台消息
+      DELAY_CHECK_ERROR                                   = 3201;                     // 延时检测异常
+      RE_JOIN_TABLE_ERROR                                 = 3026;                     // 重新加入桌子失败
+      USER_BET_ERROR                                      = 3077;                     // 用户下注失败
+      USER_SHOWCARD_ERROR                                 = 3076;                     // 用户亮牌失败
+      QIANG_ZHUANG_ERROR                                  = 3075;                     // 抢庄
+      USER_CHANGE_TABLE_ERROR                             = 3069;                     // 玩家换桌异常
+      USER_CHANGE_TABLE_STATE_ERROR                       = 3070;                     //玩家该状态下不能换桌
+      ROOM_LIST_ERROR                                     = 3091;
+      CHANNELID_GAMENO_ERROR                              = 3092;                     //
+      USER_QUIT_FOR_OVERTIME_ERROR                        = 3093;                     //您已经长时间没有操作，已退出游戏房间
+      USER_BAN                                            = 30002;                    //账号异常...无法开始游戏,请联系客服
+      USER_NOT_FOUND_ERROR                                = 3005;                     //玩家不存在
+      FORCED_OFFLINE                                      = 30001;                    //账号在其他地方登录,连接断开,请重新登录
+      PUSH_USER_TESTDATA_ERROR                            = 500;                      // 配牌失败
 
     }
     ErrorCode error                                                     = 1 ;   // 表示本次请求状态

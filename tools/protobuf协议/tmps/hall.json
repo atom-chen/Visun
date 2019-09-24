@@ -1,0 +1,123 @@
+{
+  "nested": {
+    "hallgw": {
+      "nested": {
+        "HallMsgId": {
+          "values": {
+            "Msg_Unknown": 0,
+            "Msg_HeartReq": 5000,
+            "Msg_HeartResp": 5001,
+            "Msg_UserInfoReq": 20000,
+            "Msg_UserInfoResp": 20001,
+            "Msg_GameListReq": 20002,
+            "Msg_GameListResp": 20003,
+            "Msg_NoticeNotify": 20004
+          }
+        },
+        "HeartReq": {
+          "fields": {}
+        },
+        "HeartResp": {
+          "fields": {
+            "serverTime": {
+              "type": "int64",
+              "id": 1
+            }
+          }
+        },
+        "RespErr": {
+          "values": {
+            "RespErr_Unknown": 0,
+            "ReqFormatErr": 1,
+            "UserInfoRespRedisOperErr": 2,
+            "GameListRespDBOperErr": 3
+          }
+        },
+        "UserInfoReq": {
+          "fields": {
+            "Id": {
+              "type": "int32",
+              "id": 1
+            }
+          }
+        },
+        "UserInfoResp": {
+          "fields": {
+            "Id": {
+              "type": "int32",
+              "id": 1
+            },
+            "Account": {
+              "type": "string",
+              "id": 2
+            },
+            "Name": {
+              "type": "string",
+              "id": 3
+            },
+            "Coin": {
+              "type": "int64",
+              "id": 4
+            },
+            "Head": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "GameInfo": {
+          "fields": {
+            "Id": {
+              "type": "int32",
+              "id": 1
+            },
+            "Name": {
+              "type": "string",
+              "id": 2
+            },
+            "Type": {
+              "type": "int32",
+              "id": 3
+            },
+            "State": {
+              "type": "int32",
+              "id": 4
+            },
+            "Tag": {
+              "type": "int32",
+              "id": 5
+            },
+            "HaveRoomList": {
+              "type": "int32",
+              "id": 6
+            },
+            "RoomList": {
+              "type": "string",
+              "id": 7
+            }
+          }
+        },
+        "GameListReq": {
+          "fields": {}
+        },
+        "GameListResp": {
+          "fields": {
+            "List": {
+              "rule": "repeated",
+              "type": "GameInfo",
+              "id": 1
+            }
+          }
+        },
+        "NoticeNotify": {
+          "fields": {
+            "Content": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

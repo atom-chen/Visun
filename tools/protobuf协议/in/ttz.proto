@@ -1,4 +1,6 @@
 syntax = "proto3";
+option java_package = "com.beiyou.game.proto";
+option java_outer_classname = "GameProto";
 
 package ttz;
 
@@ -29,18 +31,30 @@ message User{
     int32 qiang                 = 16; //抢庄
 
     repeated int32 remainCards           = 17;
-    repeated int32 bestOutCardDto      = 18;
+    //OutCard bestOutCardDto      = 18;
 
     repeated int32 allowQiang            = 19;
     repeated int32 allowBet              = 20;
     double currentScore          = 21;
-    repeated int32 outCardDto          = 22;
+    OutCard outCardDto          = 22;
     UserCards cards             = 23;
     double totalScore                 = 24;
     double revenue               = 25;
     double startScore            = 26;
     double endScore              = 27;
     bool hasShowCard			 = 28;
+}
+
+message OutCard {
+    int32 type                      = 1;
+    repeated int32 card             = 2;
+}
+
+message GameInfo{
+    int32 maxMult               = 1;
+    int32 coinLimit             = 2;
+    int32 difen                 = 3;
+    int32 gameNo                = 4;
 }
 
 message UserReady {
@@ -53,8 +67,18 @@ message UserReady {
 //JOIN_TABLE				   = 2002
 message JoinTableRequest {
 	string sid                  = 1; //
-	string tableId				 = 2; //桌子ID
-	string gps					 = 3; //ip地址
+	int32 tableType             = 2;
+}
+
+message JoinTableUser{
+    int32 userId                = 1; //用户ID
+    int32 state                 = 2; //状态
+    string nickname             = 3;
+    string headImg              = 4;
+    int32 sex                   = 5;
+    string ip                   = 6;
+    int32 position              = 7;
+    double coin                 = 8;
 }
 
 //加入桌子返回
@@ -66,10 +90,10 @@ message JoinTableResponse {
 	int32 channelId			    = 5;// 桌主ID
 	int32 currentRound		    = 6;// 当前回合数
 	int32 totalRound		    = 7;// 总回合数
-	string gameInfo		        = 8;// 游戏参数
+	GameInfo gameInfo		        = 8;// 游戏参数
 
 	repeated int32 cardCount	= 20;
-	repeated User users			= 21; //其它用户状态信息
+	repeated JoinTableUser users			= 21; //其它用户状态信息
 }
 
 //玩家准备
@@ -86,8 +110,21 @@ message KickedOutResponse{
     string desc     = 1;
 }
 
+//亮牌
+message ShowCardRequest {
 
+}
 
+//玩家配牌请求
+//SET_CARDS_TEST = 20000;
+message SetCardsTest
+{
+    int32 gameId = 1;
+    int32 tabletype = 2;
+    int32 deskNo = 3;
+    string sendData = 4;
+    string extraData = 5;
+}
 
 //抢庄
 //QIANG_ZHUANG                 = 2024;
@@ -103,15 +140,18 @@ message BetRequest {
 
 message BetUser{
      int32 userId             = 1;
-     int32 state              = 2;
-     int32 betCoin            = 3;
+     int32 position           = 2;
+     int32 state              = 3;
+     int32 betCoin            = 4;
 }
 
 //用户下注
 message BetResponse {
-     int32 userId             = 1;
-     int32 state              = 2;
-     repeated BetUser users               = 3;
+     int32 userId                   = 1;
+     int32 position                 = 2;
+     int32 state                    = 3;
+
+     repeated BetUser users         = 20;
 }
 
 
@@ -156,15 +196,16 @@ message DelayCheckRequest {
 }
 
 message NoticePushFrCenterRequest{
+    string content              = 1;
 }
 message NoticePushFrCenterResponse{
     string content          = 1;
 }
-
 //HALL_REFRESH_COIN            = 100;
 message HallRefreshCoinRequest{
     int32 userId    = 1;
     int32 type      = 2;
+    int32 addCoin   = 3;
 }
 
 message HallRefreshCoinResponse{
@@ -181,7 +222,7 @@ message TableInfoResponse {
      int32 gameId             = 3;
      int32 zhuangPos          = 4;
      int32 state              = 5;
-     string gameInfo          = 6;
+     GameInfo gameInfo          = 6;
      int32 currentRound       = 7;
      int32 totalRound         = 8;
 
@@ -216,7 +257,7 @@ message SendRoundResultResponse
     string tableId            = 1;
     int32 zhuangPos          = 2;
     int32 state              = 3;
-    string gameInfo          = 4;
+    GameInfo gameInfo          = 4;
     string time              = 5;
     int32 currentRound              = 6;
     repeated int32 cardCount              = 7;
@@ -239,7 +280,7 @@ message UserReconnectResponse {
 	string seq                  = 2;
 	int32 gameId				= 3;
 		int32 zhuangPos			= 4;
-	string gameInfo			= 5;
+	GameInfo gameInfo			= 5;
 	int32 state				= 6;
 	int32 currentRound			= 7;
 	int32 totalRound			= 8;
@@ -273,7 +314,13 @@ message SendMessageResponse {
       string content          = 2;
       int32 toUserId          = 3;
 }
-
+//亮牌
+message ShowCardResponse {
+      int32 userId            = 1;
+      int32 state             = 2;
+      int32 position          = 3;
+      OutCard outCardDto      = 4;
+}
 //推送金币刷新
 message SendCoinRefreshResponse {
 	int32 userId            = 1;
@@ -298,6 +345,12 @@ message QiangZhuangResponse {
 
 message DelayQuitOfflineResponse{
     int32 userId              = 1;
+}
+
+
+//用户退到后台
+message UserOnBackResponse {
+	int32 userId    		 = 1;
 }
 
 //推送钻石变化
@@ -337,7 +390,7 @@ message ForcedOfflineResponse{
 }
 
 message SendUserCardResponse{
-    repeated int32  disc        = 1;
+    repeated int32  dice        = 1;
 }
 //所有请求接口
 message Request {
@@ -355,13 +408,14 @@ message Request {
 
 	  USER_READY				   = 2006;	 //玩家点击准备请求 UserReadyRequest
 	  SEND_USER_READY			   = 2007;	 //玩家点击准备返回 SendUserReadyResponse
+	  SHOW_CARD                    = 2010;  //亮牌 ShowCardRequest, ShowCardResponse
 
-	 SEND_USER_INFO               = 2058;  //推送玩家信息 TableInfoResponse
-     SEND_USER_CARD              = 2059; //推送 提示 和手牌
+	 SEND_USER_INFO                = 2058;  //推送玩家信息 TableInfoResponse
+     SEND_USER_CARD                = 2059; //推送 提示 和手牌
 
 	  SEND_CARDS				   = 2009;	 //推送给每个玩家发牌 SendCardsResponse
       USER_RECONNECT               = 2030;   //玩家重连 UserReconnectRequest, UserReconnectResponse
-	  SEND_RECONNECT_QUIT			= 2035;  //玩家重连回到大厅 SendReconnectQuitResponse
+	  SEND_RECONNECT_QUIT		   = 2035;  //玩家重连回到大厅 SendReconnectQuitResponse
       SEND_USER_RECONNECT          = 2031;   //推送重连信息 SendUserReconnectResponse
 
 	  USER_QUIT					   = 2044;   //玩家退出 UserQuitRequest, UserQuitResponse
@@ -370,7 +424,7 @@ message Request {
 	  MESSAGE					   = 2060;   //聊天 MessageRequest
 	  SEND_MESSAGE                 = 2061;   //推送聊天信息 SendMessageResponse
 	  SEND_COIN_REFRESH            = 2062;  //推送金币刷新 SendCoinRefreshResponse
-      USER_ONBACK                  = 2080;   //用户退到后台  UserOnBackRequest
+      USER_ONBACK                  = 2080;   //用户退到后台  UserOnBackRequest, UserOnBackResponse
       SEND_USER_ONBACK             = 2081;   //退到后台 SendUserOnBackResponse
 
 	  SEND_DIAMOND_CHANGE		   = 2071;   //推送钻石变化 SendDiamondChangeResponse
@@ -391,21 +445,24 @@ message Request {
 
       SEND_HEART_BEAT				= 10000; //推送心跳 SendHeartBeatResponse
       NOTICE_PUSH_RESP              = 30002;
+      SET_CARDS_TEST                = 20000;
     }
-    CMD   cmd                                       = 1;      //访问接口
-    JoinTableRequest joinTableRequest      		    = 2;     //加入桌子
-    UserReadyRequest userReadyRequest				= 3;	  //玩家准备
-    UserReconnectRequest userReconnectRequest       = 4;     //重新连接
-    UserQuitRequest userQuitRequest                 = 5;     //玩家退出
-    MessageRequest messageRequest                   = 6;     //聊天
-    UserOnBackRequest userOnBackRequest             = 7;     //用户切换到后台
-    DelayCheckRequest delayCheckRequest             = 8;     //延时检测
-    KickedOutRequest kickedOutRequest               = 9;
+    CMD   cmd                                           = 1;      //访问接口
+    JoinTableRequest joinTableRequest          		    = 2;     //加入桌子
+    UserReadyRequest userReadyRequest		    		= 3;	  //玩家准备
+    UserReconnectRequest userReconnectRequest           = 4;     //重新连接
+    UserQuitRequest userQuitRequest                     = 5;     //玩家退出
+    MessageRequest messageRequest                       = 6;     //聊天
+    UserOnBackRequest userOnBackRequest                 = 7;     //用户切换到后台
+    DelayCheckRequest delayCheckRequest                 = 8;     //延时检测
+    KickedOutRequest kickedOutRequest                   = 9;
+    ShowCardRequest showCardRequest                     = 10;     //
 
-    QiangZhuangRequest qiangZhuangRequest           = 10;     //抢庄
-    BetRequest betRequest                           = 11;     //下注
-    NoticePushFrCenterRequest noticePushFrCenterRequest = 12;
-    HallRefreshCoinRequest hallRefreshCoinRequest   = 13;
+    QiangZhuangRequest qiangZhuangRequest               = 11;     //抢庄
+    BetRequest betRequest                               = 12;     //下注
+    NoticePushFrCenterRequest noticePushFrCenterRequest = 13;
+    HallRefreshCoinRequest hallRefreshCoinRequest       = 14;
+    SetCardsTest setCardsTest                           = 15;
 }
 
 
@@ -466,29 +523,27 @@ message Response {
  	SendJoinTableResponse sendJoinTableResponse	                        = 12;						//加入桌子--推送返回
     SendUserReadyResponse sendUserReadyResponse	                        = 13;						//玩家点击准备--推送返回2007
     SendCardsResponse sendCardsResponse			                        = 14;						//推送给每个玩家发牌--推送2009
-
     //SendUserQZResponse sendUserQZResponse		                        = 15;					    	//抢庄返回
     SendReconnectQuitResponse sendReconnectQuitResponse		            = 16;							//推送重连回到大厅
-
     SendUserReconnectResponse sendUserReconnectResponse                 = 17;				//推送玩家重新连接 2031
-
     SendUserQuitResponse sendUserQuitResponse		                    = 18;                       //推送玩家退出
     SendMessageResponse sendMessageResponse                             = 19;                       //推送聊天信息
     SendUserOnBackResponse sendUserOnBackResponse                       = 20;                       //退到后台
-
     SendDiamondChangeResponse sendDiamondChangeResponse                 = 21;                 //推送钻石变化
-
     SendRemainTimeResponse sendRemainTimeResponse			            = 22;						//推送延时时间
-
 	SendNoticeClientDismissResponse sendNoticeClientDismissResponse     = 23;		//通知玩家
     SendRoundResultResponse sendRoundResultResponse                     = 24;
+
 	SendUserQuitByAdminResponse sendUserQuitByAdminResponse	            = 25;							//通知被后台踢出
     SendCoinRefreshResponse sendCoinRefreshResponse		        	    = 26;
     SendBetResponse  sendBetResponse                                    = 27; //下注返回
     SendHeartBeatResponse sendHeartBeatResponse                         = 28;                       //心跳
     DelayQuitOfflineResponse delayQuitOfflineResponse                   = 29;
-    SendUserCardResponse sendUserCardResponse                           = 30;
-    NoticePushFrCenterResponse noticePushFrCenterResponse               = 31;
-    HallRefreshCoinResponse hallRefreshCoinResponse                     = 32;
-}
+    UserOnBackResponse userOnBackResponse                               = 30;
+    ShowCardResponse showCardResponse                                   = 31;                       //亮牌
+    SendUserCardResponse sendUserCardResponse                           = 32;
+    NoticePushFrCenterResponse noticePushFrCenterResponse               = 33;
+    HallRefreshCoinResponse hallRefreshCoinResponse                     = 34;
 
+
+}

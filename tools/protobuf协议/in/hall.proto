@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package hallgw;
+
+enum HallMsgId {
+    Msg_Unknown	= 0;
+    Msg_HeartReq = 5000;
+    Msg_HeartResp = 5001;
+    Msg_UserInfoReq      = 20000; // 获取用户信息
+    Msg_UserInfoResp     = 20001; // 获取用户信息
+    Msg_GameListReq      = 20002; // 获取游戏列表
+    Msg_GameListResp     = 20003; // 获取游戏列表
+    Msg_NoticeNotify     = 20004; // 公告推送
+}
+
+//心跳
+message HeartReq{
+}
+
+message HeartResp{
+  int64 serverTime  = 1;  //服务器时间
+}
+
+enum RespErr{
+    RespErr_Unknown	= 0;
+    ReqFormatErr = 1;
+    UserInfoRespRedisOperErr = 2;
+    GameListRespDBOperErr = 3;
+}
+
+message UserInfoReq {
+    int32 Id = 1;
+}
+
+message UserInfoResp {
+    int32  Id      = 1; // 会员Id
+    string Account = 2; // 账号
+    string Name	   = 3; // 名称
+    int64  Coin    = 4; // 金币
+    string Head    = 5; // 头像
+}
+
+message GameInfo {
+    int32  Id           = 1; // 游戏Id
+    string Name         = 2; // 游戏名称
+    int32  Type         = 3; // 游戏类型
+    int32  State        = 4; // 游戏状态
+    int32  Tag          = 5; // 标签（活动、最新）
+    int32  HaveRoomList = 6; // 是否有房间列表
+    string RoomList     = 7; // 房间列表
+}
+
+message GameListReq {
+}
+
+message GameListResp {
+    repeated GameInfo List = 1; // 游戏列表
+}
+
+message NoticeNotify {
+    string Content = 1; // 公告内容
+}

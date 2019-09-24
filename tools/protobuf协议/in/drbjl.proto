@@ -1,5 +1,5 @@
 syntax = "proto3";
-package bjl;
+package drbjl;
 option java_package = "com.beiyou.game.proto";
 option java_outer_classname = "GameProto";
 
@@ -28,7 +28,26 @@ message Player
     double revenue = 8;
     double coin = 9;
     int32 lastRoundBet = 10;
-    repeated int32 realBetCoin = 11;
+    int32 curTableIndex = 11;
+}
+
+message SimpleTable
+{
+    string tableId = 1;
+    repeated IntArr winPosRecord = 2;
+}
+
+message SubTable
+{
+    int32 index = 1;
+    int32 state = 2;
+    repeated int32 cardA = 3;
+    repeated int32 cardB = 4;
+    int32 numA = 5;
+    int32 numB = 6;
+    repeated int32 totalBet = 7;
+    repeated int32 winPoss = 8;
+    repeated IntArr winPosRecord = 9; 
 }
 
 message TableInfo
@@ -41,16 +60,17 @@ message TableInfo
     int32 minLimit = 6;
     repeated int32 maxLimit = 7;
     repeated int32 allowBet = 8;
-    repeated int32 cardA = 9;
-    repeated int32 cardB = 10;
-    int32 numA = 11;
-    int32 numB = 12;
-    repeated double mult = 13;
-    int32 state = 14;
-    repeated int32 totalBet = 15;
-    repeated int32 winPoss = 16;
-    repeated IntArr winPosRecord = 17; 
-    int32 remainCardsNum = 18;
+    repeated double mult = 9;
+    repeated SubTable subTables = 10;
+}
+
+message FreeHandInfo
+{
+    repeated int32 cardA = 1;
+    repeated int32 cardB = 2;
+    int32 numA = 3;
+    int32 numB = 4;
+    repeated int32 winPoss = 5;
 }
 
 /* ------------------------------------------------------------- *
@@ -62,105 +82,101 @@ message TableInfo
 // 此游戏未注册消息 但是包含此消息实现
 // 消息类                    消息号                                    注册此消息游戏
 // BindGameNoHandler        BIND_GAME_NO_HANDLER =2002                  骰宝
-// GetAllUserHandler        GETUSERLIST_REQ = 2020                      奔驰宝马，龙虎，飞禽走兽
+// GetAllUserHandler        GETUSERLIST_REQ  = 2020                      奔驰宝马，龙虎，飞禽走兽
 // GetRomeListHandler       GET_ROME_LIST = 20004                       三公，十三水，骰宝
 
 // common 层消息
-//2003
-message S2C_TableState
+
+//GETTABLELIST_REQ      = 2001
+message C2S_GetTableList
 {
-    int32 gameNo = 1;
-    repeated TableInfo tables = 2;
+    string sid = 1;
 }
 
-// PUSH_STATE_CHANGE_MSG             = 2009
-message S2C_PushStateChange
+//GETTABLELIST_RESP     =2002
+message S2C_GetTableList
 {
-    TableInfo table = 1;
+    repeated SimpleTable tableList = 1;
+}
+
+//FREEHANDS_REQ     =2003
+message C2S_FreeHands
+{
+    int32 tableIndex = 1;
+    int32 rounds = 2;
+}
+
+//2004
+message S2C_FreeHands
+{
+    int32 tableIndex = 1;
+    repeated FreeHandInfo freeHandInfo = 2;
+}
+
+//DEALCARD_REQ      =2005
+message C2S_DealCard
+{
+    int32 tableIndex = 1;
+    bool isRepeat = 2;
+    bool isDouble = 3; 
+}
+
+//DEALCARD_RESP     =2006 
+message S2C_DealCard
+{
+    int32 tableIndex = 1;
+    Player player = 2;
+    TableInfo tableInfo = 3;
+    Reply ret = 4;
 }
 
 // BET_REQ                             = 2010;
 message C2S_Bet
 {
-    int32 pos = 1;          // 下注位置
-    int32 value = 2;        // 下注金额
+    int32 tableIndex = 1;
+    int32 pos = 2;          // 下注位置
+    int32 value = 3;        // 下注金额
 }
 
 //2011
 message S2C_Bet
 {
-    Player player = 1;
-    int32 pos = 2;          // 下注位置
-    int32 value = 3;        // 下注金额
-    Reply ret = 4;
+    int32 tableIndex = 1;
+    Player player = 2;
+    int32 pos = 3;          // 下注位置
+    int32 value = 4;        // 下注金额
+    Reply ret = 5;
 }
 
-//2013
-message S2C_PushBetMsg
+// RESET_SUBTABLE_REQ    = 2012
+message C2S_ResetSubTable
 {
-    repeated int32 totalBet = 1;
+    int32 tableIndex = 1;
 }
 
-//2015
-message S2C_PushRoundResultMsg
+//RESET_SUBTABLE_RESP   =2013
+message S2C_ResetSubTable
 {
-    Player player = 1;
-    TableInfo tableInfo = 2;
-    repeated int32 noCoin = 3;
-    Reply ret = 4;
+    int32 tableIndex = 1;
+    Reply ret = 2;
 }
 
-//2019
-message S2C_PushSendCardMsg
-{
-    repeated int32 cardA = 1;
-    repeated int32 cardB = 2;
-    int32 numA = 3;
-    int32 numB = 4;
-    int32 state = 5;
-    int32 remainCardsNum = 6;
-}
-
-// GETUSERLIST_REQ         = 2020
-message C2S_GetUserList
-{
-}
-
-//2021
-message S2C_GetUserList
-{
-    repeated Player players = 1;
-}
-
-// BET_AGAIN_REQ     =2024
-message C2S_BetAgain
-{
-    int32 userId = 1;
-}
-
-//2025
-message S2C_BetAgain
-{
-    Player player = 1;
-    repeated int32 lastRoundBet = 2;
-    Reply ret = 3;
-}
-
-// UNDO_BET_REQ          =2026
+// UNDO_BET_REQ          = 2026
 message C2S_UndoBet
 {
-    int32 userId = 1;
+    int32 tableIndex = 1;
 }
 
 //2027
 message S2C_UndoBet
 {
-    Player player = 1;
-    repeated int32 bet = 2;
-    Reply ret = 3;
+    int32 tableIndex = 1;
+    Player player = 2;
+    repeated int32 bet = 3;
+    Reply ret = 4;
 }
 
-// USER_RECONNECT_REQ        =2030
+// USER_RECONNECT_REQ        = 2030
 message C2S_Reconnect
 {
     int32 userId = 1;
@@ -179,16 +195,16 @@ message S2C_Reconnect
 //2033
 message S2C_PushReconnectData
 {
-    Player player = 1;
+    Player player = 1; 
     TableInfo tableInfo = 2;
-//    string token = 3;
-    Reply ret = 3;
+    string token = 3;
+    Reply ret = 4;
 }
 
 //2035
 message S2C_PushReconnectQuit
 {
-    int32 userId = 1;
+    int32 userId = 1; 
 }
 
 
@@ -241,16 +257,11 @@ message S2C_DelayQuitOffline
     int32 userId = 1;
 }
 
-message S2C_PushKickOut
-{
-    int32 userId = 1;
-}
-
 // JOIN_COIN_TABLE_REQ       =20006
 message C2S_JoinTable
 {
     string sid= 1;
-    int32 tableType = 2;
+    int32 tableIndex = 2;
 }
 
 //20007
@@ -272,13 +283,6 @@ message S2C_DelayCheck
     Reply ret = 1;
 }
 
-
-//20015
-message S2C_PushRemainTime
-{
-    int32 time = 1;
-    int32 type = 2;
-}
 
 //30002
 message C2S_NoticePush
@@ -303,10 +307,9 @@ message S2C_GetSpecialCard
     Reply ret = 1;
 }
 
-
 //所有请求接口
 message Request {
-    enum CMD
+    enum CMD 
     {
         UNKNOWN                             = 0;
 
@@ -319,39 +322,32 @@ message Request {
         //推送延时时间
         PUSH_REMAINTIME_MSG                 = 20015;
 
-        //推送桌子状态
-        TABLESTATE_MSG                      = 2003;
+        //获取桌子列表
+        GETTABLELIST_REQ                    = 2001;
+        GETTABLELIST_RESP                   = 2002;
 
-        //推送状态改变通知
-        PUSH_STATE_CHANGE_MSG               = 2009;
+        //飞牌
+        FREEHANDS_REQ                       = 2003;
+        FREEHANDS_RESP                      = 2004;
+
+        //发牌
+        DEALCARD_REQ                        = 2005;
+        DEALCARD_RESP                       = 2006;
 
         //下注
         BET_REQ                             = 2010;
         BET_RESP                            = 2011;
 
-        //下注消息推送
-        PUSH_BET_MSG                        = 2013;
+        //重置子牌桌
+        RESET_SUBTABLE_REQ                  = 2012;
+        RESET_SUBTABLE_RESP                 = 2013;
 
-        //回合结算推送
-        PUSH_ROUND_RESULT_MSG               = 2015;
-
-        //发牌推送
-        PUSH_SENDCARD_MSG                   = 2019;
-
-        //获取玩家列表
-        GETUSERLIST_REQ                     = 2020;
-        GETUSERLIST_RESP                    = 2021;
-
-        //续投，重复上一轮的投注
-        BET_AGAIN_REQ                       = 2024;
-        BET_AGAIN_RESP                      = 2025;
-
-        //撤销当前投注
-        UNDO_BET_REQ                        = 2026;
-        UNDO_BET_RESP                       = 2027;
+        //撤销投注
+        UNDO_BET_REQ                         = 2026;
+        UNDO_BET_RESP                        = 2027;
 
         //重新连接
-        USER_RECONNECT_REQ                  = 2030;
+        USER_RECONNECT_REQ                  = 2030;       
         USER_RECONNECT_RESP                 = 2031;
 
         //推送玩家重连数据
@@ -374,7 +370,7 @@ message Request {
         //通知刷新金币
         PUSH_REFRESH_COIN                   = 2501;
 
-        //强制下线请求
+        //强制下线请求                       
         FORCE_OFFLINE_REQ                   = 3000;
         FORCE_OFFLINE_RESP                  = 3001;
 
@@ -386,7 +382,7 @@ message Request {
 
 
          //加入桌子
-        JOIN_COIN_TABLE_REQ                 = 20006;
+        JOIN_COIN_TABLE_REQ                 = 20006;        
         JOIN_COIN_TABLE_RESP                = 20007;
 
         //客户端延时检测
@@ -403,16 +399,18 @@ message Request {
     }
 
     CMD   cmd                           = 1;      //访问接口
-    C2S_Bet bet			                = 11;
-    C2S_JoinTable joinTable      		= 12;
-    C2S_NoticePush noticePush			= 13;
-    C2S_Reconnect reconnect				= 14;
-    C2S_UserOnback userOnback			= 15;
-    C2S_UserQuit userQuit				= 16;
-    C2S_BetAgain betAgain               = 17;
-    C2S_UndoBet undoBet                 = 18;
-    C2S_GetUserList getUserList         = 19;
-    C2S_GetSpecialCard getSpecialCard   = 20;
+    C2S_Bet bet			                = 11;	
+    C2S_JoinTable joinTable      		= 12;     	  
+    C2S_NoticePush noticePush			= 13;	 
+    C2S_Reconnect reconnect				= 14;	  
+    C2S_UserOnback userOnback			= 15;	  
+    C2S_UserQuit userQuit				= 16;	
+    C2S_GetTableList getTableList       = 17;
+    C2S_FreeHands freeHands             = 18;
+    C2S_DealCard dealCard               = 19;
+    C2S_UndoBet undoBet                 = 20;
+    C2S_ResetSubTable resetSubTable     = 21;
+    C2S_GetSpecialCard getSpecialCard   = 22;
 
 	//extensions 500 to 1000;
 }
@@ -420,13 +418,13 @@ message Request {
 //所有应答接口
 message Response {
     enum ErrorCode {
-        NO_ERROR                                            = 0;
+        NO_ERROR                                            = 0;       
         UNKNOWN_ERROR                                       = 400;                      //未知错误
         USER_LOGIN_ERROR                                    = 3001;                     // token失效,登录校验失败
         CHANNELID_GAMENO_ERROR                              = 3003;                     // channelId或gameNo错误
         HAS_INTABLE                                         = 3006;                     // 加入失败..用户已经在牌桌中
         JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
-        TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在
+        TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在  
         NOT_IN_TABLE                                        = 3011;                     // --未加入此房间
         TABLE_QUIT_ERROR                                    = 3013;                     // 玩家退出异常
         RECONNET_ERROR                                      = 3025;                     // 重连错误
@@ -439,7 +437,7 @@ message Response {
         USER_BETPOS_ERROR                                   = 3079;                     // --该位置不可以下注~请重新选择
 
         BIND_GAMENO_ERROR                                   = 3080;                     //绑定场次错误
-        GET_USERLIST_ERROR                                  = 3081;                     //获取玩家列表错误
+        GET_TABLELIST_ERROR                                 = 3081;                     //获取玩家列表错误
         TABLE_COIN_LIMIT                                    = 3082;                     //进入该房间金币最低限制是
         USER_BET_AGAIN_ERROR                                = 3083;                     //玩家上一轮没有投注
         USER_UNDO_BET_ERROR                                 = 3084;                     //没有可撤回的操作
@@ -447,41 +445,36 @@ message Response {
         GAME_START_ERROR									= 3061;						// 牌桌已经开始
         USER_IP_SAME										= 3075;						// 该房间限制同IP加入，请联系房主！
         TABLE_NO_POSITION									= 3009;						// 此房间已经人满
-
-
+      
+        
         USER_AUTO_ERROR										= 3306;						// 先取消托管
         COIN_ENOUGH                                         = 3063;                     // 金币不足
 
         FORCEOFFLINE                                        = 30001;                    // 账号在其他地方登录,连接断开,请重新登录
         USERBAN                                             = 30002;                    // 账号异常...无法开始游戏,请联系客服
         NO_RECHARGE_ERROR                                   = 30923;                    // --请充值后,再进行操作
-
     }
     ErrorCode error                     = 1;// [default = NO_ERROR];   // 表示本次请求状态
     int64 serverTime                    = 2;                        // 服务器时间
     Request.CMD     cmd                 = 3;                        // 接口
-
+ 
     Reply ret                           = 4;
 
-    S2C_Bet sendBet		                    = 11;
-    S2C_JoinTable sendJoinTable			    = 12;
-    S2C_NoticePush sendNoticePush	        = 13;
-    S2C_Reconnect sendReconnect			    = 14;
-    S2C_UserOnback sendUserOnback		    = 15;
+    S2C_Bet sendBet		                    = 11;						
+    S2C_JoinTable sendJoinTable			    = 12;										
+    S2C_NoticePush sendNoticePush	        = 13;						
+    S2C_Reconnect sendReconnect			    = 14;						
+    S2C_UserOnback sendUserOnback		    = 15;			
     S2C_UserQuit sendUserQuit		        = 16;
     S2C_UserExit sendUserExit               = 17;
-    S2C_BetAgain betAgain                   = 18;
-    S2C_UndoBet undoBet                     = 19;
-    S2C_PushStateChange pushStateChange     = 20;
-    S2C_PushRoundResultMsg pushRoundResult  = 21;
-    S2C_PushBetMsg pushBet                  = 22;
-    S2C_PushSendCardMsg pushSendCard        = 23;
-    S2C_PushReconnectData pushReconnData    = 24;
-    S2C_PushRemainTime pushRemainTime       = 25;
-    S2C_DelayQuitOffline  pushDelayQuit     = 26;
-    S2C_GetUserList       sendGetUserList   = 27;
-    S2C_PushKickOut       pushKickOut       = 28;
-    S2C_GetSpecialCard    sendSpecialCard   = 29;
+    S2C_PushReconnectData pushReconnData    = 18;
+    S2C_DelayQuitOffline  pushDelayQuit     = 19;
+    S2C_GetTableList      sendTableList     = 20;
+    S2C_FreeHands         sendFreeHands     = 21;
+    S2C_DealCard          sendDealCard      = 22;
+    S2C_UndoBet           sendUndoBet       = 23;
+    S2C_ResetSubTable     sendResetSubTable = 24;
+    S2C_GetSpecialCard    sendSpecialCard   = 25;
 
     //extensions 500 to 1000;
 }

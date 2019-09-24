@@ -1,0 +1,538 @@
+syntax = "proto3";
+package blackjack;
+option java_package = "com.beiyou.game.proto";
+option java_outer_classname = "GameProto";
+
+
+// 状态
+/**等待状态(只在第一回合前有) 
+WAIT(0),
+准备
+READY(1),
+下注
+BET(2),
+发牌
+SEND(3),
+买保险
+INSURE(4),
+要牌
+ADDCARD(5),
+结算
+ACCOUNT(6);
+*/
+
+// 统一回复数据格式
+message Reply
+{
+    int32 code = 1;
+    string msg = 2;
+}
+
+message Player
+{
+    int32 userId = 1;
+    string nickName = 2;
+    string headImg = 3;
+    int32 sex = 4;
+    string ip = 5;
+    int32 position = 6;                         // 玩家对应位置
+    double coin = 7;                            // 游戏金币  发送到前端是有减去下注之类的计算 （服务器玩家金币其实没有减）
+    int32 state = 8;                            // 游戏状态
+    double currentScore = 10;                   // 当局分数    （计算公式为  当局分减去抽水）
+    double revenue = 11;                        // 玩家赢时的抽水金币数
+    double totalScore = 12;                     // 玩家总输赢金币（多局累计）
+    // 结算时用
+    double startScore = 13;                     // 结算前金币
+    double endScore = 14;                       // 结算后金币
+}
+
+message TableOutCard
+{
+    int32 type = 1;                             // 牌型 TYPE_NO = 0 爆了、 TYPE_NORMAL = 1 正常牌型、TYPE_21D = 2 21d、 TYPE_WXL = 3 五小龙 、TYPE_BJ = 4 黑杰克  牌型大小亦遵循此规则
+    repeated int32 handCards = 2;               // 手牌 如果分牌了则手牌为之前的手牌的第二张，第一张被分出去了
+    repeated int32 cardsNum = 3;                // 手牌点数两种可能（因为有可能有A，例如 A，5（6、16）） 
+    int32 pos = 4;                              // 猜测为手牌位置
+    int32 userPos = 5;                          // 玩家椅子位置
+    int32 index = 6;                            // 是否买保险
+    bool hasStopped = 7;                        // 是否停牌
+    double betCoin = 8;                         // 下注金额
+    bool hasDouble = 9;                         // 是否双倍了(0:不双倍,1:双倍
+    bool hasDeal = 10;                          // 这个位置是否已经分过牌了
+    double insureCoin = 11;                     // 保险金额
+    int32 insure = 12;                          // 是否保险了(-1:默认 ,0:不买,1:买)
+    bool canDeal = 13;                         // 是否能分牌
+    int32 winState = 14;                       // 当前手牌输赢情况 -2（默认） -1（输） 0（平） 1（赢）
+    bool isFanPai = 15;                          // 是否需要翻牌  A 或者 10，J, Q, K 
+}
+
+message TableInfo
+{
+    string tableId = 1;      
+    string seq = 2;                                 // 桌子创建时间+gamenum+tableid
+    int32 gameId = 3;                               // 游戏id
+    int32 gameNo = 4;                               // 场次(初级中级高级...)
+    int32 state = 5;                                // 桌子状态：0:wait,1：发牌,2:下注,3:结算
+    
+    repeated int32 tableCards = 7;                  // /系统庄的牌
+    bool hasA = 8;                                  // 庄家第一张是否为 A
+    TableOutCard tableOutCardDto = 9;               // 庄家手牌信息
+    repeated TableOutCard outCardDtos = 10;         // 所有手牌信息
+    TableOutCard nextOpeOutCardDto = 11;            // 下一个操作手牌（即持有此手牌玩家操作）
+    repeated Player users = 12;                     // 玩家列表
+    
+    int32 maxBetMult = 13;                          // 最大下注倍数
+    int32 difen = 14;                               
+
+    // 进入桌子时需要
+    int32 channelId = 20;
+}
+
+// 庄家信息
+message BankerRes
+{
+    repeated int32 handCards = 1;                   // 手牌
+    repeated int32 cardsNum = 2;                             // 庄家点数
+}
+
+/* ------------------------------------------------------------- *
+ * ------------------------------------------------------------- *
+ * -------------  如果发生错误则会回复 Reply 结构  --------------- *
+ * ------------------------------------------------------------- *
+ *---------------------------------------------------------------*/
+
+// 此游戏未注册消息 但是包含此消息实现
+// 消息类                    消息号                                    注册此消息游戏
+// BindGameNoHandler        BIND_GAME_NO_HANDLER =2002                  骰宝
+// GetAllUserHandler        GETUSERLIST_REQ = 2020                      奔驰宝马，龙虎，飞禽走兽
+// GetRomeListHandler       GET_ROME_LIST = 20004                       三公，十三水，骰宝
+
+// common 层消息
+// 检测客户端延迟
+// int DELAY_CHECK_REQ = 20010
+message c2s_delayCheck
+{
+    
+}
+//DELAY_CHECK_RESP = 20011
+message s2c_delayCheck
+{
+    Reply ret = 1;
+}
+
+// 挤下线
+//FOUCED_OFFLINE_REQ = 3000
+message c2s_foucedOffline
+{
+    int32 userId = 1;
+}
+
+//FOUCED_OFFLINE_RESP = 3001
+message s2c_foucedOffline
+{
+    Reply ret = 1;
+    //固定回复  账号在其他地方登录,连接断开,请重新登录
+}
+
+//超时退出..
+// DELAYQUIT_OFFLINE_RESP = 3003;
+message s2c_delayQuitOffline
+{
+    int32 userId = 1;
+}
+
+// PUSH_TABLE_INFO_RESP = 2009; 
+message s2c_pushTableInfo
+{
+    TableInfo tableInfo = 1;
+}
+
+/** 推送延时时间 */
+// PUSH_REMAINTIME_RESP = 20015;
+message s2c_pushRemainTime
+{
+    int32 time = 1;             // 剩余时间
+    int32 type = 2;  
+    int32 totalTime = 3;        // 当前倒计时总时间 
+}
+
+// 要牌
+// ADD_CARDS_REQ = 2010
+message c2s_addCard
+{
+    int32 addPos = 1;
+    int32 addIndex = 2;
+}
+
+// ADD_CARDS_RESP = 2011
+message s2c_addCard
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 card = 3;
+    int32 pos = 4;
+    int32 userPos = 5;
+    int32 index = 6;
+}
+
+// BET_REQ = 2012
+message c2s_bet
+{
+    int32 betPos = 1;          // 下注位置
+    int32 betCoin = 2;        // 下注金额
+}
+
+// BET_RESP = 2013
+message s2c_bet
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 position = 3;
+    int32 betPos = 4;          // 下注位置
+    int32 betCoin = 5;        // 下注金额
+}
+
+// PUSH_ROUND_RESULT_RESP = 2015
+message s2c_roundResult
+{
+    TableInfo tableInfo = 1;
+    string time = 2;
+    bool noCoin = 3;                            // 是否金币不够继续游戏（true 不够继续游戏）
+    repeated BankerRes bankerRes = 4;            // 有多层层 第一层只有一张牌到时候牌型信息 第二层是两张牌时的牌型信息 第三层是三张牌时的牌型信息....
+
+}
+
+// JOIN_TABLE_REQ = 20006
+message c2s_joinTable
+{
+    string sid= 1;                      // 登入时返回
+    int32 tableType = 2;                // 进入房间的下表   从1 开始
+}
+
+// JOIN_TABLE_RESP = 20007
+message s2c_joinTable
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+}
+
+/** 闲家分牌请求 */
+// DEAL_REQ = 2024
+message c2s_dealCard
+{
+    int32 dealPos = 1;
+}
+
+/** 闲家分牌返回 */
+// DEAL_RESP = 2025
+message s2c_dealCard
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 pos = 3;
+    int32 userPos = 4;
+    int32 index = 5;
+}
+
+// DOUBLE_REQ = 2016;
+message c2s_double
+{
+    int32 doublePos = 1;
+    int32 doubleIndex = 2;
+}
+	/** 闲家双倍返回 */
+// DOUBLE_RESP = 2017;
+message s2c_double
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 pos = 3;
+    int32 userPos = 4;
+    int32 index = 5;
+}
+
+// 闲家买保险
+// INSURE_REQ = 2018
+message c2s_insure
+{
+    int32 insure = 1;
+    int32 insurePos = 2;
+}
+/** 闲家保险返回 */
+// INSURE_RESP = 2019
+message s2c_insure
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 pos = 3;
+    int32 userPos = 4;
+    int32 index = 5;
+}
+
+// NOTICE_PUSH_REQ = 30002
+message c2s_noticePush
+{
+
+}
+
+// NOTICE_PUSH_RESP = 30003
+// 直接返回 ret
+message s2c_noticePush
+{
+    //Reply ret = 1;
+    // 原样返回
+}
+
+// PUSH_USER_RECONNECT_REQ = 2030;
+message c2s_reconnect
+{
+    int32 userId = 1;
+}
+
+// PUSH_USER_RECONNECT_RESP = 2031
+// PUSH_RECONNECT_QUIT_RESP = 2035 房间不存在发送此消息号 ------- 返回大厅
+// PUSH_RECONNECT_DATA_RESP = 2033 重连数据
+message s2c_reconnectData
+{
+    TableInfo tableInfo = 1;
+}
+// PUSH_USER_RECONNECT_RESP = 2031
+message s2c_reconnect
+{
+    int32 userId = 1;
+    int32 online = 2;
+}
+
+// STOP_CARDS_REQ = 2020;
+message c2s_stopCard
+{
+    int32 stopPos = 1;
+    int32 stopIndex = 2;
+}
+
+/** 玩家停牌返回2021 */
+// STOP_CARDS_RESP = 2021
+message s2c_stopCard
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+    int32 pos = 3;
+    int32 userPos = 4;
+    int32 index = 5;
+}
+
+// USER_ONBACK_REQ = 2080;
+message c2s_userOnback
+{
+    int32 onback = 1;
+}
+// USER_ONBACK_RESP = 2081
+message s2c_userOnback
+{
+    Reply ret = 1;
+}
+
+// USER_QUIT_REQ = 2044;
+message c2s_userQuit
+{
+
+}
+// USER_QUIT_RESP = 2045
+message s2c_userQuit
+{
+    int32 userId = 1;
+    string nickName = 2;
+    int32 position = 3;
+    string  tableId = 4;
+}
+
+// USER_READY_REQ = 2106;
+message c2s_userReady
+{
+
+}
+
+    /** 玩家点击准备返回 2107 */
+    //给客户端播放刷新匹配时间动画
+// USER_READY_RESP = 2107
+message s2c_userReady
+{
+    TableInfo tableInfo = 1;
+    int32 userId = 2;
+}
+
+// SETCARDSTEST = 20000;
+message c2s_setCardsTest
+{
+    int32 gameId = 1;           // gameid
+    int32 tabletype = 2;        // 房间类型
+    int32 deskNo = 3;           // 座位号
+    string sendData = 4;        // 发送配置。 牌面值为 花色值*16+牌面值 ，用逗号分割
+    string extraData = 5;
+}
+
+
+//所有请求接口
+message Request {
+    enum CMD 
+    {
+        UNKNOWN                             = 0;
+
+          /**后台手动踢出用户*/
+        ADMIN_KICKEDOUT = 200;
+
+        // 玩家要牌
+        ADD_CARDS_REQ = 2010;
+        ADD_CARDS_RESP = 2011;
+        // 下注
+        BET_REQ = 2012;
+        BET_RESP = 2013;
+
+        //结算
+        PUSH_ROUND_RESULT_RESP = 2015;
+
+        // 加入桌子
+        JOIN_TABLE_REQ = 20006;
+        JOIN_TABLE_RESP = 20007;
+
+        // 闲家分牌
+        DEAL_REQ = 2024;
+        DEAL_RESP = 2025;
+
+        // 闲家双倍
+        DOUBLE_REQ = 2016;
+        DOUBLE_RESP = 2017;
+
+        // 闲家买保险
+        INSURE_REQ = 2018;
+        INSURE_RESP = 2019;
+        // 
+        NOTICE_PUSH_REQ = 30002;
+        NOTICE_PUSH_RESP = 30003;
+        // 重连
+        PUSH_USER_RECONNECT_REQ = 2030;
+        PUSH_USER_RECONNECT_RESP = 2031;
+        PUSH_RECONNECT_QUIT_RESP = 2035;            // 房间不存在发送此消息号 ------- 返回大厅
+        PUSH_RECONNECT_DATA_RESP = 2033;            // 重连数据
+        // 停牌
+        STOP_CARDS_REQ = 2020;
+        STOP_CARDS_RESP = 2021;
+        //
+        USER_ONBACK_REQ = 2080;
+        USER_ONBACK_RESP = 2081;
+        // 玩家退出
+        USER_QUIT_REQ = 2044;
+        USER_QUIT_RESP = 2045;
+        // 玩家准备
+        USER_READY_REQ = 2106;
+        USER_READY_RESP = 2107;
+        
+        // 游戏发牌
+        SEND_USERCARD_RESP = 2027;
+
+        /**刷新游戏金币*/ // 接受
+        HALL_REFRESH_COIN = 100;
+
+        //通知刷新金币    // 推送
+        PUSH_REFRESH_COIN = 2501;
+
+        DELAYQUIT_OFFLINE_RESP = 3003;
+
+        PUSH_TABLE_INFO_RESP = 2009;                    // 游戏开始返回   推送桌子信息   s2c_pushTableInfo sendpushTableInfo
+        /** 推送延时时间 */
+        PUSH_REMAINTIME_RESP = 20015;
+        /**推送保险完成,要牌开始 */
+        PUSH_INSURECOMP_RESP = 2029;
+        
+        /* 玩家配牌请求 */
+        SETCARDSTEST = 20000;
+    }
+
+    CMD   cmd                               = 1;      //访问接口
+    c2s_addCard addCard	                    = 11;	
+    c2s_bet bet                   		    = 12;     
+    c2s_joinTable joinTable		            = 13;	  
+    c2s_dealCard dealCard                   = 14;
+    c2s_double reqDouble                    = 15;
+    c2s_insure insure                       = 16;
+    c2s_noticePush noticePush			    = 17;	 
+    c2s_reconnect reconnect				    = 18;	
+    c2s_stopCard stopCard                   = 19;
+    c2s_userOnback userOnback			    = 20;	  
+    c2s_userQuit userQuit				    = 21;	  
+    c2s_userReady userReady                 = 22;
+    c2s_setCardsTest setCardsTest           = 23;
+
+    // 
+    // c2s_refreshCoin refreshCoin             = 23;
+    // c2s_adminKickedOut adminKickedOut   = 24;
+	//extensions 500 to 1000;
+}
+
+//所有应答接口
+message Response {
+    enum ErrorCode {
+        NO_ERROR                        = 0;       
+        OK                                                  = 200;                      // "OK",
+        USER_ADDCARD_ERROR                                  = 3076;                     // 用户要牌失败
+        NOT_IN_TABLE										= 3011;						// --未加入此房间
+        TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在  
+        USER_BET_ERROR                                      = 3077;                     // --下注错误，不在下注状态
+        USER_BETCOIN_ERROR                                  = 3078;                     // --下注金额错误
+        USER_BETPOS_ERROR                                   = 3079;                     // --该位置不可以下注~请重新选择
+        JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
+        USERBAN                                             = 30002;                    // 账号异常...无法开始游戏,请联系客服
+        ROOMLIST_ERROR                                      = 3002;                     // 加载房间列表失败
+        CHANNELID_GAMENO_ERROR                              = 3003;                     // channelId或gameNo错误
+        ACCOUNT_NOT_ENOUGH_ERROR                            = 3004;                     // 当前余额不足，请从您的主钱包转入即可
+        NO_RECHARGE_ERROR                                   = 30923;                    // --请充值后,再进行操作
+        USER_DEALCARD_ERROR                                 = 3081;                     // 分牌失败~请重新尝试
+        USER_INSURE_ERROR                                   = 3082;                     // 保险失败~请重新尝试")
+        FOUCEDOFFLINE                                       = 30001;                    // 账号在其他地方登录,连接断开,请重新登录
+        USER_STOPCARD_ERROR                                 = 3080;                     // 停牌失败~请重新尝试")
+        USER_READY_ERROR									= 3012;						// 玩家人数不足或玩家未准备,请稍后再试
+        USER_ONBACK_ERROR                                   = 3056;                     // 用户退后台消息
+        TABLE_QUIT_ERROR                                    = 3013;                     // "游戏中无法退出~")
+
+        USER_ADDCARD_STATE_ERROR                            = 3084;                     // "不在要牌状态"),
+        USER_DOUBLE_POS_ERROR                               = 3085;                     // "不能在这个位置双倍"),
+        USER_DOUBLE_ALREADY_ERROR                           = 3086;                     // "该位置已经双倍"),
+        USER_DOUBLE_COIN_ERROR                              = 3087;                     // "金币不足，无法双倍"),
+        USER_ALREADY_STOP_ERROR                             = 3089;                     // "已经停牌了"),
+        TABLE_ADDCARD_STATE_ERROR                           = 3090;                     // "牌桌不在要牌状态"),
+        USER_ADDCARD_POS_ERROR                              = 3091;                     // "不能在这个位置要牌"),
+        USER_DEALCARD_POS_ERROR                             = 3092;                     // "这个位置不能分牌"),
+        USER_DEALCARD_COIN_ERROR                            = 3093;                     // "金币不足，分牌失败"),
+        USER_INSURE_COIN_ERROR                              = 3094;                     // "金币不足，买保险失败"),
+        USER_INSURE_POS_ERROR                               = 3095;                     // "这个位置已经选择买过或者不买了"),
+        USER_STOP_POS_ERROR                                 = 3096;                     // "不能在这个位置停牌"),
+        USER_STOP_ALREADY_ERROR                             = 3097;                     // "这个位置已经停牌"),
+        DATA_PARSE_ERROR                                    = 31000;                    // "数据解析错误")
+    }
+    ErrorCode error                             = 1;            // [default = NO_ERROR];   // 表示本次请求状态
+    int64 serverTime                            = 2;                        // 服务器时间
+    Request.CMD     cmd                         = 3;                        // 接口
+ 
+    Reply ret                                   = 4;
+
+    s2c_addCard sendAddCard                     = 11;
+    s2c_bet sendBet		                        = 12;	
+    s2c_joinTable sendJoinTable                 = 13;
+    s2c_dealCard sendDealCard                   = 14;
+    s2c_double sendDouble                       = 15;
+    s2c_insure sendInsure                       = 16;					
+    s2c_noticePush sendNoticePush	            = 17;						
+    s2c_reconnect sendReconnect			        = 18;	
+    s2c_reconnectData sendReconnectData         = 19;
+    s2c_stopCard sendStopCard                   = 20;
+    s2c_userOnback sendUserOnback		        = 21;			
+    s2c_userQuit sendUserQuit		            = 22;						
+    s2c_userReady sendUserReady                 = 23;
+    s2c_roundResult sendRoundResult             = 24;
+
+ //   s2c_refreshCoin sendRefreshCoin             = 25;
+    s2c_delayQuitOffline sendDelayQuitOffline   = 26;
+    s2c_pushTableInfo sendpushTableInfo         = 27;
+    s2c_pushRemainTime sendPushRemainTime       = 28;
+    s2c_pushTableInfo sendUserCard              = 29;
+    //extensions 500 to 1000;
+}

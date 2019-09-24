@@ -27,8 +27,6 @@ message Player
     double totalScore = 7;
     double revenue = 8;
     double coin = 9;
-    int32 lastRoundBet = 10;
-    repeated int32 realBetCoin = 11;
 }
 
 message TableInfo
@@ -98,7 +96,7 @@ message S2C_Bet
 //2013
 message S2C_PushBetMsg
 {
-    repeated int32 totalBet = 1;
+    int32 totalBet = 1;
 }
 
 //2015
@@ -113,28 +111,17 @@ message S2C_PushRoundResultMsg
 //2019
 message S2C_PushSendCardMsg
 {
-    repeated int32 cardA = 1;
-    repeated int32 cardB = 2;
+    int32 cardA = 1;
+    int32 cardB = 2;
     int32 numA = 3;
     int32 numB = 4;
     int32 state = 5;
     int32 remainCardsNum = 6;
 }
 
-// GETUSERLIST_REQ         = 2020
-message C2S_GetUserList
-{
-}
-
-//2021
-message S2C_GetUserList
-{
-    repeated Player players = 1;
-}
-
 // BET_AGAIN_REQ     =2024
 message C2S_BetAgain
-{
+{ 
     int32 userId = 1;
 }
 
@@ -179,34 +166,30 @@ message S2C_Reconnect
 //2033
 message S2C_PushReconnectData
 {
-    Player player = 1;
+    Player player = 1; 
     TableInfo tableInfo = 2;
-//    string token = 3;
-    Reply ret = 3;
+    string token = 3;
+    Reply ret = 4;
 }
 
 //2035
 message S2C_PushReconnectQuit
 {
-    int32 userId = 1;
+    int32 userId = 1; 
 }
 
 
 // USER_QUIT_REQ             =2044
 message C2S_UserQuit
 {
+    
 }
 
 //2045
 message S2C_UserQuit
 {
     int32 userId = 1;
-}
-
-//2047
-message S2C_UserExit
-{
-   int32 userId = 1;
+    Reply ret = 2;
 }
 
 //2080
@@ -235,16 +218,6 @@ message S2C_forceOffline
     Reply ret = 1;
 }
 
-//3003
-message S2C_DelayQuitOffline
-{
-    int32 userId = 1;
-}
-
-message S2C_PushKickOut
-{
-    int32 userId = 1;
-}
 
 // JOIN_COIN_TABLE_REQ       =20006
 message C2S_JoinTable
@@ -257,8 +230,7 @@ message C2S_JoinTable
 message S2C_JoinTable
 {
     TableInfo tableInfo = 1;
-    Player player = 2;
-    Reply ret = 3;
+    Reply ret = 2;
 }
 
 // 20010
@@ -291,22 +263,9 @@ message S2C_NoticePush
     Reply ret = 1;
 }
 
-// SET_SPECIAL_CARD_REQ       = 10000009;
-message C2S_GetSpecialCard
-{
-    string data = 1;
-}
-
-//10000010
-message S2C_GetSpecialCard
-{
-    Reply ret = 1;
-}
-
-
 //所有请求接口
 message Request {
-    enum CMD
+    enum CMD 
     {
         UNKNOWN                             = 0;
 
@@ -329,19 +288,19 @@ message Request {
         BET_REQ                             = 2010;
         BET_RESP                            = 2011;
 
-        //下注消息推送
+        //下注消息推送                    
         PUSH_BET_MSG                        = 2013;
 
-        //回合结算推送
+        //回合结算推送    
         PUSH_ROUND_RESULT_MSG               = 2015;
 
-        //发牌推送
+        //发牌推送                              
         PUSH_SENDCARD_MSG                   = 2019;
-
+           
         //获取玩家列表
-        GETUSERLIST_REQ                     = 2020;
-        GETUSERLIST_RESP                    = 2021;
-
+        // GETUSERLIST_REQ                     = 2020;
+        // GETUSERLIST_RESP                    = 2021;             
+                      
         //续投，重复上一轮的投注
         BET_AGAIN_REQ                       = 2024;
         BET_AGAIN_RESP                      = 2025;
@@ -351,7 +310,7 @@ message Request {
         UNDO_BET_RESP                       = 2027;
 
         //重新连接
-        USER_RECONNECT_REQ                  = 2030;
+        USER_RECONNECT_REQ                  = 2030;       
         USER_RECONNECT_RESP                 = 2031;
 
         //推送玩家重连数据
@@ -374,7 +333,7 @@ message Request {
         //通知刷新金币
         PUSH_REFRESH_COIN                   = 2501;
 
-        //强制下线请求
+        //强制下线请求                       
         FORCE_OFFLINE_REQ                   = 3000;
         FORCE_OFFLINE_RESP                  = 3001;
 
@@ -386,7 +345,7 @@ message Request {
 
 
          //加入桌子
-        JOIN_COIN_TABLE_REQ                 = 20006;
+        JOIN_COIN_TABLE_REQ                 = 20006;        
         JOIN_COIN_TABLE_RESP                = 20007;
 
         //客户端延时检测
@@ -396,37 +355,31 @@ message Request {
         //游戏服请求广播
         NOTICE_PUSH_REQ                     = 30002;
         NOTICE_PUSH_RESP                    = 30003;
-
-        //配牌
-        SET_SPECIAL_CARD_REQ                = 10000009;
-        SET_SPECIAL_CARD_RESP               = 10000010;
     }
 
     CMD   cmd                           = 1;      //访问接口
-    C2S_Bet bet			                = 11;
-    C2S_JoinTable joinTable      		= 12;
-    C2S_NoticePush noticePush			= 13;
-    C2S_Reconnect reconnect				= 14;
-    C2S_UserOnback userOnback			= 15;
-    C2S_UserQuit userQuit				= 16;
-    C2S_BetAgain betAgain               = 17;
+    C2S_Bet bet			                = 11;	
+    C2S_JoinTable joinTable      		= 12;     	  
+    C2S_NoticePush noticePush			= 13;	 
+    C2S_Reconnect reconnect				= 14;	  
+    C2S_UserOnback userOnback			= 15;	  
+    C2S_UserQuit userQuit				= 16;	
+    C2S_BetAgain betAgain               = 17;  
     C2S_UndoBet undoBet                 = 18;
-    C2S_GetUserList getUserList         = 19;
-    C2S_GetSpecialCard getSpecialCard   = 20;
-
+    
 	//extensions 500 to 1000;
 }
 
 //所有应答接口
 message Response {
     enum ErrorCode {
-        NO_ERROR                                            = 0;
+        NO_ERROR                                            = 0;       
         UNKNOWN_ERROR                                       = 400;                      //未知错误
         USER_LOGIN_ERROR                                    = 3001;                     // token失效,登录校验失败
         CHANNELID_GAMENO_ERROR                              = 3003;                     // channelId或gameNo错误
         HAS_INTABLE                                         = 3006;                     // 加入失败..用户已经在牌桌中
         JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
-        TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在
+        TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在  
         NOT_IN_TABLE                                        = 3011;                     // --未加入此房间
         TABLE_QUIT_ERROR                                    = 3013;                     // 玩家退出异常
         RECONNET_ERROR                                      = 3025;                     // 重连错误
@@ -447,8 +400,8 @@ message Response {
         GAME_START_ERROR									= 3061;						// 牌桌已经开始
         USER_IP_SAME										= 3075;						// 该房间限制同IP加入，请联系房主！
         TABLE_NO_POSITION									= 3009;						// 此房间已经人满
-
-
+      
+        
         USER_AUTO_ERROR										= 3306;						// 先取消托管
         COIN_ENOUGH                                         = 3063;                     // 金币不足
 
@@ -460,28 +413,15 @@ message Response {
     ErrorCode error                     = 1;// [default = NO_ERROR];   // 表示本次请求状态
     int64 serverTime                    = 2;                        // 服务器时间
     Request.CMD     cmd                 = 3;                        // 接口
-
+ 
     Reply ret                           = 4;
 
-    S2C_Bet sendBet		                    = 11;
-    S2C_JoinTable sendJoinTable			    = 12;
-    S2C_NoticePush sendNoticePush	        = 13;
-    S2C_Reconnect sendReconnect			    = 14;
-    S2C_UserOnback sendUserOnback		    = 15;
-    S2C_UserQuit sendUserQuit		        = 16;
-    S2C_UserExit sendUserExit               = 17;
-    S2C_BetAgain betAgain                   = 18;
-    S2C_UndoBet undoBet                     = 19;
-    S2C_PushStateChange pushStateChange     = 20;
-    S2C_PushRoundResultMsg pushRoundResult  = 21;
-    S2C_PushBetMsg pushBet                  = 22;
-    S2C_PushSendCardMsg pushSendCard        = 23;
-    S2C_PushReconnectData pushReconnData    = 24;
-    S2C_PushRemainTime pushRemainTime       = 25;
-    S2C_DelayQuitOffline  pushDelayQuit     = 26;
-    S2C_GetUserList       sendGetUserList   = 27;
-    S2C_PushKickOut       pushKickOut       = 28;
-    S2C_GetSpecialCard    sendSpecialCard   = 29;
-
+    S2C_Bet sendBet		                    = 11;						
+    S2C_JoinTable sendJoinTable			    = 12;										
+    S2C_NoticePush sendNoticePush	        = 13;						
+    S2C_Reconnect sendReconnect			    = 14;						
+    S2C_UserOnback sendUserOnback		    = 15;			
+    S2C_UserQuit sendUserQuit		        = 16;	
+    
     //extensions 500 to 1000;
 }

@@ -10,7 +10,5 @@
 打开xxxxxx.proto文件，加上下面两条
 	syntax = "proto3";
 	package xxxxxx;
-打开gen_proto.py，将要生成的新协议xxxxxx添加进去
-执行一键生成所有
-仿照“生成rpc qhb.bat”，写一个生成自己的rpc接口的bat
-执行自己的bat
+仿照 “生成 qhb.bat”，写一个生成自己的接口的bat
+双击执行bat文件
