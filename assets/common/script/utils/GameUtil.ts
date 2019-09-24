@@ -1,4 +1,4 @@
-import CommonUtils from "../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
@@ -34,7 +34,7 @@ export default class GameUtil {
 		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
-		var fromPos = CommonUtils.convertSpaceAR(fromObj, parent);
+		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
 		this.flyChip(chipSpr, fromPos, toPos, duration);
 	}
 
@@ -43,7 +43,7 @@ export default class GameUtil {
 		var szDst = dstObj.getContentSize();
 		var srcScale = srcObj.scale;
 		var dstScale = dstObj.scale;
-		var toPos = CommonUtils.convertSpaceAR(dstObj, parent);
+		var toPos = CommonUtil.convertSpaceAR(dstObj, parent);
 		var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
 		var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
 		toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );

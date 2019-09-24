@@ -1,0 +1,152 @@
+{
+  "nested": {
+    "login": {
+      "nested": {
+        "UserLoginSvc": {
+          "methods": {
+            "userLogIn": {
+              "requestType": "UserLogInReq",
+              "responseType": "UserLogInResp"
+            }
+          }
+        },
+        "GsPackage": {
+          "fields": {
+            "enBody": {
+              "type": "bytes",
+              "id": 1
+            },
+            "sign": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "UserInfo": {
+          "fields": {
+            "memberId": {
+              "type": "int64",
+              "id": 1
+            },
+            "memberAccount": {
+              "type": "string",
+              "id": 2
+            },
+            "memberName": {
+              "type": "string",
+              "id": 3
+            },
+            "merchantId": {
+              "type": "int64",
+              "id": 4
+            },
+            "merchantMemberId": {
+              "type": "int64",
+              "id": 5
+            },
+            "merchantName": {
+              "type": "string",
+              "id": 6
+            },
+            "merchantAccount": {
+              "type": "string",
+              "id": 7
+            },
+            "memberStatus": {
+              "type": "int32",
+              "id": 8
+            },
+            "identity": {
+              "type": "string",
+              "id": 9
+            },
+            "memberAvatar": {
+              "type": "string",
+              "id": 10
+            },
+            "token": {
+              "type": "string",
+              "id": 11
+            },
+            "money": {
+              "type": "string",
+              "id": 12
+            }
+          }
+        },
+        "UserLogInReq": {
+          "fields": {
+            "address": {
+              "type": "string",
+              "id": 1
+            },
+            "logType": {
+              "type": "int32",
+              "id": 2
+            },
+            "memberId": {
+              "type": "int64",
+              "id": 3
+            },
+            "memberLoginDevice": {
+              "type": "int32",
+              "id": 4
+            },
+            "memberLoginIp": {
+              "type": "string",
+              "id": 5
+            },
+            "memberLoginTime": {
+              "type": "string",
+              "id": 6
+            },
+            "memberLogOutTime": {
+              "type": "string",
+              "id": 7
+            },
+            "merchantId": {
+              "type": "int64",
+              "id": 8
+            },
+            "merchantMemberId": {
+              "type": "int64",
+              "id": 9
+            },
+            "merchantName": {
+              "type": "string",
+              "id": 10
+            },
+            "remark": {
+              "type": "string",
+              "id": 11
+            },
+            "token": {
+              "type": "string",
+              "id": 12
+            },
+            "ipAddress": {
+              "type": "string",
+              "id": 13
+            }
+          }
+        },
+        "UserLogInResp": {
+          "fields": {
+            "code": {
+              "type": "int32",
+              "id": 1
+            },
+            "msg": {
+              "type": "string",
+              "id": 2
+            },
+            "data": {
+              "type": "UserInfo",
+              "id": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

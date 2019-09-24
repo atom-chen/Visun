@@ -1,5 +1,6 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import CommonUtils from "../../../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -7,15 +8,16 @@ const {ccclass, property} = cc._decorator;
 export default class LoginUI extends BaseComponent {
 
     start () {
-        CommonUtils.traverseNodes(this.node, this.m_ui);
+        CommonUtil.traverseNodes(this.node, this.m_ui);
 
-        CommonUtils.addClickEvent(this.m_ui.btn_login, function(){ 
+        CommonUtil.addClickEvent(this.m_ui.btn_login, function(){ 
+            cc.log("click ");
+            LoginMgr.instance().loginAsYouke();
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_youke, function(){ 
             cc.log("click ");
         }, this);
-        CommonUtils.addClickEvent(this.m_ui.btn_youke, function(){ 
-            cc.log("click ");
-        }, this);
-        CommonUtils.addClickEvent(this.m_ui.btn_regist, function(){ 
+        CommonUtil.addClickEvent(this.m_ui.btn_regist, function(){ 
             cc.log("click ");
         }, this);
     }

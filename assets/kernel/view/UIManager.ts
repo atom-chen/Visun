@@ -1,7 +1,7 @@
 //---------------------------------
 // UI管理器
 //---------------------------------
-import CommonUtils from "../utils/CommonUtils";
+import CommonUtil from "../utils/CommonUtil";
 import { LayerDefine } from "../looker/KernelDefine";
 import CoreUIDefine from "../looker/CoreUIDefine";
 import LoadCenter from "../load/LoadCenter";
@@ -75,11 +75,11 @@ export default class UIManager {
 			if(!obj) { cc.log("实例化预制体失败"); return; }
 
 			if(bModal) { 
-				CommonUtils.setModal(obj, bCloseWhenClickMask); 
+				CommonUtil.setModal(obj, bCloseWhenClickMask); 
 			}
 
 			if(layerId!==LayerDefine.Panel) {
-				if(CommonUtils.hasEditbox(obj)) {
+				if(CommonUtil.hasEditbox(obj)) {
 					cc.log("----- yes has editbox");
 				}
 				else {
@@ -205,7 +205,7 @@ export default class UIManager {
 			var obj = cc.instantiate(loadedResource);
 			if(!obj) { cc.log("实例化预制体失败"); return; }
 
-			CommonUtils.setModal(obj, false); 
+			CommonUtil.setModal(obj, false); 
 
 			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
@@ -257,7 +257,7 @@ export default class UIManager {
 
 	//-----------------------------------------------------------------
 	
-	public static announce() {
+	public static announce(content:string) {
 		
 	}
 

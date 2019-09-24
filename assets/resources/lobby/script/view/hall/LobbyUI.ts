@@ -2,7 +2,7 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import UIManager from "../../../../../kernel/view/UIManager";
 import HttpCore from "../../../../../kernel/net/HttpCore";
-import CommonUtils from "../../../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import http_rules from "../../proto/http_rules";
@@ -12,8 +12,6 @@ import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import { ProcessorType, ChannelType } from "../../../../../kernel/looker/KernelDefine";
 import ChannelMgr from "../../../../../kernel/net/channel/ChannelMgr";
-import { qhb } from "../../../../../common/script/proto/qhb";
-import { qhb_request } from "../../../../../common/script/proxy/net_qhb";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { MAIN_HTTP_URL, MAIN_WS_URL } from "../../../../../common/script/definer/ConstDefine";
 import UserMgr from "../../../../../common/script/model/UserMgr";
@@ -30,7 +28,7 @@ export default class LobbyUI extends BaseComponent {
 
 	onLoad () 
 	{
-		CommonUtils.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		this.initUiEvents();
 		this.initNet();
@@ -46,35 +44,35 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private initUiEvents(){
-		CommonUtils.addClickEvent(this.m_ui.btn_safebox, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_email, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			UIManager.openPopwnd(ViewDefine.EmailUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_shop, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
 			UIManager.openPopwnd(ViewDefine.ShopUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_kefu, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 			UIManager.openPopwnd(ViewDefine.KefuUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_withdraw, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
 			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_spread, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
 			UIManager.openPopwnd(ViewDefine.SpreadUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.HeroUI, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ 
 			UIManager.openPopwnd(ViewDefine.PersonUI.path, null);
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_user, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_user, function(){ 
 			UIManager.openPopwnd(ViewDefine.LoginUI.path, null);
 		}, this);
 
@@ -91,7 +89,7 @@ export default class LobbyUI extends BaseComponent {
 			var cfg = gameBtnList[i];
 			var bton = this.m_ui[cfg.btn];
 			bton.gameId = cfg.id;
-			CommonUtils.addClickEvent(bton, function(){ 
+			CommonUtil.addClickEvent(bton, function(){ 
 				GameManager.instance().enterGame(this.gameId);
 			}, bton);
 		}
@@ -126,10 +124,8 @@ export default class LobbyUI extends BaseComponent {
 		var processor = ProcessorMgr.instance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
 		var hall_channel = ChannelMgr.instance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		hall_channel.setProcessor(processor);
-		hall_channel.registProtocol(qhb);
+		hall_channel.registProtocol(null);
 		hall_channel.connect(MAIN_WS_URL, 0);
-
-		qhb_request.JOIN_COIN_TABLE_REQ({sid:"sssssdddd",tableType:0}, false);
 	}
 
 

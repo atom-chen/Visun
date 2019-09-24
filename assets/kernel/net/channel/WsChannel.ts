@@ -19,8 +19,8 @@ export default class WsChannel implements IChannel {
 	private _ws:any = null;
 	private _url:string = "";
 	private _dataProcessor:IProcessor = null;
-	private _onConnSuccess:Function;
-	private _onConnFail:Function;
+	private _onConnSuccess:CHandler;
+	private _onConnFail:CHandler;
 	private _reconnectTimes:number = MAX_RECONNECT;
 	private _name : string;
 	private _heartTmr: any;
@@ -44,7 +44,7 @@ export default class WsChannel implements IChannel {
 		this._reconnectTimes = MAX_RECONNECT;
 
 		if(this._onConnSuccess) {
-			this._onConnSuccess();
+			this._onConnSuccess.invoke();
 			this._onConnSuccess = null;
 		}
 		this._onConnFail = null;
@@ -102,7 +102,7 @@ export default class WsChannel implements IChannel {
 		this._dataProcessor.registProtocol(protocol);
 	}
 	
-	public connect(url:string, port:number, on_success:Function = null, on_fail:Function = null) : void
+	public connect(url:string, port:number, on_success:CHandler = null, on_fail:CHandler = null) : void
 	{
 		if(this._url === url && this._ws !== null) {
 			if(this._curState==ConnState.connecting){
@@ -219,7 +219,7 @@ export default class WsChannel implements IChannel {
 		else {
 			this._onConnSuccess = null;
 			if(this._onConnFail) {
-				this._onConnFail();
+				this._onConnFail.invoke();
 				this._onConnFail = null;
 			}
 

@@ -5,7 +5,7 @@ const fs = require("fs");
 var arguments = process.argv.splice(2);
 console.log('所传递的参数是：', arguments);
 
-var filepath = "../../assets/common/scripts/proto/" + arguments[0] + ".js";
+var filepath = "../../assets/common/script/proto/" + arguments[0] + ".js";
 const data = fs.readFileSync(filepath, 'utf8').split('\n');
 for(var i=0; i<=20; i++) {
 	if(data[i].match("require") && data[i].match("protobuf")){

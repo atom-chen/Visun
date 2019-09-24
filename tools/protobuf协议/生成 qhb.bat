@@ -1,1 +1,1 @@
-python gen_proto.py qhb game
+python gen_rpc.py qhb game

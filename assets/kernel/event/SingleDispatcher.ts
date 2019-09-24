@@ -1,7 +1,13 @@
 import EventCenter from "./EventCenter";
 
 export default class SingleDispatcher {
+	protected _observer = null;
 	protected _responders = {};
+
+	public setObserver(observer:any) : void
+	{
+		this._observer = observer;
+	}
 
 	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void
 	{
@@ -33,6 +39,11 @@ export default class SingleDispatcher {
 			cc.log("无效的cmd");
 			return;
 		}
+
+		if(this._observer && this._observer[cmd]) {
+			this._observer[cmd].call(this._observer, info);
+		}
+
 		if(this._responders[cmd]) {
 			var callback = this._responders[cmd];
 			if(callback.thisObj){
@@ -42,6 +53,7 @@ export default class SingleDispatcher {
 				callback.func(info);
 			}
 		}
+
 		EventCenter.instance().fire(cmd.toString(), info);
 	}
 }

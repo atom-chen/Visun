@@ -4,6 +4,7 @@
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
 import { ConnState } from "../../looker/KernelDefine";
+import CHandler from "../../basic/CHandler";
 
 
 export default class TcpChannel implements IChannel {
@@ -21,7 +22,7 @@ export default class TcpChannel implements IChannel {
 
     }
 
-    public connect(url: string, port: number, on_success?: Function, on_fail?: Function): void 
+    public connect(url: string, port: number, on_success?: CHandler, on_fail?: CHandler): void 
     {
         
     }
@@ -67,6 +68,10 @@ export default class TcpChannel implements IChannel {
 
 	public getName() : string {
 		return this._name;
-	}
+    }
+    
+    getProcessor() : IProcessor{
+        return null;
+    }
 
 }

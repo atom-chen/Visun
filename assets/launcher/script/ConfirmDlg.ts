@@ -2,7 +2,7 @@
 // 确认框
 //---------------------------------
 import BaseComponent from "../../kernel/view/BaseComponent";
-import CommonUtils from "../../kernel/utils/CommonUtils";
+import CommonUtil from "../../kernel/utils/CommonUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -13,14 +13,14 @@ export default class ConfirmDlg extends BaseComponent {
 
 	onLoad() {
 		var self = this;
-		CommonUtils.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-        CommonUtils.addClickEvent(this.m_ui.btn_ok, function(){ 
+        CommonUtil.addClickEvent(this.m_ui.btn_ok, function(){ 
             self._callback(1);
 			self.node.destroy();
 		}, this);
 		
-		CommonUtils.addClickEvent(this.m_ui.btn_no, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){ 
             self._callback(0);
 			self.node.destroy();
 		}, this);

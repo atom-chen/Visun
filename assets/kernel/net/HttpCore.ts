@@ -10,7 +10,7 @@ import HttpCodec from "../codec/HttpCodec";
 import LocalCache from "../localcache/LocalCache";
 import EventCenter from "../event/EventCenter";
 import UIManager from "../view/UIManager";
-import { NetResult } from "../looker/KernelDefine";
+import { HttpResult } from "../looker/KernelDefine";
 
 
 
@@ -120,7 +120,7 @@ export default class HttpCore {
 		switch(ptoinfo.reqType) 
 		{
 			case "GET":
-					HttpCore.callGet(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
+					HttpCore.callGet(domain, addr, paramStr, (iCode:HttpResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 						if(!this._forbitCache[ptoname]){
 							HttpCore._localCache.set(ptoname, data);
@@ -128,7 +128,7 @@ export default class HttpCore {
 					});
 					break;
 			case "POST":
-					HttpCore.callPost(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
+					HttpCore.callPost(domain, addr, paramStr, (iCode:HttpResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 						if(!this._forbitCache[ptoname]){
 							HttpCore._localCache.set(ptoname, data);
@@ -136,7 +136,7 @@ export default class HttpCore {
 					});
 					break;
 			case "UPLOAD":
-					HttpCore.callUpload(domain, addr, paramStr, (iCode:NetResult, data:any)=>{
+					HttpCore.callUpload(domain, addr, paramStr, (iCode:HttpResult, data:any)=>{
 						HttpCore.onRespData(ptoname, iCode, data, unsafeCallback);
 					});
 					break;
@@ -148,7 +148,7 @@ export default class HttpCore {
 		}
 	}
 
-	private static onRespData(ptoname:string, iCode:NetResult, data:any, unsafeCallback?:(data:any)=>void) 
+	private static onRespData(ptoname:string, iCode:HttpResult, data:any, unsafeCallback?:(data:any)=>void) 
 	{
 		if(!this.g_allProtocol[ptoname]) {
 			cc.log("协议已卸载", ptoname);
@@ -157,7 +157,7 @@ export default class HttpCore {
 
 		cc.log("[响应]：", ptoname, iCode);
 
-		if( iCode === NetResult.Succ ) {
+		if( iCode === HttpResult.Succ ) {
 			// 解码
 			var info = this._coder.decode(data);
 
@@ -196,7 +196,7 @@ export default class HttpCore {
 		// xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
 	}
 
-	public static callGet(url:any, addr:any, params:any, callback:(iCode:NetResult, data:any)=>void) 
+	public static callGet(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void) 
 	{
 		var finalUrl = url;
 		if(addr && addr != "") {
@@ -212,21 +212,21 @@ export default class HttpCore {
 
 		xhr.onabort = function() {
 			cc.log('[onabort]', finalUrl);
-			callback(NetResult.Aborted, xhr.responseText);
+			callback(HttpResult.Aborted, xhr.responseText);
 		}
 		xhr.onerror = function() {
 			cc.log('[onerror]', finalUrl);
-			callback(NetResult.Error, xhr.responseText);
+			callback(HttpResult.Error, xhr.responseText);
 		}
 		xhr.ontimeout = function() {
 			cc.log('[ontimeout]', finalUrl);
-			callback(NetResult.Timeout, xhr.responseText);
+			callback(HttpResult.Timeout, xhr.responseText);
 		}
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
 				cc.log("[RESP]", finalUrl);
 			//	cc.log(xhr.responseText);
-				callback(NetResult.Succ, xhr.responseText);
+				callback(HttpResult.Succ, xhr.responseText);
 			}
 		};
 
@@ -237,7 +237,7 @@ export default class HttpCore {
 		xhr.send();
 	}
 
-	public static callPost(url:any, addr:any, params:any, callback:(iCode:NetResult, data:any)=>void) 
+	public static callPost(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void) 
 	{
 		var finalUrl = url;
 		if(addr && addr != "") {
@@ -250,21 +250,21 @@ export default class HttpCore {
 
 		xhr.onabort = function() {
 			cc.log('[onabort]', finalUrl);
-			callback(NetResult.Aborted, xhr.responseText);
+			callback(HttpResult.Aborted, xhr.responseText);
 		}
 		xhr.onerror = function() {
 			cc.log('[onerror]', finalUrl);
-			callback(NetResult.Error, xhr.responseText);
+			callback(HttpResult.Error, xhr.responseText);
 		}
 		xhr.ontimeout = function() {
 			cc.log('[ontimeout]', finalUrl);
-			callback(NetResult.Timeout, xhr.responseText);
+			callback(HttpResult.Timeout, xhr.responseText);
 		}
 		xhr.onreadystatechange = function () {
 			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
 				cc.log("[RESP]", finalUrl);
 			//	cc.log(xhr.responseText);
-				callback(NetResult.Succ, xhr.responseText);
+				callback(HttpResult.Succ, xhr.responseText);
 			}
 		};
 		
@@ -275,7 +275,7 @@ export default class HttpCore {
 		xhr.send(paramStr);
 	}
 
-	public static callUpload(url:any, addr:any, params:any, callback:(iCode:NetResult, data:any)=>void)
+	public static callUpload(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void)
 	{
 
 	}

@@ -1,5 +1,5 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import EventCenter from "../../../../kernel/event/EventCenter";
 import GameUtil from "../../../../common/script/utils/GameUtil";
@@ -11,9 +11,9 @@ export default class bjleUI extends BaseComponent {
 	_players : any[] = [];
 
 	onLoad () {
-		CommonUtils.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             SceneManager.turn2Scene("LobbyScene");
         }, this);
 
@@ -53,7 +53,7 @@ export default class bjleUI extends BaseComponent {
 			if(err) { cc.log("error: "+err); return; }
 			var flys = GameUtil.parseChip(money);
 			for(var i=0; i<flys.length; i++){
-				var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+flys[i]);
+				var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+flys[i]);
 				if(!atlas.getSpriteFrame(name)){ return; }
 				var chip = new cc.Node();
 				chip.scale = 0.4

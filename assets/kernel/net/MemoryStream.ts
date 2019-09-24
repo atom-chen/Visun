@@ -20,9 +20,9 @@ if(!ArrayBuffer["transfer"]) {
 };
 
 export default class MemoryStream {
-	protected buffer:ArrayBuffer = null;
+	public buffer:ArrayBuffer = null;
 	protected data_view:DataView = null;
-	protected little_endian:boolean = true;
+	protected little_endian:boolean = false;
 
 	public constructor(size:number) 
 	{
@@ -31,6 +31,24 @@ export default class MemoryStream {
 			this.data_view = new DataView(this.buffer);
 		}
 	}
+
+	public setBuffer(buff:ArrayBuffer) 
+	{
+		this.buffer = buff;
+		this.data_view = new DataView(this.buffer);
+	}
+	
+	public expand(offset:number, src:Uint8Array)
+	{
+		if(!this.buffer || this.buffer.byteLength-offset < src.length){
+			this.buffer = new ArrayBuffer(length);
+			this.data_view = new DataView(this.buffer);
+		}
+		var buf = new Uint8Array(this.buffer);
+		buf.set(new Uint8Array(src), 0);
+	}
+
+	
 
 	public read_int8(offset:number): number 
 	{
@@ -140,23 +158,6 @@ export default class MemoryStream {
 	{
 		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
 		dvPtr.set(buff);
-	}
-
-
-	public setBuffer(buff:ArrayBuffer) 
-	{
-		this.buffer = buff;
-		this.data_view = new DataView(this.buffer);
-	}
-	
-	public expand(offset:number, src:Uint8Array)
-	{
-		if(!this.buffer || this.buffer.byteLength-offset < src.length){
-			this.buffer = new ArrayBuffer(length);
-			this.data_view = new DataView(this.buffer);
-		}
-		var buf = new Uint8Array(this.buffer);
-		buf.set(new Uint8Array(src), 0);
 	}
 
 }

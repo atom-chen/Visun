@@ -10,8 +10,6 @@ export default class JsonProcessor extends BaseProcessor {
 
     public sendMessage(cmd: number|string, info: any): boolean 
     {
-        if(!this.isValidCmd(cmd)) { return; }
-
         if(info===undefined || info===null){
 			info = {};
 		}

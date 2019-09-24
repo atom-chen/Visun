@@ -1,1 +1,1 @@
-python gen_proto.py UserLoginSvc hall
+python gen_rpc.py UserLoginSvc hall

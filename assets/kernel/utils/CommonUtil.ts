@@ -1,7 +1,7 @@
 //---------------------------------
 // 通用辅助接口
 //---------------------------------
-export default class CommonUtils {
+export default class CommonUtil {
 
 	public static traverseNodes(root:any, tbl:any) 
 	{
@@ -10,7 +10,7 @@ export default class CommonUtils {
 		for (var i = 0; i < childlist.length; i++){
 			tbl[childlist[i].getName()] = childlist[i];
 		//	cc.log("----", childlist[i].getName());
-			CommonUtils.traverseNodes(childlist[i], tbl)
+			CommonUtil.traverseNodes(childlist[i], tbl)
 		}
 	}
 
@@ -22,7 +22,7 @@ export default class CommonUtils {
 			if(childlist[i].getComponent(cc.EditBox)) {
 				return true;
 			}
-			return CommonUtils.hasEditbox(childlist[i]);
+			return CommonUtil.hasEditbox(childlist[i]);
 		}
 		return false;
 	}
@@ -85,6 +85,19 @@ export default class CommonUtils {
 		else {
 			return false;
 		}
+	}
+
+	static Bytes2Str(arr: Uint8Array) {
+		let str = "";
+		for (let i = 0; i < arr.length; i++) {
+			let tmp = arr[i].toString(16);
+			if (tmp.length == 1) {
+				tmp = "0" + tmp;
+			}
+			str += " " + tmp;
+			if(i==7) { str += "  "; }
+		}
+		return str;
 	}
 
 	// Returns a random integer between min and max

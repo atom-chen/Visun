@@ -1,1 +1,1 @@
-C:\Python27\python gen_proto.py blackjack game
+python gen_rpc.py blackjack game

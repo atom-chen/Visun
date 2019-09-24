@@ -4,41 +4,42 @@
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
+import { ConnState } from "../../looker/KernelDefine";
 
 export default class BaseProcessor extends SingleDispatcher implements IProcessor {
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
 	protected _pb_package:any;
-	public name_2_cmd:object = {};
-	public cmd_2_name:object = {};
 	protected _send_list = [];
 	protected _fire_list = [];
+	protected _cmds = {};
 
 	public registProtocol(protocol:any) : void
 	{
 		this._pb_package = protocol;
-		this.name_2_cmd = {};
-		this.cmd_2_name = {};
-
 		cc.log("-----------------注册ws协议-----------------");
-		var info = protocol.Request.CMD;
-		for(var key in info) {
-			if(isNaN(key as any)) {
-				var value = info[key];
-			//	cc.log(key, value);
-				this.name_2_cmd[key] = value;
-				this.cmd_2_name[value] = key;
-			}
+		
+	}
+
+	public registCmds(cmds:any) : void
+	{
+		if(cmds===null || cmds===undefined) { return; }
+		for(var k in cmds) {
+			this._cmds[k] = cmds[k];
 		}
 	}
 
-	public isValidCmd(cmd:number|string) : boolean 
+	public unregistCmds(cmds:any) : void
 	{
-		if(!this.cmd_2_name[cmd]) {
-			cc.log(this._channel.getName(), "未定义该协议", cmd);
-			return false;
+		if(cmds===null || cmds===undefined) { return; }
+		for(var k in cmds) {
+			this._cmds[k] = null;
 		}
-		return true;
+	}
+
+	public unregistAllCmds() : void
+	{
+		this._cmds = {};
 	}
 
 	public setChannel(cluster:IChannel)
@@ -52,8 +53,6 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 		this.clearRecvlist();
 		this.removeAllResponder();
 		this._channel = null;
-		this.name_2_cmd = null;
-		this.cmd_2_name = null;
 		this._pb_package = null;
 	}
 
@@ -74,6 +73,11 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 		this._paused = bPause;
 		this.flushRecvlist();
 		this.flushSendlist();
+	}
+
+	public isNetHolded() : boolean
+	{
+		return this._channel.getState() != ConnState.connectsucc && this._channel.getState() != ConnState.reconnectsucc || this._paused;
 	}
 
 	public flushRecvlist() 

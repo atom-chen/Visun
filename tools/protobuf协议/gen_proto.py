@@ -19,14 +19,14 @@ def excuteCmd(cmdStr):
 def gen_proto(Proto, channel="game"): 
 	print("=====Begin:" + Proto + " " + channel)
 	print("gen " + Proto + ".js")
-	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/scripts/proto/" + Proto + ".js in/" + Proto + ".proto")
+	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/script/proto/" + Proto + ".js in/" + Proto + ".proto")
 	print("gen "+Proto+".ts")
-	excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/common/scripts/proto/" + Proto + ".js")
+	excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/common/script/proto/" + Proto + ".js")
 	time.sleep(0.5)
 	print("fix "+Proto+".js")
 	excuteCmd("node fix.js " + Proto)
 	print("gen rpc " + Proto)
-	excuteCmd("node gen_request.js " + Proto + " " + channel)
+	excuteCmd("node gen_proto.js " + Proto + " " + channel)
 	print("=====Finish: " + Proto + "\n")
 
 protoName = sys.argv[1]

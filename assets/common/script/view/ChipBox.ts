@@ -1,4 +1,4 @@
-import CommonUtils from "../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../kernel/view/BaseComponent";
 
 const {ccclass, property} = cc._decorator;
@@ -9,12 +9,12 @@ export default class ChipBox extends BaseComponent {
     private selectedIndex:number = 1;
 
     onLoad() {
-        CommonUtils.traverseNodes(this.node, this.m_ui);
-        CommonUtils.addClickEvent(this.m_ui.chip1, function(){ this.onSelect(1); }, this);
-        CommonUtils.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
-        CommonUtils.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
-        CommonUtils.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
-        CommonUtils.addClickEvent(this.m_ui.chip5, function(){ this.onSelect(5); }, this);
+        CommonUtil.traverseNodes(this.node, this.m_ui);
+        CommonUtil.addClickEvent(this.m_ui.chip1, function(){ this.onSelect(1); }, this);
+        CommonUtil.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
+        CommonUtil.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
+        CommonUtil.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
+        CommonUtil.addClickEvent(this.m_ui.chip5, function(){ this.onSelect(5); }, this);
     }
 
     private onSelect(idx:number) {
@@ -35,7 +35,7 @@ export default class ChipBox extends BaseComponent {
         cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
             if(err) { cc.log("error: "+err); return; }
             for(var i=1; i<=5; i++){
-                var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+values[i-1]);
+                var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+values[i-1]);
                 self.m_ui["chip"+i].getComponent(cc.Button).normalSprite = atlas.getSpriteFrame(name);
                 self.m_ui["chip"+i].getComponent(cc.Button).hoverSprite = atlas.getSpriteFrame(name);
                 self.m_ui["chip"+i].getComponent(cc.Button).pressedSprite = atlas.getSpriteFrame(name);

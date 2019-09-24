@@ -1,6 +1,6 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
-import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -8,9 +8,9 @@ const {ccclass, property} = cc._decorator;
 export default class FqzsUI extends BaseComponent {
     
     start () {
-        CommonUtils.traverseNodes(this.node, this.m_ui);
+        CommonUtil.traverseNodes(this.node, this.m_ui);
         
-        CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
+        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             SceneManager.turn2Scene("LobbyScene");
 		}, this);
 

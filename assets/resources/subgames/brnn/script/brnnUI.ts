@@ -1,5 +1,5 @@
 import GameUtil from "../../../../common/script/utils/GameUtil";
-import CommonUtils from "../../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import SimplePool from "../../../../kernel/pool/SimplePool";
@@ -32,7 +32,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 	
 	onLoad () {
-		CommonUtils.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		var self = this;
 		cc.loader.loadRes(ViewDefine.ChipSpr.path, cc.Prefab, function (err, loadedRes) {
@@ -40,13 +40,13 @@ export default class BrnnUI extends BaseComponent {
 			self._loadedRes = cc.instantiate(loadedRes);
 		});
 
-		CommonUtils.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		CommonUtils.addClickEvent(this.m_ui.btn_close, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             SceneManager.turn2Scene("LobbyScene");
 		}, this);
 		
-		CommonUtils.addClickEvent(this.m_ui.btn_help, function(){ 
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             var childs = this.m_ui.chiplayer.children
 			var len = childs.length;
 			for(var i=len-1; i>=0; i--){
@@ -55,10 +55,10 @@ export default class BrnnUI extends BaseComponent {
 			}
 		}, this);
 
-		CommonUtils.addClickEvent(this.m_ui.area1, function(){ this.bet(1); }, this);
-		CommonUtils.addClickEvent(this.m_ui.area2, function(){ this.bet(2); }, this);
-		CommonUtils.addClickEvent(this.m_ui.area3, function(){ this.bet(3); }, this);
-		CommonUtils.addClickEvent(this.m_ui.area4, function(){ this.bet(4); }, this);
+		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.bet(1); }, this);
+		CommonUtil.addClickEvent(this.m_ui.area2, function(){ this.bet(2); }, this);
+		CommonUtil.addClickEvent(this.m_ui.area3, function(){ this.bet(3); }, this);
+		CommonUtil.addClickEvent(this.m_ui.area4, function(){ this.bet(4); }, this);
 		
 		var compBox = this.m_ui.ChipBox.getComponent("ChipBox");
 		compBox.getComponent("ChipBox").setChipValues(this._rule);

@@ -1,5 +1,5 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
-import CommonUtils from "../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 import User from "../model/User";
 
 
@@ -16,7 +16,7 @@ export default class HeroUI extends BaseComponent {
     public userId:number = 0;
 
     onLoad () {
-        CommonUtils.addClickEvent(this.node, function(){ cc.log("click hero head"); }, this);
+        CommonUtil.addClickEvent(this.node, function(){ cc.log("click hero head"); }, this);
     }
 
     public setUserInfo(userObj:User) {

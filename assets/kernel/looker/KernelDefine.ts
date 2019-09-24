@@ -51,7 +51,7 @@ export enum ChannelType {
 	Http,
 }
 
-export enum NetResult {
+export enum HttpResult {
 	Succ = 0,
 	Timeout,
 	Aborted,

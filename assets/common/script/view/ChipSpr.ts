@@ -1,4 +1,4 @@
-import CommonUtils from "../../../kernel/utils/CommonUtils";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 
 const {ccclass, property} = cc._decorator;
@@ -9,7 +9,7 @@ export default class ChipSpr extends cc.Component {
 
     onResLoaded(err, atlas){
         if(err) { cc.log("error: "+err); return; }
-        var name = CommonUtils.getFrameName("common/imgs/chip/chip_"+this._value);
+        var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+this._value);
         this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
     }
 
