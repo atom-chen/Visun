@@ -33,7 +33,7 @@ export default class SingleDispatcher {
 		this._responders = {};
 	}
 
-	public response(cmd:string|number, info:any) : void
+	public fire(cmd:string|number, info:any) : void
 	{
 		if(cmd===null || cmd===undefined){
 			cc.log("无效的cmd");

@@ -80,7 +80,7 @@ export default class LoginMgr extends ModelBase {
 			channel_hall.setProcessor(g_HallProcessor);
 			channel_hall.registProtocol(null);
 			channel_hall.getProcessor().registCmds(hallgw_packet_define);
-			channel_hall.getProcessor().setObserver(proxy_hall);
+			channel_hall.getProcessor().getDispatcher().setObserver(proxy_hall);
 			//channel_hall.getProcessor().setHeartbeatFunc(()=>{ hallgw_request.Msg_HeartReq(null); })
 			channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
 

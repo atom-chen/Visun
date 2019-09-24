@@ -53,7 +53,7 @@ export default class JsonProcessor extends BaseProcessor {
 			cc.log("push fire", this._fire_list.length);
 		}
 		else{
-			this.response(cmd, data);
+			this._dispatcher.fire(cmd, data);
 		}
     }
 

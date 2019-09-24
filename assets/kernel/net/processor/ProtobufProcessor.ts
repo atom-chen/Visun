@@ -79,7 +79,7 @@ export default class ProtobufProcessor extends BaseProcessor {
 		}
 		else
 		{
-			this.response(cmd, data);
+			this._dispatcher.fire(cmd, data);
 		}
 	}
 	

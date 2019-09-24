@@ -6,13 +6,19 @@ import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
 import { ConnState } from "../../looker/KernelDefine";
 
-export default class BaseProcessor extends SingleDispatcher implements IProcessor {
+export default class BaseProcessor implements IProcessor {
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
 	protected _pb_package:any;
 	protected _send_list = [];
 	protected _fire_list = [];
 	protected _cmds = {};
+	protected _dispatcher = new SingleDispatcher;
+
+	public getDispatcher() : SingleDispatcher
+	{
+		return this._dispatcher;
+	}
 
 	public registProtocol(protocol:any) : void
 	{
@@ -51,7 +57,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 	{
 		this.clearSendlist();
 		this.clearRecvlist();
-		this.removeAllResponder();
+		this._dispatcher.removeAllResponder();
 		this._channel = null;
 		this._pb_package = null;
 	}
@@ -87,7 +93,7 @@ export default class BaseProcessor extends SingleDispatcher implements IProcesso
 
 		cc.log(this._channel.getName(), "flush firelist", this._fire_list.length);
 		for(var i=0, len=this._fire_list.length; i<len; i++){
-			this.response(this._fire_list[i].cmd, this._fire_list[i].data);
+			this._dispatcher.fire(this._fire_list[i].cmd, this._fire_list[i].data);
 		}
 		this._fire_list.length = 0;
 		this._fire_list = [];
