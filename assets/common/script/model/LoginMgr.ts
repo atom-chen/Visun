@@ -16,6 +16,8 @@ import faultylabs from "../../../kernel/utils/MD5Util";
 import { hallgw_packet_define } from "../proxy/net_hall";
 import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
 import { room_packet_define } from "../proxy/net_RoomProto";
+import PlatformUtil from "../../../kernel/utils/PlatformUtil";
+import HallRequest from "../proxy/HallRequest";
 
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
@@ -129,6 +131,12 @@ export default class LoginMgr extends ModelBase {
 	//游客登录
 	public loginAsYouke(): void {
 		this.connectLoginServer();
+
+		var param = { 
+			deviceID : PlatformUtil.getDeviceId(), 
+			platformId : 3
+		};
+		HallRequest.req_youke_login(param);
 	}
 
 	//账号登录

@@ -5,16 +5,16 @@ import HttpCore from "../../../../../kernel/net/HttpCore";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import http_rules from "../../proto/http_rules";
-import HallRequest from "../../proxy/HallRequest";
-import HallRespond from "../../proxy/HallRespond";
-import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
+import http_rules from "../../../../../common/script/proto/http_rules";
+import HallRequest from "../../../../../common/script/proxy/HallRequest";
+import HallRespond from "../../../../../common/script/proxy/HallRespond";
 import UserMgr from "../../../../../common/script/model/UserMgr";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Procedure from "../../../../../kernel/promise/Procedure";
 import CHandler from "../../../../../kernel/basic/CHandler";
 import TimerManager from "../../../../../kernel/timer/TimerManager";
 import ServerConfig from "../../../../../common/script/definer/ServerConfig";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -28,14 +28,10 @@ export default class LobbyUI extends BaseComponent {
 
 		this.initUiEvents();
 		this.initNet();
-	//	this.testSpine();
+		this.testSpine();
 		TimerManager.addSecondTimer(2, 1, new CHandler(this, this.testProcedure));
 
-		var param = { 
-			deviceID : PlatformUtil.getDeviceId(), 
-			platformId : 3
-		};
-		HallRequest.req_youke_login(param);
+		LoginMgr.getInstance().loginAsYouke();
 	}
 
 	private initUiEvents(){
@@ -97,40 +93,15 @@ export default class LobbyUI extends BaseComponent {
 
 		EventCenter.getInstance().listen("req_youke_login", this.req_userinfo, this);
 		EventCenter.getInstance().listen("req_userinfo", this.req_userinfo, this);
-		EventCenter.getInstance().listen("req_room_select_info", this.req_room_select_info, this);
-		EventCenter.getInstance().listen("req_enter_br_room", this.req_enter_br_room, this);
 	}
 
 	private req_userinfo(data:any) {
 		this.m_ui.HeroUI.getComponent("HeroUI").setUserInfo(UserMgr.getInstance().getHero());
 	}
 
-	private req_room_select_info(info){
-		cc.log(info);
-	}
-
-	private req_enter_br_room(info) {
-		cc.log("------------------");
-		cc.log(info);
-	}
-
 
 	private testSpine() {
-		cc.view.enableAntiAlias(true);
-		var self = this;
-
-		//加载spine
-		cc.loader.loadRes("common/spines/bairenniuniu_kaishixiazhu.json", sp.SkeletonData, 
-		function(err, resc){
-			if( err ) { cc.log( '载入spine失败:' + err ); return; }
-			//var obj = cc.instantiate(resc);
-			var obj = new cc.Node();
-			var sk = obj.addComponent(sp.Skeleton);
-			sk.skeletonData = resc;
-			self.node.addChild(obj, 10);
-			//obj.scale = 0.2;
-			sk.setAnimation(1, "animation", true);
-		});
+		UIManager.showSpineAsync("common/spines/jack.json", 0, "a", true, this.node, {zIndex:10, x:-400, y:280, scale:0.5});
 	}
 
 

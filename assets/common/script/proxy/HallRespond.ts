@@ -1,9 +1,9 @@
-import HttpCore from "../../../../kernel/net/HttpCore";
-import GameManager from "../../../../common/script/model/GameManager";
+import HttpCore from "../../../kernel/net/HttpCore";
+import GameManager from "../model/GameManager";
 import HallRequest from "./HallRequest";
-import LogicCenter from "../../../../common/script/model/LogicCenter";
-import UIManager from "../../../../kernel/view/UIManager";
-import UserMgr from "../../../../common/script/model/UserMgr";
+import LogicCenter from "../model/LogicCenter";
+import UIManager from "../../../kernel/view/UIManager";
+import UserMgr from "../model/UserMgr";
 
 var HallRespond:any;
 HallRespond = {};

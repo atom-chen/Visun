@@ -1,11 +1,7 @@
 import GameConfig from "../definer/GameConfig";
-import HttpCore from "../../../kernel/net/HttpCore";
 import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
-import HallRequest from "../../../resources/lobby/script/proxy/HallRequest";
 import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
-import { CLIENT_VERSION } from "../definer/ConstDefine";
-import UserMgr from "./UserMgr";
 import ModelBase from "../../../kernel/model/ModelBase";
 import ViewDefine from "../definer/ViewDefine";
 
@@ -72,38 +68,6 @@ export default class GameManager extends ModelBase {
 		}
 		
 		this.enterGameScene(gameId);
-		
-		
-		if(cfg.game_type===1){
-			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.getInstance().getHero().channelId})
-
-			//获得游戏的ws地址
-			var param = {
-				sid : HttpCore.token,
-				gameId: gameId,
-				tableType: 0,
-				gameType: 0,
-				clientVersion: CLIENT_VERSION,
-				channelId: UserMgr.getInstance().getHero().channelId
-			}
-			HallRequest.req_enter_coin_room(param);
-		}
-		else {
-			//点击游戏按钮，进入选房界面
-			HallRequest.req_room_select_info({gameId:gameId,channelId:UserMgr.getInstance().getHero().channelId});
-
-			//获得游戏的ws地址
-			var param = {
-				sid : HttpCore.token,
-				gameId: gameId,
-				tableType: 1,
-				gameType: 0,
-				clientVersion: CLIENT_VERSION,
-				channelId: UserMgr.getInstance().getHero().channelId
-			}
-			HallRequest.req_enter_br_room(param);
-		}
 	}
 
 	public enterGameScene(gameId) {

@@ -254,16 +254,38 @@ export default class UIManager {
 		}
 		cc.loader.loadRes(CoreUIDefine.toast.path, cc.Prefab, completeCallback);
 	}
-
-	//-----------------------------------------------------------------
 	
 	public static announce(content:string) {
 		
 	}
-
-	//-----------------------------------------------------------------
 	
 	public static barrage() {
 		
+	}
+
+
+	//---------------------------------------------------------
+
+	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any) 
+	{
+		cc.loader.loadRes(respath, sp.SkeletonData, function(err, rsc){
+				if(err) { 
+					cc.log( '载入spine失败:' + err ); 
+					return; 
+				}
+				if(!cc.isValid(parent, true)) {
+					cc.log("parent已经释放");
+					return;
+				}
+				var obj = new cc.Node();
+				var sk = obj.addComponent(sp.Skeleton);
+				sk.skeletonData = rsc;
+				sk.premultipliedAlpha = false;
+				parent.addChild(obj);
+				for(var k in info) {
+					obj[k] = info[k];
+				}
+				sk.setAnimation(trackIndex, aniName, bLoop);
+		});
 	}
 }

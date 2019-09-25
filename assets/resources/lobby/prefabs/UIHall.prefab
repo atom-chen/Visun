@@ -296,7 +296,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 910,
+      "width": 1065,
       "height": 420
     },
     "_anchorPoint": {
@@ -372,7 +372,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 120,
+      "x": 125,
       "y": 110,
       "z": 0
     },
@@ -664,7 +664,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 120,
+      "x": 125,
       "y": -100,
       "z": 0
     },
@@ -956,7 +956,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 350,
+      "x": 405,
       "y": 110,
       "z": 0
     },
@@ -1248,7 +1248,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 350,
+      "x": 405,
       "y": -100,
       "z": 0
     },
@@ -1540,7 +1540,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 580,
+      "x": 685,
       "y": 110,
       "z": 0
     },
@@ -1832,7 +1832,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 580,
+      "x": 685,
       "y": -100,
       "z": 0
     },
@@ -2124,7 +2124,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 810,
+      "x": 965,
       "y": 110,
       "z": 0
     },
@@ -2416,7 +2416,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 810,
+      "x": 965,
       "y": -100,
       "z": 0
     },
@@ -2706,7 +2706,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 910,
+      "width": 1065,
       "height": 420
     },
     "_resize": 1,
@@ -2718,11 +2718,11 @@
       "height": 200
     },
     "_N$startAxis": 1,
-    "_N$paddingLeft": 20,
+    "_N$paddingLeft": 25,
     "_N$paddingRight": 0,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
-    "_N$spacingX": 30,
+    "_N$spacingX": 80,
     "_N$spacingY": 10,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 0,
@@ -5840,9 +5840,9 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_srcBlendFactor": 772,
-    "_dstBlendFactor": 771,
-    "_custom": false,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 772,
+    "_custom": true,
     "_file": {
       "__uuid__": "5c10d7d0-4044-4722-b423-2fc90144cc03"
     },
@@ -5852,7 +5852,7 @@
     "_texture": {
       "__uuid__": "d0a82d39-bede-46c4-b698-c81ff0dedfff"
     },
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 50,
