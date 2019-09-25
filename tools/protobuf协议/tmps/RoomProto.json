@@ -1,0 +1,137 @@
+{
+  "nested": {
+    "room": {
+      "options": {
+        "java_package": "com.beiyou.game.proto",
+        "java_outer_classname": "RoomProto"
+      },
+      "nested": {
+        "User": {
+          "fields": {
+            "sessionId": {
+              "type": "int64",
+              "id": 1
+            },
+            "createTime": {
+              "type": "int64",
+              "id": 2
+            },
+            "updateTime": {
+              "type": "int64",
+              "id": 3
+            },
+            "userid": {
+              "type": "int32",
+              "id": 4
+            },
+            "tableId": {
+              "type": "string",
+              "id": 5
+            },
+            "channelId": {
+              "type": "int32",
+              "id": 7
+            },
+            "remoteAddr": {
+              "type": "string",
+              "id": 8
+            },
+            "onBack": {
+              "type": "int32",
+              "id": 9
+            },
+            "gameNo": {
+              "type": "int32",
+              "id": 11
+            },
+            "gameNum": {
+              "type": "int32",
+              "id": 12
+            }
+          }
+        },
+        "AssignResponse": {
+          "fields": {
+            "msgid": {
+              "type": "int32",
+              "id": 1
+            },
+            "user": {
+              "type": "User",
+              "id": 2
+            },
+            "assignMode": {
+              "type": "AssignMode",
+              "id": 3
+            }
+          }
+        },
+        "AssignMode": {
+          "values": {
+            "IMMEDIATELY": 0,
+            "ROOM": 1,
+            "QUEUE": 2
+          }
+        },
+        "ServerInfo": {
+          "fields": {
+            "roomId": {
+              "type": "int32",
+              "id": 1
+            },
+            "tableId": {
+              "type": "int32",
+              "id": 2
+            },
+            "User": {
+              "type": "int32",
+              "id": 3
+            }
+          }
+        },
+        "CMD": {
+          "values": {
+            "UNKNOWN": 0,
+            "JOIN_ROOM_REQ": 40000,
+            "JOIN_ROOM_RES": 40001,
+            "GET_FROM_GATE": 101,
+            "SEND_TO_GATE": 102
+          }
+        },
+        "ErrorCode": {
+          "values": {
+            "NO_ERROR": 0,
+            "OK": 1,
+            "NO_GET_DATE_ERROR": 2,
+            "NO_SEND_DATE_ERROR": 3,
+            "PLAYER_ENOUGH_ERROR": 4
+          }
+        },
+        "Request": {
+          "fields": {
+            "cmd": {
+              "type": "CMD",
+              "id": 1
+            }
+          }
+        },
+        "Response": {
+          "fields": {
+            "error": {
+              "type": "ErrorCode",
+              "id": 1
+            },
+            "cmd": {
+              "type": "CMD",
+              "id": 2
+            },
+            "assignResponse": {
+              "type": "AssignResponse",
+              "id": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

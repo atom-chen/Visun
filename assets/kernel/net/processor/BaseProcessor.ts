@@ -9,7 +9,6 @@ import { ConnState } from "../../looker/KernelDefine";
 export default class BaseProcessor implements IProcessor {
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
-	protected _pb_package:any;
 	protected _send_list = [];
 	protected _fire_list = [];
 	protected _cmds = {};
@@ -22,8 +21,6 @@ export default class BaseProcessor implements IProcessor {
 
 	public registProtocol(protocol:any) : void
 	{
-		this._pb_package = protocol;
-		cc.log("-----------------注册ws协议-----------------");
 		
 	}
 
@@ -59,7 +56,6 @@ export default class BaseProcessor implements IProcessor {
 		this.clearRecvlist();
 		this._dispatcher.removeAllResponder();
 		this._channel = null;
-		this._pb_package = null;
 	}
 
 	public clearSendlist() : void

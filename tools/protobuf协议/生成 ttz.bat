@@ -1,1 +1,1 @@
-python gen_rpc.py ttz game
+python gen_proto.py ttz game

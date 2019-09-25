@@ -1,1 +1,1 @@
-python gen_rpc.py zjh game
+python gen_proto.py zjh game

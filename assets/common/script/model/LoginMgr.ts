@@ -12,7 +12,6 @@ import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import { login } from "../proto/UserLoginSvc";
-import { hallgw } from "../proto/hall";
 import proxy_hall from "../proxy/proxy_hall";
 import CHandler from "../../../kernel/basic/CHandler";
 import faultylabs from "../../../kernel/utils/MD5Util";
@@ -23,8 +22,6 @@ export default class LoginMgr extends ModelBase {
 
 	private constructor(){
 		super();
-		hallgw_packet_define[login_msgs.Msg_GsPackage] = login_packet_define[login_msgs.Msg_GsPackage];
-		hallgw_packet_define[login_msgs.Msg_UserLogInResp] = login_packet_define[login_msgs.Msg_UserLogInResp];
 	}
     public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
@@ -78,8 +75,9 @@ export default class LoginMgr extends ModelBase {
 			var g_HallProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.hall, ProcessorType.Protobuff);
 			var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.hall, ChannelType.Ws);
 			channel_hall.setProcessor(g_HallProcessor);
-			channel_hall.registProtocol(null);
+			channel_hall.getProcessor().unregistAllCmds();
 			channel_hall.getProcessor().registCmds(hallgw_packet_define);
+			channel_hall.getProcessor().registCmds(login_packet_define);
 			channel_hall.getProcessor().getDispatcher().setObserver(proxy_hall);
 			//channel_hall.getProcessor().setHeartbeatFunc(()=>{ hallgw_request.Msg_HeartReq(null); })
 			channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );

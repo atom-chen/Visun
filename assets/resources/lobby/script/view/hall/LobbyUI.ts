@@ -34,7 +34,6 @@ export default class LobbyUI extends BaseComponent {
 		this.initUiEvents();
 		this.initNet();
 	//	this.testSpine();
-	//	this.testWs()
 		TimerManager.addSecondTimer(2, 1, new CHandler(this, this.testProcedure));
 
 		var param = { 
@@ -118,15 +117,6 @@ export default class LobbyUI extends BaseComponent {
 	private req_enter_br_room(info) {
 		cc.log("------------------");
 		cc.log(info);
-	}
-
-
-	private testWs() {
-		var processor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
-		var hall_channel = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
-		hall_channel.setProcessor(processor);
-		hall_channel.registProtocol(null);
-		hall_channel.connect(MAIN_WS_URL, 0);
 	}
 
 

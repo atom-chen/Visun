@@ -1,1 +1,1 @@
-python gen_rpc.py kpqznn game
+python gen_proto.py kpqznn game

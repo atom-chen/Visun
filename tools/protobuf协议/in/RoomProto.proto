@@ -1,0 +1,71 @@
+syntax = "proto3";
+package room;
+option java_package = "com.beiyou.game.proto";
+option java_outer_classname = "RoomProto";
+
+message User 
+{
+    int64 sessionId       = 1;
+    int64 createTime      = 2;
+    int64 updateTime      = 3;
+    int32 userid         = 4;
+    string tableId       = 5;
+    int32 channelId      = 7;
+    string remoteAddr    = 8;
+    int32 onBack         = 9;
+    int32 gameNo         = 11;
+    int32 gameNum        = 12;
+}
+
+//分配应答
+message AssignResponse 
+{
+    int32 msgid            = 1; //消息ID
+    User  user             = 2; //玩家信息
+    AssignMode assignMode  = 3; //分房模式
+    
+}
+
+//分配策略模式
+enum AssignMode
+{
+    IMMEDIATELY  = 0;  //即时推送(百人场)
+    ROOM         = 1;  //包房模式
+    QUEUE        = 2;  //排队模式
+}
+
+//分服信息(TODO分服统计)
+message ServerInfo
+{
+    int32 roomId  = 1;
+    int32 tableId = 2; //
+	int32 User    = 3; 
+}
+
+enum CMD {
+    UNKNOWN           = 0;
+    JOIN_ROOM_REQ     = 40000;
+	JOIN_ROOM_RES     = 40001;
+    GET_FROM_GATE     = 101;
+    SEND_TO_GATE      = 102;
+}
+
+enum ErrorCode {
+    NO_ERROR                        = 0;
+    OK                              = 1;
+    NO_GET_DATE_ERROR               = 2; //没有获取到数据
+    NO_SEND_DATE_ERROR              = 3; //没有发送数据
+    PLAYER_ENOUGH_ERROR             = 4; //玩家人数不够
+}
+
+//所有请求接口
+message Request {
+    CMD   cmd                           = 1;
+}
+
+//所有应答接口
+message Response {
+    ErrorCode error                     = 1;
+    CMD   cmd                           = 2;
+    AssignResponse  assignResponse                           = 3;
+}

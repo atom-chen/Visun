@@ -22,6 +22,31 @@ function getImportMud(data) {
 	return tmp;
 }
 
+var jsfile = "./in/"+pbfilename;
+var jsCont = null;
+if( fs.existsSync(jsfile+".js") ) {
+	jsCont = require(jsfile);
+}
+
+//找到cmd对应的message定义
+function getStructName(enumK) {
+	if( jsCont ) {
+		return jsCont.map_enumKey_2_StructName[enumK];
+	}
+	else {
+		return enumK.replace("Msg_", "");
+	}
+}
+
+function getRpcPairName() {
+	if( jsCont ) {
+		return jsCont.cmdEnumName;
+	}
+	else {
+		return "HallMsgId";
+	}
+}
+
 
 //-----------------------------------------------------------------
 // 第一步： 解析 消息cmd 和 结构体 以及 在protobuf网络包中的字段名
@@ -32,7 +57,7 @@ const line_list = fs.readFileSync(filepath, 'utf8').split('\n');
 
 var depMud = getImportMud(line_list);
 console.log("import ",  depMud);
-var RpcPairName = "HallMsgId";
+var RpcPairName = getRpcPairName();
 
 function getPackageName(data) {
 	for(var i=0, len=data.length; i<len; i++) {
@@ -157,7 +182,7 @@ for(var enumKey in infos) {
 	if(infos[enumKey] != "0" && infos[enumKey] != 0) {
 		//var idName = mudname+"."+RpcPairName+"."+enumKey;
 		var idName = infos[enumKey];
-		var structName = enumKey.replace("Msg_", "");
+		var structName = getStructName(enumKey);
 		outstr += "    " + idName + ": new NetPacket(" + idName + ", " + mudname+"."+structName + "),\n";
 	}
 }
@@ -165,27 +190,31 @@ outstr += "}\n\n";
 
 // Request Functions
 function isRequest(enumK) {
-	var len = enumK.length;
-	return enumK.slice(len-3)=="Req" || enumK.slice(len-7)=="Request";
+	// var len = enumK.length;
+	// return enumK.slice(len-3)=="Req" || enumK.slice(len-7)=="Request";
+	return true;
 }
 function getRequestParam(enumK) {
-	var structName = enumKey.replace("Msg_", "");
+	var structName = getStructName(enumK);
 	var argInfo = jsObj[structName]
 	if(!argInfo) { return "any"; }
 	var fields = argInfo.fields;
 	var desc = "{";
 	for(var fieldName in fields) {
 		var typeStr = fields[fieldName].type;
-		if(typeStr.indexOf("int")>=0){
-			typeStr = "number"
+		if(typeStr.indexOf("int") >= 0){
+			typeStr = "number";
 		}
 		else if(typeStr == "string") {
-			typeStr = "string"
+			typeStr = "string";
+		}
+		else {
+			typeStr = "any";
 		}
 		if(desc=="{")
 			desc += " " + fieldName + ":" + typeStr;
 		else
-			desc += " ," + fieldName + ":" + typeStr;
+			desc += ", " + fieldName + ":" + typeStr;
 	}
 	desc += " }";
 	if(desc=="{ }") { desc = "{}"; }

@@ -32,12 +32,28 @@ export class hallgw_request {
     {
         hallgw_packet_define[5000].sendToChannel(ChannelDefine.hall, data, false);
     }
+    public static Msg_HeartResp( data:{ serverTime:number } ) : void 
+    {
+        hallgw_packet_define[5001].sendToChannel(ChannelDefine.hall, data, false);
+    }
     public static Msg_UserInfoReq( data:{ Id:number } ) : void 
     {
         hallgw_packet_define[20000].sendToChannel(ChannelDefine.hall, data, false);
     }
+    public static Msg_UserInfoResp( data:{ Id:number, Account:string, Name:string, Coin:number, Head:string } ) : void 
+    {
+        hallgw_packet_define[20001].sendToChannel(ChannelDefine.hall, data, false);
+    }
     public static Msg_GameListReq( data:{} ) : void 
     {
         hallgw_packet_define[20002].sendToChannel(ChannelDefine.hall, data, false);
+    }
+    public static Msg_GameListResp( data:{ List:any } ) : void 
+    {
+        hallgw_packet_define[20003].sendToChannel(ChannelDefine.hall, data, false);
+    }
+    public static Msg_NoticeNotify( data:{ Content:string } ) : void 
+    {
+        hallgw_packet_define[20004].sendToChannel(ChannelDefine.hall, data, false);
     }
 }

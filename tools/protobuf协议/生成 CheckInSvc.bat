@@ -1,1 +1,1 @@
-python gen_rpc.py CheckInSvc hall
+python gen_proto.py CheckInSvc hall
