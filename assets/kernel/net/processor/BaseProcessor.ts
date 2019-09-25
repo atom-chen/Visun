@@ -7,12 +7,13 @@ import SingleDispatcher from "../../event/SingleDispatcher";
 import { ConnState } from "../../looker/KernelDefine";
 
 export default class BaseProcessor implements IProcessor {
+	protected _dispatcher = new SingleDispatcher;
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
 	protected _send_list = [];
 	protected _fire_list = [];
 	protected _cmds = {};
-	protected _dispatcher = new SingleDispatcher;
+	
 
 	public getDispatcher() : SingleDispatcher
 	{
