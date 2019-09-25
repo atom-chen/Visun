@@ -1,7 +1,5 @@
 import UserMgr from "./UserMgr";
 import ModelBase from "../../../kernel/model/ModelBase";
-import { hallgw_packet_define } from "../proxy/net_hall";
-import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
 import UIManager from "../../../kernel/view/UIManager";
 import HttpCore from "../../../kernel/net/HttpCore";
 import ServerConfig from "../definer/ServerConfig";
@@ -15,6 +13,9 @@ import { login } from "../proto/UserLoginSvc";
 import proxy_hall from "../proxy/proxy_hall";
 import CHandler from "../../../kernel/basic/CHandler";
 import faultylabs from "../../../kernel/utils/MD5Util";
+import { hallgw_packet_define } from "../proxy/net_hall";
+import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
+import { room_packet_define } from "../proxy/net_RoomProto";
 
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
@@ -78,6 +79,7 @@ export default class LoginMgr extends ModelBase {
 			channel_hall.getProcessor().unregistAllCmds();
 			channel_hall.getProcessor().registCmds(hallgw_packet_define);
 			channel_hall.getProcessor().registCmds(login_packet_define);
+			channel_hall.getProcessor().registCmds(room_packet_define);
 			channel_hall.getProcessor().getDispatcher().setObserver(proxy_hall);
 			//channel_hall.getProcessor().setHeartbeatFunc(()=>{ hallgw_request.Msg_HeartReq(null); })
 			channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
