@@ -16,12 +16,34 @@ export default class EventCenter {
 		EventCenter._instance = null;
 	}
 
+	public getEvent(evtName:string, cbFunc:Function, thisObj:any) : number
+	{
+		var evtList = this._events[evtName];
+		if(!evtList) { return -1; }
+
+		var len = evtList.length;
+		for(var i=len-1; i>=0; i--) {
+			var listener = evtList[i];
+			if(listener.callBack === cbFunc && listener.target === thisObj)
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
 	//监听事件
 	public listen(evtName:string, cbFunc:Function, thisObj:any, bCall:boolean=false)
 	{
 		if(!evtName || !cbFunc)
 		{
 			cc.log("listen error! event name or callback is null!")
+			return;
+		}
+
+		if(this.getEvent(evtName, cbFunc, thisObj) >= 0) {
+			cc.log("already registed this event: ", evtName);
 			return;
 		}
 
@@ -41,19 +63,18 @@ export default class EventCenter {
 	}
 
 	//移除监听
-	public remove(evtName:string, cbFunc:Function)
+	public remove(evtName:string, cbFunc:Function, thisObj:any)
 	{
 		var evtList = this._events[evtName];
-		if(!evtList) {
-			return;
-		}
+		if(!evtList) { return; }
 
 		var len = evtList.length;
 		for(var i=len-1; i>=0; i--) {
 			var listener = evtList[i];
-			if(listener.callBack === cbFunc)
+			if(listener.callBack === cbFunc && listener.target === thisObj)
 			{
 				evtList.splice(i, 1);
+				break;
 			}
 		}
 	}

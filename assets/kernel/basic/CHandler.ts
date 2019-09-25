@@ -14,6 +14,11 @@ export default class CHandler {
 		this._args = args;
 	}
 
+	public isSame(who:CHandler) : boolean
+	{
+		return who._fn === this._fn && who._target === this._target
+	}
+
 	public getTarget() : any 
 	{ 
 		return this._target; 

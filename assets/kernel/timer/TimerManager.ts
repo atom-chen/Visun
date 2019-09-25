@@ -48,7 +48,22 @@ export default class TimerManager {
 		TimerManager.s_updating = false;
 	}
 
+	private static getIndex(callback:CHandler) : number
+	{
+		for(var i=TimerManager._timers.length-1; i>=0; i--) {
+			if(TimerManager._timers[i].isSame(callback)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
+		var tmp = TimerManager.getIndex(callback);
+		if(tmp >= 0) {
+			cc.log("already exist this timer handler");
+			return TimerManager._timers[tmp].getId();
+		}
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
@@ -59,6 +74,11 @@ export default class TimerManager {
 	}
 
 	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler) {
+		var tmp = TimerManager.getIndex(callback);
+		if(tmp >= 0) {
+			cc.log("already exist this timer handler");
+			return TimerManager._timers[tmp].getId();
+		}
 		TimerManager.autoId++;
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;

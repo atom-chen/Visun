@@ -21,6 +21,11 @@ export class BaseTimer implements JTIPoolObject {
 	recycle(): void {
 		this.stop();
 	}
+
+	public isSame(cb:CHandler) : boolean
+	{
+		return this._callback.isSame(cb);
+	}
     
     public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler){
 		this._type = type;
