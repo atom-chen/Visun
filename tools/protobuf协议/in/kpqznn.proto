@@ -425,6 +425,7 @@ message SendRoundResultResponse {
 message SendRemainTimeResponse {
      int32 time               = 1;
      int32 type               = 2;
+     int32 totalTime          = 3;
 }
 
 

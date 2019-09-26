@@ -62,7 +62,7 @@ message TableOutCard
     int32 insure = 12;                          // 是否保险了(-1:默认 ,0:不买,1:买)
     bool canDeal = 13;                         // 是否能分牌
     int32 winState = 14;                       // 当前手牌输赢情况 -2（默认） -1（输） 0（平） 1（赢）
-    bool isFanPai = 15;                          // 是否需要翻牌  A 或者 10，J, Q, K 
+
 }
 
 message TableInfo
@@ -82,6 +82,11 @@ message TableInfo
     
     int32 maxBetMult = 13;                          // 最大下注倍数
     int32 difen = 14;                               
+
+    bool isFanPai = 15;                          // 是否需要翻牌  A 或者 10，J, Q, K 
+
+    int32 totalTime = 16;                            // 倒计时总时间     -- 与state联用
+    int32 remainTime = 17;                           // 倒计时还剩时间   -- 与state联用
 
     // 进入桌子时需要
     int32 channelId = 20;
@@ -348,7 +353,7 @@ message s2c_userQuit
 // USER_READY_REQ = 2106;
 message c2s_userReady
 {
-
+    int32 tableType = 1;
 }
 
     /** 玩家点击准备返回 2107 */
@@ -370,6 +375,10 @@ message c2s_setCardsTest
     string extraData = 5;
 }
 
+// START_FANPAI_RESP = 4001;
+message s2c_StartFanpai
+{
+}
 
 //所有请求接口
 message Request {
@@ -445,6 +454,9 @@ message Request {
         
         /* 玩家配牌请求 */
         SETCARDSTEST = 20000;
+
+        // 通知前端开始翻牌 并且有预留两秒
+        START_FANPAI_RESP = 4001;
     }
 
     CMD   cmd                               = 1;      //访问接口
@@ -534,5 +546,6 @@ message Response {
     s2c_pushTableInfo sendpushTableInfo         = 27;
     s2c_pushRemainTime sendPushRemainTime       = 28;
     s2c_pushTableInfo sendUserCard              = 29;
+    s2c_StartFanpai sendStartFanPai             = 30;
     //extensions 500 to 1000;
 }

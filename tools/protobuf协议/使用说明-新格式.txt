@@ -1,0 +1,18 @@
+-------------------------------------------
+-- protobuf使用说明
+-------------------------------------------
+安装node.js
+安装protobufjs到全局, 控制台输入： npm install -g protobufjs
+把protobuf.js文件拖到Creator工程中并且导入为插件（已经导入，忽略这一步）
+
+
+步骤：
+1. 将xxxxxx.proto文件放入in目录
+
+2. 打开xxxxxx.proto文件，加上下面两条（如果已经有则忽略该步骤）
+syntax = "proto3";
+package xxxxxx;
+
+3. 在in目录新建一个文件xxxxxx.js，将xxxxxx.proto中的消息id对应的参数结构体建立一个映射表，仿照hall.js
+
+4. 仿照 “生成 hall.bat”，写一个生成自己的接口的bat，然后双击执行bat文件

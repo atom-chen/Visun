@@ -8,34 +8,34 @@ import NetPacket from "../../../kernel/net/NetPacket";
 
 export enum room_msgs {
     UNKNOWN = 0,
-    JOIN_ROOM_REQ = 40000,
-    JOIN_ROOM_RES = 40001,
-    GET_FROM_GATE = 101,
-    SEND_TO_GATE = 102,
+    JOIN_ROOM_REQ = 30000,
+    JOIN_ROOM_RES = 30001,
+    GET_FROM_GATE = 30002,
+    SEND_TO_GATE = 30003,
 }
 
 export var room_packet_define = {
-    40000: new NetPacket(40000, room.ServerInfo),
-    40001: new NetPacket(40001, room.AssignResponse),
-    101: new NetPacket(101, room.ServerInfo),
-    102: new NetPacket(102, room.AssignResponse),
+    30000: new NetPacket(30000, room.JoinTableRequest),
+    30001: new NetPacket(30001, room.JoinTableResponse),
+    30002: new NetPacket(30002, room.ServerInfo),
+    30003: new NetPacket(30003, room.AssignResponse),
 }
 
 export class room_request {
-    public static JOIN_ROOM_REQ( data:{ roomId:number, tableId:number, User:number } ) : void 
+    public static JOIN_ROOM_REQ( data:{ user:any } ) : void 
     {
-        room_packet_define[40000].sendToChannel(ChannelDefine.hall, data, false);
+        room_packet_define[30000].sendToChannel(ChannelDefine.hall, data, false);
     }
-    public static JOIN_ROOM_RES( data:{ msgid:number, user:any, assignMode:any } ) : void 
+    public static JOIN_ROOM_RES( data:{ user:any, assignMode:any } ) : void 
     {
-        room_packet_define[40001].sendToChannel(ChannelDefine.hall, data, false);
+        room_packet_define[30001].sendToChannel(ChannelDefine.hall, data, false);
     }
-    public static GET_FROM_GATE( data:{ roomId:number, tableId:number, User:number } ) : void 
+    public static GET_FROM_GATE( data:any ) : void 
     {
-        room_packet_define[101].sendToChannel(ChannelDefine.hall, data, false);
+        room_packet_define[30002].sendToChannel(ChannelDefine.hall, data, false);
     }
-    public static SEND_TO_GATE( data:{ msgid:number, user:any, assignMode:any } ) : void 
+    public static SEND_TO_GATE( data:any ) : void 
     {
-        room_packet_define[102].sendToChannel(ChannelDefine.hall, data, false);
+        room_packet_define[30003].sendToChannel(ChannelDefine.hall, data, false);
     }
 }

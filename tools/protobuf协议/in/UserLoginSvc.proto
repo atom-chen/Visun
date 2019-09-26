@@ -4,10 +4,40 @@ syntax = "proto3";
 
 package login;
 
-service UserLoginSvc {
-    // 会员登录
-    rpc userLogIn(UserLogInReq) returns (UserLogInResp) {}
+
+enum CMD {
+    Msg_HeartReq        = 5000;
+    Msg_HeartResp       = 5001;
+    Msg_SysError        = 5002;
+    CheckTokenReq       = 5003;
+    MovedGateNot        = 5004;
+    CheckTokenRes       = 5005;
+    Msg_GsPackage       = 10000;
+    Msg_UserLogInResp   = 10001;
 }
+
+//心跳
+message HeartReq{
+}
+
+message HeartResp{
+  int64 serverTime  = 1;  //服务器时间
+}
+
+//校验token
+message CheckTokenRequest {
+  int64 uid = 1;
+  string token = 2;
+}
+
+message CheckTokenResponse {
+}
+
+//重定向网关通知
+message MovedGateNotice {
+  string wsUri = 1;
+}
+
 
 message GsPackage {
     bytes enBody = 1;  // 加密后的消息体

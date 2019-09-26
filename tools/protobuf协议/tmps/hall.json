@@ -5,35 +5,28 @@
         "HallMsgId": {
           "values": {
             "Msg_Unknown": 0,
-            "Msg_HeartReq": 5000,
-            "Msg_HeartResp": 5001,
-            "Msg_UserInfoReq": 20000,
-            "Msg_UserInfoResp": 20001,
-            "Msg_GameListReq": 20002,
-            "Msg_GameListResp": 20003,
-            "Msg_NoticeNotify": 20004
-          }
-        },
-        "HeartReq": {
-          "fields": {}
-        },
-        "HeartResp": {
-          "fields": {
-            "serverTime": {
-              "type": "int64",
-              "id": 1
-            }
+            "Msg_GetUserInfoReq": 20000,
+            "Msg_GetUserInfoResp": 20001,
+            "Msg_GetGameListReq": 20002,
+            "Msg_GetGameListResp": 20003,
+            "Msg_GetGameConfigReq": 20004,
+            "Msg_GetGameConfigResp": 20005,
+            "Msg_ChangeHeadReq": 20006,
+            "Msg_ChangeHeadResp": 20007,
+            "Msg_BroadcastNotice": 80000
           }
         },
         "RespErr": {
           "values": {
             "RespErr_Unknown": 0,
             "ReqFormatErr": 1,
-            "UserInfoRespRedisOperErr": 2,
-            "GameListRespDBOperErr": 3
+            "MsgGetUserInfoRespRedisOperErr": 2,
+            "MsgGetGameListRespDBOperErr": 3,
+            "MsgGetGameConfigRespRpcBackErr": 4,
+            "MsgGetGameConfigRespFormatErr": 5
           }
         },
-        "UserInfoReq": {
+        "MsgGetUserInfoReq": {
           "fields": {
             "Id": {
               "type": "int32",
@@ -41,7 +34,7 @@
             }
           }
         },
-        "UserInfoResp": {
+        "MsgGetUserInfoResp": {
           "fields": {
             "Id": {
               "type": "int32",
@@ -75,32 +68,24 @@
               "type": "string",
               "id": 2
             },
-            "Type": {
+            "State": {
               "type": "int32",
               "id": 3
             },
-            "State": {
+            "HaveRoomList": {
               "type": "int32",
               "id": 4
             },
-            "Tag": {
-              "type": "int32",
-              "id": 5
-            },
-            "HaveRoomList": {
-              "type": "int32",
-              "id": 6
-            },
             "RoomList": {
               "type": "string",
-              "id": 7
+              "id": 5
             }
           }
         },
-        "GameListReq": {
+        "MsgGetGameListReq": {
           "fields": {}
         },
-        "GameListResp": {
+        "MsgGetGameListResp": {
           "fields": {
             "List": {
               "rule": "repeated",
@@ -109,10 +94,144 @@
             }
           }
         },
-        "NoticeNotify": {
+        "MsgChangeHeadReq": {
           "fields": {
+            "UserId": {
+              "type": "int64",
+              "id": 1
+            },
+            "Head": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "MsgChangeHeadResp": {
+          "fields": {}
+        },
+        "MsgNoticeNotify": {
+          "fields": {
+            "Platform": {
+              "type": "int32",
+              "id": 1
+            },
             "Content": {
               "type": "string",
+              "id": 2
+            },
+            "RollCount": {
+              "type": "int32",
+              "id": 3
+            },
+            "DisplayDuration": {
+              "type": "int32",
+              "id": 4
+            }
+          }
+        },
+        "RoomInfo": {
+          "fields": {
+            "RoomId": {
+              "type": "int32",
+              "id": 1
+            },
+            "RoomName": {
+              "type": "string",
+              "id": 2
+            },
+            "MinCost": {
+              "type": "int64",
+              "id": 3
+            },
+            "MaxCost": {
+              "type": "int64",
+              "id": 4
+            }
+          }
+        },
+        "GameType": {
+          "fields": {
+            "Id": {
+              "type": "int32",
+              "id": 1
+            },
+            "Name": {
+              "type": "string",
+              "id": 2
+            },
+            "Order": {
+              "type": "int32",
+              "id": 3
+            }
+          }
+        },
+        "GameRelation": {
+          "fields": {
+            "GameId": {
+              "type": "int32",
+              "id": 1
+            },
+            "GameName": {
+              "type": "string",
+              "id": 2
+            },
+            "GameTypeId": {
+              "type": "int32",
+              "id": 3
+            },
+            "GameLabelId": {
+              "type": "int32",
+              "id": 4
+            },
+            "GameLabelName": {
+              "type": "string",
+              "id": 5
+            },
+            "GameOrder": {
+              "type": "int32",
+              "id": 6
+            },
+            "RoomList": {
+              "rule": "repeated",
+              "type": "RoomInfo",
+              "id": 7
+            }
+          }
+        },
+        "GameConfig": {
+          "fields": {
+            "PlatformId": {
+              "type": "int32",
+              "id": 1
+            },
+            "Type": {
+              "rule": "repeated",
+              "type": "GameType",
+              "id": 2
+            },
+            "Relation": {
+              "rule": "repeated",
+              "type": "GameRelation",
+              "id": 3
+            }
+          }
+        },
+        "MsgGetGameConfigReq": {
+          "fields": {}
+        },
+        "MsgGetGameConfigResp": {
+          "fields": {
+            "GameConfig": {
+              "rule": "repeated",
+              "type": "GameConfig",
+              "id": 1
+            }
+          }
+        },
+        "MsgModifyGameConfigNotify": {
+          "fields": {
+            "GameConfig": {
+              "type": "GameConfig",
               "id": 1
             }
           }

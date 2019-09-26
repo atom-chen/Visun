@@ -18,72 +18,962 @@ $root.login = (function() {
      */
     var login = {};
 
-    login.UserLoginSvc = (function() {
+    /**
+     * CMD enum.
+     * @name login.CMD
+     * @enum {string}
+     * @property {number} Msg_HeartReq=5000 Msg_HeartReq value
+     * @property {number} Msg_HeartResp=5001 Msg_HeartResp value
+     * @property {number} Msg_SysError=5002 Msg_SysError value
+     * @property {number} CheckTokenReq=5003 CheckTokenReq value
+     * @property {number} MovedGateNot=5004 MovedGateNot value
+     * @property {number} CheckTokenRes=5005 CheckTokenRes value
+     * @property {number} Msg_GsPackage=10000 Msg_GsPackage value
+     * @property {number} Msg_UserLogInResp=10001 Msg_UserLogInResp value
+     */
+    login.CMD = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[5000] = "Msg_HeartReq"] = 5000;
+        values[valuesById[5001] = "Msg_HeartResp"] = 5001;
+        values[valuesById[5002] = "Msg_SysError"] = 5002;
+        values[valuesById[5003] = "CheckTokenReq"] = 5003;
+        values[valuesById[5004] = "MovedGateNot"] = 5004;
+        values[valuesById[5005] = "CheckTokenRes"] = 5005;
+        values[valuesById[10000] = "Msg_GsPackage"] = 10000;
+        values[valuesById[10001] = "Msg_UserLogInResp"] = 10001;
+        return values;
+    })();
+
+    login.HeartReq = (function() {
 
         /**
-         * Constructs a new UserLoginSvc service.
+         * Properties of a HeartReq.
          * @memberof login
-         * @classdesc Represents a UserLoginSvc
-         * @extends $protobuf.rpc.Service
-         * @constructor
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @interface IHeartReq
          */
-        function UserLoginSvc(rpcImpl, requestDelimited, responseDelimited) {
-            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+
+        /**
+         * Constructs a new HeartReq.
+         * @memberof login
+         * @classdesc Represents a HeartReq.
+         * @implements IHeartReq
+         * @constructor
+         * @param {login.IHeartReq=} [properties] Properties to set
+         */
+        function HeartReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
         }
 
-        (UserLoginSvc.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = UserLoginSvc;
-
         /**
-         * Creates new UserLoginSvc service using the specified rpc implementation.
+         * Creates a new HeartReq instance using the specified properties.
          * @function create
-         * @memberof login.UserLoginSvc
+         * @memberof login.HeartReq
          * @static
-         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
-         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
-         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
-         * @returns {UserLoginSvc} RPC service. Useful where requests and/or responses are streamed.
+         * @param {login.IHeartReq=} [properties] Properties to set
+         * @returns {login.HeartReq} HeartReq instance
          */
-        UserLoginSvc.create = function create(rpcImpl, requestDelimited, responseDelimited) {
-            return new this(rpcImpl, requestDelimited, responseDelimited);
+        HeartReq.create = function create(properties) {
+            return new HeartReq(properties);
         };
 
         /**
-         * Callback as used by {@link login.UserLoginSvc#userLogIn}.
-         * @memberof login.UserLoginSvc
-         * @typedef userLogInCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {login.UserLogInResp} [response] UserLogInResp
+         * Encodes the specified HeartReq message. Does not implicitly {@link login.HeartReq.verify|verify} messages.
+         * @function encode
+         * @memberof login.HeartReq
+         * @static
+         * @param {login.IHeartReq} message HeartReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HeartReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified HeartReq message, length delimited. Does not implicitly {@link login.HeartReq.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof login.HeartReq
+         * @static
+         * @param {login.IHeartReq} message HeartReq message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HeartReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a HeartReq message from the specified reader or buffer.
+         * @function decode
+         * @memberof login.HeartReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {login.HeartReq} HeartReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HeartReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.HeartReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a HeartReq message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof login.HeartReq
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {login.HeartReq} HeartReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HeartReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a HeartReq message.
+         * @function verify
+         * @memberof login.HeartReq
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        HeartReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a HeartReq message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof login.HeartReq
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {login.HeartReq} HeartReq
+         */
+        HeartReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.HeartReq)
+                return object;
+            return new $root.login.HeartReq();
+        };
+
+        /**
+         * Creates a plain object from a HeartReq message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof login.HeartReq
+         * @static
+         * @param {login.HeartReq} message HeartReq
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        HeartReq.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this HeartReq to JSON.
+         * @function toJSON
+         * @memberof login.HeartReq
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        HeartReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return HeartReq;
+    })();
+
+    login.HeartResp = (function() {
+
+        /**
+         * Properties of a HeartResp.
+         * @memberof login
+         * @interface IHeartResp
+         * @property {number|Long|null} [serverTime] HeartResp serverTime
          */
 
         /**
-         * Calls userLogIn.
-         * @function userLogIn
-         * @memberof login.UserLoginSvc
-         * @instance
-         * @param {login.IUserLogInReq} request UserLogInReq message or plain object
-         * @param {login.UserLoginSvc.userLogInCallback} callback Node-style callback called with the error, if any, and UserLogInResp
-         * @returns {undefined}
-         * @variation 1
+         * Constructs a new HeartResp.
+         * @memberof login
+         * @classdesc Represents a HeartResp.
+         * @implements IHeartResp
+         * @constructor
+         * @param {login.IHeartResp=} [properties] Properties to set
          */
-        Object.defineProperty(UserLoginSvc.prototype.userLogIn = function userLogIn(request, callback) {
-            return this.rpcCall(userLogIn, $root.login.UserLogInReq, $root.login.UserLogInResp, request, callback);
-        }, "name", { value: "userLogIn" });
+        function HeartResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
 
         /**
-         * Calls userLogIn.
-         * @function userLogIn
-         * @memberof login.UserLoginSvc
+         * HeartResp serverTime.
+         * @member {number|Long} serverTime
+         * @memberof login.HeartResp
          * @instance
-         * @param {login.IUserLogInReq} request UserLogInReq message or plain object
-         * @returns {Promise<login.UserLogInResp>} Promise
-         * @variation 2
+         */
+        HeartResp.prototype.serverTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * Creates a new HeartResp instance using the specified properties.
+         * @function create
+         * @memberof login.HeartResp
+         * @static
+         * @param {login.IHeartResp=} [properties] Properties to set
+         * @returns {login.HeartResp} HeartResp instance
+         */
+        HeartResp.create = function create(properties) {
+            return new HeartResp(properties);
+        };
+
+        /**
+         * Encodes the specified HeartResp message. Does not implicitly {@link login.HeartResp.verify|verify} messages.
+         * @function encode
+         * @memberof login.HeartResp
+         * @static
+         * @param {login.IHeartResp} message HeartResp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HeartResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.serverTime != null && message.hasOwnProperty("serverTime"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.serverTime);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified HeartResp message, length delimited. Does not implicitly {@link login.HeartResp.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof login.HeartResp
+         * @static
+         * @param {login.IHeartResp} message HeartResp message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        HeartResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a HeartResp message from the specified reader or buffer.
+         * @function decode
+         * @memberof login.HeartResp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {login.HeartResp} HeartResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HeartResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.HeartResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.serverTime = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a HeartResp message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof login.HeartResp
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {login.HeartResp} HeartResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        HeartResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a HeartResp message.
+         * @function verify
+         * @memberof login.HeartResp
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        HeartResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.serverTime != null && message.hasOwnProperty("serverTime"))
+                if (!$util.isInteger(message.serverTime) && !(message.serverTime && $util.isInteger(message.serverTime.low) && $util.isInteger(message.serverTime.high)))
+                    return "serverTime: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a HeartResp message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof login.HeartResp
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {login.HeartResp} HeartResp
+         */
+        HeartResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.HeartResp)
+                return object;
+            var message = new $root.login.HeartResp();
+            if (object.serverTime != null)
+                if ($util.Long)
+                    (message.serverTime = $util.Long.fromValue(object.serverTime)).unsigned = false;
+                else if (typeof object.serverTime === "string")
+                    message.serverTime = parseInt(object.serverTime, 10);
+                else if (typeof object.serverTime === "number")
+                    message.serverTime = object.serverTime;
+                else if (typeof object.serverTime === "object")
+                    message.serverTime = new $util.LongBits(object.serverTime.low >>> 0, object.serverTime.high >>> 0).toNumber();
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a HeartResp message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof login.HeartResp
+         * @static
+         * @param {login.HeartResp} message HeartResp
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        HeartResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.serverTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.serverTime = options.longs === String ? "0" : 0;
+            if (message.serverTime != null && message.hasOwnProperty("serverTime"))
+                if (typeof message.serverTime === "number")
+                    object.serverTime = options.longs === String ? String(message.serverTime) : message.serverTime;
+                else
+                    object.serverTime = options.longs === String ? $util.Long.prototype.toString.call(message.serverTime) : options.longs === Number ? new $util.LongBits(message.serverTime.low >>> 0, message.serverTime.high >>> 0).toNumber() : message.serverTime;
+            return object;
+        };
+
+        /**
+         * Converts this HeartResp to JSON.
+         * @function toJSON
+         * @memberof login.HeartResp
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        HeartResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return HeartResp;
+    })();
+
+    login.CheckTokenRequest = (function() {
+
+        /**
+         * Properties of a CheckTokenRequest.
+         * @memberof login
+         * @interface ICheckTokenRequest
+         * @property {number|Long|null} [uid] CheckTokenRequest uid
+         * @property {string|null} [token] CheckTokenRequest token
          */
 
-        return UserLoginSvc;
+        /**
+         * Constructs a new CheckTokenRequest.
+         * @memberof login
+         * @classdesc Represents a CheckTokenRequest.
+         * @implements ICheckTokenRequest
+         * @constructor
+         * @param {login.ICheckTokenRequest=} [properties] Properties to set
+         */
+        function CheckTokenRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CheckTokenRequest uid.
+         * @member {number|Long} uid
+         * @memberof login.CheckTokenRequest
+         * @instance
+         */
+        CheckTokenRequest.prototype.uid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * CheckTokenRequest token.
+         * @member {string} token
+         * @memberof login.CheckTokenRequest
+         * @instance
+         */
+        CheckTokenRequest.prototype.token = "";
+
+        /**
+         * Creates a new CheckTokenRequest instance using the specified properties.
+         * @function create
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {login.ICheckTokenRequest=} [properties] Properties to set
+         * @returns {login.CheckTokenRequest} CheckTokenRequest instance
+         */
+        CheckTokenRequest.create = function create(properties) {
+            return new CheckTokenRequest(properties);
+        };
+
+        /**
+         * Encodes the specified CheckTokenRequest message. Does not implicitly {@link login.CheckTokenRequest.verify|verify} messages.
+         * @function encode
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {login.ICheckTokenRequest} message CheckTokenRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckTokenRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.uid);
+            if (message.token != null && message.hasOwnProperty("token"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.token);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CheckTokenRequest message, length delimited. Does not implicitly {@link login.CheckTokenRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {login.ICheckTokenRequest} message CheckTokenRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckTokenRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CheckTokenRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {login.CheckTokenRequest} CheckTokenRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckTokenRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.CheckTokenRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.uid = reader.int64();
+                    break;
+                case 2:
+                    message.token = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CheckTokenRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {login.CheckTokenRequest} CheckTokenRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckTokenRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CheckTokenRequest message.
+         * @function verify
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CheckTokenRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (!$util.isInteger(message.uid) && !(message.uid && $util.isInteger(message.uid.low) && $util.isInteger(message.uid.high)))
+                    return "uid: integer|Long expected";
+            if (message.token != null && message.hasOwnProperty("token"))
+                if (!$util.isString(message.token))
+                    return "token: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a CheckTokenRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {login.CheckTokenRequest} CheckTokenRequest
+         */
+        CheckTokenRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.CheckTokenRequest)
+                return object;
+            var message = new $root.login.CheckTokenRequest();
+            if (object.uid != null)
+                if ($util.Long)
+                    (message.uid = $util.Long.fromValue(object.uid)).unsigned = false;
+                else if (typeof object.uid === "string")
+                    message.uid = parseInt(object.uid, 10);
+                else if (typeof object.uid === "number")
+                    message.uid = object.uid;
+                else if (typeof object.uid === "object")
+                    message.uid = new $util.LongBits(object.uid.low >>> 0, object.uid.high >>> 0).toNumber();
+            if (object.token != null)
+                message.token = String(object.token);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CheckTokenRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof login.CheckTokenRequest
+         * @static
+         * @param {login.CheckTokenRequest} message CheckTokenRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CheckTokenRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.uid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.uid = options.longs === String ? "0" : 0;
+                object.token = "";
+            }
+            if (message.uid != null && message.hasOwnProperty("uid"))
+                if (typeof message.uid === "number")
+                    object.uid = options.longs === String ? String(message.uid) : message.uid;
+                else
+                    object.uid = options.longs === String ? $util.Long.prototype.toString.call(message.uid) : options.longs === Number ? new $util.LongBits(message.uid.low >>> 0, message.uid.high >>> 0).toNumber() : message.uid;
+            if (message.token != null && message.hasOwnProperty("token"))
+                object.token = message.token;
+            return object;
+        };
+
+        /**
+         * Converts this CheckTokenRequest to JSON.
+         * @function toJSON
+         * @memberof login.CheckTokenRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CheckTokenRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CheckTokenRequest;
+    })();
+
+    login.CheckTokenResponse = (function() {
+
+        /**
+         * Properties of a CheckTokenResponse.
+         * @memberof login
+         * @interface ICheckTokenResponse
+         */
+
+        /**
+         * Constructs a new CheckTokenResponse.
+         * @memberof login
+         * @classdesc Represents a CheckTokenResponse.
+         * @implements ICheckTokenResponse
+         * @constructor
+         * @param {login.ICheckTokenResponse=} [properties] Properties to set
+         */
+        function CheckTokenResponse(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Creates a new CheckTokenResponse instance using the specified properties.
+         * @function create
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {login.ICheckTokenResponse=} [properties] Properties to set
+         * @returns {login.CheckTokenResponse} CheckTokenResponse instance
+         */
+        CheckTokenResponse.create = function create(properties) {
+            return new CheckTokenResponse(properties);
+        };
+
+        /**
+         * Encodes the specified CheckTokenResponse message. Does not implicitly {@link login.CheckTokenResponse.verify|verify} messages.
+         * @function encode
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {login.ICheckTokenResponse} message CheckTokenResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckTokenResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CheckTokenResponse message, length delimited. Does not implicitly {@link login.CheckTokenResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {login.ICheckTokenResponse} message CheckTokenResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CheckTokenResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CheckTokenResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {login.CheckTokenResponse} CheckTokenResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckTokenResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.CheckTokenResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CheckTokenResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {login.CheckTokenResponse} CheckTokenResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CheckTokenResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CheckTokenResponse message.
+         * @function verify
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CheckTokenResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        /**
+         * Creates a CheckTokenResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {login.CheckTokenResponse} CheckTokenResponse
+         */
+        CheckTokenResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.CheckTokenResponse)
+                return object;
+            return new $root.login.CheckTokenResponse();
+        };
+
+        /**
+         * Creates a plain object from a CheckTokenResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof login.CheckTokenResponse
+         * @static
+         * @param {login.CheckTokenResponse} message CheckTokenResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CheckTokenResponse.toObject = function toObject() {
+            return {};
+        };
+
+        /**
+         * Converts this CheckTokenResponse to JSON.
+         * @function toJSON
+         * @memberof login.CheckTokenResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CheckTokenResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CheckTokenResponse;
+    })();
+
+    login.MovedGateNotice = (function() {
+
+        /**
+         * Properties of a MovedGateNotice.
+         * @memberof login
+         * @interface IMovedGateNotice
+         * @property {string|null} [wsUri] MovedGateNotice wsUri
+         */
+
+        /**
+         * Constructs a new MovedGateNotice.
+         * @memberof login
+         * @classdesc Represents a MovedGateNotice.
+         * @implements IMovedGateNotice
+         * @constructor
+         * @param {login.IMovedGateNotice=} [properties] Properties to set
+         */
+        function MovedGateNotice(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MovedGateNotice wsUri.
+         * @member {string} wsUri
+         * @memberof login.MovedGateNotice
+         * @instance
+         */
+        MovedGateNotice.prototype.wsUri = "";
+
+        /**
+         * Creates a new MovedGateNotice instance using the specified properties.
+         * @function create
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {login.IMovedGateNotice=} [properties] Properties to set
+         * @returns {login.MovedGateNotice} MovedGateNotice instance
+         */
+        MovedGateNotice.create = function create(properties) {
+            return new MovedGateNotice(properties);
+        };
+
+        /**
+         * Encodes the specified MovedGateNotice message. Does not implicitly {@link login.MovedGateNotice.verify|verify} messages.
+         * @function encode
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {login.IMovedGateNotice} message MovedGateNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MovedGateNotice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.wsUri != null && message.hasOwnProperty("wsUri"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.wsUri);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MovedGateNotice message, length delimited. Does not implicitly {@link login.MovedGateNotice.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {login.IMovedGateNotice} message MovedGateNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MovedGateNotice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MovedGateNotice message from the specified reader or buffer.
+         * @function decode
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {login.MovedGateNotice} MovedGateNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MovedGateNotice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.MovedGateNotice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.wsUri = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MovedGateNotice message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {login.MovedGateNotice} MovedGateNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MovedGateNotice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MovedGateNotice message.
+         * @function verify
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MovedGateNotice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.wsUri != null && message.hasOwnProperty("wsUri"))
+                if (!$util.isString(message.wsUri))
+                    return "wsUri: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MovedGateNotice message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {login.MovedGateNotice} MovedGateNotice
+         */
+        MovedGateNotice.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.MovedGateNotice)
+                return object;
+            var message = new $root.login.MovedGateNotice();
+            if (object.wsUri != null)
+                message.wsUri = String(object.wsUri);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MovedGateNotice message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof login.MovedGateNotice
+         * @static
+         * @param {login.MovedGateNotice} message MovedGateNotice
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MovedGateNotice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.wsUri = "";
+            if (message.wsUri != null && message.hasOwnProperty("wsUri"))
+                object.wsUri = message.wsUri;
+            return object;
+        };
+
+        /**
+         * Converts this MovedGateNotice to JSON.
+         * @function toJSON
+         * @memberof login.MovedGateNotice
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MovedGateNotice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MovedGateNotice;
     })();
 
     login.GsPackage = (function() {

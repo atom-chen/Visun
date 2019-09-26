@@ -5,396 +5,226 @@ export namespace hallgw {
     /** HallMsgId enum. */
     enum HallMsgId {
         Msg_Unknown = 0,
-        Msg_HeartReq = 5000,
-        Msg_HeartResp = 5001,
-        Msg_UserInfoReq = 20000,
-        Msg_UserInfoResp = 20001,
-        Msg_GameListReq = 20002,
-        Msg_GameListResp = 20003,
-        Msg_NoticeNotify = 20004
-    }
-
-    /** Properties of a HeartReq. */
-    interface IHeartReq {
-    }
-
-    /** Represents a HeartReq. */
-    class HeartReq implements IHeartReq {
-
-        /**
-         * Constructs a new HeartReq.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: hallgw.IHeartReq);
-
-        /**
-         * Creates a new HeartReq instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns HeartReq instance
-         */
-        public static create(properties?: hallgw.IHeartReq): hallgw.HeartReq;
-
-        /**
-         * Encodes the specified HeartReq message. Does not implicitly {@link hallgw.HeartReq.verify|verify} messages.
-         * @param message HeartReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: hallgw.IHeartReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified HeartReq message, length delimited. Does not implicitly {@link hallgw.HeartReq.verify|verify} messages.
-         * @param message HeartReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: hallgw.IHeartReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a HeartReq message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns HeartReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.HeartReq;
-
-        /**
-         * Decodes a HeartReq message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns HeartReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.HeartReq;
-
-        /**
-         * Verifies a HeartReq message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a HeartReq message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns HeartReq
-         */
-        public static fromObject(object: { [k: string]: any }): hallgw.HeartReq;
-
-        /**
-         * Creates a plain object from a HeartReq message. Also converts values to other types if specified.
-         * @param message HeartReq
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: hallgw.HeartReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this HeartReq to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a HeartResp. */
-    interface IHeartResp {
-
-        /** HeartResp serverTime */
-        serverTime?: (number|Long|null);
-    }
-
-    /** Represents a HeartResp. */
-    class HeartResp implements IHeartResp {
-
-        /**
-         * Constructs a new HeartResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: hallgw.IHeartResp);
-
-        /** HeartResp serverTime. */
-        public serverTime: (number|Long);
-
-        /**
-         * Creates a new HeartResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns HeartResp instance
-         */
-        public static create(properties?: hallgw.IHeartResp): hallgw.HeartResp;
-
-        /**
-         * Encodes the specified HeartResp message. Does not implicitly {@link hallgw.HeartResp.verify|verify} messages.
-         * @param message HeartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: hallgw.IHeartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified HeartResp message, length delimited. Does not implicitly {@link hallgw.HeartResp.verify|verify} messages.
-         * @param message HeartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: hallgw.IHeartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a HeartResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns HeartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.HeartResp;
-
-        /**
-         * Decodes a HeartResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns HeartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.HeartResp;
-
-        /**
-         * Verifies a HeartResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a HeartResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns HeartResp
-         */
-        public static fromObject(object: { [k: string]: any }): hallgw.HeartResp;
-
-        /**
-         * Creates a plain object from a HeartResp message. Also converts values to other types if specified.
-         * @param message HeartResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: hallgw.HeartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this HeartResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
+        Msg_GetUserInfoReq = 20000,
+        Msg_GetUserInfoResp = 20001,
+        Msg_GetGameListReq = 20002,
+        Msg_GetGameListResp = 20003,
+        Msg_GetGameConfigReq = 20004,
+        Msg_GetGameConfigResp = 20005,
+        Msg_ChangeHeadReq = 20006,
+        Msg_ChangeHeadResp = 20007,
+        Msg_BroadcastNotice = 80000
     }
 
     /** RespErr enum. */
     enum RespErr {
         RespErr_Unknown = 0,
         ReqFormatErr = 1,
-        UserInfoRespRedisOperErr = 2,
-        GameListRespDBOperErr = 3
+        MsgGetUserInfoRespRedisOperErr = 2,
+        MsgGetGameListRespDBOperErr = 3,
+        MsgGetGameConfigRespRpcBackErr = 4,
+        MsgGetGameConfigRespFormatErr = 5
     }
 
-    /** Properties of a UserInfoReq. */
-    interface IUserInfoReq {
+    /** Properties of a MsgGetUserInfoReq. */
+    interface IMsgGetUserInfoReq {
 
-        /** UserInfoReq Id */
+        /** MsgGetUserInfoReq Id */
         Id?: (number|null);
     }
 
-    /** Represents a UserInfoReq. */
-    class UserInfoReq implements IUserInfoReq {
+    /** Represents a MsgGetUserInfoReq. */
+    class MsgGetUserInfoReq implements IMsgGetUserInfoReq {
 
         /**
-         * Constructs a new UserInfoReq.
+         * Constructs a new MsgGetUserInfoReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: hallgw.IUserInfoReq);
+        constructor(properties?: hallgw.IMsgGetUserInfoReq);
 
-        /** UserInfoReq Id. */
+        /** MsgGetUserInfoReq Id. */
         public Id: number;
 
         /**
-         * Creates a new UserInfoReq instance using the specified properties.
+         * Creates a new MsgGetUserInfoReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns UserInfoReq instance
+         * @returns MsgGetUserInfoReq instance
          */
-        public static create(properties?: hallgw.IUserInfoReq): hallgw.UserInfoReq;
+        public static create(properties?: hallgw.IMsgGetUserInfoReq): hallgw.MsgGetUserInfoReq;
 
         /**
-         * Encodes the specified UserInfoReq message. Does not implicitly {@link hallgw.UserInfoReq.verify|verify} messages.
-         * @param message UserInfoReq message or plain object to encode
+         * Encodes the specified MsgGetUserInfoReq message. Does not implicitly {@link hallgw.MsgGetUserInfoReq.verify|verify} messages.
+         * @param message MsgGetUserInfoReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: hallgw.IUserInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: hallgw.IMsgGetUserInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserInfoReq message, length delimited. Does not implicitly {@link hallgw.UserInfoReq.verify|verify} messages.
-         * @param message UserInfoReq message or plain object to encode
+         * Encodes the specified MsgGetUserInfoReq message, length delimited. Does not implicitly {@link hallgw.MsgGetUserInfoReq.verify|verify} messages.
+         * @param message MsgGetUserInfoReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: hallgw.IUserInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: hallgw.IMsgGetUserInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a UserInfoReq message from the specified reader or buffer.
+         * Decodes a MsgGetUserInfoReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns UserInfoReq
+         * @returns MsgGetUserInfoReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.UserInfoReq;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetUserInfoReq;
 
         /**
-         * Decodes a UserInfoReq message from the specified reader or buffer, length delimited.
+         * Decodes a MsgGetUserInfoReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns UserInfoReq
+         * @returns MsgGetUserInfoReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.UserInfoReq;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetUserInfoReq;
 
         /**
-         * Verifies a UserInfoReq message.
+         * Verifies a MsgGetUserInfoReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a UserInfoReq message from a plain object. Also converts values to their respective internal types.
+         * Creates a MsgGetUserInfoReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns UserInfoReq
+         * @returns MsgGetUserInfoReq
          */
-        public static fromObject(object: { [k: string]: any }): hallgw.UserInfoReq;
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetUserInfoReq;
 
         /**
-         * Creates a plain object from a UserInfoReq message. Also converts values to other types if specified.
-         * @param message UserInfoReq
+         * Creates a plain object from a MsgGetUserInfoReq message. Also converts values to other types if specified.
+         * @param message MsgGetUserInfoReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: hallgw.UserInfoReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: hallgw.MsgGetUserInfoReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this UserInfoReq to JSON.
+         * Converts this MsgGetUserInfoReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a UserInfoResp. */
-    interface IUserInfoResp {
+    /** Properties of a MsgGetUserInfoResp. */
+    interface IMsgGetUserInfoResp {
 
-        /** UserInfoResp Id */
+        /** MsgGetUserInfoResp Id */
         Id?: (number|null);
 
-        /** UserInfoResp Account */
+        /** MsgGetUserInfoResp Account */
         Account?: (string|null);
 
-        /** UserInfoResp Name */
+        /** MsgGetUserInfoResp Name */
         Name?: (string|null);
 
-        /** UserInfoResp Coin */
+        /** MsgGetUserInfoResp Coin */
         Coin?: (number|Long|null);
 
-        /** UserInfoResp Head */
+        /** MsgGetUserInfoResp Head */
         Head?: (string|null);
     }
 
-    /** Represents a UserInfoResp. */
-    class UserInfoResp implements IUserInfoResp {
+    /** Represents a MsgGetUserInfoResp. */
+    class MsgGetUserInfoResp implements IMsgGetUserInfoResp {
 
         /**
-         * Constructs a new UserInfoResp.
+         * Constructs a new MsgGetUserInfoResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: hallgw.IUserInfoResp);
+        constructor(properties?: hallgw.IMsgGetUserInfoResp);
 
-        /** UserInfoResp Id. */
+        /** MsgGetUserInfoResp Id. */
         public Id: number;
 
-        /** UserInfoResp Account. */
+        /** MsgGetUserInfoResp Account. */
         public Account: string;
 
-        /** UserInfoResp Name. */
+        /** MsgGetUserInfoResp Name. */
         public Name: string;
 
-        /** UserInfoResp Coin. */
+        /** MsgGetUserInfoResp Coin. */
         public Coin: (number|Long);
 
-        /** UserInfoResp Head. */
+        /** MsgGetUserInfoResp Head. */
         public Head: string;
 
         /**
-         * Creates a new UserInfoResp instance using the specified properties.
+         * Creates a new MsgGetUserInfoResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns UserInfoResp instance
+         * @returns MsgGetUserInfoResp instance
          */
-        public static create(properties?: hallgw.IUserInfoResp): hallgw.UserInfoResp;
+        public static create(properties?: hallgw.IMsgGetUserInfoResp): hallgw.MsgGetUserInfoResp;
 
         /**
-         * Encodes the specified UserInfoResp message. Does not implicitly {@link hallgw.UserInfoResp.verify|verify} messages.
-         * @param message UserInfoResp message or plain object to encode
+         * Encodes the specified MsgGetUserInfoResp message. Does not implicitly {@link hallgw.MsgGetUserInfoResp.verify|verify} messages.
+         * @param message MsgGetUserInfoResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: hallgw.IUserInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: hallgw.IMsgGetUserInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserInfoResp message, length delimited. Does not implicitly {@link hallgw.UserInfoResp.verify|verify} messages.
-         * @param message UserInfoResp message or plain object to encode
+         * Encodes the specified MsgGetUserInfoResp message, length delimited. Does not implicitly {@link hallgw.MsgGetUserInfoResp.verify|verify} messages.
+         * @param message MsgGetUserInfoResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: hallgw.IUserInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: hallgw.IMsgGetUserInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a UserInfoResp message from the specified reader or buffer.
+         * Decodes a MsgGetUserInfoResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns UserInfoResp
+         * @returns MsgGetUserInfoResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.UserInfoResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetUserInfoResp;
 
         /**
-         * Decodes a UserInfoResp message from the specified reader or buffer, length delimited.
+         * Decodes a MsgGetUserInfoResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns UserInfoResp
+         * @returns MsgGetUserInfoResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.UserInfoResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetUserInfoResp;
 
         /**
-         * Verifies a UserInfoResp message.
+         * Verifies a MsgGetUserInfoResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a UserInfoResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a MsgGetUserInfoResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns UserInfoResp
+         * @returns MsgGetUserInfoResp
          */
-        public static fromObject(object: { [k: string]: any }): hallgw.UserInfoResp;
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetUserInfoResp;
 
         /**
-         * Creates a plain object from a UserInfoResp message. Also converts values to other types if specified.
-         * @param message UserInfoResp
+         * Creates a plain object from a MsgGetUserInfoResp message. Also converts values to other types if specified.
+         * @param message MsgGetUserInfoResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: hallgw.UserInfoResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: hallgw.MsgGetUserInfoResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this UserInfoResp to JSON.
+         * Converts this MsgGetUserInfoResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -409,14 +239,8 @@ export namespace hallgw {
         /** GameInfo Name */
         Name?: (string|null);
 
-        /** GameInfo Type */
-        Type?: (number|null);
-
         /** GameInfo State */
         State?: (number|null);
-
-        /** GameInfo Tag */
-        Tag?: (number|null);
 
         /** GameInfo HaveRoomList */
         HaveRoomList?: (number|null);
@@ -440,14 +264,8 @@ export namespace hallgw {
         /** GameInfo Name. */
         public Name: string;
 
-        /** GameInfo Type. */
-        public Type: number;
-
         /** GameInfo State. */
         public State: number;
-
-        /** GameInfo Tag. */
-        public Tag: number;
 
         /** GameInfo HaveRoomList. */
         public HaveRoomList: number;
@@ -526,265 +344,1165 @@ export namespace hallgw {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameListReq. */
-    interface IGameListReq {
+    /** Properties of a MsgGetGameListReq. */
+    interface IMsgGetGameListReq {
     }
 
-    /** Represents a GameListReq. */
-    class GameListReq implements IGameListReq {
+    /** Represents a MsgGetGameListReq. */
+    class MsgGetGameListReq implements IMsgGetGameListReq {
 
         /**
-         * Constructs a new GameListReq.
+         * Constructs a new MsgGetGameListReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: hallgw.IGameListReq);
+        constructor(properties?: hallgw.IMsgGetGameListReq);
 
         /**
-         * Creates a new GameListReq instance using the specified properties.
+         * Creates a new MsgGetGameListReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameListReq instance
+         * @returns MsgGetGameListReq instance
          */
-        public static create(properties?: hallgw.IGameListReq): hallgw.GameListReq;
+        public static create(properties?: hallgw.IMsgGetGameListReq): hallgw.MsgGetGameListReq;
 
         /**
-         * Encodes the specified GameListReq message. Does not implicitly {@link hallgw.GameListReq.verify|verify} messages.
-         * @param message GameListReq message or plain object to encode
+         * Encodes the specified MsgGetGameListReq message. Does not implicitly {@link hallgw.MsgGetGameListReq.verify|verify} messages.
+         * @param message MsgGetGameListReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: hallgw.IGameListReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: hallgw.IMsgGetGameListReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameListReq message, length delimited. Does not implicitly {@link hallgw.GameListReq.verify|verify} messages.
-         * @param message GameListReq message or plain object to encode
+         * Encodes the specified MsgGetGameListReq message, length delimited. Does not implicitly {@link hallgw.MsgGetGameListReq.verify|verify} messages.
+         * @param message MsgGetGameListReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: hallgw.IGameListReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: hallgw.IMsgGetGameListReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameListReq message from the specified reader or buffer.
+         * Decodes a MsgGetGameListReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameListReq
+         * @returns MsgGetGameListReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.GameListReq;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetGameListReq;
 
         /**
-         * Decodes a GameListReq message from the specified reader or buffer, length delimited.
+         * Decodes a MsgGetGameListReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameListReq
+         * @returns MsgGetGameListReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.GameListReq;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetGameListReq;
 
         /**
-         * Verifies a GameListReq message.
+         * Verifies a MsgGetGameListReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameListReq message from a plain object. Also converts values to their respective internal types.
+         * Creates a MsgGetGameListReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameListReq
+         * @returns MsgGetGameListReq
          */
-        public static fromObject(object: { [k: string]: any }): hallgw.GameListReq;
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetGameListReq;
 
         /**
-         * Creates a plain object from a GameListReq message. Also converts values to other types if specified.
-         * @param message GameListReq
+         * Creates a plain object from a MsgGetGameListReq message. Also converts values to other types if specified.
+         * @param message MsgGetGameListReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: hallgw.GameListReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: hallgw.MsgGetGameListReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameListReq to JSON.
+         * Converts this MsgGetGameListReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameListResp. */
-    interface IGameListResp {
+    /** Properties of a MsgGetGameListResp. */
+    interface IMsgGetGameListResp {
 
-        /** GameListResp List */
+        /** MsgGetGameListResp List */
         List?: (hallgw.IGameInfo[]|null);
     }
 
-    /** Represents a GameListResp. */
-    class GameListResp implements IGameListResp {
+    /** Represents a MsgGetGameListResp. */
+    class MsgGetGameListResp implements IMsgGetGameListResp {
 
         /**
-         * Constructs a new GameListResp.
+         * Constructs a new MsgGetGameListResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: hallgw.IGameListResp);
+        constructor(properties?: hallgw.IMsgGetGameListResp);
 
-        /** GameListResp List. */
+        /** MsgGetGameListResp List. */
         public List: hallgw.IGameInfo[];
 
         /**
-         * Creates a new GameListResp instance using the specified properties.
+         * Creates a new MsgGetGameListResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameListResp instance
+         * @returns MsgGetGameListResp instance
          */
-        public static create(properties?: hallgw.IGameListResp): hallgw.GameListResp;
+        public static create(properties?: hallgw.IMsgGetGameListResp): hallgw.MsgGetGameListResp;
 
         /**
-         * Encodes the specified GameListResp message. Does not implicitly {@link hallgw.GameListResp.verify|verify} messages.
-         * @param message GameListResp message or plain object to encode
+         * Encodes the specified MsgGetGameListResp message. Does not implicitly {@link hallgw.MsgGetGameListResp.verify|verify} messages.
+         * @param message MsgGetGameListResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: hallgw.IGameListResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: hallgw.IMsgGetGameListResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameListResp message, length delimited. Does not implicitly {@link hallgw.GameListResp.verify|verify} messages.
-         * @param message GameListResp message or plain object to encode
+         * Encodes the specified MsgGetGameListResp message, length delimited. Does not implicitly {@link hallgw.MsgGetGameListResp.verify|verify} messages.
+         * @param message MsgGetGameListResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: hallgw.IGameListResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: hallgw.IMsgGetGameListResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameListResp message from the specified reader or buffer.
+         * Decodes a MsgGetGameListResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameListResp
+         * @returns MsgGetGameListResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.GameListResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetGameListResp;
 
         /**
-         * Decodes a GameListResp message from the specified reader or buffer, length delimited.
+         * Decodes a MsgGetGameListResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameListResp
+         * @returns MsgGetGameListResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.GameListResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetGameListResp;
 
         /**
-         * Verifies a GameListResp message.
+         * Verifies a MsgGetGameListResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameListResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a MsgGetGameListResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameListResp
+         * @returns MsgGetGameListResp
          */
-        public static fromObject(object: { [k: string]: any }): hallgw.GameListResp;
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetGameListResp;
 
         /**
-         * Creates a plain object from a GameListResp message. Also converts values to other types if specified.
-         * @param message GameListResp
+         * Creates a plain object from a MsgGetGameListResp message. Also converts values to other types if specified.
+         * @param message MsgGetGameListResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: hallgw.GameListResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: hallgw.MsgGetGameListResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameListResp to JSON.
+         * Converts this MsgGetGameListResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a NoticeNotify. */
-    interface INoticeNotify {
+    /** Properties of a MsgChangeHeadReq. */
+    interface IMsgChangeHeadReq {
 
-        /** NoticeNotify Content */
-        Content?: (string|null);
+        /** MsgChangeHeadReq UserId */
+        UserId?: (number|Long|null);
+
+        /** MsgChangeHeadReq Head */
+        Head?: (string|null);
     }
 
-    /** Represents a NoticeNotify. */
-    class NoticeNotify implements INoticeNotify {
+    /** Represents a MsgChangeHeadReq. */
+    class MsgChangeHeadReq implements IMsgChangeHeadReq {
 
         /**
-         * Constructs a new NoticeNotify.
+         * Constructs a new MsgChangeHeadReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: hallgw.INoticeNotify);
+        constructor(properties?: hallgw.IMsgChangeHeadReq);
 
-        /** NoticeNotify Content. */
-        public Content: string;
+        /** MsgChangeHeadReq UserId. */
+        public UserId: (number|Long);
+
+        /** MsgChangeHeadReq Head. */
+        public Head: string;
 
         /**
-         * Creates a new NoticeNotify instance using the specified properties.
+         * Creates a new MsgChangeHeadReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns NoticeNotify instance
+         * @returns MsgChangeHeadReq instance
          */
-        public static create(properties?: hallgw.INoticeNotify): hallgw.NoticeNotify;
+        public static create(properties?: hallgw.IMsgChangeHeadReq): hallgw.MsgChangeHeadReq;
 
         /**
-         * Encodes the specified NoticeNotify message. Does not implicitly {@link hallgw.NoticeNotify.verify|verify} messages.
-         * @param message NoticeNotify message or plain object to encode
+         * Encodes the specified MsgChangeHeadReq message. Does not implicitly {@link hallgw.MsgChangeHeadReq.verify|verify} messages.
+         * @param message MsgChangeHeadReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: hallgw.INoticeNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: hallgw.IMsgChangeHeadReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified NoticeNotify message, length delimited. Does not implicitly {@link hallgw.NoticeNotify.verify|verify} messages.
-         * @param message NoticeNotify message or plain object to encode
+         * Encodes the specified MsgChangeHeadReq message, length delimited. Does not implicitly {@link hallgw.MsgChangeHeadReq.verify|verify} messages.
+         * @param message MsgChangeHeadReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: hallgw.INoticeNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: hallgw.IMsgChangeHeadReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a NoticeNotify message from the specified reader or buffer.
+         * Decodes a MsgChangeHeadReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns NoticeNotify
+         * @returns MsgChangeHeadReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.NoticeNotify;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgChangeHeadReq;
 
         /**
-         * Decodes a NoticeNotify message from the specified reader or buffer, length delimited.
+         * Decodes a MsgChangeHeadReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns NoticeNotify
+         * @returns MsgChangeHeadReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.NoticeNotify;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgChangeHeadReq;
 
         /**
-         * Verifies a NoticeNotify message.
+         * Verifies a MsgChangeHeadReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a NoticeNotify message from a plain object. Also converts values to their respective internal types.
+         * Creates a MsgChangeHeadReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns NoticeNotify
+         * @returns MsgChangeHeadReq
          */
-        public static fromObject(object: { [k: string]: any }): hallgw.NoticeNotify;
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgChangeHeadReq;
 
         /**
-         * Creates a plain object from a NoticeNotify message. Also converts values to other types if specified.
-         * @param message NoticeNotify
+         * Creates a plain object from a MsgChangeHeadReq message. Also converts values to other types if specified.
+         * @param message MsgChangeHeadReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: hallgw.NoticeNotify, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: hallgw.MsgChangeHeadReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this NoticeNotify to JSON.
+         * Converts this MsgChangeHeadReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MsgChangeHeadResp. */
+    interface IMsgChangeHeadResp {
+    }
+
+    /** Represents a MsgChangeHeadResp. */
+    class MsgChangeHeadResp implements IMsgChangeHeadResp {
+
+        /**
+         * Constructs a new MsgChangeHeadResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IMsgChangeHeadResp);
+
+        /**
+         * Creates a new MsgChangeHeadResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgChangeHeadResp instance
+         */
+        public static create(properties?: hallgw.IMsgChangeHeadResp): hallgw.MsgChangeHeadResp;
+
+        /**
+         * Encodes the specified MsgChangeHeadResp message. Does not implicitly {@link hallgw.MsgChangeHeadResp.verify|verify} messages.
+         * @param message MsgChangeHeadResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IMsgChangeHeadResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgChangeHeadResp message, length delimited. Does not implicitly {@link hallgw.MsgChangeHeadResp.verify|verify} messages.
+         * @param message MsgChangeHeadResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IMsgChangeHeadResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgChangeHeadResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgChangeHeadResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgChangeHeadResp;
+
+        /**
+         * Decodes a MsgChangeHeadResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgChangeHeadResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgChangeHeadResp;
+
+        /**
+         * Verifies a MsgChangeHeadResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgChangeHeadResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgChangeHeadResp
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgChangeHeadResp;
+
+        /**
+         * Creates a plain object from a MsgChangeHeadResp message. Also converts values to other types if specified.
+         * @param message MsgChangeHeadResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.MsgChangeHeadResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgChangeHeadResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MsgNoticeNotify. */
+    interface IMsgNoticeNotify {
+
+        /** MsgNoticeNotify Platform */
+        Platform?: (number|null);
+
+        /** MsgNoticeNotify Content */
+        Content?: (string|null);
+
+        /** MsgNoticeNotify RollCount */
+        RollCount?: (number|null);
+
+        /** MsgNoticeNotify DisplayDuration */
+        DisplayDuration?: (number|null);
+    }
+
+    /** Represents a MsgNoticeNotify. */
+    class MsgNoticeNotify implements IMsgNoticeNotify {
+
+        /**
+         * Constructs a new MsgNoticeNotify.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IMsgNoticeNotify);
+
+        /** MsgNoticeNotify Platform. */
+        public Platform: number;
+
+        /** MsgNoticeNotify Content. */
+        public Content: string;
+
+        /** MsgNoticeNotify RollCount. */
+        public RollCount: number;
+
+        /** MsgNoticeNotify DisplayDuration. */
+        public DisplayDuration: number;
+
+        /**
+         * Creates a new MsgNoticeNotify instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgNoticeNotify instance
+         */
+        public static create(properties?: hallgw.IMsgNoticeNotify): hallgw.MsgNoticeNotify;
+
+        /**
+         * Encodes the specified MsgNoticeNotify message. Does not implicitly {@link hallgw.MsgNoticeNotify.verify|verify} messages.
+         * @param message MsgNoticeNotify message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IMsgNoticeNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgNoticeNotify message, length delimited. Does not implicitly {@link hallgw.MsgNoticeNotify.verify|verify} messages.
+         * @param message MsgNoticeNotify message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IMsgNoticeNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgNoticeNotify message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgNoticeNotify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgNoticeNotify;
+
+        /**
+         * Decodes a MsgNoticeNotify message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgNoticeNotify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgNoticeNotify;
+
+        /**
+         * Verifies a MsgNoticeNotify message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgNoticeNotify message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgNoticeNotify
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgNoticeNotify;
+
+        /**
+         * Creates a plain object from a MsgNoticeNotify message. Also converts values to other types if specified.
+         * @param message MsgNoticeNotify
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.MsgNoticeNotify, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgNoticeNotify to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RoomInfo. */
+    interface IRoomInfo {
+
+        /** RoomInfo RoomId */
+        RoomId?: (number|null);
+
+        /** RoomInfo RoomName */
+        RoomName?: (string|null);
+
+        /** RoomInfo MinCost */
+        MinCost?: (number|Long|null);
+
+        /** RoomInfo MaxCost */
+        MaxCost?: (number|Long|null);
+    }
+
+    /** Represents a RoomInfo. */
+    class RoomInfo implements IRoomInfo {
+
+        /**
+         * Constructs a new RoomInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IRoomInfo);
+
+        /** RoomInfo RoomId. */
+        public RoomId: number;
+
+        /** RoomInfo RoomName. */
+        public RoomName: string;
+
+        /** RoomInfo MinCost. */
+        public MinCost: (number|Long);
+
+        /** RoomInfo MaxCost. */
+        public MaxCost: (number|Long);
+
+        /**
+         * Creates a new RoomInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RoomInfo instance
+         */
+        public static create(properties?: hallgw.IRoomInfo): hallgw.RoomInfo;
+
+        /**
+         * Encodes the specified RoomInfo message. Does not implicitly {@link hallgw.RoomInfo.verify|verify} messages.
+         * @param message RoomInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RoomInfo message, length delimited. Does not implicitly {@link hallgw.RoomInfo.verify|verify} messages.
+         * @param message RoomInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RoomInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RoomInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.RoomInfo;
+
+        /**
+         * Decodes a RoomInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RoomInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.RoomInfo;
+
+        /**
+         * Verifies a RoomInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RoomInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RoomInfo
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.RoomInfo;
+
+        /**
+         * Creates a plain object from a RoomInfo message. Also converts values to other types if specified.
+         * @param message RoomInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.RoomInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RoomInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameType. */
+    interface IGameType {
+
+        /** GameType Id */
+        Id?: (number|null);
+
+        /** GameType Name */
+        Name?: (string|null);
+
+        /** GameType Order */
+        Order?: (number|null);
+    }
+
+    /** Represents a GameType. */
+    class GameType implements IGameType {
+
+        /**
+         * Constructs a new GameType.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IGameType);
+
+        /** GameType Id. */
+        public Id: number;
+
+        /** GameType Name. */
+        public Name: string;
+
+        /** GameType Order. */
+        public Order: number;
+
+        /**
+         * Creates a new GameType instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameType instance
+         */
+        public static create(properties?: hallgw.IGameType): hallgw.GameType;
+
+        /**
+         * Encodes the specified GameType message. Does not implicitly {@link hallgw.GameType.verify|verify} messages.
+         * @param message GameType message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IGameType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameType message, length delimited. Does not implicitly {@link hallgw.GameType.verify|verify} messages.
+         * @param message GameType message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IGameType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameType message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameType
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.GameType;
+
+        /**
+         * Decodes a GameType message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameType
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.GameType;
+
+        /**
+         * Verifies a GameType message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameType message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameType
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.GameType;
+
+        /**
+         * Creates a plain object from a GameType message. Also converts values to other types if specified.
+         * @param message GameType
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.GameType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameType to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameRelation. */
+    interface IGameRelation {
+
+        /** GameRelation GameId */
+        GameId?: (number|null);
+
+        /** GameRelation GameName */
+        GameName?: (string|null);
+
+        /** GameRelation GameTypeId */
+        GameTypeId?: (number|null);
+
+        /** GameRelation GameLabelId */
+        GameLabelId?: (number|null);
+
+        /** GameRelation GameLabelName */
+        GameLabelName?: (string|null);
+
+        /** GameRelation GameOrder */
+        GameOrder?: (number|null);
+
+        /** GameRelation RoomList */
+        RoomList?: (hallgw.IRoomInfo[]|null);
+    }
+
+    /** Represents a GameRelation. */
+    class GameRelation implements IGameRelation {
+
+        /**
+         * Constructs a new GameRelation.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IGameRelation);
+
+        /** GameRelation GameId. */
+        public GameId: number;
+
+        /** GameRelation GameName. */
+        public GameName: string;
+
+        /** GameRelation GameTypeId. */
+        public GameTypeId: number;
+
+        /** GameRelation GameLabelId. */
+        public GameLabelId: number;
+
+        /** GameRelation GameLabelName. */
+        public GameLabelName: string;
+
+        /** GameRelation GameOrder. */
+        public GameOrder: number;
+
+        /** GameRelation RoomList. */
+        public RoomList: hallgw.IRoomInfo[];
+
+        /**
+         * Creates a new GameRelation instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameRelation instance
+         */
+        public static create(properties?: hallgw.IGameRelation): hallgw.GameRelation;
+
+        /**
+         * Encodes the specified GameRelation message. Does not implicitly {@link hallgw.GameRelation.verify|verify} messages.
+         * @param message GameRelation message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IGameRelation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameRelation message, length delimited. Does not implicitly {@link hallgw.GameRelation.verify|verify} messages.
+         * @param message GameRelation message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IGameRelation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameRelation message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameRelation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.GameRelation;
+
+        /**
+         * Decodes a GameRelation message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameRelation
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.GameRelation;
+
+        /**
+         * Verifies a GameRelation message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameRelation message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameRelation
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.GameRelation;
+
+        /**
+         * Creates a plain object from a GameRelation message. Also converts values to other types if specified.
+         * @param message GameRelation
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.GameRelation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameRelation to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameConfig. */
+    interface IGameConfig {
+
+        /** GameConfig PlatformId */
+        PlatformId?: (number|null);
+
+        /** GameConfig Type */
+        Type?: (hallgw.IGameType[]|null);
+
+        /** GameConfig Relation */
+        Relation?: (hallgw.IGameRelation[]|null);
+    }
+
+    /** Represents a GameConfig. */
+    class GameConfig implements IGameConfig {
+
+        /**
+         * Constructs a new GameConfig.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IGameConfig);
+
+        /** GameConfig PlatformId. */
+        public PlatformId: number;
+
+        /** GameConfig Type. */
+        public Type: hallgw.IGameType[];
+
+        /** GameConfig Relation. */
+        public Relation: hallgw.IGameRelation[];
+
+        /**
+         * Creates a new GameConfig instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameConfig instance
+         */
+        public static create(properties?: hallgw.IGameConfig): hallgw.GameConfig;
+
+        /**
+         * Encodes the specified GameConfig message. Does not implicitly {@link hallgw.GameConfig.verify|verify} messages.
+         * @param message GameConfig message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IGameConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameConfig message, length delimited. Does not implicitly {@link hallgw.GameConfig.verify|verify} messages.
+         * @param message GameConfig message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IGameConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameConfig message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameConfig
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.GameConfig;
+
+        /**
+         * Decodes a GameConfig message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameConfig
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.GameConfig;
+
+        /**
+         * Verifies a GameConfig message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameConfig message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameConfig
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.GameConfig;
+
+        /**
+         * Creates a plain object from a GameConfig message. Also converts values to other types if specified.
+         * @param message GameConfig
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.GameConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameConfig to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MsgGetGameConfigReq. */
+    interface IMsgGetGameConfigReq {
+    }
+
+    /** Represents a MsgGetGameConfigReq. */
+    class MsgGetGameConfigReq implements IMsgGetGameConfigReq {
+
+        /**
+         * Constructs a new MsgGetGameConfigReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IMsgGetGameConfigReq);
+
+        /**
+         * Creates a new MsgGetGameConfigReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgGetGameConfigReq instance
+         */
+        public static create(properties?: hallgw.IMsgGetGameConfigReq): hallgw.MsgGetGameConfigReq;
+
+        /**
+         * Encodes the specified MsgGetGameConfigReq message. Does not implicitly {@link hallgw.MsgGetGameConfigReq.verify|verify} messages.
+         * @param message MsgGetGameConfigReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IMsgGetGameConfigReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgGetGameConfigReq message, length delimited. Does not implicitly {@link hallgw.MsgGetGameConfigReq.verify|verify} messages.
+         * @param message MsgGetGameConfigReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IMsgGetGameConfigReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgGetGameConfigReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgGetGameConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetGameConfigReq;
+
+        /**
+         * Decodes a MsgGetGameConfigReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgGetGameConfigReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetGameConfigReq;
+
+        /**
+         * Verifies a MsgGetGameConfigReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgGetGameConfigReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgGetGameConfigReq
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetGameConfigReq;
+
+        /**
+         * Creates a plain object from a MsgGetGameConfigReq message. Also converts values to other types if specified.
+         * @param message MsgGetGameConfigReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.MsgGetGameConfigReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgGetGameConfigReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MsgGetGameConfigResp. */
+    interface IMsgGetGameConfigResp {
+
+        /** MsgGetGameConfigResp GameConfig */
+        GameConfig?: (hallgw.IGameConfig[]|null);
+    }
+
+    /** Represents a MsgGetGameConfigResp. */
+    class MsgGetGameConfigResp implements IMsgGetGameConfigResp {
+
+        /**
+         * Constructs a new MsgGetGameConfigResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IMsgGetGameConfigResp);
+
+        /** MsgGetGameConfigResp GameConfig. */
+        public GameConfig: hallgw.IGameConfig[];
+
+        /**
+         * Creates a new MsgGetGameConfigResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgGetGameConfigResp instance
+         */
+        public static create(properties?: hallgw.IMsgGetGameConfigResp): hallgw.MsgGetGameConfigResp;
+
+        /**
+         * Encodes the specified MsgGetGameConfigResp message. Does not implicitly {@link hallgw.MsgGetGameConfigResp.verify|verify} messages.
+         * @param message MsgGetGameConfigResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IMsgGetGameConfigResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgGetGameConfigResp message, length delimited. Does not implicitly {@link hallgw.MsgGetGameConfigResp.verify|verify} messages.
+         * @param message MsgGetGameConfigResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IMsgGetGameConfigResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgGetGameConfigResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgGetGameConfigResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgGetGameConfigResp;
+
+        /**
+         * Decodes a MsgGetGameConfigResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgGetGameConfigResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgGetGameConfigResp;
+
+        /**
+         * Verifies a MsgGetGameConfigResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgGetGameConfigResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgGetGameConfigResp
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgGetGameConfigResp;
+
+        /**
+         * Creates a plain object from a MsgGetGameConfigResp message. Also converts values to other types if specified.
+         * @param message MsgGetGameConfigResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.MsgGetGameConfigResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgGetGameConfigResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a MsgModifyGameConfigNotify. */
+    interface IMsgModifyGameConfigNotify {
+
+        /** MsgModifyGameConfigNotify GameConfig */
+        GameConfig?: (hallgw.IGameConfig|null);
+    }
+
+    /** Represents a MsgModifyGameConfigNotify. */
+    class MsgModifyGameConfigNotify implements IMsgModifyGameConfigNotify {
+
+        /**
+         * Constructs a new MsgModifyGameConfigNotify.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: hallgw.IMsgModifyGameConfigNotify);
+
+        /** MsgModifyGameConfigNotify GameConfig. */
+        public GameConfig?: (hallgw.IGameConfig|null);
+
+        /**
+         * Creates a new MsgModifyGameConfigNotify instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns MsgModifyGameConfigNotify instance
+         */
+        public static create(properties?: hallgw.IMsgModifyGameConfigNotify): hallgw.MsgModifyGameConfigNotify;
+
+        /**
+         * Encodes the specified MsgModifyGameConfigNotify message. Does not implicitly {@link hallgw.MsgModifyGameConfigNotify.verify|verify} messages.
+         * @param message MsgModifyGameConfigNotify message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: hallgw.IMsgModifyGameConfigNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified MsgModifyGameConfigNotify message, length delimited. Does not implicitly {@link hallgw.MsgModifyGameConfigNotify.verify|verify} messages.
+         * @param message MsgModifyGameConfigNotify message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: hallgw.IMsgModifyGameConfigNotify, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a MsgModifyGameConfigNotify message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MsgModifyGameConfigNotify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): hallgw.MsgModifyGameConfigNotify;
+
+        /**
+         * Decodes a MsgModifyGameConfigNotify message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns MsgModifyGameConfigNotify
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): hallgw.MsgModifyGameConfigNotify;
+
+        /**
+         * Verifies a MsgModifyGameConfigNotify message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a MsgModifyGameConfigNotify message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns MsgModifyGameConfigNotify
+         */
+        public static fromObject(object: { [k: string]: any }): hallgw.MsgModifyGameConfigNotify;
+
+        /**
+         * Creates a plain object from a MsgModifyGameConfigNotify message. Also converts values to other types if specified.
+         * @param message MsgModifyGameConfigNotify
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: hallgw.MsgModifyGameConfigNotify, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this MsgModifyGameConfigNotify to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

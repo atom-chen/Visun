@@ -110,7 +110,11 @@ function parseRpcPair(data) {
 	};
 }
 
-function getEnumInfo(whichArr){
+function getEnumInfo(whichArr) {
+	if(jsCont && jsCont.enumInfo) {
+		return jsCont.enumInfo;
+	}
+	
 	var lenReq = whichArr.length;
 	var cmdInfo = {};
 	for(var nn = 0; nn<lenReq; nn++) {
@@ -183,7 +187,12 @@ for(var enumKey in infos) {
 		//var idName = mudname+"."+RpcPairName+"."+enumKey;
 		var idName = infos[enumKey];
 		var structName = getStructName(enumKey);
-		outstr += "    " + idName + ": new NetPacket(" + idName + ", " + mudname+"."+structName + "),\n";
+		if(structName === "") {
+			outstr += "    " + idName + ": new NetPacket(" + idName + ", " + "null" + "),\n";
+		}
+		else {
+			outstr += "    " + idName + ": new NetPacket(" + idName + ", " + mudname+"."+structName + "),\n";
+		}
 	}
 }
 outstr += "}\n\n";
@@ -198,7 +207,7 @@ function getRequestParam(enumK) {
 	var structName = getStructName(enumK);
 	var argInfo = jsObj[structName]
 	if(!argInfo) { return "any"; }
-	var fields = argInfo.fields;
+	var fields = argInfo.fields || {};
 	var desc = "{";
 	for(var fieldName in fields) {
 		var typeStr = fields[fieldName].type;

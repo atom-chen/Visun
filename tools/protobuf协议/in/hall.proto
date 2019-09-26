@@ -4,35 +4,33 @@ package hallgw;
 
 enum HallMsgId {
     Msg_Unknown	= 0;
-    Msg_HeartReq = 5000;
-    Msg_HeartResp = 5001;
-    Msg_UserInfoReq      = 20000; // 获取用户信息
-    Msg_UserInfoResp     = 20001; // 获取用户信息
-    Msg_GameListReq      = 20002; // 获取游戏列表
-    Msg_GameListResp     = 20003; // 获取游戏列表
-    Msg_NoticeNotify     = 20004; // 公告推送
-}
-
-//心跳
-message HeartReq{
-}
-
-message HeartResp{
-  int64 serverTime  = 1;  //服务器时间
+    Msg_GetUserInfoReq    = 20000; // 获取用户信息req
+    Msg_GetUserInfoResp   = 20001; // 获取用户信息resp
+    Msg_GetGameListReq    = 20002; // 获取游戏列表req
+    Msg_GetGameListResp   = 20003; // 获取游戏列表resp
+    Msg_GetGameConfigReq  = 20004; // 获取游戏列表req
+    Msg_GetGameConfigResp = 20005; // 获取游戏列表resp
+    Msg_ChangeHeadReq     = 20006; // 换头像req
+    Msg_ChangeHeadResp    = 20007; // 换头像resp
+    Msg_BroadcastNotice   = 80000; // (广播)公告
 }
 
 enum RespErr{
     RespErr_Unknown	= 0;
     ReqFormatErr = 1;
-    UserInfoRespRedisOperErr = 2;
-    GameListRespDBOperErr = 3;
+    MsgGetUserInfoRespRedisOperErr = 2;
+    MsgGetGameListRespDBOperErr = 3;
+    MsgGetGameConfigRespRpcBackErr = 4;
+    MsgGetGameConfigRespFormatErr = 5;
 }
 
-message UserInfoReq {
+// 获取用户信息req
+message MsgGetUserInfoReq {
     int32 Id = 1;
 }
 
-message UserInfoResp {
+// 获取用户信息resp
+message MsgGetUserInfoResp {
     int32  Id      = 1; // 会员Id
     string Account = 2; // 账号
     string Name	   = 3; // 名称
@@ -43,20 +41,81 @@ message UserInfoResp {
 message GameInfo {
     int32  Id           = 1; // 游戏Id
     string Name         = 2; // 游戏名称
-    int32  Type         = 3; // 游戏类型
-    int32  State        = 4; // 游戏状态
-    int32  Tag          = 5; // 标签（活动、最新）
-    int32  HaveRoomList = 6; // 是否有房间列表
-    string RoomList     = 7; // 房间列表
+    int32  State        = 3; // 游戏状态
+    int32  HaveRoomList = 4; // 是否有房间列表
+    string RoomList     = 5; // 房间列表
 }
 
-message GameListReq {
+// 获取游戏列表req
+message MsgGetGameListReq {
 }
 
-message GameListResp {
+// 获取游戏列表resp
+message MsgGetGameListResp {
     repeated GameInfo List = 1; // 游戏列表
 }
 
-message NoticeNotify {
-    string Content = 1; // 公告内容
+// 换头像req
+message MsgChangeHeadReq {
+    int64  UserId = 1; // 用户Id
+    string Head   = 2; // 头像
+}
+
+// 换头像resp
+message MsgChangeHeadResp {
+}
+
+// (广播)公告
+message MsgNoticeNotify {
+    int32  Platform        = 1; // 平台
+    string Content         = 2; // 公告内容
+    int32  RollCount       = 3; // 滚动次数
+    int32  DisplayDuration = 4; // 展示时长
+}
+
+//房间信息
+message RoomInfo {
+    int32  RoomId   = 1;  // 房间Id
+    string RoomName = 2;  // 房间名称
+    int64  MinCost  = 3;  // 最小消耗
+    int64  MaxCost  = 4;  // 最大消耗
+}
+
+//游戏类别
+message GameType {
+    int32  Id     = 1; // 游戏类别Id
+    string Name   = 2; // 游戏类别名称
+    int32  Order  = 3; // 游戏类别顺序
+}
+
+// 游戏关联
+message GameRelation {
+    int32    GameId              = 1; // 游戏Id
+    string   GameName            = 2; // 游戏名称
+    int32    GameTypeId          = 3; // 游戏分类Id
+    int32    GameLabelId         = 4; // 游戏标签Id
+    string   GameLabelName       = 5; // 游戏标签名称
+    int32    GameOrder           = 6; // 游戏在分类下的排序
+    repeated RoomInfo RoomList   = 7; // 房间列表
+}
+
+// 游戏配置
+message GameConfig {
+    int32    PlatformId            = 1; // 平台Id
+    repeated GameType     Type     = 2; // 游戏分类
+    repeated GameRelation Relation = 3; // 游戏关联
+}
+
+// 获取游戏配置req
+message MsgGetGameConfigReq {
+}
+
+// 获取游戏配置resp
+message MsgGetGameConfigResp {
+    repeated GameConfig GameConfig = 1;
+}
+
+// 修改游戏配置notify
+message MsgModifyGameConfigNotify {
+    GameConfig GameConfig = 1;
 }

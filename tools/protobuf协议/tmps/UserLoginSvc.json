@@ -2,11 +2,49 @@
   "nested": {
     "login": {
       "nested": {
-        "UserLoginSvc": {
-          "methods": {
-            "userLogIn": {
-              "requestType": "UserLogInReq",
-              "responseType": "UserLogInResp"
+        "CMD": {
+          "values": {
+            "Msg_HeartReq": 5000,
+            "Msg_HeartResp": 5001,
+            "Msg_SysError": 5002,
+            "CheckTokenReq": 5003,
+            "MovedGateNot": 5004,
+            "CheckTokenRes": 5005,
+            "Msg_GsPackage": 10000,
+            "Msg_UserLogInResp": 10001
+          }
+        },
+        "HeartReq": {
+          "fields": {}
+        },
+        "HeartResp": {
+          "fields": {
+            "serverTime": {
+              "type": "int64",
+              "id": 1
+            }
+          }
+        },
+        "CheckTokenRequest": {
+          "fields": {
+            "uid": {
+              "type": "int64",
+              "id": 1
+            },
+            "token": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "CheckTokenResponse": {
+          "fields": {}
+        },
+        "MovedGateNotice": {
+          "fields": {
+            "wsUri": {
+              "type": "string",
+              "id": 1
             }
           }
         },

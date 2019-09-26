@@ -3,7 +3,6 @@
 // cmd : 消息ID
 // data_struct : 包体数据结构
 //----------------------------------------------------
-
 import MemoryStream from "./MemoryStream";
 import ChannelMgr from "./channel/ChannelMgr";
 
@@ -25,20 +24,32 @@ export default class NetPacket {
 
 		var HEAD_SIZE = 8;
 		
-		var body = data;
-		if( !bIsPbObj ) { body = this.data_struct.create(data); } 
-		var buff_body = this.data_struct.encode(body).finish();
-		var bytes_body = new Uint8Array(buff_body);
-		var buffSend = bytes_body;
+		var bytes_body = null;
 
-		var memStream = new MemoryStream(HEAD_SIZE + buffSend.length);
-		memStream.write_buffer(HEAD_SIZE, buffSend);
-		memStream.write_int32(0, this.cmd);
-		memStream.write_int32(4, 0);
+		if(this.data_struct !== null && this.data_struct!==undefined) {
+			var body = data;
+			if( !bIsPbObj ) { body = this.data_struct.create(data); } 
+			var buff_body = this.data_struct.encode(body).finish();
+			bytes_body = new Uint8Array(buff_body);
+		}
 
-		buffSend = new Uint8Array(memStream.buffer);
-		// cc.log("pack", this.unpack(buffSend));
-		return buffSend;
+		if(bytes_body !== null) {
+			var memStream = new MemoryStream(HEAD_SIZE + bytes_body.length);
+			memStream.write_uint32(0, this.cmd);
+			memStream.write_int32(4, 0);
+			memStream.write_buffer(HEAD_SIZE, bytes_body);
+			var buffSend = new Uint8Array(memStream.buffer);
+			// cc.log("pack", this.unpack(buffSend));
+			return buffSend;
+		}
+		else {
+			var memStream = new MemoryStream(HEAD_SIZE);
+			memStream.write_uint32(0, this.cmd);
+			memStream.write_int32(4, 0);
+			var buffSend = new Uint8Array(memStream.buffer);
+			// cc.log("pack", this.unpack(buffSend));
+			return buffSend;
+		}
 	}
 
 	unpack(buff:any) : any
@@ -54,15 +65,17 @@ export default class NetPacket {
 		memStream.write_buffer(0, bytes);
 
 		var cmd = memStream.read_uint32(0);
-		var errCode = memStream.read_uint32(4);
+		var errCode = memStream.read_int32(4);
 		var data = null;
 
 		//解析包体
 		if(errCode == 0){
-			var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-			var body = this.data_struct.decode(tmp);
-			var defaults = { defaults: true };
-			data = this.data_struct.toObject(body, defaults);
+			if(this.data_struct!==null && this.data_struct!==undefined) {
+				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
+				var body = this.data_struct.decode(tmp);
+				var defaults = { defaults: true };
+				data = this.data_struct.toObject(body, defaults);
+			}
 		}
 		
 		return {

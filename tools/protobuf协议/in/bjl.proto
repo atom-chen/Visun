@@ -51,6 +51,7 @@ message TableInfo
     repeated int32 winPoss = 16;
     repeated IntArr winPosRecord = 17; 
     int32 remainCardsNum = 18;
+    int32 stateTime = 19;
 }
 
 /* ------------------------------------------------------------- *
@@ -203,6 +204,11 @@ message S2C_UserQuit
     int32 userId = 1;
 }
 
+//USER_STAY_IN_GAME_REQ  = 2046
+message C2S_UserStayInGame
+{
+}
+
 //2047
 message S2C_UserExit
 {
@@ -232,7 +238,8 @@ message C2S_ForceOffline
 //3001
 message S2C_forceOffline
 {
-    Reply ret = 1;
+    int32 userId = 1;
+    //Reply ret = 1;
 }
 
 //3003
@@ -278,6 +285,7 @@ message S2C_PushRemainTime
 {
     int32 time = 1;
     int32 type = 2;
+    int32 totalTime = 3;
 }
 
 //30002
@@ -291,16 +299,14 @@ message S2C_NoticePush
     Reply ret = 1;
 }
 
-// SET_SPECIAL_CARD_REQ       = 10000009;
-message C2S_GetSpecialCard
+// SET_CARDS_TEST = 20000;
+message SetCardsTest
 {
-    string data = 1;
-}
-
-//10000010
-message S2C_GetSpecialCard
-{
-    Reply ret = 1;
+    int32 gameId = 1;
+    int32 tabletype = 2;
+    int32 deskNo = 3;
+    string sendData = 4;
+    string extraData = 5;
 }
 
 
@@ -364,6 +370,9 @@ message Request {
         USER_QUIT_REQ                       = 2044;
         USER_QUIT_RESP                      = 2045;
 
+        //玩家三轮不投注，选择不退出游戏
+        USER_STAY_IN_GAME_REQ               = 2046;
+
         //推送玩家退出
         PUSH_USER_EXIT                      = 2047;
 
@@ -384,6 +393,8 @@ message Request {
         //推送踢出消息
         PUSH_KICKEDOUT_MSG                  = 4001;
 
+        //配牌
+        SET_CARDS_TEST = 20000;
 
          //加入桌子
         JOIN_COIN_TABLE_REQ                 = 20006;
@@ -397,9 +408,7 @@ message Request {
         NOTICE_PUSH_REQ                     = 30002;
         NOTICE_PUSH_RESP                    = 30003;
 
-        //配牌
-        SET_SPECIAL_CARD_REQ                = 10000009;
-        SET_SPECIAL_CARD_RESP               = 10000010;
+
     }
 
     CMD   cmd                           = 1;      //访问接口
@@ -412,7 +421,8 @@ message Request {
     C2S_BetAgain betAgain               = 17;
     C2S_UndoBet undoBet                 = 18;
     C2S_GetUserList getUserList         = 19;
-    C2S_GetSpecialCard getSpecialCard   = 20;
+    SetCardsTest setCardsTest           = 20;
+    C2S_UserStayInGame  userStayIngame  = 21;
 
 	//extensions 500 to 1000;
 }
@@ -428,7 +438,7 @@ message Response {
         JOIN_TABLE_ERROR                                    = 3007;                     // 加入牌桌失败
         TABLE_NOT_FIND_ERROR								= 3008;						// --牌桌不存在
         NOT_IN_TABLE                                        = 3011;                     // --未加入此房间
-        TABLE_QUIT_ERROR                                    = 3013;                     // 玩家退出异常
+        TABLE_QUIT_ERROR                                    = 3013;                     // 当前正在游戏中，无法退出
         RECONNET_ERROR                                      = 3025;                     // 重连错误
         USER_ONBACK_ERROR                                   = 3056;                     // 用户退后台消息
         DELAY_CHECK_ERROR                                   = 3071;                     //延时检测异常
@@ -481,7 +491,7 @@ message Response {
     S2C_DelayQuitOffline  pushDelayQuit     = 26;
     S2C_GetUserList       sendGetUserList   = 27;
     S2C_PushKickOut       pushKickOut       = 28;
-    S2C_GetSpecialCard    sendSpecialCard   = 29;
+    S2C_forceOffline      sendForceOffline  = 29;
 
     //extensions 500 to 1000;
 }

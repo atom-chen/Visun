@@ -11,6 +11,7 @@ import LocalCache from "../localcache/LocalCache";
 import EventCenter from "../event/EventCenter";
 import UIManager from "../view/UIManager";
 import { HttpResult } from "../looker/KernelDefine";
+import KernelEvent from "../looker/KernelEvent";
 
 
 
@@ -174,10 +175,12 @@ export default class HttpCore {
 			else {
 				cc.log(info);
 				UIManager.toast(info.msg || "未知错误");
+				EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname, info);
 			}
 		}
 		else {
 			UIManager.toast("网络请求失败");
+			EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname);
 		}
 	}
 
