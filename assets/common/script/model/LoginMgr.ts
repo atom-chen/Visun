@@ -180,7 +180,7 @@ export default class LoginMgr extends ModelBase {
 		//g_HallProcessor.setHeartbeatFunc(()=>{ login_request.Msg_HeartReq(null); });
 		channel_hall.close();
 		channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
-		if(LoginUser.getInstance() != null) {
+		if(!LoginMgr.getInstance().checkLogin2(false)) {
 			login_request.CheckTokenReq({uid:LoginUser.getInstance().memberId, token:LoginUser.getInstance().token});
 		}
 	}
