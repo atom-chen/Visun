@@ -16,25 +16,23 @@ import faultylabs from "../../../kernel/utils/MD5Util";
 import { hallgw_packet_define } from "../proxy/net_hall";
 import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
 import { room_packet_define } from "../proxy/net_RoomProto";
-import PlatformUtil from "../../../kernel/utils/PlatformUtil";
-import HallRequest from "../proxy/HallRequest";
 
 
 export class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
-	memberId:number = 0;          //会员id
-	memberAccount:string;     //会员账号
-	memberName:string;        //会员名称
-	merchantId:number;         //商户id
-	merchantMemberId:number;   //商户会员id
-	merchantName:string;      //商户名称
-	merchantAccount:string;   //商户账号
-	memberStatus:number;       //会员状态
-	identity:string;          //身份
-	memberAvatar:string;     //会员头像
-	token:string;            //token
-	money:string;            //以上分金额
+	memberId:number = 0;			//会员id
+	memberAccount:string;			//会员账号
+	memberName:string;				//会员名称
+	merchantId:number;				//商户id
+	merchantMemberId:number;		//商户会员id
+	merchantName:string;			//商户名称
+	merchantAccount:string;			//商户账号
+	memberStatus:number;			//会员状态
+	identity:string;				//身份
+	memberAvatar:string;			//会员头像
+	token:string;					//token
+	money:string;					//以上分金额
 
 	private constructor() {
 		super();
@@ -55,6 +53,7 @@ export class LoginUser extends ModelBase {
 			LoginUser._instance = null;
 		}
 	}
+	
 }
 
 

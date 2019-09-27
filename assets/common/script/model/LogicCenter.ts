@@ -1,6 +1,6 @@
-import LoginMgr from "./LoginMgr";
+import LoginMgr, { LoginUser } from "./LoginMgr";
 import UserMgr from "./UserMgr";
-import ModelBase from "../../../kernel/model/ModelBase";
+import GameManager from "./GameManager";
 
 
 export default class LogicCenter {
@@ -25,6 +25,8 @@ export default class LogicCenter {
         this.clear();
         this.registModel(LoginMgr);
         this.registModel(UserMgr);
+        this.registModel(LoginUser);
+        this.registModel(GameManager);
     }
 
     //清理逻辑数据
@@ -33,6 +35,7 @@ export default class LogicCenter {
         for(var i=0; i<this._managers.length; i++){
             this._managers[i].getInstance().clear();
             this._managers[i].delInstance();
+            cc.log("unregist model ", i+1);
         }
         this._managers.length = 0;
         this._managers = [];
@@ -42,6 +45,17 @@ export default class LogicCenter {
         cls.getInstance();
         if(this._managers.indexOf(cls) < 0){
             this._managers.push(cls);
+            cc.log("regist model ", this._managers.length);
+        }
+    }
+
+    public unregistModel(cls:any) {
+        var idx = this._managers.indexOf(cls);
+        if(idx >= 0) {
+            this._managers.splice(idx);
+            cls.getInstance().clear();
+            cls.delInstance();
+            cc.log("unregist model ", this._managers.length);
         }
     }
 }
