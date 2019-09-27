@@ -29,6 +29,7 @@ export default class UIManager {
 	}
 
 	public static callReflesh(obj:any, args:any[]){
+		if(args===null || args===undefined) { return; }
 		var compList = obj["_components"];
 		if(compList) {
 			for (var i in compList) {
@@ -188,7 +189,7 @@ export default class UIManager {
 	//-----------------------------------------------------------------
 
 
-	public static openDialog(dlgName:string, callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
+	public static openDialog(dlgName:string, content:string, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){
 			cc.log("allready exist: ", dlgName);
 			return;

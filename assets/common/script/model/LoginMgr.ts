@@ -125,11 +125,11 @@ export default class LoginMgr extends ModelBase {
             //3次重连失败 弹提示框 
             if(net.getState() == ConnState.reconnectfail)
             {
-                UIManager.openDialog("reconnect_cfm", (flag)=>{
+                UIManager.openDialog("reconnect_cfm", "与服务器断开连接，请重新尝试", (flag)=>{
                     if(flag == 1) {
                         net.reconnect();
 					}
-                }, "与服务器断开连接，请重新尝试");
+                });
             }
         }
     }
