@@ -1,13 +1,7 @@
 import CommonUtil from "../utils/CommonUtil";
 import LoadCenter from "../load/LoadCenter";
 
-/**
- * @class AudioManager
- * @author lxx
- * @deprecated 音乐，音效管理模块
- * 
- * TODO  暂时未实现保存
- */
+
 export default class AudioManager {
     private static singleInstance: AudioManager = null;
     static getInstance(): AudioManager {
