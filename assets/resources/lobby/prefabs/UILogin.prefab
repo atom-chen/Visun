@@ -25,9 +25,6 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 64
-      },
-      {
         "__id__": 65
       },
       {
@@ -35,10 +32,13 @@
       },
       {
         "__id__": 67
+      },
+      {
+        "__id__": 68
       }
     ],
     "_prefab": {
-      "__id__": 68
+      "__id__": 69
     },
     "_opacity": 255,
     "_color": {
@@ -122,10 +122,13 @@
       },
       {
         "__id__": 62
+      },
+      {
+        "__id__": 63
       }
     ],
     "_prefab": {
-      "__id__": 63
+      "__id__": 64
     },
     "_opacity": 255,
     "_color": {
@@ -2372,6 +2375,16 @@
     "_id": ""
   },
   {
+    "__type__": "cc.BlockInputEvents",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -2455,9 +2468,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "btn_login": null,
-    "btn_youke": null,
-    "btn_regist": null,
     "_id": ""
   },
   {
