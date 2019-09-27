@@ -1,4 +1,4 @@
-cc.Button.prototype._onTouchEnded = function (event) {
+cc.Button.prototype["_onTouchEnded"] = function (event) {
     if (!this.interactable || !this.enabledInHierarchy) return;
     console.log("===========");
     if (this._pressed) {
