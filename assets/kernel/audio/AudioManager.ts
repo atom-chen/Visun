@@ -1,117 +1,144 @@
+import CommonUtil from "../utils/CommonUtil";
 import LoadCenter from "../load/LoadCenter";
 
-//---------------------------------
-// 音频管理
-//---------------------------------
+/**
+ * @class AudioManager
+ * @author lxx
+ * @deprecated 音乐，音效管理模块
+ * 
+ * TODO  暂时未实现保存
+ */
 export default class AudioManager {
-	private static singleInstance: AudioManager = null;
-	public static getInstance(): AudioManager {
-		if (AudioManager.singleInstance == null) {
-			AudioManager.singleInstance = new AudioManager();
-		}
-		return AudioManager.singleInstance;
-	}
-	
-	private effects: Array<cc.AudioClip> = null;
+    private static singleInstance: AudioManager = null;
+    static getInstance(): AudioManager {
+        if (AudioManager.singleInstance == null) {
+            AudioManager.singleInstance = new AudioManager();
+        }
+        return AudioManager.singleInstance;
+    }
 
-	private _currentMusicId: number = -1;
-	private _currentMusicCacheUrl: string = null;
+    private effects: Array<cc.AudioClip> = null;
 
-	private _currentEffectId: number = -1;
-	private _currentEffectCacheUrl: string = null;
-	private _mute: boolean = true;
+    private _currentMusicId: number = -1;
+    private _currentMusicCacheUrl: string = null;
 
-	constructor() {
-		this.effects = [];
-	}
+    private _currentEffectId: number = -1;
+    private _currentEffectCacheUrl: string = null;
 
-	public setEffectsVolume(volume: number) {
-		cc.audioEngine.setEffectsVolume(volume);
-		if (volume <= 0.001) {
-			this.stopEffect()
-		}
-	}
+    private _musicEnable = true;
+    private _effectEnable = true;
 
-	public setMusicVolume(volume: number) {
-		cc.audioEngine.setMusicVolume(volume);
-		if (volume <= 0.001) {
-			this.stopMusic();
-		}
-	}
+    private _musicVolume = 0.7;
+    private _effectVolume = 0.7;
 
-	public stopMusic() {
-		cc.audioEngine.stopMusic();
-	}
+    private constructor() {
+        this.effects = [];
+    }
 
-	public stopEffect() {
-		if (this._currentEffectId < 0) {
-			return;
-		}
-		cc.audioEngine.stopEffect(this._currentEffectId);
-		this._currentEffectId = -1;
-	}
-	
-	public playMusic(audioclip: cc.AudioClip, loop: boolean) {
-		if(this._mute) { return; }
-		this._currentMusicCacheUrl = audioclip.nativeUrl;
-		LoadCenter.getInstance().retatinRes(this._currentMusicCacheUrl);
-		this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
-		cc.audioEngine.setFinishCallback(this._currentMusicId , () =>{
-			LoadCenter.getInstance().releaseRes(this._currentMusicCacheUrl);
-			this._currentMusicCacheUrl = null;
-			this._currentMusicId = -1;
-		});
-	}
 
-	public playMusicSync(path: string, loop: boolean) {
-		if(this._mute) { return; }
-		LoadCenter.getInstance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
-			this.playMusic(audioclip, loop, true)
-		}.bind(this));
-	}
-	
+    enableMusic(flag:boolean) {
+        this._musicEnable = flag;
+        if(!flag) {
+            this.stopMusic();
+        }
+    }
 
-	public playEffect(audioclip: cc.AudioClip, immediately: boolean, sync: boolean) {
-		if(this._mute) { return; }
-		if (immediately) {
-			this._playEffect(audioclip, sync);
-			return;
-		}
-		this.effects.push(audioclip);
-		this._playEffect();
-	}
+    enableEffects(flag:boolean) {
+        this._effectEnable = flag;
+        if(!flag) {
+            this.stopEffect();
+        }
+    }
 
-	public playEffectSync(path: string, immediately: boolean) {
-		if(this._mute) { return; }
-		LoadCenter.getInstance().loadAudioClip(path, function(audioclip:cc.AudioClip) {
-			this.playEffect(audioclip, immediately, true);
-		}.bind(this));
-	}
+    setMusicVolume(volume: number) {
+        volume = CommonUtil.limitNum(volume, 0, 1);
+        this._musicVolume = volume;
+        cc.audioEngine.setMusicVolume(volume);
+        if (volume === 0) {
+            this.stopMusic();
+        }
+    }
 
-	private _playEffect(audioclip: cc.AudioClip = null, sync: boolean = false) {
-		if(this._mute) { return; }
-		if (audioclip) {
-			this._play(audioclip);
-			return;
-		}
-		let audioclipObject = this.effects.shift();
-		if (!audioclipObject) {
-			return;
-		}
-		this._play(audioclipObject);
-	}
+    setEffectsVolume(volume: number) {
+        volume = CommonUtil.limitNum(volume, 0, 1);
+        this._effectVolume = volume;
+        cc.audioEngine.setEffectsVolume(volume);
+        if (volume === 0) {
+            this.stopEffect()
+        }
+    }
 
-	private _play(audioclip: cc.AudioClip) {
-		if(this._mute) { return; }
-		this._currentEffectCacheUrl = audioclip.nativeUrl;
-		LoadCenter.getInstance().retatinRes(this._currentEffectCacheUrl);
-		this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
-		cc.audioEngine.setFinishCallback(this._currentEffectId, () =>{
-			LoadCenter.getInstance().releaseRes(this._currentEffectCacheUrl);
-			this._currentEffectId = -1;
-			this._currentEffectCacheUrl = null;
-			this._playEffect();
-		});
-	}
+
+    stopMusic() {
+        cc.audioEngine.stopMusic();
+    }
+
+    stopEffect() {
+        if (this._currentEffectId < 0) {
+            return;
+        }
+        cc.audioEngine.stopEffect(this._currentEffectId);
+        this._currentEffectId = -1;
+    }
+
+    playMusic(audioclip: cc.AudioClip, loop: boolean) {
+        if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
+        this._currentMusicCacheUrl = audioclip.nativeUrl;
+        this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
+        cc.audioEngine.setFinishCallback(this._currentMusicId, () => {
+            this._currentMusicCacheUrl = null;
+            this._currentMusicId = -1;
+        });
+    }
+
+    playMusicSync(path: string, loop: boolean) {
+        if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
+        cc.log("play music", path, loop);
+        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
+            this.playMusic(audioclip, loop, true)
+        }.bind(this));
+    }
+
+
+    playEffect(audioclip: cc.AudioClip, immediately: boolean, sync: boolean) {
+        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
+        if (immediately) {
+            this._playEffect(audioclip, sync);
+            return;
+        }
+        this.effects.push(audioclip);
+        this._playEffect();
+    }
+
+    playEffectSync(path: string, immediately: boolean) {
+        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
+        cc.log("play effect", path, immediately);
+        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
+            this.playEffect(audioclip, immediately, true);
+        }.bind(this));
+    }
+
+
+    private _playEffect(audioclip: cc.AudioClip = null, sync: boolean = false) {
+        if (audioclip) {
+            this._play(audioclip);
+            return;
+        }
+        let audioclipObject = this.effects.shift();
+        if (!audioclipObject) {
+            return;
+        }
+        this._play(audioclipObject);
+    }
+
+    private _play(audioclip: cc.AudioClip) {
+        this._currentEffectCacheUrl = audioclip.nativeUrl;
+        this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
+        cc.audioEngine.setFinishCallback(this._currentEffectId, () => {
+            this._currentEffectId = -1;
+            this._currentEffectCacheUrl = null;
+            this._playEffect();
+        });
+    }
 
 }

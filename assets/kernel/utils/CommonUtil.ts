@@ -210,4 +210,11 @@ export default class CommonUtil {
 		return utf8;
 	}
 
+	static limitNum(v:number, minV:number, maxV:number) : number
+	{
+		if(maxV!==null) { if(v>maxV) v = maxV; }
+		if(minV!==null) { if(v<minV) v = minV; }
+		return v;
+	}
+
 }
