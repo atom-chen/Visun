@@ -14,7 +14,6 @@ import CHandler from "../../basic/CHandler";
 
 export default interface IChannel {
     setProcessor(porcessor:IProcessor) : void;
-    registProtocol(protocol:any) : void;
     connect(url:string, port:number, on_success?:CHandler, on_fail?:CHandler) : void;
     reconnect() : void;
     force_reconnect() : void;

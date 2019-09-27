@@ -1,6 +1,41 @@
 //---------------------------------
 // 通用辅助接口
 //---------------------------------
+if(!ArrayBuffer["transfer"]) {
+    ArrayBuffer["transfer"] = function (source, length) {
+        source = Object(source);
+		var dest = new ArrayBuffer(length);
+		
+        if(!(source instanceof ArrayBuffer) || !(dest instanceof ArrayBuffer)) {
+            throw new TypeError("ArrayBuffer.transfer, error: Source and destination must be ArrayBuffer instances");
+		}
+		
+        if(dest.byteLength >= source.byteLength) {
+			var buf = new Uint8Array(dest);
+			buf.set(new Uint8Array(source), 0);
+		}
+		else {
+			throw new RangeError("ArrayBuffer.transfer, error: destination has not enough space");
+		}
+		
+		return dest;
+    };
+};
+
+if(!String.prototype["format"]) {
+	String.prototype["format"] = function() {
+		var values = arguments;
+		return this.replace(/\{(\d+)\}/g, function(match, index) {
+			if (values.length > index) {
+				return values[index];
+			} 
+			else {
+				return "";
+			}
+		});
+	};
+}
+
 export default class CommonUtil {
 
 	public static traverseNodes(root:any, tbl:any) 

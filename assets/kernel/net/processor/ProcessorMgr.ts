@@ -2,6 +2,7 @@ import IProcessor from "./IProcessor";
 import JsonProcessor from "./JsonProcessor";
 import ProtobufProcessor from "./ProtobufProcessor";
 import { ProcessorType } from "../../looker/KernelDefine";
+import StreamProcessor from "./StreamProcessor";
 
 //-----------------------------------------
 // 消息处理器总管
@@ -30,6 +31,10 @@ export default class ProcessorMgr {
             else if(type == ProcessorType.Protobuff) 
             {
                 this._all_processors[key] = new ProtobufProcessor();
+            }
+            else if(type == ProcessorType.Stream) 
+            {
+                this._all_processors[key] = new StreamProcessor();
             }
         }
         return this._all_processors[key];

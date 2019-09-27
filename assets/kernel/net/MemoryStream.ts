@@ -1,24 +1,3 @@
-if(!ArrayBuffer["transfer"]) {
-    ArrayBuffer["transfer"] = function (source, length) {
-        source = Object(source);
-		var dest = new ArrayBuffer(length);
-		
-        if(!(source instanceof ArrayBuffer) || !(dest instanceof ArrayBuffer)) {
-            throw new TypeError("ArrayBuffer.transfer, error: Source and destination must be ArrayBuffer instances");
-		}
-		
-        if(dest.byteLength >= source.byteLength) {
-			var buf = new Uint8Array(dest);
-			buf.set(new Uint8Array(source), 0);
-		}
-		else {
-			throw new RangeError("ArrayBuffer.transfer, error: destination has not enough space");
-		}
-		
-		return dest;
-    };
-};
-
 export default class MemoryStream {
 	public buffer:ArrayBuffer = null;
 	protected data_view:DataView = null;
@@ -99,6 +78,18 @@ export default class MemoryStream {
     {
         this.data_view.setFloat32(offset, value, this.little_endian);
 	}
+
+	public read_buffer(offset:number, size:number) : Uint8Array
+	{
+		var buf = new Uint8Array(this.buffer, offset, size);
+		return buf;
+	}
+
+	public write_buffer(offset:number, buff:Uint8Array)
+	{
+		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
+		dvPtr.set(buff);
+	}
 	
 	public read_string(offset:number) : string
 	{
@@ -146,18 +137,6 @@ export default class MemoryStream {
 		}
 		
 		buf[i++] = 0;
-	}
-
-	public read_buffer(offset:number, size:number) : Uint8Array
-	{
-		var buf = new Uint8Array(this.buffer, offset, size);
-		return buf;
-	}
-
-	public write_buffer(offset:number, buff:Uint8Array)
-	{
-		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
-		dvPtr.set(buff);
 	}
 
 }

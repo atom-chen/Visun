@@ -28,6 +28,7 @@ export default class BaseProcessor implements IProcessor {
 	public registCmds(cmds:any) : void
 	{
 		if(cmds===null || cmds===undefined) { return; }
+		cc.log(this._channel.getName(), "---regist cmds---", Object.keys(cmds).length);
 		for(var k in cmds) {
 			this._cmds[k] = cmds[k];
 		}
@@ -36,6 +37,7 @@ export default class BaseProcessor implements IProcessor {
 	public unregistCmds(cmds:any) : void
 	{
 		if(cmds===null || cmds===undefined) { return; }
+		cc.log(this._channel.getName(), "---unregist cmds---", Object.keys(cmds).length);
 		for(var k in cmds) {
 			this._cmds[k] = null;
 		}
@@ -43,10 +45,11 @@ export default class BaseProcessor implements IProcessor {
 
 	public unregistAllCmds() : void
 	{
+		cc.log(this._channel.getName(), "---unregist all cmds---");
 		this._cmds = {};
 	}
 
-	public setChannel(cluster:IChannel)
+	public setChannel(cluster:IChannel) : void
 	{
 		this._channel = cluster;
 	}
@@ -83,7 +86,7 @@ export default class BaseProcessor implements IProcessor {
 		return this._channel.getState() != ConnState.connectsucc && this._channel.getState() != ConnState.reconnectsucc || this._paused;
 	}
 
-	public flushRecvlist() 
+	public flushRecvlist() : void
 	{
 		if(this._paused) { return; }
 		if(this._fire_list.length <= 0) { return; }
@@ -96,7 +99,7 @@ export default class BaseProcessor implements IProcessor {
 		this._fire_list = [];
 	}
 
-	public flushSendlist() 
+	public flushSendlist() : void
 	{
 		if(this._paused) { return; }
 		if(this._send_list.length <= 0) { return; }

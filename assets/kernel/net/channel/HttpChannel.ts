@@ -17,11 +17,6 @@ export default class HttpChannel implements IChannel {
         
     }
 
-    public registProtocol(protocol:any) : void
-	{
-		
-	}
-
     public connect(url: string, port: number, on_success?: CHandler, on_fail?: CHandler): void 
     {
         

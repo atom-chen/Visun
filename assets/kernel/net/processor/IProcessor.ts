@@ -5,12 +5,14 @@ import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
 
 export default interface IProcessor {
+    clear() : void;
+
     registProtocol(protocol:any) : void;
     registCmds(cmds:any) : void;
 	unregistCmds(cmds:any) : void;
-	unregistAllCmds() : void;
+    unregistAllCmds() : void;
+    
     setChannel(cluster:IChannel) : void;
-    clear() : void;
     sendMessage(cmd:number|string, info:any) : boolean;
     onrecvBuff(buff:any) : void;
     
