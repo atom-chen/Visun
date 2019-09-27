@@ -3,7 +3,7 @@
 //---------------------------------
 import CommonUtil from "../utils/CommonUtil";
 import { LayerDefine } from "../looker/KernelDefine";
-import CoreUIDefine from "../looker/CoreUIDefine";
+import KernelUIDefine from "../looker/KernelUIDefine";
 import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
 import TimerManager from "../timer/TimerManager";
@@ -194,7 +194,7 @@ export default class UIManager {
 			return;
 		}
 		
-		cc.loader.loadRes(CoreUIDefine.dialog.path, cc.Prefab, 
+		cc.loader.loadRes(KernelUIDefine.dialog.path, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
 			//cc.log("进度: ", completeCnt, totalCnt);
 		}, 
@@ -210,7 +210,7 @@ export default class UIManager {
 			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
 			
-			obj.getComponent(CoreUIDefine.dialog.comp).reflesh(callback, content, title, okTxt, cancelTxt); 
+			obj.getComponent(KernelUIDefine.dialog.comp).reflesh(callback, content, title, okTxt, cancelTxt); 
 		});
 	}
 
@@ -218,7 +218,7 @@ export default class UIManager {
 	
 	public static toast(content:string) {
 		if(content===undefined||content===null) { return; }
-		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(CoreUIDefine.toast.comp).label_cont.string === content){
+		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.comp).label_cont.string === content){
 			return;
 		}
 		
@@ -240,7 +240,7 @@ export default class UIManager {
 			UIManager._toastList.push(obj);
 			obj.y = 0;
 			//刷新数据并定时销毁
-			var scriptCpn = obj.getComponent(CoreUIDefine.toast.comp);
+			var scriptCpn = obj.getComponent(KernelUIDefine.toast.comp);
 			scriptCpn.setContent(content);
 			scriptCpn.scheduleOnce(function() {
 				for(var i=0; i<UIManager._toastList.length; i++) {
@@ -252,7 +252,7 @@ export default class UIManager {
 				this.node.destroy();
 			}, 2);
 		}
-		cc.loader.loadRes(CoreUIDefine.toast.path, cc.Prefab, completeCallback);
+		cc.loader.loadRes(KernelUIDefine.toast.path, cc.Prefab, completeCallback);
 	}
 	
 	public static announce(content:string) {
