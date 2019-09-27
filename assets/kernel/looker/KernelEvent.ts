@@ -7,7 +7,8 @@ var KernelEvent = {
 	SCENE_AFTER_SWITCH : "SCENE_AFTER_SWITCH",
 	NET_STATE : "NET_STATE",
 	NET_WS_FAIL : "NET_WS_FAIL",
-	HTTP_FAIL : "HTTP_FAIL"
+	HTTP_FAIL : "HTTP_FAIL",
+	UI_LOADING : "UI_LOADING"
 }
 
 export default KernelEvent;

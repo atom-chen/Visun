@@ -8,6 +8,8 @@ import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
 import TimerManager from "../timer/TimerManager";
 import CHandler from "../basic/CHandler";
+import EventCenter from "../event/EventCenter";
+import KernelEvent from "../looker/KernelEvent";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -64,9 +66,16 @@ export default class UIManager {
 			return;
 		}
 		
+		if(prefabName !== KernelUIDefine.loading.path){
+			UIManager.showLoading();
+		}
+
 		cc.loader.loadRes(prefabName, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
 			//cc.log("进度: ", completeCnt, totalCnt);
+			if(prefabName!==KernelUIDefine.loading.path){
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, completeCnt, totalCnt);
+			}
 		}, 
 		(err, loadedResource)=>{
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
@@ -109,6 +118,10 @@ export default class UIManager {
 
 			UIManager.callReflesh(obj, args);
 			if(callback) { callback.apply(obj); }
+
+			if(prefabName!==KernelUIDefine.loading.path){
+				UIManager.closeWindow(KernelUIDefine.loading.path);
+			}
 		});
 	}
 
@@ -187,6 +200,10 @@ export default class UIManager {
 	
 
 	//-----------------------------------------------------------------
+
+	public static showLoading() {
+		this.initWindow(LayerDefine.Loading, KernelUIDefine.loading.path, true, false, null, null);
+	}
 
 
 	public static openDialog(dlgName:string, content:string, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
