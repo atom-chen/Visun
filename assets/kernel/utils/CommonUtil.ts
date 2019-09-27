@@ -70,29 +70,12 @@ export default class CommonUtil {
 		target.off("click", callback, thisObj);
 	}
 
-	public static setModal(obj:cc.Node, closeWhenClickMask:boolean)
+	// 直接add一个layer然后设置localZOrder为-1的方式，在手机浏览器上有时候挡不住事件，改为这样了
+	public static setModal(obj:cc.Node, flag:boolean)
 	{
-		// 直接add一个layer然后设置localZOrder为-1的方式，在手机浏览器上有时候挡不住事件，改为这样了
-		if(!obj || !cc.isValid(obj)){
-			return;
-		}
-
-		var frame = cc.find("frame", obj);
-		if(!frame && obj.childrenCount == 1) {
-			frame = obj.children[0];
-		}
-		if(frame){
-			frame.on("touchstart", function(event:any){ event.stopPropagation(); });
-			frame.on("touchend", function(event:any){ event.stopPropagation(); });
-		}
-
-		obj.on("touchstart", function(event:any){ event.stopPropagation(); });
-		obj.on("touchend", function(event:any){ 
-			event.stopPropagation(); 
-			if(closeWhenClickMask){
-				this.destroy();
-			}
-		}, obj);
+		if(!obj || !cc.isValid(obj)){ return; }
+		obj.on(cc.Node.EventType.TOUCH_START, function(event:any){ event.stopPropagation(); });
+		obj.on(cc.Node.EventType.TOUCH_END, function(event:any){ event.stopPropagation(); if(flag){ this.destroy(); } }, obj);
 	}
 
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
