@@ -19,8 +19,8 @@ export default class AudioManager {
     private _currentEffectId: number = -1;
     private _currentEffectCacheUrl: string = null;
 
-    private _musicEnable = true;
-    private _effectEnable = true;
+    private _musicEnable = false;
+    private _effectEnable = false;
 
     private _musicVolume = 0.7;
     private _effectVolume = 0.7;
