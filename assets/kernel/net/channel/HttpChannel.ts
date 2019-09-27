@@ -37,6 +37,10 @@ export default class HttpChannel implements IChannel {
 
     }
 
+    public disconnect(): void {
+        throw new Error("Method not implemented.");
+    }
+
     public close(): void 
     {
         

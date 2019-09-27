@@ -37,6 +37,10 @@ export default class TcpChannel implements IChannel {
         
     }
 
+    public disconnect(): void {
+        throw new Error("Method not implemented.");
+    }
+
     public close(): void 
     {
         

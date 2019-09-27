@@ -18,6 +18,7 @@ export default interface IChannel {
     connect(url:string, port:number, on_success?:CHandler, on_fail?:CHandler) : void;
     reconnect() : void;
     force_reconnect() : void;
+    disconnect() : void;
     close() : void;
     sendMessage(cmd:string|number, info:any) : boolean;
     sendBuff(buff:any) : boolean;

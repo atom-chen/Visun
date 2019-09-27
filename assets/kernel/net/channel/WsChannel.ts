@@ -25,6 +25,15 @@ export default class WsChannel implements IChannel {
 	private _name : string;
 	private _heartTmr: any;
 
+	constructor() {
+		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
+			this.setPaused(true);
+		}, this);
+		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
+			this.setPaused(false);
+		}, this);
+	}
+
 	private notifyState() : void
 	{
 		EventCenter.getInstance().fire(KernelEvent.NET_STATE, this);
@@ -162,6 +171,12 @@ export default class WsChannel implements IChannel {
 		}
 	}
 
+	public disconnect() {
+		this._reconnectTimes = 0;
+		this.stopHeartBeat();
+		this.clear_ws();
+	}
+
 	private do_connect() : void
 	{
 		var self = this;
@@ -184,10 +199,10 @@ export default class WsChannel implements IChannel {
 		if(this._ws) {
 			var ws = this._ws;
 			this._ws = null;
-			ws.onopen = null;
-			ws.onmessage = null;
-			ws.onclose = null;
-			ws.onerror = null;
+			ws.onopen = function(){ };
+			ws.onmessage = function(){ };
+			ws.onclose = function(){ };
+			ws.onerror = function(){ };
 			ws.close();
 		}
 	}
@@ -280,18 +295,20 @@ export default class WsChannel implements IChannel {
 
 	private startHeartBeat() : void
 	{
+		TimerManager.delTimer(this._heartTmr);
 		this._heartTmr = TimerManager.addSecondTimer(8, -1, new CHandler(this, this.sendHeartBeat));
 	}
 
 	private sendHeartBeat() : void
 	{
-		cc.log(this._name, "---------- send heart beat");
+	//	cc.log(this._name, "---------- send heart beat");
 		this._dataProcessor.sendHeartBeat();
 	}
 
 	private stopHeartBeat() : void
 	{
 		TimerManager.delTimer(this._heartTmr);
+		this._heartTmr = null;
 	}
 
 
