@@ -29,7 +29,6 @@ export default class LobbyUI extends BaseComponent {
 		this.initUiEvents();
 		this.initNet();
 		this.testSpine();
-		TimerManager.addSecondTimer(2, 1, new CHandler(this, this.testProcedure));
 
 		LoginMgr.getInstance().loginAsYouke();
 	}
@@ -41,6 +40,7 @@ export default class LobbyUI extends BaseComponent {
 
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			UIManager.openPopwnd(ViewDefine.EmailUI.path, null);
+			this.testProcedure();
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 

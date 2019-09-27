@@ -12,11 +12,13 @@ export default class InitLogic {
 
 		cc.game.on(cc.game.EVENT_HIDE, ()=>{
             console.log("游戏进入后台");
+            cc.audioEngine.pauseAll();
             EventCenter.getInstance().fire(cc.game.EVENT_HIDE);
         });
         
         cc.game.on(cc.game.EVENT_SHOW, ()=>{
             console.log("游戏进入前台");
+            cc.audioEngine.resumeAll();
             EventCenter.getInstance().fire(cc.game.EVENT_SHOW);
         });
 
