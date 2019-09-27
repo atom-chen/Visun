@@ -101,7 +101,7 @@ export default class LobbyUI extends BaseComponent {
 
 
 	private testSpine() {
-		UIManager.showSpineAsync("common/spines/jack.json", 0, "a", true, this.node, {zIndex:10, x:-400, y:280, scale:0.5});
+		UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {zIndex:10, x:-400, y:280, scale:0.5});
 	}
 
 

@@ -270,23 +270,45 @@ export default class UIManager {
 	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any) 
 	{
 		cc.loader.loadRes(respath, sp.SkeletonData, function(err, rsc){
-				if(err) { 
-					cc.log( '载入spine失败:' + err ); 
-					return; 
-				}
-				if(!cc.isValid(parent, true)) {
-					cc.log("parent已经释放");
-					return;
-				}
-				var obj = new cc.Node();
-				var sk = obj.addComponent(sp.Skeleton);
-				sk.skeletonData = rsc;
-				sk.premultipliedAlpha = false;
-				parent.addChild(obj);
-				for(var k in info) {
-					obj[k] = info[k];
-				}
-				sk.setAnimation(trackIndex, aniName, bLoop);
+			if(err) { 
+				cc.log( '载入spine失败:' + err ); 
+				return; 
+			}
+			if(!cc.isValid(parent, true)) {
+				cc.log("parent已经释放");
+				return;
+			}
+			var obj = new cc.Node();
+			var sk = obj.addComponent(sp.Skeleton);
+			sk.skeletonData = rsc;
+			sk.premultipliedAlpha = false;
+			parent.addChild(obj);
+			for(var k in info) {
+				obj[k] = info[k];
+			}
+			sk.setAnimation(trackIndex, aniName, bLoop);
 		});
 	}
+
+	public static showSpriteAsync(respath:string, parent:cc.Node, info:any)
+	{
+		cc.loader.loadRes(respath, cc.SpriteFrame, function(err, rsc){
+			if(err) { 
+				cc.log( '载入spine失败:' + err ); 
+				return; 
+			}
+			if(!cc.isValid(parent, true)) {
+				cc.log("parent已经释放");
+				return;
+			}
+			var obj = new cc.Node;
+			var spr = obj.addComponent(cc.Sprite);
+			spr.spriteFrame = rsc;
+			parent.addChild(obj);
+			for(var k in info) {
+				obj[k] = info[k];
+			}
+		})
+	}
+	
 }
