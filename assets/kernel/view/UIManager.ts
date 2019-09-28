@@ -65,24 +65,20 @@ export default class UIManager {
 			if(callback) { callback(wnd); }
 			return;
 		}
-		
-		if(prefabName !== KernelUIDefine.loading.path){
-			UIManager.showLoading();
-		}
 
 		cc.loader.loadRes(prefabName, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
-			//cc.log("进度: ", completeCnt, totalCnt);
-			if(prefabName!==KernelUIDefine.loading.path){
+			if(layerId===LayerDefine.Panel){
+				cc.log("进度: ", prefabName, completeCnt, totalCnt);
 				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, completeCnt, totalCnt);
 			}
 		}, 
 		(err, loadedResource)=>{
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
 			var cvs = cc.find("Canvas");
-			if( !cvs ) { cc.log("没有Canvas"); return; }
+			if( !cvs ) { cc.log("没有Canvas", prefabName); return; }
 			var obj = cc.instantiate(loadedResource);
-			if(!obj) { cc.log("实例化预制体失败"); return; }
+			if(!obj) { cc.log("实例化预制体失败", prefabName); return; }
 
 			if(bModal) { 
 				CommonUtil.setModal(obj, bCloseWhenClickMask); 
@@ -118,10 +114,6 @@ export default class UIManager {
 
 			UIManager.callReflesh(obj, args);
 			if(callback) { callback.apply(obj); }
-
-			if(prefabName!==KernelUIDefine.loading.path){
-				UIManager.closeWindow(KernelUIDefine.loading.path);
-			}
 		});
 	}
 

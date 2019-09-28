@@ -3,6 +3,9 @@ import EventCenter from "../event/EventCenter";
 import KernelEvent from "../../kernel/looker/KernelEvent";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
+import TimerManager from "../timer/TimerManager";
+import CHandler from "../basic/CHandler";
+import KernelUIDefine from "../looker/KernelUIDefine";
 
 export default class SceneManager {
 	private constructor() {}
@@ -12,13 +15,14 @@ export default class SceneManager {
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
 		EventCenter.getInstance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
-
+		UIManager.showLoading();
+		cc.log("--------释放旧资源--------")
 		var cvs = cc.find("Canvas");
 		LoadCenter.getInstance().retainNodeRes(cvs);
 		LoadCenter.getInstance().releaseNodeRes(cvs);
 		UIManager.clear();
 	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
-		
+		cc.log("-----切换场景-----", this.curSceneName, "--->", sceneName);
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
 
