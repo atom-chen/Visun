@@ -51,14 +51,15 @@ export default class TimerManager {
 	private static getIndex(callback:CHandler) : number
 	{
 		for(var i=TimerManager._timers.length-1; i>=0; i--) {
-			if(TimerManager._timers[i].isSame(callback)) {
+			if(TimerManager._timers[i].isSame(callback) && !TimerManager._timers[i].isStoped()) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) {
+	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) : number
+	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
 			cc.log("already exist this timer handler");
@@ -73,7 +74,8 @@ export default class TimerManager {
 		return id;
 	}
 
-	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler) {
+	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler) : number
+	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
 			cc.log("already exist this timer handler");
@@ -88,6 +90,16 @@ export default class TimerManager {
 		return id;
 	}
 
+	public static delayFrame(delay:number, callback:CHandler) : number
+	{
+		return TimerManager.addFrameTimer(delay, 1, callback);
+	}
+
+	public static delaySecond(delay:number, callback:CHandler) : number
+	{
+		return TimerManager.addSecondTimer(delay, 1, callback);
+	}
+
 	public static delTimer(id:number) {
 		if(id===null || id===undefined){ return; }
 		for(var i=TimerManager._timers.length-1; i>=0; i--) {
@@ -100,6 +112,17 @@ export default class TimerManager {
 				break;
 			}
 		}
+	}
+
+	public static isValid(id:number) : boolean
+	{
+		if(id===null || id===undefined){ return false; }
+		for(var i=TimerManager._timers.length-1; i>=0; i--) {
+			if(TimerManager._timers[i].getId()===id) {
+				return !TimerManager._timers[i].isStoped();
+			}
+		}
+		return false;
 	}
 
 	public static removeByTarget(target:any) {

@@ -26,12 +26,21 @@ export default class SceneManager {
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
 
-		var afterLaunch = function() {
-			Adaptor.adaptScreen();
-			LoadCenter.getInstance().gc();
-			if(onLaunched) { onLaunched(); }
-			EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
-		}
-		return cc.director.loadScene(sceneName, afterLaunch.bind(this));
+		cc.director.preloadScene(sceneName, 
+			(completeCount:number, totalCount:number, item:any)=>{
+
+			}, 
+			(err:Error, rsc:cc.SceneAsset)=>{
+				var afterLaunch = function() {
+					Adaptor.adaptScreen();
+					LoadCenter.getInstance().gc();
+					UIManager.showLoading();
+					if(onLaunched) { onLaunched(); }
+					EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
+				}
+				return cc.director.loadScene(sceneName, afterLaunch.bind(this));
+			}
+		);
+		return true;
 	}
 }
