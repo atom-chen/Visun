@@ -37,7 +37,7 @@
   },
   "startScene": "11c1a0a6-d692-42f8-9afa-45c7864f6d57",
   "title": "hello_world",
-  "webOrientation": "auto",
+  "webOrientation": "landscape",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx6ac3f5090a6b99c5",

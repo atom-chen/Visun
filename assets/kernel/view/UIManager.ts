@@ -42,12 +42,15 @@ export default class UIManager {
 		return UIManager._allUI[respath];
 	}
 
-	//创建窗口的唯一接口
-	private static initWindow(layerId:LayerDefine, respath:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
+	//创建窗口
+	private static showSingleton(respath:string, parent:cc.Node, zIndex:LayerDefine, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
 		if(cc.isValid(UIManager._allUI[respath], true)){
 			cc.log("allready exist: ", respath);
 			var wnd = UIManager._allUI[respath];
-			wnd.zIndex = layerId;
+			if(wnd.parent===null || wnd.parent!==parent) {
+				wnd.parent = parent || cc.find("Canvas");
+			}
+			wnd.zIndex = zIndex;
 			wnd.active = true;
 			UIManager.callReflesh(wnd, args);
 			if(callback) { callback(wnd); }
@@ -60,12 +63,13 @@ export default class UIManager {
 			if( !cvs ) { cc.log("没有Canvas", respath); return; }
 			var obj = cc.instantiate(loadedResource);
 			if(!obj) { cc.log("实例化预制体失败", respath); return; }
+			parent = parent || cvs;
 
 			if(bModal) { 
 				CommonUtil.setModal(obj, bCloseWhenClickMask); 
 			}
 
-			if(layerId!==LayerDefine.Panel) {
+			if(zIndex!==LayerDefine.Panel) {
 				if(CommonUtil.hasEditbox(obj)) {
 					cc.log("----- yes has editbox");
 				}
@@ -78,18 +82,18 @@ export default class UIManager {
 					var baseComp = obj.getComponent(BaseComponent);
 					if(baseComp) {
 						baseComp.listenDestory((comp)=>{
-							TimerManager.addFrameTimer(2,1, new CHandler(null, ()=>{
-								LoadCenter.getInstance().gc();
-							}));
+						//	TimerManager.addFrameTimer(2,1, new CHandler(null, ()=>{
+						//		LoadCenter.getInstance().gc();
+						//	}));
 						})
 					}
 				}
 			}
 
-			cvs.addChild(obj, layerId);
+			parent.addChild(obj, zIndex);
 			UIManager._allUI[respath] = obj;
 			UIManager.callReflesh(obj, args);
-			if(callback) { callback.apply(obj); }
+			if(callback) { callback(obj); }
 		}
 		if(cc.loader.getRes(respath, cc.Prefab)){
 			completeCallback(null, cc.loader.getRes(respath, cc.Prefab));
@@ -97,7 +101,7 @@ export default class UIManager {
 		}
 		cc.loader.loadRes(respath, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
-			if(layerId===LayerDefine.Panel){
+			if(zIndex===LayerDefine.Panel){
 			//	cc.log("进度: ", respath, completeCnt, totalCnt);
 				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, completeCnt, totalCnt);
 			}
@@ -107,12 +111,12 @@ export default class UIManager {
 
 	//打开面板
 	public static openPanel(respath:string, callback:Function, ...args:any[]) {
-		this.initWindow(LayerDefine.Panel, respath, true, false, callback, args);
+		this.showSingleton(respath, null, LayerDefine.Panel, true, false, callback, args);
 	}
 	
 	//打开弹窗
 	public static openPopwnd(respath:string, callback:Function, ...args:any[]) {
-		this.initWindow(LayerDefine.Popup, respath, true, true, callback, args);
+		this.showSingleton(respath, null, LayerDefine.Popup, true, true, callback, args);
 	}
 
 	//关闭窗口
@@ -150,7 +154,7 @@ export default class UIManager {
 	//-----------------------------------------------------------------
 
 	public static showLoading() {
-		this.initWindow(LayerDefine.Loading, KernelUIDefine.loading.path, true, false, null, null);
+		this.showSingleton(KernelUIDefine.loading.path, null, LayerDefine.Loading, true, false, null, null);
 	}
 
 

@@ -7,6 +7,7 @@ import { HOT_STATE } from "../../kernel/looker/KernelDefine";
 import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
+import Adaptor from "../../kernel/adaptor/Adaptor";
 
 @ccclass
 export default class HotupdateScene extends BaseComponent {
@@ -23,6 +24,8 @@ export default class HotupdateScene extends BaseComponent {
 
 
 	onLoad () {
+		Adaptor.setFullScreen(true);
+		Adaptor.adaptOrientation(true);
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
 
