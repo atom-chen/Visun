@@ -13,9 +13,7 @@ import KernelEvent from "../looker/KernelEvent";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
-
 	private static _allDialog = {};
-
 	private static _toastList:any[] = [];
 
 
@@ -28,7 +26,7 @@ export default class UIManager {
 	}
 
 	public static callReflesh(obj:any, args:any[]){
-		if(args===null || args===undefined) { return; }
+	//	if(args===null || args===undefined) { return; }
 		var compList = obj["_components"];
 		if(compList) {
 			for (var i in compList) {
@@ -40,15 +38,15 @@ export default class UIManager {
 		}
 	}
 
-	public static getWindow(prefabName):any{
-		return UIManager._allUI[prefabName];
+	public static getWindow(respath):any{
+		return UIManager._allUI[respath];
 	}
 
 	//创建窗口的唯一接口
-	public static initWindow(layerId:LayerDefine, prefabName:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
-		if(cc.isValid(UIManager._allUI[prefabName], true)){
-			cc.log("allready exist: ", prefabName);
-			var wnd = UIManager._allUI[prefabName];
+	private static initWindow(layerId:LayerDefine, respath:string, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
+		if(cc.isValid(UIManager._allUI[respath], true)){
+			cc.log("allready exist: ", respath);
+			var wnd = UIManager._allUI[respath];
 			wnd.zIndex = layerId;
 			wnd.active = true;
 			UIManager.callReflesh(wnd, args);
@@ -59,9 +57,9 @@ export default class UIManager {
 		var completeCallback = function(err, loadedResource) {
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
 			var cvs = cc.find("Canvas");
-			if( !cvs ) { cc.log("没有Canvas", prefabName); return; }
+			if( !cvs ) { cc.log("没有Canvas", respath); return; }
 			var obj = cc.instantiate(loadedResource);
-			if(!obj) { cc.log("实例化预制体失败", prefabName); return; }
+			if(!obj) { cc.log("实例化预制体失败", respath); return; }
 
 			if(bModal) { 
 				CommonUtil.setModal(obj, bCloseWhenClickMask); 
@@ -89,18 +87,18 @@ export default class UIManager {
 			}
 
 			cvs.addChild(obj, layerId);
-			UIManager._allUI[prefabName] = obj;
+			UIManager._allUI[respath] = obj;
 			UIManager.callReflesh(obj, args);
 			if(callback) { callback.apply(obj); }
 		}
-		if(cc.loader.getRes(prefabName, cc.Prefab)){
-			completeCallback(null, cc.loader.getRes(prefabName, cc.Prefab));
+		if(cc.loader.getRes(respath, cc.Prefab)){
+			completeCallback(null, cc.loader.getRes(respath, cc.Prefab));
 			return;
 		}
-		cc.loader.loadRes(prefabName, cc.Prefab, 
+		cc.loader.loadRes(respath, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
 			if(layerId===LayerDefine.Panel){
-			//	cc.log("进度: ", prefabName, completeCnt, totalCnt);
+			//	cc.log("进度: ", respath, completeCnt, totalCnt);
 				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, completeCnt, totalCnt);
 			}
 		}, 
@@ -108,19 +106,19 @@ export default class UIManager {
 	}
 
 	//打开面板
-	public static openPanel(prefabName:string, callback:Function, ...args:any[]) {
-		this.initWindow(LayerDefine.Panel, prefabName, true, false, callback, args);
+	public static openPanel(respath:string, callback:Function, ...args:any[]) {
+		this.initWindow(LayerDefine.Panel, respath, true, false, callback, args);
 	}
 	
 	//打开弹窗
-	public static openPopwnd(prefabName:string, callback:Function, ...args:any[]) {
-		this.initWindow(LayerDefine.Popup, prefabName, true, true, callback, args);
+	public static openPopwnd(respath:string, callback:Function, ...args:any[]) {
+		this.initWindow(LayerDefine.Popup, respath, true, true, callback, args);
 	}
 
 	//关闭窗口
-	public static closeWindow(prefabName:string) {
-		var wnd = this._allUI[prefabName];
-		this._allUI[prefabName] = null;
+	public static closeWindow(respath:string) {
+		var wnd = this._allUI[respath];
+		this._allUI[respath] = null;
 		if(wnd) { wnd.destroy(); }
 	}
 
@@ -132,10 +130,10 @@ export default class UIManager {
 
 	//监听到UI销毁时调用
 	public static onWindowClose(obj:any) {
-		for(var prefabName in this._allUI) {
-			if(obj===this._allUI[prefabName]){
-				this._allUI[prefabName] = null;
-				cc.log("_allUI 监听到UI销毁时调用", prefabName);
+		for(var respath in this._allUI) {
+			if(obj===this._allUI[respath]){
+				this._allUI[respath] = null;
+				cc.log("_allUI 监听到UI销毁时调用", respath);
 				break;
 			}
 		}
