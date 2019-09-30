@@ -1,6 +1,7 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import GameManager from "../../../../common/script/model/GameManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -11,7 +12,7 @@ export default class DdzUI extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            SceneManager.turn2Scene("LobbyScene");
+            GameManager.getInstance().quitGame(0);
 		}, this);
     }
     

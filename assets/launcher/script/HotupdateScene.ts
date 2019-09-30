@@ -8,6 +8,7 @@ import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
+import KernelUIDefine from "../../kernel/looker/KernelUIDefine";
 
 @ccclass
 export default class HotupdateScene extends BaseComponent {
@@ -49,7 +50,7 @@ export default class HotupdateScene extends BaseComponent {
 
 	protected enterGame() {
 		this.byteProgress.node.active = false;
-		SceneManager.turn2Scene("LobbyScene");
+		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 	}
 
 	protected getLocalManifestPath() : string

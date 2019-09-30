@@ -3,6 +3,7 @@ import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import SceneManager from "../../../../kernel/view/SceneManager";
 import EventCenter from "../../../../kernel/event/EventCenter";
 import GameUtil from "../../../../common/script/utils/GameUtil";
+import GameManager from "../../../../common/script/model/GameManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,7 +15,7 @@ export default class bjleUI extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            SceneManager.turn2Scene("LobbyScene");
+            GameManager.getInstance().quitGame(0);
         }, this);
 
 		var rule = [1,10,20,100,500];
@@ -66,7 +67,7 @@ export default class bjleUI extends BaseComponent {
 	}
 
 	private MSG_USER_LEAVE_ROOM_PUSH(info) {
-		SceneManager.turn2Scene("LobbyScene");
+		GameManager.getInstance().quitGame(0);
 	}
 
 	private MSG_GAME_OTHER_BET_ACK(info) {

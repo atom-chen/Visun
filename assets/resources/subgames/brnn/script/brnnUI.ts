@@ -5,6 +5,7 @@ import SceneManager from "../../../../kernel/view/SceneManager";
 import SimplePool from "../../../../kernel/pool/SimplePool";
 import TimerManager from "../../../../kernel/timer/TimerManager";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
+import GameManager from "../../../../common/script/model/GameManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -43,7 +44,7 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            SceneManager.turn2Scene("LobbyScene");
+            GameManager.getInstance().quitGame(0);
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 

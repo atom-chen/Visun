@@ -4,6 +4,7 @@ import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
 import ModelBase from "../../../kernel/model/ModelBase";
 import ViewDefine from "../definer/ViewDefine";
+import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
 
 
 export default class GameManager extends ModelBase {
@@ -49,6 +50,7 @@ export default class GameManager extends ModelBase {
 		return HotUpdator.create(gameId, "", (bSucc:boolean)=>{}, null);
 	}
 
+	//进入游戏的唯一入口
 	public enterGame(gameId:string) {
 		var cfg = GameConfig[gameId];
 		if(!cfg) {
@@ -71,7 +73,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	public enterGameScene(gameId) {
-		SceneManager.turn2Scene("GameScene", ()=>{
+		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
 			gameId = gameId.toString();
 			switch(gameId) {
 				case "40000040":
@@ -91,6 +93,11 @@ export default class GameManager extends ModelBase {
 					break;
 			}
 		});
+	}
+
+	//退出游戏的唯一出口
+	public quitGame(reason:number) {
+		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 	}
 
 }
