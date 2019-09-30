@@ -92,15 +92,15 @@ export default class AudioManager {
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play music", path, loop);
         LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
-            this.playMusic(audioclip, loop, true)
+            this.playMusic(audioclip, loop, true);
         }.bind(this));
     }
 
 
-    playEffect(audioclip: cc.AudioClip, immediately: boolean, sync: boolean) {
+    playEffect(audioclip: cc.AudioClip, immediately: boolean) {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
         if (immediately) {
-            this._playEffect(audioclip, sync);
+            this._playEffect(audioclip);
             return;
         }
         this.effects.push(audioclip);
@@ -117,7 +117,7 @@ export default class AudioManager {
     }
 
 
-    private _playEffect(audioclip: cc.AudioClip = null, sync: boolean = false) {
+    private _playEffect(audioclip: cc.AudioClip = null) {
         if (audioclip) {
             this._play(audioclip);
             return;

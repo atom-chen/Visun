@@ -6,8 +6,6 @@ import { LayerDefine } from "../looker/KernelDefine";
 import KernelUIDefine from "../looker/KernelUIDefine";
 import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
-import TimerManager from "../timer/TimerManager";
-import CHandler from "../basic/CHandler";
 import EventCenter from "../event/EventCenter";
 import KernelEvent from "../looker/KernelEvent";
 
@@ -217,6 +215,10 @@ export default class UIManager {
 				}
 				this.node.destroy();
 			}, 2);
+		}
+		if(cc.loader.getRes(KernelUIDefine.toast.path, cc.Prefab)) {
+			completeCallback(null, cc.loader.getRes(KernelUIDefine.toast.path, cc.Prefab));
+			return;
 		}
 		cc.loader.loadRes(KernelUIDefine.toast.path, cc.Prefab, completeCallback);
 	}

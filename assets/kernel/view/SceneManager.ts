@@ -3,9 +3,6 @@ import EventCenter from "../event/EventCenter";
 import KernelEvent from "../../kernel/looker/KernelEvent";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
-import TimerManager from "../timer/TimerManager";
-import CHandler from "../basic/CHandler";
-import KernelUIDefine from "../looker/KernelUIDefine";
 
 export default class SceneManager {
 	private constructor() {}

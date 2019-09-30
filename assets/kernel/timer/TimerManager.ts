@@ -18,32 +18,24 @@ export default class TimerManager {
 		node.schedule(TimerManager.update, 0, cc.macro.REPEAT_FOREVER);
 	}
 
-	private static delByIndex(idx:number) {
-		TimerManager._timers[idx].stop();
-		TimerManager._timers.splice(idx, 1);
-	}
 
 	private static update(dt:number) {
 		TimerManager.s_updating = true;
-		try{
-			for(var i=0, len=TimerManager._timers.length; i<len; i++) {
-				try{
-					TimerManager._timers[i].tick(dt);
-				}
-				catch(err) {
-					TimerManager._timers[i].stop();
-					cc.log(err);
-				}
-
-				if(TimerManager._timers[i].isStoped()) {
-					TimerManager.delByIndex(i);
-					i--;
-					len--;
-				}
+		for(var i=0, len=TimerManager._timers.length; i<len; i++) {
+			try{
+				TimerManager._timers[i].tick(dt);
 			}
-		}
-		catch(err) {
-			cc.log(err)
+			catch(err) {
+				TimerManager._timers[i].stop();
+				cc.log(err);
+			}
+
+			if(TimerManager._timers[i].isStoped()) {
+				TimerManager._timers[i].stop();
+				TimerManager._timers.splice(i, 1);
+				i--;
+				len--;
+			}
 		}
 		TimerManager.s_updating = false;
 	}
@@ -101,7 +93,7 @@ export default class TimerManager {
 	}
 
 	public static delTimer(id:number) {
-		if(id===null || id===undefined){ return; }
+		if(id===null || id===undefined || id <= 0){ return; }
 		for(var i=TimerManager._timers.length-1; i>=0; i--) {
 			if(TimerManager._timers[i].getId()===id) {
 				TimerManager._timers[i].stop();
@@ -116,7 +108,7 @@ export default class TimerManager {
 
 	public static isValid(id:number) : boolean
 	{
-		if(id===null || id===undefined){ return false; }
+		if(id===null || id===undefined || id <= 0){ return false; }
 		for(var i=TimerManager._timers.length-1; i>=0; i--) {
 			if(TimerManager._timers[i].getId()===id) {
 				return !TimerManager._timers[i].isStoped();
