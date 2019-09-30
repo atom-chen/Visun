@@ -51,8 +51,20 @@ export default class Adaptor {
 	}
 
 	//进入全屏
-	public static setFullScreen(bFull:boolean) {
+	private static s_is_full_screen:boolean = false;
+	public static isFullScreen() : boolean
+	{
+		return this.s_is_full_screen;
+	}
+	public static setFullScreen(bFull:boolean) : void
+	{
 		if(cc.sys.isNative){ return; }
+		if(bFull===Adaptor.s_is_full_screen){
+			return;
+		}
+		
+		Adaptor.s_is_full_screen = bFull;
+
 		if(bFull) {
 			var de = document.documentElement;
 			if (de.requestFullscreen) {

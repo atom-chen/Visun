@@ -13,7 +13,7 @@ export enum login_msgs {
     CheckTokenReq = 5003,
     MovedGateNot = 5004,
     CheckTokenRes = 5005,
-    Msg_GsPackage = 10000,
+    Msg_UserLogInReq = 10000,
     Msg_UserLogInResp = 10001,
 }
 
@@ -24,7 +24,7 @@ export var login_packet_define = {
     5003: new NetPacket(5003, login.CheckTokenRequest),
     5004: new NetPacket(5004, login.MovedGateNotice),
     5005: new NetPacket(5005, login.CheckTokenResponse),
-    10000: new NetPacket(10000, login.GsPackage),
+    10000: new NetPacket(10000, login.UserLogInReq),
     10001: new NetPacket(10001, login.UserLogInResp),
 }
 
@@ -53,11 +53,11 @@ export class login_request {
     {
         login_packet_define[5005].sendToChannel(ChannelDefine.hall, data, false);
     }
-    public static Msg_GsPackage( data:{ enBody:any, sign:string } ) : void 
+    public static Msg_UserLogInReq( data:{ token:string } ) : void 
     {
         login_packet_define[10000].sendToChannel(ChannelDefine.hall, data, false);
     }
-    public static Msg_UserLogInResp( data:{ code:number, msg:string, data:any } ) : void 
+    public static Msg_UserLogInResp( data:{ data:any } ) : void 
     {
         login_packet_define[10001].sendToChannel(ChannelDefine.hall, data, false);
     }

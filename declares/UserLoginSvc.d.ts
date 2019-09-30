@@ -10,7 +10,7 @@ export namespace login {
         CheckTokenReq = 5003,
         MovedGateNot = 5004,
         CheckTokenRes = 5005,
-        Msg_GsPackage = 10000,
+        Msg_UserLogInReq = 10000,
         Msg_UserLogInResp = 10001
     }
 
@@ -458,140 +458,23 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GsPackage. */
-    interface IGsPackage {
-
-        /** GsPackage enBody */
-        enBody?: (Uint8Array|null);
-
-        /** GsPackage sign */
-        sign?: (string|null);
-    }
-
-    /** Represents a GsPackage. */
-    class GsPackage implements IGsPackage {
-
-        /**
-         * Constructs a new GsPackage.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: login.IGsPackage);
-
-        /** GsPackage enBody. */
-        public enBody: Uint8Array;
-
-        /** GsPackage sign. */
-        public sign: string;
-
-        /**
-         * Creates a new GsPackage instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GsPackage instance
-         */
-        public static create(properties?: login.IGsPackage): login.GsPackage;
-
-        /**
-         * Encodes the specified GsPackage message. Does not implicitly {@link login.GsPackage.verify|verify} messages.
-         * @param message GsPackage message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: login.IGsPackage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GsPackage message, length delimited. Does not implicitly {@link login.GsPackage.verify|verify} messages.
-         * @param message GsPackage message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: login.IGsPackage, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GsPackage message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GsPackage
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GsPackage;
-
-        /**
-         * Decodes a GsPackage message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GsPackage
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GsPackage;
-
-        /**
-         * Verifies a GsPackage message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GsPackage message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GsPackage
-         */
-        public static fromObject(object: { [k: string]: any }): login.GsPackage;
-
-        /**
-         * Creates a plain object from a GsPackage message. Also converts values to other types if specified.
-         * @param message GsPackage
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: login.GsPackage, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GsPackage to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a UserInfo. */
     interface IUserInfo {
 
-        /** UserInfo memberId */
-        memberId?: (number|Long|null);
+        /** UserInfo userid */
+        userid?: (number|Long|null);
 
-        /** UserInfo memberAccount */
-        memberAccount?: (string|null);
+        /** UserInfo name */
+        name?: (string|null);
 
-        /** UserInfo memberName */
-        memberName?: (string|null);
+        /** UserInfo headicon */
+        headicon?: (string|null);
 
-        /** UserInfo merchantId */
-        merchantId?: (number|Long|null);
+        /** UserInfo coin */
+        coin?: (number|Long|null);
 
-        /** UserInfo merchantMemberId */
-        merchantMemberId?: (number|Long|null);
-
-        /** UserInfo merchantName */
-        merchantName?: (string|null);
-
-        /** UserInfo merchantAccount */
-        merchantAccount?: (string|null);
-
-        /** UserInfo memberStatus */
-        memberStatus?: (number|null);
-
-        /** UserInfo identity */
-        identity?: (string|null);
-
-        /** UserInfo memberAvatar */
-        memberAvatar?: (string|null);
-
-        /** UserInfo token */
-        token?: (string|null);
-
-        /** UserInfo money */
-        money?: (string|null);
+        /** UserInfo sign */
+        sign?: (string|null);
     }
 
     /** Represents a UserInfo. */
@@ -603,41 +486,20 @@ export namespace login {
          */
         constructor(properties?: login.IUserInfo);
 
-        /** UserInfo memberId. */
-        public memberId: (number|Long);
+        /** UserInfo userid. */
+        public userid: (number|Long);
 
-        /** UserInfo memberAccount. */
-        public memberAccount: string;
+        /** UserInfo name. */
+        public name: string;
 
-        /** UserInfo memberName. */
-        public memberName: string;
+        /** UserInfo headicon. */
+        public headicon: string;
 
-        /** UserInfo merchantId. */
-        public merchantId: (number|Long);
+        /** UserInfo coin. */
+        public coin: (number|Long);
 
-        /** UserInfo merchantMemberId. */
-        public merchantMemberId: (number|Long);
-
-        /** UserInfo merchantName. */
-        public merchantName: string;
-
-        /** UserInfo merchantAccount. */
-        public merchantAccount: string;
-
-        /** UserInfo memberStatus. */
-        public memberStatus: number;
-
-        /** UserInfo identity. */
-        public identity: string;
-
-        /** UserInfo memberAvatar. */
-        public memberAvatar: string;
-
-        /** UserInfo token. */
-        public token: string;
-
-        /** UserInfo money. */
-        public money: string;
+        /** UserInfo sign. */
+        public sign: string;
 
         /**
          * Creates a new UserInfo instance using the specified properties.
@@ -713,44 +575,8 @@ export namespace login {
     /** Properties of a UserLogInReq. */
     interface IUserLogInReq {
 
-        /** UserLogInReq address */
-        address?: (string|null);
-
-        /** UserLogInReq logType */
-        logType?: (number|null);
-
-        /** UserLogInReq memberId */
-        memberId?: (number|Long|null);
-
-        /** UserLogInReq memberLoginDevice */
-        memberLoginDevice?: (number|null);
-
-        /** UserLogInReq memberLoginIp */
-        memberLoginIp?: (string|null);
-
-        /** UserLogInReq memberLoginTime */
-        memberLoginTime?: (string|null);
-
-        /** UserLogInReq memberLogOutTime */
-        memberLogOutTime?: (string|null);
-
-        /** UserLogInReq merchantId */
-        merchantId?: (number|Long|null);
-
-        /** UserLogInReq merchantMemberId */
-        merchantMemberId?: (number|Long|null);
-
-        /** UserLogInReq merchantName */
-        merchantName?: (string|null);
-
-        /** UserLogInReq remark */
-        remark?: (string|null);
-
         /** UserLogInReq token */
         token?: (string|null);
-
-        /** UserLogInReq ipAddress */
-        ipAddress?: (string|null);
     }
 
     /** Represents a UserLogInReq. */
@@ -762,44 +588,8 @@ export namespace login {
          */
         constructor(properties?: login.IUserLogInReq);
 
-        /** UserLogInReq address. */
-        public address: string;
-
-        /** UserLogInReq logType. */
-        public logType: number;
-
-        /** UserLogInReq memberId. */
-        public memberId: (number|Long);
-
-        /** UserLogInReq memberLoginDevice. */
-        public memberLoginDevice: number;
-
-        /** UserLogInReq memberLoginIp. */
-        public memberLoginIp: string;
-
-        /** UserLogInReq memberLoginTime. */
-        public memberLoginTime: string;
-
-        /** UserLogInReq memberLogOutTime. */
-        public memberLogOutTime: string;
-
-        /** UserLogInReq merchantId. */
-        public merchantId: (number|Long);
-
-        /** UserLogInReq merchantMemberId. */
-        public merchantMemberId: (number|Long);
-
-        /** UserLogInReq merchantName. */
-        public merchantName: string;
-
-        /** UserLogInReq remark. */
-        public remark: string;
-
         /** UserLogInReq token. */
         public token: string;
-
-        /** UserLogInReq ipAddress. */
-        public ipAddress: string;
 
         /**
          * Creates a new UserLogInReq instance using the specified properties.
@@ -875,12 +665,6 @@ export namespace login {
     /** Properties of a UserLogInResp. */
     interface IUserLogInResp {
 
-        /** UserLogInResp code */
-        code?: (number|null);
-
-        /** UserLogInResp msg */
-        msg?: (string|null);
-
         /** UserLogInResp data */
         data?: (login.IUserInfo|null);
     }
@@ -893,12 +677,6 @@ export namespace login {
          * @param [properties] Properties to set
          */
         constructor(properties?: login.IUserLogInResp);
-
-        /** UserLogInResp code. */
-        public code: number;
-
-        /** UserLogInResp msg. */
-        public msg: string;
 
         /** UserLogInResp data. */
         public data?: (login.IUserInfo|null);

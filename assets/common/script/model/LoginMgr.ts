@@ -197,22 +197,9 @@ export default class LoginMgr extends ModelBase {
 	private sendLoginRequest() {
 		//发送登录请求
 		var info = {
-			logType : 0,					// 登录类型: 由客户端提供??? 或者写死???
-			memberId : 136589,				// 会员ID: 由客户端提供
-			memberLoginDevice : 12345,		// 登录设备: 由客户端提供
-			merchantId : 0,					// 平台ID: 由客户端提供
-			merchantMemberId : 12345,		// 平台会员ID: ???
 			token : "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHZW50Lk5pIiwic3ViIjoicGlwcGEiLCJpYXQiOjE1NjkwNjQ1OTgsImV4cCI6MTU2OTA2ODE5OH0.wdtu0aT6hzv2tR_Jeu-xMiAXiNJYk1r77XkZmXU7oMXf04IZo_Mk0J69VV-RhFMFNm2WesUwOBou5VMBzL9mQA"
 		};
-
-		var body = login.UserLogInReq.create(info);
-		var buff_body = login.UserLogInReq.encode(body).finish();
-		var bytes_body = new Uint8Array(buff_body);
-		var sendInfo = {
-			enBody: bytes_body,
-			sign: faultylabs.MD5(bytes_body)
-		}
-		login_request.Msg_GsPackage(sendInfo);
+		login_request.Msg_UserLogInReq(info);
 	}
 
 	//游客登录

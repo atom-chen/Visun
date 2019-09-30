@@ -1,8 +1,8 @@
 var map_enumKey_2_StructName = {
     Msg_SysError		: "",
-    Msg_HeartReq 		    : "HeartReq",
-    Msg_HeartResp 		    : "HeartResp",
-    Msg_GsPackage 		: "GsPackage",
+    Msg_HeartReq 		: "HeartReq",
+    Msg_HeartResp 		: "HeartResp",
+    Msg_UserLogInReq 	: "UserLogInReq",
     Msg_UserLogInResp 	: "UserLogInResp",
     CheckTokenReq	    : "CheckTokenRequest",
     CheckTokenRes	    : "CheckTokenResponse",

@@ -28,7 +28,7 @@ $root.login = (function() {
      * @property {number} CheckTokenReq=5003 CheckTokenReq value
      * @property {number} MovedGateNot=5004 MovedGateNot value
      * @property {number} CheckTokenRes=5005 CheckTokenRes value
-     * @property {number} Msg_GsPackage=10000 Msg_GsPackage value
+     * @property {number} Msg_UserLogInReq=10000 Msg_UserLogInReq value
      * @property {number} Msg_UserLogInResp=10001 Msg_UserLogInResp value
      */
     login.CMD = (function() {
@@ -39,7 +39,7 @@ $root.login = (function() {
         values[valuesById[5003] = "CheckTokenReq"] = 5003;
         values[valuesById[5004] = "MovedGateNot"] = 5004;
         values[valuesById[5005] = "CheckTokenRes"] = 5005;
-        values[valuesById[10000] = "Msg_GsPackage"] = 10000;
+        values[valuesById[10000] = "Msg_UserLogInReq"] = 10000;
         values[valuesById[10001] = "Msg_UserLogInResp"] = 10001;
         return values;
     })();
@@ -976,243 +976,17 @@ $root.login = (function() {
         return MovedGateNotice;
     })();
 
-    login.GsPackage = (function() {
-
-        /**
-         * Properties of a GsPackage.
-         * @memberof login
-         * @interface IGsPackage
-         * @property {Uint8Array|null} [enBody] GsPackage enBody
-         * @property {string|null} [sign] GsPackage sign
-         */
-
-        /**
-         * Constructs a new GsPackage.
-         * @memberof login
-         * @classdesc Represents a GsPackage.
-         * @implements IGsPackage
-         * @constructor
-         * @param {login.IGsPackage=} [properties] Properties to set
-         */
-        function GsPackage(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * GsPackage enBody.
-         * @member {Uint8Array} enBody
-         * @memberof login.GsPackage
-         * @instance
-         */
-        GsPackage.prototype.enBody = $util.newBuffer([]);
-
-        /**
-         * GsPackage sign.
-         * @member {string} sign
-         * @memberof login.GsPackage
-         * @instance
-         */
-        GsPackage.prototype.sign = "";
-
-        /**
-         * Creates a new GsPackage instance using the specified properties.
-         * @function create
-         * @memberof login.GsPackage
-         * @static
-         * @param {login.IGsPackage=} [properties] Properties to set
-         * @returns {login.GsPackage} GsPackage instance
-         */
-        GsPackage.create = function create(properties) {
-            return new GsPackage(properties);
-        };
-
-        /**
-         * Encodes the specified GsPackage message. Does not implicitly {@link login.GsPackage.verify|verify} messages.
-         * @function encode
-         * @memberof login.GsPackage
-         * @static
-         * @param {login.IGsPackage} message GsPackage message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GsPackage.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.enBody != null && message.hasOwnProperty("enBody"))
-                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.enBody);
-            if (message.sign != null && message.hasOwnProperty("sign"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sign);
-            return writer;
-        };
-
-        /**
-         * Encodes the specified GsPackage message, length delimited. Does not implicitly {@link login.GsPackage.verify|verify} messages.
-         * @function encodeDelimited
-         * @memberof login.GsPackage
-         * @static
-         * @param {login.IGsPackage} message GsPackage message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        GsPackage.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        /**
-         * Decodes a GsPackage message from the specified reader or buffer.
-         * @function decode
-         * @memberof login.GsPackage
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {login.GsPackage} GsPackage
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GsPackage.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GsPackage();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.enBody = reader.bytes();
-                    break;
-                case 2:
-                    message.sign = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Decodes a GsPackage message from the specified reader or buffer, length delimited.
-         * @function decodeDelimited
-         * @memberof login.GsPackage
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {login.GsPackage} GsPackage
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        GsPackage.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        /**
-         * Verifies a GsPackage message.
-         * @function verify
-         * @memberof login.GsPackage
-         * @static
-         * @param {Object.<string,*>} message Plain object to verify
-         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-         */
-        GsPackage.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.enBody != null && message.hasOwnProperty("enBody"))
-                if (!(message.enBody && typeof message.enBody.length === "number" || $util.isString(message.enBody)))
-                    return "enBody: buffer expected";
-            if (message.sign != null && message.hasOwnProperty("sign"))
-                if (!$util.isString(message.sign))
-                    return "sign: string expected";
-            return null;
-        };
-
-        /**
-         * Creates a GsPackage message from a plain object. Also converts values to their respective internal types.
-         * @function fromObject
-         * @memberof login.GsPackage
-         * @static
-         * @param {Object.<string,*>} object Plain object
-         * @returns {login.GsPackage} GsPackage
-         */
-        GsPackage.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.GsPackage)
-                return object;
-            var message = new $root.login.GsPackage();
-            if (object.enBody != null)
-                if (typeof object.enBody === "string")
-                    $util.base64.decode(object.enBody, message.enBody = $util.newBuffer($util.base64.length(object.enBody)), 0);
-                else if (object.enBody.length)
-                    message.enBody = object.enBody;
-            if (object.sign != null)
-                message.sign = String(object.sign);
-            return message;
-        };
-
-        /**
-         * Creates a plain object from a GsPackage message. Also converts values to other types if specified.
-         * @function toObject
-         * @memberof login.GsPackage
-         * @static
-         * @param {login.GsPackage} message GsPackage
-         * @param {$protobuf.IConversionOptions} [options] Conversion options
-         * @returns {Object.<string,*>} Plain object
-         */
-        GsPackage.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if (options.bytes === String)
-                    object.enBody = "";
-                else {
-                    object.enBody = [];
-                    if (options.bytes !== Array)
-                        object.enBody = $util.newBuffer(object.enBody);
-                }
-                object.sign = "";
-            }
-            if (message.enBody != null && message.hasOwnProperty("enBody"))
-                object.enBody = options.bytes === String ? $util.base64.encode(message.enBody, 0, message.enBody.length) : options.bytes === Array ? Array.prototype.slice.call(message.enBody) : message.enBody;
-            if (message.sign != null && message.hasOwnProperty("sign"))
-                object.sign = message.sign;
-            return object;
-        };
-
-        /**
-         * Converts this GsPackage to JSON.
-         * @function toJSON
-         * @memberof login.GsPackage
-         * @instance
-         * @returns {Object.<string,*>} JSON object
-         */
-        GsPackage.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GsPackage;
-    })();
-
     login.UserInfo = (function() {
 
         /**
          * Properties of a UserInfo.
          * @memberof login
          * @interface IUserInfo
-         * @property {number|Long|null} [memberId] UserInfo memberId
-         * @property {string|null} [memberAccount] UserInfo memberAccount
-         * @property {string|null} [memberName] UserInfo memberName
-         * @property {number|Long|null} [merchantId] UserInfo merchantId
-         * @property {number|Long|null} [merchantMemberId] UserInfo merchantMemberId
-         * @property {string|null} [merchantName] UserInfo merchantName
-         * @property {string|null} [merchantAccount] UserInfo merchantAccount
-         * @property {number|null} [memberStatus] UserInfo memberStatus
-         * @property {string|null} [identity] UserInfo identity
-         * @property {string|null} [memberAvatar] UserInfo memberAvatar
-         * @property {string|null} [token] UserInfo token
-         * @property {string|null} [money] UserInfo money
+         * @property {number|Long|null} [userid] UserInfo userid
+         * @property {string|null} [name] UserInfo name
+         * @property {string|null} [headicon] UserInfo headicon
+         * @property {number|Long|null} [coin] UserInfo coin
+         * @property {string|null} [sign] UserInfo sign
          */
 
         /**
@@ -1231,100 +1005,44 @@ $root.login = (function() {
         }
 
         /**
-         * UserInfo memberId.
-         * @member {number|Long} memberId
+         * UserInfo userid.
+         * @member {number|Long} userid
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.memberId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        UserInfo.prototype.userid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
-         * UserInfo memberAccount.
-         * @member {string} memberAccount
+         * UserInfo name.
+         * @member {string} name
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.memberAccount = "";
+        UserInfo.prototype.name = "";
 
         /**
-         * UserInfo memberName.
-         * @member {string} memberName
+         * UserInfo headicon.
+         * @member {string} headicon
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.memberName = "";
+        UserInfo.prototype.headicon = "";
 
         /**
-         * UserInfo merchantId.
-         * @member {number|Long} merchantId
+         * UserInfo coin.
+         * @member {number|Long} coin
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.merchantId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        UserInfo.prototype.coin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
-         * UserInfo merchantMemberId.
-         * @member {number|Long} merchantMemberId
+         * UserInfo sign.
+         * @member {string} sign
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.merchantMemberId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * UserInfo merchantName.
-         * @member {string} merchantName
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.merchantName = "";
-
-        /**
-         * UserInfo merchantAccount.
-         * @member {string} merchantAccount
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.merchantAccount = "";
-
-        /**
-         * UserInfo memberStatus.
-         * @member {number} memberStatus
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.memberStatus = 0;
-
-        /**
-         * UserInfo identity.
-         * @member {string} identity
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.identity = "";
-
-        /**
-         * UserInfo memberAvatar.
-         * @member {string} memberAvatar
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.memberAvatar = "";
-
-        /**
-         * UserInfo token.
-         * @member {string} token
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.token = "";
-
-        /**
-         * UserInfo money.
-         * @member {string} money
-         * @memberof login.UserInfo
-         * @instance
-         */
-        UserInfo.prototype.money = "";
+        UserInfo.prototype.sign = "";
 
         /**
          * Creates a new UserInfo instance using the specified properties.
@@ -1350,30 +1068,16 @@ $root.login = (function() {
         UserInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.memberId);
-            if (message.memberAccount != null && message.hasOwnProperty("memberAccount"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.memberAccount);
-            if (message.memberName != null && message.hasOwnProperty("memberName"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.memberName);
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.merchantId);
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.merchantMemberId);
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.merchantName);
-            if (message.merchantAccount != null && message.hasOwnProperty("merchantAccount"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.merchantAccount);
-            if (message.memberStatus != null && message.hasOwnProperty("memberStatus"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.memberStatus);
-            if (message.identity != null && message.hasOwnProperty("identity"))
-                writer.uint32(/* id 9, wireType 2 =*/74).string(message.identity);
-            if (message.memberAvatar != null && message.hasOwnProperty("memberAvatar"))
-                writer.uint32(/* id 10, wireType 2 =*/82).string(message.memberAvatar);
-            if (message.token != null && message.hasOwnProperty("token"))
-                writer.uint32(/* id 11, wireType 2 =*/90).string(message.token);
-            if (message.money != null && message.hasOwnProperty("money"))
-                writer.uint32(/* id 12, wireType 2 =*/98).string(message.money);
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.userid);
+            if (message.name != null && message.hasOwnProperty("name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.headicon != null && message.hasOwnProperty("headicon"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.headicon);
+            if (message.coin != null && message.hasOwnProperty("coin"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.coin);
+            if (message.sign != null && message.hasOwnProperty("sign"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sign);
             return writer;
         };
 
@@ -1409,40 +1113,19 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.memberId = reader.int64();
+                    message.userid = reader.int64();
                     break;
                 case 2:
-                    message.memberAccount = reader.string();
+                    message.name = reader.string();
                     break;
                 case 3:
-                    message.memberName = reader.string();
+                    message.headicon = reader.string();
                     break;
                 case 4:
-                    message.merchantId = reader.int64();
+                    message.coin = reader.int64();
                     break;
                 case 5:
-                    message.merchantMemberId = reader.int64();
-                    break;
-                case 6:
-                    message.merchantName = reader.string();
-                    break;
-                case 7:
-                    message.merchantAccount = reader.string();
-                    break;
-                case 8:
-                    message.memberStatus = reader.int32();
-                    break;
-                case 9:
-                    message.identity = reader.string();
-                    break;
-                case 10:
-                    message.memberAvatar = reader.string();
-                    break;
-                case 11:
-                    message.token = reader.string();
-                    break;
-                case 12:
-                    message.money = reader.string();
+                    message.sign = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1479,42 +1162,21 @@ $root.login = (function() {
         UserInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                if (!$util.isInteger(message.memberId) && !(message.memberId && $util.isInteger(message.memberId.low) && $util.isInteger(message.memberId.high)))
-                    return "memberId: integer|Long expected";
-            if (message.memberAccount != null && message.hasOwnProperty("memberAccount"))
-                if (!$util.isString(message.memberAccount))
-                    return "memberAccount: string expected";
-            if (message.memberName != null && message.hasOwnProperty("memberName"))
-                if (!$util.isString(message.memberName))
-                    return "memberName: string expected";
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                if (!$util.isInteger(message.merchantId) && !(message.merchantId && $util.isInteger(message.merchantId.low) && $util.isInteger(message.merchantId.high)))
-                    return "merchantId: integer|Long expected";
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                if (!$util.isInteger(message.merchantMemberId) && !(message.merchantMemberId && $util.isInteger(message.merchantMemberId.low) && $util.isInteger(message.merchantMemberId.high)))
-                    return "merchantMemberId: integer|Long expected";
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                if (!$util.isString(message.merchantName))
-                    return "merchantName: string expected";
-            if (message.merchantAccount != null && message.hasOwnProperty("merchantAccount"))
-                if (!$util.isString(message.merchantAccount))
-                    return "merchantAccount: string expected";
-            if (message.memberStatus != null && message.hasOwnProperty("memberStatus"))
-                if (!$util.isInteger(message.memberStatus))
-                    return "memberStatus: integer expected";
-            if (message.identity != null && message.hasOwnProperty("identity"))
-                if (!$util.isString(message.identity))
-                    return "identity: string expected";
-            if (message.memberAvatar != null && message.hasOwnProperty("memberAvatar"))
-                if (!$util.isString(message.memberAvatar))
-                    return "memberAvatar: string expected";
-            if (message.token != null && message.hasOwnProperty("token"))
-                if (!$util.isString(message.token))
-                    return "token: string expected";
-            if (message.money != null && message.hasOwnProperty("money"))
-                if (!$util.isString(message.money))
-                    return "money: string expected";
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                if (!$util.isInteger(message.userid) && !(message.userid && $util.isInteger(message.userid.low) && $util.isInteger(message.userid.high)))
+                    return "userid: integer|Long expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.headicon != null && message.hasOwnProperty("headicon"))
+                if (!$util.isString(message.headicon))
+                    return "headicon: string expected";
+            if (message.coin != null && message.hasOwnProperty("coin"))
+                if (!$util.isInteger(message.coin) && !(message.coin && $util.isInteger(message.coin.low) && $util.isInteger(message.coin.high)))
+                    return "coin: integer|Long expected";
+            if (message.sign != null && message.hasOwnProperty("sign"))
+                if (!$util.isString(message.sign))
+                    return "sign: string expected";
             return null;
         };
 
@@ -1530,51 +1192,30 @@ $root.login = (function() {
             if (object instanceof $root.login.UserInfo)
                 return object;
             var message = new $root.login.UserInfo();
-            if (object.memberId != null)
+            if (object.userid != null)
                 if ($util.Long)
-                    (message.memberId = $util.Long.fromValue(object.memberId)).unsigned = false;
-                else if (typeof object.memberId === "string")
-                    message.memberId = parseInt(object.memberId, 10);
-                else if (typeof object.memberId === "number")
-                    message.memberId = object.memberId;
-                else if (typeof object.memberId === "object")
-                    message.memberId = new $util.LongBits(object.memberId.low >>> 0, object.memberId.high >>> 0).toNumber();
-            if (object.memberAccount != null)
-                message.memberAccount = String(object.memberAccount);
-            if (object.memberName != null)
-                message.memberName = String(object.memberName);
-            if (object.merchantId != null)
+                    (message.userid = $util.Long.fromValue(object.userid)).unsigned = false;
+                else if (typeof object.userid === "string")
+                    message.userid = parseInt(object.userid, 10);
+                else if (typeof object.userid === "number")
+                    message.userid = object.userid;
+                else if (typeof object.userid === "object")
+                    message.userid = new $util.LongBits(object.userid.low >>> 0, object.userid.high >>> 0).toNumber();
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.headicon != null)
+                message.headicon = String(object.headicon);
+            if (object.coin != null)
                 if ($util.Long)
-                    (message.merchantId = $util.Long.fromValue(object.merchantId)).unsigned = false;
-                else if (typeof object.merchantId === "string")
-                    message.merchantId = parseInt(object.merchantId, 10);
-                else if (typeof object.merchantId === "number")
-                    message.merchantId = object.merchantId;
-                else if (typeof object.merchantId === "object")
-                    message.merchantId = new $util.LongBits(object.merchantId.low >>> 0, object.merchantId.high >>> 0).toNumber();
-            if (object.merchantMemberId != null)
-                if ($util.Long)
-                    (message.merchantMemberId = $util.Long.fromValue(object.merchantMemberId)).unsigned = false;
-                else if (typeof object.merchantMemberId === "string")
-                    message.merchantMemberId = parseInt(object.merchantMemberId, 10);
-                else if (typeof object.merchantMemberId === "number")
-                    message.merchantMemberId = object.merchantMemberId;
-                else if (typeof object.merchantMemberId === "object")
-                    message.merchantMemberId = new $util.LongBits(object.merchantMemberId.low >>> 0, object.merchantMemberId.high >>> 0).toNumber();
-            if (object.merchantName != null)
-                message.merchantName = String(object.merchantName);
-            if (object.merchantAccount != null)
-                message.merchantAccount = String(object.merchantAccount);
-            if (object.memberStatus != null)
-                message.memberStatus = object.memberStatus | 0;
-            if (object.identity != null)
-                message.identity = String(object.identity);
-            if (object.memberAvatar != null)
-                message.memberAvatar = String(object.memberAvatar);
-            if (object.token != null)
-                message.token = String(object.token);
-            if (object.money != null)
-                message.money = String(object.money);
+                    (message.coin = $util.Long.fromValue(object.coin)).unsigned = false;
+                else if (typeof object.coin === "string")
+                    message.coin = parseInt(object.coin, 10);
+                else if (typeof object.coin === "number")
+                    message.coin = object.coin;
+                else if (typeof object.coin === "object")
+                    message.coin = new $util.LongBits(object.coin.low >>> 0, object.coin.high >>> 0).toNumber();
+            if (object.sign != null)
+                message.sign = String(object.sign);
             return message;
         };
 
@@ -1594,62 +1235,34 @@ $root.login = (function() {
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.memberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.userid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.memberId = options.longs === String ? "0" : 0;
-                object.memberAccount = "";
-                object.memberName = "";
+                    object.userid = options.longs === String ? "0" : 0;
+                object.name = "";
+                object.headicon = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.merchantId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.coin = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.merchantId = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.merchantMemberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.merchantMemberId = options.longs === String ? "0" : 0;
-                object.merchantName = "";
-                object.merchantAccount = "";
-                object.memberStatus = 0;
-                object.identity = "";
-                object.memberAvatar = "";
-                object.token = "";
-                object.money = "";
+                    object.coin = options.longs === String ? "0" : 0;
+                object.sign = "";
             }
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                if (typeof message.memberId === "number")
-                    object.memberId = options.longs === String ? String(message.memberId) : message.memberId;
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                if (typeof message.userid === "number")
+                    object.userid = options.longs === String ? String(message.userid) : message.userid;
                 else
-                    object.memberId = options.longs === String ? $util.Long.prototype.toString.call(message.memberId) : options.longs === Number ? new $util.LongBits(message.memberId.low >>> 0, message.memberId.high >>> 0).toNumber() : message.memberId;
-            if (message.memberAccount != null && message.hasOwnProperty("memberAccount"))
-                object.memberAccount = message.memberAccount;
-            if (message.memberName != null && message.hasOwnProperty("memberName"))
-                object.memberName = message.memberName;
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                if (typeof message.merchantId === "number")
-                    object.merchantId = options.longs === String ? String(message.merchantId) : message.merchantId;
+                    object.userid = options.longs === String ? $util.Long.prototype.toString.call(message.userid) : options.longs === Number ? new $util.LongBits(message.userid.low >>> 0, message.userid.high >>> 0).toNumber() : message.userid;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.headicon != null && message.hasOwnProperty("headicon"))
+                object.headicon = message.headicon;
+            if (message.coin != null && message.hasOwnProperty("coin"))
+                if (typeof message.coin === "number")
+                    object.coin = options.longs === String ? String(message.coin) : message.coin;
                 else
-                    object.merchantId = options.longs === String ? $util.Long.prototype.toString.call(message.merchantId) : options.longs === Number ? new $util.LongBits(message.merchantId.low >>> 0, message.merchantId.high >>> 0).toNumber() : message.merchantId;
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                if (typeof message.merchantMemberId === "number")
-                    object.merchantMemberId = options.longs === String ? String(message.merchantMemberId) : message.merchantMemberId;
-                else
-                    object.merchantMemberId = options.longs === String ? $util.Long.prototype.toString.call(message.merchantMemberId) : options.longs === Number ? new $util.LongBits(message.merchantMemberId.low >>> 0, message.merchantMemberId.high >>> 0).toNumber() : message.merchantMemberId;
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                object.merchantName = message.merchantName;
-            if (message.merchantAccount != null && message.hasOwnProperty("merchantAccount"))
-                object.merchantAccount = message.merchantAccount;
-            if (message.memberStatus != null && message.hasOwnProperty("memberStatus"))
-                object.memberStatus = message.memberStatus;
-            if (message.identity != null && message.hasOwnProperty("identity"))
-                object.identity = message.identity;
-            if (message.memberAvatar != null && message.hasOwnProperty("memberAvatar"))
-                object.memberAvatar = message.memberAvatar;
-            if (message.token != null && message.hasOwnProperty("token"))
-                object.token = message.token;
-            if (message.money != null && message.hasOwnProperty("money"))
-                object.money = message.money;
+                    object.coin = options.longs === String ? $util.Long.prototype.toString.call(message.coin) : options.longs === Number ? new $util.LongBits(message.coin.low >>> 0, message.coin.high >>> 0).toNumber() : message.coin;
+            if (message.sign != null && message.hasOwnProperty("sign"))
+                object.sign = message.sign;
             return object;
         };
 
@@ -1673,19 +1286,7 @@ $root.login = (function() {
          * Properties of a UserLogInReq.
          * @memberof login
          * @interface IUserLogInReq
-         * @property {string|null} [address] UserLogInReq address
-         * @property {number|null} [logType] UserLogInReq logType
-         * @property {number|Long|null} [memberId] UserLogInReq memberId
-         * @property {number|null} [memberLoginDevice] UserLogInReq memberLoginDevice
-         * @property {string|null} [memberLoginIp] UserLogInReq memberLoginIp
-         * @property {string|null} [memberLoginTime] UserLogInReq memberLoginTime
-         * @property {string|null} [memberLogOutTime] UserLogInReq memberLogOutTime
-         * @property {number|Long|null} [merchantId] UserLogInReq merchantId
-         * @property {number|Long|null} [merchantMemberId] UserLogInReq merchantMemberId
-         * @property {string|null} [merchantName] UserLogInReq merchantName
-         * @property {string|null} [remark] UserLogInReq remark
          * @property {string|null} [token] UserLogInReq token
-         * @property {string|null} [ipAddress] UserLogInReq ipAddress
          */
 
         /**
@@ -1704,108 +1305,12 @@ $root.login = (function() {
         }
 
         /**
-         * UserLogInReq address.
-         * @member {string} address
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.address = "";
-
-        /**
-         * UserLogInReq logType.
-         * @member {number} logType
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.logType = 0;
-
-        /**
-         * UserLogInReq memberId.
-         * @member {number|Long} memberId
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.memberId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * UserLogInReq memberLoginDevice.
-         * @member {number} memberLoginDevice
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.memberLoginDevice = 0;
-
-        /**
-         * UserLogInReq memberLoginIp.
-         * @member {string} memberLoginIp
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.memberLoginIp = "";
-
-        /**
-         * UserLogInReq memberLoginTime.
-         * @member {string} memberLoginTime
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.memberLoginTime = "";
-
-        /**
-         * UserLogInReq memberLogOutTime.
-         * @member {string} memberLogOutTime
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.memberLogOutTime = "";
-
-        /**
-         * UserLogInReq merchantId.
-         * @member {number|Long} merchantId
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.merchantId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * UserLogInReq merchantMemberId.
-         * @member {number|Long} merchantMemberId
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.merchantMemberId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * UserLogInReq merchantName.
-         * @member {string} merchantName
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.merchantName = "";
-
-        /**
-         * UserLogInReq remark.
-         * @member {string} remark
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.remark = "";
-
-        /**
          * UserLogInReq token.
          * @member {string} token
          * @memberof login.UserLogInReq
          * @instance
          */
         UserLogInReq.prototype.token = "";
-
-        /**
-         * UserLogInReq ipAddress.
-         * @member {string} ipAddress
-         * @memberof login.UserLogInReq
-         * @instance
-         */
-        UserLogInReq.prototype.ipAddress = "";
 
         /**
          * Creates a new UserLogInReq instance using the specified properties.
@@ -1831,32 +1336,8 @@ $root.login = (function() {
         UserLogInReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.address != null && message.hasOwnProperty("address"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
-            if (message.logType != null && message.hasOwnProperty("logType"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.logType);
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.memberId);
-            if (message.memberLoginDevice != null && message.hasOwnProperty("memberLoginDevice"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.memberLoginDevice);
-            if (message.memberLoginIp != null && message.hasOwnProperty("memberLoginIp"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.memberLoginIp);
-            if (message.memberLoginTime != null && message.hasOwnProperty("memberLoginTime"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.memberLoginTime);
-            if (message.memberLogOutTime != null && message.hasOwnProperty("memberLogOutTime"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.memberLogOutTime);
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.merchantId);
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.merchantMemberId);
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                writer.uint32(/* id 10, wireType 2 =*/82).string(message.merchantName);
-            if (message.remark != null && message.hasOwnProperty("remark"))
-                writer.uint32(/* id 11, wireType 2 =*/90).string(message.remark);
             if (message.token != null && message.hasOwnProperty("token"))
-                writer.uint32(/* id 12, wireType 2 =*/98).string(message.token);
-            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
-                writer.uint32(/* id 13, wireType 2 =*/106).string(message.ipAddress);
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
             return writer;
         };
 
@@ -1892,43 +1373,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.address = reader.string();
-                    break;
-                case 2:
-                    message.logType = reader.int32();
-                    break;
-                case 3:
-                    message.memberId = reader.int64();
-                    break;
-                case 4:
-                    message.memberLoginDevice = reader.int32();
-                    break;
-                case 5:
-                    message.memberLoginIp = reader.string();
-                    break;
-                case 6:
-                    message.memberLoginTime = reader.string();
-                    break;
-                case 7:
-                    message.memberLogOutTime = reader.string();
-                    break;
-                case 8:
-                    message.merchantId = reader.int64();
-                    break;
-                case 9:
-                    message.merchantMemberId = reader.int64();
-                    break;
-                case 10:
-                    message.merchantName = reader.string();
-                    break;
-                case 11:
-                    message.remark = reader.string();
-                    break;
-                case 12:
                     message.token = reader.string();
-                    break;
-                case 13:
-                    message.ipAddress = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1965,45 +1410,9 @@ $root.login = (function() {
         UserLogInReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.address != null && message.hasOwnProperty("address"))
-                if (!$util.isString(message.address))
-                    return "address: string expected";
-            if (message.logType != null && message.hasOwnProperty("logType"))
-                if (!$util.isInteger(message.logType))
-                    return "logType: integer expected";
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                if (!$util.isInteger(message.memberId) && !(message.memberId && $util.isInteger(message.memberId.low) && $util.isInteger(message.memberId.high)))
-                    return "memberId: integer|Long expected";
-            if (message.memberLoginDevice != null && message.hasOwnProperty("memberLoginDevice"))
-                if (!$util.isInteger(message.memberLoginDevice))
-                    return "memberLoginDevice: integer expected";
-            if (message.memberLoginIp != null && message.hasOwnProperty("memberLoginIp"))
-                if (!$util.isString(message.memberLoginIp))
-                    return "memberLoginIp: string expected";
-            if (message.memberLoginTime != null && message.hasOwnProperty("memberLoginTime"))
-                if (!$util.isString(message.memberLoginTime))
-                    return "memberLoginTime: string expected";
-            if (message.memberLogOutTime != null && message.hasOwnProperty("memberLogOutTime"))
-                if (!$util.isString(message.memberLogOutTime))
-                    return "memberLogOutTime: string expected";
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                if (!$util.isInteger(message.merchantId) && !(message.merchantId && $util.isInteger(message.merchantId.low) && $util.isInteger(message.merchantId.high)))
-                    return "merchantId: integer|Long expected";
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                if (!$util.isInteger(message.merchantMemberId) && !(message.merchantMemberId && $util.isInteger(message.merchantMemberId.low) && $util.isInteger(message.merchantMemberId.high)))
-                    return "merchantMemberId: integer|Long expected";
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                if (!$util.isString(message.merchantName))
-                    return "merchantName: string expected";
-            if (message.remark != null && message.hasOwnProperty("remark"))
-                if (!$util.isString(message.remark))
-                    return "remark: string expected";
             if (message.token != null && message.hasOwnProperty("token"))
                 if (!$util.isString(message.token))
                     return "token: string expected";
-            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
-                if (!$util.isString(message.ipAddress))
-                    return "ipAddress: string expected";
             return null;
         };
 
@@ -2019,53 +1428,8 @@ $root.login = (function() {
             if (object instanceof $root.login.UserLogInReq)
                 return object;
             var message = new $root.login.UserLogInReq();
-            if (object.address != null)
-                message.address = String(object.address);
-            if (object.logType != null)
-                message.logType = object.logType | 0;
-            if (object.memberId != null)
-                if ($util.Long)
-                    (message.memberId = $util.Long.fromValue(object.memberId)).unsigned = false;
-                else if (typeof object.memberId === "string")
-                    message.memberId = parseInt(object.memberId, 10);
-                else if (typeof object.memberId === "number")
-                    message.memberId = object.memberId;
-                else if (typeof object.memberId === "object")
-                    message.memberId = new $util.LongBits(object.memberId.low >>> 0, object.memberId.high >>> 0).toNumber();
-            if (object.memberLoginDevice != null)
-                message.memberLoginDevice = object.memberLoginDevice | 0;
-            if (object.memberLoginIp != null)
-                message.memberLoginIp = String(object.memberLoginIp);
-            if (object.memberLoginTime != null)
-                message.memberLoginTime = String(object.memberLoginTime);
-            if (object.memberLogOutTime != null)
-                message.memberLogOutTime = String(object.memberLogOutTime);
-            if (object.merchantId != null)
-                if ($util.Long)
-                    (message.merchantId = $util.Long.fromValue(object.merchantId)).unsigned = false;
-                else if (typeof object.merchantId === "string")
-                    message.merchantId = parseInt(object.merchantId, 10);
-                else if (typeof object.merchantId === "number")
-                    message.merchantId = object.merchantId;
-                else if (typeof object.merchantId === "object")
-                    message.merchantId = new $util.LongBits(object.merchantId.low >>> 0, object.merchantId.high >>> 0).toNumber();
-            if (object.merchantMemberId != null)
-                if ($util.Long)
-                    (message.merchantMemberId = $util.Long.fromValue(object.merchantMemberId)).unsigned = false;
-                else if (typeof object.merchantMemberId === "string")
-                    message.merchantMemberId = parseInt(object.merchantMemberId, 10);
-                else if (typeof object.merchantMemberId === "number")
-                    message.merchantMemberId = object.merchantMemberId;
-                else if (typeof object.merchantMemberId === "object")
-                    message.merchantMemberId = new $util.LongBits(object.merchantMemberId.low >>> 0, object.merchantMemberId.high >>> 0).toNumber();
-            if (object.merchantName != null)
-                message.merchantName = String(object.merchantName);
-            if (object.remark != null)
-                message.remark = String(object.remark);
             if (object.token != null)
                 message.token = String(object.token);
-            if (object.ipAddress != null)
-                message.ipAddress = String(object.ipAddress);
             return message;
         };
 
@@ -2082,68 +1446,10 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.address = "";
-                object.logType = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.memberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.memberId = options.longs === String ? "0" : 0;
-                object.memberLoginDevice = 0;
-                object.memberLoginIp = "";
-                object.memberLoginTime = "";
-                object.memberLogOutTime = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.merchantId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.merchantId = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.merchantMemberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.merchantMemberId = options.longs === String ? "0" : 0;
-                object.merchantName = "";
-                object.remark = "";
+            if (options.defaults)
                 object.token = "";
-                object.ipAddress = "";
-            }
-            if (message.address != null && message.hasOwnProperty("address"))
-                object.address = message.address;
-            if (message.logType != null && message.hasOwnProperty("logType"))
-                object.logType = message.logType;
-            if (message.memberId != null && message.hasOwnProperty("memberId"))
-                if (typeof message.memberId === "number")
-                    object.memberId = options.longs === String ? String(message.memberId) : message.memberId;
-                else
-                    object.memberId = options.longs === String ? $util.Long.prototype.toString.call(message.memberId) : options.longs === Number ? new $util.LongBits(message.memberId.low >>> 0, message.memberId.high >>> 0).toNumber() : message.memberId;
-            if (message.memberLoginDevice != null && message.hasOwnProperty("memberLoginDevice"))
-                object.memberLoginDevice = message.memberLoginDevice;
-            if (message.memberLoginIp != null && message.hasOwnProperty("memberLoginIp"))
-                object.memberLoginIp = message.memberLoginIp;
-            if (message.memberLoginTime != null && message.hasOwnProperty("memberLoginTime"))
-                object.memberLoginTime = message.memberLoginTime;
-            if (message.memberLogOutTime != null && message.hasOwnProperty("memberLogOutTime"))
-                object.memberLogOutTime = message.memberLogOutTime;
-            if (message.merchantId != null && message.hasOwnProperty("merchantId"))
-                if (typeof message.merchantId === "number")
-                    object.merchantId = options.longs === String ? String(message.merchantId) : message.merchantId;
-                else
-                    object.merchantId = options.longs === String ? $util.Long.prototype.toString.call(message.merchantId) : options.longs === Number ? new $util.LongBits(message.merchantId.low >>> 0, message.merchantId.high >>> 0).toNumber() : message.merchantId;
-            if (message.merchantMemberId != null && message.hasOwnProperty("merchantMemberId"))
-                if (typeof message.merchantMemberId === "number")
-                    object.merchantMemberId = options.longs === String ? String(message.merchantMemberId) : message.merchantMemberId;
-                else
-                    object.merchantMemberId = options.longs === String ? $util.Long.prototype.toString.call(message.merchantMemberId) : options.longs === Number ? new $util.LongBits(message.merchantMemberId.low >>> 0, message.merchantMemberId.high >>> 0).toNumber() : message.merchantMemberId;
-            if (message.merchantName != null && message.hasOwnProperty("merchantName"))
-                object.merchantName = message.merchantName;
-            if (message.remark != null && message.hasOwnProperty("remark"))
-                object.remark = message.remark;
             if (message.token != null && message.hasOwnProperty("token"))
                 object.token = message.token;
-            if (message.ipAddress != null && message.hasOwnProperty("ipAddress"))
-                object.ipAddress = message.ipAddress;
             return object;
         };
 
@@ -2167,8 +1473,6 @@ $root.login = (function() {
          * Properties of a UserLogInResp.
          * @memberof login
          * @interface IUserLogInResp
-         * @property {number|null} [code] UserLogInResp code
-         * @property {string|null} [msg] UserLogInResp msg
          * @property {login.IUserInfo|null} [data] UserLogInResp data
          */
 
@@ -2186,22 +1490,6 @@ $root.login = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
-
-        /**
-         * UserLogInResp code.
-         * @member {number} code
-         * @memberof login.UserLogInResp
-         * @instance
-         */
-        UserLogInResp.prototype.code = 0;
-
-        /**
-         * UserLogInResp msg.
-         * @member {string} msg
-         * @memberof login.UserLogInResp
-         * @instance
-         */
-        UserLogInResp.prototype.msg = "";
 
         /**
          * UserLogInResp data.
@@ -2235,12 +1523,8 @@ $root.login = (function() {
         UserLogInResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.code != null && message.hasOwnProperty("code"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-            if (message.msg != null && message.hasOwnProperty("msg"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.msg);
             if (message.data != null && message.hasOwnProperty("data"))
-                $root.login.UserInfo.encode(message.data, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.login.UserInfo.encode(message.data, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -2276,12 +1560,6 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.code = reader.int32();
-                    break;
-                case 2:
-                    message.msg = reader.string();
-                    break;
-                case 3:
                     message.data = $root.login.UserInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2319,12 +1597,6 @@ $root.login = (function() {
         UserLogInResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.code != null && message.hasOwnProperty("code"))
-                if (!$util.isInteger(message.code))
-                    return "code: integer expected";
-            if (message.msg != null && message.hasOwnProperty("msg"))
-                if (!$util.isString(message.msg))
-                    return "msg: string expected";
             if (message.data != null && message.hasOwnProperty("data")) {
                 var error = $root.login.UserInfo.verify(message.data);
                 if (error)
@@ -2345,10 +1617,6 @@ $root.login = (function() {
             if (object instanceof $root.login.UserLogInResp)
                 return object;
             var message = new $root.login.UserLogInResp();
-            if (object.code != null)
-                message.code = object.code | 0;
-            if (object.msg != null)
-                message.msg = String(object.msg);
             if (object.data != null) {
                 if (typeof object.data !== "object")
                     throw TypeError(".login.UserLogInResp.data: object expected");
@@ -2370,15 +1638,8 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.code = 0;
-                object.msg = "";
+            if (options.defaults)
                 object.data = null;
-            }
-            if (message.code != null && message.hasOwnProperty("code"))
-                object.code = message.code;
-            if (message.msg != null && message.hasOwnProperty("msg"))
-                object.msg = message.msg;
             if (message.data != null && message.hasOwnProperty("data"))
                 object.data = $root.login.UserInfo.toObject(message.data, options);
             return object;
