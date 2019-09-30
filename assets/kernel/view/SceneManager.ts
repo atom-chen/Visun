@@ -15,7 +15,6 @@ export default class SceneManager {
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
 		EventCenter.getInstance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
-		UIManager.showLoading();
 		cc.log("--------释放旧资源--------")
 		var cvs = cc.find("Canvas");
 		LoadCenter.getInstance().retainNodeRes(cvs);
@@ -34,7 +33,6 @@ export default class SceneManager {
 				var afterLaunch = function() {
 					Adaptor.adaptScreen();
 					LoadCenter.getInstance().gc();
-					UIManager.showLoading();
 					if(onLaunched) { onLaunched(); }
 					EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 				}

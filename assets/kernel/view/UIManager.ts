@@ -153,10 +153,6 @@ export default class UIManager {
 
 	//-----------------------------------------------------------------
 
-	public static showLoading() {
-		this.showSingleton(KernelUIDefine.loading.path, null, LayerDefine.Loading, true, false, null, null);
-	}
-
 
 	public static openDialog(dlgName:string, content:string, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){

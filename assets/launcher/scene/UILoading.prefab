@@ -22,7 +22,7 @@
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 2,
     "_components": [
       {
         "__id__": 5
@@ -60,8 +60,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 640,
-      "y": 360,
+      "x": 0,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -203,7 +203,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "9bbda31e-ad49-43c9-aaf2-f7d9896bac69"
+      "__uuid__": "cced4c8b-900a-4064-bb81-fed079010dc5"
     },
     "_type": 1,
     "_sizeMode": 0,

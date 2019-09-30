@@ -895,12 +895,19 @@
     "_parent": {
       "__id__": 1
     },
-    "_children": [],
+    "_children": [
+      {
+        "__id__": 24
+      }
+    ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 24
+        "__id__": 26
+      },
+      {
+        "__id__": 27
       }
     ],
     "_prefab": null,
@@ -914,8 +921,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 1280,
+      "height": 720
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -924,8 +931,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 640,
+      "y": 360,
       "z": 0
     },
     "_scale": {
@@ -947,6 +954,38 @@
     "_id": "fa8MsZy+FFXZro+NXu/hMp"
   },
   {
+    "__type__": "cc.Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 23
+    },
+    "_id": "8crqx1G4tIy62tZjI0CBao",
+    "_prefab": {
+      "__id__": 25
+    },
+    "_name": "UILoading",
+    "_active": true,
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 24
+    },
+    "asset": {
+      "__uuid__": "ed6f53da-d83a-49cc-ae65-327e31fe98cd"
+    },
+    "fileId": "53yJVdyXZFYK3mS6K81fHn",
+    "sync": true
+  },
+  {
     "__type__": "46ef8gH1HBGArtDFwvUqYf9",
     "_name": "",
     "_objFlags": 0,
@@ -955,5 +994,32 @@
     },
     "_enabled": true,
     "_id": "78KZC1VWpA9ZV80PdaofzI"
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 23
+    },
+    "_enabled": true,
+    "alignMode": 1,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0,
+    "_id": "d20ZGJOGRLULJy6F1bL+Dp"
   }
 ]
