@@ -47,7 +47,7 @@ export class LoginUser extends ModelBase {
 		return LoginUser._instance;
 	}
 
-	public delInstance() {
+	public static delInstance() {
 		if (LoginUser._instance) {
 			LoginUser._instance.clear();
 			LoginUser._instance = null;

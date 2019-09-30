@@ -42,7 +42,7 @@ export default class LogicCenter {
     }
 
     public registModel(cls:any) {
-        if(!cls.delInstance) { cc.error("no delInstance"); }
+        if(!cls.delInstance) { cc.error("no delInstance", cls); }
         cls.getInstance();
         if(this._managers.indexOf(cls) < 0){
             this._managers.push(cls);
