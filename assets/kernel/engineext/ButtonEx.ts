@@ -5,7 +5,7 @@ if(cc.sys.isNative)
 
 if(cc.Button["hook_onTouchEnded"]) {
     cc.Button["hook_onTouchEnded"]( ()=>{
-        AudioManager.getInstance().playEffectSync("", true);
+        AudioManager.getInstance().playEffectSync("");
     } );
 }
 
@@ -19,7 +19,7 @@ if(!cc.Button.prototype["_onTouchEnded_origin"]) {
         if (!this.interactable || !this.enabledInHierarchy) return;
         cc.log("------- overrided button click")
         cc.Button.prototype["_onTouchEnded_origin"].call(this, event);
-        AudioManager.getInstance().playEffectSync("", true);
+        AudioManager.getInstance().playEffectSync("");
     }
 }
     

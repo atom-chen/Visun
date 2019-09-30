@@ -79,6 +79,7 @@ export default class AudioManager {
 
     playMusic(audioclip: cc.AudioClip, loop: boolean) {
         if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
+        if(!audioclip) { cc.log("invalid audioClip"); return; }
         this._currentMusicCacheUrl = audioclip.nativeUrl;
         this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
         cc.audioEngine.setFinishCallback(this._currentMusicId, () => {
@@ -92,51 +93,29 @@ export default class AudioManager {
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play music", path, loop);
         LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
-            this.playMusic(audioclip, loop, true);
+            this.playMusic(audioclip, loop);
         }.bind(this));
     }
 
 
-    playEffect(audioclip: cc.AudioClip, immediately: boolean) {
+    playEffect(audioclip: cc.AudioClip, loop:boolean = false) {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
-        if (immediately) {
-            this._playEffect(audioclip);
-            return;
-        }
-        this.effects.push(audioclip);
-        this._playEffect();
-    }
-
-    playEffectSync(path: string, immediately: boolean) {
-        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
-        if(!path || path===""){ cc.log("invalid path", path); return; }
-        cc.log("play effect", path, immediately);
-        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
-            this.playEffect(audioclip, immediately, true);
-        }.bind(this));
-    }
-
-
-    private _playEffect(audioclip: cc.AudioClip = null) {
-        if (audioclip) {
-            this._play(audioclip);
-            return;
-        }
-        let audioclipObject = this.effects.shift();
-        if (!audioclipObject) {
-            return;
-        }
-        this._play(audioclipObject);
-    }
-
-    private _play(audioclip: cc.AudioClip) {
+        if (!audioclip) { cc.log("invalid audioClip"); return; }
         this._currentEffectCacheUrl = audioclip.nativeUrl;
-        this._currentEffectId = cc.audioEngine.playEffect(audioclip, false);
+        this._currentEffectId = cc.audioEngine.playEffect(audioclip, loop);
         cc.audioEngine.setFinishCallback(this._currentEffectId, () => {
             this._currentEffectId = -1;
             this._currentEffectCacheUrl = null;
-            this._playEffect();
         });
+    }
+
+    playEffectSync(path: string, loop:boolean = false) {
+        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
+        if(!path || path===""){ cc.log("invalid path", path); return; }
+        cc.log("play effect", path);
+        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
+            this.playEffect(audioclip, loop);
+        }.bind(this));
     }
 
 }
