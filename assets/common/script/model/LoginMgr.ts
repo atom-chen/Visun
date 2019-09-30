@@ -19,18 +19,11 @@ import { room_packet_define } from "../proxy/net_RoomProto";
 export class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
-	memberId:number = 0;			//会员id
-	memberAccount:string;			//会员账号
-	memberName:string;				//会员名称
-	merchantId:number;				//商户id
-	merchantMemberId:number;		//商户会员id
-	merchantName:string;			//商户名称
-	merchantAccount:string;			//商户账号
-	memberStatus:number;			//会员状态
-	identity:string;				//身份
-	memberAvatar:string;			//会员头像
-	token:string;					//token
-	money:string;					//以上分金额
+	userid:number = 0;			//会员id
+	headicon:string;      		//商户名称
+	name:string;        		//会员名称
+	sign:string;            	//token
+	coin:string;            	//以上分金额
 
 	private constructor() {
 		super();
@@ -81,8 +74,8 @@ export default class LoginMgr extends ModelBase {
 		return UserMgr.getInstance().getHeroId() !== null;
 	}
 
-	public checkLogin2(bTip: boolean): boolean {
-		var hasLogin = LoginUser.getInstance().memberId !== 0;
+	public checkLogin(bTip: boolean): boolean {
+		var hasLogin = LoginUser.getInstance().userid !== 0;
 		if (bTip && !hasLogin) {
 			UIManager.toast("请先登录");
 		}
@@ -113,12 +106,12 @@ export default class LoginMgr extends ModelBase {
             //重连成功
             if(net.getState() == ConnState.reconnectsucc)
             {
-				if(!LoginMgr.getInstance().checkLogin2(false)) {
+				if(!LoginMgr.getInstance().checkLogin(false)) {
 					cc.log("尚未登录");
 					this.sendLoginRequest();
 					return;
 				}
-                login_request.CheckTokenReq({ uid:LoginUser.getInstance().memberId, token:LoginUser.getInstance().token });
+                login_request.CheckTokenReq({ uid:LoginUser.getInstance().userid, token:LoginUser.getInstance().sign });
             }
             //3次重连失败 弹提示框 
             if(net.getState() == ConnState.reconnectfail)
@@ -177,8 +170,8 @@ export default class LoginMgr extends ModelBase {
 		//g_HallProcessor.setHeartbeatFunc(()=>{ login_request.Msg_HeartReq(null); });
 		channel_hall.close();
 		channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
-		if(!LoginMgr.getInstance().checkLogin2(false)) {
-			login_request.CheckTokenReq({uid:LoginUser.getInstance().memberId, token:LoginUser.getInstance().token});
+		if(!LoginMgr.getInstance().checkLogin(false)) {
+			login_request.CheckTokenReq({uid:LoginUser.getInstance().userid, token:LoginUser.getInstance().sign});
 		}
 	}
 
@@ -202,11 +195,13 @@ export default class LoginMgr extends ModelBase {
 
 	//游客登录
 	public loginAsYouke(): void {
+		if(this.checkLogin(false)) { return; }
 		this.connectLoginServer();
 	}
 
 	//账号登录
 	public loginByAccount(): void {
+		if(this.checkLogin(false)) { return; }
 		this.connectLoginServer();
 	}
 }
