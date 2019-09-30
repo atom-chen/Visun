@@ -9,10 +9,8 @@ import { HttpResult, ProcessorType, ChannelType, ConnState } from "../../../kern
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
-import { login } from "../proto/UserLoginSvc";
 import proxy_hall from "../proxy/proxy_hall";
 import CHandler from "../../../kernel/basic/CHandler";
-import faultylabs from "../../../kernel/utils/MD5Util";
 import { hallgw_packet_define } from "../proxy/net_hall";
 import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
 import { room_packet_define } from "../proxy/net_RoomProto";
