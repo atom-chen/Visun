@@ -2,6 +2,7 @@ import { hallgw_msgs } from "./net_hall";
 import { login_msgs } from "./net_UserLoginSvc";
 import UIManager from "../../../kernel/view/UIManager";
 import LoginMgr, { LoginUser } from "../model/LoginMgr";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 var proxy_hall = {
 
@@ -11,14 +12,8 @@ var proxy_hall = {
 	},
 
 	[login_msgs.Msg_UserLogInResp] : function(param:any) {
-		cc.log("登录成功");
-		cc.log(param);
-		UIManager.toast("new 登录成功");
-
-		var data = param.data;
-		for(var k in data) {
-			LoginUser.getInstance()[k] = data[k];
-		}
+		UIManager.toast("登录成功");
+		CommonUtil.simpleCopy(LoginUser.getInstance(), param.data);
 	},
 
 	[hallgw_msgs.Msg_BroadcastNotice] : function(param:any) {
