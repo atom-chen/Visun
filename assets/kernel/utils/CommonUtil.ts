@@ -201,6 +201,7 @@ export default class CommonUtil {
 	}
 
 	static simpleCopy(target, source) {
+		if(source === undefined || source === null) { return; }
 		for (var key in source) {
 			if (source.hasOwnProperty(key)) {
 				target[key] = source[key];
