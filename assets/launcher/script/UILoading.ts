@@ -26,24 +26,26 @@ export default class UILoading extends cc.Component {
         TimerManager.delTimer(this._tmr);
         this._tmr = 0;
         this.node.active = true;
-        this.labelProgress.string = "资源加载中";
+        this.labelProgress.string = "";
     }
 
     private onProgress(sub:number, total:number) {
-        //cc.log("========", sub, total);
         TimerManager.delTimer(this._tmr);
         this._tmr = 0;
         this.labelProgress.string = sub + "/" + total;
         if(sub===total) {
-            TimerManager.delayFrame(5, new CHandler(this, (tmr)=>{
-                this._tmr = 0;
-                this.node.active = false;
-            }));
+            TimerManager.delayFrame(5, new CHandler(this, this.onHideView));
         }
+    }
+
+    private onHideView(tmr) {
+        this._tmr = 0;
+        this.node.active = false;
     }
 
     onDestroy() {
         cc.error("donnot delete me");
         EventCenter.getInstance().removeByTarget(this);
+        TimerManager.delTimer(this._tmr);
     }
 }

@@ -9,7 +9,6 @@ export default class Procedure {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
 	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;
-	protected _bAutoClean:boolean = false;
 
 	protected _procFunc:CHandler = null;
 	protected _stopFunc:CHandler = null;
@@ -204,13 +203,8 @@ export default class Procedure {
 	protected resolve(rlt:BEHAVIOR_STATE, arg?:any) : void
 	{
 		if(this.isSelfDone()) { return; }
-
 		this._cur_state = rlt;
-
-		if(this._bAutoClean) { this.cleanSelf(); }
-		
 		cc.log("end", this.fixedName());
-
 		this.checkDone();
 	}
 
@@ -240,7 +234,6 @@ export default class Procedure {
 		if( !this.isSelfDone() ) {
 			this._cur_state = BEHAVIOR_STATE.STOPED;
 			this.onStop();
-			if(this._bAutoClean) { this.cleanSelf(); }
 		}
 
 		if(this._partList) {
