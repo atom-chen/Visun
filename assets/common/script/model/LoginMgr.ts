@@ -84,15 +84,15 @@ export default class LoginMgr extends ModelBase {
 
 
 	private onNetFail(info) {
-		if(info.CMD === login_msgs.Msg_UserLogInResp) {
+		if(info.cmd === login_msgs.Msg_UserLogInResp) {
 			UIManager.toast("登录失败");
 		}
-		else if(info.CMD === login_msgs.Msg_SysError) {
+		else if(info.cmd === login_msgs.Msg_SysError) {
 			UIManager.toast("系统错误");
 		}
-		else if(info.CMD === login_msgs.CheckTokenRes) {
+		else if(info.cmd === login_msgs.CheckTokenRes) {
 			//session过期，需重新登录
-			if(info.code === 404) {
+			if(info.errCode === 404) {
 				LoginMgr.getInstance().loginAsYouke();
 			}
 		}
@@ -127,7 +127,7 @@ export default class LoginMgr extends ModelBase {
 	
 	public connectLoginServer() {
 		HttpCore.callGet(ServerConfig.gateServer, null, null, (iCode:HttpResult, data:any)=>{
-			EventCenter.getInstance().listen(KernelEvent.NET_WS_FAIL, this.onNetFail, this);
+			EventCenter.getInstance().listen(KernelEvent.WS_FAIL, this.onNetFail, this);
 			EventCenter.getInstance().listen(KernelEvent.NET_STATE, this.onNetWorkChange, this);
 
 			//获取可用服务器列表

@@ -55,7 +55,7 @@ export default class ProtobufProcessor extends BaseProcessor {
 		//有错误则走错误处理逻辑
 		if(errCode != 0){
 			cc.log(this._channel.getName(), "[net fail]", cmd, errCode);
-			EventCenter.getInstance().fire( KernelEvent.NET_WS_FAIL, { CMD:cmd, code:errCode } );
+			EventCenter.getInstance().fire( KernelEvent.WS_FAIL, { cmd:cmd, errCode:errCode } );
 			return;
 		}
 

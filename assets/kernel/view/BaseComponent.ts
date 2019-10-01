@@ -1,11 +1,10 @@
+//---------------------------------
+// 所有组建的父类
+//---------------------------------
 import EventCenter from "../event/EventCenter";
 import TimerManager from "../timer/TimerManager";
 import UIManager from "./UIManager";
 
-
-//---------------------------------
-// 所有组建的父类
-//---------------------------------
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,7 +24,7 @@ export default class BaseComponent extends cc.Component {
        
     // }
 
-    listenDestory(listener:Function, target:any){
+    listenDestory(listener:Function, target:any) {
         this.m_dtor_listeners.push({ callback:listener, target:target });
     }
 

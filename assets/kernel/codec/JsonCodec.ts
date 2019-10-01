@@ -12,6 +12,7 @@ export default class JsonCodec implements ICodec {
 
 	decode(data: any) 
 	{
+		if(data===null || data===undefined) { return data; }
 		return JSON.parse(data);
 	}
 
