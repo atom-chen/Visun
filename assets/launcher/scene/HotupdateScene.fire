@@ -412,8 +412,6 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
     "_id": "e8OgvRDX5KbZ0bIecsFLwz"
   },
   {
@@ -475,8 +473,6 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
     "_id": "e19Ixlzn5L57s9ljNwIviH"
   },
   {
@@ -650,8 +646,6 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
     "_id": "69phwMh0tHDo0tuVa2ujGu"
   },
   {
@@ -713,8 +707,6 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_rotationX": 0,
-    "_rotationY": 0,
     "_id": "05+6izyTZFY48DPh8VbAQ6"
   },
   {
@@ -970,9 +962,7 @@
       "x": 0,
       "y": 0,
       "z": 0
-    },
-    "_rotationX": 0,
-    "_rotationY": 0
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
