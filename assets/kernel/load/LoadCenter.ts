@@ -8,7 +8,8 @@ loadResArray(urls, type, progressCallback, completeCallback)
 loadResDir(url, type, progressCallback, completeCallback)
 */
 export default class LoadCenter {
-	static _instance: LoadCenter = null;
+	private static _instance: LoadCenter = null;
+	private static _enableGC: boolean = false;
 
 	static getInstance(): LoadCenter {
 		if (LoadCenter._instance) { return LoadCenter._instance; }
@@ -81,6 +82,7 @@ export default class LoadCenter {
 
 	gc()
 	{
+		if(!LoadCenter._enableGC){ return; }
 		var texturesInCache = cc.loader["_cache"];
 		var release_key = [];
 		for (var asset in texturesInCache) {
@@ -99,7 +101,8 @@ export default class LoadCenter {
 		}
 	}
 
-	_depthGC(strs: Array<string>) {
+	private _depthGC(strs: Array<string>) {
+		if(!LoadCenter._enableGC){ return; }
 		var texturesInCache = cc.loader["_cache"];
 		var release_json = [];
 		for (var asset in texturesInCache) {

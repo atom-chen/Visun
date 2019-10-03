@@ -52,6 +52,10 @@ export default class UIManager {
 			wnd.active = true;
 			UIManager.callReflesh(wnd, args);
 			if(callback) { callback(wnd); }
+			if(zIndex===LayerDefine.Panel){
+				//	cc.log("进度: ", respath, completeCnt, totalCnt);
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, 1, 1);
+			}
 			return;
 		}
 
@@ -95,6 +99,10 @@ export default class UIManager {
 		}
 		if(cc.loader.getRes(respath, cc.Prefab)){
 			completeCallback(null, cc.loader.getRes(respath, cc.Prefab));
+			if(zIndex===LayerDefine.Panel){
+				//	cc.log("进度: ", respath, completeCnt, totalCnt);
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, 1, 1);
+			}
 			return;
 		}
 		cc.loader.loadRes(respath, cc.Prefab, 
