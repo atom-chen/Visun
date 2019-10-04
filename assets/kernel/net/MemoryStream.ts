@@ -24,7 +24,7 @@ export default class MemoryStream {
 			this.data_view = new DataView(this.buffer);
 		}
 		var buf = new Uint8Array(this.buffer);
-		buf.set(new Uint8Array(src), 0);
+		buf.set(src, offset);
 	}
 
 	
@@ -89,6 +89,15 @@ export default class MemoryStream {
 	{
 		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
 		dvPtr.set(buff);
+	}
+
+	public safe_write_buffer(offset:number, buff:Uint8Array)
+	{
+		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
+		var len = dvPtr.length;
+		for(var i=0; i<len; i++) {
+			dvPtr[i] = buff[i];
+		}
 	}
 	
 	public read_string(offset:number) : string

@@ -5,6 +5,7 @@
 //----------------------------------------------------
 import MemoryStream from "./MemoryStream";
 import ChannelMgr from "./channel/ChannelMgr";
+import { HEAD_SIZE } from "../looker/KernelDefine";
 
 
 export default class NetPacket {
@@ -21,8 +22,6 @@ export default class NetPacket {
 		if(data===undefined || data===null) {
 			data = {};
 		}
-
-		var HEAD_SIZE = 8;
 		
 		var bytes_body = null;
 
@@ -59,7 +58,6 @@ export default class NetPacket {
 		}
 
 		//解析包头
-		var HEAD_SIZE = 8;
 		var memStream = new MemoryStream(buff.length);
 		memStream.write_buffer(0, buff);
 
@@ -89,7 +87,6 @@ export default class NetPacket {
 		}
 
 		//解析包头
-		var HEAD_SIZE = 8;
 		var cmd = memStream.read_uint32(0);
 		var errCode = memStream.read_int32(4);
 		var data = null;
