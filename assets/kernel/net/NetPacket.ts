@@ -52,7 +52,7 @@ export default class NetPacket {
 		}
 	}
 
-	unpack(buff:any) : any
+	unpack(buff:Uint8Array) : any
 	{
 		if(buff===undefined || buff === null) {
 			return { cmd:0, errCode:1, data:null };
@@ -60,9 +60,8 @@ export default class NetPacket {
 
 		//解析包头
 		var HEAD_SIZE = 8;
-		var bytes = new Uint8Array(buff);
-		var memStream = new MemoryStream(bytes.length);
-		memStream.write_buffer(0, bytes);
+		var memStream = new MemoryStream(buff.length);
+		memStream.write_buffer(0, buff);
 
 		var cmd = memStream.read_uint32(0);
 		var errCode = memStream.read_int32(4);
@@ -72,8 +71,7 @@ export default class NetPacket {
 		if(errCode == 0){
 			if(this.data_struct!==null && this.data_struct!==undefined) {
 				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				var body = this.data_struct.decode(tmp);
-				data = this.data_struct.toObject(body, { defaults: true });
+				data = this.data_struct.toObject(this.data_struct.decode(tmp), {defaults:true});
 			}
 		}
 		
@@ -100,8 +98,7 @@ export default class NetPacket {
 		if(errCode == 0){
 			if(this.data_struct!==null && this.data_struct!==undefined) {
 				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				var body = this.data_struct.decode(tmp);
-				data = this.data_struct.toObject(body, { defaults: true });
+				data = this.data_struct.toObject(this.data_struct.decode(tmp), {defaults:true});
 			}
 		}
 		
@@ -110,6 +107,17 @@ export default class NetPacket {
 			errCode : errCode,
 			data : data
 		};
+	}
+
+	unpackBody(bytes:Uint8Array) : any
+	{
+		if(bytes===null || bytes===undefined) {
+			return null;
+		}
+		if(this.data_struct!==null && this.data_struct!==undefined) {
+			return this.data_struct.toObject(this.data_struct.decode(bytes), {defaults:true});
+		}
+		return null;
 	}
 
 	public sendToChannel(channelKey:string, data:any, bIsPbObj:boolean)

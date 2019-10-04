@@ -32,11 +32,6 @@ export default class ProtobufProcessor extends BaseProcessor {
 
 	public onrecvBuff(buff: any): void 
 	{
-		if(typeof buff === "string") {
-			//cc.log(this._channel.getName(), "[recv json]", buff);
-			return;
-		}
-
 		var HEAD_SIZE = 8;
 
 		//解析包头
@@ -66,7 +61,7 @@ export default class ProtobufProcessor extends BaseProcessor {
 			return;
 		}
 
-		var data = packet.unpack(bytes).data;
+		var data = packet.unpackStream(memStream).data;
 
 		if(this.isShowDebug(cmd)) {
 			cc.log(this._channel.getName(), "[recv]", cmd, data);
