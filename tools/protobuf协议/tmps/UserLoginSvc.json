@@ -51,7 +51,7 @@
               "id": 3
             },
             "coin": {
-              "type": "float",
+              "type": "string",
               "id": 4
             },
             "sign": {
@@ -69,10 +69,6 @@
             "device": {
               "type": "string",
               "id": 2
-            },
-            "memberId": {
-              "type": "int64",
-              "id": 3
             }
           }
         },

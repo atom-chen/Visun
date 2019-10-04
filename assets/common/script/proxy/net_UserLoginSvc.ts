@@ -33,5 +33,5 @@ export var login_packet_define = {
 export class login_request {
     public static Msg_HeartReq( data:{} ) { login_packet_define[5000].sendToChannel(ChannelDefine.hall, data, false); }
     public static CheckTokenReq( data:{ uid:number, token:string } ) { login_packet_define[5003].sendToChannel(ChannelDefine.hall, data, false); }
-    public static Msg_UserLogInReq( data:{ token:string, device:string, memberId:number } ) { login_packet_define[10000].sendToChannel(ChannelDefine.hall, data, false); }
+    public static Msg_UserLogInReq( data:{ token:string, device:string } ) { login_packet_define[10000].sendToChannel(ChannelDefine.hall, data, false); }
 }

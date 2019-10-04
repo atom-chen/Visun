@@ -25,7 +25,7 @@ export default class HotupdateScene extends BaseComponent {
 
 
 	onLoad () {
-		Adaptor.setFullScreen(true);
+	//	Adaptor.setFullScreen(true);
 		Adaptor.adaptOrientation(true);
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;

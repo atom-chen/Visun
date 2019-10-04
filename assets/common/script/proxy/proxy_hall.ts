@@ -1,5 +1,5 @@
 import { hallgw_msgs, hallgw_request } from "./net_hall";
-import { login_msgs } from "./net_UserLoginSvc";
+import { login_msgs, login_request } from "./net_UserLoginSvc";
 import UIManager from "../../../kernel/view/UIManager";
 import LoginMgr, { LoginUser } from "../model/LoginMgr";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
@@ -15,9 +15,11 @@ var proxy_hall = {
 
 	[login_msgs.Msg_UserLogInResp] : function(param:any) {
 		UIManager.toast("登录成功");
+		param.data.coin = parseFloat(param.data.coin);
 		CommonUtil.simpleCopy(LoginUser.getInstance(), param.data);
 
 		TimerManager.delaySecond(1, new CHandler(this, (tmr)=>{
+			hallgw_request.MsgGetUserInfoReq({Id:LoginUser.getInstance().userid});
 			hallgw_request.MsgGetGameConfigReq({PlatformId:1});
 		}) );
 	},
