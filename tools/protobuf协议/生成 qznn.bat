@@ -1,1 +1,1 @@
-python gen_proto.py qznn game
+python gen_request.py qznn game

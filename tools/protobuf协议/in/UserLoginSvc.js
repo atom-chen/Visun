@@ -1,18 +1,15 @@
-var map_enumKey_2_StructName = {
-    Msg_SysError		: "",
-    Msg_HeartReq 		: "HeartReq",
-    Msg_HeartResp 		: "HeartResp",
-    Msg_UserLogInReq 	: "UserLogInReq",
-    Msg_UserLogInResp 	: "UserLogInResp",
-    CheckTokenReq	    : "CheckTokenRequest",
-    CheckTokenRes	    : "CheckTokenResponse",
-    MovedGateNot	    : "MovedGateNotice",
+var RpcDefine = {
+	Msg_HeartReq 		: [5000, "HeartReq"],
+	Msg_HeartResp 		: [5001, "HeartResp", 2],
+	Msg_SysError		: [5002, "", 2],
+	CheckTokenReq	    : [5003, "CheckTokenRequest"],
+	MovedGateNot	    : [5004, "MovedGateNotice", 2],
+	CheckTokenRes	    : [5005, "CheckTokenResponse", 2],
+	AdminKickUser       : [5006, "", 2],
+	Msg_UserLogInReq 	: [10000, "UserLogInReq"],
+	Msg_UserLogInResp 	: [10001, "UserLogInResp", 2],
 }
 
-var cmdEnumName = "CMD";
-
-
 module.exports = {
-	map_enumKey_2_StructName : map_enumKey_2_StructName,
-	cmdEnumName : cmdEnumName
+	RpcDefine : RpcDefine
 };

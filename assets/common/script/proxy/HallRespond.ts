@@ -26,35 +26,9 @@ HallRespond.req_userinfo = function(info:any) {
 	UserMgr.getInstance().updateUser(info);
 }
 
-HallRespond.req_ranklist = function(info:any) {
-	cc.log(info);
-}
-
 HallRespond.req_game_list = function(info:any) {
 	if(!info) return;
 	GameManager.getInstance().setServerGames(info.data);
-}
-
-HallRespond.req_enter_br_room = function(info:any) {
-	if(!info) return;
-	cc.log(info);
-	if(info.code != 200) {
-		UIManager.toast(info.msg);
-		return;
-	}
-	var url = "ws://" + info.addr + "/websocket";
-	
-}
-
-HallRespond.req_enter_coin_room = function(info:any) {
-	if(!info) return;
-	cc.log(info);
-	if(info.code != 200) {
-		UIManager.toast(info.msg);
-		return;
-	}
-	var url = "ws://" + info.addr + "/websocket";
-	
 }
 
 export default HallRespond;

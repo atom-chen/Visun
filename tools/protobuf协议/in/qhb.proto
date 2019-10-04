@@ -161,31 +161,31 @@ message s2c_refreshCoin
 /* -------------------------------------------------------------------- */
 /* -------------------------------------------------------------------- */
 
-// APPLY_REQ = 2004;        // 埋雷申请
+// APPLY_REQ = 40004;
 message c2s_apply
 {
     RedBag redBag = 1;
 }
 
-// APPLY_RESP = 2005;       // 埋雷申请 - 返回
+// APPLY_RESP = 40005;       // 埋雷申请 - 返回
 message s2c_apply
 {
     Player applyPlayer = 1;
 }
 
-// DISAPPLY_REQ = 2006;     // 取消埋雷申请
+// DISAPPLY_REQ = 40006;     // 取消埋雷申请
 message c2s_disApply
 {
 
 }
-// DISAPPLY_RESP = 2007;    // 取消埋雷申请 - 返回
+// DISAPPLY_RESP = 40007;    // 取消埋雷申请 - 返回
 message s2c_disApply
 {
     double coin = 1;
 }
 
 /** 加入牌桌请求 */
-// JOIN_COIN_TABLE_REQ = 20006;
+// JOIN_COIN_TABLE_REQ = 40000;
 message c2s_joinTable
 {
     string sid = 1;
@@ -193,20 +193,20 @@ message c2s_joinTable
 }
 
 /** 加入牌桌返回 */
-// JOIN_COIN_TABLE_RESP = 20007;
+// JOIN_COIN_TABLE_RESP = 40001;
 message s2c_joinTable
 {
     TableInfo tableInfo = 1;
 }
 
 /**获取玩家列表*/
-// GET_USERLIST_REQ = 2020;
+// GET_USERLIST_REQ = 40020;
 message c2s_getUserList
 {
     int32 type = 1;  // 0 获取申请玩家列表 ;  1 获取所有玩家列表
 }
 
-// GET_USERLIST_RESP = 2021
+// GET_USERLIST_RESP = 40021
 message s2c_getUserList
 {
     repeated Player users = 1;
@@ -214,14 +214,14 @@ message s2c_getUserList
 }
 
 /** 抢红包请求 */
-// QIANG_REQ = 2000;
+// QIANG_REQ = 40022;
 message c2s_qiang
 {
 
 }
 
 /** 玩家抢红包返回 */
-// QIANG_RESP = 2001;
+// QIANG_RESP = 40023;
 message s2c_qiang
 {
     double money = 1;
@@ -230,14 +230,14 @@ message s2c_qiang
 }
 
 /** 玩家抢红包推送 */
-// PUSHBET_RESP = 2003;
+// PUSHBET_RESP = 40024;
 message s2c_qiangPush
 {
     Player qiangPlayer = 1;
 }
 
 /** 推送回合结算2015 */
-// PUSH_ROUND_RESULT_RESP = 2015;
+// PUSH_ROUND_RESULT_RESP = 40025;
 message s2c_roundResult
 {
     repeated ResultPlayer resultPlayer = 1;     // bingoUsers
@@ -254,40 +254,40 @@ message s2c_roundResult
 }
 
 /** 玩家点击重新连接 */
-// PUSH_USER_RECONNECT_REQ = 2030;
+// PUSH_USER_RECONNECT_REQ = 40026;
 message c2s_reconnect
 {
     int32 userId = 1;
 }
 
-// PUSH_USER_RECONNECT_RESP = 2031;
+// PUSH_USER_RECONNECT_RESP = 40027;
 /** 推送玩家重连数据2033 */
-// PUSH_RECONNECT_DATA_RESP = 2033
+// PUSH_RECONNECT_DATA_RESP = 40028
 message s2c_reconnect
 {
     TableInfo tableInfo = 1;
 }
 
  /**用户退后台*/
-// USER_ONBACK_REQ = 2080;
+// USER_ONBACK_REQ = 40036;
 message c2s_userOnBack
 {
     int32 onBack = 1;
 }
 
-// USER_ONBACK_RESP = 2081;
+// USER_ONBACK_RESP = 40037;
 message s2c_userOnBack
 {
     int32 userId = 1;
 }
 
 /** 玩家退出 */
-// USER_QUIT_REQ = 2044;
+// USER_QUIT_REQ = 40038;
 message c2s_userQuit
 {
 
 }
-// USER_QUIT_RESP = 2045;
+// USER_QUIT_RESP = 40039;
 message s2c_userQuit
 {
     int32 userId = 1;
@@ -295,14 +295,14 @@ message s2c_userQuit
 
 
 /* 超时操作反馈 */
-// SEND_OPERATE_REQ = 2070;
+// SEND_OPERATE_REQ = 40031;
 message c2s_sendOperate
 {
     int32 opType = 1;
 }
 
 /* 超时操作反馈返回 */
-// SEND_OPERATE_RESP = 2071;
+// SEND_OPERATE_RESP = 40032;
 message s2c_sendOperate
 {
 
@@ -369,6 +369,7 @@ message SendStateChangeResponse{
     string bankerName = 6;
     string bankerHeadImg = 7;
     double bankerCoin = 8;
+    int32 bankerUserId = 9;
 }
 
 //推送金币刷新
@@ -384,64 +385,64 @@ message SendCoinRefreshResponse {
 message Request {
     enum CMD
     {
-        UNKNOWN                             = 0;
+        UNKNOWN                      = 0;
         HALL_REFRESH_COIN            = 100;   //HallRefreshCoinRequest, HallRefreshCoinResponse
 
         // ** 申请埋雷
-        APPLY_REQ = 2004;
-        APPLY_RESP = 2005;
+        APPLY_REQ = 40004;
+        APPLY_RESP = 40005;
 
         /** 取消申请埋雷 */
-        DISAPPLY_REQ = 2006;
-        DISAPPLY_RESP = 2007;
+        DISAPPLY_REQ = 40006;
+        DISAPPLY_RESP = 40007;
 
-        PUSH_STATE_CHANGE_RESP = 2009;
+        PUSH_STATE_CHANGE_RESP = 40009;
 
         /** 加入牌桌请求 */
-	    JOIN_COIN_TABLE_REQ = 20006;
-        JOIN_COIN_TABLE_RESP = 20007;
+	    JOIN_COIN_TABLE_REQ = 40000;
+        JOIN_COIN_TABLE_RESP = 40001;
 
         /**获取玩家列表*/
-        GET_USERLIST_REQ = 2020;
-        GET_USERLIST_RESP = 2021;
+        GET_USERLIST_REQ = 40020;
+        GET_USERLIST_RESP = 40021;
 
         /** 抢红包请求 */
-	    QIANG_REQ = 2000;
-	    QIANG_RESP = 2001;
+	    QIANG_REQ = 40022;
+	    QIANG_RESP = 40023;
 	    /** 玩家抢红包推送 */
-        PUSHBET_RESP = 2003;
+        PUSHBET_RESP = 40024;
 
         /** 推送回合结算2015 */
-	    PUSH_ROUND_RESULT_RESP = 2015;
+	    PUSH_ROUND_RESULT_RESP = 40025;
 
         /** 玩家点击重新连接2030 */
-	    PUSH_USER_RECONNECT_REQ = 2030;
-        PUSH_USER_RECONNECT_RESP = 2031;
-	    PUSH_RECONNECT_DATA_RESP = 2033;/** 推送玩家重连数据2033 */   // 2031 和 2033 合并成一个结构体
-	    DELAYQUIT_OFFLINE_RESP       = 3003;    //超时踢出
-        KICKEDOUT                    = 4001;    //KickedOutRequest,KickedOutResponse
+	    PUSH_USER_RECONNECT_REQ = 40026;
+        PUSH_USER_RECONNECT_RESP = 40027;
+	    PUSH_RECONNECT_DATA_RESP = 40028;/** 推送玩家重连数据2033 */   // 2031 和 2033 合并成一个结构体
+	    DELAYQUIT_OFFLINE_RESP       = 40029;    //超时踢出
+        KICKEDOUT                    = 40030;    //KickedOutRequest,KickedOutResponse
         SEND_COIN_REFRESH            = 2062;  //推送金币刷新 SendCoinRefreshResponse
 
         /** 超时操作反馈 */
-        SEND_OPERATE_REQ      = 2070;
-        SEND_OPERATE_RESP     = 2071;
+        SEND_OPERATE_REQ      = 40031;
+        SEND_OPERATE_RESP     = 40032;
 
         /** 配牌器 **/
-        SET_CARDS_TEST        = 20000;
+        SET_CARDS_TEST        = 40033;
 
         /** 同步玩家数据 **/
-        SYNC_PALYER_INFO_REQ = 2072;
-        SYNC_PALYER_INFO_RESP = 2073;
+        SYNC_PALYER_INFO_REQ = 40034;
+        SYNC_PALYER_INFO_RESP = 40035;
 
         /**用户退后台*/
-        USER_ONBACK_REQ = 2080;
-        USER_ONBACK_RESP = 2081;
+        USER_ONBACK_REQ = 40036;
+        USER_ONBACK_RESP = 40037;
 
         /** 玩家退出 */
-	    USER_QUIT_REQ = 2044;
-	    USER_QUIT_RESP = 2045;
+	    USER_QUIT_REQ = 40038;
+	    USER_QUIT_RESP = 40039;
 
-	    SEND_REMAIN_TIME             = 20015; //推送延时 SendRemainTimeResponse
+	    SEND_REMAIN_TIME             = 40040; //推送延时 SendRemainTimeResponse
     }
 
     CMD   cmd                           = 1;      //访问接口

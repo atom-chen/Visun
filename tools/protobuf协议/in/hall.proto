@@ -4,15 +4,19 @@ package hallgw;
 
 enum HallMsgId {
     Msg_Unknown	= 0;
-    Msg_GetUserInfoReq    = 20000; // 获取用户信息req
-    Msg_GetUserInfoResp   = 20001; // 获取用户信息resp
-    Msg_GetGameListReq    = 20002; // 获取游戏列表req
-    Msg_GetGameListResp   = 20003; // 获取游戏列表resp
-    Msg_GetGameConfigReq  = 20004; // 获取游戏列表req
-    Msg_GetGameConfigResp = 20005; // 获取游戏列表resp
-    Msg_ChangeHeadReq     = 20006; // 换头像req
-    Msg_ChangeHeadResp    = 20007; // 换头像resp
-    Msg_BroadcastNotice   = 80000; // (广播)公告
+    Msg_GetUserInfoReq             = 20000; // 获取用户信息req
+    Msg_GetUserInfoResp            = 20001; // 获取用户信息resp
+    Msg_GetGameListReq             = 20002; // 获取游戏列表req
+    Msg_GetGameListResp            = 20003; // 获取游戏列表resp
+    Msg_GetGameConfigReq           = 20004; // 获取游戏列表req
+    Msg_GetGameConfigResp          = 20005; // 获取游戏列表resp
+    Msg_ChangeHeadReq              = 20006; // 换头像req
+    Msg_ChangeHeadResp             = 20007; // 换头像resp
+    Msg_DisableGame                = 20008; // 停用游戏
+    Msg_BroadcastNotice            = 80000; // (广播)公告
+    Msg_BroadcastMarquee  = 80001; // 跑马灯公告
+    Msg_BroadcastPopup    = 80002; // 弹窗公告
+    Msg_BroadcastGameConfigModify  = 80003; // (广播)游戏配置修改, 消息体复用MsgGetGameConfigResp
 }
 
 enum RespErr{
@@ -20,8 +24,8 @@ enum RespErr{
     ReqFormatErr = 1;
     MsgGetUserInfoRespRedisOperErr = 2;
     MsgGetGameListRespDBOperErr = 3;
-    MsgGetGameConfigRespRpcBackErr = 4;
-    MsgGetGameConfigRespFormatErr = 5;
+    MsgGetGameConfigRespRedisOperErr = 4;
+    MsgChangeHeadRespCallMemberServiceErr = 5;
 }
 
 // 获取用户信息req
@@ -32,14 +36,13 @@ message MsgGetUserInfoReq {
 // 获取用户信息resp
 message MsgGetUserInfoResp {
     int32  Id      = 1; // 会员Id
-    string Account = 2; // 账号
-    string Name	   = 3; // 名称
-    int64  Coin    = 4; // 金币
-    string Head    = 5; // 头像
+    string Name	   = 2; // 名称
+    double Coin    = 3; // 金币
+    string Head    = 4; // 头像
 }
 
 message GameInfo {
-    int32  Id           = 1; // 游戏Id
+    int64  Id           = 1; // 游戏Id
     string Name         = 2; // 游戏名称
     int32  State        = 3; // 游戏状态
     int32  HaveRoomList = 4; // 是否有房间列表
@@ -63,6 +66,8 @@ message MsgChangeHeadReq {
 
 // 换头像resp
 message MsgChangeHeadResp {
+    int32  Code = 1; // 换头像结果 0 成功, 其它 失败
+    string Msg  = 2; // 信息，如果失败会存放错误信息
 }
 
 // (广播)公告
@@ -73,49 +78,69 @@ message MsgNoticeNotify {
     int32  DisplayDuration = 4; // 展示时长
 }
 
-//房间信息
-message RoomInfo {
-    int32  RoomId   = 1;  // 房间Id
-    string RoomName = 2;  // 房间名称
-    int64  MinCost  = 3;  // 最小消耗
-    int64  MaxCost  = 4;  // 最大消耗
+// 游戏
+message Game {
+    int64  Id   = 1; // 游戏Id
+    string Name = 2; // 游戏名称
 }
 
 //游戏类别
 message GameType {
-    int32  Id     = 1; // 游戏类别Id
-    string Name   = 2; // 游戏类别名称
-    int32  Order  = 3; // 游戏类别顺序
+    int32  Id    = 1; // 游戏类别Id
+    string Name  = 2; // 游戏类别名称
+    int32  Order = 3; // 游戏类别顺序
+}
+
+//游戏标签
+message GameLabel {
+    int32  Id   = 1; // 游戏标签Id
+    string Name = 2; // 游戏标签名称
 }
 
 // 游戏关联
 message GameRelation {
-    int32    GameId              = 1; // 游戏Id
-    string   GameName            = 2; // 游戏名称
-    int32    GameTypeId          = 3; // 游戏分类Id
-    int32    GameLabelId         = 4; // 游戏标签Id
-    string   GameLabelName       = 5; // 游戏标签名称
-    int32    GameOrder           = 6; // 游戏在分类下的排序
-    repeated RoomInfo RoomList   = 7; // 房间列表
+    int64  GameId      = 1; // 游戏Id
+    int32  GameTypeId  = 2; // 游戏分类Id
+    int32  GameLabelId = 3; // 游戏标签Id
+    int32  GameOrder   = 4; // 游戏在分类下的排序
+    string Rooms       = 5; // 房间列表
 }
 
 // 游戏配置
 message GameConfig {
-    int32    PlatformId            = 1; // 平台Id
-    repeated GameType     Type     = 2; // 游戏分类
-    repeated GameRelation Relation = 3; // 游戏关联
+    int64    PlatformId            = 1; // 平台Id
+    repeated Game         Game     = 2; // 游戏
+    repeated GameType     Type     = 3; // 游戏分类
+    repeated GameLabel    Label    = 4; // 游戏标签
+    repeated GameRelation Relation = 5; // 游戏关联
 }
 
 // 获取游戏配置req
 message MsgGetGameConfigReq {
+    int64 PlatformId = 1; // 平台Id
 }
 
 // 获取游戏配置resp
 message MsgGetGameConfigResp {
-    repeated GameConfig GameConfig = 1;
+    GameConfig GameConfig = 1;
 }
 
 // 修改游戏配置notify
 message MsgModifyGameConfigNotify {
     GameConfig GameConfig = 1;
+}
+
+// 跑马灯公告
+message MsgMarqueeNotice {
+    repeated int64 PlatformIDs = 1;  // 需要展示公告的平台(预告跑马灯时,该值为空)
+    repeated int64 GameIDs = 2;      // 需要展示公告的游戏
+    bool IsToHall = 3;              // 是否通知大厅
+    string Content = 4;             // 公告内容
+}
+
+// 弹窗公告（只针对大厅和游戏）
+message MsgPopupNotice {
+    int32 KindID = 1;                // 类别 0:大厅 1:游戏
+    repeated int64 GameIDs = 2;      // 需要展示公告的游戏
+    string Content = 3;              // 公告内容
 }

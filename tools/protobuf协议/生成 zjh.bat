@@ -1,1 +1,1 @@
-python gen_proto.py zjh game
+python gen_request.py zjh game

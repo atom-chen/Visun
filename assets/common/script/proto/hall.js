@@ -31,7 +31,11 @@ $root.hallgw = (function() {
      * @property {number} Msg_GetGameConfigResp=20005 Msg_GetGameConfigResp value
      * @property {number} Msg_ChangeHeadReq=20006 Msg_ChangeHeadReq value
      * @property {number} Msg_ChangeHeadResp=20007 Msg_ChangeHeadResp value
+     * @property {number} Msg_DisableGame=20008 Msg_DisableGame value
      * @property {number} Msg_BroadcastNotice=80000 Msg_BroadcastNotice value
+     * @property {number} Msg_BroadcastMarquee=80001 Msg_BroadcastMarquee value
+     * @property {number} Msg_BroadcastPopup=80002 Msg_BroadcastPopup value
+     * @property {number} Msg_BroadcastGameConfigModify=80003 Msg_BroadcastGameConfigModify value
      */
     hallgw.HallMsgId = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -44,7 +48,11 @@ $root.hallgw = (function() {
         values[valuesById[20005] = "Msg_GetGameConfigResp"] = 20005;
         values[valuesById[20006] = "Msg_ChangeHeadReq"] = 20006;
         values[valuesById[20007] = "Msg_ChangeHeadResp"] = 20007;
+        values[valuesById[20008] = "Msg_DisableGame"] = 20008;
         values[valuesById[80000] = "Msg_BroadcastNotice"] = 80000;
+        values[valuesById[80001] = "Msg_BroadcastMarquee"] = 80001;
+        values[valuesById[80002] = "Msg_BroadcastPopup"] = 80002;
+        values[valuesById[80003] = "Msg_BroadcastGameConfigModify"] = 80003;
         return values;
     })();
 
@@ -56,8 +64,8 @@ $root.hallgw = (function() {
      * @property {number} ReqFormatErr=1 ReqFormatErr value
      * @property {number} MsgGetUserInfoRespRedisOperErr=2 MsgGetUserInfoRespRedisOperErr value
      * @property {number} MsgGetGameListRespDBOperErr=3 MsgGetGameListRespDBOperErr value
-     * @property {number} MsgGetGameConfigRespRpcBackErr=4 MsgGetGameConfigRespRpcBackErr value
-     * @property {number} MsgGetGameConfigRespFormatErr=5 MsgGetGameConfigRespFormatErr value
+     * @property {number} MsgGetGameConfigRespRedisOperErr=4 MsgGetGameConfigRespRedisOperErr value
+     * @property {number} MsgChangeHeadRespCallMemberServiceErr=5 MsgChangeHeadRespCallMemberServiceErr value
      */
     hallgw.RespErr = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -65,8 +73,8 @@ $root.hallgw = (function() {
         values[valuesById[1] = "ReqFormatErr"] = 1;
         values[valuesById[2] = "MsgGetUserInfoRespRedisOperErr"] = 2;
         values[valuesById[3] = "MsgGetGameListRespDBOperErr"] = 3;
-        values[valuesById[4] = "MsgGetGameConfigRespRpcBackErr"] = 4;
-        values[valuesById[5] = "MsgGetGameConfigRespFormatErr"] = 5;
+        values[valuesById[4] = "MsgGetGameConfigRespRedisOperErr"] = 4;
+        values[valuesById[5] = "MsgChangeHeadRespCallMemberServiceErr"] = 5;
         return values;
     })();
 
@@ -264,9 +272,8 @@ $root.hallgw = (function() {
          * @memberof hallgw
          * @interface IMsgGetUserInfoResp
          * @property {number|null} [Id] MsgGetUserInfoResp Id
-         * @property {string|null} [Account] MsgGetUserInfoResp Account
          * @property {string|null} [Name] MsgGetUserInfoResp Name
-         * @property {number|Long|null} [Coin] MsgGetUserInfoResp Coin
+         * @property {number|null} [Coin] MsgGetUserInfoResp Coin
          * @property {string|null} [Head] MsgGetUserInfoResp Head
          */
 
@@ -294,14 +301,6 @@ $root.hallgw = (function() {
         MsgGetUserInfoResp.prototype.Id = 0;
 
         /**
-         * MsgGetUserInfoResp Account.
-         * @member {string} Account
-         * @memberof hallgw.MsgGetUserInfoResp
-         * @instance
-         */
-        MsgGetUserInfoResp.prototype.Account = "";
-
-        /**
          * MsgGetUserInfoResp Name.
          * @member {string} Name
          * @memberof hallgw.MsgGetUserInfoResp
@@ -311,11 +310,11 @@ $root.hallgw = (function() {
 
         /**
          * MsgGetUserInfoResp Coin.
-         * @member {number|Long} Coin
+         * @member {number} Coin
          * @memberof hallgw.MsgGetUserInfoResp
          * @instance
          */
-        MsgGetUserInfoResp.prototype.Coin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        MsgGetUserInfoResp.prototype.Coin = 0;
 
         /**
          * MsgGetUserInfoResp Head.
@@ -351,14 +350,12 @@ $root.hallgw = (function() {
                 writer = $Writer.create();
             if (message.Id != null && message.hasOwnProperty("Id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.Id);
-            if (message.Account != null && message.hasOwnProperty("Account"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.Account);
             if (message.Name != null && message.hasOwnProperty("Name"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.Name);
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.Name);
             if (message.Coin != null && message.hasOwnProperty("Coin"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.Coin);
+                writer.uint32(/* id 3, wireType 1 =*/25).double(message.Coin);
             if (message.Head != null && message.hasOwnProperty("Head"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.Head);
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.Head);
             return writer;
         };
 
@@ -397,15 +394,12 @@ $root.hallgw = (function() {
                     message.Id = reader.int32();
                     break;
                 case 2:
-                    message.Account = reader.string();
-                    break;
-                case 3:
                     message.Name = reader.string();
                     break;
-                case 4:
-                    message.Coin = reader.int64();
+                case 3:
+                    message.Coin = reader.double();
                     break;
-                case 5:
+                case 4:
                     message.Head = reader.string();
                     break;
                 default:
@@ -446,15 +440,12 @@ $root.hallgw = (function() {
             if (message.Id != null && message.hasOwnProperty("Id"))
                 if (!$util.isInteger(message.Id))
                     return "Id: integer expected";
-            if (message.Account != null && message.hasOwnProperty("Account"))
-                if (!$util.isString(message.Account))
-                    return "Account: string expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
             if (message.Coin != null && message.hasOwnProperty("Coin"))
-                if (!$util.isInteger(message.Coin) && !(message.Coin && $util.isInteger(message.Coin.low) && $util.isInteger(message.Coin.high)))
-                    return "Coin: integer|Long expected";
+                if (typeof message.Coin !== "number")
+                    return "Coin: number expected";
             if (message.Head != null && message.hasOwnProperty("Head"))
                 if (!$util.isString(message.Head))
                     return "Head: string expected";
@@ -475,19 +466,10 @@ $root.hallgw = (function() {
             var message = new $root.hallgw.MsgGetUserInfoResp();
             if (object.Id != null)
                 message.Id = object.Id | 0;
-            if (object.Account != null)
-                message.Account = String(object.Account);
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.Coin != null)
-                if ($util.Long)
-                    (message.Coin = $util.Long.fromValue(object.Coin)).unsigned = false;
-                else if (typeof object.Coin === "string")
-                    message.Coin = parseInt(object.Coin, 10);
-                else if (typeof object.Coin === "number")
-                    message.Coin = object.Coin;
-                else if (typeof object.Coin === "object")
-                    message.Coin = new $util.LongBits(object.Coin.low >>> 0, object.Coin.high >>> 0).toNumber();
+                message.Coin = Number(object.Coin);
             if (object.Head != null)
                 message.Head = String(object.Head);
             return message;
@@ -508,26 +490,16 @@ $root.hallgw = (function() {
             var object = {};
             if (options.defaults) {
                 object.Id = 0;
-                object.Account = "";
                 object.Name = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.Coin = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Coin = options.longs === String ? "0" : 0;
+                object.Coin = 0;
                 object.Head = "";
             }
             if (message.Id != null && message.hasOwnProperty("Id"))
                 object.Id = message.Id;
-            if (message.Account != null && message.hasOwnProperty("Account"))
-                object.Account = message.Account;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
             if (message.Coin != null && message.hasOwnProperty("Coin"))
-                if (typeof message.Coin === "number")
-                    object.Coin = options.longs === String ? String(message.Coin) : message.Coin;
-                else
-                    object.Coin = options.longs === String ? $util.Long.prototype.toString.call(message.Coin) : options.longs === Number ? new $util.LongBits(message.Coin.low >>> 0, message.Coin.high >>> 0).toNumber() : message.Coin;
+                object.Coin = options.json && !isFinite(message.Coin) ? String(message.Coin) : message.Coin;
             if (message.Head != null && message.hasOwnProperty("Head"))
                 object.Head = message.Head;
             return object;
@@ -553,7 +525,7 @@ $root.hallgw = (function() {
          * Properties of a GameInfo.
          * @memberof hallgw
          * @interface IGameInfo
-         * @property {number|null} [Id] GameInfo Id
+         * @property {number|Long|null} [Id] GameInfo Id
          * @property {string|null} [Name] GameInfo Name
          * @property {number|null} [State] GameInfo State
          * @property {number|null} [HaveRoomList] GameInfo HaveRoomList
@@ -577,11 +549,11 @@ $root.hallgw = (function() {
 
         /**
          * GameInfo Id.
-         * @member {number} Id
+         * @member {number|Long} Id
          * @memberof hallgw.GameInfo
          * @instance
          */
-        GameInfo.prototype.Id = 0;
+        GameInfo.prototype.Id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameInfo Name.
@@ -640,7 +612,7 @@ $root.hallgw = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.Id != null && message.hasOwnProperty("Id"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.Id);
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.Id);
             if (message.Name != null && message.hasOwnProperty("Name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.Name);
             if (message.State != null && message.hasOwnProperty("State"))
@@ -684,7 +656,7 @@ $root.hallgw = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Id = reader.int32();
+                    message.Id = reader.int64();
                     break;
                 case 2:
                     message.Name = reader.string();
@@ -734,8 +706,8 @@ $root.hallgw = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Id != null && message.hasOwnProperty("Id"))
-                if (!$util.isInteger(message.Id))
-                    return "Id: integer expected";
+                if (!$util.isInteger(message.Id) && !(message.Id && $util.isInteger(message.Id.low) && $util.isInteger(message.Id.high)))
+                    return "Id: integer|Long expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
@@ -764,7 +736,14 @@ $root.hallgw = (function() {
                 return object;
             var message = new $root.hallgw.GameInfo();
             if (object.Id != null)
-                message.Id = object.Id | 0;
+                if ($util.Long)
+                    (message.Id = $util.Long.fromValue(object.Id)).unsigned = false;
+                else if (typeof object.Id === "string")
+                    message.Id = parseInt(object.Id, 10);
+                else if (typeof object.Id === "number")
+                    message.Id = object.Id;
+                else if (typeof object.Id === "object")
+                    message.Id = new $util.LongBits(object.Id.low >>> 0, object.Id.high >>> 0).toNumber();
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.State != null)
@@ -790,14 +769,21 @@ $root.hallgw = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.Id = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Id = options.longs === String ? "0" : 0;
                 object.Name = "";
                 object.State = 0;
                 object.HaveRoomList = 0;
                 object.RoomList = "";
             }
             if (message.Id != null && message.hasOwnProperty("Id"))
-                object.Id = message.Id;
+                if (typeof message.Id === "number")
+                    object.Id = options.longs === String ? String(message.Id) : message.Id;
+                else
+                    object.Id = options.longs === String ? $util.Long.prototype.toString.call(message.Id) : options.longs === Number ? new $util.LongBits(message.Id.low >>> 0, message.Id.high >>> 0).toNumber() : message.Id;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
             if (message.State != null && message.hasOwnProperty("State"))
@@ -1421,6 +1407,8 @@ $root.hallgw = (function() {
          * Properties of a MsgChangeHeadResp.
          * @memberof hallgw
          * @interface IMsgChangeHeadResp
+         * @property {number|null} [Code] MsgChangeHeadResp Code
+         * @property {string|null} [Msg] MsgChangeHeadResp Msg
          */
 
         /**
@@ -1437,6 +1425,22 @@ $root.hallgw = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * MsgChangeHeadResp Code.
+         * @member {number} Code
+         * @memberof hallgw.MsgChangeHeadResp
+         * @instance
+         */
+        MsgChangeHeadResp.prototype.Code = 0;
+
+        /**
+         * MsgChangeHeadResp Msg.
+         * @member {string} Msg
+         * @memberof hallgw.MsgChangeHeadResp
+         * @instance
+         */
+        MsgChangeHeadResp.prototype.Msg = "";
 
         /**
          * Creates a new MsgChangeHeadResp instance using the specified properties.
@@ -1462,6 +1466,10 @@ $root.hallgw = (function() {
         MsgChangeHeadResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.Code);
+            if (message.Msg != null && message.hasOwnProperty("Msg"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.Msg);
             return writer;
         };
 
@@ -1496,6 +1504,12 @@ $root.hallgw = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.Code = reader.int32();
+                    break;
+                case 2:
+                    message.Msg = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1531,6 +1545,12 @@ $root.hallgw = (function() {
         MsgChangeHeadResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                if (!$util.isInteger(message.Code))
+                    return "Code: integer expected";
+            if (message.Msg != null && message.hasOwnProperty("Msg"))
+                if (!$util.isString(message.Msg))
+                    return "Msg: string expected";
             return null;
         };
 
@@ -1545,7 +1565,12 @@ $root.hallgw = (function() {
         MsgChangeHeadResp.fromObject = function fromObject(object) {
             if (object instanceof $root.hallgw.MsgChangeHeadResp)
                 return object;
-            return new $root.hallgw.MsgChangeHeadResp();
+            var message = new $root.hallgw.MsgChangeHeadResp();
+            if (object.Code != null)
+                message.Code = object.Code | 0;
+            if (object.Msg != null)
+                message.Msg = String(object.Msg);
+            return message;
         };
 
         /**
@@ -1557,8 +1582,19 @@ $root.hallgw = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        MsgChangeHeadResp.toObject = function toObject() {
-            return {};
+        MsgChangeHeadResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Code = 0;
+                object.Msg = "";
+            }
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                object.Code = message.Code;
+            if (message.Msg != null && message.hasOwnProperty("Msg"))
+                object.Msg = message.Msg;
+            return object;
         };
 
         /**
@@ -1829,27 +1865,25 @@ $root.hallgw = (function() {
         return MsgNoticeNotify;
     })();
 
-    hallgw.RoomInfo = (function() {
+    hallgw.Game = (function() {
 
         /**
-         * Properties of a RoomInfo.
+         * Properties of a Game.
          * @memberof hallgw
-         * @interface IRoomInfo
-         * @property {number|null} [RoomId] RoomInfo RoomId
-         * @property {string|null} [RoomName] RoomInfo RoomName
-         * @property {number|Long|null} [MinCost] RoomInfo MinCost
-         * @property {number|Long|null} [MaxCost] RoomInfo MaxCost
+         * @interface IGame
+         * @property {number|Long|null} [Id] Game Id
+         * @property {string|null} [Name] Game Name
          */
 
         /**
-         * Constructs a new RoomInfo.
+         * Constructs a new Game.
          * @memberof hallgw
-         * @classdesc Represents a RoomInfo.
-         * @implements IRoomInfo
+         * @classdesc Represents a Game.
+         * @implements IGame
          * @constructor
-         * @param {hallgw.IRoomInfo=} [properties] Properties to set
+         * @param {hallgw.IGame=} [properties] Properties to set
          */
-        function RoomInfo(properties) {
+        function Game(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1857,114 +1891,88 @@ $root.hallgw = (function() {
         }
 
         /**
-         * RoomInfo RoomId.
-         * @member {number} RoomId
-         * @memberof hallgw.RoomInfo
+         * Game Id.
+         * @member {number|Long} Id
+         * @memberof hallgw.Game
          * @instance
          */
-        RoomInfo.prototype.RoomId = 0;
+        Game.prototype.Id = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
-         * RoomInfo RoomName.
-         * @member {string} RoomName
-         * @memberof hallgw.RoomInfo
+         * Game Name.
+         * @member {string} Name
+         * @memberof hallgw.Game
          * @instance
          */
-        RoomInfo.prototype.RoomName = "";
+        Game.prototype.Name = "";
 
         /**
-         * RoomInfo MinCost.
-         * @member {number|Long} MinCost
-         * @memberof hallgw.RoomInfo
-         * @instance
-         */
-        RoomInfo.prototype.MinCost = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * RoomInfo MaxCost.
-         * @member {number|Long} MaxCost
-         * @memberof hallgw.RoomInfo
-         * @instance
-         */
-        RoomInfo.prototype.MaxCost = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        /**
-         * Creates a new RoomInfo instance using the specified properties.
+         * Creates a new Game instance using the specified properties.
          * @function create
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
-         * @param {hallgw.IRoomInfo=} [properties] Properties to set
-         * @returns {hallgw.RoomInfo} RoomInfo instance
+         * @param {hallgw.IGame=} [properties] Properties to set
+         * @returns {hallgw.Game} Game instance
          */
-        RoomInfo.create = function create(properties) {
-            return new RoomInfo(properties);
+        Game.create = function create(properties) {
+            return new Game(properties);
         };
 
         /**
-         * Encodes the specified RoomInfo message. Does not implicitly {@link hallgw.RoomInfo.verify|verify} messages.
+         * Encodes the specified Game message. Does not implicitly {@link hallgw.Game.verify|verify} messages.
          * @function encode
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
-         * @param {hallgw.IRoomInfo} message RoomInfo message or plain object to encode
+         * @param {hallgw.IGame} message Game message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        RoomInfo.encode = function encode(message, writer) {
+        Game.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.RoomId != null && message.hasOwnProperty("RoomId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.RoomId);
-            if (message.RoomName != null && message.hasOwnProperty("RoomName"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.RoomName);
-            if (message.MinCost != null && message.hasOwnProperty("MinCost"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.MinCost);
-            if (message.MaxCost != null && message.hasOwnProperty("MaxCost"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.MaxCost);
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.Id);
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.Name);
             return writer;
         };
 
         /**
-         * Encodes the specified RoomInfo message, length delimited. Does not implicitly {@link hallgw.RoomInfo.verify|verify} messages.
+         * Encodes the specified Game message, length delimited. Does not implicitly {@link hallgw.Game.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
-         * @param {hallgw.IRoomInfo} message RoomInfo message or plain object to encode
+         * @param {hallgw.IGame} message Game message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        RoomInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        Game.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer.
+         * Decodes a Game message from the specified reader or buffer.
          * @function decode
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {hallgw.RoomInfo} RoomInfo
+         * @returns {hallgw.Game} Game
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        RoomInfo.decode = function decode(reader, length) {
+        Game.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.hallgw.RoomInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.hallgw.Game();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.RoomId = reader.int32();
+                    message.Id = reader.int64();
                     break;
                 case 2:
-                    message.RoomName = reader.string();
-                    break;
-                case 3:
-                    message.MinCost = reader.int64();
-                    break;
-                case 4:
-                    message.MaxCost = reader.int64();
+                    message.Name = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1975,140 +1983,110 @@ $root.hallgw = (function() {
         };
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer, length delimited.
+         * Decodes a Game message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {hallgw.RoomInfo} RoomInfo
+         * @returns {hallgw.Game} Game
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        RoomInfo.decodeDelimited = function decodeDelimited(reader) {
+        Game.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a RoomInfo message.
+         * Verifies a Game message.
          * @function verify
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        RoomInfo.verify = function verify(message) {
+        Game.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.RoomId != null && message.hasOwnProperty("RoomId"))
-                if (!$util.isInteger(message.RoomId))
-                    return "RoomId: integer expected";
-            if (message.RoomName != null && message.hasOwnProperty("RoomName"))
-                if (!$util.isString(message.RoomName))
-                    return "RoomName: string expected";
-            if (message.MinCost != null && message.hasOwnProperty("MinCost"))
-                if (!$util.isInteger(message.MinCost) && !(message.MinCost && $util.isInteger(message.MinCost.low) && $util.isInteger(message.MinCost.high)))
-                    return "MinCost: integer|Long expected";
-            if (message.MaxCost != null && message.hasOwnProperty("MaxCost"))
-                if (!$util.isInteger(message.MaxCost) && !(message.MaxCost && $util.isInteger(message.MaxCost.low) && $util.isInteger(message.MaxCost.high)))
-                    return "MaxCost: integer|Long expected";
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                if (!$util.isInteger(message.Id) && !(message.Id && $util.isInteger(message.Id.low) && $util.isInteger(message.Id.high)))
+                    return "Id: integer|Long expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
             return null;
         };
 
         /**
-         * Creates a RoomInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a Game message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {hallgw.RoomInfo} RoomInfo
+         * @returns {hallgw.Game} Game
          */
-        RoomInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.hallgw.RoomInfo)
+        Game.fromObject = function fromObject(object) {
+            if (object instanceof $root.hallgw.Game)
                 return object;
-            var message = new $root.hallgw.RoomInfo();
-            if (object.RoomId != null)
-                message.RoomId = object.RoomId | 0;
-            if (object.RoomName != null)
-                message.RoomName = String(object.RoomName);
-            if (object.MinCost != null)
+            var message = new $root.hallgw.Game();
+            if (object.Id != null)
                 if ($util.Long)
-                    (message.MinCost = $util.Long.fromValue(object.MinCost)).unsigned = false;
-                else if (typeof object.MinCost === "string")
-                    message.MinCost = parseInt(object.MinCost, 10);
-                else if (typeof object.MinCost === "number")
-                    message.MinCost = object.MinCost;
-                else if (typeof object.MinCost === "object")
-                    message.MinCost = new $util.LongBits(object.MinCost.low >>> 0, object.MinCost.high >>> 0).toNumber();
-            if (object.MaxCost != null)
-                if ($util.Long)
-                    (message.MaxCost = $util.Long.fromValue(object.MaxCost)).unsigned = false;
-                else if (typeof object.MaxCost === "string")
-                    message.MaxCost = parseInt(object.MaxCost, 10);
-                else if (typeof object.MaxCost === "number")
-                    message.MaxCost = object.MaxCost;
-                else if (typeof object.MaxCost === "object")
-                    message.MaxCost = new $util.LongBits(object.MaxCost.low >>> 0, object.MaxCost.high >>> 0).toNumber();
+                    (message.Id = $util.Long.fromValue(object.Id)).unsigned = false;
+                else if (typeof object.Id === "string")
+                    message.Id = parseInt(object.Id, 10);
+                else if (typeof object.Id === "number")
+                    message.Id = object.Id;
+                else if (typeof object.Id === "object")
+                    message.Id = new $util.LongBits(object.Id.low >>> 0, object.Id.high >>> 0).toNumber();
+            if (object.Name != null)
+                message.Name = String(object.Name);
             return message;
         };
 
         /**
-         * Creates a plain object from a RoomInfo message. Also converts values to other types if specified.
+         * Creates a plain object from a Game message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @static
-         * @param {hallgw.RoomInfo} message RoomInfo
+         * @param {hallgw.Game} message Game
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        RoomInfo.toObject = function toObject(message, options) {
+        Game.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.RoomId = 0;
-                object.RoomName = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.MinCost = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.Id = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.MinCost = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.MaxCost = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.MaxCost = options.longs === String ? "0" : 0;
+                    object.Id = options.longs === String ? "0" : 0;
+                object.Name = "";
             }
-            if (message.RoomId != null && message.hasOwnProperty("RoomId"))
-                object.RoomId = message.RoomId;
-            if (message.RoomName != null && message.hasOwnProperty("RoomName"))
-                object.RoomName = message.RoomName;
-            if (message.MinCost != null && message.hasOwnProperty("MinCost"))
-                if (typeof message.MinCost === "number")
-                    object.MinCost = options.longs === String ? String(message.MinCost) : message.MinCost;
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                if (typeof message.Id === "number")
+                    object.Id = options.longs === String ? String(message.Id) : message.Id;
                 else
-                    object.MinCost = options.longs === String ? $util.Long.prototype.toString.call(message.MinCost) : options.longs === Number ? new $util.LongBits(message.MinCost.low >>> 0, message.MinCost.high >>> 0).toNumber() : message.MinCost;
-            if (message.MaxCost != null && message.hasOwnProperty("MaxCost"))
-                if (typeof message.MaxCost === "number")
-                    object.MaxCost = options.longs === String ? String(message.MaxCost) : message.MaxCost;
-                else
-                    object.MaxCost = options.longs === String ? $util.Long.prototype.toString.call(message.MaxCost) : options.longs === Number ? new $util.LongBits(message.MaxCost.low >>> 0, message.MaxCost.high >>> 0).toNumber() : message.MaxCost;
+                    object.Id = options.longs === String ? $util.Long.prototype.toString.call(message.Id) : options.longs === Number ? new $util.LongBits(message.Id.low >>> 0, message.Id.high >>> 0).toNumber() : message.Id;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
             return object;
         };
 
         /**
-         * Converts this RoomInfo to JSON.
+         * Converts this Game to JSON.
          * @function toJSON
-         * @memberof hallgw.RoomInfo
+         * @memberof hallgw.Game
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        RoomInfo.prototype.toJSON = function toJSON() {
+        Game.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return RoomInfo;
+        return Game;
     })();
 
     hallgw.GameType = (function() {
@@ -2343,19 +2321,227 @@ $root.hallgw = (function() {
         return GameType;
     })();
 
+    hallgw.GameLabel = (function() {
+
+        /**
+         * Properties of a GameLabel.
+         * @memberof hallgw
+         * @interface IGameLabel
+         * @property {number|null} [Id] GameLabel Id
+         * @property {string|null} [Name] GameLabel Name
+         */
+
+        /**
+         * Constructs a new GameLabel.
+         * @memberof hallgw
+         * @classdesc Represents a GameLabel.
+         * @implements IGameLabel
+         * @constructor
+         * @param {hallgw.IGameLabel=} [properties] Properties to set
+         */
+        function GameLabel(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameLabel Id.
+         * @member {number} Id
+         * @memberof hallgw.GameLabel
+         * @instance
+         */
+        GameLabel.prototype.Id = 0;
+
+        /**
+         * GameLabel Name.
+         * @member {string} Name
+         * @memberof hallgw.GameLabel
+         * @instance
+         */
+        GameLabel.prototype.Name = "";
+
+        /**
+         * Creates a new GameLabel instance using the specified properties.
+         * @function create
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {hallgw.IGameLabel=} [properties] Properties to set
+         * @returns {hallgw.GameLabel} GameLabel instance
+         */
+        GameLabel.create = function create(properties) {
+            return new GameLabel(properties);
+        };
+
+        /**
+         * Encodes the specified GameLabel message. Does not implicitly {@link hallgw.GameLabel.verify|verify} messages.
+         * @function encode
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {hallgw.IGameLabel} message GameLabel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameLabel.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.Id);
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.Name);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GameLabel message, length delimited. Does not implicitly {@link hallgw.GameLabel.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {hallgw.IGameLabel} message GameLabel message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameLabel.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GameLabel message from the specified reader or buffer.
+         * @function decode
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {hallgw.GameLabel} GameLabel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameLabel.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.hallgw.GameLabel();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Id = reader.int32();
+                    break;
+                case 2:
+                    message.Name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GameLabel message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {hallgw.GameLabel} GameLabel
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameLabel.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GameLabel message.
+         * @function verify
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GameLabel.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                if (!$util.isInteger(message.Id))
+                    return "Id: integer expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GameLabel message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {hallgw.GameLabel} GameLabel
+         */
+        GameLabel.fromObject = function fromObject(object) {
+            if (object instanceof $root.hallgw.GameLabel)
+                return object;
+            var message = new $root.hallgw.GameLabel();
+            if (object.Id != null)
+                message.Id = object.Id | 0;
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GameLabel message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof hallgw.GameLabel
+         * @static
+         * @param {hallgw.GameLabel} message GameLabel
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GameLabel.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Id = 0;
+                object.Name = "";
+            }
+            if (message.Id != null && message.hasOwnProperty("Id"))
+                object.Id = message.Id;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            return object;
+        };
+
+        /**
+         * Converts this GameLabel to JSON.
+         * @function toJSON
+         * @memberof hallgw.GameLabel
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GameLabel.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLabel;
+    })();
+
     hallgw.GameRelation = (function() {
 
         /**
          * Properties of a GameRelation.
          * @memberof hallgw
          * @interface IGameRelation
-         * @property {number|null} [GameId] GameRelation GameId
-         * @property {string|null} [GameName] GameRelation GameName
+         * @property {number|Long|null} [GameId] GameRelation GameId
          * @property {number|null} [GameTypeId] GameRelation GameTypeId
          * @property {number|null} [GameLabelId] GameRelation GameLabelId
-         * @property {string|null} [GameLabelName] GameRelation GameLabelName
          * @property {number|null} [GameOrder] GameRelation GameOrder
-         * @property {Array.<hallgw.IRoomInfo>|null} [RoomList] GameRelation RoomList
+         * @property {string|null} [Rooms] GameRelation Rooms
          */
 
         /**
@@ -2367,7 +2553,6 @@ $root.hallgw = (function() {
          * @param {hallgw.IGameRelation=} [properties] Properties to set
          */
         function GameRelation(properties) {
-            this.RoomList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -2376,19 +2561,11 @@ $root.hallgw = (function() {
 
         /**
          * GameRelation GameId.
-         * @member {number} GameId
+         * @member {number|Long} GameId
          * @memberof hallgw.GameRelation
          * @instance
          */
-        GameRelation.prototype.GameId = 0;
-
-        /**
-         * GameRelation GameName.
-         * @member {string} GameName
-         * @memberof hallgw.GameRelation
-         * @instance
-         */
-        GameRelation.prototype.GameName = "";
+        GameRelation.prototype.GameId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * GameRelation GameTypeId.
@@ -2407,14 +2584,6 @@ $root.hallgw = (function() {
         GameRelation.prototype.GameLabelId = 0;
 
         /**
-         * GameRelation GameLabelName.
-         * @member {string} GameLabelName
-         * @memberof hallgw.GameRelation
-         * @instance
-         */
-        GameRelation.prototype.GameLabelName = "";
-
-        /**
          * GameRelation GameOrder.
          * @member {number} GameOrder
          * @memberof hallgw.GameRelation
@@ -2423,12 +2592,12 @@ $root.hallgw = (function() {
         GameRelation.prototype.GameOrder = 0;
 
         /**
-         * GameRelation RoomList.
-         * @member {Array.<hallgw.IRoomInfo>} RoomList
+         * GameRelation Rooms.
+         * @member {string} Rooms
          * @memberof hallgw.GameRelation
          * @instance
          */
-        GameRelation.prototype.RoomList = $util.emptyArray;
+        GameRelation.prototype.Rooms = "";
 
         /**
          * Creates a new GameRelation instance using the specified properties.
@@ -2455,20 +2624,15 @@ $root.hallgw = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.GameId != null && message.hasOwnProperty("GameId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.GameId);
-            if (message.GameName != null && message.hasOwnProperty("GameName"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.GameName);
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.GameId);
             if (message.GameTypeId != null && message.hasOwnProperty("GameTypeId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.GameTypeId);
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.GameTypeId);
             if (message.GameLabelId != null && message.hasOwnProperty("GameLabelId"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.GameLabelId);
-            if (message.GameLabelName != null && message.hasOwnProperty("GameLabelName"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.GameLabelName);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.GameLabelId);
             if (message.GameOrder != null && message.hasOwnProperty("GameOrder"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.GameOrder);
-            if (message.RoomList != null && message.RoomList.length)
-                for (var i = 0; i < message.RoomList.length; ++i)
-                    $root.hallgw.RoomInfo.encode(message.RoomList[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.GameOrder);
+            if (message.Rooms != null && message.hasOwnProperty("Rooms"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.Rooms);
             return writer;
         };
 
@@ -2504,27 +2668,19 @@ $root.hallgw = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameId = reader.int32();
+                    message.GameId = reader.int64();
                     break;
                 case 2:
-                    message.GameName = reader.string();
-                    break;
-                case 3:
                     message.GameTypeId = reader.int32();
                     break;
-                case 4:
+                case 3:
                     message.GameLabelId = reader.int32();
                     break;
-                case 5:
-                    message.GameLabelName = reader.string();
-                    break;
-                case 6:
+                case 4:
                     message.GameOrder = reader.int32();
                     break;
-                case 7:
-                    if (!(message.RoomList && message.RoomList.length))
-                        message.RoomList = [];
-                    message.RoomList.push($root.hallgw.RoomInfo.decode(reader, reader.uint32()));
+                case 5:
+                    message.Rooms = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2562,32 +2718,20 @@ $root.hallgw = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.GameId != null && message.hasOwnProperty("GameId"))
-                if (!$util.isInteger(message.GameId))
-                    return "GameId: integer expected";
-            if (message.GameName != null && message.hasOwnProperty("GameName"))
-                if (!$util.isString(message.GameName))
-                    return "GameName: string expected";
+                if (!$util.isInteger(message.GameId) && !(message.GameId && $util.isInteger(message.GameId.low) && $util.isInteger(message.GameId.high)))
+                    return "GameId: integer|Long expected";
             if (message.GameTypeId != null && message.hasOwnProperty("GameTypeId"))
                 if (!$util.isInteger(message.GameTypeId))
                     return "GameTypeId: integer expected";
             if (message.GameLabelId != null && message.hasOwnProperty("GameLabelId"))
                 if (!$util.isInteger(message.GameLabelId))
                     return "GameLabelId: integer expected";
-            if (message.GameLabelName != null && message.hasOwnProperty("GameLabelName"))
-                if (!$util.isString(message.GameLabelName))
-                    return "GameLabelName: string expected";
             if (message.GameOrder != null && message.hasOwnProperty("GameOrder"))
                 if (!$util.isInteger(message.GameOrder))
                     return "GameOrder: integer expected";
-            if (message.RoomList != null && message.hasOwnProperty("RoomList")) {
-                if (!Array.isArray(message.RoomList))
-                    return "RoomList: array expected";
-                for (var i = 0; i < message.RoomList.length; ++i) {
-                    var error = $root.hallgw.RoomInfo.verify(message.RoomList[i]);
-                    if (error)
-                        return "RoomList." + error;
-                }
-            }
+            if (message.Rooms != null && message.hasOwnProperty("Rooms"))
+                if (!$util.isString(message.Rooms))
+                    return "Rooms: string expected";
             return null;
         };
 
@@ -2604,27 +2748,22 @@ $root.hallgw = (function() {
                 return object;
             var message = new $root.hallgw.GameRelation();
             if (object.GameId != null)
-                message.GameId = object.GameId | 0;
-            if (object.GameName != null)
-                message.GameName = String(object.GameName);
+                if ($util.Long)
+                    (message.GameId = $util.Long.fromValue(object.GameId)).unsigned = false;
+                else if (typeof object.GameId === "string")
+                    message.GameId = parseInt(object.GameId, 10);
+                else if (typeof object.GameId === "number")
+                    message.GameId = object.GameId;
+                else if (typeof object.GameId === "object")
+                    message.GameId = new $util.LongBits(object.GameId.low >>> 0, object.GameId.high >>> 0).toNumber();
             if (object.GameTypeId != null)
                 message.GameTypeId = object.GameTypeId | 0;
             if (object.GameLabelId != null)
                 message.GameLabelId = object.GameLabelId | 0;
-            if (object.GameLabelName != null)
-                message.GameLabelName = String(object.GameLabelName);
             if (object.GameOrder != null)
                 message.GameOrder = object.GameOrder | 0;
-            if (object.RoomList) {
-                if (!Array.isArray(object.RoomList))
-                    throw TypeError(".hallgw.GameRelation.RoomList: array expected");
-                message.RoomList = [];
-                for (var i = 0; i < object.RoomList.length; ++i) {
-                    if (typeof object.RoomList[i] !== "object")
-                        throw TypeError(".hallgw.GameRelation.RoomList: object expected");
-                    message.RoomList[i] = $root.hallgw.RoomInfo.fromObject(object.RoomList[i]);
-                }
-            }
+            if (object.Rooms != null)
+                message.Rooms = String(object.Rooms);
             return message;
         };
 
@@ -2641,33 +2780,30 @@ $root.hallgw = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.RoomList = [];
             if (options.defaults) {
-                object.GameId = 0;
-                object.GameName = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.GameId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameId = options.longs === String ? "0" : 0;
                 object.GameTypeId = 0;
                 object.GameLabelId = 0;
-                object.GameLabelName = "";
                 object.GameOrder = 0;
+                object.Rooms = "";
             }
             if (message.GameId != null && message.hasOwnProperty("GameId"))
-                object.GameId = message.GameId;
-            if (message.GameName != null && message.hasOwnProperty("GameName"))
-                object.GameName = message.GameName;
+                if (typeof message.GameId === "number")
+                    object.GameId = options.longs === String ? String(message.GameId) : message.GameId;
+                else
+                    object.GameId = options.longs === String ? $util.Long.prototype.toString.call(message.GameId) : options.longs === Number ? new $util.LongBits(message.GameId.low >>> 0, message.GameId.high >>> 0).toNumber() : message.GameId;
             if (message.GameTypeId != null && message.hasOwnProperty("GameTypeId"))
                 object.GameTypeId = message.GameTypeId;
             if (message.GameLabelId != null && message.hasOwnProperty("GameLabelId"))
                 object.GameLabelId = message.GameLabelId;
-            if (message.GameLabelName != null && message.hasOwnProperty("GameLabelName"))
-                object.GameLabelName = message.GameLabelName;
             if (message.GameOrder != null && message.hasOwnProperty("GameOrder"))
                 object.GameOrder = message.GameOrder;
-            if (message.RoomList && message.RoomList.length) {
-                object.RoomList = [];
-                for (var j = 0; j < message.RoomList.length; ++j)
-                    object.RoomList[j] = $root.hallgw.RoomInfo.toObject(message.RoomList[j], options);
-            }
+            if (message.Rooms != null && message.hasOwnProperty("Rooms"))
+                object.Rooms = message.Rooms;
             return object;
         };
 
@@ -2691,8 +2827,10 @@ $root.hallgw = (function() {
          * Properties of a GameConfig.
          * @memberof hallgw
          * @interface IGameConfig
-         * @property {number|null} [PlatformId] GameConfig PlatformId
+         * @property {number|Long|null} [PlatformId] GameConfig PlatformId
+         * @property {Array.<hallgw.IGame>|null} [Game] GameConfig Game
          * @property {Array.<hallgw.IGameType>|null} [Type] GameConfig Type
+         * @property {Array.<hallgw.IGameLabel>|null} [Label] GameConfig Label
          * @property {Array.<hallgw.IGameRelation>|null} [Relation] GameConfig Relation
          */
 
@@ -2705,7 +2843,9 @@ $root.hallgw = (function() {
          * @param {hallgw.IGameConfig=} [properties] Properties to set
          */
         function GameConfig(properties) {
+            this.Game = [];
             this.Type = [];
+            this.Label = [];
             this.Relation = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2715,11 +2855,19 @@ $root.hallgw = (function() {
 
         /**
          * GameConfig PlatformId.
-         * @member {number} PlatformId
+         * @member {number|Long} PlatformId
          * @memberof hallgw.GameConfig
          * @instance
          */
-        GameConfig.prototype.PlatformId = 0;
+        GameConfig.prototype.PlatformId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * GameConfig Game.
+         * @member {Array.<hallgw.IGame>} Game
+         * @memberof hallgw.GameConfig
+         * @instance
+         */
+        GameConfig.prototype.Game = $util.emptyArray;
 
         /**
          * GameConfig Type.
@@ -2728,6 +2876,14 @@ $root.hallgw = (function() {
          * @instance
          */
         GameConfig.prototype.Type = $util.emptyArray;
+
+        /**
+         * GameConfig Label.
+         * @member {Array.<hallgw.IGameLabel>} Label
+         * @memberof hallgw.GameConfig
+         * @instance
+         */
+        GameConfig.prototype.Label = $util.emptyArray;
 
         /**
          * GameConfig Relation.
@@ -2762,13 +2918,19 @@ $root.hallgw = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.PlatformId);
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.PlatformId);
+            if (message.Game != null && message.Game.length)
+                for (var i = 0; i < message.Game.length; ++i)
+                    $root.hallgw.Game.encode(message.Game[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.Type != null && message.Type.length)
                 for (var i = 0; i < message.Type.length; ++i)
-                    $root.hallgw.GameType.encode(message.Type[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    $root.hallgw.GameType.encode(message.Type[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.Label != null && message.Label.length)
+                for (var i = 0; i < message.Label.length; ++i)
+                    $root.hallgw.GameLabel.encode(message.Label[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.Relation != null && message.Relation.length)
                 for (var i = 0; i < message.Relation.length; ++i)
-                    $root.hallgw.GameRelation.encode(message.Relation[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    $root.hallgw.GameRelation.encode(message.Relation[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
 
@@ -2804,14 +2966,24 @@ $root.hallgw = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.PlatformId = reader.int32();
+                    message.PlatformId = reader.int64();
                     break;
                 case 2:
+                    if (!(message.Game && message.Game.length))
+                        message.Game = [];
+                    message.Game.push($root.hallgw.Game.decode(reader, reader.uint32()));
+                    break;
+                case 3:
                     if (!(message.Type && message.Type.length))
                         message.Type = [];
                     message.Type.push($root.hallgw.GameType.decode(reader, reader.uint32()));
                     break;
-                case 3:
+                case 4:
+                    if (!(message.Label && message.Label.length))
+                        message.Label = [];
+                    message.Label.push($root.hallgw.GameLabel.decode(reader, reader.uint32()));
+                    break;
+                case 5:
                     if (!(message.Relation && message.Relation.length))
                         message.Relation = [];
                     message.Relation.push($root.hallgw.GameRelation.decode(reader, reader.uint32()));
@@ -2852,8 +3024,17 @@ $root.hallgw = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
-                if (!$util.isInteger(message.PlatformId))
-                    return "PlatformId: integer expected";
+                if (!$util.isInteger(message.PlatformId) && !(message.PlatformId && $util.isInteger(message.PlatformId.low) && $util.isInteger(message.PlatformId.high)))
+                    return "PlatformId: integer|Long expected";
+            if (message.Game != null && message.hasOwnProperty("Game")) {
+                if (!Array.isArray(message.Game))
+                    return "Game: array expected";
+                for (var i = 0; i < message.Game.length; ++i) {
+                    var error = $root.hallgw.Game.verify(message.Game[i]);
+                    if (error)
+                        return "Game." + error;
+                }
+            }
             if (message.Type != null && message.hasOwnProperty("Type")) {
                 if (!Array.isArray(message.Type))
                     return "Type: array expected";
@@ -2861,6 +3042,15 @@ $root.hallgw = (function() {
                     var error = $root.hallgw.GameType.verify(message.Type[i]);
                     if (error)
                         return "Type." + error;
+                }
+            }
+            if (message.Label != null && message.hasOwnProperty("Label")) {
+                if (!Array.isArray(message.Label))
+                    return "Label: array expected";
+                for (var i = 0; i < message.Label.length; ++i) {
+                    var error = $root.hallgw.GameLabel.verify(message.Label[i]);
+                    if (error)
+                        return "Label." + error;
                 }
             }
             if (message.Relation != null && message.hasOwnProperty("Relation")) {
@@ -2888,7 +3078,24 @@ $root.hallgw = (function() {
                 return object;
             var message = new $root.hallgw.GameConfig();
             if (object.PlatformId != null)
-                message.PlatformId = object.PlatformId | 0;
+                if ($util.Long)
+                    (message.PlatformId = $util.Long.fromValue(object.PlatformId)).unsigned = false;
+                else if (typeof object.PlatformId === "string")
+                    message.PlatformId = parseInt(object.PlatformId, 10);
+                else if (typeof object.PlatformId === "number")
+                    message.PlatformId = object.PlatformId;
+                else if (typeof object.PlatformId === "object")
+                    message.PlatformId = new $util.LongBits(object.PlatformId.low >>> 0, object.PlatformId.high >>> 0).toNumber();
+            if (object.Game) {
+                if (!Array.isArray(object.Game))
+                    throw TypeError(".hallgw.GameConfig.Game: array expected");
+                message.Game = [];
+                for (var i = 0; i < object.Game.length; ++i) {
+                    if (typeof object.Game[i] !== "object")
+                        throw TypeError(".hallgw.GameConfig.Game: object expected");
+                    message.Game[i] = $root.hallgw.Game.fromObject(object.Game[i]);
+                }
+            }
             if (object.Type) {
                 if (!Array.isArray(object.Type))
                     throw TypeError(".hallgw.GameConfig.Type: array expected");
@@ -2897,6 +3104,16 @@ $root.hallgw = (function() {
                     if (typeof object.Type[i] !== "object")
                         throw TypeError(".hallgw.GameConfig.Type: object expected");
                     message.Type[i] = $root.hallgw.GameType.fromObject(object.Type[i]);
+                }
+            }
+            if (object.Label) {
+                if (!Array.isArray(object.Label))
+                    throw TypeError(".hallgw.GameConfig.Label: array expected");
+                message.Label = [];
+                for (var i = 0; i < object.Label.length; ++i) {
+                    if (typeof object.Label[i] !== "object")
+                        throw TypeError(".hallgw.GameConfig.Label: object expected");
+                    message.Label[i] = $root.hallgw.GameLabel.fromObject(object.Label[i]);
                 }
             }
             if (object.Relation) {
@@ -2926,17 +3143,36 @@ $root.hallgw = (function() {
                 options = {};
             var object = {};
             if (options.arrays || options.defaults) {
+                object.Game = [];
                 object.Type = [];
+                object.Label = [];
                 object.Relation = [];
             }
             if (options.defaults)
-                object.PlatformId = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.PlatformId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformId = options.longs === String ? "0" : 0;
             if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
-                object.PlatformId = message.PlatformId;
+                if (typeof message.PlatformId === "number")
+                    object.PlatformId = options.longs === String ? String(message.PlatformId) : message.PlatformId;
+                else
+                    object.PlatformId = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformId) : options.longs === Number ? new $util.LongBits(message.PlatformId.low >>> 0, message.PlatformId.high >>> 0).toNumber() : message.PlatformId;
+            if (message.Game && message.Game.length) {
+                object.Game = [];
+                for (var j = 0; j < message.Game.length; ++j)
+                    object.Game[j] = $root.hallgw.Game.toObject(message.Game[j], options);
+            }
             if (message.Type && message.Type.length) {
                 object.Type = [];
                 for (var j = 0; j < message.Type.length; ++j)
                     object.Type[j] = $root.hallgw.GameType.toObject(message.Type[j], options);
+            }
+            if (message.Label && message.Label.length) {
+                object.Label = [];
+                for (var j = 0; j < message.Label.length; ++j)
+                    object.Label[j] = $root.hallgw.GameLabel.toObject(message.Label[j], options);
             }
             if (message.Relation && message.Relation.length) {
                 object.Relation = [];
@@ -2966,6 +3202,7 @@ $root.hallgw = (function() {
          * Properties of a MsgGetGameConfigReq.
          * @memberof hallgw
          * @interface IMsgGetGameConfigReq
+         * @property {number|Long|null} [PlatformId] MsgGetGameConfigReq PlatformId
          */
 
         /**
@@ -2982,6 +3219,14 @@ $root.hallgw = (function() {
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
+
+        /**
+         * MsgGetGameConfigReq PlatformId.
+         * @member {number|Long} PlatformId
+         * @memberof hallgw.MsgGetGameConfigReq
+         * @instance
+         */
+        MsgGetGameConfigReq.prototype.PlatformId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new MsgGetGameConfigReq instance using the specified properties.
@@ -3007,6 +3252,8 @@ $root.hallgw = (function() {
         MsgGetGameConfigReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.PlatformId);
             return writer;
         };
 
@@ -3041,6 +3288,9 @@ $root.hallgw = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.PlatformId = reader.int64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -3076,6 +3326,9 @@ $root.hallgw = (function() {
         MsgGetGameConfigReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
+                if (!$util.isInteger(message.PlatformId) && !(message.PlatformId && $util.isInteger(message.PlatformId.low) && $util.isInteger(message.PlatformId.high)))
+                    return "PlatformId: integer|Long expected";
             return null;
         };
 
@@ -3090,7 +3343,17 @@ $root.hallgw = (function() {
         MsgGetGameConfigReq.fromObject = function fromObject(object) {
             if (object instanceof $root.hallgw.MsgGetGameConfigReq)
                 return object;
-            return new $root.hallgw.MsgGetGameConfigReq();
+            var message = new $root.hallgw.MsgGetGameConfigReq();
+            if (object.PlatformId != null)
+                if ($util.Long)
+                    (message.PlatformId = $util.Long.fromValue(object.PlatformId)).unsigned = false;
+                else if (typeof object.PlatformId === "string")
+                    message.PlatformId = parseInt(object.PlatformId, 10);
+                else if (typeof object.PlatformId === "number")
+                    message.PlatformId = object.PlatformId;
+                else if (typeof object.PlatformId === "object")
+                    message.PlatformId = new $util.LongBits(object.PlatformId.low >>> 0, object.PlatformId.high >>> 0).toNumber();
+            return message;
         };
 
         /**
@@ -3102,8 +3365,22 @@ $root.hallgw = (function() {
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        MsgGetGameConfigReq.toObject = function toObject() {
-            return {};
+        MsgGetGameConfigReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.PlatformId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformId = options.longs === String ? "0" : 0;
+            if (message.PlatformId != null && message.hasOwnProperty("PlatformId"))
+                if (typeof message.PlatformId === "number")
+                    object.PlatformId = options.longs === String ? String(message.PlatformId) : message.PlatformId;
+                else
+                    object.PlatformId = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformId) : options.longs === Number ? new $util.LongBits(message.PlatformId.low >>> 0, message.PlatformId.high >>> 0).toNumber() : message.PlatformId;
+            return object;
         };
 
         /**
@@ -3126,7 +3403,7 @@ $root.hallgw = (function() {
          * Properties of a MsgGetGameConfigResp.
          * @memberof hallgw
          * @interface IMsgGetGameConfigResp
-         * @property {Array.<hallgw.IGameConfig>|null} [GameConfig] MsgGetGameConfigResp GameConfig
+         * @property {hallgw.IGameConfig|null} [GameConfig] MsgGetGameConfigResp GameConfig
          */
 
         /**
@@ -3138,7 +3415,6 @@ $root.hallgw = (function() {
          * @param {hallgw.IMsgGetGameConfigResp=} [properties] Properties to set
          */
         function MsgGetGameConfigResp(properties) {
-            this.GameConfig = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3147,11 +3423,11 @@ $root.hallgw = (function() {
 
         /**
          * MsgGetGameConfigResp GameConfig.
-         * @member {Array.<hallgw.IGameConfig>} GameConfig
+         * @member {hallgw.IGameConfig|null|undefined} GameConfig
          * @memberof hallgw.MsgGetGameConfigResp
          * @instance
          */
-        MsgGetGameConfigResp.prototype.GameConfig = $util.emptyArray;
+        MsgGetGameConfigResp.prototype.GameConfig = null;
 
         /**
          * Creates a new MsgGetGameConfigResp instance using the specified properties.
@@ -3177,9 +3453,8 @@ $root.hallgw = (function() {
         MsgGetGameConfigResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameConfig != null && message.GameConfig.length)
-                for (var i = 0; i < message.GameConfig.length; ++i)
-                    $root.hallgw.GameConfig.encode(message.GameConfig[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.GameConfig != null && message.hasOwnProperty("GameConfig"))
+                $root.hallgw.GameConfig.encode(message.GameConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -3215,9 +3490,7 @@ $root.hallgw = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    if (!(message.GameConfig && message.GameConfig.length))
-                        message.GameConfig = [];
-                    message.GameConfig.push($root.hallgw.GameConfig.decode(reader, reader.uint32()));
+                    message.GameConfig = $root.hallgw.GameConfig.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3255,13 +3528,9 @@ $root.hallgw = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.GameConfig != null && message.hasOwnProperty("GameConfig")) {
-                if (!Array.isArray(message.GameConfig))
-                    return "GameConfig: array expected";
-                for (var i = 0; i < message.GameConfig.length; ++i) {
-                    var error = $root.hallgw.GameConfig.verify(message.GameConfig[i]);
-                    if (error)
-                        return "GameConfig." + error;
-                }
+                var error = $root.hallgw.GameConfig.verify(message.GameConfig);
+                if (error)
+                    return "GameConfig." + error;
             }
             return null;
         };
@@ -3278,15 +3547,10 @@ $root.hallgw = (function() {
             if (object instanceof $root.hallgw.MsgGetGameConfigResp)
                 return object;
             var message = new $root.hallgw.MsgGetGameConfigResp();
-            if (object.GameConfig) {
-                if (!Array.isArray(object.GameConfig))
-                    throw TypeError(".hallgw.MsgGetGameConfigResp.GameConfig: array expected");
-                message.GameConfig = [];
-                for (var i = 0; i < object.GameConfig.length; ++i) {
-                    if (typeof object.GameConfig[i] !== "object")
-                        throw TypeError(".hallgw.MsgGetGameConfigResp.GameConfig: object expected");
-                    message.GameConfig[i] = $root.hallgw.GameConfig.fromObject(object.GameConfig[i]);
-                }
+            if (object.GameConfig != null) {
+                if (typeof object.GameConfig !== "object")
+                    throw TypeError(".hallgw.MsgGetGameConfigResp.GameConfig: object expected");
+                message.GameConfig = $root.hallgw.GameConfig.fromObject(object.GameConfig);
             }
             return message;
         };
@@ -3304,13 +3568,10 @@ $root.hallgw = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.GameConfig = [];
-            if (message.GameConfig && message.GameConfig.length) {
-                object.GameConfig = [];
-                for (var j = 0; j < message.GameConfig.length; ++j)
-                    object.GameConfig[j] = $root.hallgw.GameConfig.toObject(message.GameConfig[j], options);
-            }
+            if (options.defaults)
+                object.GameConfig = null;
+            if (message.GameConfig != null && message.hasOwnProperty("GameConfig"))
+                object.GameConfig = $root.hallgw.GameConfig.toObject(message.GameConfig, options);
             return object;
         };
 
@@ -3518,6 +3779,597 @@ $root.hallgw = (function() {
         };
 
         return MsgModifyGameConfigNotify;
+    })();
+
+    hallgw.MsgMarqueeNotice = (function() {
+
+        /**
+         * Properties of a MsgMarqueeNotice.
+         * @memberof hallgw
+         * @interface IMsgMarqueeNotice
+         * @property {Array.<number|Long>|null} [PlatformIDs] MsgMarqueeNotice PlatformIDs
+         * @property {Array.<number|Long>|null} [GameIDs] MsgMarqueeNotice GameIDs
+         * @property {boolean|null} [IsToHall] MsgMarqueeNotice IsToHall
+         * @property {string|null} [Content] MsgMarqueeNotice Content
+         */
+
+        /**
+         * Constructs a new MsgMarqueeNotice.
+         * @memberof hallgw
+         * @classdesc Represents a MsgMarqueeNotice.
+         * @implements IMsgMarqueeNotice
+         * @constructor
+         * @param {hallgw.IMsgMarqueeNotice=} [properties] Properties to set
+         */
+        function MsgMarqueeNotice(properties) {
+            this.PlatformIDs = [];
+            this.GameIDs = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MsgMarqueeNotice PlatformIDs.
+         * @member {Array.<number|Long>} PlatformIDs
+         * @memberof hallgw.MsgMarqueeNotice
+         * @instance
+         */
+        MsgMarqueeNotice.prototype.PlatformIDs = $util.emptyArray;
+
+        /**
+         * MsgMarqueeNotice GameIDs.
+         * @member {Array.<number|Long>} GameIDs
+         * @memberof hallgw.MsgMarqueeNotice
+         * @instance
+         */
+        MsgMarqueeNotice.prototype.GameIDs = $util.emptyArray;
+
+        /**
+         * MsgMarqueeNotice IsToHall.
+         * @member {boolean} IsToHall
+         * @memberof hallgw.MsgMarqueeNotice
+         * @instance
+         */
+        MsgMarqueeNotice.prototype.IsToHall = false;
+
+        /**
+         * MsgMarqueeNotice Content.
+         * @member {string} Content
+         * @memberof hallgw.MsgMarqueeNotice
+         * @instance
+         */
+        MsgMarqueeNotice.prototype.Content = "";
+
+        /**
+         * Creates a new MsgMarqueeNotice instance using the specified properties.
+         * @function create
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {hallgw.IMsgMarqueeNotice=} [properties] Properties to set
+         * @returns {hallgw.MsgMarqueeNotice} MsgMarqueeNotice instance
+         */
+        MsgMarqueeNotice.create = function create(properties) {
+            return new MsgMarqueeNotice(properties);
+        };
+
+        /**
+         * Encodes the specified MsgMarqueeNotice message. Does not implicitly {@link hallgw.MsgMarqueeNotice.verify|verify} messages.
+         * @function encode
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {hallgw.IMsgMarqueeNotice} message MsgMarqueeNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgMarqueeNotice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.PlatformIDs != null && message.PlatformIDs.length) {
+                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                for (var i = 0; i < message.PlatformIDs.length; ++i)
+                    writer.int64(message.PlatformIDs[i]);
+                writer.ldelim();
+            }
+            if (message.GameIDs != null && message.GameIDs.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.GameIDs.length; ++i)
+                    writer.int64(message.GameIDs[i]);
+                writer.ldelim();
+            }
+            if (message.IsToHall != null && message.hasOwnProperty("IsToHall"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.IsToHall);
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.Content);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MsgMarqueeNotice message, length delimited. Does not implicitly {@link hallgw.MsgMarqueeNotice.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {hallgw.IMsgMarqueeNotice} message MsgMarqueeNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgMarqueeNotice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MsgMarqueeNotice message from the specified reader or buffer.
+         * @function decode
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {hallgw.MsgMarqueeNotice} MsgMarqueeNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgMarqueeNotice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.hallgw.MsgMarqueeNotice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.PlatformIDs && message.PlatformIDs.length))
+                        message.PlatformIDs = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.PlatformIDs.push(reader.int64());
+                    } else
+                        message.PlatformIDs.push(reader.int64());
+                    break;
+                case 2:
+                    if (!(message.GameIDs && message.GameIDs.length))
+                        message.GameIDs = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.GameIDs.push(reader.int64());
+                    } else
+                        message.GameIDs.push(reader.int64());
+                    break;
+                case 3:
+                    message.IsToHall = reader.bool();
+                    break;
+                case 4:
+                    message.Content = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MsgMarqueeNotice message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {hallgw.MsgMarqueeNotice} MsgMarqueeNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgMarqueeNotice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MsgMarqueeNotice message.
+         * @function verify
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MsgMarqueeNotice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.PlatformIDs != null && message.hasOwnProperty("PlatformIDs")) {
+                if (!Array.isArray(message.PlatformIDs))
+                    return "PlatformIDs: array expected";
+                for (var i = 0; i < message.PlatformIDs.length; ++i)
+                    if (!$util.isInteger(message.PlatformIDs[i]) && !(message.PlatformIDs[i] && $util.isInteger(message.PlatformIDs[i].low) && $util.isInteger(message.PlatformIDs[i].high)))
+                        return "PlatformIDs: integer|Long[] expected";
+            }
+            if (message.GameIDs != null && message.hasOwnProperty("GameIDs")) {
+                if (!Array.isArray(message.GameIDs))
+                    return "GameIDs: array expected";
+                for (var i = 0; i < message.GameIDs.length; ++i)
+                    if (!$util.isInteger(message.GameIDs[i]) && !(message.GameIDs[i] && $util.isInteger(message.GameIDs[i].low) && $util.isInteger(message.GameIDs[i].high)))
+                        return "GameIDs: integer|Long[] expected";
+            }
+            if (message.IsToHall != null && message.hasOwnProperty("IsToHall"))
+                if (typeof message.IsToHall !== "boolean")
+                    return "IsToHall: boolean expected";
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                if (!$util.isString(message.Content))
+                    return "Content: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MsgMarqueeNotice message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {hallgw.MsgMarqueeNotice} MsgMarqueeNotice
+         */
+        MsgMarqueeNotice.fromObject = function fromObject(object) {
+            if (object instanceof $root.hallgw.MsgMarqueeNotice)
+                return object;
+            var message = new $root.hallgw.MsgMarqueeNotice();
+            if (object.PlatformIDs) {
+                if (!Array.isArray(object.PlatformIDs))
+                    throw TypeError(".hallgw.MsgMarqueeNotice.PlatformIDs: array expected");
+                message.PlatformIDs = [];
+                for (var i = 0; i < object.PlatformIDs.length; ++i)
+                    if ($util.Long)
+                        (message.PlatformIDs[i] = $util.Long.fromValue(object.PlatformIDs[i])).unsigned = false;
+                    else if (typeof object.PlatformIDs[i] === "string")
+                        message.PlatformIDs[i] = parseInt(object.PlatformIDs[i], 10);
+                    else if (typeof object.PlatformIDs[i] === "number")
+                        message.PlatformIDs[i] = object.PlatformIDs[i];
+                    else if (typeof object.PlatformIDs[i] === "object")
+                        message.PlatformIDs[i] = new $util.LongBits(object.PlatformIDs[i].low >>> 0, object.PlatformIDs[i].high >>> 0).toNumber();
+            }
+            if (object.GameIDs) {
+                if (!Array.isArray(object.GameIDs))
+                    throw TypeError(".hallgw.MsgMarqueeNotice.GameIDs: array expected");
+                message.GameIDs = [];
+                for (var i = 0; i < object.GameIDs.length; ++i)
+                    if ($util.Long)
+                        (message.GameIDs[i] = $util.Long.fromValue(object.GameIDs[i])).unsigned = false;
+                    else if (typeof object.GameIDs[i] === "string")
+                        message.GameIDs[i] = parseInt(object.GameIDs[i], 10);
+                    else if (typeof object.GameIDs[i] === "number")
+                        message.GameIDs[i] = object.GameIDs[i];
+                    else if (typeof object.GameIDs[i] === "object")
+                        message.GameIDs[i] = new $util.LongBits(object.GameIDs[i].low >>> 0, object.GameIDs[i].high >>> 0).toNumber();
+            }
+            if (object.IsToHall != null)
+                message.IsToHall = Boolean(object.IsToHall);
+            if (object.Content != null)
+                message.Content = String(object.Content);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MsgMarqueeNotice message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof hallgw.MsgMarqueeNotice
+         * @static
+         * @param {hallgw.MsgMarqueeNotice} message MsgMarqueeNotice
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MsgMarqueeNotice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults) {
+                object.PlatformIDs = [];
+                object.GameIDs = [];
+            }
+            if (options.defaults) {
+                object.IsToHall = false;
+                object.Content = "";
+            }
+            if (message.PlatformIDs && message.PlatformIDs.length) {
+                object.PlatformIDs = [];
+                for (var j = 0; j < message.PlatformIDs.length; ++j)
+                    if (typeof message.PlatformIDs[j] === "number")
+                        object.PlatformIDs[j] = options.longs === String ? String(message.PlatformIDs[j]) : message.PlatformIDs[j];
+                    else
+                        object.PlatformIDs[j] = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformIDs[j]) : options.longs === Number ? new $util.LongBits(message.PlatformIDs[j].low >>> 0, message.PlatformIDs[j].high >>> 0).toNumber() : message.PlatformIDs[j];
+            }
+            if (message.GameIDs && message.GameIDs.length) {
+                object.GameIDs = [];
+                for (var j = 0; j < message.GameIDs.length; ++j)
+                    if (typeof message.GameIDs[j] === "number")
+                        object.GameIDs[j] = options.longs === String ? String(message.GameIDs[j]) : message.GameIDs[j];
+                    else
+                        object.GameIDs[j] = options.longs === String ? $util.Long.prototype.toString.call(message.GameIDs[j]) : options.longs === Number ? new $util.LongBits(message.GameIDs[j].low >>> 0, message.GameIDs[j].high >>> 0).toNumber() : message.GameIDs[j];
+            }
+            if (message.IsToHall != null && message.hasOwnProperty("IsToHall"))
+                object.IsToHall = message.IsToHall;
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                object.Content = message.Content;
+            return object;
+        };
+
+        /**
+         * Converts this MsgMarqueeNotice to JSON.
+         * @function toJSON
+         * @memberof hallgw.MsgMarqueeNotice
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MsgMarqueeNotice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MsgMarqueeNotice;
+    })();
+
+    hallgw.MsgPopupNotice = (function() {
+
+        /**
+         * Properties of a MsgPopupNotice.
+         * @memberof hallgw
+         * @interface IMsgPopupNotice
+         * @property {number|null} [KindID] MsgPopupNotice KindID
+         * @property {Array.<number|Long>|null} [GameIDs] MsgPopupNotice GameIDs
+         * @property {string|null} [Content] MsgPopupNotice Content
+         */
+
+        /**
+         * Constructs a new MsgPopupNotice.
+         * @memberof hallgw
+         * @classdesc Represents a MsgPopupNotice.
+         * @implements IMsgPopupNotice
+         * @constructor
+         * @param {hallgw.IMsgPopupNotice=} [properties] Properties to set
+         */
+        function MsgPopupNotice(properties) {
+            this.GameIDs = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MsgPopupNotice KindID.
+         * @member {number} KindID
+         * @memberof hallgw.MsgPopupNotice
+         * @instance
+         */
+        MsgPopupNotice.prototype.KindID = 0;
+
+        /**
+         * MsgPopupNotice GameIDs.
+         * @member {Array.<number|Long>} GameIDs
+         * @memberof hallgw.MsgPopupNotice
+         * @instance
+         */
+        MsgPopupNotice.prototype.GameIDs = $util.emptyArray;
+
+        /**
+         * MsgPopupNotice Content.
+         * @member {string} Content
+         * @memberof hallgw.MsgPopupNotice
+         * @instance
+         */
+        MsgPopupNotice.prototype.Content = "";
+
+        /**
+         * Creates a new MsgPopupNotice instance using the specified properties.
+         * @function create
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {hallgw.IMsgPopupNotice=} [properties] Properties to set
+         * @returns {hallgw.MsgPopupNotice} MsgPopupNotice instance
+         */
+        MsgPopupNotice.create = function create(properties) {
+            return new MsgPopupNotice(properties);
+        };
+
+        /**
+         * Encodes the specified MsgPopupNotice message. Does not implicitly {@link hallgw.MsgPopupNotice.verify|verify} messages.
+         * @function encode
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {hallgw.IMsgPopupNotice} message MsgPopupNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgPopupNotice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.KindID != null && message.hasOwnProperty("KindID"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.KindID);
+            if (message.GameIDs != null && message.GameIDs.length) {
+                writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                for (var i = 0; i < message.GameIDs.length; ++i)
+                    writer.int64(message.GameIDs[i]);
+                writer.ldelim();
+            }
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.Content);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MsgPopupNotice message, length delimited. Does not implicitly {@link hallgw.MsgPopupNotice.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {hallgw.IMsgPopupNotice} message MsgPopupNotice message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MsgPopupNotice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MsgPopupNotice message from the specified reader or buffer.
+         * @function decode
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {hallgw.MsgPopupNotice} MsgPopupNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgPopupNotice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.hallgw.MsgPopupNotice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.KindID = reader.int32();
+                    break;
+                case 2:
+                    if (!(message.GameIDs && message.GameIDs.length))
+                        message.GameIDs = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.GameIDs.push(reader.int64());
+                    } else
+                        message.GameIDs.push(reader.int64());
+                    break;
+                case 3:
+                    message.Content = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MsgPopupNotice message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {hallgw.MsgPopupNotice} MsgPopupNotice
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MsgPopupNotice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MsgPopupNotice message.
+         * @function verify
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MsgPopupNotice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.KindID != null && message.hasOwnProperty("KindID"))
+                if (!$util.isInteger(message.KindID))
+                    return "KindID: integer expected";
+            if (message.GameIDs != null && message.hasOwnProperty("GameIDs")) {
+                if (!Array.isArray(message.GameIDs))
+                    return "GameIDs: array expected";
+                for (var i = 0; i < message.GameIDs.length; ++i)
+                    if (!$util.isInteger(message.GameIDs[i]) && !(message.GameIDs[i] && $util.isInteger(message.GameIDs[i].low) && $util.isInteger(message.GameIDs[i].high)))
+                        return "GameIDs: integer|Long[] expected";
+            }
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                if (!$util.isString(message.Content))
+                    return "Content: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MsgPopupNotice message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {hallgw.MsgPopupNotice} MsgPopupNotice
+         */
+        MsgPopupNotice.fromObject = function fromObject(object) {
+            if (object instanceof $root.hallgw.MsgPopupNotice)
+                return object;
+            var message = new $root.hallgw.MsgPopupNotice();
+            if (object.KindID != null)
+                message.KindID = object.KindID | 0;
+            if (object.GameIDs) {
+                if (!Array.isArray(object.GameIDs))
+                    throw TypeError(".hallgw.MsgPopupNotice.GameIDs: array expected");
+                message.GameIDs = [];
+                for (var i = 0; i < object.GameIDs.length; ++i)
+                    if ($util.Long)
+                        (message.GameIDs[i] = $util.Long.fromValue(object.GameIDs[i])).unsigned = false;
+                    else if (typeof object.GameIDs[i] === "string")
+                        message.GameIDs[i] = parseInt(object.GameIDs[i], 10);
+                    else if (typeof object.GameIDs[i] === "number")
+                        message.GameIDs[i] = object.GameIDs[i];
+                    else if (typeof object.GameIDs[i] === "object")
+                        message.GameIDs[i] = new $util.LongBits(object.GameIDs[i].low >>> 0, object.GameIDs[i].high >>> 0).toNumber();
+            }
+            if (object.Content != null)
+                message.Content = String(object.Content);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MsgPopupNotice message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof hallgw.MsgPopupNotice
+         * @static
+         * @param {hallgw.MsgPopupNotice} message MsgPopupNotice
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MsgPopupNotice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.GameIDs = [];
+            if (options.defaults) {
+                object.KindID = 0;
+                object.Content = "";
+            }
+            if (message.KindID != null && message.hasOwnProperty("KindID"))
+                object.KindID = message.KindID;
+            if (message.GameIDs && message.GameIDs.length) {
+                object.GameIDs = [];
+                for (var j = 0; j < message.GameIDs.length; ++j)
+                    if (typeof message.GameIDs[j] === "number")
+                        object.GameIDs[j] = options.longs === String ? String(message.GameIDs[j]) : message.GameIDs[j];
+                    else
+                        object.GameIDs[j] = options.longs === String ? $util.Long.prototype.toString.call(message.GameIDs[j]) : options.longs === Number ? new $util.LongBits(message.GameIDs[j].low >>> 0, message.GameIDs[j].high >>> 0).toNumber() : message.GameIDs[j];
+            }
+            if (message.Content != null && message.hasOwnProperty("Content"))
+                object.Content = message.Content;
+            return object;
+        };
+
+        /**
+         * Converts this MsgPopupNotice to JSON.
+         * @function toJSON
+         * @memberof hallgw.MsgPopupNotice
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MsgPopupNotice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MsgPopupNotice;
     })();
 
     return hallgw;

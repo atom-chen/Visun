@@ -3,9 +3,10 @@
 const fs = require("fs");
 
 var arguments = process.argv.splice(2);
-var mudname = arguments[0];
+var pbfilename = arguments[0];
 var channelName = arguments[1] || "game";
-console.log('所传递的参数是：', mudname, channelName);
+var headFlag = arguments[2] || "false";
+console.log('所传递的参数是：', pbfilename, channelName, headFlag);
 
 //检查import关系
 function getImportMud(data) {
@@ -22,16 +23,38 @@ function getImportMud(data) {
 	return tmp;
 }
 
+function getPackageName(data) {
+	for(var i=0, len=data.length; i<len; i++) {
+		var str = data[i];
+		str = str.replace(';', ' ');  //去分号
+		var arr = str.split(/\s+/); 	//去空白字符
+		if(arr[0].match("//") || (arr[0]=="" && arr[1] && arr[1].match("//"))){
+			//是一个注释
+		}
+		else {
+			//解析 "message Request"
+			if( arr[0]=="package" && arr[1].indexOf("\.")<0 ) {
+				return arr[1];
+			}
+			else if( arr[0]=="" && arr[1]=="package" && arr[2].indexOf("\.")<0 ){
+				return arr[2];
+			}
+		}
+	}
+	return null;
+}
 
 //-----------------------------------------------------------------
 // 第一步： 解析 消息cmd 和 结构体 以及 在protobuf网络包中的字段名
 //-----------------------------------------------------------------
 
-var filepath = "in/" + mudname + ".proto";
+var filepath = "in/" + pbfilename + ".proto";
 const line_list = fs.readFileSync(filepath, 'utf8').split('\n');
 
 var depMud = getImportMud(line_list);
 console.log("import ",  depMud);
+var mudname = getPackageName(line_list);
+if(!mudname) { mudname = pbfilename; }
 
 //一、将 "message Request" 和 "message Response" 解析出来
 function parseRequestAndResponse(data) {
@@ -231,13 +254,15 @@ function parseMessages(msgArray, reqInfo, respInfo) {
 							}
 						}
 
-						if(reqInfo.cmdInfo[enumKey] && reqInfo.cmdInfo[enumKey].enumValue==enumValue)
+						//if(reqInfo.cmdInfo[enumKey] && reqInfo.cmdInfo[enumKey].enumValue==enumValue)
+						if(reqInfo.cmdInfo[enumKey])
 						{
 							reqInfo.cmdInfo[enumKey].structName = structName;
 							reqInfo.cmdInfo[enumKey].fieldName = getFieldName(reqInfo, structName);
 							console.log("+++++", enumKey, enumValue, structName, reqInfo.cmdInfo[enumKey].fieldName);
 						}
-						else if(respInfo.cmdInfo[enumKey] && respInfo.cmdInfo[enumKey].enumValue==enumValue)
+						//else if(respInfo.cmdInfo[enumKey] && respInfo.cmdInfo[enumKey].enumValue==enumValue)
+						else if(respInfo.cmdInfo[enumKey])
 						{
 							respInfo.cmdInfo[enumKey].structName = structName;
 							respInfo.cmdInfo[enumKey].fieldName = getFieldName(respInfo, structName);
@@ -260,13 +285,21 @@ console.log("================================")
 //-----------------------------------------------------------------
 // 第二步： 生成代码
 //-----------------------------------------------------------------
-var outpath = "../../assets/common/script/proxy/net_" + mudname + ".ts";
+var outpath = "../../assets/common/script/proxy/net_" + pbfilename + ".ts";
 var outstr = "//---------------------------------\n";
 outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
-outstr += "import { " + mudname + " } from \"../proto/" + mudname + "\";\n";
-outstr += "import { ChannelDefine } from \"../definer/GlobalDefine\";\n";
-outstr += "import PacketDefine from \"../../../framework/net/PacketDefine\";\n\n\n";
+outstr += "import { " + mudname + " } from \"../proto/" + pbfilename + "\";\n";
+outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
+outstr += "import PacketDefine from \"../../../kernel/net/PacketDefine\";\n\n\n";
+
+// Enum
+outstr += "export enum " + mudname + "_msgs {\n";
+var infos = reqInfo.cmdInfo;
+for(var enumKey in infos) {
+	outstr += "    " + enumKey + " = " + infos[enumKey].enumValue + ",\n";
+}
+outstr += "}\n\n";
 
 // PackageDefine
 outstr += "export class " + mudname + "_packet_define {\n";
@@ -274,17 +307,12 @@ var infos = reqInfo.cmdInfo;
 for(var enumKey in infos) {
 	var curDef = infos[enumKey];
 	if(curDef.fieldName != undefined){
-		outstr += "    public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\");\n";
+		outstr += "    public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\", "+headFlag+");\n";
 	}
 	else{
-		outstr += "    // public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\");\n";
+		outstr += "    // public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\", "+headFlag+");\n";
 	}
 }
-// infos = respInfo.cmdInfo;
-// for(var enumKey in infos) {
-// 	var curDef = infos[enumKey];
-// 	outstr += "    public static " + enumKey + " = new PacketDefine(" + mudname + ", " + mudname+".Request.CMD."+curDef.enumKey+", "+mudname+"."+curDef.structName+", \""+curDef.fieldName+"\", \""+curDef.structName+"\");\n";
-// }
 outstr += "}\n\n";
 
 // Request Functions

@@ -1,1 +1,1 @@
-python gen_proto.py drbjl game
+python gen_request.py drbjl game

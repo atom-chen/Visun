@@ -7,7 +7,6 @@ import NetPacket from "../../../kernel/net/NetPacket";
 
 
 export enum room_msgs {
-    UNKNOWN = 0,
     JOIN_ROOM_REQ = 30000,
     JOIN_ROOM_RES = 30001,
     GET_FROM_GATE = 30002,
@@ -22,20 +21,5 @@ export var room_packet_define = {
 }
 
 export class room_request {
-    public static JOIN_ROOM_REQ( data:{ user:any } ) : void 
-    {
-        room_packet_define[30000].sendToChannel(ChannelDefine.hall, data, false);
-    }
-    public static JOIN_ROOM_RES( data:{ user:any, assignMode:any } ) : void 
-    {
-        room_packet_define[30001].sendToChannel(ChannelDefine.hall, data, false);
-    }
-    public static GET_FROM_GATE( data:any ) : void 
-    {
-        room_packet_define[30002].sendToChannel(ChannelDefine.hall, data, false);
-    }
-    public static SEND_TO_GATE( data:any ) : void 
-    {
-        room_packet_define[30003].sendToChannel(ChannelDefine.hall, data, false);
-    }
+    public static JOIN_ROOM_REQ( data:{ user:any } ) { room_packet_define[30000].sendToChannel(ChannelDefine.hall, data, false); }
 }

@@ -13,7 +13,11 @@
             "Msg_GetGameConfigResp": 20005,
             "Msg_ChangeHeadReq": 20006,
             "Msg_ChangeHeadResp": 20007,
-            "Msg_BroadcastNotice": 80000
+            "Msg_DisableGame": 20008,
+            "Msg_BroadcastNotice": 80000,
+            "Msg_BroadcastMarquee": 80001,
+            "Msg_BroadcastPopup": 80002,
+            "Msg_BroadcastGameConfigModify": 80003
           }
         },
         "RespErr": {
@@ -22,8 +26,8 @@
             "ReqFormatErr": 1,
             "MsgGetUserInfoRespRedisOperErr": 2,
             "MsgGetGameListRespDBOperErr": 3,
-            "MsgGetGameConfigRespRpcBackErr": 4,
-            "MsgGetGameConfigRespFormatErr": 5
+            "MsgGetGameConfigRespRedisOperErr": 4,
+            "MsgChangeHeadRespCallMemberServiceErr": 5
           }
         },
         "MsgGetUserInfoReq": {
@@ -40,28 +44,24 @@
               "type": "int32",
               "id": 1
             },
-            "Account": {
+            "Name": {
               "type": "string",
               "id": 2
             },
-            "Name": {
-              "type": "string",
-              "id": 3
-            },
             "Coin": {
-              "type": "int64",
-              "id": 4
+              "type": "double",
+              "id": 3
             },
             "Head": {
               "type": "string",
-              "id": 5
+              "id": 4
             }
           }
         },
         "GameInfo": {
           "fields": {
             "Id": {
-              "type": "int32",
+              "type": "int64",
               "id": 1
             },
             "Name": {
@@ -107,7 +107,16 @@
           }
         },
         "MsgChangeHeadResp": {
-          "fields": {}
+          "fields": {
+            "Code": {
+              "type": "int32",
+              "id": 1
+            },
+            "Msg": {
+              "type": "string",
+              "id": 2
+            }
+          }
         },
         "MsgNoticeNotify": {
           "fields": {
@@ -129,23 +138,15 @@
             }
           }
         },
-        "RoomInfo": {
+        "Game": {
           "fields": {
-            "RoomId": {
-              "type": "int32",
+            "Id": {
+              "type": "int64",
               "id": 1
             },
-            "RoomName": {
+            "Name": {
               "type": "string",
               "id": 2
-            },
-            "MinCost": {
-              "type": "int64",
-              "id": 3
-            },
-            "MaxCost": {
-              "type": "int64",
-              "id": 4
             }
           }
         },
@@ -165,64 +166,81 @@
             }
           }
         },
-        "GameRelation": {
+        "GameLabel": {
           "fields": {
-            "GameId": {
+            "Id": {
               "type": "int32",
               "id": 1
             },
-            "GameName": {
+            "Name": {
               "type": "string",
               "id": 2
+            }
+          }
+        },
+        "GameRelation": {
+          "fields": {
+            "GameId": {
+              "type": "int64",
+              "id": 1
             },
             "GameTypeId": {
               "type": "int32",
-              "id": 3
+              "id": 2
             },
             "GameLabelId": {
               "type": "int32",
-              "id": 4
-            },
-            "GameLabelName": {
-              "type": "string",
-              "id": 5
+              "id": 3
             },
             "GameOrder": {
               "type": "int32",
-              "id": 6
+              "id": 4
             },
-            "RoomList": {
-              "rule": "repeated",
-              "type": "RoomInfo",
-              "id": 7
+            "Rooms": {
+              "type": "string",
+              "id": 5
             }
           }
         },
         "GameConfig": {
           "fields": {
             "PlatformId": {
-              "type": "int32",
+              "type": "int64",
               "id": 1
+            },
+            "Game": {
+              "rule": "repeated",
+              "type": "Game",
+              "id": 2
             },
             "Type": {
               "rule": "repeated",
               "type": "GameType",
-              "id": 2
+              "id": 3
+            },
+            "Label": {
+              "rule": "repeated",
+              "type": "GameLabel",
+              "id": 4
             },
             "Relation": {
               "rule": "repeated",
               "type": "GameRelation",
-              "id": 3
+              "id": 5
             }
           }
         },
         "MsgGetGameConfigReq": {
-          "fields": {}
+          "fields": {
+            "PlatformId": {
+              "type": "int64",
+              "id": 1
+            }
+          }
         },
         "MsgGetGameConfigResp": {
           "fields": {
             "GameConfig": {
-              "rule": "repeated",
               "type": "GameConfig",
               "id": 1
             }
@@ -233,6 +251,45 @@
             "GameConfig": {
               "type": "GameConfig",
               "id": 1
+            }
+          }
+        },
+        "MsgMarqueeNotice": {
+          "fields": {
+            "PlatformIDs": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 1
+            },
+            "GameIDs": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 2
+            },
+            "IsToHall": {
+              "type": "bool",
+              "id": 3
+            },
+            "Content": {
+              "type": "string",
+              "id": 4
+            }
+          }
+        },
+        "MsgPopupNotice": {
+          "fields": {
+            "KindID": {
+              "type": "int32",
+              "id": 1
+            },
+            "GameIDs": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 2
+            },
+            "Content": {
+              "type": "string",
+              "id": 3
             }
           }
         }

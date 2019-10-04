@@ -1,1 +1,1 @@
-python gen_proto.py bjl game
+python gen_request.py bjl game

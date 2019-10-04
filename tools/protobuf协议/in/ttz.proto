@@ -22,7 +22,7 @@ message User{
     int32 position              = 8;
     int32 agree                 = 9;
     int32 onLine                = 10;
-    int64 coin                  = 11;
+    double coin                 = 11;
     bool tongsha                = 12;
     bool tongpei                = 13;
     bool noCoin                 = 14;

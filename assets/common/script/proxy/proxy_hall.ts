@@ -16,15 +16,15 @@ var proxy_hall = {
 		CommonUtil.simpleCopy(LoginUser.getInstance(), param.data);
 	},
 
-	[hallgw_msgs.Msg_BroadcastNotice] : function(param:any) {
+	[hallgw_msgs.MsgNoticeNotify] : function(param:any) {
 		UIManager.announce(param && param.content);
 	},
 
-	[hallgw_msgs.Msg_GetUserInfoResp] : function(param:any) {
+	[hallgw_msgs.MsgGetUserInfoResp] : function(param:any) {
 		cc.log(param);
 	},
 
-	[hallgw_msgs.Msg_GetGameConfigResp] : function(param:any) {
+	[hallgw_msgs.MsgGetGameConfigResp] : function(param:any) {
 		cc.log(param);
 	},
 

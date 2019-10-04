@@ -2,18 +2,6 @@
   "nested": {
     "login": {
       "nested": {
-        "CMD": {
-          "values": {
-            "Msg_HeartReq": 5000,
-            "Msg_HeartResp": 5001,
-            "Msg_SysError": 5002,
-            "CheckTokenReq": 5003,
-            "MovedGateNot": 5004,
-            "CheckTokenRes": 5005,
-            "Msg_UserLogInReq": 10000,
-            "Msg_UserLogInResp": 10001
-          }
-        },
         "HeartReq": {
           "fields": {}
         },
@@ -63,7 +51,7 @@
               "id": 3
             },
             "coin": {
-              "type": "int64",
+              "type": "float",
               "id": 4
             },
             "sign": {
@@ -77,6 +65,14 @@
             "token": {
               "type": "string",
               "id": 1
+            },
+            "device": {
+              "type": "string",
+              "id": 2
+            },
+            "memberId": {
+              "type": "int64",
+              "id": 3
             }
           }
         },

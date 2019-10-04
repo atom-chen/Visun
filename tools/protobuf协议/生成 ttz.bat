@@ -1,1 +1,1 @@
-python gen_proto.py ttz game
+python gen_request.py ttz game

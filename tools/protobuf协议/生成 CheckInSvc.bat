@@ -1,1 +1,1 @@
-python gen_proto.py CheckInSvc hall
+python gen_request.py CheckInSvc hall

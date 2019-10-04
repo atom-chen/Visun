@@ -4,18 +4,6 @@ syntax = "proto3";
 
 package login;
 
-
-enum CMD {
-    Msg_HeartReq        = 5000;
-    Msg_HeartResp       = 5001;
-    Msg_SysError        = 5002;
-    CheckTokenReq       = 5003;
-    MovedGateNot        = 5004;
-    CheckTokenRes       = 5005;
-    Msg_UserLogInReq    = 10000;
-    Msg_UserLogInResp   = 10001;
-}
-
 //心跳
 message HeartReq{
 }
@@ -43,12 +31,14 @@ message UserInfo {
     int64 userid = 1;
     string name = 2;
     string headicon = 3; //会员头像
-    int64 coin = 4; //金额
+    float coin = 4; //金额
     string sign = 5; //签名
 }
 
 message UserLogInReq {
     string token = 1; //token
+    string device = 2; //登录设备
+    int64 memberId = 3; //token
 }
 
 message UserLogInResp {

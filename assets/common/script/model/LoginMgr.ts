@@ -186,11 +186,11 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	private sendLoginRequest() {
-		//发送登录请求
-		var info = {
+		login_request.Msg_UserLogInReq({
+			memberId : 10000,
+			device : "0",
 			token : "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHZW50Lk5pIiwic3ViIjoicGlwcGEiLCJpYXQiOjE1NjkwNjQ1OTgsImV4cCI6MTU2OTA2ODE5OH0.wdtu0aT6hzv2tR_Jeu-xMiAXiNJYk1r77XkZmXU7oMXf04IZo_Mk0J69VV-RhFMFNm2WesUwOBou5VMBzL9mQA"
-		};
-		login_request.Msg_UserLogInReq(info);
+		});
 	}
 
 	//游客登录

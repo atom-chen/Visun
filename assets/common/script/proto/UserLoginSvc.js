@@ -18,32 +18,6 @@ $root.login = (function() {
      */
     var login = {};
 
-    /**
-     * CMD enum.
-     * @name login.CMD
-     * @enum {string}
-     * @property {number} Msg_HeartReq=5000 Msg_HeartReq value
-     * @property {number} Msg_HeartResp=5001 Msg_HeartResp value
-     * @property {number} Msg_SysError=5002 Msg_SysError value
-     * @property {number} CheckTokenReq=5003 CheckTokenReq value
-     * @property {number} MovedGateNot=5004 MovedGateNot value
-     * @property {number} CheckTokenRes=5005 CheckTokenRes value
-     * @property {number} Msg_UserLogInReq=10000 Msg_UserLogInReq value
-     * @property {number} Msg_UserLogInResp=10001 Msg_UserLogInResp value
-     */
-    login.CMD = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[5000] = "Msg_HeartReq"] = 5000;
-        values[valuesById[5001] = "Msg_HeartResp"] = 5001;
-        values[valuesById[5002] = "Msg_SysError"] = 5002;
-        values[valuesById[5003] = "CheckTokenReq"] = 5003;
-        values[valuesById[5004] = "MovedGateNot"] = 5004;
-        values[valuesById[5005] = "CheckTokenRes"] = 5005;
-        values[valuesById[10000] = "Msg_UserLogInReq"] = 10000;
-        values[valuesById[10001] = "Msg_UserLogInResp"] = 10001;
-        return values;
-    })();
-
     login.HeartReq = (function() {
 
         /**
@@ -985,7 +959,7 @@ $root.login = (function() {
          * @property {number|Long|null} [userid] UserInfo userid
          * @property {string|null} [name] UserInfo name
          * @property {string|null} [headicon] UserInfo headicon
-         * @property {number|Long|null} [coin] UserInfo coin
+         * @property {number|null} [coin] UserInfo coin
          * @property {string|null} [sign] UserInfo sign
          */
 
@@ -1030,11 +1004,11 @@ $root.login = (function() {
 
         /**
          * UserInfo coin.
-         * @member {number|Long} coin
+         * @member {number} coin
          * @memberof login.UserInfo
          * @instance
          */
-        UserInfo.prototype.coin = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        UserInfo.prototype.coin = 0;
 
         /**
          * UserInfo sign.
@@ -1075,7 +1049,7 @@ $root.login = (function() {
             if (message.headicon != null && message.hasOwnProperty("headicon"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.headicon);
             if (message.coin != null && message.hasOwnProperty("coin"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.coin);
+                writer.uint32(/* id 4, wireType 5 =*/37).float(message.coin);
             if (message.sign != null && message.hasOwnProperty("sign"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.sign);
             return writer;
@@ -1122,7 +1096,7 @@ $root.login = (function() {
                     message.headicon = reader.string();
                     break;
                 case 4:
-                    message.coin = reader.int64();
+                    message.coin = reader.float();
                     break;
                 case 5:
                     message.sign = reader.string();
@@ -1172,8 +1146,8 @@ $root.login = (function() {
                 if (!$util.isString(message.headicon))
                     return "headicon: string expected";
             if (message.coin != null && message.hasOwnProperty("coin"))
-                if (!$util.isInteger(message.coin) && !(message.coin && $util.isInteger(message.coin.low) && $util.isInteger(message.coin.high)))
-                    return "coin: integer|Long expected";
+                if (typeof message.coin !== "number")
+                    return "coin: number expected";
             if (message.sign != null && message.hasOwnProperty("sign"))
                 if (!$util.isString(message.sign))
                     return "sign: string expected";
@@ -1206,14 +1180,7 @@ $root.login = (function() {
             if (object.headicon != null)
                 message.headicon = String(object.headicon);
             if (object.coin != null)
-                if ($util.Long)
-                    (message.coin = $util.Long.fromValue(object.coin)).unsigned = false;
-                else if (typeof object.coin === "string")
-                    message.coin = parseInt(object.coin, 10);
-                else if (typeof object.coin === "number")
-                    message.coin = object.coin;
-                else if (typeof object.coin === "object")
-                    message.coin = new $util.LongBits(object.coin.low >>> 0, object.coin.high >>> 0).toNumber();
+                message.coin = Number(object.coin);
             if (object.sign != null)
                 message.sign = String(object.sign);
             return message;
@@ -1240,11 +1207,7 @@ $root.login = (function() {
                     object.userid = options.longs === String ? "0" : 0;
                 object.name = "";
                 object.headicon = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.coin = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.coin = options.longs === String ? "0" : 0;
+                object.coin = 0;
                 object.sign = "";
             }
             if (message.userid != null && message.hasOwnProperty("userid"))
@@ -1257,10 +1220,7 @@ $root.login = (function() {
             if (message.headicon != null && message.hasOwnProperty("headicon"))
                 object.headicon = message.headicon;
             if (message.coin != null && message.hasOwnProperty("coin"))
-                if (typeof message.coin === "number")
-                    object.coin = options.longs === String ? String(message.coin) : message.coin;
-                else
-                    object.coin = options.longs === String ? $util.Long.prototype.toString.call(message.coin) : options.longs === Number ? new $util.LongBits(message.coin.low >>> 0, message.coin.high >>> 0).toNumber() : message.coin;
+                object.coin = options.json && !isFinite(message.coin) ? String(message.coin) : message.coin;
             if (message.sign != null && message.hasOwnProperty("sign"))
                 object.sign = message.sign;
             return object;
@@ -1287,6 +1247,8 @@ $root.login = (function() {
          * @memberof login
          * @interface IUserLogInReq
          * @property {string|null} [token] UserLogInReq token
+         * @property {string|null} [device] UserLogInReq device
+         * @property {number|Long|null} [memberId] UserLogInReq memberId
          */
 
         /**
@@ -1311,6 +1273,22 @@ $root.login = (function() {
          * @instance
          */
         UserLogInReq.prototype.token = "";
+
+        /**
+         * UserLogInReq device.
+         * @member {string} device
+         * @memberof login.UserLogInReq
+         * @instance
+         */
+        UserLogInReq.prototype.device = "";
+
+        /**
+         * UserLogInReq memberId.
+         * @member {number|Long} memberId
+         * @memberof login.UserLogInReq
+         * @instance
+         */
+        UserLogInReq.prototype.memberId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new UserLogInReq instance using the specified properties.
@@ -1338,6 +1316,10 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.token != null && message.hasOwnProperty("token"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.token);
+            if (message.device != null && message.hasOwnProperty("device"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.device);
+            if (message.memberId != null && message.hasOwnProperty("memberId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.memberId);
             return writer;
         };
 
@@ -1374,6 +1356,12 @@ $root.login = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.token = reader.string();
+                    break;
+                case 2:
+                    message.device = reader.string();
+                    break;
+                case 3:
+                    message.memberId = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1413,6 +1401,12 @@ $root.login = (function() {
             if (message.token != null && message.hasOwnProperty("token"))
                 if (!$util.isString(message.token))
                     return "token: string expected";
+            if (message.device != null && message.hasOwnProperty("device"))
+                if (!$util.isString(message.device))
+                    return "device: string expected";
+            if (message.memberId != null && message.hasOwnProperty("memberId"))
+                if (!$util.isInteger(message.memberId) && !(message.memberId && $util.isInteger(message.memberId.low) && $util.isInteger(message.memberId.high)))
+                    return "memberId: integer|Long expected";
             return null;
         };
 
@@ -1430,6 +1424,17 @@ $root.login = (function() {
             var message = new $root.login.UserLogInReq();
             if (object.token != null)
                 message.token = String(object.token);
+            if (object.device != null)
+                message.device = String(object.device);
+            if (object.memberId != null)
+                if ($util.Long)
+                    (message.memberId = $util.Long.fromValue(object.memberId)).unsigned = false;
+                else if (typeof object.memberId === "string")
+                    message.memberId = parseInt(object.memberId, 10);
+                else if (typeof object.memberId === "number")
+                    message.memberId = object.memberId;
+                else if (typeof object.memberId === "object")
+                    message.memberId = new $util.LongBits(object.memberId.low >>> 0, object.memberId.high >>> 0).toNumber();
             return message;
         };
 
@@ -1446,10 +1451,24 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.token = "";
+                object.device = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.memberId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.memberId = options.longs === String ? "0" : 0;
+            }
             if (message.token != null && message.hasOwnProperty("token"))
                 object.token = message.token;
+            if (message.device != null && message.hasOwnProperty("device"))
+                object.device = message.device;
+            if (message.memberId != null && message.hasOwnProperty("memberId"))
+                if (typeof message.memberId === "number")
+                    object.memberId = options.longs === String ? String(message.memberId) : message.memberId;
+                else
+                    object.memberId = options.longs === String ? $util.Long.prototype.toString.call(message.memberId) : options.longs === Number ? new $util.LongBits(message.memberId.low >>> 0, message.memberId.high >>> 0).toNumber() : message.memberId;
             return object;
         };
 
