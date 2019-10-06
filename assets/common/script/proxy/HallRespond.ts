@@ -28,7 +28,6 @@ HallRespond.req_userinfo = function(info:any) {
 
 HallRespond.req_game_list = function(info:any) {
 	if(!info) return;
-	GameManager.getInstance().setServerGames(info.data);
 }
 
 export default HallRespond;

@@ -9,12 +9,8 @@ import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
 
 export default class GameManager extends ModelBase {
 	private static _instance:GameManager;
-	private _gamelist:any[];
-	
-	
 	private constructor() {
 		super();
-		this._gamelist = [];
 	}
 	public static getInstance() : GameManager {
 		if(!GameManager._instance){ GameManager._instance = new GameManager; }
@@ -26,15 +22,11 @@ export default class GameManager extends ModelBase {
 			GameManager._instance = null;
 		}
 	}
-
 	public on_clear() {
-		this._gamelist.length = 0;
+		
 	}
 
-	public setServerGames(gameList:any[]) {
-		this._gamelist = gameList;
-		cc.log(gameList);
-	} 
+
 
 	public isGameExist(gameId:string) : boolean {
 		if(!GameConfig[gameId]) {
@@ -50,6 +42,8 @@ export default class GameManager extends ModelBase {
 		return HotUpdator.create(gameId, "", (bSucc:boolean)=>{}, null);
 	}
 
+
+	
 	//进入游戏的唯一入口
 	public enterGame(gameId:string) {
 		var cfg = GameConfig[gameId];

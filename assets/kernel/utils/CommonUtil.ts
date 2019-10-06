@@ -84,10 +84,10 @@ export default class CommonUtil {
 		return dstObj.convertToNodeSpace(pt);
 	}
 
-	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
+	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec3
 	{
 		var pt = srcObj.convertToWorldSpaceAR(cc.v2(x,y));
-		return dstObj.convertToNodeSpace(pt);
+		return dstObj.convertToNodeSpaceAR(pt);
 	}
 
 	public static getFrameName(name:string) : string 

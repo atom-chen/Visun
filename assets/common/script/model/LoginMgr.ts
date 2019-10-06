@@ -20,10 +20,10 @@ export class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
 	userid:number = 0;			//会员id
-	headicon:string;      		//商户名称
-	name:string;        		//会员名称
-	sign:string;            	//token
-	coin:string;            	//以上分金额
+	headicon:string = "";      		//商户名称
+	name:string = "";        		//会员名称
+	sign:string = "";            	//token
+	coin:string = "";            	//以上分金额
 
 	private constructor() {
 		super();

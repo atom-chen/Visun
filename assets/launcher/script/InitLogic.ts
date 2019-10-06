@@ -2,6 +2,11 @@ import EventCenter from "../../kernel/event/EventCenter";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import TimerManager from "../../kernel/timer/TimerManager";
 import KernelEvent from "../../kernel/looker/KernelEvent";
+import HttpCore from "../../kernel/net/HttpCore";
+import ServerConfig from "../../common/script/definer/ServerConfig";
+import http_rules from "../../common/script/proto/http_rules";
+import HallRequest from "../../common/script/proxy/HallRequest";
+import HallRespond from "../../common/script/proxy/HallRespond";
 
 export default class InitLogic {
 	private static _inited: boolean = false;
@@ -29,6 +34,9 @@ export default class InitLogic {
         })
 
         TimerManager.start(node);
+
+        HttpCore.setMainUrl(ServerConfig.mainUrl);
+		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 	}
 
 	private static onKeyDown (event:any) {
