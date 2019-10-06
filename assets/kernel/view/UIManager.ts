@@ -182,7 +182,7 @@ export default class UIManager {
 			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
 			
-			obj.getComponent(KernelUIDefine.dialog.comp).reflesh(callback, content, title, okTxt, cancelTxt); 
+			obj.getComponent(KernelUIDefine.dialog.logicComp).reflesh(callback, content, title, okTxt, cancelTxt); 
 		});
 	}
 
@@ -190,7 +190,7 @@ export default class UIManager {
 	
 	public static toast(content:string) {
 		if(content===undefined||content===null) { return; }
-		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.comp).label_cont.string === content){
+		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.logicComp).label_cont.string === content){
 			return;
 		}
 		
@@ -212,7 +212,7 @@ export default class UIManager {
 			UIManager._toastList.push(obj);
 			obj.y = 0;
 			//刷新数据并定时销毁
-			var scriptCpn = obj.getComponent(KernelUIDefine.toast.comp);
+			var scriptCpn = obj.getComponent(KernelUIDefine.toast.logicComp);
 			scriptCpn.setContent(content);
 			scriptCpn.scheduleOnce(function() {
 				for(var i=0; i<UIManager._toastList.length; i++) {
