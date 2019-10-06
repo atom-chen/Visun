@@ -87,7 +87,7 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private initNet() {
-		HttpCore.setMainUrl(ServerConfig.loginServer);
+		HttpCore.setMainUrl(ServerConfig.mainUrl);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 		HttpCore.setCacheAble("req_youke_login", false);
 
