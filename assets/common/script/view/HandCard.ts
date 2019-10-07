@@ -4,8 +4,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class HandCard extends BaseComponent {
-	private _touchBegan:cc.Vec2;
-    private _touchMoved:cc.Vec2;
+	private _touchBegan:cc.Vec3;
+    private _touchMoved:cc.Vec3;
     private _nowState:number = 0;
 
 	onLoad() {
@@ -15,11 +15,11 @@ export default class HandCard extends BaseComponent {
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.touchMoved, this);
 	}
 
-	private _findTouchedCards (touch:cc.Vec2) : void {
+	private _findTouchedCards (touch:cc.Vec3) : void {
 		var cardArr = this.node.children;
         for (var k=0; k<cardArr.length; k++) {
             var box:cc.Rect = cardArr[k].getBoundingBox();
-            if (box.contains(touch)) {
+            if (box.contains(cc.v2(touch.x, touch.y))) {
                 if(k<cardArr.length-1){
                     if(cardArr[k+1].getBoundingBox().xMin > touch.x){
                         cardArr[k].getComponent("PokerCard").state = this._nowState;
