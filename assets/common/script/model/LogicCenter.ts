@@ -1,6 +1,6 @@
-import LoginMgr, { LoginUser } from "./LoginMgr";
-import UserMgr from "./UserMgr";
+import LoginMgr from "./LoginMgr";
 import GameManager from "./GameManager";
+import LoginUser from "./LoginUser";
 
 
 export default class LogicCenter {
@@ -24,7 +24,6 @@ export default class LogicCenter {
     public init() {
         this.clear();
         this.registModel(LoginMgr);
-        this.registModel(UserMgr);
         this.registModel(LoginUser);
         this.registModel(GameManager);
     }

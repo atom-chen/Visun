@@ -1,7 +1,6 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
-import User from "../model/User";
-import { LoginUser } from "../model/LoginMgr";
+import LoginUser from "../model/LoginUser";
 
 
 const {ccclass, property} = cc._decorator;

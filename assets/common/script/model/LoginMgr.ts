@@ -1,4 +1,3 @@
-import UserMgr from "./UserMgr";
 import ModelBase from "../../../kernel/model/ModelBase";
 import UIManager from "../../../kernel/view/UIManager";
 import HttpCore from "../../../kernel/net/HttpCore";
@@ -14,39 +13,7 @@ import CHandler from "../../../kernel/basic/CHandler";
 import { hallgw_packet_define } from "../proxy/net_hall";
 import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
 import { room_packet_define } from "../proxy/net_RoomProto";
-
-
-export class LoginUser extends ModelBase {
-	private static _instance:LoginUser = null;
-
-	userid:number = 0;			//会员id
-	headicon:string = "";      		//商户名称
-	name:string = "";        		//会员名称
-	sign:string = "";            	//token
-	coin:string = "";            	//以上分金额
-
-	private constructor() {
-		super();
-	}
-
-	public on_clear(): void {
-		
-	}
-
-	public static getInstance() : LoginUser {
-		if(!LoginUser._instance) { LoginUser._instance = new LoginUser; }
-		return LoginUser._instance;
-	}
-
-	public static delInstance() {
-		if (LoginUser._instance) {
-			LoginUser._instance.clear();
-			LoginUser._instance = null;
-		}
-	}
-	
-}
-
+import LoginUser from "./LoginUser";
 
 
 export default class LoginMgr extends ModelBase {
@@ -71,7 +38,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	public isLoginSucc() : boolean { 
-		return UserMgr.getInstance().getHeroId() !== null;
+		return LoginUser.getInstance().userid !== 0;
 	}
 
 	public checkLogin(bTip: boolean): boolean {

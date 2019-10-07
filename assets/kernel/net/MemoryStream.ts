@@ -27,79 +27,39 @@ export default class MemoryStream {
 		buf.set(src, offset);
 	}
 
-	
+	//--------------------------------------------------------------------------
 
 	public read_int8(offset:number): number 
 	{
 		return this.data_view.getUint8(offset);
 	}
 
-	public write_int8(offset:number, value:number) 
-    {
-        this.data_view.setInt8(offset, value);
-	}
-
 	public read_int16(offset:number):number 
     {
         return this.data_view.getInt16(offset, this.little_endian);
-    }
-
-    public write_int16(offset:number, value:number) 
-    {
-        this.data_view.setInt16(offset, value, this.little_endian);
 	}
 	
 	public read_int32(offset:number): number 
     {
         return this.data_view.getInt32(offset, this.little_endian);
-    }
-
-    public write_int32(offset:number, value:number) 
-    {
-        this.data_view.setInt32(offset, value, this.little_endian);
 	}
-	
+
 	public read_uint32(offset:number): number 
     {
         return this.data_view.getUint32(offset, this.little_endian);
-    }
-
-    public write_uint32(offset:number, value:number) 
-    {
-        this.data_view.setUint32(offset, value, this.little_endian);
 	}
 	
 	public read_float32(offset:number): number 
     {
         return this.data_view.getFloat32(offset, this.little_endian);
-    }
-
-    public write_float32(offset:number, value:number) 
-    {
-        this.data_view.setFloat32(offset, value, this.little_endian);
 	}
-
+	
 	public read_buffer(offset:number, size:number) : Uint8Array
 	{
 		var buf = new Uint8Array(this.buffer, offset, size);
 		return buf;
 	}
 
-	public write_buffer(offset:number, buff:Uint8Array)
-	{
-		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
-		dvPtr.set(buff);
-	}
-
-	public safe_write_buffer(offset:number, buff:Uint8Array)
-	{
-		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
-		var len = dvPtr.length;
-		for(var i=0; i<len; i++) {
-			dvPtr[i] = buff[i];
-		}
-	}
-	
 	public read_string(offset:number) : string
 	{
 		var rpos = offset;
@@ -128,6 +88,48 @@ export default class MemoryStream {
 		
 		rpos += i;
 		return s;
+	}
+
+	//--------------------------------------------------------------------------
+
+	public write_int8(offset:number, value:number) 
+    {
+        this.data_view.setInt8(offset, value);
+	}
+
+    public write_int16(offset:number, value:number) 
+    {
+        this.data_view.setInt16(offset, value, this.little_endian);
+	}
+
+    public write_int32(offset:number, value:number) 
+    {
+        this.data_view.setInt32(offset, value, this.little_endian);
+	}
+
+    public write_uint32(offset:number, value:number) 
+    {
+        this.data_view.setUint32(offset, value, this.little_endian);
+	}
+
+    public write_float32(offset:number, value:number) 
+    {
+        this.data_view.setFloat32(offset, value, this.little_endian);
+	}
+
+	public write_buffer(offset:number, buff:Uint8Array)
+	{
+		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
+		dvPtr.set(buff);
+	}
+
+	public safe_write_buffer(offset:number, buff:Uint8Array)
+	{
+		let dvPtr = new Uint8Array(this.data_view.buffer, offset);
+		var len = dvPtr.length;
+		for(var i=0; i<len; i++) {
+			dvPtr[i] = buff[i];
+		}
 	}
 
 	public write_string(offset:number, value:string)

@@ -1,10 +1,12 @@
 import { hallgw_msgs, hallgw_request } from "./net_hall";
 import { login_msgs, login_request } from "./net_UserLoginSvc";
 import UIManager from "../../../kernel/view/UIManager";
-import LoginMgr, { LoginUser } from "../model/LoginMgr";
+import LoginMgr from "../model/LoginMgr";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import TimerManager from "../../../kernel/timer/TimerManager";
 import CHandler from "../../../kernel/basic/CHandler";
+import LoginUser from "../model/LoginUser";
+import LogicCenter from "../model/LogicCenter";
 
 var proxy_hall = {
 
@@ -14,6 +16,8 @@ var proxy_hall = {
 	},
 
 	[login_msgs.Msg_UserLogInResp] : function(param:any) {
+		LogicCenter.getInstance().init();
+		
 		UIManager.toast("登录成功");
 		param.data.coin = parseFloat(param.data.coin);
 		CommonUtil.simpleCopy(LoginUser.getInstance(), param.data);

@@ -1,6 +1,6 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
-import User from "../model/User";
+import LoginUser from "../model/LoginUser";
 
 
 const {ccclass, property} = cc._decorator;
@@ -29,9 +29,9 @@ export default class PlayerUI extends BaseComponent {
         return this._userId;
     }
 
-    public setUserInfo(userObj:User) {
-        this._userId = userObj.userId;
-        this.label_name.string = userObj.nickname;
+    public setUserInfo(userObj:LoginUser) {
+        this._userId = userObj.userid;
+        this.label_name.string = userObj.name;
         this.label_money.string = userObj.coin.toString();
     }
 
