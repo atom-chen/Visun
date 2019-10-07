@@ -32,7 +32,19 @@ export default class GameManager extends ModelBase {
 		if(!GameConfig[gameId]) {
 			return false;
 		}
-		return true;
+		switch(gameId) {
+			case "40000040":
+				return true;
+			case "90000040":
+				return true;
+			case "80000044":
+				return true;
+			case "40070012":
+				return true;
+			case "80000041":
+				return true;
+		}
+		return false;
 	}
 
 	public getUpdator(gameId:string) : HotUpdator {
