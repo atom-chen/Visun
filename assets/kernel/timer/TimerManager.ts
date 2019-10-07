@@ -4,7 +4,7 @@ import CHandler from "../basic/CHandler";
 
 
 export default class TimerManager {
-	
+	private static s_inited:boolean = false;
 	private static autoId:number = 0;
 	private static s_updating:boolean = false;
 	private static _timers:BaseTimer[] = [];
@@ -15,6 +15,8 @@ export default class TimerManager {
 	}
 
 	public static start(node:cc.Component) {
+		if(TimerManager.s_inited){ return; }
+		TimerManager.s_inited = true;
 		node.schedule(TimerManager.update, 0, cc.macro.REPEAT_FOREVER);
 	}
 
