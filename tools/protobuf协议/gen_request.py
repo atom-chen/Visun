@@ -18,6 +18,10 @@ def excuteCmd(cmdStr):
 
 def gen_proto(Proto, channel="game", headFlag="false"): 
 	print("=====Begin:" + Proto + " " + channel)
+	print("gen json")
+	if not os.path.exists("tmps"):
+		os.makedirs("tmps")
+	excuteCmd("pbjs -t json in/" + Proto + ".proto" + " -o tmps/" + Proto + ".json")
 	print("gen " + Proto + ".js")
 	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/script/proto/" + Proto + ".js in/" + Proto + ".proto")
 	#print("gen "+Proto+".d.ts")

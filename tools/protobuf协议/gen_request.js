@@ -56,6 +56,15 @@ console.log("import ",  depMud);
 var mudname = getPackageName(line_list);
 if(!mudname) { mudname = pbfilename; }
 
+// from json
+var jsonFile = "tmps/" + pbfilename+".json";
+var jsonStr = fs.readFileSync(jsonFile, 'utf8');
+var ptoJs = JSON.parse(jsonStr);
+ptoJs = ptoJs["nested"][mudname]["nested"];
+// console.log(ptoJs);
+// fs.unlinkSync(jsonFile);
+
+
 //一、将 "message Request" 和 "message Response" 解析出来
 function parseRequestAndResponse(data) {
 	var startRequest = 0;
@@ -134,63 +143,27 @@ else {
 var msgArray = line_list;
 console.log("------", originLen, msgArray.length, reqArray.length, respArray.length);
 
-function findInArray(target, value, times){
-	var cur = 0;
-	var idx = -1;
-	for(var x=0, l=target.length; x<l; x++){
-		if(target[x]==value){
-			cur++;
-			if(cur==times){
-				idx = x;
-				break;
-			}
-		}
-	}
-	return idx;
-}
 
-function getEnumInfo(whichArr){
-	var lenReq = whichArr.length;
-	for(var nn = lenReq-1; nn>=0; nn--) {
-		if(whichArr[nn].indexOf("//")>=0) {
-			whichArr[nn] = whichArr[nn].slice(0, whichArr[nn].indexOf('//'));  //去注释
-		}
-		whichArr[nn] = whichArr[nn].replace(';', ' ');  //去分号
-	}
+function getEnumInfo(){
+	var enumInfo = ptoJs.Request.nested.CMD.values;
 
-	var reqStr = "";
-	lenReq = whichArr.length;
-	for(var nnn = 0; nnn < lenReq; nnn++) {
-		reqStr += whichArr[nnn];
-	}
-	var itemArr = reqStr.split(/\s+/);
-
-	var second1 = findInArray(itemArr, "{", 2);
-	var second2 = findInArray(itemArr, "}", 1);
-	var enumList = [];
-	if(second1>=0 && second2>=0) {
-		enumList = itemArr.splice(second1, second2-second1+1);
-	}
-	//console.log(enumList)
 	var cmdInfo = {};
-	for(var v=0; v<enumList.length; v++){
-		if(enumList[v]=="="){
-			cmdInfo[enumList[v-1]] = { enumKey:enumList[v-1], enumValue:enumList[v+1] };
-		}
+	for(var kk in enumInfo) {
+		cmdInfo[kk] = { enumKey:kk, enumValue:enumInfo[kk] };
 	}
 
 	var fieldInfo = {};
-	for(var v=0; v<itemArr.length; v++){
-		if(itemArr[v]=="="){
-			fieldInfo[itemArr[v-1]] = { structName:itemArr[v-2], fieldName:itemArr[v-1], fieldTag:itemArr[v+1] };
+	var fields = ptoJs.Request.fields;
+	for(var fieldName in fields) {
+		if(fields[fieldName].type != "CMD") {
+			fieldInfo[fieldName] = { structName:fields[fieldName].type, fieldName:fieldName };
 		}
 	}
 
 	return { cmdInfo : cmdInfo, fieldInfo:fieldInfo };
 }
 
-var reqInfo = getEnumInfo(reqArray);
-var respInfo = getEnumInfo(respArray);
+var reqInfo = getEnumInfo();
 console.log(reqInfo);
 
 function getFieldName(whitchInfo, structName){
@@ -202,8 +175,7 @@ function getFieldName(whitchInfo, structName){
 }
 
 //二、解析出所有的 message， 以及所绑定的 cmd
-function parseMessages(msgArray, reqInfo, respInfo) {
-	var allStructs = {};
+function parseMessages(msgArray, reqInfo) {
 	for(var i=0, len=msgArray.length; i<len; i++) {
 		// // int DELAY_CHECK_REQ = 20010
 		// message c2s_delayCheck
@@ -234,8 +206,6 @@ function parseMessages(msgArray, reqInfo, respInfo) {
 
 			// 提取使用该struct作为数据的cmd
 			if( structName ) {
-				allStructs[structName] = true;
-
 				for(var mm=1; mm<=20; mm++) {
 					if( msgArray[i-mm].match('=') && msgArray[i-mm].match("//") ) {
 						var str = msgArray[i-mm];
@@ -261,13 +231,6 @@ function parseMessages(msgArray, reqInfo, respInfo) {
 							reqInfo.cmdInfo[enumKey].fieldName = getFieldName(reqInfo, structName);
 							console.log("+++++", enumKey, enumValue, structName, reqInfo.cmdInfo[enumKey].fieldName);
 						}
-						//else if(respInfo.cmdInfo[enumKey] && respInfo.cmdInfo[enumKey].enumValue==enumValue)
-						else if(respInfo.cmdInfo[enumKey])
-						{
-							respInfo.cmdInfo[enumKey].structName = structName;
-							respInfo.cmdInfo[enumKey].fieldName = getFieldName(respInfo, structName);
-							console.log("-----", enumKey, enumValue, structName, respInfo.cmdInfo[enumKey].fieldName);
-						}
 					}
 					else {
 						break;
@@ -277,7 +240,7 @@ function parseMessages(msgArray, reqInfo, respInfo) {
 		}
 	}
 }
-parseMessages(msgArray, reqInfo, respInfo);
+parseMessages(msgArray, reqInfo);
 
 console.log("================================")
 
@@ -316,12 +279,42 @@ for(var enumKey in infos) {
 outstr += "}\n\n";
 
 // Request Functions
+//找到cmd对应的message定义
+function getStructName(enumK) {
+	return infos[enumKey].structName;
+}
+function getRequestParam(enumK) {
+	var structName = getStructName(enumK);
+	var argInfo = ptoJs[structName]
+	if(!argInfo) { return "any"; }
+	var fields = argInfo.fields || {};
+	var desc = "{";
+	for(var fieldName in fields) {
+		var typeStr = fields[fieldName].type;
+		if(typeStr.indexOf("int") >= 0){
+			typeStr = "number";
+		}
+		else if(typeStr == "string") {
+			typeStr = "string";
+		}
+		else {
+			typeStr = "any";
+		}
+		if(desc=="{")
+			desc += " " + fieldName + ":" + typeStr;
+		else
+			desc += ", " + fieldName + ":" + typeStr;
+	}
+	desc += " }";
+	if(desc=="{ }") { desc = "{}"; }
+	return desc;
+}
 outstr += "export class "+mudname+"_request {\n";
 infos = reqInfo.cmdInfo;
 for(var enumKey in infos) {
 	var curDef = infos[enumKey];
 	if(curDef.fieldName != undefined){
-		outstr += "    public static "+enumKey+"(data:any, bIsPbObj:boolean = false) : void \n";
+		outstr += "    public static "+enumKey+"(data:"+getRequestParam(enumKey)+", bIsPbObj:boolean = false) : void \n";
 		outstr += "    {\n";
 		outstr += "        "+ mudname+"_packet_define."+enumKey+".sendToChannel(ChannelDefine."+channelName+", data, bIsPbObj);\n";
 		outstr += "    }\n";
