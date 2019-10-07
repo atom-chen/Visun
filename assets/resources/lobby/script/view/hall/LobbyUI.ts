@@ -12,6 +12,7 @@ import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_UserLoginSvc";
+import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 
 
 const {ccclass, property} = cc._decorator;
@@ -83,6 +84,10 @@ export default class LobbyUI extends BaseComponent {
 
 		CommonUtil.addClickEvent(this.m_ui.btn_user, function(){ 
 			UIManager.openPopwnd(ViewDefine.LoginUI.path, null);
+		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
+			Adaptor.setFullScreen(!Adaptor.isFullScreen());
 		}, this);
 	}
 
