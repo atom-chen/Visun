@@ -10,6 +10,8 @@ import TimerManager from "../../../../../kernel/timer/TimerManager";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
+import EventCenter from "../../../../../kernel/event/EventCenter";
+import { login_msgs } from "../../../../../common/script/proto/net_UserLoginSvc";
 
 
 const {ccclass, property} = cc._decorator;
@@ -27,6 +29,8 @@ export default class LobbyUI extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 		this.testSpine();
+
+		EventCenter.getInstance().listen(login_msgs.UserLogInResp, this.refleshUI, this);
 
 		LoginMgr.getInstance().loginAsYouke();
 	}

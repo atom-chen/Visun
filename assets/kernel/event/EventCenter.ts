@@ -16,7 +16,7 @@ export default class EventCenter {
 		EventCenter._instance = null;
 	}
 
-	public getEvent(evtName:string, cbFunc:Function, thisObj:any) : number
+	public getEvent(evtName:string|number, cbFunc:Function, thisObj:any) : number
 	{
 		var evtList = this._events[evtName];
 		if(!evtList) { return -1; }
@@ -34,7 +34,7 @@ export default class EventCenter {
 	}
 
 	//监听事件
-	public listen(evtName:string, cbFunc:Function, thisObj:any, bCall:boolean=false)
+	public listen(evtName:string|number, cbFunc:Function, thisObj:any, bCall:boolean=false)
 	{
 		if(!evtName || !cbFunc)
 		{
