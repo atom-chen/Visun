@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hallgw;
 
-enum HallMsgId {
+enum CMD {
     Msg_Unknown	= 0;
     Msg_GetUserInfoReq             = 20000; // 获取用户信息req
     Msg_GetUserInfoResp            = 20001; // 获取用户信息resp
@@ -14,9 +14,9 @@ enum HallMsgId {
     Msg_ChangeHeadResp             = 20007; // 换头像resp
     Msg_DisableGame                = 20008; // 停用游戏
     Msg_BroadcastNotice            = 80000; // (广播)公告
-    Msg_BroadcastMarquee  = 80001; // 跑马灯公告
-    Msg_BroadcastPopup    = 80002; // 弹窗公告
-    Msg_BroadcastGameConfigModify  = 80003; // (广播)游戏配置修改, 消息体复用MsgGetGameConfigResp
+    Msg_BroadcastMarquee            = 80001; // 跑马灯公告
+    Msg_BroadcastPopup              = 80002; // 弹窗公告
+    Msg_BroadcastGameConfigModify   = 80003; // (广播)游戏配置修改, 消息体复用MsgGetGameConfigResp
 }
 
 enum RespErr{

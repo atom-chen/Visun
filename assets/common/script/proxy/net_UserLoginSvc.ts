@@ -7,15 +7,15 @@ import NetPacket from "../../../kernel/net/NetPacket";
 
 
 export enum login_msgs {
-    Msg_HeartReq = 5000,
-    Msg_HeartResp = 5001,
+    HeartReq = 5000,
+    HeartResp = 5001,
     Msg_SysError = 5002,
     CheckTokenReq = 5003,
     MovedGateNot = 5004,
     CheckTokenRes = 5005,
     AdminKickUser = 5006,
-    Msg_UserLogInReq = 10000,
-    Msg_UserLogInResp = 10001,
+    UserLogInReq = 10000,
+    UserLogInResp = 10001,
 }
 
 export var login_packet_define = {
@@ -31,7 +31,7 @@ export var login_packet_define = {
 }
 
 export class login_request {
-    public static Msg_HeartReq( data:{} ) { login_packet_define[5000].sendToChannel(ChannelDefine.hall, data, false); }
+    public static HeartReq( data:{} ) { login_packet_define[5000].sendToChannel(ChannelDefine.hall, data, false); }
     public static CheckTokenReq( data:{ uid:number, token:string } ) { login_packet_define[5003].sendToChannel(ChannelDefine.hall, data, false); }
-    public static Msg_UserLogInReq( data:{ token:string, device:string } ) { login_packet_define[10000].sendToChannel(ChannelDefine.hall, data, false); }
+    public static UserLogInReq( data:{ token:string, device:string } ) { login_packet_define[10000].sendToChannel(ChannelDefine.hall, data, false); }
 }

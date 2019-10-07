@@ -18,37 +18,17 @@ $root.room = (function() {
      */
     var room = {};
 
-    /**
-     * CMD enum.
-     * @name room.CMD
-     * @enum {string}
-     * @property {number} UNKNOWN=0 UNKNOWN value
-     * @property {number} JOIN_ROOM_REQ=30000 JOIN_ROOM_REQ value
-     * @property {number} JOIN_ROOM_RES=30001 JOIN_ROOM_RES value
-     * @property {number} GET_FROM_GATE=30002 GET_FROM_GATE value
-     * @property {number} SEND_TO_GATE=30003 SEND_TO_GATE value
-     */
-    room.CMD = (function() {
-        var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "UNKNOWN"] = 0;
-        values[valuesById[30000] = "JOIN_ROOM_REQ"] = 30000;
-        values[valuesById[30001] = "JOIN_ROOM_RES"] = 30001;
-        values[valuesById[30002] = "GET_FROM_GATE"] = 30002;
-        values[valuesById[30003] = "SEND_TO_GATE"] = 30003;
-        return values;
-    })();
-
     room.User = (function() {
 
         /**
          * Properties of a User.
          * @memberof room
          * @interface IUser
-         * @property {number|null} [userid] User userid
+         * @property {number|Long|null} [userid] User userid
+         * @property {number|null} [gameId] User gameId
+         * @property {number|null} [TableID] User TableID
          * @property {number|null} [tableType] User tableType
-         * @property {string|null} [tableId] User tableId
-         * @property {number|null} [gameNo] User gameNo
-         * @property {number|null} [gameNum] User gameNum
+         * @property {number|null} [channelId] User channelId
          */
 
         /**
@@ -68,11 +48,27 @@ $root.room = (function() {
 
         /**
          * User userid.
-         * @member {number} userid
+         * @member {number|Long} userid
          * @memberof room.User
          * @instance
          */
-        User.prototype.userid = 0;
+        User.prototype.userid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * User gameId.
+         * @member {number} gameId
+         * @memberof room.User
+         * @instance
+         */
+        User.prototype.gameId = 0;
+
+        /**
+         * User TableID.
+         * @member {number} TableID
+         * @memberof room.User
+         * @instance
+         */
+        User.prototype.TableID = 0;
 
         /**
          * User tableType.
@@ -83,28 +79,12 @@ $root.room = (function() {
         User.prototype.tableType = 0;
 
         /**
-         * User tableId.
-         * @member {string} tableId
+         * User channelId.
+         * @member {number} channelId
          * @memberof room.User
          * @instance
          */
-        User.prototype.tableId = "";
-
-        /**
-         * User gameNo.
-         * @member {number} gameNo
-         * @memberof room.User
-         * @instance
-         */
-        User.prototype.gameNo = 0;
-
-        /**
-         * User gameNum.
-         * @member {number} gameNum
-         * @memberof room.User
-         * @instance
-         */
-        User.prototype.gameNum = 0;
+        User.prototype.channelId = 0;
 
         /**
          * Creates a new User instance using the specified properties.
@@ -131,15 +111,15 @@ $root.room = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.userid != null && message.hasOwnProperty("userid"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.userid);
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.userid);
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gameId);
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.TableID);
             if (message.tableType != null && message.hasOwnProperty("tableType"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.tableType);
-            if (message.tableId != null && message.hasOwnProperty("tableId"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.tableId);
-            if (message.gameNo != null && message.hasOwnProperty("gameNo"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.gameNo);
-            if (message.gameNum != null && message.hasOwnProperty("gameNum"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.gameNum);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.tableType);
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.channelId);
             return writer;
         };
 
@@ -175,19 +155,19 @@ $root.room = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.userid = reader.int32();
+                    message.userid = reader.int64();
                     break;
                 case 2:
-                    message.tableType = reader.int32();
+                    message.gameId = reader.int32();
                     break;
                 case 3:
-                    message.tableId = reader.string();
+                    message.TableID = reader.int32();
                     break;
                 case 4:
-                    message.gameNo = reader.int32();
+                    message.tableType = reader.int32();
                     break;
                 case 5:
-                    message.gameNum = reader.int32();
+                    message.channelId = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -225,20 +205,20 @@ $root.room = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.userid != null && message.hasOwnProperty("userid"))
-                if (!$util.isInteger(message.userid))
-                    return "userid: integer expected";
+                if (!$util.isInteger(message.userid) && !(message.userid && $util.isInteger(message.userid.low) && $util.isInteger(message.userid.high)))
+                    return "userid: integer|Long expected";
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                if (!$util.isInteger(message.gameId))
+                    return "gameId: integer expected";
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                if (!$util.isInteger(message.TableID))
+                    return "TableID: integer expected";
             if (message.tableType != null && message.hasOwnProperty("tableType"))
                 if (!$util.isInteger(message.tableType))
                     return "tableType: integer expected";
-            if (message.tableId != null && message.hasOwnProperty("tableId"))
-                if (!$util.isString(message.tableId))
-                    return "tableId: string expected";
-            if (message.gameNo != null && message.hasOwnProperty("gameNo"))
-                if (!$util.isInteger(message.gameNo))
-                    return "gameNo: integer expected";
-            if (message.gameNum != null && message.hasOwnProperty("gameNum"))
-                if (!$util.isInteger(message.gameNum))
-                    return "gameNum: integer expected";
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                if (!$util.isInteger(message.channelId))
+                    return "channelId: integer expected";
             return null;
         };
 
@@ -255,15 +235,22 @@ $root.room = (function() {
                 return object;
             var message = new $root.room.User();
             if (object.userid != null)
-                message.userid = object.userid | 0;
+                if ($util.Long)
+                    (message.userid = $util.Long.fromValue(object.userid)).unsigned = false;
+                else if (typeof object.userid === "string")
+                    message.userid = parseInt(object.userid, 10);
+                else if (typeof object.userid === "number")
+                    message.userid = object.userid;
+                else if (typeof object.userid === "object")
+                    message.userid = new $util.LongBits(object.userid.low >>> 0, object.userid.high >>> 0).toNumber();
+            if (object.gameId != null)
+                message.gameId = object.gameId | 0;
+            if (object.TableID != null)
+                message.TableID = object.TableID | 0;
             if (object.tableType != null)
                 message.tableType = object.tableType | 0;
-            if (object.tableId != null)
-                message.tableId = String(object.tableId);
-            if (object.gameNo != null)
-                message.gameNo = object.gameNo | 0;
-            if (object.gameNum != null)
-                message.gameNum = object.gameNum | 0;
+            if (object.channelId != null)
+                message.channelId = object.channelId | 0;
             return message;
         };
 
@@ -281,22 +268,29 @@ $root.room = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.userid = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.userid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.userid = options.longs === String ? "0" : 0;
+                object.gameId = 0;
+                object.TableID = 0;
                 object.tableType = 0;
-                object.tableId = "";
-                object.gameNo = 0;
-                object.gameNum = 0;
+                object.channelId = 0;
             }
             if (message.userid != null && message.hasOwnProperty("userid"))
-                object.userid = message.userid;
+                if (typeof message.userid === "number")
+                    object.userid = options.longs === String ? String(message.userid) : message.userid;
+                else
+                    object.userid = options.longs === String ? $util.Long.prototype.toString.call(message.userid) : options.longs === Number ? new $util.LongBits(message.userid.low >>> 0, message.userid.high >>> 0).toNumber() : message.userid;
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                object.gameId = message.gameId;
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                object.TableID = message.TableID;
             if (message.tableType != null && message.hasOwnProperty("tableType"))
                 object.tableType = message.tableType;
-            if (message.tableId != null && message.hasOwnProperty("tableId"))
-                object.tableId = message.tableId;
-            if (message.gameNo != null && message.hasOwnProperty("gameNo"))
-                object.gameNo = message.gameNo;
-            if (message.gameNum != null && message.hasOwnProperty("gameNum"))
-                object.gameNum = message.gameNum;
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                object.channelId = message.channelId;
             return object;
         };
 
@@ -336,7 +330,10 @@ $root.room = (function() {
          * Properties of a JoinTableRequest.
          * @memberof room
          * @interface IJoinTableRequest
-         * @property {room.IUser|null} [user] JoinTableRequest user
+         * @property {number|Long|null} [userid] JoinTableRequest userid
+         * @property {number|null} [gameId] JoinTableRequest gameId
+         * @property {number|null} [tableType] JoinTableRequest tableType
+         * @property {number|null} [channelId] JoinTableRequest channelId
          */
 
         /**
@@ -355,12 +352,36 @@ $root.room = (function() {
         }
 
         /**
-         * JoinTableRequest user.
-         * @member {room.IUser|null|undefined} user
+         * JoinTableRequest userid.
+         * @member {number|Long} userid
          * @memberof room.JoinTableRequest
          * @instance
          */
-        JoinTableRequest.prototype.user = null;
+        JoinTableRequest.prototype.userid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * JoinTableRequest gameId.
+         * @member {number} gameId
+         * @memberof room.JoinTableRequest
+         * @instance
+         */
+        JoinTableRequest.prototype.gameId = 0;
+
+        /**
+         * JoinTableRequest tableType.
+         * @member {number} tableType
+         * @memberof room.JoinTableRequest
+         * @instance
+         */
+        JoinTableRequest.prototype.tableType = 0;
+
+        /**
+         * JoinTableRequest channelId.
+         * @member {number} channelId
+         * @memberof room.JoinTableRequest
+         * @instance
+         */
+        JoinTableRequest.prototype.channelId = 0;
 
         /**
          * Creates a new JoinTableRequest instance using the specified properties.
@@ -386,8 +407,14 @@ $root.room = (function() {
         JoinTableRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.user != null && message.hasOwnProperty("user"))
-                $root.room.User.encode(message.user, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.userid);
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.gameId);
+            if (message.tableType != null && message.hasOwnProperty("tableType"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.tableType);
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.channelId);
             return writer;
         };
 
@@ -423,7 +450,16 @@ $root.room = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.user = $root.room.User.decode(reader, reader.uint32());
+                    message.userid = reader.int64();
+                    break;
+                case 2:
+                    message.gameId = reader.int32();
+                    break;
+                case 3:
+                    message.tableType = reader.int32();
+                    break;
+                case 4:
+                    message.channelId = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -460,11 +496,18 @@ $root.room = (function() {
         JoinTableRequest.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.user != null && message.hasOwnProperty("user")) {
-                var error = $root.room.User.verify(message.user);
-                if (error)
-                    return "user." + error;
-            }
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                if (!$util.isInteger(message.userid) && !(message.userid && $util.isInteger(message.userid.low) && $util.isInteger(message.userid.high)))
+                    return "userid: integer|Long expected";
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                if (!$util.isInteger(message.gameId))
+                    return "gameId: integer expected";
+            if (message.tableType != null && message.hasOwnProperty("tableType"))
+                if (!$util.isInteger(message.tableType))
+                    return "tableType: integer expected";
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                if (!$util.isInteger(message.channelId))
+                    return "channelId: integer expected";
             return null;
         };
 
@@ -480,11 +523,21 @@ $root.room = (function() {
             if (object instanceof $root.room.JoinTableRequest)
                 return object;
             var message = new $root.room.JoinTableRequest();
-            if (object.user != null) {
-                if (typeof object.user !== "object")
-                    throw TypeError(".room.JoinTableRequest.user: object expected");
-                message.user = $root.room.User.fromObject(object.user);
-            }
+            if (object.userid != null)
+                if ($util.Long)
+                    (message.userid = $util.Long.fromValue(object.userid)).unsigned = false;
+                else if (typeof object.userid === "string")
+                    message.userid = parseInt(object.userid, 10);
+                else if (typeof object.userid === "number")
+                    message.userid = object.userid;
+                else if (typeof object.userid === "object")
+                    message.userid = new $util.LongBits(object.userid.low >>> 0, object.userid.high >>> 0).toNumber();
+            if (object.gameId != null)
+                message.gameId = object.gameId | 0;
+            if (object.tableType != null)
+                message.tableType = object.tableType | 0;
+            if (object.channelId != null)
+                message.channelId = object.channelId | 0;
             return message;
         };
 
@@ -501,10 +554,27 @@ $root.room = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.user = null;
-            if (message.user != null && message.hasOwnProperty("user"))
-                object.user = $root.room.User.toObject(message.user, options);
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.userid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.userid = options.longs === String ? "0" : 0;
+                object.gameId = 0;
+                object.tableType = 0;
+                object.channelId = 0;
+            }
+            if (message.userid != null && message.hasOwnProperty("userid"))
+                if (typeof message.userid === "number")
+                    object.userid = options.longs === String ? String(message.userid) : message.userid;
+                else
+                    object.userid = options.longs === String ? $util.Long.prototype.toString.call(message.userid) : options.longs === Number ? new $util.LongBits(message.userid.low >>> 0, message.userid.high >>> 0).toNumber() : message.userid;
+            if (message.gameId != null && message.hasOwnProperty("gameId"))
+                object.gameId = message.gameId;
+            if (message.tableType != null && message.hasOwnProperty("tableType"))
+                object.tableType = message.tableType;
+            if (message.channelId != null && message.hasOwnProperty("channelId"))
+                object.channelId = message.channelId;
             return object;
         };
 

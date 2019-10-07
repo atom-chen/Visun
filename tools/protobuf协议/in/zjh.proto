@@ -151,20 +151,20 @@ message s2c_refreshCoin
 }
 
 //超时退出..
-// DELAYQUIT_OFFLINE_RESP = 3003;
+// DELAYQUIT_OFFLINE_RESP = 40124;
 message s2c_delayQuitOffline
 {
     int32 userId = 1;
 }
 
-// PUSH_TABLE_INFO_RESP = 2009;
+// PUSH_TABLE_INFO_RESP = 40125;
 message s2c_pushTableInfo
 {
     TableInfo tableInfo = 1;
 }
 
 /** 推送延时时间 */
-// PUSH_REMAINTIME_RESP = 20015;
+// PUSH_REMAINTIME_RESP= 40126;
 message s2c_pushRemainTime
 {
     int32 time = 1;
@@ -172,13 +172,13 @@ message s2c_pushRemainTime
     int32 userId = 3;
 }
 
-// BET_REQ = 2020;
+// BET_REQ= 40100;
 message c2s_bet
 {
     int32 betCoin = 1;        // 下注金额
 }
 
-// BET_RESP = 2021;
+// BET_RESP = 40101;
 message s2c_bet
 {
     TableInfo tableInfo = 1;
@@ -188,7 +188,7 @@ message s2c_bet
     int32 betCoin = 5;        // 下注金额
 }
 
-// PUSH_ROUND_RESULT_RESP = 2015
+// PUSH_ROUND_RESULT_RESP= 40122
 message s2c_roundResult
 {
     TableInfo tableInfo = 1;
@@ -198,14 +198,14 @@ message s2c_roundResult
     int32 winnerId = 5;
 }
 
-// JOIN_TABLE_REQ = 20006
+// JOIN_TABLE_REQ = 40000
 message c2s_joinTable
 {
     string sid= 1;
     int32 tableType = 2;
 }
 
-// JOIN_TABLE_RESP = 20007
+// JOIN_TABLE_RESP = 40001
 message s2c_joinTable
 {
     TableInfo tableInfo = 1;
@@ -213,13 +213,13 @@ message s2c_joinTable
 }
 
     /**用户点击比牌*/
-// COMPARE_REQ = 2026;
+// COMPARE_REQ = 40102;
 message c2s_compareCard
 {
     int32 otherId = 1;
 }   
 
-// COMPARE_RESP = 2027;
+// COMPARE_RESP = 40103;
 message s2c_compareCard
 {
     TableInfo tableInfo = 1;
@@ -231,12 +231,12 @@ message s2c_compareCard
 }
 
     /**用户点击弃牌*/
-// DISCARD_REQ = 2024;
+// DISCARD_REQ= 40104;
 message c2s_disCard
 {
 
 }
-// DISCARD_RESP = 2025;
+// DISCARD_RESP= 40105;
 message s2c_disCard
 {
     int32 userId = 1;
@@ -244,51 +244,51 @@ message s2c_disCard
 }
 
 	/** 玩家一直跟注*/
-// FOLLOWER_BET_REQ = 2084;
+// FOLLOWER_BET_REQ = 40106;
 message c2s_followerBet
 {
     bool isfollow = 1;
 }
-// FOLLOWER_BET_RESP = 2085;
+// FOLLOWER_BET_RESP = 40107;
 message s2c_followerBet
 {
 
 }
 
-// PUSH_USER_RECONNECT_REQ = 2030;
+// PUSH_USER_RECONNECT_REQ = 40108;
 message c2s_reconnect
 {
     int32 userId = 1;
 }
 
-// PUSH_USER_RECONNECT_RESP = 2031
+// PUSH_USER_RECONNECT_RESP= 40109
 message s2c_reconnect
 {
     int32 userId = 1;
     int32 online = 2;
 }
 
-// PUSH_RECONNECT_DATA_RESP = 2033 重连数据
+// PUSH_RECONNECT_DATA_RESP  = 40111 重连数据
 message s2c_reconnectData
 {
     TableInfo tableInfo = 1;
 }
 
-// PUSH_RECONNECT_QUIT_RESP = 2035 房间不存在发送此消息号 ------- 返回大厅
+// PUSH_RECONNECT_QUIT_RESP = 40110 房间不存在发送此消息号 ------- 返回大厅
 message s2c_pushReconnectQuit
 {
     int32 userId = 1;
 }
 
     /**玩家点击看牌请求 2022*/
-// SEECARD_REQ = 2022;
+// SEECARD_REQ= 40112;
 message c2s_seeCard
 {
 
 }
 
     /**玩家看牌返回 2023*/
-// SEECARD_RESP = 2023;
+// SEECARD_RESP = 40113;
 message s2c_seeCard
 {
     int32 userId = 1;
@@ -297,12 +297,12 @@ message s2c_seeCard
 
 
 	/** 发送聊天消息 */
-// SEND_MESSAGE_REQ = 2060;
+// SEND_MESSAGE_REQ = 40114;
 message c2s_sendSpeech
 {
     int32 toUserId = 1;
 }
-// SEND_MESSAGE_RESP = 2061;
+// SEND_MESSAGE_RESP = 40115;
 message s2c_sendSpeech
 {
     int32 userId = 1;
@@ -310,24 +310,24 @@ message s2c_sendSpeech
 }
 
 /** 用户退后台 */
-// USER_ONBACK_REQ = 2080;
+// USER_ONBACK_REQ = 40116;
 message c2s_userOnback
 {
     int32 leaveState = 1;
 }
 
-// USER_ONBACK_RESP = 2081
+// USER_ONBACK_RESP = 40117
 message s2c_userOnback
 {
     int32 userId = 1;
 }
 
-// USER_QUIT_REQ = 2044;
+// USER_QUIT_REQ = 40118;
 message c2s_userQuit
 {
-
+    
 }
-// USER_QUIT_RESP = 2045
+// USER_QUIT_RESP= 40119
 message s2c_userQuit
 {
     int32 userId = 1;
@@ -338,7 +338,7 @@ message s2c_userQuit
     int32 exit = 6;
 }
 
-// USER_READY_REQ = 2106;
+// USER_READY_REQ = 40120;
 message c2s_userReady
 {
     int32 tableType = 1;
@@ -346,14 +346,14 @@ message c2s_userReady
 
     /** 玩家点击准备返回 2107 */
     //给客户端播放刷新匹配时间动画
-// USER_READY_RESP = 2107
+// USER_READY_RESP = 40121
 message s2c_userReady
 {
     TableInfo tableInfo = 1;
 }
 
 
-// SETCARDSTEST = 20000;
+// SETCARDSTEST = 40127;
 message c2s_setCardsTest
 {
     int32 gameId = 1;           // gameid
@@ -372,66 +372,9 @@ message Request {
 
           /**后台手动踢出用户*/
         ADMIN_KICKEDOUT = 200;
-
-            /**玩家下注 请求2020*/
-        BET_REQ = 2020;
-    /**玩家下注 返回2021*/
-        BET_RESP = 2021;
-
-        // 加入桌子
-        JOIN_TABLE_REQ = 20006;
-        JOIN_TABLE_RESP = 20007;
-
-            /**用户点击比牌*/
-        COMPARE_REQ = 2026;
-        COMPARE_RESP = 2027;
-
-            /**用户点击弃牌*/
-        DISCARD_REQ = 2024;
-        DISCARD_RESP = 2025;
-
-        	/** 玩家一直跟注*/
-	    FOLLOWER_BET_REQ = 2084;
-	    FOLLOWER_BET_RESP = 2085;
-
-        // 重连
-        PUSH_USER_RECONNECT_REQ = 2030;
-        PUSH_USER_RECONNECT_RESP = 2031;
-        PUSH_RECONNECT_QUIT_RESP = 2035;            // 房间不存在发送此消息号 ------- 返回大厅
-        PUSH_RECONNECT_DATA_RESP = 2033;            // 重连数据
-
-
-            /**玩家点击看牌请求 2022*/
-        SEECARD_REQ = 2022;
-        /**玩家看牌返回 2023*/
-        SEECARD_RESP = 2023;
-
-        	/** 发送聊天消息 */
-	    SEND_MESSAGE_REQ = 2060;
-	    SEND_MESSAGE_RESP = 2061;
-
-        /** 用户退后台 */
-        USER_ONBACK_REQ = 2080;
-        USER_ONBACK_RESP = 2081;
-
-        // 玩家退出
-        USER_QUIT_REQ = 2044;
-        USER_QUIT_RESP = 2045;
-    
-        // 玩家准备
-        USER_READY_REQ = 2106;
-        USER_READY_RESP = 2107;
-
-        //结算
-        PUSH_ROUND_RESULT_RESP = 2015;
-
-
+        
         PUSH_KICKEDOUT = 4001;
 
-        
-
-           /**强制踢出*/
-        FOUCED_OFFLINE_RESP = 3001;
 
         /**刷新游戏金币*/ // 接受
         HALL_REFRESH_COIN = 100;
@@ -439,15 +382,73 @@ message Request {
         //通知刷新金币    // 推送
         PUSH_REFRESH_COIN = 2501;
 
-        DELAYQUIT_OFFLINE_RESP = 3003;
+      // 加入桌子
+        JOIN_TABLE_REQ = 40000;
+        JOIN_TABLE_RESP = 40001;
 
-        PUSH_TABLE_INFO_RESP = 2009;                    // 游戏开始返回
+
+        /**玩家下注 请求2020*/
+        BET_REQ= 40100;
+        /**玩家下注 返回2021*/
+        BET_RESP = 40101;
+
+
+            /**用户点击比牌*/
+        COMPARE_REQ = 40102;
+        COMPARE_RESP = 40103;
+
+            /**用户点击弃牌*/
+        DISCARD_REQ= 40104;
+        DISCARD_RESP= 40105;
+
+        	/** 玩家一直跟注*/
+	    FOLLOWER_BET_REQ = 40106;
+	    FOLLOWER_BET_RESP = 40107;
+
+        // 重连
+        PUSH_USER_RECONNECT_REQ = 40108;
+        PUSH_USER_RECONNECT_RESP= 40109;
+        PUSH_RECONNECT_QUIT_RESP = 40110;            // 房间不存在发送此消息号 ------- 返回大厅
+        PUSH_RECONNECT_DATA_RESP  = 40111;            // 重连数据
+
+
+            /**玩家点击看牌请求 2022*/
+        SEECARD_REQ= 40112;
+        /**玩家看牌返回 2023*/
+        SEECARD_RESP = 40113;
+
+        	/** 发送聊天消息 */
+	    SEND_MESSAGE_REQ = 40114;
+	    SEND_MESSAGE_RESP = 40115;
+
+        /** 用户退后台 */
+        USER_ONBACK_REQ = 40116;
+        USER_ONBACK_RESP = 40117;
+
+        // 玩家退出
+        USER_QUIT_REQ = 40118;
+        USER_QUIT_RESP= 40119;
+    
+        // 玩家准备
+        USER_READY_REQ = 40120;
+        USER_READY_RESP = 40121;
+
+        //结算
+        PUSH_ROUND_RESULT_RESP= 40122;
+
+           /**强制踢出*/
+        FOUCED_OFFLINE_RESP= 40123;
+
+
+        DELAYQUIT_OFFLINE_RESP = 40124;
+
+        PUSH_TABLE_INFO_RESP = 40125;                    // 游戏开始返回
 
         /** 推送延时时间 */
-        PUSH_REMAINTIME_RESP = 20015;
+        PUSH_REMAINTIME_RESP= 40126;
 
         // 测试牌 协议
-        SETCARDSTEST = 20000;
+        SETCARDSTEST = 40127;
     }
 
     CMD   cmd                               = 1;      //访问接口	

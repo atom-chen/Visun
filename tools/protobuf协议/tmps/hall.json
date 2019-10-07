@@ -2,7 +2,7 @@
   "nested": {
     "hallgw": {
       "nested": {
-        "HallMsgId": {
+        "CMD": {
           "values": {
             "Msg_Unknown": 0,
             "Msg_GetUserInfoReq": 20000,

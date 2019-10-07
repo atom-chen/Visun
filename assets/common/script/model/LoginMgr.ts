@@ -37,9 +37,6 @@ export default class LoginMgr extends ModelBase {
 		
 	}
 
-	public isLoginSucc() : boolean { 
-		return LoginUser.getInstance().userid !== 0;
-	}
 
 	public checkLogin(bTip: boolean): boolean {
 		var hasLogin = LoginUser.getInstance().userid !== 0;
@@ -49,9 +46,8 @@ export default class LoginMgr extends ModelBase {
 		return hasLogin;
 	}
 
-
 	private onNetFail(info) {
-		if(info.cmd === login_msgs.Msg_UserLogInResp) {
+		if(info.cmd === login_msgs.UserLogInResp) {
 			UIManager.toast("登录失败");
 		}
 		else if(info.cmd === login_msgs.Msg_SysError) {
@@ -120,7 +116,7 @@ export default class LoginMgr extends ModelBase {
 			channel_hall.getProcessor().registCmds(login_packet_define);
 			channel_hall.getProcessor().registCmds(room_packet_define);
 			channel_hall.getProcessor().getDispatcher().setObserver(proxy_hall);
-			//channel_hall.getProcessor().setHeartbeatFunc(()=>{ hallgw_request.Msg_HeartReq(null); })
+			g_HallProcessor.setHeartbeatFunc(()=>{ login_request.HeartReq(null); });
 			channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
 
 			//发送登录请求
@@ -137,6 +133,7 @@ export default class LoginMgr extends ModelBase {
 		//g_HallProcessor.setHeartbeatFunc(()=>{ login_request.Msg_HeartReq(null); });
 		channel_hall.close();
 		channel_hall.connect( wsAddr, 0, new CHandler(this, this.onConnLoginServerSucc), new CHandler(this, this.onConnLoginServerFail) );
+		g_HallProcessor.setHeartbeatFunc(()=>{ login_request.HeartReq(null); });
 		if(!LoginMgr.getInstance().checkLogin(false)) {
 			login_request.CheckTokenReq({uid:LoginUser.getInstance().userid, token:LoginUser.getInstance().sign});
 		}
@@ -153,7 +150,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	private sendLoginRequest() {
-		login_request.Msg_UserLogInReq({
+		login_request.UserLogInReq({
 			device : "0",
 			token : "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJHZW50Lk5pIiwic3ViIjoicGlwcGEiLCJpYXQiOjE1NjkwNjQ1OTgsImV4cCI6MTU2OTA2ODE5OH0.wdtu0aT6hzv2tR_Jeu-xMiAXiNJYk1r77XkZmXU7oMXf04IZo_Mk0J69VV-RhFMFNm2WesUwOBou5VMBzL9mQA"
 		});

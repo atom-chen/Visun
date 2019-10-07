@@ -6,34 +6,25 @@
         "java_outer_classname": "RoomProto"
       },
       "nested": {
-        "CMD": {
-          "values": {
-            "UNKNOWN": 0,
-            "JOIN_ROOM_REQ": 30000,
-            "JOIN_ROOM_RES": 30001,
-            "GET_FROM_GATE": 30002,
-            "SEND_TO_GATE": 30003
-          }
-        },
         "User": {
           "fields": {
             "userid": {
-              "type": "int32",
+              "type": "int64",
               "id": 1
             },
-            "tableType": {
+            "gameId": {
               "type": "int32",
               "id": 2
             },
-            "tableId": {
-              "type": "string",
+            "TableID": {
+              "type": "int32",
               "id": 3
             },
-            "gameNo": {
+            "tableType": {
               "type": "int32",
               "id": 4
             },
-            "gameNum": {
+            "channelId": {
               "type": "int32",
               "id": 5
             }
@@ -48,9 +39,21 @@
         },
         "JoinTableRequest": {
           "fields": {
-            "user": {
-              "type": "User",
+            "userid": {
+              "type": "int64",
               "id": 1
+            },
+            "gameId": {
+              "type": "int32",
+              "id": 2
+            },
+            "tableType": {
+              "type": "int32",
+              "id": 3
+            },
+            "channelId": {
+              "type": "int32",
+              "id": 4
             }
           }
         },

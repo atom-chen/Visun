@@ -3,24 +3,15 @@ package room;
 option java_package = "com.beiyou.game.proto";
 option java_outer_classname = "RoomProto";
 
-
-enum CMD {
-    UNKNOWN           = 0;
-    JOIN_ROOM_REQ     = 30000;
-	JOIN_ROOM_RES     = 30001;
-    GET_FROM_GATE     = 30002;
-    SEND_TO_GATE      = 30003;
-}
-
-
 message User 
 {
-    int32 userid          = 1;
-	int32 tableType       = 2;
-    string tableId        = 3;
-    int32 gameNo          = 4;
-    int32 gameNum         = 5;
+    int64 userid     = 1;
+    int32 gameId     = 2;
+    int32 TableID    = 3;
+	int32 tableType  = 4; 
+	int32 channelId  = 5;
 }
+
 
 //分配策略模式
 enum AssignMode
@@ -33,12 +24,14 @@ enum AssignMode
 
 //所有请求接口
 message JoinTableRequest {
-	User  user    = 1;
+    int64 userid     = 1;
+	int32 gameId     = 2; 
+    int32 tableType  = 3; 
+    int32 channelId  = 4;	
 }
 
 //所有应答接口
 message JoinTableResponse {
     User       user        = 1; //玩家信息
-    AssignMode assignMode  = 2; //分房模式
-	
+    AssignMode assignMode  = 2; //分房模式	
 }

@@ -22,10 +22,10 @@ export default class GameUtil {
 		return chips;
 	}
 
-	public static flyChip(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number) {
+	public static flyChip(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number) {
 		if(!chipSpr) { return; }
 		chipSpr.setPosition(fromPos);
-		chipSpr.runAction( cc.moveTo(duration, toPos) );
+		chipSpr.runAction( cc.moveTo(duration, cc.v2(toPos.x, toPos.y)) );
 	}
 
 	public static flyChip2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, margin:any=null) {
@@ -38,7 +38,8 @@ export default class GameUtil {
 		this.flyChip(chipSpr, fromPos, toPos, duration);
 	}
 
-	public static getRandPos(parent:cc.Node, srcObj:cc.Node, dstObj:cc.Node, margin:any) : cc.Vec2{
+	public static getRandPos(parent:cc.Node, srcObj:cc.Node, dstObj:cc.Node, margin:any) : cc.Vec3
+	{
 		var szSrc = srcObj.getContentSize();
 		var szDst = dstObj.getContentSize();
 		var srcScale = srcObj.scale;

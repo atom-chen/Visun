@@ -21,5 +21,5 @@ export var room_packet_define = {
 }
 
 export class room_request {
-    public static JOIN_ROOM_REQ( data:{ user:any } ) { room_packet_define[30000].sendToChannel(ChannelDefine.hall, data, false); }
+    public static JOIN_ROOM_REQ( data:{ userid:number, gameId:number, tableType:number, channelId:number } ) { room_packet_define[30000].sendToChannel(ChannelDefine.hall, data, false); }
 }

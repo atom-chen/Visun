@@ -19,8 +19,8 @@ $root.hallgw = (function() {
     var hallgw = {};
 
     /**
-     * HallMsgId enum.
-     * @name hallgw.HallMsgId
+     * CMD enum.
+     * @name hallgw.CMD
      * @enum {string}
      * @property {number} Msg_Unknown=0 Msg_Unknown value
      * @property {number} Msg_GetUserInfoReq=20000 Msg_GetUserInfoReq value
@@ -37,7 +37,7 @@ $root.hallgw = (function() {
      * @property {number} Msg_BroadcastPopup=80002 Msg_BroadcastPopup value
      * @property {number} Msg_BroadcastGameConfigModify=80003 Msg_BroadcastGameConfigModify value
      */
-    hallgw.HallMsgId = (function() {
+    hallgw.CMD = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Msg_Unknown"] = 0;
         values[valuesById[20000] = "Msg_GetUserInfoReq"] = 20000;

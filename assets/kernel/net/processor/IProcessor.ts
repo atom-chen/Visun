@@ -16,7 +16,9 @@ export default interface IProcessor {
     sendMessage(cmd:number|string, info:any) : boolean;
     onrecvBuff(buff:any) : void;
     
+    setHeartbeatFunc(func:Function) : void;
     sendHeartBeat() : void;
+    
     setPaused(bPause:boolean) : void;
     flushSendlist() : void;
     flushRecvlist() : void;

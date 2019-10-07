@@ -13,6 +13,7 @@ export default class BaseProcessor implements IProcessor {
 	protected _send_list = [];
 	protected _fire_list = [];
 	protected _cmds = {};
+	protected _heatBeatFunc: Function = null;
 	
 
 	public getDispatcher() : SingleDispatcher
@@ -123,8 +124,13 @@ export default class BaseProcessor implements IProcessor {
 		cc.log("子类须重载该方法");
 	}
 
-	sendHeartBeat() : void
+	public setHeartbeatFunc(func:Function) {
+		this._heatBeatFunc = func;
+	}
+
+	public sendHeartBeat() : void
 	{
-		cc.log("子类须重载该方法");
+		if(this._heatBeatFunc)
+			this._heatBeatFunc();
 	}
 }

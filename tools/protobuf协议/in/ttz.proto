@@ -64,7 +64,7 @@ message UserReady {
 
 /*********************  请求对象 ************************/
 //加入桌子
-//JOIN_TABLE				   = 2002
+//JOIN_TABLE_Req			   = 40000;
 message JoinTableRequest {
 	string sid                  = 1; //
 	int32 tableType             = 2;
@@ -97,7 +97,7 @@ message JoinTableResponse {
 }
 
 //玩家准备
-//USER_READY				   = 2006;
+//USER_READY_Req			   = 40006;
 message UserReadyRequest {
 
 }
@@ -116,7 +116,7 @@ message ShowCardRequest {
 }
 
 //玩家配牌请求
-//SET_CARDS_TEST = 20000;
+//SET_CARDS_TEST               = 41000;
 message SetCardsTest
 {
     int32 gameId = 1;
@@ -127,13 +127,13 @@ message SetCardsTest
 }
 
 //抢庄
-//QIANG_ZHUANG                 = 2024;
+//QIANG_ZHUANG_Req             = 40024;
 message QiangZhuangRequest {
      int32 qiang              = 1; //
 }
 
 //下注
-//BET                          = 2012;
+//BET_Req                      = 40012;
 message BetRequest {
    int32 betCoin               = 1; //
 }
@@ -156,13 +156,13 @@ message BetResponse {
 
 
 //重新连接
-//USER_RECONNECT               = 2030;
+//USER_RECONNECT_Req           = 40029;
 message UserReconnectRequest {
       int32 userId            = 1; //
 }
 
 //玩家退出
-//USER_QUIT					   = 2044;
+//USER_QUIT_Req				   = 40043;
 message UserQuitRequest {
 
 }
@@ -184,7 +184,7 @@ message MessageRequest {
 }
 
 //用户退到后台
-//USER_ONBACK                  = 2080;
+//USER_ONBACK_Req              = 40080;
 message UserOnBackRequest {
 	int32 leaveState		 = 1;//0:在线,1:离线
 }
@@ -398,54 +398,61 @@ message Request {
 
       UNKNOWN                      = 0;
 
-      HALL_REFRESH_COIN            = 100;   //HallRefreshCoinRequest, HallRefreshCoinResponse
-      QIANG_ZHUANG                 = 2024;  //抢庄 QiangZhuangRequest, QiangZhuangResponse
-      SEND_ZHUANG                  = 2023;  //推送庄家信息   TableInfoResponse
-      BET                          = 2012;  //下注  BetRequest, BetResponse
+      QIANG_ZHUANG_Req             = 40024;  //抢庄 QiangZhuangRequest,
+      QIANG_ZHUANG_Resp            = 40025;  //QiangZhuangResponse
 
-      JOIN_TABLE				   = 2002;	 //加入桌子 JoinTableRequest, JoinTableResponse
-      SEND_JOIN_TABLE			   = 2003;	 //加入桌子返回消息 SendJoinTableResponse
+      SEND_ZHUANG                  = 40023;  //推送庄家信息   TableInfoResponse
 
-	  USER_READY				   = 2006;	 //玩家点击准备请求 UserReadyRequest
-	  SEND_USER_READY			   = 2007;	 //玩家点击准备返回 SendUserReadyResponse
-	  SHOW_CARD                    = 2010;  //亮牌 ShowCardRequest, ShowCardResponse
+      BET_Req                      = 40012;  //下注  BetRequest,
+      BET_Resp                     = 40013;  //BetResponse
 
-	 SEND_USER_INFO                = 2058;  //推送玩家信息 TableInfoResponse
-     SEND_USER_CARD                = 2059; //推送 提示 和手牌
+      JOIN_TABLE_Req			   = 40000;	 //加入桌子 JoinTableRequest,
+      JOIN_TABLE_Resp              = 40001;  //JoinTableResponse
 
-	  SEND_CARDS				   = 2009;	 //推送给每个玩家发牌 SendCardsResponse
-      USER_RECONNECT               = 2030;   //玩家重连 UserReconnectRequest, UserReconnectResponse
-	  SEND_RECONNECT_QUIT		   = 2035;  //玩家重连回到大厅 SendReconnectQuitResponse
-      SEND_USER_RECONNECT          = 2031;   //推送重连信息 SendUserReconnectResponse
 
-	  USER_QUIT					   = 2044;   //玩家退出 UserQuitRequest, UserQuitResponse
-	  SEND_USER_QUIT               = 2045;   //推送玩家退出 SendUserQuitResponse
+	  USER_READY_Req			   = 40006;	 //玩家点击准备请求 UserReadyRequest
+	  USER_READY_Resp              = 40007;  //UserReadyResponse
 
-	  MESSAGE					   = 2060;   //聊天 MessageRequest
-	  SEND_MESSAGE                 = 2061;   //推送聊天信息 SendMessageResponse
-	  SEND_COIN_REFRESH            = 2062;  //推送金币刷新 SendCoinRefreshResponse
-      USER_ONBACK                  = 2080;   //用户退到后台  UserOnBackRequest, UserOnBackResponse
-      SEND_USER_ONBACK             = 2081;   //退到后台 SendUserOnBackResponse
 
-	  SEND_DIAMOND_CHANGE		   = 2071;   //推送钻石变化 SendDiamondChangeResponse
+	  SHOW_CARD_Req                = 40010;  //亮牌 ShowCardRequest,
+	  SHOW_CARD_Resp               = 40011;  //ShowCardResponse
 
-      DELAY_CHECK                  = 20010;  //客户端延时检测  DelayCheckRequest, DelayCheckResponse
 
-      Get_User_Info				   = 2046;	 //获取同桌玩家信息
-      //PUSH_REFRESH_COIN            = 2501;   // SendRefreshCoindRequest, SendRefreshCoinResponse
+     SEND_USER_CARD                = 40059; //推送 提示 和手牌
 
-      SEND_ROUND_RESULT            = 2015;  //推送回合结算 SendRoundResultResponse
-      FORCE_OFFLINE                = 3000;    //
-      DELAYQUIT_OFFLINE_RESP       = 3003;    //超时踢出
-      KICKEDOUT                    = 4001;
-      SEND_NOTICE_CLIENT_DISMISS   = 21002;	 //通知玩家  SendNoticeClientDismissResponse
+	  SEND_CARDS				   = 40009;	 //推送给每个玩家发牌 SendCardsResponse
 
-	  SEND_REMAIN_TIME			= 20015; //推送倒计时  SendRemainTimeResponse
-	  SEND_USERQUIT_BY_ADMIN		= 21003; //通知客户端有人被后台踢出  SendUserQuitByAdminResponse
+      USER_RECONNECT_Req           = 40029;   //玩家重连 UserReconnectRequest,
+      USER_RECONNECT_Resp          = 40030;   //UserReconnectResponse
 
-      SEND_HEART_BEAT				= 10000; //推送心跳 SendHeartBeatResponse
-      NOTICE_PUSH_RESP              = 30002;
-      SET_CARDS_TEST                = 20000;
+	  SEND_RECONNECT_QUIT		   = 40035;  //玩家重连回到大厅 SendReconnectQuitResponse
+
+      SEND_USER_RECONNECT          = 40033;   //推送重连信息 SendUserReconnectResponse
+
+	  USER_QUIT_Req				   = 40043;   //玩家退出 UserQuitRequest,
+	  USER_QUIT_Resp               = 40044;   //UserQuitResponse
+
+	  SEND_USER_QUIT               = 40045;   //推送玩家退出 SendUserQuitResponse
+
+
+      USER_ONBACK_Req              = 40080;   //用户退到后台  UserOnBackRequest,
+      USER_ONBACK_Resp             = 40081;   //UserOnBackResponse
+
+      SEND_USER_ONBACK             = 40082;   //退到后台 SendUserOnBackResponse
+
+
+	  SEND_DIAMOND_CHANGE		   = 40071;   //推送钻石变化 SendDiamondChangeResponse
+
+      SEND_ROUND_RESULT            = 40015;  //推送回合结算 SendRoundResultResponse
+
+      FORCE_OFFLINE_Resp           = 40004;    //
+      FORCE_OFFLINE_Req            = 40005;
+
+      DELAYQUIT_OFFLINE_RESP       = 40032;    //超时踢出
+
+	  SEND_REMAIN_TIME			   = 40050; //推送倒计时  SendRemainTimeResponse
+
+      SET_CARDS_TEST               = 41000;
     }
     CMD   cmd                                           = 1;      //访问接口
     JoinTableRequest joinTableRequest          		    = 2;     //加入桌子

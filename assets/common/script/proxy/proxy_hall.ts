@@ -15,7 +15,7 @@ var proxy_hall = {
 		LoginMgr.getInstance().onGateChange(wsAddr);
 	},
 
-	[login_msgs.Msg_UserLogInResp] : function(param:any) {
+	[login_msgs.UserLogInResp] : function(param:any) {
 		LogicCenter.getInstance().init();
 		
 		UIManager.toast("登录成功");

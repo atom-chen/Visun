@@ -139,20 +139,20 @@ message s2c_foucedOffline
 }
 
 //超时退出..
-// DELAYQUIT_OFFLINE_RESP = 3003;
+// DELAYQUIT_OFFLINE_RESP= 40124;
 message s2c_delayQuitOffline
 {
     int32 userId = 1;
 }
 
-// PUSH_TABLE_INFO_RESP = 2009; 
+// PUSH_TABLE_INFO_RESP = 40125; 
 message s2c_pushTableInfo
 {
     TableInfo tableInfo = 1;
 }
 
 /** 推送延时时间 */
-// PUSH_REMAINTIME_RESP = 20015;
+// PUSH_REMAINTIME_RESP = 40126;
 message s2c_pushRemainTime
 {
     int32 time = 1;             // 剩余时间
@@ -161,14 +161,14 @@ message s2c_pushRemainTime
 }
 
 // 要牌
-// ADD_CARDS_REQ = 2010
+// ADD_CARDS_REQ = 40100
 message c2s_addCard
 {
     int32 addPos = 1;
     int32 addIndex = 2;
 }
 
-// ADD_CARDS_RESP = 2011
+// ADD_CARDS_RESP = 40101
 message s2c_addCard
 {
     TableInfo tableInfo = 1;
@@ -179,14 +179,14 @@ message s2c_addCard
     int32 index = 6;
 }
 
-// BET_REQ = 2012
+// BET_REQ = 40102
 message c2s_bet
 {
     int32 betPos = 1;          // 下注位置
     int32 betCoin = 2;        // 下注金额
 }
 
-// BET_RESP = 2013
+// BET_RESP = 40103
 message s2c_bet
 {
     TableInfo tableInfo = 1;
@@ -196,7 +196,7 @@ message s2c_bet
     int32 betCoin = 5;        // 下注金额
 }
 
-// PUSH_ROUND_RESULT_RESP = 2015
+// PUSH_ROUND_RESULT_RESP = 40104
 message s2c_roundResult
 {
     TableInfo tableInfo = 1;
@@ -206,14 +206,14 @@ message s2c_roundResult
 
 }
 
-// JOIN_TABLE_REQ = 20006
+// JOIN_TABLE_REQ = 40000
 message c2s_joinTable
 {
     string sid= 1;                      // 登入时返回
     int32 tableType = 2;                // 进入房间的下表   从1 开始
 }
 
-// JOIN_TABLE_RESP = 20007
+// JOIN_TABLE_RESP = 40001
 message s2c_joinTable
 {
     TableInfo tableInfo = 1;
@@ -221,14 +221,14 @@ message s2c_joinTable
 }
 
 /** 闲家分牌请求 */
-// DEAL_REQ = 2024
+// DEAL_REQ = 40105
 message c2s_dealCard
 {
     int32 dealPos = 1;
 }
 
 /** 闲家分牌返回 */
-// DEAL_RESP = 2025
+// DEAL_RESP = 40106
 message s2c_dealCard
 {
     TableInfo tableInfo = 1;
@@ -238,14 +238,14 @@ message s2c_dealCard
     int32 index = 5;
 }
 
-// DOUBLE_REQ = 2016;
+// DOUBLE_REQ  = 40107;
 message c2s_double
 {
     int32 doublePos = 1;
     int32 doubleIndex = 2;
 }
 	/** 闲家双倍返回 */
-// DOUBLE_RESP = 2017;
+// DOUBLE_RESP = 40108;
 message s2c_double
 {
     TableInfo tableInfo = 1;
@@ -256,14 +256,14 @@ message s2c_double
 }
 
 // 闲家买保险
-// INSURE_REQ = 2018
+// INSURE_REQ = 40109
 message c2s_insure
 {
     int32 insure = 1;
     int32 insurePos = 2;
 }
 /** 闲家保险返回 */
-// INSURE_RESP = 2019
+// INSURE_RESP= 40110
 message s2c_insure
 {
     TableInfo tableInfo = 1;
@@ -287,27 +287,27 @@ message s2c_noticePush
     // 原样返回
 }
 
-// PUSH_USER_RECONNECT_REQ = 2030;
+// PUSH_USER_RECONNECT_REQ  = 40111;
 message c2s_reconnect
 {
     int32 userId = 1;
 }
 
-// PUSH_USER_RECONNECT_RESP = 2031
-// PUSH_RECONNECT_QUIT_RESP = 2035 房间不存在发送此消息号 ------- 返回大厅
-// PUSH_RECONNECT_DATA_RESP = 2033 重连数据
+//PUSH_USER_RECONNECT_RESP = 40112
+// PUSH_RECONNECT_QUIT_RESP= 40113 房间不存在发送此消息号 ------- 返回大厅
+// PUSH_RECONNECT_DATA_RESP= 40114 重连数据
 message s2c_reconnectData
 {
     TableInfo tableInfo = 1;
 }
-// PUSH_USER_RECONNECT_RESP = 2031
+//PUSH_USER_RECONNECT_RESP = 40112
 message s2c_reconnect
 {
     int32 userId = 1;
     int32 online = 2;
 }
 
-// STOP_CARDS_REQ = 2020;
+// STOP_CARDS_REQ = 40115;
 message c2s_stopCard
 {
     int32 stopPos = 1;
@@ -315,7 +315,7 @@ message c2s_stopCard
 }
 
 /** 玩家停牌返回2021 */
-// STOP_CARDS_RESP = 2021
+// STOP_CARDS_RESP = 40116
 message s2c_stopCard
 {
     TableInfo tableInfo = 1;
@@ -325,23 +325,23 @@ message s2c_stopCard
     int32 index = 5;
 }
 
-// USER_ONBACK_REQ = 2080;
+// USER_ONBACK_REQ = 40117;
 message c2s_userOnback
 {
     int32 onback = 1;
 }
-// USER_ONBACK_RESP = 2081
+// USER_ONBACK_RESP = 40118
 message s2c_userOnback
 {
     Reply ret = 1;
 }
 
-// USER_QUIT_REQ = 2044;
+// USER_QUIT_REQ= 40119;
 message c2s_userQuit
 {
 
 }
-// USER_QUIT_RESP = 2045
+// USER_QUIT_RESP = 40120
 message s2c_userQuit
 {
     int32 userId = 1;
@@ -350,7 +350,7 @@ message s2c_userQuit
     string  tableId = 4;
 }
 
-// USER_READY_REQ = 2106;
+// USER_READY_REQ = 40121;
 message c2s_userReady
 {
     int32 tableType = 1;
@@ -358,14 +358,14 @@ message c2s_userReady
 
     /** 玩家点击准备返回 2107 */
     //给客户端播放刷新匹配时间动画
-// USER_READY_RESP = 2107
+// USER_READY_RESP= 40122
 message s2c_userReady
 {
     TableInfo tableInfo = 1;
     int32 userId = 2;
 }
 
-// SETCARDSTEST = 20000;
+// SETCARDSTEST = 40128;
 message c2s_setCardsTest
 {
     int32 gameId = 1;           // gameid
@@ -375,7 +375,7 @@ message c2s_setCardsTest
     string extraData = 5;
 }
 
-// START_FANPAI_RESP = 4001;
+// START_FANPAI_RESP = 40129;
 message s2c_StartFanpai
 {
 }
@@ -389,74 +389,79 @@ message Request {
           /**后台手动踢出用户*/
         ADMIN_KICKEDOUT = 200;
 
-        // 玩家要牌
-        ADD_CARDS_REQ = 2010;
-        ADD_CARDS_RESP = 2011;
-        // 下注
-        BET_REQ = 2012;
-        BET_RESP = 2013;
-
-        //结算
-        PUSH_ROUND_RESULT_RESP = 2015;
-
-        // 加入桌子
-        JOIN_TABLE_REQ = 20006;
-        JOIN_TABLE_RESP = 20007;
-
-        // 闲家分牌
-        DEAL_REQ = 2024;
-        DEAL_RESP = 2025;
-
-        // 闲家双倍
-        DOUBLE_REQ = 2016;
-        DOUBLE_RESP = 2017;
-
-        // 闲家买保险
-        INSURE_REQ = 2018;
-        INSURE_RESP = 2019;
-        // 
-        NOTICE_PUSH_REQ = 30002;
-        NOTICE_PUSH_RESP = 30003;
-        // 重连
-        PUSH_USER_RECONNECT_REQ = 2030;
-        PUSH_USER_RECONNECT_RESP = 2031;
-        PUSH_RECONNECT_QUIT_RESP = 2035;            // 房间不存在发送此消息号 ------- 返回大厅
-        PUSH_RECONNECT_DATA_RESP = 2033;            // 重连数据
-        // 停牌
-        STOP_CARDS_REQ = 2020;
-        STOP_CARDS_RESP = 2021;
-        //
-        USER_ONBACK_REQ = 2080;
-        USER_ONBACK_RESP = 2081;
-        // 玩家退出
-        USER_QUIT_REQ = 2044;
-        USER_QUIT_RESP = 2045;
-        // 玩家准备
-        USER_READY_REQ = 2106;
-        USER_READY_RESP = 2107;
         
-        // 游戏发牌
-        SEND_USERCARD_RESP = 2027;
-
         /**刷新游戏金币*/ // 接受
         HALL_REFRESH_COIN = 100;
 
         //通知刷新金币    // 推送
         PUSH_REFRESH_COIN = 2501;
 
-        DELAYQUIT_OFFLINE_RESP = 3003;
+        // 
+        NOTICE_PUSH_REQ = 30002;
+        NOTICE_PUSH_RESP = 30003;
 
-        PUSH_TABLE_INFO_RESP = 2009;                    // 游戏开始返回   推送桌子信息   s2c_pushTableInfo sendpushTableInfo
+        
+        // 加入桌子
+        JOIN_TABLE_REQ = 40000;
+        JOIN_TABLE_RESP = 40001;
+
+        // 玩家要牌
+        ADD_CARDS_REQ = 40100;
+        ADD_CARDS_RESP = 40101;
+        // 下注
+        BET_REQ = 40102;
+        BET_RESP = 40103;
+
+        //结算
+        PUSH_ROUND_RESULT_RESP = 40104;
+
+        // 闲家分牌
+        DEAL_REQ = 40105;
+        DEAL_RESP = 40106;
+
+        // 闲家双倍
+        DOUBLE_REQ  = 40107;
+        DOUBLE_RESP = 40108;
+
+        // 闲家买保险
+        INSURE_REQ = 40109;
+        INSURE_RESP= 40110;
+
+        // 重连
+        PUSH_USER_RECONNECT_REQ  = 40111;
+        PUSH_USER_RECONNECT_RESP = 40112;
+        PUSH_RECONNECT_QUIT_RESP= 40113;            // 房间不存在发送此消息号 ------- 返回大厅
+        PUSH_RECONNECT_DATA_RESP= 40114;            // 重连数据
+        // 停牌
+        STOP_CARDS_REQ = 40115;
+        STOP_CARDS_RESP = 40116;
+        //
+        USER_ONBACK_REQ = 40117;
+        USER_ONBACK_RESP = 40118;
+        // 玩家退出
+        USER_QUIT_REQ = 40119;
+        USER_QUIT_RESP = 40120;
+        // 玩家准备
+        USER_READY_REQ = 40121;
+        USER_READY_RESP= 40122;
+        
+        // 游戏发牌
+        SEND_USERCARD_RESP = 40123;
+
+
+        DELAYQUIT_OFFLINE_RESP= 40124;
+
+        PUSH_TABLE_INFO_RESP = 40125;                    // 游戏开始返回   推送桌子信息   s2c_pushTableInfo sendpushTableInfo
         /** 推送延时时间 */
-        PUSH_REMAINTIME_RESP = 20015;
+        PUSH_REMAINTIME_RESP = 40126;
         /**推送保险完成,要牌开始 */
-        PUSH_INSURECOMP_RESP = 2029;
+        PUSH_INSURECOMP_RESP = 40127;
         
         /* 玩家配牌请求 */
-        SETCARDSTEST = 20000;
+        SETCARDSTEST = 40128;
 
         // 通知前端开始翻牌 并且有预留两秒
-        START_FANPAI_RESP = 4001;
+        START_FANPAI_RESP = 40129;
     }
 
     CMD   cmd                               = 1;      //访问接口
