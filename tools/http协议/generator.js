@@ -86,6 +86,10 @@ function gen_define_file(rules, outPath, clsName) {
 function gen_rule_file(srcFile, outPath) {
 	const data = fs.readFileSync(srcFile, 'utf8').split('\n');
 	data.splice(data.length - 1, 1, 'export default http_rules;');
+	var content = "//---------------------------------------------------------\n";
+	content += "// 该文件自动生成，不要手动更改\n"
+	content += "//---------------------------------------------------------\n";
+	data[0] = content + data[0];
 	fs.writeFileSync(outPath, data.join('\n'), 'utf8');
 }
 
