@@ -87,7 +87,7 @@ ptoJs = ptoJs["nested"][mudname]["nested"];
 //-----------------------------------------------------------------
 // 第二步： 生成代码
 //-----------------------------------------------------------------
-var outpath = "../../assets/common/script/proxy/net_" + pbfilename + ".ts";
+var outpath = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
 var outstr = "//---------------------------------\n";
 outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";

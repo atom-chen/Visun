@@ -49,7 +49,7 @@ function gen_define_file(rules, outPath, clsName) {
 	var content = "//---------------------------------------------------------\n";
 	content += "// 该文件自动生成，不要手动更改\n"
 	content += "//---------------------------------------------------------\n";
-	content += "import HttpCore from \"../../../../kernel/net/HttpCore\";\n";
+	content += "import HttpCore from \"../../../kernel/net/HttpCore\";\n\n";
 	content += "export default class " + clsName +"{" + "\n";
 
 	for(var i=0; i<rules.length; i++){
@@ -90,5 +90,5 @@ function gen_rule_file(srcFile, outPath) {
 }
 
 //gen_declare_file(hall_rules, "../../HallRequest.d.ts");
-gen_rule_file("./http_rules.js", "../../assets/resources/lobby/script/proxy/rules/http_rules.ts");
-gen_define_file(hall_rules, "../../assets/resources/lobby/script/proxy/HallRequest.ts", "HallRequest");
+gen_rule_file("./http_rules.js", "../../assets/common/script/proto/http_rules.ts");
+gen_define_file(hall_rules, "../../assets/common/script/proto/HallRequest.ts", "HallRequest");

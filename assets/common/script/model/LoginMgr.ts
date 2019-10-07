@@ -10,10 +10,10 @@ import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import proxy_hall from "../proxy/proxy_hall";
 import CHandler from "../../../kernel/basic/CHandler";
-import { hallgw_packet_define } from "../proxy/net_hall";
-import { login_msgs, login_packet_define, login_request } from "../proxy/net_UserLoginSvc";
-import { room_packet_define } from "../proxy/net_RoomProto";
 import LoginUser from "./LoginUser";
+import { login_msgs, login_request, login_packet_define } from "../proto/net_UserLoginSvc";
+import { hallgw_packet_define } from "../proto/net_hall";
+import { room_packet_define } from "../proto/net_RoomProto";
 
 
 export default class LoginMgr extends ModelBase {

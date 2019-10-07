@@ -1,5 +1,3 @@
-import { hallgw_msgs, hallgw_request } from "./net_hall";
-import { login_msgs, login_request } from "./net_UserLoginSvc";
 import UIManager from "../../../kernel/view/UIManager";
 import LoginMgr from "../model/LoginMgr";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
@@ -7,6 +5,8 @@ import TimerManager from "../../../kernel/timer/TimerManager";
 import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "../model/LoginUser";
 import LogicCenter from "../model/LogicCenter";
+import { login_msgs } from "../proto/net_UserLoginSvc";
+import { hallgw_request, hallgw_msgs } from "../proto/net_hall";
 
 var proxy_hall = {
 

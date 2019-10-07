@@ -1,1 +1,0 @@
-python gen_request.py bjl game
