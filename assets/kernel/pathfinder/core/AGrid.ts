@@ -9,7 +9,7 @@ import ANode from "./ANode";
  * @param {Array<Array<(number|boolean)>>} [matrix] - A 0-1 matrix
  *     representing the walkable status of the nodes(0 or false for walkable).
  *     If the matrix is not supplied, all the nodes will be walkable.  */
-export default class Grid {
+export default class AGrid {
     width:number;
     height:number;
     nodes:any;
@@ -223,7 +223,7 @@ export default class Grid {
     
     /**
      * Get a clone of this grid.
-     * @return {Grid} Cloned grid.
+     * @return {AGrid} Cloned grid.
      */
     clone() {
         var i, j,
@@ -232,7 +232,7 @@ export default class Grid {
             height = this.height,
             thisNodes = this.nodes,
     
-            newGrid = new Grid(width, height),
+            newGrid = new AGrid(width, height),
             newNodes = new Array(height);
     
         for (i = 0; i < height; ++i) {

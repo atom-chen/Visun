@@ -1,5 +1,5 @@
 import ANode from './core/ANode';
-import Grid from './core/Grid';
+import AGrid from './core/AGrid';
 import Util from './core/Util';
 import DiagonalMovement from './core/DiagonalMovement';
 import Heuristic from './core/Heuristic';
@@ -15,20 +15,21 @@ import IDAStarFinder from './finders/IDAStarFinder';
 import JumpPointFinder from './finders/JumpPointFinder';
 
 var PF = {
-    'Node'                      : ANode,
-    'Grid'                      : Grid,
-    'Util'                      : Util,
-    'DiagonalMovement'          : DiagonalMovement,
-    'Heuristic'                 : Heuristic,
-    'AStarFinder'               : AStarFinder,
-    'BestFirstFinder'           : BestFirstFinder,
-    'BreadthFirstFinder'        : BreadthFirstFinder,
-    'DijkstraFinder'            : DijkstraFinder,
-    'BiAStarFinder'             : BiAStarFinder,
-    'BiBestFirstFinder'         : BiBestFirstFinder,
-    'BiBreadthFirstFinder'      : BiBreadthFirstFinder,
-    'BiDijkstraFinder'          : BiDijkstraFinder,
-    'IDAStarFinder'             : IDAStarFinder,
-    'JumpPointFinder'           : JumpPointFinder,
+	ANode					: ANode,
+	Grid					: AGrid,
+	Util					: Util,
+	DiagonalMovement		: DiagonalMovement,
+	Heuristic				: Heuristic,
+	AStarFinder				: AStarFinder,
+	BestFirstFinder			: BestFirstFinder,
+	BreadthFirstFinder		: BreadthFirstFinder,
+	DijkstraFinder			: DijkstraFinder,
+	BiAStarFinder			: BiAStarFinder,
+	BiBestFirstFinder		: BiBestFirstFinder,
+	BiBreadthFirstFinder	: BiBreadthFirstFinder,
+	BiDijkstraFinder		: BiDijkstraFinder,
+	IDAStarFinder			: IDAStarFinder,
+	JumpPointFinder			: JumpPointFinder,
 };
+
 export default PF;
