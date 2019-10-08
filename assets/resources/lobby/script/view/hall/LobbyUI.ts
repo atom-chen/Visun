@@ -13,7 +13,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_UserLoginSvc";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
-
+//import PF from "../../../../../kernel/pathfinder/PathFinding";
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,6 +34,17 @@ export default class LobbyUI extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.UserLogInResp, this.refleshUI, this);
 
 		LoginMgr.getInstance().loginAsYouke();
+
+		// var matrix = [
+		// 	[0, 0, 0, 1, 0],
+		// 	[1, 0, 0, 0, 1],
+		// 	[0, 0, 1, 0, 0],
+		// ];
+		// var grid = new PF.Grid(matrix, null);
+		// var finder = new PF.AStarFinder(null);
+		// var path = finder.findPath(1, 2, 4, 2, grid);
+		// cc.log("**********************");
+		// cc.log(path);
 	}
 
 	private refleshGameList() {

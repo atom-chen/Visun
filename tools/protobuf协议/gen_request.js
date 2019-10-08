@@ -252,7 +252,7 @@ var outpath = "../../assets/common/script/proxy/net_" + pbfilename + ".ts";
 var outstr = "//---------------------------------\n";
 outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
-outstr += "import { " + mudname + " } from \"../proto/" + pbfilename + "\";\n";
+outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
 outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
 outstr += "import PacketDefine from \"../../../kernel/net/PacketDefine\";\n\n\n";
 

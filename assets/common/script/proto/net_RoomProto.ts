@@ -1,7 +1,7 @@
 //---------------------------------
 //该文件自动生成，请勿手动更改
 //---------------------------------
-import { room } from "../proto/RoomProto";
+import { room } from "./RoomProto";
 import ChannelDefine from "../definer/ChannelDefine";
 import NetPacket from "../../../kernel/net/NetPacket";
 

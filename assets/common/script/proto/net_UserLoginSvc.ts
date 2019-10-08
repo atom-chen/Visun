@@ -1,7 +1,7 @@
 //---------------------------------
 //该文件自动生成，请勿手动更改
 //---------------------------------
-import { login } from "../proto/UserLoginSvc";
+import { login } from "./UserLoginSvc";
 import ChannelDefine from "../definer/ChannelDefine";
 import NetPacket from "../../../kernel/net/NetPacket";
 
