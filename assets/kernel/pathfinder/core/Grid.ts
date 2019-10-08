@@ -1,5 +1,5 @@
 import DiagonalMovement from "./DiagonalMovement";
-import Node from "./Node";
+import ANode from "./ANode";
 
 /**
  * The Grid class, which serves as the encapsulation of the layout of the nodes.
@@ -58,7 +58,7 @@ export default class Grid {
         for (i = 0; i < height; ++i) {
             nodes[i] = new Array(width);
             for (j = 0; j < width; ++j) {
-                nodes[i][j] = new Node(j, i);
+                nodes[i][j] = new ANode(j, i);
             }
         }
     
@@ -143,7 +143,7 @@ export default class Grid {
      *  When allowDiagonal is true, if offsets[i] is valid, then
      *  diagonalOffsets[i] and
      *  diagonalOffsets[(i + 1) % 4] is valid.
-     * @param {Node} node
+     * @param {ANode} node
      * @param {DiagonalMovement} diagonalMovement
      */
     getNeighbors(node, diagonalMovement) {
@@ -238,7 +238,7 @@ export default class Grid {
         for (i = 0; i < height; ++i) {
             newNodes[i] = new Array(width);
             for (j = 0; j < width; ++j) {
-                newNodes[i][j] = new Node(j, i, thisNodes[i][j].walkable);
+                newNodes[i][j] = new ANode(j, i, thisNodes[i][j].walkable);
             }
         }
     

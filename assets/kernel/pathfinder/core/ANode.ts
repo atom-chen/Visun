@@ -7,7 +7,7 @@
  * @param {number} y - The y coordinate of the node on the grid.
  * @param {boolean} [walkable] - Whether this node is walkable.
  */
-export default class Node {
+export default class ANode {
     x:number;
     y:number;
     walkable:boolean;

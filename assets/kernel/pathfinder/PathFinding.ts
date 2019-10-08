@@ -1,4 +1,4 @@
-import Node from './core/Node';
+import ANode from './core/ANode';
 import Grid from './core/Grid';
 import Util from './core/Util';
 import DiagonalMovement from './core/DiagonalMovement';
@@ -15,7 +15,7 @@ import IDAStarFinder from './finders/IDAStarFinder';
 import JumpPointFinder from './finders/JumpPointFinder';
 
 var PF = {
-    'Node'                      : Node,
+    'Node'                      : ANode,
     'Grid'                      : Grid,
     'Util'                      : Util,
     'DiagonalMovement'          : DiagonalMovement,
