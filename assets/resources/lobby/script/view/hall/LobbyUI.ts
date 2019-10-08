@@ -41,6 +41,7 @@ export default class LobbyUI extends BaseComponent {
 			var cfg = GameConfig[gameId];
 			var bton = cc.instantiate(this.gameBtn);
 			bton["gameId"] = gameId;
+			bton.getChildByName("gameName").getComponent(cc.Label).string = cfg.name;
 			CommonUtil.addClickEvent(bton, function(){ 
 				GameManager.getInstance().enterGame(this.gameId);
 			}, bton);

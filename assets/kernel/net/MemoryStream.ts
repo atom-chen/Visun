@@ -142,7 +142,7 @@ export default class MemoryStream {
 		
 		var buf = new Uint8Array(this.buffer, offset);
 		var i = 0;
-		for(var idx=0; idx<value.length; idx++)
+		for(var idx=0, len=value.length; idx<len; idx++)
 		{
 			buf[i++] = value.charCodeAt(idx);
 		}
