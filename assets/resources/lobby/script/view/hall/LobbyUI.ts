@@ -14,6 +14,7 @@ import EventCenter from "../../../../../kernel/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_UserLoginSvc";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
+import game_btn from "./game_btn";
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,17 +35,6 @@ export default class LobbyUI extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.UserLogInResp, this.refleshUI, this);
 
 		LoginMgr.getInstance().loginAsYouke();
-
-		var matrix = [
-			[0, 0, 0, 1, 0],
-			[1, 0, 0, 0, 1],
-			[0, 0, 1, 0, 0],
-		];
-		var grid = new PF.Grid(matrix, null);
-		var finder = new PF.AStarFinder(null);
-		var path = finder.findPath(1, 2, 4, 2, grid);
-		cc.log("**********************");
-		cc.log(path);
 	}
 
 	private refleshGameList() {
@@ -52,7 +42,7 @@ export default class LobbyUI extends BaseComponent {
 			var cfg = GameConfig[gameId];
 			var bton = cc.instantiate(this.gameBtn);
 			bton["gameId"] = gameId;
-			bton.getChildByName("gameName").getComponent(cc.Label).string = cfg.name;
+			bton.getComponent(game_btn).setGameInfo(cfg);
 			CommonUtil.addClickEvent(bton, function(){ 
 				GameManager.getInstance().enterGame(this.gameId);
 			}, bton);
@@ -65,50 +55,36 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private initUiEvents() {
-		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
-			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
-			UIManager.openPopwnd(ViewDefine.EmailUI.path, null);
-			this.testProcedure();
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
-			UIManager.openPopwnd(ViewDefine.ShopUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
-			UIManager.openPopwnd(ViewDefine.KefuUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
-			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
-			UIManager.openPopwnd(ViewDefine.SpreadUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ 
-			UIManager.openPopwnd(ViewDefine.PersonUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_user, function(){ 
-			UIManager.openPopwnd(ViewDefine.LoginUI.path, null);
-		}, this);
-
-		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
-			Adaptor.setFullScreen(!Adaptor.isFullScreen());
-		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ UIManager.openPopwnd(ViewDefine.EmailUI.path, null); this.testProcedure(); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ UIManager.openPopwnd(ViewDefine.ShopUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ UIManager.openPopwnd(ViewDefine.KefuUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ UIManager.openPopwnd(ViewDefine.SpreadUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ UIManager.openPopwnd(ViewDefine.PersonUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_user, function(){ UIManager.openPopwnd(ViewDefine.LoginUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ Adaptor.setFullScreen(!Adaptor.isFullScreen()); }, this);
 	}
 
+
+	//----------- tests --------------------------------------------
 
 	private testSpine() {
 		UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {zIndex:10, x:-400, y:280, scale:0.5});
 	}
 
-
+	private testAStart() {
+		var matrix = [
+			[0, 0, 0, 1, 0],
+			[1, 0, 0, 0, 1],
+			[0, 0, 1, 0, 0],
+		];
+		var grid = new PF.Grid(matrix, null);
+		var finder = new PF.AStarFinder(null);
+		var path = finder.findPath(1, 2, 4, 2, grid);
+		cc.log("**********************");
+		cc.log(path);
+	}
 
 	private createProcedure(duration:number, name:string) {
 		var node = new Procedure();
