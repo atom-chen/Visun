@@ -12,6 +12,10 @@ export default class TcpChannel implements IChannel {
     private _curState:ConnState = ConnState.unconnect;
     private _name : string;
 
+    constructor(name:string) {
+        this._name = name;
+    }
+
     public setProcessor(porcessor: IProcessor): void 
     {
         
@@ -60,10 +64,6 @@ export default class TcpChannel implements IChannel {
 	{
 		return this._curState;
     }
-    
-    public setName(name:string) {
-		this._name = name;
-	}
 
 	public getName() : string {
 		return this._name;

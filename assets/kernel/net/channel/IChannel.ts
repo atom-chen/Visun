@@ -23,7 +23,6 @@ export default interface IChannel {
     sendBuff(buff:any) : boolean;
     getState() : ConnState;
     destroy() : void;
-    setName(name:string) : void;
     getName() : string;
     getProcessor() : IProcessor;
 }

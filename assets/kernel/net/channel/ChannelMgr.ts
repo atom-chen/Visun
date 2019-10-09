@@ -41,15 +41,14 @@ export default class ChannelMgr {
         }
 
         if(chanType === ChannelType.Ws){
-            this._channels[key] = new WsChannel;
+            this._channels[key] = new WsChannel(key);
         }
         else if(chanType === ChannelType.Tcp) {
-            this._channels[key] = new TcpChannel;
+            this._channels[key] = new TcpChannel(key);
         }
         else if(chanType === ChannelType.Http) {
-            this._channels[key] = new HttpChannel;
+            this._channels[key] = new HttpChannel(key);
         }
-        this._channels[key].setName(key);
 
         return this._channels[key];
     }

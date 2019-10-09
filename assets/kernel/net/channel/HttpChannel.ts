@@ -12,6 +12,10 @@ export default class HttpChannel implements IChannel {
     private _curState:ConnState = ConnState.unconnect;
     private _name : string;
 
+    constructor(name:string) {
+        this._name = name;
+    }
+
     public setProcessor(porcessor: IProcessor): void 
     {
         

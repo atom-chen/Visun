@@ -25,7 +25,8 @@ export default class WsChannel implements IChannel {
 	private _name : string;
 	private _heartTmr: any;
 
-	constructor() {
+	constructor(name:string) {
+		this._name = name;
 		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
 			this.setPaused(true);
 		}, this);
@@ -110,19 +111,19 @@ export default class WsChannel implements IChannel {
 	{
 		if(this._url === url && this._ws !== null) {
 			if(this._curState==ConnState.connecting){
-				cc.log(this._name, "connecting: ", url);
+				cc.log(this._name, "skip as connecting: ", url);
 				return;
 			}
 			else if(this._curState==ConnState.connectsucc){
-				cc.log(this._name, "connected: ", url);
+				cc.log(this._name, "skip as connected: ", url);
 				return;
 			}
 			else if(this._curState==ConnState.reconnecting){
-				cc.log(this._name, "reconnecting: ", url);
+				cc.log(this._name, "skip as reconnecting: ", url);
 				return;
 			}
 			else if(this._curState==ConnState.reconnectsucc){
-				cc.log(this._name, "reconnected: ", url);
+				cc.log(this._name, "skip as reconnected: ", url);
 				return;
 			}
 		}
@@ -323,11 +324,6 @@ export default class WsChannel implements IChannel {
 	public getState() : ConnState 
 	{
 		return this._curState;
-	}
-
-	public setName(name:string) : void 
-	{
-		this._name = name;
 	}
 
 	public getName() : string 
