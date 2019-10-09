@@ -62,7 +62,7 @@ export default class LobbyUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null); }, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ UIManager.openPopwnd(ViewDefine.SpreadUI.path, null); }, this);
 		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ UIManager.openPopwnd(ViewDefine.PersonUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_user, function(){ UIManager.openPopwnd(ViewDefine.LoginUI.path, null); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ UIManager.openPopwnd(ViewDefine.LoginUI.path, null); }, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ Adaptor.setFullScreen(!Adaptor.isFullScreen()); }, this);
 	}
 
