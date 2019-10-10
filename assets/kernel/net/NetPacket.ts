@@ -59,27 +59,9 @@ export default class NetPacket implements PacketInterface {
 			return { cmd:0, errCode:1, data:null };
 		}
 
-		//解析包头
 		var memStream = new MemoryStream(buff.length);
 		memStream.write_buffer(0, buff);
-
-		var cmd = memStream.read_uint32(0);
-		var errCode = memStream.read_int32(4);
-		var data = null;
-
-		//解析包体
-		if(errCode == 0){
-			if(this.data_struct!==null && this.data_struct!==undefined) {
-				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				data = this.data_struct.toObject(this.data_struct.decode(tmp), {defaults:true});
-			}
-		}
-		
-		return {
-			cmd : cmd,
-			errCode : errCode,
-			data : data
-		};
+		return this.unpackStream(memStream);
 	}
 
 	unpackStream(memStream:MemoryStream) : any
