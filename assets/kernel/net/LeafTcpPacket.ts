@@ -7,10 +7,12 @@ import MemoryStream from "./MemoryStream";
 import ChannelMgr from "./channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
 import {leafcomand} from "../../common/script/proto/leafcomand"
-import { HEAD_SIZE } from "../looker/KernelDefine";
 
 
-export default class LeafPacket implements PacketInterface{
+const HEAD_SIZE = 8;
+
+
+export default class LeafTcpPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
 	protected mainId: number;
@@ -56,8 +58,8 @@ export default class LeafPacket implements PacketInterface{
 		}
 		else {
 			var memStream = new MemoryStream(HEAD_SIZE);
-			memStream.write_uint32(0, this.cmd);
-			memStream.write_int32(4, 0);
+			memStream.write_uint32(0, HEAD_SIZE);
+			memStream.write_int32(4, this.cmd);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
 			return buffSend;
@@ -75,6 +77,16 @@ export default class LeafPacket implements PacketInterface{
 		var memStream = new MemoryStream(bytes.length);
 		memStream.write_buffer(0, bytes);
 
+		return this.unpackStream(memStream);
+	}
+
+	public unpackStream(memStream:MemoryStream) : any
+	{
+		if(memStream===undefined || memStream === null) {
+			return { cmd:0, errCode:1, data:null };
+		}
+
+		//解析包头
 		var totalLen = memStream.read_uint32(0);
 		var cmd = memStream.read_uint32(4);
 		var errCode = 0;
@@ -113,36 +125,36 @@ export default class LeafPacket implements PacketInterface{
 		};
 	}
 
-	public unpackStream(memStream:MemoryStream) : any
+	unpackBody(bytes:Uint8Array) : any
 	{
-		if(memStream===undefined || memStream === null) {
-			return { cmd:0, errCode:1, data:null };
+		if(bytes===null || bytes===undefined) {
+			return null;
 		}
-
-		//解析包头
-		var cmd = memStream.read_uint32(0);
-		var errCode = memStream.read_int32(4);
+		var MainID = 0;
+		var SubID = 0;
 		var data = null;
+		if(this.data_struct!==null && this.data_struct!==undefined) {
+			try {
+				var extdata = leafcomand.PacketData.decode(bytes);
+				var extInfo = leafcomand.PacketData.toObject(extdata, {defaults:true,longs:Number});
+				MainID = extInfo.MainID;
+				SubID = extInfo.SubID;
+				bytes = extInfo.TransData;
 
-		//解析包体
-		if(errCode == 0){
-			if(this.data_struct!==null && this.data_struct!==undefined) {
-				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				try{
-					var body = this.data_struct.decode(tmp);
-					data = this.data_struct.toObject(body, {defaults:true,longs:Number});
-				}
-				catch(err) {
-					cc.warn("unpack fail", cmd, err);
+				var body = this.data_struct.decode(bytes);
+				data = this.data_struct.toObject(body, {defaults:true,longs:Number});
+
+				return {
+					MainID : MainID,
+					SubID : SubID,
+					data : data
 				}
 			}
+			catch(err) {
+				cc.warn("unpack fail", err);
+			}
 		}
-		
-		return {
-			cmd : cmd,
-			errCode : errCode,
-			data : data
-		};
+		return null;
 	}
 
 	public sendToChannel(channelKey:string, data:any, bIsPbObj:boolean)

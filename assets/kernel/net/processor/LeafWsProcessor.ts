@@ -7,14 +7,13 @@ import MemoryStream from "../MemoryStream";
 import EventCenter from "../../event/EventCenter";
 import KernelEvent from "../../looker/KernelEvent";
 
+const HEAD_SIZE = 4;
 
-const HEAD_SIZE:number = 8;
-
-export default class ProtobufProcessor extends BaseProcessor {
+export default class LeafWsProcessor extends BaseProcessor {
 
 	private isShowDebug(cmd: number|string) : boolean
 	{
-		return cmd != 5000 && cmd != 5001;
+		return true;
 	}
 
 	public sendMessage(cmd: number | string, info: any): boolean 
@@ -41,7 +40,7 @@ export default class ProtobufProcessor extends BaseProcessor {
 		memStream.safe_write_buffer(0, bytes);
 
 		var cmd = memStream.read_uint32(0);
-		var errCode = memStream.read_int32(4);
+		var errCode = 0;
 
 		if(this.isShowDebug(cmd)) {
 			cc.log(this._channel.getName(), "[recv buff]");

@@ -182,12 +182,12 @@ export default class LoginMgr extends ModelBase {
 		//建立大厅通道 
 		var wsAddr = ServerConfig.leafServer;
 		cc.log("连接leaf", wsAddr);
-		var g_HallProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
+		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
-		channel_hall.setProcessor(g_HallProcessor);
-		g_HallProcessor.registProtocol(null);
-		g_HallProcessor.unregistAllCmds();
-		g_HallProcessor.registCmds(leaflogin_packet_define);
+		channel_hall.setProcessor(g_leafProcessor);
+		g_leafProcessor.registProtocol(null);
+		g_leafProcessor.unregistAllCmds();
+		g_leafProcessor.registCmds(leaflogin_packet_define);
 		channel_hall.connect( wsAddr, 0, 
 			new CHandler(this, ()=>{ 
 				

@@ -38,11 +38,11 @@ export enum ConnState {
 	reconnectfail,	//重连失败
 }
 
-export const HEAD_SIZE:number = 8;
-
 export enum ProcessorType {
 	Json,
 	Protobuff,
+	LeafTcp,
+	LeafWs,
 	Stream
 }
 

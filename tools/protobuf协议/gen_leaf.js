@@ -101,7 +101,7 @@ outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
 outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
 outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
-outstr += "import LeafPacket from \"../../../kernel/net/LeafPacket\";\n\n\n";
+outstr += "import LeafWsPacket from \"../../../kernel/net/LeafWsPacket\";\n\n\n";
 
 // Enum
 outstr += "export enum " + mudname + "_msgs {\n";
@@ -120,10 +120,10 @@ for(var enumKey in infos) {
 	var mainid = getMainId(enumKey);
 	var subid = getSubId(enumKey);
 	if(structName === "") {
-		outstr += "    " + cmdId + ": new LeafPacket(" + cmdId + ", " + "null" + ", " + mainid + ", " + subid + "),\n";
+		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + "null" + ", " + mainid + ", " + subid + "),\n";
 	}
 	else {
-		outstr += "    " + cmdId + ": new LeafPacket(" + cmdId + ", " + mudname+"."+structName + ", " + mainid + ", " + subid + "),\n";
+		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+structName + ", " + mainid + ", " + subid + "),\n";
 	}
 }
 outstr += "}\n\n";
