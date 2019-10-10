@@ -1,0 +1,275 @@
+{
+  "nested": {
+    "leaflogin": {
+      "nested": {
+        "Register": {
+          "fields": {
+            "Name": {
+              "type": "string",
+              "id": 1
+            },
+            "Password": {
+              "type": "string",
+              "id": 2
+            },
+            "SecurityCode": {
+              "type": "string",
+              "id": 3
+            },
+            "MachineCode": {
+              "type": "string",
+              "id": 4
+            },
+            "InvitationCode": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "RegisterResult": {
+          "fields": {
+            "State": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Hints": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "Login": {
+          "fields": {
+            "Account": {
+              "type": "string",
+              "id": 1
+            },
+            "Password": {
+              "type": "string",
+              "id": 2
+            },
+            "SecurityCode": {
+              "type": "string",
+              "id": 3
+            },
+            "MachineCode": {
+              "type": "string",
+              "id": 4
+            }
+          }
+        },
+        "ResResult": {
+          "fields": {
+            "State": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Hints": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "TaskItem": {
+          "fields": {
+            "TaskID": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Twice": {
+              "type": "uint32",
+              "id": 2
+            },
+            "Hints": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "TaskList": {
+          "fields": {
+            "Task": {
+              "rule": "repeated",
+              "type": "TaskItem",
+              "id": 1
+            }
+          }
+        },
+        "GameList": {
+          "fields": {
+            "Items": {
+              "rule": "repeated",
+              "type": "GameItem",
+              "id": 1
+            }
+          }
+        },
+        "UserInfo": {
+          "fields": {
+            "Name": {
+              "type": "string",
+              "id": 1
+            },
+            "Accounts": {
+              "type": "string",
+              "id": 2
+            },
+            "Password": {
+              "type": "string",
+              "id": 3
+            },
+            "FaceID": {
+              "type": "uint32",
+              "id": 4
+            },
+            "Gender": {
+              "type": "uint32",
+              "id": 5
+            },
+            "Age": {
+              "type": "uint32",
+              "id": 6
+            },
+            "Level": {
+              "type": "uint32",
+              "id": 7
+            },
+            "Money": {
+              "type": "int64",
+              "id": 8
+            },
+            "PassPortID": {
+              "type": "string",
+              "id": 9
+            },
+            "Compellation": {
+              "type": "string",
+              "id": 10
+            },
+            "AgentID": {
+              "type": "uint32",
+              "id": 11
+            },
+            "SpreaderGameID": {
+              "type": "uint32",
+              "id": 12
+            },
+            "ClientAddr": {
+              "type": "uint32",
+              "id": 13
+            },
+            "MachineCode": {
+              "type": "string",
+              "id": 14
+            }
+          }
+        },
+        "RoomInfo": {
+          "fields": {
+            "RoomNum": {
+              "type": "uint32",
+              "id": 1
+            },
+            "RoomKey": {
+              "type": "string",
+              "id": 2
+            },
+            "RoomName": {
+              "type": "string",
+              "id": 3
+            },
+            "Games": {
+              "type": "GameList",
+              "id": 4
+            }
+          }
+        },
+        "GameBaseInfo": {
+          "fields": {
+            "Type": {
+              "type": "uint32",
+              "id": 1
+            },
+            "KindID": {
+              "type": "uint32",
+              "id": 2
+            },
+            "Level": {
+              "type": "uint32",
+              "id": 3
+            },
+            "Name": {
+              "type": "string",
+              "id": 4
+            },
+            "EnterScore": {
+              "type": "uint32",
+              "id": 5
+            },
+            "LessScore": {
+              "type": "uint32",
+              "id": 6
+            }
+          }
+        },
+        "GameItem": {
+          "fields": {
+            "ID": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Info": {
+              "type": "GameBaseInfo",
+              "id": 2
+            }
+          }
+        },
+        "MasterInfo": {
+          "fields": {
+            "UserInfo": {
+              "type": "UserInfo",
+              "id": 1
+            },
+            "RoomsInfo": {
+              "rule": "repeated",
+              "type": "RoomInfo",
+              "id": 2
+            },
+            "Tasks": {
+              "type": "TaskList",
+              "id": 3
+            }
+          }
+        },
+        "ReqEnterRoom": {
+          "fields": {
+            "RoomNum": {
+              "type": "uint32",
+              "id": 1
+            },
+            "RoomKey": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "ReqEnterGame": {
+          "fields": {
+            "GameID": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "ReqExitGame": {
+          "fields": {
+            "GameID": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

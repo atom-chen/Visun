@@ -14,6 +14,7 @@ import LoginUser from "./LoginUser";
 import { login_msgs, login_request, login_packet_define } from "../proto/net_UserLoginSvc";
 import { hallgw_packet_define } from "../proto/net_hall";
 import { room_packet_define } from "../proto/net_RoomProto";
+import { leaflogin_request, leaflogin_packet_define } from "../proto/net_leaflogin";
 
 
 export default class LoginMgr extends ModelBase {
@@ -167,4 +168,34 @@ export default class LoginMgr extends ModelBase {
 		if(this.checkLogin(false)) { return; }
 		this.connectLoginServer();
 	}
+
+	//----------- leaf ---------------------------
+	public leafLogin() {
+		this.testLeaf();
+		leaflogin_request.Login({Account:"user0001", Password:"ssssss", SecurityCode:"4245", MachineCode:"54143213"});
+	}
+	public leafRegist() {
+		this.testLeaf();
+		leaflogin_request.Register({Name:"user0001", Password:"dddddd", SecurityCode:"2323", MachineCode:"154343", InvitationCode:"aaaaaa"});
+	}
+	private testLeaf() {
+		//建立大厅通道 
+		var wsAddr = ServerConfig.leafServer;
+		cc.log("连接leaf", wsAddr);
+		var g_HallProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.Protobuff);
+		var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
+		channel_hall.setProcessor(g_HallProcessor);
+		g_HallProcessor.registProtocol(null);
+		g_HallProcessor.unregistAllCmds();
+		g_HallProcessor.registCmds(leaflogin_packet_define);
+		channel_hall.connect( wsAddr, 0, 
+			new CHandler(this, ()=>{ 
+				
+			}),
+			new CHandler(this, ()=>{ 
+
+			})
+		);
+	}
+
 }

@@ -5,17 +5,21 @@
 //----------------------------------------------------
 import MemoryStream from "./MemoryStream";
 import ChannelMgr from "./channel/ChannelMgr";
-import { HEAD_SIZE } from "../looker/KernelDefine";
 import PacketInterface from "./PacketInterface";
+import {leafcomand} from "../../common/script/proto/leafcomand"
 
 
-export default class NetPacket implements PacketInterface {
+export default class LeafPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
+	protected mainId: number;
+	protected subId: number;
 
-	constructor(cmd:number, dataStruct:any){
+	constructor(cmd:number, dataStruct:any, MainID:number, SubID:number){
 		this.cmd = cmd;
 		this.data_struct = dataStruct;
+		this.mainId = MainID;
+		this.subId = SubID;
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
@@ -23,6 +27,8 @@ export default class NetPacket implements PacketInterface {
 		if(data===undefined || data===null) {
 			data = {};
 		}
+
+		var HEAD_SIZE = 8;
 		
 		var bytes_body = null;
 
@@ -31,12 +37,19 @@ export default class NetPacket implements PacketInterface {
 			if( !bIsPbObj ) { body = this.data_struct.create(data); } 
 			var buff_body = this.data_struct.encode(body).finish();
 			bytes_body = new Uint8Array(buff_body);
+
+			var extdata = leafcomand.PacketData.create({
+				MainID : this.mainId,
+				SubID : this.subId,
+				TransData : bytes_body
+			});
+			bytes_body = new Uint8Array( leafcomand.PacketData.encode(extdata).finish() );
 		}
 
 		if(bytes_body !== null) {
 			var memStream = new MemoryStream(HEAD_SIZE + bytes_body.length);
-			memStream.write_uint32(0, this.cmd);
-			memStream.write_int32(4, 0);
+			memStream.write_uint32(0, HEAD_SIZE+bytes_body.length);
+			memStream.write_int32(4, this.cmd);
 			memStream.write_buffer(HEAD_SIZE, bytes_body);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
@@ -52,42 +65,64 @@ export default class NetPacket implements PacketInterface {
 		}
 	}
 
-	unpack(buff:Uint8Array) : any
+	unpack(buff:any) : any
 	{
 		if(buff===undefined || buff === null) {
 			return { cmd:0, errCode:1, data:null };
 		}
 
 		//解析包头
-		var memStream = new MemoryStream(buff.length);
-		memStream.write_buffer(0, buff);
+		var HEAD_SIZE = 8;
+		var bytes = new Uint8Array(buff);
+		var memStream = new MemoryStream(bytes.length);
+		memStream.write_buffer(0, bytes);
 
-		var cmd = memStream.read_uint32(0);
-		var errCode = memStream.read_int32(4);
+		var totalLen = memStream.read_uint32(0);
+		var cmd = memStream.read_uint32(4);
+		var errCode = 0;
+		var MainID = 0;
+		var SubID = 0;
 		var data = null;
 
 		//解析包体
 		if(errCode == 0){
 			if(this.data_struct!==null && this.data_struct!==undefined) {
 				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				data = this.data_struct.toObject(this.data_struct.decode(tmp), {defaults:true});
+				try {
+					var extdata = leafcomand.PacketData.decode(tmp);
+					var extInfo = leafcomand.PacketData.toObject(extdata, {defaults:true,longs:Number});
+					MainID = extInfo.MainID;
+					SubID = extInfo.SubID;
+					tmp = extInfo.TransData;
+
+					var body = this.data_struct.decode(tmp);
+					data = this.data_struct.toObject(body, {defaults:true,longs:Number});
+				}
+				catch(err) {
+					cc.warn("unpack fail", cmd, err);
+				}
 			}
 		}
 		
+		cc.log(cmd, errCode, MainID, SubID, data);
+
 		return {
 			cmd : cmd,
 			errCode : errCode,
+			MainID : MainID,
+			SubID : SubID,
 			data : data
 		};
 	}
 
-	unpackStream(memStream:MemoryStream) : any
+	public unpackStream(memStream:MemoryStream) : any
 	{
 		if(memStream===undefined || memStream === null) {
 			return { cmd:0, errCode:1, data:null };
 		}
 
 		//解析包头
+		var HEAD_SIZE = 8;
 		var cmd = memStream.read_uint32(0);
 		var errCode = memStream.read_int32(4);
 		var data = null;
@@ -96,7 +131,13 @@ export default class NetPacket implements PacketInterface {
 		if(errCode == 0){
 			if(this.data_struct!==null && this.data_struct!==undefined) {
 				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-				data = this.data_struct.toObject(this.data_struct.decode(tmp), {defaults:true});
+				try{
+					var body = this.data_struct.decode(tmp);
+					data = this.data_struct.toObject(body, {defaults:true,longs:Number});
+				}
+				catch(err) {
+					cc.warn("unpack fail", cmd, err);
+				}
 			}
 		}
 		
@@ -107,21 +148,11 @@ export default class NetPacket implements PacketInterface {
 		};
 	}
 
-	unpackBody(bytes:Uint8Array) : any
-	{
-		if(bytes===null || bytes===undefined) {
-			return null;
-		}
-		if(this.data_struct!==null && this.data_struct!==undefined) {
-			return this.data_struct.toObject(this.data_struct.decode(bytes), {defaults:true});
-		}
-		return null;
-	}
-
 	public sendToChannel(channelKey:string, data:any, bIsPbObj:boolean)
 	{
 		var dstChannel = ChannelMgr.getInstance().getChannel(channelKey);
-        if(!dstChannel) { cc.warn("channel not created: ", channelKey); return; }
+		if(!dstChannel) { cc.warn("..... channel not created: ", channelKey); return; }
+		cc.log(channelKey, "pack", this.cmd, data);
         var buff = this.pack(data, bIsPbObj);
         dstChannel.sendMessage(this.cmd, buff);
 	}

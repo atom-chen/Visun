@@ -1,0 +1,24 @@
+{
+  "nested": {
+    "leafcomand": {
+      "nested": {
+        "PacketData": {
+          "fields": {
+            "MainID": {
+              "type": "uint32",
+              "id": 1
+            },
+            "SubID": {
+              "type": "uint32",
+              "id": 2
+            },
+            "TransData": {
+              "type": "bytes",
+              "id": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}
