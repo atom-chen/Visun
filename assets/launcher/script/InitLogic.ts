@@ -35,7 +35,7 @@ export default class InitLogic {
 
         TimerManager.start(node);
 
-        HttpCore.setMainUrl(ServerConfig.mainUrl);
+        HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 	}
 
