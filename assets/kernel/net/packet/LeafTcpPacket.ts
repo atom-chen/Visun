@@ -3,16 +3,16 @@
 // cmd : 消息ID
 // data_struct : 包体数据结构
 //----------------------------------------------------
-import MemoryStream from "./MemoryStream";
-import ChannelMgr from "./channel/ChannelMgr";
+import MemoryStream from "../../basic/MemoryStream";
+import ChannelMgr from "../channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
-import {leafcomand} from "../../common/script/proto/leafcomand"
+import {leafcomand} from "../../../common/script/proto/leafcomand"
 
 
-const HEAD_SIZE = 4;
+const HEAD_SIZE = 8;
 
 
-export default class LeafWsPacket implements PacketInterface{
+export default class LeafTcpPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
 	protected mainId: number;
@@ -49,7 +49,8 @@ export default class LeafWsPacket implements PacketInterface{
 
 		if(bytes_body !== null) {
 			var memStream = new MemoryStream(HEAD_SIZE + bytes_body.length);
-			memStream.write_int32(0, this.cmd);
+			memStream.write_uint32(0, HEAD_SIZE+bytes_body.length);
+			memStream.write_int32(4, this.cmd);
 			memStream.write_buffer(HEAD_SIZE, bytes_body);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
@@ -57,7 +58,8 @@ export default class LeafWsPacket implements PacketInterface{
 		}
 		else {
 			var memStream = new MemoryStream(HEAD_SIZE);
-			memStream.write_uint32(0, this.cmd);
+			memStream.write_uint32(0, HEAD_SIZE);
+			memStream.write_int32(4, this.cmd);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
 			return buffSend;
@@ -70,9 +72,11 @@ export default class LeafWsPacket implements PacketInterface{
 			return { cmd:0, errCode:1, data:null };
 		}
 
+		//解析包头
 		var bytes = new Uint8Array(buff);
 		var memStream = new MemoryStream(bytes.length);
 		memStream.write_buffer(0, bytes);
+
 		return this.unpackStream(memStream);
 	}
 
@@ -83,7 +87,8 @@ export default class LeafWsPacket implements PacketInterface{
 		}
 
 		//解析包头
-		var cmd = memStream.read_uint32(0);
+		var totalLen = memStream.read_uint32(0);
+		var cmd = memStream.read_uint32(4);
 		var errCode = 0;
 		var MainID = 0;
 		var SubID = 0;

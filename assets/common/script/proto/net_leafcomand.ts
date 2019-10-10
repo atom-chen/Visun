@@ -3,7 +3,7 @@
 //---------------------------------
 import { leafcomand } from "./leafcomand";
 import ChannelDefine from "../definer/ChannelDefine";
-import LeafWsPacket from "../../../kernel/net/LeafWsPacket";
+import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum leafcomand_msgs {

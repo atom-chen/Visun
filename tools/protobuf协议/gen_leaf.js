@@ -101,7 +101,7 @@ outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
 outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
 outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
-outstr += "import LeafWsPacket from \"../../../kernel/net/LeafWsPacket\";\n\n\n";
+outstr += "import LeafWsPacket from \"../../../kernel/net/packet/LeafWsPacket\";\n\n\n";
 
 // Enum
 outstr += "export enum " + mudname + "_msgs {\n";

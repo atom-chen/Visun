@@ -254,7 +254,7 @@ outstr += "//该文件自动生成，请勿手动更改\n";
 outstr += "//---------------------------------\n";
 outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
 outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
-outstr += "import PacketDefine from \"../../../kernel/net/PacketDefine\";\n\n\n";
+outstr += "import PacketDefine from \"../../../kernel/net/packet/PacketDefine\";\n\n\n";
 
 // Enum
 outstr += "export enum " + mudname + "_msgs {\n";

@@ -3,7 +3,7 @@
 //---------------------------------
 import { leaflogin } from "./leaflogin";
 import ChannelDefine from "../definer/ChannelDefine";
-import LeafWsPacket from "../../../kernel/net/LeafWsPacket";
+import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum leaflogin_msgs {

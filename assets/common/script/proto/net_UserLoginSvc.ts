@@ -3,7 +3,7 @@
 //---------------------------------
 import { login } from "./UserLoginSvc";
 import ChannelDefine from "../definer/ChannelDefine";
-import NetPacket from "../../../kernel/net/NetPacket";
+import NetPacket from "../../../kernel/net/packet/NetPacket";
 
 
 export enum login_msgs {

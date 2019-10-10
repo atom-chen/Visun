@@ -3,7 +3,7 @@
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
 import CommonUtil from "../../utils/CommonUtil";
-import MemoryStream from "../MemoryStream";
+import MemoryStream from "../../basic/MemoryStream";
 import EventCenter from "../../event/EventCenter";
 import KernelEvent from "../../looker/KernelEvent";
 

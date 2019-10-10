@@ -1,4 +1,4 @@
-import MemoryStream from "./MemoryStream";
+import MemoryStream from "../../basic/MemoryStream";
 
 export default interface PacketInterface {
 	pack(data:any, bIsPbObj:boolean) : any;
