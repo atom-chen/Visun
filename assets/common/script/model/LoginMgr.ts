@@ -170,15 +170,35 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	//----------- leaf ---------------------------
-	public leafLogin() {
-		this.testLeaf();
-		leaflogin_request.Login({Account:"user0001", Password:"ssssss", SecurityCode:"4245", MachineCode:"54143213"});
+	private getMachineCode() : string {
+		return "54143213";
 	}
-	public leafRegist() {
-		this.testLeaf();
-		leaflogin_request.Register({Name:"user0001", Password:"dddddd", SecurityCode:"2323", MachineCode:"154343", InvitationCode:"aaaaaa"});
+	public leafLogin(Account:string, Pswd:string) {
+		if(!Account || Account==="") {
+			UIManager.toast("请输入账号");
+			return;
+		}
+		if(!Pswd || Pswd==="") {
+			UIManager.toast("请输入密码");
+			return;
+		}
+		this.connectLeaf();
+		leaflogin_request.Login({Account:Account, Password:Pswd, SecurityCode:"4245", MachineCode:this.getMachineCode()});
 	}
-	private testLeaf() {
+	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
+		if(!Account || Account==="") {
+			UIManager.toast("请输入账号");
+			return;
+		}
+		if(!Pswd || Pswd==="") {
+			UIManager.toast("请输入密码");
+			return;
+		}
+		InviteCode = InviteCode || "ssss";
+		this.connectLeaf();
+		leaflogin_request.Register({Name:Account, Password:Pswd, SecurityCode:"2323", MachineCode:this.getMachineCode(), InvitationCode:InviteCode});
+	}
+	private connectLeaf() {
 		//建立大厅通道 
 		var wsAddr = ServerConfig.leafServer;
 		cc.log("连接leaf", wsAddr);

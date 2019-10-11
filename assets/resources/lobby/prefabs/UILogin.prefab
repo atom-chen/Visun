@@ -172,7 +172,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editbox",
+    "_name": "editName",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -675,7 +675,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editbox",
+    "_name": "editPswd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -2432,6 +2432,12 @@
       "__id__": 1
     },
     "_enabled": true,
+    "editName": {
+      "__id__": 16
+    },
+    "editPswd": {
+      "__id__": 31
+    },
     "_id": ""
   },
   {
