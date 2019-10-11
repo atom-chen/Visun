@@ -2,7 +2,7 @@ var server_list = {
     test: {
         gateServer: "http://game-cluster.sihai.com/server/gate/ip",
         mainHttpUrl: "http://sdk.sihai.com/",
-        leafServer: "ws://127.0.0.1:3653"
+        leafServer: "ws://127.0.0.1:9650"
     },
     develop: {
         gateServer: "http://172.18.11.8:8001/server/gate/ip",

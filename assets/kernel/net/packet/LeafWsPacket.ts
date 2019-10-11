@@ -9,7 +9,7 @@ import PacketInterface from "./PacketInterface";
 import {leafcomand} from "../../../common/script/proto/leafcomand"
 
 
-const HEAD_SIZE = 4;
+const HEAD_SIZE = 2;
 
 
 export default class LeafWsPacket implements PacketInterface{
@@ -23,6 +23,7 @@ export default class LeafWsPacket implements PacketInterface{
 		this.data_struct = dataStruct;
 		this.mainId = MainID;
 		this.subId = SubID;
+		this.cmd = 1;
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
@@ -49,7 +50,7 @@ export default class LeafWsPacket implements PacketInterface{
 
 		if(bytes_body !== null) {
 			var memStream = new MemoryStream(HEAD_SIZE + bytes_body.length);
-			memStream.write_int32(0, this.cmd);
+			memStream.write_int16(0, this.cmd);
 			memStream.write_buffer(HEAD_SIZE, bytes_body);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
@@ -57,7 +58,7 @@ export default class LeafWsPacket implements PacketInterface{
 		}
 		else {
 			var memStream = new MemoryStream(HEAD_SIZE);
-			memStream.write_uint32(0, this.cmd);
+			memStream.write_int16(0, this.cmd);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
 			return buffSend;
@@ -83,7 +84,7 @@ export default class LeafWsPacket implements PacketInterface{
 		}
 
 		//解析包头
-		var cmd = memStream.read_uint32(0);
+		var cmd = memStream.read_int16(0);
 		var errCode = 0;
 		var MainID = 0;
 		var SubID = 0;
