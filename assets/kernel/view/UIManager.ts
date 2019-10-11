@@ -204,7 +204,7 @@ export default class UIManager {
 			//往上挪
 			var idx = 1;
 			for(var j=UIManager._toastList.length-1; j>=0; j--){
-				UIManager._toastList[j].y = 42*idx;
+				UIManager._toastList[j].y = 66*idx;
 				idx++;
 			}
 			//插入

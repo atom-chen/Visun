@@ -47,6 +47,61 @@ export default class LoginMgr extends ModelBase {
 		return hasLogin;
 	}
 
+	//----------- leaf -----------------------------------------------------
+
+	private getMachineCode() : string {
+		return "54143213";
+	}
+
+	public leafLogin(Account:string, Pswd:string) {
+		if(!Account || Account==="") {
+			UIManager.toast("请输入账号");
+			return;
+		}
+		if(!Pswd || Pswd==="") {
+			UIManager.toast("请输入密码");
+			return;
+		}
+		this.connectLeaf();
+		leaflogin_request.Login({Account:Account, Password:Pswd, SecurityCode:"4245", MachineCode:this.getMachineCode()});
+	}
+
+	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
+		if(!Account || Account==="") {
+			UIManager.toast("请输入账号");
+			return;
+		}
+		if(!Pswd || Pswd==="") {
+			UIManager.toast("请输入密码");
+			return;
+		}
+		InviteCode = InviteCode || "ssss";
+		this.connectLeaf();
+		leaflogin_request.Register({Name:Account, Password:Pswd, SecurityCode:"2323", MachineCode:this.getMachineCode(), InvitationCode:InviteCode});
+	}
+	
+	private connectLeaf() {
+		//建立通道 
+		var wsAddr = ServerConfig.leafServer;
+		cc.log("连接leaf", wsAddr);
+		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
+		var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
+		channel_hall.setProcessor(g_leafProcessor);
+		g_leafProcessor.registProtocol(null);
+		g_leafProcessor.unregistAllCmds();
+		g_leafProcessor.registCmds(leaflogin_packet_define);
+		channel_hall.connect( wsAddr, 0, 
+			new CHandler(this, ()=>{ 
+				
+			}),
+			new CHandler(this, ()=>{ 
+
+			})
+		);
+	}
+
+	//----------- sihai -----------------------------------------------------
+
 	private onNetFail(info) {
 		if(info.cmd === login_msgs.UserLogInResp) {
 			UIManager.toast("登录失败");
@@ -167,59 +222,6 @@ export default class LoginMgr extends ModelBase {
 	public loginByAccount(): void {
 		if(this.checkLogin(false)) { return; }
 		this.connectLoginServer();
-	}
-
-	//----------- leaf -----------------------------------------------------
-
-	private getMachineCode() : string {
-		return "54143213";
-	}
-
-	public leafLogin(Account:string, Pswd:string) {
-		if(!Account || Account==="") {
-			UIManager.toast("请输入账号");
-			return;
-		}
-		if(!Pswd || Pswd==="") {
-			UIManager.toast("请输入密码");
-			return;
-		}
-		this.connectLeaf();
-		leaflogin_request.Login({Account:Account, Password:Pswd, SecurityCode:"4245", MachineCode:this.getMachineCode()});
-	}
-
-	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
-		if(!Account || Account==="") {
-			UIManager.toast("请输入账号");
-			return;
-		}
-		if(!Pswd || Pswd==="") {
-			UIManager.toast("请输入密码");
-			return;
-		}
-		InviteCode = InviteCode || "ssss";
-		this.connectLeaf();
-		leaflogin_request.Register({Name:Account, Password:Pswd, SecurityCode:"2323", MachineCode:this.getMachineCode(), InvitationCode:InviteCode});
-	}
-	
-	private connectLeaf() {
-		//建立大厅通道 
-		var wsAddr = ServerConfig.leafServer;
-		cc.log("连接leaf", wsAddr);
-		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
-		var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
-		channel_hall.setProcessor(g_leafProcessor);
-		g_leafProcessor.registProtocol(null);
-		g_leafProcessor.unregistAllCmds();
-		g_leafProcessor.registCmds(leaflogin_packet_define);
-		channel_hall.connect( wsAddr, 0, 
-			new CHandler(this, ()=>{ 
-				
-			}),
-			new CHandler(this, ()=>{ 
-
-			})
-		);
 	}
 
 }

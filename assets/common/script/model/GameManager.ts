@@ -29,22 +29,10 @@ export default class GameManager extends ModelBase {
 
 
 	public isGameExist(gameId:string) : boolean {
-		if(!GameConfig[gameId]) {
-			return false;
+		if(!GameConfig[gameId] || !GameConfig[gameId].isexist) { 
+			return false; 
 		}
-		switch(gameId) {
-			case "40000040":
-				return true;
-			case "90000040":
-				return true;
-			case "80000044":
-				return true;
-			case "40070012":
-				return true;
-			case "80000041":
-				return true;
-		}
-		return false;
+		return true;
 	}
 
 	public getUpdator(gameId:string) : HotUpdator {
@@ -71,7 +59,7 @@ export default class GameManager extends ModelBase {
 			}
 		}
 		if(!this.isGameExist(gameId)) {
-			UIManager.toast("游戏不存在");
+			UIManager.toast("游戏不存在 "+gameId);
 			return;
 		}
 		
