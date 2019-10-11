@@ -1,5 +1,5 @@
 var server_list = {
-    test: {
+    publish: {
         gateServer: "http://game-cluster.sihai.com/server/gate/ip",
         mainHttpUrl: "http://sdk.sihai.com/",
         leafServer: "ws://127.0.0.1:3653"
@@ -16,6 +16,6 @@ var server_list = {
     },
 };
 
-var ServerConfig = server_list.jetten;
+var ServerConfig = server_list.develop;
 
 export default ServerConfig;

@@ -7,7 +7,7 @@ import MemoryStream from "../../basic/MemoryStream";
 import EventCenter from "../../event/EventCenter";
 import KernelEvent from "../../looker/KernelEvent";
 
-const HEAD_SIZE = 4;
+const HEAD_SIZE = 2;
 
 export default class LeafWsProcessor extends BaseProcessor {
 
@@ -39,7 +39,7 @@ export default class LeafWsProcessor extends BaseProcessor {
 		var memStream = new MemoryStream(HEAD_SIZE);
 		memStream.safe_write_buffer(0, bytes);
 
-		var cmd = memStream.read_uint32(0);
+		var cmd = memStream.read_int16(0);
 		var errCode = 0;
 
 		if(this.isShowDebug(cmd)) {

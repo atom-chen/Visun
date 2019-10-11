@@ -15,15 +15,14 @@ const HEAD_SIZE = 2;
 export default class LeafWsPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
-	protected mainId: number;
-	protected subId: number;
+	// protected mainId: number;
+	// protected subId: number;
 
-	constructor(cmd:number, dataStruct:any, MainID:number, SubID:number){
+	constructor(cmd:number, dataStruct:any, MainID?:number, SubID?:number){
 		this.cmd = cmd;
 		this.data_struct = dataStruct;
-		this.mainId = MainID;
-		this.subId = SubID;
-		this.cmd = 1;
+		// this.mainId = MainID;
+		// this.subId = SubID;
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
@@ -39,13 +38,6 @@ export default class LeafWsPacket implements PacketInterface{
 			if( !bIsPbObj ) { body = this.data_struct.create(data); } 
 			var buff_body = this.data_struct.encode(body).finish();
 			bytes_body = new Uint8Array(buff_body);
-
-			var extdata = leafcomand.PacketData.create({
-				MainID : this.mainId,
-				SubID : this.subId,
-				TransData : bytes_body
-			});
-			bytes_body = new Uint8Array( leafcomand.PacketData.encode(extdata).finish() );
 		}
 
 		if(bytes_body !== null) {
@@ -93,8 +85,8 @@ export default class LeafWsPacket implements PacketInterface{
 		//解析包体
 		if(errCode == 0){
 			if(this.data_struct!==null && this.data_struct!==undefined) {
-				var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
 				try {
+					var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
 					var extdata = leafcomand.PacketData.decode(tmp);
 					var extInfo = leafcomand.PacketData.toObject(extdata, {defaults:true,longs:Number});
 					MainID = extInfo.MainID;

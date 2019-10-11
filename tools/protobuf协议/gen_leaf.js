@@ -117,13 +117,13 @@ var infos = jsCont.RpcDefine;
 for(var enumKey in infos) {
 	var cmdId = getCmdId(enumKey);
 	var structName = getStructName(enumKey);
-	var mainid = getMainId(enumKey);
-	var subid = getSubId(enumKey);
+//	var mainid = getMainId(enumKey);
+//	var subid = getSubId(enumKey);
 	if(structName === "") {
-		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + "null" + ", " + mainid + ", " + subid + "),\n";
+		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + "null" + "),\n";
 	}
 	else {
-		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+structName + ", " + mainid + ", " + subid + "),\n";
+		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+structName + "),\n";
 	}
 }
 outstr += "}\n\n";

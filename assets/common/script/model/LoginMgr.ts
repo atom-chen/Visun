@@ -89,7 +89,7 @@ export default class LoginMgr extends ModelBase {
         }
     }
 	
-	public connectLoginServer() {
+	private connectLoginServer() {
 		HttpCore.callGet(ServerConfig.gateServer, null, null, (iCode:HttpResult, data:any)=>{
 			EventCenter.getInstance().listen(KernelEvent.WS_FAIL, this.onNetFail, this);
 			EventCenter.getInstance().listen(KernelEvent.NET_STATE, this.onNetWorkChange, this);
@@ -169,10 +169,12 @@ export default class LoginMgr extends ModelBase {
 		this.connectLoginServer();
 	}
 
-	//----------- leaf ---------------------------
+	//----------- leaf -----------------------------------------------------
+
 	private getMachineCode() : string {
 		return "54143213";
 	}
+
 	public leafLogin(Account:string, Pswd:string) {
 		if(!Account || Account==="") {
 			UIManager.toast("请输入账号");
@@ -185,6 +187,7 @@ export default class LoginMgr extends ModelBase {
 		this.connectLeaf();
 		leaflogin_request.Login({Account:Account, Password:Pswd, SecurityCode:"4245", MachineCode:this.getMachineCode()});
 	}
+
 	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
 		if(!Account || Account==="") {
 			UIManager.toast("请输入账号");
@@ -198,6 +201,7 @@ export default class LoginMgr extends ModelBase {
 		this.connectLeaf();
 		leaflogin_request.Register({Name:Account, Password:Pswd, SecurityCode:"2323", MachineCode:this.getMachineCode(), InvitationCode:InviteCode});
 	}
+	
 	private connectLeaf() {
 		//建立大厅通道 
 		var wsAddr = ServerConfig.leafServer;

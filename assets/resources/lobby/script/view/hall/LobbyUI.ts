@@ -33,8 +33,6 @@ export default class LobbyUI extends BaseComponent {
 		this.testSpine();
 
 		EventCenter.getInstance().listen(login_msgs.UserLogInResp, this.refleshUI, this);
-
-		LoginMgr.getInstance().loginAsYouke();
 	}
 
 	private refleshGameList() {
