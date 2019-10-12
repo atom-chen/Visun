@@ -12,6 +12,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
 import game_btn from "./game_btn";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,6 +29,8 @@ export default class LobbyUI extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 		this.testSpine();
+
+		LoginMgr.getInstance().checkLogin(true);
 	}
 
 	private refleshGameList() {
@@ -48,15 +51,40 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private initUiEvents() {
-		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ UIManager.openPopwnd(ViewDefine.EmailUI.path, null); this.testProcedure(); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ UIManager.openPopwnd(ViewDefine.ShopUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ UIManager.openPopwnd(ViewDefine.KefuUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ UIManager.openPopwnd(ViewDefine.SpreadUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ UIManager.openPopwnd(ViewDefine.PersonUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ UIManager.openPopwnd(ViewDefine.LoginUI.path, null); }, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ Adaptor.setFullScreen(!Adaptor.isFullScreen()); }, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.EmailUI.path, null); this.testProcedure(); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.ShopUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.KefuUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.SpreadUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ 
+			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+			UIManager.openPopwnd(ViewDefine.PersonUI.path, null); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
+			UIManager.toast("尚未实现"); 
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
+			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
+		}, this);
 	}
 
 

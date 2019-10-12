@@ -5,6 +5,7 @@ import SceneManager from "../../../kernel/view/SceneManager";
 import ModelBase from "../../../kernel/model/ModelBase";
 import ViewDefine from "../definer/ViewDefine";
 import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
+import LoginMgr from "./LoginMgr";
 
 
 export default class GameManager extends ModelBase {
@@ -43,26 +44,34 @@ export default class GameManager extends ModelBase {
 	}
 
 
-	
-	//进入游戏的唯一入口
-	public enterGame(gameId:string) {
+	public canEnterGame(gameId:string) : boolean {
 		var cfg = GameConfig[gameId];
 		if(!cfg) {
 			UIManager.toast("敬请期待");
-			return;
+			return false;
 		}
 		var updator = this.getUpdator(gameId);
 		if(updator) {
 			if(updator.isUpdating()) {
 				UIManager.toast("正在更新中，请稍等");
-				return;
+				return false;
 			}
 		}
 		if(!this.isGameExist(gameId)) {
 			UIManager.toast("游戏不存在 "+gameId);
+			return false;
+		}
+		if(!LoginMgr.getInstance().checkLogin(true)) {
+			return false;
+		}
+		return true;
+	}
+	
+	//进入游戏的唯一入口
+	public enterGame(gameId:string) {
+		if( !this.canEnterGame(gameId) ) {
 			return;
 		}
-		
 		this.enterGameScene(gameId);
 	}
 

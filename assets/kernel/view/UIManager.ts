@@ -222,7 +222,7 @@ export default class UIManager {
 					}
 				}
 				this.node.destroy();
-			}, 2);
+			}, 1);
 		}
 		if(cc.loader.getRes(KernelUIDefine.toast.path, cc.Prefab)) {
 			completeCallback(null, cc.loader.getRes(KernelUIDefine.toast.path, cc.Prefab));

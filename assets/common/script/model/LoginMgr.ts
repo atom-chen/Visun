@@ -8,6 +8,7 @@ import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
 import { login_request, login_packet_define } from "../proto/net_login";
+import ViewDefine from "../definer/ViewDefine";
 
 
 export default class LoginMgr extends ModelBase {
@@ -31,9 +32,10 @@ export default class LoginMgr extends ModelBase {
 
 
 	public checkLogin(bTip: boolean): boolean {
-		var hasLogin = LoginUser.getInstance() !== null;
+		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().Accounts !== "";
 		if (bTip && !hasLogin) {
-			UIManager.toast("请先登录");
+		//	UIManager.toast("请先登录");
+			UIManager.openPopwnd(ViewDefine.LoginUI.path, null);
 		}
 		return hasLogin;
 	}
