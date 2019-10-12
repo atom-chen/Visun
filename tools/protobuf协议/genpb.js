@@ -4,12 +4,36 @@ const { exec } = require('child_process');
 
 //要生成的pb文件
 var pbfiles = [
-	{ name:"login", router:"login" },
-	{ name:"gamecomm", router:"game" },
-	{ name:"baccarat", router:"game" },
-	{ name:"fishLord", router:"game" },
-	{ name:"landLords", router:"game" },
-	{ name:"mahjong", router:"game" }
+	{ 
+		name:"login", 
+		router:"login", 
+		clientPath:"../../assets/common/script/proxy/" 
+	},
+	{ 
+		name:"gamecomm", 
+		router:"game",
+		clientPath:"../../assets/common/script/proxy/"
+	},
+	{ 
+		name:"baccarat", 
+		router:"game",
+		clientPath:"../../assets/resources/subgames/bjle/script/"
+	},
+	{ 
+		name:"fishLord", 
+		router:"game",
+		clientPath:"../../assets/resources/subgames/buyu/script/"
+	},
+	{ 
+		name:"landLords", 
+		router:"game",
+		clientPath:"../../assets/resources/subgames/ddz/script/"
+	},
+	{ 
+		name:"mahjong", 
+		router:"game",
+	//	clientPath:"../../assets/resources/subgames/mahjong/script/"
+	}
 ]
 
 
@@ -94,6 +118,7 @@ function getRequestParam(argInfo) {
 }
 
 function doGenerate() {
+	//server begin
 	var serverPkgName = "go";
 
 	var outServerMsg = "./out/msg.go";
@@ -147,20 +172,29 @@ function doGenerate() {
 	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';
 	routerStr += "func init() {\n";
+	//server end
 
 
 	for(var iii in pbfiles) {
-		var pbfilename = pbfiles[iii].name;
+		var cfg = pbfiles[iii];
+		var pbfilename = cfg.name;
+		var curRouter = cfg.router;  //for server
 		var filepath = "in/" + pbfilename + ".proto";
 		var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
 
-		var mudname = getPackageName(line_list);	//for client
-		var channelName = "game";	//for client
-		var outClient = "../../assets/common/script/proto/net_" + pbfilename + ".ts";	//for client
 
-		var curRouter = pbfiles[iii].router;	//for server
+		//client begin
+		var mudname = getPackageName(line_list);
+		var channelName = "game";
+		var outClient = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
+		var outClientHandler = null;
+		if(cfg.clientPath) {
+			outClientHandler = cfg.clientPath + "proxy_" + pbfilename + ".ts";
+		}
+		//client end
 
-		// from json
+
+		// json file geretated by probuf lib
 		var jsonFile = "tmps/" + pbfilename+".json";
 		var jsonStr = fs.readFileSync(jsonFile, 'utf8');
 		var ptoJs = JSON.parse(jsonStr);
@@ -168,7 +202,14 @@ function doGenerate() {
 		// console.log(ptoJs);
 		// fs.unlinkSync(jsonFile);
 		
+		
 		//client begin
+		var clientHandleStr = "//---------------------------------\n";
+		clientHandleStr += "// " + pbfilename + "响应句柄\n"
+		clientHandleStr += "//---------------------------------\n";
+		clientHandleStr += 'import { ' + mudname +'_msgs } from "../../../../common/script/proto/net_' + pbfilename + '"\n\n';
+		clientHandleStr += "var proxy_" + mudname + " = {\n\n";
+
 		var outstr = "//---------------------------------\n";
 		outstr += "//该文件自动生成，请勿手动更改\n";
 		outstr += "//---------------------------------\n";
@@ -180,6 +221,7 @@ function doGenerate() {
 		var reqStr = "export class "+mudname+"_request {\n";
 		//client end
 
+
 		//server begin
 		msgStr += "\n    //" + pbfilename + "文件生成的代码\n";
 		handStr += "\n    //" + pbfilename + "文件生成的代码\n";
@@ -189,6 +231,8 @@ function doGenerate() {
 		funcStr += "//-----------------------------------------------\n";
 		//server end
 
+
+		//遍历proto文件中的message定义
 		for(var msgName in ptoJs) {
 			var cmdId = getCmdId();
 			var argInfo = ptoJs[msgName];
@@ -202,7 +246,12 @@ function doGenerate() {
 			reqStr += "{ ";
 			reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
 			reqStr += "}\n";
+
+			clientHandleStr += "    [" + mudname+"_msgs"+"."+msgName + "] : function(param: any) {\n";
+			clientHandleStr += "\n";
+			clientHandleStr += "    },\n\n"
 			//client end
+
 
 			//server begin
 			msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
@@ -226,6 +275,14 @@ function doGenerate() {
 		reqStr += "}\n\n";
 		outstr += enumStr + cmdTblStr + reqStr;
 		fs.writeFileSync(outClient, outstr, 'utf8');
+
+		clientHandleStr += "}\n\n";
+		clientHandleStr += "export default proxy_"+mudname+";\n";
+		if(outClientHandler) {
+			if(!fs.existsSync(outClientHandler)){
+				fs.writeFileSync(outClientHandler, clientHandleStr, "utf8");
+			}
+		}
 		//client end
 	}
 	
