@@ -6,7 +6,6 @@
 import MemoryStream from "../../basic/MemoryStream";
 import ChannelMgr from "../channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
-import {leafcomand} from "../../../common/script/proto/leafcomand"
 
 
 const HEAD_SIZE = 2;
@@ -78,8 +77,6 @@ export default class LeafWsPacket implements PacketInterface{
 		//解析包头
 		var cmd = memStream.read_int16(0);
 		var errCode = 0;
-		var MainID = 0;
-		var SubID = 0;
 		var data = null;
 
 		//解析包体
@@ -87,12 +84,6 @@ export default class LeafWsPacket implements PacketInterface{
 			if(this.data_struct!==null && this.data_struct!==undefined) {
 				try {
 					var tmp = new Uint8Array(memStream.buffer, HEAD_SIZE);
-					var extdata = leafcomand.PacketData.decode(tmp);
-					var extInfo = leafcomand.PacketData.toObject(extdata, {defaults:true,longs:Number});
-					MainID = extInfo.MainID;
-					SubID = extInfo.SubID;
-					tmp = extInfo.TransData;
-
 					var body = this.data_struct.decode(tmp);
 					data = this.data_struct.toObject(body, {defaults:true,longs:Number});
 				}
@@ -102,13 +93,11 @@ export default class LeafWsPacket implements PacketInterface{
 			}
 		}
 		
-		cc.log(cmd, errCode, MainID, SubID, data);
+		cc.log(cmd, errCode, data);
 
 		return {
 			cmd : cmd,
 			errCode : errCode,
-			MainID : MainID,
-			SubID : SubID,
 			data : data
 		};
 	}
@@ -118,25 +107,13 @@ export default class LeafWsPacket implements PacketInterface{
 		if(bytes===null || bytes===undefined) {
 			return null;
 		}
-		var MainID = 0;
-		var SubID = 0;
+
 		var data = null;
 		if(this.data_struct!==null && this.data_struct!==undefined) {
 			try {
-				var extdata = leafcomand.PacketData.decode(bytes);
-				var extInfo = leafcomand.PacketData.toObject(extdata, {defaults:true,longs:Number});
-				MainID = extInfo.MainID;
-				SubID = extInfo.SubID;
-				bytes = extInfo.TransData;
-
 				var body = this.data_struct.decode(bytes);
 				data = this.data_struct.toObject(body, {defaults:true,longs:Number});
-
-				return {
-					MainID : MainID,
-					SubID : SubID,
-					data : data
-				}
+				return data;
 			}
 			catch(err) {
 				cc.warn("unpack fail", err);
