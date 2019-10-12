@@ -1,1 +1,0 @@
-python gen_rpc.py RoomProto hall

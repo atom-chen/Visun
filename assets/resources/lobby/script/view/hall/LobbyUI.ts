@@ -9,8 +9,6 @@ import CHandler from "../../../../../kernel/basic/CHandler";
 import TimerManager from "../../../../../kernel/timer/TimerManager";
 import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
-import EventCenter from "../../../../../kernel/event/EventCenter";
-import { login_msgs } from "../../../../../common/script/proto/net_UserLoginSvc";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
 import game_btn from "./game_btn";
@@ -30,8 +28,6 @@ export default class LobbyUI extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 		this.testSpine();
-
-		EventCenter.getInstance().listen(login_msgs.UserLogInResp, this.refleshUI, this);
 	}
 
 	private refleshGameList() {
