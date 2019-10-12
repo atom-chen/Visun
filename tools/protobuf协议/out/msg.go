@@ -43,4 +43,49 @@ func init() {
     RegisterMessage(&protoMsg.ReqEnterRoom{})
     RegisterMessage(&protoMsg.ReqEnterGame{})
     RegisterMessage(&protoMsg.ReqExitGame{})
+
+//gamecomm文件生成的代码
+    RegisterMessage(&protoMsg.PlayerInfo{})
+    RegisterMessage(&protoMsg.UserList{})
+    RegisterMessage(&protoMsg.PlayerRecord{})
+    RegisterMessage(&protoMsg.GameReady{})
+    RegisterMessage(&protoMsg.GameBet{})
+    RegisterMessage(&protoMsg.GameBetResult{})
+    RegisterMessage(&protoMsg.GameHost{})
+    RegisterMessage(&protoMsg.GameSuperHost{})
+    RegisterMessage(&protoMsg.GameRecord{})
+    RegisterMessage(&protoMsg.GameRecordList{})
+    RegisterMessage(&protoMsg.GameResult{})
+
+//baccarat文件生成的代码
+    RegisterMessage(&protoMsg.GameBaccaratEnter{})
+    RegisterMessage(&protoMsg.GameBaccaratHost{})
+    RegisterMessage(&protoMsg.GameBaccaratSuperHost{})
+    RegisterMessage(&protoMsg.GameBaccaratBet{})
+    RegisterMessage(&protoMsg.GameBaccaratBetResult{})
+    RegisterMessage(&protoMsg.GameBaccaratOver{})
+
+//fishLord文件生成的代码
+    RegisterMessage(&protoMsg.GameFishLordEnter{})
+    RegisterMessage(&protoMsg.GameFishLordPlaying{})
+    RegisterMessage(&protoMsg.GameFishLordBetResult{})
+    RegisterMessage(&protoMsg.GameFishLordOver{})
+
+//landLords文件生成的代码
+    RegisterMessage(&protoMsg.GameLandLordsEnter{})
+    RegisterMessage(&protoMsg.GameLandLordsPlayer{})
+    RegisterMessage(&protoMsg.GameLandLordsBegins{})
+    RegisterMessage(&protoMsg.GameLandLordsOutcard{})
+    RegisterMessage(&protoMsg.GameLandLordsOperate{})
+    RegisterMessage(&protoMsg.GameLandLordsAward{})
+    RegisterMessage(&protoMsg.GameLandLordsCheckout{})
+
+//mahjong文件生成的代码
+    RegisterMessage(&protoMsg.GameMahjongEnter{})
+    RegisterMessage(&protoMsg.GameMahjongPlayer{})
+    RegisterMessage(&protoMsg.GameMahjongBegins{})
+    RegisterMessage(&protoMsg.GameMahjongOutcard{})
+    RegisterMessage(&protoMsg.GameMahjongOperate{})
+    RegisterMessage(&protoMsg.GameMahjongAward{})
+    RegisterMessage(&protoMsg.GameMahjongCheckout{})
 }

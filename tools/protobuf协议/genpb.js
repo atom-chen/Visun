@@ -1,6 +1,25 @@
 const fs = require("fs");
 const { exec } = require('child_process');
 
+
+//要生成的pb文件
+var pbfiles = [
+	"login",
+	"gamecomm",
+	"baccarat",
+	"fishLord",
+	"landLords",
+	"mahjong"
+]
+
+
+
+var g_CMDID = -1;
+function getCmdId() {
+	g_CMDID++;
+	return g_CMDID;
+}
+
 //检查import关系
 function getImportMud(data) {
 	var tmp = null;
@@ -37,7 +56,6 @@ function getPackageName(data) {
 	return null;
 }
 
-
 function getRequestParam(argInfo) {
 	if(!argInfo) { return "any"; }
 	var fields = argInfo.fields || {};
@@ -62,21 +80,6 @@ function getRequestParam(argInfo) {
 	if(desc=="{ }") { desc = "{}"; }
 	return desc;
 }
-
-var g_CMDID = -1;
-function getCmdId() {
-	g_CMDID++;
-	return g_CMDID;
-}
-
-var pbfiles = [
-	"login"
-]
-
-if(!fs.existsSync("./out")){
-	fs.mkdirSync("./out")
-}
-
 
 function doGenerate() {
 	var serverPkgName = "go";
@@ -172,6 +175,11 @@ function doGenerate() {
 	fs.writeFileSync(outServerHandler, handStr, 'utf8');
 }
 
+
+
+if(!fs.existsSync("./out")){
+	fs.mkdirSync("./out")
+}
 
 var waitCnt = pbfiles.length;
 for(var iii in pbfiles) {

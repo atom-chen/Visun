@@ -1,0 +1,276 @@
+{
+  "nested": {
+    "baccarat": {
+      "nested": {
+        "GameBaccaratEnter": {
+          "fields": {
+            "UserInfo": {
+              "type": "PlayerInfo",
+              "id": 1
+            },
+            "TimeStamp": {
+              "type": "int64",
+              "id": 2
+            },
+            "Chips": {
+              "rule": "repeated",
+              "type": "int32",
+              "id": 3
+            },
+            "AwardAreas": {
+              "rule": "repeated",
+              "type": "bytes",
+              "id": 4
+            },
+            "FreeTime": {
+              "type": "uint32",
+              "id": 5
+            },
+            "BetTime": {
+              "type": "uint32",
+              "id": 6
+            },
+            "OpenTime": {
+              "type": "uint32",
+              "id": 7
+            }
+          }
+        },
+        "GameBaccaratHost": {
+          "fields": {
+            "UserID": {
+              "type": "uint64",
+              "id": 1
+            },
+            "IsWant": {
+              "type": "bool",
+              "id": 2
+            }
+          }
+        },
+        "GameBaccaratSuperHost": {
+          "fields": {
+            "UserID": {
+              "type": "uint64",
+              "id": 1
+            },
+            "IsWant": {
+              "type": "bool",
+              "id": 2
+            }
+          }
+        },
+        "GameBaccaratBet": {
+          "fields": {
+            "BetArea": {
+              "type": "int32",
+              "id": 1
+            },
+            "BetScore": {
+              "type": "int64",
+              "id": 2
+            }
+          }
+        },
+        "GameBaccaratBetResult": {
+          "fields": {
+            "State": {
+              "type": "int32",
+              "id": 1
+            },
+            "Hints": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
+        "GameBaccaratOver": {
+          "fields": {
+            "AwardArea": {
+              "type": "bytes",
+              "id": 1
+            },
+            "PlayerCard": {
+              "type": "bytes",
+              "id": 2
+            },
+            "BankerCard": {
+              "type": "bytes",
+              "id": 3
+            },
+            "Acquire": {
+              "type": "int64",
+              "id": 4
+            }
+          }
+        }
+      }
+    },
+    "gamecomm": {
+      "nested": {
+        "PlayerInfo": {
+          "fields": {
+            "UserID": {
+              "type": "uint64",
+              "id": 1
+            },
+            "Name": {
+              "type": "string",
+              "id": 2
+            },
+            "Age": {
+              "type": "int32",
+              "id": 3
+            },
+            "Sex": {
+              "type": "int32",
+              "id": 4
+            },
+            "Gold": {
+              "type": "int64",
+              "id": 5
+            },
+            "VipLevel": {
+              "type": "int32",
+              "id": 6
+            }
+          }
+        },
+        "UserList": {
+          "fields": {
+            "AllInfos": {
+              "rule": "repeated",
+              "type": "PlayerInfo",
+              "id": 1
+            }
+          }
+        },
+        "PlayerRecord": {
+          "fields": {
+            "User": {
+              "type": "PlayerInfo",
+              "id": 1
+            },
+            "Twice": {
+              "type": "int32",
+              "id": 2
+            },
+            "Ranking": {
+              "type": "int32",
+              "id": 3
+            },
+            "Bankroll": {
+              "type": "int32",
+              "id": 4
+            },
+            "WinLos": {
+              "type": "int64",
+              "id": 5
+            }
+          }
+        },
+        "GameReady": {
+          "fields": {
+            "UserID": {
+              "type": "uint64",
+              "id": 1
+            },
+            "IsReady": {
+              "type": "bool",
+              "id": 2
+            }
+          }
+        },
+        "GameBet": {
+          "fields": {
+            "BetArea": {
+              "type": "int32",
+              "id": 1
+            },
+            "BetScore": {
+              "type": "int64",
+              "id": 2
+            }
+          }
+        },
+        "GameBetResult": {
+          "fields": {
+            "UserID": {
+              "type": "uint64",
+              "id": 1
+            },
+            "State": {
+              "type": "int32",
+              "id": 2
+            },
+            "Hints": {
+              "type": "string",
+              "id": 3
+            },
+            "BetArea": {
+              "type": "int32",
+              "id": 4
+            },
+            "BetScore": {
+              "type": "int64",
+              "id": 5
+            }
+          }
+        },
+        "GameHost": {
+          "fields": {
+            "IsWant": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "GameSuperHost": {
+          "fields": {
+            "IsWant": {
+              "type": "bool",
+              "id": 1
+            }
+          }
+        },
+        "GameRecord": {
+          "fields": {
+            "Pork": {
+              "type": "bytes",
+              "id": 1
+            },
+            "Type": {
+              "type": "int32",
+              "id": 2
+            },
+            "isWon": {
+              "type": "bool",
+              "id": 3
+            }
+          }
+        },
+        "GameRecordList": {
+          "fields": {
+            "list": {
+              "rule": "repeated",
+              "type": "GameRecord",
+              "id": 1
+            }
+          }
+        },
+        "GameResult": {
+          "fields": {
+            "Flag": {
+              "type": "int32",
+              "id": 1
+            },
+            "Reason": {
+              "type": "bytes",
+              "id": 2
+            }
+          }
+        }
+      }
+    }
+  }
+}
