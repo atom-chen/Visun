@@ -142,7 +142,7 @@ function doGenerate() {
 		// console.log(ptoJs);
 		// fs.unlinkSync(jsonFile);
 	
-		msgStr += "\n//" + pbfilename + "文件生成的代码\n"
+		msgStr += "\n    //" + pbfilename + "文件生成的代码\n"
 		for(var msgName in ptoJs) {
 			var cmdId = getCmdId();
 			var argInfo = ptoJs[msgName];

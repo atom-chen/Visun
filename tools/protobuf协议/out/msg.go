@@ -27,7 +27,7 @@ func RegisterMessage(message proto.Message) {
 
 func init() {
 
-//login文件生成的代码
+    //login文件生成的代码
     RegisterMessage(&protoMsg.Register{})
     RegisterMessage(&protoMsg.RegisterResult{})
     RegisterMessage(&protoMsg.Login{})
@@ -44,7 +44,7 @@ func init() {
     RegisterMessage(&protoMsg.ReqEnterGame{})
     RegisterMessage(&protoMsg.ReqExitGame{})
 
-//gamecomm文件生成的代码
+    //gamecomm文件生成的代码
     RegisterMessage(&protoMsg.PlayerInfo{})
     RegisterMessage(&protoMsg.UserList{})
     RegisterMessage(&protoMsg.PlayerRecord{})
@@ -57,7 +57,7 @@ func init() {
     RegisterMessage(&protoMsg.GameRecordList{})
     RegisterMessage(&protoMsg.GameResult{})
 
-//baccarat文件生成的代码
+    //baccarat文件生成的代码
     RegisterMessage(&protoMsg.GameBaccaratEnter{})
     RegisterMessage(&protoMsg.GameBaccaratHost{})
     RegisterMessage(&protoMsg.GameBaccaratSuperHost{})
@@ -65,13 +65,13 @@ func init() {
     RegisterMessage(&protoMsg.GameBaccaratBetResult{})
     RegisterMessage(&protoMsg.GameBaccaratOver{})
 
-//fishLord文件生成的代码
+    //fishLord文件生成的代码
     RegisterMessage(&protoMsg.GameFishLordEnter{})
     RegisterMessage(&protoMsg.GameFishLordPlaying{})
     RegisterMessage(&protoMsg.GameFishLordBetResult{})
     RegisterMessage(&protoMsg.GameFishLordOver{})
 
-//landLords文件生成的代码
+    //landLords文件生成的代码
     RegisterMessage(&protoMsg.GameLandLordsEnter{})
     RegisterMessage(&protoMsg.GameLandLordsPlayer{})
     RegisterMessage(&protoMsg.GameLandLordsBegins{})
@@ -80,7 +80,7 @@ func init() {
     RegisterMessage(&protoMsg.GameLandLordsAward{})
     RegisterMessage(&protoMsg.GameLandLordsCheckout{})
 
-//mahjong文件生成的代码
+    //mahjong文件生成的代码
     RegisterMessage(&protoMsg.GameMahjongEnter{})
     RegisterMessage(&protoMsg.GameMahjongPlayer{})
     RegisterMessage(&protoMsg.GameMahjongBegins{})
