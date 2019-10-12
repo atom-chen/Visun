@@ -56,6 +56,18 @@ function getPackageName(data) {
 	return null;
 }
 
+function isRequest(msgName) {
+	return msgName.slice(0, 4) === "Req";
+}
+
+function isResponse(msgName) {
+	return msgName.slice(0, 5) === "Resp";
+}
+
+function isNotify(msgName) {
+	return msgName.slice(0, 7) === "Notify";
+}
+
 function getRequestParam(argInfo) {
 	if(!argInfo) { return "any"; }
 	var fields = argInfo.fields || {};
@@ -83,11 +95,18 @@ function getRequestParam(argInfo) {
 
 function doGenerate() {
 	var serverPkgName = "go";
-	var outServerMsg = "./out/msg.go"
-	var outServerHandler = "./out/handler.go"
-	var outRouter = "./out/router.go"
+
+	var outServerMsg = "./out/msg.go";
+	var outRouter = "./out/router.go";
+	var outServerHandler = "./out/handler.go";
+	var outHandleFunc = "./out/handlerFunc.go";
 
 	var msgStr = "";
+	var routerStr = "";
+	var handStr = "";
+	var funcStr = "";
+
+
 	msgStr = "//---------------------------------\n";
 	msgStr += "//该文件自动生成，请勿手动更改\n";
 	msgStr += "//---------------------------------\n";
@@ -114,9 +133,8 @@ function doGenerate() {
 	msgStr += "}\n\n"
 	msgStr += "func init() {\n"
 
-	var handStr = "";
-
-	var routerStr = "//---------------------------------\n";
+	
+	routerStr = "//---------------------------------\n";
 	routerStr += "//该文件自动生成，请勿手动更改\n";
 	routerStr += "//---------------------------------\n";
 	routerStr += "package gate\n\n";
@@ -130,15 +148,27 @@ function doGenerate() {
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';
 	routerStr += "func init() {\n";
 
+
 	for(var iii in pbfiles) {
 		var pbfilename = pbfiles[iii].name;
-		var channelName = "game";
 		var filepath = "in/" + pbfilename + ".proto";
 		var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
-		var mudname = getPackageName(line_list);
-		var curRouter = pbfiles[iii].router;
-		var outpath = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
+
+		var mudname = getPackageName(line_list);	//for client
+		var channelName = "game";	//for client
+		var outClient = "../../assets/common/script/proto/net_" + pbfilename + ".ts";	//for client
+
+		var curRouter = pbfiles[iii].router;	//for server
+
+		// from json
+		var jsonFile = "tmps/" + pbfilename+".json";
+		var jsonStr = fs.readFileSync(jsonFile, 'utf8');
+		var ptoJs = JSON.parse(jsonStr);
+		ptoJs = ptoJs["nested"][mudname]["nested"];
+		// console.log(ptoJs);
+		// fs.unlinkSync(jsonFile);
 		
+		//client begin
 		var outstr = "//---------------------------------\n";
 		outstr += "//该文件自动生成，请勿手动更改\n";
 		outstr += "//---------------------------------\n";
@@ -148,22 +178,22 @@ function doGenerate() {
 		var enumStr = "export enum " + mudname + "_msgs {\n";
 		var cmdTblStr = "export var " + mudname + "_packet_define = {\n";
 		var reqStr = "export class "+mudname+"_request {\n";
-	
-		// from json
-		var jsonFile = "tmps/" + pbfilename+".json";
-		var jsonStr = fs.readFileSync(jsonFile, 'utf8');
-		var ptoJs = JSON.parse(jsonStr);
-		ptoJs = ptoJs["nested"][mudname]["nested"];
-		// console.log(ptoJs);
-		// fs.unlinkSync(jsonFile);
-	
-		msgStr += "\n    //" + pbfilename + "文件生成的代码\n"
-		handStr += "\n    //" + pbfilename + "文件生成的代码\n"
-		routerStr += "\n    //" + pbfilename + "文件生成的代码\n"
+		//client end
+
+		//server begin
+		msgStr += "\n    //" + pbfilename + "文件生成的代码\n";
+		handStr += "\n    //" + pbfilename + "文件生成的代码\n";
+		routerStr += "\n    //" + pbfilename + "文件生成的代码\n";
+		funcStr += "//-----------------------------------------------\n";
+		funcStr += "//" + pbfilename + "文件生成的代码\n";
+		funcStr += "//-----------------------------------------------\n";
+		//server end
+
 		for(var msgName in ptoJs) {
 			var cmdId = getCmdId();
 			var argInfo = ptoJs[msgName];
 	
+			//client begin
 			enumStr += "    " + msgName + " = " + cmdId + ",\n";
 	
 			cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + "),\n";
@@ -172,31 +202,46 @@ function doGenerate() {
 			reqStr += "{ ";
 			reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
 			reqStr += "}\n";
-	
+			//client end
+
+			//server begin
 			msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
+
+			routerStr += "    msg.ProcessorProto.SetRouter(&protoMsg."+ msgName +"{}, "+ curRouter +".ChanRPC)\n";
+
 			handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
-			routerStr += "    msg.ProcessorProto.SetRouter(&protoMsg."+ msgName +"{}, "+ curRouter +".ChanRPC)\n"
+
+			funcStr += "// \n";
+			funcStr += "func handle"+msgName+"(args []interface{}) {\n";
+			funcStr += "    m := args[0].(*protoMsg."+msgName+")\n";
+			funcStr += "    a := args[1].(gate.Agent)\n";
+			funcStr += '    log.Debug("[receive]'+msgName+':->%v", m)\n';
+			funcStr += "\n}\n\n";
+			//server end
 		}
 	
+		//client begin
 		enumStr += "}\n\n";
 		cmdTblStr += "}\n\n";
 		reqStr += "}\n\n";
 		outstr += enumStr + cmdTblStr + reqStr;
-	
-		//写入文件
-		fs.writeFileSync(outpath, outstr, 'utf8');
+		fs.writeFileSync(outClient, outstr, 'utf8');
+		//client end
 	}
 	
+	//server begin
 	routerStr += "}\n\n"
 	msgStr += "}\n"
 	
 	fs.writeFileSync(outServerMsg, msgStr, 'utf8');
 	fs.writeFileSync(outServerHandler, handStr, 'utf8');
 	fs.writeFileSync(outRouter, routerStr, 'utf8');
+	fs.writeFileSync(outHandleFunc, funcStr, "utf8");
+	//server end
 }
 
 
-
+//执行生产
 if(!fs.existsSync("./out")){
 	fs.mkdirSync("./out")
 }
