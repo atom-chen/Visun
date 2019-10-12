@@ -1,0 +1,2 @@
+node genpb.js
+pause

@@ -14,14 +14,10 @@ const HEAD_SIZE = 2;
 export default class LeafWsPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
-	// protected mainId: number;
-	// protected subId: number;
 
-	constructor(cmd:number, dataStruct:any, MainID?:number, SubID?:number){
+	constructor(cmd:number, dataStruct:any){
 		this.cmd = cmd;
 		this.data_struct = dataStruct;
-		// this.mainId = MainID;
-		// this.subId = SubID;
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
