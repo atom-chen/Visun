@@ -1,5 +1,5 @@
 syntax = "proto3";
-package leaflogin;
+package login;
 
 //注册
 message Register{

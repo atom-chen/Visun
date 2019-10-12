@@ -1,6 +1,6 @@
 {
   "nested": {
-    "leaflogin": {
+    "login": {
       "nested": {
         "Register": {
           "fields": {

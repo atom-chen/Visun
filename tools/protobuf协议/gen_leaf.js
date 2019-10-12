@@ -60,14 +60,6 @@ function getStructName(enumK) {
 	return jsCont.RpcDefine[enumK][1];
 }
 
-function getMainId(enumK) {
-	return jsCont.RpcDefine[enumK][2];
-}
-
-function getSubId(enumK) {
-	return jsCont.RpcDefine[enumK][3];
-}
-
 
 //-----------------------------------------------------------------
 // 第一步： 解析 消息cmd 和 结构体 以及 在protobuf网络包中的字段名

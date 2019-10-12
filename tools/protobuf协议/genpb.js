@@ -69,105 +69,119 @@ function getCmdId() {
 	return g_CMDID;
 }
 
-
-
-var arguments = process.argv.splice(2);
 var pbfiles = [
-	"leaflogin"
+	"login"
 ]
 
-fs.mkdirSync("./out")
-var serverPkgName = "go";
-var outServerMsg = "./out/msg.go"
-var outServerHandler = "./out/handler.go"
-
-var msgStr = "";
-msgStr = "//---------------------------------\n";
-msgStr += "//该文件自动生成，请勿手动更改\n";
-msgStr += "//---------------------------------\n";
-msgStr += "package msg\n"
-msgStr += "import (\n"
-msgStr += '    "fmt"\n'
-msgStr += '    "reflect"\n'
-msgStr += '    "sync"\n'
-msgStr += '    protoMsg "github.com/appqp/msg/go"\n'
-msgStr += '    jsonMsg "github.com/appqp/msg/json"\n'
-msgStr += '    "github.com/leaf/network/json"\n'
-msgStr += '    "github.com/leaf/network/protobuf"\n'
-msgStr += '    "github.com/golang/protobuf/proto"\n'
-msgStr += ')\n\n'
-msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
-msgStr += "var ProcessorJson = json.NewProcessor()\n"
-msgStr += "var ProcessorProto = protobuf.NewProcessor()\n\n"
-msgStr += "//对外接口 【这里的注册函数并非线程安全】\n"
-msgStr += "func RegisterMessage(message proto.Message) {\n"
-msgStr += "    var wg sync.WaitGroup\n"
-msgStr += "    wg.Add(1)\n"
-msgStr += "    ProcessorProto.Register(message)\n"
-msgStr += "    wg.Done()\n"
-msgStr += "}\n\n"
-msgStr += "func init() {\n"
-
-
-var handStr = "";
-
-for(var iii in pbfiles) {
-	var pbfilename = pbfiles[iii];
-	var channelName = "game";
-	var filepath = "in/" + pbfilename + ".proto";
-	var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
-	var mudname = getPackageName(line_list);
-
-	exec("pbjs -t json in/" + pbfilename + ".proto" + " -o tmps/" + pbfilename + ".json");
-
-	var outpath = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
-	
-	var outstr = "//---------------------------------\n";
-	outstr += "//该文件自动生成，请勿手动更改\n";
-	outstr += "//---------------------------------\n";
-	outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
-	outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
-	outstr += "import LeafWsPacket from \"../../../kernel/net/packet/LeafWsPacket\";\n\n\n";
-	var enumStr = "export enum " + mudname + "_msgs {\n";
-	var cmdTblStr = "export var " + mudname + "_packet_define = {\n";
-	var reqStr = "export class "+mudname+"_request {\n";
-
-	// from json
-	var jsonFile = "tmps/" + pbfilename+".json";
-	var jsonStr = fs.readFileSync(jsonFile, 'utf8');
-	var ptoJs = JSON.parse(jsonStr);
-	ptoJs = ptoJs["nested"][mudname]["nested"];
-	// console.log(ptoJs);
-	// fs.unlinkSync(jsonFile);
-
-	var mess = ptoJs
-	for(var msgName in ptoJs) {
-		var cmdId = getCmdId();
-		var argInfo = ptoJs[msgName];
-
-		enumStr += "    " + msgName + " = " + cmdId + ",\n";
-
-		cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + "),\n";
-		
-		reqStr += "    public static "+msgName+"( data:"+getRequestParam(argInfo)+" ) ";
-		reqStr += "{ ";
-		reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
-		reqStr += "}\n";
-
-		msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
-		handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
-	}
-
-	enumStr += "}\n\n";
-	cmdTblStr += "}\n\n";
-	reqStr += "}\n\n";
-	outstr += enumStr + cmdTblStr + reqStr;
-
-	//写入文件
-	fs.writeFileSync(outpath, outstr, 'utf8');
+if(!fs.existsSync("./out")){
+	fs.mkdirSync("./out")
 }
 
-msgStr += "}\n"
 
-fs.writeFileSync(outServerMsg, msgStr, 'utf8');
-fs.writeFileSync(outServerHandler, handStr, 'utf8');
+function doGenerate() {
+	var serverPkgName = "go";
+	var outServerMsg = "./out/msg.go"
+	var outServerHandler = "./out/handler.go"
+
+	var msgStr = "";
+	msgStr = "//---------------------------------\n";
+	msgStr += "//该文件自动生成，请勿手动更改\n";
+	msgStr += "//---------------------------------\n";
+	msgStr += "package msg\n"
+	msgStr += "import (\n"
+	msgStr += '    "fmt"\n'
+	msgStr += '    "reflect"\n'
+	msgStr += '    "sync"\n'
+	msgStr += '    protoMsg "github.com/appqp/msg/go"\n'
+	msgStr += '    jsonMsg "github.com/appqp/msg/json"\n'
+	msgStr += '    "github.com/leaf/network/json"\n'
+	msgStr += '    "github.com/leaf/network/protobuf"\n'
+	msgStr += '    "github.com/golang/protobuf/proto"\n'
+	msgStr += ')\n\n'
+	msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
+	msgStr += "var ProcessorJson = json.NewProcessor()\n"
+	msgStr += "var ProcessorProto = protobuf.NewProcessor()\n\n"
+	msgStr += "//对外接口 【这里的注册函数并非线程安全】\n"
+	msgStr += "func RegisterMessage(message proto.Message) {\n"
+	msgStr += "    var wg sync.WaitGroup\n"
+	msgStr += "    wg.Add(1)\n"
+	msgStr += "    ProcessorProto.Register(message)\n"
+	msgStr += "    wg.Done()\n"
+	msgStr += "}\n\n"
+	msgStr += "func init() {\n"
+
+	var handStr = "";
+
+	for(var iii in pbfiles) {
+		var pbfilename = pbfiles[iii];
+		var channelName = "game";
+		var filepath = "in/" + pbfilename + ".proto";
+		var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
+		var mudname = getPackageName(line_list);
+	
+		var outpath = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
+		
+		var outstr = "//---------------------------------\n";
+		outstr += "//该文件自动生成，请勿手动更改\n";
+		outstr += "//---------------------------------\n";
+		outstr += "import { " + mudname + " } from \"./" + pbfilename + "\";\n";
+		outstr += "import ChannelDefine from \"../definer/ChannelDefine\";\n";
+		outstr += "import LeafWsPacket from \"../../../kernel/net/packet/LeafWsPacket\";\n\n\n";
+		var enumStr = "export enum " + mudname + "_msgs {\n";
+		var cmdTblStr = "export var " + mudname + "_packet_define = {\n";
+		var reqStr = "export class "+mudname+"_request {\n";
+	
+		// from json
+		var jsonFile = "tmps/" + pbfilename+".json";
+		var jsonStr = fs.readFileSync(jsonFile, 'utf8');
+		var ptoJs = JSON.parse(jsonStr);
+		ptoJs = ptoJs["nested"][mudname]["nested"];
+		// console.log(ptoJs);
+		// fs.unlinkSync(jsonFile);
+	
+		msgStr += "\n//" + pbfilename + "文件生成的代码\n"
+		for(var msgName in ptoJs) {
+			var cmdId = getCmdId();
+			var argInfo = ptoJs[msgName];
+	
+			enumStr += "    " + msgName + " = " + cmdId + ",\n";
+	
+			cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + "),\n";
+			
+			reqStr += "    public static "+msgName+"( data:"+getRequestParam(argInfo)+" ) ";
+			reqStr += "{ ";
+			reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
+			reqStr += "}\n";
+	
+			msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
+			handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
+		}
+	
+		enumStr += "}\n\n";
+		cmdTblStr += "}\n\n";
+		reqStr += "}\n\n";
+		outstr += enumStr + cmdTblStr + reqStr;
+	
+		//写入文件
+		fs.writeFileSync(outpath, outstr, 'utf8');
+	}
+	
+	msgStr += "}\n"
+	
+	fs.writeFileSync(outServerMsg, msgStr, 'utf8');
+	fs.writeFileSync(outServerHandler, handStr, 'utf8');
+}
+
+
+var waitCnt = pbfiles.length;
+for(var iii in pbfiles) {
+	var pbfilename = pbfiles[iii];
+	var filepath = "in/" + pbfilename + ".proto";
+	exec("pbjs -t json " + filepath + " -o tmps/" + pbfilename + ".json", ()=>{
+		waitCnt--;
+		console.log("waiting count: ", waitCnt);
+		if(waitCnt <= 0) {
+			doGenerate();
+		}
+	});
+}

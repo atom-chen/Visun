@@ -26,6 +26,8 @@ func RegisterMessage(message proto.Message) {
 }
 
 func init() {
+
+//login文件生成的代码
     RegisterMessage(&protoMsg.Register{})
     RegisterMessage(&protoMsg.RegisterResult{})
     RegisterMessage(&protoMsg.Login{})

@@ -7,11 +7,11 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.leaflogin = (function() {
+$root.login = (function() {
 
-    var leaflogin = {};
+    var login = {};
 
-    leaflogin.Register = (function() {
+    login.Register = (function() {
 
         function Register(properties) {
             if (properties)
@@ -53,7 +53,7 @@ $root.leaflogin = (function() {
         Register.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.Register();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.Register();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -108,9 +108,9 @@ $root.leaflogin = (function() {
         };
 
         Register.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.Register)
+            if (object instanceof $root.login.Register)
                 return object;
-            var message = new $root.leaflogin.Register();
+            var message = new $root.login.Register();
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.Password != null)
@@ -155,7 +155,7 @@ $root.leaflogin = (function() {
         return Register;
     })();
 
-    leaflogin.RegisterResult = (function() {
+    login.RegisterResult = (function() {
 
         function RegisterResult(properties) {
             if (properties)
@@ -188,7 +188,7 @@ $root.leaflogin = (function() {
         RegisterResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.RegisterResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.RegisterResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -225,9 +225,9 @@ $root.leaflogin = (function() {
         };
 
         RegisterResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.RegisterResult)
+            if (object instanceof $root.login.RegisterResult)
                 return object;
-            var message = new $root.leaflogin.RegisterResult();
+            var message = new $root.login.RegisterResult();
             if (object.State != null)
                 message.State = object.State >>> 0;
             if (object.Hints != null)
@@ -257,7 +257,7 @@ $root.leaflogin = (function() {
         return RegisterResult;
     })();
 
-    leaflogin.Login = (function() {
+    login.Login = (function() {
 
         function Login(properties) {
             if (properties)
@@ -296,7 +296,7 @@ $root.leaflogin = (function() {
         Login.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.Login();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.Login();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -345,9 +345,9 @@ $root.leaflogin = (function() {
         };
 
         Login.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.Login)
+            if (object instanceof $root.login.Login)
                 return object;
-            var message = new $root.leaflogin.Login();
+            var message = new $root.login.Login();
             if (object.Account != null)
                 message.Account = String(object.Account);
             if (object.Password != null)
@@ -387,7 +387,7 @@ $root.leaflogin = (function() {
         return Login;
     })();
 
-    leaflogin.ResResult = (function() {
+    login.ResResult = (function() {
 
         function ResResult(properties) {
             if (properties)
@@ -420,7 +420,7 @@ $root.leaflogin = (function() {
         ResResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.ResResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ResResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -457,9 +457,9 @@ $root.leaflogin = (function() {
         };
 
         ResResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.ResResult)
+            if (object instanceof $root.login.ResResult)
                 return object;
-            var message = new $root.leaflogin.ResResult();
+            var message = new $root.login.ResResult();
             if (object.State != null)
                 message.State = object.State >>> 0;
             if (object.Hints != null)
@@ -489,7 +489,7 @@ $root.leaflogin = (function() {
         return ResResult;
     })();
 
-    leaflogin.TaskItem = (function() {
+    login.TaskItem = (function() {
 
         function TaskItem(properties) {
             if (properties)
@@ -525,7 +525,7 @@ $root.leaflogin = (function() {
         TaskItem.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.TaskItem();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskItem();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -568,9 +568,9 @@ $root.leaflogin = (function() {
         };
 
         TaskItem.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.TaskItem)
+            if (object instanceof $root.login.TaskItem)
                 return object;
-            var message = new $root.leaflogin.TaskItem();
+            var message = new $root.login.TaskItem();
             if (object.TaskID != null)
                 message.TaskID = object.TaskID >>> 0;
             if (object.Twice != null)
@@ -605,7 +605,7 @@ $root.leaflogin = (function() {
         return TaskItem;
     })();
 
-    leaflogin.TaskList = (function() {
+    login.TaskList = (function() {
 
         function TaskList(properties) {
             this.Task = [];
@@ -626,7 +626,7 @@ $root.leaflogin = (function() {
                 writer = $Writer.create();
             if (message.Task != null && message.Task.length)
                 for (var i = 0; i < message.Task.length; ++i)
-                    $root.leaflogin.TaskItem.encode(message.Task[i], writer.uint32(10).fork()).ldelim();
+                    $root.login.TaskItem.encode(message.Task[i], writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -637,14 +637,14 @@ $root.leaflogin = (function() {
         TaskList.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.TaskList();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskList();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     if (!(message.Task && message.Task.length))
                         message.Task = [];
-                    message.Task.push($root.leaflogin.TaskItem.decode(reader, reader.uint32()));
+                    message.Task.push($root.login.TaskItem.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -667,7 +667,7 @@ $root.leaflogin = (function() {
                 if (!Array.isArray(message.Task))
                     return "Task: array expected";
                 for (var i = 0; i < message.Task.length; ++i) {
-                    var error = $root.leaflogin.TaskItem.verify(message.Task[i]);
+                    var error = $root.login.TaskItem.verify(message.Task[i]);
                     if (error)
                         return "Task." + error;
                 }
@@ -676,17 +676,17 @@ $root.leaflogin = (function() {
         };
 
         TaskList.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.TaskList)
+            if (object instanceof $root.login.TaskList)
                 return object;
-            var message = new $root.leaflogin.TaskList();
+            var message = new $root.login.TaskList();
             if (object.Task) {
                 if (!Array.isArray(object.Task))
-                    throw TypeError(".leaflogin.TaskList.Task: array expected");
+                    throw TypeError(".login.TaskList.Task: array expected");
                 message.Task = [];
                 for (var i = 0; i < object.Task.length; ++i) {
                     if (typeof object.Task[i] !== "object")
-                        throw TypeError(".leaflogin.TaskList.Task: object expected");
-                    message.Task[i] = $root.leaflogin.TaskItem.fromObject(object.Task[i]);
+                        throw TypeError(".login.TaskList.Task: object expected");
+                    message.Task[i] = $root.login.TaskItem.fromObject(object.Task[i]);
                 }
             }
             return message;
@@ -701,7 +701,7 @@ $root.leaflogin = (function() {
             if (message.Task && message.Task.length) {
                 object.Task = [];
                 for (var j = 0; j < message.Task.length; ++j)
-                    object.Task[j] = $root.leaflogin.TaskItem.toObject(message.Task[j], options);
+                    object.Task[j] = $root.login.TaskItem.toObject(message.Task[j], options);
             }
             return object;
         };
@@ -713,7 +713,7 @@ $root.leaflogin = (function() {
         return TaskList;
     })();
 
-    leaflogin.GameList = (function() {
+    login.GameList = (function() {
 
         function GameList(properties) {
             this.Items = [];
@@ -734,7 +734,7 @@ $root.leaflogin = (function() {
                 writer = $Writer.create();
             if (message.Items != null && message.Items.length)
                 for (var i = 0; i < message.Items.length; ++i)
-                    $root.leaflogin.GameItem.encode(message.Items[i], writer.uint32(10).fork()).ldelim();
+                    $root.login.GameItem.encode(message.Items[i], writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -745,14 +745,14 @@ $root.leaflogin = (function() {
         GameList.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.GameList();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameList();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     if (!(message.Items && message.Items.length))
                         message.Items = [];
-                    message.Items.push($root.leaflogin.GameItem.decode(reader, reader.uint32()));
+                    message.Items.push($root.login.GameItem.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -775,7 +775,7 @@ $root.leaflogin = (function() {
                 if (!Array.isArray(message.Items))
                     return "Items: array expected";
                 for (var i = 0; i < message.Items.length; ++i) {
-                    var error = $root.leaflogin.GameItem.verify(message.Items[i]);
+                    var error = $root.login.GameItem.verify(message.Items[i]);
                     if (error)
                         return "Items." + error;
                 }
@@ -784,17 +784,17 @@ $root.leaflogin = (function() {
         };
 
         GameList.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.GameList)
+            if (object instanceof $root.login.GameList)
                 return object;
-            var message = new $root.leaflogin.GameList();
+            var message = new $root.login.GameList();
             if (object.Items) {
                 if (!Array.isArray(object.Items))
-                    throw TypeError(".leaflogin.GameList.Items: array expected");
+                    throw TypeError(".login.GameList.Items: array expected");
                 message.Items = [];
                 for (var i = 0; i < object.Items.length; ++i) {
                     if (typeof object.Items[i] !== "object")
-                        throw TypeError(".leaflogin.GameList.Items: object expected");
-                    message.Items[i] = $root.leaflogin.GameItem.fromObject(object.Items[i]);
+                        throw TypeError(".login.GameList.Items: object expected");
+                    message.Items[i] = $root.login.GameItem.fromObject(object.Items[i]);
                 }
             }
             return message;
@@ -809,7 +809,7 @@ $root.leaflogin = (function() {
             if (message.Items && message.Items.length) {
                 object.Items = [];
                 for (var j = 0; j < message.Items.length; ++j)
-                    object.Items[j] = $root.leaflogin.GameItem.toObject(message.Items[j], options);
+                    object.Items[j] = $root.login.GameItem.toObject(message.Items[j], options);
             }
             return object;
         };
@@ -821,7 +821,7 @@ $root.leaflogin = (function() {
         return GameList;
     })();
 
-    leaflogin.UserInfo = (function() {
+    login.UserInfo = (function() {
 
         function UserInfo(properties) {
             if (properties)
@@ -890,7 +890,7 @@ $root.leaflogin = (function() {
         UserInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.UserInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.UserInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -999,9 +999,9 @@ $root.leaflogin = (function() {
         };
 
         UserInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.UserInfo)
+            if (object instanceof $root.login.UserInfo)
                 return object;
-            var message = new $root.leaflogin.UserInfo();
+            var message = new $root.login.UserInfo();
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.Accounts != null)
@@ -1105,7 +1105,7 @@ $root.leaflogin = (function() {
         return UserInfo;
     })();
 
-    leaflogin.RoomInfo = (function() {
+    login.RoomInfo = (function() {
 
         function RoomInfo(properties) {
             if (properties)
@@ -1133,7 +1133,7 @@ $root.leaflogin = (function() {
             if (message.RoomName != null && message.hasOwnProperty("RoomName"))
                 writer.uint32(26).string(message.RoomName);
             if (message.Games != null && message.hasOwnProperty("Games"))
-                $root.leaflogin.GameList.encode(message.Games, writer.uint32(34).fork()).ldelim();
+                $root.login.GameList.encode(message.Games, writer.uint32(34).fork()).ldelim();
             return writer;
         };
 
@@ -1144,7 +1144,7 @@ $root.leaflogin = (function() {
         RoomInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.RoomInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.RoomInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1158,7 +1158,7 @@ $root.leaflogin = (function() {
                     message.RoomName = reader.string();
                     break;
                 case 4:
-                    message.Games = $root.leaflogin.GameList.decode(reader, reader.uint32());
+                    message.Games = $root.login.GameList.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1187,7 +1187,7 @@ $root.leaflogin = (function() {
                 if (!$util.isString(message.RoomName))
                     return "RoomName: string expected";
             if (message.Games != null && message.hasOwnProperty("Games")) {
-                var error = $root.leaflogin.GameList.verify(message.Games);
+                var error = $root.login.GameList.verify(message.Games);
                 if (error)
                     return "Games." + error;
             }
@@ -1195,9 +1195,9 @@ $root.leaflogin = (function() {
         };
 
         RoomInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.RoomInfo)
+            if (object instanceof $root.login.RoomInfo)
                 return object;
-            var message = new $root.leaflogin.RoomInfo();
+            var message = new $root.login.RoomInfo();
             if (object.RoomNum != null)
                 message.RoomNum = object.RoomNum >>> 0;
             if (object.RoomKey != null)
@@ -1206,8 +1206,8 @@ $root.leaflogin = (function() {
                 message.RoomName = String(object.RoomName);
             if (object.Games != null) {
                 if (typeof object.Games !== "object")
-                    throw TypeError(".leaflogin.RoomInfo.Games: object expected");
-                message.Games = $root.leaflogin.GameList.fromObject(object.Games);
+                    throw TypeError(".login.RoomInfo.Games: object expected");
+                message.Games = $root.login.GameList.fromObject(object.Games);
             }
             return message;
         };
@@ -1229,7 +1229,7 @@ $root.leaflogin = (function() {
             if (message.RoomName != null && message.hasOwnProperty("RoomName"))
                 object.RoomName = message.RoomName;
             if (message.Games != null && message.hasOwnProperty("Games"))
-                object.Games = $root.leaflogin.GameList.toObject(message.Games, options);
+                object.Games = $root.login.GameList.toObject(message.Games, options);
             return object;
         };
 
@@ -1240,7 +1240,7 @@ $root.leaflogin = (function() {
         return RoomInfo;
     })();
 
-    leaflogin.GameBaseInfo = (function() {
+    login.GameBaseInfo = (function() {
 
         function GameBaseInfo(properties) {
             if (properties)
@@ -1285,7 +1285,7 @@ $root.leaflogin = (function() {
         GameBaseInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.GameBaseInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameBaseInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1346,9 +1346,9 @@ $root.leaflogin = (function() {
         };
 
         GameBaseInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.GameBaseInfo)
+            if (object instanceof $root.login.GameBaseInfo)
                 return object;
-            var message = new $root.leaflogin.GameBaseInfo();
+            var message = new $root.login.GameBaseInfo();
             if (object.Type != null)
                 message.Type = object.Type >>> 0;
             if (object.KindID != null)
@@ -1398,7 +1398,7 @@ $root.leaflogin = (function() {
         return GameBaseInfo;
     })();
 
-    leaflogin.GameItem = (function() {
+    login.GameItem = (function() {
 
         function GameItem(properties) {
             if (properties)
@@ -1420,7 +1420,7 @@ $root.leaflogin = (function() {
             if (message.ID != null && message.hasOwnProperty("ID"))
                 writer.uint32(8).uint32(message.ID);
             if (message.Info != null && message.hasOwnProperty("Info"))
-                $root.leaflogin.GameBaseInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+                $root.login.GameBaseInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -1431,7 +1431,7 @@ $root.leaflogin = (function() {
         GameItem.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.GameItem();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameItem();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1439,7 +1439,7 @@ $root.leaflogin = (function() {
                     message.ID = reader.uint32();
                     break;
                 case 2:
-                    message.Info = $root.leaflogin.GameBaseInfo.decode(reader, reader.uint32());
+                    message.Info = $root.login.GameBaseInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1462,7 +1462,7 @@ $root.leaflogin = (function() {
                 if (!$util.isInteger(message.ID))
                     return "ID: integer expected";
             if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.leaflogin.GameBaseInfo.verify(message.Info);
+                var error = $root.login.GameBaseInfo.verify(message.Info);
                 if (error)
                     return "Info." + error;
             }
@@ -1470,15 +1470,15 @@ $root.leaflogin = (function() {
         };
 
         GameItem.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.GameItem)
+            if (object instanceof $root.login.GameItem)
                 return object;
-            var message = new $root.leaflogin.GameItem();
+            var message = new $root.login.GameItem();
             if (object.ID != null)
                 message.ID = object.ID >>> 0;
             if (object.Info != null) {
                 if (typeof object.Info !== "object")
-                    throw TypeError(".leaflogin.GameItem.Info: object expected");
-                message.Info = $root.leaflogin.GameBaseInfo.fromObject(object.Info);
+                    throw TypeError(".login.GameItem.Info: object expected");
+                message.Info = $root.login.GameBaseInfo.fromObject(object.Info);
             }
             return message;
         };
@@ -1494,7 +1494,7 @@ $root.leaflogin = (function() {
             if (message.ID != null && message.hasOwnProperty("ID"))
                 object.ID = message.ID;
             if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.leaflogin.GameBaseInfo.toObject(message.Info, options);
+                object.Info = $root.login.GameBaseInfo.toObject(message.Info, options);
             return object;
         };
 
@@ -1505,7 +1505,7 @@ $root.leaflogin = (function() {
         return GameItem;
     })();
 
-    leaflogin.MasterInfo = (function() {
+    login.MasterInfo = (function() {
 
         function MasterInfo(properties) {
             this.RoomsInfo = [];
@@ -1527,12 +1527,12 @@ $root.leaflogin = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
-                $root.leaflogin.UserInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
+                $root.login.UserInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
             if (message.RoomsInfo != null && message.RoomsInfo.length)
                 for (var i = 0; i < message.RoomsInfo.length; ++i)
-                    $root.leaflogin.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
+                    $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
             if (message.Tasks != null && message.hasOwnProperty("Tasks"))
-                $root.leaflogin.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
+                $root.login.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
             return writer;
         };
 
@@ -1543,20 +1543,20 @@ $root.leaflogin = (function() {
         MasterInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.MasterInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.MasterInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserInfo = $root.leaflogin.UserInfo.decode(reader, reader.uint32());
+                    message.UserInfo = $root.login.UserInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
                     if (!(message.RoomsInfo && message.RoomsInfo.length))
                         message.RoomsInfo = [];
-                    message.RoomsInfo.push($root.leaflogin.RoomInfo.decode(reader, reader.uint32()));
+                    message.RoomsInfo.push($root.login.RoomInfo.decode(reader, reader.uint32()));
                     break;
                 case 3:
-                    message.Tasks = $root.leaflogin.TaskList.decode(reader, reader.uint32());
+                    message.Tasks = $root.login.TaskList.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1576,7 +1576,7 @@ $root.leaflogin = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
-                var error = $root.leaflogin.UserInfo.verify(message.UserInfo);
+                var error = $root.login.UserInfo.verify(message.UserInfo);
                 if (error)
                     return "UserInfo." + error;
             }
@@ -1584,13 +1584,13 @@ $root.leaflogin = (function() {
                 if (!Array.isArray(message.RoomsInfo))
                     return "RoomsInfo: array expected";
                 for (var i = 0; i < message.RoomsInfo.length; ++i) {
-                    var error = $root.leaflogin.RoomInfo.verify(message.RoomsInfo[i]);
+                    var error = $root.login.RoomInfo.verify(message.RoomsInfo[i]);
                     if (error)
                         return "RoomsInfo." + error;
                 }
             }
             if (message.Tasks != null && message.hasOwnProperty("Tasks")) {
-                var error = $root.leaflogin.TaskList.verify(message.Tasks);
+                var error = $root.login.TaskList.verify(message.Tasks);
                 if (error)
                     return "Tasks." + error;
             }
@@ -1598,28 +1598,28 @@ $root.leaflogin = (function() {
         };
 
         MasterInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.MasterInfo)
+            if (object instanceof $root.login.MasterInfo)
                 return object;
-            var message = new $root.leaflogin.MasterInfo();
+            var message = new $root.login.MasterInfo();
             if (object.UserInfo != null) {
                 if (typeof object.UserInfo !== "object")
-                    throw TypeError(".leaflogin.MasterInfo.UserInfo: object expected");
-                message.UserInfo = $root.leaflogin.UserInfo.fromObject(object.UserInfo);
+                    throw TypeError(".login.MasterInfo.UserInfo: object expected");
+                message.UserInfo = $root.login.UserInfo.fromObject(object.UserInfo);
             }
             if (object.RoomsInfo) {
                 if (!Array.isArray(object.RoomsInfo))
-                    throw TypeError(".leaflogin.MasterInfo.RoomsInfo: array expected");
+                    throw TypeError(".login.MasterInfo.RoomsInfo: array expected");
                 message.RoomsInfo = [];
                 for (var i = 0; i < object.RoomsInfo.length; ++i) {
                     if (typeof object.RoomsInfo[i] !== "object")
-                        throw TypeError(".leaflogin.MasterInfo.RoomsInfo: object expected");
-                    message.RoomsInfo[i] = $root.leaflogin.RoomInfo.fromObject(object.RoomsInfo[i]);
+                        throw TypeError(".login.MasterInfo.RoomsInfo: object expected");
+                    message.RoomsInfo[i] = $root.login.RoomInfo.fromObject(object.RoomsInfo[i]);
                 }
             }
             if (object.Tasks != null) {
                 if (typeof object.Tasks !== "object")
-                    throw TypeError(".leaflogin.MasterInfo.Tasks: object expected");
-                message.Tasks = $root.leaflogin.TaskList.fromObject(object.Tasks);
+                    throw TypeError(".login.MasterInfo.Tasks: object expected");
+                message.Tasks = $root.login.TaskList.fromObject(object.Tasks);
             }
             return message;
         };
@@ -1635,14 +1635,14 @@ $root.leaflogin = (function() {
                 object.Tasks = null;
             }
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
-                object.UserInfo = $root.leaflogin.UserInfo.toObject(message.UserInfo, options);
+                object.UserInfo = $root.login.UserInfo.toObject(message.UserInfo, options);
             if (message.RoomsInfo && message.RoomsInfo.length) {
                 object.RoomsInfo = [];
                 for (var j = 0; j < message.RoomsInfo.length; ++j)
-                    object.RoomsInfo[j] = $root.leaflogin.RoomInfo.toObject(message.RoomsInfo[j], options);
+                    object.RoomsInfo[j] = $root.login.RoomInfo.toObject(message.RoomsInfo[j], options);
             }
             if (message.Tasks != null && message.hasOwnProperty("Tasks"))
-                object.Tasks = $root.leaflogin.TaskList.toObject(message.Tasks, options);
+                object.Tasks = $root.login.TaskList.toObject(message.Tasks, options);
             return object;
         };
 
@@ -1653,7 +1653,7 @@ $root.leaflogin = (function() {
         return MasterInfo;
     })();
 
-    leaflogin.ReqEnterRoom = (function() {
+    login.ReqEnterRoom = (function() {
 
         function ReqEnterRoom(properties) {
             if (properties)
@@ -1686,7 +1686,7 @@ $root.leaflogin = (function() {
         ReqEnterRoom.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.ReqEnterRoom();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqEnterRoom();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1723,9 +1723,9 @@ $root.leaflogin = (function() {
         };
 
         ReqEnterRoom.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.ReqEnterRoom)
+            if (object instanceof $root.login.ReqEnterRoom)
                 return object;
-            var message = new $root.leaflogin.ReqEnterRoom();
+            var message = new $root.login.ReqEnterRoom();
             if (object.RoomNum != null)
                 message.RoomNum = object.RoomNum >>> 0;
             if (object.RoomKey != null)
@@ -1755,7 +1755,7 @@ $root.leaflogin = (function() {
         return ReqEnterRoom;
     })();
 
-    leaflogin.ReqEnterGame = (function() {
+    login.ReqEnterGame = (function() {
 
         function ReqEnterGame(properties) {
             if (properties)
@@ -1785,7 +1785,7 @@ $root.leaflogin = (function() {
         ReqEnterGame.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.ReqEnterGame();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqEnterGame();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1816,9 +1816,9 @@ $root.leaflogin = (function() {
         };
 
         ReqEnterGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.ReqEnterGame)
+            if (object instanceof $root.login.ReqEnterGame)
                 return object;
-            var message = new $root.leaflogin.ReqEnterGame();
+            var message = new $root.login.ReqEnterGame();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
             return message;
@@ -1842,7 +1842,7 @@ $root.leaflogin = (function() {
         return ReqEnterGame;
     })();
 
-    leaflogin.ReqExitGame = (function() {
+    login.ReqExitGame = (function() {
 
         function ReqExitGame(properties) {
             if (properties)
@@ -1872,7 +1872,7 @@ $root.leaflogin = (function() {
         ReqExitGame.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.leaflogin.ReqExitGame();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqExitGame();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1903,9 +1903,9 @@ $root.leaflogin = (function() {
         };
 
         ReqExitGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.leaflogin.ReqExitGame)
+            if (object instanceof $root.login.ReqExitGame)
                 return object;
-            var message = new $root.leaflogin.ReqExitGame();
+            var message = new $root.login.ReqExitGame();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
             return message;
@@ -1929,7 +1929,7 @@ $root.leaflogin = (function() {
         return ReqExitGame;
     })();
 
-    return leaflogin;
+    return login;
 })();
 
 module.exports = $root;
