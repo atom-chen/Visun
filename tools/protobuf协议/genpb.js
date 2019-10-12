@@ -4,12 +4,12 @@ const { exec } = require('child_process');
 
 //要生成的pb文件
 var pbfiles = [
-	"login",
-	"gamecomm",
-	"baccarat",
-	"fishLord",
-	"landLords",
-	"mahjong"
+	{ name:"login", router:"login" },
+	{ name:"gamecomm", router:"game" },
+	{ name:"baccarat", router:"game" },
+	{ name:"fishLord", router:"game" },
+	{ name:"landLords", router:"game" },
+	{ name:"mahjong", router:"game" }
 ]
 
 
@@ -85,12 +85,13 @@ function doGenerate() {
 	var serverPkgName = "go";
 	var outServerMsg = "./out/msg.go"
 	var outServerHandler = "./out/handler.go"
+	var outRouter = "./out/router.go"
 
 	var msgStr = "";
 	msgStr = "//---------------------------------\n";
 	msgStr += "//该文件自动生成，请勿手动更改\n";
 	msgStr += "//---------------------------------\n";
-	msgStr += "package msg\n"
+	msgStr += "package msg\n\n"
 	msgStr += "import (\n"
 	msgStr += '    "fmt"\n'
 	msgStr += '    "reflect"\n'
@@ -115,13 +116,27 @@ function doGenerate() {
 
 	var handStr = "";
 
+	var routerStr = "//---------------------------------\n";
+	routerStr += "//该文件自动生成，请勿手动更改\n";
+	routerStr += "//---------------------------------\n";
+	routerStr += "package gate\n\n";
+	routerStr += 'import (\n';
+	routerStr += '    "github.com/appqp/game"\n';
+	routerStr += '    "github.com/appqp/login"\n';
+	routerStr += '    "github.com/appqp/msg"\n';
+	routerStr += '    protoMsg "github.com/appqp/msg/go"\n';
+	routerStr += ')\n\n';
+	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
+	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';
+	routerStr += "func init() {\n";
+
 	for(var iii in pbfiles) {
-		var pbfilename = pbfiles[iii];
+		var pbfilename = pbfiles[iii].name;
 		var channelName = "game";
 		var filepath = "in/" + pbfilename + ".proto";
 		var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
 		var mudname = getPackageName(line_list);
-	
+		var curRouter = pbfiles[iii].router;
 		var outpath = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
 		
 		var outstr = "//---------------------------------\n";
@@ -144,6 +159,7 @@ function doGenerate() {
 	
 		msgStr += "\n    //" + pbfilename + "文件生成的代码\n"
 		handStr += "\n    //" + pbfilename + "文件生成的代码\n"
+		routerStr += "\n    //" + pbfilename + "文件生成的代码\n"
 		for(var msgName in ptoJs) {
 			var cmdId = getCmdId();
 			var argInfo = ptoJs[msgName];
@@ -159,6 +175,7 @@ function doGenerate() {
 	
 			msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
 			handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
+			routerStr += "    msg.ProcessorProto.SetRouter(&protoMsg."+ msgName +"{}, "+ curRouter +".ChanRPC)\n"
 		}
 	
 		enumStr += "}\n\n";
@@ -170,10 +187,12 @@ function doGenerate() {
 		fs.writeFileSync(outpath, outstr, 'utf8');
 	}
 	
+	routerStr += "}\n\n"
 	msgStr += "}\n"
 	
 	fs.writeFileSync(outServerMsg, msgStr, 'utf8');
 	fs.writeFileSync(outServerHandler, handStr, 'utf8');
+	fs.writeFileSync(outRouter, routerStr, 'utf8');
 }
 
 
@@ -184,7 +203,7 @@ if(!fs.existsSync("./out")){
 
 var waitCnt = pbfiles.length;
 for(var iii in pbfiles) {
-	var pbfilename = pbfiles[iii];
+	var pbfilename = pbfiles[iii].name;
 	var filepath = "in/" + pbfilename + ".proto";
 	exec("pbjs -t json " + filepath + " -o tmps/" + pbfilename + ".json", ()=>{
 		waitCnt--;
