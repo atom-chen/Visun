@@ -1,6 +1,7 @@
 import LoginMgr from "./LoginMgr";
 import GameManager from "./GameManager";
 import LoginUser from "./LoginUser";
+import LoginSihaiMgr from "./LoginSihaiMgr";
 
 
 export default class LogicCenter {
@@ -24,6 +25,7 @@ export default class LogicCenter {
     public init() {
         this.clear();
         this.registModel(LoginMgr);
+        this.registModel(LoginSihaiMgr);
         this.registModel(LoginUser);
         this.registModel(GameManager);
     }
@@ -40,6 +42,7 @@ export default class LogicCenter {
         this._managers = [];
     }
 
+    
     public registModel(cls:any) {
         if(!cls.delInstance) { cc.error("no delInstance", cls); }
         cls.getInstance();

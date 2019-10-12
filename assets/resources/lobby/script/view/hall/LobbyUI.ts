@@ -7,7 +7,6 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Procedure from "../../../../../kernel/promise/Procedure";
 import CHandler from "../../../../../kernel/basic/CHandler";
 import TimerManager from "../../../../../kernel/timer/TimerManager";
-import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import EventCenter from "../../../../../kernel/event/EventCenter";

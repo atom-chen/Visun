@@ -1,5 +1,5 @@
 import UIManager from "../../../kernel/view/UIManager";
-import LoginMgr from "../model/LoginMgr";
+import LoginSihaiMgr from "../model/LoginSihaiMgr";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import TimerManager from "../../../kernel/timer/TimerManager";
 import CHandler from "../../../kernel/basic/CHandler";
@@ -12,7 +12,7 @@ var proxy_hall = {
 
 	[login_msgs.MovedGateNot] : function(param:any) {
 		var wsAddr = param.wsUri;
-		LoginMgr.getInstance().onGateChange(wsAddr);
+		LoginSihaiMgr.getInstance().onGateChange(wsAddr);
 	},
 
 	[login_msgs.UserLogInResp] : function(param:any) {
