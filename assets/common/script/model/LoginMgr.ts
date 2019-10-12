@@ -7,7 +7,7 @@ import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
-import { leaflogin_request, leaflogin_packet_define } from "../proto/net_leaflogin";
+import { login_request, login_packet_define } from "../proto/net_login";
 
 
 export default class LoginMgr extends ModelBase {
@@ -49,7 +49,7 @@ export default class LoginMgr extends ModelBase {
 		}
 
 		this.connectLeaf();
-		leaflogin_request.Login({
+		login_request.Login({
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
@@ -70,7 +70,7 @@ export default class LoginMgr extends ModelBase {
 		InviteCode = InviteCode || "ssss";
 
 		this.connectLeaf();
-		leaflogin_request.Register({
+		login_request.Register({
 			Name: Account, 
 			Password: Pswd, 
 			SecurityCode: "2323", 
@@ -88,7 +88,7 @@ export default class LoginMgr extends ModelBase {
 		channel_hall.setProcessor(g_leafProcessor);
 		g_leafProcessor.registProtocol(null);
 		g_leafProcessor.unregistAllCmds();
-		g_leafProcessor.registCmds(leaflogin_packet_define);
+		g_leafProcessor.registCmds(login_packet_define);
 		channel_hall.connect( wsAddr, 0, 
 			new CHandler(this, ()=>{ 
 				
