@@ -31,7 +31,7 @@ export default class LoginMgr extends ModelBase {
 
 
 	public checkLogin(bTip: boolean): boolean {
-		var hasLogin = LoginUser.getInstance().userid !== 0;
+		var hasLogin = LoginUser.getInstance() !== null;
 		if (bTip && !hasLogin) {
 			UIManager.toast("请先登录");
 		}
@@ -94,7 +94,11 @@ export default class LoginMgr extends ModelBase {
 				
 			}),
 			new CHandler(this, ()=>{ 
-
+				UIManager.openDialog("login_fail", "连接失败，是否重试？", (menuId:number)=>{
+					if(menuId===1) {
+						this.connectLeaf();
+					}
+				})
 			})
 		);
 	}

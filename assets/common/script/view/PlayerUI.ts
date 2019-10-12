@@ -30,9 +30,9 @@ export default class PlayerUI extends BaseComponent {
     }
 
     public setUserInfo(userObj:LoginUser) {
-        this._userId = userObj.userid;
-        this.label_name.string = userObj.name;
-        this.label_money.string = userObj.coin.toString();
+        this._userId = userObj.UserId;
+        this.label_name.string = userObj.Name;
+        this.label_money.string = userObj.Money.toString();
     }
 
 }
