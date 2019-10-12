@@ -117,6 +117,14 @@ function getRequestParam(argInfo) {
 	return desc;
 }
 
+function write2file(filepath, str) {
+	try {
+		fs.writeFileSync(filepath, str, 'utf8');
+	} catch (err) {
+		console.log(err);
+	}
+}
+
 function doGenerate() {
 	//server begin
 	var serverPkgName = "go";
@@ -274,13 +282,13 @@ function doGenerate() {
 		cmdTblStr += "}\n\n";
 		reqStr += "}\n\n";
 		outstr += enumStr + cmdTblStr + reqStr;
-		fs.writeFileSync(outClient, outstr, 'utf8');
+		write2file(outClient, outstr);
 
 		clientHandleStr += "}\n\n";
 		clientHandleStr += "export default proxy_"+mudname+";\n";
 		if(outClientHandler) {
 			if(!fs.existsSync(outClientHandler)){
-				fs.writeFileSync(outClientHandler, clientHandleStr, "utf8");
+				write2file(outClientHandler, clientHandleStr);
 			}
 		}
 		//client end
@@ -290,10 +298,10 @@ function doGenerate() {
 	routerStr += "}\n\n"
 	msgStr += "}\n"
 	
-	fs.writeFileSync(outServerMsg, msgStr, 'utf8');
-	fs.writeFileSync(outServerHandler, handStr, 'utf8');
-	fs.writeFileSync(outRouter, routerStr, 'utf8');
-	fs.writeFileSync(outHandleFunc, funcStr, "utf8");
+	write2file(outServerMsg, msgStr);
+	write2file(outServerHandler, handStr);
+	write2file(outRouter, routerStr);
+	write2file(outHandleFunc, funcStr);
 	//server end
 }
 
