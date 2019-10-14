@@ -129,10 +129,10 @@ function doGenerate() {
 	//server begin
 	var serverPkgName = "go";
 
-	var outServerMsg = "./out/msg.go";
-	var outRouter = "./out/router.go";
-	var outServerHandler = "./out/handler.go";
-	var outHandleFunc = "./out/handlerFunc.go";
+	var outServerMsg = "D:/go/src/vision/appqp/msg/msg.go";
+	var outRouter = "D:/go/src/vision/appqp/gate/router.go";
+	var outServerHandler = "d:/handler.go";
+	var outHandleFunc = "d:/handlerFunc.go";
 
 	var msgStr = "";
 	var routerStr = "";
@@ -145,14 +145,11 @@ function doGenerate() {
 	msgStr += "//---------------------------------\n";
 	msgStr += "package msg\n\n"
 	msgStr += "import (\n"
-	msgStr += '    "fmt"\n'
-	msgStr += '    "reflect"\n'
 	msgStr += '    "sync"\n'
-	msgStr += '    protoMsg "github.com/appqp/msg/go"\n'
-	msgStr += '    jsonMsg "github.com/appqp/msg/json"\n'
-	msgStr += '    "github.com/leaf/network/json"\n'
-	msgStr += '    "github.com/leaf/network/protobuf"\n'
 	msgStr += '    "github.com/golang/protobuf/proto"\n'
+	msgStr += '    "vision/leaf/network/json"\n'
+	msgStr += '    "vision/leaf/network/protobuf"\n'
+	msgStr += '    protoMsg "vision/appqp/msg/go"\n'
 	msgStr += ')\n\n'
 	msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
 	msgStr += "var ProcessorJson = json.NewProcessor()\n"
@@ -164,7 +161,7 @@ function doGenerate() {
 	msgStr += "    ProcessorProto.Register(message)\n"
 	msgStr += "    wg.Done()\n"
 	msgStr += "}\n\n"
-	msgStr += "func init() {\n"
+	msgStr += "func init() {"
 
 	
 	routerStr = "//---------------------------------\n";
@@ -172,14 +169,14 @@ function doGenerate() {
 	routerStr += "//---------------------------------\n";
 	routerStr += "package gate\n\n";
 	routerStr += 'import (\n';
-	routerStr += '    "github.com/appqp/game"\n';
-	routerStr += '    "github.com/appqp/login"\n';
-	routerStr += '    "github.com/appqp/msg"\n';
-	routerStr += '    protoMsg "github.com/appqp/msg/go"\n';
+	routerStr += '    "vision/appqp/game"\n';
+	routerStr += '    "vision/appqp/login"\n';
+	routerStr += '    "vision/appqp/msg"\n';
+	routerStr += '    protoMsg "vision/appqp/msg/go"\n';
 	routerStr += ')\n\n';
 	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';
-	routerStr += "func init() {\n";
+	routerStr += "func init() {";
 	//server end
 
 
@@ -307,9 +304,9 @@ function doGenerate() {
 
 
 //执行生产
-if(!fs.existsSync("./out")){
-	fs.mkdirSync("./out")
-}
+// if(!fs.existsSync("./out")){
+// 	fs.mkdirSync("./out")
+// }
 
 var waitCnt = pbfiles.length;
 for(var iii in pbfiles) {
