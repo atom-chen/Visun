@@ -9,12 +9,18 @@ import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
 import { login_request, login_packet_define } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
+import proxy_login from "../proxy/proxy_login";
 
 
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 	private constructor(){
 		super();
+		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
+		g_leafProcessor.registProtocol(null);
+		g_leafProcessor.unregistAllCmds();
+		g_leafProcessor.registCmds(login_packet_define);
+		g_leafProcessor.getDispatcher().setObserver(proxy_login);
 	}
     public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
@@ -85,13 +91,11 @@ export default class LoginMgr extends ModelBase {
 		//建立通道 
 		var wsAddr = ServerConfig.leafServer;
 		cc.log("连接leaf", wsAddr);
-		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
-		var channel_hall = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
-		channel_hall.setProcessor(g_leafProcessor);
-		g_leafProcessor.registProtocol(null);
-		g_leafProcessor.unregistAllCmds();
-		g_leafProcessor.registCmds(login_packet_define);
-		channel_hall.connect( wsAddr, 0, 
+		var g_leafProcessor = ProcessorMgr.getInstance().getProcessor(ChannelDefine.game);
+		var leafChan = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
+		leafChan.setProcessor(g_leafProcessor);
+		g_leafProcessor.setChannel(leafChan);
+		leafChan.connect( wsAddr, 0, 
 			new CHandler(this, ()=>{ 
 				
 			}),

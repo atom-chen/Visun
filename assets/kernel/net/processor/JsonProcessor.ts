@@ -22,13 +22,13 @@ export default class JsonProcessor extends BaseProcessor {
         var buff = this._coder.encode(req);
 
         if (this._channel.getState() != ConnState.connectsucc && this._channel.getState() != ConnState.reconnectsucc || this._paused) {
-			cc.log(this._channel.getName(), "消息推入队列：", this._channel.getState(), this._paused);
+			cc.log(this._name, "消息推入队列：", this._channel.getState(), this._paused);
             this._send_list.push(buff);
             return;
         }
         
         //for debug
-		cc.log(this._channel.getName(), "[send]", info);
+		cc.log(this._name, "[send]", info);
         
         this._channel.sendBuff(buff);
         return true;
@@ -39,7 +39,7 @@ export default class JsonProcessor extends BaseProcessor {
         //二进制流 转 obj
         var info = this._coder.decode(buff);
 
-        cc.log(this._channel.getName(), "[recv]", info);
+        cc.log(this._name, "[recv]", info);
 
         var cmd = info.cmd;
         var data = info.data;

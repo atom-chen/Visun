@@ -32,6 +32,7 @@ export default class WsChannel implements IChannel {
 		}, this);
 		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
 			this.setPaused(false);
+			this.force_reconnect();
 		}, this);
 	}
 
@@ -104,7 +105,6 @@ export default class WsChannel implements IChannel {
 	public setProcessor(porcessor: IProcessor): void 
 	{
 		this._dataProcessor = porcessor;
-		this._dataProcessor.setChannel(this);
 	}
 	
 	public connect(url:string, port:number, on_success:CHandler = null, on_fail:CHandler = null) : void

@@ -28,23 +28,23 @@ export default class ProcessorMgr {
         if(!this._all_processors[key]) {
             if(type == ProcessorType.Json) 
             {
-                this._all_processors[key] = new JsonProcessor();
+                this._all_processors[key] = new JsonProcessor(key);
             }
             else if(type == ProcessorType.Protobuff) 
             {
-                this._all_processors[key] = new ProtobufProcessor();
+                this._all_processors[key] = new ProtobufProcessor(key);
             }
             else if(type == ProcessorType.Stream) 
             {
-                this._all_processors[key] = new StreamProcessor();
+                this._all_processors[key] = new StreamProcessor(key);
             }
             else if(type == ProcessorType.LeafTcp)
             {
-                this._all_processors[key] = new LeafTcpProcessor();
+                this._all_processors[key] = new LeafTcpProcessor(key);
             }
             else if(type == ProcessorType.LeafWs)
             {
-                this._all_processors[key] = new LeafWsProcessor();
+                this._all_processors[key] = new LeafWsProcessor(key);
             }
         }
         return this._all_processors[key];

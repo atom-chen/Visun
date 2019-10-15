@@ -1,4 +1,5 @@
 import { login_msgs } from "../proto/net_login";
+import UIManager from "../../../kernel/view/UIManager";
 
 //---------------------------------
 // login响应句柄
@@ -19,7 +20,7 @@ var proxy_login = {
     },
 
     [login_msgs.ResResult] : function(param: any) {
-
+        UIManager.toast(param.Hints)
     },
 
     [login_msgs.TaskItem] : function(param: any) {

@@ -7,6 +7,7 @@ import SingleDispatcher from "../../event/SingleDispatcher";
 import { ConnState } from "../../looker/KernelDefine";
 
 export default class BaseProcessor implements IProcessor {
+	protected _name: string = "";
 	protected _dispatcher = new SingleDispatcher;
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
@@ -15,6 +16,9 @@ export default class BaseProcessor implements IProcessor {
 	protected _cmds = {};
 	protected _heatBeatFunc: Function = null;
 	
+	public constructor(name:string) {
+		this._name = name;
+	}
 
 	public getDispatcher() : SingleDispatcher
 	{
@@ -29,7 +33,7 @@ export default class BaseProcessor implements IProcessor {
 	public registCmds(cmds:any) : void
 	{
 		if(cmds===null || cmds===undefined) { return; }
-		cc.log(this._channel.getName(), "---regist cmds---", Object.keys(cmds).length);
+		cc.log(this._name, "---regist cmds---", Object.keys(cmds).length);
 		for(var k in cmds) {
 			this._cmds[k] = cmds[k];
 		}
@@ -38,7 +42,7 @@ export default class BaseProcessor implements IProcessor {
 	public unregistCmds(cmds:any) : void
 	{
 		if(cmds===null || cmds===undefined) { return; }
-		cc.log(this._channel.getName(), "---unregist cmds---", Object.keys(cmds).length);
+		cc.log(this._name, "---unregist cmds---", Object.keys(cmds).length);
 		for(var k in cmds) {
 			this._cmds[k] = null;
 		}
@@ -46,7 +50,7 @@ export default class BaseProcessor implements IProcessor {
 
 	public unregistAllCmds() : void
 	{
-		cc.log(this._channel.getName(), "---unregist all cmds---");
+		cc.log(this._name, "---unregist all cmds---");
 		this._cmds = {};
 	}
 
@@ -92,7 +96,7 @@ export default class BaseProcessor implements IProcessor {
 		if(this._paused) { return; }
 		if(this._fire_list.length <= 0) { return; }
 
-		cc.log(this._channel.getName(), "flush firelist", this._fire_list.length);
+		cc.log(this._name, "flush firelist", this._fire_list.length);
 		for(var i=0, len=this._fire_list.length; i<len; i++){
 			this._dispatcher.fire(this._fire_list[i].cmd, this._fire_list[i].data);
 		}
@@ -105,7 +109,7 @@ export default class BaseProcessor implements IProcessor {
 		if(this._paused) { return; }
 		if(this._send_list.length <= 0) { return; }
 
-		cc.log(this._channel.getName(), "flush sendlist: ", this._send_list.length);
+		cc.log(this._name, "flush sendlist: ", this._send_list.length);
 		for(var i=0; i<this._send_list.length; i++){
 			this._channel.sendBuff(this._send_list[i]);
 		}
