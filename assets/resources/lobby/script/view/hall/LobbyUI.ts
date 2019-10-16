@@ -13,6 +13,8 @@ import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
 import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import EventCenter from "../../../../../kernel/event/EventCenter";
+import { login_msgs } from "../../../../../common/script/proto/net_login";
 
 const {ccclass, property} = cc._decorator;
 
@@ -29,7 +31,7 @@ export default class LobbyUI extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 		this.testSpine();
-
+		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
 		LoginMgr.getInstance().checkLogin(true);
 	}
 

@@ -22,6 +22,6 @@ export default class HeroUI extends BaseComponent {
     public setUserInfo(userObj:LoginUser) {
         this.userId = userObj.UserId;
         this.label_name.string = userObj.Name + " | 金币：" + userObj.Money;
-        this.label_id.string = userObj.UserId.toString();
+        this.label_id.string = "ID: " + userObj.UserId;
     }
 }

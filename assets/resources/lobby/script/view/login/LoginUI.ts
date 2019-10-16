@@ -1,8 +1,8 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
-import TimerManager from "../../../../../kernel/timer/TimerManager";
-import CHandler from "../../../../../kernel/basic/CHandler";
+import EventCenter from "../../../../../kernel/event/EventCenter";
+import { login_msgs } from "../../../../../common/script/proto/net_login";
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,11 +34,20 @@ export default class LoginUI extends BaseComponent {
             LoginMgr.getInstance().leafRegist(name, pswd, "ssss");
         }, this);
 
-        TimerManager.addFrameTimer(1, 1000, new CHandler(this, (tmr)=>{
-            for(var i=1; i<=1000; i++) {
-                LoginMgr.getInstance().leafLogin("sss", "aaa");
+        // TimerManager.addFrameTimer(1, 200000, new CHandler(this, (tmr)=>{
+        //     for(var i=1; i<=10; i++) {
+        //         LoginMgr.getInstance().leafLogin("sss", "aaa");
+        //     }
+        // }))
+        this.initNetEvent();
+    }
+
+    private initNetEvent() {
+        EventCenter.getInstance().listen(login_msgs.LoginResult, (param:any)=>{
+            if(param.State===1) {
+                this.node.destroy();
             }
-        }))
+        }, this);
     }
 
 }
