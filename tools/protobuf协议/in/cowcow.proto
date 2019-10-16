@@ -1,7 +1,9 @@
 syntax = "proto3";
 package cowcow;
 import "gamecomm.proto";
+
 //【百人类游戏】
+
 //入场 (场景)
 message GameCowcowEnter{
 	PlayerInfo UserInfo = 1;				//玩家个人信息
@@ -11,31 +13,39 @@ message GameCowcowEnter{
 	uint32 FreeTime = 5;
 	uint32 BetTime = 6;
 	uint32 OpenTime = 7;
-
 }
-//注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 
-//游戏消息
 //抢庄
 message GameCowcowHost {
 	uint64 UserID = 1;
-     bool IsWant = 2;//true上庄 false取消上庄
- }
- //超级抢庄
- message GameCowcowSuperHost {
-	 uint64 UserID = 1;
-     bool IsWant = 2;//true上庄 false取消
- }
-//游戏中
-message GameCowcowPlaying{
-    int32 BetArea = 1;					//下注区域
+    bool IsWant = 2;	//true上庄 false取消上庄
+}
+
+message GameCowcowHostResult {
+
+}
+
+//超级抢庄
+message GameCowcowSuperHost {
+	uint64 UserID = 1;
+    bool IsWant = 2;	//true上庄 false取消
+}
+
+message GameCowcowSuperHostResult {
+	
+}
+
+//下注
+message GameCowcowBet{
+    int32 BetArea = 1;				//下注区域
     int64 BetScore = 2;				//下注金额
 }
 
 //下注结果
 message GameCowcowBetResult{
-	int32 State = 1;					//状态
-	string Hints = 2;					//提示
+	uint64 UserID = 1;					//状态
+	int32 BetArea = 2;					//提示
+	int64 BetScore = 3;
 }
 
 //结束

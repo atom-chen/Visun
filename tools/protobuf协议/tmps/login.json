@@ -2,6 +2,18 @@
   "nested": {
     "login": {
       "nested": {
+        "ResResult": {
+          "fields": {
+            "State": {
+              "type": "int32",
+              "id": 1
+            },
+            "Hints": {
+              "type": "string",
+              "id": 2
+            }
+          }
+        },
         "Register": {
           "fields": {
             "Name": {
@@ -58,7 +70,7 @@
             }
           }
         },
-        "ResResult": {
+        "LoginResult": {
           "fields": {
             "State": {
               "type": "uint32",
@@ -67,40 +79,6 @@
             "Hints": {
               "type": "string",
               "id": 2
-            }
-          }
-        },
-        "TaskItem": {
-          "fields": {
-            "TaskID": {
-              "type": "uint32",
-              "id": 1
-            },
-            "Twice": {
-              "type": "uint32",
-              "id": 2
-            },
-            "Hints": {
-              "type": "string",
-              "id": 3
-            }
-          }
-        },
-        "TaskList": {
-          "fields": {
-            "Task": {
-              "rule": "repeated",
-              "type": "TaskItem",
-              "id": 1
-            }
-          }
-        },
-        "GameList": {
-          "fields": {
-            "Items": {
-              "rule": "repeated",
-              "type": "GameItem",
-              "id": 1
             }
           }
         },
@@ -184,6 +162,40 @@
             }
           }
         },
+        "TaskItem": {
+          "fields": {
+            "TaskID": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Twice": {
+              "type": "uint32",
+              "id": 2
+            },
+            "Hints": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
+        "TaskList": {
+          "fields": {
+            "Task": {
+              "rule": "repeated",
+              "type": "TaskItem",
+              "id": 1
+            }
+          }
+        },
+        "GameList": {
+          "fields": {
+            "Items": {
+              "rule": "repeated",
+              "type": "GameItem",
+              "id": 1
+            }
+          }
+        },
         "GameBaseInfo": {
           "fields": {
             "Type": {
@@ -221,51 +233,6 @@
             "Info": {
               "type": "GameBaseInfo",
               "id": 2
-            }
-          }
-        },
-        "MasterInfo": {
-          "fields": {
-            "UserInfo": {
-              "type": "UserInfo",
-              "id": 1
-            },
-            "RoomsInfo": {
-              "rule": "repeated",
-              "type": "RoomInfo",
-              "id": 2
-            },
-            "Tasks": {
-              "type": "TaskList",
-              "id": 3
-            }
-          }
-        },
-        "ReqEnterRoom": {
-          "fields": {
-            "RoomNum": {
-              "type": "uint32",
-              "id": 1
-            },
-            "RoomKey": {
-              "type": "string",
-              "id": 2
-            }
-          }
-        },
-        "ReqEnterGame": {
-          "fields": {
-            "GameID": {
-              "type": "uint32",
-              "id": 1
-            }
-          }
-        },
-        "ReqExitGame": {
-          "fields": {
-            "GameID": {
-              "type": "uint32",
-              "id": 1
             }
           }
         }

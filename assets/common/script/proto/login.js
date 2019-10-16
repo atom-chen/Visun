@@ -11,6 +11,108 @@ $root.login = (function() {
 
     var login = {};
 
+    login.ResResult = (function() {
+
+        function ResResult(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ResResult.prototype.State = 0;
+        ResResult.prototype.Hints = "";
+
+        ResResult.create = function create(properties) {
+            return new ResResult(properties);
+        };
+
+        ResResult.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.State != null && message.hasOwnProperty("State"))
+                writer.uint32(8).int32(message.State);
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                writer.uint32(18).string(message.Hints);
+            return writer;
+        };
+
+        ResResult.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ResResult.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ResResult();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.State = reader.int32();
+                    break;
+                case 2:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ResResult.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ResResult.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.State != null && message.hasOwnProperty("State"))
+                if (!$util.isInteger(message.State))
+                    return "State: integer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        ResResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ResResult)
+                return object;
+            var message = new $root.login.ResResult();
+            if (object.State != null)
+                message.State = object.State | 0;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        ResResult.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.State = 0;
+                object.Hints = "";
+            }
+            if (message.State != null && message.hasOwnProperty("State"))
+                object.State = message.State;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        ResResult.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ResResult;
+    })();
+
     login.Register = (function() {
 
         function Register(properties) {
@@ -387,23 +489,23 @@ $root.login = (function() {
         return Login;
     })();
 
-    login.ResResult = (function() {
+    login.LoginResult = (function() {
 
-        function ResResult(properties) {
+        function LoginResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ResResult.prototype.State = 0;
-        ResResult.prototype.Hints = "";
+        LoginResult.prototype.State = 0;
+        LoginResult.prototype.Hints = "";
 
-        ResResult.create = function create(properties) {
-            return new ResResult(properties);
+        LoginResult.create = function create(properties) {
+            return new LoginResult(properties);
         };
 
-        ResResult.encode = function encode(message, writer) {
+        LoginResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.State != null && message.hasOwnProperty("State"))
@@ -413,14 +515,14 @@ $root.login = (function() {
             return writer;
         };
 
-        ResResult.encodeDelimited = function encodeDelimited(message, writer) {
+        LoginResult.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        ResResult.decode = function decode(reader, length) {
+        LoginResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ResResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.LoginResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -438,13 +540,13 @@ $root.login = (function() {
             return message;
         };
 
-        ResResult.decodeDelimited = function decodeDelimited(reader) {
+        LoginResult.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        ResResult.verify = function verify(message) {
+        LoginResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.State != null && message.hasOwnProperty("State"))
@@ -456,10 +558,10 @@ $root.login = (function() {
             return null;
         };
 
-        ResResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.ResResult)
+        LoginResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.LoginResult)
                 return object;
-            var message = new $root.login.ResResult();
+            var message = new $root.login.LoginResult();
             if (object.State != null)
                 message.State = object.State >>> 0;
             if (object.Hints != null)
@@ -467,7 +569,7 @@ $root.login = (function() {
             return message;
         };
 
-        ResResult.toObject = function toObject(message, options) {
+        LoginResult.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -482,343 +584,11 @@ $root.login = (function() {
             return object;
         };
 
-        ResResult.prototype.toJSON = function toJSON() {
+        LoginResult.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return ResResult;
-    })();
-
-    login.TaskItem = (function() {
-
-        function TaskItem(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TaskItem.prototype.TaskID = 0;
-        TaskItem.prototype.Twice = 0;
-        TaskItem.prototype.Hints = "";
-
-        TaskItem.create = function create(properties) {
-            return new TaskItem(properties);
-        };
-
-        TaskItem.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
-                writer.uint32(8).uint32(message.TaskID);
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
-                writer.uint32(16).uint32(message.Twice);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                writer.uint32(26).string(message.Hints);
-            return writer;
-        };
-
-        TaskItem.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TaskItem.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskItem();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.TaskID = reader.uint32();
-                    break;
-                case 2:
-                    message.Twice = reader.uint32();
-                    break;
-                case 3:
-                    message.Hints = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TaskItem.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TaskItem.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
-                if (!$util.isInteger(message.TaskID))
-                    return "TaskID: integer expected";
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
-                if (!$util.isInteger(message.Twice))
-                    return "Twice: integer expected";
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!$util.isString(message.Hints))
-                    return "Hints: string expected";
-            return null;
-        };
-
-        TaskItem.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.TaskItem)
-                return object;
-            var message = new $root.login.TaskItem();
-            if (object.TaskID != null)
-                message.TaskID = object.TaskID >>> 0;
-            if (object.Twice != null)
-                message.Twice = object.Twice >>> 0;
-            if (object.Hints != null)
-                message.Hints = String(object.Hints);
-            return message;
-        };
-
-        TaskItem.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.TaskID = 0;
-                object.Twice = 0;
-                object.Hints = "";
-            }
-            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
-                object.TaskID = message.TaskID;
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
-                object.Twice = message.Twice;
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = message.Hints;
-            return object;
-        };
-
-        TaskItem.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TaskItem;
-    })();
-
-    login.TaskList = (function() {
-
-        function TaskList(properties) {
-            this.Task = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TaskList.prototype.Task = $util.emptyArray;
-
-        TaskList.create = function create(properties) {
-            return new TaskList(properties);
-        };
-
-        TaskList.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Task != null && message.Task.length)
-                for (var i = 0; i < message.Task.length; ++i)
-                    $root.login.TaskItem.encode(message.Task[i], writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        TaskList.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TaskList.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskList();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.Task && message.Task.length))
-                        message.Task = [];
-                    message.Task.push($root.login.TaskItem.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TaskList.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TaskList.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Task != null && message.hasOwnProperty("Task")) {
-                if (!Array.isArray(message.Task))
-                    return "Task: array expected";
-                for (var i = 0; i < message.Task.length; ++i) {
-                    var error = $root.login.TaskItem.verify(message.Task[i]);
-                    if (error)
-                        return "Task." + error;
-                }
-            }
-            return null;
-        };
-
-        TaskList.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.TaskList)
-                return object;
-            var message = new $root.login.TaskList();
-            if (object.Task) {
-                if (!Array.isArray(object.Task))
-                    throw TypeError(".login.TaskList.Task: array expected");
-                message.Task = [];
-                for (var i = 0; i < object.Task.length; ++i) {
-                    if (typeof object.Task[i] !== "object")
-                        throw TypeError(".login.TaskList.Task: object expected");
-                    message.Task[i] = $root.login.TaskItem.fromObject(object.Task[i]);
-                }
-            }
-            return message;
-        };
-
-        TaskList.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.Task = [];
-            if (message.Task && message.Task.length) {
-                object.Task = [];
-                for (var j = 0; j < message.Task.length; ++j)
-                    object.Task[j] = $root.login.TaskItem.toObject(message.Task[j], options);
-            }
-            return object;
-        };
-
-        TaskList.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TaskList;
-    })();
-
-    login.GameList = (function() {
-
-        function GameList(properties) {
-            this.Items = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameList.prototype.Items = $util.emptyArray;
-
-        GameList.create = function create(properties) {
-            return new GameList(properties);
-        };
-
-        GameList.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Items != null && message.Items.length)
-                for (var i = 0; i < message.Items.length; ++i)
-                    $root.login.GameItem.encode(message.Items[i], writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        GameList.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameList.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameList();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.Items && message.Items.length))
-                        message.Items = [];
-                    message.Items.push($root.login.GameItem.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameList.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameList.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Items != null && message.hasOwnProperty("Items")) {
-                if (!Array.isArray(message.Items))
-                    return "Items: array expected";
-                for (var i = 0; i < message.Items.length; ++i) {
-                    var error = $root.login.GameItem.verify(message.Items[i]);
-                    if (error)
-                        return "Items." + error;
-                }
-            }
-            return null;
-        };
-
-        GameList.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.GameList)
-                return object;
-            var message = new $root.login.GameList();
-            if (object.Items) {
-                if (!Array.isArray(object.Items))
-                    throw TypeError(".login.GameList.Items: array expected");
-                message.Items = [];
-                for (var i = 0; i < object.Items.length; ++i) {
-                    if (typeof object.Items[i] !== "object")
-                        throw TypeError(".login.GameList.Items: object expected");
-                    message.Items[i] = $root.login.GameItem.fromObject(object.Items[i]);
-                }
-            }
-            return message;
-        };
-
-        GameList.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.Items = [];
-            if (message.Items && message.Items.length) {
-                object.Items = [];
-                for (var j = 0; j < message.Items.length; ++j)
-                    object.Items[j] = $root.login.GameItem.toObject(message.Items[j], options);
-            }
-            return object;
-        };
-
-        GameList.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameList;
+        return LoginResult;
     })();
 
     login.UserInfo = (function() {
@@ -1240,6 +1010,338 @@ $root.login = (function() {
         return RoomInfo;
     })();
 
+    login.TaskItem = (function() {
+
+        function TaskItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TaskItem.prototype.TaskID = 0;
+        TaskItem.prototype.Twice = 0;
+        TaskItem.prototype.Hints = "";
+
+        TaskItem.create = function create(properties) {
+            return new TaskItem(properties);
+        };
+
+        TaskItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
+                writer.uint32(8).uint32(message.TaskID);
+            if (message.Twice != null && message.hasOwnProperty("Twice"))
+                writer.uint32(16).uint32(message.Twice);
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                writer.uint32(26).string(message.Hints);
+            return writer;
+        };
+
+        TaskItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TaskItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TaskID = reader.uint32();
+                    break;
+                case 2:
+                    message.Twice = reader.uint32();
+                    break;
+                case 3:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TaskItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TaskItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
+                if (!$util.isInteger(message.TaskID))
+                    return "TaskID: integer expected";
+            if (message.Twice != null && message.hasOwnProperty("Twice"))
+                if (!$util.isInteger(message.Twice))
+                    return "Twice: integer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        TaskItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.TaskItem)
+                return object;
+            var message = new $root.login.TaskItem();
+            if (object.TaskID != null)
+                message.TaskID = object.TaskID >>> 0;
+            if (object.Twice != null)
+                message.Twice = object.Twice >>> 0;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        TaskItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.TaskID = 0;
+                object.Twice = 0;
+                object.Hints = "";
+            }
+            if (message.TaskID != null && message.hasOwnProperty("TaskID"))
+                object.TaskID = message.TaskID;
+            if (message.Twice != null && message.hasOwnProperty("Twice"))
+                object.Twice = message.Twice;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        TaskItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TaskItem;
+    })();
+
+    login.TaskList = (function() {
+
+        function TaskList(properties) {
+            this.Task = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TaskList.prototype.Task = $util.emptyArray;
+
+        TaskList.create = function create(properties) {
+            return new TaskList(properties);
+        };
+
+        TaskList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Task != null && message.Task.length)
+                for (var i = 0; i < message.Task.length; ++i)
+                    $root.login.TaskItem.encode(message.Task[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        TaskList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TaskList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TaskList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Task && message.Task.length))
+                        message.Task = [];
+                    message.Task.push($root.login.TaskItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TaskList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TaskList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Task != null && message.hasOwnProperty("Task")) {
+                if (!Array.isArray(message.Task))
+                    return "Task: array expected";
+                for (var i = 0; i < message.Task.length; ++i) {
+                    var error = $root.login.TaskItem.verify(message.Task[i]);
+                    if (error)
+                        return "Task." + error;
+                }
+            }
+            return null;
+        };
+
+        TaskList.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.TaskList)
+                return object;
+            var message = new $root.login.TaskList();
+            if (object.Task) {
+                if (!Array.isArray(object.Task))
+                    throw TypeError(".login.TaskList.Task: array expected");
+                message.Task = [];
+                for (var i = 0; i < object.Task.length; ++i) {
+                    if (typeof object.Task[i] !== "object")
+                        throw TypeError(".login.TaskList.Task: object expected");
+                    message.Task[i] = $root.login.TaskItem.fromObject(object.Task[i]);
+                }
+            }
+            return message;
+        };
+
+        TaskList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Task = [];
+            if (message.Task && message.Task.length) {
+                object.Task = [];
+                for (var j = 0; j < message.Task.length; ++j)
+                    object.Task[j] = $root.login.TaskItem.toObject(message.Task[j], options);
+            }
+            return object;
+        };
+
+        TaskList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TaskList;
+    })();
+
+    login.GameList = (function() {
+
+        function GameList(properties) {
+            this.Items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameList.prototype.Items = $util.emptyArray;
+
+        GameList.create = function create(properties) {
+            return new GameList(properties);
+        };
+
+        GameList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Items != null && message.Items.length)
+                for (var i = 0; i < message.Items.length; ++i)
+                    $root.login.GameItem.encode(message.Items[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        GameList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Items && message.Items.length))
+                        message.Items = [];
+                    message.Items.push($root.login.GameItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Items != null && message.hasOwnProperty("Items")) {
+                if (!Array.isArray(message.Items))
+                    return "Items: array expected";
+                for (var i = 0; i < message.Items.length; ++i) {
+                    var error = $root.login.GameItem.verify(message.Items[i]);
+                    if (error)
+                        return "Items." + error;
+                }
+            }
+            return null;
+        };
+
+        GameList.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.GameList)
+                return object;
+            var message = new $root.login.GameList();
+            if (object.Items) {
+                if (!Array.isArray(object.Items))
+                    throw TypeError(".login.GameList.Items: array expected");
+                message.Items = [];
+                for (var i = 0; i < object.Items.length; ++i) {
+                    if (typeof object.Items[i] !== "object")
+                        throw TypeError(".login.GameList.Items: object expected");
+                    message.Items[i] = $root.login.GameItem.fromObject(object.Items[i]);
+                }
+            }
+            return message;
+        };
+
+        GameList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Items = [];
+            if (message.Items && message.Items.length) {
+                object.Items = [];
+                for (var j = 0; j < message.Items.length; ++j)
+                    object.Items[j] = $root.login.GameItem.toObject(message.Items[j], options);
+            }
+            return object;
+        };
+
+        GameList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameList;
+    })();
+
     login.GameBaseInfo = (function() {
 
         function GameBaseInfo(properties) {
@@ -1503,430 +1605,6 @@ $root.login = (function() {
         };
 
         return GameItem;
-    })();
-
-    login.MasterInfo = (function() {
-
-        function MasterInfo(properties) {
-            this.RoomsInfo = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        MasterInfo.prototype.UserInfo = null;
-        MasterInfo.prototype.RoomsInfo = $util.emptyArray;
-        MasterInfo.prototype.Tasks = null;
-
-        MasterInfo.create = function create(properties) {
-            return new MasterInfo(properties);
-        };
-
-        MasterInfo.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
-                $root.login.UserInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
-            if (message.RoomsInfo != null && message.RoomsInfo.length)
-                for (var i = 0; i < message.RoomsInfo.length; ++i)
-                    $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
-            if (message.Tasks != null && message.hasOwnProperty("Tasks"))
-                $root.login.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
-            return writer;
-        };
-
-        MasterInfo.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        MasterInfo.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.MasterInfo();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserInfo = $root.login.UserInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    if (!(message.RoomsInfo && message.RoomsInfo.length))
-                        message.RoomsInfo = [];
-                    message.RoomsInfo.push($root.login.RoomInfo.decode(reader, reader.uint32()));
-                    break;
-                case 3:
-                    message.Tasks = $root.login.TaskList.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        MasterInfo.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        MasterInfo.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
-                var error = $root.login.UserInfo.verify(message.UserInfo);
-                if (error)
-                    return "UserInfo." + error;
-            }
-            if (message.RoomsInfo != null && message.hasOwnProperty("RoomsInfo")) {
-                if (!Array.isArray(message.RoomsInfo))
-                    return "RoomsInfo: array expected";
-                for (var i = 0; i < message.RoomsInfo.length; ++i) {
-                    var error = $root.login.RoomInfo.verify(message.RoomsInfo[i]);
-                    if (error)
-                        return "RoomsInfo." + error;
-                }
-            }
-            if (message.Tasks != null && message.hasOwnProperty("Tasks")) {
-                var error = $root.login.TaskList.verify(message.Tasks);
-                if (error)
-                    return "Tasks." + error;
-            }
-            return null;
-        };
-
-        MasterInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.MasterInfo)
-                return object;
-            var message = new $root.login.MasterInfo();
-            if (object.UserInfo != null) {
-                if (typeof object.UserInfo !== "object")
-                    throw TypeError(".login.MasterInfo.UserInfo: object expected");
-                message.UserInfo = $root.login.UserInfo.fromObject(object.UserInfo);
-            }
-            if (object.RoomsInfo) {
-                if (!Array.isArray(object.RoomsInfo))
-                    throw TypeError(".login.MasterInfo.RoomsInfo: array expected");
-                message.RoomsInfo = [];
-                for (var i = 0; i < object.RoomsInfo.length; ++i) {
-                    if (typeof object.RoomsInfo[i] !== "object")
-                        throw TypeError(".login.MasterInfo.RoomsInfo: object expected");
-                    message.RoomsInfo[i] = $root.login.RoomInfo.fromObject(object.RoomsInfo[i]);
-                }
-            }
-            if (object.Tasks != null) {
-                if (typeof object.Tasks !== "object")
-                    throw TypeError(".login.MasterInfo.Tasks: object expected");
-                message.Tasks = $root.login.TaskList.fromObject(object.Tasks);
-            }
-            return message;
-        };
-
-        MasterInfo.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.RoomsInfo = [];
-            if (options.defaults) {
-                object.UserInfo = null;
-                object.Tasks = null;
-            }
-            if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
-                object.UserInfo = $root.login.UserInfo.toObject(message.UserInfo, options);
-            if (message.RoomsInfo && message.RoomsInfo.length) {
-                object.RoomsInfo = [];
-                for (var j = 0; j < message.RoomsInfo.length; ++j)
-                    object.RoomsInfo[j] = $root.login.RoomInfo.toObject(message.RoomsInfo[j], options);
-            }
-            if (message.Tasks != null && message.hasOwnProperty("Tasks"))
-                object.Tasks = $root.login.TaskList.toObject(message.Tasks, options);
-            return object;
-        };
-
-        MasterInfo.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return MasterInfo;
-    })();
-
-    login.ReqEnterRoom = (function() {
-
-        function ReqEnterRoom(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        ReqEnterRoom.prototype.RoomNum = 0;
-        ReqEnterRoom.prototype.RoomKey = "";
-
-        ReqEnterRoom.create = function create(properties) {
-            return new ReqEnterRoom(properties);
-        };
-
-        ReqEnterRoom.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                writer.uint32(8).uint32(message.RoomNum);
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                writer.uint32(18).string(message.RoomKey);
-            return writer;
-        };
-
-        ReqEnterRoom.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        ReqEnterRoom.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqEnterRoom();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.RoomNum = reader.uint32();
-                    break;
-                case 2:
-                    message.RoomKey = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        ReqEnterRoom.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        ReqEnterRoom.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                if (!$util.isInteger(message.RoomNum))
-                    return "RoomNum: integer expected";
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                if (!$util.isString(message.RoomKey))
-                    return "RoomKey: string expected";
-            return null;
-        };
-
-        ReqEnterRoom.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.ReqEnterRoom)
-                return object;
-            var message = new $root.login.ReqEnterRoom();
-            if (object.RoomNum != null)
-                message.RoomNum = object.RoomNum >>> 0;
-            if (object.RoomKey != null)
-                message.RoomKey = String(object.RoomKey);
-            return message;
-        };
-
-        ReqEnterRoom.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.RoomNum = 0;
-                object.RoomKey = "";
-            }
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                object.RoomNum = message.RoomNum;
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                object.RoomKey = message.RoomKey;
-            return object;
-        };
-
-        ReqEnterRoom.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ReqEnterRoom;
-    })();
-
-    login.ReqEnterGame = (function() {
-
-        function ReqEnterGame(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        ReqEnterGame.prototype.GameID = 0;
-
-        ReqEnterGame.create = function create(properties) {
-            return new ReqEnterGame(properties);
-        };
-
-        ReqEnterGame.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                writer.uint32(8).uint32(message.GameID);
-            return writer;
-        };
-
-        ReqEnterGame.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        ReqEnterGame.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqEnterGame();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.GameID = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        ReqEnterGame.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        ReqEnterGame.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (!$util.isInteger(message.GameID))
-                    return "GameID: integer expected";
-            return null;
-        };
-
-        ReqEnterGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.ReqEnterGame)
-                return object;
-            var message = new $root.login.ReqEnterGame();
-            if (object.GameID != null)
-                message.GameID = object.GameID >>> 0;
-            return message;
-        };
-
-        ReqEnterGame.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.GameID = 0;
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                object.GameID = message.GameID;
-            return object;
-        };
-
-        ReqEnterGame.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ReqEnterGame;
-    })();
-
-    login.ReqExitGame = (function() {
-
-        function ReqExitGame(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        ReqExitGame.prototype.GameID = 0;
-
-        ReqExitGame.create = function create(properties) {
-            return new ReqExitGame(properties);
-        };
-
-        ReqExitGame.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                writer.uint32(8).uint32(message.GameID);
-            return writer;
-        };
-
-        ReqExitGame.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        ReqExitGame.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReqExitGame();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.GameID = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        ReqExitGame.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        ReqExitGame.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (!$util.isInteger(message.GameID))
-                    return "GameID: integer expected";
-            return null;
-        };
-
-        ReqExitGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.ReqExitGame)
-                return object;
-            var message = new $root.login.ReqExitGame();
-            if (object.GameID != null)
-                message.GameID = object.GameID >>> 0;
-            return message;
-        };
-
-        ReqExitGame.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.GameID = 0;
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                object.GameID = message.GameID;
-            return object;
-        };
-
-        ReqExitGame.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ReqExitGame;
     })();
 
     return login;

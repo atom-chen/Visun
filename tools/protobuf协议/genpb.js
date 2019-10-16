@@ -30,6 +30,11 @@ var pbfiles = [
 		clientPath:"../../assets/resources/subgames/ddz/script/"
 	},
 	{ 
+		name:"cowcow", 
+		router:"game",
+	//	clientPath:"../../assets/resources/subgames/mahjong/script/"
+	},
+	{ 
 		name:"mahjong", 
 		router:"game",
 	//	clientPath:"../../assets/resources/subgames/mahjong/script/"
@@ -149,7 +154,7 @@ function doGenerate() {
 	msgStr += '    "github.com/golang/protobuf/proto"\n'
 	msgStr += '    "vision/leaf/network/json"\n'
 	msgStr += '    "vision/leaf/network/protobuf"\n'
-	msgStr += '    protoMsg "vision/appqp/msg/go"\n'
+	msgStr += '    protoMsg "vision/appqp/msg/ptopb"\n'
 	msgStr += ')\n\n'
 	msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
 	msgStr += "var ProcessorJson = json.NewProcessor()\n"
@@ -172,7 +177,7 @@ function doGenerate() {
 	routerStr += '    "vision/appqp/game"\n';
 	routerStr += '    "vision/appqp/login"\n';
 	routerStr += '    "vision/appqp/msg"\n';
-	routerStr += '    protoMsg "vision/appqp/msg/go"\n';
+	routerStr += '    protoMsg "vision/appqp/msg/ptopb"\n';
 	routerStr += ')\n\n';
 	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';

@@ -2,6 +2,7 @@ syntax = "proto3";
 package fishlord;
 
 //【百人类游戏】
+
 //入场 (场景)
 message GameFishLordEnter{
 	repeated int32 AwardAreas = 1;		//开奖记录(路单)
@@ -15,12 +16,10 @@ message GameFishLordEnter{
 	
 	int64 Acquire = 8;					//获得金币(结算)
 }
-//注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 
-//游戏消息
-//游戏中
-message GameFishLordPlaying{
-    int32 BetArea = 1;					//下注区域
+//下注
+message GameFishLordBet{
+    int32 BetArea = 1;				//下注区域
     int64 BetScore = 2;				//下注金额
 }
 

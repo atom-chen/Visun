@@ -329,23 +329,23 @@ $root.fishlord = (function() {
         return GameFishLordEnter;
     })();
 
-    fishlord.GameFishLordPlaying = (function() {
+    fishlord.GameFishLordBet = (function() {
 
-        function GameFishLordPlaying(properties) {
+        function GameFishLordBet(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameFishLordPlaying.prototype.BetArea = 0;
-        GameFishLordPlaying.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameFishLordBet.prototype.BetArea = 0;
+        GameFishLordBet.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameFishLordPlaying.create = function create(properties) {
-            return new GameFishLordPlaying(properties);
+        GameFishLordBet.create = function create(properties) {
+            return new GameFishLordBet(properties);
         };
 
-        GameFishLordPlaying.encode = function encode(message, writer) {
+        GameFishLordBet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -355,14 +355,14 @@ $root.fishlord = (function() {
             return writer;
         };
 
-        GameFishLordPlaying.encodeDelimited = function encodeDelimited(message, writer) {
+        GameFishLordBet.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameFishLordPlaying.decode = function decode(reader, length) {
+        GameFishLordBet.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.fishlord.GameFishLordPlaying();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.fishlord.GameFishLordBet();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -380,13 +380,13 @@ $root.fishlord = (function() {
             return message;
         };
 
-        GameFishLordPlaying.decodeDelimited = function decodeDelimited(reader) {
+        GameFishLordBet.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameFishLordPlaying.verify = function verify(message) {
+        GameFishLordBet.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -398,10 +398,10 @@ $root.fishlord = (function() {
             return null;
         };
 
-        GameFishLordPlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.fishlord.GameFishLordPlaying)
+        GameFishLordBet.fromObject = function fromObject(object) {
+            if (object instanceof $root.fishlord.GameFishLordBet)
                 return object;
-            var message = new $root.fishlord.GameFishLordPlaying();
+            var message = new $root.fishlord.GameFishLordBet();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -416,7 +416,7 @@ $root.fishlord = (function() {
             return message;
         };
 
-        GameFishLordPlaying.toObject = function toObject(message, options) {
+        GameFishLordBet.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -438,11 +438,11 @@ $root.fishlord = (function() {
             return object;
         };
 
-        GameFishLordPlaying.prototype.toJSON = function toJSON() {
+        GameFishLordBet.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameFishLordPlaying;
+        return GameFishLordBet;
     })();
 
     fishlord.GameFishLordBetResult = (function() {

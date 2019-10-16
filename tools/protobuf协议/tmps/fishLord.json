@@ -42,7 +42,7 @@
             }
           }
         },
-        "GameFishLordPlaying": {
+        "GameFishLordBet": {
           "fields": {
             "BetArea": {
               "type": "int32",

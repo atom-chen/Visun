@@ -7,13 +7,13 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.baccarat = (function() {
+$root.cowcow = (function() {
 
-    var baccarat = {};
+    var cowcow = {};
 
-    baccarat.GameBaccaratEnter = (function() {
+    cowcow.GameCowcowEnter = (function() {
 
-        function GameBaccaratEnter(properties) {
+        function GameCowcowEnter(properties) {
             this.Chips = [];
             this.AwardAreas = [];
             if (properties)
@@ -22,19 +22,19 @@ $root.baccarat = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratEnter.prototype.UserInfo = null;
-        GameBaccaratEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        GameBaccaratEnter.prototype.Chips = $util.emptyArray;
-        GameBaccaratEnter.prototype.AwardAreas = $util.emptyArray;
-        GameBaccaratEnter.prototype.FreeTime = 0;
-        GameBaccaratEnter.prototype.BetTime = 0;
-        GameBaccaratEnter.prototype.OpenTime = 0;
+        GameCowcowEnter.prototype.UserInfo = null;
+        GameCowcowEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameCowcowEnter.prototype.Chips = $util.emptyArray;
+        GameCowcowEnter.prototype.AwardAreas = $util.emptyArray;
+        GameCowcowEnter.prototype.FreeTime = 0;
+        GameCowcowEnter.prototype.BetTime = 0;
+        GameCowcowEnter.prototype.OpenTime = 0;
 
-        GameBaccaratEnter.create = function create(properties) {
-            return new GameBaccaratEnter(properties);
+        GameCowcowEnter.create = function create(properties) {
+            return new GameCowcowEnter(properties);
         };
 
-        GameBaccaratEnter.encode = function encode(message, writer) {
+        GameCowcowEnter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
@@ -59,14 +59,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratEnter.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowEnter.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratEnter.decode = function decode(reader, length) {
+        GameCowcowEnter.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratEnter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowEnter();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -108,13 +108,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratEnter.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowEnter.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratEnter.verify = function verify(message) {
+        GameCowcowEnter.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
@@ -151,13 +151,13 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratEnter.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratEnter)
+        GameCowcowEnter.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowEnter)
                 return object;
-            var message = new $root.baccarat.GameBaccaratEnter();
+            var message = new $root.cowcow.GameCowcowEnter();
             if (object.UserInfo != null) {
                 if (typeof object.UserInfo !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.UserInfo: object expected");
+                    throw TypeError(".cowcow.GameCowcowEnter.UserInfo: object expected");
                 message.UserInfo = $root.gamecomm.PlayerInfo.fromObject(object.UserInfo);
             }
             if (object.TimeStamp != null)
@@ -171,14 +171,14 @@ $root.baccarat = (function() {
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
-                    throw TypeError(".baccarat.GameBaccaratEnter.Chips: array expected");
+                    throw TypeError(".cowcow.GameCowcowEnter.Chips: array expected");
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
             }
             if (object.AwardAreas) {
                 if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".baccarat.GameBaccaratEnter.AwardAreas: array expected");
+                    throw TypeError(".cowcow.GameCowcowEnter.AwardAreas: array expected");
                 message.AwardAreas = [];
                 for (var i = 0; i < object.AwardAreas.length; ++i)
                     if (typeof object.AwardAreas[i] === "string")
@@ -195,7 +195,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratEnter.toObject = function toObject(message, options) {
+        GameCowcowEnter.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -240,30 +240,30 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratEnter.prototype.toJSON = function toJSON() {
+        GameCowcowEnter.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratEnter;
+        return GameCowcowEnter;
     })();
 
-    baccarat.GameBaccaratHost = (function() {
+    cowcow.GameCowcowHost = (function() {
 
-        function GameBaccaratHost(properties) {
+        function GameCowcowHost(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratHost.prototype.IsWant = false;
+        GameCowcowHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameCowcowHost.prototype.IsWant = false;
 
-        GameBaccaratHost.create = function create(properties) {
-            return new GameBaccaratHost(properties);
+        GameCowcowHost.create = function create(properties) {
+            return new GameCowcowHost(properties);
         };
 
-        GameBaccaratHost.encode = function encode(message, writer) {
+        GameCowcowHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -273,14 +273,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratHost.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowHost.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratHost.decode = function decode(reader, length) {
+        GameCowcowHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -298,13 +298,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratHost.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowHost.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratHost.verify = function verify(message) {
+        GameCowcowHost.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -316,10 +316,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratHost)
+        GameCowcowHost.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratHost();
+            var message = new $root.cowcow.GameCowcowHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -334,7 +334,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratHost.toObject = function toObject(message, options) {
+        GameCowcowHost.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -356,30 +356,97 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratHost.prototype.toJSON = function toJSON() {
+        GameCowcowHost.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratHost;
+        return GameCowcowHost;
     })();
 
-    baccarat.GameBaccaratSuperHost = (function() {
+    cowcow.GameCowcowHostResult = (function() {
 
-        function GameBaccaratSuperHost(properties) {
+        function GameCowcowHostResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratSuperHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratSuperHost.prototype.IsWant = false;
-
-        GameBaccaratSuperHost.create = function create(properties) {
-            return new GameBaccaratSuperHost(properties);
+        GameCowcowHostResult.create = function create(properties) {
+            return new GameCowcowHostResult(properties);
         };
 
-        GameBaccaratSuperHost.encode = function encode(message, writer) {
+        GameCowcowHostResult.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        GameCowcowHostResult.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameCowcowHostResult.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowHostResult();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameCowcowHostResult.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameCowcowHostResult.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        GameCowcowHostResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowHostResult)
+                return object;
+            return new $root.cowcow.GameCowcowHostResult();
+        };
+
+        GameCowcowHostResult.toObject = function toObject() {
+            return {};
+        };
+
+        GameCowcowHostResult.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameCowcowHostResult;
+    })();
+
+    cowcow.GameCowcowSuperHost = (function() {
+
+        function GameCowcowSuperHost(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameCowcowSuperHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameCowcowSuperHost.prototype.IsWant = false;
+
+        GameCowcowSuperHost.create = function create(properties) {
+            return new GameCowcowSuperHost(properties);
+        };
+
+        GameCowcowSuperHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -389,14 +456,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratSuperHost.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowSuperHost.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratSuperHost.decode = function decode(reader, length) {
+        GameCowcowSuperHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratSuperHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowSuperHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -414,13 +481,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratSuperHost.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowSuperHost.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratSuperHost.verify = function verify(message) {
+        GameCowcowSuperHost.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -432,10 +499,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratSuperHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratSuperHost)
+        GameCowcowSuperHost.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowSuperHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratSuperHost();
+            var message = new $root.cowcow.GameCowcowSuperHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -450,7 +517,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratSuperHost.toObject = function toObject(message, options) {
+        GameCowcowSuperHost.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -472,30 +539,97 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratSuperHost.prototype.toJSON = function toJSON() {
+        GameCowcowSuperHost.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratSuperHost;
+        return GameCowcowSuperHost;
     })();
 
-    baccarat.GameBaccaratBet = (function() {
+    cowcow.GameCowcowSuperHostResult = (function() {
 
-        function GameBaccaratBet(properties) {
+        function GameCowcowSuperHostResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratBet.prototype.BetArea = 0;
-        GameBaccaratBet.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        GameBaccaratBet.create = function create(properties) {
-            return new GameBaccaratBet(properties);
+        GameCowcowSuperHostResult.create = function create(properties) {
+            return new GameCowcowSuperHostResult(properties);
         };
 
-        GameBaccaratBet.encode = function encode(message, writer) {
+        GameCowcowSuperHostResult.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        GameCowcowSuperHostResult.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameCowcowSuperHostResult.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowSuperHostResult();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameCowcowSuperHostResult.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameCowcowSuperHostResult.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        GameCowcowSuperHostResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowSuperHostResult)
+                return object;
+            return new $root.cowcow.GameCowcowSuperHostResult();
+        };
+
+        GameCowcowSuperHostResult.toObject = function toObject() {
+            return {};
+        };
+
+        GameCowcowSuperHostResult.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameCowcowSuperHostResult;
+    })();
+
+    cowcow.GameCowcowBet = (function() {
+
+        function GameCowcowBet(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameCowcowBet.prototype.BetArea = 0;
+        GameCowcowBet.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        GameCowcowBet.create = function create(properties) {
+            return new GameCowcowBet(properties);
+        };
+
+        GameCowcowBet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -505,14 +639,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratBet.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowBet.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratBet.decode = function decode(reader, length) {
+        GameCowcowBet.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBet();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowBet();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -530,13 +664,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBet.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowBet.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratBet.verify = function verify(message) {
+        GameCowcowBet.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -548,10 +682,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratBet.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBet)
+        GameCowcowBet.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowBet)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBet();
+            var message = new $root.cowcow.GameCowcowBet();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -566,7 +700,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBet.toObject = function toObject(message, options) {
+        GameCowcowBet.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -588,31 +722,31 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratBet.prototype.toJSON = function toJSON() {
+        GameCowcowBet.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratBet;
+        return GameCowcowBet;
     })();
 
-    baccarat.GameBaccaratBetResult = (function() {
+    cowcow.GameCowcowBetResult = (function() {
 
-        function GameBaccaratBetResult(properties) {
+        function GameCowcowBetResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratBetResult.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratBetResult.prototype.BetArea = 0;
-        GameBaccaratBetResult.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameCowcowBetResult.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameCowcowBetResult.prototype.BetArea = 0;
+        GameCowcowBetResult.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameBaccaratBetResult.create = function create(properties) {
-            return new GameBaccaratBetResult(properties);
+        GameCowcowBetResult.create = function create(properties) {
+            return new GameCowcowBetResult(properties);
         };
 
-        GameBaccaratBetResult.encode = function encode(message, writer) {
+        GameCowcowBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -624,14 +758,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratBetResult.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowBetResult.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratBetResult.decode = function decode(reader, length) {
+        GameCowcowBetResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBetResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowBetResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -652,13 +786,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBetResult.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowBetResult.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratBetResult.verify = function verify(message) {
+        GameCowcowBetResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -673,10 +807,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratBetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBetResult)
+        GameCowcowBetResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowBetResult)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBetResult();
+            var message = new $root.cowcow.GameCowcowBetResult();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -700,7 +834,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBetResult.toObject = function toObject(message, options) {
+        GameCowcowBetResult.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -732,53 +866,62 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratBetResult.prototype.toJSON = function toJSON() {
+        GameCowcowBetResult.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratBetResult;
+        return GameCowcowBetResult;
     })();
 
-    baccarat.GameBaccaratOver = (function() {
+    cowcow.GameCowcowOver = (function() {
 
-        function GameBaccaratOver(properties) {
+        function GameCowcowOver(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratOver.prototype.AwardArea = $util.newBuffer([]);
-        GameBaccaratOver.prototype.PlayerCard = $util.newBuffer([]);
-        GameBaccaratOver.prototype.BankerCard = $util.newBuffer([]);
-        GameBaccaratOver.prototype.Acquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameCowcowOver.prototype.AwardArea = $util.newBuffer([]);
+        GameCowcowOver.prototype.BankerCard = $util.newBuffer([]);
+        GameCowcowOver.prototype.TianCard = $util.newBuffer([]);
+        GameCowcowOver.prototype.XuanCard = $util.newBuffer([]);
+        GameCowcowOver.prototype.DiCard = $util.newBuffer([]);
+        GameCowcowOver.prototype.HuangCard = $util.newBuffer([]);
+        GameCowcowOver.prototype.Acquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameBaccaratOver.create = function create(properties) {
-            return new GameBaccaratOver(properties);
+        GameCowcowOver.create = function create(properties) {
+            return new GameCowcowOver(properties);
         };
 
-        GameBaccaratOver.encode = function encode(message, writer) {
+        GameCowcowOver.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
-            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
-                writer.uint32(18).bytes(message.PlayerCard);
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                writer.uint32(26).bytes(message.BankerCard);
+                writer.uint32(18).bytes(message.BankerCard);
+            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
+                writer.uint32(26).bytes(message.TianCard);
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
+                writer.uint32(34).bytes(message.XuanCard);
+            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
+                writer.uint32(42).bytes(message.DiCard);
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
+                writer.uint32(50).bytes(message.HuangCard);
             if (message.Acquire != null && message.hasOwnProperty("Acquire"))
-                writer.uint32(32).int64(message.Acquire);
+                writer.uint32(56).int64(message.Acquire);
             return writer;
         };
 
-        GameBaccaratOver.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowOver.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratOver.decode = function decode(reader, length) {
+        GameCowcowOver.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowOver();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -786,12 +929,21 @@ $root.baccarat = (function() {
                     message.AwardArea = reader.bytes();
                     break;
                 case 2:
-                    message.PlayerCard = reader.bytes();
-                    break;
-                case 3:
                     message.BankerCard = reader.bytes();
                     break;
+                case 3:
+                    message.TianCard = reader.bytes();
+                    break;
                 case 4:
+                    message.XuanCard = reader.bytes();
+                    break;
+                case 5:
+                    message.DiCard = reader.bytes();
+                    break;
+                case 6:
+                    message.HuangCard = reader.bytes();
+                    break;
+                case 7:
                     message.Acquire = reader.int64();
                     break;
                 default:
@@ -802,49 +954,73 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratOver.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowOver.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratOver.verify = function verify(message) {
+        GameCowcowOver.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
                     return "AwardArea: buffer expected";
-            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
-                if (!(message.PlayerCard && typeof message.PlayerCard.length === "number" || $util.isString(message.PlayerCard)))
-                    return "PlayerCard: buffer expected";
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
                 if (!(message.BankerCard && typeof message.BankerCard.length === "number" || $util.isString(message.BankerCard)))
                     return "BankerCard: buffer expected";
+            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
+                if (!(message.TianCard && typeof message.TianCard.length === "number" || $util.isString(message.TianCard)))
+                    return "TianCard: buffer expected";
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
+                if (!(message.XuanCard && typeof message.XuanCard.length === "number" || $util.isString(message.XuanCard)))
+                    return "XuanCard: buffer expected";
+            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
+                if (!(message.DiCard && typeof message.DiCard.length === "number" || $util.isString(message.DiCard)))
+                    return "DiCard: buffer expected";
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
+                if (!(message.HuangCard && typeof message.HuangCard.length === "number" || $util.isString(message.HuangCard)))
+                    return "HuangCard: buffer expected";
             if (message.Acquire != null && message.hasOwnProperty("Acquire"))
                 if (!$util.isInteger(message.Acquire) && !(message.Acquire && $util.isInteger(message.Acquire.low) && $util.isInteger(message.Acquire.high)))
                     return "Acquire: integer|Long expected";
             return null;
         };
 
-        GameBaccaratOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratOver)
+        GameCowcowOver.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowOver)
                 return object;
-            var message = new $root.baccarat.GameBaccaratOver();
+            var message = new $root.cowcow.GameCowcowOver();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
                 else if (object.AwardArea.length)
                     message.AwardArea = object.AwardArea;
-            if (object.PlayerCard != null)
-                if (typeof object.PlayerCard === "string")
-                    $util.base64.decode(object.PlayerCard, message.PlayerCard = $util.newBuffer($util.base64.length(object.PlayerCard)), 0);
-                else if (object.PlayerCard.length)
-                    message.PlayerCard = object.PlayerCard;
             if (object.BankerCard != null)
                 if (typeof object.BankerCard === "string")
                     $util.base64.decode(object.BankerCard, message.BankerCard = $util.newBuffer($util.base64.length(object.BankerCard)), 0);
                 else if (object.BankerCard.length)
                     message.BankerCard = object.BankerCard;
+            if (object.TianCard != null)
+                if (typeof object.TianCard === "string")
+                    $util.base64.decode(object.TianCard, message.TianCard = $util.newBuffer($util.base64.length(object.TianCard)), 0);
+                else if (object.TianCard.length)
+                    message.TianCard = object.TianCard;
+            if (object.XuanCard != null)
+                if (typeof object.XuanCard === "string")
+                    $util.base64.decode(object.XuanCard, message.XuanCard = $util.newBuffer($util.base64.length(object.XuanCard)), 0);
+                else if (object.XuanCard.length)
+                    message.XuanCard = object.XuanCard;
+            if (object.DiCard != null)
+                if (typeof object.DiCard === "string")
+                    $util.base64.decode(object.DiCard, message.DiCard = $util.newBuffer($util.base64.length(object.DiCard)), 0);
+                else if (object.DiCard.length)
+                    message.DiCard = object.DiCard;
+            if (object.HuangCard != null)
+                if (typeof object.HuangCard === "string")
+                    $util.base64.decode(object.HuangCard, message.HuangCard = $util.newBuffer($util.base64.length(object.HuangCard)), 0);
+                else if (object.HuangCard.length)
+                    message.HuangCard = object.HuangCard;
             if (object.Acquire != null)
                 if ($util.Long)
                     (message.Acquire = $util.Long.fromValue(object.Acquire)).unsigned = false;
@@ -857,7 +1033,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratOver.toObject = function toObject(message, options) {
+        GameCowcowOver.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -870,18 +1046,39 @@ $root.baccarat = (function() {
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
                 if (options.bytes === String)
-                    object.PlayerCard = "";
-                else {
-                    object.PlayerCard = [];
-                    if (options.bytes !== Array)
-                        object.PlayerCard = $util.newBuffer(object.PlayerCard);
-                }
-                if (options.bytes === String)
                     object.BankerCard = "";
                 else {
                     object.BankerCard = [];
                     if (options.bytes !== Array)
                         object.BankerCard = $util.newBuffer(object.BankerCard);
+                }
+                if (options.bytes === String)
+                    object.TianCard = "";
+                else {
+                    object.TianCard = [];
+                    if (options.bytes !== Array)
+                        object.TianCard = $util.newBuffer(object.TianCard);
+                }
+                if (options.bytes === String)
+                    object.XuanCard = "";
+                else {
+                    object.XuanCard = [];
+                    if (options.bytes !== Array)
+                        object.XuanCard = $util.newBuffer(object.XuanCard);
+                }
+                if (options.bytes === String)
+                    object.DiCard = "";
+                else {
+                    object.DiCard = [];
+                    if (options.bytes !== Array)
+                        object.DiCard = $util.newBuffer(object.DiCard);
+                }
+                if (options.bytes === String)
+                    object.HuangCard = "";
+                else {
+                    object.HuangCard = [];
+                    if (options.bytes !== Array)
+                        object.HuangCard = $util.newBuffer(object.HuangCard);
                 }
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -891,10 +1088,16 @@ $root.baccarat = (function() {
             }
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
-            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
-                object.PlayerCard = options.bytes === String ? $util.base64.encode(message.PlayerCard, 0, message.PlayerCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.PlayerCard) : message.PlayerCard;
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
                 object.BankerCard = options.bytes === String ? $util.base64.encode(message.BankerCard, 0, message.BankerCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.BankerCard) : message.BankerCard;
+            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
+                object.TianCard = options.bytes === String ? $util.base64.encode(message.TianCard, 0, message.TianCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.TianCard) : message.TianCard;
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
+                object.XuanCard = options.bytes === String ? $util.base64.encode(message.XuanCard, 0, message.XuanCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.XuanCard) : message.XuanCard;
+            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
+                object.DiCard = options.bytes === String ? $util.base64.encode(message.DiCard, 0, message.DiCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.DiCard) : message.DiCard;
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
+                object.HuangCard = options.bytes === String ? $util.base64.encode(message.HuangCard, 0, message.HuangCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.HuangCard) : message.HuangCard;
             if (message.Acquire != null && message.hasOwnProperty("Acquire"))
                 if (typeof message.Acquire === "number")
                     object.Acquire = options.longs === String ? String(message.Acquire) : message.Acquire;
@@ -903,14 +1106,14 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratOver.prototype.toJSON = function toJSON() {
+        GameCowcowOver.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratOver;
+        return GameCowcowOver;
     })();
 
-    return baccarat;
+    return cowcow;
 })();
 
 $root.gamecomm = (function() {

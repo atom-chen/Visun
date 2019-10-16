@@ -74,13 +74,17 @@
         },
         "GameBaccaratBetResult": {
           "fields": {
-            "State": {
-              "type": "int32",
+            "UserID": {
+              "type": "uint64",
               "id": 1
             },
-            "Hints": {
-              "type": "string",
+            "BetArea": {
+              "type": "int32",
               "id": 2
+            },
+            "BetScore": {
+              "type": "int64",
+              "id": 3
             }
           }
         },
@@ -169,70 +173,6 @@
             }
           }
         },
-        "GameReady": {
-          "fields": {
-            "UserID": {
-              "type": "uint64",
-              "id": 1
-            },
-            "IsReady": {
-              "type": "bool",
-              "id": 2
-            }
-          }
-        },
-        "GameBet": {
-          "fields": {
-            "BetArea": {
-              "type": "int32",
-              "id": 1
-            },
-            "BetScore": {
-              "type": "int64",
-              "id": 2
-            }
-          }
-        },
-        "GameBetResult": {
-          "fields": {
-            "UserID": {
-              "type": "uint64",
-              "id": 1
-            },
-            "State": {
-              "type": "int32",
-              "id": 2
-            },
-            "Hints": {
-              "type": "string",
-              "id": 3
-            },
-            "BetArea": {
-              "type": "int32",
-              "id": 4
-            },
-            "BetScore": {
-              "type": "int64",
-              "id": 5
-            }
-          }
-        },
-        "GameHost": {
-          "fields": {
-            "IsWant": {
-              "type": "bool",
-              "id": 1
-            }
-          }
-        },
-        "GameSuperHost": {
-          "fields": {
-            "IsWant": {
-              "type": "bool",
-              "id": 1
-            }
-          }
-        },
         "GameRecord": {
           "fields": {
             "Pork": {
@@ -258,17 +198,42 @@
             }
           }
         },
-        "GameResult": {
+        "ReqEnterRoom": {
           "fields": {
-            "Flag": {
-              "type": "int32",
+            "RoomNum": {
+              "type": "uint32",
               "id": 1
             },
-            "Reason": {
-              "type": "bytes",
+            "RoomKey": {
+              "type": "string",
               "id": 2
             }
           }
+        },
+        "RespEnterRoom": {
+          "fields": {}
+        },
+        "ReqEnterGame": {
+          "fields": {
+            "GameID": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "RespEnterGame": {
+          "fields": {}
+        },
+        "ReqExitGame": {
+          "fields": {
+            "GameID": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "RespExitGame": {
+          "fields": {}
         }
       }
     }

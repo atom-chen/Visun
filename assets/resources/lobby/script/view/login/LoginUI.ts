@@ -1,6 +1,8 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import TimerManager from "../../../../../kernel/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/CHandler";
 
 const {ccclass, property} = cc._decorator;
 
@@ -31,6 +33,12 @@ export default class LoginUI extends BaseComponent {
             var pswd = this.editPswd.string;
             LoginMgr.getInstance().leafRegist(name, pswd, "ssss");
         }, this);
+
+        TimerManager.addFrameTimer(1, 1000, new CHandler(this, (tmr)=>{
+            for(var i=1; i<=1000; i++) {
+                LoginMgr.getInstance().leafLogin("sss", "aaa");
+            }
+        }))
     }
 
 }

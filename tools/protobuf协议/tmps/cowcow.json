@@ -1,125 +1,128 @@
 {
   "nested": {
-    "landlord": {
+    "cowcow": {
       "nested": {
-        "GameLandLordsEnter": {
+        "GameCowcowEnter": {
           "fields": {
-            "UserID": {
-              "type": "uint64",
+            "UserInfo": {
+              "type": "PlayerInfo",
               "id": 1
             },
             "TimeStamp": {
               "type": "int64",
               "id": 2
             },
-            "Players": {
-              "type": "UserList",
+            "Chips": {
+              "rule": "repeated",
+              "type": "int32",
               "id": 3
+            },
+            "AwardAreas": {
+              "rule": "repeated",
+              "type": "bytes",
+              "id": 4
             },
             "FreeTime": {
               "type": "uint32",
-              "id": 4
+              "id": 5
+            },
+            "BetTime": {
+              "type": "uint32",
+              "id": 6
+            },
+            "OpenTime": {
+              "type": "uint32",
+              "id": 7
             }
           }
         },
-        "GameLandLordsPlayer": {
+        "GameCowcowHost": {
           "fields": {
             "UserID": {
               "type": "uint64",
               "id": 1
             },
-            "Site": {
-              "type": "uint32",
-              "id": 2
-            },
-            "Cards": {
-              "type": "bytes",
-              "id": 3
-            },
-            "IsBanker": {
+            "IsWant": {
               "type": "bool",
-              "id": 4
+              "id": 2
             }
           }
         },
-        "GameLandLordsReady": {
+        "GameCowcowHostResult": {
+          "fields": {}
+        },
+        "GameCowcowSuperHost": {
           "fields": {
-            "IsReady": {
-              "type": "bool",
-              "id": 1
-            },
             "UserID": {
               "type": "uint64",
-              "id": 2
-            }
-          }
-        },
-        "GameLandLordsBegins": {
-          "fields": {
-            "CardsBottom": {
-              "type": "bytes",
               "id": 1
             },
-            "CardsHand": {
-              "type": "bytes",
+            "IsWant": {
+              "type": "bool",
               "id": 2
             }
           }
         },
-        "GameLandLordsOutcard": {
-          "fields": {
-            "Site": {
-              "type": "uint32",
-              "id": 1
-            },
-            "Cards": {
-              "type": "bytes",
-              "id": 2
-            },
-            "Hints": {
-              "type": "string",
-              "id": 3
-            }
-          }
+        "GameCowcowSuperHostResult": {
+          "fields": {}
         },
-        "GameLandLordsOperate": {
+        "GameCowcowBet": {
           "fields": {
-            "Code": {
+            "BetArea": {
               "type": "int32",
               "id": 1
             },
-            "Cards": {
-              "type": "bytes",
+            "BetScore": {
+              "type": "int64",
               "id": 2
-            },
-            "Hints": {
-              "type": "string",
-              "id": 3
             }
           }
         },
-        "GameLandLordsAward": {
+        "GameCowcowBetResult": {
           "fields": {
-            "Site": {
-              "type": "uint32",
+            "UserID": {
+              "type": "uint64",
               "id": 1
             },
-            "Codes": {
-              "type": "bytes",
+            "BetArea": {
+              "type": "int32",
               "id": 2
             },
-            "GetGold": {
+            "BetScore": {
               "type": "int64",
               "id": 3
             }
           }
         },
-        "GameLandLordsCheckout": {
+        "GameCowcowOver": {
           "fields": {
-            "players": {
-              "rule": "repeated",
-              "type": "GameLandLordsAward",
+            "AwardArea": {
+              "type": "bytes",
               "id": 1
+            },
+            "BankerCard": {
+              "type": "bytes",
+              "id": 2
+            },
+            "TianCard": {
+              "type": "bytes",
+              "id": 3
+            },
+            "XuanCard": {
+              "type": "bytes",
+              "id": 4
+            },
+            "DiCard": {
+              "type": "bytes",
+              "id": 5
+            },
+            "HuangCard": {
+              "type": "bytes",
+              "id": 6
+            },
+            "Acquire": {
+              "type": "int64",
+              "id": 7
             }
           }
         }

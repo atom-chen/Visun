@@ -1,7 +1,8 @@
 syntax = "proto3";
 package landlord;
 import "gamecomm.proto";
-//【百人类游戏】
+
+
 //入场 (场景)
 message GameLandLordsEnter{
 	uint64 UserID = 1;					//玩家ID
@@ -9,15 +10,19 @@ message GameLandLordsEnter{
 	UserList Players = 3;				//玩家列表
 	uint32 FreeTime = 4;
 }
-//注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 
-//游戏消息
+
 // 玩家信息
 message GameLandLordsPlayer{
 	uint64 UserID = 1;					// 玩家ID
 	uint32 Site = 2;					// 玩家座位
 	bytes Cards = 3;					// 牌
 	bool IsBanker = 4;					// 是否是庄家
+}
+
+message GameLandLordsReady{
+	bool IsReady = 1;
+	uint64 UserID = 2;
 }
 
 // 开始
@@ -34,7 +39,7 @@ message GameLandLordsOutcard{
 }
 
 // 出牌结果
-//message GameResult{
+//message GameLandLordsOutResult{
 //	int32 Code = 1;						// 用户操作结果
 //	string Hints = 2;					// 玩家内容提示
 //}

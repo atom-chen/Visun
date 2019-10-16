@@ -4,14 +4,13 @@ package mahjong;
 import "gamecomm.proto";
 
 //场景
-//入场
 message GameMahjongEnter{
 	PlayerInfo userInfo = 1;			//玩家列表
 	int64 TimeStamp = 2;				//时间戳
 	uint32 FreeTime = 3;
 }
 
-//游戏消息
+
 // 玩家信息
 message GameMahjongPlayer{
 	uint64 UserID = 1;					// 玩家ID
