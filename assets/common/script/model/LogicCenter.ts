@@ -60,5 +60,3 @@ export default class LogicCenter {
         }
     }
 }
-
-LogicCenter.getInstance().init();
