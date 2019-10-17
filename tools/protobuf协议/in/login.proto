@@ -38,24 +38,63 @@ message LoginResult{
 
 //个人信息
 message UserInfo{
-	string Name = 1;			//用户
-	string Accounts = 2;		//帐号
-	string Password = 3;		//密码
-	uint32 FaceID = 4;			//头像
-	uint32 Gender = 5;			//性别
-	uint32 Age = 6;				//年龄
-	uint32 Level = 7;			//VIP级别
-	int64 Money = 8;			//金币
-	string PassPortID = 9;		//证件号
-	string Compellation =10;	//真实名字
-	uint32 AgentID = 11;		//代理标识
-	uint32 SpreaderGameID = 12; //推荐标识
-	uint32 ClientAddr = 13;		//连接地址
-	string MachineCode = 14;	//机器序列
+	uint64 UserId = 1;			//ID 
+	string Name = 2;			//用户
+	string Accounts = 3;		//帐号
+	string Password = 4;		//密码
+	uint32 FaceID = 5;			//头像
+	uint32 Gender = 6;			//性别
+	uint32 Age = 7;				//年龄
+	uint32 Level = 8;			//VIP级别
+	int64 Money = 9;			//金币
+	string PassPortID = 10;		//证件号
+	string Compellation =11;	//真实名字
+	uint32 AgentID = 12;		//代理标识
+	uint32 SpreaderGameID = 13; //推荐标识
+	uint32 ClientAddr = 14;		//连接地址
+	string MachineCode = 15;	//机器序列
 }
 
 
 //-----list--------------------------------------------------------
+
+message GameInfo {
+	uint64 GameId = 1;
+	string Name = 2;
+	string State = 3;
+	uint32 PlayerCount = 4;
+}
+
+message RoomDesc {
+	uint32 GameType		= 1;
+	uint32 GameId		= 2;
+	string Name       	= 3;
+	int32 BaseScore  	= 4;
+	int32 RountCount 	= 5;
+	int64 MinMoney   	= 6;
+	int64 MaxMoney   	= 7;
+	int32 MaxFighter 	= 8;
+	int32 MaxAudience 	= 9;
+}
+
+message GameListReq {
+
+}
+
+message GameListResp {
+	repeated GameInfo Games = 1;
+}
+
+message RoomListReq {
+	uint32 GameType = 1;
+}
+
+message RoomListResp {
+	uint32 GameType = 1;
+	repeated RoomDesc Rooms = 2;
+}
+
+//-----------------------------------------------------------------
 
 //房间信息
 message RoomInfo{

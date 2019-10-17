@@ -87,7 +87,7 @@ export default class LoginMgr extends ModelBase {
 		});
 	}
 	
-	private connectLeaf() {
+	public connectLeaf() {
 		//建立通道 
 		var wsAddr = ServerConfig.leafServer;
 		cc.log("连接leaf", wsAddr);

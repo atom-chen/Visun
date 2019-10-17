@@ -84,61 +84,158 @@
         },
         "UserInfo": {
           "fields": {
-            "Name": {
-              "type": "string",
+            "UserId": {
+              "type": "uint64",
               "id": 1
             },
-            "Accounts": {
+            "Name": {
               "type": "string",
               "id": 2
             },
-            "Password": {
+            "Accounts": {
               "type": "string",
               "id": 3
             },
-            "FaceID": {
-              "type": "uint32",
+            "Password": {
+              "type": "string",
               "id": 4
             },
-            "Gender": {
+            "FaceID": {
               "type": "uint32",
               "id": 5
             },
-            "Age": {
+            "Gender": {
               "type": "uint32",
               "id": 6
             },
-            "Level": {
+            "Age": {
               "type": "uint32",
               "id": 7
             },
+            "Level": {
+              "type": "uint32",
+              "id": 8
+            },
             "Money": {
               "type": "int64",
-              "id": 8
+              "id": 9
             },
             "PassPortID": {
               "type": "string",
-              "id": 9
+              "id": 10
             },
             "Compellation": {
               "type": "string",
-              "id": 10
+              "id": 11
             },
             "AgentID": {
               "type": "uint32",
-              "id": 11
+              "id": 12
             },
             "SpreaderGameID": {
               "type": "uint32",
-              "id": 12
+              "id": 13
             },
             "ClientAddr": {
               "type": "uint32",
-              "id": 13
+              "id": 14
             },
             "MachineCode": {
               "type": "string",
-              "id": 14
+              "id": 15
+            }
+          }
+        },
+        "GameInfo": {
+          "fields": {
+            "GameId": {
+              "type": "uint64",
+              "id": 1
+            },
+            "Name": {
+              "type": "string",
+              "id": 2
+            },
+            "State": {
+              "type": "string",
+              "id": 3
+            },
+            "PlayerCount": {
+              "type": "uint32",
+              "id": 4
+            }
+          }
+        },
+        "RoomDesc": {
+          "fields": {
+            "GameType": {
+              "type": "uint32",
+              "id": 1
+            },
+            "GameId": {
+              "type": "uint32",
+              "id": 2
+            },
+            "Name": {
+              "type": "string",
+              "id": 3
+            },
+            "BaseScore": {
+              "type": "int32",
+              "id": 4
+            },
+            "RountCount": {
+              "type": "int32",
+              "id": 5
+            },
+            "MinMoney": {
+              "type": "int64",
+              "id": 6
+            },
+            "MaxMoney": {
+              "type": "int64",
+              "id": 7
+            },
+            "MaxFighter": {
+              "type": "int32",
+              "id": 8
+            },
+            "MaxAudience": {
+              "type": "int32",
+              "id": 9
+            }
+          }
+        },
+        "GameListReq": {
+          "fields": {}
+        },
+        "GameListResp": {
+          "fields": {
+            "Games": {
+              "rule": "repeated",
+              "type": "GameInfo",
+              "id": 1
+            }
+          }
+        },
+        "RoomListReq": {
+          "fields": {
+            "GameType": {
+              "type": "uint32",
+              "id": 1
+            }
+          }
+        },
+        "RoomListResp": {
+          "fields": {
+            "GameType": {
+              "type": "uint32",
+              "id": 1
+            },
+            "Rooms": {
+              "rule": "repeated",
+              "type": "RoomDesc",
+              "id": 2
             }
           }
         },
