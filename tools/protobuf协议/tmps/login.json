@@ -2,21 +2,45 @@
   "nested": {
     "login": {
       "nested": {
-        "ResResult": {
+        "UserInfo": {
           "fields": {
-            "State": {
-              "type": "int32",
+            "UserId": {
+              "type": "uint64",
               "id": 1
             },
-            "Hints": {
+            "Accounts": {
               "type": "string",
               "id": 2
+            },
+            "Password": {
+              "type": "string",
+              "id": 3
+            },
+            "Name": {
+              "type": "string",
+              "id": 4
+            },
+            "Head": {
+              "type": "string",
+              "id": 5
+            },
+            "Sex": {
+              "type": "uint32",
+              "id": 6
+            },
+            "VipLevel": {
+              "type": "uint32",
+              "id": 8
+            },
+            "Money": {
+              "type": "int64",
+              "id": 9
             }
           }
         },
-        "Register": {
+        "ReqRegister": {
           "fields": {
-            "Name": {
+            "Account": {
               "type": "string",
               "id": 1
             },
@@ -27,18 +51,10 @@
             "SecurityCode": {
               "type": "string",
               "id": 3
-            },
-            "MachineCode": {
-              "type": "string",
-              "id": 4
-            },
-            "InvitationCode": {
-              "type": "string",
-              "id": 5
             }
           }
         },
-        "RegisterResult": {
+        "RespRegister": {
           "fields": {
             "State": {
               "type": "uint32",
@@ -50,7 +66,7 @@
             }
           }
         },
-        "Login": {
+        "ReqLogin": {
           "fields": {
             "Account": {
               "type": "string",
@@ -70,7 +86,7 @@
             }
           }
         },
-        "LoginResult": {
+        "RespLogin": {
           "fields": {
             "State": {
               "type": "uint32",
@@ -78,257 +94,6 @@
             },
             "Hints": {
               "type": "string",
-              "id": 2
-            }
-          }
-        },
-        "UserInfo": {
-          "fields": {
-            "UserId": {
-              "type": "uint64",
-              "id": 1
-            },
-            "Name": {
-              "type": "string",
-              "id": 2
-            },
-            "Accounts": {
-              "type": "string",
-              "id": 3
-            },
-            "Password": {
-              "type": "string",
-              "id": 4
-            },
-            "FaceID": {
-              "type": "uint32",
-              "id": 5
-            },
-            "Gender": {
-              "type": "uint32",
-              "id": 6
-            },
-            "Age": {
-              "type": "uint32",
-              "id": 7
-            },
-            "Level": {
-              "type": "uint32",
-              "id": 8
-            },
-            "Money": {
-              "type": "int64",
-              "id": 9
-            },
-            "PassPortID": {
-              "type": "string",
-              "id": 10
-            },
-            "Compellation": {
-              "type": "string",
-              "id": 11
-            },
-            "AgentID": {
-              "type": "uint32",
-              "id": 12
-            },
-            "SpreaderGameID": {
-              "type": "uint32",
-              "id": 13
-            },
-            "ClientAddr": {
-              "type": "uint32",
-              "id": 14
-            },
-            "MachineCode": {
-              "type": "string",
-              "id": 15
-            }
-          }
-        },
-        "GameInfo": {
-          "fields": {
-            "GameId": {
-              "type": "uint64",
-              "id": 1
-            },
-            "Name": {
-              "type": "string",
-              "id": 2
-            },
-            "State": {
-              "type": "string",
-              "id": 3
-            },
-            "PlayerCount": {
-              "type": "uint32",
-              "id": 4
-            }
-          }
-        },
-        "RoomDesc": {
-          "fields": {
-            "GameType": {
-              "type": "uint32",
-              "id": 1
-            },
-            "GameId": {
-              "type": "uint32",
-              "id": 2
-            },
-            "Name": {
-              "type": "string",
-              "id": 3
-            },
-            "BaseScore": {
-              "type": "int32",
-              "id": 4
-            },
-            "RountCount": {
-              "type": "int32",
-              "id": 5
-            },
-            "MinMoney": {
-              "type": "int64",
-              "id": 6
-            },
-            "MaxMoney": {
-              "type": "int64",
-              "id": 7
-            },
-            "MaxFighter": {
-              "type": "int32",
-              "id": 8
-            },
-            "MaxAudience": {
-              "type": "int32",
-              "id": 9
-            }
-          }
-        },
-        "GameListReq": {
-          "fields": {}
-        },
-        "GameListResp": {
-          "fields": {
-            "Games": {
-              "rule": "repeated",
-              "type": "GameInfo",
-              "id": 1
-            }
-          }
-        },
-        "RoomListReq": {
-          "fields": {
-            "GameType": {
-              "type": "uint32",
-              "id": 1
-            }
-          }
-        },
-        "RoomListResp": {
-          "fields": {
-            "GameType": {
-              "type": "uint32",
-              "id": 1
-            },
-            "Rooms": {
-              "rule": "repeated",
-              "type": "RoomDesc",
-              "id": 2
-            }
-          }
-        },
-        "RoomInfo": {
-          "fields": {
-            "RoomNum": {
-              "type": "uint32",
-              "id": 1
-            },
-            "RoomKey": {
-              "type": "string",
-              "id": 2
-            },
-            "RoomName": {
-              "type": "string",
-              "id": 3
-            },
-            "Games": {
-              "type": "GameList",
-              "id": 4
-            }
-          }
-        },
-        "TaskItem": {
-          "fields": {
-            "TaskID": {
-              "type": "uint32",
-              "id": 1
-            },
-            "Twice": {
-              "type": "uint32",
-              "id": 2
-            },
-            "Hints": {
-              "type": "string",
-              "id": 3
-            }
-          }
-        },
-        "TaskList": {
-          "fields": {
-            "Task": {
-              "rule": "repeated",
-              "type": "TaskItem",
-              "id": 1
-            }
-          }
-        },
-        "GameList": {
-          "fields": {
-            "Items": {
-              "rule": "repeated",
-              "type": "GameItem",
-              "id": 1
-            }
-          }
-        },
-        "GameBaseInfo": {
-          "fields": {
-            "Type": {
-              "type": "uint32",
-              "id": 1
-            },
-            "KindID": {
-              "type": "uint32",
-              "id": 2
-            },
-            "Level": {
-              "type": "uint32",
-              "id": 3
-            },
-            "Name": {
-              "type": "string",
-              "id": 4
-            },
-            "EnterScore": {
-              "type": "uint32",
-              "id": 5
-            },
-            "LessScore": {
-              "type": "uint32",
-              "id": 6
-            }
-          }
-        },
-        "GameItem": {
-          "fields": {
-            "ID": {
-              "type": "uint32",
-              "id": 1
-            },
-            "Info": {
-              "type": "GameBaseInfo",
               "id": 2
             }
           }

@@ -10,35 +10,15 @@ var pbfiles = [
 		clientPath:"../../assets/common/script/proxy/" 
 	},
 	{ 
+		name:"configure", 
+		router:"login",
+		clientPath:"../../assets/common/script/proxy/"
+	},
+	{ 
 		name:"gamecomm", 
 		router:"game",
 		clientPath:"../../assets/common/script/proxy/"
 	},
-	{ 
-		name:"baccarat", 
-		router:"game",
-		clientPath:"../../assets/resources/subgames/bjle/script/"
-	},
-	{ 
-		name:"fishLord", 
-		router:"game",
-		clientPath:"../../assets/resources/subgames/buyu/script/"
-	},
-	{ 
-		name:"landLords", 
-		router:"game",
-		clientPath:"../../assets/resources/subgames/ddz/script/"
-	},
-	{ 
-		name:"cowcow", 
-		router:"game",
-	//	clientPath:"../../assets/resources/subgames/mahjong/script/"
-	},
-	{ 
-		name:"mahjong", 
-		router:"game",
-	//	clientPath:"../../assets/resources/subgames/mahjong/script/"
-	}
 ]
 
 

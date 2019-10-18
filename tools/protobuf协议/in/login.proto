@@ -1,141 +1,41 @@
 syntax = "proto3";
 package login;
 
-message ResResult {
-	int32 State = 1;			//状态:0成功 1失败 
-    string Hints = 2;			//提示信息
+//个人信息
+message UserInfo{
+	uint64 UserId = 1;			//ID 
+	string Accounts = 2;		//帐号
+	string Password = 3;		//密码
+	string Name = 4;			//昵称
+	string Head = 5;			//头像
+	uint32 Sex = 6;				//性别
+	uint32 VipLevel = 8;		//VIP级别
+	int64 Money = 9;			//金币
 }
 
 //注册
-message Register{
-    string Name = 1;			//用户
+message ReqRegister {
+    string Account = 1;			//账号
     string Password = 2;		//密码
 	string SecurityCode = 3;	//验证码
-	string MachineCode = 4;	//机器码
-	string InvitationCode = 5;	//邀请码
 }
 
 //注册结果
-message RegisterResult{
-    uint32 State = 1;			//状态:0成功 1失败 
+message RespRegister {
+    uint32 State = 1;			//0成功 1失败 
     string Hints = 2;			//提示信息
 }
 
 //登录
-message Login{
-    string Account = 1;		//账号
+message ReqLogin {
+    string Account = 1;			//账号
     string Password = 2;		//密码
 	string SecurityCode = 3;	//验证码
-	string MachineCode = 4;	//机器码
+	string MachineCode = 4;		//机器码
 }
 
 //登陆结果
-message LoginResult{
-    uint32 State = 1;			//状态:0成功 1失败 
+message RespLogin {
+    uint32 State = 1;			//0成功 1失败 
     string Hints = 2;			//提示信息
-}
-
-
-//个人信息
-message UserInfo{
-	uint64 UserId = 1;			//ID 
-	string Name = 2;			//用户
-	string Accounts = 3;		//帐号
-	string Password = 4;		//密码
-	uint32 FaceID = 5;			//头像
-	uint32 Gender = 6;			//性别
-	uint32 Age = 7;				//年龄
-	uint32 Level = 8;			//VIP级别
-	int64 Money = 9;			//金币
-	string PassPortID = 10;		//证件号
-	string Compellation =11;	//真实名字
-	uint32 AgentID = 12;		//代理标识
-	uint32 SpreaderGameID = 13; //推荐标识
-	uint32 ClientAddr = 14;		//连接地址
-	string MachineCode = 15;	//机器序列
-}
-
-
-//-----list--------------------------------------------------------
-
-message GameInfo {
-	uint64 GameId = 1;
-	string Name = 2;
-	string State = 3;
-	uint32 PlayerCount = 4;
-}
-
-message RoomDesc {
-	uint32 GameType		= 1;
-	uint32 GameId		= 2;
-	string Name       	= 3;
-	int32 BaseScore  	= 4;
-	int32 RountCount 	= 5;
-	int64 MinMoney   	= 6;
-	int64 MaxMoney   	= 7;
-	int32 MaxFighter 	= 8;
-	int32 MaxAudience 	= 9;
-}
-
-message GameListReq {
-
-}
-
-message GameListResp {
-	repeated GameInfo Games = 1;
-}
-
-message RoomListReq {
-	uint32 GameType = 1;
-}
-
-message RoomListResp {
-	uint32 GameType = 1;
-	repeated RoomDesc Rooms = 2;
-}
-
-//-----------------------------------------------------------------
-
-//房间信息
-message RoomInfo{
-	uint32 RoomNum = 1;			//房间号码
-	string RoomKey = 2;			//房间钥匙
-	string RoomName = 3;		//房间名称
-	GameList Games = 4;			//游戏列表
-}
-
-
-//任务信息
-message TaskItem{
-	uint32 TaskID = 1;
-	uint32 Twice = 2; //实现次数
-	string Hints = 3;//提示语 “恭喜 祝贺”之类
-}
-
-//任务列表
-message TaskList{
-	repeated TaskItem Task = 1;
-}
-
-
-
-//游戏列表
-message GameList{
-	repeated GameItem Items = 1;//子游戏
-}
-
-//游戏信息
-message GameBaseInfo{
-	 uint32 Type = 1;	 		//游戏类型
-	 uint32 KindID = 2;	 		//游戏标识
-	 uint32 Level = 3;			//房间类别 0:普通房 1:中级房 2:高级房 3:VIP房 4:冠军房
-	 string Name = 4;			//游戏名称
-	 uint32 EnterScore = 5;		//房间进场分
-	 uint32 LessScore = 6;		//房间坐下分
-}
-
-//子游戏
-message GameItem{
-	uint32 ID = 1;
-	GameBaseInfo Info = 2;//子游戏
 }

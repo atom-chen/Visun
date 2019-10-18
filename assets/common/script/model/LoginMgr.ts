@@ -10,6 +10,8 @@ import LoginUser from "./LoginUser";
 import { login_request, login_packet_define } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
 import proxy_login from "../proxy/proxy_login";
+import { configure_packet_define } from "../proto/net_configure";
+import { gamecomm_packet_define } from "../proto/net_gamecomm";
 
 
 export default class LoginMgr extends ModelBase {
@@ -20,6 +22,8 @@ export default class LoginMgr extends ModelBase {
 		g_leafProcessor.registProtocol(null);
 		g_leafProcessor.unregistAllCmds();
 		g_leafProcessor.registCmds(login_packet_define);
+		g_leafProcessor.registCmds(configure_packet_define);
+		g_leafProcessor.registCmds(gamecomm_packet_define);
 		g_leafProcessor.getDispatcher().setObserver(proxy_login);
 	}
     public static getInstance() : LoginMgr {
@@ -57,7 +61,7 @@ export default class LoginMgr extends ModelBase {
 		}
 
 		this.connectLeaf();
-		login_request.Login({
+		login_request.ReqLogin({
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
@@ -78,12 +82,10 @@ export default class LoginMgr extends ModelBase {
 		InviteCode = InviteCode || "ssss";
 
 		this.connectLeaf();
-		login_request.Register({
-			Name: Account, 
+		login_request.ReqRegister({
+			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "2323", 
-			MachineCode: this.getMachineCode(), 
-			InvitationCode: InviteCode
 		});
 	}
 	

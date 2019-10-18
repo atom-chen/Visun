@@ -2,6 +2,22 @@
   "nested": {
     "gamecomm": {
       "nested": {
+        "FailResponse": {
+          "fields": {
+            "ReqMsgId": {
+              "type": "int32",
+              "id": 1
+            },
+            "ErrorCode": {
+              "type": "int32",
+              "id": 2
+            },
+            "Tips": {
+              "type": "string",
+              "id": 3
+            }
+          }
+        },
         "PlayerInfo": {
           "fields": {
             "UserID": {
@@ -12,25 +28,25 @@
               "type": "string",
               "id": 2
             },
-            "Age": {
-              "type": "int32",
-              "id": 3
-            },
             "Sex": {
               "type": "int32",
               "id": 4
             },
-            "Gold": {
-              "type": "int64",
-              "id": 5
-            },
             "VipLevel": {
               "type": "int32",
               "id": 6
+            },
+            "Money": {
+              "type": "int64",
+              "id": 5
+            },
+            "Head": {
+              "type": "string",
+              "id": 7
             }
           }
         },
-        "UserList": {
+        "PlayerList": {
           "fields": {
             "AllInfos": {
               "rule": "repeated",
@@ -39,56 +55,7 @@
             }
           }
         },
-        "PlayerRecord": {
-          "fields": {
-            "User": {
-              "type": "PlayerInfo",
-              "id": 1
-            },
-            "Twice": {
-              "type": "int32",
-              "id": 2
-            },
-            "Ranking": {
-              "type": "int32",
-              "id": 3
-            },
-            "Bankroll": {
-              "type": "int32",
-              "id": 4
-            },
-            "WinLos": {
-              "type": "int64",
-              "id": 5
-            }
-          }
-        },
-        "GameRecord": {
-          "fields": {
-            "Pork": {
-              "type": "bytes",
-              "id": 1
-            },
-            "Type": {
-              "type": "int32",
-              "id": 2
-            },
-            "isWon": {
-              "type": "bool",
-              "id": 3
-            }
-          }
-        },
-        "GameRecordList": {
-          "fields": {
-            "list": {
-              "rule": "repeated",
-              "type": "GameRecord",
-              "id": 1
-            }
-          }
-        },
-        "ReqEnterRoom": {
+        "ReqEnterGame": {
           "fields": {
             "RoomNum": {
               "type": "uint32",
@@ -100,19 +67,17 @@
             }
           }
         },
-        "RespEnterRoom": {
-          "fields": {}
-        },
-        "ReqEnterGame": {
+        "RespEnterGame": {
           "fields": {
-            "GameID": {
-              "type": "uint32",
+            "IsSuccess": {
+              "type": "int32",
               "id": 1
+            },
+            "Reason": {
+              "type": "string",
+              "id": 2
             }
           }
-        },
-        "RespEnterGame": {
-          "fields": {}
         },
         "ReqExitGame": {
           "fields": {
@@ -123,7 +88,16 @@
           }
         },
         "RespExitGame": {
-          "fields": {}
+          "fields": {
+            "IsSuccess": {
+              "type": "int32",
+              "id": 1
+            },
+            "Reason": {
+              "type": "string",
+              "id": 2
+            }
+          }
         }
       }
     }

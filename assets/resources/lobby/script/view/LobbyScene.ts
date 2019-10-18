@@ -5,6 +5,7 @@ import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import LogicCenter from "../../../../common/script/model/LogicCenter";
 import { login_request } from "../../../../common/script/proto/net_login";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
+import { configure_request } from "../../../../common/script/proto/net_configure";
 
 const {ccclass, property} = cc._decorator;
 
@@ -16,8 +17,8 @@ export default class LobbyScene extends BaseComponent {
         UIManager.openPanel(ViewDefine.LobbyUI.path, null);
 
         LoginMgr.getInstance().connectLeaf();
-        login_request.GameListReq(null);
-        login_request.RoomListReq({GameType:1000});
+        configure_request.GameListReq(null);
+        configure_request.RoomListReq({GameType:1000});
     }
 
     start () {
