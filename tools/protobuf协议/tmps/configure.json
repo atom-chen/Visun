@@ -5,7 +5,7 @@
         "GameInfo": {
           "fields": {
             "GameType": {
-              "type": "uint64",
+              "type": "uint32",
               "id": 1
             },
             "Name": {
@@ -13,7 +13,7 @@
               "id": 2
             },
             "State": {
-              "type": "string",
+              "type": "int32",
               "id": 3
             },
             "PlayerCount": {

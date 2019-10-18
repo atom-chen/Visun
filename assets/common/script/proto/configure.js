@@ -20,9 +20,9 @@ $root.configure = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameInfo.prototype.GameType = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameInfo.prototype.GameType = 0;
         GameInfo.prototype.Name = "";
-        GameInfo.prototype.State = "";
+        GameInfo.prototype.State = 0;
         GameInfo.prototype.PlayerCount = 0;
 
         GameInfo.create = function create(properties) {
@@ -33,11 +33,11 @@ $root.configure = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(8).uint64(message.GameType);
+                writer.uint32(8).uint32(message.GameType);
             if (message.Name != null && message.hasOwnProperty("Name"))
                 writer.uint32(18).string(message.Name);
             if (message.State != null && message.hasOwnProperty("State"))
-                writer.uint32(26).string(message.State);
+                writer.uint32(24).int32(message.State);
             if (message.PlayerCount != null && message.hasOwnProperty("PlayerCount"))
                 writer.uint32(32).uint32(message.PlayerCount);
             return writer;
@@ -55,13 +55,13 @@ $root.configure = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameType = reader.uint64();
+                    message.GameType = reader.uint32();
                     break;
                 case 2:
                     message.Name = reader.string();
                     break;
                 case 3:
-                    message.State = reader.string();
+                    message.State = reader.int32();
                     break;
                 case 4:
                     message.PlayerCount = reader.uint32();
@@ -84,14 +84,14 @@ $root.configure = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.GameType != null && message.hasOwnProperty("GameType"))
-                if (!$util.isInteger(message.GameType) && !(message.GameType && $util.isInteger(message.GameType.low) && $util.isInteger(message.GameType.high)))
-                    return "GameType: integer|Long expected";
+                if (!$util.isInteger(message.GameType))
+                    return "GameType: integer expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
             if (message.State != null && message.hasOwnProperty("State"))
-                if (!$util.isString(message.State))
-                    return "State: string expected";
+                if (!$util.isInteger(message.State))
+                    return "State: integer expected";
             if (message.PlayerCount != null && message.hasOwnProperty("PlayerCount"))
                 if (!$util.isInteger(message.PlayerCount))
                     return "PlayerCount: integer expected";
@@ -103,18 +103,11 @@ $root.configure = (function() {
                 return object;
             var message = new $root.configure.GameInfo();
             if (object.GameType != null)
-                if ($util.Long)
-                    (message.GameType = $util.Long.fromValue(object.GameType)).unsigned = true;
-                else if (typeof object.GameType === "string")
-                    message.GameType = parseInt(object.GameType, 10);
-                else if (typeof object.GameType === "number")
-                    message.GameType = object.GameType;
-                else if (typeof object.GameType === "object")
-                    message.GameType = new $util.LongBits(object.GameType.low >>> 0, object.GameType.high >>> 0).toNumber(true);
+                message.GameType = object.GameType >>> 0;
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.State != null)
-                message.State = String(object.State);
+                message.State = object.State | 0;
             if (object.PlayerCount != null)
                 message.PlayerCount = object.PlayerCount >>> 0;
             return message;
@@ -125,20 +118,13 @@ $root.configure = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.GameType = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.GameType = options.longs === String ? "0" : 0;
+                object.GameType = 0;
                 object.Name = "";
-                object.State = "";
+                object.State = 0;
                 object.PlayerCount = 0;
             }
             if (message.GameType != null && message.hasOwnProperty("GameType"))
-                if (typeof message.GameType === "number")
-                    object.GameType = options.longs === String ? String(message.GameType) : message.GameType;
-                else
-                    object.GameType = options.longs === String ? $util.Long.prototype.toString.call(message.GameType) : options.longs === Number ? new $util.LongBits(message.GameType.low >>> 0, message.GameType.high >>> 0).toNumber(true) : message.GameType;
+                object.GameType = message.GameType;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
             if (message.State != null && message.hasOwnProperty("State"))

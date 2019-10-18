@@ -2,9 +2,9 @@ syntax = "proto3";
 package configure;
 
 message GameInfo {
-	uint64 GameType = 1;		//游戏分类
+	uint32 GameType = 1;		//游戏分类
 	string Name = 2;			//游戏名
-	string State = 3;			//游戏状态: 0未开启 1未开放 2开放
+	int32 State = 3;			//游戏状态: 0未开启 1未开放 2开放
 	uint32 PlayerCount = 4;		//游戏内玩家数量
 }
 

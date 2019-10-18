@@ -25,7 +25,7 @@ export var configure_packet_define = {
 }
 
 export class configure_request {
-    public static GameInfo( data:{ GameType:number, Name:string, State:string, PlayerCount:number } ) { configure_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameInfo( data:{ GameType:number, Name:string, State:number, PlayerCount:number } ) { configure_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
     public static RoomDesc( data:{ GameType:number, GameId:number, Name:string, BaseScore:number, RountCount:number, MinMoney:number, MaxMoney:number, MaxFighter:number, MaxAudience:number } ) { configure_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameListReq( data:{} ) { configure_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
     public static GameListResp( data:{ GameList:any } ) { configure_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
