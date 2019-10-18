@@ -2,15 +2,15 @@ syntax = "proto3";
 package configure;
 
 message GameInfo {
-	uint32 GameType = 1;		//游戏分类
+	uint32 GameKind = 1;		//游戏分类
 	string Name = 2;			//游戏名
 	int32 State = 3;			//游戏状态: 0未开启 1未开放 2开放
 	uint32 PlayerCount = 4;		//游戏内玩家数量
 }
 
 message RoomDesc {
-	uint32 GameType		= 1;	//分类：斗地主/牛牛/炸金花/...
-	uint32 GameId		= 2;	//游戏ID：斗地主初级场/斗地主中级场/牛牛初级场/牛牛高级场/...
+	uint32 GameKind		= 1;	//分类：斗地主/牛牛/炸金花/...
+	uint32 GameType		= 2;	//游戏：斗地主初级场/斗地主中级场/牛牛初级场/牛牛高级场/...
 	string Name       	= 3;	//游戏名：斗地主/牛牛/炸金花/...
 	int32 BaseScore  	= 4;	//底分
 	int32 RountCount 	= 5;	//局数
@@ -30,9 +30,9 @@ message GameListResp {
 
 //房间列表
 message RoomListReq {
-	uint32 GameType = 1;
+	uint32 GameKind = 1;
 }
 message RoomListResp {
-	uint32 GameType = 1;
+	uint32 GameKind = 1;
 	repeated RoomDesc RoomList = 2;
 }

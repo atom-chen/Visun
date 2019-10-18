@@ -6,6 +6,7 @@ import LogicCenter from "../../../../common/script/model/LogicCenter";
 import { login_request } from "../../../../common/script/proto/net_login";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
 import { configure_request } from "../../../../common/script/proto/net_configure";
+import { gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
 
 const {ccclass, property} = cc._decorator;
 
@@ -18,7 +19,8 @@ export default class LobbyScene extends BaseComponent {
 
         LoginMgr.getInstance().connectLeaf();
         configure_request.GameListReq(null);
-        configure_request.RoomListReq({GameType:1000});
+        configure_request.RoomListReq({GameKind:1000});
+        gamecomm_request.ReqEnterGame({GameType:1001})
     }
 
     start () {

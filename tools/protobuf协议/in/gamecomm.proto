@@ -25,8 +25,7 @@ message PlayerList{
 
 //进入游戏（检查进入条件）
 message ReqEnterGame{
-	uint32 RoomNum = 1;			//房间号码
-	string RoomKey = 2;			//房间钥匙
+	uint32 GameType = 1;
 }
 message RespEnterGame{
     int32 IsSuccess = 1;        //0成功 1失败
@@ -35,7 +34,7 @@ message RespEnterGame{
 
 //退出游戏（检查退出条件）
 message ReqExitGame{
-	uint32 GameID = 1;			//游戏标识
+	uint32 GameType = 1;			//游戏标识
 }
 message RespExitGame{
     int32 IsSuccess = 1;        //0成功 1失败

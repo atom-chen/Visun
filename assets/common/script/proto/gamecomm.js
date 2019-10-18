@@ -430,8 +430,7 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ReqEnterGame.prototype.RoomNum = 0;
-        ReqEnterGame.prototype.RoomKey = "";
+        ReqEnterGame.prototype.GameType = 0;
 
         ReqEnterGame.create = function create(properties) {
             return new ReqEnterGame(properties);
@@ -440,10 +439,8 @@ $root.gamecomm = (function() {
         ReqEnterGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                writer.uint32(8).uint32(message.RoomNum);
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                writer.uint32(18).string(message.RoomKey);
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                writer.uint32(8).uint32(message.GameType);
             return writer;
         };
 
@@ -459,10 +456,7 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.RoomNum = reader.uint32();
-                    break;
-                case 2:
-                    message.RoomKey = reader.string();
+                    message.GameType = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -481,12 +475,9 @@ $root.gamecomm = (function() {
         ReqEnterGame.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                if (!$util.isInteger(message.RoomNum))
-                    return "RoomNum: integer expected";
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                if (!$util.isString(message.RoomKey))
-                    return "RoomKey: string expected";
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                if (!$util.isInteger(message.GameType))
+                    return "GameType: integer expected";
             return null;
         };
 
@@ -494,10 +485,8 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.ReqEnterGame)
                 return object;
             var message = new $root.gamecomm.ReqEnterGame();
-            if (object.RoomNum != null)
-                message.RoomNum = object.RoomNum >>> 0;
-            if (object.RoomKey != null)
-                message.RoomKey = String(object.RoomKey);
+            if (object.GameType != null)
+                message.GameType = object.GameType >>> 0;
             return message;
         };
 
@@ -505,14 +494,10 @@ $root.gamecomm = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                object.RoomNum = 0;
-                object.RoomKey = "";
-            }
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                object.RoomNum = message.RoomNum;
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                object.RoomKey = message.RoomKey;
+            if (options.defaults)
+                object.GameType = 0;
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                object.GameType = message.GameType;
             return object;
         };
 
@@ -634,7 +619,7 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ReqExitGame.prototype.GameID = 0;
+        ReqExitGame.prototype.GameType = 0;
 
         ReqExitGame.create = function create(properties) {
             return new ReqExitGame(properties);
@@ -643,8 +628,8 @@ $root.gamecomm = (function() {
         ReqExitGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                writer.uint32(8).uint32(message.GameID);
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                writer.uint32(8).uint32(message.GameType);
             return writer;
         };
 
@@ -660,7 +645,7 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameID = reader.uint32();
+                    message.GameType = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -679,9 +664,9 @@ $root.gamecomm = (function() {
         ReqExitGame.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (!$util.isInteger(message.GameID))
-                    return "GameID: integer expected";
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                if (!$util.isInteger(message.GameType))
+                    return "GameType: integer expected";
             return null;
         };
 
@@ -689,8 +674,8 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.ReqExitGame)
                 return object;
             var message = new $root.gamecomm.ReqExitGame();
-            if (object.GameID != null)
-                message.GameID = object.GameID >>> 0;
+            if (object.GameType != null)
+                message.GameType = object.GameType >>> 0;
             return message;
         };
 
@@ -699,9 +684,9 @@ $root.gamecomm = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.GameID = 0;
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                object.GameID = message.GameID;
+                object.GameType = 0;
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                object.GameType = message.GameType;
             return object;
         };
 

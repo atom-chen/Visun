@@ -20,7 +20,7 @@ $root.configure = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameInfo.prototype.GameType = 0;
+        GameInfo.prototype.GameKind = 0;
         GameInfo.prototype.Name = "";
         GameInfo.prototype.State = 0;
         GameInfo.prototype.PlayerCount = 0;
@@ -32,8 +32,8 @@ $root.configure = (function() {
         GameInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(8).uint32(message.GameType);
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                writer.uint32(8).uint32(message.GameKind);
             if (message.Name != null && message.hasOwnProperty("Name"))
                 writer.uint32(18).string(message.Name);
             if (message.State != null && message.hasOwnProperty("State"))
@@ -55,7 +55,7 @@ $root.configure = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameType = reader.uint32();
+                    message.GameKind = reader.uint32();
                     break;
                 case 2:
                     message.Name = reader.string();
@@ -83,9 +83,9 @@ $root.configure = (function() {
         GameInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                if (!$util.isInteger(message.GameType))
-                    return "GameType: integer expected";
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                if (!$util.isInteger(message.GameKind))
+                    return "GameKind: integer expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
@@ -102,8 +102,8 @@ $root.configure = (function() {
             if (object instanceof $root.configure.GameInfo)
                 return object;
             var message = new $root.configure.GameInfo();
-            if (object.GameType != null)
-                message.GameType = object.GameType >>> 0;
+            if (object.GameKind != null)
+                message.GameKind = object.GameKind >>> 0;
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.State != null)
@@ -118,13 +118,13 @@ $root.configure = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.GameType = 0;
+                object.GameKind = 0;
                 object.Name = "";
                 object.State = 0;
                 object.PlayerCount = 0;
             }
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                object.GameType = message.GameType;
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                object.GameKind = message.GameKind;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
             if (message.State != null && message.hasOwnProperty("State"))
@@ -150,8 +150,8 @@ $root.configure = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        RoomDesc.prototype.GameKind = 0;
         RoomDesc.prototype.GameType = 0;
-        RoomDesc.prototype.GameId = 0;
         RoomDesc.prototype.Name = "";
         RoomDesc.prototype.BaseScore = 0;
         RoomDesc.prototype.RountCount = 0;
@@ -167,10 +167,10 @@ $root.configure = (function() {
         RoomDesc.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                writer.uint32(8).uint32(message.GameKind);
             if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(8).uint32(message.GameType);
-            if (message.GameId != null && message.hasOwnProperty("GameId"))
-                writer.uint32(16).uint32(message.GameId);
+                writer.uint32(16).uint32(message.GameType);
             if (message.Name != null && message.hasOwnProperty("Name"))
                 writer.uint32(26).string(message.Name);
             if (message.BaseScore != null && message.hasOwnProperty("BaseScore"))
@@ -200,10 +200,10 @@ $root.configure = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameType = reader.uint32();
+                    message.GameKind = reader.uint32();
                     break;
                 case 2:
-                    message.GameId = reader.uint32();
+                    message.GameType = reader.uint32();
                     break;
                 case 3:
                     message.Name = reader.string();
@@ -243,12 +243,12 @@ $root.configure = (function() {
         RoomDesc.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                if (!$util.isInteger(message.GameKind))
+                    return "GameKind: integer expected";
             if (message.GameType != null && message.hasOwnProperty("GameType"))
                 if (!$util.isInteger(message.GameType))
                     return "GameType: integer expected";
-            if (message.GameId != null && message.hasOwnProperty("GameId"))
-                if (!$util.isInteger(message.GameId))
-                    return "GameId: integer expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
@@ -277,10 +277,10 @@ $root.configure = (function() {
             if (object instanceof $root.configure.RoomDesc)
                 return object;
             var message = new $root.configure.RoomDesc();
+            if (object.GameKind != null)
+                message.GameKind = object.GameKind >>> 0;
             if (object.GameType != null)
                 message.GameType = object.GameType >>> 0;
-            if (object.GameId != null)
-                message.GameId = object.GameId >>> 0;
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.BaseScore != null)
@@ -317,8 +317,8 @@ $root.configure = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
+                object.GameKind = 0;
                 object.GameType = 0;
-                object.GameId = 0;
                 object.Name = "";
                 object.BaseScore = 0;
                 object.RountCount = 0;
@@ -335,10 +335,10 @@ $root.configure = (function() {
                 object.MaxFighter = 0;
                 object.MaxAudience = 0;
             }
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                object.GameKind = message.GameKind;
             if (message.GameType != null && message.hasOwnProperty("GameType"))
                 object.GameType = message.GameType;
-            if (message.GameId != null && message.hasOwnProperty("GameId"))
-                object.GameId = message.GameId;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
             if (message.BaseScore != null && message.hasOwnProperty("BaseScore"))
@@ -553,7 +553,7 @@ $root.configure = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RoomListReq.prototype.GameType = 0;
+        RoomListReq.prototype.GameKind = 0;
 
         RoomListReq.create = function create(properties) {
             return new RoomListReq(properties);
@@ -562,8 +562,8 @@ $root.configure = (function() {
         RoomListReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(8).uint32(message.GameType);
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                writer.uint32(8).uint32(message.GameKind);
             return writer;
         };
 
@@ -579,7 +579,7 @@ $root.configure = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameType = reader.uint32();
+                    message.GameKind = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -598,9 +598,9 @@ $root.configure = (function() {
         RoomListReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                if (!$util.isInteger(message.GameType))
-                    return "GameType: integer expected";
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                if (!$util.isInteger(message.GameKind))
+                    return "GameKind: integer expected";
             return null;
         };
 
@@ -608,8 +608,8 @@ $root.configure = (function() {
             if (object instanceof $root.configure.RoomListReq)
                 return object;
             var message = new $root.configure.RoomListReq();
-            if (object.GameType != null)
-                message.GameType = object.GameType >>> 0;
+            if (object.GameKind != null)
+                message.GameKind = object.GameKind >>> 0;
             return message;
         };
 
@@ -618,9 +618,9 @@ $root.configure = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.GameType = 0;
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                object.GameType = message.GameType;
+                object.GameKind = 0;
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                object.GameKind = message.GameKind;
             return object;
         };
 
@@ -641,7 +641,7 @@ $root.configure = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RoomListResp.prototype.GameType = 0;
+        RoomListResp.prototype.GameKind = 0;
         RoomListResp.prototype.RoomList = $util.emptyArray;
 
         RoomListResp.create = function create(properties) {
@@ -651,8 +651,8 @@ $root.configure = (function() {
         RoomListResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(8).uint32(message.GameType);
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                writer.uint32(8).uint32(message.GameKind);
             if (message.RoomList != null && message.RoomList.length)
                 for (var i = 0; i < message.RoomList.length; ++i)
                     $root.configure.RoomDesc.encode(message.RoomList[i], writer.uint32(18).fork()).ldelim();
@@ -671,7 +671,7 @@ $root.configure = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameType = reader.uint32();
+                    message.GameKind = reader.uint32();
                     break;
                 case 2:
                     if (!(message.RoomList && message.RoomList.length))
@@ -695,9 +695,9 @@ $root.configure = (function() {
         RoomListResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                if (!$util.isInteger(message.GameType))
-                    return "GameType: integer expected";
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                if (!$util.isInteger(message.GameKind))
+                    return "GameKind: integer expected";
             if (message.RoomList != null && message.hasOwnProperty("RoomList")) {
                 if (!Array.isArray(message.RoomList))
                     return "RoomList: array expected";
@@ -714,8 +714,8 @@ $root.configure = (function() {
             if (object instanceof $root.configure.RoomListResp)
                 return object;
             var message = new $root.configure.RoomListResp();
-            if (object.GameType != null)
-                message.GameType = object.GameType >>> 0;
+            if (object.GameKind != null)
+                message.GameKind = object.GameKind >>> 0;
             if (object.RoomList) {
                 if (!Array.isArray(object.RoomList))
                     throw TypeError(".configure.RoomListResp.RoomList: array expected");
@@ -736,9 +736,9 @@ $root.configure = (function() {
             if (options.arrays || options.defaults)
                 object.RoomList = [];
             if (options.defaults)
-                object.GameType = 0;
-            if (message.GameType != null && message.hasOwnProperty("GameType"))
-                object.GameType = message.GameType;
+                object.GameKind = 0;
+            if (message.GameKind != null && message.hasOwnProperty("GameKind"))
+                object.GameKind = message.GameKind;
             if (message.RoomList && message.RoomList.length) {
                 object.RoomList = [];
                 for (var j = 0; j < message.RoomList.length; ++j)

@@ -4,7 +4,7 @@
       "nested": {
         "GameInfo": {
           "fields": {
-            "GameType": {
+            "GameKind": {
               "type": "uint32",
               "id": 1
             },
@@ -24,11 +24,11 @@
         },
         "RoomDesc": {
           "fields": {
-            "GameType": {
+            "GameKind": {
               "type": "uint32",
               "id": 1
             },
-            "GameId": {
+            "GameType": {
               "type": "uint32",
               "id": 2
             },
@@ -76,7 +76,7 @@
         },
         "RoomListReq": {
           "fields": {
-            "GameType": {
+            "GameKind": {
               "type": "uint32",
               "id": 1
             }
@@ -84,7 +84,7 @@
         },
         "RoomListResp": {
           "fields": {
-            "GameType": {
+            "GameKind": {
               "type": "uint32",
               "id": 1
             },

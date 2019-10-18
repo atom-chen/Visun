@@ -57,13 +57,9 @@
         },
         "ReqEnterGame": {
           "fields": {
-            "RoomNum": {
+            "GameType": {
               "type": "uint32",
               "id": 1
-            },
-            "RoomKey": {
-              "type": "string",
-              "id": 2
             }
           }
         },
@@ -81,7 +77,7 @@
         },
         "ReqExitGame": {
           "fields": {
-            "GameID": {
+            "GameType": {
               "type": "uint32",
               "id": 1
             }
