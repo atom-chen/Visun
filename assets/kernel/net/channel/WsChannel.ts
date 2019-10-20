@@ -98,7 +98,6 @@ export default class WsChannel implements IChannel {
 	public destroy(): void 
 	{
 		this.close();
-		this._dataProcessor.clear();
 		this._dataProcessor = null;
 	}
 

@@ -1,12 +1,29 @@
 import LoginMgr from "./LoginMgr";
 import GameManager from "./GameManager";
 import LoginUser from "./LoginUser";
+import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../definer/ChannelDefine";
+import { ProcessorType } from "../../../kernel/looker/KernelDefine";
+import { login_packet_define } from "../proto/net_login";
+import { configure_packet_define } from "../proto/net_configure";
+import { gamecomm_packet_define } from "../proto/net_gamecomm";
+import proxy_login from "../proxy/proxy_login";
 
 
 export default class LogicCenter {
     private static _instance:LogicCenter = null;
 
     private _managers:any[] = [];
+
+    private constructor() {
+        var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
+		g_leafProcessor.registProtocol(null);
+		g_leafProcessor.unregistAllCmds();
+		g_leafProcessor.registCmds(login_packet_define);
+		g_leafProcessor.registCmds(configure_packet_define);
+		g_leafProcessor.registCmds(gamecomm_packet_define);
+		g_leafProcessor.getDispatcher().setObserver(proxy_login);
+    }
     
     public static getInstance() : LogicCenter {
         if(!LogicCenter._instance){ LogicCenter._instance = new LogicCenter; }

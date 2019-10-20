@@ -9,22 +9,12 @@ import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
 import { login_request, login_packet_define } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
-import proxy_login from "../proxy/proxy_login";
-import { configure_packet_define } from "../proto/net_configure";
-import { gamecomm_packet_define } from "../proto/net_gamecomm";
 
 
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 	private constructor(){
 		super();
-		var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
-		g_leafProcessor.registProtocol(null);
-		g_leafProcessor.unregistAllCmds();
-		g_leafProcessor.registCmds(login_packet_define);
-		g_leafProcessor.registCmds(configure_packet_define);
-		g_leafProcessor.registCmds(gamecomm_packet_define);
-		g_leafProcessor.getDispatcher().setObserver(proxy_login);
 	}
     public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
@@ -97,10 +87,7 @@ export default class LoginMgr extends ModelBase {
 		var leafChan = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		leafChan.setProcessor(g_leafProcessor);
 		g_leafProcessor.setChannel(leafChan);
-		leafChan.connect( wsAddr, 0, 
-			new CHandler(this, ()=>{ 
-				
-			}),
+		leafChan.connect( wsAddr, 0, null,
 			new CHandler(this, ()=>{ 
 				UIManager.openDialog("login_fail", "连接失败，是否重试？", (menuId:number)=>{
 					if(menuId===1) {
