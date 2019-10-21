@@ -1,4 +1,22 @@
+import { GameKindEnum } from "./ConstDefine";
+
 var GameConfig = {
+	[GameKindEnum.BrCowCow] : {
+		id: GameKindEnum.BrCowCow,
+		name: "百人牛牛",
+		openState: 2,
+		icon: "lobby/imgs/gameico/ico_brnn",
+		dir: "brnn",
+		isexist: true
+	},
+	[GameKindEnum.Longhu] : {
+		id: GameKindEnum.Longhu,
+		name: "龙虎大战",
+		openState: 1,
+		icon: "lobby/imgs/gameico/icon_lhd",
+		dir: "longhu",
+		isexist: false
+	},
 	"40070012" : {
 		id: "40070012",
 		name: "炸金花",
@@ -15,14 +33,6 @@ var GameConfig = {
 		dir: "qznn",
 		isexist: false
 	},
-	"90000040" : {
-		id: "90000040",
-		name: "百人牛牛",
-		openState: 2,
-		icon: "lobby/imgs/gameico/ico_brnn",
-		dir: "brnn",
-		isexist: true
-	},
 	"80000041" : {
 		id: "80000041",
 		name: "百家乐",
@@ -38,14 +48,6 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_ddz",
 		dir: "ddz",
 		isexist: true
-	},
-	"90001040" : {
-		id: "90001040",
-		name: "龙虎大战",
-		openState: 1,
-		icon: "lobby/imgs/gameico/icon_lhd",
-		dir: "longhu",
-		isexist: false
 	},
 	"80000030" : {
 		id: "80000030",

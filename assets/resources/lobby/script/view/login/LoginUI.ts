@@ -34,11 +34,6 @@ export default class LoginUI extends BaseComponent {
             LoginMgr.getInstance().leafRegist(name, pswd, "ssss");
         }, this);
 
-        // TimerManager.addFrameTimer(1, 200000, new CHandler(this, (tmr)=>{
-        //     for(var i=1; i<=10; i++) {
-        //         LoginMgr.getInstance().leafLogin("sss", "aaa");
-        //     }
-        // }))
         this.initNetEvent();
     }
 

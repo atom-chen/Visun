@@ -26,8 +26,8 @@ export default class ProtobufProcessor extends BaseProcessor {
 		}
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[send buff]", cmd);
-			cc.log(CommonUtil.Bytes2Str(info));
+			cc.log(this._name, "[send buff]", cmd, info.length);
+		//	cc.log(CommonUtil.Bytes2Str(info));
 		}
 
 		return this._channel.sendBuff(info);
@@ -44,8 +44,8 @@ export default class ProtobufProcessor extends BaseProcessor {
 		var errCode = memStream.read_int32(4);
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[recv buff]");
-			cc.log(CommonUtil.Bytes2Str(bytes));
+			cc.log(this._name, "[recv buff]", cmd, bytes.length);
+		//	cc.log(CommonUtil.Bytes2Str(bytes));
 		}
 		
 		//有错误则走错误处理逻辑

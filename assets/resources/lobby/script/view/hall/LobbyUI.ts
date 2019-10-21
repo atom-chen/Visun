@@ -15,6 +15,8 @@ import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import EventCenter from "../../../../../kernel/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_login";
+import { configure_msgs, configure_request } from "../../../../../common/script/proto/net_configure";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -31,20 +33,43 @@ export default class LobbyUI extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 		this.testSpine();
+
 		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
+		EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
+
 		LoginMgr.getInstance().checkLogin(true);
+
+		configure_request.GameListReq(null);
+		configure_request.RoomListReq({GameKind:GameKindEnum.BrCowCow});
+		configure_request.RoomListReq({GameKind:GameKindEnum.BrJinhua});
+		configure_request.RoomListReq({GameKind:GameKindEnum.Longhu});
 	}
 
 	private refleshGameList() {
-		for(var gameId in GameConfig) {
-			var cfg = GameConfig[gameId];
-			var bton = cc.instantiate(this.gameBtn);
-			bton["gameId"] = gameId;
-			bton.getComponent(game_btn).setGameInfo(cfg);
-			CommonUtil.addClickEvent(bton, function(){ 
-				GameManager.getInstance().enterGame(this.gameId);
-			}, bton);
-			this.m_ui.content.addChild(bton);
+		this.m_ui.content.removeAllChildren();
+
+		var gameList = GameManager.getInstance().getGameList();
+		if(!gameList) { return; }
+
+		for(var i in gameList) {
+			var info = gameList[i];
+			var cfg = GameConfig[info.GameKind]
+			if(cfg) {
+				var bton = cc.instantiate(this.gameBtn);
+				bton["GameKind"] = info.GameKind;
+				bton.getComponent(game_btn).setGameInfo(cfg);
+				CommonUtil.addClickEvent(bton, function(){ 
+					var roomList = GameManager.getInstance().getRoomList(this.GameKind);
+					cc.log("click game button: ", this.GameKind, roomList && roomList[0])
+					if(roomList && roomList[0]){
+						GameManager.getInstance().enterGame(roomList[0].GameType);
+					}
+				}, bton);
+				this.m_ui.content.addChild(bton);
+			}
+			else {
+				cc.log("------ no GameConfig: ", info.GameKind);
+			}
 		}
 	}
 

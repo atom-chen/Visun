@@ -43,8 +43,8 @@ export default class SingleDispatcher {
 		}
 
 		for(var i in this._observer) {
-			if(this._observer[cmd]){
-				this._observer[cmd].call(this._observer, info);
+			if(this._observer[i][cmd]){
+				this._observer[i][cmd](info);
 			}
 		}
 

@@ -17,9 +17,6 @@ export default class LobbyScene extends BaseComponent {
         UIManager.openPanel(ViewDefine.LobbyUI.path, null);
 
         LoginMgr.getInstance().connectLeaf();
-        configure_request.GameListReq(null);
-        configure_request.RoomListReq({GameKind:1000});
-        gamecomm_request.ReqEnterGame({GameType:1001})
     }
 
     start () {
