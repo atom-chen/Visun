@@ -7,7 +7,7 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum gamecomm_msgs {
-    FailResponse = 11,
+    ErrorResult = 11,
     PlayerInfo = 12,
     PlayerList = 13,
     ReqEnterGame = 14,
@@ -17,7 +17,7 @@ export enum gamecomm_msgs {
 }
 
 export var gamecomm_packet_define = {
-    11: new LeafWsPacket(11, gamecomm.FailResponse),
+    11: new LeafWsPacket(11, gamecomm.ErrorResult),
     12: new LeafWsPacket(12, gamecomm.PlayerInfo),
     13: new LeafWsPacket(13, gamecomm.PlayerList),
     14: new LeafWsPacket(14, gamecomm.ReqEnterGame),
@@ -27,7 +27,7 @@ export var gamecomm_packet_define = {
 }
 
 export class gamecomm_request {
-    public static FailResponse( data:{ ReqMsgId:number, ErrorCode:number, Tips:string } ) { gamecomm_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
+    public static ErrorResult( data:{ ReqId:number, ErrCode:number, Hints:string } ) { gamecomm_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerInfo( data:{ UserID:number, Name:string, Sex:number, VipLevel:number, Money:number, Head:string } ) { gamecomm_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerList( data:{ AllInfos:any } ) { gamecomm_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqEnterGame( data:{ GameType:number } ) { gamecomm_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }

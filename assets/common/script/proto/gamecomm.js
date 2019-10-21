@@ -11,54 +11,54 @@ $root.gamecomm = (function() {
 
     var gamecomm = {};
 
-    gamecomm.FailResponse = (function() {
+    gamecomm.ErrorResult = (function() {
 
-        function FailResponse(properties) {
+        function ErrorResult(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        FailResponse.prototype.ReqMsgId = 0;
-        FailResponse.prototype.ErrorCode = 0;
-        FailResponse.prototype.Tips = "";
+        ErrorResult.prototype.ReqId = 0;
+        ErrorResult.prototype.ErrCode = 0;
+        ErrorResult.prototype.Hints = "";
 
-        FailResponse.create = function create(properties) {
-            return new FailResponse(properties);
+        ErrorResult.create = function create(properties) {
+            return new ErrorResult(properties);
         };
 
-        FailResponse.encode = function encode(message, writer) {
+        ErrorResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ReqMsgId != null && message.hasOwnProperty("ReqMsgId"))
-                writer.uint32(8).int32(message.ReqMsgId);
-            if (message.ErrorCode != null && message.hasOwnProperty("ErrorCode"))
-                writer.uint32(16).int32(message.ErrorCode);
-            if (message.Tips != null && message.hasOwnProperty("Tips"))
-                writer.uint32(26).string(message.Tips);
+            if (message.ReqId != null && message.hasOwnProperty("ReqId"))
+                writer.uint32(8).int32(message.ReqId);
+            if (message.ErrCode != null && message.hasOwnProperty("ErrCode"))
+                writer.uint32(16).int32(message.ErrCode);
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                writer.uint32(26).string(message.Hints);
             return writer;
         };
 
-        FailResponse.encodeDelimited = function encodeDelimited(message, writer) {
+        ErrorResult.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        FailResponse.decode = function decode(reader, length) {
+        ErrorResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.FailResponse();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.ErrorResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ReqMsgId = reader.int32();
+                    message.ReqId = reader.int32();
                     break;
                 case 2:
-                    message.ErrorCode = reader.int32();
+                    message.ErrCode = reader.int32();
                     break;
                 case 3:
-                    message.Tips = reader.string();
+                    message.Hints = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -68,63 +68,63 @@ $root.gamecomm = (function() {
             return message;
         };
 
-        FailResponse.decodeDelimited = function decodeDelimited(reader) {
+        ErrorResult.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        FailResponse.verify = function verify(message) {
+        ErrorResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ReqMsgId != null && message.hasOwnProperty("ReqMsgId"))
-                if (!$util.isInteger(message.ReqMsgId))
-                    return "ReqMsgId: integer expected";
-            if (message.ErrorCode != null && message.hasOwnProperty("ErrorCode"))
-                if (!$util.isInteger(message.ErrorCode))
-                    return "ErrorCode: integer expected";
-            if (message.Tips != null && message.hasOwnProperty("Tips"))
-                if (!$util.isString(message.Tips))
-                    return "Tips: string expected";
+            if (message.ReqId != null && message.hasOwnProperty("ReqId"))
+                if (!$util.isInteger(message.ReqId))
+                    return "ReqId: integer expected";
+            if (message.ErrCode != null && message.hasOwnProperty("ErrCode"))
+                if (!$util.isInteger(message.ErrCode))
+                    return "ErrCode: integer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
             return null;
         };
 
-        FailResponse.fromObject = function fromObject(object) {
-            if (object instanceof $root.gamecomm.FailResponse)
+        ErrorResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.ErrorResult)
                 return object;
-            var message = new $root.gamecomm.FailResponse();
-            if (object.ReqMsgId != null)
-                message.ReqMsgId = object.ReqMsgId | 0;
-            if (object.ErrorCode != null)
-                message.ErrorCode = object.ErrorCode | 0;
-            if (object.Tips != null)
-                message.Tips = String(object.Tips);
+            var message = new $root.gamecomm.ErrorResult();
+            if (object.ReqId != null)
+                message.ReqId = object.ReqId | 0;
+            if (object.ErrCode != null)
+                message.ErrCode = object.ErrCode | 0;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
             return message;
         };
 
-        FailResponse.toObject = function toObject(message, options) {
+        ErrorResult.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.ReqMsgId = 0;
-                object.ErrorCode = 0;
-                object.Tips = "";
+                object.ReqId = 0;
+                object.ErrCode = 0;
+                object.Hints = "";
             }
-            if (message.ReqMsgId != null && message.hasOwnProperty("ReqMsgId"))
-                object.ReqMsgId = message.ReqMsgId;
-            if (message.ErrorCode != null && message.hasOwnProperty("ErrorCode"))
-                object.ErrorCode = message.ErrorCode;
-            if (message.Tips != null && message.hasOwnProperty("Tips"))
-                object.Tips = message.Tips;
+            if (message.ReqId != null && message.hasOwnProperty("ReqId"))
+                object.ReqId = message.ReqId;
+            if (message.ErrCode != null && message.hasOwnProperty("ErrCode"))
+                object.ErrCode = message.ErrCode;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
             return object;
         };
 
-        FailResponse.prototype.toJSON = function toJSON() {
+        ErrorResult.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return FailResponse;
+        return ErrorResult;
     })();
 
     gamecomm.PlayerInfo = (function() {
@@ -155,13 +155,13 @@ $root.gamecomm = (function() {
             if (message.Name != null && message.hasOwnProperty("Name"))
                 writer.uint32(18).string(message.Name);
             if (message.Sex != null && message.hasOwnProperty("Sex"))
-                writer.uint32(32).int32(message.Sex);
+                writer.uint32(24).int32(message.Sex);
+            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
+                writer.uint32(32).int32(message.VipLevel);
             if (message.Money != null && message.hasOwnProperty("Money"))
                 writer.uint32(40).int64(message.Money);
-            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
-                writer.uint32(48).int32(message.VipLevel);
             if (message.Head != null && message.hasOwnProperty("Head"))
-                writer.uint32(58).string(message.Head);
+                writer.uint32(50).string(message.Head);
             return writer;
         };
 
@@ -182,16 +182,16 @@ $root.gamecomm = (function() {
                 case 2:
                     message.Name = reader.string();
                     break;
-                case 4:
+                case 3:
                     message.Sex = reader.int32();
                     break;
-                case 6:
+                case 4:
                     message.VipLevel = reader.int32();
                     break;
                 case 5:
                     message.Money = reader.int64();
                     break;
-                case 7:
+                case 6:
                     message.Head = reader.string();
                     break;
                 default:
@@ -277,12 +277,12 @@ $root.gamecomm = (function() {
                     object.UserID = options.longs === String ? "0" : 0;
                 object.Name = "";
                 object.Sex = 0;
+                object.VipLevel = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.Money = options.longs === String ? "0" : 0;
-                object.VipLevel = 0;
                 object.Head = "";
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -294,13 +294,13 @@ $root.gamecomm = (function() {
                 object.Name = message.Name;
             if (message.Sex != null && message.hasOwnProperty("Sex"))
                 object.Sex = message.Sex;
+            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
+                object.VipLevel = message.VipLevel;
             if (message.Money != null && message.hasOwnProperty("Money"))
                 if (typeof message.Money === "number")
                     object.Money = options.longs === String ? String(message.Money) : message.Money;
                 else
                     object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
-            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
-                object.VipLevel = message.VipLevel;
             if (message.Head != null && message.hasOwnProperty("Head"))
                 object.Head = message.Head;
             return object;

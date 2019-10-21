@@ -1,21 +1,22 @@
 syntax = "proto3";
 package gamecomm;
 
+
 //通用失败回复
-message FailResponse {
-	int32 ReqMsgId = 1;			//发起请求的消息ID
-	int32 ErrorCode = 2;		//错误码
-    string Tips = 3;			//提示信息
+message ErrorResult{
+	int32 ReqId = 1;			//发起请求的消息ID
+	int32 ErrCode = 2;		    //错误码
+    string Hints = 3;			//提示信息
 }
 
 //玩家信息
 message PlayerInfo{
     uint64 UserID = 1;      //ID
     string Name = 2;        //昵称
-    int32 Sex = 4;          //性别
-    int32 VipLevel = 6;     //vip级别
+    int32 Sex = 3;          //性别
+    int32 VipLevel = 4;     //vip级别
     int64 Money = 5;        //金币
-    string Head = 7;        //头像
+    string Head = 6;        //头像
 }
 
 //玩家列表
