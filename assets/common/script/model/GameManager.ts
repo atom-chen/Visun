@@ -7,6 +7,7 @@ import ViewDefine from "../definer/ViewDefine";
 import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { GameKindEnum } from "../definer/ConstDefine";
+import { gamecomm_request } from "../proto/net_gamecomm";
 
 
 export default class GameManager extends ModelBase {
@@ -97,12 +98,13 @@ export default class GameManager extends ModelBase {
 	}
 	
 	//进入游戏的唯一入口
-	public enterGame(gameType:string|number) {
+	public enterGame(gameType:number) {
 		cc.log("enterGame: ", gameType)
 		if( !this.canEnterGame(gameType) ) {
 			return;
 		}
-		this.enterGameScene(gameType);
+		gamecomm_request.ReqEnterGame({GameType:gameType})
+	//	this.enterGameScene(gameType);
 	}
 
 	public enterGameScene(gameType) {
@@ -133,7 +135,7 @@ export default class GameManager extends ModelBase {
 
 	//退出游戏的唯一出口
 	public quitGame(reason:number) {
-		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		gamecomm_request.ReqExitGame({GameType:0});
 	}
 
 }

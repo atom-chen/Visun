@@ -189,7 +189,7 @@ export default class UIManager {
 	//-----------------------------------------------------------------
 	
 	public static toast(content:string) {
-		if(content===undefined||content===null) { return; }
+		if(content===undefined||content===null||content==="") { return; }
 		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.logicComp).label_cont.string === content){
 			return;
 		}

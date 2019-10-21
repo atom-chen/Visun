@@ -519,6 +519,7 @@ $root.gamecomm = (function() {
 
         RespEnterGame.prototype.IsSuccess = 0;
         RespEnterGame.prototype.Reason = "";
+        RespEnterGame.prototype.GameType = 0;
 
         RespEnterGame.create = function create(properties) {
             return new RespEnterGame(properties);
@@ -531,6 +532,8 @@ $root.gamecomm = (function() {
                 writer.uint32(8).int32(message.IsSuccess);
             if (message.Reason != null && message.hasOwnProperty("Reason"))
                 writer.uint32(18).string(message.Reason);
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                writer.uint32(24).uint32(message.GameType);
             return writer;
         };
 
@@ -550,6 +553,9 @@ $root.gamecomm = (function() {
                     break;
                 case 2:
                     message.Reason = reader.string();
+                    break;
+                case 3:
+                    message.GameType = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -574,6 +580,9 @@ $root.gamecomm = (function() {
             if (message.Reason != null && message.hasOwnProperty("Reason"))
                 if (!$util.isString(message.Reason))
                     return "Reason: string expected";
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                if (!$util.isInteger(message.GameType))
+                    return "GameType: integer expected";
             return null;
         };
 
@@ -585,6 +594,8 @@ $root.gamecomm = (function() {
                 message.IsSuccess = object.IsSuccess | 0;
             if (object.Reason != null)
                 message.Reason = String(object.Reason);
+            if (object.GameType != null)
+                message.GameType = object.GameType >>> 0;
             return message;
         };
 
@@ -595,11 +606,14 @@ $root.gamecomm = (function() {
             if (options.defaults) {
                 object.IsSuccess = 0;
                 object.Reason = "";
+                object.GameType = 0;
             }
             if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
                 object.IsSuccess = message.IsSuccess;
             if (message.Reason != null && message.hasOwnProperty("Reason"))
                 object.Reason = message.Reason;
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                object.GameType = message.GameType;
             return object;
         };
 

@@ -1,13 +1,13 @@
 import ModelBase from "../../../kernel/model/ModelBase";
 import UIManager from "../../../kernel/view/UIManager";
 import ServerConfig from "../definer/ServerConfig";
-import { ProcessorType, ChannelType } from "../../../kernel/looker/KernelDefine";
+import { ChannelType } from "../../../kernel/looker/KernelDefine";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
-import { login_request, login_packet_define } from "../proto/net_login";
+import { login_request } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
 
 

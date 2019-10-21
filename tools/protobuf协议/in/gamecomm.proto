@@ -31,6 +31,7 @@ message ReqEnterGame{
 message RespEnterGame{
     int32 IsSuccess = 1;        //0成功 1失败
     string Reason = 2;          //原因反馈
+    uint32 GameType = 3;
 }
 
 //退出游戏（检查退出条件）

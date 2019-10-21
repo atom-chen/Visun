@@ -43,7 +43,6 @@ export default class LogicCenter {
     //初始化逻辑数据
     //调用时机：登录前
     public init() {
-        this.clear();
         this.registModel(LoginMgr);
         this.registModel(LoginUser);
         this.registModel(GameManager);
@@ -81,3 +80,5 @@ export default class LogicCenter {
         }
     }
 }
+
+LogicCenter.getInstance();
