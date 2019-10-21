@@ -40,11 +40,6 @@ export default class LeafWsProcessor extends BaseProcessor {
 
 		var cmd = memStream.read_int16(0);
 
-		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[recv buff]", cmd, bytes.length);
-		//	cc.log(CommonUtil.Bytes2Str(bytes));
-		}
-
 		//解析包体
 		var packet = this._cmds[cmd];
 		if(!packet) {
@@ -55,7 +50,8 @@ export default class LeafWsProcessor extends BaseProcessor {
 		var data = packet.unpackBody(bytes.subarray(HEAD_SIZE));
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[recv]", cmd, data);
+			cc.log(this._name, "[recv]", cmd, bytes.length, data);
+		//	cc.log(CommonUtil.Bytes2Str(bytes));
 		}
 
 		if(this._paused)
