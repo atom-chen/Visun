@@ -36,14 +36,14 @@ export default class EventCenter {
 	//监听事件
 	public listen(evtName:string|number, cbFunc:Function, thisObj:any, bCall:boolean=false)
 	{
-		if(!evtName || !cbFunc)
+		if(evtName===null || evtName===undefined || !cbFunc)
 		{
-			cc.log("listen error! event name or callback is null!")
+			cc.warn("listen error! event name or callback is null!", evtName, typeof evtName, typeof cbFunc);
 			return;
 		}
 
 		if(this.getEvent(evtName, cbFunc, thisObj) >= 0) {
-			cc.log("already registed this event: ", evtName);
+			cc.warn("already registed this event: ", evtName);
 			return;
 		}
 

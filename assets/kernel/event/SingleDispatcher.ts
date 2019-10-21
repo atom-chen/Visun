@@ -1,12 +1,14 @@
 import EventCenter from "./EventCenter";
 
 export default class SingleDispatcher {
-	protected _observer = null;
+	protected _observer = [];
 	protected _responders = {};
 
 	public setObserver(observer:any) : void
 	{
-		this._observer = observer;
+		if(this._observer.indexOf(observer) < 0) {
+			this._observer.push(observer)
+		}
 	}
 
 	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void
@@ -40,8 +42,10 @@ export default class SingleDispatcher {
 			return;
 		}
 
-		if(this._observer && this._observer[cmd]) {
-			this._observer[cmd].call(this._observer, info);
+		for(var i in this._observer) {
+			if(this._observer[cmd]){
+				this._observer[cmd].call(this._observer, info);
+			}
 		}
 
 		if(this._responders[cmd]) {

@@ -43,7 +43,7 @@ export default class LoginUI extends BaseComponent {
     }
 
     private initNetEvent() {
-        EventCenter.getInstance().listen(login_msgs.LoginResult, (param:any)=>{
+        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any)=>{
             if(param.State===1) {
                 this.node.destroy();
             }
