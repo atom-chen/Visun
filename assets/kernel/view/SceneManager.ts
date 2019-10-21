@@ -18,9 +18,10 @@ export default class SceneManager {
 		LoadCenter.getInstance().releaseNodeRes(cvs);
 		UIManager.clear();
 	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
-		cc.log("-----切换场景-----", this.curSceneName, "--->", sceneName);
+		
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
+		cc.log("-----切换场景开始-----", this.preSceneName, "--->", this.curSceneName);
 
 		cc.director.preloadScene(sceneName, 
 			(completeCount:number, totalCount:number, item:any)=>{
@@ -28,6 +29,7 @@ export default class SceneManager {
 			}, 
 			(err:Error, rsc:cc.SceneAsset)=>{
 				var afterLaunch = function() {
+					cc.log("-----切换场景完成-----", this.preSceneName, "--->", this.curSceneName);
 					Adaptor.adaptScreen();
 					LoadCenter.getInstance().gc();
 					if(onLaunched) { onLaunched(); }
