@@ -43,6 +43,10 @@ export default class LobbyUI extends BaseComponent {
 		configure_request.RoomListReq({GameKind:GameKindEnum.BrCowCow});
 		configure_request.RoomListReq({GameKind:GameKindEnum.BrJinhua});
 		configure_request.RoomListReq({GameKind:GameKindEnum.Longhu});
+		configure_request.RoomListReq({GameKind:GameKindEnum.Baccarat});
+		configure_request.RoomListReq({GameKind:GameKindEnum.Redpacket});
+		configure_request.RoomListReq({GameKind:GameKindEnum.BirdBeast});
+		configure_request.RoomListReq({GameKind:GameKindEnum.Redblack});
 	}
 
 	private refleshGameList() {

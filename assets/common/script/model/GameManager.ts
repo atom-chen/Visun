@@ -117,13 +117,13 @@ export default class GameManager extends ModelBase {
 				case "40000040":
 					UIManager.openPanel(ViewDefine.ddzUI.path, null);
 					break;
-				case "80000044":
+				case GameKindEnum.BirdBeast:
 					UIManager.openPanel(ViewDefine.fqzsUI.path, null);
 					break;
 				case "40070012":
 					UIManager.openPanel(ViewDefine.zjhUI.path, null);
 					break;
-				case "80000041":
+				case GameKindEnum.Baccarat:
 					UIManager.openPanel(ViewDefine.bjleUI.path, null);
 					break;
 				default:

@@ -17,6 +17,39 @@ var GameConfig = {
 		dir: "longhu",
 		isexist: false
 	},
+	[GameKindEnum.Baccarat] : {
+		id: GameKindEnum.Baccarat,
+		name: "百家乐",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_bjl",
+		dir: "bjle",
+		isexist: true
+	},
+	[GameKindEnum.Redpacket] : {
+		id: GameKindEnum.Redpacket,
+		name: "抢红包",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_qhb",
+		dir: "redbag",
+		isexist: false
+	},
+	[GameKindEnum.Redblack] : {
+		id: GameKindEnum.Redblack,
+		name: "红黑大战",
+		openState: 1,
+		icon: "lobby/imgs/gameico/icon_hhdz",
+		dir: "honhei",
+		isexist: false
+	},
+	[GameKindEnum.BirdBeast] : {
+		id: GameKindEnum.BirdBeast,
+		name: "飞禽走兽",
+		openState: 1,
+		icon: "lobby/imgs/gameico/icon_fqzs",
+		dir: "fqzs",
+		isexist: true
+	},
+	
 	"40070012" : {
 		id: "40070012",
 		name: "炸金花",
@@ -33,44 +66,12 @@ var GameConfig = {
 		dir: "qznn",
 		isexist: false
 	},
-	"80000041" : {
-		id: "80000041",
-		name: "百家乐",
-		openState: 1,
-		icon: "lobby/imgs/gameico/ico_bjl",
-		dir: "bjle",
-		isexist: true
-	},
 	"40000040" : {
 		id: "40000040",
 		name: "斗地主",
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ddz",
 		dir: "ddz",
-		isexist: true
-	},
-	"80000030" : {
-		id: "80000030",
-		name: "抢红包",
-		openState: 1,
-		icon: "lobby/imgs/gameico/ico_qhb",
-		dir: "redbag",
-		isexist: false
-	},
-	"80000040" : {
-		id: "80000040",
-		name: "红黑大战",
-		openState: 1,
-		icon: "lobby/imgs/gameico/icon_hhdz",
-		dir: "honhei",
-		isexist: false
-	},
-	"80000044" : {
-		id: "80000044",
-		name: "飞禽走兽",
-		openState: 1,
-		icon: "lobby/imgs/gameico/icon_fqzs",
-		dir: "fqzs",
 		isexist: true
 	},
 	"80000049" : {
