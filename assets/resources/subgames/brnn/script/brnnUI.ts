@@ -9,6 +9,9 @@ import ChipBox from "../../../../common/script/view/ChipBox";
 import EventCenter from "../../../../kernel/event/EventCenter";
 import UIManager from "../../../../kernel/view/UIManager";
 
+
+var margin = { left:5,right:5,bottom:40,top:5 };
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -64,7 +67,6 @@ export default class BrnnUI extends BaseComponent {
 
 		EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, (param)=>{
 			if(param.IsSuccess) {
-				var margin = { left:5,right:5,bottom:40,top:5 };
 				var idx = this.compBox.getSelectedIndex();
 				var chip = this._pool.newObject();
 				chip.getComponent("ChipSpr").value = this._rule[idx-1];

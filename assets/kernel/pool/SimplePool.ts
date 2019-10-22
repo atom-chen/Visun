@@ -1,10 +1,10 @@
 // pool for cc.Node with no reuse and no unuse
 export default class SimplePool {
 	private _pool:any[] = [];
-	private _createFunc:Function;
+	private _createFunc:()=>{};
 
 
-	public constructor(creatFunc:Function){
+	public constructor(creatFunc:()=>{}){
 		this._createFunc = creatFunc;
 	}
 
