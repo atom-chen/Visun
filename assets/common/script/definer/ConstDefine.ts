@@ -8,4 +8,12 @@ export enum GameKindEnum {
 	Redpacket	= 5000,
 	BirdBeast	= 6000,
 	Redblack	= 7000,
+	Zhajinhua	= 20100,
+	QzCowcow	= 20200,
+	Landlord	= 20300,
+	Blackjack	= 20400,
+	Sangong		= 20500,
+	Water13		= 20600,
+	Qzpaijiu	= 20700,
+	Suoha		= 20800,
 }
