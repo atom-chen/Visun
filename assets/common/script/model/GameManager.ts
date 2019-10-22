@@ -50,10 +50,6 @@ export default class GameManager extends ModelBase {
 	}
 
 	public isGameExist(gameKind:string|number) : boolean {
-		var cfg = GameConfig[gameKind];
-		if(!cfg || !cfg.isexist) { 
-			return false; 
-		}
 		return true;
 	}
 
@@ -114,13 +110,13 @@ export default class GameManager extends ModelBase {
 				case GameKindEnum.BrCowCow:
 					UIManager.openPanel(ViewDefine.brnnUI.path, null);
 					break;
-				case "40000040":
+				case GameKindEnum.Landlord:
 					UIManager.openPanel(ViewDefine.ddzUI.path, null);
 					break;
 				case GameKindEnum.BirdBeast:
 					UIManager.openPanel(ViewDefine.fqzsUI.path, null);
 					break;
-				case "40070012":
+				case GameKindEnum.Zhajinhua:
 					UIManager.openPanel(ViewDefine.zjhUI.path, null);
 					break;
 				case GameKindEnum.Baccarat:

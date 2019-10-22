@@ -7,7 +7,6 @@ var GameConfig = {
 		openState: 2,
 		icon: "lobby/imgs/gameico/ico_brnn",
 		dir: "brnn",
-		isexist: true
 	},
 	[GameKindEnum.Longhu] : {
 		id: GameKindEnum.Longhu,
@@ -15,7 +14,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_lhd",
 		dir: "longhu",
-		isexist: false
 	},
 	[GameKindEnum.Baccarat] : {
 		id: GameKindEnum.Baccarat,
@@ -23,7 +21,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_bjl",
 		dir: "bjle",
-		isexist: true
 	},
 	[GameKindEnum.Redpacket] : {
 		id: GameKindEnum.Redpacket,
@@ -31,7 +28,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qhb",
 		dir: "redbag",
-		isexist: false
 	},
 	[GameKindEnum.Redblack] : {
 		id: GameKindEnum.Redblack,
@@ -39,7 +35,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_hhdz",
 		dir: "honhei",
-		isexist: false
 	},
 	[GameKindEnum.BirdBeast] : {
 		id: GameKindEnum.BirdBeast,
@@ -47,7 +42,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_fqzs",
 		dir: "fqzs",
-		isexist: true
 	},
 	
 	[GameKindEnum.Zhajinhua] : {
@@ -56,7 +50,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_zjh",
 		dir: "zjh",
-		isexist: true
 	},
 	[GameKindEnum.QzCowcow] : {
 		id: GameKindEnum.QzCowcow,
@@ -64,7 +57,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qznn",
 		dir: "qznn",
-		isexist: false
 	},
 	[GameKindEnum.Landlord] : {
 		id: GameKindEnum.Landlord,
@@ -72,7 +64,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ddz",
 		dir: "ddz",
-		isexist: true
 	},
 	[GameKindEnum.Blackjack] : {
 		id: GameKindEnum.Blackjack,
@@ -80,7 +71,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_dian21",
 		dir: "dian21",
-		isexist: false
 	},
 	[GameKindEnum.Sangong] : {
 		id: GameKindEnum.Sangong,
@@ -88,7 +78,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_sangong",
 		dir: "sangong",
-		isexist: false
 	},
 	[GameKindEnum.Water13] : {
 		id: GameKindEnum.Water13,
@@ -96,7 +85,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_shui13",
 		dir: "shui13",
-		isexist: false
 	},
 	[GameKindEnum.Qzpaijiu] : {
 		id: GameKindEnum.Qzpaijiu,
@@ -104,7 +92,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qzpj",
 		dir: "qzpj",
-		isexist: false
 	},
 	[GameKindEnum.Suoha] : {
 		id: GameKindEnum.Suoha,
@@ -112,7 +99,6 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_suoha",
 		dir: "suoha",
-		isexist: false
 	},
 	// "80000052" : {
 	// 	id: "80000052",
@@ -120,7 +106,6 @@ var GameConfig = {
 	// 	openState: 1,
 	// 	icon: "lobby/imgs/gameico/ico_kpqznn",
 	// 	dir: "kpqznn",
-	// 	isexist: false
 	// },
 };
 
