@@ -6,6 +6,7 @@ import SimplePool from "../../../../kernel/pool/SimplePool";
 import TimerManager from "../../../../kernel/timer/TimerManager";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
+import { brcowcow_request } from "../../../../common/script/proto/net_brcowcow";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,6 +31,7 @@ export default class BrnnUI extends BaseComponent {
 		chip.getComponent("ChipSpr").value = this._rule[idx-1];
 		self.m_ui["chiplayer"].addChild(chip);
 		GameUtil.flyChip2(chip, self.compBox.getButton(idx), self.m_ui["area"+areaId], 0.25, margin);
+		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]})
 	}
 	
 	onLoad () {

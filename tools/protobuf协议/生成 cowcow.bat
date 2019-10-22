@@ -1,1 +1,1 @@
-python gen_leaf.py cowcow game
+python gen_leaf.py brcowcow game

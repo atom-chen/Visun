@@ -10,6 +10,7 @@ import { gamecomm_packet_define } from "../proto/net_gamecomm";
 import proxy_login from "../proxy/proxy_login";
 import proxy_configure from "../proxy/proxy_configure";
 import proxy_gamecomm from "../proxy/proxy_gamecomm";
+import { brcowcow_packet_define } from "../proto/net_brcowcow";
 
 
 export default class LogicCenter {
@@ -23,7 +24,8 @@ export default class LogicCenter {
 		g_leafProcessor.unregistAllCmds();
 		g_leafProcessor.registCmds(login_packet_define);
 		g_leafProcessor.registCmds(configure_packet_define);
-		g_leafProcessor.registCmds(gamecomm_packet_define);
+        g_leafProcessor.registCmds(gamecomm_packet_define);
+        g_leafProcessor.registCmds(brcowcow_packet_define);
         g_leafProcessor.getDispatcher().setObserver(proxy_login);
         g_leafProcessor.getDispatcher().setObserver(proxy_configure);
         g_leafProcessor.getDispatcher().setObserver(proxy_gamecomm);

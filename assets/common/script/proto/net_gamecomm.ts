@@ -31,7 +31,7 @@ export class gamecomm_request {
     public static PlayerInfo( data:{ UserID:number, Name:string, Sex:number, VipLevel:number, Money:number, Head:string } ) { gamecomm_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerList( data:{ AllInfos:any } ) { gamecomm_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqEnterGame( data:{ GameType:number } ) { gamecomm_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespEnterGame( data:{ IsSuccess:number, Reason:string } ) { gamecomm_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespEnterGame( data:{ IsSuccess:number, Reason:string, GameType:number } ) { gamecomm_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqExitGame( data:{ GameType:number } ) { gamecomm_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
     public static RespExitGame( data:{ IsSuccess:number, Reason:string } ) { gamecomm_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
 }

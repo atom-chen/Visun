@@ -1,0 +1,14 @@
+syntax = "proto3";
+package brcowcow;
+
+message ReqBrcowcowBet {
+    int32 AreaId = 1;
+    int32 Money = 2;
+}
+
+message RespBrcowcowBet {
+    int32 IsSuccess = 1;
+    string Reason = 2;
+    int32 AreaId = 3;
+    int32 Money = 4;
+}

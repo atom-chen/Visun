@@ -19,6 +19,11 @@ var pbfiles = [
 		router:"game",
 		clientPath:"../../assets/common/script/proxy/"
 	},
+	{ 
+		name:"brcowcow", 
+		router:"game",
+	//	clientPath:"../../assets/common/script/proxy/"
+	},
 ]
 
 
