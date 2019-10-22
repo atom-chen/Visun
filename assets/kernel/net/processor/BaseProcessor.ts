@@ -5,6 +5,7 @@ import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../event/SingleDispatcher";
 import { ConnState } from "../../looker/KernelDefine";
+import PacketInterface from "../packet/PacketInterface";
 
 export default class BaseProcessor implements IProcessor {
 	protected _name: string = "";
@@ -13,7 +14,7 @@ export default class BaseProcessor implements IProcessor {
 	protected _channel:IChannel = null;
 	protected _send_list = [];
 	protected _fire_list = [];
-	protected _cmds = {};
+	protected _cmds: Array<PacketInterface> = [];
 	protected _heatBeatFunc: Function = null;
 	
 	public constructor(name:string) {
@@ -51,7 +52,7 @@ export default class BaseProcessor implements IProcessor {
 	public unregistAllCmds() : void
 	{
 		cc.log(this._name, "---unregist all cmds---");
-		this._cmds = {};
+		this._cmds = [];
 	}
 
 	public setChannel(cluster:IChannel) : void
