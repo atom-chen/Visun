@@ -65,9 +65,10 @@ export default class LobbyUI extends BaseComponent {
 				CommonUtil.addClickEvent(bton, function(){ 
 					var roomList = GameManager.getInstance().getRoomList(this.GameKind);
 					cc.log("click game button: ", this.GameKind, roomList && roomList[0])
-					if(roomList && roomList[0]){
-						GameManager.getInstance().enterGame(roomList[0].GameType);
-					}
+					UIManager.openPopwnd(ViewDefine.UIRoom.path, null, roomList);
+					// if(roomList && roomList[0]){
+					// 	GameManager.getInstance().enterGame(roomList[0].GameType);
+					// }
 				}, bton);
 				this.m_ui.content.addChild(bton);
 			}

@@ -16,4 +16,5 @@ export default class ViewDefine {
 	public static fqzsUI = { path:"subgames/fqzs/prefabs/fqzs_ui", logicComp:"fqzsUI" };
 	public static zjhUI = { path:"subgames/zjh/prefabs/zjh_ui", logicComp:"zjhUI" };
 	public static bjleUI = { path:"subgames/bjle/prefabs/bjle_ui", logicComp:"bjleUI" };
+	public static UIRoom = { path:"lobby/prefabs/UIRoom", logicComp:"UIRoom" };
 }
