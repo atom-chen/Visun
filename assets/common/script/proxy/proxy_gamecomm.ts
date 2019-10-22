@@ -22,7 +22,7 @@ var proxy_gamecomm = {
         if(param.IsSuccess===1) {
             GameManager.getInstance().enterGameScene(param.GameType);
         } else {
-            UIManager.toast(param.Reason);
+            UIManager.toast(param.Reason||"进入游戏失败");
         }
     },
 
