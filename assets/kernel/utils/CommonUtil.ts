@@ -62,7 +62,7 @@ export default class CommonUtil {
 		return false;
 	}
 
-	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any) {
+	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any, arg?:any) {
 		target.on("click", callback, thisObj);
 	}
 

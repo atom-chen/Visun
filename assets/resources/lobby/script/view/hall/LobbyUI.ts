@@ -40,13 +40,6 @@ export default class LobbyUI extends BaseComponent {
 		LoginMgr.getInstance().checkLogin(true);
 
 		configure_request.GameListReq(null);
-		configure_request.RoomListReq({GameKind:GameKindEnum.BrCowCow});
-		configure_request.RoomListReq({GameKind:GameKindEnum.BrJinhua});
-		configure_request.RoomListReq({GameKind:GameKindEnum.Longhu});
-		configure_request.RoomListReq({GameKind:GameKindEnum.Baccarat});
-		configure_request.RoomListReq({GameKind:GameKindEnum.Redpacket});
-		configure_request.RoomListReq({GameKind:GameKindEnum.BirdBeast});
-		configure_request.RoomListReq({GameKind:GameKindEnum.Redblack});
 	}
 
 	private refleshGameList() {
@@ -63,9 +56,7 @@ export default class LobbyUI extends BaseComponent {
 				bton["GameKind"] = info.GameKind;
 				bton.getComponent(game_btn).setGameInfo(cfg);
 				CommonUtil.addClickEvent(bton, function(){ 
-					var roomList = GameManager.getInstance().getRoomList(this.GameKind);
-					cc.log("click game button: ", this.GameKind, roomList && roomList[0])
-					UIManager.openPopwnd(ViewDefine.UIRoom.path, null, roomList);
+					UIManager.openPopwnd(ViewDefine.UIRoom.path, null, this.GameKind);
 					// if(roomList && roomList[0]){
 					// 	GameManager.getInstance().enterGame(roomList[0].GameType);
 					// }
