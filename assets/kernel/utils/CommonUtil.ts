@@ -63,11 +63,11 @@ export default class CommonUtil {
 	}
 
 	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any, arg?:any) {
-		target.on("click", callback, thisObj);
+		target.on(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
 	public static delClickEvent(target:cc.Node, callback:Function, thisObj?:any){
-		target.off("click", callback, thisObj);
+		target.off(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
 	// 直接add一个layer然后设置localZOrder为-1的方式，在手机浏览器上有时候挡不住事件，改为这样了
