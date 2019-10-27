@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "UIDezhou",
+    "_name": "UIHonghei",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -271,9 +271,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "966768c1-c6df-4443-85e7-b17be335423e"
+      "__uuid__": "7192a8fe-252e-482a-9d57-325d0f9c2311"
     },
-    "fileId": "e3eKocm9xIbIAX31uxoSDQ",
+    "fileId": "9ejfnu3jpBgoHzlnZIQ0kf",
     "sync": false
   },
   {
@@ -389,9 +389,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "966768c1-c6df-4443-85e7-b17be335423e"
+      "__uuid__": "7192a8fe-252e-482a-9d57-325d0f9c2311"
     },
-    "fileId": "72hZ8fj+RFO52y1JJK+jHK",
+    "fileId": "f4AZb5ORtGWoIM0WMn0NEJ",
     "sync": false
   },
   {
@@ -410,7 +410,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "68a59659-34cc-47a3-9c64-de8624c6f134"
+      "__uuid__": "56fa5e57-ead0-47bd-94e4-71715c93c705"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -459,9 +459,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "966768c1-c6df-4443-85e7-b17be335423e"
+      "__uuid__": "7192a8fe-252e-482a-9d57-325d0f9c2311"
     },
-    "fileId": "bb7eKyEqREXLFWcZVQR5za",
+    "fileId": "489QH+8yFLK4hxnT1jQRip",
     "sync": false
   }
 ]

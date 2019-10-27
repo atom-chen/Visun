@@ -78,7 +78,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_close",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
