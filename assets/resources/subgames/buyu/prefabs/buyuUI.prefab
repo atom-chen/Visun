@@ -29,10 +29,13 @@
       },
       {
         "__id__": 11
+      },
+      {
+        "__id__": 12
       }
     ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 13
     },
     "_opacity": 255,
     "_color": {
@@ -451,6 +454,16 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 1281,
     "_originalHeight": 740,
+    "_id": ""
+  },
+  {
+    "__type__": "1f893E9K6ZIjay1ZMX0WcOO",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {
