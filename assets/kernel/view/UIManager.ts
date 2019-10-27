@@ -182,7 +182,10 @@ export default class UIManager {
 			cvs.addChild(obj, LayerDefine.Dialog);
 			UIManager._allDialog[dlgName] = obj;
 			
-			obj.getComponent(KernelUIDefine.dialog.logicComp).reflesh(callback, content, title, okTxt, cancelTxt); 
+			var logicComp = obj.getComponent(BaseComponent)
+			if(logicComp) {
+				logicComp.reflesh(callback, content, title, okTxt, cancelTxt);
+			}
 		});
 	}
 
@@ -190,7 +193,7 @@ export default class UIManager {
 	
 	public static toast(content:string) {
 		if(content===undefined||content===null||content==="") { return; }
-		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.logicComp).label_cont.string === content){
+		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(BaseComponent).label_cont.string === content){
 			return;
 		}
 		
