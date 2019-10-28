@@ -1,5 +1,4 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import SceneManager from "../../../../kernel/view/SceneManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../common/script/model/GameManager";
 
