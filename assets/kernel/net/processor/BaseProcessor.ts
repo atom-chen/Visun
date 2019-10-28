@@ -26,11 +26,6 @@ export default class BaseProcessor implements IProcessor {
 		return this._dispatcher;
 	}
 
-	public registProtocol(protocol:any) : void
-	{
-		
-	}
-
 	public registCmds(cmds:any) : void
 	{
 		if(cmds===null || cmds===undefined) { return; }

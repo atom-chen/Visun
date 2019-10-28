@@ -20,7 +20,6 @@ export default class LogicCenter {
 
     private constructor() {
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
-		g_leafProcessor.registProtocol(null);
 		g_leafProcessor.unregistAllCmds();
 		g_leafProcessor.registCmds(login_packet_define);
 		g_leafProcessor.registCmds(configure_packet_define);

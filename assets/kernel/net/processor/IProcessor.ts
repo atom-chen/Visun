@@ -7,7 +7,6 @@ import SingleDispatcher from "../../event/SingleDispatcher";
 export default interface IProcessor {
     clear() : void;
 
-    registProtocol(protocol:any) : void;
     registCmds(cmds:any) : void;
 	unregistCmds(cmds:any) : void;
     unregistAllCmds() : void;
