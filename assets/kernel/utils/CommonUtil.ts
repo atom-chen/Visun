@@ -49,6 +49,20 @@ export default class CommonUtil {
 		}
 	}
 
+	public static getUUID(): string {
+		var s = [];
+		var hexDigits = "0123456789abcdef";
+		for (var i = 0; i < 36; i++) {
+			s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+		}
+		s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+		s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+		s[8] = s[13] = s[18] = s[23] = "-";
+
+		var uuid = s.join("");
+		return uuid;
+	}
+
 	public static hasEditbox(root:any) 
 	{
 		if(!root || !root.children) { return false; }
@@ -241,6 +255,159 @@ export default class CommonUtil {
 			}
 		}
 		return newObject;
+	}
+
+	public static loadWebImg(sp, url, auto): void {
+		var width = sp.node.width;
+		var height = sp.node.height;
+		if ("http" == url.substring(0, 4)) {
+			if (cc.sys.os == cc.sys.OS_IOS) {
+				if ("http:" == url.substring(0, 5)) {
+					url = "https" + url.substring(4, url.length);
+				}
+			}
+			cc.loader.load(url, function (err, textTure) {
+				if (err) {
+					cc.error('加载图片出错了' + err);
+				} else {
+					var spriteFrame = new cc.SpriteFrame();
+					spriteFrame.setTexture(textTure);
+					sp.spriteFrame = spriteFrame;
+					if (!auto) {
+						var nWidth = sp.node.width;
+						var nHeight = sp.node.height;
+						sp.node.setScale(width / nWidth, height / nHeight);
+					}
+				}
+			});
+		} else {
+			cc.loader.loadRes(url, cc.SpriteFrame, function (spriteFrame) {
+				if (!spriteFrame) {
+					// 	cc.error('加载图片出错了' + err);
+				} else {
+					sp.spriteFrame = spriteFrame;
+					if (!auto) {
+						var nWidth = sp.node.width;
+						var nHeight = sp.node.height;
+						sp.node.setScale(width / nWidth, height / nHeight);
+					}
+				}
+			});
+		}
+	}
+
+	/**
+	 * 精确浮点数，只截取不四舍五入
+	 * @param {*} number    需要补齐的数字
+	 * @param {*} length    精确位数
+	 * @returns
+	 */
+	static interceptNumber(number: number, length: number = 2): string {
+		if (number === Math.ceil(number)) {
+			return number.toString()
+		}
+		let n = number.toString()
+		let strList = n.split(".")
+
+		return strList[0] + "." + strList[1].substring(0, length)
+	}
+
+	/**
+     * 格式化金币展示 保留俩位小数
+     * 每隔三位一个逗号
+     * @param {number} number
+     * @param {boolean} showUnit    是否显示单位 万 或者 亿 ,默认显示单位
+     * @param {boolean} add    是否添加符号在前面  ，默认不添加符号
+     */
+	static setScoreNumber(number: number, showUnit: boolean = true, add: boolean = false): string {
+		if (number == null || number == undefined) {
+			console.warn("传入未定义数据！！", number)
+			return
+		}
+		let copyNumber = Math.abs(number)
+		let str = ""   //先确定单位
+		let BILLION = 100000000
+		let TENTHOUSAND = 10000
+		let unit = ""
+		if (showUnit && copyNumber >= 100000) {
+			if (Math.floor(copyNumber / BILLION) > 0) {
+				unit = "亿"
+				str = this.interceptNumber(copyNumber / BILLION, 1)
+			} else {
+				if (Math.floor(copyNumber / TENTHOUSAND) > 0) {
+					unit = "万"
+					str = this.interceptNumber(copyNumber / TENTHOUSAND, 1)
+				}
+			}
+		} else {
+			// // 是不是带小数
+			// if (copyNumber === Math.ceil(copyNumber)) {
+			// 	str = copyNumber.toString()
+			// } else {
+			// 	str = copyNumber.toFixed(2)
+			// }
+			str = copyNumber.toFixed(2); //保留俩位小数 
+		}
+
+		let strList = str.split(".")
+		let count = Math.floor((strList[0].length - 1) / 3)
+		if (count > 0) {
+			str = ""
+			for (let index = 0; index < count; index++) {
+				str = str + "," + strList[0].slice(strList[0].length - 3, strList[0].length)
+				strList[0] = strList[0].substring(0, strList[0].length - 3)
+			}
+			str = strList[0] + str
+			if (strList[1]) {
+				str = str + "." + strList[1]
+			}
+		}
+		str = str + unit
+		// 是否添加符号
+		if (number < 0) {
+			str = "-" + str
+		} else if (add) {
+			str = "+" + str
+		}
+
+		return str
+	}
+
+	/**
+     * 处理节点及其所有子节点的置灰和恢复 state: 1置灰，0正常
+     * @static
+     * @memberof Util
+     */
+	static grayNode(node: cc.Node, state: number) {
+		cc.log(node)
+		if (node == null) { return }
+		let s = node.getComponentsInChildren(cc.Sprite);
+		for (let i = 0; i < s.length; i++) {
+			if (state === 1) {
+				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-gray-sprite', s[i]));
+			} else if (state === 0) {
+				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-sprite', s[i]));
+			}
+		}
+	}
+
+
+	static appendArray(dst: any[], arr: any[]): void {
+		if (arr) {
+			for (var i in arr) {
+				dst.push(arr[i]);
+			}
+		}
+	}
+
+	static minusArray(src: any[], arr: any[]): void {
+		if (!arr) { return; }
+		for (var i = 0; i < arr.length; i++) {
+			var idx = src.indexOf(arr[i]);
+			if (idx >= 0) {
+				src.splice(idx, 1);
+			}
+		}
 	}
 
 }
