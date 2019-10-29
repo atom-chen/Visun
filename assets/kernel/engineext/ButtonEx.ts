@@ -19,6 +19,10 @@ else
 			cc.Button.prototype["_registerNodeEvent_origin"].call(this);
 	
 			this.node.on("touchend", function(){
+				if (!this.interactable) {
+                    return
+				}
+				
 				if(this.node._touchHook) {
 					cc.log("------- touch hook -------");
 					this.node._touchHook();
