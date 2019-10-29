@@ -32,6 +32,9 @@ export default class GameManager extends ModelBase {
 	private _gameList = [];
 	public setGameList(data) {
 		this._gameList = data;
+		this._gameList.sort((a,b)=>{
+			return a.GameKind-b.GameKind
+		})
 	}
 	public getGameList() : any[] {
 		return this._gameList;
@@ -121,6 +124,33 @@ export default class GameManager extends ModelBase {
 					break;
 				case GameKindEnum.Baccarat:
 					UIManager.openPanel(ViewDefine.bjleUI.path, null);
+					break;
+				case GameKindEnum.Blackjack:
+					UIManager.openPanel(ViewDefine.dezhouUI.path, null);
+					break;
+				case GameKindEnum.Longhu:
+					UIManager.openPanel(ViewDefine.UIlonghu.path, null);
+					break;
+				case GameKindEnum.Suoha:
+					UIManager.openPanel(ViewDefine.UIsuoha.path, null);
+					break;
+				case GameKindEnum.Redpacket:
+					UIManager.openPanel(ViewDefine.UIredbag.path, null);
+					break;
+				case GameKindEnum.Water13:
+					UIManager.openPanel(ViewDefine.UIshui13.path, null);
+					break;
+				case GameKindEnum.Redblack:
+					UIManager.openPanel(ViewDefine.HongheiUI.path, null);
+					break;
+				case GameKindEnum.Sangong:
+					UIManager.openPanel(ViewDefine.UIsangong.path, null);
+					break;
+				case GameKindEnum.QzCowcow:
+					UIManager.openPanel(ViewDefine.UIqznn.path, null);
+					break;
+				case GameKindEnum.Qzpaijiu:
+					UIManager.openPanel(ViewDefine.UIpaijiu.path, null);
 					break;
 				default:
 					cc.warn("no ui", gameKind);

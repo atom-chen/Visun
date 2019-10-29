@@ -9,6 +9,7 @@ import CHandler from "../../../kernel/basic/CHandler";
 import LoginUser from "./LoginUser";
 import { login_request } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
+import { configure_request } from "../proto/net_configure";
 
 
 export default class LoginMgr extends ModelBase {
@@ -32,7 +33,7 @@ export default class LoginMgr extends ModelBase {
 
 
 	public checkLogin(bTip: boolean): boolean {
-		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().Accounts !== "";
+		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserId > 0;
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
 			UIManager.openPopwnd(ViewDefine.LoginUI.path, null);
@@ -87,7 +88,10 @@ export default class LoginMgr extends ModelBase {
 		var leafChan = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
 		leafChan.setProcessor(g_leafProcessor);
 		g_leafProcessor.setChannel(leafChan);
-		leafChan.connect( wsAddr, 0, null,
+		leafChan.connect( wsAddr, 0, 
+			new CHandler(this, ()=>{
+				configure_request.GameListReq(null);
+			}),
 			new CHandler(this, ()=>{ 
 				UIManager.openDialog("login_fail", "连接失败，是否重试？", (menuId:number)=>{
 					if(menuId===1) {

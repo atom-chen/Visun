@@ -15,7 +15,7 @@ var proxy_login = {
     },
 
     [login_msgs.RespLogin] : function(param: any) {
-        if(param.State===0) {
+        if(param.State===1) {
             LogicCenter.getInstance().clear();
             LogicCenter.getInstance().init();
             UIManager.toast("登录成功");
