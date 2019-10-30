@@ -121,8 +121,8 @@ export default class UIManager {
 	}
 	
 	//打开弹窗
-	public static openPopwnd(respath:string, callback:Function, ...args:any[]) {
-		this.showSingleton(respath, null, LayerDefine.Popup, true, true, callback, args);
+	public static openPopwnd(respath:string, bCloseWhenClickMask:boolean, callback:Function, ...args:any[]) {
+		this.showSingleton(respath, null, LayerDefine.Popup, true, bCloseWhenClickMask, callback, args);
 	}
 
 	//关闭窗口

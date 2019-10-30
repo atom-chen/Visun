@@ -56,7 +56,7 @@ export default class LobbyUI extends BaseComponent {
 				bton["GameKind"] = info.GameKind;
 				bton.getComponent(game_btn).setGameInfo(cfg);
 				CommonUtil.addClickEvent(bton, function(){ 
-					UIManager.openPopwnd(ViewDefine.UIRoom.path, null, this.GameKind);
+					UIManager.openPopwnd(ViewDefine.UIRoom.path, false, null, this.GameKind);
 					// if(roomList && roomList[0]){
 					// 	GameManager.getInstance().enterGame(roomList[0].GameType);
 					// }
@@ -76,31 +76,31 @@ export default class LobbyUI extends BaseComponent {
 	private initUiEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.EmailUI.path, null); this.testProcedure(); 
+			UIManager.openPopwnd(ViewDefine.EmailUI.path, true, null); this.testProcedure(); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.ShopUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.ShopUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.KefuUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.KefuUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.SpreadUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.SpreadUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.PersonUI.path, null); 
+			UIManager.openPopwnd(ViewDefine.PersonUI.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
 			UIManager.toast("尚未实现"); 
