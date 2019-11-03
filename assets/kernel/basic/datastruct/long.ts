@@ -1403,3 +1403,8 @@ Long.fromBytesBE = function fromBytesBE(bytes, unsigned) {
         unsigned
     );
 };
+
+
+//64位处理
+protobuf.util.Long = Long;
+protobuf.configure();
