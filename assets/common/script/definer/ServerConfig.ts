@@ -13,7 +13,7 @@ var server_list = {
     },
     mac: {
         mainHttpUrl: "http://sdk.sihai.com/",
-        leafServer: "ws://localhost:9650"
+        leafServer: "ws://192.168.0.10:9650"
     }
 };
 

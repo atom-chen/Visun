@@ -88,8 +88,13 @@ export default class CommonUtil {
 	public static setModal(obj:cc.Node, flag:boolean)
 	{
 		if(!obj || !cc.isValid(obj)){ return; }
-		obj.on(cc.Node.EventType.TOUCH_START, function(event:any){ event.stopPropagation(); });
-		obj.on(cc.Node.EventType.TOUCH_END, function(event:any){ event.stopPropagation(); if(flag){ this.destroy(); } }, obj);
+		obj.on(cc.Node.EventType.TOUCH_START, function(event:any){ 
+			event.stopPropagation(); 
+		}, obj);
+		obj.on(cc.Node.EventType.TOUCH_END, function(event:any){ 
+			event.stopPropagation(); 
+			if(flag){ this.destroy(); } 
+		}, obj);
 	}
 
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
