@@ -41,7 +41,7 @@ export default class GameManager extends ModelBase {
 			var testList = [];
 			for(var k in GameConfig) {
 				var info = {
-					GameKind : GameConfig[k].id,
+					GameKind : GameConfig[k].GameKind,
 					Name : GameConfig[k].name,
 					State : 2,
 				};
@@ -66,8 +66,8 @@ export default class GameManager extends ModelBase {
 			var cfg = GameConfig[gameKind];
 			for(var i=1; i<=4; i++) {
 				var info = {
-					GameKind : cfg.id,
-					GameType : cfg.id+i,
+					GameKind : cfg.GameKind,
+					GameType : cfg.GameKind+i,
 					Name : cfg.name,
 				}
 				testList.push(info);
@@ -105,15 +105,15 @@ export default class GameManager extends ModelBase {
 			UIManager.toast("敬请期待");
 			return false;
 		}
-		var updator = this.getUpdator(cfg.id);
+		var updator = this.getUpdator(cfg.GameKind);
 		if(updator) {
 			if(updator.isUpdating()) {
 				UIManager.toast("正在更新中，请稍等");
 				return false;
 			}
 		}
-		if(!this.isGameExist(cfg.id)) {
-			UIManager.toast("游戏不存在 "+cfg.id);
+		if(!this.isGameExist(cfg.GameKind)) {
+			UIManager.toast("游戏不存在 "+cfg.GameKind);
 			return false;
 		}
 		if(!LoginMgr.getInstance().checkLogin(true)) {
@@ -135,7 +135,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	public enterGameScene(gameType) {
-		var gameKind = this.clientConfig(gameType).id
+		var gameKind = this.clientConfig(gameType).GameKind
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
 			switch(gameKind) {
 				case GameKindEnum.BrCowCow:
