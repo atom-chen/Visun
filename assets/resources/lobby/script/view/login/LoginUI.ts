@@ -16,6 +16,10 @@ export default class LoginUI extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
+        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){
+            this.node.destroy();
+        }, this);
+
         CommonUtil.addClickEvent(this.m_ui.btn_login, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;
