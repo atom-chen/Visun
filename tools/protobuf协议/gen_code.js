@@ -7,22 +7,18 @@ var pbfiles = [
 	{ 
 		name:"login", 
 		router:"login", 
-		clientPath:"../../assets/common/script/proxy/" 
 	},
 	{ 
 		name:"configure", 
 		router:"login",
-		clientPath:"../../assets/common/script/proxy/"
 	},
 	{ 
 		name:"gamecomm", 
 		router:"game",
-		clientPath:"../../assets/common/script/proxy/"
 	},
 	{ 
 		name:"brcowcow", 
 		router:"game",
-	//	clientPath:"../../assets/common/script/proxy/"
 	},
 ]
 
@@ -183,9 +179,6 @@ function doGenerate() {
 		var channelName = "game";
 		var outClient = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
 		var outClientHandler = null;
-		if(cfg.clientPath) {
-			outClientHandler = cfg.clientPath + "proxy_" + pbfilename + ".ts";
-		}
 		//client end
 
 
