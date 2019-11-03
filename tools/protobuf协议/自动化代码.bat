@@ -1,2 +1,2 @@
-node genpb.js
+node gen_code.js
 pause
