@@ -3,8 +3,8 @@
 //---------------------------------------
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
-import { ConnState } from "../../looker/KernelDefine";
-import CHandler from "../../basic/CHandler";
+import { ConnState } from "../../basic/defines/KernelDefine";
+import CHandler from "../../basic/datastruct/CHandler";
 
 
 export default class HttpChannel implements IChannel {

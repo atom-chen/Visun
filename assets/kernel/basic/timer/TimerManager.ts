@@ -1,5 +1,5 @@
 import { BaseTimer, TimerType } from "./BaseTimer";
-import CHandler from "../basic/CHandler";
+import CHandler from "../datastruct/CHandler";
 //import JTPool from "../pool/JTPool";
 
 

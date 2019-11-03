@@ -1,8 +1,8 @@
 import LoadCenter from "../../kernel/load/LoadCenter";
-import EventCenter from "../../kernel/event/EventCenter";
-import KernelEvent from "../../kernel/looker/KernelEvent";
-import TimerManager from "../../kernel/timer/TimerManager";
-import CHandler from "../../kernel/basic/CHandler";
+import EventCenter from "../../kernel/basic/event/EventCenter";
+import KernelEvent from "../../kernel/basic/defines/KernelEvent";
+import CHandler from "../../kernel/basic/datastruct/CHandler";
+import TimerManager from "../../kernel/basic/timer/TimerManager";
 
 
 const {ccclass, property} = cc._decorator;

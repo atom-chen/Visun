@@ -1,13 +1,13 @@
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import SimplePool from "../../../../kernel/pool/SimplePool";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
 import { brcowcow_request, brcowcow_msgs } from "../../../../common/script/proto/net_brcowcow";
 import ChipBox from "../../../../common/script/view/ChipBox";
-import EventCenter from "../../../../kernel/event/EventCenter";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import UIManager from "../../../../kernel/view/UIManager";
+import SimplePool from "../../../../kernel/basic/pool/SimplePool";
 
 
 var margin = { left:5,right:5,bottom:40,top:5 };

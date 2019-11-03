@@ -1,7 +1,7 @@
 import { gamecomm_msgs } from "../proto/net_gamecomm";
 import UIManager from "../../../kernel/view/UIManager";
 import GameManager from "../model/GameManager";
-import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
+import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import SceneManager from "../../../kernel/view/SceneManager";
 
 //---------------------------------

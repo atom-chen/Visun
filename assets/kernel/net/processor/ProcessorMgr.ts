@@ -1,7 +1,7 @@
 import IProcessor from "./IProcessor";
 import JsonProcessor from "./JsonProcessor";
 import ProtobufProcessor from "./ProtobufProcessor";
-import { ProcessorType } from "../../looker/KernelDefine";
+import { ProcessorType } from "../../basic/defines/KernelDefine";
 import StreamProcessor from "./StreamProcessor";
 import LeafTcpProcessor from "./LeafTcpProcessor";
 import LeafWsProcessor from "./LeafWsProcessor";

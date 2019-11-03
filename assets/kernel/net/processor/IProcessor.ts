@@ -2,7 +2,7 @@
 // 网络消息处理器
 //--------------------------------------
 import IChannel from "../channel/IChannel";
-import SingleDispatcher from "../../event/SingleDispatcher";
+import SingleDispatcher from "../../basic/event/SingleDispatcher";
 
 export default interface IProcessor {
     clear() : void;

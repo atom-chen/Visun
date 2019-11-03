@@ -1,5 +1,5 @@
 import { JTIPoolObject } from "../pool/JTIPoolObject";
-import CHandler from "../basic/CHandler";
+import CHandler from "../datastruct/CHandler";
 
 export enum TimerType {
 	frame = 1,

@@ -3,9 +3,9 @@
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
 import CommonUtil from "../../utils/CommonUtil";
-import MemoryStream from "../../basic/MemoryStream";
-import EventCenter from "../../event/EventCenter";
-import KernelEvent from "../../looker/KernelEvent";
+import MemoryStream from "../../basic/datastruct/MemoryStream";
+import EventCenter from "../../basic/event/EventCenter";
+import KernelEvent from "../../basic/defines/KernelEvent";
 
 const HEAD_SIZE = 4;
 

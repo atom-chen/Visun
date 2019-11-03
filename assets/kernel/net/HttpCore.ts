@@ -8,10 +8,10 @@
 import ICodec from "../codec/ICodec";
 import HttpCodec from "../codec/HttpCodec";
 import LocalCache from "../localcache/LocalCache";
-import EventCenter from "../event/EventCenter";
+import EventCenter from "../basic/event/EventCenter";
 import UIManager from "../view/UIManager";
-import { HttpResult } from "../looker/KernelDefine";
-import KernelEvent from "../looker/KernelEvent";
+import { HttpResult } from "../basic/defines/KernelDefine";
+import KernelEvent from "../basic/defines/KernelEvent";
 
 
 

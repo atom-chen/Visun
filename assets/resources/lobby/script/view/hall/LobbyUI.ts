@@ -5,18 +5,18 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Procedure from "../../../../../kernel/promise/Procedure";
-import CHandler from "../../../../../kernel/basic/CHandler";
-import TimerManager from "../../../../../kernel/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
 import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
-import EventCenter from "../../../../../kernel/event/EventCenter";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_login";
 import { configure_msgs, configure_request } from "../../../../../common/script/proto/net_configure";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 
 const {ccclass, property} = cc._decorator;
 

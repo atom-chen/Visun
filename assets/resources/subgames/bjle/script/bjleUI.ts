@@ -1,6 +1,6 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
-import EventCenter from "../../../../kernel/event/EventCenter";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import GameManager from "../../../../common/script/model/GameManager";
 

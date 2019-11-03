@@ -1,17 +1,17 @@
 import ModelBase from "../../../kernel/model/ModelBase";
 import UIManager from "../../../kernel/view/UIManager";
 import ServerConfig from "../definer/ServerConfig";
-import { ChannelType, ConnState } from "../../../kernel/looker/KernelDefine";
+import { ChannelType, ConnState } from "../../../kernel/basic/defines/KernelDefine";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
-import CHandler from "../../../kernel/basic/CHandler";
+import CHandler from "../../../kernel/basic/datastruct/CHandler";
 import LoginUser from "./LoginUser";
 import { login_request } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
 import { configure_request } from "../proto/net_configure";
-import EventCenter from "../../../kernel/event/EventCenter";
-import KernelEvent from "../../../kernel/looker/KernelEvent";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import IChannel from "../../../kernel/net/channel/IChannel";
 
 

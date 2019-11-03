@@ -1,5 +1,5 @@
-import EventCenter from "../event/EventCenter";
-import TimerManager from "../timer/TimerManager";
+import EventCenter from "../basic/event/EventCenter";
+import TimerManager from "../basic/timer/TimerManager";
 
 export default abstract class ModelBase{
 	clear(): void {

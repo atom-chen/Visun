@@ -1,4 +1,4 @@
-import { HOT_STATE } from "../../kernel/looker/KernelDefine";
+import { HOT_STATE } from "../basic/defines/KernelDefine";
 import UIManager from "../view/UIManager";
 
 //---------------------------------

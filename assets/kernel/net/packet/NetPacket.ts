@@ -3,7 +3,7 @@
 // cmd : 消息ID
 // data_struct : 包体数据结构
 //----------------------------------------------------
-import MemoryStream from "../../basic/MemoryStream";
+import MemoryStream from "../../basic/datastruct/MemoryStream";
 import ChannelMgr from "../channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
 

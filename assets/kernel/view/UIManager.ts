@@ -2,12 +2,12 @@
 // UI管理器
 //---------------------------------
 import CommonUtil from "../utils/CommonUtil";
-import { LayerDefine } from "../looker/KernelDefine";
-import KernelUIDefine from "../looker/KernelUIDefine";
+import { LayerDefine } from "../basic/defines/KernelDefine";
+import KernelUIDefine from "../basic/defines/KernelUIDefine";
 import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
-import EventCenter from "../event/EventCenter";
-import KernelEvent from "../looker/KernelEvent";
+import EventCenter from "../basic/event/EventCenter";
+import KernelEvent from "../basic/defines/KernelEvent";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗

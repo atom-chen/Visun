@@ -1,8 +1,8 @@
 //---------------------------------
 // 仿js promise，将过程组织成树形结构，自根往叶播放
 //---------------------------------
-import CHandler from "../basic/CHandler";
-import { BEHAVIOR_STATE } from "../looker/KernelDefine";
+import CHandler from "../basic/datastruct/CHandler";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 
 export default class Procedure {

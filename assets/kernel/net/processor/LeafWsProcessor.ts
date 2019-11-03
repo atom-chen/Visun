@@ -3,7 +3,7 @@
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
 import CommonUtil from "../../utils/CommonUtil";
-import MemoryStream from "../../basic/MemoryStream";
+import MemoryStream from "../../basic/datastruct/MemoryStream";
 
 
 const HEAD_SIZE = 2;

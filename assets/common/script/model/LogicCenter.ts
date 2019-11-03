@@ -6,7 +6,7 @@ import GameManager from "./GameManager";
 import LoginUser from "./LoginUser";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
-import { ProcessorType } from "../../../kernel/looker/KernelDefine";
+import { ProcessorType } from "../../../kernel/basic/defines/KernelDefine";
 import { login_packet_define } from "../proto/net_login";
 import { configure_packet_define } from "../proto/net_configure";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";

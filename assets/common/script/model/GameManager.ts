@@ -4,7 +4,7 @@ import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
 import ModelBase from "../../../kernel/model/ModelBase";
 import ViewDefine from "../definer/ViewDefine";
-import KernelUIDefine from "../../../kernel/looker/KernelUIDefine";
+import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { GameKindEnum } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";

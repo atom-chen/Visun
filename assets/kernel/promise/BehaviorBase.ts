@@ -1,4 +1,4 @@
-import { BEHAVIOR_STATE } from "../looker/KernelDefine";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 export default abstract class BehaviorBase {
 	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;

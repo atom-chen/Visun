@@ -3,12 +3,12 @@
 //---------------------------------
 const {ccclass, property} = cc._decorator;
 
-import { HOT_STATE } from "../../kernel/looker/KernelDefine";
+import { HOT_STATE } from "../../kernel/basic/defines/KernelDefine";
 import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
-import KernelUIDefine from "../../kernel/looker/KernelUIDefine";
+import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 
 @ccclass
 export default class HotupdateScene extends BaseComponent {

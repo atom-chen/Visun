@@ -1,5 +1,5 @@
-import MemoryStream from "../../basic/MemoryStream";
-import Long from "../../basic/long";
+import MemoryStream from "../../basic/datastruct/MemoryStream";
+import Long from "../../basic/datastruct/long";
 
 export default interface PacketInterface {
 	pack(data:any, bIsPbObj:boolean) : any;

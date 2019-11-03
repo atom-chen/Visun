@@ -1,7 +1,7 @@
 import BehaviorNode from "./BehaviorNode";
-import { BEHAVIOR_STATE } from "../looker/KernelDefine";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 import Procedure from "./Procedure";
-import CHandler from "../basic/CHandler";
+import CHandler from "../basic/datastruct/CHandler";
 
 // 复合节点基类
 export default class AndComposite extends BehaviorNode {

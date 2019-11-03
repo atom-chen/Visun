@@ -1,7 +1,7 @@
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import { configure_request, configure_msgs } from "../../../../../common/script/proto/net_configure";
-import EventCenter from "../../../../../kernel/event/EventCenter";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
 
 const {ccclass, property} = cc._decorator;

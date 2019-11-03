@@ -3,7 +3,7 @@
 //--------------------------------------
 import JsonCodec from "../../codec/JsonCodec";
 import BaseProcessor from "./BaseProcessor";
-import { ConnState } from "../../looker/KernelDefine";
+import { ConnState } from "../../basic/defines/KernelDefine";
 
 export default class JsonProcessor extends BaseProcessor {
     private _coder:JsonCodec = new JsonCodec;

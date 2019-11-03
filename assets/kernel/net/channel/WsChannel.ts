@@ -3,11 +3,11 @@
 //---------------------------------------
 import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
-import { ConnState } from "../../looker/KernelDefine";
-import EventCenter from "../../event/EventCenter";
-import KernelEvent from "../../looker/KernelEvent";
-import TimerManager from "../../timer/TimerManager";
-import CHandler from "../../basic/CHandler";
+import { ConnState } from "../../basic/defines/KernelDefine";
+import EventCenter from "../../basic/event/EventCenter";
+import KernelEvent from "../../basic/defines/KernelEvent";
+import CHandler from "../../basic/datastruct/CHandler";
+import TimerManager from "../../basic/timer/TimerManager";
 
 var MAX_RECONNECT = 3;
 

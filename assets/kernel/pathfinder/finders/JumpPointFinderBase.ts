@@ -1,7 +1,7 @@
 import Heuristic from "../core/Heuristic";
 import Util from "../core/Util";
 //var Heap       = require('heap');
-import Heap from "../../basic/heap";
+import Heap from "../../basic/datastruct/heap";
 
 /**
  * @author imor / https://github.com/imor

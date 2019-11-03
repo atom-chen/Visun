@@ -1,6 +1,6 @@
 import { JTIPoolObject } from "./JTIPoolObject";
 import { JTIPool } from "./JTIPool";
-import JTHashMap from "../basic/JTHashMap";
+import JTHashMap from "../datastruct/JTHashMap";
 
 /**
 * 对象池

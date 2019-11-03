@@ -3,8 +3,8 @@
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
-import SingleDispatcher from "../../event/SingleDispatcher";
-import { ConnState } from "../../looker/KernelDefine";
+import SingleDispatcher from "../../basic/event/SingleDispatcher";
+import { ConnState } from "../../basic/defines/KernelDefine";
 import PacketInterface from "../packet/PacketInterface";
 
 export default class BaseProcessor implements IProcessor {

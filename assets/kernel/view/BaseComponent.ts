@@ -1,9 +1,9 @@
 //---------------------------------
 // 所有组建的父类
 //---------------------------------
-import EventCenter from "../event/EventCenter";
-import TimerManager from "../timer/TimerManager";
+import EventCenter from "../basic/event/EventCenter";
 import UIManager from "./UIManager";
+import TimerManager from "../basic/timer/TimerManager";
 
 
 const {ccclass, property} = cc._decorator;

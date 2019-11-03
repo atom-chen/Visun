@@ -1,7 +1,7 @@
 import Heuristic from "../core/Heuristic";
 import DiagonalMovement from "../core/DiagonalMovement";
 import Util from "../core/Util";
-import Heap from "../../basic/heap";
+import Heap from "../../basic/datastruct/heap";
 //var Heap       = require('heap');
 
 
