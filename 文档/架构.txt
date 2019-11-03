@@ -23,7 +23,7 @@ subgames：子游戏
 资源管理 
 场景管理 
 UI管理 
-屏幕视频 
+屏幕适配
 热更
 
 2. 业务逻辑层（launcher, common, lobby+subgames)
