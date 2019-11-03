@@ -1,5 +1,7 @@
 export const CLIENT_VERSION = "9.9.9";
 
+export const IS_DANJI_MODE = true
+
 export enum GameKindEnum {
 	BrCowCow 	= 1000,
 	BrJinhua 	= 2000,

@@ -3,6 +3,7 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import { configure_request, configure_msgs } from "../../../../../common/script/proto/net_configure";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
+import { IS_DANJI_MODE } from "../../../../../common/script/definer/ConstDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,17 +16,6 @@ export default class UIRoom extends BaseComponent {
 
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
             this.node.destroy();
-        }, this);
-        
-        EventCenter.getInstance().listen(configure_msgs.RoomListResp, (data)=>{
-            if(data!==null && data!==undefined){
-                data = data.RoomList;
-                this.roomList = data;
-                for(var i=1; i<=4; i++){
-                    this.m_ui["Label"+i].getComponent(cc.Label).string = data[i-1] && data[i-1].Name+data[i-1].GameType;
-                }
-                this.initRoomBtns();
-            }
         }, this);
     }
 
@@ -41,6 +31,18 @@ export default class UIRoom extends BaseComponent {
 
     reflesh(data:any) {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+
+        EventCenter.getInstance().listen(configure_msgs.RoomListResp, (param)=>{
+            var rooms = GameManager.getInstance().getRoomList(data);
+            if(rooms!==null && rooms!==undefined){
+                this.roomList = rooms;
+                for(var i=1; i<=4; i++){
+                    this.m_ui["Label"+i].getComponent(cc.Label).string = rooms[i-1] && rooms[i-1].Name+rooms[i-1].GameType;
+                }
+                this.initRoomBtns();
+            }
+        }, this, IS_DANJI_MODE);
+
         configure_request.RoomListReq({GameKind:data});
     }
 

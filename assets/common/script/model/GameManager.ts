@@ -6,7 +6,7 @@ import ModelBase from "../../../kernel/model/ModelBase";
 import ViewDefine from "../definer/ViewDefine";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
-import { GameKindEnum } from "../definer/ConstDefine";
+import { GameKindEnum, IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
 
 
@@ -37,6 +37,18 @@ export default class GameManager extends ModelBase {
 		})
 	}
 	public getGameList() : any[] {
+		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
+			var testList = [];
+			for(var k in GameConfig) {
+				var info = {
+					GameKind : GameConfig[k].id,
+					Name : GameConfig[k].name,
+					State : 2,
+				};
+				testList.push(info);
+			}
+			return testList;
+		}
 		return this._gameList;
 	}
 
@@ -49,6 +61,20 @@ export default class GameManager extends ModelBase {
 		}
 	}
 	public getRoomList(gameKind) {
+		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
+			var testList = [];
+			var cfg = GameConfig[gameKind];
+			for(var i=1; i<=4; i++) {
+				var info = {
+					GameKind : cfg.id,
+					GameType : cfg.id+i,
+					Name : cfg.name,
+				}
+				testList.push(info);
+			}
+			this.setRoomList(gameKind, testList);
+			return testList;
+		}
 		return this._roomList[gameKind];
 	}
 
@@ -91,7 +117,7 @@ export default class GameManager extends ModelBase {
 			return false;
 		}
 		if(!LoginMgr.getInstance().checkLogin(true)) {
-			return false;
+			return IS_DANJI_MODE;
 		}
 		return true;
 	}
@@ -102,8 +128,10 @@ export default class GameManager extends ModelBase {
 		if( !this.canEnterGame(gameType) ) {
 			return;
 		}
-		gamecomm_request.ReqEnterGame({GameType:gameType})
-	//	this.enterGameScene(gameType);
+		gamecomm_request.ReqEnterGame({GameType:gameType});
+		if(IS_DANJI_MODE) {
+			this.enterGameScene(gameType);
+		}
 	}
 
 	public enterGameScene(gameType) {
@@ -162,6 +190,9 @@ export default class GameManager extends ModelBase {
 	//退出游戏的唯一出口
 	public quitGame(reason:number) {
 		gamecomm_request.ReqExitGame({GameType:0});
+		if(IS_DANJI_MODE) {
+			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		}
 	}
 
 }
