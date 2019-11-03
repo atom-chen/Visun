@@ -1,3 +1,6 @@
+//---------------------------------
+// 管理所有的数据管理器
+//---------------------------------
 import LoginMgr from "./LoginMgr";
 import GameManager from "./GameManager";
 import LoginUser from "./LoginUser";
