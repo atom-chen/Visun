@@ -7,14 +7,6 @@ import GameManager from "../model/GameManager";
 
 var proxy_configure = {
 
-    [configure_msgs.GameInfo] : function(param: any) {
-
-    },
-
-    [configure_msgs.RoomDesc] : function(param: any) {
-
-    },
-
     [configure_msgs.GameListResp] : function(param: any) {
         GameManager.getInstance().setGameList(param.GameList)
     },
