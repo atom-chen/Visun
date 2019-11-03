@@ -16,4 +16,4 @@
 常量:         大写加下划线  如 MAIN_DOMAIN
 
 资源命名
-小写加下划线  如 btn_cancel
+小写加下划线  如 btn_cancel.png
