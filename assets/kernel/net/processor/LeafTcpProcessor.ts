@@ -7,7 +7,7 @@ import MemoryStream from "../../basic/MemoryStream";
 import EventCenter from "../../event/EventCenter";
 import KernelEvent from "../../looker/KernelEvent";
 
-const HEAD_SIZE = 8;
+const HEAD_SIZE = 4;
 
 export default class LeafTcpProcessor extends BaseProcessor {
 
@@ -39,8 +39,8 @@ export default class LeafTcpProcessor extends BaseProcessor {
 		var memStream = new MemoryStream(HEAD_SIZE);
 		memStream.safe_write_buffer(0, bytes);
 
-		var totalLen = memStream.read_uint32(0);
-		var cmd = memStream.read_uint32(4);
+		var totalLen = memStream.read_int16(0);
+		var cmd = memStream.read_int16(2);
 		var errCode = 0;
 
 		if(this.isShowDebug(cmd)) {

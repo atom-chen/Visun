@@ -28,11 +28,11 @@ export default class WsChannel implements IChannel {
 	constructor(name:string) {
 		this._name = name;
 		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
-			this.setPaused(true);
+		//	this.setPaused(true);
 		}, this);
 		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
-			this.setPaused(false);
-			this.force_reconnect();
+		//	this.setPaused(false);
+		//	this.force_reconnect();
 		}, this);
 	}
 
@@ -194,10 +194,10 @@ export default class WsChannel implements IChannel {
 		if(this._ws) {
 			var ws = this._ws;
 			this._ws = null;
-			ws.onopen = function(){ };
-			ws.onmessage = function(){ };
-			ws.onclose = function(){ };
-			ws.onerror = function(){ };
+			ws.onopen = function(e:any){ };
+			ws.onmessage = function(e:any){ };
+			ws.onclose = function(e:any){ };
+			ws.onerror = function(e:any){ };
 			ws.close();
 		}
 	}

@@ -8,7 +8,7 @@ import ChannelMgr from "../channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
 
 
-const HEAD_SIZE = 8;
+const HEAD_SIZE = 4;
 
 
 export default class LeafTcpPacket implements PacketInterface{
@@ -37,8 +37,8 @@ export default class LeafTcpPacket implements PacketInterface{
 
 		if(bytes_body !== null) {
 			var memStream = new MemoryStream(HEAD_SIZE + bytes_body.length);
-			memStream.write_uint32(0, HEAD_SIZE+bytes_body.length);
-			memStream.write_int32(4, this.cmd);
+			memStream.write_int16(0, HEAD_SIZE+bytes_body.length);
+			memStream.write_int16(2, this.cmd);
 			memStream.write_buffer(HEAD_SIZE, bytes_body);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
@@ -46,8 +46,8 @@ export default class LeafTcpPacket implements PacketInterface{
 		}
 		else {
 			var memStream = new MemoryStream(HEAD_SIZE);
-			memStream.write_uint32(0, HEAD_SIZE);
-			memStream.write_int32(4, this.cmd);
+			memStream.write_int16(0, HEAD_SIZE);
+			memStream.write_int16(2, this.cmd);
 			var buffSend = new Uint8Array(memStream.buffer);
 			// cc.log("pack", this.unpack(buffSend));
 			return buffSend;
@@ -75,8 +75,8 @@ export default class LeafTcpPacket implements PacketInterface{
 		}
 
 		//解析包头
-		var totalLen = memStream.read_uint32(0);
-		var cmd = memStream.read_uint32(4);
+		var totalLen = memStream.read_int16(0);
+		var cmd = memStream.read_int16(2);
 		var errCode = 0;
 		var data = null;
 
@@ -108,14 +108,11 @@ export default class LeafTcpPacket implements PacketInterface{
 		if(bytes===null || bytes===undefined) {
 			return null;
 		}
-		var MainID = 0;
-		var SubID = 0;
 		var data = null;
 		if(this.data_struct!==null && this.data_struct!==undefined) {
 			try {
 				var body = this.data_struct.decode(bytes);
 				data = this.data_struct.toObject(body, {defaults:true,longs:Number});
-
 				return data;
 			}
 			catch(err) {
