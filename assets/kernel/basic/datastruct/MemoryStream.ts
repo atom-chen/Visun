@@ -3,8 +3,9 @@ export default class MemoryStream {
 	protected data_view:DataView = null;
 	protected little_endian:boolean = false;
 
-	public constructor(size:number) 
+	public constructor(size:number, bLittleEndian:boolean = false) 
 	{
+		this.little_endian = bLittleEndian;
 		if(size > 0) {
 			this.buffer = new ArrayBuffer(size);
 			this.data_view = new DataView(this.buffer);
