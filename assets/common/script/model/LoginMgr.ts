@@ -1,7 +1,7 @@
 import ModelBase from "../../../kernel/model/ModelBase";
 import UIManager from "../../../kernel/view/UIManager";
 import ServerConfig from "../definer/ServerConfig";
-import { ChannelType } from "../../../kernel/looker/KernelDefine";
+import { ChannelType, ConnState } from "../../../kernel/looker/KernelDefine";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
@@ -10,12 +10,26 @@ import LoginUser from "./LoginUser";
 import { login_request } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
 import { configure_request } from "../proto/net_configure";
+import EventCenter from "../../../kernel/event/EventCenter";
+import KernelEvent from "../../../kernel/looker/KernelEvent";
+import IChannel from "../../../kernel/net/channel/IChannel";
 
 
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 	private constructor(){
 		super();
+		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
+            if(chan.getName()===ChannelDefine.game) {
+                if(chan.getState()===ConnState.reconnectfail) {
+                    UIManager.openDialog("reconnectfail", "网络断开，是否重连？", (menuId:number)=>{
+                        if(menuId===1) {
+                            chan.reconnect();
+                        }
+                    })
+                }
+            }
+        }, this);
 	}
     public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
