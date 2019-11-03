@@ -1,6 +1,7 @@
 //----------------------------------------------------
-//一个protobuf网络包由两个关键信息组成：
-// cmd : 消息ID
+//一个protobuf网络包由三个关键信息组成：
+// cmd : 消息ID，4字节
+// errCode : 错误码，4字节
 // data_struct : 包体数据结构
 //----------------------------------------------------
 import MemoryStream from "../../basic/datastruct/MemoryStream";
@@ -10,7 +11,7 @@ import PacketInterface from "./PacketInterface";
 
 const HEAD_SIZE:number = 8;
 
-export default class NetPacket implements PacketInterface {
+export default class T4C4Packet implements PacketInterface {
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
 

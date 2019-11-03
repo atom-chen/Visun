@@ -1,5 +1,6 @@
 //--------------------------------------
 // Protobuf消息处理器
+// len(2字节) + id(2字节) + body
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
 import CommonUtil from "../../utils/CommonUtil";

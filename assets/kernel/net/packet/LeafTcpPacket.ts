@@ -1,6 +1,7 @@
 //----------------------------------------------------
-//一个protobuf网络包由两个关键信息组成：
-// cmd : 消息ID
+// 一个protobuf网络包由三个关键信息组成：
+// len : 包大小，2字节
+// cmd : 消息ID，2字节
 // data_struct : 包体数据结构
 //----------------------------------------------------
 import MemoryStream from "../../basic/datastruct/MemoryStream";

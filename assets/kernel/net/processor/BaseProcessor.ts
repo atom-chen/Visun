@@ -1,5 +1,5 @@
 //--------------------------------------
-// Protobuf消息处理器
+//消息处理器
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";

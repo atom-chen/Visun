@@ -40,7 +40,7 @@ export enum ConnState {
 
 export enum ProcessorType {
 	Json,
-	Protobuff,
+	T4C4Protobuff,
 	LeafTcp,
 	LeafWs,
 	Stream

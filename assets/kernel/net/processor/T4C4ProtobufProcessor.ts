@@ -1,8 +1,8 @@
 //--------------------------------------
 // Protobuf消息处理器
+// id(4字节) + errCode(4字节) + body
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
-import CommonUtil from "../../utils/CommonUtil";
 import MemoryStream from "../../basic/datastruct/MemoryStream";
 import EventCenter from "../../basic/event/EventCenter";
 import KernelEvent from "../../basic/defines/KernelEvent";
@@ -10,7 +10,7 @@ import KernelEvent from "../../basic/defines/KernelEvent";
 
 const HEAD_SIZE:number = 8;
 
-export default class ProtobufProcessor extends BaseProcessor {
+export default class T4C4ProtobufProcessor extends BaseProcessor {
 
 	private isShowDebug(cmd: number|string) : boolean
 	{

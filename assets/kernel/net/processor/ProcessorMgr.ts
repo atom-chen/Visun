@@ -1,6 +1,6 @@
 import IProcessor from "./IProcessor";
 import JsonProcessor from "./JsonProcessor";
-import ProtobufProcessor from "./ProtobufProcessor";
+import T4C4ProtobufProcessor from "./T4C4ProtobufProcessor";
 import { ProcessorType } from "../../basic/defines/KernelDefine";
 import StreamProcessor from "./StreamProcessor";
 import LeafTcpProcessor from "./LeafTcpProcessor";
@@ -30,9 +30,9 @@ export default class ProcessorMgr {
             {
                 this._all_processors[key] = new JsonProcessor(key);
             }
-            else if(type == ProcessorType.Protobuff) 
+            else if(type == ProcessorType.T4C4Protobuff) 
             {
-                this._all_processors[key] = new ProtobufProcessor(key);
+                this._all_processors[key] = new T4C4ProtobufProcessor(key);
             }
             else if(type == ProcessorType.Stream) 
             {
