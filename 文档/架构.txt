@@ -5,16 +5,36 @@
 
 目录：
 kernel: 核心框架
+	adaptor		屏幕适配
+	audio		音频
+	basic		基础模块
+	codec		编码解码（二进制流与js对象间的互转）
+	engineext	引擎扩展
+	hotupdator	热更器
+	load		资源加载封装
+	localcache	本地缓存管理
+	model		mvvm模式的model
+	net			网络模块
+	pathfinder	A星寻路
+	promise		行为树
+	secret		加密解密
+	utils		辅助库
+	view		场景管理+UI管理
 launcher：启动器
-common：通用资源与组件(即大厅与子游戏所公用对图片和脚本组件)
+	启动入口。
+	在APP中，最小的APP包，只包含kernel与launcher，其他模块通过热更下载
+common：通用资源与组件
+	大厅与子游戏所公用的图片和脚本组件
+	总数据管理器
+	登陆
 lobby： 大厅
 subgames：子游戏
 
 
 -----------------------------------------------------------------------
--- 业务逻辑
+-- 架构：采用分层架构
 -----------------------------------------------------------------------
-1. 架构层(kernel)
+第一层：框架层(kernel)
 网络 
 音频 
 寻路 
@@ -26,7 +46,11 @@ UI管理
 屏幕适配
 热更
 
-2. 业务逻辑层（launcher, common, lobby+subgames)
+第二层：业务逻辑层
+1. common：通用资源与组件
+2. lobby与subgames
+
+逻辑层架构：
 proxy: 网络消息处理句柄
 model: 数据与逻辑
 view: 视图
