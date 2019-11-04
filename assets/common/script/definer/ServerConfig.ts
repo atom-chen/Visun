@@ -17,6 +17,6 @@ var server_list = {
     }
 };
 
-var ServerConfig = server_list.mac;
+var ServerConfig = server_list.publish;
 
 export default ServerConfig;
