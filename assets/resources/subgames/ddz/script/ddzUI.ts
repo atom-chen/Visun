@@ -34,4 +34,9 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = true;
     }
+
+    private toStateResult() {
+
+    }
+    
 }

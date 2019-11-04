@@ -19,7 +19,8 @@ export default class ChipBox extends BaseComponent {
 
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
-        this.m_ui.hilightSpr.position = this.m_ui["chip"+idx].position;
+        this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x - 2;
+        this.m_ui.hilightSpr.y = this.m_ui["chip"+idx].y + 3;
     }
 
     public getButton(idx:number) : cc.Node {
