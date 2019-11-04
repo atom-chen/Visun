@@ -13,16 +13,12 @@ export default class PlayerUI extends BaseComponent {
     @property(cc.Label)
     label_money: cc.Label = null;
 
-    public _userId:number = 0;
+    private _userId:number = 0;
 
     onLoad () {
         CommonUtil.addClickEvent(this.node, function(){ 
             cc.log("click ", this.userId);
         }, this);
-    }
-
-    public setUserId(userId:number) {
-        this._userId = userId;
     }
 
     public getUserId() : number {

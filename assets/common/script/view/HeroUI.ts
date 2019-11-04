@@ -13,14 +13,18 @@ export default class HeroUI extends BaseComponent {
     @property(cc.Label)
     label_id: cc.Label = null;
 
-    public userId:number = 0;
+    private _userId:number = 0;
 
     onLoad () {
         CommonUtil.addClickEvent(this.node, function(){ cc.log("click hero head"); }, this);
     }
 
+    public getUserId() : number {
+        return this._userId;
+    }
+
     public setUserInfo(userObj:LoginUser) {
-        this.userId = userObj.UserId;
+        this._userId = userObj.UserId;
         this.label_name.string = userObj.Name + " | 金币：" + userObj.Money;
         this.label_id.string = "ID: " + userObj.UserId;
     }
