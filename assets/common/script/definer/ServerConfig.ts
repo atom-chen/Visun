@@ -1,18 +1,18 @@
 var server_list = {
     publish: {
-        mainHttpUrl: "http://sdk.sihai.com/",
+        mainHttpUrl: "",
         leafServer: "ws://172.18.11.133:9650"
     },
     develop: {
-        mainHttpUrl: "http://sdk.sihai.com/",
+        mainHttpUrl: "",
         leafServer: "ws://172.18.11.133:9650"
     },
     jetten: {
-        mainHttpUrl: "http://sdk.sihai.com/",
+        mainHttpUrl: "",
         leafServer: "ws://172.18.11.216:9650"
     },
     mac: {
-        mainHttpUrl: "http://sdk.sihai.com/",
+        mainHttpUrl: "",
         leafServer: "ws://192.168.0.10:9650"
     }
 };
