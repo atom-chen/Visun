@@ -12,7 +12,26 @@ export default class DdzUI extends BaseComponent {
         
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame(0);
-		}, this);
+        }, this);
+        
+        this.toStateReady();
     }
     
+    private toStateReady() {
+        this.m_ui.readyNode.active = true;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = false;
+    }
+
+    private toStateGrab() {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = true;
+        this.m_ui.fightNode.active = false;
+    }
+
+    private toStateFight() {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = true;
+    }
 }
