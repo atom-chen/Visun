@@ -1,10 +1,11 @@
 //---------------------------------
 // 常量
 //---------------------------------
+export const DESIGN_ORIENTATION = 1;
 export const DESIGN_SIZE = {
-	width : 1280,
-	height : 720,
-	crown : 1280/720
+	width : 1334,
+	height : 750,
+	crown : 1334/750
 }
 
 export enum LayerDefine {

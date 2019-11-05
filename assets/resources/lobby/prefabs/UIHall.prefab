@@ -47,13 +47,10 @@
       },
       {
         "__id__": 99
-      },
-      {
-        "__id__": 100
       }
     ],
     "_prefab": {
-      "__id__": 101
+      "__id__": 100
     },
     "_opacity": 255,
     "_color": {
@@ -65,8 +62,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
-      "height": 720
+      "width": 1334,
+      "height": 750
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -75,8 +72,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 640,
-      "y": 360,
+      "x": 667,
+      "y": 375,
       "z": 0
     },
     "_scale": {
@@ -135,7 +132,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
+      "width": 1334,
       "height": 420
     },
     "_anchorPoint": {
@@ -145,7 +142,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -640,
+      "x": -667,
       "y": -20,
       "z": 0
     },
@@ -202,7 +199,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
+      "width": 1334,
       "height": 420
     },
     "_anchorPoint": {
@@ -598,8 +595,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 590,
-      "y": 310,
+      "x": 617,
+      "y": 325,
       "z": 0
     },
     "_scale": {
@@ -921,7 +918,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1280,
+      "width": 1334,
       "height": 70
     },
     "_anchorPoint": {
@@ -931,8 +928,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -640,
-      "y": -325,
+      "x": -667,
+      "y": -340,
       "z": 0
     },
     "_scale": {
@@ -2388,7 +2385,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 1162,
+      "x": 1216,
       "y": 19.5,
       "z": 0
     },
@@ -2670,7 +2667,7 @@
       "__uuid__": "4fe6820a-33f2-4bc1-a63e-f460269adc47"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -2775,8 +2772,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -590,
-      "y": 310,
+      "x": -617,
+      "y": 325,
       "z": 0
     },
     "_scale": {
@@ -3477,8 +3474,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 454,
-      "y": 310,
+      "x": 481,
+      "y": 325,
       "z": 0
     },
     "_scale": {
@@ -3780,39 +3777,6 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": ""
-  },
-  {
-    "__type__": "cc.Layout",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_layoutSize": {
-      "__type__": "cc.Size",
-      "width": 1280,
-      "height": 720
-    },
-    "_resize": 0,
-    "_N$layoutType": 0,
-    "_N$padding": 0,
-    "_N$cellSize": {
-      "__type__": "cc.Size",
-      "width": 40,
-      "height": 40
-    },
-    "_N$startAxis": 0,
-    "_N$paddingLeft": 0,
-    "_N$paddingRight": 0,
-    "_N$paddingTop": 0,
-    "_N$paddingBottom": 0,
-    "_N$spacingX": 0,
-    "_N$spacingY": 0,
-    "_N$verticalDirection": 1,
-    "_N$horizontalDirection": 0,
-    "_N$affectedByScale": false,
     "_id": ""
   },
   {

@@ -36,14 +36,22 @@ export default class Adaptor {
 	//横竖屏适配
 	public static adaptOrientation(bLandspace:boolean) : void
 	{
+		var bigger = DESIGN_SIZE.width;
+		var smaller = DESIGN_SIZE.height;
+		if(bigger < smaller) {
+			bigger = DESIGN_SIZE.height;
+			smaller = DESIGN_SIZE.width;
+			DESIGN_SIZE.width = bigger;
+			DESIGN_SIZE.height = smaller;
+		}
 		if(bLandspace) {
-			DESIGN_SIZE.width = 1280;
-			DESIGN_SIZE.height = 720;
+			DESIGN_SIZE.width = bigger;
+			DESIGN_SIZE.height = smaller;
 			cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
 		}
 		else {
-			DESIGN_SIZE.width = 720;
-			DESIGN_SIZE.height = 1280;
+			DESIGN_SIZE.width = smaller;
+			DESIGN_SIZE.height = bigger;
 			cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
 		}
 		DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
