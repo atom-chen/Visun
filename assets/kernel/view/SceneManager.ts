@@ -11,6 +11,15 @@ export default class SceneManager {
 
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
+		if(sceneName === this.curSceneName) {
+			cc.warn("禁止多次进入相同场景", sceneName);
+			return false;
+		}
+		
+		this.preSceneName = this.curSceneName;
+		this.curSceneName = sceneName;
+		cc.log("-----切换场景开始: ", this.preSceneName, "--->", this.curSceneName);
+
 		EventCenter.getInstance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
 		cc.log("--------释放旧资源--------")
 		var cvs = cc.find("Canvas");
@@ -18,10 +27,6 @@ export default class SceneManager {
 		LoadCenter.getInstance().releaseNodeRes(cvs);
 		UIManager.clear();
 	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
-		
-		this.preSceneName = this.curSceneName;
-		this.curSceneName = sceneName;
-		cc.log("-----切换场景开始: ", this.preSceneName, "--->", this.curSceneName);
 
 		cc.director.preloadScene(sceneName, 
 			(completeCount:number, totalCount:number, item:any)=>{

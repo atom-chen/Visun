@@ -1,7 +1,7 @@
 var server_list = {
     publish: {
         mainHttpUrl: "",
-        leafServer: "ws://172.18.11.133:9650"
+        leafServer: "ws://localhost:9650"
     },
     develop: {
         mainHttpUrl: "",

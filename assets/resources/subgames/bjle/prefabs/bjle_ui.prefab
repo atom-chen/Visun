@@ -178,7 +178,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "baisexuanzhong3",
+    "_name": "area_he",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -350,7 +350,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "baisexuanzhong2",
+    "_name": "area_xian_dui",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -522,7 +522,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "baisexuanzhong2",
+    "_name": "area_zhuang_dui",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -694,7 +694,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "baisexuanzhong",
+    "_name": "area_xian",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -866,7 +866,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "baisexuanzhong",
+    "_name": "area_zhuang",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2

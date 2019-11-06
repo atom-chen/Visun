@@ -3,28 +3,24 @@ import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import GameManager from "../../../../common/script/model/GameManager";
+import UIManager from "../../../../kernel/view/UIManager";
+import ChipBox from "../../../../common/script/view/ChipBox";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class bjleUI extends BaseComponent {
+	_chipBox:ChipBox;
 	_players : any[] = [];
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
-        }, this);
-
 		var rule = [1,10,20,100,500];
-		this.m_ui.ChipBox.getComponent("ChipBox").setChipValues(rule);
+		this._chipBox = this.m_ui.ChipBox.getComponent(ChipBox);
+		this._chipBox.setChipValues(rule);
 
-		EventCenter.getInstance().listen("MSG_USER_LEAVE_ROOM_PUSH", this.MSG_USER_LEAVE_ROOM_PUSH, this);
-		EventCenter.getInstance().listen("MSG_GAME_OTHER_BET_ACK", this.MSG_GAME_OTHER_BET_ACK, this);
-		EventCenter.getInstance().listen("MSG_GAME_ROOM_START_PUSH", this.MSG_GAME_ROOM_START_PUSH, this);
-		EventCenter.getInstance().listen("MSG_JOIN_COIN_ACK", this.MSG_JOIN_COIN_ACK, this);
-		EventCenter.getInstance().listen("MSG_GAME_ADD_BET_ACK", this.MSG_GAME_ADD_BET_ACK, this);
+		this.initUIEvents();
 	}
 
 	private findPlayer(userId) {
@@ -64,37 +60,25 @@ export default class bjleUI extends BaseComponent {
 			}
 		});
 	}
-
-	private MSG_USER_LEAVE_ROOM_PUSH(info) {
-		GameManager.getInstance().quitGame(0);
-	}
-
-	private MSG_GAME_OTHER_BET_ACK(info) {
-		var comp = this.findPlayer(info.userId);
-		if(!comp){ return; }
-	}
-
-	private MSG_GAME_ADD_BET_ACK(info) {
-		try{
-			this.bet(info.userId, info.betPos, info.betValue);
-		}finally{
-
-		}
-	}
-
-	private MSG_GAME_ROOM_START_PUSH(info) {
-
-	}
-
-	private MSG_JOIN_COIN_ACK(info){
-		for(var i=0; i<info.richManList.length; i++){
-			var comp = this.m_ui["richman"+(i+1)].getComponent("PlayerUI");
-			comp.setUserId(info.richManList[i].userId);
-			comp.label_name.string = info.richManList[i].nickname;
-			comp.label_money.string = info.richManList[i].coin.toString();
-			this._players[i] = comp;
-		}
-		this.m_ui.HeroUI.getComponent("HeroUI").label_name.string = info.player.nickname
-		this.m_ui.HeroUI.getComponent("HeroUI").label_id.string = info.player.coin.toString();
+	
+	private initUIEvents() {
+		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
+            GameManager.getInstance().quitGame(0);
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.area_he, function(){ 
+			cc.log("和");
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.area_xian, function(){ 
+            cc.log("闲");
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.area_zhuang, function(){ 
+            cc.log("庄");
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.area_xian_dui, function(){ 
+            cc.log("闲对");
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.area_zhuang_dui, function(){ 
+            cc.log("庄对");
+		}, this);
 	}
 }
