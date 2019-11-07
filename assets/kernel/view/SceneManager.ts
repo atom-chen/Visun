@@ -8,6 +8,11 @@ export default class SceneManager {
 	private constructor() {}
 	public static preSceneName:string;
 	public static curSceneName:string;
+	private static _switching:boolean = false;
+
+	public static isSwitching() : boolean {
+		return SceneManager._switching;
+	}
 
 	public static turn2Scene(sceneName:string, onLaunched?: Function) : boolean
 	{
@@ -15,7 +20,11 @@ export default class SceneManager {
 			cc.warn("禁止多次进入相同场景", sceneName);
 			return false;
 		}
-		
+		if(this._switching) {
+			cc.warn("禁止嵌套调用turn2Scene", sceneName, this.curSceneName);
+			return false;
+		}
+		this._switching = true;
 		this.preSceneName = this.curSceneName;
 		this.curSceneName = sceneName;
 		cc.log("-----切换场景开始: ", this.preSceneName, "--->", this.curSceneName);
@@ -37,6 +46,7 @@ export default class SceneManager {
 					cc.log("-----切换场景完成: ", this.preSceneName, "--->", this.curSceneName);
 					Adaptor.adaptScreen();
 					LoadCenter.getInstance().gc();
+					SceneManager._switching = false;
 					if(onLaunched) { onLaunched(); }
 					EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 				}

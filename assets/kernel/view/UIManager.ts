@@ -8,6 +8,7 @@ import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
 import EventCenter from "../basic/event/EventCenter";
 import KernelEvent from "../basic/defines/KernelEvent";
+import SceneManager from "./SceneManager";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -192,6 +193,10 @@ export default class UIManager {
 	//-----------------------------------------------------------------
 	
 	public static toast(content:string) {
+		if(SceneManager.isSwitching()) {
+			cc.log("场景切换过程中，略过toast: ", content);
+			return;
+		}
 		if(content===undefined||content===null||content==="") { return; }
 		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.logicComp).label_cont.string === content){
 			return;
