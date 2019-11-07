@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- 屏幕适配
+//-------------------------------------
 import { DESIGN_SIZE } from "../basic/defines/KernelDefine";
 
 export default class Adaptor {

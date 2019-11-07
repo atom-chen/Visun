@@ -1,9 +1,9 @@
-import { HOT_STATE } from "../basic/defines/KernelDefine";
-import UIManager from "../view/UIManager";
-
 //---------------------------------
 // 热更
 //---------------------------------
+import { HOT_STATE } from "../basic/defines/KernelDefine";
+import UIManager from "../view/UIManager";
+
 
 export default class HotUpdator {
 	private static _all_updators:{[key: string]: HotUpdator;} = {};

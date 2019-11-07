@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- 响应句柄：观察者模式
+//-------------------------------------
 import EventCenter from "./EventCenter";
 
 export default class SingleDispatcher {

@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- 二进制流缓存
+//-------------------------------------
 export default class MemoryStream {
 	public buffer:ArrayBuffer = null;
 	protected data_view:DataView = null;

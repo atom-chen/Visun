@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- 计时器
+//-------------------------------------
 import { BaseTimer, TimerType } from "./BaseTimer";
 import CHandler from "../datastruct/CHandler";
 //import JTPool from "../pool/JTPool";

@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- 音频播放
+//-------------------------------------
 import CommonUtil from "../utils/CommonUtil";
 import LoadCenter from "../load/LoadCenter";
 

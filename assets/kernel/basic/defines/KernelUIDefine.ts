@@ -1,3 +1,6 @@
+//-------------------------------------
+//-- UI路经
+//-------------------------------------
 export default class KernelUIDefine {
 	public static GameScene = { name:"GameScene" };
 	public static LobbyScene = { name:"LobbyScene" };
