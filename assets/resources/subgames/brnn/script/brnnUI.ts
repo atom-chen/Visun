@@ -71,7 +71,7 @@ export default class BrnnUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent("ChipSpr").value = this._rule[idx-1];
 				this.m_ui["chiplayer"].addChild(chip);
-				GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.25, margin);
+				GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, margin);
 			} else {
 				UIManager.toast(param.Reason);
 			}

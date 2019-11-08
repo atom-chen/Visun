@@ -1,7 +1,9 @@
+import BaseComponent from "../../../kernel/view/BaseComponent";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class PokerCard extends cc.Component {
+export default class PokerCard extends BaseComponent {
     private _code:number = 0;
     private _state:number = 0;
     private _curFace:boolean = true;

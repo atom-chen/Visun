@@ -56,7 +56,7 @@ export default class bjleUI extends BaseComponent {
 				chip.addComponent(cc.Sprite);
 				chip.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name)
 				self.m_ui["chiplayer"].addChild(chip);
-				GameUtil.flyChip2(chip, comp, area, 0.25, margin);
+				GameUtil.flyChip2(chip, comp, area, 0.2, margin);
 			}
 		});
 	}

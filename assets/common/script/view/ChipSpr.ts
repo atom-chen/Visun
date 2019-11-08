@@ -1,10 +1,11 @@
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import BaseComponent from "../../../kernel/view/BaseComponent";
 
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class ChipSpr extends cc.Component {
+export default class ChipSpr extends BaseComponent {
     _value: number = 1;
 
     onResLoaded(err, atlas){

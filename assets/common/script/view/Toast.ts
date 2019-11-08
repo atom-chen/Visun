@@ -1,7 +1,9 @@
+import BaseComponent from "../../../kernel/view/BaseComponent";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Toast extends cc.Component {
+export default class Toast extends BaseComponent {
     @property(cc.RichText)
     label_cont: cc.RichText = null;
 

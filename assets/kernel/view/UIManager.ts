@@ -198,7 +198,7 @@ export default class UIManager {
 			return;
 		}
 		if(content===undefined||content===null||content==="") { return; }
-		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(KernelUIDefine.toast.logicComp).label_cont.string === content){
+		if(UIManager._toastList[0] && UIManager._toastList[0].getComponent(BaseComponent).label_cont.string === content){
 			return;
 		}
 		
@@ -220,7 +220,7 @@ export default class UIManager {
 			UIManager._toastList.push(obj);
 			obj.y = 0;
 			//刷新数据并定时销毁
-			var scriptCpn = obj.getComponent(KernelUIDefine.toast.logicComp);
+			var scriptCpn = obj.getComponent(BaseComponent);
 			scriptCpn.setContent(content);
 			scriptCpn.scheduleOnce(function() {
 				for(var i=0; i<UIManager._toastList.length; i++) {
