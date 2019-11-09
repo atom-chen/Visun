@@ -18,7 +18,7 @@ var proxy_gamecomm = {
     [gamecomm_msgs.ErrorResult] : function(param:any) {
         var ReqId:number = param.ReqId;
         var ErrCode:number = param.ErrCode;
-        var Hints:string = param.ErrCode;
+        var Hints:string = param.Hints;
 
         cc.log("通用错误处理", ReqId, ErrCode, Hints);
         UIManager.toast(Hints);
