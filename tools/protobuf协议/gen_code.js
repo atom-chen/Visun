@@ -20,6 +20,10 @@ var pbfiles = [
 		name:"brcowcow", 
 		router:"game",
 	},
+	{ 
+		name:"zhajinhua", 
+		router:"game",
+	},
 ]
 
 
@@ -115,8 +119,8 @@ function doGenerate() {
 	//server begin
 	var serverPkgName = "go";
 
-	var outServerMsg = "D:/go/src/vision/appqp/msg/msg.go";
-	var outRouter = "D:/go/src/vision/appqp/gate/router.go";
+	var outServerMsg = "D:/go/src/vovov/qpservice/msg/msg.go";
+	var outRouter = "D:/go/src/vovov/qpservice/gate/router.go";
 	var outServerHandler = "d:/handler.go";
 	var outHandleFunc = "d:/handlerFunc.go";
 
@@ -133,9 +137,9 @@ function doGenerate() {
 	msgStr += "import (\n"
 	msgStr += '    "sync"\n'
 	msgStr += '    "github.com/golang/protobuf/proto"\n'
-	msgStr += '    "vision/leaf/network/json"\n'
-	msgStr += '    "vision/leaf/network/protobuf"\n'
-	msgStr += '    protoMsg "vision/appqp/msg/ptopb"\n'
+	msgStr += '    "vovov/leaf/network/json"\n'
+	msgStr += '    "vovov/leaf/network/protobuf"\n'
+	msgStr += '    protoMsg "vovov/qpservice/msg/ptopb"\n'
 	msgStr += ')\n\n'
 	msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
 	msgStr += "var ProcessorJson = json.NewProcessor()\n"
@@ -155,10 +159,10 @@ function doGenerate() {
 	routerStr += "//---------------------------------\n";
 	routerStr += "package gate\n\n";
 	routerStr += 'import (\n';
-	routerStr += '    "vision/appqp/game"\n';
-	routerStr += '    "vision/appqp/login"\n';
-	routerStr += '    "vision/appqp/msg"\n';
-	routerStr += '    protoMsg "vision/appqp/msg/ptopb"\n';
+	routerStr += '    "vovov/qpservice/game"\n';
+	routerStr += '    "vovov/qpservice/login"\n';
+	routerStr += '    "vovov/qpservice/msg"\n';
+	routerStr += '    protoMsg "vovov/qpservice/msg/ptopb"\n';
 	routerStr += ')\n\n';
 	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';

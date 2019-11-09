@@ -1,6 +1,6 @@
 export enum PokerCode {
-	KING = 79,
-	QUEEN = 78,
+	KING = 0x5F,
+	QUEEN = 0x4E,
 	HT_K = 0x3D,
 	HX_K = 0x2D,
 	MH_K = 0x1D,
@@ -56,14 +56,18 @@ export enum PokerCode {
 }
 
 export enum PokerColor {
-	HT = 4,
-	HX = 3,
-	MH = 2,
-	FK = 1
+	HT = 3,
+	HX = 2,
+	MH = 1,
+	FK = 0
 }
 
 export function getPokerColor(value:PokerCode) : PokerColor {
-	return Math.ceil(value / 16);
+	return Math.floor(value / 16);
+}
+
+export function getPokerValue(v:PokerCode) : number {
+	return v & 0x0F
 }
 
 export function pokerColorName(code:PokerCode) : string
@@ -93,7 +97,7 @@ export function pokerColorName(code:PokerCode) : string
 
 export function pokerValueName(code:PokerCode) : string
 {
-	var value = code%16;
+	var value = getPokerValue(code);
 	var vStr = "";
 	if(value == PokerCode.KING) {
 		vStr = "大王";
