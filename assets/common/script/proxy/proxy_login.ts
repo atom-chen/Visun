@@ -15,13 +15,9 @@ var proxy_login = {
     },
 
     [login_msgs.RespLogin] : function(param: any) {
-        if(param.State===1) {
-            LogicCenter.getInstance().clear();
-            LogicCenter.getInstance().init();
-            UIManager.toast("登录成功");
-        } else {
-            UIManager.toast(param.Hints || "登录失败");
-        }
+        LogicCenter.getInstance().clear();
+        LogicCenter.getInstance().init();
+        UIManager.toast("登录成功");
     },
 
     [login_msgs.UserInfo] : function(param: any) {
