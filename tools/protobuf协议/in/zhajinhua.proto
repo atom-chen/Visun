@@ -14,7 +14,8 @@ message ReqZhajinhuaFollow {
 	int64 Money = 1;
 }
 message RespZhajinhuaFollow {
-	int64 Money = 1;
+	uint64 UserId = 1;
+	int64 Money = 2;
 }
 
 //加注
@@ -22,7 +23,8 @@ message ReqZhajinhuaRaise {
 	int64 Money = 1;
 }
 message RespZhajinhuaRaise {
-	int64 Money = 1;
+	uint64 UserId = 1;
+	int64 Money = 2;
 }
 
 //看牌
@@ -30,7 +32,8 @@ message ReqZhajinhuaLook {
 	
 }
 message RespZhajinhuaLook {
-	repeated int32 Cards = 1;
+	uint64 UserId = 1;
+	repeated int32 Cards = 2;
 }
 
 //比牌

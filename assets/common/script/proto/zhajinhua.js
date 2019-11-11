@@ -289,6 +289,7 @@ $root.zhajinhua = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        RespZhajinhuaFollow.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RespZhajinhuaFollow.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         RespZhajinhuaFollow.create = function create(properties) {
@@ -298,8 +299,10 @@ $root.zhajinhua = (function() {
         RespZhajinhuaFollow.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                writer.uint32(8).uint64(message.UserId);
             if (message.Money != null && message.hasOwnProperty("Money"))
-                writer.uint32(8).int64(message.Money);
+                writer.uint32(16).int64(message.Money);
             return writer;
         };
 
@@ -315,6 +318,9 @@ $root.zhajinhua = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                case 2:
                     message.Money = reader.int64();
                     break;
                 default:
@@ -334,6 +340,9 @@ $root.zhajinhua = (function() {
         RespZhajinhuaFollow.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
             if (message.Money != null && message.hasOwnProperty("Money"))
                 if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
                     return "Money: integer|Long expected";
@@ -344,6 +353,15 @@ $root.zhajinhua = (function() {
             if (object instanceof $root.zhajinhua.RespZhajinhuaFollow)
                 return object;
             var message = new $root.zhajinhua.RespZhajinhuaFollow();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
             if (object.Money != null)
                 if ($util.Long)
                     (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
@@ -360,12 +378,23 @@ $root.zhajinhua = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.Money = options.longs === String ? "0" : 0;
+            }
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
             if (message.Money != null && message.hasOwnProperty("Money"))
                 if (typeof message.Money === "number")
                     object.Money = options.longs === String ? String(message.Money) : message.Money;
@@ -491,6 +520,7 @@ $root.zhajinhua = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        RespZhajinhuaRaise.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RespZhajinhuaRaise.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         RespZhajinhuaRaise.create = function create(properties) {
@@ -500,8 +530,10 @@ $root.zhajinhua = (function() {
         RespZhajinhuaRaise.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                writer.uint32(8).uint64(message.UserId);
             if (message.Money != null && message.hasOwnProperty("Money"))
-                writer.uint32(8).int64(message.Money);
+                writer.uint32(16).int64(message.Money);
             return writer;
         };
 
@@ -517,6 +549,9 @@ $root.zhajinhua = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                case 2:
                     message.Money = reader.int64();
                     break;
                 default:
@@ -536,6 +571,9 @@ $root.zhajinhua = (function() {
         RespZhajinhuaRaise.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
             if (message.Money != null && message.hasOwnProperty("Money"))
                 if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
                     return "Money: integer|Long expected";
@@ -546,6 +584,15 @@ $root.zhajinhua = (function() {
             if (object instanceof $root.zhajinhua.RespZhajinhuaRaise)
                 return object;
             var message = new $root.zhajinhua.RespZhajinhuaRaise();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
             if (object.Money != null)
                 if ($util.Long)
                     (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
@@ -562,12 +609,23 @@ $root.zhajinhua = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.Money = options.longs === String ? "0" : 0;
+            }
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
             if (message.Money != null && message.hasOwnProperty("Money"))
                 if (typeof message.Money === "number")
                     object.Money = options.longs === String ? String(message.Money) : message.Money;
@@ -660,6 +718,7 @@ $root.zhajinhua = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        RespZhajinhuaLook.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RespZhajinhuaLook.prototype.Cards = $util.emptyArray;
 
         RespZhajinhuaLook.create = function create(properties) {
@@ -669,8 +728,10 @@ $root.zhajinhua = (function() {
         RespZhajinhuaLook.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                writer.uint32(8).uint64(message.UserId);
             if (message.Cards != null && message.Cards.length) {
-                writer.uint32(10).fork();
+                writer.uint32(18).fork();
                 for (var i = 0; i < message.Cards.length; ++i)
                     writer.int32(message.Cards[i]);
                 writer.ldelim();
@@ -690,6 +751,9 @@ $root.zhajinhua = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                case 2:
                     if (!(message.Cards && message.Cards.length))
                         message.Cards = [];
                     if ((tag & 7) === 2) {
@@ -716,6 +780,9 @@ $root.zhajinhua = (function() {
         RespZhajinhuaLook.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
             if (message.Cards != null && message.hasOwnProperty("Cards")) {
                 if (!Array.isArray(message.Cards))
                     return "Cards: array expected";
@@ -730,6 +797,15 @@ $root.zhajinhua = (function() {
             if (object instanceof $root.zhajinhua.RespZhajinhuaLook)
                 return object;
             var message = new $root.zhajinhua.RespZhajinhuaLook();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
             if (object.Cards) {
                 if (!Array.isArray(object.Cards))
                     throw TypeError(".zhajinhua.RespZhajinhuaLook.Cards: array expected");
@@ -746,6 +822,17 @@ $root.zhajinhua = (function() {
             var object = {};
             if (options.arrays || options.defaults)
                 object.Cards = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
             if (message.Cards && message.Cards.length) {
                 object.Cards = [];
                 for (var j = 0; j < message.Cards.length; ++j)
