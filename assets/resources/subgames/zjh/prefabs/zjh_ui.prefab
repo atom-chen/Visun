@@ -3174,7 +3174,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_giveup",
     "_objFlags": 0,
     "_parent": {
       "__id__": 84
@@ -3567,7 +3567,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_look",
     "_objFlags": 0,
     "_parent": {
       "__id__": 84
@@ -3960,7 +3960,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_follow",
     "_objFlags": 0,
     "_parent": {
       "__id__": 84
@@ -4353,7 +4353,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_add",
     "_objFlags": 0,
     "_parent": {
       "__id__": 84
@@ -4746,7 +4746,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "button",
+    "_name": "btn_compare",
     "_objFlags": 0,
     "_parent": {
       "__id__": 84

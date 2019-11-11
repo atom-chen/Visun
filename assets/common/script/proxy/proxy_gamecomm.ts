@@ -4,6 +4,8 @@ import GameManager from "../model/GameManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import SceneManager from "../../../kernel/view/SceneManager";
 import { login_msgs } from "../proto/net_login";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import EventDefine from "../definer/EventDefine";
 
 //---------------------------------
 // gamecomm响应句柄
@@ -11,14 +13,10 @@ import { login_msgs } from "../proto/net_login";
 
 var proxy_gamecomm = {
 
-    [gamecomm_msgs.PlayerInfo] : function(param: any) {
-
-    },
-
     [gamecomm_msgs.ErrorResult] : function(param:any) {
         var ReqId:number = param.ReqId;
         var ErrCode:number = param.ErrCode;
-        var Hints:string = param.ErrCode;
+        var Hints:string = param.Hints;
 
         cc.log("通用错误处理", ReqId, ErrCode, Hints);
         UIManager.toast(Hints);
@@ -31,6 +29,12 @@ var proxy_gamecomm = {
                 cc.log("注册失败", Hints);
                 break;
         }
+
+        EventCenter.getInstance().fire(EventDefine.NET_ERROR_RESULT, param);
+    },
+
+    [gamecomm_msgs.PlayerInfo] : function(param: any) {
+
     },
 
     [gamecomm_msgs.RespEnterGame] : function(param:any) {

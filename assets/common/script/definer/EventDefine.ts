@@ -1,6 +1,6 @@
 //---------------------------------
 // 全局变量
 //---------------------------------
-export default class GlobalDefine {
-	
+export default class EventDefine {
+	static NET_ERROR_RESULT = "NET_ERROR_RESULT";
 }
