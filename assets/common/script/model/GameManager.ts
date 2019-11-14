@@ -9,7 +9,7 @@ import LoginMgr from "./LoginMgr";
 import { GameKindEnum, IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
 
-
+//游戏管理器
 export default class GameManager extends ModelBase {
 	private static _instance:GameManager;
 	private constructor() {

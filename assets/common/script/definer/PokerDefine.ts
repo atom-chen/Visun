@@ -1,3 +1,4 @@
+//54张扑克牌编码
 export enum PokerCode {
 	KING = 0x5F,
 	QUEEN = 0x4E,
@@ -55,6 +56,7 @@ export enum PokerCode {
 	FK_A = 0x01
 }
 
+//花色
 export enum PokerColor {
 	HT = 3,
 	HX = 2,
@@ -62,14 +64,17 @@ export enum PokerColor {
 	FK = 0
 }
 
+//花色
 export function getPokerColor(value:PokerCode) : PokerColor {
 	return Math.floor(value / 16);
 }
 
+//牌面
 export function getPokerValue(v:PokerCode) : number {
 	return v & 0x0F
 }
 
+//
 export function pokerColorName(code:PokerCode) : string
 {
 	var name:string = "";

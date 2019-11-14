@@ -14,7 +14,7 @@ import EventCenter from "../../../kernel/basic/event/EventCenter";
 import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import IChannel from "../../../kernel/net/channel/IChannel";
 
-
+//登陆管理
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 	private constructor(){

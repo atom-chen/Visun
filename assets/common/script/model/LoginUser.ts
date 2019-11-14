@@ -1,5 +1,6 @@
 import ModelBase from "../../../kernel/model/ModelBase";
 
+//登陆用户
 export default class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 

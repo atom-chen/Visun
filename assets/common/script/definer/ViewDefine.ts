@@ -1,3 +1,4 @@
+// UI路经
 export default class ViewDefine {
 	public static ChipSpr = { path:"common/prefabs/ChipSpr" };
 	//

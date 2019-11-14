@@ -16,7 +16,7 @@ import proxy_gamecomm from "../proxy/proxy_gamecomm";
 import { brcowcow_packet_define } from "../proto/net_brcowcow";
 import { zhajinhua_packet_define } from "../proto/net_zhajinhua";
 
-
+//模块管理器
 export default class LogicCenter {
     private static _instance:LogicCenter = null;
 
