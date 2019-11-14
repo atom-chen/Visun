@@ -217,7 +217,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label",
+    "_name": "lab_name",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -318,7 +318,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label",
+    "_name": "lab_money",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1

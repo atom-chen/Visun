@@ -100,13 +100,6 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_suoha",
 		dir: "suoha",
 	},
-	// "80000052" : {
-	// 	GameKind: "80000052",
-	// 	name: "看牌抢庄牛牛",
-	// 	openState: 1,
-	// 	icon: "lobby/imgs/gameico/ico_kpqznn",
-	// 	dir: "kpqznn",
-	// },
 };
 
 export default GameConfig;
