@@ -154,7 +154,7 @@ export default class GameManager extends ModelBase {
 					UIManager.openPanel(ViewDefine.bjleUI.path, null);
 					break;
 				case GameKindEnum.Blackjack:
-					UIManager.openPanel(ViewDefine.dezhouUI.path, null);
+					UIManager.openPanel(ViewDefine.UIdian21.path, null);
 					break;
 				case GameKindEnum.Longhu:
 					UIManager.openPanel(ViewDefine.UIlonghu.path, null);
