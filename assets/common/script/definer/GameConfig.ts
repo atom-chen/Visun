@@ -100,6 +100,27 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_suoha",
 		dir: "suoha",
 	},
+	[GameKindEnum.Paodekuai] : {
+		GameKind: GameKindEnum.Paodekuai,
+		name: "跑得快",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_pdk",
+		dir: "paodk",
+	},
+	[GameKindEnum.Texas] : {
+		GameKind: GameKindEnum.Texas,
+		name: "德州扑克",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_dezhou",
+		dir: "paodk",
+	},
+	[GameKindEnum.Ermj] : {
+		GameKind: GameKindEnum.Ermj,
+		name: "二人麻将",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_ermj",
+		dir: "ermj",
+	},
 };
 
 export default GameConfig;

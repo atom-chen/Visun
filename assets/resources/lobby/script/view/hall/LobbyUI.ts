@@ -37,7 +37,7 @@ export default class LobbyUI extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
 		EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
 
-		LoginMgr.getInstance().checkLogin(true);
+	//	LoginMgr.getInstance().checkLogin(true);
 
 		configure_request.GameListReq(null);
 	}

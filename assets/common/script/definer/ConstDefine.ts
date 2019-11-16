@@ -20,5 +20,8 @@ export enum GameKindEnum {
 	Water13		= 20600,	//13水
 	Qzpaijiu	= 20700,	//抢庄牌九
 	Suoha		= 20800,	//梭哈
+	Paodekuai	= 20900,	//跑得快
+	Texas		= 21000,	//德州
+	Ermj		= 21100,	//二人麻将
 	//RPG（回合制+即时制+格斗）
 }
