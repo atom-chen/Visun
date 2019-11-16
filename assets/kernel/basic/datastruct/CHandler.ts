@@ -24,18 +24,18 @@ export default class CHandler {
 		return this._target; 
 	}
 
-	public invoke(part:any=null) : void
+	public invoke(part:any=null) : any
 	{
 		var ret:any;
 		if(this._args && this._args.length > 0) {
-			if(part) {
+			if(part!=null) {
 				ret = this._fn.apply(this._target, [part].concat(this._args));
 			} else {
 				ret = this._fn.apply(this._target, this._args);
 			}
 		}
 		else {
-			if(part) {
+			if(part!=null) {
 				ret = this._fn.call(this._target, part);
 			} else {
 				ret = this._fn.call(this._target);
@@ -47,7 +47,7 @@ export default class CHandler {
 		return ret;
 	}
 
-	public invokeWith(...extra:any[]) 
+	public invokeWith(...extra:any[]) : any
 	{
 		var ret:any;
 		if(this._args && this._args.length>0){
