@@ -11,6 +11,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class zjhUI extends BaseComponent {
+
     private _handcardList:Array<HandCard> = [];
     private _playerList:Array<PlayerUI> = [];
     
@@ -26,27 +27,33 @@ export default class zjhUI extends BaseComponent {
         this.initNetEvent();
     }
 
+    //准备
     onRespZhajinhuaReady(param:any) {
 
     }
 
-    onRespZhajinhuaCompare(param:any) {
-
-    }
-
+    //跟注
     onRespZhajinhuaFollow(param:any) {
 
     }
 
-    onRespZhajinhuaGiveup(param:any) {
+    //加注
+    onRespZhajinhuaRaise(param:any) {
 
     }
 
+    //看牌
     onRespZhajinhuaLook(param:any) {
 
     }
 
-    onRespZhajinhuaRaise(param:any) {
+    //比牌
+    onRespZhajinhuaCompare(param:any) {
+
+    }
+
+    //弃牌
+    onRespZhajinhuaGiveup(param:any) {
 
     }
 
