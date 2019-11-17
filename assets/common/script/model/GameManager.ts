@@ -139,19 +139,19 @@ export default class GameManager extends ModelBase {
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
 			switch(gameKind) {
 				case GameKindEnum.BrCowCow:
-					UIManager.openPanel(ViewDefine.brnnUI.path, null);
+					UIManager.openPanel(ViewDefine.UIbrnn.path, null);
 					break;
 				case GameKindEnum.Landlord:
-					UIManager.openPanel(ViewDefine.ddzUI.path, null);
+					UIManager.openPanel(ViewDefine.UIddz.path, null);
 					break;
 				case GameKindEnum.BirdBeast:
-					UIManager.openPanel(ViewDefine.fqzsUI.path, null);
+					UIManager.openPanel(ViewDefine.UIfqzs.path, null);
 					break;
 				case GameKindEnum.Zhajinhua:
-					UIManager.openPanel(ViewDefine.zjhUI.path, null);
+					UIManager.openPanel(ViewDefine.UIzjh.path, null);
 					break;
 				case GameKindEnum.Baccarat:
-					UIManager.openPanel(ViewDefine.bjleUI.path, null);
+					UIManager.openPanel(ViewDefine.UIbjle.path, null);
 					break;
 				case GameKindEnum.Blackjack:
 					UIManager.openPanel(ViewDefine.UIdian21.path, null);
@@ -169,7 +169,7 @@ export default class GameManager extends ModelBase {
 					UIManager.openPanel(ViewDefine.UIshui13.path, null);
 					break;
 				case GameKindEnum.Redblack:
-					UIManager.openPanel(ViewDefine.HongheiUI.path, null);
+					UIManager.openPanel(ViewDefine.UIhonghei.path, null);
 					break;
 				case GameKindEnum.Sangong:
 					UIManager.openPanel(ViewDefine.UIsangong.path, null);
@@ -184,13 +184,13 @@ export default class GameManager extends ModelBase {
 					UIManager.openPanel(ViewDefine.UIpdk.path, null);
 					break;
 				case GameKindEnum.Texas:
-					UIManager.openPanel(ViewDefine.dezhouUI.path, null);
+					UIManager.openPanel(ViewDefine.UItexas.path, null);
 					break;
 				case GameKindEnum.Ermj:
 					UIManager.openPanel(ViewDefine.UIermj.path, null);
 					break;
 				case GameKindEnum.Buyu:
-					UIManager.openPanel(ViewDefine.buyuUI.path, null);
+					UIManager.openPanel(ViewDefine.UIbuyu.path, null);
 					break;
 				default:
 					cc.warn("no ui", gameKind);

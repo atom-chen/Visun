@@ -13,16 +13,16 @@ export default class ViewDefine {
 	public static LoginUI = { path:"lobby/prefabs/UILogin" };
 	public static UIRoom = { path:"lobby/prefabs/UIRoom" };
 	//
-	public static ddzUI = { path:"subgames/ddz/prefabs/ddz_ui" };
-	public static brnnUI = { path:"subgames/brnn/prefabs/brnn_ui" };
-	public static fqzsUI = { path:"subgames/fqzs/prefabs/fqzs_ui" };
-	public static zjhUI = { path:"subgames/zjh/prefabs/zjh_ui" };
-	public static bjleUI = { path:"subgames/bjle/prefabs/bjle_ui" };
-	public static buyuUI = { path:"subgames/buyu/prefabs/buyuUI" };
-	public static dezhouUI = { path:"subgames/dezhou/prefabs/UIDezhou" };
+	public static UIddz = { path:"subgames/ddz/prefabs/UIddz" };
+	public static UIbrnn = { path:"subgames/brnn/prefabs/UIbrnn" };
+	public static UIfqzs = { path:"subgames/fqzs/prefabs/UIfqzs" };
+	public static UIzjh = { path:"subgames/zjh/prefabs/UIzjh" };
+	public static UIbjle = { path:"subgames/bjle/prefabs/UIbjle" };
+	public static UIbuyu = { path:"subgames/buyu/prefabs/UIbuyu" };
+	public static UItexas = { path:"subgames/dezhou/prefabs/UItexas" };
 	public static UIdian21 = { path:"subgames/dian21/prefabs/UIdian21" };
 	public static UIerba = { path:"subgames/erba/prefabs/UIerba" };
-	public static HongheiUI = { path:"subgames/honhei/prefabs/UIHonghei" };
+	public static UIhonghei = { path:"subgames/honhei/prefabs/UIhonghei" };
 	public static UIjskb = { path:"subgames/jskb/prefabs/UIjskb" };
 	public static UIlonghu = { path:"subgames/longhu/prefabs/UIlonghu" };
 	public static UIpaijiu = { path:"subgames/paijiu/prefabs/UIpaijiu" };

@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ddz_ui",
+    "_name": "UIddz",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
