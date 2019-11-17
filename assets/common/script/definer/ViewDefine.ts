@@ -1,7 +1,7 @@
 // UI路经
 export default class ViewDefine {
 	public static ChipSpr = { path:"common/prefabs/ChipSpr" };
-	public static LoginUI = { path:"common/prefabs/UILogin" };
+	public static UILogin = { path:"common/prefabs/UILogin" };
 	//
 	public static LobbyUI = { path:"lobby/prefabs/UIHall" };
 	public static SafeboxUI = { path:"lobby/prefabs/UISafebox" };
