@@ -7,12 +7,27 @@ export default class SingleDispatcher {
 	protected _observer = [];
 	protected _responders = {};
 
-	public setObserver(observer:any) : void
+	public addObserver(observer:any) : void
 	{
 		if(this._observer.indexOf(observer) < 0) {
 			this._observer.push(observer)
 		}
 	}
+
+	public removeObserver(observer:any) : void 
+	{
+		var idx = this._observer.indexOf(observer);
+		if(idx>=0) {
+			this._observer.splice(idx, 1);
+		}
+	}
+
+	public clearObserver() : void
+	{
+		this._observer.length = 0;
+		this._observer = [];
+	}
+
 
 	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void
 	{
@@ -33,11 +48,12 @@ export default class SingleDispatcher {
 		}
 	}
 
-	public removeAllResponder() : void
+	public clearResponder() : void
 	{
 		this._responders = {};
 	}
 
+	
 	public fire(cmd:string|number, info:any) : void
 	{
 		if(cmd===null || cmd===undefined){

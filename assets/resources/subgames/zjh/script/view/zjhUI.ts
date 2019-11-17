@@ -3,15 +3,24 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/proto/net_zhajinhua";
 import GameManager from "../../../../../common/script/model/GameManager";
+import HandCard from "../../../../../common/script/view/HandCard";
+import PlayerUI from "../../../../../common/script/view/PlayerUI";
 
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class zjhUI extends BaseComponent {
+    private _handcardList:Array<HandCard> = [];
+    private _playerList:Array<PlayerUI> = [];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+
+        for(var i = 0; i <= 4; i++) {
+            this._handcardList.push(this.m_ui["HandCard"+i].getComponent(HandCard));
+            this._playerList.push(this.m_ui["PlayerUI"+i].getComponent(PlayerUI));
+        }
 
         this.initUIEvent();
         this.initNetEvent();

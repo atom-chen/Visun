@@ -189,6 +189,9 @@ export default class GameManager extends ModelBase {
 				case GameKindEnum.Ermj:
 					UIManager.openPanel(ViewDefine.UIermj.path, null);
 					break;
+				case GameKindEnum.Buyu:
+					UIManager.openPanel(ViewDefine.buyuUI.path, null);
+					break;
 				default:
 					cc.warn("no ui", gameKind);
 					break;

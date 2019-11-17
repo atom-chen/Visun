@@ -30,9 +30,9 @@ export default class LogicCenter {
         g_leafProcessor.registCmds(gamecomm_packet_define);
         g_leafProcessor.registCmds(brcowcow_packet_define);
         g_leafProcessor.registCmds(zhajinhua_packet_define);
-        g_leafProcessor.getDispatcher().setObserver(proxy_login);
-        g_leafProcessor.getDispatcher().setObserver(proxy_configure);
-        g_leafProcessor.getDispatcher().setObserver(proxy_gamecomm);
+        g_leafProcessor.getDispatcher().addObserver(proxy_login);
+        g_leafProcessor.getDispatcher().addObserver(proxy_configure);
+        g_leafProcessor.getDispatcher().addObserver(proxy_gamecomm);
     }
     
     public static getInstance() : LogicCenter {

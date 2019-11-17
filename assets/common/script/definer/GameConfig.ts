@@ -121,6 +121,13 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_ermj",
 		dir: "ermj",
 	},
+	[GameKindEnum.Buyu] : {
+		GameKind: GameKindEnum.Buyu,
+		name: "捕鱼",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "buyu",
+	},
 };
 
 export default GameConfig;
