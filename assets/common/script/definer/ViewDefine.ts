@@ -1,6 +1,7 @@
 // UI路经
 export default class ViewDefine {
 	public static ChipSpr = { path:"common/prefabs/ChipSpr" };
+	public static LoginUI = { path:"common/prefabs/UILogin" };
 	//
 	public static LobbyUI = { path:"lobby/prefabs/UIHall" };
 	public static SafeboxUI = { path:"lobby/prefabs/UISafebox" };
@@ -10,7 +11,6 @@ export default class ViewDefine {
 	public static WithdrawUI = { path:"lobby/prefabs/UIWithdraw" };
 	public static SpreadUI = { path:"lobby/prefabs/UISpread" };
 	public static PersonUI = { path:"lobby/prefabs/UIPerson" };
-	public static LoginUI = { path:"lobby/prefabs/UILogin" };
 	public static UIRoom = { path:"lobby/prefabs/UIRoom" };
 	//
 	public static UIddz = { path:"subgames/ddz/prefabs/UIddz" };
