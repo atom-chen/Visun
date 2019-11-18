@@ -1,5 +1,4 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import ChipBox from "../../../../../common/script/view/ChipBox";
 import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import { brcowcow_request, brcowcow_msgs } from "../../../../../common/script/proto/net_brcowcow";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
@@ -8,6 +7,7 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import UIManager from "../../../../../kernel/view/UIManager";
+import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 
 
 
@@ -18,7 +18,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BrnnUI extends BaseComponent {
 
-	compBox:ChipBox = null;
+	compBox:CpnChipbox = null;
 	_rule:number[] = [1,3,5,300,800];
 
 	_loadedRes:any;
@@ -62,9 +62,8 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.area3, function(){ this.bet(3); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area4, function(){ this.bet(4); }, this);
 		
-		var compBox = this.m_ui.ChipBox.getComponent(ChipBox);
-		compBox.setChipValues(this._rule);
-		this.compBox = compBox;
+		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
+		this.compBox.setChipValues(this._rule);
 
 		EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, (param)=>{
 			if(param.IsSuccess) {

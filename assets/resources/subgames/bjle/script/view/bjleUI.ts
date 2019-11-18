@@ -1,22 +1,22 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import ChipBox from "../../../../../common/script/view/ChipBox";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
+import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class bjleUI extends BaseComponent {
-	_chipBox:ChipBox;
+	_chipBox:CpnChipbox;
 	_players : any[] = [];
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		var rule = [1,10,20,100,500];
-		this._chipBox = this.m_ui.ChipBox.getComponent(ChipBox);
+		this._chipBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
 		this._chipBox.setChipValues(rule);
 
 		this.initUIEvents();

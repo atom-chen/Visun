@@ -6,7 +6,6 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Procedure from "../../../../../kernel/promise/Procedure";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import HeroUI from "../../../../../common/script/view/HeroUI";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
@@ -15,7 +14,6 @@ import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_login";
 import { configure_msgs, configure_request } from "../../../../../common/script/proto/net_configure";
-import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 
 const {ccclass, property} = cc._decorator;
@@ -32,7 +30,7 @@ export default class LobbyUI extends BaseComponent {
 		this.initUiEvents();
 		this.refleshGameList();
 		this.refleshUI(null);
-		this.testSpine();
+	//	this.testSpine();
 
 		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
 		EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
@@ -67,7 +65,7 @@ export default class LobbyUI extends BaseComponent {
 	}
 
 	private refleshUI(data:any) {
-		this.m_ui.HeroUI.getComponent(HeroUI).setUserInfo(LoginUser.getInstance());
+		
 	}
 
 	private initUiEvents() {
@@ -95,10 +93,7 @@ export default class LobbyUI extends BaseComponent {
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.SpreadUI.path, true, null); 
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.HeroUI, function(){ 
-			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.PersonUI.path, true, null); 
-		}, this);
+		
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
 			UIManager.toast("尚未实现"); 
 		}, this);

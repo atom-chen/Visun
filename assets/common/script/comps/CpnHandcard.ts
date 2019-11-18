@@ -48,20 +48,7 @@ export default class CpnHandcard extends cc.Component {
     }
 
 	private _findTouchedCards (touch:cc.Vec3) : void {
-		var cardArr = this.node.children;
-        for (var k=0; k<cardArr.length; k++) {
-            var box:cc.Rect = cardArr[k].getBoundingBox();
-            if (box.contains(cc.v2(touch.x, touch.y))) {
-                if(k<cardArr.length-1){
-                    if(cardArr[k+1].getBoundingBox().xMin > touch.x){
-                        cardArr[k].getComponent("PokerCard").state = this._nowState;
-                    }
-                }
-                else {
-                    cardArr[k].getComponent("PokerCard").state = this._nowState;
-                }
-			}
-        }
+		
     }
 
     private touchBegan(event:any) : void {
