@@ -1,16 +1,15 @@
 // UI路经
 export default class ViewDefine {
-	public static ChipSpr = { path:"common/prefabs/ChipSpr" };
 	public static UILogin = { path:"common/prefabs/UILogin" };
 	//
-	public static LobbyUI = { path:"lobby/prefabs/UIHall" };
-	public static SafeboxUI = { path:"lobby/prefabs/UISafebox" };
-	public static EmailUI = { path:"lobby/prefabs/UIEmail" };
-	public static ShopUI = { path:"lobby/prefabs/UIShop" };
-	public static KefuUI = { path:"lobby/prefabs/UIKefu" };
-	public static WithdrawUI = { path:"lobby/prefabs/UIWithdraw" };
-	public static SpreadUI = { path:"lobby/prefabs/UISpread" };
-	public static PersonUI = { path:"lobby/prefabs/UIPerson" };
+	public static UIHall = { path:"lobby/prefabs/UIHall" };
+	public static UISafebox = { path:"lobby/prefabs/UISafebox" };
+	public static UIEmail = { path:"lobby/prefabs/UIEmail" };
+	public static UIShop = { path:"lobby/prefabs/UIShop" };
+	public static UIKefu = { path:"lobby/prefabs/UIKefu" };
+	public static UIWithdraw = { path:"lobby/prefabs/UIWithdraw" };
+	public static UISpread = { path:"lobby/prefabs/UISpread" };
+	public static UIPerson = { path:"lobby/prefabs/UIPerson" };
 	public static UIRoom = { path:"lobby/prefabs/UIRoom" };
 	//
 	public static UIddz = { path:"subgames/ddz/prefabs/UIddz" };

@@ -3,6 +3,6 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class RechargeUI extends BaseComponent {
+export default class UIPerson extends BaseComponent {
 
 }

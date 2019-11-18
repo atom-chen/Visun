@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "LobbyUI",
+    "_name": "UIHall",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

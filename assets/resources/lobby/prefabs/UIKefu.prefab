@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "KefuUI",
+    "_name": "UIKefu",
     "_objFlags": 0,
     "_parent": null,
     "_children": [

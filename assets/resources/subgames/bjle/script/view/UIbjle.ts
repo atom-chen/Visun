@@ -8,7 +8,7 @@ import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class bjleUI extends BaseComponent {
+export default class UIbjle extends BaseComponent {
 	_chipBox:CpnChipbox;
 	_players : any[] = [];
 

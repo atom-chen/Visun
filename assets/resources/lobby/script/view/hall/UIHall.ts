@@ -19,7 +19,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class LobbyUI extends BaseComponent {
+export default class UIHall extends BaseComponent {
 	@property(cc.Prefab)
 	gameBtn: cc.Prefab = null;
 
@@ -71,27 +71,27 @@ export default class LobbyUI extends BaseComponent {
 	private initUiEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.SafeboxUI.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UISafebox.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.EmailUI.path, true, null); this.testProcedure(); 
+			UIManager.openPopwnd(ViewDefine.UIEmail.path, true, null); this.testProcedure(); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.ShopUI.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIShop.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.KefuUI.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIKefu.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.WithdrawUI.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIWithdraw.path, true, null); 
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.SpreadUI.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UISpread.path, true, null); 
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 

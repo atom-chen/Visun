@@ -3,8 +3,6 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class KefuUI extends BaseComponent {
-	onLoad() {
-		
-	}
+export default class UIShop extends BaseComponent {
+
 }
