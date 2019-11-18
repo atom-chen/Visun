@@ -1,5 +1,6 @@
 // UI路经
 export default class ViewDefine {
+	public static CpnChip = { path:"common/prefabs/CpnChip"};
 	public static UILogin = { path:"common/prefabs/UILogin" };
 	//
 	public static UIHall = { path:"lobby/prefabs/UIHall" };

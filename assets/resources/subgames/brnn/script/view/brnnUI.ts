@@ -8,6 +8,7 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
+import CpnChip from "../../../../../common/script/comps/CpnChip";
 
 
 
@@ -37,7 +38,7 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		var self = this;
-		cc.loader.loadRes(ViewDefine.ChipSpr.path, cc.Prefab, function (err, loadedRes) {
+		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
 			self._loadedRes = cc.instantiate(loadedRes);
 		});
@@ -69,7 +70,7 @@ export default class BrnnUI extends BaseComponent {
 			if(param.IsSuccess) {
 				var idx = this.compBox.getSelectedIndex();
 				var chip = this._pool.newObject();
-				chip.getComponent("ChipSpr").value = this._rule[idx-1];
+				chip.getComponent(CpnChip).setChipValue(this._rule[idx-1]);
 				this.m_ui["chiplayer"].addChild(chip);
 				GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, margin);
 			} else {
