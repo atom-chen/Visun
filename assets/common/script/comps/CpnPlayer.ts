@@ -9,7 +9,7 @@ export default class CpnPlayer extends BaseComponent {
     @property(cc.Label)
     label_name: cc.Label = null;
     @property(cc.Label)
-    label_id: cc.Label = null;
+    label_money: cc.Label = null;
 
     private _userId:number = 0;
     private _clickCallback:Function = null;
@@ -33,11 +33,14 @@ export default class CpnPlayer extends BaseComponent {
 
     public setUserId(uid:number) {
         this._userId = uid;
-        this.label_id.string = uid.toString();
     }
 
     public setName(name:string) {
         this.label_name.string = name;
+    }
+
+    public setMoney(money:number) {
+        this.label_money.string = money.toString();
     }
 
 }
