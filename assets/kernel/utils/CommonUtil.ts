@@ -214,6 +214,7 @@ export default class CommonUtil {
 
 	static limitNum(v:number, minV:number, maxV:number) : number
 	{
+		if(minV>maxV){ var tmp = minV; minV = maxV; maxV = tmp; }
 		if(maxV!==null) { if(v>maxV) v = maxV; }
 		if(minV!==null) { if(v<minV) v = minV; }
 		return v;

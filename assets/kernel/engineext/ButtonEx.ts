@@ -5,7 +5,7 @@ if(cc.sys.isNative)
 	
 	if(cc.Button["hook_onTouchEnded"]) {
 		cc.Button["hook_onTouchEnded"]( ()=>{
-			AudioManager.getInstance().playEffectSync("");
+			AudioManager.getInstance().playEffectAsync("");
 		} );
 	}
 
@@ -29,7 +29,7 @@ else
 				}
 				else {
 					cc.log("------- default click -------");
-					AudioManager.getInstance().playEffectSync("", true);
+					AudioManager.getInstance().playEffectAsync("", true);
 				}
 			}, this);
 		}

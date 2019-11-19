@@ -23,16 +23,11 @@ export default class BrnnUI extends BaseComponent {
 	_rule:number[] = [1,3,5,300,800];
 
 	_loadedRes:any;
-	_pool:SimplePool = new SimplePool(():cc.Prefab=>{
+	_pool:SimplePool = new SimplePool(():cc.Node=>{
 		var obj = cc.instantiate(this._loadedRes);
 		obj.scale = 0.4;
 		return obj;
 	});
-
-	private bet(areaId:number) {
-		var idx = this.compBox.getSelectedIndex();
-		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]})
-	}
 	
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -40,7 +35,7 @@ export default class BrnnUI extends BaseComponent {
 		var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
-			self._loadedRes = cc.instantiate(loadedRes);
+			self._loadedRes = loadedRes;
 		});
 
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -77,6 +72,11 @@ export default class BrnnUI extends BaseComponent {
 				UIManager.toast(param.Reason);
 			}
 		}, this);
+	}
+
+	private bet(areaId:number) {
+		var idx = this.compBox.getSelectedIndex();
+		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]})
 	}
 
 	onDestroy(){

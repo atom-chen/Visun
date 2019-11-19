@@ -91,7 +91,7 @@ export default class AudioManager {
         });
     }
 
-    playMusicSync(path: string, loop: boolean) {
+    playMusicAsync(path: string, loop: boolean) {
         if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play music", path, loop);
@@ -112,7 +112,7 @@ export default class AudioManager {
         });
     }
 
-    playEffectSync(path: string, loop:boolean = false) {
+    playEffectAsync(path: string, loop:boolean = false) {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play effect", path);
