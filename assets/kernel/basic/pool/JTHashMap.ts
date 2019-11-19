@@ -1,5 +1,5 @@
-import { JTIPoolObject } from "../pool/JTIPoolObject";
-import JTPool from "../pool/JTPool";
+import { JTIPoolObject } from "./JTIPoolObject";
+import JTPool from "./JTPool";
 
 
 export default class JTHashMap implements JTIPoolObject

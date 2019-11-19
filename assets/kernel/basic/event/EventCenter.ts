@@ -16,6 +16,7 @@ export default class EventCenter {
 		EventCenter._instance = null;
 	}
 
+
 	public getEvent(evtName:string|number, cbFunc:Function, thisObj:any) : number
 	{
 		var evtList = this._events[evtName];
@@ -102,18 +103,13 @@ export default class EventCenter {
 		var evtList = this._events[evtName];
 		if(!evtList){ return; }
 
-		if(arglist.length < 1) 
-		{
-			for(var i = 0, len = evtList.length; i < len; i++)
-			{
+		if(arglist.length < 1) {
+			for(var i = 0, len = evtList.length; i < len; i++) {
 				var listener = evtList[i];
 				listener.callBack.call(listener.target);
 			}
-		}
-		else 
-		{
-			for(var i = 0, len = evtList.length; i < len; i++)
-			{
+		} else {
+			for(var i = 0, len = evtList.length; i < len; i++) {
 				var listener = evtList[i];
 				listener.callBack.apply(listener.target, arglist);
 			}

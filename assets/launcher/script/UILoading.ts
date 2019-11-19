@@ -12,7 +12,7 @@ export default class UILoading extends cc.Component {
     @property(cc.Label)
     labelProgress: cc.Label = null;
 
-    private _tmr: number;
+    private _tmr: number = 0;
 
     onLoad () {
         LoadCenter.getInstance().retainNodeRes(this.node);
@@ -34,7 +34,7 @@ export default class UILoading extends cc.Component {
         this._tmr = 0;
         this.labelProgress.string = sub + "/" + total;
         if(sub===total) {
-            TimerManager.delayFrame(2, new CHandler(this, this.onHideView));
+            this._tmr = TimerManager.delayFrame(2, new CHandler(this, this.onHideView));
         }
     }
 

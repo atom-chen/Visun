@@ -4,28 +4,28 @@
 import EventCenter from "./EventCenter";
 
 export default class SingleDispatcher {
-	protected _observer = [];
+	protected _observers = [];
 	protected _responders = {};
 
 	public addObserver(observer:any) : void
 	{
-		if(this._observer.indexOf(observer) < 0) {
-			this._observer.push(observer)
+		if(this._observers.indexOf(observer) < 0) {
+			this._observers.push(observer)
 		}
 	}
 
 	public removeObserver(observer:any) : void 
 	{
-		var idx = this._observer.indexOf(observer);
+		var idx = this._observers.indexOf(observer);
 		if(idx>=0) {
-			this._observer.splice(idx, 1);
+			this._observers.splice(idx, 1);
 		}
 	}
 
 	public clearObserver() : void
 	{
-		this._observer.length = 0;
-		this._observer = [];
+		this._observers.length = 0;
+		this._observers = [];
 	}
 
 
@@ -61,9 +61,9 @@ export default class SingleDispatcher {
 			return;
 		}
 
-		for(var i in this._observer) {
-			if(this._observer[i][cmd]){
-				this._observer[i][cmd](info);
+		for(var i in this._observers) {
+			if(this._observers[i][cmd]){
+				this._observers[i][cmd](info);
 			}
 		}
 
@@ -71,8 +71,7 @@ export default class SingleDispatcher {
 			var callback = this._responders[cmd];
 			if(callback.thisObj){
 				callback.func.call(callback.thisObj, info);
-			}
-			else{
+			} else {
 				callback.func(info);
 			}
 		}
