@@ -1,3 +1,5 @@
+import CommonUtil from "../../../kernel/utils/CommonUtil";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -7,8 +9,22 @@ export default class CpnPoker extends cc.Component {
     private _state:number = 0;
     private _curFace:boolean = true;
 
+
+    private onResLoaded(err, atlas){
+        if(err) { cc.log("error: "+err); return; }
+        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+this._code);
+        this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
+    }
+
     setCode(v:number) {
         this._code = v;
+
+        var res = cc.loader.getRes("common/imgs/poker", cc.SpriteAtlas);
+        if(res) {
+            this.onResLoaded(null, res);
+            return;
+        }
+        cc.loader.loadRes("common/imgs/poker", cc.SpriteAtlas, this.onResLoaded.bind(this));
     }
 
     getCode() : number {
@@ -42,7 +58,7 @@ export default class CpnPoker extends cc.Component {
         return this._state;
     }
 
-    public toggleState() : void {
+    toggleState() : void {
         if(this._state===0) {
             this.setState(1);
         }

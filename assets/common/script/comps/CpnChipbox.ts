@@ -15,6 +15,7 @@ export default class CpnChipbox extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip5, function(){ this.onSelect(5); }, this);
+        this.setSelectedIndex(1);
     }
 
     private onSelect(idx:number) {
@@ -31,15 +32,32 @@ export default class CpnChipbox extends BaseComponent {
         return this.selectedIndex;
     }
 
+    public setSelectedIndex(v:number) {
+        this.selectedIndex = v;
+        this.onSelect(v);
+    }
+
+    private _values = null;
     public setChipValues(values:number[]) {
-        var self = this
-        cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
-            if(err) { cc.log("error: "+err); return; }
+        if(!this._values) {
+            CommonUtil.traverseNodes(this.node, this.m_ui);
+        }
+        this._values = values; 
+
+        var res = cc.loader.getRes("common/imgs/chip", cc.SpriteAtlas);
+        if(res) {
+            this.onResLoaded(null, res);
+            return;
+        }
+        cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, this.onResLoaded.bind(this));
+    }
+
+    private onResLoaded(err, atlas){
+        if(err) { cc.log("error: "+err); return; }
             for(var i=1; i<=5; i++){
-                var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+values[i-1]);
-                self.m_ui["chip"+i].getComponent(cc.Sprite).getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
+                var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+this._values[i-1]);
+                this.m_ui["chip"+i].getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
             }
-        });
     }
 
 }
