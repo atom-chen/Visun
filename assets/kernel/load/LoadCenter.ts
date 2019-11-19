@@ -128,79 +128,10 @@ export default class LoadCenter {
 
 	//------------------------------------------------------------------------------
 
-	// 不会进行引用计数管理
-	loadRes(url: string, type: typeof cc.Asset, callback): void {
-		if (!url || !type || !callback) {
-			cc.log("参数错误");
-			return;
-		}
-
-		cc.loader.loadRes(url, type, (err, asset) => {
-			if (err) {
-				cc.log(`[资源加载] 错误 ${err}`);
-				return;
-			}
-			callback(asset);
-		});
-	}
-
-	// 不会进行引用计数管理
-	loadResArr(paths: Array<string>, callfun: Function) {
-		cc.loader.loadResArray(paths, function(err, assets){
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			callfun(assets);
-		}.bind(this));
-	}
-
-	// 不会进行引用计数管理
-	loadAudioClip(path: string, callfun) {
-		cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			callfun(audioclip);
-		});
-	}
-
-	// 选择性进行引用计数管理
-	loadSpriteFrame(path: string, callfun: Function, retainRes: boolean = false) {
-		cc.loader.loadRes(path, cc.SpriteFrame, (err, spriteFrame) => {
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			if (retainRes) {
-				this.retatinRes(spriteFrame._textureFilename);
-			}
-			callfun(spriteFrame);
-		});
-	}
-
-	// 选择性进行引用计数管理
-	loadSpriteFrames(paths: Array<string>, callfun: Function, retainRes: boolean = false) {
-		cc.loader.loadResArray(paths, cc.SpriteFrame, function(err, spriteFrames){
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			if (retainRes) {
-				spriteFrames.forEach((spriteFrame) => {
-					this.retatinRes(spriteFrame._textureFilename);
-				});
-				
-			}
-			callfun(spriteFrames);
-		}.bind(this));
-	}
-
 	// 进行引用计数管理
-	loadStaticRes(url: string, type: typeof cc.Asset, tag: string, callback) {
+	loadStaticRes(url: string, type: typeof cc.Asset, tag: string, callback:Function) {
 		if (!url || !type || !callback) {
-			cc.log("参数错误");
+			cc.warn("参数错误");
 			return;
 		}
 		cc.loader.loadRes(url, type, (err, asset) => {
@@ -263,7 +194,6 @@ export default class LoadCenter {
 		}
 		let sprite = target.getComponent(cc.Sprite);
 		this._replaceTagetTexture(sprite, "spriteFrame", spriteFrame);
-		this.gc();
 	}
 
 	// 进行引用计数管理
@@ -279,6 +209,7 @@ export default class LoadCenter {
 		}
 
 		let button = target.getComponent(cc.Button);
+
 		if (normalSprite) {
 			this._replaceTagetTexture(button, "normalSprite", normalSprite);
 		}
@@ -294,7 +225,6 @@ export default class LoadCenter {
 		if (disabledSprite) {
 			this._replaceTagetTexture(button, "disabledSprite", disabledSprite);
 		}
-		this.gc();
 	}
 
 

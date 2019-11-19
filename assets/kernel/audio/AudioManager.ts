@@ -32,6 +32,16 @@ export default class AudioManager {
         this.effects = [];
     }
 
+    loadAudioClip(path:string, callfun:Function) {
+		cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
+			if (err) {
+				cc.log(err);
+				return;
+			}
+			callfun(audioclip);
+		});
+	}
+
 
     enableMusic(flag:boolean) {
         this._musicEnable = flag;
@@ -95,7 +105,7 @@ export default class AudioManager {
         if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play music", path, loop);
-        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
+        this.loadAudioClip(path, function (audioclip) {
             this.playMusic(audioclip, loop);
         }.bind(this));
     }
@@ -116,7 +126,7 @@ export default class AudioManager {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
         cc.log("play effect", path);
-        LoadCenter.getInstance().loadAudioClip(path, function (audioclip) {
+        this.loadAudioClip(path, function (audioclip) {
             this.playEffect(audioclip, loop);
         }.bind(this));
     }
