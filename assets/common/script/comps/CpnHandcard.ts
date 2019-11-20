@@ -1,9 +1,12 @@
 import { PokerCode } from "../definer/PokerDefine";
+import CpnPoker from "./CpnPoker";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class CpnHandcard extends cc.Component {
+    @property(cc.Prefab)
+    pokerTemplate: cc.Prefab = null;
 
     private _touchBegan:cc.Vec3;
     private _touchMoved:cc.Vec3;
@@ -40,11 +43,20 @@ export default class CpnHandcard extends cc.Component {
     }
 
     private addCard(cardV:PokerCode) {
-
+        var card = cc.instantiate(this.pokerTemplate);
+        var comp:CpnPoker = card.getComponent(CpnPoker);
+        comp.setCode(cardV);
+        this.node.addChild(card);
     }
 
     private delCard(cardV:PokerCode) {
-
+        var childs = this.node.children;
+        for(var i in childs) {
+            if(childs[i].getComponent(CpnPoker).getCode()==cardV) {
+                childs[i].removeFromParent(true);
+                break;
+            }
+        }
     }
 
 	private _findTouchedCards (touch:cc.Vec3) : void {

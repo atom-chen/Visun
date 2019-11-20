@@ -1,4 +1,5 @@
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import { getPokerValue, getPokerColor } from "../definer/PokerDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,7 +13,10 @@ export default class CpnPoker extends cc.Component {
 
     private onResLoaded(err, atlas){
         if(err) { cc.log("error: "+err); return; }
-        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+this._code);
+        var v = getPokerValue(this._code);
+        var c = getPokerColor(this._code);
+        var n = v*10+c+1;
+        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+n);
         this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
     }
 

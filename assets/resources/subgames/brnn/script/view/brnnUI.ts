@@ -9,6 +9,8 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
+import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
+import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 
 
 
@@ -72,6 +74,8 @@ export default class BrnnUI extends BaseComponent {
 				UIManager.toast(param.Reason);
 			}
 		}, this);
+
+		this.m_ui.CpnHandcard.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A])
 	}
 
 	private bet(areaId:number) {
