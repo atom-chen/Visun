@@ -5,7 +5,6 @@ import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import SceneManager from "../../../kernel/view/SceneManager";
 import { login_msgs } from "../proto/net_login";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
-import EventDefine from "../definer/EventDefine";
 
 //---------------------------------
 // gamecomm响应句柄
@@ -19,18 +18,10 @@ var proxy_gamecomm = {
         var Hints:string = param.Hints;
 
         cc.log("通用错误处理", ReqId, ErrCode, Hints);
-        UIManager.toast(Hints);
 
-        switch(ReqId) {
-            case login_msgs.ReqLogin:
-                cc.log("登录失败", Hints);
-                break;
-            case login_msgs.ReqRegister:
-                cc.log("注册失败", Hints);
-                break;
+        if( !EventCenter.neterrInstance().fire(ReqId, ErrCode, Hints) ) {
+            UIManager.toast(Hints);
         }
-
-        EventCenter.getInstance().fire(EventDefine.NET_ERROR_RESULT, param);
     },
 
     [gamecomm_msgs.PlayerInfo] : function(param: any) {
