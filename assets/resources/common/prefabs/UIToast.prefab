@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Toast",
+    "_name": "UIToast",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -60,7 +60,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 640,
+      "x": 667,
       "y": 26,
       "z": 0
     },

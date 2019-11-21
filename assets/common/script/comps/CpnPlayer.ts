@@ -43,4 +43,8 @@ export default class CpnPlayer extends BaseComponent {
         this.label_money.string = money.toString();
     }
 
+    public setHeadImg(headImg:string) {
+        
+    }
+
 }

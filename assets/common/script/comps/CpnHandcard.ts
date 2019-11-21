@@ -20,7 +20,7 @@ export default class CpnHandcard extends cc.Component {
     }
 
     public clearCards() {
-
+        this.node.removeAllChildren();
     }
     
     public resetCards(cards:Array<PokerCode>) {

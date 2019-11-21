@@ -54,10 +54,10 @@ export default class CpnChipbox extends BaseComponent {
 
     private onResLoaded(err, atlas){
         if(err) { cc.log("error: "+err); return; }
-            for(var i=1; i<=5; i++){
-                var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+this._values[i-1]);
-                this.m_ui["chip"+i].getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
-            }
+        for(var i=1; i<=5; i++){
+            var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+this._values[i-1]);
+            this.m_ui["chip"+i].getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
+        }
     }
 
 }

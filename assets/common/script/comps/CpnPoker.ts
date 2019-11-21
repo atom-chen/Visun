@@ -13,16 +13,14 @@ export default class CpnPoker extends cc.Component {
 
     private onResLoaded(err, atlas){
         if(err) { cc.log("error: "+err); return; }
-        var v = getPokerValue(this._code);
-        var c = getPokerColor(this._code);
-        var n = v*10+c+1;
+        var face = 0
+        if(this._curFace) { face = this._code; }
+        var n = getPokerValue(face) * 10 + getPokerColor(face) + 1;
         var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+n);
         this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
     }
 
-    setCode(v:number) {
-        this._code = v;
-
+    private refresh() {
         var res = cc.loader.getRes("common/imgs/poker", cc.SpriteAtlas);
         if(res) {
             this.onResLoaded(null, res);
@@ -31,20 +29,18 @@ export default class CpnPoker extends cc.Component {
         cc.loader.loadRes("common/imgs/poker", cc.SpriteAtlas, this.onResLoaded.bind(this));
     }
 
+    setCode(v:number) {
+        this._code = v;
+        this.refresh();
+    }
+
     getCode() : number {
         return this._code;
     }
 
     public setFace(bFront:boolean, duradion:number=0) {
-        if(duradion <= 0) {
-            this._curFace = bFront;
-            if(bFront) {
-    
-            }
-            else {
-    
-            }
-        }
+        this._curFace = bFront;
+        this.refresh();
     }
     
 
