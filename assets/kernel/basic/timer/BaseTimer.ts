@@ -10,7 +10,8 @@ export class BaseTimer implements JTIPoolObject {
 	protected _id:number;
 	protected _interval:number;
 	protected _callback:CHandler;
-	protected _looptimes:number;
+	protected _remainTimes:number;
+	protected _totalTimes:number;
 	protected _type:TimerType;
 	protected _isLimit:boolean;
 
@@ -27,12 +28,13 @@ export class BaseTimer implements JTIPoolObject {
 		return this._callback.isSame(cb);
 	}
     
-    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler){
+    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler) {
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
 		this._callback = callback;
-		this._looptimes = looptimes;
+		this._remainTimes = looptimes;
+		this._totalTimes = looptimes;
 		this._passedTime = 0;
 		this._stoped = false;
 		this._paused = false;
@@ -66,16 +68,19 @@ export class BaseTimer implements JTIPoolObject {
 
 		if(this._passedTime >= this._interval) {
 			this._passedTime = this._passedTime - this._interval;
-			this._callback.invoke(this);
 
 			if(this._isLimit) {
-				this._looptimes--;
-				if(this._looptimes<=0){
-					this.stop();
-					return true;
-				}
+				this._remainTimes--;
+			}
+
+			this._callback.invoke(this);
+
+			if(this._isLimit && this._remainTimes<=0) {
+				this.stop();
+				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -94,8 +99,12 @@ export class BaseTimer implements JTIPoolObject {
 		return this._stoped;
 	}
 
-	public getLooptimes(){
-		return this._looptimes;
+	public getRemainTimes() : number {
+		return this._remainTimes;
+	}
+
+	public getTotalTimes() : number {
+		return this._totalTimes;
 	}
 
 }
