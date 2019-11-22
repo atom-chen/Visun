@@ -10,6 +10,8 @@ import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 
 
 
@@ -45,6 +47,8 @@ export default class BrnnUI extends BaseComponent {
 		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
 		this.compBox.setChipValues(this._rule);
 
+		TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
+
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9]);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A]);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
@@ -61,8 +65,8 @@ export default class BrnnUI extends BaseComponent {
 		var idx = this.compBox.getSelectedIndex();
 		var chip = this._pool.newObject();
 		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1]);
-		this.m_ui["chiplayer"].addChild(chip);
-		GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, margin);
+		this.m_ui.chiplayer.addChild(chip);
+		GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
 	private onClickArea(areaId:number) {
@@ -71,6 +75,19 @@ export default class BrnnUI extends BaseComponent {
 		this.onRespBrcowcowBet({AreaId:areaId});
 	}
 
+	private onPlayersBet(tmr, param) {
+		param = param || [ {AreaId:1,Money:40030}, {AreaId:2,Money:20325}, {AreaId:3,Money:42100}, {AreaId:4,Money:52315} ];
+		for(var i in param) {
+			var info = param[i];
+			var nums = GameUtil.parseChip(info.Money, this._rule);
+			for(var j in nums) {
+				var chip = this._pool.newObject();
+				chip.getComponent(CpnChip).setChipValue(nums[j]);
+				this.m_ui.chiplayer.addChild(chip);
+				GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.2, parseInt(j)*0.03, margin);
+			}
+		}
+	}
 
 	private initNetEvent() {
 		EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
@@ -88,6 +105,8 @@ export default class BrnnUI extends BaseComponent {
 				childs[i].removeFromParent(false);
 				this._pool.delObject(childs[i]);
 			}
+
+			TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);

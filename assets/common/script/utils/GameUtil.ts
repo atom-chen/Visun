@@ -15,10 +15,11 @@ export default class GameUtil {
 			if(total<chipRule[0]) {
 				break;
 			}
-			for(var i=chipRule.length; i>=0; i--) {
+			for(var i=chipRule.length-1; i>=0; i--) {
 				if(total >= chipRule[i]) {
 					total -= chipRule[i];
 					chips.push(chipRule[i]);
+					break;
 				}
 			}
 		}
@@ -26,22 +27,25 @@ export default class GameUtil {
 	}
 
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
-	public static flyChip(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number) {
+	public static flyChip(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
 		if(!chipSpr) { return; }
 		chipSpr.setPosition(fromPos);
-		chipSpr.runAction( cc.moveTo(duration, cc.v2(toPos.x, toPos.y)) );
+		if(delay<=0)
+			chipSpr.runAction( cc.moveTo(duration, cc.v2(toPos.x, toPos.y)) );
+		else
+			chipSpr.runAction( cc.sequence(cc.delayTime(delay), cc.moveTo(duration, cc.v2(toPos.x, toPos.y))) );
 	}
 
 	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
 	//margin指终点位置距离toObj包围盒内的边距
-	public static flyChip2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, margin:any=null) {
+	public static flyChip2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
 		if(!margin) {
 			margin = { left:2,right:2,bottom:2,top:2 };
 		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
 		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
-		this.flyChip(chipSpr, fromPos, toPos, duration);
+		this.flyChip(chipSpr, fromPos, toPos, duration, delay);
 	}
 
 	//在dstObj的包围盒内，给srcobj找一个随机位置，margin指位置距离toObj包围盒内的边距
