@@ -47,17 +47,51 @@ export default class BrnnUI extends BaseComponent {
 		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
 		this.compBox.setChipValues(this._rule);
 
-		TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
-
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9]);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A]);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9]);
+		this.toStateReady();
 	}
 
 	onDestroy(){
 		this._pool.clear();
 		super.onDestroy();
+	}
+
+	private toStateReady() {
+		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中"
+		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null);
+		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null);
+		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null);
+		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null);
+
+		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+			this.toStateBetting();
+		}));
+	}
+
+	private toStateBetting() {
+		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
+		TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
+		TimerManager.addSecondTimer(16, 1, new CHandler(this, ()=>{
+			this.toStateJiesuan();
+		}));
+	}
+
+	private toStateJiesuan() {
+		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中"
+		var childs = this.m_ui.chiplayer.children
+		var len = childs.length;
+		for(var i=len-1; i>=0; i--){
+			childs[i].removeFromParent(false);
+			this._pool.delObject(childs[i]);
+		}
+
+		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9]);
+		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A]);
+		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
+		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9]);
+
+		TimerManager.addSecondTimer(2, 1, new CHandler(this, ()=>{
+			this.toStateReady();
+		}));
 	}
 
 	private onRespBrcowcowBet(param) {
@@ -72,7 +106,6 @@ export default class BrnnUI extends BaseComponent {
 	private onClickArea(areaId:number) {
 		var idx = this.compBox.getSelectedIndex();
 		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
-		this.onRespBrcowcowBet({AreaId:areaId});
 	}
 
 	private onPlayersBet(tmr, param) {
@@ -99,14 +132,7 @@ export default class BrnnUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            var childs = this.m_ui.chiplayer.children
-			var len = childs.length;
-			for(var i=len-1; i>=0; i--){
-				childs[i].removeFromParent(false);
-				this._pool.delObject(childs[i]);
-			}
 
-			TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);
