@@ -27,7 +27,7 @@ export default class GameUtil {
 	}
 
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
-	public static flyChip(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
+	public static lineTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
 		if(!chipSpr) { return; }
 		chipSpr.setPosition(fromPos);
 		if(delay<=0)
@@ -38,14 +38,42 @@ export default class GameUtil {
 
 	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
 	//margin指终点位置距离toObj包围盒内的边距
-	public static flyChip2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
+	public static lineTo1(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
 		if(!margin) {
 			margin = { left:2,right:2,bottom:2,top:2 };
 		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
 		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
-		this.flyChip(chipSpr, fromPos, toPos, duration, delay);
+		this.lineTo0(chipSpr, fromPos, toPos, duration, delay);
+	}
+
+	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
+	public static bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
+		if(!chipSpr) { return; }
+		chipSpr.setPosition(fromPos);
+		var gj = cc.bezierTo(duration, 
+			[
+				new cc.Vec2(fromPos.x+15,fromPos.y+20),
+				new cc.Vec2(fromPos.x+55,fromPos.y+140), 
+				new cc.Vec2(toPos.x,toPos.y)
+			]).easing(cc.easeInOut(0.5))
+		if(delay<=0)
+			chipSpr.runAction( gj );
+		else
+			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
+	}
+
+	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
+	//margin指终点位置距离toObj包围盒内的边距
+	public static bezierTo1(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
+		if(!margin) {
+			margin = { left:2,right:2,bottom:2,top:2 };
+		}
+		var parent = chipSpr.parent;
+		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
+		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
+		this.bezierTo0(chipSpr, fromPos, toPos, duration, delay);
 	}
 
 	//在dstObj的包围盒内，给srcobj找一个随机位置，margin指位置距离toObj包围盒内的边距

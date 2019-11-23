@@ -46,11 +46,11 @@ export default class CpnPoker extends cc.Component {
 
     playFlip(dt?:number) {
         this.setFace(false);
-        var scale1 = cc.scaleTo(0.15, 0, 1);
+        var scale1 = cc.scaleTo(0.22, 0, 1);
         var call1 = cc.callFunc(function(){
             this.setFace(true)
         }, this);
-        var scale2 = cc.scaleTo(0.15, 1, 1);
+        var scale2 = cc.scaleTo(0.22, 1, 1);
         if(isEmpty(dt)){
             this.node.runAction(cc.sequence(scale1,call1,scale2));
         } else {

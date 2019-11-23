@@ -70,7 +70,7 @@ export default class BrnnUI extends BaseComponent {
 	private toStateBetting() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
 		TimerManager.addSecondTimer(1, 5, new CHandler(this, this.onPlayersBet));
-		TimerManager.addSecondTimer(6.5, 1, new CHandler(this, ()=>{
+		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -100,7 +100,7 @@ export default class BrnnUI extends BaseComponent {
 		var chip = this._pool.newObject();
 		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1]);
 		this.m_ui.chiplayer.addChild(chip);
-		GameUtil.flyChip2(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
+		GameUtil.lineTo1(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
 	private onClickArea(areaId:number) {
@@ -109,7 +109,17 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr, param) {
-		param = param || [ {AreaId:1,Money:40030}, {AreaId:2,Money:20325}, {AreaId:3,Money:42100}, {AreaId:4,Money:52315} ];
+		param = param || [ {AreaId:1,Money:35280}, {AreaId:2,Money:28650}, {AreaId:3,Money:36455}, {AreaId:4,Money:34255} ];
+		// for(var i in param) {
+		// 	var info = param[i];
+		// 	var nums = GameUtil.parseChip(info.Money, this._rule);
+		// 	for(var j in nums) {
+		// 		var chip = this._pool.newObject();
+		// 		chip.getComponent(CpnChip).setChipValue(nums[j]);
+		// 		this.m_ui.chiplayer.addChild(chip);
+		// 		GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.12, parseInt(j)*0.01, margin);
+		// 	}
+		// }
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);
@@ -117,7 +127,7 @@ export default class BrnnUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j]);
 				this.m_ui.chiplayer.addChild(chip);
-				GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.12, parseInt(j)*0.01, margin);
+				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
 			}
 		}
 	}
