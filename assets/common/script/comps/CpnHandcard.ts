@@ -28,8 +28,8 @@ export default class CpnHandcard extends cc.Component {
         if(cards===null || cards===undefined) {
             return;
         }
-        for(var i in cards) {
-            this.addCard(cards[i]);
+        for(var i=0, len=cards.length; i<len; i++) {
+            this.addCard(cards[i]).playFlip(i*0.1);;
         }
     }
 
@@ -42,11 +42,12 @@ export default class CpnHandcard extends cc.Component {
         }
     }
 
-    private addCard(cardV:PokerCode) {
+    private addCard(cardV:PokerCode) : CpnPoker {
         var card = cc.instantiate(this.pokerTemplate);
         var comp:CpnPoker = card.getComponent(CpnPoker);
         comp.setCode(cardV);
         this.node.addChild(card);
+        return comp;
     }
 
     private delCard(cardV:PokerCode) {

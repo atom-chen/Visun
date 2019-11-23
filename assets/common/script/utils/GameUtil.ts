@@ -63,4 +63,9 @@ export default class GameUtil {
 		return toPos;
 	}
 
+	//
+	public static playFlipCard(cards:Array<cc.Node>) {
+		
+	}
+
 }

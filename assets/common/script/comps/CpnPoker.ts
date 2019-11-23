@@ -1,5 +1,6 @@
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import { getPokerValue, getPokerColor } from "../definer/PokerDefine";
+import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 
@@ -24,9 +25,9 @@ export default class CpnPoker extends cc.Component {
         var res = cc.loader.getRes("common/imgs/poker", cc.SpriteAtlas);
         if(res) {
             this.onResLoaded(null, res);
-            return;
+        } else {
+            cc.loader.loadRes("common/imgs/poker", cc.SpriteAtlas, this.onResLoaded.bind(this));
         }
-        cc.loader.loadRes("common/imgs/poker", cc.SpriteAtlas, this.onResLoaded.bind(this));
     }
 
     setCode(v:number) {
@@ -38,9 +39,23 @@ export default class CpnPoker extends cc.Component {
         return this._code;
     }
 
-    public setFace(bFront:boolean, duradion:number=0) {
+    setFace(bFront:boolean) {
         this._curFace = bFront;
         this.refresh();
+    }
+
+    playFlip(dt?:number) {
+        this.setFace(false);
+        var scale1 = cc.scaleTo(0.15, 0, 1);
+        var call1 = cc.callFunc(function(){
+            this.setFace(true)
+        }, this);
+        var scale2 = cc.scaleTo(0.15, 1, 1);
+        if(isEmpty(dt)){
+            this.node.runAction(cc.sequence(scale1,call1,scale2));
+        } else {
+            this.node.runAction(cc.sequence(cc.delayTime(dt), scale1, call1, scale2));
+        }  
     }
     
 

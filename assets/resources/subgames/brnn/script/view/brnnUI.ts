@@ -69,8 +69,8 @@ export default class BrnnUI extends BaseComponent {
 
 	private toStateBetting() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
-		TimerManager.addSecondTimer(1, 15, new CHandler(this, this.onPlayersBet));
-		TimerManager.addSecondTimer(16, 1, new CHandler(this, ()=>{
+		TimerManager.addSecondTimer(1, 5, new CHandler(this, this.onPlayersBet));
+		TimerManager.addSecondTimer(6.5, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -89,7 +89,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9]);
 
-		TimerManager.addSecondTimer(2, 1, new CHandler(this, ()=>{
+		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}
@@ -117,7 +117,7 @@ export default class BrnnUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j]);
 				this.m_ui.chiplayer.addChild(chip);
-				GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.2, parseInt(j)*0.03, margin);
+				GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.12, parseInt(j)*0.01, margin);
 			}
 		}
 	}
