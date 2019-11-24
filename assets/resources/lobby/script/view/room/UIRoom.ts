@@ -15,14 +15,14 @@ export default class UIRoom extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
-            this.node.destroy();
+            CommonUtil.safeDelete(this);
         }, this);
     }
 
     private initRoomBtns(){
         for(var i=1; i<=4; i++) {
             var btn = this.m_ui["button"+i];
-            btn.roomInfo = this.roomList[i-1];
+            btn["roomInfo"] = this.roomList[i-1];
             CommonUtil.addClickEvent(btn, function(){
                 GameManager.getInstance().enterGame(this.roomInfo.GameType);
             }, btn)

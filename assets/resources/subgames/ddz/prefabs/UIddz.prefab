@@ -1474,7 +1474,7 @@
       "y": 0,
       "z": 0
     },
-    "_skewX": 30,
+    "_skewX": 20,
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
@@ -1837,7 +1837,7 @@
       "y": 0,
       "z": 0
     },
-    "_skewX": -30,
+    "_skewX": -20,
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,

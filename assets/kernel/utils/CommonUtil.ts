@@ -49,6 +49,21 @@ export default class CommonUtil {
 		}
 	}
 
+	public static safeDelete(obj:any) {
+		if(obj===null || obj===undefined) {
+			return;
+		}
+		if(obj.delInstance) {
+			obj.delInstance();
+			return;
+		}
+		if(obj.node) {
+			obj.node.destroy();
+			return;
+		}
+		obj.destroy();
+	}
+
 	public static getUUID(): string {
 		var s = [];
 		var hexDigits = "0123456789abcdef";

@@ -18,7 +18,7 @@ export default class LoginUI extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){
-            this.node.destroy();
+            CommonUtil.safeDelete(this);
         }, this);
 
         CommonUtil.addClickEvent(this.m_ui.btn_login, function(){
@@ -45,7 +45,7 @@ export default class LoginUI extends BaseComponent {
     private initNetEvent() {
         EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any)=>{
             if(param.State===1) {
-                this.node.destroy();
+                CommonUtil.safeDelete(this);
             }
         }, this);
     }
