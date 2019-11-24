@@ -38,6 +38,7 @@ if(!String.prototype["format"]) {
 
 export default class CommonUtil {
 
+	//遍历root节点，将挂在它身上的所有子层次节点根据名字索引到tbl表中
 	public static traverseNodes(root:any, tbl:any) 
 	{
 		if(!root || !root.children) { return; }
@@ -49,6 +50,7 @@ export default class CommonUtil {
 		}
 	}
 
+	//通用到销毁接口，销毁任意对象
 	public static safeDelete(obj:any) {
 		if(obj===null || obj===undefined) {
 			return;
@@ -64,6 +66,7 @@ export default class CommonUtil {
 		obj.destroy();
 	}
 
+	//
 	public static getUUID(): string {
 		var s = [];
 		var hexDigits = "0123456789abcdef";
@@ -78,6 +81,7 @@ export default class CommonUtil {
 		return uuid;
 	}
 
+	//判断root节点下是否挂有输入框
 	public static hasEditbox(root:any) 
 	{
 		if(!root || !root.children) { return false; }
@@ -91,15 +95,17 @@ export default class CommonUtil {
 		return false;
 	}
 
+	//给节点添加点击事件
 	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any, arg?:any) {
 		target.on(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
+	//移除节点上到点击事件
 	public static delClickEvent(target:cc.Node, callback:Function, thisObj?:any){
 		target.off(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
-	// 直接add一个layer然后设置localZOrder为-1的方式，在手机浏览器上有时候挡不住事件，改为这样了
+	//将obj节点设置为模态对话框
 	public static setModal(obj:cc.Node, flag:boolean)
 	{
 		if(!obj || !cc.isValid(obj)){ return; }
@@ -112,23 +118,27 @@ export default class CommonUtil {
 		}, obj);
 	}
 
+	//坐标空间转换（原点为左下角）
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
 		var pt = srcObj.convertToWorldSpace(cc.v2(x,y));
 		return dstObj.convertToNodeSpace(pt);
 	}
 
+	//坐标空间转换（原点为锚点）
 	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec3
 	{
 		var pt = srcObj.convertToWorldSpaceAR(cc.v2(x,y));
 		return dstObj.convertToNodeSpaceAR(pt);
 	}
 
+	//
 	public static getFrameName(name:string) : string 
 	{
 		return name.replace(/\//g,"-");
 	}
 
+	//
 	public static isNil(obj:any) : boolean
 	{
 		if(obj===undefined || obj===null) {
@@ -139,6 +149,7 @@ export default class CommonUtil {
 		}
 	}
 
+	//
 	static Bytes2Str(arr: Uint8Array) {
 		let str = "";
 		for (let i = 0; i < arr.length; i++) {
@@ -152,15 +163,17 @@ export default class CommonUtil {
 		return str;
 	}
 
-	// Returns a random integer between min and max
+	//随机数
 	public static getRandomInt(min:number, max:number) : number {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
+	//洗牌算法
 	public static shuffle(array: Array<any>) {
 		for (var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
 	}
 
+	//utf8数组转换为字符串
 	public static utf8ArrayToString(array) : string
 	{
 		var out:string, i:number, len:number, c:number;
@@ -199,6 +212,7 @@ export default class CommonUtil {
 		return out;
 	}
 
+	//字符串转换为utf8数组
 	public static stringToUTF8Bytes(str:string) : any[] 
 	{
 		var utf8 = [];
@@ -227,6 +241,7 @@ export default class CommonUtil {
 		return utf8;
 	}
 
+	//
 	static limitNum(v:number, minV:number, maxV:number) : number
 	{
 		if(minV>maxV){ var tmp = minV; minV = maxV; maxV = tmp; }
@@ -235,6 +250,7 @@ export default class CommonUtil {
 		return v;
 	}
 
+	//浅复制
 	static simpleCopy(target, source) {
 		if(source === undefined || source === null) { return; }
 		for (var key in source) {
@@ -245,6 +261,7 @@ export default class CommonUtil {
 		}
 	}
 
+	//深复制
 	static deepClone(source: Object): any {
 		if (null == source || {} == source || [] == source) {
 			return source;
@@ -278,6 +295,7 @@ export default class CommonUtil {
 		return newObject;
 	}
 
+	//根据超链接下载网络图片
 	public static loadWebImg(sp, url, auto): void {
 		var width = sp.node.width;
 		var height = sp.node.height;
@@ -412,7 +430,7 @@ export default class CommonUtil {
 		}
 	}
 
-
+	//
 	static appendArray(dst: any[], arr: any[]): void {
 		if (arr) {
 			for (var i in arr) {
@@ -421,6 +439,7 @@ export default class CommonUtil {
 		}
 	}
 
+	//
 	static minusArray(src: any[], arr: any[]): void {
 		if (!arr) { return; }
 		for (var i = 0; i < arr.length; i++) {
