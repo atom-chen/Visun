@@ -10,7 +10,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class BaseComponent extends cc.Component {
-    protected m_ui:any = {};
+    protected m_ui:{[key:string]:cc.Node} = {};
     protected m_dtor_listeners:any[] = [];
     
     //放回对象池时回调

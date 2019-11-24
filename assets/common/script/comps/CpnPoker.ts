@@ -16,8 +16,8 @@ export default class CpnPoker extends cc.Component {
         if(err) { cc.log("error: "+err); return; }
         var face = 0
         if(this._curFace) { face = this._code; }
-        var n = getPokerValue(face) * 10 + getPokerColor(face) + 1;
-        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+n);
+        if(face!==0) { face = getPokerValue(face) * 10 + getPokerColor(face) + 1; }
+        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+face);
         this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
     }
 
@@ -46,11 +46,12 @@ export default class CpnPoker extends cc.Component {
 
     playFlip(dt?:number) {
         this.setFace(false);
-        var scale1 = cc.scaleTo(0.22, 0, 1);
+        this.node.setScale(1,1);
+        var scale1 = cc.scaleTo(0.2, 0, 1);
         var call1 = cc.callFunc(function(){
             this.setFace(true)
         }, this);
-        var scale2 = cc.scaleTo(0.22, 1, 1);
+        var scale2 = cc.scaleTo(0.2, 1, 1);
         if(isEmpty(dt)){
             this.node.runAction(cc.sequence(scale1,call1,scale2));
         } else {

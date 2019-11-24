@@ -110,16 +110,6 @@ export default class BrnnUI extends BaseComponent {
 
 	private onPlayersBet(tmr, param) {
 		param = param || [ {AreaId:1,Money:35280}, {AreaId:2,Money:28650}, {AreaId:3,Money:36455}, {AreaId:4,Money:34255} ];
-		// for(var i in param) {
-		// 	var info = param[i];
-		// 	var nums = GameUtil.parseChip(info.Money, this._rule);
-		// 	for(var j in nums) {
-		// 		var chip = this._pool.newObject();
-		// 		chip.getComponent(CpnChip).setChipValue(nums[j]);
-		// 		this.m_ui.chiplayer.addChild(chip);
-		// 		GameUtil.flyChip2(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.12, parseInt(j)*0.01, margin);
-		// 	}
-		// }
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);
