@@ -28,14 +28,20 @@ export default class GameManager extends ModelBase {
 	public on_clear() {
 		
 	}
+	//------------------------------------------------------------------------------
 
 	private _gameList = [];
+	private _roomList = {};
+	private _allRooms = {}
+
+
 	public setGameList(data) {
 		this._gameList = data;
 		this._gameList.sort((a,b)=>{
 			return a.GameKind-b.GameKind
 		})
 	}
+
 	public getGameList() : any[] {
 		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
 			var testList = [];
@@ -52,14 +58,13 @@ export default class GameManager extends ModelBase {
 		return this._gameList;
 	}
 
-	private _roomList = {};
-	private _allRooms = {}
 	public setRoomList(gameKind, data) {
 		this._roomList[gameKind] = data
 		for(var i in data) {
 			this._allRooms[data[i].GameType] = data[i];
 		}
 	}
+
 	public getRoomList(gameKind) {
 		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
 			var testList = [];
@@ -78,10 +83,6 @@ export default class GameManager extends ModelBase {
 		return this._roomList[gameKind];
 	}
 
-	public isGameExist(gameKind:string|number) : boolean {
-		return true;
-	}
-
 	public clientConfig(gameType:string|number) : any{
 		var svrInfo = this._allRooms[gameType];
 		if(!svrInfo) {
@@ -91,13 +92,18 @@ export default class GameManager extends ModelBase {
 		return GameConfig[svrInfo.GameKind];
 	}
 
+	
+
+	public isGameExist(gameKind:string|number) : boolean {
+		return true;
+	}
+
 	public getUpdator(gameKind:string|number) : HotUpdator {
 		if(!GameConfig[gameKind]) {
 			return null;
 		}
 		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean)=>{}, null);
 	}
-
 
 	public canEnterGame(gameType:string|number) : boolean {
 		var cfg = this.clientConfig(gameType);
@@ -121,13 +127,21 @@ export default class GameManager extends ModelBase {
 		}
 		return true;
 	}
+
+	//退出游戏的唯一出口
+	public quitGame(reason:number) {
+		gamecomm_request.ReqExitGame({GameType:0});
+		if(IS_DANJI_MODE) {
+			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		}
+	}
 	
 	//进入游戏的唯一入口
 	public enterGame(gameType:number) {
-		cc.log("enterGame: ", gameType)
 		if( !this.canEnterGame(gameType) ) {
 			return;
 		}
+		cc.log("enterGame: ", gameType)
 		gamecomm_request.ReqEnterGame({GameType:gameType});
 		if(IS_DANJI_MODE) {
 			this.enterGameScene(gameType);
@@ -197,14 +211,6 @@ export default class GameManager extends ModelBase {
 					break;
 			}
 		});
-	}
-
-	//退出游戏的唯一出口
-	public quitGame(reason:number) {
-		gamecomm_request.ReqExitGame({GameType:0});
-		if(IS_DANJI_MODE) {
-			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
-		}
 	}
 
 }
