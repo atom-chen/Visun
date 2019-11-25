@@ -97,6 +97,11 @@ function getRequestParam(argInfo) {
 		else {
 			typeStr = "any";
 		}
+
+		if(fields[fieldName].rule==="repeated"){
+			typeStr = typeStr + "[]";
+		}
+		
 		if(desc=="{")
 			desc += " " + fieldName + ":" + typeStr;
 		else

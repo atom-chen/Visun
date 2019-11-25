@@ -16,7 +16,17 @@ export default class LoginUI extends BaseComponent {
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+        this.initUIEvent();
+        this.initNetEvent();
+    }
 
+    private initNetEvent() {
+        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any)=>{
+            CommonUtil.safeDelete(this);
+        }, this);
+    }
+
+    private initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){
             CommonUtil.safeDelete(this);
         }, this);
@@ -37,16 +47,6 @@ export default class LoginUI extends BaseComponent {
             var name = this.editName.string;
             var pswd = this.editPswd.string;
             LoginMgr.getInstance().leafRegist(name, pswd, "ssss");
-        }, this);
-
-        this.initNetEvent();
-    }
-
-    private initNetEvent() {
-        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any)=>{
-            if(param.State===1) {
-                CommonUtil.safeDelete(this);
-            }
         }, this);
     }
 
