@@ -20,7 +20,17 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.outs0.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
         this.m_ui.outs1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
         this.m_ui.outs2.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
-        this.m_ui.my_handor.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
+
+        var deck = [];
+        var info = PokerCode;
+		for (var key in info) {
+			if (isNaN(key as any)) {
+				var value = parseInt( info[key] );
+                deck.push(value);
+                if(deck.length>=17) { break; }
+			}
+        }
+        this.m_ui.my_handor.getComponent(CpnHandcard).resetCards(deck);
         
         this.toStateReady();
     }
