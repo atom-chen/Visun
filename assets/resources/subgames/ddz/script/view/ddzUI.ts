@@ -3,7 +3,13 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
+import LoginUser from "../../../../../common/script/model/LoginUser";
+import DDzMgr from "../model/DDzMgr";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import DDzPlayer from "../model/DDzPlayer";
 
+
+const MAX_SOLDIER = 3;
 
 const {ccclass, property} = cc._decorator;
 
@@ -34,6 +40,15 @@ export default class DdzUI extends BaseComponent {
         
         this.toStateReady();
     }
+
+    private playerIndex(player:DDzPlayer) : number {
+		if(isNil(player)){ return -1; }
+		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+		var index = player.Pos;
+		if(hero.Pos===0) { return index; }
+		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;
+		return index;
+	}
     
     private toStateReady() {
         this.m_ui.readyNode.active = true;
