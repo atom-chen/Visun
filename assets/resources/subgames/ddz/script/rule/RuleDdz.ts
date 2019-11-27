@@ -7,7 +7,7 @@ export default class RuleDdz {
 
 	public static initDeck() : Array<PokerCode> {
 		if(RuleDdz.Deck.length > 0) {
-			return;
+			return RuleDdz.Deck;
 		}
 		var info = PokerCode;
 		for (var key in info) {
