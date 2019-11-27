@@ -3,19 +3,25 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/proto/net_zhajinhua";
 import GameManager from "../../../../../common/script/model/GameManager";
+import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
+import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class zjhUI extends BaseComponent {
-
+    private _players:Array<CpnPlayer> = [];
+    private _handors:Array<CpnHandcard> = [];
+    private _stateNodes:Array<cc.Label> = [];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         for(var i = 0; i <= 4; i++) {
-            
+            this._players.push(this.m_ui["CpnPlayer"+i].getComponent(CpnPlayer));
+            this._handors.push(this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard));
+            this._stateNodes.push(this.m_ui["label"+i].getComponent(cc.Label));
         }
 
         this.initUIEvent();
@@ -24,12 +30,13 @@ export default class zjhUI extends BaseComponent {
 
     //准备
     onRespZhajinhuaReady(param:any) {
-
+        this.m_ui.gameLayer.active = true;
+        this.m_ui.opLayer.active = true;
     }
 
     //跟注
     onRespZhajinhuaFollow(param:any) {
-
+        
     }
 
     //加注
