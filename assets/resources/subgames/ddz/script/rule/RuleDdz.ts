@@ -5,7 +5,7 @@ export default class RuleDdz {
 	// 一副牌
 	public static Deck:Array<PokerCode> = [];
 
-	public static initDeck() {
+	public static initDeck() : Array<PokerCode> {
 		if(RuleDdz.Deck.length > 0) {
 			return;
 		}
@@ -16,6 +16,7 @@ export default class RuleDdz {
 				RuleDdz.Deck.push(value);
 			}
 		}
+		return RuleDdz.Deck;
 	}
 
 	// 权值 3, 4, 5, ... , K(13), A(14), 2(15)

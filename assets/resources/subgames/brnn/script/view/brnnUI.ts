@@ -41,11 +41,11 @@ export default class BrnnUI extends BaseComponent {
 			self._loadedRes = loadedRes;
 		});
 
-		this.initNetEvent();
-		this.initUIEvent();
-		
 		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
 		this.compBox.setChipValues(this._rule);
+
+		this.initNetEvent();
+		this.initUIEvent();
 
 		this.toStateReady();
 	}
@@ -55,6 +55,7 @@ export default class BrnnUI extends BaseComponent {
 		super.onDestroy();
 	}
 
+	//准备阶段
 	private toStateReady() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中"
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null);
@@ -67,6 +68,7 @@ export default class BrnnUI extends BaseComponent {
 		}));
 	}
 
+	//下注阶段
 	private toStateBetting() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
 		TimerManager.addSecondTimer(1, 5, new CHandler(this, this.onPlayersBet));
@@ -75,6 +77,7 @@ export default class BrnnUI extends BaseComponent {
 		}));
 	}
 
+	//结算阶段
 	private toStateJiesuan() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中"
 		var childs = this.m_ui.chiplayer.children

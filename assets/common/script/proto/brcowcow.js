@@ -122,8 +122,7 @@ $root.brcowcow = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RespBrcowcowBet.prototype.IsSuccess = 0;
-        RespBrcowcowBet.prototype.Reason = "";
+        RespBrcowcowBet.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RespBrcowcowBet.prototype.AreaId = 0;
         RespBrcowcowBet.prototype.Money = 0;
 
@@ -134,14 +133,12 @@ $root.brcowcow = (function() {
         RespBrcowcowBet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                writer.uint32(8).int32(message.IsSuccess);
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                writer.uint32(18).string(message.Reason);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
             if (message.AreaId != null && message.hasOwnProperty("AreaId"))
-                writer.uint32(24).int32(message.AreaId);
+                writer.uint32(16).int32(message.AreaId);
             if (message.Money != null && message.hasOwnProperty("Money"))
-                writer.uint32(32).int32(message.Money);
+                writer.uint32(24).int32(message.Money);
             return writer;
         };
 
@@ -157,15 +154,12 @@ $root.brcowcow = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.IsSuccess = reader.int32();
+                    message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Reason = reader.string();
-                    break;
-                case 3:
                     message.AreaId = reader.int32();
                     break;
-                case 4:
+                case 3:
                     message.Money = reader.int32();
                     break;
                 default:
@@ -185,12 +179,9 @@ $root.brcowcow = (function() {
         RespBrcowcowBet.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                if (!$util.isInteger(message.IsSuccess))
-                    return "IsSuccess: integer expected";
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                if (!$util.isString(message.Reason))
-                    return "Reason: string expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             if (message.AreaId != null && message.hasOwnProperty("AreaId"))
                 if (!$util.isInteger(message.AreaId))
                     return "AreaId: integer expected";
@@ -204,10 +195,15 @@ $root.brcowcow = (function() {
             if (object instanceof $root.brcowcow.RespBrcowcowBet)
                 return object;
             var message = new $root.brcowcow.RespBrcowcowBet();
-            if (object.IsSuccess != null)
-                message.IsSuccess = object.IsSuccess | 0;
-            if (object.Reason != null)
-                message.Reason = String(object.Reason);
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.AreaId != null)
                 message.AreaId = object.AreaId | 0;
             if (object.Money != null)
@@ -220,15 +216,19 @@ $root.brcowcow = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.IsSuccess = 0;
-                object.Reason = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
                 object.AreaId = 0;
                 object.Money = 0;
             }
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                object.IsSuccess = message.IsSuccess;
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                object.Reason = message.Reason;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.AreaId != null && message.hasOwnProperty("AreaId"))
                 object.AreaId = message.AreaId;
             if (message.Money != null && message.hasOwnProperty("Money"))

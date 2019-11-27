@@ -517,8 +517,7 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RespEnterGame.prototype.IsSuccess = 0;
-        RespEnterGame.prototype.Reason = "";
+        RespEnterGame.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RespEnterGame.prototype.GameType = 0;
 
         RespEnterGame.create = function create(properties) {
@@ -528,12 +527,10 @@ $root.gamecomm = (function() {
         RespEnterGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                writer.uint32(8).int32(message.IsSuccess);
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                writer.uint32(18).string(message.Reason);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
             if (message.GameType != null && message.hasOwnProperty("GameType"))
-                writer.uint32(24).uint32(message.GameType);
+                writer.uint32(16).uint32(message.GameType);
             return writer;
         };
 
@@ -549,12 +546,9 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.IsSuccess = reader.int32();
+                    message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Reason = reader.string();
-                    break;
-                case 3:
                     message.GameType = reader.uint32();
                     break;
                 default:
@@ -574,12 +568,9 @@ $root.gamecomm = (function() {
         RespEnterGame.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                if (!$util.isInteger(message.IsSuccess))
-                    return "IsSuccess: integer expected";
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                if (!$util.isString(message.Reason))
-                    return "Reason: string expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             if (message.GameType != null && message.hasOwnProperty("GameType"))
                 if (!$util.isInteger(message.GameType))
                     return "GameType: integer expected";
@@ -590,10 +581,15 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.RespEnterGame)
                 return object;
             var message = new $root.gamecomm.RespEnterGame();
-            if (object.IsSuccess != null)
-                message.IsSuccess = object.IsSuccess | 0;
-            if (object.Reason != null)
-                message.Reason = String(object.Reason);
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.GameType != null)
                 message.GameType = object.GameType >>> 0;
             return message;
@@ -604,14 +600,18 @@ $root.gamecomm = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.IsSuccess = 0;
-                object.Reason = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
                 object.GameType = 0;
             }
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                object.IsSuccess = message.IsSuccess;
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                object.Reason = message.Reason;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.GameType != null && message.hasOwnProperty("GameType"))
                 object.GameType = message.GameType;
             return object;
@@ -720,8 +720,8 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RespExitGame.prototype.IsSuccess = 0;
-        RespExitGame.prototype.Reason = "";
+        RespExitGame.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        RespExitGame.prototype.GameType = 0;
 
         RespExitGame.create = function create(properties) {
             return new RespExitGame(properties);
@@ -730,10 +730,10 @@ $root.gamecomm = (function() {
         RespExitGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                writer.uint32(8).int32(message.IsSuccess);
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                writer.uint32(18).string(message.Reason);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                writer.uint32(16).uint32(message.GameType);
             return writer;
         };
 
@@ -749,10 +749,10 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.IsSuccess = reader.int32();
+                    message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Reason = reader.string();
+                    message.GameType = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -771,12 +771,12 @@ $root.gamecomm = (function() {
         RespExitGame.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                if (!$util.isInteger(message.IsSuccess))
-                    return "IsSuccess: integer expected";
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                if (!$util.isString(message.Reason))
-                    return "Reason: string expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                if (!$util.isInteger(message.GameType))
+                    return "GameType: integer expected";
             return null;
         };
 
@@ -784,10 +784,17 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.RespExitGame)
                 return object;
             var message = new $root.gamecomm.RespExitGame();
-            if (object.IsSuccess != null)
-                message.IsSuccess = object.IsSuccess | 0;
-            if (object.Reason != null)
-                message.Reason = String(object.Reason);
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.GameType != null)
+                message.GameType = object.GameType >>> 0;
             return message;
         };
 
@@ -796,13 +803,20 @@ $root.gamecomm = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.IsSuccess = 0;
-                object.Reason = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.GameType = 0;
             }
-            if (message.IsSuccess != null && message.hasOwnProperty("IsSuccess"))
-                object.IsSuccess = message.IsSuccess;
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                object.Reason = message.Reason;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.GameType != null && message.hasOwnProperty("GameType"))
+                object.GameType = message.GameType;
             return object;
         };
 

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package gamecomm;
+package ptopb;
 
 
 //通用失败回复
@@ -29,9 +29,8 @@ message ReqEnterGame{
 	uint32 GameType = 1;
 }
 message RespEnterGame{
-    int32 IsSuccess = 1;        //0成功 1失败
-    string Reason = 2;          //原因反馈
-    uint32 GameType = 3;
+    uint64 UserID = 1;
+    uint32 GameType = 2;
 }
 
 //退出游戏（检查退出条件）
@@ -39,6 +38,6 @@ message ReqExitGame{
 	uint32 GameType = 1;			//游戏标识
 }
 message RespExitGame{
-    int32 IsSuccess = 1;        //0成功 1失败
-    string Reason = 2;          //原因反馈
+    uint64 UserID = 1;
+    uint32 GameType = 2;			//游戏标识
 }

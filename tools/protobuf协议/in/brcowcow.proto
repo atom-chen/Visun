@@ -1,5 +1,5 @@
 syntax = "proto3";
-package brcowcow;
+package ptopb;
 
 message ReqBrcowcowBet {
     int32 AreaId = 1;
@@ -7,8 +7,7 @@ message ReqBrcowcowBet {
 }
 
 message RespBrcowcowBet {
-    int32 IsSuccess = 1;
-    string Reason = 2;
-    int32 AreaId = 3;
-    int32 Money = 4;
+    uint64 UserID = 1;
+    int32 AreaId = 2;
+    int32 Money = 3;
 }

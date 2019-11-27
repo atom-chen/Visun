@@ -9,6 +9,7 @@ import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import DDzPlayer from "../model/DDzPlayer";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
+import RuleDdz from "../rule/RuleDdz";
 
 
 const MAX_SOLDIER = 3;
@@ -17,38 +18,41 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class DdzUI extends BaseComponent {
+    private _myHandor:CpnHandcard;
+    private _players:Array<CpnPlayer> = [];
+    private _outs:Array<CpnHandcard> = [];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         
-        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
-        }, this);
+        this._myHandor = this.m_ui.my_handor.getComponent(CpnHandcard);
+        for(var i=0; i<MAX_SOLDIER; i++) {
+            this._players.push(this.m_ui["player"+i].getComponent(CpnPlayer));
+            this._outs.push(this.m_ui["outs"+i].getComponent(CpnHandcard));
+        }
+
+        this.initNetEvent();
+        this.initUIEvent();
 
         UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {y:140, scale:0.6});
-        UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this.m_ui.player0, null);
-        UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this.m_ui.player1, null);
-        UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this.m_ui.player2, null);
-
-        this.m_ui.outs0.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
-        this.m_ui.outs1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
-        this.m_ui.outs2.getComponent(CpnHandcard).resetCards([PokerCode.FK_10,PokerCode.HT_A]);
-
-        var deck = [];
-        var info = PokerCode;
-		for (var key in info) {
-			if (isNaN(key as any)) {
-				var value = parseInt( info[key] );
-                deck.push(value);
-                if(deck.length>=17) { break; }
-			}
+        for(var j=0; j<MAX_SOLDIER; j++) {
+            UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this._players[j].node, null);
+            this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A]);
         }
-        this.m_ui.my_handor.getComponent(CpnHandcard).resetCards(deck);
-        this.m_ui.my_handor.getComponent(CpnHandcard).initSlideTouch();
+
+        var deck = RuleDdz.initDeck();
+        CommonUtil.shuffle(deck);
+        var cards = [];
+		for (var n=0; n<17; n++) {
+			cards.push(deck[n]);
+        }
+        this._myHandor.resetCards(cards);
+        this._myHandor.initSlideTouch();
         
         this.toStateResult();
     }
 
+    //玩家的UI位置
     private playerIndex(player:DDzPlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
@@ -56,26 +60,37 @@ export default class DdzUI extends BaseComponent {
 		if(hero.Pos===0) { return index; }
 		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;
 		return index;
-	}
+    }
     
+    //匹配阶段
+    private toStateSearching() {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = false;
+    }
+    
+    //准备阶段
     private toStateReady() {
         this.m_ui.readyNode.active = true;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
     }
 
+    //抢地主阶段
     private toStateGrab() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = true;
         this.m_ui.fightNode.active = false;
     }
 
+    //出牌阶段
     private toStateFight() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = true;
     }
 
+    //结算阶段
     private toStateResult() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
@@ -85,4 +100,15 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.player2.getComponent(CpnPlayer).addMoney(122);
     }
     
+
+    private initNetEvent() {
+
+    }
+
+    private initUIEvent() {
+        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
+            GameManager.getInstance().quitGame(0);
+        }, this);
+    }
+
 }

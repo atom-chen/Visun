@@ -1,5 +1,5 @@
 syntax = "proto3";
-package login;
+package ptopb;
 
 //个人信息
 message UserInfo{
@@ -22,8 +22,8 @@ message ReqRegister {
 
 //注册结果
 message RespRegister {
-    uint32 State = 1;			//0成功 1失败 
-    string Hints = 2;			//提示信息
+    string Account = 1;			//账号
+	uint64 UserId = 2;
 }
 
 //登录
@@ -36,6 +36,6 @@ message ReqLogin {
 
 //登陆结果
 message RespLogin {
-    uint32 State = 1;			//0成功 1失败 
-    string Hints = 2;			//提示信息
+    string Account = 1;			//账号
+	uint64 UserId = 2;
 }
