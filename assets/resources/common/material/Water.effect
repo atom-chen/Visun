@@ -1,0 +1,67 @@
+//羽化效果
+
+%{
+	techniques: [
+		{
+			passes: [
+				{
+					vert: vs
+					frag: fs
+					cullMode: none
+					blend: true
+				}
+			]
+			layer: 0
+		}
+	]
+	properties: {
+		
+	}
+%}
+
+%% vs {
+
+precision highp float;
+
+uniform mat4 cc_matViewProj;
+attribute vec3 a_position;
+attribute vec2 a_uv0;
+attribute vec4 a_color;
+varying mediump vec2 v_uv0;
+varying lowp vec4 v_fragmentColor;
+
+void main () {
+	gl_Position = cc_matViewProj * vec4(a_position, 1);
+	v_fragmentColor = a_color;
+	v_uv0 = a_uv0;
+}
+
+}
+
+%% fs {
+
+precision highp float;
+
+varying vec4 v_fragmentColor;
+uniform sampler2D texture;
+varying vec2 v_uv0;
+
+vec4 composite(vec4 over, vec4 under)
+{
+	return over + (1.0 - over.a) * under;
+}
+
+void main () {
+	float timeFactorU = 1.0;
+    float texFactorU = 50.0;
+    float ampFactorU = 0.005;
+    float timeFactorV = 1.0;
+    float texFactorV = 50.0;
+    float ampFactorV = 0.005;
+    vec2 texCoord = v_uv0;
+    texCoord.x += sin(1.1 * timeFactorU + v_uv0.x * texFactorU) * ampFactorU;
+    texCoord.y += cos(1.1 * timeFactorV + v_uv0.y * texFactorV) * ampFactorV;
+    gl_FragColor = texture2D(texture, texCoord) * v_fragmentColor;
+}
+
+}

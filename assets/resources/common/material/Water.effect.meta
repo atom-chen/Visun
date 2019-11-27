@@ -1,0 +1,11 @@
+{
+  "ver": "1.0.15",
+  "uuid": "4a4e5600-efed-4fa3-a425-f79efc32bb14",
+  "compiledShaders": [
+    {
+      "vert": "\n#define _IS_VERT_SHADER 1\n\nprecision highp float;\n\nuniform mat4 cc_matViewProj;\nattribute vec3 a_position;\nattribute vec2 a_uv0;\nattribute vec4 a_color;\nvarying mediump vec2 v_uv0;\nvarying lowp vec4 v_fragmentColor;\n\nvoid main () {\n\tgl_Position = cc_matViewProj * vec4(a_position, 1);\n\tv_fragmentColor = a_color;\n\tv_uv0 = a_uv0;\n}\n\n\n",
+      "frag": "\n#define _IS_FRAG_SHADER 1\n\nprecision highp float;\n\nvarying vec4 v_fragmentColor;\nuniform sampler2D texture;\nvarying vec2 v_uv0;\n\nvec4 composite(vec4 over, vec4 under)\n{\n\treturn over + (1.0 - over.a) * under;\n}\n\nvoid main () {\n\tfloat timeFactorU = 1.0;\n    float texFactorU = 50.0;\n    float ampFactorU = 0.005;\n    float timeFactorV = 1.0;\n    float texFactorV = 50.0;\n    float ampFactorV = 0.005;\n    vec2 texCoord = v_uv0;\n    texCoord.x += sin(1.1 * timeFactorU + v_uv0.x * texFactorU) * ampFactorU;\n    texCoord.y += cos(1.1 * timeFactorV + v_uv0.y * texFactorV) * ampFactorV;\n    gl_FragColor = texture2D(texture, texCoord) * v_fragmentColor;\n}\n\n\n"
+    }
+  ],
+  "subMetas": {}
+}
