@@ -5,7 +5,7 @@ import GameManager from "../../../../../common/script/model/GameManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends BaseComponent {
+export default class JskbUI extends BaseComponent {
 
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);

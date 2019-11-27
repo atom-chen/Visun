@@ -1,5 +1,6 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,6 +13,7 @@ export default class CpnPlayer extends BaseComponent {
     label_money: cc.Label = null;
 
     private _userId:number = 0;
+    private _money:number = 0;
     private _clickCallback:Function = null;
 
     onLoad () {
@@ -40,11 +42,32 @@ export default class CpnPlayer extends BaseComponent {
     }
 
     public setMoney(money:number) {
+        this._money = money;
         this.label_money.string = money.toString();
     }
 
     public setHeadImg(headImg:string) {
         
+    }
+
+    public addMoney(money:number, fromV ?: number, toV ?: number) {
+        if(isNil(fromV)) { fromV = this._money; }
+        if(isNil(toV)) { toV = fromV + money; }
+        this._money = toV;
+        var delta = toV - fromV;
+        var tic = Math.ceil(delta/128);
+        this.label_money.string = fromV.toString();
+        var f = function(){
+            fromV += tic;
+            if(fromV>=this._money){
+                fromV = this._money;
+            }
+            this.label_money.string = fromV.toString();
+            if(fromV>=this._money){
+                this.unschedule(f);
+            }
+        }
+        this.schedule(f, 0);
     }
 
 }

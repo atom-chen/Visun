@@ -266,8 +266,10 @@ export default class UIManager {
 			sk.skeletonData = rsc;
 			sk.premultipliedAlpha = false;
 			parent.addChild(obj);
-			for(var k in info) {
-				obj[k] = info[k];
+			if(info) {
+				for(var k in info) {
+					obj[k] = info[k];
+				}
 			}
 			sk.setAnimation(trackIndex, aniName, bLoop);
 		});
@@ -288,8 +290,10 @@ export default class UIManager {
 			var spr = obj.addComponent(cc.Sprite);
 			spr.spriteFrame = rsc;
 			parent.addChild(obj);
-			for(var k in info) {
-				obj[k] = info[k];
+			if(info) {
+				for(var k in info) {
+					obj[k] = info[k];
+				}
 			}
 		})
 	}

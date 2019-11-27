@@ -18,18 +18,7 @@ export default class CpnHandcard extends cc.Component {
     private _touchEndCallback: Function;
 
 	onLoad() {
-		this.node.on(cc.Node.EventType.TOUCH_START, this.touchBegan, this);
-        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.touchCancel, this);
-        this.node.on(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
-        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.touchMoved, this);
-    }
-
-    public setSlideEnabled(flag:boolean) {
-        this._slideEnabled = flag;
-    }
-
-    public setTouchEndCallback(f:Function) {
-        this._touchEndCallback = f;
+		
     }
 
     public clearCards() {
@@ -127,6 +116,23 @@ export default class CpnHandcard extends cc.Component {
             arr.push(this.node.children[i].getComponent(CpnPoker).getCode());
         }
         return arr;
+    }
+
+
+
+    public initSlideTouch() {
+        this.node.on(cc.Node.EventType.TOUCH_START, this.touchBegan, this);
+        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.touchCancel, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.touchMoved, this);
+    }
+
+    public setSlideEnabled(flag:boolean) {
+        this._slideEnabled = flag;
+    }
+
+    public setTouchEndCallback(f:Function) {
+        this._touchEndCallback = f;
     }
 
 	private _findTouchedCardIndex (touch:cc.Vec3) : number {
@@ -241,10 +247,6 @@ export default class CpnHandcard extends cc.Component {
     }
 
     private touchEnd (event:any) {
-        // var touches = event.getTouches();
-        // var touchLoc = touches[0].getLocation();
-        // this._touchMoved = this.node.convertToNodeSpaceAR(touchLoc);
-        // this.toggleSelecteds();
         if(this._touchEndCallback) {
             this._touchEndCallback();
         }

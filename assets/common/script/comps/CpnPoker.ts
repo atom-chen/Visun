@@ -10,6 +10,8 @@ export default class CpnPoker extends cc.Component {
     private _code:number = 0;
     private _state:boolean = false;
     private _curFace:boolean = true;
+    private _originY:number = 0;
+    private _selectY:number = 30;
 
 
     private onResLoaded(err, atlas){
@@ -63,9 +65,11 @@ export default class CpnPoker extends cc.Component {
     setSelected(v:boolean) {
         this._state = v;
         if(v) {
-            this.node.color = new cc.Color(5, 255, 5, 255);
+            this.node.y = this._selectY;
+        //    this.node.color = new cc.Color(5, 255, 5, 255);
         } else {
-            this.node.color = new cc.Color(255, 255, 255, 255);
+            this.node.y = this._originY;
+        //    this.node.color = new cc.Color(255, 255, 255, 255);
         }
     }
 
