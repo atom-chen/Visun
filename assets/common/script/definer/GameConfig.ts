@@ -10,7 +10,7 @@ var GameConfig = {
 	},
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
-		name: "龙虎大战",
+		name: "龙虎斗",
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_lhd",
 		dir: "longhu",

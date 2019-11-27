@@ -4,6 +4,7 @@ import { configure_request, configure_msgs } from "../../../../../common/script/
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
 import { IS_DANJI_MODE } from "../../../../../common/script/definer/ConstDefine";
+import GameConfig from "../../../../../common/script/definer/GameConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -29,21 +30,21 @@ export default class UIRoom extends BaseComponent {
         }
     }
 
-    reflesh(data:any) {
+    reflesh(gameKind:any) {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         EventCenter.getInstance().listen(configure_msgs.RoomListResp, (param)=>{
-            var rooms = GameManager.getInstance().getRoomList(data);
+            var rooms = GameManager.getInstance().getRoomList(gameKind);
             if(rooms!==null && rooms!==undefined){
                 this.roomList = rooms;
                 for(var i=1; i<=4; i++){
-                    this.m_ui["Label"+i].getComponent(cc.Label).string = rooms[i-1] && rooms[i-1].Name+rooms[i-1].GameType;
+                    this.m_ui["Label"+i].getComponent(cc.Label).string = rooms[i-1] && rooms[i-1].GameType;
                 }
                 this.initRoomBtns();
             }
         }, this, IS_DANJI_MODE);
-
-        configure_request.RoomListReq({GameKind:data});
+        this.m_ui.lab_roomname.getComponent(cc.Label).string = GameConfig[gameKind].name
+        configure_request.RoomListReq({GameKind:gameKind});
     }
 
 }
