@@ -10,6 +10,8 @@ import DDzPlayer from "../model/DDzPlayer";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import RuleDdz from "../rule/RuleDdz";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 
 
 const MAX_SOLDIER = 3;
@@ -33,13 +35,21 @@ export default class DdzUI extends BaseComponent {
 
         this.initNetEvent();
         this.initUIEvent();
+        this._myHandor.initSlideTouch();
+        
+        this.toStateResult();
+        TimerManager.delayFrame(2, new CHandler(this, this.test));
+        TimerManager.delayFrame(4, new CHandler(this, this.test1));
+    }
 
+    private test() {
         UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {y:140, scale:0.6});
         for(var j=0; j<MAX_SOLDIER; j++) {
             UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this._players[j].node, null);
             this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A]);
         }
-
+    }
+    private test1() {
         var deck = RuleDdz.initDeck();
         CommonUtil.shuffle(deck);
         var cards = [];
@@ -47,9 +57,6 @@ export default class DdzUI extends BaseComponent {
 			cards.push(deck[n]);
         }
         this._myHandor.resetCards(cards);
-        this._myHandor.initSlideTouch();
-        
-        this.toStateResult();
     }
 
     //玩家的UI位置
