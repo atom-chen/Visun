@@ -4,9 +4,11 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class game_btn extends cc.Component {
+    @property(cc.Material)
+    materl : cc.Material = null;
 
     onLoad () {
-        
+        this.getComponent(cc.Button)["_spriteMaterial"] = this.materl;
     }
 
     setGameInfo(cfg:any) {

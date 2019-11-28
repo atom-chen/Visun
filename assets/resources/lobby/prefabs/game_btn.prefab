@@ -249,8 +249,8 @@
     "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": true,
-    "_N$transition": 1,
-    "transition": 1,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 230,
@@ -324,6 +324,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "materl": {
+      "__uuid__": "55951913-9538-49e2-8960-00c4aaf9a11d"
+    },
     "_id": ""
   },
   {
