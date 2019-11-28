@@ -47,16 +47,10 @@
       },
       {
         "__id__": 95
-      },
-      {
-        "__id__": 96
-      },
-      {
-        "__id__": 97
       }
     ],
     "_prefab": {
-      "__id__": 98
+      "__id__": 96
     },
     "_opacity": 255,
     "_color": {
@@ -3647,29 +3641,6 @@
     "gameBtn": {
       "__uuid__": "bc37e8b2-3673-4ff1-b1ef-9fc95c366011"
     },
-    "_id": ""
-  },
-  {
-    "__type__": "a4aa7XdPpZOaJXX8j+SttIY",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_program": 11,
-    "_props": [],
-    "_id": ""
-  },
-  {
-    "__type__": "2377cA5j7FGb5jNTEhkF0Cj",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "_max": 65535,
     "_id": ""
   },
   {
