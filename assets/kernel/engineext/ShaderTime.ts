@@ -4,12 +4,11 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class ShaderTime extends cc.Component {
 	_material: any;
+	isUpdate: boolean;
+	private _start = 0;
 	
 	@property
 	_max: number = 65535;
-
-	isUpdate: boolean;
-
 	@property
 	get max(): number {
 		return this._max;
@@ -29,8 +28,6 @@ export default class ShaderTime extends cc.Component {
 			}
 		}
 	}
-	
-	private _start = 0;
 
 	protected update(dt) {
 		this._material = this.node.getComponent(cc.Sprite).sharedMaterials[0];
@@ -38,12 +35,12 @@ export default class ShaderTime extends cc.Component {
 			this._setShaderTime(dt);
 		}
 	}
+
 	private _setShaderTime(dt) {
 		let start = this._start;
 		if (start > this.max) start = 0;
 		start += 0.02;
 		this._material.effect.setProperty('time', start);
-
 		this._start = start;
 	}
 }

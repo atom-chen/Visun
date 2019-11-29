@@ -55,15 +55,12 @@ export default class ShaderHelper extends cc.Component {
 			setTimeout(() => {
 				this.applyEffect();
 			}, 1000);
-			
 		} else {
 			this.applyEffect();
 		}
-	//	this.node.on(cc.Node.EventType.TOUCH_END, this.next, this);
 	}
 
 	applyEffect() {
-  
 		//获取精灵组件
 		let sprite = this.node.getComponent(cc.Sprite) || this.node.getComponent(cc.Label);
 		if (!sprite) {
@@ -77,10 +74,12 @@ export default class ShaderHelper extends cc.Component {
 		//在材质对象上开启USE_TEXTURE定义s
 		let defineUserTexture = !!effectAsset.shaders.find(shader => shader.defines.find(def => def.name === 'USE_TEXTURE'));
 		if (defineUserTexture) {
+			//@ts-ignore
 			material.define('USE_TEXTURE', true); 
 		}
 
 		//为材质设置effect，也是就绑定Shader了
+		//@ts-ignore
 		material.effectAsset = effectAsset
 		material.name = effectAsset.name;
 
@@ -105,6 +104,7 @@ export default class ShaderHelper extends cc.Component {
 				let value: number = values[i].value;
 				let key = keys[i];
 				if (value !== null && values[i].type === 4) {
+					//@ts-ignore
 					let oldItem = oldProps.find(item => item.key === key);
 					if (oldItem) {
 						value = oldItem.value;
@@ -126,6 +126,7 @@ export default class ShaderHelper extends cc.Component {
 		}
 
 		if (this._props.length) {
+			//@ts-ignore
 			this._props.forEach(item => item.key && this.material.setProperty(item.key, item.value || 0));
 		}
 		// @ts-ignore
@@ -140,6 +141,7 @@ export default class ShaderHelper extends cc.Component {
 
 cc.game.on(cc.game.EVENT_ENGINE_INITED, () => {
 	//cc.dynamicAtlasManager.enabled = false;
+	//@ts-ignore
 	cc.loader.loadResDir('effects', cc.EffectAsset ,(error, res) => {
 		ShaderHelper.effectAssets = res;
 		let array = ShaderHelper.effectAssets.map((item, i)  => { 

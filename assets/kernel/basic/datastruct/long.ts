@@ -1406,5 +1406,7 @@ Long.fromBytesBE = function fromBytesBE(bytes, unsigned) {
 
 
 //64位处理
+//@ts-ignore
 protobuf.util.Long = Long;
+//@ts-ignore
 protobuf.configure();
