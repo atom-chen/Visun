@@ -1,9 +1,9 @@
 syntax = "proto3";
-package ptopb;
+package login;
 
 //个人信息
 message UserInfo{
-	uint64 UserId = 1;			//ID 
+	uint64 UserID = 1;			//ID 
 	string Accounts = 2;		//帐号
 	string Password = 3;		//密码
 	string Name = 4;			//昵称
@@ -23,7 +23,7 @@ message ReqRegister {
 //注册结果
 message RespRegister {
     string Account = 1;			//账号
-	uint64 UserId = 2;
+	uint64 UserID = 2;
 }
 
 //登录
@@ -37,5 +37,5 @@ message ReqLogin {
 //登陆结果
 message RespLogin {
     string Account = 1;			//账号
-	uint64 UserId = 2;
+	uint64 UserID = 2;
 }

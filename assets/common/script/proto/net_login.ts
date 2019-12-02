@@ -23,10 +23,10 @@ export var login_packet_define = {
 }
 
 export class login_request {
-    public static UserInfo( data:{ UserId:number, Accounts:string, Password:string, Name:string, Head:string, Sex:number, VipLevel:number, Money:number } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
+    public static UserInfo( data:{ UserID:number, Accounts:string, Password:string, Name:string, Head:string, Sex:number, VipLevel:number, Money:number } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqRegister( data:{ Account:string, Password:string, SecurityCode:string } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespRegister( data:{ State:number, Hints:string } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespRegister( data:{ Account:string, UserID:number } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqLogin( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespLogin( data:{ State:number, Hints:string } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespLogin( data:{ Account:string, UserID:number } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
 }
 

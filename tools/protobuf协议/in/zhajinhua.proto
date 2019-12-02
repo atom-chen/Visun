@@ -1,12 +1,12 @@
 syntax = "proto3";
-package ptopb;
+package zhajinhua;
 
 //准备
 message ReqZhajinhuaReady {
 
 }
 message RespZhajinhuaReady {
-	uint64 UserId = 1;
+	uint64 UserID = 1;
 }
 
 //跟注
@@ -14,7 +14,7 @@ message ReqZhajinhuaFollow {
 	int64 Money = 1;
 }
 message RespZhajinhuaFollow {
-	uint64 UserId = 1;
+	uint64 UserID = 1;
 	int64 Money = 2;
 }
 
@@ -23,7 +23,7 @@ message ReqZhajinhuaRaise {
 	int64 Money = 1;
 }
 message RespZhajinhuaRaise {
-	uint64 UserId = 1;
+	uint64 UserID = 1;
 	int64 Money = 2;
 }
 
@@ -32,7 +32,7 @@ message ReqZhajinhuaLook {
 	
 }
 message RespZhajinhuaLook {
-	uint64 UserId = 1;
+	uint64 UserID = 1;
 	repeated int32 Cards = 2;
 }
 
@@ -55,5 +55,5 @@ message ReqZhajinhuaGiveup {
 
 }
 message RespZhajinhuaGiveup {
-	uint64 UserId = 1;
+	uint64 UserID = 1;
 }

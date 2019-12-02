@@ -1,5 +1,5 @@
 syntax = "proto3";
-package ptopb;
+package brcowcow;
 
 message ReqBrcowcowBet {
     int32 AreaId = 1;

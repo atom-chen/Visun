@@ -18,6 +18,6 @@ export var brcowcow_packet_define = {
 
 export class brcowcow_request {
     public static ReqBrcowcowBet( data:{ AreaId:number, Money:number } ) { brcowcow_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespBrcowcowBet( data:{ IsSuccess:number, Reason:string, AreaId:number, Money:number } ) { brcowcow_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespBrcowcowBet( data:{ UserID:number, AreaId:number, Money:number } ) { brcowcow_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
 }
 

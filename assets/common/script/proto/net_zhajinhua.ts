@@ -38,16 +38,16 @@ export var zhajinhua_packet_define = {
 
 export class zhajinhua_request {
     public static ReqZhajinhuaReady( data:{} ) { zhajinhua_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaReady( data:{ UserId:number } ) { zhajinhua_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaReady( data:{ UserID:number } ) { zhajinhua_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqZhajinhuaFollow( data:{ Money:number } ) { zhajinhua_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaFollow( data:{ Money:number } ) { zhajinhua_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaFollow( data:{ UserID:number, Money:number } ) { zhajinhua_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqZhajinhuaRaise( data:{ Money:number } ) { zhajinhua_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaRaise( data:{ Money:number } ) { zhajinhua_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaRaise( data:{ UserID:number, Money:number } ) { zhajinhua_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqZhajinhuaLook( data:{} ) { zhajinhua_packet_define[26].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaLook( data:{ Cards:number } ) { zhajinhua_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaLook( data:{ UserID:number, Cards:number[] } ) { zhajinhua_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqZhajinhuaCompare( data:{ HitId:number } ) { zhajinhua_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaCompare( data:{ AttackerId:number, HitId:number, AttackerCards:number, HitCards:number, AttackerCardType:number, HitCardType:number, WinnerId:number } ) { zhajinhua_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaCompare( data:{ AttackerId:number, HitId:number, AttackerCards:number[], HitCards:number[], AttackerCardType:number, HitCardType:number, WinnerId:number } ) { zhajinhua_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqZhajinhuaGiveup( data:{} ) { zhajinhua_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespZhajinhuaGiveup( data:{ UserId:number } ) { zhajinhua_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
+    public static RespZhajinhuaGiveup( data:{ UserID:number } ) { zhajinhua_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
 }
 

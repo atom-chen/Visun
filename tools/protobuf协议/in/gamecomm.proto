@@ -1,5 +1,5 @@
 syntax = "proto3";
-package ptopb;
+package gamecomm;
 
 
 //通用失败回复

@@ -20,7 +20,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        UserInfo.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        UserInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         UserInfo.prototype.Accounts = "";
         UserInfo.prototype.Password = "";
         UserInfo.prototype.Name = "";
@@ -36,8 +36,8 @@ $root.login = (function() {
         UserInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                writer.uint32(8).uint64(message.UserId);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
             if (message.Accounts != null && message.hasOwnProperty("Accounts"))
                 writer.uint32(18).string(message.Accounts);
             if (message.Password != null && message.hasOwnProperty("Password"))
@@ -67,7 +67,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserId = reader.uint64();
+                    message.UserID = reader.uint64();
                     break;
                 case 2:
                     message.Accounts = reader.string();
@@ -107,9 +107,9 @@ $root.login = (function() {
         UserInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
-                    return "UserId: integer|Long expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             if (message.Accounts != null && message.hasOwnProperty("Accounts"))
                 if (!$util.isString(message.Accounts))
                     return "Accounts: string expected";
@@ -138,15 +138,15 @@ $root.login = (function() {
             if (object instanceof $root.login.UserInfo)
                 return object;
             var message = new $root.login.UserInfo();
-            if (object.UserId != null)
+            if (object.UserID != null)
                 if ($util.Long)
-                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
-                else if (typeof object.UserId === "string")
-                    message.UserId = parseInt(object.UserId, 10);
-                else if (typeof object.UserId === "number")
-                    message.UserId = object.UserId;
-                else if (typeof object.UserId === "object")
-                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.Accounts != null)
                 message.Accounts = String(object.Accounts);
             if (object.Password != null)
@@ -178,9 +178,9 @@ $root.login = (function() {
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.UserId = options.longs === String ? "0" : 0;
+                    object.UserID = options.longs === String ? "0" : 0;
                 object.Accounts = "";
                 object.Password = "";
                 object.Name = "";
@@ -193,11 +193,11 @@ $root.login = (function() {
                 } else
                     object.Money = options.longs === String ? "0" : 0;
             }
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (typeof message.UserId === "number")
-                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
-                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.Accounts != null && message.hasOwnProperty("Accounts"))
                 object.Accounts = message.Accounts;
             if (message.Password != null && message.hasOwnProperty("Password"))
@@ -351,7 +351,7 @@ $root.login = (function() {
         }
 
         RespRegister.prototype.Account = "";
-        RespRegister.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        RespRegister.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         RespRegister.create = function create(properties) {
             return new RespRegister(properties);
@@ -362,8 +362,8 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.Account != null && message.hasOwnProperty("Account"))
                 writer.uint32(10).string(message.Account);
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                writer.uint32(16).uint64(message.UserId);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(16).uint64(message.UserID);
             return writer;
         };
 
@@ -382,7 +382,7 @@ $root.login = (function() {
                     message.Account = reader.string();
                     break;
                 case 2:
-                    message.UserId = reader.uint64();
+                    message.UserID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -404,9 +404,9 @@ $root.login = (function() {
             if (message.Account != null && message.hasOwnProperty("Account"))
                 if (!$util.isString(message.Account))
                     return "Account: string expected";
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
-                    return "UserId: integer|Long expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             return null;
         };
 
@@ -416,15 +416,15 @@ $root.login = (function() {
             var message = new $root.login.RespRegister();
             if (object.Account != null)
                 message.Account = String(object.Account);
-            if (object.UserId != null)
+            if (object.UserID != null)
                 if ($util.Long)
-                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
-                else if (typeof object.UserId === "string")
-                    message.UserId = parseInt(object.UserId, 10);
-                else if (typeof object.UserId === "number")
-                    message.UserId = object.UserId;
-                else if (typeof object.UserId === "object")
-                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -436,17 +436,17 @@ $root.login = (function() {
                 object.Account = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.UserId = options.longs === String ? "0" : 0;
+                    object.UserID = options.longs === String ? "0" : 0;
             }
             if (message.Account != null && message.hasOwnProperty("Account"))
                 object.Account = message.Account;
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (typeof message.UserId === "number")
-                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
-                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             return object;
         };
 
@@ -597,7 +597,7 @@ $root.login = (function() {
         }
 
         RespLogin.prototype.Account = "";
-        RespLogin.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        RespLogin.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         RespLogin.create = function create(properties) {
             return new RespLogin(properties);
@@ -608,8 +608,8 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.Account != null && message.hasOwnProperty("Account"))
                 writer.uint32(10).string(message.Account);
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                writer.uint32(16).uint64(message.UserId);
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(16).uint64(message.UserID);
             return writer;
         };
 
@@ -628,7 +628,7 @@ $root.login = (function() {
                     message.Account = reader.string();
                     break;
                 case 2:
-                    message.UserId = reader.uint64();
+                    message.UserID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -650,9 +650,9 @@ $root.login = (function() {
             if (message.Account != null && message.hasOwnProperty("Account"))
                 if (!$util.isString(message.Account))
                     return "Account: string expected";
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
-                    return "UserId: integer|Long expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             return null;
         };
 
@@ -662,15 +662,15 @@ $root.login = (function() {
             var message = new $root.login.RespLogin();
             if (object.Account != null)
                 message.Account = String(object.Account);
-            if (object.UserId != null)
+            if (object.UserID != null)
                 if ($util.Long)
-                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
-                else if (typeof object.UserId === "string")
-                    message.UserId = parseInt(object.UserId, 10);
-                else if (typeof object.UserId === "number")
-                    message.UserId = object.UserId;
-                else if (typeof object.UserId === "object")
-                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -682,17 +682,17 @@ $root.login = (function() {
                 object.Account = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.UserId = options.longs === String ? "0" : 0;
+                    object.UserID = options.longs === String ? "0" : 0;
             }
             if (message.Account != null && message.hasOwnProperty("Account"))
                 object.Account = message.Account;
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (typeof message.UserId === "number")
-                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
-                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             return object;
         };
 
