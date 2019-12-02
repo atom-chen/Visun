@@ -21,11 +21,16 @@ export default class zjhUI extends BaseComponent {
         for(var i = 0; i <= 4; i++) {
             this._players.push(this.m_ui["CpnPlayer"+i].getComponent(CpnPlayer));
             this._handors.push(this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard));
-            this._stateNodes.push(this.m_ui["label"+i].getComponent(cc.Label));
+            this._stateNodes.push(this.m_ui["stateTip"+i].getComponent(cc.Label));
         }
 
         this.initUIEvent();
         this.initNetEvent();
+    }
+
+    //场景信息
+    onRespZhajinhuaGameEnv(param:any) {
+
     }
 
     //准备
@@ -60,6 +65,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     initNetEvent() {
+    //    EventCenter.getInstance().listen(zhajinhua_msgs.RespZhajinhuaGameEnv, this.onRespZhajinhuaGameEnv, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.RespZhajinhuaReady, this.onRespZhajinhuaReady, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.RespZhajinhuaCompare, this.onRespZhajinhuaCompare, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.RespZhajinhuaFollow, this.onRespZhajinhuaFollow, this);

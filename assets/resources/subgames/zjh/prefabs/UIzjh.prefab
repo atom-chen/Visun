@@ -3722,7 +3722,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label0",
+    "_name": "stateTip0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 26
@@ -3823,7 +3823,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label1",
+    "_name": "stateTip1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 26
@@ -3924,7 +3924,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label2",
+    "_name": "stateTip2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 26
@@ -4025,7 +4025,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label3",
+    "_name": "stateTip3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 26
@@ -4126,7 +4126,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label4",
+    "_name": "stateTip4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 26
