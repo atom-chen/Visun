@@ -31,7 +31,7 @@
     iResolution: {
       type: vec3
       displayName:'分辨率'
-      value: [1280, 720, 0]
+      value: [1334, 750, 0]
     }
     Strength:{
        type: float
