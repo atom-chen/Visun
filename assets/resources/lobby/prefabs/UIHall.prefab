@@ -982,7 +982,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -992,8 +992,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 93.947,
-      "y": -1.681,
+      "x": 90.947,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -1260,7 +1260,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -1270,8 +1270,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 269.387,
-      "y": -1.681,
+      "x": 274.387,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -1538,7 +1538,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -1549,7 +1549,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 452.844,
-      "y": -1.681,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -1816,7 +1816,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -1826,8 +1826,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 630.979,
-      "y": -1.681,
+      "x": 629.979,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -2094,7 +2094,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 160,
       "height": 60
     },
     "_anchorPoint": {
@@ -2105,7 +2105,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 811.318,
-      "y": -1.681,
+      "y": 0,
       "z": 0
     },
     "_scale": {
@@ -2666,7 +2666,7 @@
     "_spriteFrame": {
       "__uuid__": "4fe6820a-33f2-4bc1-a63e-f460269adc47"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -3582,7 +3582,9 @@
     },
     "_enabled": true,
     "_materials": [
-      null
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
