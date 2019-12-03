@@ -128,6 +128,13 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "buyu",
 	},
+	[GameKindEnum.Toubao] : {
+		GameKind: GameKindEnum.Toubao,
+		name: "骰宝",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "saibao",
+	},
 };
 
 export default GameConfig;

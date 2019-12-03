@@ -11,6 +11,7 @@ export enum GameKindEnum {
 	Redpacket	= 5000,		//抢红包
 	BirdBeast	= 6000,		//飞禽走兽
 	Redblack	= 7000,		//红黑
+	Toubao		= 8000,
 	//对战
 	Zhajinhua	= 20100,	//炸金花
 	QzCowcow	= 20200,	//抢庄牛牛

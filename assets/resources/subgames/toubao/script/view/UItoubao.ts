@@ -5,7 +5,7 @@ import GameManager from "../../../../../common/script/model/GameManager";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class SaibaoUI extends BaseComponent {
+export default class ToubaoUI extends BaseComponent {
 
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
