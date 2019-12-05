@@ -67,8 +67,9 @@ export default class UIHall extends BaseComponent {
 
 	private refleshUI(data:any) {
 		var hero = LoginUser.getInstance();
-		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setName("昵称："+hero.Name+" ID："+hero.UserId);
-		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setMoney(hero.Money);
+		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setName(hero.Name);
+		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setMoney(hero.UserId);
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.Money.toString();
 	}
 
 	private initUiEvents() {
