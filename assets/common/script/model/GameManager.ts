@@ -209,6 +209,9 @@ export default class GameManager extends ModelBase {
 				case GameKindEnum.Toubao:
 					UIManager.openPanel(ViewDefine.UItoubao.path, null);
 					break;
+				case GameKindEnum.Paijiu:
+					UIManager.openPanel(ViewDefine.UIpaijiu.path, null);
+					break;
 				default:
 					cc.warn("no ui", gameKind);
 					break;

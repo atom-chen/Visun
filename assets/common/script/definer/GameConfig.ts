@@ -135,6 +135,13 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "saibao",
 	},
+	[GameKindEnum.Paijiu] : {
+		GameKind: GameKindEnum.Paijiu,
+		name: "牌九",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "paijiu",
+	},
 };
 
 export default GameConfig;
