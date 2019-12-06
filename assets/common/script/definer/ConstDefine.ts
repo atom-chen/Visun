@@ -25,6 +25,7 @@ export enum GameKindEnum {
 	Paodekuai	= 20900,	//跑得快
 	Texas		= 21000,	//德州
 	Ermj		= 21100,	//二人麻将
+	Erba		= 21200,	//二八杠
 	//街机电玩
 	Buyu		= 30100,
 	//RPG（回合制+即时制+格斗）

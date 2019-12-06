@@ -142,6 +142,20 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "paijiu",
 	},
+	[GameKindEnum.Erba] : {
+		GameKind: GameKindEnum.Erba,
+		name: "二八杠",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "erba",
+	},
+	[GameKindEnum.Ermj] : {
+		GameKind: GameKindEnum.Ermj,
+		name: "二人麻将",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "ermj",
+	},
 };
 
 export default GameConfig;
