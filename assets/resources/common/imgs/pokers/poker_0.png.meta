@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "ee29d316-31c9-4e5d-b7ac-2f7e378504ad",
+  "uuid": "1a96c84c-9c7f-4043-907b-afa5bfa8fe52",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,10 +9,10 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "choumadiban": {
+    "poker_0": {
       "ver": "1.0.4",
-      "uuid": "054d443b-d522-4c28-af55-526a246b1513",
-      "rawTextureUuid": "ee29d316-31c9-4e5d-b7ac-2f7e378504ad",
+      "uuid": "17df77c1-f2de-4edb-9745-c387663d88af",
+      "rawTextureUuid": "1a96c84c-9c7f-4043-907b-afa5bfa8fe52",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -20,14 +20,14 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 456,
-      "height": 97,
-      "rawWidth": 456,
-      "rawHeight": 97,
+      "width": 95,
+      "height": 127,
+      "rawWidth": 95,
+      "rawHeight": 127,
       "borderTop": 0,
       "borderBottom": 0,
-      "borderLeft": 125,
-      "borderRight": 74,
+      "borderLeft": 0,
+      "borderRight": 0,
       "subMetas": {}
     }
   }
