@@ -28,5 +28,6 @@ export enum GameKindEnum {
 	Erba		= 21200,	//二八杠
 	//街机电玩
 	Buyu		= 30100,
+	Jskb		= 30200,
 	//RPG（回合制+即时制+格斗）
 }

@@ -156,6 +156,13 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "ermj",
 	},
+	[GameKindEnum.Jskb] : {
+		GameKind: GameKindEnum.Jskb,
+		name: "极速狂飙",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_by",
+		dir: "jskb",
+	},
 };
 
 export default GameConfig;
