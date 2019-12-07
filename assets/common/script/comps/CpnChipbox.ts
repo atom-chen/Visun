@@ -20,8 +20,8 @@ export default class CpnChipbox extends BaseComponent {
 
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
-        this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x - 2;
-        this.m_ui.hilightSpr.y = this.m_ui["chip"+idx].y + 3;
+        this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x;
+        this.m_ui.hilightSpr.y = this.m_ui["chip"+idx].y;
     }
 
     public getButton(idx:number) : cc.Node {
