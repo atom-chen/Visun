@@ -38,6 +38,13 @@ export default class GameUtil {
 		if(v<0) { v=0; } 
 		if(v>1) { v=1; }
 		var respath = "common/imgs/person/headIcon_"+v;
+
+		var sf0 = cc.loader.getRes(respath, cc.SpriteFrame);
+		if(sf0) {
+			nd.getComponent(cc.Sprite).spriteFrame = sf0;
+			return;
+		}
+		
 		cc.loader.loadRes(respath, cc.SpriteFrame, (err, sf)=>{
 			if(err) { cc.warn("error: "+err); return; }
 			if(cc.isValid(nd)) {
