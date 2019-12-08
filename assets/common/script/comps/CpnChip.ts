@@ -7,21 +7,20 @@ export default class CpnChip extends cc.Component {
 
     _value: number = 1;
 
-    private onResLoaded(err, atlas){
+    private onResLoaded(err, sf){
         if(err) { cc.log("error: "+err); return; }
-        var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+this._value);
-        this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
+        this.getComponent(cc.Sprite).spriteFrame = sf;
     }
 
     setChipValue(v:number) {
         this._value = v;
 
-        var res = cc.loader.getRes("common/imgs/chip", cc.SpriteAtlas);
+        var res = cc.loader.getRes("common/imgs/chips/chouma"+v, cc.SpriteFrame);
         if(res) {
             this.onResLoaded(null, res);
             return;
         }
-        cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, this.onResLoaded.bind(this));
+        cc.loader.loadRes("common/imgs/chips/chouma"+v, cc.SpriteFrame, this.onResLoaded.bind(this));
     }
 
     getChipValue() : number {

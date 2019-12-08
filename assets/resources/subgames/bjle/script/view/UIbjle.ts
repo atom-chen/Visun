@@ -15,9 +15,7 @@ export default class UIbjle extends BaseComponent {
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		var rule = [1,10,20,100,500];
 		this._chipBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
-		this._chipBox.setChipValues(rule);
 
 		this.initUIEvents();
 	}

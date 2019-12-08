@@ -14,8 +14,6 @@ export default class FqzsUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame(0);
 		}, this);
-
-        this.m_ui.CpnChipbox.getComponent(CpnChipbox).setChipValues([1,3,5,8,10]);
     }
     
 }

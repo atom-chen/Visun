@@ -23,7 +23,7 @@ const {ccclass, property} = cc._decorator;
 export default class BrnnUI extends BaseComponent {
 
 	compBox:CpnChipbox = null;
-	_rule:number[] = [1,3,5,300,800];
+	_rule:number[] = [5,10,50,100,500];
 
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
@@ -42,7 +42,6 @@ export default class BrnnUI extends BaseComponent {
 		});
 
 		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
-		this.compBox.setChipValues(this._rule);
 
 		this.initNetEvent();
 		this.initUIEvent();
