@@ -26,6 +26,14 @@ export default class GameUtil {
 		return chips;
 	}
 
+	public static chipPath(v:number|string) {
+		return "common/imgs/chips/chouma"+v;
+	}
+
+	public static pokerPath(v:number|string) {
+		return "common/imgs/pokers/poker_"+v;
+	}
+
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
 	public static lineTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
 		if(!chipSpr) { return; }

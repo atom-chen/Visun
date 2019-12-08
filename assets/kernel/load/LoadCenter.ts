@@ -1,3 +1,5 @@
+import CHandler from "../basic/datastruct/CHandler";
+
 //---------------------------------
 // cc.load封装
 //---------------------------------
@@ -32,6 +34,39 @@ export default class LoadCenter {
 
 	public getCacheCount() {
 		return Object.keys(cc.loader["_cache"]).length;
+	}
+
+	//-----------------------------------------------------------------------------------
+	private _frameListeners : {[key:string]:Array<any>} = {};
+	changeSpriteFrame(comp:cc.Sprite, frameName:string) {
+		let sf0 = cc.loader.getRes(frameName, cc.SpriteFrame);
+        if(sf0) {
+            comp.spriteFrame = sf0;
+            return;
+		}
+		
+		let onSpriteFrameLoaded = function(err, sf1){
+			if(err) { cc.warn("error: "+err); return; }
+			if(this._frameListeners[frameName]) {
+				var fnList = this._frameListeners[frameName];
+				for(var i in fnList) {
+					fnList[i].target.spriteFrame = sf1;
+				}
+			}
+		}
+		this._frameListeners[frameName] = this._frameListeners[frameName] || [];
+		this._frameListeners[frameName].push({ target:comp });
+        cc.loader.loadRes(frameName, cc.SpriteFrame, onSpriteFrameLoaded.bind(this));
+	}
+	removeListenerByTarget(comp:cc.Sprite) {
+		for(var frameName in this._frameListeners) {
+			var fnList = this._frameListeners[frameName];
+			for(var i = fnList.length; i >= 0; i--) {
+				if(fnList[i].target === comp) {
+					fnList[i].splice(i, 1);
+				}
+			}
+		}
 	}
 
 	//-----------------------------------------------------------------------------------

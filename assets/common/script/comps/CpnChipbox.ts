@@ -1,5 +1,6 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import GameUtil from "../utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -45,7 +46,7 @@ export default class CpnChipbox extends BaseComponent {
         this._values = values; 
 
         for(var i=0; i<5; i++){
-            var respath = "common/imgs/chips/chouma"+this._values[i];
+            var respath = GameUtil.chipPath(this._values[i]);
             var res = cc.loader.getRes(respath, cc.SpriteFrame);
             if(res) {
                 this.onResLoaded(null, res);

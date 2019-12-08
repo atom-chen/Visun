@@ -1,6 +1,5 @@
-import CommonUtil from "../../../kernel/utils/CommonUtil";
-import { getPokerValue, getPokerColor } from "../definer/PokerDefine";
 import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
+import GameUtil from "../utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,7 +21,7 @@ export default class CpnPoker extends cc.Component {
     private getResPath() {
         var face = 0;
         if(this._curFace) { face = this._code; }
-        return "common/imgs/pokers/poker_"+face;
+        return GameUtil.pokerPath(face);
     }
 
     private refresh() {
