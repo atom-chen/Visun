@@ -25,7 +25,7 @@ export default class CpnChipbox extends BaseComponent {
         this.m_ui.hilightSpr.y = this.m_ui["chip"+idx].y+6;
     }
 
-    public getButton(idx:number) : cc.Node {
+    public getChipNode(idx:number) : cc.Node {
         return this.m_ui["chip"+idx];
     }
 

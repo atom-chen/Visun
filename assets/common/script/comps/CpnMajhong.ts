@@ -10,7 +10,9 @@ export default class CpnMajhong extends cc.Component {
 
     private onResLoaded(err, sf){
         if(err) { cc.warn("error: "+err); return; }
-        this.getComponent(cc.Sprite).spriteFrame = sf;
+        if(cc.isValid(this)) {
+            this.getComponent(cc.Sprite).spriteFrame = sf;
+        }
     }
 
     setCode(v:MajhongCode) {

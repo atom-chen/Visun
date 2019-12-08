@@ -102,7 +102,7 @@ export default class BrnnUI extends BaseComponent {
 		var chip = this._pool.newObject();
 		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1]);
 		this.m_ui.chiplayer.addChild(chip);
-		GameUtil.lineTo1(chip, this.compBox.getButton(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
+		GameUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
 	private onClickArea(areaId:number) {

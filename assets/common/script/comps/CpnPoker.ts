@@ -13,9 +13,11 @@ export default class CpnPoker extends cc.Component {
     private _selectY:number = 30;
 
 
-    private onResLoaded(err, sprFrame){
+    private onResLoaded(err, sf){
         if(err) { cc.warn("error: "+err); return; }
-        this.getComponent(cc.Sprite).spriteFrame = sprFrame;
+        if(cc.isValid(this)) {
+            this.getComponent(cc.Sprite).spriteFrame = sf;
+        }
     }
 
     private getResPath() {

@@ -1,6 +1,7 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
+import GameUtil from "../utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -46,8 +47,8 @@ export default class CpnPlayer extends BaseComponent {
         this.label_money.string = money.toString();
     }
 
-    public setHeadImg(headImg:string) {
-        
+    public setHeadImg(v:number) {
+        GameUtil.setHeadIcon(this.node, v);
     }
 
     public addMoney(money:number, fromV ?: number, toV ?: number) {

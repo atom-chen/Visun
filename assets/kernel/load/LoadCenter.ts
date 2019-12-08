@@ -52,6 +52,7 @@ export default class LoadCenter {
 				for(var i in fnList) {
 					fnList[i].target.spriteFrame = sf1;
 				}
+				this._frameListeners[frameName].length = 0;
 			}
 		}
 		this._frameListeners[frameName] = this._frameListeners[frameName] || [];
