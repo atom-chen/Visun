@@ -8,7 +8,7 @@ export default class CpnChip extends cc.Component {
     _value: number = 1;
 
     private onResLoaded(err, sf){
-        if(err) { cc.log("error: "+err); return; }
+        if(err) { cc.warn("error: "+err); return; }
         this.getComponent(cc.Sprite).spriteFrame = sf;
     }
 
