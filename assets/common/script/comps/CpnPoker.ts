@@ -14,27 +14,30 @@ export default class CpnPoker extends cc.Component {
     private _selectY:number = 30;
 
 
-    private onResLoaded(err, atlas){
-        if(err) { cc.log("error: "+err); return; }
-        var face = 0
+    private onResLoaded(err, sprFrame){
+        if(err) { cc.warn("error: "+err); return; }
+        this.getComponent(cc.Sprite).spriteFrame = sprFrame;
+    }
+
+    private getResPath() {
+        var face = 0;
         if(this._curFace) { face = this._code; }
-        if(face!==0) { face = getPokerValue(face) * 10 + getPokerColor(face) + 1; }
-        var name = CommonUtil.getFrameName("common/imgs/poker/poker_"+face);
-        this.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name);
+        return "common/imgs/pokers/poker_"+face;
     }
 
     private refresh() {
-        var res = cc.loader.getRes("common/imgs/poker", cc.SpriteAtlas);
+        var respath = this.getResPath();
+        var res = cc.loader.getRes(respath, cc.SpriteFrame);
         if(res) {
             this.onResLoaded(null, res);
         } else {
-            cc.loader.loadRes("common/imgs/poker", cc.SpriteAtlas, this.onResLoaded.bind(this));
+            cc.loader.loadRes(respath, cc.SpriteFrame, this.onResLoaded.bind(this));
         }
     }
 
-    setCode(v:number) {
+    setCode(v:number, bFront:boolean = true) {
         this._code = v;
-        this.refresh();
+        if(bFront) { this.refresh(); }
     }
 
     getCode() : number {

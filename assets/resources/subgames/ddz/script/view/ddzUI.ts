@@ -51,10 +51,11 @@ export default class DdzUI extends BaseComponent {
     }
     private test1() {
         var deck = RuleDdz.initDeck();
-        CommonUtil.shuffle(deck);
+     //   CommonUtil.shuffle(deck);
         var cards = [];
 		for (var n=0; n<17; n++) {
-			cards.push(deck[n]);
+            cards.push(deck[n]);
+            cc.log(deck[n])
         }
         this._myHandor.resetCards(cards);
     }
