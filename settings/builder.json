@@ -20,7 +20,7 @@
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
   "orientation": {

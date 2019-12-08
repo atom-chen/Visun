@@ -33,7 +33,7 @@ export default class UILoading extends cc.Component {
         TimerManager.delTimer(this._tmr);
         this._tmr = 0;
         this.labelProgress.string = sub + "/" + total;
-        if(sub===total) {
+        if(sub===total || total == 0) {
             this._tmr = TimerManager.delayFrame(2, new CHandler(this, this.onHideView));
         }
     }

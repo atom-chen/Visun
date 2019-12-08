@@ -29,8 +29,8 @@ export default class HotupdateScene extends BaseComponent {
 		Adaptor.adaptOrientation(true);
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
-
-		if ( !cc.sys.isNative ) {
+		var bNoHot = true;
+		if ( bNoHot || !cc.sys.isNative ) {
 			this.enterGame();
 		} 
 		else {
