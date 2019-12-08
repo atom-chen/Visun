@@ -15,7 +15,7 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_login";
 import { configure_msgs, configure_request } from "../../../../../common/script/proto/net_configure";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -67,9 +67,10 @@ export default class UIHall extends BaseComponent {
 
 	private refleshUI(data:any) {
 		var hero = LoginUser.getInstance();
-		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setName(hero.Name);
-		this.m_ui.CpnPlayer.getComponent(CpnPlayer).setMoney(hero.UserId);
+		this.m_ui.lab_name.getComponent(cc.Label).string = "昵称：" + hero.Name;
+		this.m_ui.lab_id.getComponent(cc.Label).string = "ID：" + hero.UserID;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.Money.toString();
+		GameUtil.setHeadIcon(this.m_ui.headNode, 1);
 	}
 
 	private initUiEvents() {

@@ -47,7 +47,7 @@ export default class LoginMgr extends ModelBase {
 
 
 	public checkLogin(bTip: boolean): boolean {
-		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserId > 0;
+		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
 			UIManager.openPopwnd(ViewDefine.UILogin.path, false, null);

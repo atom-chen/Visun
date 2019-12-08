@@ -63,7 +63,7 @@ export default class DdzUI extends BaseComponent {
     //玩家的UI位置
     private playerIndex(player:DDzPlayer) : number {
 		if(isNil(player)){ return -1; }
-		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
 		var index = player.Pos;
 		if(hero.Pos===0) { return index; }
 		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;

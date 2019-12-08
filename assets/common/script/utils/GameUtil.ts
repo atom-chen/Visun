@@ -34,6 +34,18 @@ export default class GameUtil {
 		return "common/imgs/pokers/poker_"+v;
 	}
 
+	public static setHeadIcon(nd:cc.Node, v:number) {
+		if(v<0) { v=0; } 
+		if(v>1) { v=1; }
+		var respath = "common/imgs/person/headIcon_"+v;
+		cc.loader.loadRes(respath, cc.SpriteFrame, (err, sf)=>{
+			if(err) { cc.warn("error: "+err); return; }
+			if(cc.isValid(nd)) {
+				nd.getComponent(cc.Sprite).spriteFrame = sf;
+			}
+		})
+	}
+
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
 	public static lineTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
 		if(!chipSpr) { return; }
