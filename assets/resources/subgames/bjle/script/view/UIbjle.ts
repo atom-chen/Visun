@@ -30,32 +30,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private bet(userId:number, areaId:number, money:number) {
-		var self = this;
-
-		var comp = this.findPlayer(userId);
-		if(!comp){ cc.log("find player fail"); return; }
-		if(!areaId || !money){ cc.log("arguments errer", areaId, money); return; }
-		comp = comp.node;
-		var area = this.m_ui["area"+areaId];
-		if(!area){ cc.log("no area: ", areaId); return; }
-
-		var margin = { left:5,right:5,bottom:5,top:5 };
 		
-		//todo: 须 改为ChipSpr预制体 + 对象池
-		cc.loader.loadRes("common/imgs/chip", cc.SpriteAtlas, function (err, atlas) {
-			if(err) { cc.log("error: "+err); return; }
-			var flys = GameUtil.parseChip(money);
-			for(var i=0; i<flys.length; i++){
-				var name = CommonUtil.getFrameName("common/imgs/chip/chip_"+flys[i]);
-				if(!atlas.getSpriteFrame(name)){ return; }
-				var chip = new cc.Node();
-				chip.scale = 0.4
-				chip.addComponent(cc.Sprite);
-				chip.getComponent(cc.Sprite).spriteFrame = atlas.getSpriteFrame(name)
-				self.m_ui["chiplayer"].addChild(chip);
-				GameUtil.lineTo1(chip, comp, area, 0.2, 0, margin);
-			}
-		});
 	}
 	
 	private initUIEvents() {
