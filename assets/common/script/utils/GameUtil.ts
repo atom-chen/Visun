@@ -1,4 +1,5 @@
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import { MajhongCode } from "../definer/MajhongDefine";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
@@ -34,6 +35,10 @@ export default class GameUtil {
 		return "common/imgs/pokers/poker_"+v;
 	}
 
+	public static majhongPath(v:MajhongCode) {
+		return "common/imgs/majhong/tong"+v;
+	}
+
 	public static setHeadIcon(nd:cc.Node, v:number) {
 		if(v<0) { v=0; } 
 		if(v>1) { v=1; }
@@ -44,7 +49,7 @@ export default class GameUtil {
 			nd.getComponent(cc.Sprite).spriteFrame = sf0;
 			return;
 		}
-		
+
 		cc.loader.loadRes(respath, cc.SpriteFrame, (err, sf)=>{
 			if(err) { cc.warn("error: "+err); return; }
 			if(cc.isValid(nd)) {
