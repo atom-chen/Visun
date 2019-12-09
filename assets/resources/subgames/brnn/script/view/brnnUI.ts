@@ -15,7 +15,7 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 
 
 
-var margin = { left:5,right:5,bottom:40,top:5 };
+var margin = { left:16,right:16,bottom:16,top:16 };
 
 const {ccclass, property} = cc._decorator;
 

@@ -1,5 +1,6 @@
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import { MajhongCode } from "../definer/MajhongDefine";
+import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
@@ -71,9 +72,6 @@ export default class GameUtil {
 	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
 	//margin指终点位置距离toObj包围盒内的边距
 	public static lineTo1(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
-		if(!margin) {
-			margin = { left:2,right:2,bottom:2,top:2 };
-		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
 		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
@@ -99,9 +97,6 @@ export default class GameUtil {
 	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
 	//margin指终点位置距离toObj包围盒内的边距
 	public static bezierTo1(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, duration:number, delay:number, margin:any=null) {
-		if(!margin) {
-			margin = { left:2,right:2,bottom:2,top:2 };
-		}
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
 		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
@@ -111,15 +106,19 @@ export default class GameUtil {
 	//在dstObj的包围盒内，给srcobj找一个随机位置，margin指位置距离toObj包围盒内的边距
 	public static getRandPos(parent:cc.Node, srcObj:cc.Node, dstObj:cc.Node, margin:any) : cc.Vec3
 	{
-		var szSrc = srcObj.getContentSize();
-		var szDst = dstObj.getContentSize();
-		var srcScale = srcObj.scale;
-		var dstScale = dstObj.scale;
 		var toPos = CommonUtil.convertSpaceAR(dstObj, parent);
-		var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
-		var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
-		toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );
-		toPos.y = toPos.y + ( -rangeY+margin.bottom + Math.random() * (rangeY*2-margin.bottom-margin.top) );
+		
+		if(!isNil(margin)) {
+			var szSrc = srcObj.getContentSize();
+			var szDst = dstObj.getContentSize();
+			var srcScale = srcObj.scale;
+			var dstScale = dstObj.scale;
+			var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
+			var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
+			toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );
+			toPos.y = toPos.y + ( -rangeY+margin.bottom + Math.random() * (rangeY*2-margin.bottom-margin.top) );
+		}
+		
 		return toPos;
 	}
 
