@@ -115,7 +115,7 @@ export default class BrnnUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j], true);
 				this.m_ui.chipLayer.addChild(chip);
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
+				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, margin);
 			}
 		}
 	}

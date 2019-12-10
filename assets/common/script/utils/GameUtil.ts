@@ -82,6 +82,16 @@ export default class GameUtil {
 		this.lineTo0(chipSpr, fromPos, toPos, duration, delay);
 	}
 
+	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
+	//margin指终点位置距离toObj包围盒内的边距
+	public static lineTo2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, speed:number, delay:number, margin:any=null) {
+		var parent = chipSpr.parent;
+		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
+		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
+		var duration = Math.sqrt((toPos.x-fromPos.x)*(toPos.x-fromPos.x) + (toPos.y-fromPos.y)*(toPos.y-fromPos.y)) / speed;
+		this.lineTo0(chipSpr, fromPos, toPos, duration, delay);
+	}
+
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
 	public static bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
 		if(!chipSpr) { return; }
@@ -104,6 +114,16 @@ export default class GameUtil {
 		var parent = chipSpr.parent;
 		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
 		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
+		this.bezierTo0(chipSpr, fromPos, toPos, duration, delay);
+	}
+
+	//将一个节点，从fromObj所在的位置，移动到toObj所在的位置，用时为duration秒
+	//margin指终点位置距离toObj包围盒内的边距
+	public static bezierTo2(chipSpr:cc.Node, fromObj:cc.Node, toObj:cc.Node, speed:number, delay:number, margin:any=null) {
+		var parent = chipSpr.parent;
+		var toPos = this.getRandPos(parent, chipSpr, toObj, margin);
+		var fromPos = CommonUtil.convertSpaceAR(fromObj, parent);
+		var duration = Math.sqrt((toPos.x-fromPos.x)*(toPos.x-fromPos.x) + (toPos.y-fromPos.y)*(toPos.y-fromPos.y)) / speed;
 		this.bezierTo0(chipSpr, fromPos, toPos, duration, delay);
 	}
 

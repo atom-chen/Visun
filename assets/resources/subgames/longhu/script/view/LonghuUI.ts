@@ -10,7 +10,8 @@ import CpnChip from "../../../../../common/script/comps/CpnChip";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 
 
-var margin = { left:66,right:66,bottom:28,top:28 };
+var margin = { left:66,right:66,bottom:28,top:100 };
+var margin03 = { left:134,right:122,bottom:28,top:120 };
 
 const {ccclass, property} = cc._decorator;
 
@@ -113,7 +114,9 @@ export default class LonghuUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j], true);
 				this.m_ui.chipLayer.addChild(chip);
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
+				var tmp = margin;
+				if(info.AreaId===0||info.AreaId===3) { tmp = margin03; }
+				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, tmp);
 			}
 		}
     }
