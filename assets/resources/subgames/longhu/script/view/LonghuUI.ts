@@ -55,8 +55,13 @@ export default class LonghuUI extends BaseComponent {
     //准备阶段
 	private toStateReady() {
 	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中";
+
+		this.m_ui.txt_zhunbeizhong.active = true;
+		this.m_ui.txt_xiazhuzhong.active = false;
+		this.m_ui.txt_paijiangzhong.active = false;
+
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer));
+		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer), true);
 
 		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
@@ -65,9 +70,14 @@ export default class LonghuUI extends BaseComponent {
 
 	//下注阶段
 	private toStateBetting() {
+	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中";
+		this.m_ui.txt_zhunbeizhong.active = false;
+		this.m_ui.txt_xiazhuzhong.active = true;
+		this.m_ui.txt_paijiangzhong.active = false;
+
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 10, new CHandler(this, this.onStateTimer));
-	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
+		this.tmrState = TimerManager.addSecondTimer(1, 10, new CHandler(this, this.onStateTimer), true);
+	
 		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
@@ -76,15 +86,21 @@ export default class LonghuUI extends BaseComponent {
 
 	//结算阶段
 	private toStateJiesuan() {
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer));
-	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中"
+		//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中";
+
+		this.m_ui.txt_zhunbeizhong.active = false;
+		this.m_ui.txt_xiazhuzhong.active = false;
+		this.m_ui.txt_paijiangzhong.active = true;
+	
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			childs[i].removeFromParent(false);
 			this._pool.delObject(childs[i]);
 		}
+
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer), true);
 
 		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();

@@ -28,7 +28,7 @@ export class BaseTimer implements JTIPoolObject {
 		return this._callback.isSame(cb);
 	}
     
-    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler) {
+    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) {
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
@@ -39,6 +39,9 @@ export class BaseTimer implements JTIPoolObject {
 		this._stoped = false;
 		this._paused = false;
 		this._isLimit = looptimes > 0;
+		if(callOnAdd) {
+			this._callback.invoke(this);
+		}
 	}
 
 	public stop() {

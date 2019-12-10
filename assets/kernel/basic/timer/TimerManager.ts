@@ -71,7 +71,7 @@ export default class TimerManager {
 		return id;
 	}
 
-	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler) : number
+	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) : number
 	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
@@ -82,7 +82,7 @@ export default class TimerManager {
 		let id = TimerManager.autoId;
 		var tmr = new BaseTimer;
 	//	var tmr = TimerManager._pool.get();
-		tmr.reset(TimerType.second, id, interval, looptimes, callback);
+		tmr.reset(TimerType.second, id, interval, looptimes, callback, callOnAdd);
 		TimerManager._timers.push(tmr);
 		return id;
 	}
