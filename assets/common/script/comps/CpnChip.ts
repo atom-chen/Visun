@@ -14,15 +14,15 @@ export default class CpnChip extends cc.Component {
         }
     }
 
-    setChipValue(v:number) {
+    setChipValue(v:number, b3d:boolean) {
         this._value = v;
 
-        var res = cc.loader.getRes(GameUtil.chipPath(v), cc.SpriteFrame);
+        var res = cc.loader.getRes(GameUtil.chipPath(v, b3d), cc.SpriteFrame);
         if(res) {
             this.onResLoaded(null, res);
             return;
         }
-        cc.loader.loadRes(GameUtil.chipPath(v), cc.SpriteFrame, this.onResLoaded.bind(this));
+        cc.loader.loadRes(GameUtil.chipPath(v, b3d), cc.SpriteFrame, this.onResLoaded.bind(this));
     }
 
     getChipValue() : number {

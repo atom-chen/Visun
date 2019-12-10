@@ -28,8 +28,12 @@ export default class GameUtil {
 		return chips;
 	}
 
-	public static chipPath(v:number|string) {
-		return "common/imgs/chips/chouma"+v;
+	public static chipPath(v:number|string, b3d:boolean) {
+		if(b3d) {
+			return "common/imgs/chips/cm_"+v;
+		} else {
+			return "common/imgs/chips/chouma"+v;
+		}
 	}
 
 	public static pokerPath(v:number|string) {

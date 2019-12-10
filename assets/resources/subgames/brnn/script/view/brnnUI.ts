@@ -38,6 +38,7 @@ export default class BrnnUI extends BaseComponent {
 		var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
+			if(!cc.isValid(self)) { return; }
 			self._loadedRes = loadedRes;
 		});
 
@@ -70,7 +71,7 @@ export default class BrnnUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
-		TimerManager.addSecondTimer(1, 5, new CHandler(this, this.onPlayersBet));
+		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
@@ -79,7 +80,7 @@ export default class BrnnUI extends BaseComponent {
 	//结算阶段
 	private toStateJiesuan() {
 		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中"
-		var childs = this.m_ui.chiplayer.children
+		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			childs[i].removeFromParent(false);
@@ -100,14 +101,9 @@ export default class BrnnUI extends BaseComponent {
 		param = param || {AreaId:2};
 		var idx = this.compBox.getSelectedIndex();
 		var chip = this._pool.newObject();
-		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1]);
-		this.m_ui.chiplayer.addChild(chip);
+		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
+		this.m_ui.chipLayer.addChild(chip);
 		GameUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
-	}
-
-	private onClickArea(areaId:number) {
-		var idx = this.compBox.getSelectedIndex();
-		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
 	}
 
 	private onPlayersBet(tmr, param) {
@@ -117,11 +113,16 @@ export default class BrnnUI extends BaseComponent {
 			var nums = GameUtil.parseChip(info.Money, this._rule);
 			for(var j in nums) {
 				var chip = this._pool.newObject();
-				chip.getComponent(CpnChip).setChipValue(nums[j]);
-				this.m_ui.chiplayer.addChild(chip);
+				chip.getComponent(CpnChip).setChipValue(nums[j], true);
+				this.m_ui.chipLayer.addChild(chip);
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
 			}
 		}
+	}
+
+	private onClickArea(areaId:number) {
+		var idx = this.compBox.getSelectedIndex();
+		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
 	}
 
 	private initNetEvent() {
