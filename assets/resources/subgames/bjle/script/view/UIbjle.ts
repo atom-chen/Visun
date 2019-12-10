@@ -1,22 +1,16 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
-import GameUtil from "../../../../../common/script/utils/GameUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIbjle extends BaseComponent {
-	_chipBox:CpnChipbox;
 	_players : any[] = [];
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
-
-		this._chipBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
-
 		this.initUIEvents();
 	}
 

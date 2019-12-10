@@ -1,7 +1,6 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
 
 const {ccclass, property} = cc._decorator;
 

@@ -6,7 +6,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../../common/script/model/GameManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
-import CpnChipbox from "../../../../../common/script/comps/CpnChipbox";
+import CpnChipbox2d from "../../../../../common/script/comps/CpnChipbox2d";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
@@ -22,7 +22,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BrnnUI extends BaseComponent {
 
-	compBox:CpnChipbox = null;
+	compBox:CpnChipbox2d = null;
 	_rule:number[] = [5,10,50,100,500];
 
 	_loadedRes:any;
@@ -41,7 +41,7 @@ export default class BrnnUI extends BaseComponent {
 			self._loadedRes = loadedRes;
 		});
 
-		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox);
+		this.compBox = this.m_ui.CpnChipbox.getComponent(CpnChipbox2d);
 
 		this.initNetEvent();
 		this.initUIEvent();

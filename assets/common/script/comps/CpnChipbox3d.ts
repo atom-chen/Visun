@@ -5,7 +5,7 @@ import GameUtil from "../utils/GameUtil";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CpnChipbox extends BaseComponent {
+export default class CpnChipbox3d extends BaseComponent {
 
     private selectedIndex:number = 1;
 
@@ -22,7 +22,6 @@ export default class CpnChipbox extends BaseComponent {
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
         this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x;
-        this.m_ui.hilightSpr.y = this.m_ui["chip"+idx].y+6;
     }
 
     public getChipNode(idx:number) : cc.Node {
