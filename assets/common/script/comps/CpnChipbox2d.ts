@@ -5,7 +5,7 @@ import GameUtil from "../utils/GameUtil";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CpnChipbox extends BaseComponent {
+export default class CpnChipbox2d extends BaseComponent {
 
     private selectedIndex:number = 1;
 
