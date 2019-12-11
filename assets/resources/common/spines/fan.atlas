@@ -1,0 +1,34 @@
+
+fan.png
+size: 3790,687
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/bg
+  rotate: false
+  xy: 2, 342
+  size: 2560, 343
+  orig: 2560, 343
+  offset: 0, 0
+  index: -1
+img/f
+  rotate: false
+  xy: 2564, 2
+  size: 1224, 683
+  orig: 1224, 683
+  offset: 0, 0
+  index: -1
+img/f1
+  rotate: false
+  xy: 2, 108
+  size: 102, 65
+  orig: 102, 65
+  offset: 0, 0
+  index: -1
+img/fg
+  rotate: false
+  xy: 2, 175
+  size: 640, 165
+  orig: 640, 165
+  offset: 0, 0
+  index: -1

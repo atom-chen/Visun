@@ -1,0 +1,13 @@
+
+duke.png
+size: 214,110
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/duke
+  rotate: false
+  xy: 2, 2
+  size: 210, 106
+  orig: 210, 106
+  offset: 0, 0
+  index: -1
