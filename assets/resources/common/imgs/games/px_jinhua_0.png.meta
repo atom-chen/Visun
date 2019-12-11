@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "90897a75-24f2-43f7-ac71-2aca25b574f4",
+  "uuid": "328eddf0-f768-4bf9-a87a-3d1f596ecf58",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,10 +9,10 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "jianbian2": {
+    "px_jinhua_0": {
       "ver": "1.0.4",
-      "uuid": "45b4a171-a5ea-470d-89ef-9a8b08b95d11",
-      "rawTextureUuid": "90897a75-24f2-43f7-ac71-2aca25b574f4",
+      "uuid": "d79309a2-7f17-4558-a363-f484204657d0",
+      "rawTextureUuid": "328eddf0-f768-4bf9-a87a-3d1f596ecf58",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -20,10 +20,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 312,
-      "height": 47,
-      "rawWidth": 312,
-      "rawHeight": 47,
+      "width": 85,
+      "height": 40,
+      "rawWidth": 85,
+      "rawHeight": 40,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
