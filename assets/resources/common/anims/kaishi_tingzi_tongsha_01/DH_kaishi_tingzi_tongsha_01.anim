@@ -1,0 +1,411 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "DH_kaishi_tingzi_tongsha_01",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.76,
+  "sample": 25,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "di_ying": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.2,
+              "value": 0
+            },
+            {
+              "frame": 0.36,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "di": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -4.572,
+                793.088,
+                0
+              ]
+            },
+            {
+              "frame": 0.2,
+              "value": [
+                -4.572,
+                86.873,
+                0
+              ]
+            },
+            {
+              "frame": 0.28,
+              "value": [
+                -4.572,
+                143.265,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.08,
+              "value": 0
+            },
+            {
+              "frame": 0.2,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "xingguang": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.4,
+              "value": 0
+            },
+            {
+              "frame": 0.48,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "shuzi_1": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.28,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.44,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "shuzi_2": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.28,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.44,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "yezi_1": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.44,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.6,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.76,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "yezi_2": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.48,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.64,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.8,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "yezi_3": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.56,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.72,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.88,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "yezi_4": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.48,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.64,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.8,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "yezi_5": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.52,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.68,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.84,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      },
+      "jinbian_1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.44,
+              "value": [
+                416.156,
+                199.933,
+                0
+              ]
+            },
+            {
+              "frame": 0.88,
+              "value": [
+                396.343,
+                199.933,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.44,
+              "value": 0
+            },
+            {
+              "frame": 0.88,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "jinbian_2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0.44,
+              "value": [
+                -447.758,
+                69.619,
+                0
+              ]
+            },
+            {
+              "frame": 0.88,
+              "value": [
+                -345.644,
+                69.619,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.44,
+              "value": 0
+            },
+            {
+              "frame": 0.88,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "wenzi": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.28,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 2,
+                "y": 2
+              }
+            },
+            {
+              "frame": 0.4,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.9,
+                "y": 0.9
+              }
+            },
+            {
+              "frame": 0.48,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.28,
+              "value": 0
+            },
+            {
+              "frame": 0.4,
+              "value": 255
+            }
+          ]
+        }
+      }
+    },
+    "props": {
+      "position": [
+        {
+          "frame": 1.64,
+          "value": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 1.76,
+          "value": [
+            0,
+            249.951,
+            0
+          ]
+        }
+      ],
+      "opacity": [
+        {
+          "frame": 1.64,
+          "value": 255
+        },
+        {
+          "frame": 1.76,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

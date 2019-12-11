@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.1",
+  "uuid": "82e42208-0b24-49ec-9263-cff7f344cba7",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "jinbian1": {
+      "ver": "1.0.4",
+      "uuid": "c52987a5-7d33-4204-85a6-27aab705679b",
+      "rawTextureUuid": "82e42208-0b24-49ec-9263-cff7f344cba7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 315,
+      "height": 41,
+      "rawWidth": 315,
+      "rawHeight": 41,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
