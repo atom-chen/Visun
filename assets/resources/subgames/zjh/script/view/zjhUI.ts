@@ -11,7 +11,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class zjhUI extends BaseComponent {
-    private _players:Array<CpnPlayer> = [];
+//    private _players:Array<CpnPlayer> = [];
     private _handors:Array<CpnHandcard> = [];
     private _stateNodes:Array<cc.Label> = [];
     
@@ -19,7 +19,7 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         for(var i = 0; i <= 4; i++) {
-            this._players.push(this.m_ui["CpnPlayer"+i].getComponent(CpnPlayer));
+    //        this._players.push(this.m_ui["CpnPlayer"+i].getComponent(CpnPlayer));
             this._handors.push(this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard));
             this._stateNodes.push(this.m_ui["stateTip"+i].getComponent(cc.Label));
         }
