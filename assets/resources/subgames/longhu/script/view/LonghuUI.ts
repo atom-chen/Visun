@@ -61,9 +61,9 @@ export default class LonghuUI extends BaseComponent {
 		this.m_ui.txt_paijiangzhong.active = false;
 
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
 	}
@@ -76,10 +76,10 @@ export default class LonghuUI extends BaseComponent {
 		this.m_ui.txt_paijiangzhong.active = false;
 
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 10, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 	
-		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
+		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -100,9 +100,9 @@ export default class LonghuUI extends BaseComponent {
 		}
 
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.addSecondTimer(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}

@@ -3,10 +3,9 @@ import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
 import UIManager from "../../../kernel/view/UIManager";
 import SceneManager from "../../../kernel/view/SceneManager";
 import ModelBase from "../../../kernel/model/ModelBase";
-import ViewDefine from "../definer/ViewDefine";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
-import { GameKindEnum, IS_DANJI_MODE } from "../definer/ConstDefine";
+import { IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
 
 //游戏管理器
@@ -149,82 +148,13 @@ export default class GameManager extends ModelBase {
 	}
 
 	public enterGameScene(gameType) {
-		var gameKind = this.clientConfig(gameType).GameKind
+		if(!this.clientConfig(gameType)) {
+			cc.warn("no client config");
+			return;
+		}
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
-			switch(gameKind) {
-				case GameKindEnum.BrCowCow:
-					UIManager.openPanel(ViewDefine.UIbrnn.path, null);
-					break;
-				case GameKindEnum.Landlord:
-					UIManager.openPanel(ViewDefine.UIddz.path, null);
-					break;
-				case GameKindEnum.BirdBeast:
-					UIManager.openPanel(ViewDefine.UIfqzs.path, null);
-					break;
-				case GameKindEnum.Zhajinhua:
-					UIManager.openPanel(ViewDefine.UIzjh.path, null);
-					break;
-				case GameKindEnum.Baccarat:
-					UIManager.openPanel(ViewDefine.UIbjle.path, null);
-					break;
-				case GameKindEnum.Blackjack:
-					UIManager.openPanel(ViewDefine.UIdian21.path, null);
-					break;
-				case GameKindEnum.Longhu:
-					UIManager.openPanel(ViewDefine.UIlonghu.path, null);
-					break;
-				case GameKindEnum.Suoha:
-					UIManager.openPanel(ViewDefine.UIsuoha.path, null);
-					break;
-				case GameKindEnum.Redpacket:
-					UIManager.openPanel(ViewDefine.UIredbag.path, null);
-					break;
-				case GameKindEnum.Water13:
-					UIManager.openPanel(ViewDefine.UIshui13.path, null);
-					break;
-				case GameKindEnum.Redblack:
-					UIManager.openPanel(ViewDefine.UIhonghei.path, null);
-					break;
-				case GameKindEnum.Sangong:
-					UIManager.openPanel(ViewDefine.UIsangong.path, null);
-					break;
-				case GameKindEnum.QzCowcow:
-					UIManager.openPanel(ViewDefine.UIqznn.path, null);
-					break;
-				case GameKindEnum.Qzpaijiu:
-					UIManager.openPanel(ViewDefine.UIpaijiu.path, null);
-					break;
-				case GameKindEnum.Paodekuai:
-					UIManager.openPanel(ViewDefine.UIpdk.path, null);
-					break;
-				case GameKindEnum.Texas:
-					UIManager.openPanel(ViewDefine.UItexas.path, null);
-					break;
-				case GameKindEnum.Ermj:
-					UIManager.openPanel(ViewDefine.UIermj.path, null);
-					break;
-				case GameKindEnum.Buyu:
-					UIManager.openPanel(ViewDefine.UIbuyu.path, null);
-					break;
-				case GameKindEnum.Toubao:
-					UIManager.openPanel(ViewDefine.UItoubao.path, null);
-					break;
-				case GameKindEnum.Paijiu:
-					UIManager.openPanel(ViewDefine.UIpaijiu.path, null);
-					break;
-				case GameKindEnum.Erba:
-					UIManager.openPanel(ViewDefine.UIerba.path, null);
-					break;
-				case GameKindEnum.Ermj:
-					UIManager.openPanel(ViewDefine.UIermj.path, null);
-					break;
-				case GameKindEnum.Jskb:
-					UIManager.openPanel(ViewDefine.UIjskb.path, null);
-					break;
-				default:
-					cc.warn("no ui", gameKind);
-					break;
-			}
+			var viewpath = this.clientConfig(gameType).viewpath;
+			UIManager.openPanel(viewpath, null);
 		});
 	}
 

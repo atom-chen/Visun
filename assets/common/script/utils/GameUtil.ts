@@ -3,6 +3,7 @@ import { MajhongCode } from "../definer/MajhongDefine";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 export default class GameUtil {
+	public static angle2ridian = Math.PI/180;
 	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
 
 	//将总金额total，拆分成指定面额规则的序列
@@ -45,20 +46,26 @@ export default class GameUtil {
 	}
 
 	public static setHeadIcon(nd:cc.Node, v:number) {
+		if(isNil(nd)) { return; }
+		GameUtil.setHeadSpr(nd.getComponent(cc.Sprite), v);
+	}
+
+	public static setHeadSpr(spr:cc.Sprite, v:number) {
+		if(isNil(spr)) { return; }
 		if(v<0) { v=0; } 
 		if(v>1) { v=1; }
 		var respath = "common/imgs/person/headIcon_"+v;
 
 		var sf0 = cc.loader.getRes(respath, cc.SpriteFrame);
 		if(sf0) {
-			nd.getComponent(cc.Sprite).spriteFrame = sf0;
+			spr.spriteFrame = sf0;
 			return;
 		}
 
 		cc.loader.loadRes(respath, cc.SpriteFrame, (err, sf)=>{
 			if(err) { cc.warn("error: "+err); return; }
-			if(cc.isValid(nd)) {
-				nd.getComponent(cc.Sprite).spriteFrame = sf;
+			if(cc.isValid(spr)) {
+				spr.spriteFrame = sf;
 			}
 		})
 	}
@@ -133,14 +140,22 @@ export default class GameUtil {
 		var toPos = CommonUtil.convertSpaceAR(dstObj, parent);
 		
 		if(!isNil(margin)) {
-			var szSrc = srcObj.getContentSize();
-			var szDst = dstObj.getContentSize();
-			var srcScale = srcObj.scale;
-			var dstScale = dstObj.scale;
-			var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
-			var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
-			toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );
-			toPos.y = toPos.y + ( -rangeY+margin.bottom + Math.random() * (rangeY*2-margin.bottom-margin.top) );
+			if(!isNil(margin.r)) {
+				var szSrc = srcObj.getContentSize();
+				var szDst = dstObj.getContentSize();
+				var angle = CommonUtil.getRandomInt(0,360) * this.angle2ridian;
+				toPos.x = toPos.x + Math.cos(angle) * margin.r;
+				toPos.y = toPos.y + Math.sin(angle) * margin.r;
+			} else {
+				var szSrc = srcObj.getContentSize();
+				var szDst = dstObj.getContentSize();
+				var srcScale = srcObj.scale;
+				var dstScale = dstObj.scale;
+				var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
+				var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
+				toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );
+				toPos.y = toPos.y + ( -rangeY+margin.bottom + Math.random() * (rangeY*2-margin.bottom-margin.top) );
+			}
 		}
 		
 		return toPos;

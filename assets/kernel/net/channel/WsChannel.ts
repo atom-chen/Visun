@@ -210,7 +210,7 @@ export default class WsChannel implements IChannel {
 		cc.log(this._name, "断网了or连接失败了");
 		this.clear_ws();
 		
-		//自动重连
+		//静默重连3次，超过了重连次数则抛断网消息
 		if(this._reconnectTimes > 0) {
 			this._reconnectTimes--;
 
@@ -218,15 +218,12 @@ export default class WsChannel implements IChannel {
 				this._curState = ConnState.connecting;
 				cc.log(this._name, "再次尝试建立连接: ", this._reconnectTimes, this._url);
 				this.do_connect();
-			}
-			else {
+			} else {
 				this._curState = ConnState.reconnecting;
 				cc.log(this._name, "断线重连: ", this._reconnectTimes, this._url);
 				this.do_connect();
 			}
-		}
-		//超过了重连次数就主动关闭网络
-		else {
+		} else {
 			this._onConnSuccess = null;
 			if(this._onConnFail) {
 				this._onConnFail.invoke();
@@ -236,8 +233,7 @@ export default class WsChannel implements IChannel {
 			if(this._curState == ConnState.connecting) {
 				this._curState = ConnState.connectfail;
 				cc.log(this._name, "连接失败: ", this._reconnectTimes, this._url);
-			}
-			else {
+			} else {
 				this._curState = ConnState.reconnectfail;
 				cc.log(this._name, "重连失败: ", this._reconnectTimes, this._url);
 			}
@@ -291,7 +287,7 @@ export default class WsChannel implements IChannel {
 	private startHeartBeat() : void
 	{
 		TimerManager.delTimer(this._heartTmr);
-		this._heartTmr = TimerManager.addSecondTimer(8, -1, new CHandler(this, this.sendHeartBeat));
+		this._heartTmr = TimerManager.loopSecond(8, -1, new CHandler(this, this.sendHeartBeat));
 	}
 
 	private sendHeartBeat() : void

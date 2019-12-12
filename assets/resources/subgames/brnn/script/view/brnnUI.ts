@@ -65,7 +65,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null);
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
 	}
@@ -74,8 +74,8 @@ export default class BrnnUI extends BaseComponent {
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
 
-		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
+		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -96,7 +96,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9]);
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}

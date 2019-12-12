@@ -55,7 +55,7 @@ export default class TimerManager {
 		return -1;
 	}
 
-	public static addFrameTimer(interval:number, looptimes:number, callback:CHandler) : number
+	public static loopFrame(interval:number, looptimes:number, callback:CHandler) : number
 	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
@@ -71,7 +71,7 @@ export default class TimerManager {
 		return id;
 	}
 
-	public static addSecondTimer(interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) : number
+	public static loopSecond(interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) : number
 	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
@@ -89,12 +89,12 @@ export default class TimerManager {
 
 	public static delayFrame(delay:number, callback:CHandler) : number
 	{
-		return TimerManager.addFrameTimer(delay, 1, callback);
+		return TimerManager.loopFrame(delay, 1, callback);
 	}
 
 	public static delaySecond(delay:number, callback:CHandler) : number
 	{
-		return TimerManager.addSecondTimer(delay, 1, callback);
+		return TimerManager.loopSecond(delay, 1, callback);
 	}
 
 	public static delTimer(id:number) {

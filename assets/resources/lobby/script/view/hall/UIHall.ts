@@ -132,7 +132,7 @@ export default class UIHall extends BaseComponent {
 		node.setProcFunc(new CHandler( null,
 			(part?:Procedure)=>{
 				if(duration>0){
-					TimerManager.addSecondTimer(duration, 1, new CHandler( part,
+					TimerManager.loopSecond(duration, 1, new CHandler( part,
 						function(tmr){ 
 							this.resolve_succ();
 						})

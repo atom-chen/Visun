@@ -50,7 +50,7 @@ export default class HongheiUI extends BaseComponent {
 	private toStateReady() {
 	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中"
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
 	}
@@ -58,8 +58,8 @@ export default class HongheiUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
-		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
+		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -74,7 +74,7 @@ export default class HongheiUI extends BaseComponent {
 			this._pool.delObject(childs[i]);
 		}
 
-		TimerManager.addSecondTimer(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}

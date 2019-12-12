@@ -28,7 +28,7 @@ export default class Marquee {
 		this._callback = callback;
 		this._circleCnt = 0;
 		this._curIndex = fromIndex;
-		TimerManager.addFrameTimer(0, -1, new CHandler(this, this.frameUpdate));
+		TimerManager.loopFrame(0, -1, new CHandler(this, this.frameUpdate));
 	}
 
 	stop(bClean:boolean) {
