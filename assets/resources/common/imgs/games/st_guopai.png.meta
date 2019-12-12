@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "ccbab054-24a4-4b69-9c57-6ac03b7dab43",
+  "uuid": "f6b07c30-a5f7-41f7-9058-9f0a230730f1",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,10 +9,10 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "genzhu": {
+    "st_guopai": {
       "ver": "1.0.4",
-      "uuid": "0a0f3db6-4a81-4229-8a74-d0149107744d",
-      "rawTextureUuid": "ccbab054-24a4-4b69-9c57-6ac03b7dab43",
+      "uuid": "9cad58c4-5a2f-41fb-b434-723c1722b80f",
+      "rawTextureUuid": "f6b07c30-a5f7-41f7-9058-9f0a230730f1",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

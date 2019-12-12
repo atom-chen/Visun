@@ -5,6 +5,8 @@ import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/
 import GameManager from "../../../../../common/script/model/GameManager";
 import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
+import CpnUserState from "../../../../../common/script/comps/CpnUserState";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -13,7 +15,7 @@ const {ccclass, property} = cc._decorator;
 export default class zjhUI extends BaseComponent {
 //    private _players:Array<CpnPlayer> = [];
     private _handors:Array<CpnHandcard> = [];
-    private _stateNodes:Array<cc.Label> = [];
+    private _stateNodes:Array<CpnUserState> = [];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -21,11 +23,13 @@ export default class zjhUI extends BaseComponent {
         for(var i = 0; i <= 4; i++) {
     //        this._players.push(this.m_ui["CpnPlayer"+i].getComponent(CpnPlayer));
             this._handors.push(this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard));
-            this._stateNodes.push(this.m_ui["stateTip"+i].getComponent(cc.Label));
+            this._stateNodes.push(this.m_ui["stateTip"+i].getComponent(CpnUserState));
         }
 
         this.initUIEvent();
         this.initNetEvent();
+
+        this.onRespZhajinhuaReady(null);
     }
 
     //场景信息
@@ -37,6 +41,10 @@ export default class zjhUI extends BaseComponent {
     onRespZhajinhuaReady(param:any) {
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = true;
+        for(var i in this._stateNodes){
+            this._stateNodes[i].setState(5);
+        }
+        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5});
     }
 
     //跟注

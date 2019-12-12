@@ -26,10 +26,13 @@
     "_components": [
       {
         "__id__": 6
+      },
+      {
+        "__id__": 7
       }
     ],
     "_prefab": {
-      "__id__": 7
+      "__id__": 8
     },
     "_opacity": 255,
     "_color": {
@@ -221,6 +224,16 @@
     "_N$mode": 2,
     "_N$progress": 0.7,
     "_N$reverse": true,
+    "_id": ""
+  },
+  {
+    "__type__": "9784ax+E8RM8aTHQ1vY9EU1",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {

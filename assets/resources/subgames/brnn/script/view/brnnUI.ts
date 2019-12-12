@@ -12,6 +12,7 @@ import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
 
@@ -57,7 +58,7 @@ export default class BrnnUI extends BaseComponent {
 
 	//准备阶段
 	private toStateReady() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中";
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
 		
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null);
@@ -71,7 +72,7 @@ export default class BrnnUI extends BaseComponent {
 
 	//下注阶段
 	private toStateBetting() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中";
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
 
 		TimerManager.addSecondTimer(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.addSecondTimer(10, 1, new CHandler(this, ()=>{
@@ -81,7 +82,7 @@ export default class BrnnUI extends BaseComponent {
 
 	//结算阶段
 	private toStateJiesuan() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中";
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
