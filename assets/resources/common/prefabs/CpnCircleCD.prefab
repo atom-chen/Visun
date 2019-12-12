@@ -44,8 +44,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 220,
-      "height": 298
+      "width": 132,
+      "height": 180
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -107,8 +107,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 220,
-      "height": 298
+      "width": 132,
+      "height": 180
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -165,8 +165,8 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_fillStart": 0,
-    "_fillRange": -0.7,
+    "_fillStart": 0.25,
+    "_fillRange": -0.6,
     "_isTrimmedMode": true,
     "_atlas": null,
     "_id": ""
@@ -222,7 +222,7 @@
       "__id__": 3
     },
     "_N$mode": 2,
-    "_N$progress": 0.7,
+    "_N$progress": 0.6,
     "_N$reverse": true,
     "_id": ""
   },
