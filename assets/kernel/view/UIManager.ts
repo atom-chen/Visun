@@ -250,7 +250,7 @@ export default class UIManager {
 
 	//---------------------------------------------------------
 
-	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any) 
+	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any, listeners:any) 
 	{
 		cc.loader.loadRes(respath, sp.SkeletonData, function(err, rsc){
 			if(err) { 
@@ -272,6 +272,53 @@ export default class UIManager {
 				}
 			}
 			sk.setAnimation(trackIndex, aniName, bLoop);
+
+			sk.setStartListener(trackEntry => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				cc.log("[track %s][animation %s] start.", trackEntry.trackIndex, animationName);
+				if(listeners && listeners.on_start) {
+					listeners.on_start(trackEntry)
+				}
+			});
+			sk.setInterruptListener(trackEntry => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				cc.log("[track %s][animation %s] interrupt.", trackEntry.trackIndex, animationName);
+				if(listeners && listeners.on_interrupt) {
+					listeners.on_interrupt(trackEntry)
+				}
+			});
+			sk.setEndListener(trackEntry => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				cc.log("[track %s][animation %s] end.", trackEntry.trackIndex, animationName);
+				if(listeners && listeners.on_end) {
+					listeners.on_end(trackEntry)
+				}
+			});
+			sk.setDisposeListener(trackEntry => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				cc.log("[track %s][animation %s] will be disposed.", trackEntry.trackIndex, animationName);
+				if(listeners && listeners.on_dispose) {
+					listeners.on_dispose(trackEntry)
+				}
+			});
+			sk.setCompleteListener((trackEntry) => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				if (animationName === 'shoot') {
+					this.spine.clearTrack(1);
+				}
+				var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
+				cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
+				if(listeners && listeners.on_complete) {
+					listeners.on_complete(trackEntry)
+				}
+			});
+			sk.setEventListener((trackEntry, event) => {
+				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+				cc.log("[track %s][animation %s] event: %s, %s, %s, %s", trackEntry.trackIndex, animationName, event.data.name, event.intValue, event.floatValue, event.stringValue);
+				if(listeners && listeners.on_event) {
+					listeners.on_event(trackEntry)
+				}
+			});
 		});
 	}
 

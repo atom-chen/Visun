@@ -43,9 +43,9 @@ export default class DdzUI extends BaseComponent {
     }
 
     private test() {
-        UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {y:140, scale:0.6});
+        UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {y:140, scale:0.6}, null);
         for(var j=0; j<MAX_SOLDIER; j++) {
-            UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this._players[j].node, null);
+            UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this._players[j].node, {scale:1.1}, null);
             this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A]);
         }
     }

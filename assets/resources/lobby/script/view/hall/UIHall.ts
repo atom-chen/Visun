@@ -110,10 +110,6 @@ export default class UIHall extends BaseComponent {
 
 	//----------- tests --------------------------------------------
 
-	private testSpine() {
-		UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {zIndex:10, x:-400, y:280, scale:0.5});
-	}
-
 	private testAStart() {
 		var matrix = [
 			[0, 0, 0, 1, 0],

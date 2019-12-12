@@ -7,6 +7,9 @@ import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import CpnUserState from "../../../../../common/script/comps/CpnUserState";
 import UIManager from "../../../../../kernel/view/UIManager";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 
 
 const {ccclass, property} = cc._decorator;
@@ -16,6 +19,7 @@ export default class zjhUI extends BaseComponent {
 //    private _players:Array<CpnPlayer> = [];
     private _handors:Array<CpnHandcard> = [];
     private _stateNodes:Array<CpnUserState> = [];
+    private _tmrState = 0;
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -34,42 +38,65 @@ export default class zjhUI extends BaseComponent {
 
     //场景信息
     onRespZhajinhuaGameEnv(param:any) {
-
+        //
     }
 
-    //准备
+    //准备阶段
     onRespZhajinhuaReady(param:any) {
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = true;
         for(var i in this._stateNodes){
             this._stateNodes[i].setState(5);
         }
-        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5});
+        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, null);
+        TimerManager.loopSecond(1, 3, new CHandler(this, (tmr:BaseTimer)=>{
+            if(tmr.getRemainTimes() <= 0) {
+                this.onRespZhajinhuaFight(null);
+            }
+        }), true);
+    }
+
+    //战斗阶段
+    onRespZhajinhuaFight(param:any) {
+        this.m_ui.gameLayer.active = true;
+        this.m_ui.opLayer.active = true;
+    }
+
+    //结算阶段
+    onRespZhajinhuaJiesuan(param:any) {
+        this.m_ui.gameLayer.active = true;
+        this.m_ui.opLayer.active = false;
+    }
+
+
+    //轮到谁
+    onRespCurTurnto(param:any) {
+        cc.log("轮到谁", param.UserID, param.RemainTime);
     }
 
     //跟注
     onRespZhajinhuaFollow(param:any) {
-        
+        cc.log("跟注", param.UserID, param.Money);
     }
 
     //加注
     onRespZhajinhuaRaise(param:any) {
-
+        cc.log("加注", param.UserID, param.Money);
     }
 
     //看牌
     onRespZhajinhuaLook(param:any) {
-
+        cc.log("看牌", param.UserID, param.Cards);
     }
 
     //比牌
     onRespZhajinhuaCompare(param:any) {
-
+        cc.log("比牌", param);
     }
 
     //弃牌
     onRespZhajinhuaGiveup(param:any) {
-
+        cc.log("弃牌", param.UserID);
     }
 
     initNetEvent() {
