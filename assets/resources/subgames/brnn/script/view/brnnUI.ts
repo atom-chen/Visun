@@ -13,6 +13,7 @@ import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import CpnGameState from "../../../../../common/script/comps/CpnGameState";
+import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 
 
 
@@ -25,6 +26,7 @@ export default class BrnnUI extends BaseComponent {
 
 	compBox:CpnChipbox3d = null;
 	_rule:number[] = [5,10,50,100,500];
+	private tmrState = 0;
 
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
@@ -56,6 +58,10 @@ export default class BrnnUI extends BaseComponent {
 		super.onDestroy();
 	}
 
+	private onStateTimer(tmr:BaseTimer) {
+		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+	}
+
 	//准备阶段
 	private toStateReady() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
@@ -64,7 +70,8 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null);
-
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
@@ -73,7 +80,8 @@ export default class BrnnUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
@@ -95,7 +103,9 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A]);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K]);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9]);
-
+		
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
