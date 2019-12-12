@@ -7,6 +7,8 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
 var margin = { left:8,right:8,bottom:8,top:8 };
@@ -21,7 +23,8 @@ export default class FqzsUI extends BaseComponent {
 		obj.scale = 0.3;
 		return obj;
     });
-    
+	
+	private tmrState = 0;
     _rule:number[] = [5,10,50,100,500];
     
     start () {
@@ -45,10 +48,15 @@ export default class FqzsUI extends BaseComponent {
 		super.onDestroy();
 	}
 
+	private onStateTimer(tmr:BaseTimer) {
+		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+	}
+
     //准备阶段
 	private toStateReady() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中"
-
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(0);
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
@@ -56,7 +64,9 @@ export default class FqzsUI extends BaseComponent {
 
 	//下注阶段
 	private toStateBetting() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中"
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(2);
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
@@ -65,14 +75,15 @@ export default class FqzsUI extends BaseComponent {
 
 	//结算阶段
 	private toStateJiesuan() {
-		this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中"
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(4);
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			childs[i].removeFromParent(false);
 			this._pool.delObject(childs[i]);
 		}
-
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
