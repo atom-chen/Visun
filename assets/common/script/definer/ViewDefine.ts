@@ -35,4 +35,5 @@ export default class ViewDefine {
 	public static UIsuoha = { path:"subgames/suoha/prefabs/UIsuoha" };
 	public static UIermj = { path:"subgames/ermj/prefabs/UIermj" };
 	public static UItoubao = { path:"subgames/toubao/prefabs/UItoubao" };
+	public static UIbrttz = { path:"subgames/brttz/prefabs/UIbrttz" };
 }

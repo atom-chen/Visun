@@ -171,6 +171,14 @@ var GameConfig = {
 		dir: "jskb",
 		viewpath: ViewDefine.UIjskb.path
 	},
+	[GameKindEnum.Brttz] : {
+		GameKind: GameKindEnum.Brttz,
+		name: "百人推筒子",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_jskb",
+		dir: "jskb",
+		viewpath: ViewDefine.UIbrttz.path
+	},
 };
 
 export default GameConfig;
