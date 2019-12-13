@@ -9,6 +9,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
 const {ccclass, property} = cc._decorator;
@@ -42,8 +43,9 @@ export default class zjhUI extends BaseComponent {
 
     //准备阶段
     onRespZhajinhuaReady(param:any) {
-        this.m_ui.gameLayer.active = true;
-        this.m_ui.opLayer.active = true;
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(0);
+        this.m_ui.gameLayer.active = false;
+        this.m_ui.opLayer.active = false;
         for(var i in this._stateNodes){
             this._stateNodes[i].setState(5);
         }
@@ -56,6 +58,9 @@ export default class zjhUI extends BaseComponent {
 
     //开始游戏
     onRespZhajinhuaBegin(param:any) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(1);
+        this.m_ui.gameLayer.active = false;
+        this.m_ui.opLayer.active = false;
         UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
@@ -71,6 +76,7 @@ export default class zjhUI extends BaseComponent {
 
     //战斗阶段
     onRespZhajinhuaFight(param:any) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(2);
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = true;
 
@@ -83,6 +89,7 @@ export default class zjhUI extends BaseComponent {
 
     //结算阶段
     onRespZhajinhuaJiesuan(param:any) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(4);
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = false;
 
