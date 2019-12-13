@@ -3,7 +3,6 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/proto/net_zhajinhua";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import CpnUserState from "../../../../../common/script/comps/CpnUserState";
 import UIManager from "../../../../../kernel/view/UIManager";
@@ -48,7 +47,21 @@ export default class zjhUI extends BaseComponent {
         for(var i in this._stateNodes){
             this._stateNodes[i].setState(5);
         }
-        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, null);
+        TimerManager.loopSecond(1, 3, new CHandler(this, (tmr:BaseTimer)=>{
+            if(tmr.getRemainTimes() <= 0) {
+                this.onRespZhajinhuaBegin(null);
+            }
+        }), true);
+    }
+
+    //开始游戏
+    onRespZhajinhuaBegin(param:any) {
+        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
+            on_complete: (sk, trackEntry)=>{
+                CommonUtil.safeDelete(sk);
+            }
+        });
+
         TimerManager.loopSecond(1, 3, new CHandler(this, (tmr:BaseTimer)=>{
             if(tmr.getRemainTimes() <= 0) {
                 this.onRespZhajinhuaFight(null);
@@ -60,12 +73,24 @@ export default class zjhUI extends BaseComponent {
     onRespZhajinhuaFight(param:any) {
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = true;
+
+        TimerManager.loopSecond(1, 3, new CHandler(this, (tmr:BaseTimer)=>{
+            if(tmr.getRemainTimes() <= 0) {
+                this.onRespZhajinhuaJiesuan(null);
+            }
+        }), true);
     }
 
     //结算阶段
     onRespZhajinhuaJiesuan(param:any) {
         this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = false;
+
+        TimerManager.loopSecond(1, 3, new CHandler(this, (tmr:BaseTimer)=>{
+            if(tmr.getRemainTimes() <= 0) {
+                this.onRespZhajinhuaReady(null);
+            }
+        }), true);
     }
 
 
