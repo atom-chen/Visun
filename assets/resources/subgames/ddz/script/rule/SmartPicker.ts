@@ -5,12 +5,28 @@ import RuleDdz from "./RuleDdz";
 import DDzPaiXingHuojian from "../paixing/DDzPaixingHuojian";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
-
-function isNil(v:any) {
-	return v===null || v===undefined;
-}
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 export default class SmartPicker {
+
+	private static _excepts:Array< Array<PokerCode> > = [];
+	public static addExcept(cards:Array<PokerCode>) {
+		this._excepts.push(cards);
+	}
+	public static clearExcept() {
+		this._excepts.length = 0;
+	}
+	private static hasExcept(cards:Array<PokerCode>) : boolean {
+		for(var i in this._excepts) {
+			if(CommonUtil.isSameArray(RuleDdz.getWeightList(this._excepts[i]), RuleDdz.getWeightList(cards))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static lengthExcept() : number {
+		return this._excepts.length;
+	}
 
 	public static aiPick(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, isFriend:boolean) : Array<PokerCode>
 	{
@@ -20,6 +36,7 @@ export default class SmartPicker {
 		var outs = [];
 		var pxEnemy = DDzPaiXingParser.getPaiXing(enemyCards);
 
+		//敌方牌型无效时
 		if(DDzPaiXingParser.isInValid(pxEnemy)) {
 			if(hands.length===2 && DDzPaiXingHuojian.isMyType(hands, RuleDdz.getWeightList(hands))){
 				outs = hands.slice(0);
@@ -34,13 +51,25 @@ export default class SmartPicker {
 			return outs;
 		}
 
+		//敌方牌型有效时
 		for(var iii in hands) {
 			outs = this.pick(hands, enemyCards, [hands[iii]]);
-			if(outs&&outs.length>0) {
-				break;
+			if(outs && outs.length>0 && !this.hasExcept(outs)) {
+				return outs;
 			}
 		}
-		return outs;
+
+		var pxEnemy = DDzPaiXingParser.getPaiXing(enemyCards);
+		if(pxEnemy.paixing !== DDzPaiXingEnum.zhadan) {
+			for(var jjj in hands) {
+				outs = this.pickZhadan(hands, enemyCards, [hands[jjj]]);
+				if(outs && outs.length>0 && !this.hasExcept(outs)) {
+					return outs;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	// 从一手牌(hands)中，检测出【可以打过当前出牌且包含了contains】的出牌序列
@@ -152,44 +181,70 @@ export default class SmartPicker {
 		return outs;
 	}
 
+	//
 	protected static pickFeiji1(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
-		var pxEnemy = DDzPaiXingParser.getPaiXing(enemyCards);
-		if(DDzPaiXingParser.getPaiXing(contains).compare(pxEnemy)) {
-			return contains;
-		};
-
-		var outs = [];
-		var wMapHands = RuleDdz.getWeightMap(hands);
-		var wMapContains = RuleDdz.getWeightMap(contains);
-		var threeList = [];
-		for(var w in wMapContains) {
-			if(wMapHands[w].length>=3) {
-				threeList.push(wMapHands[w]);
-			}
-		}
-		if(threeList.length<pxEnemy.main_part.length/3) {
+		var fj0 = this.pickFeiji0(hands, enemyCards, contains);
+		if(!fj0 || fj0.length < 3) {
 			return null;
 		}
-		threeList.sort( (a,b)=>{
-			let cmp = RuleDdz.getWeight(a[0]) - RuleDdz.getWeight(b[0]);
-			if(cmp>0) return 1;
-			if(cmp<0) return -1;
-			return 0;
-		} );
+		var pxEnemy = DDzPaiXingParser.getPaiXing(enemyCards);
+		if(!DDzPaiXingParser.getPaiXing(fj0).compare(DDzPaiXingParser.getPaiXing(pxEnemy.main_part))) {
+			return null;
+		}
+		var n = fj0.length/3;
+		for(var i in hands) {
+			if(fj0.indexOf(hands[i])<0) {
+				fj0.push(hands[i])
+				n--;
+				if(n<=0) {
+					break;
+				}
+			}
+		}
+		if(fj0.length==enemyCards.length) {
+			return fj0;
+		}
 		return null;
 	}
 
+	//ok
 	protected static pickFeiji2(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
+		var fj0 = this.pickFeiji0(hands, enemyCards, contains);
+		if(!fj0 || fj0.length < 3) {
+			return null;
+		}
 		var pxEnemy = DDzPaiXingParser.getPaiXing(enemyCards);
-		if(DDzPaiXingParser.getPaiXing(contains).compare(pxEnemy)){
-			return contains;
-		};
-
-		var outs = [];
-		var wHands = RuleDdz.getWeightMap(hands);
-
+		if(!DDzPaiXingParser.getPaiXing(fj0).compare(DDzPaiXingParser.getPaiXing(pxEnemy.main_part))) {
+			return null;
+		}
+		var n = fj0.length/3;
+		var wMap = RuleDdz.getWeightMap(hands);
+		for(var i=0; i<hands.length; i++) {
+			var curW = RuleDdz.getWeight(hands[i]);
+			if(wMap[curW].length >= 2) {
+				var pp = [];
+				for(var j in wMap[curW]) {
+					if(fj0.indexOf(wMap[curW][j])<0) {
+						pp.push(wMap[curW][j]);
+						if(pp.length == 2) {
+							break;
+						}
+					}
+				}
+				if(pp.length==2) {
+					fj0.push(pp[0]);
+					fj0.push(pp[1]);
+				}
+			}
+			if(fj0.length==enemyCards.length) {
+				break;
+			}
+		}
+		if(fj0.length==enemyCards.length) {
+			return fj0;
+		}
 		return null;
 	}
 
@@ -246,33 +301,57 @@ export default class SmartPicker {
 		return null;
 	}
 
+	//ok
 	protected static pickSandai1(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
-		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
-			return contains;
-		};
-		var idx = hands.indexOf(contains[0]);
-		if(idx<0){ return null; }
-		
-		var wMapContains = RuleDdz.getWeightMap(contains);
-		if(Object.keys(wMapContains).length>2){
+		if(RuleDdz.getWeight(contains[0]) < RuleDdz.getWeight(DDzPaiXingParser.getPaiXing(enemyCards).main_part[0])) {
 			return null;
 		}
 
-		var outs = [];
-		for(var w in wMapContains) {
-			//wMapContains[w].length
+		var threePart = this.pickSandai0(hands, enemyCards, contains);
+		if(isNil(threePart) || threePart.length<3) {
+			return null;
 		}
-		
+
+		var wMap = RuleDdz.getWeightMap(hands);
+		var single = null;
+		for(var i in hands) {
+			if(threePart.indexOf(hands[i]) < 0) {
+				if(wMap[RuleDdz.getWeight(hands[i])] < 2) {
+					threePart.push(hands[i]);
+					return threePart;
+				}
+				if(single===null) {
+					single = hands[i];
+				}
+			}
+		}
+		if(single !== null) {
+			threePart.push(single);
+			return threePart;
+		}
 		return null;
 	}
 
+	//ok
 	protected static pickSandai2(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
-		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
-			return contains;
-		};
+		if(RuleDdz.getWeight(contains[0]) < RuleDdz.getWeight(DDzPaiXingParser.getPaiXing(enemyCards).main_part[0])) {
+			return null;
+		}
 
+		var threePart = this.pickSandai0(hands, enemyCards, contains);
+		if(isNil(threePart) || threePart.length<3) {
+			return null;
+		}
+
+		for(var i = 0, len = hands.length-1; i<len; i++) {
+			if(threePart.indexOf(hands[i]) < 0 && threePart.indexOf(hands[i+1]) < 0 && RuleDdz.getWeight(hands[i])==RuleDdz.getWeight(hands[i+1])) {
+				threePart.push(hands[i]);
+				threePart.push(hands[i+1]);
+				return threePart;
+			}
+		}
 		return null;
 	}
 
@@ -308,42 +387,62 @@ export default class SmartPicker {
 		return null;
 	}
 
+	//ok
 	protected static pickSidai2(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
 		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
 			return contains;
 		};
-		var wMapContains = RuleDdz.getWeightMap(contains);
-		if(Object.keys(wMapContains).length > 3) {
-			return null;
-		}
+
 		var outs = [];
 		var wHands = RuleDdz.getWeightMap(hands);
-		for(var w in wMapContains) {
-			if(wHands[w].length === 4) {
+		for(var w in wHands) {
+			if(wHands[w].length === 4 && parseInt(w) > RuleDdz.getWeight(enemyCards[0])) {
 				CommonUtil.appendArray(outs, wHands[w].slice(0,4));
-			} else {
-				for(var i in wMapContains[w]) {
-					outs.push(contains[i]);
-					if(outs.length>=6){ break; }
-				}
+				break;
 			}
 		}
-		return outs;
+
+		for(var i in hands) {
+			if(outs.indexOf(hands[i]) < 0) {
+				if(outs.length >= 6) { break; }
+				outs.push(hands[i]);
+				if(outs.length >= 6) { break; }
+			}
+		}
+		if(outs.length == 6) {
+			return outs;
+		}
+		return null;
 	}
 
+	//ok
 	protected static pickSidai4(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
 		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
 			return contains;
 		};
-		var wMapContains = RuleDdz.getWeightMap(contains);
-		if(Object.keys(wMapContains).length > 3) {
-			return null;
-		}
+
 		var outs = [];
 		var wHands = RuleDdz.getWeightMap(hands);
-		
+		for(var w in wHands) {
+			if(wHands[w].length === 4 && parseInt(w) > RuleDdz.getWeight(enemyCards[0])) {
+				CommonUtil.appendArray(outs, wHands[w].slice(0,4));
+				break;
+			}
+		}
+
+		for(var i in wHands) {
+			if(wHands[i].length >= 2 && outs.indexOf(wHands[i][0]) < 0) {
+				if(outs.length >= 8) { break; }
+				outs.push(wHands[i][0]);
+				outs.push(wHands[i][1]);
+				if(outs.length >= 8) { break; }
+			}
+		}
+		if(outs.length == 8) {
+			return outs;
+		}
 		return null;
 	}
 
@@ -353,20 +452,13 @@ export default class SmartPicker {
 		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
 			return contains;
 		};
+
 		if(RuleDdz.getWeight(contains[0])<=RuleDdz.getWeight(enemyCards[0])){
 			return null;
 		}
+		
 		var idx = hands.indexOf(contains[0]);
 		if(idx<0) { return null; }
-		
-		if(contains[0]===PokerCode.QUEEN || contains[0]===PokerCode.KING){
-			var i1 = hands.indexOf(PokerCode.KING);
-			var i2 = hands.indexOf(PokerCode.QUEEN);
-			if(i1>=0 && i2>=0) {
-				return [PokerCode.KING, PokerCode.QUEEN];
-			}
-			return null;
-		}
 
 		var outs = [];
 		outs.push(contains[0]);
@@ -387,6 +479,15 @@ export default class SmartPicker {
 		if(outs.length===4) {
 			return outs;
 		}
+
+		if(contains[0]===PokerCode.QUEEN || contains[0]===PokerCode.KING){
+			var i1 = hands.indexOf(PokerCode.KING);
+			var i2 = hands.indexOf(PokerCode.QUEEN);
+			if(i1>=0 && i2>=0) {
+				return [PokerCode.KING, PokerCode.QUEEN];
+			}
+		}
+
 		return null;
 	}
 

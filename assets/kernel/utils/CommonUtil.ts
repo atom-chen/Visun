@@ -450,4 +450,20 @@ export default class CommonUtil {
 		}
 	}
 
+	static isSameArray(a1: any[], a2: any[]): boolean {
+		if (typeof a1 != typeof a2) { return false; }
+		if (a1.length != a2.length) { return false; }
+		for (var i in a1) {
+			if (a2.indexOf(a1[i]) < 0) {
+				return false;
+			}
+		}
+		for (var i in a2) {
+			if (a1.indexOf(a2[i]) < 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
