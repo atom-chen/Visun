@@ -11,6 +11,7 @@ export default class CpnPoker extends cc.Component {
     private _curFace:boolean = true;
     private _originY:number = 0;
     private _selectY:number = 30;
+    private _flipAct = null;
 
 
     private onResLoaded(err, sf){
@@ -51,6 +52,10 @@ export default class CpnPoker extends cc.Component {
     }
 
     playFlip(dt?:number) {
+        if(this._flipAct) {
+            this.node.stopAction(this._flipAct);
+            this._flipAct = null;
+        }
         this.setFace(false);
         this.node.setScale(1,1);
         var scale1 = cc.scaleTo(0.2, 0, 1);
@@ -58,10 +63,13 @@ export default class CpnPoker extends cc.Component {
             this.setFace(true)
         }, this);
         var scale2 = cc.scaleTo(0.2, 1, 1);
+        var call2 = cc.callFunc(function(){
+            this._flipAct = null;
+        }, this);
         if(isEmpty(dt)){
-            this.node.runAction(cc.sequence(scale1,call1,scale2));
+            this._flipAct = this.node.runAction(cc.sequence(scale1, call1, scale2, call2));
         } else {
-            this.node.runAction(cc.sequence(cc.delayTime(dt), scale1, call1, scale2));
+            this._flipAct = this.node.runAction(cc.sequence(cc.delayTime(dt), scale1, call1, scale2, call2));
         }  
     }
     

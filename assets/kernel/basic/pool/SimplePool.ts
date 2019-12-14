@@ -21,8 +21,11 @@ export default class SimplePool {
 	}
 
 	public delObject(obj:any) {
-		if(obj && this._pool.indexOf(obj)===-1) {
-			this._pool.push(obj);
+		if(obj) {
+			obj.removeFromParent(false);
+			if(this._pool.indexOf(obj) < 0) {
+				this._pool.push(obj);
+			}
 		}
 	}
 

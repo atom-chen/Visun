@@ -69,7 +69,7 @@ export default class CpnHandcard extends cc.Component {
         var childs = this.node.children;
         for(var i in childs) {
             if(childs[i].getComponent(CpnPoker).getCode()==cardV) {
-                childs[i].removeFromParent(true);
+                childs[i].destroy();
                 break;
             }
         }
