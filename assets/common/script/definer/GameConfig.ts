@@ -175,7 +175,7 @@ var GameConfig = {
 		GameKind: GameKindEnum.Brttz,
 		name: "百人推筒子",
 		openState: 1,
-		icon: "lobby/imgs/gameico/ico_jskb",
+		icon: "lobby/imgs/gameico/ico_brttz",
 		dir: "jskb",
 		viewpath: ViewDefine.UIbrttz.path
 	},
