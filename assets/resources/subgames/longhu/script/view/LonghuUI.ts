@@ -8,6 +8,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
 var margin = { left:66,right:66,bottom:28,top:100 };
@@ -54,11 +55,7 @@ export default class LonghuUI extends BaseComponent {
 
     //准备阶段
 	private toStateReady() {
-	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "准备中";
-
-		this.m_ui.txt_zhunbeizhong.active = true;
-		this.m_ui.txt_xiazhuzhong.active = false;
-		this.m_ui.txt_paijiangzhong.active = false;
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -70,11 +67,8 @@ export default class LonghuUI extends BaseComponent {
 
 	//下注阶段
 	private toStateBetting() {
-	//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "下注中";
-		this.m_ui.txt_zhunbeizhong.active = false;
-		this.m_ui.txt_xiazhuzhong.active = true;
-		this.m_ui.txt_paijiangzhong.active = false;
-
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 	
@@ -86,12 +80,8 @@ export default class LonghuUI extends BaseComponent {
 
 	//结算阶段
 	private toStateJiesuan() {
-		//	this.m_ui.lab_gamestate.getComponent(cc.Label).string = "结算中";
-
-		this.m_ui.txt_zhunbeizhong.active = false;
-		this.m_ui.txt_xiazhuzhong.active = false;
-		this.m_ui.txt_paijiangzhong.active = true;
-	
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
