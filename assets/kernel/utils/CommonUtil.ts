@@ -50,6 +50,15 @@ export default class CommonUtil {
 		}
 	}
 
+	public static traveseLabels(root:cc.Node, tbl:any)
+	{
+		if(!root) { return; }
+		var comps = root.getComponentsInChildren(cc.Label);
+		for(var i in comps) {
+			tbl[comps[i].node.name] = comps[i];
+		}
+	}
+
 	//通用到销毁接口，销毁任意对象
 	public static safeDelete(obj:any) {
 		if(obj===null || obj===undefined) {

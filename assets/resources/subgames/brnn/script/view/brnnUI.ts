@@ -37,6 +37,7 @@ export default class BrnnUI extends BaseComponent {
 	
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traveseLabels(this.node, this.m_lab);
 
 		var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
@@ -59,7 +60,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
-		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
 	//准备阶段

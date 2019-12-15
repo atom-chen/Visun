@@ -144,15 +144,15 @@ export default class UIManager {
 		for(var respath in this._allUI) {
 			if(obj===this._allUI[respath]){
 				this._allUI[respath] = null;
-				cc.log("_allUI 监听到UI销毁时调用", respath);
-				break;
+				cc.log("_allUI 监听到UI销毁", respath);
+				return;
 			}
 		}
 		for(var dlgName in this._allDialog) {
 			if(obj===this._allDialog[dlgName]){
 				this._allDialog[dlgName] = null;
-				cc.log("_allDialog 监听到UI销毁时调用", dlgName);
-				break;
+				cc.log("_allDialog 监听到UI销毁", dlgName);
+				return;
 			}
 		}
 	}

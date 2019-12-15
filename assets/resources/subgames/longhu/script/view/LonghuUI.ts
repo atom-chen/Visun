@@ -29,7 +29,8 @@ export default class LonghuUI extends BaseComponent {
     _rule:number[] = [5,10,50,100,500];
     
     start () {
-        CommonUtil.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traverseNodes(this.node, this.m_ui);
+		CommonUtil.traveseLabels(this.node, this.m_lab);
 
         var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
@@ -50,7 +51,7 @@ export default class LonghuUI extends BaseComponent {
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
-		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
     //准备阶段

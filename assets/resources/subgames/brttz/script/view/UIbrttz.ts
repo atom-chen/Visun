@@ -1,14 +1,14 @@
-import BaseComponent from "../../../../kernel/view/BaseComponent";
-import SimplePool from "../../../../kernel/basic/pool/SimplePool";
-import CommonUtil from "../../../../kernel/utils/CommonUtil";
-import ViewDefine from "../../../../common/script/definer/ViewDefine";
-import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
-import CpnGameState from "../../../../common/script/comps/CpnGameState";
-import TimerManager from "../../../../kernel/basic/timer/TimerManager";
-import CHandler from "../../../../kernel/basic/datastruct/CHandler";
-import GameUtil from "../../../../common/script/utils/GameUtil";
-import CpnChip from "../../../../common/script/comps/CpnChip";
-import GameManager from "../../../../common/script/model/GameManager";
+import BaseComponent from "../../../../../kernel/view/BaseComponent";
+import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
+import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import CpnGameState from "../../../../../common/script/comps/CpnGameState";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
+import CpnChip from "../../../../../common/script/comps/CpnChip";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 
 var margin = { rx:100, ry:65 };
@@ -30,7 +30,7 @@ export default class UIbrttz extends BaseComponent {
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
-
+		CommonUtil.traveseLabels(this.node, this.m_lab);
         var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
@@ -50,7 +50,7 @@ export default class UIbrttz extends BaseComponent {
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
-	//	this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
     //准备阶段
