@@ -21,16 +21,13 @@ export default class SimplePool {
 	}
 
 	public delObject(obj:any) {
-		if(obj) {
-			obj.removeFromParent(false);
-			if(this._pool.indexOf(obj) < 0) {
-				this._pool.push(obj);
-			}
+		if(obj && this._pool.indexOf(obj) < 0) {
+			this._pool.push(obj);
 		}
 	}
 
 	public clear() : void {
-		for(var i=0, cnt=this._pool.length; i<cnt; ++i) {
+		for(var i=this._pool.length-1; i>=0; i--) {
 			this._pool[i].destroy();
 		}
 		this._pool.length = 0;
