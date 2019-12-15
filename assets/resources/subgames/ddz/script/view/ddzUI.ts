@@ -46,7 +46,7 @@ export default class DdzUI extends BaseComponent {
         UIManager.showSpineAsync("common/spines/jack", 0, "a", true, this.node, {y:140, scale:0.6}, null);
         for(var j=0; j<MAX_SOLDIER; j++) {
             UIManager.showSpineAsync("common/spines/ky_lhd_js", 0, "1", true, this._players[j].node, {scale:1.1}, null);
-            this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A]);
+            this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A], true);
         }
     }
     private test1() {
@@ -57,7 +57,7 @@ export default class DdzUI extends BaseComponent {
             cards.push(deck[n]);
             cc.log(deck[n])
         }
-        this._myHandor.resetCards(cards);
+        this._myHandor.resetCards(cards, true);
     }
 
     //玩家的UI位置

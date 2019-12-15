@@ -26,14 +26,21 @@ export default class CpnHandcard extends cc.Component {
         this.initSelectflag();
     }
     
-    public resetCards(cards:Array<PokerCode>) {
+    public resetCards(cards:Array<PokerCode>, bPlay:boolean) {
         this.clearCards();
         if(cards===null || cards===undefined) {
             return;
         }
-        for(var i=0, len=cards.length; i<len; i++) {
-            this.addCard(cards[i]).playFlip(i*0.1);;
+        if(bPlay) {
+            for(var i=0, len=cards.length; i<len; i++) {
+                this.addCard(cards[i]).playFlip(i*0.1);
+            }
+        } else {
+            for(var i=0, len=cards.length; i<len; i++) {
+                this.addCard(cards[i]);
+            }
         }
+        
         this.initSelectflag();
     }
 
