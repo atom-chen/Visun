@@ -95,7 +95,6 @@ export default class BrnnUI extends BaseComponent {
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
-			childs[i].removeFromParent(false);
 			this._pool.delObject(childs[i]);
 		}
 

@@ -20,9 +20,11 @@ export default class SimplePool {
 		}
 	}
 
-	public delObject(obj:any) {
-		if(obj && this._pool.indexOf(obj) < 0) {
+	public delObject(obj:cc.Node) {
+		if(obj /*&& this._pool.indexOf(obj) < 0*/) {
 			this._pool.push(obj);
+			obj.stopAllActions();
+			obj.removeFromParent(false);
 		}
 	}
 
