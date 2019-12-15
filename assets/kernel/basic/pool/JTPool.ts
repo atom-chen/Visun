@@ -1,6 +1,5 @@
 import { JTIPoolObject } from "./JTIPoolObject";
 import { JTIPool } from "./JTIPool";
-import JTHashMap from "./JTHashMap";
 
 /**
 * 对象池
@@ -166,11 +165,11 @@ export default class JTPool<T extends JTIPoolObject> implements JTIPool
 	 */
 	public static getInstance(cls:any):JTIPool
 	{
-		let pool:JTIPool = this.poolMap.get(cls)
+		let pool:JTIPool = this.poolMap[cls];
 		if (!pool) 
 		{
 			pool = new JTPool(cls);
-			this.poolMap.set(cls, pool);
+			this.poolMap[cls] = pool;
 		}
 		return pool as JTIPool;
 	}
@@ -182,23 +181,17 @@ export default class JTPool<T extends JTIPoolObject> implements JTIPool
 	public static dispose(cls:any):void
 	{
 		let pool:JTIPool = this.getInstance(cls);
-		this.poolMap.remove(cls);
+		this.poolMap[cls] = null;
 		pool.dispose();
 	}
 
 	/**
 	 * 对象池Map-管理所有的对象的池
 	 */
-	protected static _poolManager:JTHashMap = null;
-	public static get poolMap():JTHashMap
+	protected static _poolManager:any = null;
+	public static get poolMap():any
 	{
-		if (!this._poolManager) this._poolManager = new JTHashMap();
-		let poolMap:JTHashMap = this._poolManager.get("pool");
-		if (!poolMap)
-		{
-			poolMap = new JTHashMap();
-			this._poolManager.set("pool", poolMap)
-		}
-		return poolMap;
+		if (!this._poolManager) this._poolManager = {};
+		return this._poolManager;
 	}
 }
