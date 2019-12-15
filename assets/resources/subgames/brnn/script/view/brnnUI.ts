@@ -92,17 +92,29 @@ export default class BrnnUI extends BaseComponent {
 	private toStateJiesuan() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 
-		var childs = this.m_ui.chipLayer.children
-		var len = childs.length;
-		for(var i=len-1; i>=0; i--){
-			this._pool.delObject(childs[i]);
-		}
-
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9], true);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A], true);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K], true);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9], true);
 		
+		var self = this;
+		this.m_ui.chipLayer.runAction(cc.sequence(
+			cc.delayTime(1),
+			cc.callFunc(function(){
+				var childs = this.m_ui.chipLayer.children
+				var len = childs.length;
+				for(var i=len-1; i>=0; i--){
+					var pos = CommonUtil.convertSpaceAR(this.m_ui["area"+childs[i].__areaId], this.m_ui.chipLayer);
+					childs[i].runAction(cc.sequence(
+						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
+						cc.callFunc(function(obj){
+							self._pool.delObject(obj);
+						}, childs[i])
+					))
+				}
+			}, this)
+		));
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
@@ -128,6 +140,7 @@ export default class BrnnUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j], true);
 				this.m_ui.chipLayer.addChild(chip);
+				chip.__areaId = info.AreaId;
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin);
 			}
 		}

@@ -108,7 +108,7 @@ export default class GameUtil {
 				new cc.Vec2(fromPos.x+15,fromPos.y+20),
 				new cc.Vec2(fromPos.x+55,fromPos.y+140), 
 				new cc.Vec2(toPos.x,toPos.y)
-			]).easing(cc.easeInOut(0.5))
+			]).easing(cc.easeInOut(2))
 		if(delay<=0)
 			chipSpr.runAction( gj );
 		else
@@ -140,12 +140,12 @@ export default class GameUtil {
 		var toPos = CommonUtil.convertSpaceAR(dstObj, parent);
 		
 		if(!isNil(margin)) {
-			if(!isNil(margin.r)) {
+			if(!isNil(margin.rx)) {
 				var szSrc = srcObj.getContentSize();
 				var szDst = dstObj.getContentSize();
 				var angle = CommonUtil.getRandomInt(0,360) * this.angle2ridian;
-				toPos.x = toPos.x + Math.cos(angle) * margin.r;
-				toPos.y = toPos.y + Math.sin(angle) * margin.r;
+				toPos.x = toPos.x + Math.cos(angle) * margin.rx;
+				toPos.y = toPos.y + Math.sin(angle) * margin.ry;
 			} else {
 				var szSrc = srcObj.getContentSize();
 				var szDst = dstObj.getContentSize();
