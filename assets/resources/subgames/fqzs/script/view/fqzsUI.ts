@@ -12,6 +12,20 @@ import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
 var margin = { left:8,right:8,bottom:8,top:8 };
+var testdata = [ 
+	{AreaId:0,Money:33425},
+	{AreaId:1,Money:34354}, 
+	{AreaId:2,Money:32365}, 
+	{AreaId:3,Money:34532}, 
+	{AreaId:4,Money:33342},
+	{AreaId:5,Money:34354},
+	{AreaId:6,Money:34354},
+	{AreaId:7,Money:34354},
+	{AreaId:8,Money:34354},
+	{AreaId:9,Money:34354},
+	{AreaId:10,Money:34354},
+	{AreaId:11,Money:34354},
+];
 
 const {ccclass, property} = cc._decorator;
 
@@ -90,20 +104,7 @@ export default class FqzsUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		param = param || [ 
-            {AreaId:0,Money:3425},
-            {AreaId:1,Money:4354}, 
-            {AreaId:2,Money:2365}, 
-            {AreaId:3,Money:4532}, 
-            {AreaId:4,Money:3342},
-            {AreaId:5,Money:4354},
-            {AreaId:6,Money:4354},
-            {AreaId:7,Money:4354},
-            {AreaId:8,Money:4354},
-            {AreaId:9,Money:4354},
-            {AreaId:10,Money:4354},
-            {AreaId:11,Money:4354},
-        ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);
