@@ -23,13 +23,13 @@ const maskAry = [
 	parseInt('11111111', 2),
 ]
 
-class _encodeServerID {
-	randInt() {
+export default class encodeServerID {
+	static randInt() {
 		return Math.floor(Math.random() * 6) + 1;
 	}
 
 
-	valueAtBit(num, bit) {
+	static valueAtBit(num, bit) {
 		if (8 < bit) {
 			return 0
 		}
@@ -42,7 +42,7 @@ class _encodeServerID {
 	}
 
 	//加密字节
-	enword2(nBit, nFirst, nSecond) {
+	static enword2(nBit, nFirst, nSecond) {
 		if (8 < nBit) {//
 			return [0, 0]
 		}
@@ -62,7 +62,7 @@ class _encodeServerID {
 		return [data, idle]
 	}
 
-	enword(nBit, nFirst, nSecond) {
+	static enword(nBit, nFirst, nSecond) {
 		if (8 < nBit) {//
 			return [0, 0]
 		}
@@ -78,7 +78,7 @@ class _encodeServerID {
 		return [data0 + data1, idle0 + idle1];
 	}
 
-	encodedata(serverIID) {
+	static encodedata(serverIID) {
 		var ary = [];
 		var byteTimeStamp = Date.now().toString();
 		//console.log("byteTimeStamp:", byteTimeStamp)
@@ -100,11 +100,11 @@ class _encodeServerID {
 		}
 		console.log(ary)
 		var result = String.fromCharCode(...ary);
-		bb.log("input:" + serverIID + " output" + result);
-		bb.log(byteTimeStamp)
-		bb.log("berfore add remaind byteTimeStamp result = " + result)
+		cc.log("input:" + serverIID + " output" + result);
+		cc.log(byteTimeStamp)
+		cc.log("berfore add remaind byteTimeStamp result = " + result)
 		result = result + byteTimeStamp.substring(serverIID.length);
-		bb.log("after add remaind byteTimeStamp result = " + result)
+		cc.log("after add remaind byteTimeStamp result = " + result)
 
 		result = btoa(result);
 		console.log(result);
@@ -113,8 +113,3 @@ class _encodeServerID {
 		return result;
 	}
 }
-//console.log("=============================");
-export var ServerIDEncode = new _encodeServerID;
-//ServerIDEncode.encodedata("QHB");
-
-

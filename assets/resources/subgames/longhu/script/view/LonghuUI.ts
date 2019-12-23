@@ -11,6 +11,22 @@ import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 
+var testdata = [ 
+	{AreaId:0,Money:13425},
+	{AreaId:1,Money:14354}, 
+	{AreaId:2,Money:12365}, 
+	{AreaId:3,Money:14532}, 
+	{AreaId:4,Money:13342},
+	{AreaId:5,Money:14354},
+	{AreaId:6,Money:14354},
+	{AreaId:7,Money:14354},
+	{AreaId:8,Money:14354},
+	{AreaId:9,Money:14354},
+	{AreaId:10,Money:14354},
+	{AreaId:11,Money:14354},
+	{AreaId:12,Money:14354},
+];
+
 var margin = { left:66,right:66,bottom:28,top:100 };
 var margin03 = { left:134,right:122,bottom:28,top:120 };
 
@@ -98,21 +114,7 @@ export default class LonghuUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		param = param || [ 
-            {AreaId:0,Money:3425},
-            {AreaId:1,Money:4354}, 
-            {AreaId:2,Money:2365}, 
-            {AreaId:3,Money:4532}, 
-            {AreaId:4,Money:3342},
-            {AreaId:5,Money:4354},
-            {AreaId:6,Money:4354},
-            {AreaId:7,Money:4354},
-            {AreaId:8,Money:4354},
-            {AreaId:9,Money:4354},
-            {AreaId:10,Money:4354},
-			{AreaId:11,Money:4354},
-			{AreaId:12,Money:4354},
-        ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);
