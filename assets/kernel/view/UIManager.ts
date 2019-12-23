@@ -272,52 +272,51 @@ export default class UIManager {
 			}
 			sk.setAnimation(trackIndex, aniName, bLoop);
 
-			sk.setStartListener(trackEntry => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				cc.log("[track %s][animation %s] start.", trackEntry.trackIndex, animationName);
-				if(listeners && listeners.on_start) {
-					listeners.on_start(sk, trackEntry)
-				}
-			});
-			sk.setInterruptListener(trackEntry => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				cc.log("[track %s][animation %s] interrupt.", trackEntry.trackIndex, animationName);
-				if(listeners && listeners.on_interrupt) {
+			if(!listeners) { return; }
+			
+			if(listeners.on_start) {
+				sk.setStartListener(trackEntry => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					cc.log("[track %s][animation %s] start.", trackEntry.trackIndex, animationName);
+					listeners.on_start(sk, trackEntry);
+				});
+			}
+			if(listeners.on_interrupt) {
+				sk.setInterruptListener(trackEntry => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					cc.log("[track %s][animation %s] interrupt.", trackEntry.trackIndex, animationName);
 					listeners.on_interrupt(sk, trackEntry)
-				}
-			});
-			sk.setEndListener(trackEntry => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				cc.log("[track %s][animation %s] end.", trackEntry.trackIndex, animationName);
-				if(listeners && listeners.on_end) {
+				});
+			}
+			if(listeners.on_end) {
+				sk.setEndListener(trackEntry => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					cc.log("[track %s][animation %s] end.", trackEntry.trackIndex, animationName);
 					listeners.on_end(sk, trackEntry)
-				}
-			});
-			sk.setDisposeListener(trackEntry => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				cc.log("[track %s][animation %s] will be disposed.", trackEntry.trackIndex, animationName);
-				if(listeners && listeners.on_dispose) {
+				});
+			}
+			if(listeners.on_dispose) {
+				sk.setDisposeListener(trackEntry => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					cc.log("[track %s][animation %s] will be disposed.", trackEntry.trackIndex, animationName);
 					listeners.on_dispose(sk, trackEntry)
-				}
-			});
-			sk.setCompleteListener((trackEntry) => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				if (animationName === 'shoot') {
-					this.spine.clearTrack(1);
-				}
-				var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
-				cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
-				if(listeners && listeners.on_complete) {
+				});
+			}
+			if(listeners.on_complete) {
+				sk.setCompleteListener((trackEntry) => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
+					cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
 					listeners.on_complete(sk, trackEntry)
-				}
-			});
-			sk.setEventListener((trackEntry, event) => {
-				var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-				cc.log("[track %s][animation %s] event: %s, %s, %s, %s", trackEntry.trackIndex, animationName, event.data.name, event.intValue, event.floatValue, event.stringValue);
-				if(listeners && listeners.on_event) {
+				});
+			}
+			if(listeners.on_event) {
+				sk.setEventListener((trackEntry, event) => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					cc.log("[track %s][animation %s] event: %s, %s, %s, %s", trackEntry.trackIndex, animationName, event.data.name, event.intValue, event.floatValue, event.stringValue);
 					listeners.on_event(sk, trackEntry)
-				}
-			});
+				});
+			}
 		});
 	}
 
