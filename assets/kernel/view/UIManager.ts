@@ -75,8 +75,7 @@ export default class UIManager {
 			if(zIndex!==LayerDefine.Panel) {
 				if(CommonUtil.hasEditbox(obj)) {
 					cc.log("----- yes has editbox");
-				}
-				else {
+				} else {
 					let key = cc.loader["_getReferenceKey"](loadedResource);
 					LoadCenter.getInstance().retatinRes(key);
 					LoadCenter.getInstance().retainNodeRes(obj);
