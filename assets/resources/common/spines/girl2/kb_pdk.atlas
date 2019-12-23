@@ -1,0 +1,139 @@
+
+kb_pdk.png
+size: 1084,1084
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_arm
+  rotate: false
+  xy: 910, 539
+  size: 145, 223
+  orig: 145, 223
+  offset: 0, 0
+  index: -1
+L_hand_shizhi
+  rotate: false
+  xy: 910, 216
+  size: 72, 53
+  orig: 72, 53
+  offset: 0, 0
+  index: -1
+L_hand_wumingzhi
+  rotate: true
+  xy: 910, 181
+  size: 33, 51
+  orig: 33, 51
+  offset: 0, 0
+  index: -1
+L_hand_xiaomuzhi
+  rotate: false
+  xy: 684, 130
+  size: 27, 41
+  orig: 27, 41
+  offset: 0, 0
+  index: -1
+L_hand_zhongzhi
+  rotate: true
+  xy: 622, 113
+  size: 58, 60
+  orig: 58, 60
+  offset: 0, 0
+  index: -1
+L_xiaobi
+  rotate: true
+  xy: 910, 764
+  size: 318, 147
+  orig: 318, 147
+  offset: 0, 0
+  index: -1
+R_arm
+  rotate: false
+  xy: 2, 2
+  size: 210, 304
+  orig: 210, 304
+  offset: 0, 0
+  index: -1
+R_hand_muzhi
+  rotate: true
+  xy: 557, 113
+  size: 58, 63
+  orig: 58, 63
+  offset: 0, 0
+  index: -1
+R_hand_shizhi
+  rotate: true
+  xy: 1021, 471
+  size: 66, 27
+  orig: 66, 27
+  offset: 0, 0
+  index: -1
+R_hand_wumingzhi
+  rotate: true
+  xy: 1059, 1034
+  size: 48, 14
+  orig: 48, 14
+  offset: 0, 0
+  index: -1
+R_hand_zhongzhi
+  rotate: true
+  xy: 988, 359
+  size: 60, 20
+  orig: 60, 20
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 308
+  size: 553, 774
+  orig: 553, 774
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 1057, 670
+  size: 92, 25
+  orig: 92, 25
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 214, 101
+  size: 177, 205
+  orig: 177, 205
+  offset: 0, 0
+  index: -1
+toufa_1
+  rotate: true
+  xy: 214, 9
+  size: 90, 168
+  orig: 90, 168
+  offset: 0, 0
+  index: -1
+toufa_2
+  rotate: false
+  xy: 393, 127
+  size: 162, 179
+  orig: 162, 179
+  offset: 0, 0
+  index: -1
+toufa_3
+  rotate: false
+  xy: 557, 173
+  size: 351, 909
+  orig: 351, 909
+  offset: 0, 0
+  index: -1
+touying_1
+  rotate: false
+  xy: 910, 421
+  size: 109, 116
+  orig: 109, 116
+  offset: 0, 0
+  index: -1
+touying_2
+  rotate: false
+  xy: 910, 271
+  size: 76, 148
+  orig: 76, 148
+  offset: 0, 0
+  index: -1

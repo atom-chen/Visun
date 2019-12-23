@@ -1,0 +1,167 @@
+
+kb_jszjh.png
+size: 1079,1079
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+backhair
+  rotate: false
+  xy: 234, 31
+  size: 205, 196
+  orig: 205, 196
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 229
+  size: 631, 848
+  orig: 631, 848
+  offset: 0, 0
+  index: -1
+card1
+  rotate: false
+  xy: 441, 52
+  size: 99, 79
+  orig: 99, 79
+  offset: 0, 0
+  index: -1
+card2
+  rotate: true
+  xy: 545, 125
+  size: 102, 88
+  orig: 102, 88
+  offset: 0, 0
+  index: -1
+card3
+  rotate: false
+  xy: 441, 133
+  size: 102, 94
+  orig: 102, 94
+  offset: 0, 0
+  index: -1
+h1
+  rotate: true
+  xy: 635, 23
+  size: 261, 290
+  orig: 261, 290
+  offset: 0, 0
+  index: -1
+h2
+  rotate: false
+  xy: 927, 97
+  size: 65, 113
+  orig: 65, 113
+  offset: 0, 0
+  index: -1
+h3
+  rotate: false
+  xy: 542, 29
+  size: 72, 94
+  orig: 72, 94
+  offset: 0, 0
+  index: -1
+h4
+  rotate: false
+  xy: 1006, 219
+  size: 60, 108
+  orig: 60, 108
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 823, 329
+  size: 152, 218
+  orig: 152, 218
+  offset: 0, 0
+  index: -1
+lingdai
+  rotate: false
+  xy: 927, 212
+  size: 77, 115
+  orig: 77, 115
+  offset: 0, 0
+  index: -1
+youshou
+  rotate: false
+  xy: 635, 286
+  size: 186, 456
+  orig: 186, 456
+  offset: 0, 0
+  index: -1
+youshou_finger2
+  rotate: false
+  xy: 1029, 991
+  size: 48, 86
+  orig: 48, 86
+  offset: 0, 0
+  index: -1
+youshou_finger3
+  rotate: false
+  xy: 927, 19
+  size: 62, 76
+  orig: 62, 76
+  offset: 0, 0
+  index: -1
+youtui
+  rotate: true
+  xy: 823, 483
+  size: 259, 248
+  orig: 259, 248
+  offset: 0, 0
+  index: -1
+youyan
+  rotate: false
+  xy: 854, 298
+  size: 42, 29
+  orig: 42, 29
+  offset: 0, 0
+  index: -1
+youyanqiu
+  rotate: false
+  xy: 1060, 976
+  size: 17, 13
+  orig: 17, 13
+  offset: 0, 0
+  index: -1
+zuoshou
+  rotate: false
+  xy: 635, 744
+  size: 392, 333
+  orig: 392, 333
+  offset: 0, 0
+  index: -1
+zuoshou_finger1
+  rotate: true
+  xy: 1029, 907
+  size: 82, 29
+  orig: 82, 29
+  offset: 0, 0
+  index: -1
+zuoshou_finger4
+  rotate: false
+  xy: 1029, 861
+  size: 42, 44
+  orig: 42, 44
+  offset: 0, 0
+  index: -1
+zuotui
+  rotate: false
+  xy: 2, 2
+  size: 230, 225
+  orig: 230, 225
+  offset: 0, 0
+  index: -1
+zuoyan
+  rotate: true
+  xy: 823, 286
+  size: 41, 29
+  orig: 41, 29
+  offset: 0, 0
+  index: -1
+zuoyanqiu
+  rotate: true
+  xy: 616, 107
+  size: 16, 17
+  orig: 16, 17
+  offset: 0, 0
+  index: -1

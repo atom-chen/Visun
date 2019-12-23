@@ -1,0 +1,153 @@
+
+kb_qzpj.png
+size: 1288,1288
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 599, 377
+  size: 582, 909
+  orig: 582, 909
+  offset: 0, 0
+  index: -1
+erhuan_L
+  rotate: false
+  xy: 565, 324
+  size: 13, 40
+  orig: 13, 40
+  offset: 0, 0
+  index: -1
+eye
+  rotate: true
+  xy: 1183, 1163
+  size: 123, 52
+  orig: 123, 52
+  offset: 0, 0
+  index: -1
+eye_tk
+  rotate: false
+  xy: 301, 11
+  size: 82, 35
+  orig: 82, 35
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 896, 122
+  size: 217, 253
+  orig: 217, 253
+  offset: 0, 0
+  index: -1
+foufa_dow
+  rotate: false
+  xy: 2, 366
+  size: 595, 920
+  orig: 595, 920
+  offset: 0, 0
+  index: -1
+hand_l
+  rotate: true
+  xy: 2, 117
+  size: 247, 561
+  orig: 247, 561
+  offset: 0, 0
+  index: -1
+hand_l_a
+  rotate: false
+  xy: 1237, 1174
+  size: 42, 74
+  orig: 42, 74
+  offset: 0, 0
+  index: -1
+hand_l_b
+  rotate: false
+  xy: 456, 55
+  size: 74, 60
+  orig: 74, 60
+  offset: 0, 0
+  index: -1
+hand_l_c
+  rotate: false
+  xy: 1183, 1015
+  size: 41, 72
+  orig: 41, 72
+  offset: 0, 0
+  index: -1
+hand_l_d
+  rotate: true
+  xy: 456, 2
+  size: 51, 53
+  orig: 51, 53
+  offset: 0, 0
+  index: -1
+hand_l_e
+  rotate: false
+  xy: 1255, 176
+  size: 31, 36
+  orig: 31, 36
+  offset: 0, 0
+  index: -1
+hand_r_a
+  rotate: true
+  xy: 1115, 156
+  size: 56, 102
+  orig: 56, 102
+  offset: 0, 0
+  index: -1
+hand_r_b
+  rotate: true
+  xy: 1219, 156
+  size: 56, 34
+  orig: 56, 34
+  offset: 0, 0
+  index: -1
+hand_r_c
+  rotate: true
+  xy: 1183, 1089
+  size: 72, 50
+  orig: 72, 50
+  offset: 0, 0
+  index: -1
+hand_r_d
+  rotate: false
+  xy: 1237, 1250
+  size: 49, 36
+  orig: 49, 36
+  offset: 0, 0
+  index: -1
+hand_r_dow
+  rotate: true
+  xy: 2, 10
+  size: 105, 297
+  orig: 105, 297
+  offset: 0, 0
+  index: -1
+hand_r_e
+  rotate: true
+  xy: 1183, 957
+  size: 56, 46
+  orig: 56, 46
+  offset: 0, 0
+  index: -1
+hand_r_up
+  rotate: true
+  xy: 599, 104
+  size: 271, 295
+  orig: 271, 295
+  offset: 0, 0
+  index: -1
+toufa_2
+  rotate: true
+  xy: 1115, 214
+  size: 161, 143
+  orig: 161, 143
+  offset: 0, 0
+  index: -1
+toufa_3
+  rotate: true
+  xy: 301, 48
+  size: 67, 153
+  orig: 67, 153
+  offset: 0, 0
+  index: -1
