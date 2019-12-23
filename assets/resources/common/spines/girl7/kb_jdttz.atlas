@@ -1,0 +1,139 @@
+
+kb_jdttz.png
+size: 839,839
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+backhair1
+  rotate: true
+  xy: 700, 102
+  size: 43, 102
+  orig: 43, 102
+  offset: 0, 0
+  index: -1
+backhair2
+  rotate: false
+  xy: 711, 421
+  size: 99, 211
+  orig: 99, 211
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 30
+  size: 360, 807
+  orig: 360, 807
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 364, 129
+  size: 228, 278
+  orig: 228, 278
+  offset: 0, 0
+  index: -1
+h1
+  rotate: true
+  xy: 594, 114
+  size: 31, 104
+  orig: 31, 104
+  offset: 0, 0
+  index: -1
+h2
+  rotate: true
+  xy: 463, 38
+  size: 34, 111
+  orig: 34, 111
+  offset: 0, 0
+  index: -1
+h3
+  rotate: true
+  xy: 364, 15
+  size: 34, 85
+  orig: 34, 85
+  offset: 0, 0
+  index: -1
+h4
+  rotate: false
+  xy: 364, 51
+  size: 97, 76
+  orig: 97, 76
+  offset: 0, 0
+  index: -1
+h5
+  rotate: false
+  xy: 711, 634
+  size: 126, 203
+  orig: 126, 203
+  offset: 0, 0
+  index: -1
+hand_l
+  rotate: false
+  xy: 364, 409
+  size: 345, 428
+  orig: 345, 428
+  offset: 0, 0
+  index: -1
+hand_r
+  rotate: true
+  xy: 594, 147
+  size: 260, 237
+  orig: 260, 237
+  offset: 0, 0
+  index: -1
+youshou_finger2
+  rotate: false
+  xy: 764, 49
+  size: 40, 51
+  orig: 40, 51
+  offset: 0, 0
+  index: -1
+youshou_finger3
+  rotate: true
+  xy: 654, 13
+  size: 36, 41
+  orig: 36, 41
+  offset: 0, 0
+  index: -1
+youshou_finger4
+  rotate: true
+  xy: 517, 4
+  size: 32, 35
+  orig: 32, 35
+  offset: 0, 0
+  index: -1
+zuoshou_finger2
+  rotate: false
+  xy: 576, 57
+  size: 98, 55
+  orig: 98, 55
+  offset: 0, 0
+  index: -1
+zuoshou_finger3
+  rotate: false
+  xy: 676, 51
+  size: 86, 49
+  orig: 86, 49
+  offset: 0, 0
+  index: -1
+zuoshou_finger4
+  rotate: false
+  xy: 451, 2
+  size: 64, 34
+  orig: 64, 34
+  offset: 0, 0
+  index: -1
+zuoyan
+  rotate: false
+  xy: 463, 74
+  size: 107, 53
+  orig: 107, 53
+  offset: 0, 0
+  index: -1
+zuoyanqiu
+  rotate: false
+  xy: 576, 18
+  size: 76, 37
+  orig: 76, 37
+  offset: 0, 0
+  index: -1

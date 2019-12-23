@@ -1,0 +1,83 @@
+
+kb_tb.png
+size: 817,817
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 11
+  size: 319, 804
+  orig: 319, 804
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 721, 788
+  size: 92, 27
+  orig: 92, 27
+  offset: 0, 0
+  index: -1
+eye_tk
+  rotate: false
+  xy: 721, 770
+  size: 65, 16
+  orig: 65, 16
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 586, 398
+  size: 148, 194
+  orig: 148, 194
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 323, 2
+  size: 198, 265
+  orig: 198, 265
+  offset: 0, 0
+  index: -1
+leg_r
+  rotate: false
+  xy: 590, 9
+  size: 108, 208
+  orig: 108, 208
+  offset: 0, 0
+  index: -1
+shou_R
+  rotate: false
+  xy: 586, 594
+  size: 133, 221
+  orig: 133, 221
+  offset: 0, 0
+  index: -1
+toufa_1
+  rotate: false
+  xy: 323, 447
+  size: 261, 368
+  orig: 261, 368
+  offset: 0, 0
+  index: -1
+toufa_2
+  rotate: false
+  xy: 323, 202
+  size: 222, 243
+  orig: 222, 243
+  offset: 0, 0
+  index: -1
+yixiu_dow
+  rotate: true
+  xy: 716, 232
+  size: 164, 97
+  orig: 164, 97
+  offset: 0, 0
+  index: -1
+yixiu_up
+  rotate: false
+  xy: 547, 219
+  size: 167, 177
+  orig: 167, 177
+  offset: 0, 0
+  index: -1
