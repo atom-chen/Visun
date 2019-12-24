@@ -38,12 +38,12 @@ export default class UIRoom extends BaseComponent {
             if(rooms!==null && rooms!==undefined){
                 this.roomList = rooms;
                 for(var i=1; i<=4; i++){
-                    this.m_ui["Label"+i].getComponent(cc.Label).string = rooms[i-1] && rooms[i-1].GameType;
+                    this.m_lab["Label"+i].string = rooms[i-1] && rooms[i-1].GameType;
                 }
                 this.initRoomBtns();
             }
         }, this, IS_DANJI_MODE);
-        this.m_ui.lab_roomname.getComponent(cc.Label).string = GameConfig[gameKind].name
+        this.m_lab.lab_roomname.string = GameConfig[gameKind].name
         configure_request.RoomListReq({GameKind:gameKind});
     }
 
