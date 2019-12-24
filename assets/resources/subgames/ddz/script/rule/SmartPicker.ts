@@ -317,7 +317,7 @@ export default class SmartPicker {
 		var single = null;
 		for(var i in hands) {
 			if(threePart.indexOf(hands[i]) < 0) {
-				if(wMap[RuleDdz.getWeight(hands[i])] < 2) {
+				if(!isNil(wMap[RuleDdz.getWeight(hands[i])]) && wMap[RuleDdz.getWeight(hands[i])].length < 2) {
 					threePart.push(hands[i]);
 					return threePart;
 				}
@@ -449,14 +449,6 @@ export default class SmartPicker {
 	//ok
 	protected static pickZhadan(hands:Array<PokerCode>, enemyCards:Array<PokerCode>, contains:Array<PokerCode>) : Array<PokerCode>
 	{
-		if(DDzPaiXingParser.getPaiXing(contains).compare(DDzPaiXingParser.getPaiXing(enemyCards))){
-			return contains;
-		};
-
-		if(RuleDdz.getWeight(contains[0])<=RuleDdz.getWeight(enemyCards[0])){
-			return null;
-		}
-		
 		var idx = hands.indexOf(contains[0]);
 		if(idx<0) { return null; }
 
@@ -477,7 +469,9 @@ export default class SmartPicker {
 			}
 		}
 		if(outs.length===4) {
-			return outs;
+			if(DDzPaiXingParser.getPaiXing(outs).compare(DDzPaiXingParser.getPaiXing(enemyCards))) {
+				return outs;
+			}
 		}
 
 		if(contains[0]===PokerCode.QUEEN || contains[0]===PokerCode.KING){
