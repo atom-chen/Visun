@@ -3,6 +3,9 @@ if (false) {
     BK.Script.loadlib('GameRes://libs/qqplay-adapter.js');
 }
 
+// 修改渲染清晰程度，值越大越清晰，不要超过3
+// window.devicePixelRatio = 2
+
 window.boot = function () {
     var settings = window._CCSettings;
     window._CCSettings = undefined;
@@ -62,15 +65,20 @@ window.boot = function () {
     function setLoadingDisplay() {
         // Loading splash scene
         var splash = document.getElementById('splash');
+
+
+        var progressBar_ex = document.getElementById('progressBar_ex');
+ 
         var progressBar = splash.querySelector('.progress-bar span');
         if (progressBar) {
             cc.loader.onProgress = function (completedCount, totalCount, item) {
                 var percent = 100 * completedCount / totalCount;
                 if (progressBar) {
                     progressBar.style.width = percent.toFixed(2) + '%';
+                    progressBar_ex.innerText = "权威认证，公平可信！引擎启动中..." + percent.toFixed(0) + '%'
+                  
                 }
             };
-            
             progressBar.style.width = '0%';
         }
         splash.style.display = 'block';
@@ -80,70 +88,73 @@ window.boot = function () {
     }
 
     var onStart = function () {
-        if (!cc.sys.capabilities.webp) {
-            cc.macro.SUPPORT_TEXTURE_FORMATS = [
-                ".png", ".jpg", ".webp"
-            ]
-        }
-       
-        console.log(cc.macro.SUPPORT_TEXTURE_FORMATS)
-        cc.loader.downloader._subpackages = settings.subpackages;
-
-        cc.view.enableRetina(true);
-        cc.view.resizeWithBrowserSize(true);
-
-        if (!false && !false) {
-            if (cc.sys.isBrowser) {
-                setLoadingDisplay();
+        try {
+            if (!cc.sys.capabilities.webp) {
+                cc.macro.SUPPORT_TEXTURE_FORMATS = [
+                    ".png", ".jpg", ".webp"
+                ]
             }
-
-            if (cc.sys.isMobile) {
-                if (settings.orientation === 'landscape') {
-                    cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+    
+            console.log(cc.macro.SUPPORT_TEXTURE_FORMATS)
+            cc.loader.downloader._subpackages = settings.subpackages;
+    
+            cc.view.enableRetina(true);
+            cc.view.resizeWithBrowserSize(true);
+    
+            if (!false && !false) {
+                if (cc.sys.isBrowser) {
+                    setLoadingDisplay();
                 }
-                else if (settings.orientation === 'portrait') {
-                    cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
-                }
-                cc.view.enableAutoFullScreen([
-                    cc.sys.BROWSER_TYPE_BAIDU,
-                    cc.sys.BROWSER_TYPE_WECHAT,
-                    cc.sys.BROWSER_TYPE_MOBILE_QQ,
-                    cc.sys.BROWSER_TYPE_MIUI,
-                ].indexOf(cc.sys.browserType) < 0);
-            }
-
-            // Limit downloading max concurrent task to 2,
-            // more tasks simultaneously may cause performance draw back on some android system / browsers.
-            // You can adjust the number based on your own test result, you have to set it before any loading process to take effect.
-            if (cc.sys.isBrowser && cc.sys.os === cc.sys.OS_ANDROID) {
-                cc.macro.DOWNLOAD_MAX_CONCURRENT = 2;
-            }
-        }
-
-        function loadScene(launchScene) {
-            cc.director.loadScene(launchScene, null,
-                function () {
-                    if (cc.sys.isBrowser) {
-                        // show canvas
-                        var canvas = document.getElementById('GameCanvas');
-                        canvas.style.visibility = '';
-                        var div = document.getElementById('GameDiv');
-                        if (div) {
-                            div.style.backgroundImage = '';
-                        }
+    
+                if (cc.sys.isMobile) {
+                    if (settings.orientation === 'landscape') {
+                        cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                     }
-                    cc.loader.onProgress = null;
-                    console.log('Success to load scene: ' + launchScene);
+                    else if (settings.orientation === 'portrait') {
+                        cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+                    }
+                    cc.view.enableAutoFullScreen([
+                        cc.sys.BROWSER_TYPE_BAIDU,
+                        cc.sys.BROWSER_TYPE_WECHAT,
+                        cc.sys.BROWSER_TYPE_MOBILE_QQ,
+                        cc.sys.BROWSER_TYPE_MIUI,
+                    ].indexOf(cc.sys.browserType) < 0);
                 }
-            );
-
+    
+                // Limit downloading max concurrent task to 2,
+                // more tasks simultaneously may cause performance draw back on some android system / browsers.
+                // You can adjust the number based on your own test result, you have to set it before any loading process to take effect.
+                if (cc.sys.isBrowser && cc.sys.os === cc.sys.OS_ANDROID) {
+                    cc.macro.DOWNLOAD_MAX_CONCURRENT = 2;
+                }
+            }
+    
+            function loadScene(launchScene) {
+                cc.director.loadScene(launchScene, null,
+                    function () {
+                        if (cc.sys.isBrowser) {
+                            // show canvas
+                            var canvas = document.getElementById('GameCanvas');
+                            canvas.style.visibility = '';
+                            var div = document.getElementById('GameDiv');
+                            if (div) {
+                                div.style.backgroundImage = '';
+                            }
+                        }
+                        cc.loader.onProgress = null;
+                        console.log('Success to load scene: ' + launchScene);
+                    }
+                );
+    
+            }
+    
+            var launchScene = settings.launchScene;
+    
+            // load scene
+            loadScene(launchScene);
+        } catch (err) {
+            console.log(err);
         }
-
-        var launchScene = settings.launchScene;
-
-        // load scene
-        loadScene(launchScene);
-
     };
 
     // jsList
@@ -185,7 +196,8 @@ window.boot = function () {
         md5AssetsMap: settings.md5AssetsMap,
         subpackages: settings.subpackages
     });
-
+    cc.view.enableAntiAlias(true);
+    cc.macro.ENABLE_WEBGL_ANTIALIAS = true;
     cc.game.run(option, onStart);
 };
 

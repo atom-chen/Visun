@@ -142,24 +142,7 @@ export default class CommonUtil {
 	}
 
 	//
-	public static getFrameName(name:string) : string 
-	{
-		return name.replace(/\//g,"-");
-	}
-
-	//
-	public static isNil(obj:any) : boolean
-	{
-		if(obj===undefined || obj===null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	//
-	static Bytes2Str(arr: Uint8Array) {
+	static Bytes2Str(arr: Uint8Array, flagPos:number) : string {
 		let str = "";
 		for (let i = 0; i < arr.length; i++) {
 			let tmp = arr[i].toString(16);
@@ -167,7 +150,7 @@ export default class CommonUtil {
 				tmp = "0" + tmp;
 			}
 			str += " " + tmp;
-			if(i==7) { str += "  "; }
+			if(i==flagPos) { str += "  "; }
 		}
 		return str;
 	}
@@ -344,6 +327,17 @@ export default class CommonUtil {
 		}
 	}
 
+	static getLocalTime(nS) {
+		var now = new Date(parseInt(nS) * 1000);
+		var year = now.getFullYear();
+		var month = now.getMonth() + 1;
+		var date = now.getDate();
+		var hour = now.getHours();
+		var minute = now.getMinutes();
+		var second = now.getSeconds();
+		return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+	}
+
 	/**
 	 * 精确浮点数，只截取不四舍五入
 	 * @param {*} number    需要补齐的数字
@@ -363,20 +357,25 @@ export default class CommonUtil {
 	/**
      * 格式化金币展示 保留俩位小数
      * 每隔三位一个逗号
-     * @param {number} number
-     * @param {boolean} showUnit    是否显示单位 万 或者 亿 ,默认显示单位
+     * @param {number} value  金币数量
+	 * @param {number} divNum  value的实际值为value/divNum
+     * @param {boolean} showUnit    是否显示单位 ,默认显示单位
      * @param {boolean} add    是否添加符号在前面  ，默认不添加符号
+	 * @param {boolean} showComma    是否使用逗号(千分位),默认添加
+	 * @param {boolean} showFixed    是否保留俩位小数，默认 没有0
      */
-	static setScoreNumber(number: number, showUnit: boolean = true, add: boolean = false): string {
-		if (number == null || number == undefined) {
-			console.warn("传入未定义数据！！", number)
+	static setScoreNumber(value: number, divNum:number, showUnit: boolean = true, add: boolean = false, showComma: boolean = true, showFixed: boolean = false): string {
+		if (value == null || value == undefined) {
+			console.warn("传入未定义数据！！", value)
 			return
 		}
-		let copyNumber = Math.abs(number)
+
+		let copyNumber = Math.abs(value / divNum);//最新分单位
 		let str = ""   //先确定单位
 		let BILLION = 100000000
 		let TENTHOUSAND = 10000
 		let unit = ""
+		showUnit = false; //最新版需求不需要单位了 
 		if (showUnit && copyNumber >= 100000) {
 			if (Math.floor(copyNumber / BILLION) > 0) {
 				unit = "亿"
@@ -388,31 +387,43 @@ export default class CommonUtil {
 				}
 			}
 		} else {
-			// // 是不是带小数
-			// if (copyNumber === Math.ceil(copyNumber)) {
-			// 	str = copyNumber.toString()
-			// } else {
-			// 	str = copyNumber.toFixed(2)
-			// }
-			str = copyNumber.toFixed(2); //保留俩位小数 
+			// 是否保留 俩位小数  0.00
+			if (!showFixed) {
+				str = copyNumber.toString()
+			} else {
+				str = copyNumber.toFixed(2)
+			}
+			//str = copyNumber.toFixed(2); //保留俩位小数 
 		}
 
+		//加，显示 先按照3个长度 解出来 ，倒叙拼接
 		let strList = str.split(".")
 		let count = Math.floor((strList[0].length - 1) / 3)
-		if (count > 0) {
+		if (showComma && count > 0) {
 			str = ""
+			let arr = []
+
 			for (let index = 0; index < count; index++) {
-				str = str + "," + strList[0].slice(strList[0].length - 3, strList[0].length)
+				arr.push(strList[0].slice(strList[0].length - 3, strList[0].length));
 				strList[0] = strList[0].substring(0, strList[0].length - 3)
 			}
-			str = strList[0] + str
+			arr.push(strList[0]);
+			for (let j = arr.length - 1; j >= 0; j--) {
+				if (j == arr.length - 1) {
+					str = arr[j];
+				} else {
+					str = str + "," + arr[j];
+				}
+			}
+			//带小数点的
 			if (strList[1]) {
 				str = str + "." + strList[1]
 			}
+
 		}
 		str = str + unit
 		// 是否添加符号
-		if (number < 0) {
+		if (value < 0) {
 			str = "-" + str
 		} else if (add) {
 			str = "+" + str
