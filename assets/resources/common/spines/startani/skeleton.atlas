@@ -1,0 +1,152 @@
+
+skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+s1
+  rotate: false
+  xy: 506, 2
+  size: 494, 162
+  orig: 494, 162
+  offset: 0, 0
+  index: -1
+s1m
+  rotate: false
+  xy: 2, 2
+  size: 502, 162
+  orig: 502, 162
+  offset: 0, 0
+  index: -1
+s2
+  rotate: false
+  xy: 2, 166
+  size: 743, 416
+  orig: 743, 416
+  offset: 0, 0
+  index: -1
+s2m
+  rotate: false
+  xy: 2, 584
+  size: 747, 415
+  orig: 747, 415
+  offset: 0, 0
+  index: -1
+saoguang_00001
+  rotate: false
+  xy: 751, 879
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00002
+  rotate: false
+  xy: 751, 757
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00003
+  rotate: false
+  xy: 751, 635
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00004
+  rotate: false
+  xy: 751, 513
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00005
+  rotate: false
+  xy: 747, 391
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00006
+  rotate: false
+  xy: 747, 269
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+
+skeleton2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+s3
+  rotate: false
+  xy: 2, 2
+  size: 503, 470
+  orig: 503, 470
+  offset: 0, 0
+  index: -1
+s3m
+  rotate: false
+  xy: 2, 474
+  size: 510, 470
+  orig: 510, 470
+  offset: 0, 0
+  index: -1
+saoguang_00007
+  rotate: false
+  xy: 514, 824
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00008
+  rotate: false
+  xy: 514, 702
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00009
+  rotate: false
+  xy: 756, 824
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00010
+  rotate: false
+  xy: 514, 580
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00011
+  rotate: false
+  xy: 756, 702
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00012
+  rotate: false
+  xy: 756, 580
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00013
+  rotate: false
+  xy: 514, 458
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
+saoguang_00014
+  rotate: false
+  xy: 756, 458
+  size: 240, 120
+  orig: 240, 120
+  offset: 0, 0
+  index: -1
