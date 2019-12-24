@@ -24,12 +24,11 @@ else
 				}
 				
 				if(this.node._touchHook) {
-					cc.log("------- touch hook -------");
+				//	cc.log("------- touch hook -------");
 					this.node._touchHook();
-				}
-				else {
-					cc.log("------- default click -------");
-					AudioManager.getInstance().playEffectAsync("", true);
+				} else {
+				//	cc.log("------- default click -------");
+				//	AudioManager.getInstance().playEffectAsync("", true);
 				}
 			}, this);
 		}

@@ -14,6 +14,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 
@@ -52,6 +53,8 @@ export default class BrnnUI extends BaseComponent {
 		this.initUIEvent();
 
 		this.toStateReady();
+
+		AudioManager.getInstance().playMusicAsync("common/audios/music_bg", true);
 	}
 
 	onDestroy(){
@@ -84,13 +87,16 @@ export default class BrnnUI extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9], true);
@@ -98,6 +104,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K], true);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9], true);
 		
+		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -132,8 +139,13 @@ export default class BrnnUI extends BaseComponent {
 		GameUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
-	private onPlayersBet(tmr, param) {
-		param = param || [ {AreaId:1,Money:35280}, {AreaId:2,Money:28650}, {AreaId:3,Money:36455}, {AreaId:4,Money:34255} ];
+	private onPlayersBet(tmr:BaseTimer, param:any) {
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		param = param || [ {AreaId:1,Money:25280}, {AreaId:2,Money:28650}, {AreaId:3,Money:26455}, {AreaId:4,Money:24255} ];
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);

@@ -14,6 +14,7 @@ export default class UIRoom extends BaseComponent {
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+        CommonUtil.traveseLabels(this.node, this.m_lab);
 
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
             CommonUtil.safeDelete(this);

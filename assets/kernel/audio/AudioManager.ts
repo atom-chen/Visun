@@ -22,24 +22,33 @@ export default class AudioManager {
     private _currentEffectId: number = -1;
     private _currentEffectCacheUrl: string = null;
 
-    private _musicEnable = false;
-    private _effectEnable = false;
+    private _musicEnable = true;
+    private _effectEnable = true;
 
-    private _musicVolume = 0.7;
+    private _musicVolume = 0.3;
     private _effectVolume = 0.7;
 
     private constructor() {
         this.effects = [];
     }
 
-    loadAudioClip(path:string, callfun:Function) {
-		cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
-			if (err) {
-				cc.log(err);
-				return;
-			}
-			callfun(audioclip);
-		});
+    loadAudioClip(path:string, bFlag:boolean, callfun:Function) {
+        var rsc = cc.loader.getRes(path, cc.AudioClip);
+        if(rsc) {
+            callfun(rsc);
+            return;
+        }
+        if(bFlag) {
+            cc.loader.loadRes(path, cc.AudioClip, (err, audioclip) => {
+                if (err) {
+                    cc.log(err);
+                    return;
+                }
+                callfun(audioclip);
+            });
+        } else {
+            cc.loader.loadRes(path, cc.AudioClip);
+        }
 	}
 
 
@@ -93,6 +102,7 @@ export default class AudioManager {
     playMusic(audioclip: cc.AudioClip, loop: boolean) {
         if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
         if(!audioclip) { cc.log("invalid audioClip"); return; }
+        if(this._currentMusicCacheUrl===audioclip.nativeUrl) { return; }
         this._currentMusicCacheUrl = audioclip.nativeUrl;
         this._currentMusicId = cc.audioEngine.playMusic(audioclip, loop);
         cc.audioEngine.setFinishCallback(this._currentMusicId, () => {
@@ -104,8 +114,8 @@ export default class AudioManager {
     playMusicAsync(path: string, loop: boolean) {
         if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
-        cc.log("play music", path, loop);
-        this.loadAudioClip(path, function (audioclip) {
+    //    cc.log("play music", path, loop);
+        this.loadAudioClip(path, true, function (audioclip) {
             this.playMusic(audioclip, loop);
         }.bind(this));
     }
@@ -125,8 +135,8 @@ export default class AudioManager {
     playEffectAsync(path: string, loop:boolean = false) {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
-        cc.log("play effect", path);
-        this.loadAudioClip(path, function (audioclip) {
+    //    cc.log("play effect", path);
+        this.loadAudioClip(path, false, function (audioclip) {
             this.playEffect(audioclip, loop);
         }.bind(this));
     }
