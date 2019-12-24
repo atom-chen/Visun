@@ -9,7 +9,7 @@ export default class GameUtil {
 	//将总金额total，拆分成指定面额规则的序列
 	//如总额1185，游戏中的筹码面额有"5, 10, 50, 100, 500"
 	//拆分后的序列就是：1185 == 500 + 500 + 100 + 50 + 10 + 10 + 10 + 5
-	public static parseChip(total:number, chipRule?:number[]) {
+	public static parseChip(total:number, chipRule?:number[]) : number[] {
 		if(!chipRule) {
 			chipRule = this.CHIP_RULE;
 		}
@@ -29,7 +29,7 @@ export default class GameUtil {
 		return chips;
 	}
 
-	public static chipPath(v:number|string, b3d:boolean) {
+	public static chipPath(v:number|string, b3d:boolean) : string {
 		if(b3d) {
 			return "common/imgs/chips/cm_"+v;
 		} else {
@@ -37,11 +37,11 @@ export default class GameUtil {
 		}
 	}
 
-	public static pokerPath(v:number|string) {
+	public static pokerPath(v:number|string) : string {
 		return "common/imgs/pokers/poker_"+v;
 	}
 
-	public static majhongPath(v:MajhongCode) {
+	public static majhongPath(v:MajhongCode) : string {
 		return "common/imgs/majhong/tong"+v;
 	}
 
