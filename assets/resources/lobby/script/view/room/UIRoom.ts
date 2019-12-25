@@ -22,6 +22,15 @@ export default class UIRoom extends BaseComponent {
         }, this);
     }
 
+    reflesh(gameKind:any) {
+        this._gameKind = gameKind;
+        CommonUtil.traverseNodes(this.node, this.m_ui);
+        this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
+
+        EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
+        configure_request.RoomListReq({GameKind:gameKind});
+    }
+
     private initRoomBtns(){
         for(var i=1; i<=4; i++) {
             var btn = this.m_ui["button"+i];
@@ -41,15 +50,6 @@ export default class UIRoom extends BaseComponent {
             }
             this.initRoomBtns();
         }
-    }
-
-    reflesh(gameKind:any) {
-        this._gameKind = gameKind;
-        CommonUtil.traverseNodes(this.node, this.m_ui);
-        this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
-
-        EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
-        configure_request.RoomListReq({GameKind:gameKind});
     }
 
 }
