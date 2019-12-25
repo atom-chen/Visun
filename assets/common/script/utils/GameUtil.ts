@@ -4,7 +4,7 @@ import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 export default class GameUtil {
 	public static angle2ridian = Math.PI/180;
-	public static CHIP_RULE = [1,2,3,8,10,20,100,300,500,800,1000,3000,5000,8000,10000];
+	public static CHIP_RULE = [1,2,5,10,50,100,200,500,1000,5000];
 
 	//将总金额total，拆分成指定面额规则的序列
 	//如总额1185，游戏中的筹码面额有"5, 10, 50, 100, 500"

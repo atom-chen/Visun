@@ -249,7 +249,15 @@ export default class UIManager {
 
 	//---------------------------------------------------------
 
-	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any, listeners:any) 
+	/*
+	listeners.on_start = function(sk, trackEntry) { }
+	listeners.on_interrupt = function(sk, trackEntry) { }
+	listeners.on_end = function(sk, trackEntry) { }
+	listeners.on_dispose = function(sk, trackEntry) { }
+	listeners.on_complete = function(sk, trackEntry) { }
+	listeners.on_event = function(sk, trackEntry) { }
+	*/
+	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any, listeners?:any) 
 	{
 		cc.loader.loadRes(respath, sp.SkeletonData, function(err, rsc){
 			if(err) { 
