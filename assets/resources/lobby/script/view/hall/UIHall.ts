@@ -32,7 +32,8 @@ export default class UIHall extends BaseComponent {
 		this.refleshGameList();
 		this.refleshUI(null);
 	//	this.testSpine();
-
+		this.m_ui.btn_fs.active = !cc.sys.isNative;
+		
 		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
 		EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
 
