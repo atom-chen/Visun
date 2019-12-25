@@ -11,6 +11,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UIRoom extends BaseComponent {
     private roomList = null;
+    private _gameKind = 0;
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -31,20 +32,23 @@ export default class UIRoom extends BaseComponent {
         }
     }
 
-    reflesh(gameKind:any) {
-        CommonUtil.traverseNodes(this.node, this.m_ui);
-
-        EventCenter.getInstance().listen(configure_msgs.RoomListResp, (param)=>{
-            var rooms = GameManager.getInstance().getRoomList(gameKind);
-            if(rooms!==null && rooms!==undefined){
-                this.roomList = rooms;
-                for(var i=1; i<=4; i++){
-                    this.m_lab["Label"+i].string = rooms[i-1] && rooms[i-1].GameType;
-                }
-                this.initRoomBtns();
+    private onRoomListResp(param) {
+        var rooms = GameManager.getInstance().getRoomList(this._gameKind);
+        if(rooms!==null && rooms!==undefined){
+            this.roomList = rooms;
+            for(var i=1; i<=4; i++){
+                this.m_lab["Label"+i].string = rooms[i-1] && rooms[i-1].GameType;
             }
-        }, this, IS_DANJI_MODE);
-        this.m_lab.lab_roomname.string = GameConfig[gameKind].name
+            this.initRoomBtns();
+        }
+    }
+
+    reflesh(gameKind:any) {
+        this._gameKind = gameKind;
+        CommonUtil.traverseNodes(this.node, this.m_ui);
+        this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
+
+        EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
         configure_request.RoomListReq({GameKind:gameKind});
     }
 
