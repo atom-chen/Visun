@@ -1,0 +1,104 @@
+
+skeleton.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chouma2
+  rotate: false
+  xy: 233, 50
+  size: 48, 40
+  orig: 48, 40
+  offset: 0, 0
+  index: -1
+chouma3
+  rotate: false
+  xy: 362, 151
+  size: 54, 47
+  orig: 54, 47
+  offset: 0, 0
+  index: -1
+jinbi1
+  rotate: false
+  xy: 571, 338
+  size: 33, 37
+  orig: 33, 37
+  offset: 0, 0
+  index: -1
+maozi01
+  rotate: false
+  xy: 466, 377
+  size: 183, 133
+  orig: 183, 133
+  offset: 0, 0
+  index: -1
+puke
+  rotate: false
+  xy: 2, 27
+  size: 176, 171
+  orig: 176, 171
+  offset: 0, 0
+  index: -1
+touying1
+  rotate: false
+  xy: 651, 458
+  size: 231, 52
+  orig: 231, 52
+  offset: 0, 0
+  index: -1
+touying2
+  rotate: false
+  xy: 2, 3
+  size: 73, 22
+  orig: 73, 22
+  offset: 0, 0
+  index: -1
+touying3
+  rotate: false
+  xy: 651, 430
+  size: 73, 26
+  orig: 73, 26
+  offset: 0, 0
+  index: -1
+touying4
+  rotate: false
+  xy: 180, 92
+  size: 180, 106
+  orig: 180, 106
+  offset: 0, 0
+  index: -1
+wuxing
+  rotate: false
+  xy: 466, 290
+  size: 37, 34
+  orig: 37, 34
+  offset: 0, 0
+  index: -1
+youjiao
+  rotate: false
+  xy: 180, 2
+  size: 51, 88
+  orig: 51, 88
+  offset: 0, 0
+  index: -1
+zhonchouma
+  rotate: false
+  xy: 466, 326
+  size: 103, 49
+  orig: 103, 49
+  offset: 0, 0
+  index: -1
+zhuozi
+  rotate: false
+  xy: 2, 200
+  size: 462, 310
+  orig: 462, 310
+  offset: 0, 0
+  index: -1
+zuojiao
+  rotate: true
+  xy: 884, 484
+  size: 26, 73
+  orig: 26, 73
+  offset: 0, 0
+  index: -1
