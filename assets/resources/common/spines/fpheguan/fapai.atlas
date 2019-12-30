@@ -1,0 +1,69 @@
+
+fapai.png
+size: 697,695
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+img/er
+  rotate: true
+  xy: 107, 630
+  size: 63, 67
+  orig: 63, 67
+  offset: 0, 0
+  index: -1
+img/left
+  rotate: true
+  xy: 2, 391
+  size: 103, 454
+  orig: 103, 454
+  offset: 0, 0
+  index: -1
+img/p2
+  rotate: true
+  xy: 176, 623
+  size: 70, 74
+  orig: 70, 74
+  offset: 0, 0
+  index: -1
+img/pai
+  rotate: false
+  xy: 252, 599
+  size: 96, 94
+  orig: 96, 94
+  offset: 0, 0
+  index: -1
+img/right
+  rotate: true
+  xy: 2, 496
+  size: 101, 481
+  orig: 101, 481
+  offset: 0, 0
+  index: -1
+img/rou
+  rotate: true
+  xy: 2, 662
+  size: 31, 103
+  orig: 31, 103
+  offset: 0, 0
+  index: -1
+img/shengti
+  rotate: true
+  xy: 313, 63
+  size: 326, 366
+  orig: 326, 366
+  offset: 0, 0
+  index: -1
+img/t
+  rotate: false
+  xy: 485, 415
+  size: 210, 278
+  orig: 210, 278
+  offset: 0, 0
+  index: -1
+img/yao
+  rotate: false
+  xy: 2, 107
+  size: 309, 282
+  orig: 309, 282
+  offset: 0, 0
+  index: -1
