@@ -92,9 +92,9 @@ export default class HongheiUI extends BaseComponent {
 
     private onPlayersBet(tmr, param) {
 		param = param || [ 
-            {AreaId:0,Money:53425},
-            {AreaId:1,Money:54354}, 
-            {AreaId:2,Money:52365}, 
+            {AreaId:0,Money:23425},
+            {AreaId:1,Money:24354}, 
+            {AreaId:2,Money:22365}, 
         ];
 		for(var i in param) {
 			var info = param[i];
