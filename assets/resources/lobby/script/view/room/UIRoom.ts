@@ -16,7 +16,13 @@ export default class UIRoom extends BaseComponent {
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traveseLabels(this.node, this.m_lab);
-
+        var poslist = [];
+        for(var i=1; i<=4; i++) {
+            var btn = this.m_ui["button"+i];
+            var oldPos = btn.position;
+            btn.y = -1000;
+            btn.runAction(cc.moveTo(0.15, oldPos));
+        }
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
             CommonUtil.safeDelete(this);
         }, this);
