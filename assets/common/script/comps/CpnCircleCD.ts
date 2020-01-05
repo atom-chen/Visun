@@ -7,14 +7,11 @@ export default class CpnCircleCD extends cc.Component {
     _remainCD:number = 0;
     _totalCD:number = 1;
 
-    start() {
-        this.setRemainCD(10, 10);
-        this._running = true;
-    }
-
     setRemainCD(totalSec:number, remainSec:number) {
         this._remainCD = remainSec;
         this._totalCD = totalSec;
+        this.getComponent(cc.ProgressBar).progress = 1 - this._remainCD/this._totalCD;
+        this._running = this._remainCD > 0;
     }
 
     serRunning(b:boolean) {
