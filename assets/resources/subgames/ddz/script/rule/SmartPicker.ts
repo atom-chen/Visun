@@ -164,8 +164,7 @@ export default class SmartPicker {
 		
 		var wMap = RuleDdz.getWeightMap(hands);
 		var wc0 = RuleDdz.getWeight(contains[0]);
-		var wcN = RuleDdz.getWeight(contains[contains.length-1]);
-		if(wc0<=RuleDdz.getWeight(enemyCards[0]) || wcN-wc0+1>enemyCards.length/3){
+		if(wc0<=RuleDdz.getWeight(enemyCards[0])){
 			return null;
 		}
 		var outs = [];

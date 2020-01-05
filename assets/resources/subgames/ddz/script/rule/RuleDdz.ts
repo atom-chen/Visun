@@ -79,14 +79,6 @@ export default class RuleDdz {
 		} );
 	}
 
-	public static printCards(cards:Array<PokerCode>) : string {
-		var txt = "";
-		for(var i in cards) {
-			txt += " " + pokerName(cards[i]);
-		}
-		return txt;
-	}
-
 	public static sortCardsMax2Min(cards:Array<PokerCode>) {
 		if(cards===undefined || cards===null || cards.length <= 1){
 			return;
@@ -97,6 +89,14 @@ export default class RuleDdz {
 			if(cmp<0) return 1;
 			return 0;
 		} );
+	}
+
+	public static printCards(cards:Array<PokerCode>) : string {
+		var txt = "";
+		for(var i in cards) {
+			txt += " " + pokerName(cards[i]);
+		}
+		return txt;
 	}
 
 	// 经典玩法的牌型集合
