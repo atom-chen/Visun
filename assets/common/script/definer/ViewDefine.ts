@@ -22,7 +22,7 @@ export default class ViewDefine {
 	public static UItexas = { path:"subgames/dezhou/prefabs/UItexas" };
 	public static UIdian21 = { path:"subgames/dian21/prefabs/UIdian21" };
 	public static UIerba = { path:"subgames/erba/prefabs/UIerba" };
-	public static UIhonghei = { path:"subgames/honhei/prefabs/UIhonghei" };
+	public static UIhonghei = { path:"subgames/honhei/prefabs/UIHonghei" };
 	public static UIjskb = { path:"subgames/jskb/prefabs/UIjskb" };
 	public static UIlonghu = { path:"subgames/longhu/prefabs/UIlonghu" };
 	public static UIpaijiu = { path:"subgames/paijiu/prefabs/UIpaijiu" };
