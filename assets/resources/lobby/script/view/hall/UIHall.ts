@@ -56,7 +56,7 @@ export default class UIHall extends BaseComponent {
 				bton["GameKind"] = info.GameKind;
 				bton.getComponent(game_btn).setGameInfo(cfg);
 				CommonUtil.addClickEvent(bton, function(){ 
-					UIManager.openPopwnd(ViewDefine.UIRoom.path, false, null, this.GameKind);
+					UIManager.openPopwnd(ViewDefine.UIRoom, false, null, this.GameKind);
 				}, bton);
 				this.m_ui.content.addChild(bton);
 			}
@@ -78,32 +78,32 @@ export default class UIHall extends BaseComponent {
 		//保险箱
 		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UISafebox.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UISafebox, true, null); 
 		}, this);
 		//邮件
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIEmail.path, true, null); this.testProcedure(); 
+			UIManager.openPopwnd(ViewDefine.UIEmail, true, null); this.testProcedure(); 
 		}, this);
 		//商店
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIShop.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIShop, true, null); 
 		}, this);
 		//客服
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIKefu.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIKefu, true, null); 
 		}, this);
 		//提现
 		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIWithdraw.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UIWithdraw, true, null); 
 		}, this);
 		//推广
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UISpread.path, true, null); 
+			UIManager.openPopwnd(ViewDefine.UISpread, true, null); 
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 

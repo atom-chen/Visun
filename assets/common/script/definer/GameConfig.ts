@@ -8,7 +8,7 @@ var GameConfig = {
 		openState: 2,
 		icon: "lobby/imgs/gameico/ico_brnn",
 		dir: "brnn",
-		viewpath: ViewDefine.UIbrnn.path
+		viewpath: ViewDefine.UIbrnn
 	},
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
@@ -16,7 +16,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_lhd",
 		dir: "longhu",
-		viewpath: ViewDefine.UIlonghu.path
+		viewpath: ViewDefine.UIlonghu
 	},
 	[GameKindEnum.Baccarat] : {
 		GameKind: GameKindEnum.Baccarat,
@@ -24,7 +24,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_bjl",
 		dir: "bjle",
-		viewpath: ViewDefine.UIbjle.path
+		viewpath: ViewDefine.UIbjle
 	},
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,
@@ -32,7 +32,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qhb",
 		dir: "redbag",
-		viewpath: ViewDefine.UIredbag.path
+		viewpath: ViewDefine.UIredbag
 	},
 	[GameKindEnum.Redblack] : {
 		GameKind: GameKindEnum.Redblack,
@@ -40,7 +40,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_hhdz",
 		dir: "honhei",
-		viewpath: ViewDefine.UIhonghei.path
+		viewpath: ViewDefine.UIhonghei
 	},
 	[GameKindEnum.BirdBeast] : {
 		GameKind: GameKindEnum.BirdBeast,
@@ -48,7 +48,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_fqzs",
 		dir: "fqzs",
-		viewpath: ViewDefine.UIfqzs.path
+		viewpath: ViewDefine.UIfqzs
 	},
 	
 	[GameKindEnum.Zhajinhua] : {
@@ -57,7 +57,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/icon_zjh",
 		dir: "zjh",
-		viewpath: ViewDefine.UIzjh.path
+		viewpath: ViewDefine.UIzjh
 	},
 	[GameKindEnum.QzCowcow] : {
 		GameKind: GameKindEnum.QzCowcow,
@@ -65,7 +65,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qznn",
 		dir: "qznn",
-		viewpath: ViewDefine.UIqznn.path
+		viewpath: ViewDefine.UIqznn
 	},
 	[GameKindEnum.Landlord] : {
 		GameKind: GameKindEnum.Landlord,
@@ -73,7 +73,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ddz",
 		dir: "ddz",
-		viewpath: ViewDefine.UIddz.path
+		viewpath: ViewDefine.UIddz
 	},
 	[GameKindEnum.Blackjack] : {
 		GameKind: GameKindEnum.Blackjack,
@@ -81,7 +81,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_dian21",
 		dir: "dian21",
-		viewpath: ViewDefine.UIdian21.path
+		viewpath: ViewDefine.UIdian21
 	},
 	[GameKindEnum.Sangong] : {
 		GameKind: GameKindEnum.Sangong,
@@ -89,7 +89,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_sangong",
 		dir: "sangong",
-		viewpath: ViewDefine.UIsangong.path
+		viewpath: ViewDefine.UIsangong
 	},
 	[GameKindEnum.Water13] : {
 		GameKind: GameKindEnum.Water13,
@@ -97,7 +97,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_shui13",
 		dir: "shui13",
-		viewpath: ViewDefine.UIshui13.path
+		viewpath: ViewDefine.UIshui13
 	},
 	[GameKindEnum.Qzpaijiu] : {
 		GameKind: GameKindEnum.Qzpaijiu,
@@ -105,7 +105,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qzpj",
 		dir: "qzpj",
-		viewpath: ViewDefine.UIpaijiu.path
+		viewpath: ViewDefine.UIpaijiu
 	},
 	[GameKindEnum.Suoha] : {
 		GameKind: GameKindEnum.Suoha,
@@ -113,7 +113,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_suoha",
 		dir: "suoha",
-		viewpath: ViewDefine.UIsuoha.path
+		viewpath: ViewDefine.UIsuoha
 	},
 	[GameKindEnum.Paodekuai] : {
 		GameKind: GameKindEnum.Paodekuai,
@@ -121,7 +121,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_pdk",
 		dir: "paodk",
-		viewpath: ViewDefine.UIpdk.path
+		viewpath: ViewDefine.UIpdk
 	},
 	[GameKindEnum.Texas] : {
 		GameKind: GameKindEnum.Texas,
@@ -129,7 +129,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_dezhou",
 		dir: "paodk",
-		viewpath: ViewDefine.UItexas.path
+		viewpath: ViewDefine.UItexas
 	},
 	[GameKindEnum.Ermj] : {
 		GameKind: GameKindEnum.Ermj,
@@ -137,7 +137,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ermj",
 		dir: "ermj",
-		viewpath: ViewDefine.UIermj.path
+		viewpath: ViewDefine.UIermj
 	},
 	[GameKindEnum.Buyu] : {
 		GameKind: GameKindEnum.Buyu,
@@ -145,7 +145,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "buyu",
-		viewpath: ViewDefine.UIbuyu.path
+		viewpath: ViewDefine.UIbuyu
 	},
 	[GameKindEnum.Toubao] : {
 		GameKind: GameKindEnum.Toubao,
@@ -153,7 +153,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_toubao",
 		dir: "saibao",
-		viewpath: ViewDefine.UItoubao.path
+		viewpath: ViewDefine.UItoubao
 	},
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
@@ -161,7 +161,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_erba",
 		dir: "erba",
-		viewpath: ViewDefine.UIerba.path
+		viewpath: ViewDefine.UIerba
 	},
 	[GameKindEnum.Jskb] : {
 		GameKind: GameKindEnum.Jskb,
@@ -169,7 +169,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_jskb",
 		dir: "jskb",
-		viewpath: ViewDefine.UIjskb.path
+		viewpath: ViewDefine.UIjskb
 	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
@@ -177,7 +177,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_brttz",
 		dir: "jskb",
-		viewpath: ViewDefine.UIbrttz.path
+		viewpath: ViewDefine.UIbrttz
 	},
 };
 

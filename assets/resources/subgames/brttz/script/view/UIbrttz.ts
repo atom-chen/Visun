@@ -32,7 +32,7 @@ export default class UIbrttz extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traveseLabels(this.node, this.m_lab);
         var self = this;
-		cc.loader.loadRes(ViewDefine.CpnChip.path, cc.Prefab, function (err, loadedRes) {
+		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {
 			if(err) { cc.log("error: "+err); return; }
 			if(!cc.isValid(self)) { return; }
 			self._loadedRes = loadedRes;

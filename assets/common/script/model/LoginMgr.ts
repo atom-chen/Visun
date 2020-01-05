@@ -50,7 +50,7 @@ export default class LoginMgr extends ModelBase {
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
-			UIManager.openPopwnd(ViewDefine.UILogin.path, false, null);
+			UIManager.openPopwnd(ViewDefine.UILogin, false, null);
 		}
 		return hasLogin;
 	}
