@@ -9,6 +9,7 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import CpnGameState from "../../../../../common/script/comps/CpnGameState";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 var testdata = [ 
@@ -85,6 +86,8 @@ export default class LonghuUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
@@ -98,12 +101,14 @@ export default class LonghuUI extends BaseComponent {
 	//结算阶段
 	private toStateJiesuan() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
 		
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			this._pool.delObject(childs[i]);
 		}
+		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -127,6 +132,11 @@ export default class LonghuUI extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, tmp);
 			}
 		}
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
     }
 
 
