@@ -13,6 +13,11 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 var margin = { left:12,right:12,bottom:12,top:48 };
+var testdata = [ 
+	{AreaId:0,Money:23425},
+	{AreaId:1,Money:24354}, 
+	{AreaId:2,Money:22365}, 
+];
 
 const {ccclass, property} = cc._decorator;
 
@@ -63,7 +68,6 @@ export default class HongheiUI extends BaseComponent {
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//下注阶段
@@ -75,6 +79,7 @@ export default class HongheiUI extends BaseComponent {
 		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
@@ -95,11 +100,7 @@ export default class HongheiUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		param = param || [ 
-            {AreaId:0,Money:23425},
-            {AreaId:1,Money:24354}, 
-            {AreaId:2,Money:22365}, 
-        ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);

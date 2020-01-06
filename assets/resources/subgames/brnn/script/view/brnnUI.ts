@@ -19,6 +19,12 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 var margin = { left:16,right:16,bottom:16,top:16 };
+var testdata = [ 
+	{AreaId:1,Money:25280}, 
+	{AreaId:2,Money:28650}, 
+	{AreaId:3,Money:26455}, 
+	{AreaId:4,Money:24255} 
+];
 
 const {ccclass, property} = cc._decorator;
 
@@ -145,7 +151,7 @@ export default class BrnnUI extends BaseComponent {
 		} 
 		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
 		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
-		param = param || [ {AreaId:1,Money:25280}, {AreaId:2,Money:28650}, {AreaId:3,Money:26455}, {AreaId:4,Money:24255} ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);

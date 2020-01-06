@@ -13,6 +13,11 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 var margin = { rx:100, ry:65 };
+var testdata = [ 
+	{AreaId:0,Money:13425},
+	{AreaId:1,Money:14354}, 
+	{AreaId:2,Money:12365}, 
+];
 
 const {ccclass, property} = cc._decorator;
 
@@ -94,11 +99,7 @@ export default class UIbrttz extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		param = param || [ 
-            {AreaId:0,Money:13425},
-            {AreaId:1,Money:14354}, 
-            {AreaId:2,Money:12365}, 
-        ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);

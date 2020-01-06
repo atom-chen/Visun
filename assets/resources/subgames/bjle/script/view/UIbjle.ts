@@ -21,6 +21,13 @@ var margin = [
 	{ left:80,right:80,bottom:90,top:90 },
 	{ left:80,right:80,bottom:90,top:90 },
 ];
+var testdata = [ 
+	{AreaId:0,Money:25280}, 
+	{AreaId:1,Money:25280}, 
+	{AreaId:2,Money:28650}, 
+	{AreaId:3,Money:26455}, 
+	{AreaId:4,Money:24255} 
+];
 
 const {ccclass, property} = cc._decorator;
 
@@ -120,7 +127,7 @@ export default class UIbjle extends BaseComponent {
 		} 
 		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
 		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
-		param = param || [ {AreaId:0,Money:25280}, {AreaId:1,Money:25280}, {AreaId:2,Money:28650}, {AreaId:3,Money:26455}, {AreaId:4,Money:24255} ];
+		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
 			var nums = GameUtil.parseChip(info.Money, this._rule);
