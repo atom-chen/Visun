@@ -136,7 +136,7 @@ export default class AudioManager {
         if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
         if(!path || path===""){ cc.log("invalid path", path); return; }
     //    cc.log("play effect", path);
-        this.loadAudioClip(path, false, function (audioclip) {
+        this.loadAudioClip(path, true, function (audioclip) {
             this.playEffect(audioclip, loop);
         }.bind(this));
     }
