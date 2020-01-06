@@ -13,18 +13,18 @@ import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 
 var margin = { left:8,right:8,bottom:8,top:8 };
 var testdata = [ 
-	{AreaId:0,Money:33425},
-	{AreaId:1,Money:34354}, 
-	{AreaId:2,Money:32365}, 
-	{AreaId:3,Money:34532}, 
-	{AreaId:4,Money:33342},
-	{AreaId:5,Money:34354},
-	{AreaId:6,Money:34354},
-	{AreaId:7,Money:34354},
-	{AreaId:8,Money:34354},
-	{AreaId:9,Money:34354},
-	{AreaId:10,Money:34354},
-	{AreaId:11,Money:34354},
+	{AreaId:0,Money:13425},
+	{AreaId:1,Money:14354}, 
+	{AreaId:2,Money:12365}, 
+	{AreaId:3,Money:14532}, 
+	{AreaId:4,Money:13342},
+	{AreaId:5,Money:14354},
+	{AreaId:6,Money:14354},
+	{AreaId:7,Money:14354},
+	{AreaId:8,Money:14354},
+	{AreaId:9,Money:14354},
+	{AreaId:10,Money:14354},
+	{AreaId:11,Money:14354},
 ];
 
 const {ccclass, property} = cc._decorator;
