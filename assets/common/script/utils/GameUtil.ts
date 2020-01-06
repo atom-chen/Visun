@@ -151,6 +151,8 @@ export default class GameUtil {
 				var szDst = dstObj.getContentSize();
 				var srcScale = srcObj.scale;
 				var dstScale = dstObj.scale;
+				if(srcScale < 0) { srcScale = -srcScale; }
+				if(dstScale < 0) { dstScale = -dstScale; }
 				var rangeX = Math.abs( (szDst.width*dstScale - szSrc.width*srcScale) / 2 );
 				var rangeY = Math.abs( (szDst.height*dstScale - szSrc.height*srcScale) / 2 );
 				toPos.x = toPos.x + ( -rangeX+margin.left + Math.random() * (rangeX*2-margin.right-margin.left) );
