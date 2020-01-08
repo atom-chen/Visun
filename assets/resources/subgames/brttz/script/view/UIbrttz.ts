@@ -14,9 +14,9 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 var margin = { rx:100, ry:65 };
 var testdata = [ 
-	{AreaId:0,Money:13425},
-	{AreaId:1,Money:14354}, 
-	{AreaId:2,Money:12365}, 
+	{AreaId:0,Money:23425},
+	{AreaId:1,Money:24354}, 
+	{AreaId:2,Money:22365}, 
 ];
 
 const {ccclass, property} = cc._decorator;
