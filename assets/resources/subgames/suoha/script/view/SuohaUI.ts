@@ -12,6 +12,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class SuohaUI extends BaseComponent {
+	
 	_pnList:Array<{[key:string]:cc.Node}> = [];
 
 	onLoad() {
@@ -28,7 +29,14 @@ export default class SuohaUI extends BaseComponent {
 		this.toStateFight(0);
 	}
 
+	getNextIndex(curIdx:number) {
+		var nextIdx = curIdx + 1;
+		if(nextIdx >= MAX_PLAYER) { nextIdx = 0; }
+		return nextIdx;
+	}
+
 	toStateFight(idx:number) {
+		//当前操作者倒计时
 		for(var i=0; i<MAX_PLAYER; i++) {
 			this._pnList[i].CpnCircleCD.active = idx===i;
 			if(idx===i) {
@@ -36,10 +44,9 @@ export default class SuohaUI extends BaseComponent {
 			}
 		}
 
+		//5秒后下一个
 		TimerManager.delaySecond(5, new CHandler(this, ()=>{
-			var nextIdx = idx+1;
-			if(nextIdx >= MAX_PLAYER) { nextIdx = 0; }
-			this.toStateFight(nextIdx);
+			this.toStateFight(this.getNextIndex(idx));
 		}))
 	}
 

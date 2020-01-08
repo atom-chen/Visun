@@ -61,7 +61,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(1);
         this.m_ui.gameLayer.active = false;
         this.m_ui.opLayer.active = false;
-        UIManager.showSpineAsync("common/spines/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
+        UIManager.showSpineAsync("common/spines/kaishiyouxi/fan", 0, "a", true, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
             }
