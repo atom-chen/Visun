@@ -80,6 +80,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
@@ -90,13 +91,14 @@ export default class BrnnUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
@@ -110,7 +112,6 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K], true);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9], true);
 		
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -128,6 +129,7 @@ export default class BrnnUI extends BaseComponent {
 				}
 			}, this)
 		));
+		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -146,11 +148,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
@@ -163,6 +161,12 @@ export default class BrnnUI extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin);
 			}
 		}
+		//播音效
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
 	}
 
 	private onClickArea(areaId:number) {

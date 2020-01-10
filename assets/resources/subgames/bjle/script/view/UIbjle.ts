@@ -6,10 +6,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
-import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
-import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 
@@ -82,22 +79,21 @@ export default class UIbjle extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
+	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
 
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -113,6 +109,7 @@ export default class UIbjle extends BaseComponent {
 				}
 			}, this)
 		));
+		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -122,11 +119,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
@@ -139,6 +132,12 @@ export default class UIbjle extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin[info.AreaId]);
 			}
 		}
+		//播音效
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
 	}
 	
 	private initUIEvents() {

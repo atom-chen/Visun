@@ -6,15 +6,10 @@ import CpnChipbox3d from "../../../../../common/script/comps/CpnChipbox3d";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
-import CpnGameState from "../../../../../common/script/comps/CpnGameState";
-import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import CpnChip from "../../../../../common/script/comps/CpnChip";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
-import { brcowcow_request, brcowcow_msgs } from "../../../../../common/script/proto/net_brcowcow";
-import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 
 
 var margin = { rx:10, ry:10 };
@@ -86,12 +81,6 @@ export default class ToubaoUI extends BaseComponent {
 		this._pool.clear();
 		super.onDestroy();
 	}
-	
-	initUIEvent() {
-		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
-		}, this);
-	}
 
 	private onStateTimer(tmr:BaseTimer) {
 	//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
@@ -100,6 +89,7 @@ export default class ToubaoUI extends BaseComponent {
 	//准备阶段
 	private toStateReady() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
@@ -110,20 +100,20 @@ export default class ToubaoUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
 
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 		var self = this;
@@ -152,11 +142,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
@@ -169,9 +155,22 @@ export default class ToubaoUI extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["betBtn"+info.AreaId], 0.14+0.02*info.AreaId, parseInt(j)*0.01, margin);
 			}
 		}
+		//播音效
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
 	}
 
 	private initNetEvent() {
 		
 	}
+
+	initUIEvent() {
+		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
+            GameManager.getInstance().quitGame(0);
+		}, this);
+	}
+
 }

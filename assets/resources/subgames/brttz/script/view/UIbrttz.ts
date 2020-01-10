@@ -62,6 +62,7 @@ export default class UIbrttz extends BaseComponent {
     //准备阶段
 	private toStateReady() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
@@ -72,25 +73,28 @@ export default class UIbrttz extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
 		}));
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			this._pool.delObject(childs[i]);
 		}
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
@@ -99,6 +103,7 @@ export default class UIbrttz extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
+		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
@@ -110,6 +115,7 @@ export default class UIbrttz extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
 			}
 		}
+		//播音效
 		if(tmr.getRemainTimes() < 3) {
 			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
 		} 

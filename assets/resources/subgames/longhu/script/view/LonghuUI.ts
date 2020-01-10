@@ -77,7 +77,6 @@ export default class LonghuUI extends BaseComponent {
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateBetting();
 		}));
@@ -86,12 +85,10 @@ export default class LonghuUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-
 		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
 		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
-	
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
 			this.toStateJiesuan();
@@ -112,13 +109,13 @@ export default class LonghuUI extends BaseComponent {
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-
 		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}
 
     private onPlayersBet(tmr, param) {
+		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
 			var info = param[i];
@@ -132,6 +129,7 @@ export default class LonghuUI extends BaseComponent {
 				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, tmp);
 			}
 		}
+		//播音效
 		if(tmr.getRemainTimes() < 3) {
 			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
 		} 
