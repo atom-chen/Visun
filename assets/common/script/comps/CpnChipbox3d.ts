@@ -8,6 +8,7 @@ const {ccclass, property} = cc._decorator;
 export default class CpnChipbox3d extends BaseComponent {
 
     private selectedIndex:number = 1;
+    private _values = null;
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -37,26 +38,32 @@ export default class CpnChipbox3d extends BaseComponent {
         this.onSelect(v);
     }
 
-    private _values = null;
+    
     public setChipValues(values:number[]) {
         if(!this._values) {
             CommonUtil.traverseNodes(this.node, this.m_ui);
         }
+
         this._values = values; 
 
         for(var i=0; i<5; i++){
-            var respath = GameUtil.chipPath(this._values[i], true);
-            var res = cc.loader.getRes(respath, cc.SpriteFrame);
-            if(res) {
-                this.onResLoaded(null, res);
-                return;
-            }
-            cc.loader.loadRes(respath, cc.SpriteFrame, this.onResLoaded.bind(this));
+            this.setChipValue(i, values[i]);
         }
     }
 
-    private onResLoaded(err, sprFrame){
-        if(err) { cc.log("error: "+err); return; }
+    private setChipValue(index:number, v:number) {
+        var respath = GameUtil.chipPath(v, false);
+        var res = cc.loader.getRes(respath, cc.SpriteFrame);
+        if(res){ 
+            this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;
+        } else {
+            cc.loader.loadRes( respath, cc.SpriteFrame, function(err, rsc){
+                if(err) { cc.log("error: "+err); return; }
+                if(cc.isValid(this)) {
+                    this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;
+                }
+            }.bind(this) );
+        }
     }
 
 }

@@ -142,7 +142,7 @@ export default class CommonUtil {
 	}
 
 	//
-	static Bytes2Str(arr: Uint8Array, flagPos:number) : string {
+	static Bytes2Str(arr: Uint8Array, flagPos:number = 7) : string {
 		let str = "";
 		for (let i = 0; i < arr.length; i++) {
 			let tmp = arr[i].toString(16);

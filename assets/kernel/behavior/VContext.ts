@@ -1,4 +1,4 @@
-import Procedure from "./Procedure";
+import Procedure from "../promise/Procedure";
 
 
 export default class VContext {
