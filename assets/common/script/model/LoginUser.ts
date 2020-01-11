@@ -4,10 +4,10 @@ import ModelBase from "../../../kernel/model/ModelBase";
 export default class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
-	UserID: number = 0;
-	Name:string = "";			//用户
+	UserID: number = 0;			//用户ID
 	Accounts:string = "";		//帐号
 	Password:string = "";		//密码
+	Name:string = "";			//昵称
 	FaceID:number = 0;			//头像
 	Gender:number = 0;			//性别
 	Age:number = 0;				//年龄
@@ -38,6 +38,10 @@ export default class LoginUser extends ModelBase {
 			LoginUser._instance.clear();
 			LoginUser._instance = null;
 		}
+	}
+
+	public getMoney() : number {
+		return this.Money;
 	}
 	
 }

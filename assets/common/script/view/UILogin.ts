@@ -27,22 +27,23 @@ export default class LoginUI extends BaseComponent {
     }
 
     private initUIEvent() {
+        //关闭按钮
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){
             CommonUtil.safeDelete(this);
         }, this);
-
+        //登陆按钮
         CommonUtil.addClickEvent(this.m_ui.btn_login, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;
             LoginMgr.getInstance().leafLogin(name, pswd);
         }, this);
-
+        //游客登陆按钮
         CommonUtil.addClickEvent(this.m_ui.btn_youke, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;
             LoginMgr.getInstance().leafLogin(name, pswd);
         }, this);
-
+        //注册按钮
         CommonUtil.addClickEvent(this.m_ui.btn_regist, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;

@@ -46,6 +46,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 
+	//检测是否已经登陆
 	public checkLogin(bTip: boolean): boolean {
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
 		if (bTip && !hasLogin) {
@@ -55,6 +56,7 @@ export default class LoginMgr extends ModelBase {
 		return hasLogin;
 	}
 
+	//登陆
 	public leafLogin(Account:string, Pswd:string) {
 		if(!Account || Account==="") {
 			UIManager.toast("请输入账号");
@@ -74,6 +76,7 @@ export default class LoginMgr extends ModelBase {
 		});
 	}
 
+	//注册
 	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
 		if(!Account || Account==="") {
 			UIManager.toast("请输入账号");
@@ -94,6 +97,7 @@ export default class LoginMgr extends ModelBase {
 		});
 	}
 	
+	//建立网络连接
 	public connectLeaf() {
 		//建立通道 
 		var wsAddr = ServerConfig.leafServer;
@@ -116,6 +120,7 @@ export default class LoginMgr extends ModelBase {
 		);
 	}
 
+	//获取机器码
 	private getMachineCode() : string {
 		return "54143213";
 	}

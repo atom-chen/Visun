@@ -29,11 +29,12 @@ export default class GameManager extends ModelBase {
 	}
 	//------------------------------------------------------------------------------
 
-	private _gameList = [];
-	private _roomList = {};
-	private _allRooms = {}
+	private _gameList = [];		//服务器游戏列表
+	private _roomList = {};		//服务器房间列表
+	private _allRooms = {}		//根据游戏ID索引游戏数据
 
 
+	//存储服务器下发的游戏列表
 	public setGameList(data) {
 		this._gameList = data;
 		this._gameList.sort((a,b)=>{
@@ -41,6 +42,7 @@ export default class GameManager extends ModelBase {
 		})
 	}
 
+	//获取服务器下发的游戏列表
 	public getGameList() : any[] {
 		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
 			var testList = [];
@@ -57,6 +59,7 @@ export default class GameManager extends ModelBase {
 		return this._gameList;
 	}
 
+	//存储服务器下发的房间列表
 	public setRoomList(gameKind, data) {
 		this._roomList[gameKind] = data
 		for(var i in data) {
@@ -64,6 +67,7 @@ export default class GameManager extends ModelBase {
 		}
 	}
 
+	//获取服务器下发的房间列表
 	public getRoomList(gameKind) {
 		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
 			var testList = [];
@@ -82,6 +86,7 @@ export default class GameManager extends ModelBase {
 		return this._roomList[gameKind];
 	}
 
+	//获取子游戏的客户端配置
 	public clientConfig(gameType:string|number) : any{
 		var svrInfo = this._allRooms[gameType];
 		if(!svrInfo) {
@@ -92,11 +97,12 @@ export default class GameManager extends ModelBase {
 	}
 
 	
-
+	//游戏是否已下载好
 	public isGameExist(gameKind:string|number) : boolean {
 		return true;
 	}
 
+	//获取子游戏热更器
 	public getUpdator(gameKind:string|number) : HotUpdator {
 		if(!GameConfig[gameKind]) {
 			return null;
@@ -104,6 +110,7 @@ export default class GameManager extends ModelBase {
 		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean)=>{}, null);
 	}
 
+	//检测是否可进入某游戏
 	public canEnterGame(gameType:string|number) : boolean {
 		var cfg = this.clientConfig(gameType);
 		if(!cfg) {
@@ -127,6 +134,7 @@ export default class GameManager extends ModelBase {
 		return true;
 	}
 
+
 	//退出游戏的唯一出口
 	public quitGame(reason:number) {
 		gamecomm_request.ReqExitGame({GameType:0});
@@ -147,6 +155,7 @@ export default class GameManager extends ModelBase {
 		}
 	}
 
+	//跳转到游戏场景
 	public enterGameScene(gameType) {
 		if(!this.clientConfig(gameType)) {
 			cc.warn("no client config");

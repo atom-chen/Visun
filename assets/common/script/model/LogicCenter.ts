@@ -23,6 +23,7 @@ export default class LogicCenter {
     private _managers:any[] = [];
 
     private constructor() {
+        //初始化游戏协议
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
 		g_leafProcessor.registCmds(login_packet_define);

@@ -1,3 +1,6 @@
+//服务器列表
+// mainHttpUrl: http域名
+// leafServer:  游戏连接ip地址/域名
 var server_list = {
     publish: {
         mainHttpUrl: "",
@@ -17,6 +20,7 @@ var server_list = {
     }
 };
 
+//选定某服
 var ServerConfig = server_list.publish;
 
 export default ServerConfig;

@@ -29,6 +29,7 @@ export default class GameUtil {
 		return chips;
 	}
 
+	//获取筹码图片资源路经
 	public static chipPath(v:number|string, b3d:boolean) : string {
 		if(b3d) {
 			return "common/imgs/chips/cm_"+v;
@@ -37,19 +38,23 @@ export default class GameUtil {
 		}
 	}
 
+	//获取扑克图片资源路经
 	public static pokerPath(v:number|string) : string {
 		return "common/imgs/pokers/poker_"+v;
 	}
 
+	//获取麻将图片资源路经
 	public static majhongPath(v:MajhongCode) : string {
 		return "common/imgs/majhong/tong"+v;
 	}
 
+	//设置头像图片
 	public static setHeadIcon(nd:cc.Node, v:number) {
 		if(isNil(nd)) { return; }
 		GameUtil.setHeadSpr(nd.getComponent(cc.Sprite), v);
 	}
 
+	//设置头像图片
 	public static setHeadSpr(spr:cc.Sprite, v:number) {
 		if(isNil(spr)) { return; }
 		if(v<0) { v=0; } 
