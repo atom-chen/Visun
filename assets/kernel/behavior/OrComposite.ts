@@ -1,7 +1,7 @@
 import BehaviorNode from "./BehaviorNode";
 import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
-import Procedure from "./Procedure";
 import CHandler from "../basic/datastruct/CHandler";
+import Procedure from "../promise/Procedure";
 
 // 复合节点基类
 export default class OrComposite extends BehaviorNode {

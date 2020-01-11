@@ -1,7 +1,7 @@
 import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
-import Procedure from "./Procedure";
 import CHandler from "../basic/datastruct/CHandler";
 import RoleAgent from "./RoleAgent";
+import Procedure from "../promise/Procedure";
 
 export default abstract class BehaviorNode extends Procedure {
 	protected _succNode:Procedure = null;
