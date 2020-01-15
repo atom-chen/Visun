@@ -51,8 +51,7 @@ export default class Adaptor {
 			DESIGN_SIZE.width = bigger;
 			DESIGN_SIZE.height = smaller;
 			cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
-		}
-		else {
+		} else {
 			DESIGN_SIZE.width = smaller;
 			DESIGN_SIZE.height = bigger;
 			cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
@@ -63,10 +62,12 @@ export default class Adaptor {
 
 	//进入全屏
 	private static s_is_full_screen:boolean = false;
+
 	public static isFullScreen() : boolean
 	{
 		return this.s_is_full_screen;
 	}
+	
 	public static setFullScreen(bFull:boolean) : void
 	{
 		if(cc.sys.isNative){ return; }
@@ -96,11 +97,6 @@ export default class Adaptor {
 				dc["webkitCancelFullScreen"]();
 			}
 		}
-	}
-
-	//手动对指定节点进行全屏适配（没什么用，统一用adaptScreen方案，然后在编辑器中编辑控件的布局即可）
-	public static adaptUI(node:cc.Node) {
-		node.setContentSize(cc.view.getFrameSize());
 	}
 
 }
