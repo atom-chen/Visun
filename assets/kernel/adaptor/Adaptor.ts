@@ -5,6 +5,8 @@ import { DESIGN_SIZE } from "../basic/defines/KernelDefine";
 
 export default class Adaptor {
 
+	private static s_is_full_screen:boolean = false;
+
 	//全屏适配
 	//调用时机：在监听到窗口大小变化时 + 场景onLoad时
 	//场景onLoad时的调用是因为场景初始化时是用编辑器里的设计尺寸布局的，所以需要在调用一次重新布局
@@ -44,25 +46,22 @@ export default class Adaptor {
 		if(bigger < smaller) {
 			bigger = DESIGN_SIZE.height;
 			smaller = DESIGN_SIZE.width;
-			DESIGN_SIZE.width = bigger;
-			DESIGN_SIZE.height = smaller;
 		}
 		if(bLandspace) {
 			DESIGN_SIZE.width = bigger;
 			DESIGN_SIZE.height = smaller;
+			DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
 			cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
 		} else {
 			DESIGN_SIZE.width = smaller;
 			DESIGN_SIZE.height = bigger;
+			DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
 			cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
 		}
-		DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
 		Adaptor.adaptScreen();
 	}
 
 	//进入全屏
-	private static s_is_full_screen:boolean = false;
-
 	public static isFullScreen() : boolean
 	{
 		return this.s_is_full_screen;

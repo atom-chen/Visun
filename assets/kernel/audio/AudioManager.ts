@@ -14,8 +14,6 @@ export default class AudioManager {
         return AudioManager.singleInstance;
     }
 
-    private effects: Array<cc.AudioClip> = null;
-
     private _currentMusicId: number = -1;
     private _currentMusicCacheUrl: string = null;
 
@@ -28,9 +26,6 @@ export default class AudioManager {
     private _musicVolume = 0.3;
     private _effectVolume = 0.7;
 
-    private constructor() {
-        this.effects = [];
-    }
 
     loadAudioClip(path:string, bFlag:boolean, callfun:Function) {
         var rsc = cc.loader.getRes(path, cc.AudioClip);

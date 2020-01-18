@@ -76,9 +76,7 @@ export default class MemoryStream {
 			if(buf[i] != 0)
 			{
 				s += String.fromCharCode(buf[i]);
-			}
-			else
-			{
+			} else {
 				i++;
 				break;
 			}
