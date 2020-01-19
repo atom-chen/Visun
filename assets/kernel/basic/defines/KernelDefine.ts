@@ -1,13 +1,15 @@
 //---------------------------------
 // 常量
 //---------------------------------
-export const DESIGN_ORIENTATION = 1;
+
+// UI设计尺寸
 export const DESIGN_SIZE = {
 	width : 1334,
 	height : 750,
 	crown : 1334/750
 }
 
+// UI层次
 export enum LayerDefine {
 	Panel = 0,
 	Popup,
@@ -16,6 +18,7 @@ export enum LayerDefine {
 	Loading,
 }
 
+// 热更状态
 export enum HOT_STATE {
 	READY = 0,
 	UPENGINE = 1,		//下载引擎包
@@ -28,6 +31,7 @@ export enum HOT_STATE {
 	LOADINGRES = 8,		//加载资源
 }
 
+// 网络连接状态
 export enum ConnState {
 	unconnect = 0, 	//尚未连接
 	connecting,		//正在连接
@@ -39,6 +43,7 @@ export enum ConnState {
 	reconnectfail,	//重连失败
 }
 
+// 网络包编解码格式
 export enum ProcessorType {
 	Json,
 	T4C4Protobuff,
@@ -47,6 +52,7 @@ export enum ProcessorType {
 	Stream
 }
 
+// 网络通道类型
 export enum ChannelType {
 	Ws,
 	Tcp,
@@ -54,6 +60,7 @@ export enum ChannelType {
 	Http,
 }
 
+// HTTP响应状态
 export enum HttpResult {
 	Succ = 0,
 	Timeout,
@@ -61,6 +68,7 @@ export enum HttpResult {
 	Error
 }
 
+// 行为树状态
 export enum BEHAVIOR_STATE {
 	READY = 1,
 	RUNNING,

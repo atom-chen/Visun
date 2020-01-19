@@ -51,6 +51,26 @@ export default class CpnPoker extends cc.Component {
         this.refresh();
     }
 
+    getFace() : boolean {
+        return this._curFace;
+    }
+
+    setSelected(v:boolean) {
+        this._state = v;
+        if(v) {
+            this.node.y = this._selectY;
+        //    this.node.color = new cc.Color(5, 255, 5, 255);
+        } else {
+            this.node.y = this._originY;
+        //    this.node.color = new cc.Color(255, 255, 255, 255);
+        }
+    }
+
+    isSelected() : boolean {
+        return this._state;
+    }
+
+
     playFlip(dt?:number) {
         if(this._flipAct) {
             this.node.stopAction(this._flipAct);
@@ -71,22 +91,6 @@ export default class CpnPoker extends cc.Component {
         } else {
             this._flipAct = this.node.runAction(cc.sequence(cc.delayTime(dt), scale1, call1, scale2, call2));
         }  
-    }
-    
-
-    setSelected(v:boolean) {
-        this._state = v;
-        if(v) {
-            this.node.y = this._selectY;
-        //    this.node.color = new cc.Color(5, 255, 5, 255);
-        } else {
-            this.node.y = this._originY;
-        //    this.node.color = new cc.Color(255, 255, 255, 255);
-        }
-    }
-
-    isSelected() : boolean {
-        return this._state;
     }
 
 }

@@ -6,7 +6,7 @@ export default class KernelUIDefine {
 	public static LobbyScene = { name:"LobbyScene" };
 	public static HotupdateScene = { name:"HotupdateScene" };
 
-	public static dialog = { path:"launcher/prefabs/ConfirmDlg" };
-	public static toast = { path:"common/prefabs/UIToast" };
-	public static loading = { path:"launcher/scene/UILoading" };
+	public static dialog = "launcher/prefabs/ConfirmDlg";
+	public static toast = "common/prefabs/UIToast";
+	public static loading = "launcher/scene/UILoading";
 }
