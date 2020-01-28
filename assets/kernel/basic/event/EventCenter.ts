@@ -22,6 +22,10 @@ export default class EventCenter {
 		return EventCenter._neterrInst;
 	}
 
+	public listenerCount(evtName:string|number) : number {
+		if(this._events[evtName]) { return this._events[evtName].length; }
+		return 0;
+	}
 
 	public getEvent(evtName:string|number, cbFunc:Function, thisObj:any) : number
 	{

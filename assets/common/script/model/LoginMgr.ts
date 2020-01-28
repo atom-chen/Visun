@@ -19,6 +19,7 @@ export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
 	private constructor(){
 		super();
+		//重连逻辑
 		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
             if(chan.getName()===ChannelDefine.game) {
                 if(chan.getState()===ConnState.reconnectfail) {

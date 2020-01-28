@@ -3,7 +3,6 @@ import UIManager from "../../../kernel/view/UIManager";
 import GameManager from "../model/GameManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import SceneManager from "../../../kernel/view/SceneManager";
-import { login_msgs } from "../proto/net_login";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 
 //---------------------------------
