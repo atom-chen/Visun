@@ -54,6 +54,7 @@ export default class BrnnUI extends BaseComponent {
 		});
 
 		this.compBox = this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d);
+		this.compBox.setChipValues([1,2,5,10,50])
 
 		this.initNetEvent();
 		this.initUIEvent();

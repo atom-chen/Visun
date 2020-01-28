@@ -154,7 +154,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chip1",
+    "_name": "chip0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -326,7 +326,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chip2",
+    "_name": "chip1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -498,7 +498,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chip3",
+    "_name": "chip2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -670,7 +670,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chip4",
+    "_name": "chip3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -842,7 +842,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "chip5",
+    "_name": "chip4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2

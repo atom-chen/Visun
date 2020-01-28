@@ -16,7 +16,7 @@ export default class CpnChipbox2d extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
-        CommonUtil.addClickEvent(this.m_ui.chip5, function(){ this.onSelect(5); }, this);
+        CommonUtil.addClickEvent(this.m_ui.chip0, function(){ this.onSelect(0); }, this);
         this.setSelectedIndex(1);
     }
 
@@ -60,7 +60,7 @@ export default class CpnChipbox2d extends BaseComponent {
             cc.loader.loadRes( respath, cc.SpriteFrame, function(err, rsc){
                 if(err) { cc.log("error: "+err); return; }
                 if(cc.isValid(this)) {
-                    this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;
+                    this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = rsc;
                 }
             }.bind(this) );
         }
