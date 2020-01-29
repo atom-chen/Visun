@@ -1,3 +1,6 @@
+//-----------------------------
+//斗地主/跑得快手牌组件
+//-----------------------------
 import { PokerCode } from "../definer/PokerDefine";
 import CpnPoker from "./CpnPoker";
 import RuleDdz from "../../../resources/subgames/ddz/script/rule/RuleDdz";

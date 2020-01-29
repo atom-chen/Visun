@@ -1,3 +1,6 @@
+//-----------------------------
+//玩家组件
+//-----------------------------
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";

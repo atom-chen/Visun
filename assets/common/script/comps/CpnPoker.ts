@@ -1,3 +1,6 @@
+//-----------------------------
+//扑克组件
+//-----------------------------
 import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
 import GameUtil from "../utils/GameUtil";
 

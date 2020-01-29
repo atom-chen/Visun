@@ -1,3 +1,6 @@
+//-----------------------------
+//筹码盒组件
+//-----------------------------
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import GameUtil from "../utils/GameUtil";

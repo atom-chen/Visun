@@ -1,3 +1,6 @@
+//-----------------------------
+//麻将组件
+//-----------------------------
 import GameUtil from "../utils/GameUtil";
 import { MajhongCode } from "../definer/MajhongDefine";
 
