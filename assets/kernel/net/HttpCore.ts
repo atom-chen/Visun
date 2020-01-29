@@ -17,13 +17,13 @@ import KernelEvent from "../basic/defines/KernelEvent";
 
 export default class HttpCore {
 	private static g_timeout:number = 8000;		//超时
-	public static token:string = "";
+	public static token:string = "";			//
 
-	private static _mainUrl:string = "";
+	private static _mainUrl:string = "";			//
 	private static _coder:ICodec = new HttpCodec;	//编码解码器
-	private static g_allProtocol:object = {};	//规则
-	private static _responder:any;				//响应句柄
-	private static _forbitCache:any = {};
+	private static g_allProtocol:object = {};		//规则
+	private static _responder:any;					//响应句柄
+	private static _forbitCache:any = {};			//设置某条协议是否取消缓存
 	private static _localCache:LocalCache = LocalCache.getInstance("http");
 
 	//@注册一组协议
@@ -39,10 +39,10 @@ export default class HttpCore {
 
 			if(this.g_allProtocol[ptoname]) {
 				cc.log("重新注册：", ptoname);
-			} 
-			else {
+			} else {
 				cc.log("注册协议：", ptoname);
 			}
+			
 			if(!requestor[ptoname]) {
 				cc.error("没有请求接口", ptoname);
 			}
@@ -101,8 +101,7 @@ export default class HttpCore {
 			if(!addr) { addr = ""; }
 			if(!tAddrParams) {
 				cc.error("地址参数类型错误");
-			}
-			else {
+			} else {
 				for(var j = 0,len = ptoinfo.addrparams.length; j < len; j++) {
 					if( typeof(tAddrParams[j]) != ptoinfo.addrparams[j] ){
 						cc.error("地址参数类型错误");
@@ -113,10 +112,6 @@ export default class HttpCore {
 		}
 
 		var paramStr = this._coder.encode(tParams, ptoinfo.params);
-
-		if(ptoinfo.reqType==="POST") {
-			paramStr = "data=" + JSON.stringify(tParams);
-		}
 
 		switch(ptoinfo.reqType) 
 		{
@@ -171,14 +166,12 @@ export default class HttpCore {
 				if(unsafeCallback) { unsafeCallback(info); }
 				// 触发事件
 				EventCenter.getInstance().fire( ptoname, info );
-			}
-			else {
+			} else {
 				cc.log(info);
 				UIManager.toast(info.msg || "未知错误");
 				EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname, info);
 			}
-		}
-		else {
+		} else {
 			UIManager.toast("网络请求失败");
 			EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname);
 		}
