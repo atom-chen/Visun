@@ -157,7 +157,7 @@ export default class WsChannel implements IChannel {
 	public force_reconnect() : void
 	{
 		this._reconnectTimes = MAX_RECONNECT;
-		if(this._curState == ConnState.connectsucc || this._curState == ConnState.reconnectsucc || this._curState == ConnState.reconnectfail) {
+		if(this._curState == ConnState.connectsucc || this._curState == ConnState.connectfail || this._curState == ConnState.reconnectsucc || this._curState == ConnState.reconnectfail) {
 			this.stopHeartBeat();
 			this.clear_ws();
 			cc.log(this._name, "强制重连", this._curState, this._url);
@@ -183,8 +183,7 @@ export default class WsChannel implements IChannel {
 				}
 				self.initWs(self._url, ""+loadedResource);
 			});
-		}
-		else {
+		} else {
 			self.initWs(self._url, "");
 		}
 	}

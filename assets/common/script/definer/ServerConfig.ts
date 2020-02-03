@@ -4,7 +4,7 @@
 var server_list = {
     publish: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.0.10:9650"
+        leafServer: "ws://192.168.0.108:9650"
     },
     develop: {
         mainHttpUrl: "",
