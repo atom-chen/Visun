@@ -26,7 +26,7 @@ export default class ConfirmDlg extends BaseComponent {
 	}
 
 	
-	public reflesh(callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null, hasCancel:boolean=false) 
+	public reflesh(callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null, hasCancel:boolean=true) 
 	{
 		this._callback = callback;
 		this.m_ui.labelContent.getComponent(cc.Label).string = content;
