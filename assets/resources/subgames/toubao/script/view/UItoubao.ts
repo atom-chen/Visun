@@ -86,14 +86,22 @@ export default class ToubaoUI extends BaseComponent {
 	//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
+	private playTipBetting() {
+		var childs = this.m_ui.betLayer.children;
+		for (var i in childs) {
+			childs[i].runAction(cc.blink(1, 3));
+		}
+	}
+
 	//准备阶段
 	private toStateReady() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
 		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
+		TimerManager.loopSecond(3, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateBetting();
+			this.playTipBetting();
 		}));
 	}
 
