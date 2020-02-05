@@ -89,11 +89,7 @@ export default class UIbjle extends BaseComponent {
 		}));
 	}
 
-	//结算阶段
-	private toStateJiesuan() {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
+	private playJiesuan() {
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -110,6 +106,14 @@ export default class UIbjle extends BaseComponent {
 			}, this)
 		));
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+	}
+
+	//结算阶段
+	private toStateJiesuan() {
+	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
+		this.playJiesuan();
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);

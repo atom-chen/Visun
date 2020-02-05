@@ -102,17 +102,14 @@ export default class BrnnUI extends BaseComponent {
 		}));
 	}
 
-	//结算阶段
-	private toStateJiesuan() {
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-
+	private playJiesuan() {
+		//开牌
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9], true);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A], true);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K], true);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9], true);
 		
+		//收集筹码
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -131,6 +128,15 @@ export default class BrnnUI extends BaseComponent {
 			}, this)
 		));
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+	}
+
+	//结算阶段
+	private toStateJiesuan() {
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+
+		this.playJiesuan();
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);

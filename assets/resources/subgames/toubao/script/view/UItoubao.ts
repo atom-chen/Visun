@@ -118,11 +118,7 @@ export default class ToubaoUI extends BaseComponent {
 		}));
 	}
 
-	//结算阶段
-	private toStateJiesuan() {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
+	private playJiesuan() {
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
@@ -141,6 +137,14 @@ export default class ToubaoUI extends BaseComponent {
 				}
 			}, this)
 		));
+	}
+
+	//结算阶段
+	private toStateJiesuan() {
+	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
+		this.playJiesuan();
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);

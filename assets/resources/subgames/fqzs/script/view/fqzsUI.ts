@@ -92,16 +92,20 @@ export default class FqzsUI extends BaseComponent {
 		}));
 	}
 
-	//结算阶段
-	private toStateJiesuan() {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
+	private playJiesuan() {
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
 		for(var i=len-1; i>=0; i--){
 			this._pool.delObject(childs[i]);
 		}
+	}
+
+	//结算阶段
+	private toStateJiesuan() {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+
+		this.playJiesuan();
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
