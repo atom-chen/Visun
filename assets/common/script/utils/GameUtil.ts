@@ -208,4 +208,15 @@ export default class GameUtil {
 		}
 	}
 
+	public static playShake(obj:cc.Node, duration: number, shakeTimes: number) : void {
+		if(isNil(obj)) { return; }
+		var dt = duration / (shakeTimes*4);
+		obj.runAction( cc.repeat( 
+			cc.sequence(
+				cc.moveBy(dt, cc.v2(10,0)), 
+				cc.moveBy(dt*2, cc.v2(-20, 0)), 
+				cc.moveBy(dt, cc.v2(10,0))
+			), shakeTimes ) );
+	}
+
 }

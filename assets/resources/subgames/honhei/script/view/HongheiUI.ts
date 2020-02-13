@@ -108,6 +108,7 @@ export default class HongheiUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
+		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {

@@ -155,6 +155,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
+		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
