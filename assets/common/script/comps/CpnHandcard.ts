@@ -145,7 +145,7 @@ export default class CpnHandcard extends cc.Component {
         this._touchEndCallback = f;
     }
 
-	private _findTouchedCardIndex (touch:cc.Vec3) : number {
+	private findTouchedCardIndex (touch:cc.Vec3) : number {
 		var target = -1;
 		var cardArr = this.node.children;
         for (var k=0; k<cardArr.length; k++) {
@@ -183,8 +183,8 @@ export default class CpnHandcard extends cc.Component {
     }
 
     private toggleSelecteds() {
-        var firstIdx = this._findTouchedCardIndex(this._touchBegan);
-        var lastIdx = this._findTouchedCardIndex(this._touchMoved);
+        var firstIdx = this.findTouchedCardIndex(this._touchBegan);
+        var lastIdx = this.findTouchedCardIndex(this._touchMoved);
 
         var collects = [];
         var contains = [];
