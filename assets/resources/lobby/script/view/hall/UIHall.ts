@@ -75,6 +75,10 @@ export default class UIHall extends BaseComponent {
 	}
 
 	private initUiEvents() {
+		//头像
+		CommonUtil.addClickEvent(this.m_ui.headNode, function(){ 
+			UIManager.openPopwnd(ViewDefine.UISetting, true, null); 
+		}, this);
 		//保险箱
 		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
