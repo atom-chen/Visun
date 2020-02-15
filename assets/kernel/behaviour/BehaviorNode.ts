@@ -1,13 +1,14 @@
-import { BehaviorTree } from "./BehaviorTree";
-import { BT_STATE } from "./AIConst";
-import { RoleAgent } from "./RoleAgent";
-
 //--------------------------------------------------------------------------------------------
 // 行为树节点
 // 具体实现要继承自 DecoratorNode ConditionNode ActionNode
 //--------------------------------------------------------------------------------------------
+import { BT_STATE } from "./AIConst";
+import BehaviorTree from "./BehaviorTree";
+import RoleAgent from "./RoleAgent";
+
+
 //所有节点类型的基类
-export abstract class BehaviorNodeBase {
+export default abstract class BehaviorNodeBase {
 	protected clsName:string = "BehaviorNodeBase";
 	protected leftNode:BehaviorNodeBase;	//当本节点返回失败时，走向左节点
 	protected rightNode:BehaviorNodeBase;	//当本节点返回成功时，走向右节点

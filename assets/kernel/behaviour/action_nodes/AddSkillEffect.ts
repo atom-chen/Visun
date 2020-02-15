@@ -1,8 +1,8 @@
 import { ActionNode } from "../BehaviorNode";
-import { RoleAgent } from "../RoleAgent";
 import { BT_STATE } from "../AIConst";
+import RoleAgent from "../RoleAgent";
 
-export class AddSkillEffect extends ActionNode{
+export default class AddSkillEffect extends ActionNode{
 	protected clsName:string = "AddSkillEffect";
 
 	public constructor() {

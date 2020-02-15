@@ -1,10 +1,8 @@
 import { ActionNode } from "../BehaviorNode";
-
-import { RoleAgent } from "../RoleAgent";
-
 import { BT_STATE } from "../AIConst";
+import RoleAgent from "../RoleAgent";
 
-export class Delay extends ActionNode{
+export default class Delay extends ActionNode{
 	protected clsName:string = "Delay";
 	private restTime:number;
 

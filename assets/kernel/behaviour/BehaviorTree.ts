@@ -1,11 +1,12 @@
-import { BehaviorNodeBase } from "./BehaviorNode";
-import { BT_STATE } from "./AIConst";
-import { RoleAgent } from "./RoleAgent";
-
-//--------------------------------------------------------------------------------------------
+//------------------------------
 // 行为树
-//--------------------------------------------------------------------------------------------
-export class BehaviorTree {
+//------------------------------
+import { BT_STATE } from "./AIConst";
+import BehaviorNodeBase from "./BehaviorNode";
+import RoleAgent from "./RoleAgent";
+
+
+export default class BehaviorTree {
 	protected clsName:string = "BehaviorTree";
 	private mRootNode:BehaviorNodeBase;
 	

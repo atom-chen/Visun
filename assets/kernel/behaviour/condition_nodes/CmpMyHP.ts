@@ -1,8 +1,8 @@
 import { ConditionNode } from "../BehaviorNode";
 import { BT_STATE } from "../AIConst";
-import { RoleAgent } from "../RoleAgent";
+import RoleAgent from "../RoleAgent";
 
-export class CmpMyHP extends ConditionNode {
+export default class CmpMyHP extends ConditionNode {
 	protected clsName:string = "CmpMyHP";
 	private cmpMode:string;
 	private hpPercent:number;

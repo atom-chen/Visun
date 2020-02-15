@@ -1,7 +1,11 @@
-import { BehaviorNodeBase } from "./BehaviorNode";
-import { BehaviorTree } from "./BehaviorTree";
+//------------------------------------
+// 行为树文件加载器
+//------------------------------------
+import BehaviorNodeBase from "./BehaviorNode";
+import BehaviorTree from "./BehaviorTree";
 
-export class BTLoader {
+
+export default class BTLoader {
 	private static genNode(clsName:string, ...args:any[]) :BehaviorNodeBase {
 		return null;
 	}
