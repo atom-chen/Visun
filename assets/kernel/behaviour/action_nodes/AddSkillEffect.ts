@@ -1,6 +1,6 @@
 import { ActionNode } from "../BehaviorNode";
-import { BT_STATE } from "../AIConst";
 import RoleAgent from "../RoleAgent";
+import { BEHAVIOR_STATE } from "../../basic/defines/KernelDefine";
 
 export default class AddSkillEffect extends ActionNode{
 	protected clsName:string = "AddSkillEffect";
@@ -9,7 +9,7 @@ export default class AddSkillEffect extends ActionNode{
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BT_STATE{
-		return BT_STATE.FAIL;
+	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE{
+		return BEHAVIOR_STATE.FAIL;
 	}
 }

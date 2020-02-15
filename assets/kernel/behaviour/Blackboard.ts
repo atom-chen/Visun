@@ -2,17 +2,17 @@
 // 行为树黑板，记录角色行为树需要的所有相关数据
 //---------------------------------------
 import Procedure from "../promise/Procedure";
-import { BT_STATE } from "./AIConst";
 import RoleAgent from "./RoleAgent";
 import BehaviorNodeBase from "./BehaviorNode";
 import BehaviorTree from "./BehaviorTree";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 
 export default class Blackboard {
 	private mOwner:RoleAgent;							//黑板拥有者
 	private interruptingTree:{[key:string]:boolean};	//键为树名，存放正在中断的行为树
 	private runningNodeList:Array<BehaviorNodeBase>;	//存放所有处于运行状态的节点
-	private treeStateInfo: {[key:string]:BT_STATE};		//标记行为树的运行状态：running/succ/fail
+	private treeStateInfo: {[key:string]:BEHAVIOR_STATE};		//标记行为树的运行状态：running/succ/fail
 	private callbackInfo: {[key:string]:Function};		//键为树名，存放行为树执行完毕时的回调
 	private promise:Procedure;					//动画辅助
 	private fightTargets:Array<RoleAgent>;		//施法目标记录
@@ -42,12 +42,12 @@ export default class Blackboard {
 	}
 
 	// 行为树最终结束的唯一接口
-	private tell_bt_result(btTree:BehaviorTree, result:BT_STATE) {
+	private tell_bt_result(btTree:BehaviorTree, result:BEHAVIOR_STATE) {
 		if(this.isTreeHasRunningNode(btTree)){
 			console.error("执行出错：此时不应该还有执行中的节点");
 		}
 		let treeName = btTree.getName();
-		if(this.treeStateInfo[treeName] != BT_STATE.RUNNING) {
+		if(this.treeStateInfo[treeName] != BEHAVIOR_STATE.RUNNING) {
 			console.error("执行出错：此时行为树应该处于running状态");
 		}
 		if (this.callbackInfo[treeName] != null && this.callbackInfo[treeName] != undefined) {
@@ -66,17 +66,17 @@ export default class Blackboard {
 			console.error("is running");
 		let treeName = btTree.getName();
 		console.log("行为树开始：", treeName);
-		this.treeStateInfo[treeName] = BT_STATE.RUNNING;
+		this.treeStateInfo[treeName] = BEHAVIOR_STATE.RUNNING;
 		this.callbackInfo[treeName] = Callback;
 	}
 
 	// 行为树执行完毕时调用
-	public tellBTFinish(btTree:BehaviorTree, result:BT_STATE) {
+	public tellBTFinish(btTree:BehaviorTree, result:BEHAVIOR_STATE) {
 		this.tell_bt_result(btTree, result);
 	}
 
 	// 行为树被中断时调用
-	public tellBTInterrupt(btTree:BehaviorTree, result:BT_STATE) {
+	public tellBTInterrupt(btTree:BehaviorTree, result:BEHAVIOR_STATE) {
 		this.tell_bt_result(btTree, result);
 	}
 
@@ -111,7 +111,7 @@ export default class Blackboard {
 
 	//判断某行为树是否处于running状态
 	public hasRunningTree(btTree:BehaviorTree) : boolean {
-		return this.treeStateInfo[btTree.getName()] == BT_STATE.RUNNING;
+		return this.treeStateInfo[btTree.getName()] == BEHAVIOR_STATE.RUNNING;
 	}
 
 	//判断某树是否有正在running的节点

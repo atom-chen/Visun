@@ -2,9 +2,9 @@
 // 行为树节点
 // 具体实现要继承自 DecoratorNode ConditionNode ActionNode
 //--------------------------------------------------------------------------------------------
-import { BT_STATE } from "./AIConst";
 import BehaviorTree from "./BehaviorTree";
 import RoleAgent from "./RoleAgent";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 
 //所有节点类型的基类
@@ -26,19 +26,19 @@ export default abstract class BehaviorNodeBase {
 
 	public getClassName() { return this.clsName; }
 
-	public abstract Proc(theOwner:RoleAgent):BT_STATE;
+	public abstract Proc(theOwner:RoleAgent):BEHAVIOR_STATE;
 
 	//执行
-	public Execute(theOwner:RoleAgent) : BT_STATE{
+	public Execute(theOwner:RoleAgent) : BEHAVIOR_STATE{
 		// 如果被中断，直接返回失败
 		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
 			console.log(this.getBTTree().getName(),"is interrupting !!!");
-			return BT_STATE.FAIL;
+			return BEHAVIOR_STATE.FAIL;
 		}
 
 		if(theOwner.getBlackboard().hasRunningNode(this)) {
 			console.log(this.clsName,"is running !!!");
-			return BT_STATE.RUNNING;
+			return BEHAVIOR_STATE.RUNNING;
 		}
 		
 		//before deal
@@ -46,10 +46,10 @@ export default abstract class BehaviorNodeBase {
 		theOwner.getBlackboard().addRunningNode(this);
 
 		//deal 
-		var result:BT_STATE = this.Proc(theOwner);
+		var result:BEHAVIOR_STATE = this.Proc(theOwner);
 
-		if(result == BT_STATE.RUNNING){
-			return BT_STATE.RUNNING;
+		if(result == BEHAVIOR_STATE.RUNNING){
+			return BEHAVIOR_STATE.RUNNING;
 		}
 
 		//deal over
@@ -57,7 +57,7 @@ export default abstract class BehaviorNodeBase {
 	}
 
 	//执行完成时调用
-	public onDealOver(theOwner:RoleAgent, result:BT_STATE) : BT_STATE{
+	public onDealOver(theOwner:RoleAgent, result:BEHAVIOR_STATE) : BEHAVIOR_STATE{
 		// 标记为非运行中节点
 		theOwner.getBlackboard().delRunningNode(this)
 
@@ -65,16 +65,16 @@ export default abstract class BehaviorNodeBase {
 
 		// 如果被中断，不再执行后面的节点，直接返回失败
 		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
-			return BT_STATE.FAIL;
+			return BEHAVIOR_STATE.FAIL;
 		}
 
 		//本节点返回为成功，则执行右节点；返回为失败，则执行左节点
-		if(result == BT_STATE.SUCC){
+		if(result == BEHAVIOR_STATE.SUCC){
 			if(this.rightNode != null){
 				return this.rightNode.Execute(theOwner);
 			}
 		} 
-		else if (result == BT_STATE.FAIL){
+		else if (result == BEHAVIOR_STATE.FAIL){
 			if(this.leftNode != null){
 				return this.leftNode.Execute(theOwner);
 			}
@@ -86,9 +86,9 @@ export default abstract class BehaviorNodeBase {
 		//并行节点检查
 		let bnComp = this.getCompNode()
 		if (bnComp) {
-			let compResult:BT_STATE = bnComp.checkResult(theOwner);
-			if(compResult == BT_STATE.RUNNING) {
-				return BT_STATE.RUNNING;
+			let compResult:BEHAVIOR_STATE = bnComp.checkResult(theOwner);
+			if(compResult == BEHAVIOR_STATE.RUNNING) {
+				return BEHAVIOR_STATE.RUNNING;
 			} 
 			else {
 				return bnComp.onDealOver(theOwner, compResult);
@@ -182,13 +182,13 @@ export class AndCompositeNode extends CompositeNodeBase {
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BT_STATE {
+	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE {
 		for(let bn of this.childList) {
-			if(bn.Proc(theOwner) == BT_STATE.FAIL){
-				return BT_STATE.FAIL;
+			if(bn.Proc(theOwner) == BEHAVIOR_STATE.FAIL){
+				return BEHAVIOR_STATE.FAIL;
 			}
 		}
-		return BT_STATE.SUCC;
+		return BEHAVIOR_STATE.SUCC;
 	}
 }
 
@@ -200,13 +200,13 @@ export class OrCompositeNode extends CompositeNodeBase {
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BT_STATE {
+	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE {
 		for(let bn of this.childList) {
-			if(bn.Proc(theOwner) == BT_STATE.SUCC){
-				return BT_STATE.SUCC;
+			if(bn.Proc(theOwner) == BEHAVIOR_STATE.SUCC){
+				return BEHAVIOR_STATE.SUCC;
 			}
 		}
-		return BT_STATE.FAIL;
+		return BEHAVIOR_STATE.FAIL;
 	}
 }
 
@@ -224,16 +224,16 @@ export class ParallelNode extends CompositeNodeBase {
 	}
 
 	//执行
-	public Execute(theOwner:RoleAgent) : BT_STATE{
+	public Execute(theOwner:RoleAgent) : BEHAVIOR_STATE{
 		// 如果被中断，直接返回失败
 		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
 			console.log(this.getBTTree().getName(),"is interrupting !!!");
-			return BT_STATE.FAIL;
+			return BEHAVIOR_STATE.FAIL;
 		}
 
 		if(theOwner.getBlackboard().hasRunningNode(this)) {
 			console.log(this.getClassName(),"is running !!!");
-			return BT_STATE.RUNNING;
+			return BEHAVIOR_STATE.RUNNING;
 		}
 		
 		//before deal
@@ -244,11 +244,11 @@ export class ParallelNode extends CompositeNodeBase {
 		}
 
 		//deal 
-		var result:BT_STATE = BT_STATE.SUCC;
+		var result:BEHAVIOR_STATE = BEHAVIOR_STATE.SUCC;
 		for(let bn of this.childList) {
 			let rlt = bn.Proc(theOwner);
-			if(rlt == BT_STATE.RUNNING){
-				result = BT_STATE.RUNNING;
+			if(rlt == BEHAVIOR_STATE.RUNNING){
+				result = BEHAVIOR_STATE.RUNNING;
 			} else {
 				bn.onDealOver(theOwner,rlt);
 			}
@@ -257,16 +257,16 @@ export class ParallelNode extends CompositeNodeBase {
 		return result;
 	}
 
-	public Proc(theOwner:RoleAgent) : BT_STATE { 
+	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE { 
 		console.error("do not use this func");
-		return BT_STATE.RUNNING;
+		return BEHAVIOR_STATE.RUNNING;
 	}
 
-	public checkResult(theOwner:RoleAgent) : BT_STATE {
-		let State:BT_STATE = BT_STATE.SUCC;
+	public checkResult(theOwner:RoleAgent) : BEHAVIOR_STATE {
+		let State:BEHAVIOR_STATE = BEHAVIOR_STATE.SUCC;
 		for(let bn of this.childList) {
 			if(theOwner.getBlackboard().hasRunningNode(bn)){
-				State = BT_STATE.RUNNING;
+				State = BEHAVIOR_STATE.RUNNING;
 				break;
 			}
 		}

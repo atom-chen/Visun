@@ -1,6 +1,6 @@
 import { ConditionNode } from "../BehaviorNode";
-import { BT_STATE } from "../AIConst";
 import RoleAgent from "../RoleAgent";
+import { BEHAVIOR_STATE } from "../../basic/defines/KernelDefine";
 
 export default class CmpMyHP extends ConditionNode {
 	protected clsName:string = "CmpMyHP";
@@ -15,8 +15,8 @@ export default class CmpMyHP extends ConditionNode {
 		this.bPercent = bPercent;
 	}
 	
-	public Proc(theOwner:RoleAgent) : BT_STATE{
-		return BT_STATE.FAIL;
+	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE{
+		return BEHAVIOR_STATE.FAIL;
 	//	return theOwner.ProcCmpMyHP(this.cmpMode, this.hpPercent, this.bPercent);
 	}
 }

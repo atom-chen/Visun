@@ -1,9 +1,9 @@
 //------------------------------
 // 行为树
 //------------------------------
-import { BT_STATE } from "./AIConst";
 import BehaviorNodeBase from "./BehaviorNode";
 import RoleAgent from "./RoleAgent";
+import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 
 export default class BehaviorTree {
@@ -31,10 +31,10 @@ export default class BehaviorTree {
 	}
 
 	//执行
-	public Execute(theOwner:RoleAgent, Callback:Function) : BT_STATE {
+	public Execute(theOwner:RoleAgent, Callback:Function) : BEHAVIOR_STATE {
 		if(this.isRunning(theOwner)){
 			console.log("正在执行中：", this.clsName);
-			return BT_STATE.RUNNING;
+			return BEHAVIOR_STATE.RUNNING;
 		}
 		theOwner.getBlackboard().tellBTBegin(this, Callback);
 		return this.mRootNode.Execute(theOwner);
@@ -50,7 +50,7 @@ export default class BehaviorTree {
 			}
 			theOwner.getBlackboard().markInterrupting(this, false);
 
-			theOwner.getBlackboard().tellBTInterrupt(this, BT_STATE.FAIL);
+			theOwner.getBlackboard().tellBTInterrupt(this, BEHAVIOR_STATE.FAIL);
 		}
 	}
 }

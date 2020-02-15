@@ -1,11 +1,6 @@
 //----------------------------
 // 行为树相关常量
 //----------------------------
-export enum BT_STATE {
-	RUNNING = -1,
-	FAIL = 0,
-	SUCC = 1,
-}
 
 export function AiCompare(op:string, lvalue:number, rvalue:number) : boolean{
 	switch (op){
