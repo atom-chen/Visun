@@ -3,6 +3,13 @@
 //-------------------------------------
 import { DESIGN_SIZE } from "../basic/defines/KernelDefine";
 
+//切后台回来时布局错乱了，暂时这样处理
+window["__origin_onresize"] = window.onresize;
+window.onresize = function(...args: any[]) {
+//	window["__origin_onresize"](...args);
+	Adaptor.adaptScreen();
+}
+
 export default class Adaptor {
 
 	private static s_is_full_screen:boolean = false;
