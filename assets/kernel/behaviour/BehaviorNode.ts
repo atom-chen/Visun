@@ -9,7 +9,7 @@ import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 
 //所有节点类型的基类
 export default abstract class BehaviorNodeBase {
-	protected clsName:string = "BehaviorNodeBase";
+	protected clsName:string = "BehaviorNodeBase"; //方便调试
 	protected leftNode:BehaviorNodeBase;	//当本节点返回失败时，走向左节点
 	protected rightNode:BehaviorNodeBase;	//当本节点返回成功时，走向右节点
 	protected preNode:BehaviorNodeBase;		//父节点

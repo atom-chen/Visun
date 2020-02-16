@@ -2,8 +2,9 @@
 // 行为树相关常量
 //----------------------------
 
-export function AiCompare(op:string, lvalue:number, rvalue:number) : boolean{
-	switch (op){
+//比较函数
+export function AiCompare(op:string, lvalue:number, rvalue:number) : boolean {
+	switch (op) {
 		case "l":   return lvalue < rvalue;
 		case "e":   return lvalue == rvalue;
 		case "g":   return lvalue > rvalue;

@@ -9,10 +9,6 @@ import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 export default class BehaviorTree {
 	protected clsName:string = "BehaviorTree";
 	private mRootNode:BehaviorNodeBase;
-	
-	public constructor() {
-		
-	}
 
 	//名字KEY
 	public getName() : string {
@@ -53,4 +49,5 @@ export default class BehaviorTree {
 			theOwner.getBlackboard().tellBTInterrupt(this, BEHAVIOR_STATE.FAIL);
 		}
 	}
+	
 }

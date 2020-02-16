@@ -14,7 +14,7 @@ export default class Blackboard {
 	private runningNodeList:Array<BehaviorNodeBase>;	//存放所有处于运行状态的节点
 	private treeStateInfo: {[key:string]:BEHAVIOR_STATE};		//标记行为树的运行状态：running/succ/fail
 	private callbackInfo: {[key:string]:Function};		//键为树名，存放行为树执行完毕时的回调
-	private promise:Procedure;					//动画辅助
+	
 	private fightTargets:Array<RoleAgent>;		//施法目标记录
 
 	public constructor(theOwner:RoleAgent) {
@@ -27,18 +27,6 @@ export default class Blackboard {
 
 	public getOwner() : RoleAgent {
 		return this.mOwner;
-	}
-	public getPromise() : Procedure {
-		return this.promise;
-	}
-	public setPromise(promise:Procedure) {
-		this.promise = promise;
-	}
-	public setFightTargets(targets:Array<RoleAgent>){
-		this.fightTargets = targets;
-	}
-	public getFightTargets() : Array<RoleAgent> {
-		return this.fightTargets;
 	}
 
 	// 行为树最终结束的唯一接口
@@ -149,4 +137,15 @@ export default class Blackboard {
 	public markInterrupting(btTree:BehaviorTree, flag:boolean) {
 		this.interruptingTree[btTree.getName()] = flag;
 	}
+
+	//---------------------------------------------------------------------------
+
+	public setFightTargets(targets:Array<RoleAgent>){
+		this.fightTargets = targets;
+	}
+
+	public getFightTargets() : Array<RoleAgent> {
+		return this.fightTargets;
+	}
+
 }
