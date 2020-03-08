@@ -2,7 +2,7 @@
 -- protobuf使用说明
 -------------------------------------------
 
-1. 安装node.js 
+1. 安装node.js 以下两个地址任选其一下载安装即可
 https://nodejs.org/en/
 http://nodejs.cn/download/
 
