@@ -12,6 +12,9 @@ export default class UILoading extends cc.Component {
     @property(cc.Label)
     labelProgress: cc.Label = null;
 
+    @property(cc.Sprite)
+    loading: cc.Sprite = null;
+
     private _tmr: number = 0;
 
     onLoad () {
@@ -20,6 +23,8 @@ export default class UILoading extends cc.Component {
         EventCenter.getInstance().listen(KernelEvent.SCENE_BEFORE_SWITCH, this.onBeforeSwitch, this);
     //    EventCenter.getInstance().listen(KernelEvent.SCENE_AFTER_SWITCH, ()=>{ this.node.active=false; }, this);
         EventCenter.getInstance().listen(KernelEvent.UI_LOADING, this.onProgress, this);
+
+        this.loading.node.runAction(cc.repeatForever(cc.rotateBy(1, 360)));
     }
 
     private onBeforeSwitch() {

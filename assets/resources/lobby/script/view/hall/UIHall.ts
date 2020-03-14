@@ -96,7 +96,7 @@ export default class UIHall extends BaseComponent {
 		}, this);
 		//客服
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
-			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+		//	if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UIKefu, true, null); 
 		}, this);
 		//提现
@@ -106,7 +106,7 @@ export default class UIHall extends BaseComponent {
 		}, this);
 		//推广
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
-			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
+		//	if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UISpread, true, null); 
 		}, this);
 		//设置
