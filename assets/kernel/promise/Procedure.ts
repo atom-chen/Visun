@@ -8,13 +8,11 @@ import { BEHAVIOR_STATE } from "../basic/defines/KernelDefine";
 export default class Procedure {
 	protected _node_type:string = "unknown";
 	protected _name:string = "";
-	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;
 
+	protected _cur_state:BEHAVIOR_STATE = BEHAVIOR_STATE.READY;
 	protected _procFunc:CHandler = null;
 	protected _stopFunc:CHandler = null;
-	
 	protected _nextNode:Procedure = null;
-	
 	protected _groupNode:Procedure = null;
 	protected _partList:Array<Procedure> = null;
 
@@ -125,18 +123,15 @@ export default class Procedure {
 		return this.then(nextNode);
 	}
 
-
 	//----------------------------------------------------------------------------
 	//----------------------------------------------------------------------------
-
 
 	//@overrided
 	public Proc(arg?:any) : void
 	{
 		if(this._procFunc) {
 			this._procFunc.invoke(this);
-		}
-		else {
+		} else {
 			this._cur_state = BEHAVIOR_STATE.SUCC;
 		}
 	}
@@ -170,6 +165,7 @@ export default class Procedure {
 	{
 		var bSelfDone = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();
+
 		if (bSelfDone && bPartsDone) {
 			if(this._nextNode && !this._nextNode.isDone()) {
 				this._nextNode._groupNode = this._groupNode;
@@ -191,11 +187,12 @@ export default class Procedure {
 			return this._cur_state;
 		}
 		else if(bSelfDone){
-			cc.log(this.fixedName(), "finished bug pasts is runnig");
+			cc.log(this.fixedName(), "self done, pasts runnig");
 		}
 		else if(bPartsDone) {
-			cc.log(this.fixedName(), "not finished when pasts done");
+			cc.log(this.fixedName(), "self running, pasts done");
 		}
+
 		return BEHAVIOR_STATE.RUNNING;
 	}
 
@@ -263,6 +260,37 @@ export default class Procedure {
 		}
 	}
 
+	//@overrided
+	public isSelfDone(arg?:any) : boolean 
+	{
+		return this._cur_state===BEHAVIOR_STATE.SUCC || this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED;
+	}
+
+	//@overrided
+	public isPartsDone(arg?:any) : boolean 
+	{
+		if(this._partList) {
+			for(var i in this._partList) {
+				if(!this._partList[i].isDone()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	//@overrided
+	public isDone(arg?:any) : boolean 
+	{
+		if(!this.isSelfDone()) { return false; }
+		if(!this.isPartsDone()) { return false; }
+		if(this._nextNode) { 
+			if(!this._nextNode.isDone()) { 
+				return false; 
+			} 
+		}
+		return true;
+	}
 
 	//@overrided
 	public getSelfResult(arg?:any) : BEHAVIOR_STATE
@@ -299,38 +327,6 @@ export default class Procedure {
 			} 
 		}
 		return BEHAVIOR_STATE.SUCC;
-	}
-
-	//@overrided
-	public isSelfDone(arg?:any) : boolean 
-	{
-		return this._cur_state===BEHAVIOR_STATE.SUCC || this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED;
-	}
-
-	//@overrided
-	public isPartsDone(arg?:any) : boolean 
-	{
-		if(this._partList) {
-			for(var i in this._partList) {
-				if(!this._partList[i].isDone()){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
-	//@overrided
-	public isDone(arg?:any) : boolean 
-	{
-		if(!this.isSelfDone()) { return false; }
-		if(!this.isPartsDone()) { return false; }
-		if(this._nextNode) { 
-			if(!this._nextNode.isDone()) { 
-				return false; 
-			} 
-		}
-		return true;
 	}
 	
 }
