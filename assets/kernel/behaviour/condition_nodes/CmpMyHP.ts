@@ -16,8 +16,8 @@ export default class CmpMyHP extends ConditionNode {
 		this.bPercent = bPercent;
 	}
 	
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE{
-		return theOwner.ProcCmpMyHP(this.cmpMode, this.hpValue, this.bPercent);
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE{
+		return role.ProcCmpMyHP(this.cmpMode, this.hpValue, this.bPercent);
 	}
 
 }

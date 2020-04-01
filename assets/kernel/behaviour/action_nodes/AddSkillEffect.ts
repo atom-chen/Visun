@@ -9,7 +9,7 @@ export default class AddSkillEffect extends ActionNode{
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE{
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE{
 		return BEHAVIOR_STATE.FAIL;
 	}
 }

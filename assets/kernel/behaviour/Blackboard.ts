@@ -17,8 +17,8 @@ export default class Blackboard {
 	
 	private fightTargets:Array<RoleAgent>;		//施法目标记录
 
-	public constructor(theOwner:RoleAgent) {
-		this.mOwner = theOwner;
+	public constructor(role:RoleAgent) {
+		this.mOwner = role;
 		this.interruptingTree = {};
 		this.runningNodeList = [];
 		this.treeStateInfo = {};

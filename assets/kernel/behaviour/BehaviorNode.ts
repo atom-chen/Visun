@@ -26,57 +26,57 @@ export default abstract class BehaviorNodeBase {
 
 	public getClassName() { return this.clsName; }
 
-	public abstract Proc(theOwner:RoleAgent):BEHAVIOR_STATE;
+	public abstract Proc(role:RoleAgent):BEHAVIOR_STATE;
 
 	//执行
-	public Execute(theOwner:RoleAgent) : BEHAVIOR_STATE{
+	public Execute(role:RoleAgent) : BEHAVIOR_STATE{
 		// 如果被中断，直接返回失败
-		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
+		if(role.getBlackboard().isInterrupting(this.getBTTree())){
 			console.log(this.getBTTree().getName(),"is interrupting !!!");
 			return BEHAVIOR_STATE.FAIL;
 		}
 
-		if(theOwner.getBlackboard().hasRunningNode(this)) {
+		if(role.getBlackboard().hasRunningNode(this)) {
 			console.log(this.clsName,"is running !!!");
 			return BEHAVIOR_STATE.RUNNING;
 		}
 		
 		//before deal
 		// 标记为运行中节点
-		theOwner.getBlackboard().addRunningNode(this);
+		role.getBlackboard().addRunningNode(this);
 
 		//deal 
-		var result:BEHAVIOR_STATE = this.Proc(theOwner);
+		var result:BEHAVIOR_STATE = this.Proc(role);
 
 		if(result == BEHAVIOR_STATE.RUNNING){
 			return BEHAVIOR_STATE.RUNNING;
 		}
 
 		//deal over
-		return this.onDealOver(theOwner, result);
+		return this.onDealOver(role, result);
 	}
 
 	//执行完成时调用
-	public onDealOver(theOwner:RoleAgent, result:BEHAVIOR_STATE) : BEHAVIOR_STATE{
+	public onDealOver(role:RoleAgent, result:BEHAVIOR_STATE) : BEHAVIOR_STATE{
 		// 标记为非运行中节点
-		theOwner.getBlackboard().delRunningNode(this)
+		role.getBlackboard().delRunningNode(this)
 
 		console.log("---", this.clsName, result);
 
 		// 如果被中断，不再执行后面的节点，直接返回失败
-		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
+		if(role.getBlackboard().isInterrupting(this.getBTTree())){
 			return BEHAVIOR_STATE.FAIL;
 		}
 
 		//本节点返回为成功，则执行右节点；返回为失败，则执行左节点
 		if(result == BEHAVIOR_STATE.SUCC){
 			if(this.rightNode != null){
-				return this.rightNode.Execute(theOwner);
+				return this.rightNode.Execute(role);
 			}
 		} 
 		else if (result == BEHAVIOR_STATE.FAIL){
 			if(this.leftNode != null){
-				return this.leftNode.Execute(theOwner);
+				return this.leftNode.Execute(role);
 			}
 		}
 		else {
@@ -86,30 +86,30 @@ export default abstract class BehaviorNodeBase {
 		//并行节点检查
 		let bnComp = this.getCompNode()
 		if (bnComp) {
-			let compResult:BEHAVIOR_STATE = bnComp.checkResult(theOwner);
+			let compResult:BEHAVIOR_STATE = bnComp.checkResult(role);
 			if(compResult == BEHAVIOR_STATE.RUNNING) {
 				return BEHAVIOR_STATE.RUNNING;
 			} 
 			else {
-				return bnComp.onDealOver(theOwner, compResult);
+				return bnComp.onDealOver(role, compResult);
 			}
 		}
 
 		// 没有后续节点了，标记行为树执行完毕
-		theOwner.getBlackboard().tellBTFinish(this.getBTTree(), result);
+		role.getBlackboard().tellBTFinish(this.getBTTree(), result);
 
 		return result;
 	}
 
 	//被中断时调用，子类如果在中断时需要执行某些操作，须重载该接口
-	public onInterrupt(theOwner:RoleAgent){
+	public onInterrupt(role:RoleAgent){
 
 	}
 
 	//中断操作
-	public Interrupt(theOwner:RoleAgent){
-		this.onInterrupt(theOwner);
-		theOwner.getBlackboard().delRunningNode(this);
+	public Interrupt(role:RoleAgent){
+		this.onInterrupt(role);
+		role.getBlackboard().delRunningNode(this);
 	}
 
 	public setRightNode(rNode:BehaviorNodeBase){
@@ -122,8 +122,8 @@ export default abstract class BehaviorNodeBase {
 		lNode.preNode = this;
 	}
 
-	public isRunning(theOwner:RoleAgent){
-		return theOwner.getBlackboard().hasRunningNode(this);
+	public isRunning(role:RoleAgent){
+		return role.getBlackboard().hasRunningNode(this);
 	}
 
 	public getRoot(){
@@ -182,9 +182,9 @@ export class AndCompositeNode extends CompositeNodeBase {
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE {
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE {
 		for(let bn of this.childList) {
-			if(bn.Proc(theOwner) == BEHAVIOR_STATE.FAIL){
+			if(bn.Proc(role) == BEHAVIOR_STATE.FAIL){
 				return BEHAVIOR_STATE.FAIL;
 			}
 		}
@@ -200,9 +200,9 @@ export class OrCompositeNode extends CompositeNodeBase {
 		super();
 	}
 
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE {
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE {
 		for(let bn of this.childList) {
-			if(bn.Proc(theOwner) == BEHAVIOR_STATE.SUCC){
+			if(bn.Proc(role) == BEHAVIOR_STATE.SUCC){
 				return BEHAVIOR_STATE.SUCC;
 			}
 		}
@@ -224,48 +224,48 @@ export class ParallelNode extends CompositeNodeBase {
 	}
 
 	//执行
-	public Execute(theOwner:RoleAgent) : BEHAVIOR_STATE{
+	public Execute(role:RoleAgent) : BEHAVIOR_STATE{
 		// 如果被中断，直接返回失败
-		if(theOwner.getBlackboard().isInterrupting(this.getBTTree())){
+		if(role.getBlackboard().isInterrupting(this.getBTTree())){
 			console.log(this.getBTTree().getName(),"is interrupting !!!");
 			return BEHAVIOR_STATE.FAIL;
 		}
 
-		if(theOwner.getBlackboard().hasRunningNode(this)) {
+		if(role.getBlackboard().hasRunningNode(this)) {
 			console.log(this.getClassName(),"is running !!!");
 			return BEHAVIOR_STATE.RUNNING;
 		}
 		
 		//before deal
 		// 标记为运行中节点
-		theOwner.getBlackboard().addRunningNode(this);
+		role.getBlackboard().addRunningNode(this);
 		for(let bn of this.childList) {
-			theOwner.getBlackboard().addRunningNode(bn);
+			role.getBlackboard().addRunningNode(bn);
 		}
 
 		//deal 
 		var result:BEHAVIOR_STATE = BEHAVIOR_STATE.SUCC;
 		for(let bn of this.childList) {
-			let rlt = bn.Proc(theOwner);
+			let rlt = bn.Proc(role);
 			if(rlt == BEHAVIOR_STATE.RUNNING){
 				result = BEHAVIOR_STATE.RUNNING;
 			} else {
-				bn.onDealOver(theOwner,rlt);
+				bn.onDealOver(role,rlt);
 			}
 		}
 
 		return result;
 	}
 
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE { 
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE { 
 		console.error("do not use this func");
 		return BEHAVIOR_STATE.RUNNING;
 	}
 
-	public checkResult(theOwner:RoleAgent) : BEHAVIOR_STATE {
+	public checkResult(role:RoleAgent) : BEHAVIOR_STATE {
 		let State:BEHAVIOR_STATE = BEHAVIOR_STATE.SUCC;
 		for(let bn of this.childList) {
-			if(theOwner.getBlackboard().hasRunningNode(bn)){
+			if(role.getBlackboard().hasRunningNode(bn)){
 				State = BEHAVIOR_STATE.RUNNING;
 				break;
 			}

@@ -11,7 +11,7 @@ export default class Rest extends ActionNode{
 		this.restTime = restTime;
 	}
 
-	public Proc(theOwner:RoleAgent) : BEHAVIOR_STATE{
-		return theOwner.ProcRest(this.restTime);
+	public Proc(role:RoleAgent) : BEHAVIOR_STATE{
+		return role.ProcRest(this.restTime);
 	}
 }

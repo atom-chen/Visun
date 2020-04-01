@@ -22,31 +22,31 @@ export default class BehaviorTree {
 	}
 
 	//是否在执行中
-	public isRunning(theOwner:RoleAgent) : boolean {
-		return theOwner.getBlackboard().hasRunningTree(this);
+	public isRunning(role:RoleAgent) : boolean {
+		return role.getBlackboard().hasRunningTree(this);
 	}
 
 	//执行
-	public Execute(theOwner:RoleAgent, Callback:Function) : BEHAVIOR_STATE {
-		if(this.isRunning(theOwner)){
+	public Execute(role:RoleAgent, Callback:Function) : BEHAVIOR_STATE {
+		if(this.isRunning(role)){
 			console.log("正在执行中：", this.clsName);
 			return BEHAVIOR_STATE.RUNNING;
 		}
-		theOwner.getBlackboard().tellBTBegin(this, Callback);
-		return this.mRootNode.Execute(theOwner);
+		role.getBlackboard().tellBTBegin(this, Callback);
+		return this.mRootNode.Execute(role);
 	}
 
 	//中断执行
-	public Interrupt(theOwner:RoleAgent) {
-		let running_nodes = theOwner.getBlackboard().getRunningNodesOfTree(this);
+	public Interrupt(role:RoleAgent) {
+		let running_nodes = role.getBlackboard().getRunningNodesOfTree(this);
 		if (running_nodes != null) {
-			theOwner.getBlackboard().markInterrupting(this, true);
+			role.getBlackboard().markInterrupting(this, true);
 			for(let dealingNode of running_nodes) {
-				dealingNode.Interrupt(theOwner);
+				dealingNode.Interrupt(role);
 			}
-			theOwner.getBlackboard().markInterrupting(this, false);
+			role.getBlackboard().markInterrupting(this, false);
 
-			theOwner.getBlackboard().tellBTInterrupt(this, BEHAVIOR_STATE.FAIL);
+			role.getBlackboard().tellBTInterrupt(this, BEHAVIOR_STATE.FAIL);
 		}
 	}
 	
