@@ -7,6 +7,6 @@ export default class KernelUIDefine {
 	public static HotupdateScene = { name:"HotupdateScene" };
 
 	public static dialog = "launcher/prefabs/ConfirmDlg";
-	public static toast = "common/prefabs/UIToast";
+	public static toast = "launcher/prefabs/UIToast";
 	public static loading = "launcher/scene/UILoading";
 }
