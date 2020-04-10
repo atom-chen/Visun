@@ -7,6 +7,7 @@ import ServerConfig from "../../common/script/definer/ServerConfig";
 import http_rules from "../../common/script/proto/http_rules";
 import HallRespond from "../../common/script/proxy/HallRespond";
 import HallRequest from "../../common/script/proto/HallRequest";
+import Updator from "../../kernel/basic/timer/Updator";
 
 
 export default class InitLogic {
@@ -35,6 +36,7 @@ export default class InitLogic {
         })
 
         TimerManager.start(node);
+        Updator.start(node);
 
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
