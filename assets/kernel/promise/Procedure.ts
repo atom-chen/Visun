@@ -127,7 +127,7 @@ export default class Procedure {
 	//----------------------------------------------------------------------------
 
 	//@overrided
-	public Proc(arg?:any) : void
+	public Proc() : void
 	{
 		if(this._procFunc) {
 			this._procFunc.invoke(this);
@@ -137,7 +137,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public run(arg?:any) : BEHAVIOR_STATE 
+	public run() : BEHAVIOR_STATE 
 	{
 		if(this._cur_state === BEHAVIOR_STATE.READY) {
 			this._cur_state = BEHAVIOR_STATE.RUNNING;
@@ -161,7 +161,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public checkDone(arg?:any) : BEHAVIOR_STATE 
+	public checkDone() : BEHAVIOR_STATE 
 	{
 		var bSelfDone = this.isSelfDone();
 		var bPartsDone = this.isPartsDone();
@@ -197,7 +197,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	protected resolve(rlt:BEHAVIOR_STATE, arg?:any) : void
+	protected resolve(rlt:BEHAVIOR_STATE) : void
 	{
 		if(this.isSelfDone()) { return; }
 		this._cur_state = rlt;
@@ -206,19 +206,19 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public resolve_fail(arg?:any) : void
+	public resolve_fail() : void
 	{
 		this.resolve(BEHAVIOR_STATE.FAIL);
 	}
 
 	//@overrided
-	public resolve_succ(arg?:any) : void 
+	public resolve_succ() : void 
 	{
 		this.resolve(BEHAVIOR_STATE.SUCC);
 	}
 
 	//@overrided
-	protected onStop(arg?:any) : void
+	protected onStop() : void
 	{
 		if(this._stopFunc){
 			this._stopFunc.invoke(this);
@@ -226,7 +226,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public stop(arg?:any) : void 
+	public stop() : void 
 	{
 		if( !this.isSelfDone() ) {
 			this._cur_state = BEHAVIOR_STATE.STOPED;
@@ -245,7 +245,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public recover(arg?:any) : void 
+	public recover() : void 
 	{
 		this._cur_state = BEHAVIOR_STATE.READY;
 
@@ -261,13 +261,13 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public isSelfDone(arg?:any) : boolean 
+	public isSelfDone() : boolean 
 	{
 		return this._cur_state===BEHAVIOR_STATE.SUCC || this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED;
 	}
 
 	//@overrided
-	public isPartsDone(arg?:any) : boolean 
+	public isPartsDone() : boolean 
 	{
 		if(this._partList) {
 			for(var i in this._partList) {
@@ -280,7 +280,7 @@ export default class Procedure {
 	}
 	
 	//@overrided
-	public isDone(arg?:any) : boolean 
+	public isDone() : boolean 
 	{
 		if(!this.isSelfDone()) { return false; }
 		if(!this.isPartsDone()) { return false; }
@@ -293,7 +293,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public getSelfResult(arg?:any) : BEHAVIOR_STATE
+	public getSelfResult() : BEHAVIOR_STATE
 	{
 		if(this._cur_state===BEHAVIOR_STATE.FAIL || this._cur_state===BEHAVIOR_STATE.STOPED){
 			return BEHAVIOR_STATE.FAIL;
@@ -304,7 +304,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public getPartsResult(arg?:any) : BEHAVIOR_STATE
+	public getPartsResult() : BEHAVIOR_STATE
 	{
 		if(this._partList) {
 			for(var i in this._partList) {
@@ -317,7 +317,7 @@ export default class Procedure {
 	}
 
 	//@overrided
-	public getResult(arg?:any) : BEHAVIOR_STATE
+	public getResult() : BEHAVIOR_STATE
 	{
 		if(!this.isSelfDone()) { return this._cur_state; }
 		if(!this.isPartsDone()) { return BEHAVIOR_STATE.RUNNING; }
