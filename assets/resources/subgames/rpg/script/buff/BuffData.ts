@@ -1,7 +1,4 @@
-import RoleEntity from "../role/RoleEntity";
-export enum BuffType {
-	Invalid,
-}
+import { BuffType } from "../define";
 
 export default class BuffData {
 
