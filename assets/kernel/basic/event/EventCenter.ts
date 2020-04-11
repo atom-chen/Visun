@@ -21,6 +21,7 @@ export default class EventCenter {
 		if(!EventCenter._neterrInst){ EventCenter._neterrInst = new EventCenter(); }
 		return EventCenter._neterrInst;
 	}
+	
 
 	public listenerCount(evtName:string|number) : number {
 		if(this._events[evtName]) { return this._events[evtName].length; }

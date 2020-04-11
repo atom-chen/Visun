@@ -8,6 +8,7 @@ import http_rules from "../../common/script/proto/http_rules";
 import HallRespond from "../../common/script/proxy/HallRespond";
 import HallRequest from "../../common/script/proto/HallRequest";
 import Updator from "../../kernel/basic/timer/Updator";
+import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 
 
 export default class InitLogic {
@@ -15,7 +16,14 @@ export default class InitLogic {
 
 	public static run(node: cc.Component) {
 		if(this._inited) { return; }
-		this._inited = true;
+        this._inited = true;
+        
+        KernelUIDefine.GameScene = { name:"GameScene" };
+        KernelUIDefine.LobbyScene = { name:"LobbyScene" };
+        KernelUIDefine.HotupdateScene = { name:"HotupdateScene" };
+        KernelUIDefine.dialog = "launcher/prefabs/ConfirmDlg";
+        KernelUIDefine.toast = "launcher/prefabs/UIToast";
+        KernelUIDefine.loading = "launcher/scene/UILoading";
 
 		cc.game.on(cc.game.EVENT_HIDE, ()=>{
             console.log("游戏进入后台");
