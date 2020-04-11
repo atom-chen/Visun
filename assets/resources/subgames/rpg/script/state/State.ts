@@ -1,3 +1,6 @@
+//-----------------------------------
+// 状态基类
+//-----------------------------------
 import RoleEntity from "../role/RoleEntity";
 
 export class StateBase {

@@ -1,4 +1,7 @@
-import { CombatStopReason, CombatResult } from "../define";
+//-----------------------------------
+// 战斗：基类
+//-----------------------------------
+import { CombatStopReason, CombatReport } from "../define";
 
 
 export default class CombatBase {
@@ -11,7 +14,7 @@ export default class CombatBase {
 
 	}
 
-	public genResult() : CombatResult {
+	public genResult() : CombatReport {
 		return null;
 	}
 

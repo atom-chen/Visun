@@ -1,3 +1,6 @@
+//-----------------------------------
+// Buff
+//-----------------------------------
 import { BuffType } from "../define";
 
 export default class BuffData {

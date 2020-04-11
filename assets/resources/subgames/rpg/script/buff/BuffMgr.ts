@@ -1,3 +1,6 @@
+//-----------------------------------
+// 某个角色身上的Buff集合
+//-----------------------------------
 import RoleEntity from "../role/RoleEntity";
 import BuffData from "./BuffData";
 

@@ -1,11 +1,35 @@
-import BuffMgr from "../buff/BuffMgr";
-import StateMgr from "../state/StateMgr";
-import SkillMgr from "../skill/SkillMgr";
+//-----------------------------------
+// 实体：角色
+//-----------------------------------
+import RoleAgent from "../../../../../kernel/behaviour/RoleAgent";
 
-export default class RoleEntity {
+export default class RoleEntity extends RoleAgent {
+	protected uid:number;
+	protected hp:number;
+	protected typeId:number;
+	protected roleType:number;
+	protected shapeId:number;
+	protected userName:string;
+	protected nick:string;
+	protected curExp:number;
+	protected grade:number;
+	protected vipLevel:number;
+	protected money:number;
+	protected diamond:number;
+	protected equip:string;
 
-	private stateObj:StateMgr;
-	private skillObj:SkillMgr;
-	private buffObj:BuffMgr;
+	protected posX:number;
+	protected posY:number;
+	protected posH:number;
+
+	protected RushSpeed:number;
+	protected RunSpeed:number;
+	protected WalkSpeed:number;
+	
+	protected curDir:number;
+	protected curMoveSpeed:number;
+	protected curSkySpeed:number;
+
+	
 
 }

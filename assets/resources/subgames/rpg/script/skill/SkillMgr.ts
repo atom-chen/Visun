@@ -1,3 +1,6 @@
+//-----------------------------------
+// 角色身上的技能包
+//-----------------------------------
 import Skill from "./Skill";
 
 export default class SkillMgr {

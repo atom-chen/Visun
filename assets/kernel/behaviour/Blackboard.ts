@@ -1,7 +1,6 @@
 //---------------------------------------
 // 行为树黑板，记录角色行为树需要的所有相关数据
 //---------------------------------------
-import Procedure from "../promise/Procedure";
 import RoleAgent from "./RoleAgent";
 import BehaviorNodeBase from "./BehaviorNode";
 import BehaviorTree from "./BehaviorTree";

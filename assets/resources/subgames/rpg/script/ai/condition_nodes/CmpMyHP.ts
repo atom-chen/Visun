@@ -1,6 +1,6 @@
-import { ConditionNode } from "../BehaviorNode";
-import RoleAgent from "../RoleAgent";
-import { BEHAVIOR_STATE } from "../../basic/defines/KernelDefine";
+import { ConditionNode } from "../../../../../../kernel/behaviour/BehaviorNode";
+import { BEHAVIOR_STATE } from "../../../../../../kernel/basic/defines/KernelDefine";
+import RoleFighter from "../../role/RoleFighter";
 
 export default class CmpMyHP extends ConditionNode {
 	
@@ -16,7 +16,7 @@ export default class CmpMyHP extends ConditionNode {
 		this.bPercent = bPercent;
 	}
 	
-	public Proc(role:RoleAgent) : BEHAVIOR_STATE{
+	public Proc(role:RoleFighter) : BEHAVIOR_STATE{
 		return role.ProcCmpMyHP(this.cmpMode, this.hpValue, this.bPercent);
 	}
 
