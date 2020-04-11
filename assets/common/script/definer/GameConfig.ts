@@ -179,6 +179,15 @@ var GameConfig = {
 		dir: "jskb",
 		viewpath: ViewDefine.UIbrttz
 	},
+
+	[GameKindEnum.RPG] : {
+		GameKind: GameKindEnum.RPG,
+		name: "RPG",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_brttz",
+		dir: "jskb",
+		viewpath: ViewDefine.battle1
+	},
 };
 
 export default GameConfig;
