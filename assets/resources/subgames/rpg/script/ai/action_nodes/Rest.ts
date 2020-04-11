@@ -12,6 +12,6 @@ export default class Rest extends ActionNode{
 	}
 
 	public Proc(role:RoleFighter) : BEHAVIOR_STATE{
-		return role.ProcRest(this.restTime);
+		return role.ProcRest(this, this.restTime);
 	}
 }

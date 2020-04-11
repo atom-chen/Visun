@@ -1,5 +1,8 @@
 //---------------------------------
 // 通用辅助接口
+
+import { isNil } from "./GlobalFuncs";
+
 //---------------------------------
 if(!ArrayBuffer["transfer"]) {
     ArrayBuffer["transfer"] = function (source, length) {
@@ -223,9 +226,11 @@ export default class CommonUtil {
 	//
 	static limitNum(v:number, minV:number, maxV:number) : number
 	{
-		if(minV>maxV){ var tmp = minV; minV = maxV; maxV = tmp; }
-		if(maxV!==null) { if(v>maxV) v = maxV; }
-		if(minV!==null) { if(v<minV) v = minV; }
+		if( !isNil(minV) && !isNil(maxV) ) {
+			if(minV>maxV){ var tmp = minV; minV = maxV; maxV = tmp; }
+		}
+		if(!isNil(maxV)) { if(v>maxV) v = maxV; }
+		if(!isNil(minV)) { if(v<minV) v = minV; }
 		return v;
 	}
 
