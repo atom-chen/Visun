@@ -2,9 +2,10 @@
 // 状态基类
 //-----------------------------------
 import RoleEntity from "../role/RoleEntity";
-import { StateParam } from "./StateConst";
+import { StateParam, RoleState } from "./StateConst";
 
 export default class StateBase {
+	protected id:RoleState = -1;
 
 	public frameUpdate() {
 
@@ -20,6 +21,10 @@ export default class StateBase {
 
 	public onComplete(who: RoleEntity) {
 
+	}
+
+	public getId() : RoleState {
+		return this.id;
 	}
 
 }

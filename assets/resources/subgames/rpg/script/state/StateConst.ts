@@ -1,6 +1,6 @@
 export enum RoleState {
 	//动作状态层（原子级动作）
-	ActBridge,	//
+	ActBridge = 1,	//
 	Idle,		//站
 	Walk,		//走
 	Run,		//跑

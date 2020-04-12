@@ -1,8 +1,10 @@
 import RoleEntity from "../../role/RoleEntity";
-import { StateParam } from "../StateConst";
+import { StateParam, RoleState } from "../StateConst";
 import { ActionState } from "../State";
 
 export default class DefendState extends ActionState {
+	protected id:RoleState = RoleState.Defend;
+	
 	public frameUpdate() {
 
 	}

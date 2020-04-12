@@ -1,8 +1,10 @@
 import RoleEntity from "../../role/RoleEntity";
-import { StateParam } from "../StateConst";
+import { StateParam, RoleState } from "../StateConst";
 import { SkyMoveState } from "../State";
 
 export default class SkyBridgeState extends SkyMoveState {
+	protected id:RoleState = RoleState.SkyBridge;
+	
 	public frameUpdate() {
 
 	}
