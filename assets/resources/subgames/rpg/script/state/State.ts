@@ -2,14 +2,15 @@
 // 状态基类
 //-----------------------------------
 import RoleEntity from "../role/RoleEntity";
+import { StateParam } from "./StateConst";
 
-export class StateBase {
+export default class StateBase {
 
 	public frameUpdate() {
 
 	}
 
-	public onEnter(who: RoleEntity) {
+	public onEnter(who: RoleEntity, param:StateParam) {
 
 	}
 

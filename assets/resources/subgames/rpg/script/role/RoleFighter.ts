@@ -10,7 +10,6 @@ import { AiCompare } from "../../../../../kernel/behaviour/AIUtil";
 import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler } from "../../../../../kernel/utils/GlobalFuncs";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 
 
 export default class RoleFighter extends RoleEntity {
@@ -28,6 +27,10 @@ export default class RoleFighter extends RoleEntity {
 	private stateObj:StateMgr;
 	private skillObj:SkillMgr;
 	private buffObj:BuffMgr;
+
+	public frameUpdate() {
+		
+	}
 
 	public addHP(v:number) : number {
 		this.curHp = this.curHp + v;
