@@ -28,6 +28,7 @@ import SkyLineState from "./SkyMoveStates/SkyLineState";
 import SkyPathState from "./SkyMoveStates/SkyPathState";
 import SkyRestState from "./SkyMoveStates/SkyRestState";
 import RoleFighter from "../role/RoleFighter";
+import { ActionState, GroundMoveState, SkyMoveState } from "./State";
 
 var ActionStateTable = {
 	[RoleState.ActBridge] : new ActionBridgeState(),
@@ -64,7 +65,13 @@ var SkyMoveStateTable = {
 
 
 export default class StateMgr {
+	private mCurActionState : ActionState;
+	private mCurGroundState : GroundMoveState;
+	private mCurSkyState : SkyMoveState;
+
 	public frameUpdate(obj:RoleFighter, dt:number) {
-		
+		this.mCurActionState.frameUpdate(obj);
+		this.mCurGroundState.frameUpdate(obj);
+		this.mCurSkyState.frameUpdate(obj);
 	}
 }

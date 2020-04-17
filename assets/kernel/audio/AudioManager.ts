@@ -2,7 +2,6 @@
 //-- 音频播放
 //-------------------------------------
 import CommonUtil from "../utils/CommonUtil";
-import LoadCenter from "../load/LoadCenter";
 
 
 export default class AudioManager {
@@ -95,7 +94,10 @@ export default class AudioManager {
 
 
     playMusic(audioclip: cc.AudioClip, loop: boolean) {
-        if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
+        if(!this._musicEnable || this._musicVolume<=0) { 
+        //    cc.log("music skip as disable or volume == 0"); 
+            return; 
+        }
         if(!audioclip) { cc.log("invalid audioClip"); return; }
         if(this._currentMusicCacheUrl===audioclip.nativeUrl) { return; }
         this._currentMusicCacheUrl = audioclip.nativeUrl;
@@ -107,7 +109,10 @@ export default class AudioManager {
     }
 
     playMusicAsync(path: string, loop: boolean) {
-        if(!this._musicEnable || this._musicVolume<=0) { cc.log("music skip as disable or volume == 0"); return; }
+        if(!this._musicEnable || this._musicVolume<=0) { 
+        //    cc.log("music skip as disable or volume == 0"); 
+            return; 
+        }
         if(!path || path===""){ cc.log("invalid path", path); return; }
     //    cc.log("play music", path, loop);
         this.loadAudioClip(path, true, function (audioclip) {
@@ -117,7 +122,10 @@ export default class AudioManager {
 
 
     playEffect(audioclip: cc.AudioClip, loop:boolean = false) {
-        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
+        if(!this._effectEnable || this._effectVolume<=0) { 
+        //    cc.log("effect skip as disable or volume == 0"); 
+            return; 
+        }
         if (!audioclip) { cc.log("invalid audioClip"); return; }
         this._currentEffectCacheUrl = audioclip.nativeUrl;
         this._currentEffectId = cc.audioEngine.playEffect(audioclip, loop);
@@ -128,7 +136,10 @@ export default class AudioManager {
     }
 
     playEffectAsync(path: string, loop:boolean = false) {
-        if(!this._effectEnable || this._effectVolume<=0) { cc.log("effect skip as disable or volume == 0"); return; }
+        if(!this._effectEnable || this._effectVolume<=0) { 
+        //    cc.log("effect skip as disable or volume == 0"); 
+            return; 
+        }
         if(!path || path===""){ cc.log("invalid path", path); return; }
     //    cc.log("play effect", path);
         this.loadAudioClip(path, true, function (audioclip) {

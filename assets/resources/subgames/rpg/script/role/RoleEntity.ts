@@ -2,7 +2,6 @@
 // 实体：角色
 //-----------------------------------
 import RoleAgent from "../../../../../kernel/behaviour/RoleAgent";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 
 export default class RoleEntity extends RoleAgent {
 	protected uid:number;

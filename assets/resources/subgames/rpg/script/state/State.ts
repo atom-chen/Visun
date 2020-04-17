@@ -7,7 +7,7 @@ import { StateParam, RoleState } from "./StateConst";
 export default class StateBase {
 	protected id:RoleState = -1;
 
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

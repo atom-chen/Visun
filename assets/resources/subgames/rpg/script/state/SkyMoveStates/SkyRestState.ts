@@ -5,7 +5,7 @@ import { SkyMoveState } from "../State";
 export default class SkyRestState extends SkyMoveState {
 	protected id:RoleState = RoleState.SkyRest;
 	
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

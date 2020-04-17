@@ -5,7 +5,7 @@ import { ActionState } from "../State";
 export default class SkillState extends ActionState {
 	protected id:RoleState = RoleState.Skill;
 	
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

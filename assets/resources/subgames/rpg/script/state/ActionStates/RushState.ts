@@ -5,7 +5,7 @@ import { ActionState } from "../State";
 export default class RushState extends ActionState {
 	protected id:RoleState = RoleState.Rush;
 	
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

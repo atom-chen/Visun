@@ -5,7 +5,7 @@ import { ActionState } from "../State";
 export default class FreezState extends ActionState {
 	protected id:RoleState = RoleState.Freez;
 	
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

@@ -5,7 +5,7 @@ import { GroundMoveState } from "../State";
 export default class GroundLineState extends GroundMoveState {
 	protected id:RoleState = RoleState.GroundLine;
 	
-	public frameUpdate() {
+	public frameUpdate(who: RoleEntity) {
 
 	}
 

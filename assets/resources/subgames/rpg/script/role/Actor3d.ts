@@ -1,6 +1,9 @@
 //-----------------------------------
 // 视图，3D模型
 //-----------------------------------
-export default class Actor3d {
+import ActorBase from "./ActorBase";
+
+
+export default class Actor3d extends ActorBase {
 	
 }
