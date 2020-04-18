@@ -1,7 +1,7 @@
 //-----------------------------------
 // 某个角色的状态管理
 //-----------------------------------
-import { RoleState, StateParam, CrossLayerForbitTable, ActionStateTransTable, GroundStateTransTable, SkyStateTransTable, StateName } from "./StateConst";
+import { RoleState, CrossLayerForbitTable, ActionStateTransTable, GroundStateTransTable, SkyStateTransTable, StateName, StateLayer } from "./StateConst";
 import JumpState from "./ActionStates/JumpState";
 import ActionBridgeState from "./ActionStates/ActionBridgeState";
 import DefendState from "./ActionStates/DefendState";
@@ -138,7 +138,7 @@ export default class StateMgr {
 		return false;
 	}
 
-	public setActionState(obj:RoleFighter, iState:RoleState, param:StateParam) {
+	public setActionState(obj:RoleFighter, iState:RoleState, param:any) {
 		if(this.mCurActionState) {
 			this.mCurActionState.onExit(obj);
 		}
@@ -147,7 +147,7 @@ export default class StateMgr {
 		this.mCurActionState.onEnter(obj, param);
 	}
 
-	public setGroundMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) {
+	public setGroundMoveState(obj:RoleFighter, iState:RoleState, param:any) {
 		if(this.mCurGroundState) {
 			this.mCurGroundState.onExit(obj);
 		}
@@ -156,7 +156,7 @@ export default class StateMgr {
 		this.mCurGroundState.onEnter(obj, param);
 	}
 
-	public setSkyMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) {
+	public setSkyMoveState(obj:RoleFighter, iState:RoleState, param:any) {
 		if(this.mCurSkyState) {
 			this.mCurSkyState.onExit(obj);
 		}
@@ -165,7 +165,7 @@ export default class StateMgr {
 		this.mCurSkyState.onEnter(obj, param);
 	}
 
-	public turn2ActionState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+	public turn2ActionState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
 		if(this.can2ActionState(obj, iState)) {
 			this.setActionState(obj, iState, param);
 			return true;
@@ -173,7 +173,7 @@ export default class StateMgr {
 		return false;
 	}
 
-	public turn2GroundMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+	public turn2GroundMoveState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
 		if(this.can2GroundMoveState(obj, iState)) {
 			this.setGroundMoveState(obj, iState, param);
 			return true;
@@ -181,12 +181,59 @@ export default class StateMgr {
 		return false;
 	}
 
-	public turn2SkyMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+	public turn2SkyMoveState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
 		if(this.can2SkyMoveState(obj, iState)) {
 			this.setSkyMoveState(obj, iState, param);
 			return true;
 		}
 		return false;
+	}
+
+	public getStateLayer(iState:RoleState) : StateLayer {
+		if(iState >= RoleState.ActBridge && iState <= RoleState.Relife) {
+			return StateLayer.Action;
+		} else if(iState >= RoleState.GroundBridge && iState <= RoleState.GroundFreez) {
+			return StateLayer.GroundMove;
+		} else {
+			return StateLayer.SkyMove;
+		}
+	}
+
+	public canToState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
+		var stateType = this.getStateLayer(iState);
+		if(stateType === StateLayer.Action) {
+			return this.can2ActionState(obj, iState);
+		} else if(stateType === StateLayer.GroundMove) {
+			return this.can2GroundMoveState(obj, iState);
+		} else {
+			return this.can2SkyMoveState(obj, iState);
+		}
+	}
+
+	public turnToState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
+		var stateType = this.getStateLayer(iState);
+		if(stateType === StateLayer.Action) {
+			if(this.can2ActionState(obj, iState)) {
+				this.setActionState(obj, iState, param);
+				return true;
+			} else {
+				return false;
+			}
+		} else if(stateType === StateLayer.GroundMove) {
+			if(this.can2GroundMoveState(obj, iState)) {
+				this.setGroundMoveState(obj, iState, param);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if(this.can2SkyMoveState(obj, iState)) {
+				this.setSkyMoveState(obj, iState, param);
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 
 }

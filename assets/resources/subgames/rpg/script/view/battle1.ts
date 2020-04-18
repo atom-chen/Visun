@@ -20,10 +20,7 @@ export default class battle1 extends BaseComponent {
         }, this);
         
         var r1 = new RoleFighter(1);
-        r1.getStateMgr().setActionState(r1, RoleState.Skill, null);
-        var a1 = r1.getStateMgr().can2ActionState(r1, RoleState.Run);
-        var a2 = r1.getStateMgr().can2GroundMoveState(r1, RoleState.SkyFreez);
-        cc.log(a1, a2);
+        r1.getStateMgr().turnToState(r1, RoleState.Skill, null);
     }
 
 }

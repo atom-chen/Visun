@@ -28,6 +28,13 @@ export enum RoleState {
 	SkyFreez,		//悬空
 }
 
+//状态转换表（动作层）
+export enum StateLayer {
+	Action,			//动作层
+	GroundMove,		//水平移动层
+	SkyMove,		//垂直移动层
+}
+
 export var StateName = {
 		[RoleState.ActBridge] : "ActBridge",
 		[RoleState.Idle] : "a站立",
@@ -55,13 +62,6 @@ export var StateName = {
 		[RoleState.SkyLine] : "s浮空",
 		[RoleState.SkyPath] : "s飞行",
 		[RoleState.SkyFreez] : "s锁定",
-}
-
-//状态转换表（动作层）
-export enum StateLayer {
-	Action,			//动作层
-	GroundMove,		//水平移动层
-	SkyMove,		//垂直移动层
 }
 
 //状态转换表（动作层）
@@ -446,9 +446,4 @@ export var CrossLayerForbitTable = {
 	[RoleState.SkyLine] : {
 		[RoleState.GroundFreez] : true,
 	},
-}
-
-export class StateParam {
-	public toState:number = -1;
-	public args:any;
 }

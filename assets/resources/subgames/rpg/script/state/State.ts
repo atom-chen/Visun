@@ -2,7 +2,7 @@
 // 状态基类
 //-----------------------------------
 import RoleEntity from "../role/RoleEntity";
-import { StateParam, RoleState } from "./StateConst";
+import { RoleState } from "./StateConst";
 
 export default class StateBase {
 	protected id:RoleState = -1;
@@ -11,7 +11,7 @@ export default class StateBase {
 
 	}
 
-	public onEnter(who: RoleEntity, param:StateParam) {
+	public onEnter(who: RoleEntity, param:any) {
 
 	}
 

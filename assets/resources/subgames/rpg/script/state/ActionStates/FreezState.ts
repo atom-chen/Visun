@@ -1,5 +1,5 @@
 import RoleEntity from "../../role/RoleEntity";
-import { StateParam, RoleState } from "../StateConst";
+import { RoleState } from "../StateConst";
 import StateBase from "../State";
 
 export default class FreezState extends StateBase {
@@ -9,7 +9,7 @@ export default class FreezState extends StateBase {
 
 	}
 
-	public onEnter(who: RoleEntity, param:StateParam) {
+	public onEnter(who: RoleEntity, param:any) {
 
 	}
 
