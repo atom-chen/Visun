@@ -28,6 +28,35 @@ export enum RoleState {
 	SkyFreez,		//悬空
 }
 
+export var StateName = {
+		[RoleState.ActBridge] : "ActBridge",
+		[RoleState.Idle] : "a站立",
+		[RoleState.Walk] : "a走",
+		[RoleState.Run] : "a跑",
+		[RoleState.Rush] : "a冲",
+		[RoleState.Jump] : "a跳",
+		[RoleState.Skill] : "a攻击",
+		[RoleState.Defend] : "a防御",
+		[RoleState.Hit] : "a受击",
+		[RoleState.Flight] : "a浮空",
+		[RoleState.Freez] : "a冻结",
+		[RoleState.Lie] : "a倒地",
+		[RoleState.Die] : "a死亡",
+		[RoleState.Relife] : "a复活",
+
+		[RoleState.GroundBridge] : "GroundBridge",
+		[RoleState.GroundRest] : "g休息",
+		[RoleState.GroundLine] : "g击退",
+		[RoleState.GroundPath] : "g寻路",
+		[RoleState.GroundFreez] : "g束缚",
+
+		[RoleState.SkyBridge] : "SkyBridge",
+		[RoleState.SkyRest] : "s着地",
+		[RoleState.SkyLine] : "s浮空",
+		[RoleState.SkyPath] : "s飞行",
+		[RoleState.SkyFreez] : "s锁定",
+}
+
 //状态转换表（动作层）
 export enum StateLayer {
 	Action,			//动作层
@@ -71,6 +100,22 @@ export var ActionStateTransTable = {
 	},
 	[RoleState.Walk] : {
 		[RoleState.ActBridge] : false,
+		[RoleState.Idle] : true,
+		[RoleState.Walk] : true,
+		[RoleState.Run] : true,
+		[RoleState.Rush] : true,
+		[RoleState.Jump] : true,
+		// [RoleState.Skill] : true,
+		// [RoleState.Defend] : true,
+		// [RoleState.Hit] : true,
+		// [RoleState.Flight] : true,
+		// [RoleState.Freez] : true,
+		// [RoleState.Lie] : true,
+		// [RoleState.Die] : true,
+		// [RoleState.Relife] : true,
+	},
+	[RoleState.Run] : {
+		[RoleState.ActBridge] : true,
 		[RoleState.Idle] : true,
 		[RoleState.Walk] : true,
 		[RoleState.Run] : true,

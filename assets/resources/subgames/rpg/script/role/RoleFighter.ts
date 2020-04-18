@@ -10,6 +10,7 @@ import { AiCompare } from "../../../../../kernel/behaviour/AIUtil";
 import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import Updator from "../../../../../kernel/basic/timer/Updator";
 
 
 export default class RoleFighter extends RoleEntity {
@@ -37,6 +38,7 @@ export default class RoleFighter extends RoleEntity {
 		this.skillObj = new SkillMgr();
 		this.buffObj = new BuffMgr();
 		this.stateObj.resetStates(this);
+		Updator.registerUpdator(newHandler(this.frameUpdate, this));
 	}
 
 	public getId() : number {

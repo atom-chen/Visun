@@ -1,8 +1,7 @@
 //-----------------------------------
 // 某个角色的状态管理
 //-----------------------------------
-
-import { RoleState, StateParam, CrossLayerForbitTable, ActionStateTransTable, GroundStateTransTable, SkyStateTransTable } from "./StateConst";
+import { RoleState, StateParam, CrossLayerForbitTable, ActionStateTransTable, GroundStateTransTable, SkyStateTransTable, StateName } from "./StateConst";
 import JumpState from "./ActionStates/JumpState";
 import ActionBridgeState from "./ActionStates/ActionBridgeState";
 import DefendState from "./ActionStates/DefendState";
@@ -91,17 +90,17 @@ export default class StateMgr {
 	}
 
 	//检查是否被跨层阻止
-	public checkCrossLayerForbit(obj:RoleFighter, iState:RoleState) : boolean {
-		if(isNil(CrossLayerForbitTable[iState])) { return true; }
+	private isCrossLayerForbit(obj:RoleFighter, iState:RoleState) : boolean {
+		if(isNil(CrossLayerForbitTable[iState])) { return false; }
 		var forbits = CrossLayerForbitTable[iState];
-		if(forbits[obj.getStateMgr().mCurActionState.getId()]==true) { return false; }
-		if(forbits[obj.getStateMgr().mCurGroundState.getId()]==true) { return false; }
-		if(forbits[obj.getStateMgr().mCurSkyState.getId()]==true) { return false; }
+		if(forbits[obj.getStateMgr().mCurActionState.getId()]==true) { return true; }
+		if(forbits[obj.getStateMgr().mCurGroundState.getId()]==true) { return true; }
+		if(forbits[obj.getStateMgr().mCurSkyState.getId()]==true) { return true; }
 		return false;
 	}
 
 	public can2ActionState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(!this.checkCrossLayerForbit(obj, iState)) {
+		if(this.isCrossLayerForbit(obj, iState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurActionState)) {
@@ -114,7 +113,7 @@ export default class StateMgr {
 	}
 
 	public can2GroundMoveState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(!this.checkCrossLayerForbit(obj, iState)) {
+		if(this.isCrossLayerForbit(obj, iState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurGroundState)) {
@@ -127,7 +126,7 @@ export default class StateMgr {
 	}
 
 	public can2SkyMoveState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(!this.checkCrossLayerForbit(obj, iState)) {
+		if(this.isCrossLayerForbit(obj, iState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurSkyState)) {
@@ -143,7 +142,7 @@ export default class StateMgr {
 		if(this.mCurActionState) {
 			this.mCurActionState.onExit(obj);
 		}
-		cc.log(obj.getId(), this.mCurActionState.getId() + " ---> " + iState); 
+		cc.log(obj.getId(), StateName[this.mCurActionState.getId()] + " ---> " + StateName[iState]); 
 		this.mCurActionState = ActionStateTable[iState];
 		this.mCurActionState.onEnter(obj, param);
 	}
@@ -152,7 +151,7 @@ export default class StateMgr {
 		if(this.mCurGroundState) {
 			this.mCurGroundState.onExit(obj);
 		}
-		cc.log(obj.getId(), this.mCurGroundState.getId() + " ---> " + iState); 
+		cc.log(obj.getId(), StateName[this.mCurGroundState.getId()] + " ---> " + StateName[iState]); 
 		this.mCurGroundState = GroundMoveStateTable[iState];
 		this.mCurGroundState.onEnter(obj, param);
 	}
@@ -161,9 +160,33 @@ export default class StateMgr {
 		if(this.mCurSkyState) {
 			this.mCurSkyState.onExit(obj);
 		}
-		cc.log(obj.getId(), this.mCurSkyState.getId() + " ---> " + iState); 
+		cc.log(obj.getId(), StateName[this.mCurSkyState.getId()] + " ---> " + StateName[iState]); 
 		this.mCurSkyState = SkyMoveStateTable[iState];
 		this.mCurSkyState.onEnter(obj, param);
+	}
+
+	public turn2ActionState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+		if(this.can2ActionState(obj, iState)) {
+			this.setActionState(obj, iState, param);
+			return true;
+		}
+		return false;
+	}
+
+	public turn2GroundMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+		if(this.can2GroundMoveState(obj, iState)) {
+			this.setGroundMoveState(obj, iState, param);
+			return true;
+		}
+		return false;
+	}
+
+	public turn2SkyMoveState(obj:RoleFighter, iState:RoleState, param:StateParam) : boolean {
+		if(this.can2SkyMoveState(obj, iState)) {
+			this.setSkyMoveState(obj, iState, param);
+			return true;
+		}
+		return false;
 	}
 
 }
