@@ -2,10 +2,12 @@
 // 角色身上的技能包
 //-----------------------------------
 import Skill from "./Skill";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 export default class SkillMgr {
 
-	skillList: Array<Skill> = [];
+	private skillList: Array<Skill> = [];
+	private curSkill:Skill;
 
 	public addSkill(idx:number, skillObj:Skill) : boolean {
 		for(var i=0; i<5; i++) {
@@ -25,6 +27,21 @@ export default class SkillMgr {
 			}
 		}
 		return false;
+	}
+
+	public playSkill(skillIndex:number) {
+		if(isNil(this.skillList[skillIndex])) {
+			cc.log("尚未学习该技能：", skillIndex);
+			return;
+		}
+		this.curSkill = this.skillList[skillIndex];
+		this.skillList[skillIndex].play(null, null);
+	}
+
+	public interruptSkill() {
+		if(!isNil(this.curSkill)) {
+			this.curSkill.interrupt();
+		}
 	}
 
 }
