@@ -2,6 +2,15 @@ import { GameKindEnum } from "./ConstDefine";
 import ViewDefine from "./ViewDefine";
 
 var GameConfig = {
+	[GameKindEnum.RPG] : {
+		GameKind: GameKindEnum.RPG,
+		name: "RPG",
+		openState: 1,
+		icon: "lobby/imgs/gameico/ico_rpg",
+		dir: "jskb",
+		viewpath: ViewDefine.battle1
+	},
+	
 	[GameKindEnum.BrCowCow] : {
 		GameKind: GameKindEnum.BrCowCow,
 		name: "百人牛牛",
@@ -178,15 +187,6 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_brttz",
 		dir: "jskb",
 		viewpath: ViewDefine.UIbrttz
-	},
-
-	[GameKindEnum.RPG] : {
-		GameKind: GameKindEnum.RPG,
-		name: "RPG",
-		openState: 1,
-		icon: "lobby/imgs/gameico/ico_brttz",
-		dir: "jskb",
-		viewpath: ViewDefine.battle1
 	},
 };
 
