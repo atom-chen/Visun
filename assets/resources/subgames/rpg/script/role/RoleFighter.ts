@@ -9,7 +9,7 @@ import BuffMgr from "../buff/BuffMgr";
 import { AiCompare } from "../../../../../kernel/behaviour/AIUtil";
 import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import { newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 
 export default class RoleFighter extends RoleEntity {
@@ -37,6 +37,16 @@ export default class RoleFighter extends RoleEntity {
 
 	public frameUpdate() {
 		this.stateObj.frameUpdate(this, 0);
+	}
+
+	public getStateMgr() : StateMgr {
+		return this.stateObj;
+	}
+
+	public setPos(x:number, y:number, h:number) {
+		if(!isNil(x)) { this.posX = x; } 
+		if(!isNil(y)) { this.posY = y; }
+		if(!isNil(h)) { this.posH = h; }
 	}
 
 	public addHP(v:number) : number {

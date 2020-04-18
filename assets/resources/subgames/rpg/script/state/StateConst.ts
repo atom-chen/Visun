@@ -36,7 +36,7 @@ export enum StateLayer {
 }
 
 //状态转换表（动作层）
-var ActionStateTransTable = {
+export var ActionStateTransTable = {
 	[RoleState.ActBridge] : {
 	//	[RoleState.ActBridge] : false,
 		[RoleState.Idle] : true,
@@ -264,7 +264,7 @@ var ActionStateTransTable = {
 }
 
 //状态转换表（水平移动层）
-var GroundStateTransTable = {
+export var GroundStateTransTable = {
 	[RoleState.GroundBridge] : {
 	//	[RoleState.GroundBridge] : true,
 		[RoleState.GroundRest] : true,
@@ -303,7 +303,7 @@ var GroundStateTransTable = {
 }
 
 //状态转换表（空中移动层）
-var SkyStateTransTable = {
+export var SkyStateTransTable = {
 	[RoleState.SkyBridge] : {
 	//	[RoleState.SkyBridge] : true,
 		[RoleState.SkyRest] : true,
@@ -342,7 +342,7 @@ var SkyStateTransTable = {
 }
 
 //跨层阻止
-var CrossLayerForbitTable = {
+export var CrossLayerForbitTable = {
 	//ActState阻止SkyMovState
 	[RoleState.SkyLine] : {
 		[RoleState.Skill] : true,
