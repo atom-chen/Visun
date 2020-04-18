@@ -84,100 +84,100 @@ export default class StateMgr {
 	}
 
 	//检查是否被跨层阻止
-	private isCrossLayerForbit(obj:RoleFighter, iState:RoleState) : boolean {
-		if(isNil(CrossLayerForbitTable[iState])) { return false; }
-		var forbits = CrossLayerForbitTable[iState];
+	private isCrossLayerForbit(obj:RoleFighter, toState:RoleState) : boolean {
+		if(isNil(CrossLayerForbitTable[toState])) { return false; }
+		var forbits = CrossLayerForbitTable[toState];
 		if(forbits[obj.getStateMgr().mCurActionState.getId()]==true) { return true; }
 		if(forbits[obj.getStateMgr().mCurGroundState.getId()]==true) { return true; }
 		if(forbits[obj.getStateMgr().mCurSkyState.getId()]==true) { return true; }
 		return false;
 	}
 
-	public can2ActionState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(this.isCrossLayerForbit(obj, iState)) {
+	public can2ActionState(obj:RoleFighter, toState:RoleState) : boolean {
+		if(this.isCrossLayerForbit(obj, toState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurActionState)) {
 			return true;
 		}
-		if(ActionStateTransTable[iState][obj.getStateMgr().mCurActionState.getId()]) {
+		if(ActionStateTransTable[toState][obj.getStateMgr().mCurActionState.getId()]) {
 			return true;
 		}
 		return false;
 	}
 
-	public can2GroundMoveState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(this.isCrossLayerForbit(obj, iState)) {
+	public can2GroundMoveState(obj:RoleFighter, toState:RoleState) : boolean {
+		if(this.isCrossLayerForbit(obj, toState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurGroundState)) {
 			return true;
 		}
-		if(GroundStateTransTable[iState][obj.getStateMgr().mCurGroundState.getId()]) {
+		if(GroundStateTransTable[toState][obj.getStateMgr().mCurGroundState.getId()]) {
 			return true;
 		}
 		return false;
 	}
 
-	public can2SkyMoveState(obj:RoleFighter, iState:RoleState) : boolean {
-		if(this.isCrossLayerForbit(obj, iState)) {
+	public can2SkyMoveState(obj:RoleFighter, toState:RoleState) : boolean {
+		if(this.isCrossLayerForbit(obj, toState)) {
 			return false;
 		}
 		if(isNil(obj.getStateMgr().mCurSkyState)) {
 			return true;
 		}
-		if(SkyStateTransTable[iState][obj.getStateMgr().mCurSkyState.getId()]) {
+		if(SkyStateTransTable[toState][obj.getStateMgr().mCurSkyState.getId()]) {
 			return true;
 		}
 		return false;
 	}
 
-	public setActionState(obj:RoleFighter, iState:RoleState, param:any) {
+	public setActionState(obj:RoleFighter, toState:RoleState, param:any) {
 		if(this.mCurActionState) {
 			this.mCurActionState.onExit(obj);
 		}
-		cc.log(obj.getId(), StateName[this.mCurActionState.getId()] + " ---> " + StateName[iState]); 
-		this.mCurActionState = ActionStateTable[iState];
+		cc.log(obj.getId(), StateName[this.mCurActionState.getId()] + " ---> " + StateName[toState]); 
+		this.mCurActionState = ActionStateTable[toState];
 		this.mCurActionState.onEnter(obj, param);
 	}
 
-	public setGroundMoveState(obj:RoleFighter, iState:RoleState, param:any) {
+	public setGroundMoveState(obj:RoleFighter, toState:RoleState, param:any) {
 		if(this.mCurGroundState) {
 			this.mCurGroundState.onExit(obj);
 		}
-		cc.log(obj.getId(), StateName[this.mCurGroundState.getId()] + " ---> " + StateName[iState]); 
-		this.mCurGroundState = GroundMoveStateTable[iState];
+		cc.log(obj.getId(), StateName[this.mCurGroundState.getId()] + " ---> " + StateName[toState]); 
+		this.mCurGroundState = GroundMoveStateTable[toState];
 		this.mCurGroundState.onEnter(obj, param);
 	}
 
-	public setSkyMoveState(obj:RoleFighter, iState:RoleState, param:any) {
+	public setSkyMoveState(obj:RoleFighter, toState:RoleState, param:any) {
 		if(this.mCurSkyState) {
 			this.mCurSkyState.onExit(obj);
 		}
-		cc.log(obj.getId(), StateName[this.mCurSkyState.getId()] + " ---> " + StateName[iState]); 
-		this.mCurSkyState = SkyMoveStateTable[iState];
+		cc.log(obj.getId(), StateName[this.mCurSkyState.getId()] + " ---> " + StateName[toState]); 
+		this.mCurSkyState = SkyMoveStateTable[toState];
 		this.mCurSkyState.onEnter(obj, param);
 	}
 
-	public turn2ActionState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
-		if(this.can2ActionState(obj, iState)) {
-			this.setActionState(obj, iState, param);
+	public turn2ActionState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		if(this.can2ActionState(obj, toState)) {
+			this.setActionState(obj, toState, param);
 			return true;
 		}
 		return false;
 	}
 
-	public turn2GroundMoveState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
-		if(this.can2GroundMoveState(obj, iState)) {
-			this.setGroundMoveState(obj, iState, param);
+	public turn2GroundMoveState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		if(this.can2GroundMoveState(obj, toState)) {
+			this.setGroundMoveState(obj, toState, param);
 			return true;
 		}
 		return false;
 	}
 
-	public turn2SkyMoveState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
-		if(this.can2SkyMoveState(obj, iState)) {
-			this.setSkyMoveState(obj, iState, param);
+	public turn2SkyMoveState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		if(this.can2SkyMoveState(obj, toState)) {
+			this.setSkyMoveState(obj, toState, param);
 			return true;
 		}
 		return false;
@@ -193,36 +193,36 @@ export default class StateMgr {
 		}
 	}
 
-	public canToState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
-		var stateType = this.getStateLayer(iState);
+	public canToState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		var stateType = this.getStateLayer(toState);
 		if(stateType === StateLayer.Action) {
-			return this.can2ActionState(obj, iState);
+			return this.can2ActionState(obj, toState);
 		} else if(stateType === StateLayer.GroundMove) {
-			return this.can2GroundMoveState(obj, iState);
+			return this.can2GroundMoveState(obj, toState);
 		} else {
-			return this.can2SkyMoveState(obj, iState);
+			return this.can2SkyMoveState(obj, toState);
 		}
 	}
 
-	public turnToState(obj:RoleFighter, iState:RoleState, param:any) : boolean {
-		var stateType = this.getStateLayer(iState);
+	public turnToState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		var stateType = this.getStateLayer(toState);
 		if(stateType === StateLayer.Action) {
-			if(this.can2ActionState(obj, iState)) {
-				this.setActionState(obj, iState, param);
+			if(this.can2ActionState(obj, toState)) {
+				this.setActionState(obj, toState, param);
 				return true;
 			} else {
 				return false;
 			}
 		} else if(stateType === StateLayer.GroundMove) {
-			if(this.can2GroundMoveState(obj, iState)) {
-				this.setGroundMoveState(obj, iState, param);
+			if(this.can2GroundMoveState(obj, toState)) {
+				this.setGroundMoveState(obj, toState, param);
 				return true;
 			} else {
 				return false;
 			}
 		} else {
-			if(this.can2SkyMoveState(obj, iState)) {
-				this.setSkyMoveState(obj, iState, param);
+			if(this.can2SkyMoveState(obj, toState)) {
+				this.setSkyMoveState(obj, toState, param);
 				return true;
 			} else {
 				return false;
