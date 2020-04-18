@@ -10,9 +10,11 @@ import { AiCompare } from "../../../../../kernel/behaviour/AIUtil";
 import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
-import Updator from "../../../../../kernel/basic/timer/Updator";
 
 
+const {ccclass, property} = cc._decorator;
+
+@ccclass
 export default class RoleFighter extends RoleEntity {
 	protected curMp:number;
 	protected curHp:number;
@@ -37,16 +39,16 @@ export default class RoleFighter extends RoleEntity {
 		this.stateObj = new StateMgr();
 		this.skillObj = new SkillMgr();
 		this.buffObj = new BuffMgr();
-		this.stateObj.resetStates(this);
-		Updator.registerUpdator(newHandler(this.frameUpdate, this));
+	//	this.stateObj.resetStates(this);
+	//	Updator.registerUpdator(newHandler(this.update, this));
+	}
+
+	public update() {
+		this.stateObj.frameUpdate(this, 0);
 	}
 
 	public getId() : number {
 		return this.roleId;
-	}
-
-	public frameUpdate() {
-		this.stateObj.frameUpdate(this, 0);
 	}
 
 	public getStateMgr() : StateMgr {

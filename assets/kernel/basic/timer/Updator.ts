@@ -26,10 +26,11 @@ export default class Updator {
 		Updator.funcs.push(func);
 	}
 
-	public static unregisterUpdator(func:CHandler) {
-		var idx = Updator.funcs.indexOf(func);
-		if(idx >= 0) {
-			Updator.funcs.splice(idx);
+	public static unregisterUpdator(func:Function, thisObj:any) {
+		for(var i=0; i<Updator.funcs.length; i++) {
+			if(Updator.funcs[i].isSelf(func, thisObj)) {
+				Updator.funcs.splice(i);
+			}
 		}
 	}
 

@@ -19,6 +19,10 @@ export default class CHandler {
 		return who._fn === this._fn && who._thisObj === this._thisObj
 	}
 
+	public isSelf(fun:Function, thisObj:any) {
+		return this._fn === fun && this._thisObj === thisObj;
+	}
+
 	public invoke(part:any=null) : any
 	{
 		var ret:any;
