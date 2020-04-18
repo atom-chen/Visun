@@ -13,7 +13,7 @@ export default class SkillState extends StateBase {
 	}
 
 	public onEnter(who: RoleEntity, param:any) {
-		TimerManager.delayFrame(10, newHandler((tmr, target)=>{
+		TimerManager.delayFrame(66, newHandler((tmr, target)=>{
 			this.onComplete(target);
 		}, this, who))
 	}
@@ -24,6 +24,6 @@ export default class SkillState extends StateBase {
 
 	public onComplete(who: RoleEntity) {
 		var a = who as RoleFighter;
-		a.getStateMgr().setActionState(a, RoleState.ActBridge, RoleState.Idle)
+		a.getStateMgr().setActionState(a, RoleState.Idle, null);
 	}
 }

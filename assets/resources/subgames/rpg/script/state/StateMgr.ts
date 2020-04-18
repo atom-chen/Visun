@@ -3,7 +3,6 @@
 //-----------------------------------
 import { RoleState, CrossLayerForbitTable, ActionStateTransTable, GroundStateTransTable, SkyStateTransTable, StateName, StateLayer } from "./StateConst";
 import JumpState from "./ActionStates/JumpState";
-import ActionBridgeState from "./ActionStates/ActionBridgeState";
 import DefendState from "./ActionStates/DefendState";
 import DieState from "./ActionStates/DieState";
 import FlightState from "./ActionStates/FlightState";
@@ -16,12 +15,10 @@ import RunState from "./ActionStates/RunState";
 import RushState from "./ActionStates/RushState";
 import SkillState from "./ActionStates/SkillState";
 import WalkState from "./ActionStates/WalkState";
-import GroundBridgeState from "./GroundMoveStates/GroundBridgeState";
 import GroundFreezState from "./GroundMoveStates/GroundFreezState";
 import GroundLineState from "./GroundMoveStates/GroundLineState";
 import GroundPathState from "./GroundMoveStates/GroundPathState";
 import GroundRestState from "./GroundMoveStates/GroundRestState";
-import SkyBridgeState from "./SkyMoveStates/SkyBridgeState";
 import SkyFreezState from "./SkyMoveStates/SkyFreezState";
 import SkyLineState from "./SkyMoveStates/SkyLineState";
 import SkyPathState from "./SkyMoveStates/SkyPathState";
@@ -31,7 +28,6 @@ import StateBase from "./State";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 var ActionStateTable:{[key:number]:StateBase} = {
-	[RoleState.ActBridge] : new ActionBridgeState(),
 	[RoleState.Defend] : new DefendState(),
 	[RoleState.Die] : new DieState(),
 	[RoleState.Flight] : new FlightState(),
@@ -48,7 +44,6 @@ var ActionStateTable:{[key:number]:StateBase} = {
 }
 
 var GroundMoveStateTable:{[key:number]:StateBase} = {
-	[RoleState.GroundBridge] : new GroundBridgeState(),
 	[RoleState.GroundFreez] : new GroundFreezState(),
 	[RoleState.GroundLine] : new GroundLineState(),
 	[RoleState.GroundPath] : new GroundPathState(),
@@ -56,7 +51,6 @@ var GroundMoveStateTable:{[key:number]:StateBase} = {
 }
 
 var SkyMoveStateTable:{[key:number]:StateBase} = {
-	[RoleState.SkyBridge] : new SkyBridgeState(),
 	[RoleState.SkyFreez] : new SkyFreezState(),
 	[RoleState.SkyLine] : new SkyLineState(),
 	[RoleState.SkyPath] : new SkyPathState(),
@@ -190,9 +184,9 @@ export default class StateMgr {
 	}
 
 	public getStateLayer(iState:RoleState) : StateLayer {
-		if(iState >= RoleState.ActBridge && iState <= RoleState.Relife) {
+		if(iState >= RoleState.Idle && iState <= RoleState.Relife) {
 			return StateLayer.Action;
-		} else if(iState >= RoleState.GroundBridge && iState <= RoleState.GroundFreez) {
+		} else if(iState >= RoleState.GroundLine && iState <= RoleState.GroundFreez) {
 			return StateLayer.GroundMove;
 		} else {
 			return StateLayer.SkyMove;
