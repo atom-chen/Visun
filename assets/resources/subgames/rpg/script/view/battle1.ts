@@ -4,6 +4,7 @@
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
+import RoleFighter from "../role/RoleFighter";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,7 +16,10 @@ export default class battle1 extends BaseComponent {
 
 		CommonUtil.addClickEvent(this.m_ui.btn_quit, function(){ 
             GameManager.getInstance().quitGame(0);
-		}, this);
+        }, this);
+        
+        var r1 = new RoleFighter(1);
+        var r2 = new RoleFighter(2);
     }
 
 }

@@ -28,7 +28,7 @@ import SkyLineState from "./SkyMoveStates/SkyLineState";
 import SkyPathState from "./SkyMoveStates/SkyPathState";
 import SkyRestState from "./SkyMoveStates/SkyRestState";
 import RoleFighter from "../role/RoleFighter";
-import StateBase, { ActionState, GroundMoveState, SkyMoveState } from "./State";
+import StateBase from "./State";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 var ActionStateTable:{[key:number]:StateBase} = {
@@ -66,15 +66,15 @@ var SkyMoveStateTable:{[key:number]:StateBase} = {
 
 
 export default class StateMgr {
-	private mCurActionState : ActionState;
-	private mCurGroundState : GroundMoveState;
-	private mCurSkyState : SkyMoveState;
+	private mCurActionState : StateBase;
+	private mCurGroundState : StateBase;
+	private mCurSkyState : StateBase;
 //	private mTarget : RoleFighter;
 
 	constructor() {
-		this.mCurActionState = new ActionState();
-		this.mCurGroundState = new GroundMoveState();
-		this.mCurSkyState = new SkyMoveState();
+		this.mCurActionState = new IdleState();
+		this.mCurGroundState = new GroundRestState();
+		this.mCurSkyState = new SkyRestState();
 	}
 
 	public frameUpdate(obj:RoleFighter, dt:number) {
@@ -143,6 +143,7 @@ export default class StateMgr {
 		if(this.mCurActionState) {
 			this.mCurActionState.onExit(obj);
 		}
+		cc.log(obj.getId(), this.mCurActionState.getId() + " ---> " + iState); 
 		this.mCurActionState = ActionStateTable[iState];
 		this.mCurActionState.onEnter(obj, param);
 	}
@@ -151,6 +152,7 @@ export default class StateMgr {
 		if(this.mCurGroundState) {
 			this.mCurGroundState.onExit(obj);
 		}
+		cc.log(obj.getId(), this.mCurGroundState.getId() + " ---> " + iState); 
 		this.mCurGroundState = GroundMoveStateTable[iState];
 		this.mCurGroundState.onEnter(obj, param);
 	}
@@ -159,8 +161,9 @@ export default class StateMgr {
 		if(this.mCurSkyState) {
 			this.mCurSkyState.onExit(obj);
 		}
-		this.mCurSkyState = SkyMoveState[iState];
+		cc.log(obj.getId(), this.mCurSkyState.getId() + " ---> " + iState); 
+		this.mCurSkyState = SkyMoveStateTable[iState];
 		this.mCurSkyState.onEnter(obj, param);
 	}
-	
+
 }

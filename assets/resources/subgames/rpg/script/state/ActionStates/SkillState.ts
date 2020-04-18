@@ -1,8 +1,8 @@
 import RoleEntity from "../../role/RoleEntity";
 import { StateParam, RoleState } from "../StateConst";
-import { ActionState } from "../State";
+import StateBase from "../State";
 
-export default class SkillState extends ActionState {
+export default class SkillState extends StateBase {
 	protected id:RoleState = RoleState.Skill;
 	
 	public frameUpdate(who: RoleEntity) {

@@ -28,11 +28,19 @@ export default class RoleFighter extends RoleEntity {
 	private skillObj:SkillMgr;
 	private buffObj:BuffMgr;
 
-	constructor() {
+	public roleId: number;
+
+	constructor(id:number) {
 		super();
+		this.roleId = id;
 		this.stateObj = new StateMgr();
 		this.skillObj = new SkillMgr();
 		this.buffObj = new BuffMgr();
+		this.stateObj.resetStates(this);
+	}
+
+	public getId() : number {
+		return this.roleId;
 	}
 
 	public frameUpdate() {

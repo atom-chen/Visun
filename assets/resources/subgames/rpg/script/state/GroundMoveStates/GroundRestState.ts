@@ -1,8 +1,8 @@
 import RoleEntity from "../../role/RoleEntity";
 import { StateParam, RoleState } from "../StateConst";
-import { GroundMoveState } from "../State";
+import StateBase from "../State";
 
-export default class GroundRestState extends GroundMoveState {
+export default class GroundRestState extends StateBase {
 	protected id:RoleState = RoleState.GroundRest;
 	
 	public frameUpdate(who: RoleEntity) {

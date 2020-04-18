@@ -1,8 +1,8 @@
 import RoleEntity from "../../role/RoleEntity";
 import { StateParam, RoleState } from "../StateConst";
-import { SkyMoveState } from "../State";
+import StateBase from "../State";
 
-export default class SkyLineState extends SkyMoveState {
+export default class SkyLineState extends StateBase {
 	protected id:RoleState = RoleState.SkyLine;
 	
 	public frameUpdate(who: RoleEntity) {

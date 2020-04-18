@@ -29,17 +29,3 @@ export default class StateBase {
 
 }
 
-
-export class SkyMoveState extends StateBase {
-
-}
-
-
-export class GroundMoveState extends StateBase {
-
-}
-
-
-export class ActionState extends StateBase {
-
-}
