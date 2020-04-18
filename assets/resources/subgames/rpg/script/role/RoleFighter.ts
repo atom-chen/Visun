@@ -25,11 +25,11 @@ export default class RoleFighter extends RoleEntity {
 	protected CriDef:number;
 	protected CriProb:number;
 
-	private stateObj:StateMgr;
-	private skillObj:SkillMgr;
-	private buffObj:BuffMgr;
+	protected stateObj:StateMgr;
+	protected skillObj:SkillMgr;
+	protected buffObj:BuffMgr;
 
-	public roleId: number;
+	protected roleId: number;
 
 	constructor(id:number) {
 		super();
