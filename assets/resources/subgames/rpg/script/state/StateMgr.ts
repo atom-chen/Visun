@@ -76,11 +76,22 @@ export default class StateMgr {
 		this.mCurSkyState.frameUpdate(obj);
 	}
 
+
 	public resetStates(obj:RoleFighter) {
 		obj.setPos(null, null, 0);
 		this.setActionState(obj, RoleState.Idle, null);
 		this.setGroundMoveState(obj, RoleState.GroundRest, null);
 		this.setSkyMoveState(obj, RoleState.SkyRest, null);
+	}
+
+	public getStateLayer(iState:RoleState) : StateLayer {
+		if(iState >= RoleState.Idle && iState <= RoleState.Relife) {
+			return StateLayer.Action;
+		} else if(iState >= RoleState.GroundLine && iState <= RoleState.GroundFreez) {
+			return StateLayer.GroundMove;
+		} else {
+			return StateLayer.SkyMove;
+		}
 	}
 
 	//检查是否被跨层阻止
@@ -132,6 +143,17 @@ export default class StateMgr {
 		return false;
 	}
 
+	public canToState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
+		var stateType = this.getStateLayer(toState);
+		if(stateType === StateLayer.Action) {
+			return this.can2ActionState(obj, toState);
+		} else if(stateType === StateLayer.GroundMove) {
+			return this.can2GroundMoveState(obj, toState);
+		} else {
+			return this.can2SkyMoveState(obj, toState);
+		}
+	}
+
 	public setActionState(obj:RoleFighter, toState:RoleState, param:any) {
 		if(this.mCurActionState) {
 			this.mCurActionState.onExit(obj);
@@ -157,51 +179,6 @@ export default class StateMgr {
 		cc.log(obj.getId(), StateName[this.mCurSkyState.getId()] + " ---> " + StateName[toState]); 
 		this.mCurSkyState = SkyMoveStateTable[toState];
 		this.mCurSkyState.onEnter(obj, param);
-	}
-
-	public turn2ActionState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
-		if(this.can2ActionState(obj, toState)) {
-			this.setActionState(obj, toState, param);
-			return true;
-		}
-		return false;
-	}
-
-	public turn2GroundMoveState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
-		if(this.can2GroundMoveState(obj, toState)) {
-			this.setGroundMoveState(obj, toState, param);
-			return true;
-		}
-		return false;
-	}
-
-	public turn2SkyMoveState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
-		if(this.can2SkyMoveState(obj, toState)) {
-			this.setSkyMoveState(obj, toState, param);
-			return true;
-		}
-		return false;
-	}
-
-	public getStateLayer(iState:RoleState) : StateLayer {
-		if(iState >= RoleState.Idle && iState <= RoleState.Relife) {
-			return StateLayer.Action;
-		} else if(iState >= RoleState.GroundLine && iState <= RoleState.GroundFreez) {
-			return StateLayer.GroundMove;
-		} else {
-			return StateLayer.SkyMove;
-		}
-	}
-
-	public canToState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
-		var stateType = this.getStateLayer(toState);
-		if(stateType === StateLayer.Action) {
-			return this.can2ActionState(obj, toState);
-		} else if(stateType === StateLayer.GroundMove) {
-			return this.can2GroundMoveState(obj, toState);
-		} else {
-			return this.can2SkyMoveState(obj, toState);
-		}
 	}
 
 	public turnToState(obj:RoleFighter, toState:RoleState, param:any) : boolean {
