@@ -11,9 +11,6 @@ import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
-
-const {ccclass, property} = cc._decorator;
-
 export default class RoleFighter extends RoleEntity {
 	protected curMp:number;
 	protected curHp:number;
