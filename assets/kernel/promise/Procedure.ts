@@ -41,11 +41,7 @@ export default class Procedure {
 		this._stopFunc = null;
 	}
 
-
-	public getType() : string 
-	{
-		return this._node_type;
-	}
+	
 	public fixedName() :string 
 	{
 		if(this._groupNode)
@@ -57,10 +53,6 @@ export default class Procedure {
 	{
 		this._name = name;
 		return this;
-	}
-	public getName() : string
-	{
-		return this._name;
 	}
 
 
@@ -230,6 +222,7 @@ export default class Procedure {
 	{
 		if( !this.isSelfDone() ) {
 			this._cur_state = BEHAVIOR_STATE.STOPED;
+			cc.log("stop", this.fixedName());
 			this.onStop();
 		}
 

@@ -10,6 +10,7 @@ import { AiCompare } from "../../../../../kernel/behaviour/AIUtil";
 import BehaviorNodeBase from "../../../../../kernel/behaviour/BehaviorNode";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import { RoleState } from "../state/StateConst";
 
 export default class RoleFighter extends RoleEntity {
 	protected curMp:number;
@@ -59,6 +60,9 @@ export default class RoleFighter extends RoleEntity {
 
 	public addHP(v:number) : number {
 		this.curHp = this.curHp + v;
+		if(this.curHp <= 0) {
+			this.stateObj.turnToState(this, RoleState.Die, null);
+		}
 		return this.curHp;
 	}
 	

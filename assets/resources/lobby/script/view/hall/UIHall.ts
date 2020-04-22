@@ -151,7 +151,7 @@ export default class UIHall extends BaseComponent {
 				}
 			} 
 		));
-		node.setStopFunc(new CHandler(null, (part?:Procedure)=>{ cc.log(part.getName()+" stoped") }));
+		node.setStopFunc(new CHandler(null, (part?:Procedure)=>{ }));
 		node.setName(name)
 		return node;
 	}

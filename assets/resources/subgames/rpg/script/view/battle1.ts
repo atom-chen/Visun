@@ -19,8 +19,14 @@ export default class battle1 extends BaseComponent {
             GameManager.getInstance().quitGame(0);
         }, this);
         
+        this.testFight();
+    }
+
+    testFight() {
         var r1 = new RoleFighter(1);
         r1.getStateMgr().turnToState(r1, RoleState.Skill, null);
+        var r2 = new RoleFighter(2);
+        r2.getStateMgr().turnToState(r2, RoleState.Idle, null);
     }
 
 }
