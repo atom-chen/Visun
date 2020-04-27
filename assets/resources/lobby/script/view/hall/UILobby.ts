@@ -62,7 +62,10 @@ export default class UILobby extends BaseComponent {
 	}
 
 	private initUiEvents() {
-		
+		//头像
+		CommonUtil.addClickEvent(this.m_ui.headNode, function(){ 
+			UIManager.openPopwnd(ViewDefine.UILogin, true, null); 
+		}, this);
 	}
 
 }
