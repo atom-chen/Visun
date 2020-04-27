@@ -4,6 +4,8 @@ import LoginUser from "../model/LoginUser";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
+import { baccarat_msgs } from "../proto/net_baccarat";
+import { GameKindEnum } from "../definer/ConstDefine";
 
 //---------------------------------
 // login响应句柄
@@ -28,6 +30,14 @@ var proxy_login = {
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
         //param.RoomsInfo = [{RoomNum: 101, RoomKey: "321weqe", RoomName: " 万人房", Games: {…}}]
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
+    },
+
+    [login_msgs.GameList] : function(param) {
+        GameManager.getInstance().setGameArr(param.Items)
+    },
+
+    [baccarat_msgs.GameBaccaratEnter] : function(param) {
+        GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
     }
 
 }

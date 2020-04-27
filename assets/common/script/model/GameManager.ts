@@ -6,6 +6,7 @@ import ModelBase from "../../../kernel/model/ModelBase";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
+import { gamecomm_request } from "../proto/net_gamecomm";
 
 //游戏管理器
 export default class GameManager extends ModelBase {
@@ -32,6 +33,7 @@ export default class GameManager extends ModelBase {
 	private _roomList = {};		//服务器房间列表
 	private _allRooms = {}		//根据游戏ID索引游戏数据
 	private roomsInfo = [];
+	private gameArr = [];
 
 	public setRoomsInfo(info:any) {
 		this.roomsInfo = info;
@@ -39,6 +41,14 @@ export default class GameManager extends ModelBase {
 
 	public getRoomsInfo() : any {
 		return this.roomsInfo;
+	}
+
+	public setGameArr(data) {
+		this.gameArr = data;
+	}
+
+	public getGameArr() : any {
+		return this.gameArr;
 	}
 
 
@@ -96,12 +106,7 @@ export default class GameManager extends ModelBase {
 
 	//获取子游戏的客户端配置
 	public clientConfig(gameType:string|number) : any{
-		var svrInfo = this._allRooms[gameType];
-		if(!svrInfo) {
-			cc.log("no server info: ", gameType);
-			return null;
-		}
-		return GameConfig[svrInfo.GameKind];
+		return GameConfig[gameType];
 	}
 
 	
@@ -145,7 +150,7 @@ export default class GameManager extends ModelBase {
 
 	//退出游戏的唯一出口
 	public quitGame(reason:number) {
-	//	gamecomm_request.ReqExitGame({GameType:0});
+		gamecomm_request.ReqExitGame({GameID:4});
 		if(IS_DANJI_MODE) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}

@@ -103,6 +103,7 @@ export default class LeafWsPacket implements PacketInterface{
 		if(bytes===null || bytes===undefined) {
 			return null;
 		}
+		if(bytes.length <= 0) { return null; }
 
 		var data = null;
 		if(this.data_struct!==null && this.data_struct!==undefined) {

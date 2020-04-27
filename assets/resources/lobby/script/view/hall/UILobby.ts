@@ -3,7 +3,7 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
-import { login_msgs } from "../../../../../common/script/proto/net_login";
+import { login_msgs, login_request } from "../../../../../common/script/proto/net_login";
 import GameManager from "../../../../../common/script/model/GameManager";
 import room_btn from "./room_btn";
 import UIManager from "../../../../../kernel/view/UIManager";
@@ -36,11 +36,14 @@ export default class UILobby extends BaseComponent {
 		for(var i in roomsInfo) {
 			var info = roomsInfo[i];
 			var bton = cc.instantiate(this.roomBtn);
-		//	bton["GameKind"] = info.GameKind;
+			bton["RoomInfo"] = info;
 			bton.getComponent(room_btn).setRoomInfo(info);
 			CommonUtil.addClickEvent(bton, function(){ 
-				cc.log("进入房间");
-			//	UIManager.openPopwnd(ViewDefine.UIRoom, false, null, this.GameKind);
+				login_request.ReqEnterRoom({
+					RoomNum: this.RoomInfo.RoomNum,
+					RoomKey: this.RoomInfo.RoomKey
+				});
+				UIManager.openPopwnd(ViewDefine.UIGames, false, null, this.GameKind);
 			}, bton);
 			this.m_ui.content.addChild(bton);
 		}
