@@ -1252,7 +1252,9 @@ $root.login = (function() {
         GameBaseInfo.prototype.Type = 0;
         GameBaseInfo.prototype.KindID = 0;
         GameBaseInfo.prototype.Level = 0;
+        GameBaseInfo.prototype.TableID = 0;
         GameBaseInfo.prototype.Name = "";
+        GameBaseInfo.prototype.Number = "";
         GameBaseInfo.prototype.EnterScore = 0;
         GameBaseInfo.prototype.LessScore = 0;
 
@@ -1269,12 +1271,16 @@ $root.login = (function() {
                 writer.uint32(16).uint32(message.KindID);
             if (message.Level != null && message.hasOwnProperty("Level"))
                 writer.uint32(24).uint32(message.Level);
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                writer.uint32(32).uint32(message.TableID);
             if (message.Name != null && message.hasOwnProperty("Name"))
-                writer.uint32(34).string(message.Name);
+                writer.uint32(42).string(message.Name);
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                writer.uint32(50).string(message.Number);
             if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
-                writer.uint32(40).uint32(message.EnterScore);
+                writer.uint32(56).uint32(message.EnterScore);
             if (message.LessScore != null && message.hasOwnProperty("LessScore"))
-                writer.uint32(48).uint32(message.LessScore);
+                writer.uint32(64).uint32(message.LessScore);
             return writer;
         };
 
@@ -1299,12 +1305,18 @@ $root.login = (function() {
                     message.Level = reader.uint32();
                     break;
                 case 4:
-                    message.Name = reader.string();
+                    message.TableID = reader.uint32();
                     break;
                 case 5:
-                    message.EnterScore = reader.uint32();
+                    message.Name = reader.string();
                     break;
                 case 6:
+                    message.Number = reader.string();
+                    break;
+                case 7:
+                    message.EnterScore = reader.uint32();
+                    break;
+                case 8:
                     message.LessScore = reader.uint32();
                     break;
                 default:
@@ -1333,9 +1345,15 @@ $root.login = (function() {
             if (message.Level != null && message.hasOwnProperty("Level"))
                 if (!$util.isInteger(message.Level))
                     return "Level: integer expected";
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                if (!$util.isInteger(message.TableID))
+                    return "TableID: integer expected";
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                if (!$util.isString(message.Number))
+                    return "Number: string expected";
             if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
                 if (!$util.isInteger(message.EnterScore))
                     return "EnterScore: integer expected";
@@ -1355,8 +1373,12 @@ $root.login = (function() {
                 message.KindID = object.KindID >>> 0;
             if (object.Level != null)
                 message.Level = object.Level >>> 0;
+            if (object.TableID != null)
+                message.TableID = object.TableID >>> 0;
             if (object.Name != null)
                 message.Name = String(object.Name);
+            if (object.Number != null)
+                message.Number = String(object.Number);
             if (object.EnterScore != null)
                 message.EnterScore = object.EnterScore >>> 0;
             if (object.LessScore != null)
@@ -1372,7 +1394,9 @@ $root.login = (function() {
                 object.Type = 0;
                 object.KindID = 0;
                 object.Level = 0;
+                object.TableID = 0;
                 object.Name = "";
+                object.Number = "";
                 object.EnterScore = 0;
                 object.LessScore = 0;
             }
@@ -1382,8 +1406,12 @@ $root.login = (function() {
                 object.KindID = message.KindID;
             if (message.Level != null && message.hasOwnProperty("Level"))
                 object.Level = message.Level;
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                object.TableID = message.TableID;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                object.Number = message.Number;
             if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
                 object.EnterScore = message.EnterScore;
             if (message.LessScore != null && message.hasOwnProperty("LessScore"))
