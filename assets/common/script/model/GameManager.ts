@@ -137,7 +137,7 @@ export default class GameManager extends ModelBase {
 
 	//退出游戏的唯一出口
 	public quitGame(reason:number) {
-		gamecomm_request.ReqExitGame({GameType:0});
+	//	gamecomm_request.ReqExitGame({GameType:0});
 		if(IS_DANJI_MODE) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
@@ -149,7 +149,7 @@ export default class GameManager extends ModelBase {
 			return;
 		}
 		cc.log("enterGame: ", gameType)
-		gamecomm_request.ReqEnterGame({GameType:gameType});
+	//	gamecomm_request.ReqEnterGame({GameType:gameType});
 		if(IS_DANJI_MODE) {
 			this.enterGameScene(gameType);
 		}

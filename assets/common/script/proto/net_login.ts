@@ -7,26 +7,56 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum login_msgs {
-    UserInfo = 0,
-    ReqRegister = 1,
-    RespRegister = 2,
-    ReqLogin = 3,
-    RespLogin = 4,
+    Register = 0,
+    RegisterResult = 1,
+    Login = 2,
+    ResResult = 3,
+    TaskItem = 4,
+    TaskList = 5,
+    GameList = 6,
+    UserInfo = 7,
+    RoomInfo = 8,
+    GameBaseInfo = 9,
+    GameItem = 10,
+    MasterInfo = 11,
+    ReqEnterRoom = 12,
+    ReqEnterGame = 13,
+    ReqExitGame = 14,
 }
 
 export var login_packet_define = {
-    0: new LeafWsPacket(0, login.UserInfo),
-    1: new LeafWsPacket(1, login.ReqRegister),
-    2: new LeafWsPacket(2, login.RespRegister),
-    3: new LeafWsPacket(3, login.ReqLogin),
-    4: new LeafWsPacket(4, login.RespLogin),
+    0: new LeafWsPacket(0, login.Register),
+    1: new LeafWsPacket(1, login.RegisterResult),
+    2: new LeafWsPacket(2, login.Login),
+    3: new LeafWsPacket(3, login.ResResult),
+    4: new LeafWsPacket(4, login.TaskItem),
+    5: new LeafWsPacket(5, login.TaskList),
+    6: new LeafWsPacket(6, login.GameList),
+    7: new LeafWsPacket(7, login.UserInfo),
+    8: new LeafWsPacket(8, login.RoomInfo),
+    9: new LeafWsPacket(9, login.GameBaseInfo),
+    10: new LeafWsPacket(10, login.GameItem),
+    11: new LeafWsPacket(11, login.MasterInfo),
+    12: new LeafWsPacket(12, login.ReqEnterRoom),
+    13: new LeafWsPacket(13, login.ReqEnterGame),
+    14: new LeafWsPacket(14, login.ReqExitGame),
 }
 
 export class login_request {
-    public static UserInfo( data:{ UserID:number, Accounts:string, Password:string, Name:string, Head:string, Sex:number, VipLevel:number, Money:number } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReqRegister( data:{ Account:string, Password:string, SecurityCode:string } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespRegister( data:{ Account:string, UserID:number } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReqLogin( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
-    public static RespLogin( data:{ Account:string, UserID:number } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
+    public static Register( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
+    public static RegisterResult( data:{ State:number, Hints:string } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
+    public static Login( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResResult( data:{ State:number, Hints:string } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
+    public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
+    public static TaskList( data:{ Task:any[] } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameList( data:{ Items:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
+    public static UserInfo( data:{ Name:string, Accounts:string, Password:string, FaceID:number, Gender:number, Age:number, Level:number, Gold:number, PassPortID:string, Compellation:string, AgentID:number, SpreaderGameID:number, ClientAddr:number, MachineCode:string } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
+    public static RoomInfo( data:{ RoomNum:number, RoomKey:string, RoomName:string, Games:any } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameBaseInfo( data:{ Type:number, KindID:number, Level:number, Name:string, EnterScore:number, LessScore:number } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
+    public static MasterInfo( data:{ UserInfo:any, RoomsInfo:any[], Tasks:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
+    public static ReqEnterRoom( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
+    public static ReqEnterGame( data:{ GameID:number } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
+    public static ReqExitGame( data:{ GameID:number } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
 }
 

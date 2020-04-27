@@ -12,7 +12,7 @@ var server_list = {
     },
     jetten: {
         mainHttpUrl: "",
-        leafServer: "ws://172.18.11.216:9650"
+        leafServer: "ws://127.0.0.1:9650"
     },
     mac: {
         mainHttpUrl: "",
@@ -21,6 +21,6 @@ var server_list = {
 };
 
 //选定某服
-var ServerConfig = server_list.publish;
+var ServerConfig = server_list.jetten;
 
 export default ServerConfig;

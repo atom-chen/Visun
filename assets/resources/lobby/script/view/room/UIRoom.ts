@@ -1,6 +1,5 @@
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import { configure_request, configure_msgs } from "../../../../../common/script/proto/net_configure";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
 import { IS_DANJI_MODE } from "../../../../../common/script/definer/ConstDefine";
@@ -33,8 +32,8 @@ export default class UIRoom extends BaseComponent {
         this._gameKind = gameKind;
         this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
 
-        EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
-        configure_request.RoomListReq({GameKind:gameKind});
+   //     EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
+    //    configure_request.RoomListReq({GameKind:gameKind});
     }
 
     private initRoomBtns(){

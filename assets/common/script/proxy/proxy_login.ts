@@ -10,11 +10,11 @@ import LogicCenter from "../model/LogicCenter";
 
 var proxy_login = {
 
-    [login_msgs.RespRegister] : function(param: any) {
+    [login_msgs.RegisterResult] : function(param: any) {
         UIManager.toast(param.Hints);
     },
 
-    [login_msgs.RespLogin] : function(param: any) {
+    [login_msgs.ResResult] : function(param: any) {
         LogicCenter.getInstance().clear();
         LogicCenter.getInstance().init();
         UIManager.toast("登录成功");

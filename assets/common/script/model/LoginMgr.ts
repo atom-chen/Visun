@@ -7,12 +7,11 @@ import ChannelDefine from "../definer/ChannelDefine";
 import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
 import CHandler from "../../../kernel/basic/datastruct/CHandler";
 import LoginUser from "./LoginUser";
-import { login_request } from "../proto/net_login";
 import ViewDefine from "../definer/ViewDefine";
-import { configure_request } from "../proto/net_configure";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import IChannel from "../../../kernel/net/channel/IChannel";
+import { login_request } from '../proto/net_login';
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -69,7 +68,8 @@ export default class LoginMgr extends ModelBase {
 		}
 
 		this.connectLeaf();
-		login_request.ReqLogin({
+		
+		login_request.Login({
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
@@ -91,11 +91,7 @@ export default class LoginMgr extends ModelBase {
 		InviteCode = InviteCode || "ssss";
 
 		this.connectLeaf();
-		login_request.ReqRegister({
-			Account: Account, 
-			Password: Pswd, 
-			SecurityCode: "2323", 
-		});
+
 	}
 	
 	//建立网络连接
@@ -109,7 +105,7 @@ export default class LoginMgr extends ModelBase {
 		g_leafProcessor.setChannel(leafChan);
 		leafChan.connect( wsAddr, 0, 
 			new CHandler(this, ()=>{
-				configure_request.GameListReq(null);
+				
 			}),
 			new CHandler(this, ()=>{ 
 				UIManager.openDialog("login_fail", "连接失败，是否重试？", (menuId:number)=>{

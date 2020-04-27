@@ -13,7 +13,6 @@ import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../../common/script/proto/net_login";
-import { configure_msgs, configure_request } from "../../../../../common/script/proto/net_configure";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 
@@ -35,11 +34,11 @@ export default class UIHall extends BaseComponent {
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
 		
 		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
-		EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
+	//	EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
 
 	//	LoginMgr.getInstance().checkLogin(true);
 
-		configure_request.GameListReq(null);
+	//	configure_request.GameListReq(null);
 	}
 
 	private refleshGameList() {

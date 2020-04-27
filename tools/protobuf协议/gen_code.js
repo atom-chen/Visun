@@ -9,19 +9,31 @@ var pbfiles = [
 		router:"login", 
 	},
 	{ 
-		name:"configure", 
-		router:"login",
+		name:"baccarat", 
+		router:"game",
 	},
 	{ 
 		name:"gamecomm", 
 		router:"game",
 	},
 	{ 
-		name:"brcowcow", 
+		name:"cowcow", 
 		router:"game",
 	},
 	{ 
-		name:"zhajinhua", 
+		name:"landLords", 
+		router:"game",
+	},
+	{ 
+		name:"mahjong", 
+		router:"game",
+	},
+	{ 
+		name:"fishLord", 
+		router:"game",
+	},
+	{ 
+		name:"comand", 
 		router:"game",
 	},
 ]
@@ -120,14 +132,15 @@ function write2file(filepath, str) {
 	}
 }
 
+var autoOutPath = "E:/Go_PRJ/server"
 function doGenerate() {
 	//server begin
 	var serverPkgName = "go";
 
-	var outServerMsg = "D:/go/src/vovov/qpservice/msg/msg.go";
-	var outRouter = "D:/go/src/vovov/qpservice/gate/router.go";
-	var outServerHandler = "d:/handler.go";
-	var outHandleFunc = "d:/handlerFunc.go";
+	var outServerMsg = autoOutPath + "/msg/msg.go";
+	var outRouter = autoOutPath + "/gate/router.go";
+	var outServerHandler = autoOutPath + "/handler.go";
+	var outHandleFunc = autoOutPath + "/handlerFunc.go";
 
 	var msgStr = "";
 	var routerStr = "";
@@ -142,9 +155,9 @@ function doGenerate() {
 	msgStr += "import (\n"
 	msgStr += '    "sync"\n'
 	msgStr += '    "github.com/golang/protobuf/proto"\n'
-	msgStr += '    "vovov/leaf/network/json"\n'
-	msgStr += '    "vovov/leaf/network/protobuf"\n'
-	msgStr += '    protoMsg "vovov/qpservice/msg/ptopb"\n'
+	msgStr += '    "github.com/name5566/leaf/network/json"\n'
+	msgStr += '    "github.com/name5566/leaf/network/protobuf"\n'
+	msgStr += '    protoMsg "server/msg/go"\n'
 	msgStr += ')\n\n'
 	msgStr += "// 使用默认的 JSON 消息处理器（默认还提供了 protobuf 消息处理器）\n"
 	msgStr += "var ProcessorJson = json.NewProcessor()\n"
@@ -164,10 +177,10 @@ function doGenerate() {
 	routerStr += "//---------------------------------\n";
 	routerStr += "package gate\n\n";
 	routerStr += 'import (\n';
-	routerStr += '    "vovov/qpservice/game"\n';
-	routerStr += '    "vovov/qpservice/login"\n';
-	routerStr += '    "vovov/qpservice/msg"\n';
-	routerStr += '    protoMsg "vovov/qpservice/msg/ptopb"\n';
+	routerStr += '    "server/game"\n';
+	routerStr += '    "server/login"\n';
+	routerStr += '    "server/msg"\n';
+	routerStr += '    protoMsg "server/msg/go"\n';
 	routerStr += ')\n\n';
 	routerStr += '//路由模块分发消息【模块间使用 ChanRPC 通讯，消息路由也不例外】\n';
 	routerStr += '//注:需要解析的结构体才进行路由分派，即用客户端主动发起的)\n';

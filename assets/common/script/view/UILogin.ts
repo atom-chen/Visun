@@ -1,11 +1,15 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LoginMgr from "../model/LoginMgr";
-import EventCenter from "../../../kernel/basic/event/EventCenter";
+import EventCenter from '../../../kernel/basic/event/EventCenter';
 import { login_msgs } from "../proto/net_login";
 
 
 const {ccclass, property} = cc._decorator;
+
+class b {
+    aaaassss(){}
+}
 
 @ccclass
 export default class LoginUI extends BaseComponent {
@@ -20,8 +24,17 @@ export default class LoginUI extends BaseComponent {
         this.initNetEvent();
     }
 
+    aaaaaaa(a, b, c) {
+        cc.log("============", a, b, c)
+    }
+
     private initNetEvent() {
-        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any)=>{
+        
+        EventCenter.getInstance().listen("aaaa", this.aaaaaaa, this);
+
+        EventCenter.getInstance().fire("aaaa", 1, "dddd");
+
+        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any, a:number)=>{
             CommonUtil.safeDelete(this);
         }, this);
     }

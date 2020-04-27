@@ -8,13 +8,12 @@ import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import { ProcessorType } from "../../../kernel/basic/defines/KernelDefine";
 import { login_packet_define } from "../proto/net_login";
-import { configure_packet_define } from "../proto/net_configure";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";
 import proxy_login from "../proxy/proxy_login";
-import proxy_configure from "../proxy/proxy_configure";
-import proxy_gamecomm from "../proxy/proxy_gamecomm";
-import { brcowcow_packet_define } from "../proto/net_brcowcow";
-import { zhajinhua_packet_define } from "../proto/net_zhajinhua";
+import { comand_packet_define } from "../proto/net_comand";
+import { baccarat_packet_define } from "../proto/net_baccarat";
+import { landLords_packet_define } from "../proto/net_landLords";
+
 
 //模块管理器
 export default class LogicCenter {
@@ -27,13 +26,11 @@ export default class LogicCenter {
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
 		g_leafProcessor.registCmds(login_packet_define);
-		g_leafProcessor.registCmds(configure_packet_define);
         g_leafProcessor.registCmds(gamecomm_packet_define);
-        g_leafProcessor.registCmds(brcowcow_packet_define);
-        g_leafProcessor.registCmds(zhajinhua_packet_define);
+        g_leafProcessor.registCmds(comand_packet_define);
+        g_leafProcessor.registCmds(baccarat_packet_define);
+        g_leafProcessor.registCmds(landLords_packet_define);
         g_leafProcessor.getDispatcher().addObserver(proxy_login);
-        g_leafProcessor.getDispatcher().addObserver(proxy_configure);
-        g_leafProcessor.getDispatcher().addObserver(proxy_gamecomm);
     }
     
     public static getInstance() : LogicCenter {

@@ -7,6 +7,946 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
+$root.landLords = (function() {
+
+    var landLords = {};
+
+    landLords.GameLandLordsEnter = (function() {
+
+        function GameLandLordsEnter(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsEnter.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameLandLordsEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameLandLordsEnter.prototype.Players = null;
+        GameLandLordsEnter.prototype.FreeTime = 0;
+
+        GameLandLordsEnter.create = function create(properties) {
+            return new GameLandLordsEnter(properties);
+        };
+
+        GameLandLordsEnter.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(16).int64(message.TimeStamp);
+            if (message.Players != null && message.hasOwnProperty("Players"))
+                $root.gamecomm.UserList.encode(message.Players, writer.uint32(26).fork()).ldelim();
+            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
+                writer.uint32(32).uint32(message.FreeTime);
+            return writer;
+        };
+
+        GameLandLordsEnter.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsEnter.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsEnter();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 3:
+                    message.Players = $root.gamecomm.UserList.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.FreeTime = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsEnter.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsEnter.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.Players != null && message.hasOwnProperty("Players")) {
+                var error = $root.gamecomm.UserList.verify(message.Players);
+                if (error)
+                    return "Players." + error;
+            }
+            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
+                if (!$util.isInteger(message.FreeTime))
+                    return "FreeTime: integer expected";
+            return null;
+        };
+
+        GameLandLordsEnter.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsEnter)
+                return object;
+            var message = new $root.landLords.GameLandLordsEnter();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.Players != null) {
+                if (typeof object.Players !== "object")
+                    throw TypeError(".landLords.GameLandLordsEnter.Players: object expected");
+                message.Players = $root.gamecomm.UserList.fromObject(object.Players);
+            }
+            if (object.FreeTime != null)
+                message.FreeTime = object.FreeTime >>> 0;
+            return message;
+        };
+
+        GameLandLordsEnter.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.Players = null;
+                object.FreeTime = 0;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.Players != null && message.hasOwnProperty("Players"))
+                object.Players = $root.gamecomm.UserList.toObject(message.Players, options);
+            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
+                object.FreeTime = message.FreeTime;
+            return object;
+        };
+
+        GameLandLordsEnter.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsEnter;
+    })();
+
+    landLords.GameLandLordsPlayer = (function() {
+
+        function GameLandLordsPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameLandLordsPlayer.prototype.Site = 0;
+        GameLandLordsPlayer.prototype.Cards = $util.newBuffer([]);
+        GameLandLordsPlayer.prototype.IsBanker = false;
+
+        GameLandLordsPlayer.create = function create(properties) {
+            return new GameLandLordsPlayer(properties);
+        };
+
+        GameLandLordsPlayer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                writer.uint32(16).uint32(message.Site);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                writer.uint32(26).bytes(message.Cards);
+            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
+                writer.uint32(32).bool(message.IsBanker);
+            return writer;
+        };
+
+        GameLandLordsPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsPlayer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsPlayer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.Site = reader.uint32();
+                    break;
+                case 3:
+                    message.Cards = reader.bytes();
+                    break;
+                case 4:
+                    message.IsBanker = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsPlayer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsPlayer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                if (!$util.isInteger(message.Site))
+                    return "Site: integer expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
+                    return "Cards: buffer expected";
+            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
+                if (typeof message.IsBanker !== "boolean")
+                    return "IsBanker: boolean expected";
+            return null;
+        };
+
+        GameLandLordsPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsPlayer)
+                return object;
+            var message = new $root.landLords.GameLandLordsPlayer();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.Site != null)
+                message.Site = object.Site >>> 0;
+            if (object.Cards != null)
+                if (typeof object.Cards === "string")
+                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
+                else if (object.Cards.length)
+                    message.Cards = object.Cards;
+            if (object.IsBanker != null)
+                message.IsBanker = Boolean(object.IsBanker);
+            return message;
+        };
+
+        GameLandLordsPlayer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.Site = 0;
+                if (options.bytes === String)
+                    object.Cards = "";
+                else {
+                    object.Cards = [];
+                    if (options.bytes !== Array)
+                        object.Cards = $util.newBuffer(object.Cards);
+                }
+                object.IsBanker = false;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                object.Site = message.Site;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
+            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
+                object.IsBanker = message.IsBanker;
+            return object;
+        };
+
+        GameLandLordsPlayer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsPlayer;
+    })();
+
+    landLords.GameLandLordsBegins = (function() {
+
+        function GameLandLordsBegins(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsBegins.prototype.CardsBottom = $util.newBuffer([]);
+        GameLandLordsBegins.prototype.CardsHand = $util.newBuffer([]);
+
+        GameLandLordsBegins.create = function create(properties) {
+            return new GameLandLordsBegins(properties);
+        };
+
+        GameLandLordsBegins.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.CardsBottom != null && message.hasOwnProperty("CardsBottom"))
+                writer.uint32(10).bytes(message.CardsBottom);
+            if (message.CardsHand != null && message.hasOwnProperty("CardsHand"))
+                writer.uint32(18).bytes(message.CardsHand);
+            return writer;
+        };
+
+        GameLandLordsBegins.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsBegins.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsBegins();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.CardsBottom = reader.bytes();
+                    break;
+                case 2:
+                    message.CardsHand = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsBegins.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsBegins.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.CardsBottom != null && message.hasOwnProperty("CardsBottom"))
+                if (!(message.CardsBottom && typeof message.CardsBottom.length === "number" || $util.isString(message.CardsBottom)))
+                    return "CardsBottom: buffer expected";
+            if (message.CardsHand != null && message.hasOwnProperty("CardsHand"))
+                if (!(message.CardsHand && typeof message.CardsHand.length === "number" || $util.isString(message.CardsHand)))
+                    return "CardsHand: buffer expected";
+            return null;
+        };
+
+        GameLandLordsBegins.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsBegins)
+                return object;
+            var message = new $root.landLords.GameLandLordsBegins();
+            if (object.CardsBottom != null)
+                if (typeof object.CardsBottom === "string")
+                    $util.base64.decode(object.CardsBottom, message.CardsBottom = $util.newBuffer($util.base64.length(object.CardsBottom)), 0);
+                else if (object.CardsBottom.length)
+                    message.CardsBottom = object.CardsBottom;
+            if (object.CardsHand != null)
+                if (typeof object.CardsHand === "string")
+                    $util.base64.decode(object.CardsHand, message.CardsHand = $util.newBuffer($util.base64.length(object.CardsHand)), 0);
+                else if (object.CardsHand.length)
+                    message.CardsHand = object.CardsHand;
+            return message;
+        };
+
+        GameLandLordsBegins.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if (options.bytes === String)
+                    object.CardsBottom = "";
+                else {
+                    object.CardsBottom = [];
+                    if (options.bytes !== Array)
+                        object.CardsBottom = $util.newBuffer(object.CardsBottom);
+                }
+                if (options.bytes === String)
+                    object.CardsHand = "";
+                else {
+                    object.CardsHand = [];
+                    if (options.bytes !== Array)
+                        object.CardsHand = $util.newBuffer(object.CardsHand);
+                }
+            }
+            if (message.CardsBottom != null && message.hasOwnProperty("CardsBottom"))
+                object.CardsBottom = options.bytes === String ? $util.base64.encode(message.CardsBottom, 0, message.CardsBottom.length) : options.bytes === Array ? Array.prototype.slice.call(message.CardsBottom) : message.CardsBottom;
+            if (message.CardsHand != null && message.hasOwnProperty("CardsHand"))
+                object.CardsHand = options.bytes === String ? $util.base64.encode(message.CardsHand, 0, message.CardsHand.length) : options.bytes === Array ? Array.prototype.slice.call(message.CardsHand) : message.CardsHand;
+            return object;
+        };
+
+        GameLandLordsBegins.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsBegins;
+    })();
+
+    landLords.GameLandLordsOutcard = (function() {
+
+        function GameLandLordsOutcard(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsOutcard.prototype.Site = 0;
+        GameLandLordsOutcard.prototype.Cards = $util.newBuffer([]);
+        GameLandLordsOutcard.prototype.Hints = "";
+
+        GameLandLordsOutcard.create = function create(properties) {
+            return new GameLandLordsOutcard(properties);
+        };
+
+        GameLandLordsOutcard.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                writer.uint32(8).uint32(message.Site);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                writer.uint32(18).bytes(message.Cards);
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                writer.uint32(26).string(message.Hints);
+            return writer;
+        };
+
+        GameLandLordsOutcard.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsOutcard.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOutcard();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Site = reader.uint32();
+                    break;
+                case 2:
+                    message.Cards = reader.bytes();
+                    break;
+                case 3:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsOutcard.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsOutcard.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                if (!$util.isInteger(message.Site))
+                    return "Site: integer expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
+                    return "Cards: buffer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        GameLandLordsOutcard.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsOutcard)
+                return object;
+            var message = new $root.landLords.GameLandLordsOutcard();
+            if (object.Site != null)
+                message.Site = object.Site >>> 0;
+            if (object.Cards != null)
+                if (typeof object.Cards === "string")
+                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
+                else if (object.Cards.length)
+                    message.Cards = object.Cards;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        GameLandLordsOutcard.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Site = 0;
+                if (options.bytes === String)
+                    object.Cards = "";
+                else {
+                    object.Cards = [];
+                    if (options.bytes !== Array)
+                        object.Cards = $util.newBuffer(object.Cards);
+                }
+                object.Hints = "";
+            }
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                object.Site = message.Site;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        GameLandLordsOutcard.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsOutcard;
+    })();
+
+    landLords.GameLandLordsOperate = (function() {
+
+        function GameLandLordsOperate(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsOperate.prototype.Code = 0;
+        GameLandLordsOperate.prototype.Cards = $util.newBuffer([]);
+        GameLandLordsOperate.prototype.Hints = "";
+
+        GameLandLordsOperate.create = function create(properties) {
+            return new GameLandLordsOperate(properties);
+        };
+
+        GameLandLordsOperate.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                writer.uint32(8).int32(message.Code);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                writer.uint32(18).bytes(message.Cards);
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                writer.uint32(26).string(message.Hints);
+            return writer;
+        };
+
+        GameLandLordsOperate.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsOperate.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOperate();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Code = reader.int32();
+                    break;
+                case 2:
+                    message.Cards = reader.bytes();
+                    break;
+                case 3:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsOperate.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsOperate.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                if (!$util.isInteger(message.Code))
+                    return "Code: integer expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
+                    return "Cards: buffer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        GameLandLordsOperate.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsOperate)
+                return object;
+            var message = new $root.landLords.GameLandLordsOperate();
+            if (object.Code != null)
+                message.Code = object.Code | 0;
+            if (object.Cards != null)
+                if (typeof object.Cards === "string")
+                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
+                else if (object.Cards.length)
+                    message.Cards = object.Cards;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        GameLandLordsOperate.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Code = 0;
+                if (options.bytes === String)
+                    object.Cards = "";
+                else {
+                    object.Cards = [];
+                    if (options.bytes !== Array)
+                        object.Cards = $util.newBuffer(object.Cards);
+                }
+                object.Hints = "";
+            }
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                object.Code = message.Code;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        GameLandLordsOperate.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsOperate;
+    })();
+
+    landLords.GameLandLordsAward = (function() {
+
+        function GameLandLordsAward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsAward.prototype.Site = 0;
+        GameLandLordsAward.prototype.Codes = $util.newBuffer([]);
+        GameLandLordsAward.prototype.GetGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        GameLandLordsAward.create = function create(properties) {
+            return new GameLandLordsAward(properties);
+        };
+
+        GameLandLordsAward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                writer.uint32(8).uint32(message.Site);
+            if (message.Codes != null && message.hasOwnProperty("Codes"))
+                writer.uint32(18).bytes(message.Codes);
+            if (message.GetGold != null && message.hasOwnProperty("GetGold"))
+                writer.uint32(24).int64(message.GetGold);
+            return writer;
+        };
+
+        GameLandLordsAward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsAward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsAward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Site = reader.uint32();
+                    break;
+                case 2:
+                    message.Codes = reader.bytes();
+                    break;
+                case 3:
+                    message.GetGold = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsAward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsAward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                if (!$util.isInteger(message.Site))
+                    return "Site: integer expected";
+            if (message.Codes != null && message.hasOwnProperty("Codes"))
+                if (!(message.Codes && typeof message.Codes.length === "number" || $util.isString(message.Codes)))
+                    return "Codes: buffer expected";
+            if (message.GetGold != null && message.hasOwnProperty("GetGold"))
+                if (!$util.isInteger(message.GetGold) && !(message.GetGold && $util.isInteger(message.GetGold.low) && $util.isInteger(message.GetGold.high)))
+                    return "GetGold: integer|Long expected";
+            return null;
+        };
+
+        GameLandLordsAward.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsAward)
+                return object;
+            var message = new $root.landLords.GameLandLordsAward();
+            if (object.Site != null)
+                message.Site = object.Site >>> 0;
+            if (object.Codes != null)
+                if (typeof object.Codes === "string")
+                    $util.base64.decode(object.Codes, message.Codes = $util.newBuffer($util.base64.length(object.Codes)), 0);
+                else if (object.Codes.length)
+                    message.Codes = object.Codes;
+            if (object.GetGold != null)
+                if ($util.Long)
+                    (message.GetGold = $util.Long.fromValue(object.GetGold)).unsigned = false;
+                else if (typeof object.GetGold === "string")
+                    message.GetGold = parseInt(object.GetGold, 10);
+                else if (typeof object.GetGold === "number")
+                    message.GetGold = object.GetGold;
+                else if (typeof object.GetGold === "object")
+                    message.GetGold = new $util.LongBits(object.GetGold.low >>> 0, object.GetGold.high >>> 0).toNumber();
+            return message;
+        };
+
+        GameLandLordsAward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Site = 0;
+                if (options.bytes === String)
+                    object.Codes = "";
+                else {
+                    object.Codes = [];
+                    if (options.bytes !== Array)
+                        object.Codes = $util.newBuffer(object.Codes);
+                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.GetGold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GetGold = options.longs === String ? "0" : 0;
+            }
+            if (message.Site != null && message.hasOwnProperty("Site"))
+                object.Site = message.Site;
+            if (message.Codes != null && message.hasOwnProperty("Codes"))
+                object.Codes = options.bytes === String ? $util.base64.encode(message.Codes, 0, message.Codes.length) : options.bytes === Array ? Array.prototype.slice.call(message.Codes) : message.Codes;
+            if (message.GetGold != null && message.hasOwnProperty("GetGold"))
+                if (typeof message.GetGold === "number")
+                    object.GetGold = options.longs === String ? String(message.GetGold) : message.GetGold;
+                else
+                    object.GetGold = options.longs === String ? $util.Long.prototype.toString.call(message.GetGold) : options.longs === Number ? new $util.LongBits(message.GetGold.low >>> 0, message.GetGold.high >>> 0).toNumber() : message.GetGold;
+            return object;
+        };
+
+        GameLandLordsAward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsAward;
+    })();
+
+    landLords.GameLandLordsCheckout = (function() {
+
+        function GameLandLordsCheckout(properties) {
+            this.players = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameLandLordsCheckout.prototype.players = $util.emptyArray;
+
+        GameLandLordsCheckout.create = function create(properties) {
+            return new GameLandLordsCheckout(properties);
+        };
+
+        GameLandLordsCheckout.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.players != null && message.players.length)
+                for (var i = 0; i < message.players.length; ++i)
+                    $root.landLords.GameLandLordsAward.encode(message.players[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        GameLandLordsCheckout.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameLandLordsCheckout.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsCheckout();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.players && message.players.length))
+                        message.players = [];
+                    message.players.push($root.landLords.GameLandLordsAward.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsCheckout.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameLandLordsCheckout.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.players != null && message.hasOwnProperty("players")) {
+                if (!Array.isArray(message.players))
+                    return "players: array expected";
+                for (var i = 0; i < message.players.length; ++i) {
+                    var error = $root.landLords.GameLandLordsAward.verify(message.players[i]);
+                    if (error)
+                        return "players." + error;
+                }
+            }
+            return null;
+        };
+
+        GameLandLordsCheckout.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsCheckout)
+                return object;
+            var message = new $root.landLords.GameLandLordsCheckout();
+            if (object.players) {
+                if (!Array.isArray(object.players))
+                    throw TypeError(".landLords.GameLandLordsCheckout.players: array expected");
+                message.players = [];
+                for (var i = 0; i < object.players.length; ++i) {
+                    if (typeof object.players[i] !== "object")
+                        throw TypeError(".landLords.GameLandLordsCheckout.players: object expected");
+                    message.players[i] = $root.landLords.GameLandLordsAward.fromObject(object.players[i]);
+                }
+            }
+            return message;
+        };
+
+        GameLandLordsCheckout.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.players = [];
+            if (message.players && message.players.length) {
+                object.players = [];
+                for (var j = 0; j < message.players.length; ++j)
+                    object.players[j] = $root.landLords.GameLandLordsAward.toObject(message.players[j], options);
+            }
+            return object;
+        };
+
+        GameLandLordsCheckout.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameLandLordsCheckout;
+    })();
+
+    return landLords;
+})();
+
 $root.gamecomm = (function() {
 
     var gamecomm = {};

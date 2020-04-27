@@ -1,6 +1,5 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
-import { brcowcow_request, brcowcow_msgs } from "../../../../../common/script/proto/net_brcowcow";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../../common/script/model/GameManager";
@@ -179,11 +178,11 @@ export default class BrnnUI extends BaseComponent {
 
 	private onClickArea(areaId:number) {
 		var idx = this.compBox.getSelectedIndex();
-		brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
+	//	brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
 	}
 
 	private initNetEvent() {
-		EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
+	//	EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
 	}
 
 	private initUIEvent() {
