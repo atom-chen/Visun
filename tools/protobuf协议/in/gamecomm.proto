@@ -1,6 +1,18 @@
 syntax = "proto3";
 package gamecomm;
 
+
+//进入游戏
+message ReqEnterGame{
+    uint32 GameID = 1;			//游戏标识
+}
+
+//退出游戏
+message ReqExitGame{
+    uint32 GameID = 1;			//游戏标识
+}
+
+
 //玩家信息
 message PlayerInfo{
     uint64 UserID = 1;          //ID
@@ -76,4 +88,11 @@ message GameResult{
     bytes Reason = 2;       //原因
 }
 
+
+//通知金币变化
+message NotifyChangeGold{
+    uint64 UserID = 1;      //ID
+    int64 Gold = 2;         //金币 *100
+    uint32 Code = 3;        //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结
+}
 //

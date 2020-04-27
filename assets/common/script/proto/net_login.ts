@@ -20,8 +20,6 @@ export enum login_msgs {
     GameItem = 10,
     MasterInfo = 11,
     ReqEnterRoom = 12,
-    ReqEnterGame = 13,
-    ReqExitGame = 14,
 }
 
 export var login_packet_define = {
@@ -38,8 +36,6 @@ export var login_packet_define = {
     10: new LeafWsPacket(10, login.GameItem),
     11: new LeafWsPacket(11, login.MasterInfo),
     12: new LeafWsPacket(12, login.ReqEnterRoom),
-    13: new LeafWsPacket(13, login.ReqEnterGame),
-    14: new LeafWsPacket(14, login.ReqExitGame),
 }
 
 export class login_request {
@@ -56,7 +52,5 @@ export class login_request {
     public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
     public static MasterInfo( data:{ UserInfo:any, RoomsInfo:any[], Tasks:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqEnterRoom( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReqEnterGame( data:{ GameID:number } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReqExitGame( data:{ GameID:number } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
 }
 

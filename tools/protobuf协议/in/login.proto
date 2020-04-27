@@ -106,15 +106,6 @@ message ReqEnterRoom{
 	string RoomKey = 2;			//房间钥匙
 }
 
-//进入游戏
-message ReqEnterGame{
-	uint32 GameID = 1;			//游戏标识
-}
-
-//退出游戏
-message ReqExitGame{
-	uint32 GameID = 1;			//游戏标识
-}
 
 
 
