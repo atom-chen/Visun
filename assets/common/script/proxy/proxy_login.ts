@@ -15,14 +15,17 @@ var proxy_login = {
     },
 
     [login_msgs.ResResult] : function(param: any) {
-        LogicCenter.getInstance().clear();
-        LogicCenter.getInstance().init();
-        UIManager.toast("登录成功");
+        UIManager.toast(param.Hints);
     },
 
     [login_msgs.UserInfo] : function(param: any) {
         CommonUtil.simpleCopy(LoginUser.getInstance(), param);
     },
+
+    [login_msgs.MasterInfo] : function(param) {
+        UIManager.toast("登陆成功");
+        CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
+    }
 
 }
 

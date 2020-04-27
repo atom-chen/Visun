@@ -34,7 +34,7 @@ export default class LoginUI extends BaseComponent {
 
         EventCenter.getInstance().fire("aaaa", 1, "dddd");
 
-        EventCenter.getInstance().listen(login_msgs.RespLogin, (param:any, a:number)=>{
+        EventCenter.getInstance().listen(login_msgs.MasterInfo, (param:any, a:number)=>{
             CommonUtil.safeDelete(this);
         }, this);
     }

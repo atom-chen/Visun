@@ -12,11 +12,11 @@ var server_list = {
     },
     jetten: {
         mainHttpUrl: "",
-        leafServer: "ws://127.0.0.1:9650"
+        leafServer: "ws://192.168.43.7:9650"
     },
     mac: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.0.10:9650"
+        leafServer: "ws://192.168.58.126:9650"
     }
 };
 
