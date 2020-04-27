@@ -1,5 +1,5 @@
 syntax = "proto3";
-package gamecomm;
+package go;
 
 
 //进入游戏
@@ -41,6 +41,17 @@ message PlayerRecord{
     int64 WinLos = 5;   //总输赢 （当局）
 }
 
+//游戏状态(空闲)
+message GameStatusFree {
+}
+//游戏状态(游戏中)
+message GameStatusPlaying {
+}
+//游戏状态(结束)
+message GameStatusOver {
+}
+
+//游戏状态(准备)
 message GameReady{
     uint64 UserID = 1;   //ID
     bool IsReady = 2; // 玩家准备

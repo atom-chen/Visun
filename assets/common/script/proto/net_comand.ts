@@ -7,14 +7,14 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum comand_msgs {
-    PacketData = 59,
+    PacketData = 62,
 }
 
 export var comand_packet_define = {
-    59: new LeafWsPacket(59, comand.PacketData),
+    62: new LeafWsPacket(62, comand.PacketData),
 }
 
 export class comand_request {
-    public static PacketData( data:{ MainID:number, SubID:number, TransData:any } ) { comand_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }
+    public static PacketData( data:{ MainID:number, SubID:number, TransData:any } ) { comand_packet_define[62].sendToChannel(ChannelDefine.game, data, false); }
 }
 
