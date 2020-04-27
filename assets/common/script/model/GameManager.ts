@@ -6,7 +6,6 @@ import ModelBase from "../../../kernel/model/ModelBase";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
-import { gamecomm_request } from "../proto/net_gamecomm";
 
 //游戏管理器
 export default class GameManager extends ModelBase {
@@ -32,6 +31,15 @@ export default class GameManager extends ModelBase {
 	private _gameList = [];		//服务器游戏列表
 	private _roomList = {};		//服务器房间列表
 	private _allRooms = {}		//根据游戏ID索引游戏数据
+	private roomsInfo = [];
+
+	public setRoomsInfo(info:any) {
+		this.roomsInfo = info;
+	}
+
+	public getRoomsInfo() : any {
+		return this.roomsInfo;
+	}
 
 
 	//存储服务器下发的游戏列表

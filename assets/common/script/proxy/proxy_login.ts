@@ -3,6 +3,7 @@ import UIManager from "../../../kernel/view/UIManager";
 import LoginUser from "../model/LoginUser";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
+import GameManager from "../model/GameManager";
 
 //---------------------------------
 // login响应句柄
@@ -25,6 +26,8 @@ var proxy_login = {
     [login_msgs.MasterInfo] : function(param) {
         UIManager.toast("登陆成功");
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
+        //param.RoomsInfo = [{RoomNum: 101, RoomKey: "321weqe", RoomName: " 万人房", Games: {…}}]
+        GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
     }
 
 }

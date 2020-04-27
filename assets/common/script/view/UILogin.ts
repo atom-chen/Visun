@@ -7,10 +7,6 @@ import { login_msgs } from "../proto/net_login";
 
 const {ccclass, property} = cc._decorator;
 
-class b {
-    aaaassss(){}
-}
-
 @ccclass
 export default class LoginUI extends BaseComponent {
     @property(cc.EditBox)
@@ -24,17 +20,8 @@ export default class LoginUI extends BaseComponent {
         this.initNetEvent();
     }
 
-    aaaaaaa(a, b, c) {
-        cc.log("============", a, b, c)
-    }
-
     private initNetEvent() {
-        
-        EventCenter.getInstance().listen("aaaa", this.aaaaaaa, this);
-
-        EventCenter.getInstance().fire("aaaa", 1, "dddd");
-
-        EventCenter.getInstance().listen(login_msgs.MasterInfo, (param:any, a:number)=>{
+        EventCenter.getInstance().listen(login_msgs.MasterInfo, (param:any)=>{
             CommonUtil.safeDelete(this);
         }, this);
     }
