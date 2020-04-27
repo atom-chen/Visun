@@ -7,11 +7,11 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.go = (function() {
+$root.gamecomm = (function() {
 
-    var go = {};
+    var gamecomm = {};
 
-    go.ReqEnterGame = (function() {
+    gamecomm.ReqEnterGame = (function() {
 
         function ReqEnterGame(properties) {
             if (properties)
@@ -41,7 +41,7 @@ $root.go = (function() {
         ReqEnterGame.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.ReqEnterGame();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.ReqEnterGame();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -72,9 +72,9 @@ $root.go = (function() {
         };
 
         ReqEnterGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.ReqEnterGame)
+            if (object instanceof $root.gamecomm.ReqEnterGame)
                 return object;
-            var message = new $root.go.ReqEnterGame();
+            var message = new $root.gamecomm.ReqEnterGame();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
             return message;
@@ -98,7 +98,7 @@ $root.go = (function() {
         return ReqEnterGame;
     })();
 
-    go.ReqExitGame = (function() {
+    gamecomm.ReqExitGame = (function() {
 
         function ReqExitGame(properties) {
             if (properties)
@@ -128,7 +128,7 @@ $root.go = (function() {
         ReqExitGame.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.ReqExitGame();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.ReqExitGame();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -159,9 +159,9 @@ $root.go = (function() {
         };
 
         ReqExitGame.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.ReqExitGame)
+            if (object instanceof $root.gamecomm.ReqExitGame)
                 return object;
-            var message = new $root.go.ReqExitGame();
+            var message = new $root.gamecomm.ReqExitGame();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
             return message;
@@ -185,7 +185,7 @@ $root.go = (function() {
         return ReqExitGame;
     })();
 
-    go.PlayerInfo = (function() {
+    gamecomm.PlayerInfo = (function() {
 
         function PlayerInfo(properties) {
             if (properties)
@@ -245,7 +245,7 @@ $root.go = (function() {
         PlayerInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.PlayerInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.PlayerInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -336,9 +336,9 @@ $root.go = (function() {
         };
 
         PlayerInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.PlayerInfo)
+            if (object instanceof $root.gamecomm.PlayerInfo)
                 return object;
-            var message = new $root.go.PlayerInfo();
+            var message = new $root.gamecomm.PlayerInfo();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -441,7 +441,7 @@ $root.go = (function() {
         return PlayerInfo;
     })();
 
-    go.UserList = (function() {
+    gamecomm.UserList = (function() {
 
         function UserList(properties) {
             this.AllInfos = [];
@@ -462,7 +462,7 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.AllInfos != null && message.AllInfos.length)
                 for (var i = 0; i < message.AllInfos.length; ++i)
-                    $root.go.PlayerInfo.encode(message.AllInfos[i], writer.uint32(10).fork()).ldelim();
+                    $root.gamecomm.PlayerInfo.encode(message.AllInfos[i], writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -473,14 +473,14 @@ $root.go = (function() {
         UserList.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.UserList();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.UserList();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     if (!(message.AllInfos && message.AllInfos.length))
                         message.AllInfos = [];
-                    message.AllInfos.push($root.go.PlayerInfo.decode(reader, reader.uint32()));
+                    message.AllInfos.push($root.gamecomm.PlayerInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -503,7 +503,7 @@ $root.go = (function() {
                 if (!Array.isArray(message.AllInfos))
                     return "AllInfos: array expected";
                 for (var i = 0; i < message.AllInfos.length; ++i) {
-                    var error = $root.go.PlayerInfo.verify(message.AllInfos[i]);
+                    var error = $root.gamecomm.PlayerInfo.verify(message.AllInfos[i]);
                     if (error)
                         return "AllInfos." + error;
                 }
@@ -512,17 +512,17 @@ $root.go = (function() {
         };
 
         UserList.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.UserList)
+            if (object instanceof $root.gamecomm.UserList)
                 return object;
-            var message = new $root.go.UserList();
+            var message = new $root.gamecomm.UserList();
             if (object.AllInfos) {
                 if (!Array.isArray(object.AllInfos))
-                    throw TypeError(".go.UserList.AllInfos: array expected");
+                    throw TypeError(".gamecomm.UserList.AllInfos: array expected");
                 message.AllInfos = [];
                 for (var i = 0; i < object.AllInfos.length; ++i) {
                     if (typeof object.AllInfos[i] !== "object")
-                        throw TypeError(".go.UserList.AllInfos: object expected");
-                    message.AllInfos[i] = $root.go.PlayerInfo.fromObject(object.AllInfos[i]);
+                        throw TypeError(".gamecomm.UserList.AllInfos: object expected");
+                    message.AllInfos[i] = $root.gamecomm.PlayerInfo.fromObject(object.AllInfos[i]);
                 }
             }
             return message;
@@ -537,7 +537,7 @@ $root.go = (function() {
             if (message.AllInfos && message.AllInfos.length) {
                 object.AllInfos = [];
                 for (var j = 0; j < message.AllInfos.length; ++j)
-                    object.AllInfos[j] = $root.go.PlayerInfo.toObject(message.AllInfos[j], options);
+                    object.AllInfos[j] = $root.gamecomm.PlayerInfo.toObject(message.AllInfos[j], options);
             }
             return object;
         };
@@ -549,7 +549,7 @@ $root.go = (function() {
         return UserList;
     })();
 
-    go.PlayerRecord = (function() {
+    gamecomm.PlayerRecord = (function() {
 
         function PlayerRecord(properties) {
             if (properties)
@@ -572,7 +572,7 @@ $root.go = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.User != null && message.hasOwnProperty("User"))
-                $root.go.PlayerInfo.encode(message.User, writer.uint32(10).fork()).ldelim();
+                $root.gamecomm.PlayerInfo.encode(message.User, writer.uint32(10).fork()).ldelim();
             if (message.Twice != null && message.hasOwnProperty("Twice"))
                 writer.uint32(16).int32(message.Twice);
             if (message.Ranking != null && message.hasOwnProperty("Ranking"))
@@ -591,12 +591,12 @@ $root.go = (function() {
         PlayerRecord.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.PlayerRecord();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.PlayerRecord();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.User = $root.go.PlayerInfo.decode(reader, reader.uint32());
+                    message.User = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
                     message.Twice = reader.int32();
@@ -628,7 +628,7 @@ $root.go = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.User != null && message.hasOwnProperty("User")) {
-                var error = $root.go.PlayerInfo.verify(message.User);
+                var error = $root.gamecomm.PlayerInfo.verify(message.User);
                 if (error)
                     return "User." + error;
             }
@@ -648,13 +648,13 @@ $root.go = (function() {
         };
 
         PlayerRecord.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.PlayerRecord)
+            if (object instanceof $root.gamecomm.PlayerRecord)
                 return object;
-            var message = new $root.go.PlayerRecord();
+            var message = new $root.gamecomm.PlayerRecord();
             if (object.User != null) {
                 if (typeof object.User !== "object")
-                    throw TypeError(".go.PlayerRecord.User: object expected");
-                message.User = $root.go.PlayerInfo.fromObject(object.User);
+                    throw TypeError(".gamecomm.PlayerRecord.User: object expected");
+                message.User = $root.gamecomm.PlayerInfo.fromObject(object.User);
             }
             if (object.Twice != null)
                 message.Twice = object.Twice | 0;
@@ -690,7 +690,7 @@ $root.go = (function() {
                     object.WinLos = options.longs === String ? "0" : 0;
             }
             if (message.User != null && message.hasOwnProperty("User"))
-                object.User = $root.go.PlayerInfo.toObject(message.User, options);
+                object.User = $root.gamecomm.PlayerInfo.toObject(message.User, options);
             if (message.Twice != null && message.hasOwnProperty("Twice"))
                 object.Twice = message.Twice;
             if (message.Ranking != null && message.hasOwnProperty("Ranking"))
@@ -712,7 +712,7 @@ $root.go = (function() {
         return PlayerRecord;
     })();
 
-    go.GameStatusFree = (function() {
+    gamecomm.GameStatusFree = (function() {
 
         function GameStatusFree(properties) {
             if (properties)
@@ -738,7 +738,7 @@ $root.go = (function() {
         GameStatusFree.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameStatusFree();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStatusFree();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -763,9 +763,9 @@ $root.go = (function() {
         };
 
         GameStatusFree.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameStatusFree)
+            if (object instanceof $root.gamecomm.GameStatusFree)
                 return object;
-            return new $root.go.GameStatusFree();
+            return new $root.gamecomm.GameStatusFree();
         };
 
         GameStatusFree.toObject = function toObject() {
@@ -779,7 +779,7 @@ $root.go = (function() {
         return GameStatusFree;
     })();
 
-    go.GameStatusPlaying = (function() {
+    gamecomm.GameStatusPlaying = (function() {
 
         function GameStatusPlaying(properties) {
             if (properties)
@@ -805,7 +805,7 @@ $root.go = (function() {
         GameStatusPlaying.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameStatusPlaying();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStatusPlaying();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -830,9 +830,9 @@ $root.go = (function() {
         };
 
         GameStatusPlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameStatusPlaying)
+            if (object instanceof $root.gamecomm.GameStatusPlaying)
                 return object;
-            return new $root.go.GameStatusPlaying();
+            return new $root.gamecomm.GameStatusPlaying();
         };
 
         GameStatusPlaying.toObject = function toObject() {
@@ -846,7 +846,7 @@ $root.go = (function() {
         return GameStatusPlaying;
     })();
 
-    go.GameStatusOver = (function() {
+    gamecomm.GameStatusOver = (function() {
 
         function GameStatusOver(properties) {
             if (properties)
@@ -872,7 +872,7 @@ $root.go = (function() {
         GameStatusOver.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameStatusOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStatusOver();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -897,9 +897,9 @@ $root.go = (function() {
         };
 
         GameStatusOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameStatusOver)
+            if (object instanceof $root.gamecomm.GameStatusOver)
                 return object;
-            return new $root.go.GameStatusOver();
+            return new $root.gamecomm.GameStatusOver();
         };
 
         GameStatusOver.toObject = function toObject() {
@@ -913,7 +913,7 @@ $root.go = (function() {
         return GameStatusOver;
     })();
 
-    go.GameReady = (function() {
+    gamecomm.GameReady = (function() {
 
         function GameReady(properties) {
             if (properties)
@@ -946,7 +946,7 @@ $root.go = (function() {
         GameReady.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameReady();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameReady();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -983,9 +983,9 @@ $root.go = (function() {
         };
 
         GameReady.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameReady)
+            if (object instanceof $root.gamecomm.GameReady)
                 return object;
-            var message = new $root.go.GameReady();
+            var message = new $root.gamecomm.GameReady();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1029,7 +1029,7 @@ $root.go = (function() {
         return GameReady;
     })();
 
-    go.GameBet = (function() {
+    gamecomm.GameBet = (function() {
 
         function GameBet(properties) {
             if (properties)
@@ -1062,7 +1062,7 @@ $root.go = (function() {
         GameBet.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBet();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameBet();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1099,9 +1099,9 @@ $root.go = (function() {
         };
 
         GameBet.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameBet)
+            if (object instanceof $root.gamecomm.GameBet)
                 return object;
-            var message = new $root.go.GameBet();
+            var message = new $root.gamecomm.GameBet();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -1145,7 +1145,7 @@ $root.go = (function() {
         return GameBet;
     })();
 
-    go.GameBetResult = (function() {
+    gamecomm.GameBetResult = (function() {
 
         function GameBetResult(properties) {
             if (properties)
@@ -1187,7 +1187,7 @@ $root.go = (function() {
         GameBetResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBetResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameBetResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1242,9 +1242,9 @@ $root.go = (function() {
         };
 
         GameBetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameBetResult)
+            if (object instanceof $root.gamecomm.GameBetResult)
                 return object;
-            var message = new $root.go.GameBetResult();
+            var message = new $root.gamecomm.GameBetResult();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1317,7 +1317,7 @@ $root.go = (function() {
         return GameBetResult;
     })();
 
-    go.GameHost = (function() {
+    gamecomm.GameHost = (function() {
 
         function GameHost(properties) {
             if (properties)
@@ -1347,7 +1347,7 @@ $root.go = (function() {
         GameHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1378,9 +1378,9 @@ $root.go = (function() {
         };
 
         GameHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameHost)
+            if (object instanceof $root.gamecomm.GameHost)
                 return object;
-            var message = new $root.go.GameHost();
+            var message = new $root.gamecomm.GameHost();
             if (object.IsWant != null)
                 message.IsWant = Boolean(object.IsWant);
             return message;
@@ -1404,7 +1404,7 @@ $root.go = (function() {
         return GameHost;
     })();
 
-    go.GameSuperHost = (function() {
+    gamecomm.GameSuperHost = (function() {
 
         function GameSuperHost(properties) {
             if (properties)
@@ -1434,7 +1434,7 @@ $root.go = (function() {
         GameSuperHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameSuperHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameSuperHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1465,9 +1465,9 @@ $root.go = (function() {
         };
 
         GameSuperHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameSuperHost)
+            if (object instanceof $root.gamecomm.GameSuperHost)
                 return object;
-            var message = new $root.go.GameSuperHost();
+            var message = new $root.gamecomm.GameSuperHost();
             if (object.IsWant != null)
                 message.IsWant = Boolean(object.IsWant);
             return message;
@@ -1491,7 +1491,7 @@ $root.go = (function() {
         return GameSuperHost;
     })();
 
-    go.GameRecord = (function() {
+    gamecomm.GameRecord = (function() {
 
         function GameRecord(properties) {
             if (properties)
@@ -1527,7 +1527,7 @@ $root.go = (function() {
         GameRecord.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecord();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameRecord();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1570,9 +1570,9 @@ $root.go = (function() {
         };
 
         GameRecord.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameRecord)
+            if (object instanceof $root.gamecomm.GameRecord)
                 return object;
-            var message = new $root.go.GameRecord();
+            var message = new $root.gamecomm.GameRecord();
             if (object.Pork != null)
                 if (typeof object.Pork === "string")
                     $util.base64.decode(object.Pork, message.Pork = $util.newBuffer($util.base64.length(object.Pork)), 0);
@@ -1616,7 +1616,7 @@ $root.go = (function() {
         return GameRecord;
     })();
 
-    go.GameRecordList = (function() {
+    gamecomm.GameRecordList = (function() {
 
         function GameRecordList(properties) {
             this.list = [];
@@ -1637,7 +1637,7 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.list != null && message.list.length)
                 for (var i = 0; i < message.list.length; ++i)
-                    $root.go.GameRecord.encode(message.list[i], writer.uint32(10).fork()).ldelim();
+                    $root.gamecomm.GameRecord.encode(message.list[i], writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -1648,14 +1648,14 @@ $root.go = (function() {
         GameRecordList.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecordList();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameRecordList();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     if (!(message.list && message.list.length))
                         message.list = [];
-                    message.list.push($root.go.GameRecord.decode(reader, reader.uint32()));
+                    message.list.push($root.gamecomm.GameRecord.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1678,7 +1678,7 @@ $root.go = (function() {
                 if (!Array.isArray(message.list))
                     return "list: array expected";
                 for (var i = 0; i < message.list.length; ++i) {
-                    var error = $root.go.GameRecord.verify(message.list[i]);
+                    var error = $root.gamecomm.GameRecord.verify(message.list[i]);
                     if (error)
                         return "list." + error;
                 }
@@ -1687,17 +1687,17 @@ $root.go = (function() {
         };
 
         GameRecordList.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameRecordList)
+            if (object instanceof $root.gamecomm.GameRecordList)
                 return object;
-            var message = new $root.go.GameRecordList();
+            var message = new $root.gamecomm.GameRecordList();
             if (object.list) {
                 if (!Array.isArray(object.list))
-                    throw TypeError(".go.GameRecordList.list: array expected");
+                    throw TypeError(".gamecomm.GameRecordList.list: array expected");
                 message.list = [];
                 for (var i = 0; i < object.list.length; ++i) {
                     if (typeof object.list[i] !== "object")
-                        throw TypeError(".go.GameRecordList.list: object expected");
-                    message.list[i] = $root.go.GameRecord.fromObject(object.list[i]);
+                        throw TypeError(".gamecomm.GameRecordList.list: object expected");
+                    message.list[i] = $root.gamecomm.GameRecord.fromObject(object.list[i]);
                 }
             }
             return message;
@@ -1712,7 +1712,7 @@ $root.go = (function() {
             if (message.list && message.list.length) {
                 object.list = [];
                 for (var j = 0; j < message.list.length; ++j)
-                    object.list[j] = $root.go.GameRecord.toObject(message.list[j], options);
+                    object.list[j] = $root.gamecomm.GameRecord.toObject(message.list[j], options);
             }
             return object;
         };
@@ -1724,7 +1724,7 @@ $root.go = (function() {
         return GameRecordList;
     })();
 
-    go.GameResult = (function() {
+    gamecomm.GameResult = (function() {
 
         function GameResult(properties) {
             if (properties)
@@ -1757,7 +1757,7 @@ $root.go = (function() {
         GameResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1794,9 +1794,9 @@ $root.go = (function() {
         };
 
         GameResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameResult)
+            if (object instanceof $root.gamecomm.GameResult)
                 return object;
-            var message = new $root.go.GameResult();
+            var message = new $root.gamecomm.GameResult();
             if (object.Flag != null)
                 message.Flag = object.Flag | 0;
             if (object.Reason != null)
@@ -1835,7 +1835,7 @@ $root.go = (function() {
         return GameResult;
     })();
 
-    go.NotifyChangeGold = (function() {
+    gamecomm.NotifyChangeGold = (function() {
 
         function NotifyChangeGold(properties) {
             if (properties)
@@ -1871,7 +1871,7 @@ $root.go = (function() {
         NotifyChangeGold.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.NotifyChangeGold();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.NotifyChangeGold();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1914,9 +1914,9 @@ $root.go = (function() {
         };
 
         NotifyChangeGold.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.NotifyChangeGold)
+            if (object instanceof $root.gamecomm.NotifyChangeGold)
                 return object;
-            var message = new $root.go.NotifyChangeGold();
+            var message = new $root.gamecomm.NotifyChangeGold();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1979,7 +1979,7 @@ $root.go = (function() {
         return NotifyChangeGold;
     })();
 
-    return go;
+    return gamecomm;
 })();
 
 module.exports = $root;
