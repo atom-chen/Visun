@@ -8,6 +8,7 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import room_btn from "./room_btn";
 import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 
 
 const {ccclass, property} = cc._decorator;
@@ -68,6 +69,14 @@ export default class UILobby extends BaseComponent {
 		//头像
 		CommonUtil.addClickEvent(this.m_ui.headNode, function(){ 
 			UIManager.openPopwnd(ViewDefine.UILogin, true, null); 
+		}, this);
+		//设置
+		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
+			UIManager.toast("尚未实现"); 
+		}, this);
+		//全屏
+		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
+			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
 		}, this);
 	}
 
