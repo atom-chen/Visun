@@ -13,6 +13,9 @@ import proxy_login from "../proxy/proxy_login";
 import { comand_packet_define } from "../proto/net_comand";
 import { baccarat_packet_define } from "../proto/net_baccarat";
 import { landLords_packet_define } from "../proto/net_landLords";
+import { cowcow_packet_define } from "../proto/net_cowcow";
+import { fishLord_packet_define } from "../proto/net_fishLord";
+import { mahjong_packet_define } from "../proto/net_mahjong";
 
 
 //模块管理器
@@ -30,6 +33,9 @@ export default class LogicCenter {
         g_leafProcessor.registCmds(comand_packet_define);
         g_leafProcessor.registCmds(baccarat_packet_define);
         g_leafProcessor.registCmds(landLords_packet_define);
+        g_leafProcessor.registCmds(cowcow_packet_define);
+        g_leafProcessor.registCmds(fishLord_packet_define);
+        g_leafProcessor.registCmds(mahjong_packet_define);
         g_leafProcessor.getDispatcher().addObserver(proxy_login);
     }
     

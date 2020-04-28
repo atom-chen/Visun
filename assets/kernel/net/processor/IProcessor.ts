@@ -1,5 +1,5 @@
 //--------------------------------------
-// 网络消息处理器
+// 网络消息处理器接口
 //--------------------------------------
 import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../basic/event/SingleDispatcher";

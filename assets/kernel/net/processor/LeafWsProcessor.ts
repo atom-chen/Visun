@@ -55,15 +55,13 @@ export default class LeafWsProcessor extends BaseProcessor {
 		//	cc.log(CommonUtil.Bytes2Str(bytes));
 		}
 
-		if(this._paused)
-		{
+		if(this._paused) {
 			this._fire_list.push({cmd:cmd,data:data});
 			cc.log(this._name, "push fire", this._fire_list.length);
+			return;
 		}
-		else
-		{
-			this._dispatcher.fire(cmd, data);
-		}
+
+		this._dispatcher.fire(cmd, data);
 	}
 	
 }

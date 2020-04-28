@@ -1,5 +1,5 @@
 //--------------------------------------
-//消息处理器
+//消息处理器基类
 //--------------------------------------
 import IProcessor from "./IProcessor";
 import IChannel from "../channel/IChannel";
@@ -9,7 +9,7 @@ import PacketInterface from "../packet/PacketInterface";
 
 export default class BaseProcessor implements IProcessor {
 	protected _name: string = "";
-	protected _dispatcher = new SingleDispatcher;
+	protected _dispatcher = new SingleDispatcher;	//消息派发器
 	protected _paused:boolean = false;
 	protected _channel:IChannel = null;
 	protected _send_list = [];

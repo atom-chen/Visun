@@ -1,3 +1,6 @@
+//-----------------------------------------
+// 消息处理器总管
+//-----------------------------------------
 import IProcessor from "./IProcessor";
 import JsonProcessor from "./JsonProcessor";
 import T4C4ProtobufProcessor from "./T4C4ProtobufProcessor";
@@ -6,9 +9,6 @@ import StreamProcessor from "./StreamProcessor";
 import LeafTcpProcessor from "./LeafTcpProcessor";
 import LeafWsProcessor from "./LeafWsProcessor";
 
-//-----------------------------------------
-// 消息处理器总管
-//-----------------------------------------
 export default class ProcessorMgr {
     private static _instance:ProcessorMgr = null;
 
