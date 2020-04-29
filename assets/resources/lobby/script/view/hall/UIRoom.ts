@@ -1,8 +1,6 @@
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
-import { IS_DANJI_MODE } from "../../../../../common/script/definer/ConstDefine";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 
 const {ccclass, property} = cc._decorator;

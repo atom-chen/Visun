@@ -1,36 +1,42 @@
-import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
-import GameManager from "../../../../../common/script/model/GameManager";
-import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
-import ViewDefine from "../../../../../common/script/definer/ViewDefine";
-import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
-import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import AudioManager from "../../../../../kernel/audio/AudioManager";
-import CpnChip from "../../../../../common/script/comps/CpnChip";
-import GameUtil from "../../../../../common/script/utils/GameUtil";
-
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import SimplePool from "../../../../kernel/basic/pool/SimplePool";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import ViewDefine from "../../../../common/script/definer/ViewDefine";
+import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
+import TimerManager from "../../../../kernel/basic/timer/TimerManager";
+import CHandler from "../../../../kernel/basic/datastruct/CHandler";
+import AudioManager from "../../../../kernel/audio/AudioManager";
+import GameUtil from "../../../../common/script/utils/GameUtil";
+import CpnChip from "../../../../common/script/comps/CpnChip";
+import GameManager from "../../../../common/script/model/GameManager";
 
 var margin = [
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:80,right:80,bottom:90,top:90 },
-	{ left:80,right:80,bottom:90,top:90 },
+	{ left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
+    { left:10,right:10,bottom:10,top:10 },
 ];
 var testdata = [ 
 	{AreaId:0,Money:25280}, 
 	{AreaId:1,Money:25280}, 
 	{AreaId:2,Money:28650}, 
 	{AreaId:3,Money:26455}, 
-	{AreaId:4,Money:24255} 
+    {AreaId:4,Money:24255},
+    {AreaId:5,Money:28650}, 
+	{AreaId:6,Money:26455}, 
+	{AreaId:7,Money:24255},
 ];
+
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class UIbjle extends BaseComponent {
-	_rule:number[] = [5,10,50,100,500];
+export default class BacarratUI extends BaseComponent {
+    _rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
 
 	_loadedRes:any;
@@ -147,20 +153,29 @@ export default class UIbjle extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame(0);
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
-			cc.log("和");
+		CommonUtil.addClickEvent(this.m_ui.area0, function(){ 
+			
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.button1, function(){ 
-            cc.log("闲");
+		CommonUtil.addClickEvent(this.m_ui.area1, function(){ 
+            
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.button2, function(){ 
-            cc.log("庄");
+		CommonUtil.addClickEvent(this.m_ui.area2, function(){ 
+            
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.button3, function(){ 
-            cc.log("闲对");
+		CommonUtil.addClickEvent(this.m_ui.area3, function(){ 
+            
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.button4, function(){ 
-            cc.log("庄对");
+		CommonUtil.addClickEvent(this.m_ui.area4, function(){ 
+            
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.area5, function(){ 
+            
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.area6, function(){ 
+            
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.area7, function(){ 
+            
 		}, this);
 	}
 }

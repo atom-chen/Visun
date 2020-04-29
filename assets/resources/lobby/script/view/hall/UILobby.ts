@@ -9,6 +9,7 @@ import room_btn from "./room_btn";
 import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -71,8 +72,8 @@ export default class UILobby extends BaseComponent {
 			UIManager.openPopwnd(ViewDefine.UILogin, true, null); 
 		}, this);
 		//设置
-		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
-			UIManager.toast("尚未实现"); 
+		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
+			GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

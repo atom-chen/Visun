@@ -33,7 +33,7 @@ var GameConfig = {
 		openState: 1,
 		icon: "lobby/imgs/gameico/ico_bjl",
 		dir: "bjle",
-		viewpath: ViewDefine.UIbjle
+		viewpath: ViewDefine.UIBacarrat
 	},
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,
