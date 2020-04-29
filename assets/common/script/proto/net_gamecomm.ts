@@ -49,7 +49,7 @@ export var gamecomm_packet_define = {
 export class gamecomm_request {
     public static ReqEnterGame( data:{ GameID:number } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqExitGame( data:{ GameID:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
-    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, VipLevel:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, VipLevel:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static UserList( data:{ AllInfos:any[] } ) { gamecomm_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerRecord( data:{ User:any, Twice:number, Ranking:number, Bankroll:number, WinLos:number } ) { gamecomm_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
     public static GameStatusFree( data:{} ) { gamecomm_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }

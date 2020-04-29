@@ -205,6 +205,8 @@ $root.gamecomm = (function() {
         PlayerInfo.prototype.PlatformID = 0;
         PlayerInfo.prototype.RoomNum = 0;
         PlayerInfo.prototype.GameID = 0;
+        PlayerInfo.prototype.TableID = 0;
+        PlayerInfo.prototype.ChairID = 0;
 
         PlayerInfo.create = function create(properties) {
             return new PlayerInfo(properties);
@@ -235,6 +237,10 @@ $root.gamecomm = (function() {
                 writer.uint32(80).uint32(message.RoomNum);
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 writer.uint32(88).uint32(message.GameID);
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                writer.uint32(96).uint32(message.TableID);
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                writer.uint32(104).uint32(message.ChairID);
             return writer;
         };
 
@@ -281,6 +287,12 @@ $root.gamecomm = (function() {
                     break;
                 case 11:
                     message.GameID = reader.uint32();
+                    break;
+                case 12:
+                    message.TableID = reader.uint32();
+                    break;
+                case 13:
+                    message.ChairID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -332,6 +344,12 @@ $root.gamecomm = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID))
                     return "GameID: integer expected";
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                if (!$util.isInteger(message.TableID))
+                    return "TableID: integer expected";
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                if (!$util.isInteger(message.ChairID))
+                    return "ChairID: integer expected";
             return null;
         };
 
@@ -375,6 +393,10 @@ $root.gamecomm = (function() {
                 message.RoomNum = object.RoomNum >>> 0;
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
+            if (object.TableID != null)
+                message.TableID = object.TableID >>> 0;
+            if (object.ChairID != null)
+                message.ChairID = object.ChairID >>> 0;
             return message;
         };
 
@@ -402,6 +424,8 @@ $root.gamecomm = (function() {
                 object.PlatformID = 0;
                 object.RoomNum = 0;
                 object.GameID = 0;
+                object.TableID = 0;
+                object.ChairID = 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -431,6 +455,10 @@ $root.gamecomm = (function() {
                 object.RoomNum = message.RoomNum;
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 object.GameID = message.GameID;
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                object.TableID = message.TableID;
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                object.ChairID = message.ChairID;
             return object;
         };
 

@@ -80,11 +80,11 @@ message GameBaseInfo{
 	 uint32 Type = 1;	 		//游戏类型
 	 uint32 KindID = 2;	 		//游戏标识
 	 uint32 Level = 3;			//游戏类别 0:普通 1:中级 2:高级 3:积分排位 4:淘汰制排位
-	 uint32 TableID = 4;		//桌号ID
-	 string Name = 5;			//游戏名称
-	 string Number = 6;			//牌 局 号
-	 uint32 EnterScore = 7;		//进 场 分
-	 uint32 LessScore = 8;		//坐 下 分
+	 string Name = 4;			//游戏名称
+	 uint32 EnterScore = 5;		//进 场 分
+	 uint32 LessScore = 6;		//坐 下 分
+	 uint32 MaxOnline = 7;		//在线人数
+	 uint32 State = 8;			//状态
 }
 //子游戏
 message GameItem{

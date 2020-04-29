@@ -301,9 +301,9 @@ function doGenerate() {
 	msgStr += "}\n"
 	
 	write2file(outServerMsg, msgStr);
-	write2file(outServerHandler, handStr);
+	//write2file(outServerHandler, handStr);
 	write2file(outRouter, routerStr);
-	write2file(outHandleFunc, funcStr);
+	//write2file(outHandleFunc, funcStr);
 	//server end
 }
 

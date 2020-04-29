@@ -15,7 +15,6 @@ message GameBaccaratEnter{
 
 }
 //注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
-
 //游戏消息
 //抢庄
 message GameBaccaratHost {
