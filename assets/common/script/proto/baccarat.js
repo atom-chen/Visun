@@ -7,11 +7,11 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.baccarat = (function() {
+$root.go = (function() {
 
-    var baccarat = {};
+    var go = {};
 
-    baccarat.GameBaccaratEnter = (function() {
+    go.GameBaccaratEnter = (function() {
 
         function GameBaccaratEnter(properties) {
             this.Chips = [];
@@ -66,7 +66,7 @@ $root.baccarat = (function() {
         GameBaccaratEnter.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratEnter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratEnter();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -152,12 +152,12 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratEnter.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratEnter)
+            if (object instanceof $root.go.GameBaccaratEnter)
                 return object;
-            var message = new $root.baccarat.GameBaccaratEnter();
+            var message = new $root.go.GameBaccaratEnter();
             if (object.UserInfo != null) {
                 if (typeof object.UserInfo !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.UserInfo: object expected");
+                    throw TypeError(".go.GameBaccaratEnter.UserInfo: object expected");
                 message.UserInfo = $root.gamecomm.PlayerInfo.fromObject(object.UserInfo);
             }
             if (object.TimeStamp != null)
@@ -171,14 +171,14 @@ $root.baccarat = (function() {
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
-                    throw TypeError(".baccarat.GameBaccaratEnter.Chips: array expected");
+                    throw TypeError(".go.GameBaccaratEnter.Chips: array expected");
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
             }
             if (object.AwardAreas) {
                 if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".baccarat.GameBaccaratEnter.AwardAreas: array expected");
+                    throw TypeError(".go.GameBaccaratEnter.AwardAreas: array expected");
                 message.AwardAreas = [];
                 for (var i = 0; i < object.AwardAreas.length; ++i)
                     if (typeof object.AwardAreas[i] === "string")
@@ -247,7 +247,7 @@ $root.baccarat = (function() {
         return GameBaccaratEnter;
     })();
 
-    baccarat.GameBaccaratHost = (function() {
+    go.GameBaccaratHost = (function() {
 
         function GameBaccaratHost(properties) {
             if (properties)
@@ -280,7 +280,7 @@ $root.baccarat = (function() {
         GameBaccaratHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -317,9 +317,9 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratHost)
+            if (object instanceof $root.go.GameBaccaratHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratHost();
+            var message = new $root.go.GameBaccaratHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -363,7 +363,7 @@ $root.baccarat = (function() {
         return GameBaccaratHost;
     })();
 
-    baccarat.GameBaccaratSuperHost = (function() {
+    go.GameBaccaratSuperHost = (function() {
 
         function GameBaccaratSuperHost(properties) {
             if (properties)
@@ -396,7 +396,7 @@ $root.baccarat = (function() {
         GameBaccaratSuperHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratSuperHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratSuperHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -433,9 +433,9 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratSuperHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratSuperHost)
+            if (object instanceof $root.go.GameBaccaratSuperHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratSuperHost();
+            var message = new $root.go.GameBaccaratSuperHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -479,7 +479,7 @@ $root.baccarat = (function() {
         return GameBaccaratSuperHost;
     })();
 
-    baccarat.GameBaccaratBet = (function() {
+    go.GameBaccaratBet = (function() {
 
         function GameBaccaratBet(properties) {
             if (properties)
@@ -512,7 +512,7 @@ $root.baccarat = (function() {
         GameBaccaratBet.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBet();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratBet();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -549,9 +549,9 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratBet.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBet)
+            if (object instanceof $root.go.GameBaccaratBet)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBet();
+            var message = new $root.go.GameBaccaratBet();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -595,7 +595,7 @@ $root.baccarat = (function() {
         return GameBaccaratBet;
     })();
 
-    baccarat.GameBaccaratBetResult = (function() {
+    go.GameBaccaratBetResult = (function() {
 
         function GameBaccaratBetResult(properties) {
             if (properties)
@@ -604,6 +604,9 @@ $root.baccarat = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        GameBaccaratBetResult.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameBaccaratBetResult.prototype.BetArea = 0;
+        GameBaccaratBetResult.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GameBaccaratBetResult.prototype.State = 0;
         GameBaccaratBetResult.prototype.Hints = "";
 
@@ -614,10 +617,16 @@ $root.baccarat = (function() {
         GameBaccaratBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
             if (message.State != null && message.hasOwnProperty("State"))
-                writer.uint32(8).int32(message.State);
+                writer.uint32(16).int32(message.State);
             if (message.Hints != null && message.hasOwnProperty("Hints"))
-                writer.uint32(18).string(message.Hints);
+                writer.uint32(26).string(message.Hints);
+            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+                writer.uint32(32).int32(message.BetArea);
+            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+                writer.uint32(40).int64(message.BetScore);
             return writer;
         };
 
@@ -628,14 +637,23 @@ $root.baccarat = (function() {
         GameBaccaratBetResult.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBetResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratBetResult();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.State = reader.int32();
+                    message.UserID = reader.uint64();
+                    break;
+                case 4:
+                    message.BetArea = reader.int32();
+                    break;
+                case 5:
+                    message.BetScore = reader.int64();
                     break;
                 case 2:
+                    message.State = reader.int32();
+                    break;
+                case 3:
                     message.Hints = reader.string();
                     break;
                 default:
@@ -655,6 +673,15 @@ $root.baccarat = (function() {
         GameBaccaratBetResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+                if (!$util.isInteger(message.BetArea))
+                    return "BetArea: integer expected";
+            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+                if (!$util.isInteger(message.BetScore) && !(message.BetScore && $util.isInteger(message.BetScore.low) && $util.isInteger(message.BetScore.high)))
+                    return "BetScore: integer|Long expected";
             if (message.State != null && message.hasOwnProperty("State"))
                 if (!$util.isInteger(message.State))
                     return "State: integer expected";
@@ -665,9 +692,29 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratBetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBetResult)
+            if (object instanceof $root.go.GameBaccaratBetResult)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBetResult();
+            var message = new $root.go.GameBaccaratBetResult();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.BetArea != null)
+                message.BetArea = object.BetArea | 0;
+            if (object.BetScore != null)
+                if ($util.Long)
+                    (message.BetScore = $util.Long.fromValue(object.BetScore)).unsigned = false;
+                else if (typeof object.BetScore === "string")
+                    message.BetScore = parseInt(object.BetScore, 10);
+                else if (typeof object.BetScore === "number")
+                    message.BetScore = object.BetScore;
+                else if (typeof object.BetScore === "object")
+                    message.BetScore = new $util.LongBits(object.BetScore.low >>> 0, object.BetScore.high >>> 0).toNumber();
             if (object.State != null)
                 message.State = object.State | 0;
             if (object.Hints != null)
@@ -680,13 +727,36 @@ $root.baccarat = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
                 object.State = 0;
                 object.Hints = "";
+                object.BetArea = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.BetScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.BetScore = options.longs === String ? "0" : 0;
             }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.State != null && message.hasOwnProperty("State"))
                 object.State = message.State;
             if (message.Hints != null && message.hasOwnProperty("Hints"))
                 object.Hints = message.Hints;
+            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+                object.BetArea = message.BetArea;
+            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+                if (typeof message.BetScore === "number")
+                    object.BetScore = options.longs === String ? String(message.BetScore) : message.BetScore;
+                else
+                    object.BetScore = options.longs === String ? $util.Long.prototype.toString.call(message.BetScore) : options.longs === Number ? new $util.LongBits(message.BetScore.low >>> 0, message.BetScore.high >>> 0).toNumber() : message.BetScore;
             return object;
         };
 
@@ -697,7 +767,7 @@ $root.baccarat = (function() {
         return GameBaccaratBetResult;
     })();
 
-    baccarat.GameBaccaratOver = (function() {
+    go.GameBaccaratOver = (function() {
 
         function GameBaccaratOver(properties) {
             if (properties)
@@ -733,7 +803,7 @@ $root.baccarat = (function() {
         GameBaccaratOver.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratOver();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -776,9 +846,9 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratOver)
+            if (object instanceof $root.go.GameBaccaratOver)
                 return object;
-            var message = new $root.baccarat.GameBaccaratOver();
+            var message = new $root.go.GameBaccaratOver();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -840,7 +910,7 @@ $root.baccarat = (function() {
         return GameBaccaratOver;
     })();
 
-    baccarat.GameBaccaratCheckout = (function() {
+    go.GameBaccaratCheckout = (function() {
 
         function GameBaccaratCheckout(properties) {
             if (properties)
@@ -870,7 +940,7 @@ $root.baccarat = (function() {
         GameBaccaratCheckout.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratCheckout();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameBaccaratCheckout();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -901,9 +971,9 @@ $root.baccarat = (function() {
         };
 
         GameBaccaratCheckout.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratCheckout)
+            if (object instanceof $root.go.GameBaccaratCheckout)
                 return object;
-            var message = new $root.baccarat.GameBaccaratCheckout();
+            var message = new $root.go.GameBaccaratCheckout();
             if (object.Acquire != null)
                 if ($util.Long)
                     (message.Acquire = $util.Long.fromValue(object.Acquire)).unsigned = false;
@@ -941,7 +1011,7 @@ $root.baccarat = (function() {
         return GameBaccaratCheckout;
     })();
 
-    return baccarat;
+    return go;
 })();
 
 $root.gamecomm = (function() {
