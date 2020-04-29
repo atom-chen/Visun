@@ -55,7 +55,7 @@ export default class UILobby extends BaseComponent {
 		var hero = LoginUser.getInstance();
 		this.m_ui.lab_name.getComponent(cc.Label).string = "昵称：" + hero.Name;
 		this.m_ui.lab_id.getComponent(cc.Label).string = "ID：" + hero.UserID;
-		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.Money.toString();
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.Gold.toString();
 		GameUtil.setHeadIcon(this.m_ui.headNode, 1);
 	}
 

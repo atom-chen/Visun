@@ -12,7 +12,7 @@ export default class LoginUser extends ModelBase {
 	Gender:number = 0;			//性别
 	Age:number = 0;				//年龄
 	Level:number = 0;			//VIP级别
-	Money:number = 0;			//金币
+	Gold:number = 0;			//金币
 	PassPortID:string = "";		//证件号
 	Compellation:string = "";	//真实名字
 	AgentID:number = 0;			//代理标识
