@@ -11,7 +11,7 @@ import CpnChip from "../../../../common/script/comps/CpnChip";
 import GameManager from "../../../../common/script/model/GameManager";
 import CpnChipbox2d from "../../../../common/script/comps/CpnChipbox2d";
 import UIManager from "../../../../kernel/view/UIManager";
-import { baccarat_request } from "../../../../common/script/proto/net_baccarat";
+import { baccarat_request, baccarat_msgs } from "../../../../common/script/proto/net_baccarat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
 
@@ -62,13 +62,13 @@ export default class BacarratUI extends BaseComponent {
     }
     
     private initNetEvent() {
-        EventCenter.getInstance().listen(gamecomm_msgs.GameBetResult, this.onGameBetResult, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameBet, this.onGameBet, this);
+        EventCenter.getInstance().listen(baccarat_msgs.GameBaccaratBetResult, this.onGameBetResult, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameStatusPlaying, function(param){
             AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
         }, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameStatusOver, function(param){
             AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+            this.playJiesuan();
         }, this);
     }
 
@@ -84,6 +84,10 @@ export default class BacarratUI extends BaseComponent {
     }
 
     private onGameBetResult(param) {
+        if(param.State == 0) {
+            UIManager.toast("下注失败");
+            return;
+        }
         //飞筹码
         var nums = GameUtil.parseChip(param.BetScore, this._rule);
         var idx = this.getIndexInChipBox(param.BetScore);

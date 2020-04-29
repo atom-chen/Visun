@@ -41,7 +41,7 @@ export default class LoginUser extends ModelBase {
 	}
 
 	public getMoney() : number {
-		return this.Money;
+		return this.Gold;
 	}
 	
 }
