@@ -1,5 +1,5 @@
 syntax = "proto3";
-package go;
+package baccarat;
 import "gamecomm.proto";
 
 //场景
