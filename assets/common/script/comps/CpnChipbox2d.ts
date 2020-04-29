@@ -42,6 +42,15 @@ export default class CpnChipbox2d extends BaseComponent {
     }
 
     
+    public getSelectValue() : number {
+        return this._values[this.selectedIndex];
+    }
+
+    public getSelectedNode() : cc.Node {
+        return this.m_ui["chip"+this.selectedIndex];
+    }
+
+    
     public setChipValues(values:number[]) {
         if(!this._values) {
             CommonUtil.traverseNodes(this.node, this.m_ui);

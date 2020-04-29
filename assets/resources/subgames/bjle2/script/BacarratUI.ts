@@ -9,23 +9,26 @@ import AudioManager from "../../../../kernel/audio/AudioManager";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../common/script/comps/CpnChip";
 import GameManager from "../../../../common/script/model/GameManager";
+import CpnChipbox2d from "../../../../common/script/comps/CpnChipbox2d";
+import UIManager from "../../../../kernel/view/UIManager";
+import { baccarat_request } from "../../../../common/script/proto/net_baccarat";
 
 var margin = [
-	{ left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
-    { left:10,right:10,bottom:10,top:10 },
+	{ left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
+    { left:32,right:32,bottom:32,top:32 },
 ];
 var testdata = [ 
-	{AreaId:0,Money:25280}, 
-	{AreaId:1,Money:25280}, 
+	{AreaId:0,Money:35280}, 
+	{AreaId:1,Money:35280}, 
 	{AreaId:2,Money:28650}, 
 	{AreaId:3,Money:26455}, 
-    {AreaId:4,Money:24255},
+    {AreaId:4,Money:34255},
     {AreaId:5,Money:28650}, 
 	{AreaId:6,Money:26455}, 
 	{AreaId:7,Money:24255},
@@ -56,7 +59,7 @@ export default class BacarratUI extends BaseComponent {
 			if(!cc.isValid(self)) { return; }
 			self._loadedRes = loadedRes;
 		});
-
+        this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 		this.toStateReady();
 	}
 
@@ -87,7 +90,7 @@ export default class BacarratUI extends BaseComponent {
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
+	//	TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
 		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
@@ -142,40 +145,53 @@ export default class BacarratUI extends BaseComponent {
 			}
 		}
 		//播音效
-		if(tmr.getRemainTimes() < 3) {
+		if(tmr && tmr.getRemainTimes() < 3) {
 			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
 		} 
 		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
 		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
-	}
+    }
+    
+    private onClickArea(areaID:number) {
+        var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
+        if(!money) {
+            UIManager.toast("请选择下注区域");
+            return;
+        }
+        cc.log("下注：", areaID, money);
+        baccarat_request.GameBaccaratBet({
+            BetArea : areaID+1,
+            BetScore : money
+        });
+    }
 	
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame(0);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area0, function(){ 
-			
+            this.onClickArea(0);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ 
-            
+            this.onClickArea(1);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area2, function(){ 
-            
+            this.onClickArea(2);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area3, function(){ 
-            
+            this.onClickArea(3);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area4, function(){ 
-            
+            this.onClickArea(4);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.area5, function(){ 
-            
+            this.onClickArea(5);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.area6, function(){ 
-            
+            this.onClickArea(6);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.area7, function(){ 
-            
+            this.onClickArea(7);
 		}, this);
 	}
 }
