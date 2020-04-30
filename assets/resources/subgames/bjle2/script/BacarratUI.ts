@@ -1,5 +1,4 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import SimplePool from "../../../../kernel/basic/pool/SimplePool";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
@@ -15,6 +14,7 @@ import { baccarat_request, baccarat_msgs } from "../../../../common/script/proto
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
 import LoginUser from "../../../../common/script/model/LoginUser";
+import ResPool from "../../../../kernel/basic/pool/ResPool";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -35,30 +35,18 @@ export default class BacarratUI extends BaseComponent {
     _rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
 
-	_loadedRes:any;
-	_pool:SimplePool = new SimplePool(():cc.Node=>{
-		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.4;
-		return obj;
-	});
-
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvents();
         this.initNetEvent();
 
-		var self = this;
-		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {
-			if(err) { cc.log("error: "+err); return; }
-			if(!cc.isValid(self)) { return; }
-			self._loadedRes = loadedRes;
-		});
+        ResPool.load(ViewDefine.CpnChip);
         this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 		this.toStateReady();
 	}
 
 	onDestroy(){
-		this._pool.clear();
+		ResPool.unload(ViewDefine.CpnChip);
 		super.onDestroy();
     }
     
@@ -81,7 +69,7 @@ export default class BacarratUI extends BaseComponent {
             fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
         }
 		for(var j in nums) {
-			var chip = this._pool.newObject();
+			var chip = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
@@ -119,7 +107,7 @@ export default class BacarratUI extends BaseComponent {
 				for(var i=len-1; i>=0; i--){
 					childs[i].runAction(
 						cc.callFunc(function(obj){
-							self._pool.delObject(obj);
+                            ResPool.delObject(ViewDefine.CpnChip, obj);
 						}, childs[i])
 					);
 				}
