@@ -5,7 +5,6 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { login_msgs, login_request } from "../../../../../common/script/proto/net_login";
 import GameManager from "../../../../../common/script/model/GameManager";
-import room_btn from "./room_btn";
 import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
