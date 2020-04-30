@@ -5,14 +5,16 @@ import "gamecomm.proto";
 //场景
 //入场
 message GameBaccaratEnter{
-	PlayerInfo UserInfo = 1;				//玩家个人信息
-	int64 TimeStamp = 2;				//时间戳
-	repeated int32 Chips = 3; 			//筹码
-	repeated bytes AwardAreas = 4;		//开奖记录(路单)
-	uint32 FreeTime = 5;
-	uint32 BetTime = 6;
-	uint32 OpenTime = 7;
-
+	int64 TimeStamp = 1;				//时间戳
+	repeated int32 Chips = 2; 			//筹码
+	repeated bytes AwardAreas = 3;		//开奖记录(路单)
+	uint32 FreeTime = 4;
+	uint32 BetTime = 5;
+	uint32 OpenTime = 6;
+	GameStateFree Free = 7;  		 	//空闲状态(清场或游戏未启动)
+	GameStateStart Start = 8;			//开始状态
+	GameStatePlaying Playing = 9;		//下注状态
+	GameStateOver Over = 10;			//结算状态
 }
 //注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 //游戏消息

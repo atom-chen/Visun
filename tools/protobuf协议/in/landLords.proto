@@ -4,10 +4,15 @@ import "gamecomm.proto";
 //【百人类游戏】
 //入场 (场景)
 message GameLandLordsEnter{
-	uint64 UserID = 1;					//玩家ID
-	int64 TimeStamp = 2;				//时间戳
-	UserList Players = 3;				//玩家列表
-	uint32 FreeTime = 4;
+	int64 TimeStamp = 1;				//时间戳
+	uint32 FreeTime = 2;				//最长等待时间
+	uint32 OutTime = 3;					//最长出牌时间
+	uint32 CallTime = 4;				//最长叫分时间
+	GameStateFree Free = 5;  		 	//空闲状态(清场或游戏未启动)
+	GameStateStart Start = 6;			//开始状态
+	GameStateCall Call = 7;				//叫分状态
+	GameStatePlaying Playing = 8;		//下注状态
+	GameStateOver Over = 9;				//结算状态
 }
 //注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 
@@ -15,20 +20,32 @@ message GameLandLordsEnter{
 // 玩家信息
 message GameLandLordsPlayer{
 	uint64 UserID = 1;					// 玩家ID
-	uint32 Site = 2;					// 玩家座位
 	bytes Cards = 3;					// 牌
 	bool IsBanker = 4;					// 是否是庄家
 }
 
 // 开始
-message GameLandLordsBegins{
-	bytes CardsBottom = 1;				// 三张底牌
+message GameLandLordsDeal{
+	uint64 UserID = 1;					// 玩家ID
 	bytes CardsHand = 2;				// 手牌
 }
 
+// 叫分
+message GameLandLordsCall{
+	uint64 UserID = 1;					// 玩家ID
+	uint32 Score = 2;					// 叫分 0:不叫 1: 2: 3:
+}
+
+// 广播抢地主后的玩家
+message GameLandLordsBottomcard{
+	uint64 UserID = 1;					// 玩家ID
+	bytes CardsBottom = 2;				// 三张底牌
+}
+
+
 // 出牌
 message GameLandLordsOutcard{
-	uint32 Site = 1;					// 玩家座位
+	uint64 UserID = 1;					// 玩家ID
 	bytes Cards = 2;					// 牌值
 	string Hints = 3;					// 操作提示
 }
@@ -42,7 +59,7 @@ message GameLandLordsOperate{
 
 // 得分
 message GameLandLordsAward{
-	uint32 Site = 1;					// 玩家座位
+	uint64 UserID = 1;					// 玩家ID
 	bytes Codes = 2;					// 牌型
 	int64 GetGold = 3;					// 获得的金币
 }

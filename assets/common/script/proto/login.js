@@ -1543,6 +1543,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        MasterInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         MasterInfo.prototype.UserInfo = null;
         MasterInfo.prototype.RoomsInfo = $util.emptyArray;
         MasterInfo.prototype.Tasks = null;
@@ -1554,13 +1555,15 @@ $root.login = (function() {
         MasterInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
-                $root.login.UserInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
+                $root.login.UserInfo.encode(message.UserInfo, writer.uint32(18).fork()).ldelim();
             if (message.RoomsInfo != null && message.RoomsInfo.length)
                 for (var i = 0; i < message.RoomsInfo.length; ++i)
-                    $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
+                    $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(26).fork()).ldelim();
             if (message.Tasks != null && message.hasOwnProperty("Tasks"))
-                $root.login.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
+                $root.login.TaskList.encode(message.Tasks, writer.uint32(34).fork()).ldelim();
             return writer;
         };
 
@@ -1576,14 +1579,17 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserInfo = $root.login.UserInfo.decode(reader, reader.uint32());
+                    message.UserID = reader.uint64();
                     break;
                 case 2:
+                    message.UserInfo = $root.login.UserInfo.decode(reader, reader.uint32());
+                    break;
+                case 3:
                     if (!(message.RoomsInfo && message.RoomsInfo.length))
                         message.RoomsInfo = [];
                     message.RoomsInfo.push($root.login.RoomInfo.decode(reader, reader.uint32()));
                     break;
-                case 3:
+                case 4:
                     message.Tasks = $root.login.TaskList.decode(reader, reader.uint32());
                     break;
                 default:
@@ -1603,6 +1609,9 @@ $root.login = (function() {
         MasterInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
                 var error = $root.login.UserInfo.verify(message.UserInfo);
                 if (error)
@@ -1629,6 +1638,15 @@ $root.login = (function() {
             if (object instanceof $root.login.MasterInfo)
                 return object;
             var message = new $root.login.MasterInfo();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.UserInfo != null) {
                 if (typeof object.UserInfo !== "object")
                     throw TypeError(".login.MasterInfo.UserInfo: object expected");
@@ -1659,9 +1677,19 @@ $root.login = (function() {
             if (options.arrays || options.defaults)
                 object.RoomsInfo = [];
             if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
                 object.UserInfo = null;
                 object.Tasks = null;
             }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
                 object.UserInfo = $root.login.UserInfo.toObject(message.UserInfo, options);
             if (message.RoomsInfo && message.RoomsInfo.length) {

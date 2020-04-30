@@ -27,7 +27,7 @@ export var baccarat_packet_define = {
 }
 
 export class baccarat_request {
-    public static GameBaccaratEnter( data:{ UserInfo:any, TimeStamp:number, Chips:number[], AwardAreas:any[], FreeTime:number, BetTime:number, OpenTime:number } ) { baccarat_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameBaccaratEnter( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], FreeTime:number, BetTime:number, OpenTime:number, Free:any, Start:any, Playing:any, Over:any } ) { baccarat_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
     public static GameBaccaratHost( data:{ UserID:number, IsWant:any } ) { baccarat_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
     public static GameBaccaratSuperHost( data:{ UserID:number, IsWant:any } ) { baccarat_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
     public static GameBaccaratBet( data:{ BetArea:number, BetScore:number } ) { baccarat_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }

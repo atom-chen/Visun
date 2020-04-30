@@ -65,7 +65,6 @@ message UserInfo{
 	uint32 SpreaderGameID = 12; //推荐标识
 	uint32 ClientAddr = 13;		//连接地址
 	string MachineCode = 14;	//机器序列
-
 }
 //房间信息
 message RoomInfo{
@@ -94,9 +93,12 @@ message GameItem{
 
 //主页信息
 message MasterInfo{
-	UserInfo UserInfo = 1;			//用户信息
-	repeated RoomInfo RoomsInfo = 2;//房间号列表【普通用户,敲一下门就可以进来，但是没有修改房间配置的权限，只有带钥匙的，才可以进行房间修改，即房主权限】
-	TaskList Tasks = 3;				//任务列表
+	uint64 UserID = 1;          //ID
+	UserInfo UserInfo = 2;			//用户信息
+	repeated RoomInfo RoomsInfo = 3;//房间号列表【普通用户,敲一下门就可以进来，但是没有修改房间配置的权限，只有带钥匙的，才可以进行房间修改，即房主权限】
+	TaskList Tasks = 4;				//任务列表
+
+
 }
 
 

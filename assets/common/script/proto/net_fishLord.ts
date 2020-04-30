@@ -7,23 +7,23 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum fishLord_msgs {
-    GameFishLordEnter = 58,
-    GameFishLordPlaying = 59,
-    GameFishLordBetResult = 60,
-    GameFishLordOver = 61,
+    GameFishLordEnter = 63,
+    GameFishLordPlaying = 64,
+    GameFishLordBetResult = 65,
+    GameFishLordOver = 66,
 }
 
 export var fishLord_packet_define = {
-    58: new LeafWsPacket(58, fishLord.GameFishLordEnter),
-    59: new LeafWsPacket(59, fishLord.GameFishLordPlaying),
-    60: new LeafWsPacket(60, fishLord.GameFishLordBetResult),
-    61: new LeafWsPacket(61, fishLord.GameFishLordOver),
+    63: new LeafWsPacket(63, fishLord.GameFishLordEnter),
+    64: new LeafWsPacket(64, fishLord.GameFishLordPlaying),
+    65: new LeafWsPacket(65, fishLord.GameFishLordBetResult),
+    66: new LeafWsPacket(66, fishLord.GameFishLordOver),
 }
 
 export class fishLord_request {
-    public static GameFishLordEnter( data:{ AwardAreas:number[], players:string[], Countdown:number, Chips:number[], Odds:number[], BankerScore:number, PlayerScore:number, Acquire:number } ) { fishLord_packet_define[58].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameFishLordPlaying( data:{ BetArea:number, BetScore:number } ) { fishLord_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameFishLordBetResult( data:{ State:number, Hints:string } ) { fishLord_packet_define[60].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameFishLordOver( data:{ AwardArea:number[], PlayerCard:number[], BankerCard:number[], Acquire:number } ) { fishLord_packet_define[61].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameFishLordEnter( data:{ AwardAreas:number[], players:string[], Countdown:number, Chips:number[], Odds:number[], BankerScore:number, PlayerScore:number, Acquire:number } ) { fishLord_packet_define[63].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameFishLordPlaying( data:{ BetArea:number, BetScore:number } ) { fishLord_packet_define[64].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameFishLordBetResult( data:{ State:number, Hints:string } ) { fishLord_packet_define[65].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameFishLordOver( data:{ AwardArea:number[], PlayerCard:number[], BankerCard:number[], Acquire:number } ) { fishLord_packet_define[66].sendToChannel(ChannelDefine.game, data, false); }
 }
 
