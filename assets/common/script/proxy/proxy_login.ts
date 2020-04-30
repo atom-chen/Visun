@@ -28,8 +28,10 @@ var proxy_login = {
     [login_msgs.MasterInfo] : function(param) {
         UIManager.toast("登陆成功");
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
-        //param.RoomsInfo = [{RoomNum: 101, RoomKey: "321weqe", RoomName: " 万人房", Games: {…}}]
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
+        if(param.UserID!==null && param.UserID!==undefined) {
+            LoginUser.getInstance().UserID = param.UserID;
+        }
     },
 
     [login_msgs.GameList] : function(param) {
