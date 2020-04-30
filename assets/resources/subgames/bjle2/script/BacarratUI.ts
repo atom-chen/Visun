@@ -14,6 +14,7 @@ import UIManager from "../../../../kernel/view/UIManager";
 import { baccarat_request, baccarat_msgs } from "../../../../common/script/proto/net_baccarat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
+import LoginUser from "../../../../common/script/model/LoginUser";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -63,24 +64,8 @@ export default class BacarratUI extends BaseComponent {
     
     private initNetEvent() {
         EventCenter.getInstance().listen(baccarat_msgs.GameBaccaratBetResult, this.onGameBetResult, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusPlaying, function(param){
-            AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
-        }, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusOver, function(param){
-            AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-            this.playJiesuan();
-        }, this);
-    }
-
-    private getIndexInChipBox(score:number) : number {
-        var idx = 0;
-        for(var i=0; i<this._rule.length; i++) {
-            if(this._rule[i] == score) {
-                idx = i;
-                break;
-            }
-        }
-        return idx;
+        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusPlaying, this.toStateBetting, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusOver, this.toStateJiesuan, this);
     }
 
     private onGameBetResult(param) {
@@ -90,29 +75,17 @@ export default class BacarratUI extends BaseComponent {
         }
         //飞筹码
         var nums = GameUtil.parseChip(param.BetScore, this._rule);
-        var idx = this.getIndexInChipBox(param.BetScore);
-        var fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+        var fromObj = this.m_ui.btnPlayerlist; 
+        if(param.UserID == LoginUser.getInstance().UserID || true) {
+            var idx = Math.max(0, this._rule.indexOf(param.BetScore));
+            fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+        }
 		for(var j in nums) {
 			var chip = this._pool.newObject();
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
 			GameUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
-		}
-		//播音效
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
-    }
-
-    private onGameBet(param) {
-        //飞筹码
-        var nums = GameUtil.parseChip(param.BetScore, this._rule);
-        var fromObj = this.m_ui.btnPlayerlist;
-		for(var j in nums) {
-			var chip = this._pool.newObject();
-			chip.getComponent(CpnChip).setChipValue(nums[j], true);
-			this.m_ui.chipLayer.addChild(chip);
-			chip.__areaId = param.BetArea;
-			GameUtil.bezierTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
 		}
 		//播音效
 		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
@@ -125,21 +98,18 @@ export default class BacarratUI extends BaseComponent {
 	//准备阶段
 	private toStateReady() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
-		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
 
 	//下注阶段
-	private toStateBetting() {
+	private toStateBetting(param) {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
 		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 	}
 
-	private playJiesuan() {
+    //结算阶段
+    private playJiesuan() {
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -157,18 +127,13 @@ export default class BacarratUI extends BaseComponent {
 		));
 		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
 	}
-
-	//结算阶段
-	private toStateJiesuan() {
+	private toStateJiesuan(param) {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
-
 		this.playJiesuan();
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
     
+
     private onClickArea(areaID:number) {
         var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
         if(!money) {
@@ -181,7 +146,6 @@ export default class BacarratUI extends BaseComponent {
             BetScore : money
         });
     }
-	
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame(0);
