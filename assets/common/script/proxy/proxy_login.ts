@@ -26,7 +26,11 @@ var proxy_login = {
     },
 
     [login_msgs.MasterInfo] : function(param) {
+        LogicCenter.getInstance().clear();
+        LogicCenter.getInstance().init();
+
         UIManager.toast("登陆成功");
+        
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
         if(param.UserID!==null && param.UserID!==undefined) {

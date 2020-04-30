@@ -4,16 +4,16 @@ export const IS_DANJI_MODE = true
 
 export enum GameKindEnum {
 	//百人
-	BrCowCow 	= 1000,		//百人牛牛
-	BrJinhua 	= 2000,		//百人金花
-	Longhu 		= 3000,		//龙虎
-	Baccarat	= 4000,		//百家乐
-	Redpacket	= 5000,		//抢红包
-	BirdBeast	= 6000,		//飞禽走兽
-	Redblack	= 7000,		//红黑
-	Toubao		= 8000,		//骰宝
-	Paijiu		= 9000,		//牌九
-	Brttz		= 10000,	//百人推筒子
+	BrCowCow 	= 10100,		//百人牛牛
+	BrJinhua 	= 10200,		//百人金花
+	Longhu 		= 10300,		//龙虎
+	Baccarat	= 10400,		//百家乐
+	Redpacket	= 10500,		//抢红包
+	BirdBeast	= 10600,		//飞禽走兽
+	Redblack	= 10700,		//红黑
+	Toubao		= 10800,		//骰宝
+	Paijiu		= 10900,		//牌九
+	Brttz		= 11000,	//百人推筒子
 	//对战
 	Zhajinhua	= 20100,	//炸金花
 	QzCowcow	= 20200,	//抢庄牛牛
