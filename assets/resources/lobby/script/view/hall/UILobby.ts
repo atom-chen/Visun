@@ -10,6 +10,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import { gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 
 
 const {ccclass, property} = cc._decorator;
@@ -17,7 +18,9 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UILobby extends BaseComponent {
 	@property(cc.Prefab)
-	roomBtn: cc.Prefab = null;
+	gameBtn: cc.Prefab = null;
+	@property(cc.Prefab)
+	roomTab: cc.Prefab = null;
 
 	onLoad () 
 	{
@@ -25,27 +28,56 @@ export default class UILobby extends BaseComponent {
 
 		this.initUiEvents();
 		this.initNetEvents();
+
 		this.refleshRoomsInfo();
+		this.refleshGameList();
 		this.refleshUI(null);
 	}
 
 	private refleshRoomsInfo() {
-		this.m_ui.content.removeAllChildren();
+		this.m_ui.contentLeft.removeAllChildren();
 
 		var roomsInfo = GameManager.getInstance().getRoomsInfo();
 		if(!roomsInfo) { return; }
 
 		for(var i in roomsInfo) {
 			var info = roomsInfo[i];
-			var bton = cc.instantiate(this.roomBtn);
+			var bton = cc.instantiate(this.roomTab);
 			bton["RoomInfo"] = info;
-			bton.getComponent(room_btn).setRoomInfo(info);
+			var m_ui:any = {};
+			CommonUtil.traverseNodes(bton, m_ui);
+			m_ui.lab_roomname.getComponent(cc.Label).string = info.RoomName;
+			//m_ui.lab_roomnum.getComponent(cc.Label).string = info.RoomNum;
+			//m_ui.lab_roomkey.getComponent(cc.Label).string = info.RoomKey;
 			CommonUtil.addClickEvent(bton, function(){ 
 				login_request.ReqEnterRoom({
 					RoomNum: this.RoomInfo.RoomNum,
 					RoomKey: this.RoomInfo.RoomKey
 				});
-				UIManager.openPopwnd(ViewDefine.UIGames, false, null, this.GameKind);
+			}, bton);
+			this.m_ui.contentLeft.addChild(bton);
+		}
+	}
+
+	private refleshGameList() {
+		this.m_ui.content.removeAllChildren();
+
+		var gameList = GameManager.getInstance().getGameArr();
+		if(!gameList) { return; }
+
+		for(var i in gameList) {
+			var info = gameList[i];
+			var bton = cc.instantiate(this.gameBtn);
+            bton["GameInfo"] = info;
+            var tbl : any = {};
+            CommonUtil.traverseNodes(bton, tbl);
+            tbl.lab_roomname.getComponent(cc.Label).string = info.Info.Name;
+            tbl.lab_roomnum.getComponent(cc.Label).string = info.Info.EnterScore;
+            tbl.lab_roomkey.getComponent(cc.Label).string = info.Info.Level;
+			CommonUtil.addClickEvent(bton, function(){ 
+				gamecomm_request.ReqEnterGame({
+                    GameID: this.GameInfo.ID 
+                });
 			}, bton);
 			this.m_ui.content.addChild(bton);
 		}
@@ -63,7 +95,8 @@ export default class UILobby extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.MasterInfo, (param:any)=>{
 			this.refleshUI(null);
 			this.refleshRoomsInfo();
-        }, this);
+		}, this);
+		EventCenter.getInstance().listen(login_msgs.GameList, this.refleshGameList, this);
 	}
 
 	private initUiEvents() {

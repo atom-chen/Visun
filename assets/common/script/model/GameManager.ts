@@ -40,6 +40,13 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getRoomsInfo() : any {
+		// if(this.roomsInfo.length<=0) {
+		// 	this.roomsInfo = [
+		// 		{RoomName:"百人房",RoomNum:"1",RoomKey:"000"},
+		// 		{RoomName:"对战房",RoomNum:"1",RoomKey:"000"},
+		// 		{RoomName:"街机房",RoomNum:"1",RoomKey:"000"},
+		// 	]
+		// }
 		return this.roomsInfo;
 	}
 
@@ -48,6 +55,15 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getGameArr() : any {
+		// if(this.gameArr.length<=0) {
+		// 	this.gameArr = [
+		// 		{ID:101,Info:{Name:"牛牛",EnterScore:10,Level:0}},
+		// 		{ID:102,Info:{Name:"金花",EnterScore:10,Level:0}},
+		// 		{ID:103,Info:{Name:"德州",EnterScore:10,Level:0}},
+		// 		{ID:104,Info:{Name:"斗地主",EnterScore:10,Level:0}},
+		// 		{ID:105,Info:{Name:"二十一点",EnterScore:10,Level:0}},
+		// 	]
+		// }
 		return this.gameArr;
 	}
 
