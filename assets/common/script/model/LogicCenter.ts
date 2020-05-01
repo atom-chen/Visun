@@ -9,7 +9,7 @@ import ChannelDefine from "../definer/ChannelDefine";
 import { ProcessorType } from "../../../kernel/basic/defines/KernelDefine";
 import { login_packet_define } from "../proto/net_login";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";
-import proxy_login from "../proxy/proxy_login";
+import NetHandlers from "../proxy/NetHandlers";
 import { comand_packet_define } from "../proto/net_comand";
 import { baccarat_packet_define } from "../proto/net_baccarat";
 import { landLords_packet_define } from "../proto/net_landLords";
@@ -36,7 +36,7 @@ export default class LogicCenter {
         g_leafProcessor.registCmds(cowcow_packet_define);
         g_leafProcessor.registCmds(fishLord_packet_define);
         g_leafProcessor.registCmds(mahjong_packet_define);
-        g_leafProcessor.getDispatcher().addObserver(proxy_login);
+        g_leafProcessor.getDispatcher().addObserver(NetHandlers);
     }
     
     public static getInstance() : LogicCenter {

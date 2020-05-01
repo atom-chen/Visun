@@ -12,7 +12,7 @@ import { landLords_msgs } from "../proto/net_landLords";
 // login响应句柄
 //---------------------------------
 
-var proxy_login = {
+var NetHandlers = {
 
     [login_msgs.RegisterResult] : function(param: any) {
         UIManager.toast(param.Hints);
@@ -53,4 +53,4 @@ var proxy_login = {
 
 }
 
-export default proxy_login;
+export default NetHandlers;
