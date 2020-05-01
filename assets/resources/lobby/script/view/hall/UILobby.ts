@@ -99,7 +99,7 @@ export default class UILobby extends BaseComponent {
 	private initUiEvents() {
 		//头像
 		CommonUtil.addClickEvent(this.m_ui.headNode, function(){ 
-			UIManager.openPopwnd(ViewDefine.UILogin, true, null); 
+			UIManager.openPopwnd(ViewDefine.UILogin, false, null); 
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
