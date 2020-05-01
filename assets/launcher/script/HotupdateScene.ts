@@ -1,14 +1,14 @@
 //---------------------------------
 // 热更界面
 //---------------------------------
-const {ccclass, property} = cc._decorator;
-
 import { HOT_STATE } from "../../kernel/basic/defines/KernelDefine";
 import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
+
+const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class HotupdateScene extends BaseComponent {

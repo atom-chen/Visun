@@ -1,12 +1,7 @@
 import EventCenter from "../../kernel/basic/event/EventCenter";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelEvent from "../../kernel/basic/defines/KernelEvent";
-import HttpCore from "../../kernel/net/HttpCore";
 import TimerManager from "../../kernel/basic/timer/TimerManager";
-import ServerConfig from "../../common/script/definer/ServerConfig";
-import http_rules from "../../common/script/proto/http_rules";
-import HallRespond from "../../common/script/proxy/HallRespond";
-import HallRequest from "../../common/script/proto/HallRequest";
 import Updator from "../../kernel/basic/timer/Updator";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 
@@ -45,9 +40,6 @@ export default class InitLogic {
 
         TimerManager.start(node);
         Updator.start(node);
-
-        HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
-		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
 	}
 
 	private static onKeyDown (event:any) {

@@ -4,12 +4,17 @@
 import LoginMgr from "./LoginMgr";
 import GameManager from "./GameManager";
 import LoginUser from "./LoginUser";
+import HttpCore from "../../../kernel/net/HttpCore";
+import ServerConfig from "../definer/ServerConfig";
+import http_rules from "../proto/http_rules";
+import HallRequest from "../proto/HallRequest";
+import HallRespond from "../proxy/HallRespond";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import { ProcessorType } from "../../../kernel/basic/defines/KernelDefine";
+import NetHandlers from "../proxy/NetHandlers";
 import { login_packet_define } from "../proto/net_login";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";
-import NetHandlers from "../proxy/NetHandlers";
 import { comand_packet_define } from "../proto/net_comand";
 import { baccarat_packet_define } from "../proto/net_baccarat";
 import { landLords_packet_define } from "../proto/net_landLords";
@@ -37,6 +42,9 @@ export default class LogicCenter {
         g_leafProcessor.registCmds(fishLord_packet_define);
         g_leafProcessor.registCmds(mahjong_packet_define);
         g_leafProcessor.getDispatcher().addObserver(NetHandlers);
+        
+        HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
+		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
     }
     
     public static getInstance() : LogicCenter {
