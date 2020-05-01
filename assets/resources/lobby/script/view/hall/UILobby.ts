@@ -46,8 +46,6 @@ export default class UILobby extends BaseComponent {
 			var m_ui:any = {};
 			CommonUtil.traverseNodes(bton, m_ui);
 			m_ui.lab_roomname.getComponent(cc.Label).string = info.RoomName;
-			//m_ui.lab_roomnum.getComponent(cc.Label).string = info.RoomNum;
-			//m_ui.lab_roomkey.getComponent(cc.Label).string = info.RoomKey;
 			CommonUtil.addClickEvent(bton, function(){ 
 				login_request.ReqEnterRoom({
 					RoomNum: this.RoomInfo.RoomNum,
@@ -105,7 +103,7 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
-			GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
+			GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

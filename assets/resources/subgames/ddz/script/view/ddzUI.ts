@@ -4,15 +4,14 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import LoginUser from "../../../../../common/script/model/LoginUser";
-import DDzMgr from "../model/DDzMgr";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import DDzPlayer from "../model/DDzPlayer";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
+import DDzMgr from "../model/DDzMgr";
 import RuleDdz from "../rule/RuleDdz";
-import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-
+import { landLords_msgs } from "../../../../../common/script/proto/net_landLords";
 
 const MAX_SOLDIER = 3;
 
@@ -31,16 +30,117 @@ export default class DdzUI extends BaseComponent {
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._players.push(this.m_ui["player"+i].getComponent(CpnPlayer));
             this._outs.push(this.m_ui["outs"+i].getComponent(CpnHandcard));
+            this._players[i].setName("");
+            this._players[i].setMoney(0);
         }
+        this._players[0].setName(LoginUser.getInstance().Name);
+        this._players[0].setMoney(LoginUser.getInstance().getMoney());
 
         this.initNetEvent();
         this.initUIEvent();
         this._myHandor.initSlideTouch();
         
-        this.toStateResult();
-        TimerManager.delayFrame(2, new CHandler(this, this.test));
-        TimerManager.delayFrame(4, new CHandler(this, this.test1));
+        this.toStateReady(null);
     }
+
+    //玩家的UI位置
+    private playerIndex(player:DDzPlayer) : number {
+		if(isNil(player)){ return -1; }
+		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
+		var index = player.Pos;
+		if(hero.Pos===0) { return index; }
+		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;
+		return index;
+    }
+    
+    //匹配阶段
+    private toStateSearching(param) {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = false;
+    }
+    
+    //准备阶段
+    private toStateReady(param) {
+        this.m_ui.readyNode.active = true;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = false;
+        this.m_ui.tipLayer.active = false;
+        this._myHandor.clearCards();
+        for(var i in this._outs) {
+            this._outs[i].clearCards();
+        }
+    }
+
+    //抢地主阶段
+    private toStateGrab(param) {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = true;
+        this.m_ui.fightNode.active = false;
+        this.m_ui.tipLayer.active = false;
+    }
+
+    //出牌阶段
+    private toStateFight(param) {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = true;
+        this.m_ui.tipLayer.active = true;
+    }
+
+    //结算阶段
+    private toStateResult(param) {
+        this.m_ui.readyNode.active = false;
+        this.m_ui.grabNode.active = false;
+        this.m_ui.fightNode.active = false;
+        this.m_ui.tipLayer.active = true;
+        this.m_ui.player0.getComponent(CpnPlayer).addMoney(100);
+        this.m_ui.player1.getComponent(CpnPlayer).addMoney(135);
+        this.m_ui.player2.getComponent(CpnPlayer).addMoney(122);
+    }
+    
+
+    private GameLandLordsPlayer(param) {
+
+    }
+    private GameLandLordsOutcard(param) {
+        
+    }
+    private GameLandLordsOperate(param) {
+        
+    }
+    private GameLandLordsDeal(param) {
+        this._myHandor.resetCards(param.CardsHand, true);
+    }
+    private GameLandLordsCheckout(param) {
+        
+    }
+    private GameLandLordsCall(param) {
+        
+    }
+    private GameLandLordsBottomcard(param) {
+        
+    }
+    private GameLandLordsAward(param) {
+        
+    }
+    private initNetEvent() {
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsPlayer, this.GameLandLordsPlayer, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOutcard, this.GameLandLordsOutcard, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOperate, this.GameLandLordsOperate, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDeal, this.GameLandLordsDeal, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCheckout, this.GameLandLordsCheckout, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCall, this.GameLandLordsCall, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomcard, this.GameLandLordsBottomcard, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsAward, this.GameLandLordsAward, this);
+    }
+
+    private initUIEvent() {
+        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
+            GameManager.getInstance().quitGame(0);
+        }, this);
+    }
+
 
     private test() {
         UIManager.showSpineAsync("common/spines/jack/jack", 0, "a", true, this.node, {y:140, scale:0.6}, null);
@@ -58,65 +158,6 @@ export default class DdzUI extends BaseComponent {
         //    cc.log(deck[n])
         }
         this._myHandor.resetCards(cards, true);
-    }
-
-    //玩家的UI位置
-    private playerIndex(player:DDzPlayer) : number {
-		if(isNil(player)){ return -1; }
-		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
-		var index = player.Pos;
-		if(hero.Pos===0) { return index; }
-		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;
-		return index;
-    }
-    
-    //匹配阶段
-    private toStateSearching() {
-        this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = false;
-    }
-    
-    //准备阶段
-    private toStateReady() {
-        this.m_ui.readyNode.active = true;
-        this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = false;
-    }
-
-    //抢地主阶段
-    private toStateGrab() {
-        this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = true;
-        this.m_ui.fightNode.active = false;
-    }
-
-    //出牌阶段
-    private toStateFight() {
-        this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = true;
-    }
-
-    //结算阶段
-    private toStateResult() {
-        this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = false;
-        this.m_ui.player0.getComponent(CpnPlayer).addMoney(100);
-        this.m_ui.player1.getComponent(CpnPlayer).addMoney(135);
-        this.m_ui.player2.getComponent(CpnPlayer).addMoney(122);
-    }
-    
-
-    private initNetEvent() {
-
-    }
-
-    private initUIEvent() {
-        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
-        }, this);
     }
 
 }

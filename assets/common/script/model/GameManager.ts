@@ -27,11 +27,9 @@ export default class GameManager extends ModelBase {
 	public on_clear() {
 		
 	}
+
 	//------------------------------------------------------------------------------
 
-	private _gameList = [];		//服务器游戏列表
-	private _roomList = {};		//服务器房间列表
-	private _allRooms = {}		//根据游戏ID索引游戏数据
 	private roomsInfo = [];
 	private gameArr = [];
 
@@ -65,59 +63,6 @@ export default class GameManager extends ModelBase {
 		// 	]
 		// }
 		return this.gameArr;
-	}
-
-
-	//存储服务器下发的游戏列表
-	public setGameList(data) {
-		this._gameList = data;
-		this._gameList.sort((a,b)=>{
-			return a.GameKind-b.GameKind
-		})
-	}
-
-	//获取服务器下发的游戏列表
-	public getGameList() : any[] {
-		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
-			var testList = [];
-			for(var k in GameConfig) {
-				var info = {
-					GameKind : GameConfig[k].GameKind,
-					Name : GameConfig[k].name,
-					State : 2,
-				};
-				testList.push(info);
-			}
-			return testList;
-		}
-		return this._gameList;
-	}
-
-	//存储服务器下发的房间列表
-	public setRoomList(gameKind, data) {
-		this._roomList[gameKind] = data
-		for(var i in data) {
-			this._allRooms[data[i].GameType] = data[i];
-		}
-	}
-
-	//获取服务器下发的房间列表
-	public getRoomList(gameKind) {
-		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
-			var testList = [];
-			var cfg = GameConfig[gameKind];
-			for(var i=1; i<=4; i++) {
-				var info = {
-					GameKind : cfg.GameKind,
-					GameType : cfg.GameKind+i,
-					Name : cfg.name,
-				}
-				testList.push(info);
-			}
-			this.setRoomList(gameKind, testList);
-			return testList;
-		}
-		return this._roomList[gameKind];
 	}
 
 	//获取子游戏的客户端配置
@@ -165,8 +110,8 @@ export default class GameManager extends ModelBase {
 
 
 	//退出游戏的唯一出口
-	public quitGame(reason:number) {
-		gamecomm_request.ReqExitGame({GameID:4});
+	public quitGame(gameId:number) {
+		gamecomm_request.ReqExitGame({GameID:gameId});
 		if(IS_DANJI_MODE) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
@@ -194,6 +139,60 @@ export default class GameManager extends ModelBase {
 			var viewpath = this.clientConfig(gameType).viewpath;
 			UIManager.openPanel(viewpath, null);
 		});
+	}
+
+	//------------------------------------------------------------------------------
+
+	private _gameList = [];		//服务器游戏列表
+	private _roomList = {};		//服务器房间列表
+	private _allRooms = {}		//根据游戏ID索引游戏数据
+	//存储服务器下发的游戏列表
+	public setGameList(data) {
+		this._gameList = data;
+		this._gameList.sort((a,b)=>{
+			return a.GameKind-b.GameKind
+		})
+	}
+	//获取服务器下发的游戏列表
+	public getGameList() : any[] {
+		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
+			var testList = [];
+			for(var k in GameConfig) {
+				var info = {
+					GameKind : GameConfig[k].GameKind,
+					Name : GameConfig[k].name,
+					State : 2,
+				};
+				testList.push(info);
+			}
+			return testList;
+		}
+		return this._gameList;
+	}
+	//存储服务器下发的房间列表
+	public setRoomList(gameKind, data) {
+		this._roomList[gameKind] = data
+		for(var i in data) {
+			this._allRooms[data[i].GameType] = data[i];
+		}
+	}
+	//获取服务器下发的房间列表
+	public getRoomList(gameKind) {
+		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
+			var testList = [];
+			var cfg = GameConfig[gameKind];
+			for(var i=1; i<=4; i++) {
+				var info = {
+					GameKind : cfg.GameKind,
+					GameType : cfg.GameKind+i,
+					Name : cfg.name,
+				}
+				testList.push(info);
+			}
+			this.setRoomList(gameKind, testList);
+			return testList;
+		}
+		return this._roomList[gameKind];
 	}
 
 }

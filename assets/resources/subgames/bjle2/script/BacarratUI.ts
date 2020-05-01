@@ -136,7 +136,7 @@ export default class BacarratUI extends BaseComponent {
     }
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame(4);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);
