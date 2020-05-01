@@ -52,8 +52,8 @@ export default class BacarratUI extends BaseComponent {
     
     private initNetEvent() {
         EventCenter.getInstance().listen(baccarat_msgs.GameBaccaratBetResult, this.onGameBetResult, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusPlaying, this.toStateBetting, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStatusOver, this.toStateJiesuan, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameStatePlaying, this.toStateBetting, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameStateOver, this.toStateJiesuan, this);
     }
 
     private onGameBetResult(param) {

@@ -55,7 +55,7 @@ export default class DdzUI extends BaseComponent {
         var cards = [];
 		for (var n=0; n<17; n++) {
             cards.push(deck[n]);
-            cc.log(deck[n])
+        //    cc.log(deck[n])
         }
         this._myHandor.resetCards(cards, true);
     }

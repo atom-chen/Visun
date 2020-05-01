@@ -6,6 +6,7 @@ import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
 import { baccarat_msgs } from "../proto/net_baccarat";
 import { GameKindEnum } from "../definer/ConstDefine";
+import { landLords_msgs } from "../proto/net_landLords";
 
 //---------------------------------
 // login响应句柄
@@ -30,7 +31,7 @@ var proxy_login = {
         LogicCenter.getInstance().init();
 
         UIManager.toast("登陆成功");
-        
+
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
         if(param.UserID!==null && param.UserID!==undefined) {
@@ -44,6 +45,10 @@ var proxy_login = {
 
     [baccarat_msgs.GameBaccaratEnter] : function(param) {
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
+    },
+
+    [landLords_msgs.GameLandLordsEnter] : function(param) {
+        GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     }
 
 }
