@@ -630,23 +630,23 @@ $root.landLords = (function() {
         return GameLandLordsCall;
     })();
 
-    landLords.GameLandLordsBottomcard = (function() {
+    landLords.GameLandLordsBottomCard = (function() {
 
-        function GameLandLordsBottomcard(properties) {
+        function GameLandLordsBottomCard(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsBottomcard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsBottomcard.prototype.CardsBottom = $util.newBuffer([]);
+        GameLandLordsBottomCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameLandLordsBottomCard.prototype.CardsBottom = $util.newBuffer([]);
 
-        GameLandLordsBottomcard.create = function create(properties) {
-            return new GameLandLordsBottomcard(properties);
+        GameLandLordsBottomCard.create = function create(properties) {
+            return new GameLandLordsBottomCard(properties);
         };
 
-        GameLandLordsBottomcard.encode = function encode(message, writer) {
+        GameLandLordsBottomCard.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -656,14 +656,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsBottomcard.encodeDelimited = function encodeDelimited(message, writer) {
+        GameLandLordsBottomCard.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsBottomcard.decode = function decode(reader, length) {
+        GameLandLordsBottomCard.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsBottomcard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsBottomCard();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -681,13 +681,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsBottomcard.decodeDelimited = function decodeDelimited(reader) {
+        GameLandLordsBottomCard.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsBottomcard.verify = function verify(message) {
+        GameLandLordsBottomCard.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -699,10 +699,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsBottomcard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsBottomcard)
+        GameLandLordsBottomCard.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsBottomCard)
                 return object;
-            var message = new $root.landLords.GameLandLordsBottomcard();
+            var message = new $root.landLords.GameLandLordsBottomCard();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -720,7 +720,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsBottomcard.toObject = function toObject(message, options) {
+        GameLandLordsBottomCard.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -748,31 +748,31 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsBottomcard.prototype.toJSON = function toJSON() {
+        GameLandLordsBottomCard.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsBottomcard;
+        return GameLandLordsBottomCard;
     })();
 
-    landLords.GameLandLordsOutcard = (function() {
+    landLords.GameLandLordsOutCard = (function() {
 
-        function GameLandLordsOutcard(properties) {
+        function GameLandLordsOutCard(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsOutcard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsOutcard.prototype.Cards = $util.newBuffer([]);
-        GameLandLordsOutcard.prototype.Hints = "";
+        GameLandLordsOutCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameLandLordsOutCard.prototype.Cards = $util.newBuffer([]);
+        GameLandLordsOutCard.prototype.Hints = "";
 
-        GameLandLordsOutcard.create = function create(properties) {
-            return new GameLandLordsOutcard(properties);
+        GameLandLordsOutCard.create = function create(properties) {
+            return new GameLandLordsOutCard(properties);
         };
 
-        GameLandLordsOutcard.encode = function encode(message, writer) {
+        GameLandLordsOutCard.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -784,14 +784,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsOutcard.encodeDelimited = function encodeDelimited(message, writer) {
+        GameLandLordsOutCard.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsOutcard.decode = function decode(reader, length) {
+        GameLandLordsOutCard.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOutcard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOutCard();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -812,13 +812,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsOutcard.decodeDelimited = function decodeDelimited(reader) {
+        GameLandLordsOutCard.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsOutcard.verify = function verify(message) {
+        GameLandLordsOutCard.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -833,10 +833,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsOutcard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsOutcard)
+        GameLandLordsOutCard.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.GameLandLordsOutCard)
                 return object;
-            var message = new $root.landLords.GameLandLordsOutcard();
+            var message = new $root.landLords.GameLandLordsOutCard();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -856,7 +856,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsOutcard.toObject = function toObject(message, options) {
+        GameLandLordsOutCard.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -887,11 +887,11 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsOutcard.prototype.toJSON = function toJSON() {
+        GameLandLordsOutCard.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsOutcard;
+        return GameLandLordsOutCard;
     })();
 
     landLords.GameLandLordsOperate = (function() {

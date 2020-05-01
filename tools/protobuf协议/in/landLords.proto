@@ -37,14 +37,14 @@ message GameLandLordsCall{
 }
 
 // 广播抢地主后的玩家
-message GameLandLordsBottomcard{
+message GameLandLordsBottomCard{
 	uint64 UserID = 1;					// 玩家ID
 	bytes CardsBottom = 2;				// 三张底牌
 }
 
 
 // 出牌
-message GameLandLordsOutcard{
+message GameLandLordsOutCard{
 	uint64 UserID = 1;					// 玩家ID
 	bytes Cards = 2;					// 牌值
 	string Hints = 3;					// 操作提示
