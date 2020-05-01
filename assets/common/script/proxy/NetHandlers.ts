@@ -9,7 +9,7 @@ import { GameKindEnum } from "../definer/ConstDefine";
 import { landLords_msgs } from "../proto/net_landLords";
 
 //---------------------------------
-// login响应句柄
+// 网络数据处理句柄
 //---------------------------------
 
 var NetHandlers = {
