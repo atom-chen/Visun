@@ -103,7 +103,7 @@ export default class DdzUI extends BaseComponent {
     private GameLandLordsPlayer(param) {
 
     }
-    private GameLandLordsOutcard(param) {
+    private GameLandLordsOutCard(param) {
         
     }
     private GameLandLordsOperate(param) {
@@ -118,7 +118,7 @@ export default class DdzUI extends BaseComponent {
     private GameLandLordsCall(param) {
         
     }
-    private GameLandLordsBottomcard(param) {
+    private GameLandLordsBottomCard(param) {
         
     }
     private GameLandLordsAward(param) {
@@ -126,12 +126,12 @@ export default class DdzUI extends BaseComponent {
     }
     private initNetEvent() {
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsPlayer, this.GameLandLordsPlayer, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOutcard, this.GameLandLordsOutcard, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOutCard, this.GameLandLordsOutCard, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOperate, this.GameLandLordsOperate, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDeal, this.GameLandLordsDeal, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCheckout, this.GameLandLordsCheckout, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCall, this.GameLandLordsCall, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomcard, this.GameLandLordsBottomcard, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomCard, this.GameLandLordsBottomCard, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsAward, this.GameLandLordsAward, this);
     }
 
