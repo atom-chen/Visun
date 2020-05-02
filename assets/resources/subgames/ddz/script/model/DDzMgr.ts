@@ -25,6 +25,8 @@ export default class DDzMgr extends ModelBase {
 
 	private _players : Array<GamePlayer> = [];
 	private _zhuangId : number = 0;
+	private _curAttackerId : number = null;
+	public EnterData = null;
 
 	//---- 玩家 -----------
 	resetPlayerList(playerList) {
@@ -68,6 +70,14 @@ export default class DDzMgr extends ModelBase {
 	//---- 上一个玩家的出牌 -----------
 	getPreout() : Array<number> {
 		return null;
+	}
+
+	setCurAttacker(uid:number) {
+		this._curAttackerId = uid;
+	}
+
+	getCurAttacker() : GamePlayer {
+		return this.getPlayer(this._curAttackerId);
 	}
 
 }

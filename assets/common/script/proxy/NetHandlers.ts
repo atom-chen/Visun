@@ -50,6 +50,7 @@ var NetHandlers = {
     },
 
     [landLords_msgs.GameLandLordsEnter] : function(param) {
+        DDzMgr.getInstance().EnterData = param;
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
 

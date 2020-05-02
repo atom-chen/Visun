@@ -10,7 +10,7 @@ import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
 import RuleDdz from "../rule/RuleDdz";
-import { landLords_msgs } from "../../../../../common/script/proto/net_landLords";
+import { landLords_msgs, landLords_request } from "../../../../../common/script/proto/net_landLords";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GamePlayer from "../../../../../common/script/model/GamePlayer";
 
@@ -43,6 +43,26 @@ export default class DdzUI extends BaseComponent {
         
         this.refreshPlayers();
         this.toStateReady(null);
+        
+        DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
+        var EnterData = DDzMgr.getInstance().EnterData;
+        if(EnterData) {
+            if(EnterData.GameStateFree) {
+                this.toStateSearching(null);
+            }
+            else if(EnterData.GameStateStart) {
+                this.toStateReady(null);
+            }
+            else if(EnterData.GameStateCall) {
+                this.toStateGrab(null);
+            }
+            else if(EnterData.GameStatePlaying) {
+                this.toStateFight(null);
+            }
+            else if(EnterData.GameStateOver) {
+                this.toStateResult(null);
+            }
+        }
     }
 
     //玩家的UI位置
@@ -57,9 +77,14 @@ export default class DdzUI extends BaseComponent {
     
     //匹配阶段
     private toStateSearching(param) {
-        this.m_ui.readyNode.active = false;
+        this.m_ui.readyNode.active = true;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
+        this.m_ui.tipLayer.active = false;
+        this._myHandor.clearCards();
+        for(var i in this._outs) {
+            this._outs[i].clearCards();
+        }
     }
     
     //准备阶段
@@ -69,18 +94,18 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
         this._myHandor.clearCards();
-        this.m_ui.labGrab0.getComponent(cc.Label).string = "";
-        this.m_ui.labGrab1.getComponent(cc.Label).string = "";
-        this.m_ui.labGrab2.getComponent(cc.Label).string = "";
         for(var i in this._outs) {
             this._outs[i].clearCards();
         }
+        this.m_ui.labGrab0.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab1.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab2.getComponent(cc.Label).string = "";
     }
 
     //抢地主阶段
     private toStateGrab(param) {
         this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = true;
+        this.m_ui.grabNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
     }
@@ -89,8 +114,11 @@ export default class DdzUI extends BaseComponent {
     private toStateFight(param) {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = true;
+        this.m_ui.fightNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
         this.m_ui.tipLayer.active = true;
+        this.m_ui.labGrab0.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab1.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab2.getComponent(cc.Label).string = "";
     }
 
     //结算阶段
@@ -99,9 +127,9 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = true;
-        this.m_ui.player0.getComponent(CpnPlayer).addMoney(100);
-        this.m_ui.player1.getComponent(CpnPlayer).addMoney(135);
-        this.m_ui.player2.getComponent(CpnPlayer).addMoney(122);
+        this.m_ui.labGrab0.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab1.getComponent(cc.Label).string = "";
+        this.m_ui.labGrab2.getComponent(cc.Label).string = "";
     }
     
     private refreshPlayers() {
@@ -123,6 +151,11 @@ export default class DdzUI extends BaseComponent {
         this._myHandor.resetCards(param.Cards, true);
     }
     private GameLandLordsOutCard(param) {
+        this.toStateGrab(param);
+        if(isNil(param)) {
+            return;
+        }
+
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
         if(!p){
             UIManager.toast("bug：找不到玩家 "+param.UserID);
@@ -137,6 +170,10 @@ export default class DdzUI extends BaseComponent {
         } else {
             UIManager.toast("bug：找不到玩家UI "+param.UserID);
         }
+
+        var nextPos = (p.Pos + 1) % MAX_SOLDIER;
+        DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
+        this.toStateFight(null);
     }
     private GameLandLordsOperate(param) {
         
@@ -157,6 +194,10 @@ export default class DdzUI extends BaseComponent {
         if(this.m_ui["labGrab"+idx]) {
             this.m_ui["labGrab"+idx].getComponent(cc.Label).string = param.Score;
         }
+
+        var nextPos = (p.Pos + 1) % MAX_SOLDIER;
+        DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
+        this.toStateGrab(null);
     }
     private GameLandLordsBottomCard(param) {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
@@ -165,7 +206,16 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, true);
     }
     private GameLandLordsAward(param) {
-        
+        this.toStateResult(null);
+        if(isNil(param)) { return; }
+        for(var i in param.players) {
+            var p = param.players[i];
+            var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
+            this.m_ui["player"+idx].getComponent(CpnPlayer).addMoney(p.GetGold);
+            if(p.GetGold > 0) {
+                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", true, this._players[idx].node, {scale:1.1}, null);
+            }
+        }
     }
     private onUserList(param) {
         DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
@@ -191,28 +241,47 @@ export default class DdzUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             gamecomm_request.GameReady({
                 UserID:LoginUser.getInstance().UserID,
-                IsReady:1
+                IsReady:true
             });
         }, this);
-    }
-
-
-    private test() {
-        UIManager.showSpineAsync("common/spines/jack/jack", 0, "a", true, this.node, {y:140, scale:0.6}, null);
-        for(var j=0; j<MAX_SOLDIER; j++) {
-            UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", true, this._players[j].node, {scale:1.1}, null);
-            this._outs[j].resetCards([PokerCode.FK_10,PokerCode.HT_A], true);
-        }
-    }
-    private test1() {
-        var deck = RuleDdz.initDeck();
-     //   CommonUtil.shuffle(deck);
-        var cards = [];
-		for (var n=0; n<17; n++) {
-            cards.push(deck[n]);
-        //    cc.log(deck[n])
-        }
-        this._myHandor.resetCards(cards, true);
+        CommonUtil.addClickEvent(this.m_ui.btn_out, function(){ 
+            landLords_request.GameLandLordsOutCard({
+                UserID:LoginUser.getInstance().UserID,
+                Cards: this._myHandor.getSelectedCards(),
+                Hints:"",
+            });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_pass, function(){ 
+            landLords_request.GameLandLordsOutCard({
+                UserID:LoginUser.getInstance().UserID,
+                Cards: [],
+                Hints:"",
+            });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_score0, function(){ 
+            landLords_request.GameLandLordsCall({
+                UserID:LoginUser.getInstance().UserID,
+                Score:0
+            });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_score1, function(){ 
+            landLords_request.GameLandLordsCall({
+                UserID:LoginUser.getInstance().UserID,
+                Score:1
+            });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_score2, function(){ 
+            landLords_request.GameLandLordsCall({
+                UserID:LoginUser.getInstance().UserID,
+                Score:2
+            });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_score3, function(){ 
+            landLords_request.GameLandLordsCall({
+                UserID:LoginUser.getInstance().UserID,
+                Score:3
+            });
+        }, this);
     }
 
 }
