@@ -27,7 +27,9 @@ export default class LoginMgr extends ModelBase {
                             chan.reconnect();
                         }
                     })
-                }
+                } else if(chan.getState()===ConnState.reconnectsucc) {
+					LoginMgr.getInstance().leafLogin(LoginUser.getInstance().Name, LoginUser.getInstance().Password);
+				}
             }
         }, this);
 	}

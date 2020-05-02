@@ -1,5 +1,6 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
 import GamePlayer from "../../../../../common/script/model/GamePlayer";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 export default class DDzMgr extends ModelBase {
 	private static _instance:DDzMgr = null;
@@ -35,6 +36,10 @@ export default class DDzMgr extends ModelBase {
 			} else {
 				this._players[i] = null;
 			}
+		}
+		if(isNil(playerList) || playerList.length <= 0) {
+			this._players.length = 0;
+			this._players = [];
 		}
 	}
 

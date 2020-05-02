@@ -11,7 +11,7 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
 import RuleDdz from "../rule/RuleDdz";
 import { landLords_msgs } from "../../../../../common/script/proto/net_landLords";
-import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GamePlayer from "../../../../../common/script/model/GamePlayer";
 
 const MAX_SOLDIER = 3;
@@ -111,9 +111,11 @@ export default class DdzUI extends BaseComponent {
         }
         var players = DDzMgr.getInstance().getPlayerList();
         for(var i in players) {
-            var idx = this.playerIndex(players[i]);
-            this._players[idx].setName(players[i].Name);
-            this._players[idx].setMoney(players[i].Gold);
+            if(!isNil(players[i])) {
+                var idx = this.playerIndex(players[i]);
+                this._players[idx].setName(players[i].Name);
+                this._players[idx].setMoney(players[i].Gold);
+            }
         }
     }
 
@@ -185,6 +187,12 @@ export default class DdzUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             DDzMgr.getInstance().resetPlayerList([]);
             GameManager.getInstance().quitGame(0);
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
+            gamecomm_request.GameReady({
+                UserID:LoginUser.getInstance().UserID,
+                IsReady:1
+            });
         }, this);
     }
 
