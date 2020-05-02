@@ -2,8 +2,8 @@ import EventCenter from "../../kernel/basic/event/EventCenter";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelEvent from "../../kernel/basic/defines/KernelEvent";
 import TimerManager from "../../kernel/basic/timer/TimerManager";
-import Updator from "../../kernel/basic/timer/Updator";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
+import EcsSystem from "../../kernel/ecs/EcsSystem";
 
 
 export default class InitLogic {
@@ -39,7 +39,7 @@ export default class InitLogic {
         })
 
         TimerManager.start(node);
-        Updator.start(node);
+        EcsSystem.start(node);
 	}
 
 	private static onKeyDown (event:any) {
