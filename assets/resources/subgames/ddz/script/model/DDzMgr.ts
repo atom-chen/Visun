@@ -29,8 +29,12 @@ export default class DDzMgr extends ModelBase {
 	resetPlayerList(playerList) {
 		this._players = playerList;
 		for(var i=0; i<3; i++) {
-			this._players[i] = playerList[i];
-			this._players[i].Pos = i;
+			if(playerList[i]) {
+				this._players[i] = playerList[i];
+				this._players[i].Pos = i;
+			} else {
+				this._players[i] = null;
+			}
 		}
 	}
 
