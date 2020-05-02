@@ -1,7 +1,8 @@
 //-----------------------------------
 // 战斗：基类
 //-----------------------------------
-import { CombatStopReason, CombatReport } from "../define";
+import { CombatStopReason } from "../define";
+import CombatReport from "./CombatReport";
 
 
 export default class CombatBase {

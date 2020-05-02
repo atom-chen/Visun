@@ -15,9 +15,3 @@ export enum CombatStopReason {
 	success,	//胜利
 	quit,		//用户强制退出
 }
-
-//战报
-export class CombatReport {
-	result:CombatStopReason = CombatStopReason.unknown;
-	score:number = 0;
-}
