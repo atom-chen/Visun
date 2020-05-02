@@ -7,6 +7,8 @@ import GameManager from "../model/GameManager";
 import { baccarat_msgs } from "../proto/net_baccarat";
 import { GameKindEnum } from "../definer/ConstDefine";
 import { landLords_msgs } from "../proto/net_landLords";
+import { gamecomm_msgs } from "../proto/net_gamecomm";
+import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 
 //---------------------------------
 // 网络数据处理句柄
@@ -49,6 +51,10 @@ var NetHandlers = {
 
     [landLords_msgs.GameLandLordsEnter] : function(param) {
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
+    },
+
+    [gamecomm_msgs.UserList] : function(param) {
+        DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
     }
 
 }

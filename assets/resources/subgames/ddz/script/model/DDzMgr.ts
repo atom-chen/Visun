@@ -1,6 +1,5 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
-import DDzPlayer from "./DDzPlayer";
-import { getPokerValue } from "../../../../../common/script/definer/PokerDefine";
+import GamePlayer from "../../../../../common/script/model/GamePlayer";
 
 export default class DDzMgr extends ModelBase {
 	private static _instance:DDzMgr = null;
@@ -23,15 +22,27 @@ export default class DDzMgr extends ModelBase {
 
 	//------------------------------------------------------------------------------
 
-	private _players:{[key:number]:DDzPlayer};
-	private _zhuangId:number = 0;
+	private _players : Array<GamePlayer> = [];
+	private _zhuangId : number = 0;
 
 	//---- 玩家 -----------
-	getPlayer(uid:number) : DDzPlayer {
-		return this._players[uid];
+	resetPlayerList(playerList) {
+		this._players = playerList;
+		for(var i=0; i<3; i++) {
+			this._players[i] = playerList[i];
+			this._players[i].Pos = i;
+		}
 	}
 
-	getPlayerByPos(pos:number) : DDzPlayer
+	getPlayer(uid:number) : GamePlayer {
+		for(var i in this._players) {
+			if(uid == this._players[i].UserID) {
+				return this._players[i];
+			}
+		}
+	}
+
+	getPlayerByPos(pos:number) : GamePlayer
 	{
 		for(var userId in this._players) {
 			if(this._players[userId].Pos == pos) {
@@ -40,66 +51,14 @@ export default class DDzMgr extends ModelBase {
 		}
 		return null;
 	}
+
+	getPlayerList() : Array<GamePlayer> {
+		return this._players;
+	}
 	
 	//---- 上一个玩家的出牌 -----------
 	getPreout() : Array<number> {
 		return null;
 	}
 
-	//----庄家-----------
-	setZhuangBySaizi(cardV:number) {
-		var v = getPokerValue(cardV);
-		var posList = [];
-		for(var i in this._players) {
-			posList.push(this._players[i].Pos);
-		} 
-		posList.sort( (a,b)=>{
-			let cmp = a-b;
-			if(cmp>0) return 1;
-			if(cmp<0) return -1;
-			return 0;
-		} );
-		var idx = v % posList.length;
-		if(idx===0) { idx = posList.length; }
-		idx = idx - 1;
-		var dstPos = posList[idx];
-		var dstUserId = this.getPlayerByPos(dstPos) && this.getPlayerByPos(dstPos).UserId;
-		this.setZhuangjia(dstUserId);
-	}
-	setZhuangjia(userId:number) {
-		this._zhuangId = userId;
-	}
-	getZhuangjia() : number {
-		return this._zhuangId;
-	}
-
-	//----以庄家为起点的参战人员列表-----------
-	getFighterList() : any {
-		var usrlist = [];
-		for(var x in this._players) {
-			usrlist.push(this._players[x]);
-		}
-		if(usrlist.length<=0) { return usrlist; }
-
-		usrlist.sort((a,b)=>{
-			return a.Pos-b.Pos;
-		});
-		var p = usrlist[0];
-		var xxx = 0;
-		while(p.userId != this.getZhuangjia()) {
-			usrlist.splice(0, 1);
-			usrlist.push(p);
-			p = usrlist[0];
-			xxx++;
-			if(xxx>=usrlist.length) { break; }
-		}
-		
-		var posList = [];
-		for(var m in usrlist) {
-		//	if(usrlist[m].state != SuohaUserState.DISCARD) {
-				posList.push(usrlist[m]);
-		//	}
-		}
-		return posList;
-	}
 }
