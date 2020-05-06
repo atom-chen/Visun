@@ -1071,6 +1071,7 @@ $root.baccarat = (function() {
     return baccarat;
 })();
 
+<<<<<<< HEAD
 $root.gamecomm = (function() {
 
     var gamecomm = {};
@@ -3497,4 +3498,6 @@ $root.gamecomm = (function() {
     return gamecomm;
 })();
 
+=======
+>>>>>>> 3918515cf7070aa93d786c08e3cf01bd6d6907c6
 module.exports = $root;
