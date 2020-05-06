@@ -1,7 +1,7 @@
 //54张扑克牌编码
 export enum PokerCode {
-	KING = 0x5F,
-	QUEEN = 0x4E,
+	KING = 0x0F,
+	QUEEN = 0x0E,
 	HT_K = 0x3D,
 	HX_K = 0x2D,
 	MH_K = 0x1D,

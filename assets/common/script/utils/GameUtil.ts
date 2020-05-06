@@ -40,6 +40,8 @@ export default class GameUtil {
 
 	//获取扑克图片资源路经
 	public static pokerPath(v:number|string) : string {
+		if(v===0x0E) { v = 0x4E; }
+		if(v===0x0F) { v = 0x5F; }
 		return "common/imgs/pokers/poker_"+v;
 	}
 
