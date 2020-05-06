@@ -18,6 +18,8 @@ def excuteCmd(cmdStr):
 
 def gen_proto(Proto, channel="game"): 
 	print("=====Begin:" + Proto + " " + channel)
+	print("fix "+Proto+".proto")
+	excuteCmd("node fixpackage.js " + Proto)
 	print("gen json")
 	if not os.path.exists("tmps"):
 		os.makedirs("tmps")
