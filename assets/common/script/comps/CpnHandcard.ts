@@ -40,7 +40,7 @@ export default class CpnHandcard extends cc.Component {
             }
         } else {
             for(var i=0, len=cards.length; i<len; i++) {
-                this.addCard(cards[i]);
+                this.addCard(cards[i]).setFace(true);
             }
         }
         
