@@ -9,13 +9,14 @@ message GameLandLordsEnter{
 	uint32 FreeTime = 3;				//最长等待时间
 	uint32 OutTime = 4;					//最长出牌时间
 	uint32 CallTime = 5;				//最长叫分时间
-	bytes BeforeCards = 6;				//上一家的出牌(场景恢复)
-	bytes HandCards = 7;				//玩家手牌(场景恢复)
-	GameStateFree Free = 8;  		 	//空闲状态(清场或游戏未启动)
-	GameStateStart Start = 9;			//开始状态
-	GameStateCall Call = 10;				//叫分状态
-	GameStatePlaying Playing = 11;		//下注状态
-	GameStateOver Over = 12;				//结算状态
+	bytes HandCards = 6;				//玩家手牌(场景恢复)
+	GameStateFree Free = 7;  		 	//空闲状态(清场或游戏未启动)
+	GameStateStart Start = 8;			//开始状态
+	GameStateCall Call = 9;				//叫分状态
+	GameStatePlaying Playing = 10;		//下注状态
+	GameStateOver Over = 11;			//结算状态
+	uint32 BeforeChairID = 12;			//上一家的椅子号
+	bytes BeforeCards = 13;				//上一家的出牌(场景恢复)
 
 }
 
