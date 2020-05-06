@@ -240,7 +240,7 @@ export default class CommonUtil {
 		for (var key in source) {
 			if (source.hasOwnProperty(key)) {
 				target[key] = source[key];
-				cc.log("copy: ", key, target[key]);
+			//	cc.log("copy: ", key, target[key]);
 			}
 		}
 	}

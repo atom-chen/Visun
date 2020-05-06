@@ -146,7 +146,7 @@ export default class DdzUI extends BaseComponent {
     }
 
     private GameLandLordsPlayer(param) {
-        this._myHandor.resetCards(param.Cards, true);
+        this._myHandor.resetCards(param.Cards, false);
     }
     private GameLandLordsOutCard(param) {
         this.toStateGrab(param);
@@ -177,7 +177,7 @@ export default class DdzUI extends BaseComponent {
         
     }
     private GameLandLordsDeal(param) {
-        this._myHandor.resetCards(param.CardsHand, true);
+        this._myHandor.resetCards(param.CardsHand, false);
     }
     private GameLandLordsCheckout(param) {
         
@@ -201,7 +201,7 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, true);
+        this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false);
     }
     private GameLandLordsAward(param) {
         this.toStateResult(null);

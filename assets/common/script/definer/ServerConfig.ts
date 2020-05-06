@@ -16,11 +16,11 @@ var server_list = {
     },
     mac: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.58.126:9650"
+        leafServer: "ws://192.168.43.7:9650"
     }
 };
 
 //选定某服
-var ServerConfig = server_list.jetten;
+var ServerConfig = server_list.mac;
 
 export default ServerConfig;
