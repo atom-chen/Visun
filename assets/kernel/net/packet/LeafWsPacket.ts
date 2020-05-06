@@ -14,10 +14,16 @@ const HEAD_SIZE = 2;
 export default class LeafWsPacket implements PacketInterface{
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
+	protected msg_name:string;
 
-	constructor(cmd:number, dataStruct:any){
+	constructor(cmd:number, dataStruct:any, msgName?:string){
 		this.cmd = cmd;
 		this.data_struct = dataStruct;
+		this.msg_name = msgName;
+	}
+
+	debugName() : string {
+		return this.msg_name || " ";
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
@@ -123,7 +129,7 @@ export default class LeafWsPacket implements PacketInterface{
 	{
 		var dstChannel = ChannelMgr.getInstance().getChannel(channelKey);
 		if(!dstChannel) { cc.warn("..... channel not created: ", channelKey); return; }
-		cc.log(channelKey, "pack", this.cmd, data);
+		cc.log(cc.js.formatStr("%s pack %s(%d)", channelKey, this.msg_name, this.cmd), data);
         var buff = this.pack(data, bIsPbObj);
 		dstChannel.sendMessage(this.cmd, buff);
 	}

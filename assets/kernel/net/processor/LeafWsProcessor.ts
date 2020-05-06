@@ -3,7 +3,6 @@
 // id(2字节) + body
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
-import CommonUtil from "../../utils/CommonUtil";
 import MemoryStream from "../../basic/datastruct/MemoryStream";
 
 
@@ -25,7 +24,8 @@ export default class LeafWsProcessor extends BaseProcessor {
 		}
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[send buff]", cmd, info.length);
+			cc.log(cc.js.formatStr("%s [send buff] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), info.length));
+		//	cc.log(this._name, "[send buff]", cmd, info.length);
 		//	cc.log(CommonUtil.Bytes2Str(info));
 		}
 

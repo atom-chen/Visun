@@ -7,4 +7,5 @@ export default interface PacketInterface {
 	unpackStream(memStream:MemoryStream) : any;
 	unpackBody(bytes:Uint8Array) : any;
 	sendToChannel(channelKey:string, data:any, bIsPbObj:boolean) : void;
+	debugName():string;
 }

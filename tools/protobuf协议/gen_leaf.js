@@ -115,7 +115,7 @@ for(var enumKey in infos) {
 		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + "null" + "),\n";
 	}
 	else {
-		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+structName + "),\n";
+		outstr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+structName + ", \"" + structName + "\"" + "),\n";
 	}
 }
 outstr += "}\n\n";

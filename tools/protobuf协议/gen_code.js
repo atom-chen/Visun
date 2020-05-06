@@ -250,7 +250,7 @@ function doGenerate() {
 			//client begin
 			enumStr += "    " + msgName + " = " + cmdId + ",\n";
 	
-			cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + "),\n";
+			cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + ", \"" + mudname+"."+msgName + "\"" + "),\n";
 			
 			reqStr += "    public static "+msgName+"( data:"+getRequestParam(argInfo)+" ) ";
 			reqStr += "{ ";

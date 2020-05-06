@@ -15,9 +15,13 @@ export default class T4C4Packet implements PacketInterface {
 	protected cmd:number;				//消息ID
 	protected data_struct:any;			//包体数据结构
 
-	constructor(cmd:number, dataStruct:any){
+	constructor(cmd:number, dataStruct:any, msgName?:string){
 		this.cmd = cmd;
 		this.data_struct = dataStruct;
+	}
+
+	debugName() : string {
+		return " ";
 	}
 
 	pack(data:any, bIsPbObj:boolean) : Uint8Array
