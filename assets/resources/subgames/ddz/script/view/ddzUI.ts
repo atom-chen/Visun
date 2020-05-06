@@ -2,14 +2,12 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
-import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
 import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
-import RuleDdz from "../rule/RuleDdz";
 import { landLords_msgs, landLords_request } from "../../../../../common/script/proto/net_landLords";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GamePlayer from "../../../../../common/script/model/GamePlayer";
@@ -243,6 +241,9 @@ export default class DdzUI extends BaseComponent {
                 UserID:LoginUser.getInstance().UserID,
                 IsReady:true
             });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){ 
+            
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_out, function(){ 
             landLords_request.GameLandLordsOutCard({

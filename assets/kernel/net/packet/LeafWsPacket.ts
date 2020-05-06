@@ -125,7 +125,7 @@ export default class LeafWsPacket implements PacketInterface{
 		if(!dstChannel) { cc.warn("..... channel not created: ", channelKey); return; }
 		cc.log(channelKey, "pack", this.cmd, data);
         var buff = this.pack(data, bIsPbObj);
-        dstChannel.sendMessage(this.cmd, buff);
+		dstChannel.sendMessage(this.cmd, buff);
 	}
 
 }
