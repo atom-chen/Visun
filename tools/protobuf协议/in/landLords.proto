@@ -4,24 +4,29 @@ import "gamecomm.proto";
 //【百人类游戏】
 //入场 (场景)
 message GameLandLordsEnter{
-	int64 TimeStamp = 1;				//时间戳
-	uint32 FreeTime = 2;				//最长等待时间
-	uint32 OutTime = 3;					//最长出牌时间
-	uint32 CallTime = 4;				//最长叫分时间
-	GameStateFree Free = 5;  		 	//空闲状态(清场或游戏未启动)
-	GameStateStart Start = 6;			//开始状态
-	GameStateCall Call = 7;				//叫分状态
-	GameStatePlaying Playing = 8;		//下注状态
-	GameStateOver Over = 9;				//结算状态
+	uint32 ChairID = 1;					//座位号
+	int64 TimeStamp = 2;				//时间戳
+	uint32 FreeTime = 3;				//最长等待时间
+	uint32 OutTime = 4;					//最长出牌时间
+	uint32 CallTime = 5;				//最长叫分时间
+	bytes BeforeCards = 6;				//上一家的出牌(场景恢复)
+	bytes HandCards = 7;				//玩家手牌(场景恢复)
+	GameStateFree Free = 8;  		 	//空闲状态(清场或游戏未启动)
+	GameStateStart Start = 9;			//开始状态
+	GameStateCall Call = 10;				//叫分状态
+	GameStatePlaying Playing = 11;		//下注状态
+	GameStateOver Over = 12;				//结算状态
+
 }
+
 //注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
 
 //游戏消息
 // 玩家信息
 message GameLandLordsPlayer{
 	uint64 UserID = 1;					// 玩家ID
-	bytes Cards = 3;					// 牌
-	bool IsBanker = 4;					// 是否是庄家
+	bytes Cards = 2;					// 牌
+	bool IsBanker = 3;					// 是否是庄家
 }
 
 // 开始
