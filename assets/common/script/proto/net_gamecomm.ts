@@ -24,9 +24,10 @@ export enum gamecomm_msgs {
     GameStateCall = 34,
     GameStatePlaying = 35,
     GameStateOver = 36,
-    GameHost = 37,
-    GameSuperHost = 38,
-    GameCall = 39,
+    GameBeOut = 37,
+    GameHost = 38,
+    GameSuperHost = 39,
+    GameCall = 40,
 }
 
 export var gamecomm_packet_define = {
@@ -47,9 +48,10 @@ export var gamecomm_packet_define = {
     34: new LeafWsPacket(34, gamecomm.GameStateCall),
     35: new LeafWsPacket(35, gamecomm.GameStatePlaying),
     36: new LeafWsPacket(36, gamecomm.GameStateOver),
-    37: new LeafWsPacket(37, gamecomm.GameHost),
-    38: new LeafWsPacket(38, gamecomm.GameSuperHost),
-    39: new LeafWsPacket(39, gamecomm.GameCall),
+    37: new LeafWsPacket(37, gamecomm.GameBeOut),
+    38: new LeafWsPacket(38, gamecomm.GameHost),
+    39: new LeafWsPacket(39, gamecomm.GameSuperHost),
+    40: new LeafWsPacket(40, gamecomm.GameCall),
 }
 
 export class gamecomm_request {
@@ -70,8 +72,9 @@ export class gamecomm_request {
     public static GameStateCall( data:{ UserID:number } ) { gamecomm_packet_define[34].sendToChannel(ChannelDefine.game, data, false); }
     public static GameStatePlaying( data:{} ) { gamecomm_packet_define[35].sendToChannel(ChannelDefine.game, data, false); }
     public static GameStateOver( data:{} ) { gamecomm_packet_define[36].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameHost( data:{ IsWant:any } ) { gamecomm_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameSuperHost( data:{ IsWant:any } ) { gamecomm_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCall( data:{ UserID:number, Score:number } ) { gamecomm_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameBeOut( data:{ UserID:number, Code:number, Hints:any } ) { gamecomm_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameHost( data:{ IsWant:any } ) { gamecomm_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameSuperHost( data:{ IsWant:any } ) { gamecomm_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCall( data:{ UserID:number, Score:number } ) { gamecomm_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
 }
 

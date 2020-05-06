@@ -48,7 +48,7 @@ export class login_request {
     public static GameList( data:{ Items:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static UserInfo( data:{ Name:string, Accounts:string, Password:string, FaceID:number, Gender:number, Age:number, Level:number, Gold:number, PassPortID:string, Compellation:string, AgentID:number, SpreaderGameID:number, ClientAddr:number, MachineCode:string } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
     public static RoomInfo( data:{ RoomNum:number, RoomKey:string, RoomName:string, Games:any } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameBaseInfo( data:{ Type:number, KindID:number, Level:number, Name:string, EnterScore:number, LessScore:number, MaxOnline:number, State:number } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameBaseInfo( data:{ Type:number, KindID:number, Level:number, Name:string, EnterScore:number, LessScore:number, MaxOnline:number, State:number, Commission:number } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
     public static MasterInfo( data:{ UserID:number, UserInfo:any, RoomsInfo:any[], Tasks:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqEnterRoom( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
