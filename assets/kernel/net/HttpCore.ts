@@ -38,9 +38,9 @@ export default class HttpCore {
 			var ptoname:string = ruleList[i].name
 
 			if(this.g_allProtocol[ptoname]) {
-				cc.log("重新注册：", ptoname);
+				cc.log("重新注册Http协议：", ptoname);
 			} else {
-				cc.log("注册协议：", ptoname);
+				cc.log("注册Http协议：", ptoname);
 			}
 			
 			if(!requestor[ptoname]) {
