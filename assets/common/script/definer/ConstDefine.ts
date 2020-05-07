@@ -15,7 +15,7 @@ export enum GameKindEnum {
 	Paijiu		= 10900,		//牌九
 	Brttz		= 11000,		//百人推筒子
 	//对战
-	Zhajinhua	= 20100,		//炸金花
+	Zhajinhua	= 1003,		//炸金花
 	QzCowcow	= 20200,		//抢庄牛牛
 	Landlord	= 3001,			//斗地主
 	Blackjack	= 20400,		//21点（黑杰克）
