@@ -21,8 +21,7 @@ export default class UILobby extends BaseComponent {
 	@property(cc.Prefab)
 	roomTab: cc.Prefab = null;
 
-	onLoad () 
-	{
+	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		this.initUiEvents();
@@ -63,21 +62,32 @@ export default class UILobby extends BaseComponent {
 		if(!gameList) { return; }
 
 		for(var i in gameList) {
-			var info = gameList[i];
+			var gameData = gameList[i];
 			var bton = cc.instantiate(this.gameBtn);
-            bton["GameInfo"] = info;
-            var tbl : any = {};
-            CommonUtil.traverseNodes(bton, tbl);
-            tbl.lab_roomname.getComponent(cc.Label).string = info.Info.Name;
-            tbl.lab_roomnum.getComponent(cc.Label).string = info.Info.EnterScore;
-            tbl.lab_roomkey.getComponent(cc.Label).string = info.Info.Level;
+            bton["gameData"] = gameData;
+			
+			this.m_ui.content.addChild(bton);
+
 			CommonUtil.addClickEvent(bton, function(){ 
 				gamecomm_request.ReqEnterGame({
-                    GameID: this.GameInfo.ID 
+                    GameID: this.gameData.ID 
                 });
 			}, bton);
-			this.m_ui.content.addChild(bton);
+
+			this.refreshGameButton(bton, gameData);
 		}
+	}
+
+	private refreshGameButton(bton, gameData) {
+		var tbl : any = {};
+		CommonUtil.traverseNodes(bton, tbl);
+		tbl.lab_roomname.getComponent(cc.Label).string = gameData.Info.Name;
+		tbl.lab_roomnum.getComponent(cc.Label).string = gameData.Info.EnterScore;
+		tbl.lab_roomkey.getComponent(cc.Label).string = gameData.Info.Level;
+		cc.loader.loadRes("lobby/imgs/gameico/ico_brnn", cc.SpriteFrame, (err, rsc)=>{
+			if(err) { cc.log("load fail", err); return; }
+			tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
+		});
 	}
 
 	private refleshUI(data:any) {

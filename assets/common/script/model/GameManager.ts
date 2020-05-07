@@ -7,6 +7,7 @@ import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
+import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 //游戏管理器
 export default class GameManager extends ModelBase {
@@ -38,7 +39,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getRoomsInfo() : any {
-		// if(this.roomsInfo.length<=0) {
+		// if(isNil(this.roomsInfo) || this.roomsInfo.length<=0) {
 		// 	this.roomsInfo = [
 		// 		{RoomName:"百人房",RoomNum:"1",RoomKey:"000"},
 		// 		{RoomName:"对战房",RoomNum:"1",RoomKey:"000"},
@@ -53,7 +54,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getGameArr() : any {
-		// if(this.gameArr.length<=0) {
+		// if(isNil(this.gameArr) || this.gameArr.length<=0) {
 		// 	this.gameArr = [
 		// 		{ID:101,Info:{Name:"牛牛",EnterScore:10,Level:0}},
 		// 		{ID:102,Info:{Name:"金花",EnterScore:10,Level:0}},
