@@ -4,8 +4,9 @@ const fs = require("fs");
 
 var arguments = process.argv.splice(2);
 console.log('所传递的参数是：', arguments);
+var protoName = arguments[0];
 
-var filepath = "../../assets/common/script/proto/" + arguments[0] + ".js";
+var filepath = "../../assets/common/script/proto/" + protoName + ".js";
 const data = fs.readFileSync(filepath, 'utf8').split('\n');
 
 for(var i=0, len=data.length; i<len; i++) {
@@ -15,7 +16,7 @@ for(var i=0, len=data.length; i<len; i++) {
 	}
 }
 
-if(arguments[0] != "gamecomm") {
+if(protoName != "gamecomm") {
 	for(var from=0, len=data.length; from<len; from++) {
 		if(data[from].match("root.gamecomm = ") && data[from].match("function")){
 			console.log("第"+from+"行发现累赘import: "+data[from]);
