@@ -47,7 +47,7 @@ export default class DDzMgr extends ModelBase {
 
 	removePlayer(uid:number) {
 		for(var i in this._players) {
-			if(uid == this._players[i].UserID) {
+			if(!isNil(this._players[i]) && uid == this._players[i].UserID) {
 				this._players.splice(parseInt(i), 1);
 				break;
 			}
@@ -56,7 +56,7 @@ export default class DDzMgr extends ModelBase {
 
 	getPlayer(uid:number) : GamePlayer {
 		for(var i in this._players) {
-			if(uid == this._players[i].UserID) {
+			if(!isNil(this._players[i]) && uid == this._players[i].UserID) {
 				return this._players[i];
 			}
 		}
@@ -64,9 +64,9 @@ export default class DDzMgr extends ModelBase {
 
 	getPlayerByPos(pos:number) : GamePlayer
 	{
-		for(var userId in this._players) {
-			if(this._players[userId].ChairID == pos) {
-				return this._players[userId];
+		for(var idx in this._players) {
+			if(!isNil(this._players[idx]) && this._players[idx].ChairID == pos) {
+				return this._players[idx];
 			} 
 		}
 		return null;

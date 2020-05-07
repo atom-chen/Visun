@@ -42,9 +42,12 @@ export default class DdzUI extends BaseComponent {
         this.refreshPlayers();
         this.toStateReady(null);
         
-        DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
         var EnterData = DDzMgr.getInstance().EnterData;
         if(EnterData) {
+            DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
+
+            this._myHandor.resetCards(EnterData.HandCards, false);
+            
             if(EnterData.GameStateFree) {
                 this.toStateSearching(null);
             }
