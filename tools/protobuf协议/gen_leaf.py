@@ -17,22 +17,30 @@ def excuteCmd(cmdStr):
 	os.system(cmdStr)
 
 def gen_proto(Proto, channel="game"): 
-	print("=====Begin:" + Proto + " " + channel)
-	print("fix "+Proto+".proto")
+	print("===========Begin: " + Proto + " " + channel)
+
+	print("fix package name for "+Proto+".proto")
 	excuteCmd("node fixpackage.js " + Proto)
+
 	print("gen json")
 	if not os.path.exists("tmps"):
 		os.makedirs("tmps")
 	excuteCmd("pbjs -t json in/" + Proto + ".proto" + " -o tmps/" + Proto + ".json")
+
 	print("gen " + Proto + ".js")
 	excuteCmd("pbjs -t static-module -w commonjs -o ../../assets/common/script/proto/" + Proto + ".js in/" + Proto + ".proto" + " " + "--no-comments")
+
 	#print("gen "+Proto+".d.ts")
 	#excuteCmd("pbts -o ../../declares/" + Proto + ".d.ts ../../assets/common/script/proto/" + Proto + ".js")
+
 	time.sleep(0.5)
+
 	print("fix "+Proto+".js")
 	excuteCmd("node fix.js " + Proto)
+
 	# print("gen rpc " + Proto)
 	# excuteCmd("node gen_leaf.js " + Proto + " " + channel)
+	
 	print("=====Finish: " + Proto + "\n")
 
 protoName = sys.argv[1]
