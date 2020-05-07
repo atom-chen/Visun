@@ -1,5 +1,6 @@
-
-
+//-------------------------------
+// 这种协议方式，需要在in目录下写一份和proto文件同名的js文件，来标明消息ID和protobuf数据之间的对应关系
+//-------------------------------
 const fs = require("fs");
 
 var arguments = process.argv.splice(2);

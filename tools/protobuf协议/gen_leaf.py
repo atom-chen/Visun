@@ -38,9 +38,6 @@ def gen_proto(Proto, channel="game"):
 	print("fix "+Proto+".js")
 	excuteCmd("node fix.js " + Proto)
 
-	# print("gen rpc " + Proto)
-	# excuteCmd("node gen_leaf.js " + Proto + " " + channel)
-	
 	print("=====Finish: " + Proto + "\n")
 
 protoName = sys.argv[1]
