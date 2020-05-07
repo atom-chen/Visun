@@ -33,14 +33,14 @@ export default class LogicCenter {
         //初始化游戏协议
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
-		g_leafProcessor.registCmds(login_packet_define);
-        g_leafProcessor.registCmds(gamecomm_packet_define);
+        g_leafProcessor.registCmds(login_packet_define);
         g_leafProcessor.registCmds(comand_packet_define);
+        g_leafProcessor.registCmds(gamecomm_packet_define);
         g_leafProcessor.registCmds(baccarat_packet_define);
-        g_leafProcessor.registCmds(landLords_packet_define);
         g_leafProcessor.registCmds(cowcow_packet_define);
-        g_leafProcessor.registCmds(fishLord_packet_define);
+        g_leafProcessor.registCmds(landLords_packet_define);
         g_leafProcessor.registCmds(mahjong_packet_define);
+        g_leafProcessor.registCmds(fishLord_packet_define);
         g_leafProcessor.getDispatcher().addObserver(NetHandlers);
         
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);

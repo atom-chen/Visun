@@ -9,11 +9,15 @@ var pbfiles = [
 		router:"login", 
 	},
 	{ 
-		name:"baccarat", 
+		name:"comand", 
 		router:"game",
 	},
 	{ 
 		name:"gamecomm", 
+		router:"game",
+	},
+	{ 
+		name:"baccarat", 
 		router:"game",
 	},
 	{ 
@@ -30,10 +34,6 @@ var pbfiles = [
 	},
 	{ 
 		name:"fishLord", 
-		router:"game",
-	},
-	{ 
-		name:"comand", 
 		router:"game",
 	},
 ]
