@@ -169,11 +169,11 @@ export default class HttpCore {
 			} else {
 				cc.log(info);
 				UIManager.toast(info.msg || "未知错误");
-				EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname, info);
+				EventCenter.getInstance().fire(KernelEvent.HTTP_ERROR_CODE, ptoname, info);
 			}
 		} else {
 			UIManager.toast("网络请求失败");
-			EventCenter.getInstance().fire(KernelEvent.HTTP_FAIL, ptoname);
+			EventCenter.getInstance().fire(KernelEvent.HTTP_ERROR_CODE, ptoname);
 		}
 	}
 

@@ -52,7 +52,7 @@ export default class LeafTcpProcessor extends BaseProcessor {
 		//有错误则走错误处理逻辑
 		if(errCode != 0){
 			cc.log(this._name, "[net fail]", cmd, errCode);
-			EventCenter.getInstance().fire( KernelEvent.WS_FAIL, { cmd:cmd, errCode:errCode } );
+			EventCenter.getInstance().fire( KernelEvent.WS_ERROR_CODE, { cmd:cmd, errCode:errCode } );
 			return;
 		}
 
