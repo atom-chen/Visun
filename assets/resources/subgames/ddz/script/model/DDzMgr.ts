@@ -34,7 +34,7 @@ export default class DDzMgr extends ModelBase {
 		for(var i=0; i<3; i++) {
 			if(playerList[i]) {
 				this._players[i] = playerList[i];
-				this._players[i].Pos = i;
+				this._players[i].ChairID = i;
 			} else {
 				this._players[i] = null;
 			}
@@ -42,6 +42,15 @@ export default class DDzMgr extends ModelBase {
 		if(isNil(playerList) || playerList.length <= 0) {
 			this._players.length = 0;
 			this._players = [];
+		}
+	}
+
+	removePlayer(uid:number) {
+		for(var i in this._players) {
+			if(uid == this._players[i].UserID) {
+				this._players.splice(parseInt(i), 1);
+				break;
+			}
 		}
 	}
 
@@ -56,7 +65,7 @@ export default class DDzMgr extends ModelBase {
 	getPlayerByPos(pos:number) : GamePlayer
 	{
 		for(var userId in this._players) {
-			if(this._players[userId].Pos == pos) {
+			if(this._players[userId].ChairID == pos) {
 				return this._players[userId];
 			} 
 		}

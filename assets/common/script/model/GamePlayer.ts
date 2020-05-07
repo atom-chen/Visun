@@ -12,6 +12,4 @@ export default class GamePlayer {
     GameID : number = 11; 		// 所在游戏ID 0:无效
     TableID : number = 12; 		// 所在桌号ID 0:无效
 	ChairID : number = 13; 		// 所在椅子ID 0:无效
-	
-	Pos : number = 0;
 }

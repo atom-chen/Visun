@@ -67,9 +67,9 @@ export default class DdzUI extends BaseComponent {
     private playerIndex(player:GamePlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
-		var index = player.Pos;
-		if(hero.Pos===0) { return index; }
-		index = (player.Pos-hero.Pos+MAX_SOLDIER) % MAX_SOLDIER;
+		var index = player.ChairID;
+		if(hero.ChairID===0) { return index; }
+		index = (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
 		return index;
     }
     
@@ -149,7 +149,7 @@ export default class DdzUI extends BaseComponent {
         this._myHandor.resetCards(param.Cards, false);
     }
     private GameLandLordsOutCard(param) {
-        this.toStateGrab(param);
+        this.toStateFight(param);
         if(isNil(param)) {
             return;
         }
@@ -169,18 +169,19 @@ export default class DdzUI extends BaseComponent {
             UIManager.toast("bug：找不到玩家UI "+param.UserID);
         }
 
-        var nextPos = (p.Pos + 1) % MAX_SOLDIER;
+        var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateFight(null);
-    }
-    private GameLandLordsOperate(param) {
-        
     }
     private GameLandLordsDeal(param) {
         this._myHandor.resetCards(param.CardsHand, false);
     }
     private GameLandLordsCheckout(param) {
         
+    }
+    private GameStateCall(param) {
+        DDzMgr.getInstance().setCurAttacker(param.UserID);
+        this.toStateGrab(null);
     }
     private GameLandLordsCall(param) {
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
@@ -193,7 +194,7 @@ export default class DdzUI extends BaseComponent {
             this.m_ui["labGrab"+idx].getComponent(cc.Label).string = param.Score;
         }
 
-        var nextPos = (p.Pos + 1) % MAX_SOLDIER;
+        var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateGrab(null);
     }
@@ -217,18 +218,30 @@ export default class DdzUI extends BaseComponent {
     }
     private onUserList(param) {
         DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
+        var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(param.UserID));
+        if(idx>=0) {
+            this._outs[idx].resetCards(null, false);
+            this._players[idx].setName("");
+            this._players[idx].setMoney(0);
+        }
         this.refreshPlayers();
+    }
+    private GameBeOut(param) {
+        UIManager.toast("玩家被踢出房间"+param.UserID);
+        DDzMgr.getInstance().removePlayer(param.UserID);
+
     }
     private initNetEvent() {
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsPlayer, this.GameLandLordsPlayer, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOutCard, this.GameLandLordsOutCard, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOperate, this.GameLandLordsOperate, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDeal, this.GameLandLordsDeal, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCheckout, this.GameLandLordsCheckout, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCall, this.GameLandLordsCall, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomCard, this.GameLandLordsBottomCard, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsAward, this.GameLandLordsAward, this);
         EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.onUserList, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameBeOut, this.GameBeOut, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameStateCall, this.GameStateCall, this);
     }
 
     private initUIEvent() {

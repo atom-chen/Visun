@@ -10,6 +10,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import { gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
+import GameConfig from "../../../../../common/script/definer/GameConfig";
 
 
 const {ccclass, property} = cc._decorator;
@@ -79,15 +80,23 @@ export default class UILobby extends BaseComponent {
 	}
 
 	private refreshGameButton(bton, gameData) {
+		var cfg = GameConfig[gameData.Info.KindID];
+
 		var tbl : any = {};
 		CommonUtil.traverseNodes(bton, tbl);
 		tbl.lab_roomname.getComponent(cc.Label).string = gameData.Info.Name;
 		tbl.lab_roomnum.getComponent(cc.Label).string = gameData.Info.EnterScore;
 		tbl.lab_roomkey.getComponent(cc.Label).string = gameData.Info.Level;
-		cc.loader.loadRes("lobby/imgs/gameico/ico_brnn", cc.SpriteFrame, (err, rsc)=>{
-			if(err) { cc.log("load fail", err); return; }
-			tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
-		});
+		
+		if(cfg) {
+			cc.loader.loadRes(cfg.icon, cc.SpriteFrame, (err, rsc)=>{
+				if(err) { cc.log("load fail", err); return; }
+				tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
+			});
+		} else {
+			cc.warn("缺少配置信息：", gameData.Info.KindID);
+		}
+		
 	}
 
 	private refleshUI(data:any) {
