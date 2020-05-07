@@ -47,7 +47,7 @@ export default class DdzUI extends BaseComponent {
             DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
 
             this._myHandor.resetCards(EnterData.HandCards, false);
-            
+
             if(EnterData.GameStateFree) {
                 this.toStateSearching(null);
             }
@@ -165,6 +165,9 @@ export default class DdzUI extends BaseComponent {
         var idx = this.playerIndex(p);
         if(idx>=0) {
             this._outs[idx].resetCards(param.Cards, false);
+            if(param.UserID === LoginUser.getInstance().UserID) {
+                this._myHandor.delCards(param.Cards);
+            }
             if(isNil(param.Cards) || param.Cards.length<=0) {
                 UIManager.toast(p.Name+" 不要")
             }
@@ -202,10 +205,9 @@ export default class DdzUI extends BaseComponent {
         this.toStateGrab(null);
     }
     private GameLandLordsBottomCard(param) {
-        this.m_ui.labGrab0.getComponent(cc.Label).string = "";
-        this.m_ui.labGrab1.getComponent(cc.Label).string = "";
-        this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false);
+        DDzMgr.getInstance().setCurAttacker(param.UserID);
+        this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
+        this.toStateFight(null);
     }
     private GameLandLordsAward(param) {
         this.toStateResult(null);

@@ -50,6 +50,7 @@ export default class LoginMgr extends ModelBase {
 
 	//检测是否已经登陆
 	public checkLogin(bTip: boolean): boolean {
+		cc.log("用户: ", LoginUser.getInstance().UserID);
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");

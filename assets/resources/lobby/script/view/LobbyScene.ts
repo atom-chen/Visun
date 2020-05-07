@@ -13,8 +13,8 @@ export default class LobbyScene extends BaseComponent {
     onLoad () {
      //   UIManager.openPanel(ViewDefine.UIHall, null);
         UIManager.openPanel(ViewDefine.UILobby, null);
-        UIManager.openPopwnd(ViewDefine.UILogin, false, null);
         LoginMgr.getInstance().connectLeaf();
+        LoginMgr.getInstance().checkLogin(true);
     }
 
     start () {
