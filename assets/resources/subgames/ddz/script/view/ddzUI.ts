@@ -358,9 +358,13 @@ export default class DdzUI extends BaseComponent {
         this.refreshPlayers();
     }
     private GameBeOut(param) {
-        UIManager.toast("玩家被踢出房间"+param.UserID);
         DDzMgr.getInstance().removePlayer(param.UserID);
 
+        if(param.UserID == LoginUser.getInstance().UserID) {
+            GameManager.getInstance().quitGame(true);
+        }
+
+        UIManager.toast("玩家被踢出房间"+param.UserID);
     }
     private initNetEvent() {
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsPlayer, this.GameLandLordsPlayer, this);
@@ -392,7 +396,7 @@ export default class DdzUI extends BaseComponent {
     private initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             DDzMgr.getInstance().clearFighters();
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame();
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             gamecomm_request.GameReady({

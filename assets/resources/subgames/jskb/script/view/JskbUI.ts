@@ -11,7 +11,7 @@ export default class JskbUI extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame();
 		}, this);
 	}
 	

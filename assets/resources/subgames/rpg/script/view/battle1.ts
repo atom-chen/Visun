@@ -16,7 +16,7 @@ export default class battle1 extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_quit, function(){ 
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame();
         }, this);
         
         this.testFight();

@@ -112,9 +112,9 @@ export default class GameManager extends ModelBase {
 
 
 	//退出游戏的唯一出口
-	public quitGame(gameId:number) {
-		gamecomm_request.ReqExitGame({GameID:gameId});
-		if(IS_DANJI_MODE) {
+	public quitGame(bForce?:boolean) {
+		gamecomm_request.ReqExitGame({GameID:this.gameId});
+		if(IS_DANJI_MODE || bForce) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
 	}

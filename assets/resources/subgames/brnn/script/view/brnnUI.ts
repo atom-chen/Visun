@@ -187,7 +187,7 @@ export default class BrnnUI extends BaseComponent {
 
 	private initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame();
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 

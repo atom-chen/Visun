@@ -56,7 +56,7 @@ export default class Shui13UI extends BaseComponent {
 
 	initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame(0);
+            GameManager.getInstance().quitGame();
 		}, this);
 	}
 	
