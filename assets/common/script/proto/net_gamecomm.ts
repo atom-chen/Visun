@@ -60,7 +60,7 @@ export class gamecomm_request {
     public static ReqEnterGame( data:{ GameID:number } ) { gamecomm_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqExitGame( data:{ GameID:number } ) { gamecomm_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqChangeTable( data:{ GameID:number } ) { gamecomm_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
-    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, VipLevel:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, VipLevel:number, Account:string, Sate:number } ) { gamecomm_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
     public static UserList( data:{ AllInfos:any[] } ) { gamecomm_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerRecord( data:{ User:any, Twice:number, Ranking:number, Bankroll:number, WinLos:number } ) { gamecomm_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static GameReady( data:{ UserID:number, IsReady:any } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
