@@ -21,6 +21,6 @@ var server_list = {
 };
 
 //选定某服
-var ServerConfig = server_list.mac;
+var ServerConfig = server_list.jetten;
 
 export default ServerConfig;

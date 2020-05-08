@@ -14,10 +14,10 @@ export enum fishLord_msgs {
 }
 
 export var fishLord_packet_define = {
-    64: new LeafWsPacket(64, fishLord.GameFishLordEnter),
-    65: new LeafWsPacket(65, fishLord.GameFishLordPlaying),
-    66: new LeafWsPacket(66, fishLord.GameFishLordBetResult),
-    67: new LeafWsPacket(67, fishLord.GameFishLordOver),
+    64: new LeafWsPacket(64, fishLord.GameFishLordEnter, "fishLord.GameFishLordEnter"),
+    65: new LeafWsPacket(65, fishLord.GameFishLordPlaying, "fishLord.GameFishLordPlaying"),
+    66: new LeafWsPacket(66, fishLord.GameFishLordBetResult, "fishLord.GameFishLordBetResult"),
+    67: new LeafWsPacket(67, fishLord.GameFishLordOver, "fishLord.GameFishLordOver"),
 }
 
 export class fishLord_request {

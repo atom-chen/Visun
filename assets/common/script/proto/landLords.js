@@ -14,18 +14,17 @@ $root.landLords = (function() {
     landLords.GameLandLordsEnter = (function() {
 
         function GameLandLordsEnter(properties) {
+            this.Players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsEnter.prototype.ChairID = 0;
         GameLandLordsEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GameLandLordsEnter.prototype.FreeTime = 0;
         GameLandLordsEnter.prototype.OutTime = 0;
         GameLandLordsEnter.prototype.CallTime = 0;
-        GameLandLordsEnter.prototype.HandCards = $util.newBuffer([]);
         GameLandLordsEnter.prototype.Free = null;
         GameLandLordsEnter.prototype.Start = null;
         GameLandLordsEnter.prototype.Call = null;
@@ -33,6 +32,7 @@ $root.landLords = (function() {
         GameLandLordsEnter.prototype.Over = null;
         GameLandLordsEnter.prototype.BeforeChairID = 0;
         GameLandLordsEnter.prototype.BeforeCards = $util.newBuffer([]);
+        GameLandLordsEnter.prototype.Players = $util.emptyArray;
 
         GameLandLordsEnter.create = function create(properties) {
             return new GameLandLordsEnter(properties);
@@ -41,32 +41,31 @@ $root.landLords = (function() {
         GameLandLordsEnter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
-                writer.uint32(8).uint32(message.ChairID);
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
-                writer.uint32(16).int64(message.TimeStamp);
+                writer.uint32(8).int64(message.TimeStamp);
             if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
-                writer.uint32(24).uint32(message.FreeTime);
+                writer.uint32(16).uint32(message.FreeTime);
             if (message.OutTime != null && message.hasOwnProperty("OutTime"))
-                writer.uint32(32).uint32(message.OutTime);
+                writer.uint32(24).uint32(message.OutTime);
             if (message.CallTime != null && message.hasOwnProperty("CallTime"))
-                writer.uint32(40).uint32(message.CallTime);
-            if (message.HandCards != null && message.hasOwnProperty("HandCards"))
-                writer.uint32(50).bytes(message.HandCards);
+                writer.uint32(32).uint32(message.CallTime);
             if (message.Free != null && message.hasOwnProperty("Free"))
-                $root.gamecomm.GameStateFree.encode(message.Free, writer.uint32(58).fork()).ldelim();
+                $root.gamecomm.GameStateFree.encode(message.Free, writer.uint32(42).fork()).ldelim();
             if (message.Start != null && message.hasOwnProperty("Start"))
-                $root.gamecomm.GameStateStart.encode(message.Start, writer.uint32(66).fork()).ldelim();
+                $root.gamecomm.GameStateStart.encode(message.Start, writer.uint32(50).fork()).ldelim();
             if (message.Call != null && message.hasOwnProperty("Call"))
-                $root.gamecomm.GameStateCall.encode(message.Call, writer.uint32(74).fork()).ldelim();
+                $root.gamecomm.GameStateCall.encode(message.Call, writer.uint32(58).fork()).ldelim();
             if (message.Playing != null && message.hasOwnProperty("Playing"))
-                $root.gamecomm.GameStatePlaying.encode(message.Playing, writer.uint32(82).fork()).ldelim();
+                $root.gamecomm.GameStatePlaying.encode(message.Playing, writer.uint32(66).fork()).ldelim();
             if (message.Over != null && message.hasOwnProperty("Over"))
-                $root.gamecomm.GameStateOver.encode(message.Over, writer.uint32(90).fork()).ldelim();
+                $root.gamecomm.GameStateOver.encode(message.Over, writer.uint32(74).fork()).ldelim();
             if (message.BeforeChairID != null && message.hasOwnProperty("BeforeChairID"))
-                writer.uint32(96).uint32(message.BeforeChairID);
+                writer.uint32(80).uint32(message.BeforeChairID);
             if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))
-                writer.uint32(106).bytes(message.BeforeCards);
+                writer.uint32(90).bytes(message.BeforeCards);
+            if (message.Players != null && message.Players.length)
+                for (var i = 0; i < message.Players.length; ++i)
+                    $root.landLords.GameLandLordsPlayer.encode(message.Players[i], writer.uint32(98).fork()).ldelim();
             return writer;
         };
 
@@ -82,43 +81,42 @@ $root.landLords = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ChairID = reader.uint32();
-                    break;
-                case 2:
                     message.TimeStamp = reader.int64();
                     break;
-                case 3:
+                case 2:
                     message.FreeTime = reader.uint32();
                     break;
-                case 4:
+                case 3:
                     message.OutTime = reader.uint32();
                     break;
-                case 5:
+                case 4:
                     message.CallTime = reader.uint32();
                     break;
-                case 6:
-                    message.HandCards = reader.bytes();
-                    break;
-                case 7:
+                case 5:
                     message.Free = $root.gamecomm.GameStateFree.decode(reader, reader.uint32());
                     break;
-                case 8:
+                case 6:
                     message.Start = $root.gamecomm.GameStateStart.decode(reader, reader.uint32());
                     break;
-                case 9:
+                case 7:
                     message.Call = $root.gamecomm.GameStateCall.decode(reader, reader.uint32());
                     break;
-                case 10:
+                case 8:
                     message.Playing = $root.gamecomm.GameStatePlaying.decode(reader, reader.uint32());
                     break;
-                case 11:
+                case 9:
                     message.Over = $root.gamecomm.GameStateOver.decode(reader, reader.uint32());
                     break;
-                case 12:
+                case 10:
                     message.BeforeChairID = reader.uint32();
                     break;
-                case 13:
+                case 11:
                     message.BeforeCards = reader.bytes();
+                    break;
+                case 12:
+                    if (!(message.Players && message.Players.length))
+                        message.Players = [];
+                    message.Players.push($root.landLords.GameLandLordsPlayer.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -137,9 +135,6 @@ $root.landLords = (function() {
         GameLandLordsEnter.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
-                if (!$util.isInteger(message.ChairID))
-                    return "ChairID: integer expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
                     return "TimeStamp: integer|Long expected";
@@ -152,9 +147,6 @@ $root.landLords = (function() {
             if (message.CallTime != null && message.hasOwnProperty("CallTime"))
                 if (!$util.isInteger(message.CallTime))
                     return "CallTime: integer expected";
-            if (message.HandCards != null && message.hasOwnProperty("HandCards"))
-                if (!(message.HandCards && typeof message.HandCards.length === "number" || $util.isString(message.HandCards)))
-                    return "HandCards: buffer expected";
             if (message.Free != null && message.hasOwnProperty("Free")) {
                 var error = $root.gamecomm.GameStateFree.verify(message.Free);
                 if (error)
@@ -186,6 +178,15 @@ $root.landLords = (function() {
             if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))
                 if (!(message.BeforeCards && typeof message.BeforeCards.length === "number" || $util.isString(message.BeforeCards)))
                     return "BeforeCards: buffer expected";
+            if (message.Players != null && message.hasOwnProperty("Players")) {
+                if (!Array.isArray(message.Players))
+                    return "Players: array expected";
+                for (var i = 0; i < message.Players.length; ++i) {
+                    var error = $root.landLords.GameLandLordsPlayer.verify(message.Players[i]);
+                    if (error)
+                        return "Players." + error;
+                }
+            }
             return null;
         };
 
@@ -193,8 +194,6 @@ $root.landLords = (function() {
             if (object instanceof $root.landLords.GameLandLordsEnter)
                 return object;
             var message = new $root.landLords.GameLandLordsEnter();
-            if (object.ChairID != null)
-                message.ChairID = object.ChairID >>> 0;
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -210,11 +209,6 @@ $root.landLords = (function() {
                 message.OutTime = object.OutTime >>> 0;
             if (object.CallTime != null)
                 message.CallTime = object.CallTime >>> 0;
-            if (object.HandCards != null)
-                if (typeof object.HandCards === "string")
-                    $util.base64.decode(object.HandCards, message.HandCards = $util.newBuffer($util.base64.length(object.HandCards)), 0);
-                else if (object.HandCards.length)
-                    message.HandCards = object.HandCards;
             if (object.Free != null) {
                 if (typeof object.Free !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Free: object expected");
@@ -247,6 +241,16 @@ $root.landLords = (function() {
                     $util.base64.decode(object.BeforeCards, message.BeforeCards = $util.newBuffer($util.base64.length(object.BeforeCards)), 0);
                 else if (object.BeforeCards.length)
                     message.BeforeCards = object.BeforeCards;
+            if (object.Players) {
+                if (!Array.isArray(object.Players))
+                    throw TypeError(".landLords.GameLandLordsEnter.Players: array expected");
+                message.Players = [];
+                for (var i = 0; i < object.Players.length; ++i) {
+                    if (typeof object.Players[i] !== "object")
+                        throw TypeError(".landLords.GameLandLordsEnter.Players: object expected");
+                    message.Players[i] = $root.landLords.GameLandLordsPlayer.fromObject(object.Players[i]);
+                }
+            }
             return message;
         };
 
@@ -254,8 +258,9 @@ $root.landLords = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.Players = [];
             if (options.defaults) {
-                object.ChairID = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -264,13 +269,6 @@ $root.landLords = (function() {
                 object.FreeTime = 0;
                 object.OutTime = 0;
                 object.CallTime = 0;
-                if (options.bytes === String)
-                    object.HandCards = "";
-                else {
-                    object.HandCards = [];
-                    if (options.bytes !== Array)
-                        object.HandCards = $util.newBuffer(object.HandCards);
-                }
                 object.Free = null;
                 object.Start = null;
                 object.Call = null;
@@ -285,8 +283,6 @@ $root.landLords = (function() {
                         object.BeforeCards = $util.newBuffer(object.BeforeCards);
                 }
             }
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
-                object.ChairID = message.ChairID;
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
@@ -298,8 +294,6 @@ $root.landLords = (function() {
                 object.OutTime = message.OutTime;
             if (message.CallTime != null && message.hasOwnProperty("CallTime"))
                 object.CallTime = message.CallTime;
-            if (message.HandCards != null && message.hasOwnProperty("HandCards"))
-                object.HandCards = options.bytes === String ? $util.base64.encode(message.HandCards, 0, message.HandCards.length) : options.bytes === Array ? Array.prototype.slice.call(message.HandCards) : message.HandCards;
             if (message.Free != null && message.hasOwnProperty("Free"))
                 object.Free = $root.gamecomm.GameStateFree.toObject(message.Free, options);
             if (message.Start != null && message.hasOwnProperty("Start"))
@@ -314,6 +308,11 @@ $root.landLords = (function() {
                 object.BeforeChairID = message.BeforeChairID;
             if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))
                 object.BeforeCards = options.bytes === String ? $util.base64.encode(message.BeforeCards, 0, message.BeforeCards.length) : options.bytes === Array ? Array.prototype.slice.call(message.BeforeCards) : message.BeforeCards;
+            if (message.Players && message.Players.length) {
+                object.Players = [];
+                for (var j = 0; j < message.Players.length; ++j)
+                    object.Players[j] = $root.landLords.GameLandLordsPlayer.toObject(message.Players[j], options);
+            }
             return object;
         };
 
@@ -334,6 +333,8 @@ $root.landLords = (function() {
         }
 
         GameLandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameLandLordsPlayer.prototype.ChairID = 0;
+        GameLandLordsPlayer.prototype.CardsLen = 0;
         GameLandLordsPlayer.prototype.Cards = $util.newBuffer([]);
         GameLandLordsPlayer.prototype.IsBanker = false;
 
@@ -346,10 +347,14 @@ $root.landLords = (function() {
                 writer = $Writer.create();
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 writer.uint32(8).uint64(message.UserID);
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                writer.uint32(16).uint32(message.ChairID);
+            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
+                writer.uint32(24).uint32(message.CardsLen);
             if (message.Cards != null && message.hasOwnProperty("Cards"))
-                writer.uint32(18).bytes(message.Cards);
+                writer.uint32(34).bytes(message.Cards);
             if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
-                writer.uint32(24).bool(message.IsBanker);
+                writer.uint32(40).bool(message.IsBanker);
             return writer;
         };
 
@@ -368,9 +373,15 @@ $root.landLords = (function() {
                     message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Cards = reader.bytes();
+                    message.ChairID = reader.uint32();
                     break;
                 case 3:
+                    message.CardsLen = reader.uint32();
+                    break;
+                case 4:
+                    message.Cards = reader.bytes();
+                    break;
+                case 5:
                     message.IsBanker = reader.bool();
                     break;
                 default:
@@ -393,6 +404,12 @@ $root.landLords = (function() {
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
                     return "UserID: integer|Long expected";
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                if (!$util.isInteger(message.ChairID))
+                    return "ChairID: integer expected";
+            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
+                if (!$util.isInteger(message.CardsLen))
+                    return "CardsLen: integer expected";
             if (message.Cards != null && message.hasOwnProperty("Cards"))
                 if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
                     return "Cards: buffer expected";
@@ -415,6 +432,10 @@ $root.landLords = (function() {
                     message.UserID = object.UserID;
                 else if (typeof object.UserID === "object")
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.ChairID != null)
+                message.ChairID = object.ChairID >>> 0;
+            if (object.CardsLen != null)
+                message.CardsLen = object.CardsLen >>> 0;
             if (object.Cards != null)
                 if (typeof object.Cards === "string")
                     $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
@@ -435,6 +456,8 @@ $root.landLords = (function() {
                     object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
+                object.ChairID = 0;
+                object.CardsLen = 0;
                 if (options.bytes === String)
                     object.Cards = "";
                 else {
@@ -449,6 +472,10 @@ $root.landLords = (function() {
                     object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                object.ChairID = message.ChairID;
+            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
+                object.CardsLen = message.CardsLen;
             if (message.Cards != null && message.hasOwnProperty("Cards"))
                 object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
             if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
@@ -966,131 +993,6 @@ $root.landLords = (function() {
         };
 
         return GameLandLordsOutCard;
-    })();
-
-    landLords.GameLandLordsOperate = (function() {
-
-        function GameLandLordsOperate(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameLandLordsOperate.prototype.Code = 0;
-        GameLandLordsOperate.prototype.Cards = $util.newBuffer([]);
-        GameLandLordsOperate.prototype.Hints = "";
-
-        GameLandLordsOperate.create = function create(properties) {
-            return new GameLandLordsOperate(properties);
-        };
-
-        GameLandLordsOperate.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                writer.uint32(8).int32(message.Code);
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                writer.uint32(18).bytes(message.Cards);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                writer.uint32(26).string(message.Hints);
-            return writer;
-        };
-
-        GameLandLordsOperate.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameLandLordsOperate.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOperate();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Code = reader.int32();
-                    break;
-                case 2:
-                    message.Cards = reader.bytes();
-                    break;
-                case 3:
-                    message.Hints = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameLandLordsOperate.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameLandLordsOperate.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                if (!$util.isInteger(message.Code))
-                    return "Code: integer expected";
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
-                    return "Cards: buffer expected";
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!$util.isString(message.Hints))
-                    return "Hints: string expected";
-            return null;
-        };
-
-        GameLandLordsOperate.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsOperate)
-                return object;
-            var message = new $root.landLords.GameLandLordsOperate();
-            if (object.Code != null)
-                message.Code = object.Code | 0;
-            if (object.Cards != null)
-                if (typeof object.Cards === "string")
-                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
-                else if (object.Cards.length)
-                    message.Cards = object.Cards;
-            if (object.Hints != null)
-                message.Hints = String(object.Hints);
-            return message;
-        };
-
-        GameLandLordsOperate.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.Code = 0;
-                if (options.bytes === String)
-                    object.Cards = "";
-                else {
-                    object.Cards = [];
-                    if (options.bytes !== Array)
-                        object.Cards = $util.newBuffer(object.Cards);
-                }
-                object.Hints = "";
-            }
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                object.Code = message.Code;
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = message.Hints;
-            return object;
-        };
-
-        GameLandLordsOperate.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameLandLordsOperate;
     })();
 
     landLords.GameLandLordsAward = (function() {

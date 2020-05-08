@@ -23,19 +23,19 @@ export enum login_msgs {
 }
 
 export var login_packet_define = {
-    0: new LeafWsPacket(0, login.Register),
-    1: new LeafWsPacket(1, login.RegisterResult),
-    2: new LeafWsPacket(2, login.Login),
-    3: new LeafWsPacket(3, login.ResResult),
-    4: new LeafWsPacket(4, login.TaskItem),
-    5: new LeafWsPacket(5, login.TaskList),
-    6: new LeafWsPacket(6, login.GameList),
-    7: new LeafWsPacket(7, login.UserInfo),
-    8: new LeafWsPacket(8, login.RoomInfo),
-    9: new LeafWsPacket(9, login.GameBaseInfo),
-    10: new LeafWsPacket(10, login.GameItem),
-    11: new LeafWsPacket(11, login.MasterInfo),
-    12: new LeafWsPacket(12, login.ReqEnterRoom),
+    0: new LeafWsPacket(0, login.Register, "login.Register"),
+    1: new LeafWsPacket(1, login.RegisterResult, "login.RegisterResult"),
+    2: new LeafWsPacket(2, login.Login, "login.Login"),
+    3: new LeafWsPacket(3, login.ResResult, "login.ResResult"),
+    4: new LeafWsPacket(4, login.TaskItem, "login.TaskItem"),
+    5: new LeafWsPacket(5, login.TaskList, "login.TaskList"),
+    6: new LeafWsPacket(6, login.GameList, "login.GameList"),
+    7: new LeafWsPacket(7, login.UserInfo, "login.UserInfo"),
+    8: new LeafWsPacket(8, login.RoomInfo, "login.RoomInfo"),
+    9: new LeafWsPacket(9, login.GameBaseInfo, "login.GameBaseInfo"),
+    10: new LeafWsPacket(10, login.GameItem, "login.GameItem"),
+    11: new LeafWsPacket(11, login.MasterInfo, "login.MasterInfo"),
+    12: new LeafWsPacket(12, login.ReqEnterRoom, "login.ReqEnterRoom"),
 }
 
 export class login_request {

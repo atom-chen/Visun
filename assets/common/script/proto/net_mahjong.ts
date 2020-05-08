@@ -17,13 +17,13 @@ export enum mahjong_msgs {
 }
 
 export var mahjong_packet_define = {
-    57: new LeafWsPacket(57, mahjong.GameMahjongEnter),
-    58: new LeafWsPacket(58, mahjong.GameMahjongPlayer),
-    59: new LeafWsPacket(59, mahjong.GameMahjongBegins),
-    60: new LeafWsPacket(60, mahjong.GameMahjongOutcard),
-    61: new LeafWsPacket(61, mahjong.GameMahjongOperate),
-    62: new LeafWsPacket(62, mahjong.GameMahjongAward),
-    63: new LeafWsPacket(63, mahjong.GameMahjongCheckout),
+    57: new LeafWsPacket(57, mahjong.GameMahjongEnter, "mahjong.GameMahjongEnter"),
+    58: new LeafWsPacket(58, mahjong.GameMahjongPlayer, "mahjong.GameMahjongPlayer"),
+    59: new LeafWsPacket(59, mahjong.GameMahjongBegins, "mahjong.GameMahjongBegins"),
+    60: new LeafWsPacket(60, mahjong.GameMahjongOutcard, "mahjong.GameMahjongOutcard"),
+    61: new LeafWsPacket(61, mahjong.GameMahjongOperate, "mahjong.GameMahjongOperate"),
+    62: new LeafWsPacket(62, mahjong.GameMahjongAward, "mahjong.GameMahjongAward"),
+    63: new LeafWsPacket(63, mahjong.GameMahjongCheckout, "mahjong.GameMahjongCheckout"),
 }
 
 export class mahjong_request {
