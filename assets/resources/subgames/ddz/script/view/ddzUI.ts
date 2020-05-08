@@ -335,10 +335,16 @@ export default class DdzUI extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.onUserList, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameBeOut, this.GameBeOut, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameStateCall, this.GameStateCall, this);
-        // EventCenter.getInstance().listen(landLords_msgs.Hosting, function(param){
-        //     DDzMgr.getInstance().IsHosting = param.IsHosting;
-        //     this.refreshAuto();
-        // }, this);
+        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsTrustee, function(param){
+            if(param.UserID == LoginUser.getInstance().UserID) {
+                DDzMgr.getInstance().IsHosting = param.IsTrustee == 1;
+            }
+            var p = DDzMgr.getInstance().getPlayer(param.UserID);
+            if(p) {
+                p.IsHosting = param.IsTrustee == 1;
+            }
+            this.refreshAuto();
+        }, this);
     }
 
     private initUIEvent() {
@@ -394,7 +400,14 @@ export default class DdzUI extends BaseComponent {
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
-            DDzMgr.getInstance().IsHosting = !DDzMgr.getInstance().IsHosting;
+            var bAuto = 1;
+            if(DDzMgr.getInstance().IsHosting) {
+                bAuto = 0;
+            }
+            landLords_request.GameLandLordsTrustee({
+                UserID:LoginUser.getInstance().UserID,
+                IsTrustee: bAuto
+            })
             this.refreshAuto();
         }, this);
     }
