@@ -1,5 +1,5 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
-import GamePlayer from "../../../../../common/script/model/GamePlayer";
+import DdzPlayer from "./DdzPlayer";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 
@@ -24,11 +24,11 @@ export default class DDzMgr extends ModelBase {
 
 	//------------------------------------------------------------------------------
 
-	private _players : {[key:number]:GamePlayer} = {};
+	private _players : {[key:number]:DdzPlayer} = {};
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
 	public EnterData = null;
-	public IsAuto : boolean = false;
+	public IsHosting : boolean = false;
 
 	//---- 玩家 -----------
 	clearFighters() {
@@ -38,7 +38,7 @@ export default class DDzMgr extends ModelBase {
 	updateFighterList(playerList) {
 		for(var i in playerList) {
 			if(isNil(this._players[playerList[i].UserID])) {
-				this._players[playerList[i].UserID] = new GamePlayer();
+				this._players[playerList[i].UserID] = new DdzPlayer();
 			}
 			CommonUtil.simpleCopy(this._players[playerList[i].UserID], playerList[i]);
 		}
@@ -48,11 +48,11 @@ export default class DDzMgr extends ModelBase {
 		this._players[uid] = null;
 	}
 
-	getPlayer(uid:number) : GamePlayer {
+	getPlayer(uid:number) : DdzPlayer {
 		return this._players[uid];
 	}
 
-	getPlayerByPos(pos:number) : GamePlayer
+	getPlayerByPos(pos:number) : DdzPlayer
 	{
 		for(var uid in this._players) {
 			if(!isNil(this._players[uid]) && this._players[uid].ChairID == pos) {
@@ -62,7 +62,7 @@ export default class DDzMgr extends ModelBase {
 		return null;
 	}
 
-	getFighterList() : {[key:number]:GamePlayer} {
+	getFighterList() : {[key:number]:DdzPlayer} {
 		return this._players;
 	}
 	
@@ -75,7 +75,7 @@ export default class DDzMgr extends ModelBase {
 		this._curAttackerId = uid;
 	}
 
-	getCurAttacker() : GamePlayer {
+	getCurAttacker() : DdzPlayer {
 		return this.getPlayer(this._curAttackerId);
 	}
 
@@ -83,7 +83,7 @@ export default class DDzMgr extends ModelBase {
 		return this._zhuangId;
 	}
 
-	getZhuang() : GamePlayer {
+	getZhuang() : DdzPlayer {
 		return this.getPlayer(this._zhuangId);
 	}
 

@@ -50,6 +50,10 @@ export default class CpnPlayer extends BaseComponent {
         this.label_money.string = money.toString();
     }
 
+    public setMoneyStr(moneyStr:string) {
+        this.label_money.string = moneyStr;
+    }
+
     public setHeadImg(v:number) {
         GameUtil.setHeadIcon(this.node, v);
     }
