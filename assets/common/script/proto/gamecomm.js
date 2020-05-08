@@ -289,6 +289,7 @@ $root.gamecomm = (function() {
         PlayerInfo.prototype.VipLevel = 0;
         PlayerInfo.prototype.Account = "";
         PlayerInfo.prototype.Sate = 0;
+        PlayerInfo.prototype.ChairID = 0;
 
         PlayerInfo.create = function create(properties) {
             return new PlayerInfo(properties);
@@ -313,6 +314,8 @@ $root.gamecomm = (function() {
                 writer.uint32(58).string(message.Account);
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 writer.uint32(64).int32(message.Sate);
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                writer.uint32(104).uint32(message.ChairID);
             return writer;
         };
 
@@ -350,6 +353,9 @@ $root.gamecomm = (function() {
                     break;
                 case 8:
                     message.Sate = reader.int32();
+                    break;
+                case 13:
+                    message.ChairID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -392,6 +398,9 @@ $root.gamecomm = (function() {
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 if (!$util.isInteger(message.Sate))
                     return "Sate: integer expected";
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                if (!$util.isInteger(message.ChairID))
+                    return "ChairID: integer expected";
             return null;
         };
 
@@ -429,6 +438,8 @@ $root.gamecomm = (function() {
                 message.Account = String(object.Account);
             if (object.Sate != null)
                 message.Sate = object.Sate | 0;
+            if (object.ChairID != null)
+                message.ChairID = object.ChairID >>> 0;
             return message;
         };
 
@@ -453,6 +464,7 @@ $root.gamecomm = (function() {
                 object.VipLevel = 0;
                 object.Account = "";
                 object.Sate = 0;
+                object.ChairID = 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -476,6 +488,8 @@ $root.gamecomm = (function() {
                 object.Account = message.Account;
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 object.Sate = message.Sate;
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                object.ChairID = message.ChairID;
             return object;
         };
 
