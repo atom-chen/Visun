@@ -101,6 +101,7 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
         this.refreshAuto();
+        this.m_ui.zhuang.active = false;
     }
     
     //准备阶段
@@ -119,7 +120,8 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
         DDzMgr.getInstance().setCurAttacker(0);
-        this.refreshCurAttacker()
+        this.refreshCurAttacker();
+        this.m_ui.zhuang.active = false;
     }
 
     //抢地主阶段
@@ -130,6 +132,7 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.tipLayer.active = false;
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
+        this.m_ui.zhuang.active = false;
     }
 
     //出牌阶段
@@ -141,6 +144,14 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
+        this.m_ui.zhuang.active = true;
+        var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
+        if(idx>=0) {
+            var pos = this._players[idx].node.position;
+            pos.x += 40;
+            pos.y += 62;
+            this.m_ui.zhuang.position = pos;
+        }
     }
 
     //结算阶段
@@ -154,6 +165,14 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
+        this.m_ui.zhuang.active = true;
+        var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
+        if(idx>=0) {
+            var pos = this._players[idx].node.position;
+            pos.x += 40;
+            pos.y += 62;
+            this.m_ui.zhuang.position = pos;
+        }
     }
     
     private refreshPlayers() {
@@ -253,8 +272,10 @@ export default class DdzUI extends BaseComponent {
     }
     private GameLandLordsBottomCard(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
-        this._myHandor.addCards(param.CardsBottom);
-        this._myHandor.sortCards();
+        if(param.UserID == LoginUser.getInstance().UserID) {
+            this._myHandor.addCards(param.CardsBottom);
+            this._myHandor.sortCards();
+        }
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
         this.toStateFight();
         this.refreshCurAttacker();

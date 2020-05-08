@@ -83,4 +83,12 @@ export default class DDzMgr extends ModelBase {
 		return this.getPlayer(this._curAttackerId);
 	}
 
+	setZhuang(uid:number) : number {
+		return this._zhuangId;
+	}
+
+	getZhuang() : GamePlayer {
+		return this.getPlayer(this._zhuangId);
+	}
+
 }
