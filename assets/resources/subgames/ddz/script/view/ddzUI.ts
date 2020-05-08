@@ -76,7 +76,7 @@ export default class DdzUI extends BaseComponent {
     private playerIndex(player:DdzPlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
-		if(hero.ChairID===1) { return 0; }
+		if(hero.ChairID===1) { return player.ChairID-1; }
 		return (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
     }
 
