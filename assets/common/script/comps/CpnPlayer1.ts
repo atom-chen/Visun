@@ -56,9 +56,9 @@ export default class CpnPlayer1 extends BaseComponent {
         GameUtil.setHeadIcon(this.head_icon.node, v);
     }
 
-    public addMoney(money:number, fromV ?: number, toV ?: number) {
+    public addMoney(money:number, fromV ?: number) {
         if(isNil(fromV)) { fromV = this._money; }
-        if(isNil(toV)) { toV = fromV + money; }
+        var toV = fromV + money;
         this._money = toV;
         var delta = toV - fromV;
         var tic = Math.ceil(delta/128);

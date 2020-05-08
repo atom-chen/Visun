@@ -27,18 +27,11 @@ export default class DDzMgr extends ModelBase {
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
 	public EnterData = null;
+	public IsAuto : boolean = false;
 
 	//---- 玩家 -----------
 	resetPlayerList(playerList) {
 		this._players = playerList;
-		for(var i=0; i<3; i++) {
-			if(playerList[i]) {
-				this._players[i] = playerList[i];
-				this._players[i].ChairID = i;
-			} else {
-				this._players[i] = null;
-			}
-		}
 		if(isNil(playerList) || playerList.length <= 0) {
 			this._players.length = 0;
 			this._players = [];
@@ -60,6 +53,7 @@ export default class DDzMgr extends ModelBase {
 				return this._players[i];
 			}
 		}
+		return null;
 	}
 
 	getPlayerByPos(pos:number) : GamePlayer

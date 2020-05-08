@@ -41,28 +41,29 @@ export default class DdzUI extends BaseComponent {
         this._myHandor.initSlideTouch();
         
         this.refreshPlayers();
-        this.toStateReady(null);
+        this.toStateReady();
         
         var EnterData = DDzMgr.getInstance().EnterData;
         if(EnterData) {
             DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
 
             this._myHandor.resetCards(EnterData.HandCards, false);
+            this._myHandor.sortCards();
 
             if(EnterData.GameStateFree) {
-                this.toStateSearching(null);
+                this.toStateSearching();
             }
             else if(EnterData.GameStateStart) {
-                this.toStateReady(null);
+                this.toStateReady();
             }
             else if(EnterData.GameStateCall) {
-                this.toStateGrab(null);
+                this.toStateGrab();
             }
             else if(EnterData.GameStatePlaying) {
-                this.toStateFight(null);
+                this.toStateFight();
             }
             else if(EnterData.GameStateOver) {
-                this.toStateResult(null);
+                this.toStateResult();
             }
         }
     }
@@ -76,9 +77,17 @@ export default class DdzUI extends BaseComponent {
 		index = (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
 		return index;
     }
+
+    private refreshAuto() {
+        if(DDzMgr.getInstance().IsAuto) {
+            this.m_ui.lab_auto.getComponent(cc.Label).string = "取消托管";
+        } else {
+            this.m_ui.lab_auto.getComponent(cc.Label).string = "托 管";
+        }
+    }
     
     //匹配阶段
-    private toStateSearching(param) {
+    private toStateSearching() {
         this.m_ui.readyNode.active = true;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
@@ -87,10 +96,12 @@ export default class DdzUI extends BaseComponent {
         for(var i in this._outs) {
             this._outs[i].clearCards();
         }
+        DDzMgr.getInstance().IsAuto = false;
+        this.refreshAuto();
     }
     
     //准备阶段
-    private toStateReady(param) {
+    private toStateReady() {
         this.m_ui.readyNode.active = true;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
@@ -102,18 +113,22 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
+        DDzMgr.getInstance().IsAuto = false;
+        this.refreshAuto();
     }
 
     //抢地主阶段
-    private toStateGrab(param) {
+    private toStateGrab() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
+        DDzMgr.getInstance().IsAuto = false;
+        this.refreshAuto();
     }
 
     //出牌阶段
-    private toStateFight(param) {
+    private toStateFight() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
@@ -124,7 +139,7 @@ export default class DdzUI extends BaseComponent {
     }
 
     //结算阶段
-    private toStateResult(param) {
+    private toStateResult() {
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
         this.m_ui.fightNode.active = false;
@@ -132,6 +147,8 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
+        DDzMgr.getInstance().IsAuto = false;
+        this.refreshAuto();
     }
     
     private refreshPlayers() {
@@ -151,9 +168,10 @@ export default class DdzUI extends BaseComponent {
 
     private GameLandLordsPlayer(param) {
         this._myHandor.resetCards(param.Cards, false);
+        this._myHandor.sortCards();
     }
     private GameLandLordsOutCard(param) {
-        this.toStateFight(param);
+        this.toStateFight();
         if(isNil(param)) {
             return;
         }
@@ -178,17 +196,26 @@ export default class DdzUI extends BaseComponent {
 
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
-        this.toStateFight(null);
+        this.toStateFight();
     }
     private GameLandLordsDeal(param) {
         this._myHandor.resetCards(param.CardsHand, false);
     }
     private GameLandLordsCheckout(param) {
-        
+        this.toStateResult();
+        if(isNil(param)) { return; }
+        for(var i in param.players) {
+            var p = param.players[i];
+            var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
+            this.m_ui["player"+idx].getComponent(CpnPlayer).addMoney(p.GetGold);
+            if(p.GetGold > 0) {
+                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1}, null);
+            }
+        }
     }
     private GameStateCall(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
-        this.toStateGrab(null);
+        this.toStateGrab();
     }
     private GameLandLordsCall(param) {
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
@@ -203,24 +230,14 @@ export default class DdzUI extends BaseComponent {
 
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
-        this.toStateGrab(null);
+        this.toStateGrab();
     }
     private GameLandLordsBottomCard(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
+        this._myHandor.addCards(param.CardsBottom);
+        this._myHandor.sortCards();
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
-        this.toStateFight(null);
-    }
-    private GameLandLordsAward(param) {
-        this.toStateResult(null);
-        if(isNil(param)) { return; }
-        for(var i in param.players) {
-            var p = param.players[i];
-            var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
-            this.m_ui["player"+idx].getComponent(CpnPlayer).addMoney(p.GetGold);
-            if(p.GetGold > 0) {
-                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1}, null);
-            }
-        }
+        this.toStateFight();
     }
     private onUserList(param) {
         DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
@@ -244,7 +261,6 @@ export default class DdzUI extends BaseComponent {
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCheckout, this.GameLandLordsCheckout, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCall, this.GameLandLordsCall, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomCard, this.GameLandLordsBottomCard, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsAward, this.GameLandLordsAward, this);
         EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.onUserList, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameBeOut, this.GameBeOut, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameStateCall, this.GameStateCall, this);
@@ -301,6 +317,10 @@ export default class DdzUI extends BaseComponent {
                 UserID:LoginUser.getInstance().UserID,
                 Score:3
             });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
+            DDzMgr.getInstance().IsAuto = !DDzMgr.getInstance().IsAuto;
+            this.refreshAuto();
         }, this);
     }
 
