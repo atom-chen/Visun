@@ -40,6 +40,7 @@ export default class DDzMgr extends ModelBase {
 				this._players[playerList[i].UserID] = new DdzPlayer();
 			}
 			CommonUtil.simpleCopy(this._players[playerList[i].UserID], playerList[i]);
+			cc.log("更新玩家信息", this._players[playerList[i].UserID], this._players[playerList[i].UserID].ChairID);
 		}
 	}
 
@@ -54,14 +55,8 @@ export default class DDzMgr extends ModelBase {
 	getPlayerByPos(pos:number) : DdzPlayer
 	{
 		for(var uid in this._players) {
-			cc.log((this._players[uid]));
 			if(!isNil(this._players[uid]) && this._players[uid].ChairID == pos) {
 				return this._players[uid];
-			} 
-			var ttt = parseInt(uid)
-			cc.log((this._players[ttt]));
-			if(!isNil(this._players[ttt]) && this._players[ttt].ChairID == pos) {
-				return this._players[ttt];
 			} 
 		}
 		return null;
