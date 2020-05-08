@@ -11,6 +11,12 @@ message ReqExitGame {
     uint32 GameID = 1; //游戏标识
 }
 
+//换桌
+message ReqChangeTable {
+    uint32 GameID = 1; //游戏标识
+}
+
+
 //玩家信息
 message PlayerInfo {
     uint64 UserID = 1; //ID

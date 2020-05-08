@@ -185,6 +185,93 @@ $root.gamecomm = (function() {
         return ReqExitGame;
     })();
 
+    gamecomm.ReqChangeTable = (function() {
+
+        function ReqChangeTable(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ReqChangeTable.prototype.GameID = 0;
+
+        ReqChangeTable.create = function create(properties) {
+            return new ReqChangeTable(properties);
+        };
+
+        ReqChangeTable.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                writer.uint32(8).uint32(message.GameID);
+            return writer;
+        };
+
+        ReqChangeTable.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ReqChangeTable.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.ReqChangeTable();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ReqChangeTable.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ReqChangeTable.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID))
+                    return "GameID: integer expected";
+            return null;
+        };
+
+        ReqChangeTable.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.ReqChangeTable)
+                return object;
+            var message = new $root.gamecomm.ReqChangeTable();
+            if (object.GameID != null)
+                message.GameID = object.GameID >>> 0;
+            return message;
+        };
+
+        ReqChangeTable.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.GameID = 0;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                object.GameID = message.GameID;
+            return object;
+        };
+
+        ReqChangeTable.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ReqChangeTable;
+    })();
+
     gamecomm.PlayerInfo = (function() {
 
         function PlayerInfo(properties) {
