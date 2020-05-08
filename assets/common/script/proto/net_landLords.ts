@@ -11,10 +11,11 @@ export enum landLords_msgs {
     GameLandLordsPlayer = 50,
     GameLandLordsDeal = 51,
     GameLandLordsCall = 52,
-    GameLandLordsBottomCard = 53,
-    GameLandLordsOutCard = 54,
-    GameLandLordsAward = 55,
-    GameLandLordsCheckout = 56,
+    GameLandLordsTrustee = 53,
+    GameLandLordsBottomCard = 54,
+    GameLandLordsOutCard = 55,
+    GameLandLordsAward = 56,
+    GameLandLordsCheckout = 57,
 }
 
 export var landLords_packet_define = {
@@ -22,10 +23,11 @@ export var landLords_packet_define = {
     50: new LeafWsPacket(50, landLords.GameLandLordsPlayer, "landLords.GameLandLordsPlayer"),
     51: new LeafWsPacket(51, landLords.GameLandLordsDeal, "landLords.GameLandLordsDeal"),
     52: new LeafWsPacket(52, landLords.GameLandLordsCall, "landLords.GameLandLordsCall"),
-    53: new LeafWsPacket(53, landLords.GameLandLordsBottomCard, "landLords.GameLandLordsBottomCard"),
-    54: new LeafWsPacket(54, landLords.GameLandLordsOutCard, "landLords.GameLandLordsOutCard"),
-    55: new LeafWsPacket(55, landLords.GameLandLordsAward, "landLords.GameLandLordsAward"),
-    56: new LeafWsPacket(56, landLords.GameLandLordsCheckout, "landLords.GameLandLordsCheckout"),
+    53: new LeafWsPacket(53, landLords.GameLandLordsTrustee, "landLords.GameLandLordsTrustee"),
+    54: new LeafWsPacket(54, landLords.GameLandLordsBottomCard, "landLords.GameLandLordsBottomCard"),
+    55: new LeafWsPacket(55, landLords.GameLandLordsOutCard, "landLords.GameLandLordsOutCard"),
+    56: new LeafWsPacket(56, landLords.GameLandLordsAward, "landLords.GameLandLordsAward"),
+    57: new LeafWsPacket(57, landLords.GameLandLordsCheckout, "landLords.GameLandLordsCheckout"),
 }
 
 export class landLords_request {
@@ -33,9 +35,10 @@ export class landLords_request {
     public static GameLandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any } ) { landLords_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
     public static GameLandLordsDeal( data:{ UserID:number, CardsHand:any } ) { landLords_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
     public static GameLandLordsCall( data:{ UserID:number, Score:number } ) { landLords_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameLandLordsBottomCard( data:{ UserID:number, CardsBottom:any } ) { landLords_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameLandLordsOutCard( data:{ UserID:number, Cards:any, Hints:string } ) { landLords_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameLandLordsAward( data:{ UserID:number, Codes:any, GetGold:number } ) { landLords_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameLandLordsCheckout( data:{ players:any[] } ) { landLords_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsTrustee( data:{ UserID:number, IsTrustee:any } ) { landLords_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsBottomCard( data:{ UserID:number, CardsBottom:any } ) { landLords_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsOutCard( data:{ UserID:number, Cards:any, Hints:string } ) { landLords_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsAward( data:{ UserID:number, Codes:any, GetGold:number } ) { landLords_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsCheckout( data:{ players:any[] } ) { landLords_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
 }
 

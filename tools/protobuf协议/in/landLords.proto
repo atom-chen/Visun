@@ -44,6 +44,10 @@ message GameLandLordsCall {
     uint64 UserID = 1; // 玩家ID
     uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
 }
+message GameLandLordsTrustee {
+    uint64 UserID = 1; // 玩家ID
+    bool IsTrustee = 2;//是否托管
+}
 
 // 广播抢地主后的玩家
 message GameLandLordsBottomCard {
