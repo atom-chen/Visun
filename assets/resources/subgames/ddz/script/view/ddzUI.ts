@@ -9,7 +9,7 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
 import { landLords_msgs, landLords_request } from "../../../../../common/script/proto/net_landLords";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
-import GamePlayer from "../../../../../common/script/model/GamePlayer";
+import DdzPlayer from "../model/DdzPlayer";
 import CpnPlayer1 from "../../../../../common/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../../common/script/comps/CpnCircleCD";
 
@@ -72,7 +72,7 @@ export default class DdzUI extends BaseComponent {
 
 
     //玩家的UI位置
-    private playerIndex(player:GamePlayer) : number {
+    private playerIndex(player:DdzPlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
 		var index = player.ChairID;

@@ -1,6 +1,6 @@
-import { PokerCode } from "../definer/PokerDefine";
+import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 
-export default class GamePlayer {
+export default class DdzPlayer {
 	UserID : number = 0; 		//ID
     Name : string = ""; 		//账号
     Age : number = 0; 			//年龄
