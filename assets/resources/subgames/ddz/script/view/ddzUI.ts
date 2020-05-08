@@ -102,6 +102,10 @@ export default class DdzUI extends BaseComponent {
         this.refreshCurAttacker();
         this.refreshAuto();
         this.m_ui.zhuang.active = false;
+        this.m_ui.remainBg1.active = false;
+        this.m_ui.lab_remain1.active = false;
+        this.m_ui.remainBg2.active = false;
+        this.m_ui.lab_remain2.active = false;
     }
     
     //准备阶段
@@ -122,6 +126,10 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
         this.m_ui.zhuang.active = false;
+        this.m_ui.remainBg1.active = false;
+        this.m_ui.lab_remain1.active = false;
+        this.m_ui.remainBg2.active = false;
+        this.m_ui.lab_remain2.active = false;
     }
 
     //抢地主阶段
@@ -133,6 +141,10 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
         this.m_ui.zhuang.active = false;
+        this.m_ui.remainBg1.active = false;
+        this.m_ui.lab_remain1.active = false;
+        this.m_ui.remainBg2.active = false;
+        this.m_ui.lab_remain2.active = false;
     }
 
     //出牌阶段
@@ -152,6 +164,10 @@ export default class DdzUI extends BaseComponent {
             pos.y += 62;
             this.m_ui.zhuang.position = pos;
         }
+        this.m_ui.remainBg1.active = true;
+        this.m_ui.lab_remain1.active = true;
+        this.m_ui.remainBg2.active = true;
+        this.m_ui.lab_remain2.active = true;
     }
 
     //结算阶段
@@ -173,6 +189,11 @@ export default class DdzUI extends BaseComponent {
             pos.y += 62;
             this.m_ui.zhuang.position = pos;
         }
+
+        this.m_ui.remainBg1.active = true;
+        this.m_ui.lab_remain1.active = true;
+        this.m_ui.remainBg2.active = true;
+        this.m_ui.lab_remain2.active = true;
     }
     
     private refreshPlayers() {
