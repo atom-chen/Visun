@@ -257,7 +257,7 @@ export default class UIManager {
 	listeners.on_complete = function(sk, trackEntry) { }
 	listeners.on_event = function(sk, trackEntry) { }
 	*/
-	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, bLoop:boolean, parent:cc.Node, info:any, listeners?:any) 
+	public static showSpineAsync(respath:string, trackIndex:number, aniName:string, loopTimes:number, parent:cc.Node, info:any, listeners?:any) 
 	{
 		cc.loader.loadRes(respath, sp.SkeletonData, function(err, rsc){
 			if(err) { 
@@ -268,6 +268,7 @@ export default class UIManager {
 				cc.log("parent已经释放");
 				return;
 			}
+
 			var obj = new cc.Node();
 			var sk = obj.addComponent(sp.Skeleton);
 			sk.skeletonData = rsc;
@@ -278,7 +279,24 @@ export default class UIManager {
 					obj[k] = info[k];
 				}
 			}
-			sk.setAnimation(trackIndex, aniName, bLoop);
+
+			if(loopTimes==1) {
+				sk.setAnimation(trackIndex, aniName, false);
+			} else {
+				sk.setAnimation(trackIndex, aniName, true);
+			}
+			
+			if(loopTimes>0 || (listeners && listeners.on_complete)) {
+				sk.setCompleteListener((trackEntry) => {
+					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+					var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
+					cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
+					if(listeners && listeners.on_complete){ listeners.on_complete(sk, trackEntry); }
+					if(loopTimes>0 && loopCount>=loopTimes) {
+						obj.removeFromParent(true);
+					}
+				});
+			}
 
 			if(!listeners) { return; }
 			
@@ -310,14 +328,17 @@ export default class UIManager {
 					listeners.on_dispose(sk, trackEntry)
 				});
 			}
-			if(listeners.on_complete) {
-				sk.setCompleteListener((trackEntry) => {
-					var animationName = trackEntry.animation ? trackEntry.animation.name : "";
-					var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
-					cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
-					listeners.on_complete(sk, trackEntry)
-				});
-			}
+			// if(listeners.on_complete) {
+			// 	sk.setCompleteListener((trackEntry) => {
+			// 		var animationName = trackEntry.animation ? trackEntry.animation.name : "";
+			// 		var loopCount = Math.floor(trackEntry.trackTime / trackEntry.animationEnd); 
+			// 		cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
+			// 		listeners.on_complete(sk, trackEntry);
+			// 		if(loopTimes>0 && loopCount>=loopTimes) {
+			// 			obj.removeFromParent(true);
+			// 		}
+			// 	});
+			// }
 			if(listeners.on_event) {
 				sk.setEventListener((trackEntry, event) => {
 					var animationName = trackEntry.animation ? trackEntry.animation.name : "";

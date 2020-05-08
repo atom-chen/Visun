@@ -31,6 +31,7 @@ export default class DdzUI extends BaseComponent {
             this._outs.push(this.m_ui["outs"+i].getComponent(CpnHandcard));
             this._players[i].setName("");
             this._players[i].setMoney(0);
+            UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[i].node, {scale:1.1}, null);
         }
         this._players[0].setName(LoginUser.getInstance().Name);
         this._players[0].setMoney(LoginUser.getInstance().getMoney());
@@ -217,7 +218,7 @@ export default class DdzUI extends BaseComponent {
             var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
             this.m_ui["player"+idx].getComponent(CpnPlayer).addMoney(p.GetGold);
             if(p.GetGold > 0) {
-                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", true, this._players[idx].node, {scale:1.1}, null);
+                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1}, null);
             }
         }
     }
