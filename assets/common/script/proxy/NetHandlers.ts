@@ -9,6 +9,7 @@ import { GameKindEnum } from "../definer/ConstDefine";
 import { landLords_msgs } from "../proto/net_landLords";
 import { gamecomm_msgs } from "../proto/net_gamecomm";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
+import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 //---------------------------------
 // 网络数据处理句柄
@@ -51,11 +52,27 @@ var NetHandlers = {
 
     [landLords_msgs.GameLandLordsEnter] : function(param) {
         DDzMgr.getInstance().EnterData = param;
+        DDzMgr.getInstance().clearFighters();
+        DDzMgr.getInstance().updateFighterList(param.Players);
+        for(var i in param.Players) {
+            if(param.Players[i].IsBanker) {
+                DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
+            }
+        }
+        if(!isNil(param.BeforeChairID)) {
+            var cur = (param.BeforeChairID + 1) % 3;
+            for(var i in param.Players) {
+                if(param.Players[i].ChairID == cur) {
+                    DDzMgr.getInstance().setCurAttacker(param.Players[i].UserID);
+                    break;
+                }
+            }
+        }
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
 
     [gamecomm_msgs.UserList] : function(param) {
-        DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
+        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
     }
 
 }

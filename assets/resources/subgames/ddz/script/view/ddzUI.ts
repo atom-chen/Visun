@@ -45,11 +45,10 @@ export default class DdzUI extends BaseComponent {
         
         var EnterData = DDzMgr.getInstance().EnterData;
         if(EnterData) {
-            DDzMgr.getInstance().setCurAttacker(LoginUser.getInstance().UserID);
-
-            this._myHandor.resetCards(EnterData.HandCards, false);
+            this._myHandor.resetCards(DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID).Cards, false);
             this._myHandor.sortCards();
             this.refreshCurAttacker();
+            this.refreshRemainCardCount();
 
             if(EnterData.GameStateFree) {
                 this.toStateSearching();
@@ -59,12 +58,24 @@ export default class DdzUI extends BaseComponent {
             }
             else if(EnterData.GameStateCall) {
                 this.toStateGrab();
+                this.refreshCurAttacker();
             }
             else if(EnterData.GameStatePlaying) {
                 this.toStateFight();
+                this.refreshCurAttacker();
             }
             else if(EnterData.GameStateOver) {
                 this.toStateResult();
+            }
+        }
+    }
+
+    private refreshRemainCardCount() {
+        var fighters = DDzMgr.getInstance().getFighterList();
+        for(var uid in fighters) {
+            var idx = this.playerIndex(fighters[uid]);
+            if(idx > 0) {
+                this.m_ui["lab_remain"+idx].getComponent(cc.Label).string = fighters[uid].CardsLen.toString();
             }
         }
     }
@@ -101,7 +112,7 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
         this.refreshAuto();
-        this.m_ui.zhuang.active = false;
+        this.markZhuang(false);
         this.m_ui.remainBg1.active = false;
         this.m_ui.lab_remain1.active = false;
         this.m_ui.remainBg2.active = false;
@@ -125,7 +136,7 @@ export default class DdzUI extends BaseComponent {
         this.refreshAuto();
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
-        this.m_ui.zhuang.active = false;
+        this.markZhuang(false);
         this.m_ui.remainBg1.active = false;
         this.m_ui.lab_remain1.active = false;
         this.m_ui.remainBg2.active = false;
@@ -140,7 +151,7 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.tipLayer.active = false;
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
-        this.m_ui.zhuang.active = false;
+        this.markZhuang(false);
         this.m_ui.remainBg1.active = false;
         this.m_ui.lab_remain1.active = false;
         this.m_ui.remainBg2.active = false;
@@ -156,14 +167,7 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        this.m_ui.zhuang.active = true;
-        var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
-        if(idx>=0) {
-            var pos = this._players[idx].node.position;
-            pos.x += 40;
-            pos.y += 62;
-            this.m_ui.zhuang.position = pos;
-        }
+        this.markZhuang(true);
         this.m_ui.remainBg1.active = true;
         this.m_ui.lab_remain1.active = true;
         this.m_ui.remainBg2.active = true;
@@ -181,15 +185,7 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
-        this.m_ui.zhuang.active = true;
-        var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
-        if(idx>=0) {
-            var pos = this._players[idx].node.position;
-            pos.x += 40;
-            pos.y += 62;
-            this.m_ui.zhuang.position = pos;
-        }
-
+        this.markZhuang(true);
         this.m_ui.remainBg1.active = true;
         this.m_ui.lab_remain1.active = true;
         this.m_ui.remainBg2.active = true;
@@ -201,13 +197,24 @@ export default class DdzUI extends BaseComponent {
             this._players[ii].setName("");
             this._players[ii].setMoney(0);
         }
-        var players = DDzMgr.getInstance().getPlayerList();
+        var players = DDzMgr.getInstance().getFighterList();
         for(var i in players) {
             if(!isNil(players[i])) {
                 var idx = this.playerIndex(players[i]);
                 this._players[idx].setName(players[i].Name);
                 this._players[idx].setMoney(players[i].Gold);
             }
+        }
+    }
+
+    private markZhuang(bShow:boolean) {
+        var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
+        this.m_ui.zhuang.active = idx >= 0 && bShow;
+        if(idx>=0) {
+            var pos = this._players[idx].node.position;
+            pos.x += 40;
+            pos.y += 62;
+            this.m_ui.zhuang.position = pos;
         }
     }
 
@@ -237,6 +244,8 @@ export default class DdzUI extends BaseComponent {
             UIManager.toast("bug：找不到玩家 "+param.UserID);
             return;
         }
+        p.CardsLen -= param.Cards.length;
+
         var idx = this.playerIndex(p);
         if(idx>=0) {
             this._outs[idx].resetCards(param.Cards, false);
@@ -249,6 +258,8 @@ export default class DdzUI extends BaseComponent {
         } else {
             UIManager.toast("bug：找不到玩家UI "+param.UserID);
         }
+        
+        this.refreshRemainCardCount();
 
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
@@ -293,6 +304,7 @@ export default class DdzUI extends BaseComponent {
     }
     private GameLandLordsBottomCard(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
+        DDzMgr.getInstance().setZhuang(param.UserID);
         if(param.UserID == LoginUser.getInstance().UserID) {
             this._myHandor.addCards(param.CardsBottom);
             this._myHandor.sortCards();
@@ -300,15 +312,17 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
         this.toStateFight();
         this.refreshCurAttacker();
+        this.markZhuang(true);
+
+        var fighters = DDzMgr.getInstance().getFighterList();
+        for(var uid in fighters) {
+            fighters[uid].CardsLen = 17;
+        }
+        fighters[param.UserID].CardsLen = 20;
+        this.refreshRemainCardCount();
     }
     private onUserList(param) {
-        DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
-        var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(param.UserID));
-        if(idx>=0) {
-            this._outs[idx].resetCards(null, false);
-            this._players[idx].setName("");
-            this._players[idx].setMoney(0);
-        }
+        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
         this.refreshPlayers();
     }
     private GameBeOut(param) {
@@ -330,7 +344,7 @@ export default class DdzUI extends BaseComponent {
 
     private initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            DDzMgr.getInstance().resetPlayerList([]);
+            DDzMgr.getInstance().clearFighters();
             GameManager.getInstance().quitGame(0);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 

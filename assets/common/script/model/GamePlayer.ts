@@ -1,3 +1,5 @@
+import { PokerCode } from "../definer/PokerDefine";
+
 export default class GamePlayer {
 	UserID : number = 1; 		//ID
     Name : string = ""; 		//账号
@@ -11,5 +13,8 @@ export default class GamePlayer {
     RoomNum : number = 10; 		// 房间号 0:无效
     GameID : number = 11; 		// 所在游戏ID 0:无效
     TableID : number = 12; 		// 所在桌号ID 0:无效
-	ChairID : number = 13; 		// 所在椅子ID 0:无效
+    ChairID : number = 13; 		// 所在椅子ID 0:无效
+
+    CardsLen: number = 0;
+    Cards: Array<PokerCode> = [];  
 }
