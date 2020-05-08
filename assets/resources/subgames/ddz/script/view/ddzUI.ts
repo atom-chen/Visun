@@ -282,6 +282,7 @@ export default class DdzUI extends BaseComponent {
 
         var nextPos = DDzMgr.nextPos(p.ChairID);
         var nextAttacker = DDzMgr.getInstance().getPlayerByPos(nextPos);
+        cc.log("--------", p.ChairID, nextPos, nextAttacker);
         if(nextAttacker) {
             DDzMgr.getInstance().setCurAttacker(nextAttacker.UserID);
         } else {
@@ -323,6 +324,7 @@ export default class DdzUI extends BaseComponent {
 
         var nextPos = DDzMgr.nextPos(p.ChairID);
         var nextAttacker = DDzMgr.getInstance().getPlayerByPos(nextPos);
+        cc.log("--------", p.ChairID, nextPos, nextAttacker);
         if(nextAttacker) {
             DDzMgr.getInstance().setCurAttacker(nextAttacker.UserID);
         } else {

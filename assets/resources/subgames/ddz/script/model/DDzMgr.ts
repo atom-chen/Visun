@@ -73,7 +73,7 @@ export default class DDzMgr extends ModelBase {
 
 	setCurAttacker(uid:number) {
 		this._curAttackerId = uid;
-		cc.log("当前操作者", uid, this._players[uid]&&this._players[uid].Name, this._players[uid]);
+		cc.log("切换当前操作者", uid, this._players[uid]&&this._players[uid].Name, this._players[uid]);
 	}
 
 	getCurAttacker() : DdzPlayer {
