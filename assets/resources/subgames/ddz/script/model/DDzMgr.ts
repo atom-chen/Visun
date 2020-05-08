@@ -28,7 +28,6 @@ export default class DDzMgr extends ModelBase {
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
 	public EnterData = null;
-	public IsHosting : boolean = false;
 
 	//---- 玩家 -----------
 	clearFighters() {
@@ -85,6 +84,14 @@ export default class DDzMgr extends ModelBase {
 
 	getZhuang() : DdzPlayer {
 		return this.getPlayer(this._zhuangId);
+	}
+
+	resetStates() {
+		for(var uid in this._players) {
+			if(!isNil(this._players[uid])) {
+				this._players[uid].IsTrustee = false;
+			} 
+		}
 	}
 
 }

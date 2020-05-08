@@ -17,5 +17,5 @@ export default class DdzPlayer {
 
     CardsLen: number = 0;
     Cards: Array<PokerCode> = [];  
-    IsHosting : boolean = false;
+    IsTrustee : boolean = false;
 }

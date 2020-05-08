@@ -33,6 +33,7 @@ export default class GameManager extends ModelBase {
 
 	private roomsInfo = [];
 	private gameArr = [];
+	private gameId = 0;
 
 	public setRoomsInfo(info:any) {
 		this.roomsInfo = info;
@@ -116,6 +117,14 @@ export default class GameManager extends ModelBase {
 		if(IS_DANJI_MODE) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
+	}
+
+	public setGameId(v:number) {
+		this.gameId = v;
+	}
+
+	public getGameId() : number {
+		return this.gameId;
 	}
 	
 	//进入游戏的唯一入口

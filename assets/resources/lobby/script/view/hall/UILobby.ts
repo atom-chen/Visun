@@ -70,6 +70,7 @@ export default class UILobby extends BaseComponent {
 			this.m_ui.content.addChild(bton);
 
 			CommonUtil.addClickEvent(bton, function(){ 
+				GameManager.getInstance().setGameId(this.gameData.ID);
 				gamecomm_request.ReqEnterGame({
                     GameID: this.gameData.ID 
                 });
