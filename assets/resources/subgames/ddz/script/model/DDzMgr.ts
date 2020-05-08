@@ -28,7 +28,7 @@ export default class DDzMgr extends ModelBase {
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
 	public EnterData = null;
-	public IsAuto : boolean = false;
+	public IsHosting : boolean = false;
 
 	//---- 玩家 -----------
 	clearFighters() {

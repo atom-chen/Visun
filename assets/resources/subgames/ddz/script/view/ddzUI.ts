@@ -31,7 +31,7 @@ export default class DdzUI extends BaseComponent {
             this._players.push(this.m_ui["player"+i].getComponent(CpnPlayer1));
             this._outs.push(this.m_ui["outs"+i].getComponent(CpnHandcard));
             this._players[i].setName("");
-            this._players[i].setMoney(0);
+            this._players[i].setMoneyStr("");
         }
         this._players[0].setName(LoginUser.getInstance().Name);
         this._players[0].setMoney(LoginUser.getInstance().getMoney());
@@ -48,7 +48,7 @@ export default class DdzUI extends BaseComponent {
             this._myHandor.resetCards(DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID).Cards, false);
             this._myHandor.sortCards();
             this.refreshCurAttacker();
-            this.refreshRemainCardCount();
+            this.refreshRemainCardCount(true);
 
             if(EnterData.GameStateFree) {
                 this.toStateSearching();
@@ -70,15 +70,6 @@ export default class DdzUI extends BaseComponent {
         }
     }
 
-    private refreshRemainCardCount() {
-        var fighters = DDzMgr.getInstance().getFighterList();
-        for(var uid in fighters) {
-            var idx = this.playerIndex(fighters[uid]);
-            if(idx > 0) {
-                this.m_ui["lab_remain"+idx].getComponent(cc.Label).string = fighters[uid].CardsLen.toString();
-            }
-        }
-    }
 
     //玩家的UI位置
     private playerIndex(player:GamePlayer) : number {
@@ -90,13 +81,6 @@ export default class DdzUI extends BaseComponent {
 		return index;
     }
 
-    private refreshAuto() {
-        if(DDzMgr.getInstance().IsAuto) {
-            this.m_ui.lab_auto.getComponent(cc.Label).string = "取消托管";
-        } else {
-            this.m_ui.lab_auto.getComponent(cc.Label).string = "托 管";
-        }
-    }
     
     //匹配阶段
     private toStateSearching() {
@@ -108,15 +92,12 @@ export default class DdzUI extends BaseComponent {
         for(var i in this._outs) {
             this._outs[i].clearCards();
         }
-        DDzMgr.getInstance().IsAuto = false;
+        DDzMgr.getInstance().IsHosting = false;
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
         this.refreshAuto();
-        this.markZhuang(false);
-        this.m_ui.remainBg1.active = false;
-        this.m_ui.lab_remain1.active = false;
-        this.m_ui.remainBg2.active = false;
-        this.m_ui.lab_remain2.active = false;
+        this.refreshZhuang(false);
+        this.refreshRemainCardCount(false);
     }
     
     //准备阶段
@@ -132,15 +113,12 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        DDzMgr.getInstance().IsAuto = false;
+        DDzMgr.getInstance().IsHosting = false;
         this.refreshAuto();
         DDzMgr.getInstance().setCurAttacker(0);
         this.refreshCurAttacker();
-        this.markZhuang(false);
-        this.m_ui.remainBg1.active = false;
-        this.m_ui.lab_remain1.active = false;
-        this.m_ui.remainBg2.active = false;
-        this.m_ui.lab_remain2.active = false;
+        this.refreshZhuang(false);
+        this.refreshRemainCardCount(false);
     }
 
     //抢地主阶段
@@ -149,13 +127,10 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.grabNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
-        DDzMgr.getInstance().IsAuto = false;
+        DDzMgr.getInstance().IsHosting = false;
         this.refreshAuto();
-        this.markZhuang(false);
-        this.m_ui.remainBg1.active = false;
-        this.m_ui.lab_remain1.active = false;
-        this.m_ui.remainBg2.active = false;
-        this.m_ui.lab_remain2.active = false;
+        this.refreshZhuang(false);
+        this.refreshRemainCardCount(false);
     }
 
     //出牌阶段
@@ -167,11 +142,8 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        this.markZhuang(true);
-        this.m_ui.remainBg1.active = true;
-        this.m_ui.lab_remain1.active = true;
-        this.m_ui.remainBg2.active = true;
-        this.m_ui.lab_remain2.active = true;
+        this.refreshZhuang(true);
+        this.refreshRemainCardCount(true);
     }
 
     //结算阶段
@@ -183,19 +155,41 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
-        DDzMgr.getInstance().IsAuto = false;
+        DDzMgr.getInstance().IsHosting = false;
         this.refreshAuto();
-        this.markZhuang(true);
-        this.m_ui.remainBg1.active = true;
-        this.m_ui.lab_remain1.active = true;
-        this.m_ui.remainBg2.active = true;
-        this.m_ui.lab_remain2.active = true;
+        this.refreshZhuang(true);
+        this.refreshRemainCardCount(true);
+    }
+
+    private refreshRemainCardCount(bShow:boolean) {
+        this.m_ui.remainBg1.active = bShow;
+        this.m_ui.lab_remain1.active = bShow;
+        this.m_ui.remainBg2.active = bShow;
+        this.m_ui.lab_remain2.active = bShow;
+
+        if(!bShow) { return; }
+
+        var fighters = DDzMgr.getInstance().getFighterList();
+        for(var uid in fighters) {
+            var idx = this.playerIndex(fighters[uid]);
+            if(idx > 0) {
+                this.m_ui["lab_remain"+idx].getComponent(cc.Label).string = fighters[uid].CardsLen.toString();
+            }
+        }
+    }
+
+    private refreshAuto() {
+        if(DDzMgr.getInstance().IsHosting) {
+            this.m_ui.lab_auto.getComponent(cc.Label).string = "取消托管";
+        } else {
+            this.m_ui.lab_auto.getComponent(cc.Label).string = "托 管";
+        }
     }
     
     private refreshPlayers() {
         for(var ii=0; ii<MAX_SOLDIER; ii++) {
             this._players[ii].setName("");
-            this._players[ii].setMoney(0);
+            this._players[ii].setMoneyStr("");
         }
         var players = DDzMgr.getInstance().getFighterList();
         for(var i in players) {
@@ -207,7 +201,7 @@ export default class DdzUI extends BaseComponent {
         }
     }
 
-    private markZhuang(bShow:boolean) {
+    private refreshZhuang(bShow:boolean) {
         var idx = this.playerIndex(DDzMgr.getInstance().getZhuang());
         this.m_ui.zhuang.active = idx >= 0 && bShow;
         if(idx>=0) {
@@ -228,6 +222,7 @@ export default class DdzUI extends BaseComponent {
             this.m_ui["CpnCircleCD"+curAttackerIdx].getComponent(CpnCircleCD).setRemainCD(15, 15);
         }
     }
+
 
     private GameLandLordsPlayer(param) {
         this._myHandor.resetCards(param.Cards, false);
@@ -258,8 +253,8 @@ export default class DdzUI extends BaseComponent {
         } else {
             UIManager.toast("bug：找不到玩家UI "+param.UserID);
         }
-        
-        this.refreshRemainCardCount();
+
+        this.refreshRemainCardCount(true);
 
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
@@ -312,14 +307,14 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
         this.toStateFight();
         this.refreshCurAttacker();
-        this.markZhuang(true);
+        this.refreshZhuang(true);
 
         var fighters = DDzMgr.getInstance().getFighterList();
         for(var uid in fighters) {
             fighters[uid].CardsLen = 17;
         }
         fighters[param.UserID].CardsLen = 20;
-        this.refreshRemainCardCount();
+        this.refreshRemainCardCount(true);
     }
     private onUserList(param) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
@@ -340,6 +335,10 @@ export default class DdzUI extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.onUserList, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameBeOut, this.GameBeOut, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GameStateCall, this.GameStateCall, this);
+        // EventCenter.getInstance().listen(landLords_msgs.Hosting, function(param){
+        //     DDzMgr.getInstance().IsHosting = param.IsHosting;
+        //     this.refreshAuto();
+        // }, this);
     }
 
     private initUIEvent() {
@@ -395,7 +394,7 @@ export default class DdzUI extends BaseComponent {
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
-            DDzMgr.getInstance().IsAuto = !DDzMgr.getInstance().IsAuto;
+            DDzMgr.getInstance().IsHosting = !DDzMgr.getInstance().IsHosting;
             this.refreshAuto();
         }, this);
     }
