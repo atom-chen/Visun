@@ -3,7 +3,7 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import LoginUser from "../../../../../common/script/model/LoginUser";
-import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
@@ -12,6 +12,7 @@ import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/pr
 import DdzPlayer from "../model/DdzPlayer";
 import CpnPlayer1 from "../../../../../common/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../../common/script/comps/CpnCircleCD";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 
 const MAX_SOLDIER = 3;
 
@@ -123,8 +124,12 @@ export default class DdzUI extends BaseComponent {
 
     //抢地主阶段
     private toStateGrab() {
+        var curFighter = DDzMgr.getInstance().getCurAttacker();
+        if(!curFighter) {
+            cc.warn("bug 获取当前操作者失败");
+        }
         this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
+        this.m_ui.grabNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserID);
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
         DDzMgr.getInstance().resetStates();
@@ -136,9 +141,13 @@ export default class DdzUI extends BaseComponent {
 
     //出牌阶段
     private toStateFight() {
+        var curFighter = DDzMgr.getInstance().getCurAttacker();
+        if(!curFighter) {
+            cc.warn("bug 获取当前操作者失败");
+        }
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = DDzMgr.getInstance().getCurAttacker().UserID == LoginUser.getInstance().UserID;
+        this.m_ui.fightNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserID);
         this.m_ui.tipLayer.active = true;
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
@@ -162,6 +171,7 @@ export default class DdzUI extends BaseComponent {
         this.refreshZhuang(true);
         this.refreshRemainCardCount(true);
         this.m_ui.btn_double.active = false;
+        TimerManager.delaySecond(2, newHandler(function(){ this.m_ui.readyNode.active = true; }, this))
     }
 
     private refreshRemainCardCount(bShow:boolean) {
@@ -271,7 +281,12 @@ export default class DdzUI extends BaseComponent {
         this.refreshRemainCardCount(true);
 
         var nextPos = DDzMgr.nextPos(p.ChairID);
-        DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
+        var nextAttacker = DDzMgr.getInstance().getPlayerByPos(nextPos);
+        if(nextAttacker) {
+            DDzMgr.getInstance().setCurAttacker(nextAttacker.UserID);
+        } else {
+            cc.log("客户端bug：计算下一个操作者失败", nextPos, nextAttacker);
+        }
         this.toStateFight();
         this.refreshCurAttacker();
     }
@@ -307,7 +322,13 @@ export default class DdzUI extends BaseComponent {
         }
 
         var nextPos = DDzMgr.nextPos(p.ChairID);
-        DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
+        var nextAttacker = DDzMgr.getInstance().getPlayerByPos(nextPos);
+        if(nextAttacker) {
+            DDzMgr.getInstance().setCurAttacker(nextAttacker.UserID);
+        } else {
+            cc.log("客户端bug：计算下一个操作者失败", nextPos, nextAttacker);
+        }
+
         this.toStateGrab();
         this.refreshCurAttacker();
     }
@@ -358,6 +379,11 @@ export default class DdzUI extends BaseComponent {
         }, this);
         EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDouble, function(param){
             UIManager.toast("玩家加倍 UserID: "+param.UserID);
+        }, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GameReady, function(param){
+            if(param.UserID==LoginUser.getInstance().UserID) {
+                this.m_ui.readyNode.active = false;
+            }
         }, this);
     }
 
