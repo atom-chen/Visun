@@ -5,12 +5,13 @@ import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
-import CpnPlayer from "../../../../../common/script/comps/CpnPlayer";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import DDzMgr from "../model/DDzMgr";
 import { landLords_msgs, landLords_request } from "../../../../../common/script/proto/net_landLords";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GamePlayer from "../../../../../common/script/model/GamePlayer";
+import CpnPlayer1 from "../../../../../common/script/comps/CpnPlayer1";
+import CpnCircleCD from "../../../../../common/script/comps/CpnCircleCD";
 
 const MAX_SOLDIER = 3;
 
@@ -19,7 +20,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class DdzUI extends BaseComponent {
     private _myHandor:CpnHandcard;
-    private _players:Array<CpnPlayer> = [];
+    private _players:Array<CpnPlayer1> = [];
     private _outs:Array<CpnHandcard> = [];
     
     start () {
@@ -27,11 +28,10 @@ export default class DdzUI extends BaseComponent {
         
         this._myHandor = this.m_ui.my_handor.getComponent(CpnHandcard);
         for(var i=0; i<MAX_SOLDIER; i++) {
-            this._players.push(this.m_ui["player"+i].getComponent(CpnPlayer));
+            this._players.push(this.m_ui["player"+i].getComponent(CpnPlayer1));
             this._outs.push(this.m_ui["outs"+i].getComponent(CpnHandcard));
             this._players[i].setName("");
             this._players[i].setMoney(0);
-            UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[i].node, {scale:1.1}, null);
         }
         this._players[0].setName(LoginUser.getInstance().Name);
         this._players[0].setMoney(LoginUser.getInstance().getMoney());
@@ -49,6 +49,7 @@ export default class DdzUI extends BaseComponent {
 
             this._myHandor.resetCards(EnterData.HandCards, false);
             this._myHandor.sortCards();
+            this.refreshCurAttacker();
 
             if(EnterData.GameStateFree) {
                 this.toStateSearching();
@@ -97,6 +98,8 @@ export default class DdzUI extends BaseComponent {
             this._outs[i].clearCards();
         }
         DDzMgr.getInstance().IsAuto = false;
+        DDzMgr.getInstance().setCurAttacker(0);
+        this.refreshCurAttacker();
         this.refreshAuto();
     }
     
@@ -115,6 +118,8 @@ export default class DdzUI extends BaseComponent {
         this.m_ui.labGrab2.getComponent(cc.Label).string = "";
         DDzMgr.getInstance().IsAuto = false;
         this.refreshAuto();
+        DDzMgr.getInstance().setCurAttacker(0);
+        this.refreshCurAttacker()
     }
 
     //抢地主阶段
@@ -166,6 +171,17 @@ export default class DdzUI extends BaseComponent {
         }
     }
 
+    private refreshCurAttacker() {
+        var MAX_PLAYER = 3;
+        var curAttackerIdx = this.playerIndex(DDzMgr.getInstance().getCurAttacker());
+        for(var idx=0; idx<MAX_PLAYER; idx++) {
+			this.m_ui["CpnCircleCD"+idx].active = idx===curAttackerIdx;
+        }
+        if(this.m_ui["CpnCircleCD"+curAttackerIdx]) {
+            this.m_ui["CpnCircleCD"+curAttackerIdx].getComponent(CpnCircleCD).setRemainCD(15, 15);
+        }
+    }
+
     private GameLandLordsPlayer(param) {
         this._myHandor.resetCards(param.Cards, false);
         this._myHandor.sortCards();
@@ -197,6 +213,7 @@ export default class DdzUI extends BaseComponent {
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateFight();
+        this.refreshCurAttacker();
     }
     private GameLandLordsDeal(param) {
         this._myHandor.resetCards(param.CardsHand, false);
@@ -207,15 +224,16 @@ export default class DdzUI extends BaseComponent {
         for(var i in param.players) {
             var p = param.players[i];
             var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
-            this.m_ui["player"+idx].getComponent(CpnPlayer).addMoney(p.GetGold);
+            this.m_ui["player"+idx].getComponent(CpnPlayer1).addMoney(p.GetGold);
             if(p.GetGold > 0) {
-                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1}, null);
+                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1, y:19}, null);
             }
         }
     }
     private GameStateCall(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
         this.toStateGrab();
+        this.refreshCurAttacker();
     }
     private GameLandLordsCall(param) {
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
@@ -231,6 +249,7 @@ export default class DdzUI extends BaseComponent {
         var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateGrab();
+        this.refreshCurAttacker();
     }
     private GameLandLordsBottomCard(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
@@ -238,6 +257,7 @@ export default class DdzUI extends BaseComponent {
         this._myHandor.sortCards();
         this.m_ui.dipai.getComponent(CpnHandcard).resetCards(param.CardsBottom, false); 
         this.toStateFight();
+        this.refreshCurAttacker();
     }
     private onUserList(param) {
         DDzMgr.getInstance().resetPlayerList(param && param.AllInfos);
