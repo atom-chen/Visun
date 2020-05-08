@@ -95,19 +95,30 @@ message NotifyChangeGold {
 //游戏状态
 //(空闲)
 message GameStateFree {
+    int64 TimeStamp = 1; //时间戳
+    uint32 WaitTime = 2; //最长等待时间
 }
 //(开始)
 message GameStateStart {
+    int64 TimeStamp = 1; //时间戳
+    uint32 WaitTime = 2; //最长等待时间
 }
-//(叫分)
-message GameStateCall {
-    uint64 UserID = 1; // 玩家ID
-}
+
 //(游戏中)
 message GameStatePlaying {
+    int64 TimeStamp = 1; //时间戳
+    uint32 WaitTime = 2; //最长等待时间
 }
 //(结束)
 message GameStateOver {
+    int64 TimeStamp = 1; //时间戳
+    uint32 WaitTime = 2; //最长等待时间
+}
+//(叫分)
+message GameStateCall {
+    int64 TimeStamp = 1; //时间戳
+    uint32 WaitTime = 2; //最长等待时间
+    uint64 UserID = 3; // 玩家ID
 }
 //(踢出)
 message GameBeOut {

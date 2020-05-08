@@ -31,6 +31,7 @@ message GameLandLordsPlayer {
     uint32 CardsLen = 3; // 手牌的数目
     bytes Cards = 4; // 牌 (若为其他玩家时,该值为空,仅提供手牌数目)
     bool IsBanker = 5; // 是否是庄家
+    bool IsTrustee = 6; //是否托管中
 }
 
 // 开始
@@ -48,12 +49,12 @@ message GameLandLordsCall {
 // 加倍
 message GameLandLordsDouble {
     uint64 UserID = 1; // 玩家ID
-    uint32 Number = 2;  // 额外倍数  1:加倍 2:超级加倍:
+    uint32 Number = 2; // 额外倍数  1:加倍 2:超级加倍:
 }
 
 message GameLandLordsTrustee {
     uint64 UserID = 1; // 玩家ID
-    bool IsTrustee = 2;//是否托管
+    bool IsTrustee = 2; //是否托管
 }
 
 // 广播抢地主后的玩家

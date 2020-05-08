@@ -1728,6 +1728,9 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        GameStateFree.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameStateFree.prototype.WaitTime = 0;
+
         GameStateFree.create = function create(properties) {
             return new GameStateFree(properties);
         };
@@ -1735,6 +1738,10 @@ $root.gamecomm = (function() {
         GameStateFree.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(8).int64(message.TimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
 
@@ -1749,6 +1756,12 @@ $root.gamecomm = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 2:
+                    message.WaitTime = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1766,17 +1779,53 @@ $root.gamecomm = (function() {
         GameStateFree.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime))
+                    return "WaitTime: integer expected";
             return null;
         };
 
         GameStateFree.fromObject = function fromObject(object) {
             if (object instanceof $root.gamecomm.GameStateFree)
                 return object;
-            return new $root.gamecomm.GameStateFree();
+            var message = new $root.gamecomm.GameStateFree();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                message.WaitTime = object.WaitTime >>> 0;
+            return message;
         };
 
-        GameStateFree.toObject = function toObject() {
-            return {};
+        GameStateFree.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.WaitTime = 0;
+            }
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                object.WaitTime = message.WaitTime;
+            return object;
         };
 
         GameStateFree.prototype.toJSON = function toJSON() {
@@ -1795,6 +1844,9 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        GameStateStart.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameStateStart.prototype.WaitTime = 0;
+
         GameStateStart.create = function create(properties) {
             return new GameStateStart(properties);
         };
@@ -1802,6 +1854,10 @@ $root.gamecomm = (function() {
         GameStateStart.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(8).int64(message.TimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
 
@@ -1816,6 +1872,12 @@ $root.gamecomm = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
+                case 1:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 2:
+                    message.WaitTime = reader.uint32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1833,17 +1895,53 @@ $root.gamecomm = (function() {
         GameStateStart.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime))
+                    return "WaitTime: integer expected";
             return null;
         };
 
         GameStateStart.fromObject = function fromObject(object) {
             if (object instanceof $root.gamecomm.GameStateStart)
                 return object;
-            return new $root.gamecomm.GameStateStart();
+            var message = new $root.gamecomm.GameStateStart();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                message.WaitTime = object.WaitTime >>> 0;
+            return message;
         };
 
-        GameStateStart.toObject = function toObject() {
-            return {};
+        GameStateStart.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.WaitTime = 0;
+            }
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                object.WaitTime = message.WaitTime;
+            return object;
         };
 
         GameStateStart.prototype.toJSON = function toJSON() {
@@ -1851,6 +1949,238 @@ $root.gamecomm = (function() {
         };
 
         return GameStateStart;
+    })();
+
+    gamecomm.GameStatePlaying = (function() {
+
+        function GameStatePlaying(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameStatePlaying.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameStatePlaying.prototype.WaitTime = 0;
+
+        GameStatePlaying.create = function create(properties) {
+            return new GameStatePlaying(properties);
+        };
+
+        GameStatePlaying.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(8).int64(message.TimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(16).uint32(message.WaitTime);
+            return writer;
+        };
+
+        GameStatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameStatePlaying.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStatePlaying();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 2:
+                    message.WaitTime = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameStatePlaying.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameStatePlaying.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime))
+                    return "WaitTime: integer expected";
+            return null;
+        };
+
+        GameStatePlaying.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.GameStatePlaying)
+                return object;
+            var message = new $root.gamecomm.GameStatePlaying();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                message.WaitTime = object.WaitTime >>> 0;
+            return message;
+        };
+
+        GameStatePlaying.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.WaitTime = 0;
+            }
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                object.WaitTime = message.WaitTime;
+            return object;
+        };
+
+        GameStatePlaying.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameStatePlaying;
+    })();
+
+    gamecomm.GameStateOver = (function() {
+
+        function GameStateOver(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameStateOver.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameStateOver.prototype.WaitTime = 0;
+
+        GameStateOver.create = function create(properties) {
+            return new GameStateOver(properties);
+        };
+
+        GameStateOver.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(8).int64(message.TimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(16).uint32(message.WaitTime);
+            return writer;
+        };
+
+        GameStateOver.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameStateOver.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStateOver();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 2:
+                    message.WaitTime = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameStateOver.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameStateOver.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime))
+                    return "WaitTime: integer expected";
+            return null;
+        };
+
+        GameStateOver.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.GameStateOver)
+                return object;
+            var message = new $root.gamecomm.GameStateOver();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                message.WaitTime = object.WaitTime >>> 0;
+            return message;
+        };
+
+        GameStateOver.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.WaitTime = 0;
+            }
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                object.WaitTime = message.WaitTime;
+            return object;
+        };
+
+        GameStateOver.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameStateOver;
     })();
 
     gamecomm.GameStateCall = (function() {
@@ -1862,6 +2192,8 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        GameStateCall.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameStateCall.prototype.WaitTime = 0;
         GameStateCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         GameStateCall.create = function create(properties) {
@@ -1871,8 +2203,12 @@ $root.gamecomm = (function() {
         GameStateCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(8).int64(message.TimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(16).uint32(message.WaitTime);
             if (message.UserID != null && message.hasOwnProperty("UserID"))
-                writer.uint32(8).uint64(message.UserID);
+                writer.uint32(24).uint64(message.UserID);
             return writer;
         };
 
@@ -1888,6 +2224,12 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 2:
+                    message.WaitTime = reader.uint32();
+                    break;
+                case 3:
                     message.UserID = reader.uint64();
                     break;
                 default:
@@ -1907,6 +2249,12 @@ $root.gamecomm = (function() {
         GameStateCall.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime))
+                    return "WaitTime: integer expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
                     return "UserID: integer|Long expected";
@@ -1917,6 +2265,17 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.GameStateCall)
                 return object;
             var message = new $root.gamecomm.GameStateCall();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                message.WaitTime = object.WaitTime >>> 0;
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1933,12 +2292,26 @@ $root.gamecomm = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                object.WaitTime = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
+            }
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                object.WaitTime = message.WaitTime;
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
                     object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
@@ -1952,140 +2325,6 @@ $root.gamecomm = (function() {
         };
 
         return GameStateCall;
-    })();
-
-    gamecomm.GameStatePlaying = (function() {
-
-        function GameStatePlaying(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameStatePlaying.create = function create(properties) {
-            return new GameStatePlaying(properties);
-        };
-
-        GameStatePlaying.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        GameStatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameStatePlaying.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStatePlaying();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameStatePlaying.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameStatePlaying.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        GameStatePlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.gamecomm.GameStatePlaying)
-                return object;
-            return new $root.gamecomm.GameStatePlaying();
-        };
-
-        GameStatePlaying.toObject = function toObject() {
-            return {};
-        };
-
-        GameStatePlaying.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameStatePlaying;
-    })();
-
-    gamecomm.GameStateOver = (function() {
-
-        function GameStateOver(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameStateOver.create = function create(properties) {
-            return new GameStateOver(properties);
-        };
-
-        GameStateOver.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        GameStateOver.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameStateOver.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GameStateOver();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameStateOver.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameStateOver.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        GameStateOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.gamecomm.GameStateOver)
-                return object;
-            return new $root.gamecomm.GameStateOver();
-        };
-
-        GameStateOver.toObject = function toObject() {
-            return {};
-        };
-
-        GameStateOver.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameStateOver;
     })();
 
     gamecomm.GameBeOut = (function() {

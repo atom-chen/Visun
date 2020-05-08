@@ -22,9 +22,9 @@ export enum gamecomm_msgs {
     NotifyChangeGold = 26,
     GameStateFree = 27,
     GameStateStart = 28,
-    GameStateCall = 29,
-    GameStatePlaying = 30,
-    GameStateOver = 31,
+    GameStatePlaying = 29,
+    GameStateOver = 30,
+    GameStateCall = 31,
     GameBeOut = 32,
     GameHost = 33,
     GameSuperHost = 34,
@@ -47,9 +47,9 @@ export var gamecomm_packet_define = {
     26: new LeafWsPacket(26, gamecomm.NotifyChangeGold, "gamecomm.NotifyChangeGold"),
     27: new LeafWsPacket(27, gamecomm.GameStateFree, "gamecomm.GameStateFree"),
     28: new LeafWsPacket(28, gamecomm.GameStateStart, "gamecomm.GameStateStart"),
-    29: new LeafWsPacket(29, gamecomm.GameStateCall, "gamecomm.GameStateCall"),
-    30: new LeafWsPacket(30, gamecomm.GameStatePlaying, "gamecomm.GameStatePlaying"),
-    31: new LeafWsPacket(31, gamecomm.GameStateOver, "gamecomm.GameStateOver"),
+    29: new LeafWsPacket(29, gamecomm.GameStatePlaying, "gamecomm.GameStatePlaying"),
+    30: new LeafWsPacket(30, gamecomm.GameStateOver, "gamecomm.GameStateOver"),
+    31: new LeafWsPacket(31, gamecomm.GameStateCall, "gamecomm.GameStateCall"),
     32: new LeafWsPacket(32, gamecomm.GameBeOut, "gamecomm.GameBeOut"),
     33: new LeafWsPacket(33, gamecomm.GameHost, "gamecomm.GameHost"),
     34: new LeafWsPacket(34, gamecomm.GameSuperHost, "gamecomm.GameSuperHost"),
@@ -70,11 +70,11 @@ export class gamecomm_request {
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
     public static GameResult( data:{ Flag:number, Reason:any } ) { gamecomm_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }
     public static NotifyChangeGold( data:{ UserID:number, Gold:number, Code:number } ) { gamecomm_packet_define[26].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameStateFree( data:{} ) { gamecomm_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameStateStart( data:{} ) { gamecomm_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameStateCall( data:{ UserID:number } ) { gamecomm_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameStatePlaying( data:{} ) { gamecomm_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameStateOver( data:{} ) { gamecomm_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameStateFree( data:{ TimeStamp:number, WaitTime:number } ) { gamecomm_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameStateStart( data:{ TimeStamp:number, WaitTime:number } ) { gamecomm_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameStatePlaying( data:{ TimeStamp:number, WaitTime:number } ) { gamecomm_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameStateOver( data:{ TimeStamp:number, WaitTime:number } ) { gamecomm_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameStateCall( data:{ TimeStamp:number, WaitTime:number, UserID:number } ) { gamecomm_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
     public static GameBeOut( data:{ UserID:number, Code:number, Hints:any } ) { gamecomm_packet_define[32].sendToChannel(ChannelDefine.game, data, false); }
     public static GameHost( data:{ IsWant:any } ) { gamecomm_packet_define[33].sendToChannel(ChannelDefine.game, data, false); }
     public static GameSuperHost( data:{ IsWant:any } ) { gamecomm_packet_define[34].sendToChannel(ChannelDefine.game, data, false); }

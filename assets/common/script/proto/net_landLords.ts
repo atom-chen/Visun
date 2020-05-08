@@ -34,7 +34,7 @@ export var landLords_packet_define = {
 
 export class landLords_request {
     public static GameLandLordsEnter( data:{ TimeStamp:number, FreeTime:number, OutTime:number, CallTime:number, Free:any, Start:any, Call:any, Playing:any, Over:any, BeforeChairID:number, BeforeCards:any, Players:any[] } ) { landLords_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameLandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any } ) { landLords_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameLandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any, IsTrustee:any } ) { landLords_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
     public static GameLandLordsDeal( data:{ UserID:number, CardsHand:any } ) { landLords_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
     public static GameLandLordsCall( data:{ UserID:number, Score:number } ) { landLords_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
     public static GameLandLordsDouble( data:{ UserID:number, Number:number } ) { landLords_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
