@@ -75,10 +75,8 @@ export default class DdzUI extends BaseComponent {
     private playerIndex(player:DdzPlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
-		var index = player.ChairID;
-		if(hero.ChairID===0) { return index; }
-		index = (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
-		return index;
+		if(hero.ChairID===1) { return 0; }
+		return (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
     }
 
     
@@ -272,7 +270,7 @@ export default class DdzUI extends BaseComponent {
 
         this.refreshRemainCardCount(true);
 
-        var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
+        var nextPos = DDzMgr.nextPos(p.ChairID);
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateFight();
         this.refreshCurAttacker();
@@ -308,7 +306,7 @@ export default class DdzUI extends BaseComponent {
             this.m_ui["labGrab"+idx].getComponent(cc.Label).string = param.Score;
         }
 
-        var nextPos = (p.ChairID + 1) % MAX_SOLDIER;
+        var nextPos = DDzMgr.nextPos(p.ChairID);
         DDzMgr.getInstance().setCurAttacker(DDzMgr.getInstance().getPlayerByPos(nextPos).UserID);
         this.toStateGrab();
         this.refreshCurAttacker();

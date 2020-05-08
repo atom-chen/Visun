@@ -95,4 +95,10 @@ export default class DDzMgr extends ModelBase {
 		}
 	}
 
+	static nextPos(pos:number) : number {
+		var v = pos + 1;
+		if(v>3) { v = 1; }
+		return v;
+	}
+
 }
