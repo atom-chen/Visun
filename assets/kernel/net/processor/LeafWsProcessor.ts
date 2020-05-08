@@ -24,8 +24,7 @@ export default class LeafWsProcessor extends BaseProcessor {
 		}
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(cc.js.formatStr("%s [send buff] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), info.length));
-		//	cc.log(this._name, "[send buff]", cmd, info.length);
+			cc.log(cc.js.formatStr("%s [send] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), info.length));
 		//	cc.log(CommonUtil.Bytes2Str(info));
 		}
 
@@ -51,8 +50,9 @@ export default class LeafWsProcessor extends BaseProcessor {
 		var data = packet.unpackBody(bytes.subarray(HEAD_SIZE));
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(this._name, "[recv]", cmd, bytes.length, data);
+			cc.log(cc.js.formatStr("%s [recv] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), bytes.length));
 		//	cc.log(CommonUtil.Bytes2Str(bytes));
+			cc.log(data);
 		}
 
 		if(this._paused) {
