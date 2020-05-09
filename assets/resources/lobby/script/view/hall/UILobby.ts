@@ -13,6 +13,7 @@ import { gamecomm_request } from "../../../../../common/script/proto/net_gamecom
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import SceneManager from "../../../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../../../kernel/basic/defines/KernelUIDefine";
+import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 
 
 const {ccclass, property} = cc._decorator;
@@ -137,8 +138,9 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//
 		CommonUtil.addClickEvent(this.m_ui.btn_qhb, function(){
-			SceneManager.turn2Scene(KernelUIDefine.VScene.name);
-			UIManager.openPanel(ViewDefine.UIChat, null);
+			SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
+				UIManager.openPanel(ViewDefine.UIChat, null);
+			});
 		}, this);
 	}
 

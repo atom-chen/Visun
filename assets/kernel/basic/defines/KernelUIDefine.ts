@@ -5,7 +5,6 @@ export default class KernelUIDefine {
 	public static GameScene = { name:"GameScene", isLandspace:true };
 	public static LobbyScene = { name:"LobbyScene", isLandspace:true };
 	public static HotupdateScene = { name:"HotupdateScene", isLandspace:true };
-	public static VScene = { name:"VScene", isLandspace:false };
 
 	public static ConfirmDlg = "launcher/prefabs/ConfirmDlg";
 	public static UIToast = "launcher/prefabs/UIToast";
