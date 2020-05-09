@@ -2,6 +2,7 @@
 export default class ViewDefine {
 	public static CpnChip = "common/prefabs/CpnChip";
 	public static UILogin = "common/prefabs/UILogin";
+	public static UIChat = "common/prefabs/UIChat";
 	//
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIGames = "lobby/prefabs/UIGames";

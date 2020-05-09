@@ -129,6 +129,10 @@ export default class UILobby extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
 			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
 		}, this);
+		//
+		CommonUtil.addClickEvent(this.m_ui.btn_chat, function(){
+			UIManager.openPanel(ViewDefine.UIChat, null);
+		}, this);
 	}
 
 }

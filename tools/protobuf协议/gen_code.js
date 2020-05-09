@@ -9,6 +9,10 @@ var pbfiles = [
 		router:"login", 
 	},
 	{ 
+		name:"chat", 
+		router:"chat",
+	},
+	{ 
 		name:"comand", 
 		router:"game",
 	},
