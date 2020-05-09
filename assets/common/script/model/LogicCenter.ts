@@ -23,6 +23,7 @@ import { fishLord_packet_define } from "../proto/net_fishLord";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import ChatHandlers from "../proxy/ChatHandlers";
 import ChatMgr from "./ChatMgr";
+import { chat_packet_define } from "../proto/net_chat";
 
 
 //模块管理器
@@ -36,6 +37,7 @@ export default class LogicCenter {
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
         g_leafProcessor.registCmds(login_packet_define);
+        g_leafProcessor.registCmds(chat_packet_define);
         g_leafProcessor.registCmds(comand_packet_define);
         g_leafProcessor.registCmds(gamecomm_packet_define);
         g_leafProcessor.registCmds(baccarat_packet_define);
@@ -47,6 +49,7 @@ export default class LogicCenter {
         //初始化聊天协议
         var g_chatProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.chat, ProcessorType.LeafWs);
         g_chatProcessor.unregistAllCmds();
+     //   g_chatProcessor.registCmds(chat_msgs);
         g_chatProcessor.getDispatcher().addObserver(ChatHandlers);
         //初始化Http协议
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
