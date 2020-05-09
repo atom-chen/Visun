@@ -17,14 +17,18 @@ for(var i=0, len=data.length; i<len; i++) {
 }
 
 if(protoName != "gamecomm") {
+	var flag = false;
 	for(var from=0, len=data.length; from<len; from++) {
 		if(data[from].match("root.gamecomm = ") && data[from].match("function")){
 			console.log("第"+from+"行发现累赘import: "+data[from]);
 			data.splice(from);
+			flag = true;
 			break;
 		}
 	}
-	data.push("module.exports = $root;");
+	if(flag) {
+		data.push("module.exports = $root;");
+	}
 }
 
 fs.writeFileSync(filepath, data.join('\n'), 'utf8');
