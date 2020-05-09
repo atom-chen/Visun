@@ -1,59 +1,117 @@
 syntax = "proto3";
-package go;
+package chat;
 
-//
-message SimplePlayerInfo {
-	uint64 UserID = 1;
-	string Name = 2;
-	string HeadImg = 3;
+//建群
+message SetupGroup {
+    string name = 1;
 }
-
-//聊天：世界频道
-message WorldChat {
-	string Content = 1;
-}
-
-message WorldChatResp {
-	string Content = 1;
-	uint64 Timestamp = 2;
-	SimplePlayerInfo Sender = 3;
+message SetupGroupResp {
+    uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+    string GroupName = 2; //世界频道
+    uint64 HostID = 3;//群主ID
+    int64 Timestamp = 4;//创建时间戳
+    repeated uint64 AdminList = 5;//管理员列表
+    repeated uint64 MemberList = 6;//成员列表
+    repeated  uint64 BannedList = 7;//禁言列表
 }
 
 //聊天：群频道
 message GroupChat {
-	string Content = 1;
-	uint64 GroupId = 2;
+    uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+    string Content = 2;
 }
 
 message GroupChatResp {
-	string Content = 1;
-	uint64 GroupId = 2;
-	uint64 Timestamp = 3;
-	SimplePlayerInfo Sender = 4;
+    uint64 GroupId = 1;
+    string Content = 2;
+    int64 Timestamp = 3;
+    uint64 SenderID = 4;
 }
 
 //聊天：私聊频道
 message PrivateChat {
-	string Content = 1;
-	uint64 TargetId = 2;
+    uint64 TargetId = 1; //
+    string Content = 2;
 }
 
 message PrivateChatResp {
-	string Content = 1;
-	uint64 TargetId = 2;
-	uint64 Timestamp = 3;
-	SimplePlayerInfo Sender = 4;
+    string Content = 1;
+    int64 Timestamp = 2;
+    uint64 SenderID = 3;
 }
 
-//聊天：游戏频道
-message GameChat {
-	string Content = 1;
-	uint64 GameId = 2;
+//拉人
+message GroupAddPerson {
+    uint64 GroupId = 1;
+    uint64 MemID = 2; //被拉者ID
 }
 
-message GameChatResp {
-	string Content = 1;
-	uint64 GameId = 2;
-	uint64 Timestamp = 3;
-	SimplePlayerInfo Sender = 4;
+message GroupAddPersonResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //拉人者ID
+    int64 Timestamp = 3;
+    uint64 MemID = 4;  //被拉者
+}
+
+//踢人
+message GroupDelPerson {
+    uint64 GroupId = 1;
+    uint64 MemID = 2; //被踢者ID
+}
+
+message GroupDelPersonResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //踢人者ID
+    int64 Timestamp = 3;
+    uint64 MemID = 4; //被踢者信息
+}
+
+//禁言(管理员或群主才有权限)
+message GroupBanned {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //被禁者ID
+    bool IsBanned = 3; //是否禁言
+}
+
+message GroupBannedResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //管理员或群主
+    bool IsBanned = 3; //是否禁言
+    int64 Timestamp = 4;
+    uint64 MemID = 5; //被禁言者信息
+}
+
+//退群
+message GroupQuit {
+    uint64 GroupId = 1;
+}
+
+message GroupQuitResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //退群者
+    int64 Timestamp = 3;
+}
+
+//解散
+message GroupDismiss {
+    uint64 GroupId = 1;
+    int64 Timestamp = 2;
+}
+
+message GroupDismissResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //群主
+    int64 Timestamp = 3;
+}
+
+//变换群主
+message GroupChangeHost {
+    uint64 GroupId = 1;
+    uint64 OldID = 2; //老群主
+    uint64 NewID = 3; //新群主
+}
+message GroupChangeHostResp {
+    uint64 GroupId = 1;
+    uint64 UserID = 2; //新群主ID
+    int64 Timestamp = 3;
 }
