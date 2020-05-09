@@ -1,1 +1,1 @@
-python gen_leaf.py chat chat
+python gen_leaf.py chat game
