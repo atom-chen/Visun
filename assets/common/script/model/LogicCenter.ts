@@ -22,6 +22,7 @@ import { cowcow_packet_define } from "../proto/net_cowcow";
 import { fishLord_packet_define } from "../proto/net_fishLord";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import ChatHandlers from "../proxy/ChatHandlers";
+import ChatMgr from "./ChatMgr";
 
 
 //模块管理器
@@ -69,6 +70,7 @@ export default class LogicCenter {
         this.registModel(LoginMgr);
         this.registModel(LoginUser);
         this.registModel(GameManager);
+        this.registModel(ChatMgr);
     }
 
     //清理逻辑数据

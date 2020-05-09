@@ -48,6 +48,34 @@ export default class LoginMgr extends ModelBase {
 	}
 
 
+	//获取机器码
+	private getMachineCode() : string {
+		return "54143213";
+	}
+
+	//建立网络连接
+	public connectServer() {
+		//建立通道 
+		var wsAddr = ServerConfig.leafServer;
+		cc.log("连接登陆服", wsAddr);
+		var g_leafProcessor = ProcessorMgr.getInstance().getProcessor(ChannelDefine.game);
+		var leafChan = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
+		leafChan.setProcessor(g_leafProcessor);
+		g_leafProcessor.setChannel(leafChan);
+		leafChan.connect( wsAddr, 0, 
+			new CHandler(this, ()=>{
+				
+			}),
+			new CHandler(this, ()=>{ 
+				UIManager.openDialog("loginconn_fail", "登陆服连接失败，是否重试？", (menuId:number)=>{
+					if(menuId===1) {
+						this.connectServer();
+					}
+				})
+			})
+		);
+	}
+
 	//检测是否已经登陆
 	public checkLogin(bTip: boolean): boolean {
 		cc.log("用户: ", LoginUser.getInstance().UserID);
@@ -70,7 +98,7 @@ export default class LoginMgr extends ModelBase {
 			return;
 		}
 
-		this.connectLeaf();
+		this.connectServer();
 		
 		login_request.Login({
 			Account: Account, 
@@ -81,7 +109,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	//注册
-	public leafRegist(Account:string, Pswd:string, InviteCode:string) {
+	public leafRegist(Account:string, Pswd:string, SecurityCode:string, InviteCode:string) {
 		if(!Account || Account==="") {
 			UIManager.toast("请输入账号");
 			return;
@@ -93,36 +121,15 @@ export default class LoginMgr extends ModelBase {
 		
 		InviteCode = InviteCode || "ssss";
 
-		this.connectLeaf();
+		this.connectServer();
 
-	}
-	
-	//建立网络连接
-	public connectLeaf() {
-		//建立通道 
-		var wsAddr = ServerConfig.leafServer;
-		cc.log("连接leaf", wsAddr);
-		var g_leafProcessor = ProcessorMgr.getInstance().getProcessor(ChannelDefine.game);
-		var leafChan = ChannelMgr.getInstance().createChannel(ChannelDefine.game, ChannelType.Ws);
-		leafChan.setProcessor(g_leafProcessor);
-		g_leafProcessor.setChannel(leafChan);
-		leafChan.connect( wsAddr, 0, 
-			new CHandler(this, ()=>{
-				
-			}),
-			new CHandler(this, ()=>{ 
-				UIManager.openDialog("login_fail", "连接失败，是否重试？", (menuId:number)=>{
-					if(menuId===1) {
-						this.connectLeaf();
-					}
-				})
-			})
-		);
-	}
-
-	//获取机器码
-	private getMachineCode() : string {
-		return "54143213";
+		login_request.Register({
+			Name : Account,
+			Password : Pswd,
+			SecurityCode : SecurityCode,
+			MachineCode : this.getMachineCode(),
+			InvitationCode : InviteCode
+		})
 	}
 
 }

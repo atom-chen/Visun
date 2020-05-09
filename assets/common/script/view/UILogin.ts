@@ -47,7 +47,7 @@ export default class LoginUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_regist, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;
-            LoginMgr.getInstance().leafRegist(name, pswd, "ssss");
+            LoginMgr.getInstance().leafRegist(name, pswd, "yanzhengma", "yaoqingma");
         }, this);
     }
 

@@ -8,6 +8,7 @@ import EventCenter from "../../basic/event/EventCenter";
 import KernelEvent from "../../basic/defines/KernelEvent";
 import CHandler from "../../basic/datastruct/CHandler";
 import TimerManager from "../../basic/timer/TimerManager";
+import { isNil } from "../../utils/GlobalFuncs";
 
 var MAX_RECONNECT = 3;
 
@@ -108,6 +109,10 @@ export default class WsChannel implements IChannel {
 	
 	public connect(url:string, port:number, on_success:CHandler = null, on_fail:CHandler = null) : void
 	{
+		if(isNil(url) || url==="") {
+			cc.warn(this._name, "无效的网络连接地址:", url);
+			return;
+		}
 		if(this._url === url && this._ws !== null) {
 			if(this._curState==ConnState.connecting){
 				cc.log(this._name, "skip as connecting: ", url);

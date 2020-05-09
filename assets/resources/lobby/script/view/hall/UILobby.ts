@@ -13,7 +13,6 @@ import { gamecomm_request } from "../../../../../common/script/proto/net_gamecom
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import SceneManager from "../../../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../../../kernel/basic/defines/KernelUIDefine";
-import PlatformUtil from "../../../../../kernel/utils/PlatformUtil";
 
 
 const {ccclass, property} = cc._decorator;
