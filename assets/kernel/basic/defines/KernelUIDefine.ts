@@ -2,11 +2,12 @@
 //-- UI路经
 //-------------------------------------
 export default class KernelUIDefine {
-	public static GameScene = { name:"GameScene" };
-	public static LobbyScene = { name:"LobbyScene" };
-	public static HotupdateScene = { name:"HotupdateScene" };
+	public static GameScene = { name:"GameScene", isLandspace:true };
+	public static LobbyScene = { name:"LobbyScene", isLandspace:true };
+	public static HotupdateScene = { name:"HotupdateScene", isLandspace:true };
+	public static VScene = { name:"VScene", isLandspace:false };
 
-	public static dialog = "launcher/prefabs/ConfirmDlg";
-	public static toast = "launcher/prefabs/UIToast";
-	public static loading = "launcher/scene/UILoading";
+	public static ConfirmDlg = "launcher/prefabs/ConfirmDlg";
+	public static UIToast = "launcher/prefabs/UIToast";
+	public static UILoading = "launcher/scene/UILoading";
 }

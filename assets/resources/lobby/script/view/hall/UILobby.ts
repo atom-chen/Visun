@@ -11,6 +11,8 @@ import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import { gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
+import SceneManager from "../../../../../kernel/view/SceneManager";
+import KernelUIDefine from "../../../../../kernel/basic/defines/KernelUIDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -131,6 +133,11 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//
 		CommonUtil.addClickEvent(this.m_ui.btn_chat, function(){
+			UIManager.toggleWindow(ViewDefine.UIChat);
+		}, this);
+		//
+		CommonUtil.addClickEvent(this.m_ui.btn_qhb, function(){
+			SceneManager.turn2Scene(KernelUIDefine.VScene.name);
 			UIManager.openPanel(ViewDefine.UIChat, null);
 		}, this);
 	}

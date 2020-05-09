@@ -37,8 +37,16 @@ export default class UIManager {
 		}
 	}
 
-	public static getWindow(respath):any{
+	public static getWindow(respath:string):any{
 		return UIManager._allUI[respath];
+	}
+
+	public static toggleWindow(respath:string) : any {
+		if(cc.isValid(UIManager._allUI[respath])) {
+			UIManager.closeWindow(respath);
+		} else {
+			UIManager.showSingleton(respath, null, LayerDefine.Panel, false, false, null, null);
+		}
 	}
 
 	//创建窗口
@@ -166,7 +174,7 @@ export default class UIManager {
 			return;
 		}
 		
-		cc.loader.loadRes(KernelUIDefine.dialog, cc.Prefab, 
+		cc.loader.loadRes(KernelUIDefine.ConfirmDlg, cc.Prefab, 
 		(completeCnt:number, totalCnt:number, item:any)=>{
 			//cc.log("进度: ", completeCnt, totalCnt);
 		}, 
@@ -231,11 +239,11 @@ export default class UIManager {
 				this.node.destroy();
 			}, 1);
 		}
-		if(cc.loader.getRes(KernelUIDefine.toast, cc.Prefab)) {
-			completeCallback(null, cc.loader.getRes(KernelUIDefine.toast, cc.Prefab));
+		if(cc.loader.getRes(KernelUIDefine.UIToast, cc.Prefab)) {
+			completeCallback(null, cc.loader.getRes(KernelUIDefine.UIToast, cc.Prefab));
 			return;
 		}
-		cc.loader.loadRes(KernelUIDefine.toast, cc.Prefab, completeCallback);
+		cc.loader.loadRes(KernelUIDefine.UIToast, cc.Prefab, completeCallback);
 	}
 	
 	public static announce(content:string) {

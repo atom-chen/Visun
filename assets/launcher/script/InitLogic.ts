@@ -13,12 +13,12 @@ export default class InitLogic {
 		if(this._inited) { return; }
         this._inited = true;
         
-        KernelUIDefine.GameScene = { name:"GameScene" };
-        KernelUIDefine.LobbyScene = { name:"LobbyScene" };
-        KernelUIDefine.HotupdateScene = { name:"HotupdateScene" };
-        KernelUIDefine.dialog = "launcher/prefabs/ConfirmDlg";
-        KernelUIDefine.toast = "launcher/prefabs/UIToast";
-        KernelUIDefine.loading = "launcher/scene/UILoading";
+        KernelUIDefine.GameScene.name = "GameScene";
+        KernelUIDefine.LobbyScene.name = "LobbyScene";
+        KernelUIDefine.HotupdateScene.name = "HotupdateScene";
+        KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
+        KernelUIDefine.UIToast = "launcher/prefabs/UIToast";
+        KernelUIDefine.UILoading = "launcher/scene/UILoading";
 
 		cc.game.on(cc.game.EVENT_HIDE, ()=>{
             console.log("游戏进入后台");

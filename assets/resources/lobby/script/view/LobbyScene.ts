@@ -11,7 +11,6 @@ const {ccclass, property} = cc._decorator;
 export default class LobbyScene extends BaseComponent {
 
     onLoad () {
-     //   UIManager.openPanel(ViewDefine.UIHall, null);
         UIManager.openPanel(ViewDefine.UILobby, null);
         LoginMgr.getInstance().connectLeaf();
         LoginMgr.getInstance().checkLogin(true);

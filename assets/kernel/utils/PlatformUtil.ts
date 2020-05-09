@@ -1,5 +1,8 @@
 //---------------------------------
 // 平台相关接口导出
+
+import Adaptor from "../adaptor/Adaptor";
+
 //---------------------------------
 export default class PlatformUtil {
 
@@ -42,8 +45,9 @@ export default class PlatformUtil {
 	//手动设置横竖屏
 	public static setOrientation(bLandspace:boolean) 
 	{
-		let n:number = bLandspace ? cc.macro.ORIENTATION_LANDSCAPE : cc.macro.ORIENTATION_PORTRAIT;
-		cc.view.setOrientation(n);
+		if(!cc.sys.isNative) {
+			Adaptor.adaptOrientation(bLandspace);
+		}
 	}
 	
 }
