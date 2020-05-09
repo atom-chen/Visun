@@ -21,6 +21,7 @@ import { landLords_packet_define } from "../proto/net_landLords";
 import { cowcow_packet_define } from "../proto/net_cowcow";
 import { fishLord_packet_define } from "../proto/net_fishLord";
 import { mahjong_packet_define } from "../proto/net_mahjong";
+import ChatHandlers from "../proxy/ChatHandlers";
 
 
 //模块管理器
@@ -42,7 +43,11 @@ export default class LogicCenter {
         g_leafProcessor.registCmds(mahjong_packet_define);
         g_leafProcessor.registCmds(fishLord_packet_define);
         g_leafProcessor.getDispatcher().addObserver(NetHandlers);
-        
+        //初始化聊天协议
+        var g_chatProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.chat, ProcessorType.LeafWs);
+        g_chatProcessor.unregistAllCmds();
+        g_chatProcessor.getDispatcher().addObserver(ChatHandlers);
+        //初始化Http协议
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
 		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
     }

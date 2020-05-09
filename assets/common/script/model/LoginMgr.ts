@@ -22,7 +22,7 @@ export default class LoginMgr extends ModelBase {
 		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
             if(chan.getName()===ChannelDefine.game) {
                 if(chan.getState()===ConnState.reconnectfail) {
-                    UIManager.openDialog("reconnectfail", "网络断开，是否重连？", (menuId:number)=>{
+                    UIManager.openDialog("reconnectfail", "游戏连接断开，是否重连？", (menuId:number)=>{
                         if(menuId===1) {
                             chan.reconnect();
                         }
