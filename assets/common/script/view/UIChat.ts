@@ -10,6 +10,8 @@ export default class UIChat extends BaseComponent {
     editcont: cc.EditBox = null;
 
     start () {
+        CommonUtil.traverseNodes(this.node, this.m_ui);
+        
         CommonUtil.addClickEvent(this.m_ui.btn_send, function(){
             var cont = this.editcont.string;
             chat_request.GroupChat({

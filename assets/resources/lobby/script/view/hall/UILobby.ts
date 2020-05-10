@@ -141,6 +141,10 @@ export default class UILobby extends BaseComponent {
 				UIManager.openPanel(ViewDefine.UIChat, null);
 			});
 		}, this);
+		//
+		CommonUtil.addClickEvent(this.m_ui.btn_group, function(){
+			UIManager.openPopwnd(ViewDefine.UIGroupCreate, true, null);
+		}, this);
 	}
 
 }
