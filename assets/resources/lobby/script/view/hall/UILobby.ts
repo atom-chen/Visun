@@ -138,7 +138,7 @@ export default class UILobby extends BaseComponent {
 		//
 		CommonUtil.addClickEvent(this.m_ui.btn_qhb, function(){
 			SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
-				UIManager.openPanel(ViewDefine.UIChat, null);
+				UIManager.openPanel(ViewDefine.UIqhb, null);
 			});
 		}, this);
 		//

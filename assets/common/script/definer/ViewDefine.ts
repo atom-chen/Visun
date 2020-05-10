@@ -44,4 +44,5 @@ export default class ViewDefine {
 	public static UIbrttz = "subgames/brttz/prefabs/UIbrttz";
 	public static UIBacarrat = "subgames/bjle2/prefabs/UIBacarrat";
 	public static battle1 = "subgames/rpg/prefabs/battle1";
+	public static UIqhb = "subgames/qhb/prefabs/UIqhb";
 }
