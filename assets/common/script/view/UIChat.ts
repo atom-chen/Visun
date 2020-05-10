@@ -34,7 +34,7 @@ export default class UIChat extends BaseComponent {
         }, this);
         
         EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
-        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.PrivateChatResp, this);
+        EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
     }
 
     GroupChatResp(param) {
