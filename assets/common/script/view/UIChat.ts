@@ -3,6 +3,8 @@ import CommonUtil from "../../../kernel/utils/CommonUtil";
 import { chat_request, chat_msgs } from "../proto/net_chat";
 import LoginUser from "../model/LoginUser";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
+import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
+import UIManager from "../../../kernel/view/UIManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -21,6 +23,10 @@ export default class UIChat extends BaseComponent {
         
         CommonUtil.addClickEvent(this.m_ui.btn_send, function(){
             var cont = this.editcont.string;
+            if(isEmpty(cont)) {
+                UIManager.toast("请输入聊天内容");
+                return;
+            }
             chat_request.GroupChat({
                 GroupId: 0,
                 Content: cont
