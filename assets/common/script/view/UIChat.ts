@@ -1,7 +1,8 @@
 import BaseComponent from "../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
-import { chat_request } from "../proto/net_chat";
+import { chat_request, chat_msgs } from "../proto/net_chat";
 import LoginUser from "../model/LoginUser";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
 
 const {ccclass, property} = cc._decorator;
 
@@ -24,8 +25,18 @@ export default class UIChat extends BaseComponent {
                 GroupId: 0,
                 Content: cont
             });
-            this.onChatMsg(0, cont, "嗷嗷", "");
-		}, this);
+        }, this);
+        
+        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
+        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.PrivateChatResp, this);
+    }
+
+    GroupChatResp(param) {
+        this.onChatMsg(param.SenderID, param.Content, "啊啊啊", "");
+    }
+
+    PrivateChatResp(param) {
+        this.onChatMsg(param.SenderID, param.Content, "嗷嗷嗷", "");
     }
 
     onChatMsg(uid:number, cont:string, name:string, headImg:string) {
