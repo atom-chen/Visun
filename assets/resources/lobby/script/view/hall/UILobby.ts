@@ -145,6 +145,10 @@ export default class UILobby extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_group, function(){
 			UIManager.openPopwnd(ViewDefine.UIGroupCreate, true, null);
 		}, this);
+		//
+		CommonUtil.addClickEvent(this.m_ui.btn_grp_addmember, function(){
+			UIManager.openPopwnd(ViewDefine.UIGroupAddMember, true, null);
+		}, this);
 	}
 
 }

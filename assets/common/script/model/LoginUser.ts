@@ -1,4 +1,5 @@
 import ModelBase from "../../../kernel/model/ModelBase";
+import Group from "./Group";
 
 //登陆用户
 export default class LoginUser extends ModelBase {
@@ -20,8 +21,11 @@ export default class LoginUser extends ModelBase {
 	ClientAddr:number = 0;		//连接地址
 	MachineCode:string = "";	//机器序列
 
+	MyGroup:Group = null;
+
 	private constructor() {
 		super();
+		this.MyGroup = null;
 	}
 
 	public on_clear(): void {
