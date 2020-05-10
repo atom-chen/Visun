@@ -8,36 +8,45 @@ message SetupGroup {
 message SetupGroupResp {
     uint64 GroupId = 1; //0~99官方指定 100~100000私人群
     string GroupName = 2; //世界频道
-    uint64 HostID = 3;//群主ID
-    int64 Timestamp = 4;//创建时间戳
-    repeated uint64 AdminList = 5;//管理员列表
-    repeated uint64 MemberList = 6;//成员列表
-    repeated  uint64 BannedList = 7;//禁言列表
+    uint64 HostID = 3; //群主ID
+    int64 Timestamp = 4; //创建时间戳
+    repeated uint64 AdminList = 5; //管理员列表
+    repeated uint64 MemberList = 6; //成员列表
+    repeated uint64 BannedList = 7; //禁言列表
 }
 
 //聊天：群频道
 message GroupChat {
     uint64 GroupId = 1; //0~99官方指定 100~100000私人群
-    string Content = 2;
+    uint32 Type = 2;
+    string Content = 3;
+    ContestLuck GoodLuck = 4;
+
 }
 
 message GroupChatResp {
     uint64 GroupId = 1;
-    string Content = 2;
-    int64 Timestamp = 3;
-    uint64 SenderID = 4;
+    uint32 Type = 2;
+    string Content = 3;
+    ContestLuck GoodLuck = 4;
+    int64 Timestamp = 5;
+    uint64 SenderID = 6;
 }
 
 //聊天：私聊频道
 message PrivateChat {
     uint64 TargetId = 1; //
-    string Content = 2;
+    uint32 Type = 2;
+    string Content = 3;
+    ContestLuck GoodLuck = 4;
 }
 
 message PrivateChatResp {
-    string Content = 1;
-    int64 Timestamp = 2;
-    uint64 SenderID = 3;
+    uint32 Type = 1;
+    string Content = 2;
+    ContestLuck GoodLuck = 3;
+    int64 Timestamp = 4;
+    uint64 SenderID = 5;
 }
 
 //拉人
@@ -50,7 +59,7 @@ message GroupAddPersonResp {
     uint64 GroupId = 1;
     uint64 UserID = 2; //拉人者ID
     int64 Timestamp = 3;
-    uint64 MemID = 4;  //被拉者
+    uint64 MemID = 4; //被拉者
 }
 
 //踢人
@@ -114,4 +123,11 @@ message GroupChangeHostResp {
     uint64 GroupId = 1;
     uint64 UserID = 2; //新群主ID
     int64 Timestamp = 3;
+}
+
+//抢红包
+message ContestLuck {
+    uint32 Code = 1; //操作码 0:固定红包 1:随机红包
+    uint32 Number = 2; //红包个数
+    int64 Gold = 3; //金币
 }

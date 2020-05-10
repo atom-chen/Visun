@@ -25,6 +25,7 @@ export enum chat_msgs {
     GroupDismissResp = 28,
     GroupChangeHost = 29,
     GroupChangeHostResp = 30,
+    ContestLuck = 31,
 }
 
 export var chat_packet_define = {
@@ -46,15 +47,16 @@ export var chat_packet_define = {
     28: new LeafWsPacket(28, chat.GroupDismissResp, "chat.GroupDismissResp"),
     29: new LeafWsPacket(29, chat.GroupChangeHost, "chat.GroupChangeHost"),
     30: new LeafWsPacket(30, chat.GroupChangeHostResp, "chat.GroupChangeHostResp"),
+    31: new LeafWsPacket(31, chat.ContestLuck, "chat.ContestLuck"),
 }
 
 export class chat_request {
     public static SetupGroup( data:{ name:string } ) { chat_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
     public static SetupGroupResp( data:{ GroupId:number, GroupName:string, HostID:number, Timestamp:number, AdminList:number[], MemberList:number[], BannedList:number[] } ) { chat_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupChat( data:{ GroupId:number, Content:string } ) { chat_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupChatResp( data:{ GroupId:number, Content:string, Timestamp:number, SenderID:number } ) { chat_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateChat( data:{ TargetId:number, Content:string } ) { chat_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateChatResp( data:{ Content:string, Timestamp:number, SenderID:number } ) { chat_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupChat( data:{ GroupId:number, Type:number, Content:string, GoodLuck:any } ) { chat_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupChatResp( data:{ GroupId:number, Type:number, Content:string, GoodLuck:any, Timestamp:number, SenderID:number } ) { chat_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateChat( data:{ TargetId:number, Type:number, Content:string, GoodLuck:any } ) { chat_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateChatResp( data:{ Type:number, Content:string, GoodLuck:any, Timestamp:number, SenderID:number } ) { chat_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupAddPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupAddPersonResp( data:{ GroupId:number, UserID:number, Timestamp:number, MemID:number } ) { chat_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupDelPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
@@ -67,5 +69,6 @@ export class chat_request {
     public static GroupDismissResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupChangeHost( data:{ GroupId:number, OldID:number, NewID:number } ) { chat_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupChangeHostResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
+    public static ContestLuck( data:{ Code:number, Number:number, Gold:number } ) { chat_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
 }
 
