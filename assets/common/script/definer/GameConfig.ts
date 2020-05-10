@@ -5,7 +5,6 @@ var GameConfig = {
 	[GameKindEnum.RPG] : {
 		GameKind: GameKindEnum.RPG,
 		name: "RPG",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_rpg",
 		dir: "jskb",
 		viewpath: ViewDefine.battle1
@@ -14,7 +13,6 @@ var GameConfig = {
 	[GameKindEnum.BrCowCow] : {
 		GameKind: GameKindEnum.BrCowCow,
 		name: "百人牛牛",
-		openState: 2,
 		icon: "lobby/imgs/gameico/ico_brnn",
 		dir: "brnn",
 		viewpath: ViewDefine.UIbrnn
@@ -22,7 +20,6 @@ var GameConfig = {
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
 		name: "龙虎斗",
-		openState: 1,
 		icon: "lobby/imgs/gameico/icon_lhd",
 		dir: "longhu",
 		viewpath: ViewDefine.UIlonghu
@@ -30,7 +27,6 @@ var GameConfig = {
 	[GameKindEnum.Baccarat] : {
 		GameKind: GameKindEnum.Baccarat,
 		name: "百家乐",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_bjl",
 		dir: "bjle",
 		viewpath: ViewDefine.UIBacarrat
@@ -38,7 +34,6 @@ var GameConfig = {
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,
 		name: "抢红包",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qhb",
 		dir: "redbag",
 		viewpath: ViewDefine.UIredbag
@@ -46,7 +41,6 @@ var GameConfig = {
 	[GameKindEnum.Redblack] : {
 		GameKind: GameKindEnum.Redblack,
 		name: "红黑大战",
-		openState: 1,
 		icon: "lobby/imgs/gameico/icon_hhdz",
 		dir: "honhei",
 		viewpath: ViewDefine.UIhonghei
@@ -54,7 +48,6 @@ var GameConfig = {
 	[GameKindEnum.BirdBeast] : {
 		GameKind: GameKindEnum.BirdBeast,
 		name: "飞禽走兽",
-		openState: 1,
 		icon: "lobby/imgs/gameico/icon_fqzs",
 		dir: "fqzs",
 		viewpath: ViewDefine.UIfqzs
@@ -63,7 +56,6 @@ var GameConfig = {
 	[GameKindEnum.Zhajinhua] : {
 		GameKind: GameKindEnum.Zhajinhua,
 		name: "炸金花",
-		openState: 1,
 		icon: "lobby/imgs/gameico/icon_zjh",
 		dir: "zjh",
 		viewpath: ViewDefine.UIzjh
@@ -71,7 +63,6 @@ var GameConfig = {
 	[GameKindEnum.QzCowcow] : {
 		GameKind: GameKindEnum.QzCowcow,
 		name: "抢庄牛牛",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qznn",
 		dir: "qznn",
 		viewpath: ViewDefine.UIqznn
@@ -79,7 +70,6 @@ var GameConfig = {
 	[GameKindEnum.Landlord] : {
 		GameKind: GameKindEnum.Landlord,
 		name: "斗地主",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ddz",
 		dir: "ddz",
 		viewpath: ViewDefine.UIddz
@@ -87,7 +77,6 @@ var GameConfig = {
 	[GameKindEnum.Blackjack] : {
 		GameKind: GameKindEnum.Blackjack,
 		name: "21点",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_dian21",
 		dir: "dian21",
 		viewpath: ViewDefine.UIdian21
@@ -95,7 +84,6 @@ var GameConfig = {
 	[GameKindEnum.Sangong] : {
 		GameKind: GameKindEnum.Sangong,
 		name: "三公",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_sangong",
 		dir: "sangong",
 		viewpath: ViewDefine.UIsangong
@@ -103,7 +91,6 @@ var GameConfig = {
 	[GameKindEnum.Water13] : {
 		GameKind: GameKindEnum.Water13,
 		name: "十三水",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_shui13",
 		dir: "shui13",
 		viewpath: ViewDefine.UIshui13
@@ -111,7 +98,6 @@ var GameConfig = {
 	[GameKindEnum.Qzpaijiu] : {
 		GameKind: GameKindEnum.Qzpaijiu,
 		name: "抢庄牌九",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_qzpj",
 		dir: "qzpj",
 		viewpath: ViewDefine.UIpaijiu
@@ -119,7 +105,6 @@ var GameConfig = {
 	[GameKindEnum.Suoha] : {
 		GameKind: GameKindEnum.Suoha,
 		name: "梭哈",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_suoha",
 		dir: "suoha",
 		viewpath: ViewDefine.UIsuoha
@@ -127,7 +112,6 @@ var GameConfig = {
 	[GameKindEnum.Paodekuai] : {
 		GameKind: GameKindEnum.Paodekuai,
 		name: "跑得快",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_pdk",
 		dir: "paodk",
 		viewpath: ViewDefine.UIpdk
@@ -135,7 +119,6 @@ var GameConfig = {
 	[GameKindEnum.Texas] : {
 		GameKind: GameKindEnum.Texas,
 		name: "德州扑克",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_dezhou",
 		dir: "paodk",
 		viewpath: ViewDefine.UItexas
@@ -143,7 +126,6 @@ var GameConfig = {
 	[GameKindEnum.Ermj] : {
 		GameKind: GameKindEnum.Ermj,
 		name: "二人麻将",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_ermj",
 		dir: "ermj",
 		viewpath: ViewDefine.UIermj
@@ -151,7 +133,6 @@ var GameConfig = {
 	[GameKindEnum.Buyu] : {
 		GameKind: GameKindEnum.Buyu,
 		name: "捕鱼",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_by",
 		dir: "buyu",
 		viewpath: ViewDefine.UIbuyu
@@ -159,7 +140,6 @@ var GameConfig = {
 	[GameKindEnum.Toubao] : {
 		GameKind: GameKindEnum.Toubao,
 		name: "骰宝",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_toubao",
 		dir: "saibao",
 		viewpath: ViewDefine.UItoubao
@@ -167,7 +147,6 @@ var GameConfig = {
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
 		name: "二八杠",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_erba",
 		dir: "erba",
 		viewpath: ViewDefine.UIerba
@@ -175,7 +154,6 @@ var GameConfig = {
 	[GameKindEnum.Jskb] : {
 		GameKind: GameKindEnum.Jskb,
 		name: "极速狂飙",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_jskb",
 		dir: "jskb",
 		viewpath: ViewDefine.UIjskb
@@ -183,7 +161,6 @@ var GameConfig = {
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
 		name: "百人推筒子",
-		openState: 1,
 		icon: "lobby/imgs/gameico/ico_brttz",
 		dir: "jskb",
 		viewpath: ViewDefine.UIbrttz
