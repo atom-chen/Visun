@@ -15,20 +15,20 @@ export default class LeafWsProcessor extends BaseProcessor {
 		return true;
 	}
 
-	public sendMessage(cmd: number | string, info: any): boolean 
+	public sendMessage(cmd: number | string, buff: any): boolean 
 	{
 		if (this.isNetHolded()) {
-			cc.log(this._name, "消息推入队列：", this._channel.getState(), this._paused);
-			this._send_list.push(info);
+			cc.log(cc.js.formatStr("%s [push send] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, buff.length));
+			this._send_list.push(buff);
 			return false;
 		}
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(cc.js.formatStr("%s [send] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), info.length));
+			cc.log(cc.js.formatStr("%s [send] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, buff.length));
 		//	cc.log(CommonUtil.Bytes2Str(info));
 		}
 
-		return this._channel.sendBuff(info);
+		return this._channel.sendBuff(buff);
 	}
 
 	public onrecvBuff(buff: any): void 
@@ -50,18 +50,20 @@ export default class LeafWsProcessor extends BaseProcessor {
 		var data = packet.unpackBody(bytes.subarray(HEAD_SIZE));
 
 		if(this.isShowDebug(cmd)) {
-			cc.log(cc.js.formatStr("%s [recv] cmd:%d msgName:%s bytes:%d", this._name, cmd, this._cmds[cmd].debugName(), bytes.length));
+			if(this._paused) {
+				cc.log(cc.js.formatStr("%s [push recv] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, bytes.length));
+			} else {
+				cc.log(cc.js.formatStr("%s [recv] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, bytes.length));
+			}
 		//	cc.log(CommonUtil.Bytes2Str(bytes));
 			cc.log(data);
 		}
 
 		if(this._paused) {
 			this._fire_list.push({cmd:cmd,data:data});
-			cc.log(this._name, "push fire", this._fire_list.length);
-			return;
+		} else {
+			this._dispatcher.fire(cmd, data);
 		}
-
-		this._dispatcher.fire(cmd, data);
 	}
 	
 }
