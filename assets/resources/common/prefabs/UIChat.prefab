@@ -34,17 +34,17 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 60
-      },
-      {
         "__id__": 61
       },
       {
         "__id__": 62
+      },
+      {
+        "__id__": 63
       }
     ],
     "_prefab": {
-      "__id__": 63
+      "__id__": 64
     },
     "_opacity": 255,
     "_color": {
@@ -1490,17 +1490,17 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 57
+        "__id__": 58
       },
       {
         "__id__": 46
       },
       {
-        "__id__": 58
+        "__id__": 59
       }
     ],
     "_prefab": {
-      "__id__": 59
+      "__id__": 60
     },
     "_opacity": 255,
     "_color": {
@@ -1563,14 +1563,14 @@
         "__id__": 45
       },
       {
-        "__id__": 54
+        "__id__": 55
       },
       {
-        "__id__": 55
+        "__id__": 56
       }
     ],
     "_prefab": {
-      "__id__": 56
+      "__id__": 57
     },
     "_opacity": 255,
     "_color": {
@@ -1779,10 +1779,13 @@
     "_components": [
       {
         "__id__": 52
+      },
+      {
+        "__id__": 53
       }
     ],
     "_prefab": {
-      "__id__": 53
+      "__id__": 54
     },
     "_opacity": 255,
     "_color": {
@@ -1976,6 +1979,39 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 220,
     "_originalHeight": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Layout",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 47
+    },
+    "_enabled": true,
+    "_layoutSize": {
+      "__type__": "cc.Size",
+      "width": 300,
+      "height": 200
+    },
+    "_resize": 1,
+    "_N$layoutType": 2,
+    "_N$padding": 0,
+    "_N$cellSize": {
+      "__type__": "cc.Size",
+      "width": 40,
+      "height": 40
+    },
+    "_N$startAxis": 0,
+    "_N$paddingLeft": 0,
+    "_N$paddingRight": 0,
+    "_N$paddingTop": 0,
+    "_N$paddingBottom": 0,
+    "_N$spacingX": 0,
+    "_N$spacingY": 2,
+    "_N$verticalDirection": 1,
+    "_N$horizontalDirection": 0,
+    "_N$affectedByScale": false,
     "_id": ""
   },
   {
@@ -2198,6 +2234,12 @@
     "_enabled": true,
     "editcont": {
       "__id__": 37
+    },
+    "ChatItemL": {
+      "__uuid__": "aa4449d3-705f-466d-9241-ce74c26ed38c"
+    },
+    "ChatItemR": {
+      "__uuid__": "65b76c06-a7d9-4adb-8373-142654d96a9f"
     },
     "_id": ""
   },

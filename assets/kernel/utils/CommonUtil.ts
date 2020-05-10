@@ -1,9 +1,9 @@
 //---------------------------------
 // 通用辅助接口
-
+//---------------------------------
 import { isNil } from "./GlobalFuncs";
 
-//---------------------------------
+
 if(!ArrayBuffer["transfer"]) {
     ArrayBuffer["transfer"] = function (source, length) {
         source = Object(source);

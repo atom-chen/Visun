@@ -17,6 +17,7 @@ export default class ViewDefine {
 	public static UIPerson = "lobby/prefabs/UIPerson";
 	public static UIRoom = "lobby/prefabs/UIRoom";
 	public static UIGroupCreate = "lobby/prefabs/UIGroupCreate";
+	public static UIGroupMember = "lobby/prefabs/UIGroupMember";
 	//
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
