@@ -38,14 +38,17 @@ export default class UIChat extends BaseComponent {
     }
 
     GroupChatResp(param) {
-        this.onChatMsg(param.SenderID, param.Content, "啊啊啊", "");
+        this.onChatMsg(param.SenderID, param.Content, "", "");
     }
 
     PrivateChatResp(param) {
-        this.onChatMsg(param.SenderID, param.Content, "嗷嗷嗷", "");
+        this.onChatMsg(param.SenderID, param.Content, "", "");
     }
 
     onChatMsg(uid:number, cont:string, name:string, headImg:string) {
+        if(isEmpty(name)) {
+            name = uid.toString();
+        }
         var item = null;
         if(uid==LoginUser.getInstance().UserID){
             item = cc.instantiate(this.ChatItemR);
