@@ -2,6 +2,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import UIManager from "../../../../kernel/view/UIManager";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
+import ViewDefine from "../../../../common/script/definer/ViewDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,22 +13,22 @@ export default class UIMain extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         CommonUtil.addClickEvent(this.m_ui.btn_chat, function(){ 
-            UIManager.closeWindow("appenvelope/prefabs/UIGroup");
-            UIManager.closeWindow("appenvelope/prefabs/UIPersonal");
-            UIManager.openPanel("appenvelope/prefabs/UIChat", null);
+            UIManager.closeWindow(ViewDefine.UIGroup);
+            UIManager.closeWindow(ViewDefine.UIPersonal);
+            UIManager.openPanel(ViewDefine.UIChat, null);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_group, function(){ 
-            UIManager.closeWindow("appenvelope/prefabs/UIChat");
-            UIManager.closeWindow("appenvelope/prefabs/UIPersonal");
-            UIManager.openPanel("appenvelope/prefabs/UIGroup", null);
+            UIManager.closeWindow(ViewDefine.UIChat);
+            UIManager.closeWindow(ViewDefine.UIPersonal);
+            UIManager.openPanel(ViewDefine.UIGroup, null);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_person, function(){ 
             if(!LoginMgr.getInstance().checkLogin(true)){
                 return;
             }
-            UIManager.closeWindow("appenvelope/prefabs/UIGroup");
-            UIManager.closeWindow("appenvelope/prefabs/UIChat");
-            UIManager.openPanel("appenvelope/prefabs/UIPersonal", null);
+            UIManager.closeWindow(ViewDefine.UIGroup);
+            UIManager.closeWindow(ViewDefine.UIChat);
+            UIManager.openPanel(ViewDefine.UIPersonal, null);
 		}, this);
     }
 

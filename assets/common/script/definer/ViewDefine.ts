@@ -2,7 +2,6 @@
 export default class ViewDefine {
 	public static CpnChip = "common/prefabs/CpnChip";
 	public static UILogin = "common/prefabs/UILogin";
-	public static UIChat = "common/prefabs/UIChat";
 	//
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIGames = "lobby/prefabs/UIGames";
@@ -16,9 +15,15 @@ export default class ViewDefine {
 	public static UISpread = "lobby/prefabs/UISpread";
 	public static UIPerson = "lobby/prefabs/UIPerson";
 	public static UIRoom = "lobby/prefabs/UIRoom";
-	public static UIGroupCreate = "lobby/prefabs/UIGroupCreate";
-	public static UIGroupAddMember = "lobby/prefabs/UIGroupAddMember";
-	public static UIGroupMember = "lobby/prefabs/UIGroupMember";
+
+	
+	public static UIGroupCreate = "appenvelope/prefabs/UIGroupCreate";
+	public static UIGroupAddMember = "appenvelope/prefabs/UIGroupAddMember";
+	public static UIGroupMember = "appenvelope/prefabs/UIGroupMember";
+	public static UIMain = "appenvelope/prefabs/UIMain";
+	public static UIChat = "appenvelope/prefabs/UIChat";
+	public static UIGroup = "appenvelope/prefabs/UIGroup";
+	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
 	//
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
