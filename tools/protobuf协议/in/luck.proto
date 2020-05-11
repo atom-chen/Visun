@@ -1,0 +1,50 @@
+syntax = "proto3";
+package luck;
+
+//发红包
+message SendReward {
+    int64 Type = 1; //发红包类型 0:固定 1:随机
+    int64 Count = 2; //个数
+    int64 Money = 3; //总金额(分)
+}
+message SendRewardResp {
+    int32 ID = 1;
+    int32 Type = 2; //发红包类型 0:固定 1:随机
+    int64 Count = 3; //个数
+    int64 Money = 4; //总金额(分)
+    int64 TimeStamp = 5;//发红包时间
+    uint64 SenderID = 6;//发送者
+    int64 StartTimeStamp = 7;//起始时间
+    int64 WaitTime = 8;//最长等待时间
+}
+
+
+//抢红包
+message GetReward {
+    int32 ID = 1;
+}
+
+message GetRewardResp {
+    int32 ID = 1;
+    uint64 SenderID = 2;//
+    int64 StartTimeStamp = 3;//起始时间
+    int64 WaitTime = 4;//最长等待时间
+    int64 Count = 5; //个数
+    int64 Money = 6; //总金额(分)
+    int64 RemainCount = 7; //剩余个数
+    int64 RemainMoney = 8; //剩余金额(分)
+    int64 BestMoney = 9; //手气最佳金额
+    int64 BestMoneyIndex = 10; //手气最佳序号
+    repeated int64 MoneyList = 11; //拆分列表
+}
+
+
+//摇色子
+message RollDice {
+    int64 Count = 1; //色子个数
+}
+
+message RollDiceResp {
+    int64 Count = 1; //色子个数
+    bytes Numbers = 2;//点数
+}

@@ -1,0 +1,1 @@
+python gen_leaf.py luck game
