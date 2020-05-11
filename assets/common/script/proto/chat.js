@@ -1266,6 +1266,490 @@ $root.chat = (function() {
         return InviteEnterGroupResp;
     })();
 
+    chat.GroupInvite = (function() {
+
+        function GroupInvite(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupInvite.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupInvite.prototype.Invite = null;
+
+        GroupInvite.create = function create(properties) {
+            return new GroupInvite(properties);
+        };
+
+        GroupInvite.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Invite != null && message.hasOwnProperty("Invite"))
+                $root.chat.InviteEnterGroup.encode(message.Invite, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupInvite.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupInvite.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupInvite();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Invite = $root.chat.InviteEnterGroup.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupInvite.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupInvite.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Invite != null && message.hasOwnProperty("Invite")) {
+                var error = $root.chat.InviteEnterGroup.verify(message.Invite);
+                if (error)
+                    return "Invite." + error;
+            }
+            return null;
+        };
+
+        GroupInvite.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupInvite)
+                return object;
+            var message = new $root.chat.GroupInvite();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Invite != null) {
+                if (typeof object.Invite !== "object")
+                    throw TypeError(".chat.GroupInvite.Invite: object expected");
+                message.Invite = $root.chat.InviteEnterGroup.fromObject(object.Invite);
+            }
+            return message;
+        };
+
+        GroupInvite.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Invite = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Invite != null && message.hasOwnProperty("Invite"))
+                object.Invite = $root.chat.InviteEnterGroup.toObject(message.Invite, options);
+            return object;
+        };
+
+        GroupInvite.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupInvite;
+    })();
+
+    chat.GroupInviteResp = (function() {
+
+        function GroupInviteResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupInviteResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupInviteResp.prototype.Resp = null;
+
+        GroupInviteResp.create = function create(properties) {
+            return new GroupInviteResp(properties);
+        };
+
+        GroupInviteResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.chat.InviteEnterGroupResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupInviteResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupInviteResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupInviteResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.chat.InviteEnterGroupResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupInviteResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupInviteResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.chat.InviteEnterGroupResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        GroupInviteResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupInviteResp)
+                return object;
+            var message = new $root.chat.GroupInviteResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.GroupInviteResp.Resp: object expected");
+                message.Resp = $root.chat.InviteEnterGroupResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        GroupInviteResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.chat.InviteEnterGroupResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        GroupInviteResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupInviteResp;
+    })();
+
+    chat.PrivateInvite = (function() {
+
+        function PrivateInvite(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateInvite.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateInvite.prototype.Invite = null;
+
+        PrivateInvite.create = function create(properties) {
+            return new PrivateInvite(properties);
+        };
+
+        PrivateInvite.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.Invite != null && message.hasOwnProperty("Invite"))
+                $root.chat.InviteEnterGroup.encode(message.Invite, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateInvite.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateInvite.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateInvite();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.Invite = $root.chat.InviteEnterGroup.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateInvite.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateInvite.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.Invite != null && message.hasOwnProperty("Invite")) {
+                var error = $root.chat.InviteEnterGroup.verify(message.Invite);
+                if (error)
+                    return "Invite." + error;
+            }
+            return null;
+        };
+
+        PrivateInvite.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateInvite)
+                return object;
+            var message = new $root.chat.PrivateInvite();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.Invite != null) {
+                if (typeof object.Invite !== "object")
+                    throw TypeError(".chat.PrivateInvite.Invite: object expected");
+                message.Invite = $root.chat.InviteEnterGroup.fromObject(object.Invite);
+            }
+            return message;
+        };
+
+        PrivateInvite.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.Invite = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.Invite != null && message.hasOwnProperty("Invite"))
+                object.Invite = $root.chat.InviteEnterGroup.toObject(message.Invite, options);
+            return object;
+        };
+
+        PrivateInvite.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateInvite;
+    })();
+
+    chat.PrivateInviteResp = (function() {
+
+        function PrivateInviteResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateInviteResp.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateInviteResp.prototype.Resp = null;
+
+        PrivateInviteResp.create = function create(properties) {
+            return new PrivateInviteResp(properties);
+        };
+
+        PrivateInviteResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.chat.InviteEnterGroupResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateInviteResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateInviteResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateInviteResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.chat.InviteEnterGroupResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateInviteResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateInviteResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.chat.InviteEnterGroupResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        PrivateInviteResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateInviteResp)
+                return object;
+            var message = new $root.chat.PrivateInviteResp();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.PrivateInviteResp.Resp: object expected");
+                message.Resp = $root.chat.InviteEnterGroupResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        PrivateInviteResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.chat.InviteEnterGroupResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        PrivateInviteResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateInviteResp;
+    })();
+
     chat.EnterGroup = (function() {
 
         function EnterGroup(properties) {
@@ -1886,6 +2370,974 @@ $root.chat = (function() {
         };
 
         return GroupChatResp;
+    })();
+
+    chat.GroupSendReward = (function() {
+
+        function GroupSendReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupSendReward.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupSendReward.prototype.SendReward = null;
+
+        GroupSendReward.create = function create(properties) {
+            return new GroupSendReward(properties);
+        };
+
+        GroupSendReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.SendReward != null && message.hasOwnProperty("SendReward"))
+                $root.luck.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupSendReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupSendReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupSendReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.SendReward = $root.luck.SendReward.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupSendReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupSendReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.SendReward != null && message.hasOwnProperty("SendReward")) {
+                var error = $root.luck.SendReward.verify(message.SendReward);
+                if (error)
+                    return "SendReward." + error;
+            }
+            return null;
+        };
+
+        GroupSendReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupSendReward)
+                return object;
+            var message = new $root.chat.GroupSendReward();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.SendReward != null) {
+                if (typeof object.SendReward !== "object")
+                    throw TypeError(".chat.GroupSendReward.SendReward: object expected");
+                message.SendReward = $root.luck.SendReward.fromObject(object.SendReward);
+            }
+            return message;
+        };
+
+        GroupSendReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.SendReward = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.SendReward != null && message.hasOwnProperty("SendReward"))
+                object.SendReward = $root.luck.SendReward.toObject(message.SendReward, options);
+            return object;
+        };
+
+        GroupSendReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupSendReward;
+    })();
+
+    chat.GroupSendRewardResp = (function() {
+
+        function GroupSendRewardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupSendRewardResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupSendRewardResp.prototype.Resp = null;
+
+        GroupSendRewardResp.create = function create(properties) {
+            return new GroupSendRewardResp(properties);
+        };
+
+        GroupSendRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupSendRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupSendRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupSendRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.SendRewardResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupSendRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupSendRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.SendRewardResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        GroupSendRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupSendRewardResp)
+                return object;
+            var message = new $root.chat.GroupSendRewardResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.GroupSendRewardResp.Resp: object expected");
+                message.Resp = $root.luck.SendRewardResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        GroupSendRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.SendRewardResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        GroupSendRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupSendRewardResp;
+    })();
+
+    chat.GroupGetReward = (function() {
+
+        function GroupGetReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupGetReward.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupGetReward.prototype.GetReward = null;
+
+        GroupGetReward.create = function create(properties) {
+            return new GroupGetReward(properties);
+        };
+
+        GroupGetReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.GetReward != null && message.hasOwnProperty("GetReward"))
+                $root.luck.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupGetReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupGetReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupGetReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.GetReward = $root.luck.GetReward.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupGetReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupGetReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.GetReward != null && message.hasOwnProperty("GetReward")) {
+                var error = $root.luck.GetReward.verify(message.GetReward);
+                if (error)
+                    return "GetReward." + error;
+            }
+            return null;
+        };
+
+        GroupGetReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupGetReward)
+                return object;
+            var message = new $root.chat.GroupGetReward();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.GetReward != null) {
+                if (typeof object.GetReward !== "object")
+                    throw TypeError(".chat.GroupGetReward.GetReward: object expected");
+                message.GetReward = $root.luck.GetReward.fromObject(object.GetReward);
+            }
+            return message;
+        };
+
+        GroupGetReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.GetReward = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.GetReward != null && message.hasOwnProperty("GetReward"))
+                object.GetReward = $root.luck.GetReward.toObject(message.GetReward, options);
+            return object;
+        };
+
+        GroupGetReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupGetReward;
+    })();
+
+    chat.GroupGetRewardResp = (function() {
+
+        function GroupGetRewardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupGetRewardResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupGetRewardResp.prototype.Resp = null;
+
+        GroupGetRewardResp.create = function create(properties) {
+            return new GroupGetRewardResp(properties);
+        };
+
+        GroupGetRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupGetRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupGetRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupGetRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.GetRewardResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupGetRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupGetRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.GetRewardResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        GroupGetRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupGetRewardResp)
+                return object;
+            var message = new $root.chat.GroupGetRewardResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.GroupGetRewardResp.Resp: object expected");
+                message.Resp = $root.luck.GetRewardResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        GroupGetRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.GetRewardResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        GroupGetRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupGetRewardResp;
+    })();
+
+    chat.PrivateSendReward = (function() {
+
+        function PrivateSendReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateSendReward.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateSendReward.prototype.SendReward = null;
+
+        PrivateSendReward.create = function create(properties) {
+            return new PrivateSendReward(properties);
+        };
+
+        PrivateSendReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.SendReward != null && message.hasOwnProperty("SendReward"))
+                $root.luck.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateSendReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateSendReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateSendReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.SendReward = $root.luck.SendReward.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateSendReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateSendReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.SendReward != null && message.hasOwnProperty("SendReward")) {
+                var error = $root.luck.SendReward.verify(message.SendReward);
+                if (error)
+                    return "SendReward." + error;
+            }
+            return null;
+        };
+
+        PrivateSendReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateSendReward)
+                return object;
+            var message = new $root.chat.PrivateSendReward();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.SendReward != null) {
+                if (typeof object.SendReward !== "object")
+                    throw TypeError(".chat.PrivateSendReward.SendReward: object expected");
+                message.SendReward = $root.luck.SendReward.fromObject(object.SendReward);
+            }
+            return message;
+        };
+
+        PrivateSendReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.SendReward = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.SendReward != null && message.hasOwnProperty("SendReward"))
+                object.SendReward = $root.luck.SendReward.toObject(message.SendReward, options);
+            return object;
+        };
+
+        PrivateSendReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateSendReward;
+    })();
+
+    chat.PrivateSendRewardResp = (function() {
+
+        function PrivateSendRewardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateSendRewardResp.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateSendRewardResp.prototype.Resp = null;
+
+        PrivateSendRewardResp.create = function create(properties) {
+            return new PrivateSendRewardResp(properties);
+        };
+
+        PrivateSendRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateSendRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateSendRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateSendRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.SendRewardResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateSendRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateSendRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.SendRewardResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        PrivateSendRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateSendRewardResp)
+                return object;
+            var message = new $root.chat.PrivateSendRewardResp();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.PrivateSendRewardResp.Resp: object expected");
+                message.Resp = $root.luck.SendRewardResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        PrivateSendRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.SendRewardResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        PrivateSendRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateSendRewardResp;
+    })();
+
+    chat.PrivateGetReward = (function() {
+
+        function PrivateGetReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateGetReward.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateGetReward.prototype.GetReward = null;
+
+        PrivateGetReward.create = function create(properties) {
+            return new PrivateGetReward(properties);
+        };
+
+        PrivateGetReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.GetReward != null && message.hasOwnProperty("GetReward"))
+                $root.luck.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateGetReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateGetReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateGetReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.GetReward = $root.luck.GetReward.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateGetReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateGetReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.GetReward != null && message.hasOwnProperty("GetReward")) {
+                var error = $root.luck.GetReward.verify(message.GetReward);
+                if (error)
+                    return "GetReward." + error;
+            }
+            return null;
+        };
+
+        PrivateGetReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateGetReward)
+                return object;
+            var message = new $root.chat.PrivateGetReward();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.GetReward != null) {
+                if (typeof object.GetReward !== "object")
+                    throw TypeError(".chat.PrivateGetReward.GetReward: object expected");
+                message.GetReward = $root.luck.GetReward.fromObject(object.GetReward);
+            }
+            return message;
+        };
+
+        PrivateGetReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.GetReward = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.GetReward != null && message.hasOwnProperty("GetReward"))
+                object.GetReward = $root.luck.GetReward.toObject(message.GetReward, options);
+            return object;
+        };
+
+        PrivateGetReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateGetReward;
+    })();
+
+    chat.PrivateGetRewardResp = (function() {
+
+        function PrivateGetRewardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateGetRewardResp.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateGetRewardResp.prototype.Resp = null;
+
+        PrivateGetRewardResp.create = function create(properties) {
+            return new PrivateGetRewardResp(properties);
+        };
+
+        PrivateGetRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                writer.uint32(8).uint64(message.TargetId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateGetRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateGetRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateGetRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TargetId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.GetRewardResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateGetRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateGetRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
+                    return "TargetId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.GetRewardResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        PrivateGetRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateGetRewardResp)
+                return object;
+            var message = new $root.chat.PrivateGetRewardResp();
+            if (object.TargetId != null)
+                if ($util.Long)
+                    (message.TargetId = $util.Long.fromValue(object.TargetId)).unsigned = true;
+                else if (typeof object.TargetId === "string")
+                    message.TargetId = parseInt(object.TargetId, 10);
+                else if (typeof object.TargetId === "number")
+                    message.TargetId = object.TargetId;
+                else if (typeof object.TargetId === "object")
+                    message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.PrivateGetRewardResp.Resp: object expected");
+                message.Resp = $root.luck.GetRewardResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        PrivateGetRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TargetId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+                if (typeof message.TargetId === "number")
+                    object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
+                else
+                    object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.GetRewardResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        PrivateGetRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateGetRewardResp;
     })();
 
     chat.PrivateChat = (function() {
@@ -4034,6 +5486,1185 @@ $root.chat = (function() {
     })();
 
     return chat;
+})();
+
+$root.luck = (function() {
+
+    var luck = {};
+
+    luck.SendReward = (function() {
+
+        function SendReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SendReward.prototype.Type = 0;
+        SendReward.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendReward.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        SendReward.create = function create(properties) {
+            return new SendReward(properties);
+        };
+
+        SendReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                writer.uint32(8).int32(message.Type);
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                writer.uint32(16).int64(message.Count);
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                writer.uint32(24).int64(message.Money);
+            return writer;
+        };
+
+        SendReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SendReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.SendReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Type = reader.int32();
+                    break;
+                case 2:
+                    message.Count = reader.int64();
+                    break;
+                case 3:
+                    message.Money = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SendReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SendReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                if (!$util.isInteger(message.Type))
+                    return "Type: integer expected";
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
+                    return "Count: integer|Long expected";
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
+                    return "Money: integer|Long expected";
+            return null;
+        };
+
+        SendReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.SendReward)
+                return object;
+            var message = new $root.luck.SendReward();
+            if (object.Type != null)
+                message.Type = object.Type | 0;
+            if (object.Count != null)
+                if ($util.Long)
+                    (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
+                else if (typeof object.Count === "string")
+                    message.Count = parseInt(object.Count, 10);
+                else if (typeof object.Count === "number")
+                    message.Count = object.Count;
+                else if (typeof object.Count === "object")
+                    message.Count = new $util.LongBits(object.Count.low >>> 0, object.Count.high >>> 0).toNumber();
+            if (object.Money != null)
+                if ($util.Long)
+                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
+                else if (typeof object.Money === "string")
+                    message.Money = parseInt(object.Money, 10);
+                else if (typeof object.Money === "number")
+                    message.Money = object.Money;
+                else if (typeof object.Money === "object")
+                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
+            return message;
+        };
+
+        SendReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Type = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Count = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Money = options.longs === String ? "0" : 0;
+            }
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                object.Type = message.Type;
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (typeof message.Count === "number")
+                    object.Count = options.longs === String ? String(message.Count) : message.Count;
+                else
+                    object.Count = options.longs === String ? $util.Long.prototype.toString.call(message.Count) : options.longs === Number ? new $util.LongBits(message.Count.low >>> 0, message.Count.high >>> 0).toNumber() : message.Count;
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (typeof message.Money === "number")
+                    object.Money = options.longs === String ? String(message.Money) : message.Money;
+                else
+                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
+            return object;
+        };
+
+        SendReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SendReward;
+    })();
+
+    luck.SendRewardResp = (function() {
+
+        function SendRewardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SendRewardResp.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendRewardResp.prototype.Type = 0;
+        SendRewardResp.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendRewardResp.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendRewardResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendRewardResp.prototype.SenderID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SendRewardResp.prototype.StartTimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendRewardResp.prototype.WaitTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        SendRewardResp.create = function create(properties) {
+            return new SendRewardResp(properties);
+        };
+
+        SendRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                writer.uint32(8).int64(message.ID);
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                writer.uint32(16).int32(message.Type);
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                writer.uint32(24).int64(message.Count);
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                writer.uint32(32).int64(message.Money);
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                writer.uint32(40).int64(message.TimeStamp);
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                writer.uint32(48).uint64(message.SenderID);
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                writer.uint32(56).int64(message.StartTimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(64).int64(message.WaitTime);
+            return writer;
+        };
+
+        SendRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SendRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.SendRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ID = reader.int64();
+                    break;
+                case 2:
+                    message.Type = reader.int32();
+                    break;
+                case 3:
+                    message.Count = reader.int64();
+                    break;
+                case 4:
+                    message.Money = reader.int64();
+                    break;
+                case 5:
+                    message.TimeStamp = reader.int64();
+                    break;
+                case 6:
+                    message.SenderID = reader.uint64();
+                    break;
+                case 7:
+                    message.StartTimeStamp = reader.int64();
+                    break;
+                case 8:
+                    message.WaitTime = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SendRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SendRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                if (!$util.isInteger(message.Type))
+                    return "Type: integer expected";
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
+                    return "Count: integer|Long expected";
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
+                    return "Money: integer|Long expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                if (!$util.isInteger(message.SenderID) && !(message.SenderID && $util.isInteger(message.SenderID.low) && $util.isInteger(message.SenderID.high)))
+                    return "SenderID: integer|Long expected";
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                if (!$util.isInteger(message.StartTimeStamp) && !(message.StartTimeStamp && $util.isInteger(message.StartTimeStamp.low) && $util.isInteger(message.StartTimeStamp.high)))
+                    return "StartTimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime) && !(message.WaitTime && $util.isInteger(message.WaitTime.low) && $util.isInteger(message.WaitTime.high)))
+                    return "WaitTime: integer|Long expected";
+            return null;
+        };
+
+        SendRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.SendRewardResp)
+                return object;
+            var message = new $root.luck.SendRewardResp();
+            if (object.ID != null)
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
+            if (object.Type != null)
+                message.Type = object.Type | 0;
+            if (object.Count != null)
+                if ($util.Long)
+                    (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
+                else if (typeof object.Count === "string")
+                    message.Count = parseInt(object.Count, 10);
+                else if (typeof object.Count === "number")
+                    message.Count = object.Count;
+                else if (typeof object.Count === "object")
+                    message.Count = new $util.LongBits(object.Count.low >>> 0, object.Count.high >>> 0).toNumber();
+            if (object.Money != null)
+                if ($util.Long)
+                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
+                else if (typeof object.Money === "string")
+                    message.Money = parseInt(object.Money, 10);
+                else if (typeof object.Money === "number")
+                    message.Money = object.Money;
+                else if (typeof object.Money === "object")
+                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.SenderID != null)
+                if ($util.Long)
+                    (message.SenderID = $util.Long.fromValue(object.SenderID)).unsigned = true;
+                else if (typeof object.SenderID === "string")
+                    message.SenderID = parseInt(object.SenderID, 10);
+                else if (typeof object.SenderID === "number")
+                    message.SenderID = object.SenderID;
+                else if (typeof object.SenderID === "object")
+                    message.SenderID = new $util.LongBits(object.SenderID.low >>> 0, object.SenderID.high >>> 0).toNumber(true);
+            if (object.StartTimeStamp != null)
+                if ($util.Long)
+                    (message.StartTimeStamp = $util.Long.fromValue(object.StartTimeStamp)).unsigned = false;
+                else if (typeof object.StartTimeStamp === "string")
+                    message.StartTimeStamp = parseInt(object.StartTimeStamp, 10);
+                else if (typeof object.StartTimeStamp === "number")
+                    message.StartTimeStamp = object.StartTimeStamp;
+                else if (typeof object.StartTimeStamp === "object")
+                    message.StartTimeStamp = new $util.LongBits(object.StartTimeStamp.low >>> 0, object.StartTimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                if ($util.Long)
+                    (message.WaitTime = $util.Long.fromValue(object.WaitTime)).unsigned = false;
+                else if (typeof object.WaitTime === "string")
+                    message.WaitTime = parseInt(object.WaitTime, 10);
+                else if (typeof object.WaitTime === "number")
+                    message.WaitTime = object.WaitTime;
+                else if (typeof object.WaitTime === "object")
+                    message.WaitTime = new $util.LongBits(object.WaitTime.low >>> 0, object.WaitTime.high >>> 0).toNumber();
+            return message;
+        };
+
+        SendRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
+                object.Type = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Count = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Money = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.SenderID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.SenderID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.StartTimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.StartTimeStamp = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.WaitTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WaitTime = options.longs === String ? "0" : 0;
+            }
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                object.Type = message.Type;
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (typeof message.Count === "number")
+                    object.Count = options.longs === String ? String(message.Count) : message.Count;
+                else
+                    object.Count = options.longs === String ? $util.Long.prototype.toString.call(message.Count) : options.longs === Number ? new $util.LongBits(message.Count.low >>> 0, message.Count.high >>> 0).toNumber() : message.Count;
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (typeof message.Money === "number")
+                    object.Money = options.longs === String ? String(message.Money) : message.Money;
+                else
+                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                if (typeof message.SenderID === "number")
+                    object.SenderID = options.longs === String ? String(message.SenderID) : message.SenderID;
+                else
+                    object.SenderID = options.longs === String ? $util.Long.prototype.toString.call(message.SenderID) : options.longs === Number ? new $util.LongBits(message.SenderID.low >>> 0, message.SenderID.high >>> 0).toNumber(true) : message.SenderID;
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                if (typeof message.StartTimeStamp === "number")
+                    object.StartTimeStamp = options.longs === String ? String(message.StartTimeStamp) : message.StartTimeStamp;
+                else
+                    object.StartTimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.StartTimeStamp) : options.longs === Number ? new $util.LongBits(message.StartTimeStamp.low >>> 0, message.StartTimeStamp.high >>> 0).toNumber() : message.StartTimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (typeof message.WaitTime === "number")
+                    object.WaitTime = options.longs === String ? String(message.WaitTime) : message.WaitTime;
+                else
+                    object.WaitTime = options.longs === String ? $util.Long.prototype.toString.call(message.WaitTime) : options.longs === Number ? new $util.LongBits(message.WaitTime.low >>> 0, message.WaitTime.high >>> 0).toNumber() : message.WaitTime;
+            return object;
+        };
+
+        SendRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SendRewardResp;
+    })();
+
+    luck.GetReward = (function() {
+
+        function GetReward(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetReward.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        GetReward.create = function create(properties) {
+            return new GetReward(properties);
+        };
+
+        GetReward.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                writer.uint32(8).int64(message.ID);
+            return writer;
+        };
+
+        GetReward.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetReward.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.GetReward();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ID = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetReward.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetReward.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
+            return null;
+        };
+
+        GetReward.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.GetReward)
+                return object;
+            var message = new $root.luck.GetReward();
+            if (object.ID != null)
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
+            return message;
+        };
+
+        GetReward.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
+            return object;
+        };
+
+        GetReward.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetReward;
+    })();
+
+    luck.GetRewardResp = (function() {
+
+        function GetRewardResp(properties) {
+            this.MoneyList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetRewardResp.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.SenderID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GetRewardResp.prototype.StartTimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.WaitTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.Type = 0;
+        GetRewardResp.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.RemainCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.RemainMoney = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.BestMoney = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.BestMoneyIndex = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.MoneyList = $util.emptyArray;
+
+        GetRewardResp.create = function create(properties) {
+            return new GetRewardResp(properties);
+        };
+
+        GetRewardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                writer.uint32(8).int64(message.ID);
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                writer.uint32(16).uint64(message.SenderID);
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                writer.uint32(24).int64(message.StartTimeStamp);
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                writer.uint32(32).int64(message.WaitTime);
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                writer.uint32(40).int32(message.Type);
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                writer.uint32(48).int64(message.Count);
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                writer.uint32(56).int64(message.Money);
+            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
+                writer.uint32(64).int64(message.RemainCount);
+            if (message.RemainMoney != null && message.hasOwnProperty("RemainMoney"))
+                writer.uint32(72).int64(message.RemainMoney);
+            if (message.BestMoney != null && message.hasOwnProperty("BestMoney"))
+                writer.uint32(80).int64(message.BestMoney);
+            if (message.BestMoneyIndex != null && message.hasOwnProperty("BestMoneyIndex"))
+                writer.uint32(88).int64(message.BestMoneyIndex);
+            if (message.MoneyList != null && message.MoneyList.length) {
+                writer.uint32(98).fork();
+                for (var i = 0; i < message.MoneyList.length; ++i)
+                    writer.int64(message.MoneyList[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        GetRewardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetRewardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.GetRewardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ID = reader.int64();
+                    break;
+                case 2:
+                    message.SenderID = reader.uint64();
+                    break;
+                case 3:
+                    message.StartTimeStamp = reader.int64();
+                    break;
+                case 4:
+                    message.WaitTime = reader.int64();
+                    break;
+                case 5:
+                    message.Type = reader.int32();
+                    break;
+                case 6:
+                    message.Count = reader.int64();
+                    break;
+                case 7:
+                    message.Money = reader.int64();
+                    break;
+                case 8:
+                    message.RemainCount = reader.int64();
+                    break;
+                case 9:
+                    message.RemainMoney = reader.int64();
+                    break;
+                case 10:
+                    message.BestMoney = reader.int64();
+                    break;
+                case 11:
+                    message.BestMoneyIndex = reader.int64();
+                    break;
+                case 12:
+                    if (!(message.MoneyList && message.MoneyList.length))
+                        message.MoneyList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.MoneyList.push(reader.int64());
+                    } else
+                        message.MoneyList.push(reader.int64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetRewardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetRewardResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                if (!$util.isInteger(message.SenderID) && !(message.SenderID && $util.isInteger(message.SenderID.low) && $util.isInteger(message.SenderID.high)))
+                    return "SenderID: integer|Long expected";
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                if (!$util.isInteger(message.StartTimeStamp) && !(message.StartTimeStamp && $util.isInteger(message.StartTimeStamp.low) && $util.isInteger(message.StartTimeStamp.high)))
+                    return "StartTimeStamp: integer|Long expected";
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (!$util.isInteger(message.WaitTime) && !(message.WaitTime && $util.isInteger(message.WaitTime.low) && $util.isInteger(message.WaitTime.high)))
+                    return "WaitTime: integer|Long expected";
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                if (!$util.isInteger(message.Type))
+                    return "Type: integer expected";
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
+                    return "Count: integer|Long expected";
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
+                    return "Money: integer|Long expected";
+            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
+                if (!$util.isInteger(message.RemainCount) && !(message.RemainCount && $util.isInteger(message.RemainCount.low) && $util.isInteger(message.RemainCount.high)))
+                    return "RemainCount: integer|Long expected";
+            if (message.RemainMoney != null && message.hasOwnProperty("RemainMoney"))
+                if (!$util.isInteger(message.RemainMoney) && !(message.RemainMoney && $util.isInteger(message.RemainMoney.low) && $util.isInteger(message.RemainMoney.high)))
+                    return "RemainMoney: integer|Long expected";
+            if (message.BestMoney != null && message.hasOwnProperty("BestMoney"))
+                if (!$util.isInteger(message.BestMoney) && !(message.BestMoney && $util.isInteger(message.BestMoney.low) && $util.isInteger(message.BestMoney.high)))
+                    return "BestMoney: integer|Long expected";
+            if (message.BestMoneyIndex != null && message.hasOwnProperty("BestMoneyIndex"))
+                if (!$util.isInteger(message.BestMoneyIndex) && !(message.BestMoneyIndex && $util.isInteger(message.BestMoneyIndex.low) && $util.isInteger(message.BestMoneyIndex.high)))
+                    return "BestMoneyIndex: integer|Long expected";
+            if (message.MoneyList != null && message.hasOwnProperty("MoneyList")) {
+                if (!Array.isArray(message.MoneyList))
+                    return "MoneyList: array expected";
+                for (var i = 0; i < message.MoneyList.length; ++i)
+                    if (!$util.isInteger(message.MoneyList[i]) && !(message.MoneyList[i] && $util.isInteger(message.MoneyList[i].low) && $util.isInteger(message.MoneyList[i].high)))
+                        return "MoneyList: integer|Long[] expected";
+            }
+            return null;
+        };
+
+        GetRewardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.GetRewardResp)
+                return object;
+            var message = new $root.luck.GetRewardResp();
+            if (object.ID != null)
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
+            if (object.SenderID != null)
+                if ($util.Long)
+                    (message.SenderID = $util.Long.fromValue(object.SenderID)).unsigned = true;
+                else if (typeof object.SenderID === "string")
+                    message.SenderID = parseInt(object.SenderID, 10);
+                else if (typeof object.SenderID === "number")
+                    message.SenderID = object.SenderID;
+                else if (typeof object.SenderID === "object")
+                    message.SenderID = new $util.LongBits(object.SenderID.low >>> 0, object.SenderID.high >>> 0).toNumber(true);
+            if (object.StartTimeStamp != null)
+                if ($util.Long)
+                    (message.StartTimeStamp = $util.Long.fromValue(object.StartTimeStamp)).unsigned = false;
+                else if (typeof object.StartTimeStamp === "string")
+                    message.StartTimeStamp = parseInt(object.StartTimeStamp, 10);
+                else if (typeof object.StartTimeStamp === "number")
+                    message.StartTimeStamp = object.StartTimeStamp;
+                else if (typeof object.StartTimeStamp === "object")
+                    message.StartTimeStamp = new $util.LongBits(object.StartTimeStamp.low >>> 0, object.StartTimeStamp.high >>> 0).toNumber();
+            if (object.WaitTime != null)
+                if ($util.Long)
+                    (message.WaitTime = $util.Long.fromValue(object.WaitTime)).unsigned = false;
+                else if (typeof object.WaitTime === "string")
+                    message.WaitTime = parseInt(object.WaitTime, 10);
+                else if (typeof object.WaitTime === "number")
+                    message.WaitTime = object.WaitTime;
+                else if (typeof object.WaitTime === "object")
+                    message.WaitTime = new $util.LongBits(object.WaitTime.low >>> 0, object.WaitTime.high >>> 0).toNumber();
+            if (object.Type != null)
+                message.Type = object.Type | 0;
+            if (object.Count != null)
+                if ($util.Long)
+                    (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
+                else if (typeof object.Count === "string")
+                    message.Count = parseInt(object.Count, 10);
+                else if (typeof object.Count === "number")
+                    message.Count = object.Count;
+                else if (typeof object.Count === "object")
+                    message.Count = new $util.LongBits(object.Count.low >>> 0, object.Count.high >>> 0).toNumber();
+            if (object.Money != null)
+                if ($util.Long)
+                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
+                else if (typeof object.Money === "string")
+                    message.Money = parseInt(object.Money, 10);
+                else if (typeof object.Money === "number")
+                    message.Money = object.Money;
+                else if (typeof object.Money === "object")
+                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
+            if (object.RemainCount != null)
+                if ($util.Long)
+                    (message.RemainCount = $util.Long.fromValue(object.RemainCount)).unsigned = false;
+                else if (typeof object.RemainCount === "string")
+                    message.RemainCount = parseInt(object.RemainCount, 10);
+                else if (typeof object.RemainCount === "number")
+                    message.RemainCount = object.RemainCount;
+                else if (typeof object.RemainCount === "object")
+                    message.RemainCount = new $util.LongBits(object.RemainCount.low >>> 0, object.RemainCount.high >>> 0).toNumber();
+            if (object.RemainMoney != null)
+                if ($util.Long)
+                    (message.RemainMoney = $util.Long.fromValue(object.RemainMoney)).unsigned = false;
+                else if (typeof object.RemainMoney === "string")
+                    message.RemainMoney = parseInt(object.RemainMoney, 10);
+                else if (typeof object.RemainMoney === "number")
+                    message.RemainMoney = object.RemainMoney;
+                else if (typeof object.RemainMoney === "object")
+                    message.RemainMoney = new $util.LongBits(object.RemainMoney.low >>> 0, object.RemainMoney.high >>> 0).toNumber();
+            if (object.BestMoney != null)
+                if ($util.Long)
+                    (message.BestMoney = $util.Long.fromValue(object.BestMoney)).unsigned = false;
+                else if (typeof object.BestMoney === "string")
+                    message.BestMoney = parseInt(object.BestMoney, 10);
+                else if (typeof object.BestMoney === "number")
+                    message.BestMoney = object.BestMoney;
+                else if (typeof object.BestMoney === "object")
+                    message.BestMoney = new $util.LongBits(object.BestMoney.low >>> 0, object.BestMoney.high >>> 0).toNumber();
+            if (object.BestMoneyIndex != null)
+                if ($util.Long)
+                    (message.BestMoneyIndex = $util.Long.fromValue(object.BestMoneyIndex)).unsigned = false;
+                else if (typeof object.BestMoneyIndex === "string")
+                    message.BestMoneyIndex = parseInt(object.BestMoneyIndex, 10);
+                else if (typeof object.BestMoneyIndex === "number")
+                    message.BestMoneyIndex = object.BestMoneyIndex;
+                else if (typeof object.BestMoneyIndex === "object")
+                    message.BestMoneyIndex = new $util.LongBits(object.BestMoneyIndex.low >>> 0, object.BestMoneyIndex.high >>> 0).toNumber();
+            if (object.MoneyList) {
+                if (!Array.isArray(object.MoneyList))
+                    throw TypeError(".luck.GetRewardResp.MoneyList: array expected");
+                message.MoneyList = [];
+                for (var i = 0; i < object.MoneyList.length; ++i)
+                    if ($util.Long)
+                        (message.MoneyList[i] = $util.Long.fromValue(object.MoneyList[i])).unsigned = false;
+                    else if (typeof object.MoneyList[i] === "string")
+                        message.MoneyList[i] = parseInt(object.MoneyList[i], 10);
+                    else if (typeof object.MoneyList[i] === "number")
+                        message.MoneyList[i] = object.MoneyList[i];
+                    else if (typeof object.MoneyList[i] === "object")
+                        message.MoneyList[i] = new $util.LongBits(object.MoneyList[i].low >>> 0, object.MoneyList[i].high >>> 0).toNumber();
+            }
+            return message;
+        };
+
+        GetRewardResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.MoneyList = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.SenderID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.SenderID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.StartTimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.StartTimeStamp = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.WaitTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WaitTime = options.longs === String ? "0" : 0;
+                object.Type = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Count = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Money = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.RemainCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.RemainCount = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.RemainMoney = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.RemainMoney = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.BestMoney = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.BestMoney = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.BestMoneyIndex = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.BestMoneyIndex = options.longs === String ? "0" : 0;
+            }
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
+            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+                if (typeof message.SenderID === "number")
+                    object.SenderID = options.longs === String ? String(message.SenderID) : message.SenderID;
+                else
+                    object.SenderID = options.longs === String ? $util.Long.prototype.toString.call(message.SenderID) : options.longs === Number ? new $util.LongBits(message.SenderID.low >>> 0, message.SenderID.high >>> 0).toNumber(true) : message.SenderID;
+            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+                if (typeof message.StartTimeStamp === "number")
+                    object.StartTimeStamp = options.longs === String ? String(message.StartTimeStamp) : message.StartTimeStamp;
+                else
+                    object.StartTimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.StartTimeStamp) : options.longs === Number ? new $util.LongBits(message.StartTimeStamp.low >>> 0, message.StartTimeStamp.high >>> 0).toNumber() : message.StartTimeStamp;
+            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+                if (typeof message.WaitTime === "number")
+                    object.WaitTime = options.longs === String ? String(message.WaitTime) : message.WaitTime;
+                else
+                    object.WaitTime = options.longs === String ? $util.Long.prototype.toString.call(message.WaitTime) : options.longs === Number ? new $util.LongBits(message.WaitTime.low >>> 0, message.WaitTime.high >>> 0).toNumber() : message.WaitTime;
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                object.Type = message.Type;
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (typeof message.Count === "number")
+                    object.Count = options.longs === String ? String(message.Count) : message.Count;
+                else
+                    object.Count = options.longs === String ? $util.Long.prototype.toString.call(message.Count) : options.longs === Number ? new $util.LongBits(message.Count.low >>> 0, message.Count.high >>> 0).toNumber() : message.Count;
+            if (message.Money != null && message.hasOwnProperty("Money"))
+                if (typeof message.Money === "number")
+                    object.Money = options.longs === String ? String(message.Money) : message.Money;
+                else
+                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
+            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
+                if (typeof message.RemainCount === "number")
+                    object.RemainCount = options.longs === String ? String(message.RemainCount) : message.RemainCount;
+                else
+                    object.RemainCount = options.longs === String ? $util.Long.prototype.toString.call(message.RemainCount) : options.longs === Number ? new $util.LongBits(message.RemainCount.low >>> 0, message.RemainCount.high >>> 0).toNumber() : message.RemainCount;
+            if (message.RemainMoney != null && message.hasOwnProperty("RemainMoney"))
+                if (typeof message.RemainMoney === "number")
+                    object.RemainMoney = options.longs === String ? String(message.RemainMoney) : message.RemainMoney;
+                else
+                    object.RemainMoney = options.longs === String ? $util.Long.prototype.toString.call(message.RemainMoney) : options.longs === Number ? new $util.LongBits(message.RemainMoney.low >>> 0, message.RemainMoney.high >>> 0).toNumber() : message.RemainMoney;
+            if (message.BestMoney != null && message.hasOwnProperty("BestMoney"))
+                if (typeof message.BestMoney === "number")
+                    object.BestMoney = options.longs === String ? String(message.BestMoney) : message.BestMoney;
+                else
+                    object.BestMoney = options.longs === String ? $util.Long.prototype.toString.call(message.BestMoney) : options.longs === Number ? new $util.LongBits(message.BestMoney.low >>> 0, message.BestMoney.high >>> 0).toNumber() : message.BestMoney;
+            if (message.BestMoneyIndex != null && message.hasOwnProperty("BestMoneyIndex"))
+                if (typeof message.BestMoneyIndex === "number")
+                    object.BestMoneyIndex = options.longs === String ? String(message.BestMoneyIndex) : message.BestMoneyIndex;
+                else
+                    object.BestMoneyIndex = options.longs === String ? $util.Long.prototype.toString.call(message.BestMoneyIndex) : options.longs === Number ? new $util.LongBits(message.BestMoneyIndex.low >>> 0, message.BestMoneyIndex.high >>> 0).toNumber() : message.BestMoneyIndex;
+            if (message.MoneyList && message.MoneyList.length) {
+                object.MoneyList = [];
+                for (var j = 0; j < message.MoneyList.length; ++j)
+                    if (typeof message.MoneyList[j] === "number")
+                        object.MoneyList[j] = options.longs === String ? String(message.MoneyList[j]) : message.MoneyList[j];
+                    else
+                        object.MoneyList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.MoneyList[j]) : options.longs === Number ? new $util.LongBits(message.MoneyList[j].low >>> 0, message.MoneyList[j].high >>> 0).toNumber() : message.MoneyList[j];
+            }
+            return object;
+        };
+
+        GetRewardResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetRewardResp;
+    })();
+
+    luck.RollDice = (function() {
+
+        function RollDice(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        RollDice.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        RollDice.create = function create(properties) {
+            return new RollDice(properties);
+        };
+
+        RollDice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                writer.uint32(8).int64(message.Count);
+            return writer;
+        };
+
+        RollDice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        RollDice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.RollDice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Count = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        RollDice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        RollDice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
+                    return "Count: integer|Long expected";
+            return null;
+        };
+
+        RollDice.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.RollDice)
+                return object;
+            var message = new $root.luck.RollDice();
+            if (object.Count != null)
+                if ($util.Long)
+                    (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
+                else if (typeof object.Count === "string")
+                    message.Count = parseInt(object.Count, 10);
+                else if (typeof object.Count === "number")
+                    message.Count = object.Count;
+                else if (typeof object.Count === "object")
+                    message.Count = new $util.LongBits(object.Count.low >>> 0, object.Count.high >>> 0).toNumber();
+            return message;
+        };
+
+        RollDice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Count = options.longs === String ? "0" : 0;
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (typeof message.Count === "number")
+                    object.Count = options.longs === String ? String(message.Count) : message.Count;
+                else
+                    object.Count = options.longs === String ? $util.Long.prototype.toString.call(message.Count) : options.longs === Number ? new $util.LongBits(message.Count.low >>> 0, message.Count.high >>> 0).toNumber() : message.Count;
+            return object;
+        };
+
+        RollDice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RollDice;
+    })();
+
+    luck.RollDiceResp = (function() {
+
+        function RollDiceResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        RollDiceResp.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        RollDiceResp.prototype.Numbers = $util.newBuffer([]);
+
+        RollDiceResp.create = function create(properties) {
+            return new RollDiceResp(properties);
+        };
+
+        RollDiceResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                writer.uint32(8).int64(message.Count);
+            if (message.Numbers != null && message.hasOwnProperty("Numbers"))
+                writer.uint32(18).bytes(message.Numbers);
+            return writer;
+        };
+
+        RollDiceResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        RollDiceResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.RollDiceResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Count = reader.int64();
+                    break;
+                case 2:
+                    message.Numbers = reader.bytes();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        RollDiceResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        RollDiceResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
+                    return "Count: integer|Long expected";
+            if (message.Numbers != null && message.hasOwnProperty("Numbers"))
+                if (!(message.Numbers && typeof message.Numbers.length === "number" || $util.isString(message.Numbers)))
+                    return "Numbers: buffer expected";
+            return null;
+        };
+
+        RollDiceResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.luck.RollDiceResp)
+                return object;
+            var message = new $root.luck.RollDiceResp();
+            if (object.Count != null)
+                if ($util.Long)
+                    (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
+                else if (typeof object.Count === "string")
+                    message.Count = parseInt(object.Count, 10);
+                else if (typeof object.Count === "number")
+                    message.Count = object.Count;
+                else if (typeof object.Count === "object")
+                    message.Count = new $util.LongBits(object.Count.low >>> 0, object.Count.high >>> 0).toNumber();
+            if (object.Numbers != null)
+                if (typeof object.Numbers === "string")
+                    $util.base64.decode(object.Numbers, message.Numbers = $util.newBuffer($util.base64.length(object.Numbers)), 0);
+                else if (object.Numbers.length)
+                    message.Numbers = object.Numbers;
+            return message;
+        };
+
+        RollDiceResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Count = options.longs === String ? "0" : 0;
+                if (options.bytes === String)
+                    object.Numbers = "";
+                else {
+                    object.Numbers = [];
+                    if (options.bytes !== Array)
+                        object.Numbers = $util.newBuffer(object.Numbers);
+                }
+            }
+            if (message.Count != null && message.hasOwnProperty("Count"))
+                if (typeof message.Count === "number")
+                    object.Count = options.longs === String ? String(message.Count) : message.Count;
+                else
+                    object.Count = options.longs === String ? $util.Long.prototype.toString.call(message.Count) : options.longs === Number ? new $util.LongBits(message.Count.low >>> 0, message.Count.high >>> 0).toNumber() : message.Count;
+            if (message.Numbers != null && message.hasOwnProperty("Numbers"))
+                object.Numbers = options.bytes === String ? $util.base64.encode(message.Numbers, 0, message.Numbers.length) : options.bytes === Array ? Array.prototype.slice.call(message.Numbers) : message.Numbers;
+            return object;
+        };
+
+        RollDiceResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RollDiceResp;
+    })();
+
+    return luck;
 })();
 
 module.exports = $root;

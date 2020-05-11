@@ -1,5 +1,6 @@
 syntax = "proto3";
 package chat;
+import "luck.proto";
 
 message SimplePlayerInfo {
     uint64 UserID = 1;
@@ -49,6 +50,28 @@ message InviteEnterGroupResp {
     uint64 UserID = 3; //发起人
     int64 Timestamp = 4; //创建时间戳
 }
+//群内邀请
+message GroupInvite {
+    uint64 GroupId = 1; //发送至
+    InviteEnterGroup Invite = 2;
+}
+message GroupInviteResp {
+    uint64 GroupId = 1; //发送至
+    InviteEnterGroupResp Resp = 2;
+}
+
+//个人邀请
+message PrivateInvite {
+    uint64 TargetId = 1; //发送至
+    InviteEnterGroup Invite = 2;
+}
+message PrivateInviteResp {
+    uint64 TargetId = 1; //发送至
+    InviteEnterGroupResp Resp = 2;
+}
+
+
+
 //进群 不单独解析,仅作为聊天内容，即Content
 message EnterGroup {
     uint64 GroupId = 1;
@@ -75,6 +98,53 @@ message GroupChatResp {
     int64 Timestamp = 4;
     uint64 SenderID = 5;
 }
+
+
+
+//发群红包
+message GroupSendReward{
+    uint64 GroupId = 1;
+    SendReward  SendReward = 2;
+}
+message GroupSendRewardResp{
+    uint64 GroupId = 1;
+    SendRewardResp  Resp = 2;
+}
+
+//抢群红包
+message GroupGetReward{
+    uint64 GroupId = 1;
+    GetReward  GetReward = 2;
+}
+message GroupGetRewardResp{
+    uint64 GroupId = 1;
+    GetRewardResp  Resp = 2;
+}
+
+//个人红包
+message PrivateSendReward{
+    uint64 TargetId = 1;
+    SendReward  SendReward = 2;
+}
+message PrivateSendRewardResp{
+    uint64 TargetId = 1;
+    SendRewardResp  Resp = 2;
+}
+//抢群红包
+message PrivateGetReward{
+    uint64 TargetId = 1;
+    GetReward  GetReward = 2;
+}
+message PrivateGetRewardResp{
+    uint64 TargetId = 1;
+    GetRewardResp  Resp = 2;
+}
+
+
+
+
+
+
 
 //聊天：私聊频道
 message PrivateChat {
