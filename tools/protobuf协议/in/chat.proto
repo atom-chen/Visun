@@ -38,18 +38,18 @@ message SetupGroupResp {
     repeated uint64 BannedList = 7; //禁言列表
 }
 
-//邀请加入
+//邀请加入 不单独解析,仅作为聊天内容，即Content
 message InviteEnterGroup {
     uint64 GroupId = 1;
     string GroupName = 2;
 }
 message InviteEnterGroupResp {
-    uint64 GroupId = 1;
-    uint64 HostID = 2;
-    uint64 UserID = 3;
+    uint64 GroupId = 1; //群ID
+    uint64 HostID = 2; //群主
+    uint64 UserID = 3; //发起人
     int64 Timestamp = 4; //创建时间戳
 }
-//进群
+//进群 不单独解析,仅作为聊天内容，即Content
 message EnterGroup {
     uint64 GroupId = 1;
     uint64 HostID = 2;
@@ -62,14 +62,14 @@ message EnterGroupResp {
 
 //聊天：群频道
 message GroupChat {
-    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:Dice 4:Invite(邀请) 5:SendHongBao 6:GetHongBao
     uint64 GroupId = 2; //0~99官方指定 100~100000私人群
     bytes Content = 3;
 
 }
 
 message GroupChatResp {
-    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:Dice 4:Invite(邀请) 5:SendHongBao 6:GetHongBao
     uint64 GroupId = 2;
     bytes Content = 3;
     int64 Timestamp = 4;
