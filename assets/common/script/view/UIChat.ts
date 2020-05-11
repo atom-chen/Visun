@@ -29,7 +29,9 @@ export default class UIChat extends BaseComponent {
             }
             chat_request.GroupChat({
                 GroupId: 0,
-                Content: cont
+                Content: cont,
+                Type:0,
+                GoodLuck:null
             });
         }, this);
         

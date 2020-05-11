@@ -2,6 +2,11 @@
 // 常量
 //---------------------------------
 
+export const DESIGN_VIEW_SIZE = {
+	width : 1334,
+	height : 750
+}
+
 // UI设计尺寸
 export const DESIGN_SIZE = {
 	width : 1334,
