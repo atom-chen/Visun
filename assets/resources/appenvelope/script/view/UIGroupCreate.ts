@@ -6,6 +6,7 @@ import { chat_request, chat_msgs } from "../../../../common/script/proto/net_cha
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import Group from "../../../../common/script/model/Group";
 import LoginUser from "../../../../common/script/model/LoginUser";
+import GroupMgr from "../../../../common/script/model/GroupMgr";
 
 
 
@@ -26,7 +27,7 @@ export default class UIGroupCreate extends BaseComponent {
 	
 	SetupGroupResp(param) {
 		var grp = new Group(param.GroupId, param.GroupName, param.HostId, param.Timestamp);
-		LoginUser.getInstance().MyGroup = grp;
+		GroupMgr.getInstance().addGroup(grp);
 		CommonUtil.safeDelete(this);
 	}
 

@@ -27,14 +27,14 @@ export default class UIGroupAddMember extends BaseComponent {
 				UIManager.toast("请输入有效的用户ID");
 				return;
 			}
-			if(isNil(LoginUser.getInstance().MyGroup)) {
-				UIManager.toast("你还不属于任何群，无法添加成员");
-				return;
-			}
-            chat_request.GroupAddPerson({
-				GroupId: LoginUser.getInstance().MyGroup.getId(),
-				MemID: parseInt(target)
-			});
+			// if(isNil(LoginUser.getInstance().MyGroup)) {
+			// 	UIManager.toast("你还不属于任何群，无法添加成员");
+			// 	return;
+			// }
+            // chat_request.GroupAddPerson({
+			// 	GroupId: LoginUser.getInstance().MyGroup.getId(),
+			// 	MemID: parseInt(target)
+			// });
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){
             CommonUtil.safeDelete(this);

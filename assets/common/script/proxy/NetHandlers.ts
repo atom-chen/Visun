@@ -10,6 +10,8 @@ import { landLords_msgs } from "../proto/net_landLords";
 import { gamecomm_msgs } from "../proto/net_gamecomm";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
+import GroupMgr from "../model/GroupMgr";
+import Group from "../model/Group";
 
 //---------------------------------
 // 网络数据处理句柄
@@ -39,6 +41,14 @@ var NetHandlers = {
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
         if(param.UserID!==null && param.UserID!==undefined) {
             LoginUser.getInstance().UserID = param.UserID;
+        }
+
+        if(param.Groups) {
+            for(var i in param.Groups) {
+                var info = param.Groups[i];
+                var grp = new Group(info.ID, info.Name, info.HostId, info.Timestamp);
+                GroupMgr.getInstance().addGroup(grp);
+            }
         }
     },
 

@@ -35,5 +35,9 @@ export default class GroupMgr extends ModelBase {
 	public getGroup(grpId:number) : Group {
 		return this._groups[grpId];
 	}
+
+	public getGroupList() : {[key:number]:Group} {
+		return this._groups;
+	}
 	
 }

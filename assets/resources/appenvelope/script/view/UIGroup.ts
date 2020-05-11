@@ -4,6 +4,7 @@ import LoginUser from "../../../../common/script/model/LoginUser";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import UIManager from "../../../../kernel/view/UIManager";
+import GroupMgr from "../../../../common/script/model/GroupMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,23 +16,13 @@ export default class UIGroup extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
-        var hasGroup = !isNil(LoginUser.getInstance().MyGroup);
-        this.m_ui.btn_create_grp.active = !hasGroup;
-
         this.initUIEvent();
 
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
-        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        var grps = GroupMgr.getInstance().getGroupList();
+        for(var grpId in grps) {
+            var item = cc.instantiate(this.groupitem);
+            this.m_ui.content.addChild(item);
+        }
     }
 
     initUIEvent() {
