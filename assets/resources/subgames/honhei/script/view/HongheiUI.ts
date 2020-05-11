@@ -36,7 +36,7 @@ export default class HongheiUI extends BaseComponent {
     
     start () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
-		CommonUtil.traveseLabels(this.node, this.m_lab);
+		CommonUtil.traverseLabels(this.node, this.m_lab);
 
         var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {

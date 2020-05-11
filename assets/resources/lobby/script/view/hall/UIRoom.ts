@@ -12,7 +12,7 @@ export default class UIRoom extends BaseComponent {
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
-        CommonUtil.traveseLabels(this.node, this.m_lab);
+        CommonUtil.traverseLabels(this.node, this.m_lab);
         
         for(var i=1; i<=4; i++) {
             var btn = this.m_ui["button"+i];

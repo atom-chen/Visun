@@ -9,7 +9,7 @@ const {ccclass, property} = cc._decorator;
 export default class UISettor extends BaseComponent {
 	start() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
-		CommonUtil.traveseLabels(this.node, this.m_lab);
+		CommonUtil.traverseLabels(this.node, this.m_lab);
 
 		if(LocalCache.getInstance("pub").get("music", 1)==1){
 			this.m_lab.lab_music.string = "开";

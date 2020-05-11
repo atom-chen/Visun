@@ -27,6 +27,15 @@ export default class HotupdateScene extends BaseComponent {
 	onLoad () {
 	//	Adaptor.setFullScreen(true);
 		Adaptor.adaptOrientation(false);
+		
+		KernelUIDefine.GameScene.name = "GameScene";
+    //    KernelUIDefine.LobbyScene.name = "LobbyScene";
+        KernelUIDefine.LobbyScene.name = "EnvelopeScene";
+        KernelUIDefine.HotupdateScene.name = "HotupdateScene";
+        KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
+        KernelUIDefine.UIToast = "launcher/prefabs/UIToast";
+		KernelUIDefine.UILoading = "launcher/scene/UILoading";
+		
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
 		var bNoHot = true;

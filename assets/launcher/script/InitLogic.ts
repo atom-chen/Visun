@@ -12,14 +12,6 @@ export default class InitLogic {
 	public static run(node: cc.Component) {
 		if(this._inited) { return; }
         this._inited = true;
-        
-        KernelUIDefine.GameScene.name = "GameScene";
-     //   KernelUIDefine.LobbyScene.name = "LobbyScene";
-        KernelUIDefine.LobbyScene.name = "EnvelopeScene";
-        KernelUIDefine.HotupdateScene.name = "HotupdateScene";
-        KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
-        KernelUIDefine.UIToast = "launcher/prefabs/UIToast";
-        KernelUIDefine.UILoading = "launcher/scene/UILoading";
 
 		cc.game.on(cc.game.EVENT_HIDE, ()=>{
             console.log("游戏进入后台");

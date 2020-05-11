@@ -40,7 +40,7 @@ export default class CommonUtil {
 		}
 	}
 
-	public static traveseLabels(root:cc.Node, tbl:any)
+	public static traverseLabels(root:cc.Node, tbl:any)
 	{
 		if(!root) { return; }
 		var comps = root.getComponentsInChildren(cc.Label);

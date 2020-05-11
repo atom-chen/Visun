@@ -1,6 +1,7 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import UIManager from "../../../../kernel/view/UIManager";
+import LoginMgr from "../../../../common/script/model/LoginMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -21,6 +22,9 @@ export default class UIMain extends BaseComponent {
             UIManager.openPanel("appenvelope/prefabs/UIGroup", null);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_person, function(){ 
+            if(!LoginMgr.getInstance().checkLogin(true)){
+                return;
+            }
             UIManager.closeWindow("appenvelope/prefabs/UIGroup");
             UIManager.closeWindow("appenvelope/prefabs/UIChat");
             UIManager.openPanel("appenvelope/prefabs/UIPersonal", null);
