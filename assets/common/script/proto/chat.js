@@ -1092,6 +1092,7 @@ $root.chat = (function() {
         InviteEnterGroupResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         InviteEnterGroupResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         InviteEnterGroupResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        InviteEnterGroupResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         InviteEnterGroupResp.create = function create(properties) {
             return new InviteEnterGroupResp(properties);
@@ -1106,6 +1107,8 @@ $root.chat = (function() {
                 writer.uint32(16).uint64(message.HostID);
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 writer.uint32(24).uint64(message.UserID);
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                writer.uint32(32).int64(message.Timestamp);
             return writer;
         };
 
@@ -1128,6 +1131,9 @@ $root.chat = (function() {
                     break;
                 case 3:
                     message.UserID = reader.uint64();
+                    break;
+                case 4:
+                    message.Timestamp = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1155,6 +1161,9 @@ $root.chat = (function() {
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
                     return "UserID: integer|Long expected";
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
+                    return "Timestamp: integer|Long expected";
             return null;
         };
 
@@ -1189,6 +1198,15 @@ $root.chat = (function() {
                     message.UserID = object.UserID;
                 else if (typeof object.UserID === "object")
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.Timestamp != null)
+                if ($util.Long)
+                    (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
+                else if (typeof object.Timestamp === "string")
+                    message.Timestamp = parseInt(object.Timestamp, 10);
+                else if (typeof object.Timestamp === "number")
+                    message.Timestamp = object.Timestamp;
+                else if (typeof object.Timestamp === "object")
+                    message.Timestamp = new $util.LongBits(object.Timestamp.low >>> 0, object.Timestamp.high >>> 0).toNumber();
             return message;
         };
 
@@ -1212,6 +1230,11 @@ $root.chat = (function() {
                     object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Timestamp = options.longs === String ? "0" : 0;
             }
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 if (typeof message.GroupId === "number")
@@ -1228,6 +1251,11 @@ $root.chat = (function() {
                     object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (typeof message.Timestamp === "number")
+                    object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
+                else
+                    object.Timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.Timestamp) : options.longs === Number ? new $util.LongBits(message.Timestamp.low >>> 0, message.Timestamp.high >>> 0).toNumber() : message.Timestamp;
             return object;
         };
 
@@ -1379,6 +1407,7 @@ $root.chat = (function() {
 
         EnterGroupResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         EnterGroupResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EnterGroupResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         EnterGroupResp.create = function create(properties) {
             return new EnterGroupResp(properties);
@@ -1391,6 +1420,8 @@ $root.chat = (function() {
                 writer.uint32(8).uint64(message.UserID);
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 writer.uint32(16).uint64(message.GroupId);
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                writer.uint32(24).int64(message.Timestamp);
             return writer;
         };
 
@@ -1410,6 +1441,9 @@ $root.chat = (function() {
                     break;
                 case 2:
                     message.GroupId = reader.uint64();
+                    break;
+                case 3:
+                    message.Timestamp = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1434,6 +1468,9 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
+                    return "Timestamp: integer|Long expected";
             return null;
         };
 
@@ -1459,6 +1496,15 @@ $root.chat = (function() {
                     message.GroupId = object.GroupId;
                 else if (typeof object.GroupId === "object")
                     message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Timestamp != null)
+                if ($util.Long)
+                    (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
+                else if (typeof object.Timestamp === "string")
+                    message.Timestamp = parseInt(object.Timestamp, 10);
+                else if (typeof object.Timestamp === "number")
+                    message.Timestamp = object.Timestamp;
+                else if (typeof object.Timestamp === "object")
+                    message.Timestamp = new $util.LongBits(object.Timestamp.low >>> 0, object.Timestamp.high >>> 0).toNumber();
             return message;
         };
 
@@ -1477,6 +1523,11 @@ $root.chat = (function() {
                     object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.GroupId = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Timestamp = options.longs === String ? "0" : 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -1488,6 +1539,11 @@ $root.chat = (function() {
                     object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (typeof message.Timestamp === "number")
+                    object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
+                else
+                    object.Timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.Timestamp) : options.longs === Number ? new $util.LongBits(message.Timestamp.low >>> 0, message.Timestamp.high >>> 0).toNumber() : message.Timestamp;
             return object;
         };
 

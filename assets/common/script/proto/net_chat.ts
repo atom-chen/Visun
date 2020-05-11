@@ -75,9 +75,9 @@ export class chat_request {
     public static SetupGroup( data:{ Name:string } ) { chat_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static SetupGroupResp( data:{ GroupId:number, GroupName:string, HostID:number, Timestamp:number, AdminList:number[], MemberList:number[], BannedList:number[] } ) { chat_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static InviteEnterGroup( data:{ GroupId:number, GroupName:string } ) { chat_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
-    public static InviteEnterGroupResp( data:{ GroupId:number, HostID:number, UserID:number } ) { chat_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static InviteEnterGroupResp( data:{ GroupId:number, HostID:number, UserID:number, Timestamp:number } ) { chat_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGroup( data:{ GroupId:number, HostID:number } ) { chat_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterGroupResp( data:{ UserID:number, GroupId:number } ) { chat_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterGroupResp( data:{ UserID:number, GroupId:number, Timestamp:number } ) { chat_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupChat( data:{ Type:number, GroupId:number, Content:any } ) { chat_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupChatResp( data:{ Type:number, GroupId:number, Content:any, Timestamp:number, SenderID:number } ) { chat_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }
     public static PrivateChat( data:{ Type:number, TargetId:number, Content:any } ) { chat_packet_define[26].sendToChannel(ChannelDefine.game, data, false); }

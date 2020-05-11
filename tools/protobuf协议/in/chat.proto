@@ -3,15 +3,14 @@ package chat;
 
 message SimplePlayerInfo {
     uint64 UserID = 1;
-    uint32 Sex = 2;			//性别
-    int64  Gold = 3;		//金币
-    uint32 HeadID = 4;      //头像标识
+    uint32 Sex = 2; //性别
+    int64 Gold = 3; //金币
+    uint32 HeadID = 4; //头像标识
 }
-
 
 //获取在线玩家列表
 message GetOnlinePlayers {
-    int32 PageNum = 1;//页码数0:所有, <0:该页的玩家数
+    int32 PageNum = 1; //页码数0:所有, <0:该页的玩家数
 }
 message GetOnlinePlayersResp {
     repeated SimplePlayerInfo Infos = 1;
@@ -21,10 +20,9 @@ message GetOnlinePlayersResp {
 message FindPlayer {
     string Name = 1;
 }
-message FindPlayerResp {//模糊查找
-    repeated SimplePlayerInfo Infos = 1;
+message FindPlayerResp { //模糊查找
+                         repeated SimplePlayerInfo Infos = 1;
 }
-
 
 //建群
 message SetupGroup {
@@ -33,11 +31,11 @@ message SetupGroup {
 message SetupGroupResp {
     uint64 GroupId = 1; //0~99官方指定 100~100000私人群
     string GroupName = 2; //世界频道
-    uint64 HostID = 3;//群主ID
-    int64 Timestamp = 4;//创建时间戳
-    repeated uint64 AdminList = 5;//管理员列表
-    repeated uint64 MemberList = 6;//成员列表
-    repeated  uint64 BannedList = 7;//禁言列表
+    uint64 HostID = 3; //群主ID
+    int64 Timestamp = 4; //创建时间戳
+    repeated uint64 AdminList = 5; //管理员列表
+    repeated uint64 MemberList = 6; //成员列表
+    repeated uint64 BannedList = 7; //禁言列表
 }
 
 //邀请加入
@@ -49,29 +47,29 @@ message InviteEnterGroupResp {
     uint64 GroupId = 1;
     uint64 HostID = 2;
     uint64 UserID = 3;
+    int64 Timestamp = 4; //创建时间戳
 }
 //进群
 message EnterGroup {
     uint64 GroupId = 1;
     uint64 HostID = 2;
 }
-message EnterGroupResp {//在群内广播
+message EnterGroupResp {
     uint64 UserID = 1;
     uint64 GroupId = 2;
+    int64 Timestamp = 3; //创建时间戳
 }
-
-
 
 //聊天：群频道
 message GroupChat {
-    uint32 Type = 1;//0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
     uint64 GroupId = 2; //0~99官方指定 100~100000私人群
     bytes Content = 3;
 
 }
 
 message GroupChatResp {
-    uint32 Type = 1;//0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
     uint64 GroupId = 2;
     bytes Content = 3;
     int64 Timestamp = 4;
@@ -80,13 +78,13 @@ message GroupChatResp {
 
 //聊天：私聊频道
 message PrivateChat {
-    uint32 Type = 1;//0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
     uint64 TargetId = 2; //
     bytes Content = 3;
 }
 
 message PrivateChatResp {
-    uint32 Type = 1;//0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
+    uint32 Type = 1; //0:text 1:Image 2:Voice 3:HongBao 4:Dice 5:Invite(邀请)
     bytes Content = 2;
     int64 Timestamp = 3;
     uint64 SenderID = 4;
@@ -102,7 +100,7 @@ message GroupAddPersonResp {
     uint64 GroupId = 1;
     uint64 UserID = 2; //拉人者ID
     int64 Timestamp = 3;
-    uint64 MemID = 4;  //被拉者
+    uint64 MemID = 4; //被拉者
 }
 
 //踢人
