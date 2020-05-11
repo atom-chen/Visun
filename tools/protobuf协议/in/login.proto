@@ -1,5 +1,5 @@
 syntax = "proto3";
-package login;
+package go;
 //注册
 message Register {
     string Name = 1; //用户

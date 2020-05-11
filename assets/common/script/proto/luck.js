@@ -20,7 +20,7 @@ $root.luck = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SendReward.prototype.Type = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SendReward.prototype.Type = 0;
         SendReward.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         SendReward.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
@@ -32,7 +32,7 @@ $root.luck = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.Type != null && message.hasOwnProperty("Type"))
-                writer.uint32(8).int64(message.Type);
+                writer.uint32(8).int32(message.Type);
             if (message.Count != null && message.hasOwnProperty("Count"))
                 writer.uint32(16).int64(message.Count);
             if (message.Money != null && message.hasOwnProperty("Money"))
@@ -52,7 +52,7 @@ $root.luck = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Type = reader.int64();
+                    message.Type = reader.int32();
                     break;
                 case 2:
                     message.Count = reader.int64();
@@ -78,8 +78,8 @@ $root.luck = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type) && !(message.Type && $util.isInteger(message.Type.low) && $util.isInteger(message.Type.high)))
-                    return "Type: integer|Long expected";
+                if (!$util.isInteger(message.Type))
+                    return "Type: integer expected";
             if (message.Count != null && message.hasOwnProperty("Count"))
                 if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
                     return "Count: integer|Long expected";
@@ -94,14 +94,7 @@ $root.luck = (function() {
                 return object;
             var message = new $root.luck.SendReward();
             if (object.Type != null)
-                if ($util.Long)
-                    (message.Type = $util.Long.fromValue(object.Type)).unsigned = false;
-                else if (typeof object.Type === "string")
-                    message.Type = parseInt(object.Type, 10);
-                else if (typeof object.Type === "number")
-                    message.Type = object.Type;
-                else if (typeof object.Type === "object")
-                    message.Type = new $util.LongBits(object.Type.low >>> 0, object.Type.high >>> 0).toNumber();
+                message.Type = object.Type | 0;
             if (object.Count != null)
                 if ($util.Long)
                     (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
@@ -128,11 +121,7 @@ $root.luck = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.Type = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Type = options.longs === String ? "0" : 0;
+                object.Type = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -145,10 +134,7 @@ $root.luck = (function() {
                     object.Money = options.longs === String ? "0" : 0;
             }
             if (message.Type != null && message.hasOwnProperty("Type"))
-                if (typeof message.Type === "number")
-                    object.Type = options.longs === String ? String(message.Type) : message.Type;
-                else
-                    object.Type = options.longs === String ? $util.Long.prototype.toString.call(message.Type) : options.longs === Number ? new $util.LongBits(message.Type.low >>> 0, message.Type.high >>> 0).toNumber() : message.Type;
+                object.Type = message.Type;
             if (message.Count != null && message.hasOwnProperty("Count"))
                 if (typeof message.Count === "number")
                     object.Count = options.longs === String ? String(message.Count) : message.Count;
@@ -178,7 +164,7 @@ $root.luck = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SendRewardResp.prototype.ID = 0;
+        SendRewardResp.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         SendRewardResp.prototype.Type = 0;
         SendRewardResp.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         SendRewardResp.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -195,7 +181,7 @@ $root.luck = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.ID != null && message.hasOwnProperty("ID"))
-                writer.uint32(8).int32(message.ID);
+                writer.uint32(8).int64(message.ID);
             if (message.Type != null && message.hasOwnProperty("Type"))
                 writer.uint32(16).int32(message.Type);
             if (message.Count != null && message.hasOwnProperty("Count"))
@@ -225,7 +211,7 @@ $root.luck = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ID = reader.int32();
+                    message.ID = reader.int64();
                     break;
                 case 2:
                     message.Type = reader.int32();
@@ -266,8 +252,8 @@ $root.luck = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.ID != null && message.hasOwnProperty("ID"))
-                if (!$util.isInteger(message.ID))
-                    return "ID: integer expected";
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
             if (message.Type != null && message.hasOwnProperty("Type"))
                 if (!$util.isInteger(message.Type))
                     return "Type: integer expected";
@@ -297,7 +283,14 @@ $root.luck = (function() {
                 return object;
             var message = new $root.luck.SendRewardResp();
             if (object.ID != null)
-                message.ID = object.ID | 0;
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
             if (object.Type != null)
                 message.Type = object.Type | 0;
             if (object.Count != null)
@@ -362,7 +355,11 @@ $root.luck = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.ID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
                 object.Type = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -396,7 +393,10 @@ $root.luck = (function() {
                     object.WaitTime = options.longs === String ? "0" : 0;
             }
             if (message.ID != null && message.hasOwnProperty("ID"))
-                object.ID = message.ID;
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
             if (message.Type != null && message.hasOwnProperty("Type"))
                 object.Type = message.Type;
             if (message.Count != null && message.hasOwnProperty("Count"))
@@ -448,7 +448,7 @@ $root.luck = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GetReward.prototype.ID = 0;
+        GetReward.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         GetReward.create = function create(properties) {
             return new GetReward(properties);
@@ -458,7 +458,7 @@ $root.luck = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.ID != null && message.hasOwnProperty("ID"))
-                writer.uint32(8).int32(message.ID);
+                writer.uint32(8).int64(message.ID);
             return writer;
         };
 
@@ -474,7 +474,7 @@ $root.luck = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ID = reader.int32();
+                    message.ID = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -494,8 +494,8 @@ $root.luck = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.ID != null && message.hasOwnProperty("ID"))
-                if (!$util.isInteger(message.ID))
-                    return "ID: integer expected";
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
             return null;
         };
 
@@ -504,7 +504,14 @@ $root.luck = (function() {
                 return object;
             var message = new $root.luck.GetReward();
             if (object.ID != null)
-                message.ID = object.ID | 0;
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
             return message;
         };
 
@@ -513,9 +520,16 @@ $root.luck = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.ID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
             if (message.ID != null && message.hasOwnProperty("ID"))
-                object.ID = message.ID;
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
             return object;
         };
 
@@ -536,10 +550,11 @@ $root.luck = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GetRewardResp.prototype.ID = 0;
+        GetRewardResp.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GetRewardResp.prototype.SenderID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         GetRewardResp.prototype.StartTimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GetRewardResp.prototype.WaitTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GetRewardResp.prototype.Type = 0;
         GetRewardResp.prototype.Count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GetRewardResp.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GetRewardResp.prototype.RemainCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -556,27 +571,29 @@ $root.luck = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.ID != null && message.hasOwnProperty("ID"))
-                writer.uint32(8).int32(message.ID);
+                writer.uint32(8).int64(message.ID);
             if (message.SenderID != null && message.hasOwnProperty("SenderID"))
                 writer.uint32(16).uint64(message.SenderID);
             if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
                 writer.uint32(24).int64(message.StartTimeStamp);
             if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
                 writer.uint32(32).int64(message.WaitTime);
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                writer.uint32(40).int32(message.Type);
             if (message.Count != null && message.hasOwnProperty("Count"))
-                writer.uint32(40).int64(message.Count);
+                writer.uint32(48).int64(message.Count);
             if (message.Money != null && message.hasOwnProperty("Money"))
-                writer.uint32(48).int64(message.Money);
+                writer.uint32(56).int64(message.Money);
             if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
-                writer.uint32(56).int64(message.RemainCount);
+                writer.uint32(64).int64(message.RemainCount);
             if (message.RemainMoney != null && message.hasOwnProperty("RemainMoney"))
-                writer.uint32(64).int64(message.RemainMoney);
+                writer.uint32(72).int64(message.RemainMoney);
             if (message.BestMoney != null && message.hasOwnProperty("BestMoney"))
-                writer.uint32(72).int64(message.BestMoney);
+                writer.uint32(80).int64(message.BestMoney);
             if (message.BestMoneyIndex != null && message.hasOwnProperty("BestMoneyIndex"))
-                writer.uint32(80).int64(message.BestMoneyIndex);
+                writer.uint32(88).int64(message.BestMoneyIndex);
             if (message.MoneyList != null && message.MoneyList.length) {
-                writer.uint32(90).fork();
+                writer.uint32(98).fork();
                 for (var i = 0; i < message.MoneyList.length; ++i)
                     writer.int64(message.MoneyList[i]);
                 writer.ldelim();
@@ -596,7 +613,7 @@ $root.luck = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ID = reader.int32();
+                    message.ID = reader.int64();
                     break;
                 case 2:
                     message.SenderID = reader.uint64();
@@ -608,24 +625,27 @@ $root.luck = (function() {
                     message.WaitTime = reader.int64();
                     break;
                 case 5:
-                    message.Count = reader.int64();
+                    message.Type = reader.int32();
                     break;
                 case 6:
-                    message.Money = reader.int64();
+                    message.Count = reader.int64();
                     break;
                 case 7:
-                    message.RemainCount = reader.int64();
+                    message.Money = reader.int64();
                     break;
                 case 8:
-                    message.RemainMoney = reader.int64();
+                    message.RemainCount = reader.int64();
                     break;
                 case 9:
-                    message.BestMoney = reader.int64();
+                    message.RemainMoney = reader.int64();
                     break;
                 case 10:
-                    message.BestMoneyIndex = reader.int64();
+                    message.BestMoney = reader.int64();
                     break;
                 case 11:
+                    message.BestMoneyIndex = reader.int64();
+                    break;
+                case 12:
                     if (!(message.MoneyList && message.MoneyList.length))
                         message.MoneyList = [];
                     if ((tag & 7) === 2) {
@@ -653,8 +673,8 @@ $root.luck = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.ID != null && message.hasOwnProperty("ID"))
-                if (!$util.isInteger(message.ID))
-                    return "ID: integer expected";
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
             if (message.SenderID != null && message.hasOwnProperty("SenderID"))
                 if (!$util.isInteger(message.SenderID) && !(message.SenderID && $util.isInteger(message.SenderID.low) && $util.isInteger(message.SenderID.high)))
                     return "SenderID: integer|Long expected";
@@ -664,6 +684,9 @@ $root.luck = (function() {
             if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
                 if (!$util.isInteger(message.WaitTime) && !(message.WaitTime && $util.isInteger(message.WaitTime.low) && $util.isInteger(message.WaitTime.high)))
                     return "WaitTime: integer|Long expected";
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                if (!$util.isInteger(message.Type))
+                    return "Type: integer expected";
             if (message.Count != null && message.hasOwnProperty("Count"))
                 if (!$util.isInteger(message.Count) && !(message.Count && $util.isInteger(message.Count.low) && $util.isInteger(message.Count.high)))
                     return "Count: integer|Long expected";
@@ -697,7 +720,14 @@ $root.luck = (function() {
                 return object;
             var message = new $root.luck.GetRewardResp();
             if (object.ID != null)
-                message.ID = object.ID | 0;
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber();
             if (object.SenderID != null)
                 if ($util.Long)
                     (message.SenderID = $util.Long.fromValue(object.SenderID)).unsigned = true;
@@ -725,6 +755,8 @@ $root.luck = (function() {
                     message.WaitTime = object.WaitTime;
                 else if (typeof object.WaitTime === "object")
                     message.WaitTime = new $util.LongBits(object.WaitTime.low >>> 0, object.WaitTime.high >>> 0).toNumber();
+            if (object.Type != null)
+                message.Type = object.Type | 0;
             if (object.Count != null)
                 if ($util.Long)
                     (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
@@ -803,7 +835,11 @@ $root.luck = (function() {
             if (options.arrays || options.defaults)
                 object.MoneyList = [];
             if (options.defaults) {
-                object.ID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.SenderID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -819,6 +855,7 @@ $root.luck = (function() {
                     object.WaitTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.WaitTime = options.longs === String ? "0" : 0;
+                object.Type = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -851,7 +888,10 @@ $root.luck = (function() {
                     object.BestMoneyIndex = options.longs === String ? "0" : 0;
             }
             if (message.ID != null && message.hasOwnProperty("ID"))
-                object.ID = message.ID;
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber() : message.ID;
             if (message.SenderID != null && message.hasOwnProperty("SenderID"))
                 if (typeof message.SenderID === "number")
                     object.SenderID = options.longs === String ? String(message.SenderID) : message.SenderID;
@@ -867,6 +907,8 @@ $root.luck = (function() {
                     object.WaitTime = options.longs === String ? String(message.WaitTime) : message.WaitTime;
                 else
                     object.WaitTime = options.longs === String ? $util.Long.prototype.toString.call(message.WaitTime) : options.longs === Number ? new $util.LongBits(message.WaitTime.low >>> 0, message.WaitTime.high >>> 0).toNumber() : message.WaitTime;
+            if (message.Type != null && message.hasOwnProperty("Type"))
+                object.Type = message.Type;
             if (message.Count != null && message.hasOwnProperty("Count"))
                 if (typeof message.Count === "number")
                     object.Count = options.longs === String ? String(message.Count) : message.Count;
