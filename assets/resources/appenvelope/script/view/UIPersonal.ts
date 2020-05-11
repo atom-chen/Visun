@@ -11,8 +11,18 @@ export default class UIPersonal extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traverseLabels(this.node, this.m_lab);
 
+        this.refreshUI();
+
+        this.initUIEvent();
+    }
+
+    refreshUI() {
         this.m_lab.lab_name.string = LoginUser.getInstance().Name;
         this.m_lab.lab_id.string = LoginUser.getInstance().UserID.toString();
+    }
+
+    initUIEvent() {
+
     }
 
 }

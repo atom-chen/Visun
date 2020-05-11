@@ -15,9 +15,13 @@ export default class UIGroupAddMember extends BaseComponent {
     editcont: cc.EditBox = null;
 
     start () {
-        CommonUtil.traverseNodes(this.node, this.m_ui);
-        
-        CommonUtil.addClickEvent(this.m_ui.btn_ok, function() {
+		CommonUtil.traverseNodes(this.node, this.m_ui);
+		
+		this.initUIEvent();
+	}
+	
+	initUIEvent() {
+		CommonUtil.addClickEvent(this.m_ui.btn_ok, function() {
 			var target = this.editcont.string;
 			if(isEmpty(target)) {
 				UIManager.toast("请输入有效的用户ID");
@@ -35,6 +39,6 @@ export default class UIGroupAddMember extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){
             CommonUtil.safeDelete(this);
 		}, this);
-    }
+	}
 
 }

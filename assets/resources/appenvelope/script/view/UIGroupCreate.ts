@@ -19,7 +19,19 @@ export default class UIGroupCreate extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         
-        CommonUtil.addClickEvent(this.m_ui.btn_ok, function() {
+        this.initUIEvent();
+
+		EventCenter.getInstance().listen(chat_msgs.SetupGroupResp, this.SetupGroupResp, this);
+	}
+	
+	SetupGroupResp(param) {
+		var grp = new Group(param.GroupId, param.GroupName, param.HostId, param.Timestamp);
+		LoginUser.getInstance().MyGroup = grp;
+		CommonUtil.safeDelete(this);
+	}
+
+	initUIEvent() {
+		CommonUtil.addClickEvent(this.m_ui.btn_ok, function() {
 			var grpName = this.editcont.string;
 			if(isEmpty(grpName)) {
 				UIManager.toast("请输入群名");
@@ -32,13 +44,6 @@ export default class UIGroupCreate extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){
             CommonUtil.safeDelete(this);
 		}, this);
-
-		EventCenter.getInstance().listen(chat_msgs.SetupGroupResp, this.SetupGroupResp, this);
-	}
-	
-	SetupGroupResp(param) {
-		var grp = new Group(param.GroupId, param.GroupName, param.HostId, param.Timestamp);
-		LoginUser.getInstance().MyGroup = grp;
 	}
 
 }

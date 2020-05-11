@@ -9,6 +9,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIGroup extends BaseComponent {
+    @property(cc.Prefab)
+    groupitem: cc.Prefab = null;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -16,6 +18,10 @@ export default class UIGroup extends BaseComponent {
         var hasGroup = !isNil(LoginUser.getInstance().MyGroup);
         this.m_ui.btn_create_grp.active = !hasGroup;
 
+        this.initUIEvent();
+    }
+
+    initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_create_grp, function(){ 
             UIManager.openPanel(ViewDefine.UIGroupCreate, null);
         }, this);

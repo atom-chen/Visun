@@ -12,6 +12,10 @@ export default class UIMain extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
+        this.initUIEvent();
+    }
+
+    initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_chat, function(){ 
             UIManager.closeWindow(ViewDefine.UIGroup);
             UIManager.closeWindow(ViewDefine.UIPersonal);

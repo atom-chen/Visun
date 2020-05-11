@@ -11,6 +11,10 @@ export default class UIEnvelopeSend extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
+        this.initUIEvent();
+    }
+
+    initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_ok, function() {
             var money = this.m_ui.edit_money.getComponent(cc.EditBox).string;
             var count = this.m_ui.edit_count.getComponent(cc.EditBox).string;
