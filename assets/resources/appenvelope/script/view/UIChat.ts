@@ -5,6 +5,7 @@ import UIManager from "../../../../kernel/view/UIManager";
 import { chat_request, chat_msgs } from "../../../../common/script/proto/net_chat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import LoginUser from "../../../../common/script/model/LoginUser";
+import ViewDefine from "../../../../common/script/definer/ViewDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -22,6 +23,13 @@ export default class UIChat extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         
+        this.initUIEvent();
+        
+        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
+        EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
+    }
+
+    initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_send, function(){
             var cont = this.editcont.string;
             if(isEmpty(cont)) {
@@ -29,16 +37,14 @@ export default class UIChat extends BaseComponent {
                 return;
             }
             chat_request.GroupChat({
+                Type: 0,
                 GroupId: 0,
                 Content: cont,
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_fhb, function(){
-            UIManager.toast("尚未实现");
+            UIManager.openPopwnd(ViewDefine.UIEnvelopeSend, false, null);
         }, this);
-        
-        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
-        EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
     }
 
     GroupChatResp(param) {

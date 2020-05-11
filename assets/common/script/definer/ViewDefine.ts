@@ -24,6 +24,7 @@ export default class ViewDefine {
 	public static UIChat = "appenvelope/prefabs/UIChat";
 	public static UIGroup = "appenvelope/prefabs/UIGroup";
 	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
+	public static UIEnvelopeSend = "appenvelope/prefabs/UIEnvelopeSend";
 	//
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
