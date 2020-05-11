@@ -1,5 +1,5 @@
 syntax = "proto3";
-package go;
+package chat;
 
 message SimplePlayerInfo {
     uint64 UserID = 1;

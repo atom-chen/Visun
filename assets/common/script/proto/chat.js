@@ -11,6 +11,359 @@ $root.chat = (function() {
 
     var chat = {};
 
+    chat.SimplePlayerInfo = (function() {
+
+        function SimplePlayerInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SimplePlayerInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SimplePlayerInfo.prototype.Sex = 0;
+        SimplePlayerInfo.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SimplePlayerInfo.prototype.HeadID = 0;
+
+        SimplePlayerInfo.create = function create(properties) {
+            return new SimplePlayerInfo(properties);
+        };
+
+        SimplePlayerInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.Sex != null && Object.hasOwnProperty.call(message, "Sex"))
+                writer.uint32(16).uint32(message.Sex);
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
+                writer.uint32(24).int64(message.Gold);
+            if (message.HeadID != null && Object.hasOwnProperty.call(message, "HeadID"))
+                writer.uint32(32).uint32(message.HeadID);
+            return writer;
+        };
+
+        SimplePlayerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SimplePlayerInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.SimplePlayerInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.Sex = reader.uint32();
+                    break;
+                case 3:
+                    message.Gold = reader.int64();
+                    break;
+                case 4:
+                    message.HeadID = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SimplePlayerInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SimplePlayerInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.Sex != null && message.hasOwnProperty("Sex"))
+                if (!$util.isInteger(message.Sex))
+                    return "Sex: integer expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
+            if (message.HeadID != null && message.hasOwnProperty("HeadID"))
+                if (!$util.isInteger(message.HeadID))
+                    return "HeadID: integer expected";
+            return null;
+        };
+
+        SimplePlayerInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.SimplePlayerInfo)
+                return object;
+            var message = new $root.chat.SimplePlayerInfo();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.Sex != null)
+                message.Sex = object.Sex >>> 0;
+            if (object.Gold != null)
+                if ($util.Long)
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
+            if (object.HeadID != null)
+                message.HeadID = object.HeadID >>> 0;
+            return message;
+        };
+
+        SimplePlayerInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.Sex = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Gold = options.longs === String ? "0" : 0;
+                object.HeadID = 0;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.Sex != null && message.hasOwnProperty("Sex"))
+                object.Sex = message.Sex;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
+                else
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
+            if (message.HeadID != null && message.hasOwnProperty("HeadID"))
+                object.HeadID = message.HeadID;
+            return object;
+        };
+
+        SimplePlayerInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SimplePlayerInfo;
+    })();
+
+    chat.GetOnlinePlayers = (function() {
+
+        function GetOnlinePlayers(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetOnlinePlayers.prototype.PageNum = 0;
+
+        GetOnlinePlayers.create = function create(properties) {
+            return new GetOnlinePlayers(properties);
+        };
+
+        GetOnlinePlayers.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.PageNum != null && Object.hasOwnProperty.call(message, "PageNum"))
+                writer.uint32(8).int32(message.PageNum);
+            return writer;
+        };
+
+        GetOnlinePlayers.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetOnlinePlayers.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GetOnlinePlayers();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.PageNum = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayers.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetOnlinePlayers.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                if (!$util.isInteger(message.PageNum))
+                    return "PageNum: integer expected";
+            return null;
+        };
+
+        GetOnlinePlayers.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GetOnlinePlayers)
+                return object;
+            var message = new $root.chat.GetOnlinePlayers();
+            if (object.PageNum != null)
+                message.PageNum = object.PageNum | 0;
+            return message;
+        };
+
+        GetOnlinePlayers.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.PageNum = 0;
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                object.PageNum = message.PageNum;
+            return object;
+        };
+
+        GetOnlinePlayers.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetOnlinePlayers;
+    })();
+
+    chat.GetOnlinePlayersResp = (function() {
+
+        function GetOnlinePlayersResp(properties) {
+            this.Infos = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetOnlinePlayersResp.prototype.Infos = $util.emptyArray;
+
+        GetOnlinePlayersResp.create = function create(properties) {
+            return new GetOnlinePlayersResp(properties);
+        };
+
+        GetOnlinePlayersResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Infos != null && message.Infos.length)
+                for (var i = 0; i < message.Infos.length; ++i)
+                    $root.chat.SimplePlayerInfo.encode(message.Infos[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        GetOnlinePlayersResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetOnlinePlayersResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GetOnlinePlayersResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Infos && message.Infos.length))
+                        message.Infos = [];
+                    message.Infos.push($root.chat.SimplePlayerInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayersResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetOnlinePlayersResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Infos != null && message.hasOwnProperty("Infos")) {
+                if (!Array.isArray(message.Infos))
+                    return "Infos: array expected";
+                for (var i = 0; i < message.Infos.length; ++i) {
+                    var error = $root.chat.SimplePlayerInfo.verify(message.Infos[i]);
+                    if (error)
+                        return "Infos." + error;
+                }
+            }
+            return null;
+        };
+
+        GetOnlinePlayersResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GetOnlinePlayersResp)
+                return object;
+            var message = new $root.chat.GetOnlinePlayersResp();
+            if (object.Infos) {
+                if (!Array.isArray(object.Infos))
+                    throw TypeError(".chat.GetOnlinePlayersResp.Infos: array expected");
+                message.Infos = [];
+                for (var i = 0; i < object.Infos.length; ++i) {
+                    if (typeof object.Infos[i] !== "object")
+                        throw TypeError(".chat.GetOnlinePlayersResp.Infos: object expected");
+                    message.Infos[i] = $root.chat.SimplePlayerInfo.fromObject(object.Infos[i]);
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayersResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Infos = [];
+            if (message.Infos && message.Infos.length) {
+                object.Infos = [];
+                for (var j = 0; j < message.Infos.length; ++j)
+                    object.Infos[j] = $root.chat.SimplePlayerInfo.toObject(message.Infos[j], options);
+            }
+            return object;
+        };
+
+        GetOnlinePlayersResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetOnlinePlayersResp;
+    })();
+
     chat.SetupGroup = (function() {
 
         function SetupGroup(properties) {
@@ -20,7 +373,7 @@ $root.chat = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SetupGroup.prototype.name = "";
+        SetupGroup.prototype.Name = "";
 
         SetupGroup.create = function create(properties) {
             return new SetupGroup(properties);
@@ -29,8 +382,8 @@ $root.chat = (function() {
         SetupGroup.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.name != null && message.hasOwnProperty("name"))
-                writer.uint32(10).string(message.name);
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(10).string(message.Name);
             return writer;
         };
 
@@ -46,7 +399,7 @@ $root.chat = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.name = reader.string();
+                    message.Name = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -65,9 +418,9 @@ $root.chat = (function() {
         SetupGroup.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.name != null && message.hasOwnProperty("name"))
-                if (!$util.isString(message.name))
-                    return "name: string expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
             return null;
         };
 
@@ -75,8 +428,8 @@ $root.chat = (function() {
             if (object instanceof $root.chat.SetupGroup)
                 return object;
             var message = new $root.chat.SetupGroup();
-            if (object.name != null)
-                message.name = String(object.name);
+            if (object.Name != null)
+                message.Name = String(object.Name);
             return message;
         };
 
@@ -85,9 +438,9 @@ $root.chat = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.name = "";
-            if (message.name != null && message.hasOwnProperty("name"))
-                object.name = message.name;
+                object.Name = "";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
             return object;
         };
 
@@ -125,13 +478,13 @@ $root.chat = (function() {
         SetupGroupResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.GroupName != null && message.hasOwnProperty("GroupName"))
+            if (message.GroupName != null && Object.hasOwnProperty.call(message, "GroupName"))
                 writer.uint32(18).string(message.GroupName);
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
                 writer.uint32(24).uint64(message.HostID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(32).int64(message.Timestamp);
             if (message.AdminList != null && message.AdminList.length) {
                 writer.uint32(42).fork();
@@ -426,9 +779,7 @@ $root.chat = (function() {
         }
 
         GroupChat.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GroupChat.prototype.Type = 0;
         GroupChat.prototype.Content = "";
-        GroupChat.prototype.GoodLuck = null;
 
         GroupChat.create = function create(properties) {
             return new GroupChat(properties);
@@ -437,14 +788,10 @@ $root.chat = (function() {
         GroupChat.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                writer.uint32(16).uint32(message.Type);
-            if (message.Content != null && message.hasOwnProperty("Content"))
-                writer.uint32(26).string(message.Content);
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                $root.chat.ContestLuck.encode(message.GoodLuck, writer.uint32(34).fork()).ldelim();
+            if (message.Content != null && Object.hasOwnProperty.call(message, "Content"))
+                writer.uint32(18).string(message.Content);
             return writer;
         };
 
@@ -463,13 +810,7 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.Type = reader.uint32();
-                    break;
-                case 3:
                     message.Content = reader.string();
-                    break;
-                case 4:
-                    message.GoodLuck = $root.chat.ContestLuck.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -491,17 +832,9 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
             if (message.Content != null && message.hasOwnProperty("Content"))
                 if (!$util.isString(message.Content))
                     return "Content: string expected";
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck")) {
-                var error = $root.chat.ContestLuck.verify(message.GoodLuck);
-                if (error)
-                    return "GoodLuck." + error;
-            }
             return null;
         };
 
@@ -518,15 +851,8 @@ $root.chat = (function() {
                     message.GroupId = object.GroupId;
                 else if (typeof object.GroupId === "object")
                     message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
-            if (object.Type != null)
-                message.Type = object.Type >>> 0;
             if (object.Content != null)
                 message.Content = String(object.Content);
-            if (object.GoodLuck != null) {
-                if (typeof object.GoodLuck !== "object")
-                    throw TypeError(".chat.GroupChat.GoodLuck: object expected");
-                message.GoodLuck = $root.chat.ContestLuck.fromObject(object.GoodLuck);
-            }
             return message;
         };
 
@@ -540,21 +866,15 @@ $root.chat = (function() {
                     object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.GroupId = options.longs === String ? "0" : 0;
-                object.Type = 0;
                 object.Content = "";
-                object.GoodLuck = null;
             }
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 if (typeof message.GroupId === "number")
                     object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
             if (message.Content != null && message.hasOwnProperty("Content"))
                 object.Content = message.Content;
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                object.GoodLuck = $root.chat.ContestLuck.toObject(message.GoodLuck, options);
             return object;
         };
 
@@ -575,9 +895,7 @@ $root.chat = (function() {
         }
 
         GroupChatResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GroupChatResp.prototype.Type = 0;
         GroupChatResp.prototype.Content = "";
-        GroupChatResp.prototype.GoodLuck = null;
         GroupChatResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GroupChatResp.prototype.SenderID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
@@ -588,18 +906,14 @@ $root.chat = (function() {
         GroupChatResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                writer.uint32(16).uint32(message.Type);
-            if (message.Content != null && message.hasOwnProperty("Content"))
-                writer.uint32(26).string(message.Content);
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                $root.chat.ContestLuck.encode(message.GoodLuck, writer.uint32(34).fork()).ldelim();
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
-                writer.uint32(40).int64(message.Timestamp);
-            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
-                writer.uint32(48).uint64(message.SenderID);
+            if (message.Content != null && Object.hasOwnProperty.call(message, "Content"))
+                writer.uint32(18).string(message.Content);
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
+                writer.uint32(24).int64(message.Timestamp);
+            if (message.SenderID != null && Object.hasOwnProperty.call(message, "SenderID"))
+                writer.uint32(32).uint64(message.SenderID);
             return writer;
         };
 
@@ -618,18 +932,12 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.Type = reader.uint32();
-                    break;
-                case 3:
                     message.Content = reader.string();
                     break;
-                case 4:
-                    message.GoodLuck = $root.chat.ContestLuck.decode(reader, reader.uint32());
-                    break;
-                case 5:
+                case 3:
                     message.Timestamp = reader.int64();
                     break;
-                case 6:
+                case 4:
                     message.SenderID = reader.uint64();
                     break;
                 default:
@@ -652,17 +960,9 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
             if (message.Content != null && message.hasOwnProperty("Content"))
                 if (!$util.isString(message.Content))
                     return "Content: string expected";
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck")) {
-                var error = $root.chat.ContestLuck.verify(message.GoodLuck);
-                if (error)
-                    return "GoodLuck." + error;
-            }
             if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
                 if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
                     return "Timestamp: integer|Long expected";
@@ -685,15 +985,8 @@ $root.chat = (function() {
                     message.GroupId = object.GroupId;
                 else if (typeof object.GroupId === "object")
                     message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
-            if (object.Type != null)
-                message.Type = object.Type >>> 0;
             if (object.Content != null)
                 message.Content = String(object.Content);
-            if (object.GoodLuck != null) {
-                if (typeof object.GoodLuck !== "object")
-                    throw TypeError(".chat.GroupChatResp.GoodLuck: object expected");
-                message.GoodLuck = $root.chat.ContestLuck.fromObject(object.GoodLuck);
-            }
             if (object.Timestamp != null)
                 if ($util.Long)
                     (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
@@ -725,9 +1018,7 @@ $root.chat = (function() {
                     object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.GroupId = options.longs === String ? "0" : 0;
-                object.Type = 0;
                 object.Content = "";
-                object.GoodLuck = null;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -744,12 +1035,8 @@ $root.chat = (function() {
                     object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
             if (message.Content != null && message.hasOwnProperty("Content"))
                 object.Content = message.Content;
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                object.GoodLuck = $root.chat.ContestLuck.toObject(message.GoodLuck, options);
             if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
                 if (typeof message.Timestamp === "number")
                     object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
@@ -780,9 +1067,7 @@ $root.chat = (function() {
         }
 
         PrivateChat.prototype.TargetId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        PrivateChat.prototype.Type = 0;
         PrivateChat.prototype.Content = "";
-        PrivateChat.prototype.GoodLuck = null;
 
         PrivateChat.create = function create(properties) {
             return new PrivateChat(properties);
@@ -791,14 +1076,10 @@ $root.chat = (function() {
         PrivateChat.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TargetId != null && message.hasOwnProperty("TargetId"))
+            if (message.TargetId != null && Object.hasOwnProperty.call(message, "TargetId"))
                 writer.uint32(8).uint64(message.TargetId);
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                writer.uint32(16).uint32(message.Type);
-            if (message.Content != null && message.hasOwnProperty("Content"))
-                writer.uint32(26).string(message.Content);
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                $root.chat.ContestLuck.encode(message.GoodLuck, writer.uint32(34).fork()).ldelim();
+            if (message.Content != null && Object.hasOwnProperty.call(message, "Content"))
+                writer.uint32(18).string(message.Content);
             return writer;
         };
 
@@ -817,13 +1098,7 @@ $root.chat = (function() {
                     message.TargetId = reader.uint64();
                     break;
                 case 2:
-                    message.Type = reader.uint32();
-                    break;
-                case 3:
                     message.Content = reader.string();
-                    break;
-                case 4:
-                    message.GoodLuck = $root.chat.ContestLuck.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -845,17 +1120,9 @@ $root.chat = (function() {
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
                     return "TargetId: integer|Long expected";
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
             if (message.Content != null && message.hasOwnProperty("Content"))
                 if (!$util.isString(message.Content))
                     return "Content: string expected";
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck")) {
-                var error = $root.chat.ContestLuck.verify(message.GoodLuck);
-                if (error)
-                    return "GoodLuck." + error;
-            }
             return null;
         };
 
@@ -872,15 +1139,8 @@ $root.chat = (function() {
                     message.TargetId = object.TargetId;
                 else if (typeof object.TargetId === "object")
                     message.TargetId = new $util.LongBits(object.TargetId.low >>> 0, object.TargetId.high >>> 0).toNumber(true);
-            if (object.Type != null)
-                message.Type = object.Type >>> 0;
             if (object.Content != null)
                 message.Content = String(object.Content);
-            if (object.GoodLuck != null) {
-                if (typeof object.GoodLuck !== "object")
-                    throw TypeError(".chat.PrivateChat.GoodLuck: object expected");
-                message.GoodLuck = $root.chat.ContestLuck.fromObject(object.GoodLuck);
-            }
             return message;
         };
 
@@ -894,21 +1154,15 @@ $root.chat = (function() {
                     object.TargetId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TargetId = options.longs === String ? "0" : 0;
-                object.Type = 0;
                 object.Content = "";
-                object.GoodLuck = null;
             }
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 if (typeof message.TargetId === "number")
                     object.TargetId = options.longs === String ? String(message.TargetId) : message.TargetId;
                 else
                     object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
             if (message.Content != null && message.hasOwnProperty("Content"))
                 object.Content = message.Content;
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                object.GoodLuck = $root.chat.ContestLuck.toObject(message.GoodLuck, options);
             return object;
         };
 
@@ -928,9 +1182,7 @@ $root.chat = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        PrivateChatResp.prototype.Type = 0;
         PrivateChatResp.prototype.Content = "";
-        PrivateChatResp.prototype.GoodLuck = null;
         PrivateChatResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         PrivateChatResp.prototype.SenderID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
@@ -941,16 +1193,12 @@ $root.chat = (function() {
         PrivateChatResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                writer.uint32(8).uint32(message.Type);
-            if (message.Content != null && message.hasOwnProperty("Content"))
-                writer.uint32(18).string(message.Content);
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                $root.chat.ContestLuck.encode(message.GoodLuck, writer.uint32(26).fork()).ldelim();
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
-                writer.uint32(32).int64(message.Timestamp);
-            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
-                writer.uint32(40).uint64(message.SenderID);
+            if (message.Content != null && Object.hasOwnProperty.call(message, "Content"))
+                writer.uint32(10).string(message.Content);
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
+                writer.uint32(16).int64(message.Timestamp);
+            if (message.SenderID != null && Object.hasOwnProperty.call(message, "SenderID"))
+                writer.uint32(24).uint64(message.SenderID);
             return writer;
         };
 
@@ -966,18 +1214,12 @@ $root.chat = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Type = reader.uint32();
-                    break;
-                case 2:
                     message.Content = reader.string();
                     break;
-                case 3:
-                    message.GoodLuck = $root.chat.ContestLuck.decode(reader, reader.uint32());
-                    break;
-                case 4:
+                case 2:
                     message.Timestamp = reader.int64();
                     break;
-                case 5:
+                case 3:
                     message.SenderID = reader.uint64();
                     break;
                 default:
@@ -997,17 +1239,9 @@ $root.chat = (function() {
         PrivateChatResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
             if (message.Content != null && message.hasOwnProperty("Content"))
                 if (!$util.isString(message.Content))
                     return "Content: string expected";
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck")) {
-                var error = $root.chat.ContestLuck.verify(message.GoodLuck);
-                if (error)
-                    return "GoodLuck." + error;
-            }
             if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
                 if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
                     return "Timestamp: integer|Long expected";
@@ -1021,15 +1255,8 @@ $root.chat = (function() {
             if (object instanceof $root.chat.PrivateChatResp)
                 return object;
             var message = new $root.chat.PrivateChatResp();
-            if (object.Type != null)
-                message.Type = object.Type >>> 0;
             if (object.Content != null)
                 message.Content = String(object.Content);
-            if (object.GoodLuck != null) {
-                if (typeof object.GoodLuck !== "object")
-                    throw TypeError(".chat.PrivateChatResp.GoodLuck: object expected");
-                message.GoodLuck = $root.chat.ContestLuck.fromObject(object.GoodLuck);
-            }
             if (object.Timestamp != null)
                 if ($util.Long)
                     (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
@@ -1056,9 +1283,7 @@ $root.chat = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.Type = 0;
                 object.Content = "";
-                object.GoodLuck = null;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -1070,12 +1295,8 @@ $root.chat = (function() {
                 } else
                     object.SenderID = options.longs === String ? "0" : 0;
             }
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
             if (message.Content != null && message.hasOwnProperty("Content"))
                 object.Content = message.Content;
-            if (message.GoodLuck != null && message.hasOwnProperty("GoodLuck"))
-                object.GoodLuck = $root.chat.ContestLuck.toObject(message.GoodLuck, options);
             if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
                 if (typeof message.Timestamp === "number")
                     object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
@@ -1115,9 +1336,9 @@ $root.chat = (function() {
         GroupAddPerson.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.MemID != null && message.hasOwnProperty("MemID"))
+            if (message.MemID != null && Object.hasOwnProperty.call(message, "MemID"))
                 writer.uint32(16).uint64(message.MemID);
             return writer;
         };
@@ -1247,13 +1468,13 @@ $root.chat = (function() {
         GroupAddPersonResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(24).int64(message.Timestamp);
-            if (message.MemID != null && message.hasOwnProperty("MemID"))
+            if (message.MemID != null && Object.hasOwnProperty.call(message, "MemID"))
                 writer.uint32(32).uint64(message.MemID);
             return writer;
         };
@@ -1431,9 +1652,9 @@ $root.chat = (function() {
         GroupDelPerson.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.MemID != null && message.hasOwnProperty("MemID"))
+            if (message.MemID != null && Object.hasOwnProperty.call(message, "MemID"))
                 writer.uint32(16).uint64(message.MemID);
             return writer;
         };
@@ -1563,13 +1784,13 @@ $root.chat = (function() {
         GroupDelPersonResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(24).int64(message.Timestamp);
-            if (message.MemID != null && message.hasOwnProperty("MemID"))
+            if (message.MemID != null && Object.hasOwnProperty.call(message, "MemID"))
                 writer.uint32(32).uint64(message.MemID);
             return writer;
         };
@@ -1748,11 +1969,11 @@ $root.chat = (function() {
         GroupBanned.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.IsBanned != null && message.hasOwnProperty("IsBanned"))
+            if (message.IsBanned != null && Object.hasOwnProperty.call(message, "IsBanned"))
                 writer.uint32(24).bool(message.IsBanned);
             return writer;
         };
@@ -1894,15 +2115,15 @@ $root.chat = (function() {
         GroupBannedResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.IsBanned != null && message.hasOwnProperty("IsBanned"))
+            if (message.IsBanned != null && Object.hasOwnProperty.call(message, "IsBanned"))
                 writer.uint32(24).bool(message.IsBanned);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(32).int64(message.Timestamp);
-            if (message.MemID != null && message.hasOwnProperty("MemID"))
+            if (message.MemID != null && Object.hasOwnProperty.call(message, "MemID"))
                 writer.uint32(40).uint64(message.MemID);
             return writer;
         };
@@ -2090,7 +2311,7 @@ $root.chat = (function() {
         GroupQuit.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
             return writer;
         };
@@ -2193,11 +2414,11 @@ $root.chat = (function() {
         GroupQuitResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(24).int64(message.Timestamp);
             return writer;
         };
@@ -2350,9 +2571,9 @@ $root.chat = (function() {
         GroupDismiss.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(16).int64(message.Timestamp);
             return writer;
         };
@@ -2481,11 +2702,11 @@ $root.chat = (function() {
         GroupDismissResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(24).int64(message.Timestamp);
             return writer;
         };
@@ -2639,11 +2860,11 @@ $root.chat = (function() {
         GroupChangeHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.OldID != null && message.hasOwnProperty("OldID"))
+            if (message.OldID != null && Object.hasOwnProperty.call(message, "OldID"))
                 writer.uint32(16).uint64(message.OldID);
-            if (message.NewID != null && message.hasOwnProperty("NewID"))
+            if (message.NewID != null && Object.hasOwnProperty.call(message, "NewID"))
                 writer.uint32(24).uint64(message.NewID);
             return writer;
         };
@@ -2797,11 +3018,11 @@ $root.chat = (function() {
         GroupChangeHostResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+            if (message.GroupId != null && Object.hasOwnProperty.call(message, "GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(16).uint64(message.UserID);
-            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+            if (message.Timestamp != null && Object.hasOwnProperty.call(message, "Timestamp"))
                 writer.uint32(24).int64(message.Timestamp);
             return writer;
         };
@@ -2933,136 +3154,6 @@ $root.chat = (function() {
         };
 
         return GroupChangeHostResp;
-    })();
-
-    chat.ContestLuck = (function() {
-
-        function ContestLuck(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        ContestLuck.prototype.Code = 0;
-        ContestLuck.prototype.Number = 0;
-        ContestLuck.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        ContestLuck.create = function create(properties) {
-            return new ContestLuck(properties);
-        };
-
-        ContestLuck.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                writer.uint32(8).uint32(message.Code);
-            if (message.Number != null && message.hasOwnProperty("Number"))
-                writer.uint32(16).uint32(message.Number);
-            if (message.Gold != null && message.hasOwnProperty("Gold"))
-                writer.uint32(24).int64(message.Gold);
-            return writer;
-        };
-
-        ContestLuck.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        ContestLuck.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.ContestLuck();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Code = reader.uint32();
-                    break;
-                case 2:
-                    message.Number = reader.uint32();
-                    break;
-                case 3:
-                    message.Gold = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        ContestLuck.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        ContestLuck.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                if (!$util.isInteger(message.Code))
-                    return "Code: integer expected";
-            if (message.Number != null && message.hasOwnProperty("Number"))
-                if (!$util.isInteger(message.Number))
-                    return "Number: integer expected";
-            if (message.Gold != null && message.hasOwnProperty("Gold"))
-                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
-                    return "Gold: integer|Long expected";
-            return null;
-        };
-
-        ContestLuck.fromObject = function fromObject(object) {
-            if (object instanceof $root.chat.ContestLuck)
-                return object;
-            var message = new $root.chat.ContestLuck();
-            if (object.Code != null)
-                message.Code = object.Code >>> 0;
-            if (object.Number != null)
-                message.Number = object.Number >>> 0;
-            if (object.Gold != null)
-                if ($util.Long)
-                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
-                else if (typeof object.Gold === "string")
-                    message.Gold = parseInt(object.Gold, 10);
-                else if (typeof object.Gold === "number")
-                    message.Gold = object.Gold;
-                else if (typeof object.Gold === "object")
-                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
-            return message;
-        };
-
-        ContestLuck.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.Code = 0;
-                object.Number = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Gold = options.longs === String ? "0" : 0;
-            }
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                object.Code = message.Code;
-            if (message.Number != null && message.hasOwnProperty("Number"))
-                object.Number = message.Number;
-            if (message.Gold != null && message.hasOwnProperty("Gold"))
-                if (typeof message.Gold === "number")
-                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
-                else
-                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
-            return object;
-        };
-
-        ContestLuck.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return ContestLuck;
     })();
 
     return chat;
