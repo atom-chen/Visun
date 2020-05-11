@@ -6,15 +6,15 @@ import TimerManager from "../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import AudioManager from "../../../../kernel/audio/AudioManager";
 import GameUtil from "../../../../common/script/utils/GameUtil";
-import CpnChip from "../../../../common/script/comps/CpnChip";
 import GameManager from "../../../../common/script/model/GameManager";
-import CpnChipbox2d from "../../../../common/script/comps/CpnChipbox2d";
 import UIManager from "../../../../kernel/view/UIManager";
 import { baccarat_request, baccarat_msgs } from "../../../../common/script/proto/net_baccarat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import ResPool from "../../../../kernel/basic/pool/ResPool";
+import CpnChipbox2d from "../../../appqp/script/comps/CpnChipbox2d";
+import CpnChip from "../../../appqp/script/comps/CpnChip";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -76,7 +76,7 @@ export default class BacarratUI extends BaseComponent {
 			GameUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
 		}
 		//播音效
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
 	private onStateTimer(tmr:BaseTimer) {
@@ -93,7 +93,7 @@ export default class BacarratUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting(param) {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 	}
 
     //结算阶段
@@ -113,11 +113,11 @@ export default class BacarratUI extends BaseComponent {
 				}
 			}, this)
 		));
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 	}
 	private toStateJiesuan(param) {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.playJiesuan();
 	}
     

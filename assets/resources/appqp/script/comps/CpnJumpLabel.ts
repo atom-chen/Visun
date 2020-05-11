@@ -1,7 +1,7 @@
 //-----------------------------
 //文本组件（数字渐变）
 //-----------------------------
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
+import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 

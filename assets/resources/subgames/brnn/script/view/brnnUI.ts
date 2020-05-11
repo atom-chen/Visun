@@ -5,15 +5,15 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../../common/script/model/GameManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
-import CpnChipbox3d from "../../../../../common/script/comps/CpnChipbox3d";
-import CpnChip from "../../../../../common/script/comps/CpnChip";
-import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
+import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
+import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
+import CpnChip from "../../../../appqp/script/comps/CpnChip";
 
 
 
@@ -60,7 +60,7 @@ export default class BrnnUI extends BaseComponent {
 
 		this.toStateReady();
 
-		AudioManager.getInstance().playMusicAsync("common/audios/music_bg", true);
+		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 	}
 
 	onDestroy(){
@@ -91,7 +91,7 @@ export default class BrnnUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
@@ -126,12 +126,12 @@ export default class BrnnUI extends BaseComponent {
 				}
 			}, this)
 		));
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 
@@ -170,10 +170,10 @@ export default class BrnnUI extends BaseComponent {
 		}
 		//播音效
 		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
 		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
 	private onClickArea(areaId:number) {

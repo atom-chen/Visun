@@ -1,8 +1,8 @@
 //-----------------------------
 //麻将组件
 //-----------------------------
-import GameUtil from "../utils/GameUtil";
-import { MajhongCode } from "../definer/MajhongDefine";
+import { MajhongCode } from "../../../../common/script/definer/MajhongDefine";
+import GameUtil from "../../../../common/script/utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 

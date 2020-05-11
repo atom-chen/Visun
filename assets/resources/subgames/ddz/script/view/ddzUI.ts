@@ -1,7 +1,6 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
@@ -10,9 +9,10 @@ import DDzMgr from "../model/DDzMgr";
 import { landLords_msgs, landLords_request } from "../../../../../common/script/proto/net_landLords";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import DdzPlayer from "../model/DdzPlayer";
-import CpnPlayer1 from "../../../../../common/script/comps/CpnPlayer1";
-import CpnCircleCD from "../../../../../common/script/comps/CpnCircleCD";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
+import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
+import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 
 const MAX_SOLDIER = 3;
 

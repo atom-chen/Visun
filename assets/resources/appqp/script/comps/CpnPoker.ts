@@ -1,8 +1,8 @@
 //-----------------------------
 //扑克组件
 //-----------------------------
-import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
-import GameUtil from "../utils/GameUtil";
+import GameUtil from "../../../../common/script/utils/GameUtil";
+import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 

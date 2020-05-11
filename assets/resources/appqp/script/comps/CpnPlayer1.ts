@@ -1,20 +1,22 @@
 //-----------------------------
 //玩家组件
 //-----------------------------
-import BaseComponent from "../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
-import GameUtil from "../utils/GameUtil";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import GameUtil from "../../../../common/script/utils/GameUtil";
+import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CpnPlayer extends BaseComponent {
+export default class CpnPlayer1 extends BaseComponent {
 
     @property(cc.Label)
     label_name: cc.Label = null;
     @property(cc.Label)
     label_money: cc.Label = null;
+    @property(cc.Sprite)
+    head_icon: cc.Sprite = null;
 
     private _userId:number = 0;
     private _money:number = 0;
@@ -55,7 +57,7 @@ export default class CpnPlayer extends BaseComponent {
     }
 
     public setHeadImg(v:number) {
-        GameUtil.setHeadIcon(this.node, v);
+        GameUtil.setHeadIcon(this.head_icon.node, v);
     }
 
     public addMoney(money:number, fromV ?: number) {

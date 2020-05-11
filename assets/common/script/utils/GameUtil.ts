@@ -32,9 +32,9 @@ export default class GameUtil {
 	//获取筹码图片资源路经
 	public static chipPath(v:number|string, b3d:boolean) : string {
 		if(b3d) {
-			return "common/imgs/chips/cm_"+v;
+			return "appqp/imgs/chips/cm_"+v;
 		} else {
-			return "common/imgs/chips/chouma"+v;
+			return "appqp/imgs/chips/chouma"+v;
 		}
 	}
 
@@ -42,12 +42,12 @@ export default class GameUtil {
 	public static pokerPath(v:number|string) : string {
 		if(v===0x0E) { v = 0x4E; }
 		if(v===0x0F) { v = 0x5F; }
-		return "common/imgs/pokers/poker_"+v;
+		return "appqp/imgs/pokers/poker_"+v;
 	}
 
 	//获取麻将图片资源路经
 	public static majhongPath(v:MajhongCode) : string {
-		return "common/imgs/majhong/tong"+v;
+		return "appqp/imgs/majhong/tong"+v;
 	}
 
 	//设置头像图片

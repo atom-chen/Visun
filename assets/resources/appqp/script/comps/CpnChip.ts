@@ -1,7 +1,8 @@
 //-----------------------------
 //筹码组件
 //-----------------------------
-import GameUtil from "../utils/GameUtil";
+
+import GameUtil from "../../../../common/script/utils/GameUtil";
 
 const {ccclass, property} = cc._decorator;
 

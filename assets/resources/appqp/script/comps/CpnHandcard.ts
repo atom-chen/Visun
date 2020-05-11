@@ -1,11 +1,11 @@
 //-----------------------------
 //斗地主/跑得快手牌组件
 //-----------------------------
-import { PokerCode } from "../definer/PokerDefine";
+import { PokerCode } from "../../../../common/script/definer/PokerDefine";
 import CpnPoker from "./CpnPoker";
-import RuleDdz from "../../../resources/subgames/ddz/script/rule/RuleDdz";
-import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
-import SlidePicker from "../../../resources/subgames/ddz/script/rule/SlidePicker";
+import RuleDdz from "../../../subgames/ddz/script/rule/RuleDdz";
+import DDzMgr from "../../../subgames/ddz/script/model/DDzMgr";
+import SlidePicker from "../../../subgames/ddz/script/rule/SlidePicker";
 
 const {ccclass, property} = cc._decorator;
 

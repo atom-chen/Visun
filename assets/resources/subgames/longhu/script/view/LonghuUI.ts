@@ -6,10 +6,10 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
-import CpnChip from "../../../../../common/script/comps/CpnChip";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
-import CpnGameState from "../../../../../common/script/comps/CpnGameState";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
+import CpnChip from "../../../../appqp/script/comps/CpnChip";
 
 
 var testdata = [ 
@@ -85,7 +85,7 @@ export default class LonghuUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
@@ -101,13 +101,13 @@ export default class LonghuUI extends BaseComponent {
 		for(var i=len-1; i>=0; i--){
 			this._pool.delObject(childs[i]);
 		}
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 	}
 
 	//结算阶段
 	private toStateJiesuan() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		
 		this.playJiesuan();
 
@@ -136,10 +136,10 @@ export default class LonghuUI extends BaseComponent {
 		}
 		//播音效
 		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
 		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
 

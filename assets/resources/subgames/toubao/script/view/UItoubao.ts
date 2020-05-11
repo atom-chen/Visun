@@ -2,14 +2,14 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
-import CpnChipbox3d from "../../../../../common/script/comps/CpnChipbox3d";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import CpnChip from "../../../../../common/script/comps/CpnChip";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
+import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
+import CpnChip from "../../../../appqp/script/comps/CpnChip";
 
 
 var margin = { rx:10, ry:10 };
@@ -75,7 +75,7 @@ export default class ToubaoUI extends BaseComponent {
 
 		this.toStateReady();
 
-		AudioManager.getInstance().playMusicAsync("common/audios/music_bg", true);
+		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 	}
 
 	onDestroy(){
@@ -109,7 +109,7 @@ export default class ToubaoUI extends BaseComponent {
 	//下注阶段
 	private toStateBetting() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("common/audios/startbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
@@ -120,7 +120,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private playJiesuan() {
-		AudioManager.getInstance().playEffectAsync("common/audios/collect", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -143,7 +143,7 @@ export default class ToubaoUI extends BaseComponent {
 	//结算阶段
 	private toStateJiesuan() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("common/audios/endbet", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 
 		this.playJiesuan();
 
@@ -171,10 +171,10 @@ export default class ToubaoUI extends BaseComponent {
 		}
 		//播音效
 		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("common/audios/lastsecond", false);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
 		} 
-		AudioManager.getInstance().playEffectAsync("common/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("common/audios/chipmove", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
 	private initNetEvent() {

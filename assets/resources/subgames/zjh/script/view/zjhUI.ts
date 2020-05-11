@@ -2,13 +2,13 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnHandcard from "../../../../../common/script/comps/CpnHandcard";
-import CpnUserState from "../../../../../common/script/comps/CpnUserState";
 import UIManager from "../../../../../kernel/view/UIManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
-import CpnGameState from "../../../../../common/script/comps/CpnGameState";
+import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
+import CpnUserState from "../../../../appqp/script/comps/CpnUserState";
+import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 
 
 const {ccclass, property} = cc._decorator;

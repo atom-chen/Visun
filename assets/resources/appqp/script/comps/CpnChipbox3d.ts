@@ -1,14 +1,15 @@
 //-----------------------------
 //筹码盒组件
 //-----------------------------
-import BaseComponent from "../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
-import GameUtil from "../utils/GameUtil";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import GameUtil from "../../../../common/script/utils/GameUtil";
+
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CpnChipbox2d extends BaseComponent {
+export default class CpnChipbox3d extends BaseComponent {
 
     private selectedIndex:number = 1;
     private _values = null;
@@ -39,15 +40,6 @@ export default class CpnChipbox2d extends BaseComponent {
     public setSelectedIndex(v:number) {
         this.selectedIndex = v;
         this.onSelect(v);
-    }
-
-    
-    public getSelectValue() : number {
-        return this._values[this.selectedIndex];
-    }
-
-    public getSelectedNode() : cc.Node {
-        return this.m_ui["chip"+this.selectedIndex];
     }
 
     

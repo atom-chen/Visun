@@ -1,9 +1,9 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import CpnCircleCD from "../../../../../common/script/comps/CpnCircleCD";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 
 
 var MAX_PLAYER = 5;
