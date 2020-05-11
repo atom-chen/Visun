@@ -22,12 +22,18 @@ export default class UIGroup extends BaseComponent {
         for(var grpId in grps) {
             var item = cc.instantiate(this.groupitem);
             this.m_ui.content.addChild(item);
+            item.getChildByName("lab_grpname").getComponent(cc.Label).string = grps[grpId].GroupName;
+            item.getChildByName("lab_grphost").getComponent(cc.Label).string = grps[grpId].HostID.toString();
+            item.getChildByName("lab_grpmembercnt").getComponent(cc.Label).string = "0";
         }
     }
 
     initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_create_grp, function(){ 
             UIManager.openPanel(ViewDefine.UIGroupCreate, null);
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_join_grp, function(){ 
+            UIManager.openPanel(ViewDefine.UIGroupJoin, null);
         }, this);
     }
 

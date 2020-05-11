@@ -1,8 +1,8 @@
 export default class Group {
-	private GroupId:number = 0;
-	private GroupName:string = "";
-	private HostID:number = 0;
-	private Timestamp:number = 0;
+	GroupId:number = 0;
+	GroupName:string = "";
+	HostID:number = 0;
+	Timestamp:number = 0;
 	private AdminList:Array<number>;
 	private MemberList:Array<number>;
 	private BannedList:Array<number>;
