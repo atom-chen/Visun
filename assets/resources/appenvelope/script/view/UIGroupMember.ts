@@ -1,5 +1,6 @@
-import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+
 
 
 const {ccclass, property} = cc._decorator;

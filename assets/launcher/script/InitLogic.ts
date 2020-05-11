@@ -14,7 +14,8 @@ export default class InitLogic {
         this._inited = true;
         
         KernelUIDefine.GameScene.name = "GameScene";
-        KernelUIDefine.LobbyScene.name = "LobbyScene";
+     //   KernelUIDefine.LobbyScene.name = "LobbyScene";
+        KernelUIDefine.LobbyScene.name = "EnvelopeScene";
         KernelUIDefine.HotupdateScene.name = "HotupdateScene";
         KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
         KernelUIDefine.UIToast = "launcher/prefabs/UIToast";

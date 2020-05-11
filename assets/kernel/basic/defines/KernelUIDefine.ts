@@ -3,7 +3,7 @@
 //-------------------------------------
 export default class KernelUIDefine {
 	public static GameScene = { name:"GameScene", isLandspace:true };
-	public static LobbyScene = { name:"LobbyScene", isLandspace:true };
+	public static LobbyScene = { name:"EnvelopeScene", isLandspace:true };
 	public static HotupdateScene = { name:"HotupdateScene", isLandspace:true };
 
 	public static ConfirmDlg = "launcher/prefabs/ConfirmDlg";

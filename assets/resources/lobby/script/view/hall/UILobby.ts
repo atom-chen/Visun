@@ -11,8 +11,6 @@ import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import { gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
-import SceneManager from "../../../../../kernel/view/SceneManager";
-import KernelUIDefine from "../../../../../kernel/basic/defines/KernelUIDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -130,24 +128,6 @@ export default class UILobby extends BaseComponent {
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
 			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
-		}, this);
-		//
-		CommonUtil.addClickEvent(this.m_ui.btn_chat, function(){
-			UIManager.toggleWindow(ViewDefine.UIChat);
-		}, this);
-		//
-		CommonUtil.addClickEvent(this.m_ui.btn_qhb, function(){
-			SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
-				UIManager.openPanel(ViewDefine.UIqhb, null);
-			});
-		}, this);
-		//
-		CommonUtil.addClickEvent(this.m_ui.btn_group, function(){
-			UIManager.openPopwnd(ViewDefine.UIGroupCreate, true, null);
-		}, this);
-		//
-		CommonUtil.addClickEvent(this.m_ui.btn_grp_addmember, function(){
-			UIManager.openPopwnd(ViewDefine.UIGroupAddMember, true, null);
 		}, this);
 	}
 

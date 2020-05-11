@@ -1,11 +1,12 @@
-import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
-import { chat_request, chat_msgs } from "../../../../../common/script/proto/net_chat";
-import { isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
-import UIManager from "../../../../../kernel/view/UIManager";
-import EventCenter from "../../../../../kernel/basic/event/EventCenter";
-import Group from "../../../../../common/script/model/Group";
-import LoginUser from "../../../../../common/script/model/LoginUser";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
+import UIManager from "../../../../kernel/view/UIManager";
+import { chat_request, chat_msgs } from "../../../../common/script/proto/net_chat";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import Group from "../../../../common/script/model/Group";
+import LoginUser from "../../../../common/script/model/LoginUser";
+
 
 
 const {ccclass, property} = cc._decorator;
@@ -25,7 +26,7 @@ export default class UIGroupCreate extends BaseComponent {
 				return;
 			}
             chat_request.SetupGroup({
-				name: grpName
+				Name: grpName
 			});
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){

@@ -1,10 +1,11 @@
-import BaseComponent from "../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
-import { chat_request, chat_msgs } from "../proto/net_chat";
-import LoginUser from "../model/LoginUser";
-import EventCenter from "../../../kernel/basic/event/EventCenter";
-import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
-import UIManager from "../../../kernel/view/UIManager";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
+import UIManager from "../../../../kernel/view/UIManager";
+import { chat_request, chat_msgs } from "../../../../common/script/proto/net_chat";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import LoginUser from "../../../../common/script/model/LoginUser";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,9 +31,10 @@ export default class UIChat extends BaseComponent {
             chat_request.GroupChat({
                 GroupId: 0,
                 Content: cont,
-                Type:0,
-                GoodLuck:null
             });
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_fhb, function(){
+            UIManager.toast("尚未实现");
         }, this);
         
         EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);

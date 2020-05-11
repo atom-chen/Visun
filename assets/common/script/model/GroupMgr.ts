@@ -25,10 +25,15 @@ export default class GroupMgr extends ModelBase {
 
 
 	public addGroup(grp:Group) {
-
+		this._groups[grp.getId()] = grp;
 	}
 
-	public delGroup(grp:Group) {
-
+	public delGroup(grpId:number) {
+		this._groups[grpId] = null;
 	}
+
+	public getGroup(grpId:number) : Group {
+		return this._groups[grpId];
+	}
+	
 }
