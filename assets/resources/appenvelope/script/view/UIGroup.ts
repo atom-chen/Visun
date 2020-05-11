@@ -19,6 +19,19 @@ export default class UIGroup extends BaseComponent {
         this.m_ui.btn_create_grp.active = !hasGroup;
 
         this.initUIEvent();
+
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
+        this.m_ui.content.addChild(cc.instantiate(this.groupitem));
     }
 
     initUIEvent() {

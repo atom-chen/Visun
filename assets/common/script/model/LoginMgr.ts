@@ -22,6 +22,8 @@ import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
 import NetHandlers from "../proxy/NetHandlers";
 import IProcessor from "../../../kernel/net/processor/IProcessor";
+import { luck_packet_define } from "../proto/net_luck";
+import ChatHandlers from "../proxy/ChatHandlers";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -71,15 +73,17 @@ export default class LoginMgr extends ModelBase {
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
         g_leafProcessor.registCmds(login_packet_define);
-        g_leafProcessor.registCmds(chat_packet_define);
+		g_leafProcessor.registCmds(chat_packet_define);
+		g_leafProcessor.registCmds(luck_packet_define);
         g_leafProcessor.registCmds(comand_packet_define);
         g_leafProcessor.registCmds(gamecomm_packet_define);
         g_leafProcessor.registCmds(baccarat_packet_define);
         g_leafProcessor.registCmds(cowcow_packet_define);
         g_leafProcessor.registCmds(landLords_packet_define);
         g_leafProcessor.registCmds(mahjong_packet_define);
-        g_leafProcessor.registCmds(fishLord_packet_define);
+		g_leafProcessor.registCmds(fishLord_packet_define);
 		g_leafProcessor.getDispatcher().addObserver(NetHandlers);
+		g_leafProcessor.getDispatcher().addObserver(ChatHandlers);
 		return g_leafProcessor;
 	}
 

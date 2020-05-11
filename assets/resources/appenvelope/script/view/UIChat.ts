@@ -6,6 +6,7 @@ import { chat_request, chat_msgs } from "../../../../common/script/proto/net_cha
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
+import { luck_msgs, luck_request } from "../../../../common/script/proto/net_luck";
 
 
 const {ccclass, property} = cc._decorator;
@@ -20,6 +21,11 @@ export default class UIChat extends BaseComponent {
     @property(cc.Prefab)
     ChatItemR: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    ChatRedL: cc.Prefab = null;
+    @property(cc.Prefab)
+    ChatRedR: cc.Prefab = null;
+
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         
@@ -27,6 +33,7 @@ export default class UIChat extends BaseComponent {
         
         EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
+        EventCenter.getInstance().listen(luck_msgs.GetRewardResp, this.GetRewardResp, this);
     }
 
     initUIEvent() {
@@ -53,6 +60,33 @@ export default class UIChat extends BaseComponent {
 
     PrivateChatResp(param) {
         this.onChatMsg(param.SenderID, param.Content, "", "");
+    }
+
+    // message SendRewardResp {
+    //     int32 ID = 1;
+    //     int32 Type = 2; //发红包类型 0:固定 1:随机
+    //     int64 Count = 3; //个数
+    //     int64 Money = 4; //总金额(分)
+    //     int64 TimeStamp = 5;//发红包时间
+    //     uint64 SenderID = 6;//发送者
+    //     int64 StartTimeStamp = 7;//起始时间
+    //     int64 WaitTime = 8;//最长等待时间
+    // }
+    GetRewardResp(param) {
+        if(isEmpty(param)) {
+            return;
+        }
+        var item = null;
+        if(param.SenderID==LoginUser.getInstance().UserID) {
+            item = cc.instantiate(this.ChatRedR)
+        } else {
+            item = cc.instantiate(this.ChatRedL);
+        }
+        item.getChildByName("enveBg1")._info_ = param;
+        item.getChildByName("enveBg1").getChildByName("lab_sender").getComponent(cc.Label).string = param.SenderID;
+        CommonUtil.addClickEvent(item.getChildByName("enveBg1"), function(){
+            luck_request.GetReward(this._info_.ID);
+        }, item.getChildByName("enveBg1"));
     }
 
     onChatMsg(uid:number, cont:string, name:string, headImg:string) {

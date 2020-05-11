@@ -2,6 +2,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../kernel/view/UIManager";
+import { luck_request } from "../../../../common/script/proto/net_luck";
 
 const {ccclass, property} = cc._decorator;
 
@@ -23,6 +24,11 @@ export default class UIEnvelopeSend extends BaseComponent {
 				return;
             }
             cc.log("发红包", money, count);
+            luck_request.SendReward({
+                Type: 1,
+                Count : count,
+                Money : money
+            })
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){
             CommonUtil.safeDelete(this);
