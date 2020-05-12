@@ -1,1 +1,0 @@
-python gen_leaf.py comand game

@@ -3052,7 +3052,7 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
             if (message.SendReward != null && message.hasOwnProperty("SendReward"))
-                $root.go.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
+                $root.luck.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3071,7 +3071,7 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.SendReward = $root.go.SendReward.decode(reader, reader.uint32());
+                    message.SendReward = $root.luck.SendReward.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3094,7 +3094,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
             if (message.SendReward != null && message.hasOwnProperty("SendReward")) {
-                var error = $root.go.SendReward.verify(message.SendReward);
+                var error = $root.luck.SendReward.verify(message.SendReward);
                 if (error)
                     return "SendReward." + error;
             }
@@ -3117,7 +3117,7 @@ $root.chat = (function() {
             if (object.SendReward != null) {
                 if (typeof object.SendReward !== "object")
                     throw TypeError(".chat.GroupSendReward.SendReward: object expected");
-                message.SendReward = $root.go.SendReward.fromObject(object.SendReward);
+                message.SendReward = $root.luck.SendReward.fromObject(object.SendReward);
             }
             return message;
         };
@@ -3140,7 +3140,7 @@ $root.chat = (function() {
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
             if (message.SendReward != null && message.hasOwnProperty("SendReward"))
-                object.SendReward = $root.go.SendReward.toObject(message.SendReward, options);
+                object.SendReward = $root.luck.SendReward.toObject(message.SendReward, options);
             return object;
         };
 
@@ -3173,7 +3173,7 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                $root.go.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+                $root.luck.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3192,7 +3192,7 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.Resp = $root.go.SendRewardResp.decode(reader, reader.uint32());
+                    message.Resp = $root.luck.SendRewardResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3215,7 +3215,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
             if (message.Resp != null && message.hasOwnProperty("Resp")) {
-                var error = $root.go.SendRewardResp.verify(message.Resp);
+                var error = $root.luck.SendRewardResp.verify(message.Resp);
                 if (error)
                     return "Resp." + error;
             }
@@ -3238,7 +3238,7 @@ $root.chat = (function() {
             if (object.Resp != null) {
                 if (typeof object.Resp !== "object")
                     throw TypeError(".chat.GroupSendRewardResp.Resp: object expected");
-                message.Resp = $root.go.SendRewardResp.fromObject(object.Resp);
+                message.Resp = $root.luck.SendRewardResp.fromObject(object.Resp);
             }
             return message;
         };
@@ -3261,7 +3261,7 @@ $root.chat = (function() {
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                object.Resp = $root.go.SendRewardResp.toObject(message.Resp, options);
+                object.Resp = $root.luck.SendRewardResp.toObject(message.Resp, options);
             return object;
         };
 
@@ -3294,7 +3294,7 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
             if (message.GetReward != null && message.hasOwnProperty("GetReward"))
-                $root.go.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
+                $root.luck.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3313,7 +3313,7 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.GetReward = $root.go.GetReward.decode(reader, reader.uint32());
+                    message.GetReward = $root.luck.GetReward.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3336,7 +3336,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
             if (message.GetReward != null && message.hasOwnProperty("GetReward")) {
-                var error = $root.go.GetReward.verify(message.GetReward);
+                var error = $root.luck.GetReward.verify(message.GetReward);
                 if (error)
                     return "GetReward." + error;
             }
@@ -3359,7 +3359,7 @@ $root.chat = (function() {
             if (object.GetReward != null) {
                 if (typeof object.GetReward !== "object")
                     throw TypeError(".chat.GroupGetReward.GetReward: object expected");
-                message.GetReward = $root.go.GetReward.fromObject(object.GetReward);
+                message.GetReward = $root.luck.GetReward.fromObject(object.GetReward);
             }
             return message;
         };
@@ -3382,7 +3382,7 @@ $root.chat = (function() {
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
             if (message.GetReward != null && message.hasOwnProperty("GetReward"))
-                object.GetReward = $root.go.GetReward.toObject(message.GetReward, options);
+                object.GetReward = $root.luck.GetReward.toObject(message.GetReward, options);
             return object;
         };
 
@@ -3415,7 +3415,7 @@ $root.chat = (function() {
             if (message.GroupId != null && message.hasOwnProperty("GroupId"))
                 writer.uint32(8).uint64(message.GroupId);
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                $root.go.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+                $root.luck.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3434,7 +3434,7 @@ $root.chat = (function() {
                     message.GroupId = reader.uint64();
                     break;
                 case 2:
-                    message.Resp = $root.go.GetRewardResp.decode(reader, reader.uint32());
+                    message.Resp = $root.luck.GetRewardResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3457,7 +3457,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
                     return "GroupId: integer|Long expected";
             if (message.Resp != null && message.hasOwnProperty("Resp")) {
-                var error = $root.go.GetRewardResp.verify(message.Resp);
+                var error = $root.luck.GetRewardResp.verify(message.Resp);
                 if (error)
                     return "Resp." + error;
             }
@@ -3480,7 +3480,7 @@ $root.chat = (function() {
             if (object.Resp != null) {
                 if (typeof object.Resp !== "object")
                     throw TypeError(".chat.GroupGetRewardResp.Resp: object expected");
-                message.Resp = $root.go.GetRewardResp.fromObject(object.Resp);
+                message.Resp = $root.luck.GetRewardResp.fromObject(object.Resp);
             }
             return message;
         };
@@ -3503,7 +3503,7 @@ $root.chat = (function() {
                 else
                     object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                object.Resp = $root.go.GetRewardResp.toObject(message.Resp, options);
+                object.Resp = $root.luck.GetRewardResp.toObject(message.Resp, options);
             return object;
         };
 
@@ -3536,7 +3536,7 @@ $root.chat = (function() {
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 writer.uint32(8).uint64(message.TargetId);
             if (message.SendReward != null && message.hasOwnProperty("SendReward"))
-                $root.go.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
+                $root.luck.SendReward.encode(message.SendReward, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3555,7 +3555,7 @@ $root.chat = (function() {
                     message.TargetId = reader.uint64();
                     break;
                 case 2:
-                    message.SendReward = $root.go.SendReward.decode(reader, reader.uint32());
+                    message.SendReward = $root.luck.SendReward.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3578,7 +3578,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
                     return "TargetId: integer|Long expected";
             if (message.SendReward != null && message.hasOwnProperty("SendReward")) {
-                var error = $root.go.SendReward.verify(message.SendReward);
+                var error = $root.luck.SendReward.verify(message.SendReward);
                 if (error)
                     return "SendReward." + error;
             }
@@ -3601,7 +3601,7 @@ $root.chat = (function() {
             if (object.SendReward != null) {
                 if (typeof object.SendReward !== "object")
                     throw TypeError(".chat.PrivateSendReward.SendReward: object expected");
-                message.SendReward = $root.go.SendReward.fromObject(object.SendReward);
+                message.SendReward = $root.luck.SendReward.fromObject(object.SendReward);
             }
             return message;
         };
@@ -3624,7 +3624,7 @@ $root.chat = (function() {
                 else
                     object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
             if (message.SendReward != null && message.hasOwnProperty("SendReward"))
-                object.SendReward = $root.go.SendReward.toObject(message.SendReward, options);
+                object.SendReward = $root.luck.SendReward.toObject(message.SendReward, options);
             return object;
         };
 
@@ -3657,7 +3657,7 @@ $root.chat = (function() {
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 writer.uint32(8).uint64(message.TargetId);
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                $root.go.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+                $root.luck.SendRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3676,7 +3676,7 @@ $root.chat = (function() {
                     message.TargetId = reader.uint64();
                     break;
                 case 2:
-                    message.Resp = $root.go.SendRewardResp.decode(reader, reader.uint32());
+                    message.Resp = $root.luck.SendRewardResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3699,7 +3699,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
                     return "TargetId: integer|Long expected";
             if (message.Resp != null && message.hasOwnProperty("Resp")) {
-                var error = $root.go.SendRewardResp.verify(message.Resp);
+                var error = $root.luck.SendRewardResp.verify(message.Resp);
                 if (error)
                     return "Resp." + error;
             }
@@ -3722,7 +3722,7 @@ $root.chat = (function() {
             if (object.Resp != null) {
                 if (typeof object.Resp !== "object")
                     throw TypeError(".chat.PrivateSendRewardResp.Resp: object expected");
-                message.Resp = $root.go.SendRewardResp.fromObject(object.Resp);
+                message.Resp = $root.luck.SendRewardResp.fromObject(object.Resp);
             }
             return message;
         };
@@ -3745,7 +3745,7 @@ $root.chat = (function() {
                 else
                     object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                object.Resp = $root.go.SendRewardResp.toObject(message.Resp, options);
+                object.Resp = $root.luck.SendRewardResp.toObject(message.Resp, options);
             return object;
         };
 
@@ -3778,7 +3778,7 @@ $root.chat = (function() {
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 writer.uint32(8).uint64(message.TargetId);
             if (message.GetReward != null && message.hasOwnProperty("GetReward"))
-                $root.go.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
+                $root.luck.GetReward.encode(message.GetReward, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3797,7 +3797,7 @@ $root.chat = (function() {
                     message.TargetId = reader.uint64();
                     break;
                 case 2:
-                    message.GetReward = $root.go.GetReward.decode(reader, reader.uint32());
+                    message.GetReward = $root.luck.GetReward.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3820,7 +3820,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
                     return "TargetId: integer|Long expected";
             if (message.GetReward != null && message.hasOwnProperty("GetReward")) {
-                var error = $root.go.GetReward.verify(message.GetReward);
+                var error = $root.luck.GetReward.verify(message.GetReward);
                 if (error)
                     return "GetReward." + error;
             }
@@ -3843,7 +3843,7 @@ $root.chat = (function() {
             if (object.GetReward != null) {
                 if (typeof object.GetReward !== "object")
                     throw TypeError(".chat.PrivateGetReward.GetReward: object expected");
-                message.GetReward = $root.go.GetReward.fromObject(object.GetReward);
+                message.GetReward = $root.luck.GetReward.fromObject(object.GetReward);
             }
             return message;
         };
@@ -3866,7 +3866,7 @@ $root.chat = (function() {
                 else
                     object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
             if (message.GetReward != null && message.hasOwnProperty("GetReward"))
-                object.GetReward = $root.go.GetReward.toObject(message.GetReward, options);
+                object.GetReward = $root.luck.GetReward.toObject(message.GetReward, options);
             return object;
         };
 
@@ -3899,7 +3899,7 @@ $root.chat = (function() {
             if (message.TargetId != null && message.hasOwnProperty("TargetId"))
                 writer.uint32(8).uint64(message.TargetId);
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                $root.go.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+                $root.luck.GetRewardResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3918,7 +3918,7 @@ $root.chat = (function() {
                     message.TargetId = reader.uint64();
                     break;
                 case 2:
-                    message.Resp = $root.go.GetRewardResp.decode(reader, reader.uint32());
+                    message.Resp = $root.luck.GetRewardResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3941,7 +3941,7 @@ $root.chat = (function() {
                 if (!$util.isInteger(message.TargetId) && !(message.TargetId && $util.isInteger(message.TargetId.low) && $util.isInteger(message.TargetId.high)))
                     return "TargetId: integer|Long expected";
             if (message.Resp != null && message.hasOwnProperty("Resp")) {
-                var error = $root.go.GetRewardResp.verify(message.Resp);
+                var error = $root.luck.GetRewardResp.verify(message.Resp);
                 if (error)
                     return "Resp." + error;
             }
@@ -3964,7 +3964,7 @@ $root.chat = (function() {
             if (object.Resp != null) {
                 if (typeof object.Resp !== "object")
                     throw TypeError(".chat.PrivateGetRewardResp.Resp: object expected");
-                message.Resp = $root.go.GetRewardResp.fromObject(object.Resp);
+                message.Resp = $root.luck.GetRewardResp.fromObject(object.Resp);
             }
             return message;
         };
@@ -3987,7 +3987,7 @@ $root.chat = (function() {
                 else
                     object.TargetId = options.longs === String ? $util.Long.prototype.toString.call(message.TargetId) : options.longs === Number ? new $util.LongBits(message.TargetId.low >>> 0, message.TargetId.high >>> 0).toNumber(true) : message.TargetId;
             if (message.Resp != null && message.hasOwnProperty("Resp"))
-                object.Resp = $root.go.GetRewardResp.toObject(message.Resp, options);
+                object.Resp = $root.luck.GetRewardResp.toObject(message.Resp, options);
             return object;
         };
 
@@ -6146,11 +6146,11 @@ $root.chat = (function() {
     return chat;
 })();
 
-$root.go = (function() {
+$root.luck = (function() {
 
-    var go = {};
+    var luck = {};
 
-    go.SendReward = (function() {
+    luck.SendReward = (function() {
 
         function SendReward(properties) {
             if (properties)
@@ -6186,7 +6186,7 @@ $root.go = (function() {
         SendReward.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.SendReward();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.SendReward();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -6229,9 +6229,9 @@ $root.go = (function() {
         };
 
         SendReward.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.SendReward)
+            if (object instanceof $root.luck.SendReward)
                 return object;
-            var message = new $root.go.SendReward();
+            var message = new $root.luck.SendReward();
             if (object.Type != null)
                 message.Type = object.Type | 0;
             if (object.Count != null)
@@ -6294,7 +6294,7 @@ $root.go = (function() {
         return SendReward;
     })();
 
-    go.SendRewardResp = (function() {
+    luck.SendRewardResp = (function() {
 
         function SendRewardResp(properties) {
             if (properties)
@@ -6345,7 +6345,7 @@ $root.go = (function() {
         SendRewardResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.SendRewardResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.SendRewardResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -6418,9 +6418,9 @@ $root.go = (function() {
         };
 
         SendRewardResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.SendRewardResp)
+            if (object instanceof $root.luck.SendRewardResp)
                 return object;
-            var message = new $root.go.SendRewardResp();
+            var message = new $root.luck.SendRewardResp();
             if (object.ID != null)
                 if ($util.Long)
                     (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
@@ -6578,7 +6578,7 @@ $root.go = (function() {
         return SendRewardResp;
     })();
 
-    go.GetReward = (function() {
+    luck.GetReward = (function() {
 
         function GetReward(properties) {
             if (properties)
@@ -6608,7 +6608,7 @@ $root.go = (function() {
         GetReward.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GetReward();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.GetReward();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -6639,9 +6639,9 @@ $root.go = (function() {
         };
 
         GetReward.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GetReward)
+            if (object instanceof $root.luck.GetReward)
                 return object;
-            var message = new $root.go.GetReward();
+            var message = new $root.luck.GetReward();
             if (object.ID != null)
                 if ($util.Long)
                     (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
@@ -6679,7 +6679,7 @@ $root.go = (function() {
         return GetReward;
     })();
 
-    go.GetRewardResp = (function() {
+    luck.GetRewardResp = (function() {
 
         function GetRewardResp(properties) {
             this.MoneyList = [];
@@ -6747,7 +6747,7 @@ $root.go = (function() {
         GetRewardResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GetRewardResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.GetRewardResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -6855,9 +6855,9 @@ $root.go = (function() {
         };
 
         GetRewardResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GetRewardResp)
+            if (object instanceof $root.luck.GetRewardResp)
                 return object;
-            var message = new $root.go.GetRewardResp();
+            var message = new $root.luck.GetRewardResp();
             if (object.ID != null)
                 if ($util.Long)
                     (message.ID = $util.Long.fromValue(object.ID)).unsigned = false;
@@ -6952,7 +6952,7 @@ $root.go = (function() {
                     message.BestMoneyIndex = new $util.LongBits(object.BestMoneyIndex.low >>> 0, object.BestMoneyIndex.high >>> 0).toNumber();
             if (object.MoneyList) {
                 if (!Array.isArray(object.MoneyList))
-                    throw TypeError(".go.GetRewardResp.MoneyList: array expected");
+                    throw TypeError(".luck.GetRewardResp.MoneyList: array expected");
                 message.MoneyList = [];
                 for (var i = 0; i < object.MoneyList.length; ++i)
                     if ($util.Long)
@@ -7096,7 +7096,7 @@ $root.go = (function() {
         return GetRewardResp;
     })();
 
-    go.RollDice = (function() {
+    luck.RollDice = (function() {
 
         function RollDice(properties) {
             if (properties)
@@ -7126,7 +7126,7 @@ $root.go = (function() {
         RollDice.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.RollDice();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.RollDice();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7157,9 +7157,9 @@ $root.go = (function() {
         };
 
         RollDice.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.RollDice)
+            if (object instanceof $root.luck.RollDice)
                 return object;
-            var message = new $root.go.RollDice();
+            var message = new $root.luck.RollDice();
             if (object.Count != null)
                 if ($util.Long)
                     (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
@@ -7197,7 +7197,7 @@ $root.go = (function() {
         return RollDice;
     })();
 
-    go.RollDiceResp = (function() {
+    luck.RollDiceResp = (function() {
 
         function RollDiceResp(properties) {
             if (properties)
@@ -7230,7 +7230,7 @@ $root.go = (function() {
         RollDiceResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.RollDiceResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.luck.RollDiceResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7267,9 +7267,9 @@ $root.go = (function() {
         };
 
         RollDiceResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.RollDiceResp)
+            if (object instanceof $root.luck.RollDiceResp)
                 return object;
-            var message = new $root.go.RollDiceResp();
+            var message = new $root.luck.RollDiceResp();
             if (object.Count != null)
                 if ($util.Long)
                     (message.Count = $util.Long.fromValue(object.Count)).unsigned = false;
@@ -7322,7 +7322,7 @@ $root.go = (function() {
         return RollDiceResp;
     })();
 
-    return go;
+    return luck;
 })();
 
 module.exports = $root;
