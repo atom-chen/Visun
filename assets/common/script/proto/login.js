@@ -387,6 +387,73 @@ $root.login = (function() {
         return Login;
     })();
 
+    login.Exit = (function() {
+
+        function Exit(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        Exit.create = function create(properties) {
+            return new Exit(properties);
+        };
+
+        Exit.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            return writer;
+        };
+
+        Exit.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        Exit.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.Exit();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        Exit.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        Exit.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            return null;
+        };
+
+        Exit.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.Exit)
+                return object;
+            return new $root.login.Exit();
+        };
+
+        Exit.toObject = function toObject() {
+            return {};
+        };
+
+        Exit.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Exit;
+    })();
+
     login.ResResult = (function() {
 
         function ResResult(properties) {
@@ -1105,6 +1172,164 @@ $root.login = (function() {
         return UserInfo;
     })();
 
+    login.SimplePlayerInfo = (function() {
+
+        function SimplePlayerInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SimplePlayerInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SimplePlayerInfo.prototype.Sex = 0;
+        SimplePlayerInfo.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        SimplePlayerInfo.prototype.HeadID = 0;
+
+        SimplePlayerInfo.create = function create(properties) {
+            return new SimplePlayerInfo(properties);
+        };
+
+        SimplePlayerInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.Sex != null && message.hasOwnProperty("Sex"))
+                writer.uint32(16).uint32(message.Sex);
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                writer.uint32(24).int64(message.Gold);
+            if (message.HeadID != null && message.hasOwnProperty("HeadID"))
+                writer.uint32(32).uint32(message.HeadID);
+            return writer;
+        };
+
+        SimplePlayerInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SimplePlayerInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SimplePlayerInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.Sex = reader.uint32();
+                    break;
+                case 3:
+                    message.Gold = reader.int64();
+                    break;
+                case 4:
+                    message.HeadID = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SimplePlayerInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SimplePlayerInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.Sex != null && message.hasOwnProperty("Sex"))
+                if (!$util.isInteger(message.Sex))
+                    return "Sex: integer expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
+            if (message.HeadID != null && message.hasOwnProperty("HeadID"))
+                if (!$util.isInteger(message.HeadID))
+                    return "HeadID: integer expected";
+            return null;
+        };
+
+        SimplePlayerInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.SimplePlayerInfo)
+                return object;
+            var message = new $root.login.SimplePlayerInfo();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.Sex != null)
+                message.Sex = object.Sex >>> 0;
+            if (object.Gold != null)
+                if ($util.Long)
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
+            if (object.HeadID != null)
+                message.HeadID = object.HeadID >>> 0;
+            return message;
+        };
+
+        SimplePlayerInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.Sex = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Gold = options.longs === String ? "0" : 0;
+                object.HeadID = 0;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.Sex != null && message.hasOwnProperty("Sex"))
+                object.Sex = message.Sex;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
+                else
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
+            if (message.HeadID != null && message.hasOwnProperty("HeadID"))
+                object.HeadID = message.HeadID;
+            return object;
+        };
+
+        SimplePlayerInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SimplePlayerInfo;
+    })();
+
     login.RoomInfo = (function() {
 
         function RoomInfo(properties) {
@@ -1275,24 +1500,15 @@ $root.login = (function() {
                 writer.uint32(24).uint64(message.HostID);
             if (message.SetUpTime != null && message.hasOwnProperty("SetUpTime"))
                 writer.uint32(32).int64(message.SetUpTime);
-            if (message.AdminList != null && message.AdminList.length) {
-                writer.uint32(42).fork();
+            if (message.AdminList != null && message.AdminList.length)
                 for (var i = 0; i < message.AdminList.length; ++i)
-                    writer.uint64(message.AdminList[i]);
-                writer.ldelim();
-            }
-            if (message.MemberList != null && message.MemberList.length) {
-                writer.uint32(50).fork();
+                    $root.login.SimplePlayerInfo.encode(message.AdminList[i], writer.uint32(42).fork()).ldelim();
+            if (message.MemberList != null && message.MemberList.length)
                 for (var i = 0; i < message.MemberList.length; ++i)
-                    writer.uint64(message.MemberList[i]);
-                writer.ldelim();
-            }
-            if (message.BannedList != null && message.BannedList.length) {
-                writer.uint32(58).fork();
+                    $root.login.SimplePlayerInfo.encode(message.MemberList[i], writer.uint32(50).fork()).ldelim();
+            if (message.BannedList != null && message.BannedList.length)
                 for (var i = 0; i < message.BannedList.length; ++i)
-                    writer.uint64(message.BannedList[i]);
-                writer.ldelim();
-            }
+                    $root.login.SimplePlayerInfo.encode(message.BannedList[i], writer.uint32(58).fork()).ldelim();
             return writer;
         };
 
@@ -1322,32 +1538,17 @@ $root.login = (function() {
                 case 5:
                     if (!(message.AdminList && message.AdminList.length))
                         message.AdminList = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.AdminList.push(reader.uint64());
-                    } else
-                        message.AdminList.push(reader.uint64());
+                    message.AdminList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
                     break;
                 case 6:
                     if (!(message.MemberList && message.MemberList.length))
                         message.MemberList = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.MemberList.push(reader.uint64());
-                    } else
-                        message.MemberList.push(reader.uint64());
+                    message.MemberList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
                     break;
                 case 7:
                     if (!(message.BannedList && message.BannedList.length))
                         message.BannedList = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.BannedList.push(reader.uint64());
-                    } else
-                        message.BannedList.push(reader.uint64());
+                    message.BannedList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1381,23 +1582,29 @@ $root.login = (function() {
             if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
                 if (!Array.isArray(message.AdminList))
                     return "AdminList: array expected";
-                for (var i = 0; i < message.AdminList.length; ++i)
-                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
-                        return "AdminList: integer|Long[] expected";
+                for (var i = 0; i < message.AdminList.length; ++i) {
+                    var error = $root.login.SimplePlayerInfo.verify(message.AdminList[i]);
+                    if (error)
+                        return "AdminList." + error;
+                }
             }
             if (message.MemberList != null && message.hasOwnProperty("MemberList")) {
                 if (!Array.isArray(message.MemberList))
                     return "MemberList: array expected";
-                for (var i = 0; i < message.MemberList.length; ++i)
-                    if (!$util.isInteger(message.MemberList[i]) && !(message.MemberList[i] && $util.isInteger(message.MemberList[i].low) && $util.isInteger(message.MemberList[i].high)))
-                        return "MemberList: integer|Long[] expected";
+                for (var i = 0; i < message.MemberList.length; ++i) {
+                    var error = $root.login.SimplePlayerInfo.verify(message.MemberList[i]);
+                    if (error)
+                        return "MemberList." + error;
+                }
             }
             if (message.BannedList != null && message.hasOwnProperty("BannedList")) {
                 if (!Array.isArray(message.BannedList))
                     return "BannedList: array expected";
-                for (var i = 0; i < message.BannedList.length; ++i)
-                    if (!$util.isInteger(message.BannedList[i]) && !(message.BannedList[i] && $util.isInteger(message.BannedList[i].low) && $util.isInteger(message.BannedList[i].high)))
-                        return "BannedList: integer|Long[] expected";
+                for (var i = 0; i < message.BannedList.length; ++i) {
+                    var error = $root.login.SimplePlayerInfo.verify(message.BannedList[i]);
+                    if (error)
+                        return "BannedList." + error;
+                }
             }
             return null;
         };
@@ -1439,43 +1646,31 @@ $root.login = (function() {
                 if (!Array.isArray(object.AdminList))
                     throw TypeError(".login.GroupInfo.AdminList: array expected");
                 message.AdminList = [];
-                for (var i = 0; i < object.AdminList.length; ++i)
-                    if ($util.Long)
-                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
-                    else if (typeof object.AdminList[i] === "string")
-                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
-                    else if (typeof object.AdminList[i] === "number")
-                        message.AdminList[i] = object.AdminList[i];
-                    else if (typeof object.AdminList[i] === "object")
-                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+                for (var i = 0; i < object.AdminList.length; ++i) {
+                    if (typeof object.AdminList[i] !== "object")
+                        throw TypeError(".login.GroupInfo.AdminList: object expected");
+                    message.AdminList[i] = $root.login.SimplePlayerInfo.fromObject(object.AdminList[i]);
+                }
             }
             if (object.MemberList) {
                 if (!Array.isArray(object.MemberList))
                     throw TypeError(".login.GroupInfo.MemberList: array expected");
                 message.MemberList = [];
-                for (var i = 0; i < object.MemberList.length; ++i)
-                    if ($util.Long)
-                        (message.MemberList[i] = $util.Long.fromValue(object.MemberList[i])).unsigned = true;
-                    else if (typeof object.MemberList[i] === "string")
-                        message.MemberList[i] = parseInt(object.MemberList[i], 10);
-                    else if (typeof object.MemberList[i] === "number")
-                        message.MemberList[i] = object.MemberList[i];
-                    else if (typeof object.MemberList[i] === "object")
-                        message.MemberList[i] = new $util.LongBits(object.MemberList[i].low >>> 0, object.MemberList[i].high >>> 0).toNumber(true);
+                for (var i = 0; i < object.MemberList.length; ++i) {
+                    if (typeof object.MemberList[i] !== "object")
+                        throw TypeError(".login.GroupInfo.MemberList: object expected");
+                    message.MemberList[i] = $root.login.SimplePlayerInfo.fromObject(object.MemberList[i]);
+                }
             }
             if (object.BannedList) {
                 if (!Array.isArray(object.BannedList))
                     throw TypeError(".login.GroupInfo.BannedList: array expected");
                 message.BannedList = [];
-                for (var i = 0; i < object.BannedList.length; ++i)
-                    if ($util.Long)
-                        (message.BannedList[i] = $util.Long.fromValue(object.BannedList[i])).unsigned = true;
-                    else if (typeof object.BannedList[i] === "string")
-                        message.BannedList[i] = parseInt(object.BannedList[i], 10);
-                    else if (typeof object.BannedList[i] === "number")
-                        message.BannedList[i] = object.BannedList[i];
-                    else if (typeof object.BannedList[i] === "object")
-                        message.BannedList[i] = new $util.LongBits(object.BannedList[i].low >>> 0, object.BannedList[i].high >>> 0).toNumber(true);
+                for (var i = 0; i < object.BannedList.length; ++i) {
+                    if (typeof object.BannedList[i] !== "object")
+                        throw TypeError(".login.GroupInfo.BannedList: object expected");
+                    message.BannedList[i] = $root.login.SimplePlayerInfo.fromObject(object.BannedList[i]);
+                }
             }
             return message;
         };
@@ -1527,26 +1722,17 @@ $root.login = (function() {
             if (message.AdminList && message.AdminList.length) {
                 object.AdminList = [];
                 for (var j = 0; j < message.AdminList.length; ++j)
-                    if (typeof message.AdminList[j] === "number")
-                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
-                    else
-                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+                    object.AdminList[j] = $root.login.SimplePlayerInfo.toObject(message.AdminList[j], options);
             }
             if (message.MemberList && message.MemberList.length) {
                 object.MemberList = [];
                 for (var j = 0; j < message.MemberList.length; ++j)
-                    if (typeof message.MemberList[j] === "number")
-                        object.MemberList[j] = options.longs === String ? String(message.MemberList[j]) : message.MemberList[j];
-                    else
-                        object.MemberList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.MemberList[j]) : options.longs === Number ? new $util.LongBits(message.MemberList[j].low >>> 0, message.MemberList[j].high >>> 0).toNumber(true) : message.MemberList[j];
+                    object.MemberList[j] = $root.login.SimplePlayerInfo.toObject(message.MemberList[j], options);
             }
             if (message.BannedList && message.BannedList.length) {
                 object.BannedList = [];
                 for (var j = 0; j < message.BannedList.length; ++j)
-                    if (typeof message.BannedList[j] === "number")
-                        object.BannedList[j] = options.longs === String ? String(message.BannedList[j]) : message.BannedList[j];
-                    else
-                        object.BannedList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.BannedList[j]) : options.longs === Number ? new $util.LongBits(message.BannedList[j].low >>> 0, message.BannedList[j].high >>> 0).toNumber(true) : message.BannedList[j];
+                    object.BannedList[j] = $root.login.SimplePlayerInfo.toObject(message.BannedList[j], options);
             }
             return object;
         };
@@ -2177,6 +2363,396 @@ $root.login = (function() {
         };
 
         return ReqEnterRoom;
+    })();
+
+    login.GetOnlinePlayers = (function() {
+
+        function GetOnlinePlayers(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetOnlinePlayers.prototype.PageNum = 0;
+
+        GetOnlinePlayers.create = function create(properties) {
+            return new GetOnlinePlayers(properties);
+        };
+
+        GetOnlinePlayers.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                writer.uint32(8).int32(message.PageNum);
+            return writer;
+        };
+
+        GetOnlinePlayers.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetOnlinePlayers.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GetOnlinePlayers();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.PageNum = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayers.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetOnlinePlayers.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                if (!$util.isInteger(message.PageNum))
+                    return "PageNum: integer expected";
+            return null;
+        };
+
+        GetOnlinePlayers.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.GetOnlinePlayers)
+                return object;
+            var message = new $root.login.GetOnlinePlayers();
+            if (object.PageNum != null)
+                message.PageNum = object.PageNum | 0;
+            return message;
+        };
+
+        GetOnlinePlayers.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.PageNum = 0;
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                object.PageNum = message.PageNum;
+            return object;
+        };
+
+        GetOnlinePlayers.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetOnlinePlayers;
+    })();
+
+    login.GetOnlinePlayersResp = (function() {
+
+        function GetOnlinePlayersResp(properties) {
+            this.Infos = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetOnlinePlayersResp.prototype.Infos = $util.emptyArray;
+
+        GetOnlinePlayersResp.create = function create(properties) {
+            return new GetOnlinePlayersResp(properties);
+        };
+
+        GetOnlinePlayersResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Infos != null && message.Infos.length)
+                for (var i = 0; i < message.Infos.length; ++i)
+                    $root.login.SimplePlayerInfo.encode(message.Infos[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        GetOnlinePlayersResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetOnlinePlayersResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GetOnlinePlayersResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Infos && message.Infos.length))
+                        message.Infos = [];
+                    message.Infos.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayersResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetOnlinePlayersResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Infos != null && message.hasOwnProperty("Infos")) {
+                if (!Array.isArray(message.Infos))
+                    return "Infos: array expected";
+                for (var i = 0; i < message.Infos.length; ++i) {
+                    var error = $root.login.SimplePlayerInfo.verify(message.Infos[i]);
+                    if (error)
+                        return "Infos." + error;
+                }
+            }
+            return null;
+        };
+
+        GetOnlinePlayersResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.GetOnlinePlayersResp)
+                return object;
+            var message = new $root.login.GetOnlinePlayersResp();
+            if (object.Infos) {
+                if (!Array.isArray(object.Infos))
+                    throw TypeError(".login.GetOnlinePlayersResp.Infos: array expected");
+                message.Infos = [];
+                for (var i = 0; i < object.Infos.length; ++i) {
+                    if (typeof object.Infos[i] !== "object")
+                        throw TypeError(".login.GetOnlinePlayersResp.Infos: object expected");
+                    message.Infos[i] = $root.login.SimplePlayerInfo.fromObject(object.Infos[i]);
+                }
+            }
+            return message;
+        };
+
+        GetOnlinePlayersResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Infos = [];
+            if (message.Infos && message.Infos.length) {
+                object.Infos = [];
+                for (var j = 0; j < message.Infos.length; ++j)
+                    object.Infos[j] = $root.login.SimplePlayerInfo.toObject(message.Infos[j], options);
+            }
+            return object;
+        };
+
+        GetOnlinePlayersResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetOnlinePlayersResp;
+    })();
+
+    login.FindPlayer = (function() {
+
+        function FindPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        FindPlayer.prototype.Name = "";
+
+        FindPlayer.create = function create(properties) {
+            return new FindPlayer(properties);
+        };
+
+        FindPlayer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                writer.uint32(10).string(message.Name);
+            return writer;
+        };
+
+        FindPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        FindPlayer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.FindPlayer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Name = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        FindPlayer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        FindPlayer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            return null;
+        };
+
+        FindPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.FindPlayer)
+                return object;
+            var message = new $root.login.FindPlayer();
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            return message;
+        };
+
+        FindPlayer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Name = "";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            return object;
+        };
+
+        FindPlayer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FindPlayer;
+    })();
+
+    login.FindPlayerResp = (function() {
+
+        function FindPlayerResp(properties) {
+            this.Infos = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        FindPlayerResp.prototype.Infos = $util.emptyArray;
+
+        FindPlayerResp.create = function create(properties) {
+            return new FindPlayerResp(properties);
+        };
+
+        FindPlayerResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Infos != null && message.Infos.length)
+                for (var i = 0; i < message.Infos.length; ++i)
+                    $root.login.SimplePlayerInfo.encode(message.Infos[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        FindPlayerResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        FindPlayerResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.FindPlayerResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Infos && message.Infos.length))
+                        message.Infos = [];
+                    message.Infos.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        FindPlayerResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        FindPlayerResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Infos != null && message.hasOwnProperty("Infos")) {
+                if (!Array.isArray(message.Infos))
+                    return "Infos: array expected";
+                for (var i = 0; i < message.Infos.length; ++i) {
+                    var error = $root.login.SimplePlayerInfo.verify(message.Infos[i]);
+                    if (error)
+                        return "Infos." + error;
+                }
+            }
+            return null;
+        };
+
+        FindPlayerResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.FindPlayerResp)
+                return object;
+            var message = new $root.login.FindPlayerResp();
+            if (object.Infos) {
+                if (!Array.isArray(object.Infos))
+                    throw TypeError(".login.FindPlayerResp.Infos: array expected");
+                message.Infos = [];
+                for (var i = 0; i < object.Infos.length; ++i) {
+                    if (typeof object.Infos[i] !== "object")
+                        throw TypeError(".login.FindPlayerResp.Infos: object expected");
+                    message.Infos[i] = $root.login.SimplePlayerInfo.fromObject(object.Infos[i]);
+                }
+            }
+            return message;
+        };
+
+        FindPlayerResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Infos = [];
+            if (message.Infos && message.Infos.length) {
+                object.Infos = [];
+                for (var j = 0; j < message.Infos.length; ++j)
+                    object.Infos[j] = $root.login.SimplePlayerInfo.toObject(message.Infos[j], options);
+            }
+            return object;
+        };
+
+        FindPlayerResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FindPlayerResp;
     })();
 
     return login;

@@ -21,6 +21,10 @@ message Login {
     string SecurityCode = 3; //验证码
     string MachineCode = 4; //机器码
 }
+//退出
+message Exit {
+}
+
 
 //结果反馈
 message ResResult {
@@ -63,6 +67,15 @@ message UserInfo {
     uint32 ClientAddr = 13; //连接地址
     string MachineCode = 14; //机器序列
 }
+
+//个人简介
+message SimplePlayerInfo {
+    uint64 UserID = 1;
+    uint32 Sex = 2; //性别
+    int64 Gold = 3; //金币
+    uint32 HeadID = 4; //头像标识
+}
+
 //房间信息
 message RoomInfo {
     uint32 RoomNum = 1; //房间号码
@@ -77,9 +90,9 @@ message GroupInfo {
     string Name = 2;
     uint64 HostID = 3;
     int64 SetUpTime = 4;
-    repeated uint64 AdminList = 5;
-    repeated uint64 MemberList = 6;
-    repeated uint64 BannedList = 7;
+    repeated SimplePlayerInfo AdminList = 5;
+    repeated SimplePlayerInfo MemberList = 6;
+    repeated SimplePlayerInfo BannedList = 7;
 }
 
 //游戏信息
@@ -100,6 +113,9 @@ message GameItem {
     GameBaseInfo Info = 2; //子游戏
 }
 
+
+
+
 //主页信息
 message MasterInfo {
     uint64 UserID = 1; //ID
@@ -110,6 +126,8 @@ message MasterInfo {
 
 }
 
+
+
 //////////////客户端发起(上行)/////////////////////////////
 //进入房间
 message ReqEnterRoom {
@@ -117,6 +135,22 @@ message ReqEnterRoom {
     string RoomKey = 2; //房间钥匙
 }
 
+//获取在线玩家列表
+message GetOnlinePlayers {
+    int32 PageNum = 1; //页码数0:所有, <0:该页的玩家数
+}
+message GetOnlinePlayersResp {
+    repeated SimplePlayerInfo Infos = 1;
+}
+
+//查找玩家
+message FindPlayer {
+    string Name = 1;
+}
+//模糊查找
+message FindPlayerResp {
+    repeated SimplePlayerInfo Infos = 1;
+}
 
 
 
