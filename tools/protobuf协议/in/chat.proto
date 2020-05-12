@@ -38,6 +38,29 @@ message SetupGroupResp {
     repeated uint64 MemberList = 6; //成员列表
     repeated uint64 BannedList = 7; //禁言列表
 }
+//设置管理员(需要群主权限)
+message SetupGroupAdmin {
+     uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+     repeated uint64 AdminList = 2; //管理员列表
+}
+message SetupGroupAdminResp {
+    uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+    repeated uint64 AdminList = 2; //当前管理员
+    int64 Timestamp = 3; //创建时间戳
+}
+
+//取消管理员(需要群主权限)
+message CancelGroupAdmin {
+    uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+    repeated uint64 AdminList = 2; //管理员列表
+}
+message CancelGroupAdminResp {
+    uint64 GroupId = 1; //0~99官方指定 100~100000私人群
+    repeated uint64 AdminList = 2; //当前管理员
+    int64 Timestamp = 3; //创建时间戳
+}
+
+
 
 //邀请加入 不单独解析,仅作为聊天内容，即Content
 message InviteEnterGroup {

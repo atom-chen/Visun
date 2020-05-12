@@ -78,4 +78,17 @@ export default class ChatMgr extends ModelBase {
 			})
 		);
 	}
+
+	private _chatUser:number;
+	private _chatGroup:number;
+	setChatingTarget(uid:number, grpId:number) {
+		this._chatUser = uid;
+		this._chatGroup = grpId;
+	}
+	getChatGroup():number {
+		return this._chatGroup;
+	}
+	getChatUser() : number {
+		return this._chatUser;
+	}
 }
