@@ -51,6 +51,8 @@ export default class UIChat extends BaseComponent {
                 UIManager.toast("请选择聊天对象");
                 return;
             }
+            cont = CommonUtil.stringToUTF8Bytes(cont);
+            cc.log(CommonUtil.utf8ArrayToString(cont));
             chat_request.GroupChat({
                 Type: 0,
                 GroupId: target,

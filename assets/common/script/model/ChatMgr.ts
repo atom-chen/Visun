@@ -93,7 +93,7 @@ export default class ChatMgr extends ModelBase {
 		return this._chatUser;
 	}
 	getChatingTarget(): string {
-		if(!isNil(this._chatUser)) {
+		if(!isNil(this._chatUser) && this._chatUser !== 0) {
 			return "用户：" + this._chatUser;
 		}
 		if(!isNil(this._chatGroup)) {
