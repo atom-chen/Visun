@@ -21,7 +21,7 @@ export default class UIGroup extends BaseComponent {
 
         this.initUIEvent();
 
-        EventCenter.getInstance().listen(login_msgs.MasterInfo, this.onMasterInfo, this);
+        EventCenter.getInstance().listen(login_msgs.MasterInfo, this.onMasterInfo, this, true);
     }
 
     onMasterInfo(param) {
