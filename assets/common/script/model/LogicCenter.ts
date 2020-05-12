@@ -10,6 +10,7 @@ import http_rules from "../proto/http_rules";
 import HallRequest from "../proto/HallRequest";
 import HallRespond from "../proxy/HallRespond";
 import ChatMgr from "./ChatMgr";
+import GroupMgr from "./GroupMgr";
 
 
 //模块管理器
@@ -42,6 +43,7 @@ export default class LogicCenter {
         this.registModel(LoginUser);
         this.registModel(GameManager);
         this.registModel(ChatMgr);
+        this.registModel(GroupMgr);
     }
 
     //清理逻辑数据
