@@ -71,7 +71,7 @@ message UserInfo {
 //个人简介
 message SimplePlayerInfo {
     uint64 UserID = 1;
-    uint32 Sex = 2; //性别
+    int32 Sex = 2; //性别
     int64 Gold = 3; //金币
     uint32 HeadID = 4; //头像标识
 }
@@ -90,9 +90,9 @@ message GroupInfo {
     string Name = 2;
     uint64 HostID = 3;
     int64 SetUpTime = 4;
-    repeated SimplePlayerInfo AdminList = 5;
-    repeated SimplePlayerInfo MemberList = 6;
-    repeated SimplePlayerInfo BannedList = 7;
+    repeated uint64 AdminList = 5;
+    repeated uint64 BannedList = 6;
+    repeated SimplePlayerInfo MemberList = 7;
 }
 
 //游戏信息

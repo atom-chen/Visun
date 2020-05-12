@@ -1196,7 +1196,7 @@ $root.login = (function() {
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 writer.uint32(8).uint64(message.UserID);
             if (message.Sex != null && message.hasOwnProperty("Sex"))
-                writer.uint32(16).uint32(message.Sex);
+                writer.uint32(16).int32(message.Sex);
             if (message.Gold != null && message.hasOwnProperty("Gold"))
                 writer.uint32(24).int64(message.Gold);
             if (message.HeadID != null && message.hasOwnProperty("HeadID"))
@@ -1219,7 +1219,7 @@ $root.login = (function() {
                     message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Sex = reader.uint32();
+                    message.Sex = reader.int32();
                     break;
                 case 3:
                     message.Gold = reader.int64();
@@ -1273,7 +1273,7 @@ $root.login = (function() {
                 else if (typeof object.UserID === "object")
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.Sex != null)
-                message.Sex = object.Sex >>> 0;
+                message.Sex = object.Sex | 0;
             if (object.Gold != null)
                 if ($util.Long)
                     (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
@@ -1469,8 +1469,8 @@ $root.login = (function() {
 
         function GroupInfo(properties) {
             this.AdminList = [];
-            this.MemberList = [];
             this.BannedList = [];
+            this.MemberList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1482,8 +1482,8 @@ $root.login = (function() {
         GroupInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         GroupInfo.prototype.SetUpTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         GroupInfo.prototype.AdminList = $util.emptyArray;
-        GroupInfo.prototype.MemberList = $util.emptyArray;
         GroupInfo.prototype.BannedList = $util.emptyArray;
+        GroupInfo.prototype.MemberList = $util.emptyArray;
 
         GroupInfo.create = function create(properties) {
             return new GroupInfo(properties);
@@ -1500,15 +1500,21 @@ $root.login = (function() {
                 writer.uint32(24).uint64(message.HostID);
             if (message.SetUpTime != null && message.hasOwnProperty("SetUpTime"))
                 writer.uint32(32).int64(message.SetUpTime);
-            if (message.AdminList != null && message.AdminList.length)
+            if (message.AdminList != null && message.AdminList.length) {
+                writer.uint32(42).fork();
                 for (var i = 0; i < message.AdminList.length; ++i)
-                    $root.login.SimplePlayerInfo.encode(message.AdminList[i], writer.uint32(42).fork()).ldelim();
+                    writer.uint64(message.AdminList[i]);
+                writer.ldelim();
+            }
+            if (message.BannedList != null && message.BannedList.length) {
+                writer.uint32(50).fork();
+                for (var i = 0; i < message.BannedList.length; ++i)
+                    writer.uint64(message.BannedList[i]);
+                writer.ldelim();
+            }
             if (message.MemberList != null && message.MemberList.length)
                 for (var i = 0; i < message.MemberList.length; ++i)
-                    $root.login.SimplePlayerInfo.encode(message.MemberList[i], writer.uint32(50).fork()).ldelim();
-            if (message.BannedList != null && message.BannedList.length)
-                for (var i = 0; i < message.BannedList.length; ++i)
-                    $root.login.SimplePlayerInfo.encode(message.BannedList[i], writer.uint32(58).fork()).ldelim();
+                    $root.login.SimplePlayerInfo.encode(message.MemberList[i], writer.uint32(58).fork()).ldelim();
             return writer;
         };
 
@@ -1538,17 +1544,27 @@ $root.login = (function() {
                 case 5:
                     if (!(message.AdminList && message.AdminList.length))
                         message.AdminList = [];
-                    message.AdminList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AdminList.push(reader.uint64());
+                    } else
+                        message.AdminList.push(reader.uint64());
                     break;
                 case 6:
+                    if (!(message.BannedList && message.BannedList.length))
+                        message.BannedList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.BannedList.push(reader.uint64());
+                    } else
+                        message.BannedList.push(reader.uint64());
+                    break;
+                case 7:
                     if (!(message.MemberList && message.MemberList.length))
                         message.MemberList = [];
                     message.MemberList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
-                    break;
-                case 7:
-                    if (!(message.BannedList && message.BannedList.length))
-                        message.BannedList = [];
-                    message.BannedList.push($root.login.SimplePlayerInfo.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1582,11 +1598,16 @@ $root.login = (function() {
             if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
                 if (!Array.isArray(message.AdminList))
                     return "AdminList: array expected";
-                for (var i = 0; i < message.AdminList.length; ++i) {
-                    var error = $root.login.SimplePlayerInfo.verify(message.AdminList[i]);
-                    if (error)
-                        return "AdminList." + error;
-                }
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
+                        return "AdminList: integer|Long[] expected";
+            }
+            if (message.BannedList != null && message.hasOwnProperty("BannedList")) {
+                if (!Array.isArray(message.BannedList))
+                    return "BannedList: array expected";
+                for (var i = 0; i < message.BannedList.length; ++i)
+                    if (!$util.isInteger(message.BannedList[i]) && !(message.BannedList[i] && $util.isInteger(message.BannedList[i].low) && $util.isInteger(message.BannedList[i].high)))
+                        return "BannedList: integer|Long[] expected";
             }
             if (message.MemberList != null && message.hasOwnProperty("MemberList")) {
                 if (!Array.isArray(message.MemberList))
@@ -1595,15 +1616,6 @@ $root.login = (function() {
                     var error = $root.login.SimplePlayerInfo.verify(message.MemberList[i]);
                     if (error)
                         return "MemberList." + error;
-                }
-            }
-            if (message.BannedList != null && message.hasOwnProperty("BannedList")) {
-                if (!Array.isArray(message.BannedList))
-                    return "BannedList: array expected";
-                for (var i = 0; i < message.BannedList.length; ++i) {
-                    var error = $root.login.SimplePlayerInfo.verify(message.BannedList[i]);
-                    if (error)
-                        return "BannedList." + error;
                 }
             }
             return null;
@@ -1646,11 +1658,29 @@ $root.login = (function() {
                 if (!Array.isArray(object.AdminList))
                     throw TypeError(".login.GroupInfo.AdminList: array expected");
                 message.AdminList = [];
-                for (var i = 0; i < object.AdminList.length; ++i) {
-                    if (typeof object.AdminList[i] !== "object")
-                        throw TypeError(".login.GroupInfo.AdminList: object expected");
-                    message.AdminList[i] = $root.login.SimplePlayerInfo.fromObject(object.AdminList[i]);
-                }
+                for (var i = 0; i < object.AdminList.length; ++i)
+                    if ($util.Long)
+                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
+                    else if (typeof object.AdminList[i] === "string")
+                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
+                    else if (typeof object.AdminList[i] === "number")
+                        message.AdminList[i] = object.AdminList[i];
+                    else if (typeof object.AdminList[i] === "object")
+                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+            }
+            if (object.BannedList) {
+                if (!Array.isArray(object.BannedList))
+                    throw TypeError(".login.GroupInfo.BannedList: array expected");
+                message.BannedList = [];
+                for (var i = 0; i < object.BannedList.length; ++i)
+                    if ($util.Long)
+                        (message.BannedList[i] = $util.Long.fromValue(object.BannedList[i])).unsigned = true;
+                    else if (typeof object.BannedList[i] === "string")
+                        message.BannedList[i] = parseInt(object.BannedList[i], 10);
+                    else if (typeof object.BannedList[i] === "number")
+                        message.BannedList[i] = object.BannedList[i];
+                    else if (typeof object.BannedList[i] === "object")
+                        message.BannedList[i] = new $util.LongBits(object.BannedList[i].low >>> 0, object.BannedList[i].high >>> 0).toNumber(true);
             }
             if (object.MemberList) {
                 if (!Array.isArray(object.MemberList))
@@ -1662,16 +1692,6 @@ $root.login = (function() {
                     message.MemberList[i] = $root.login.SimplePlayerInfo.fromObject(object.MemberList[i]);
                 }
             }
-            if (object.BannedList) {
-                if (!Array.isArray(object.BannedList))
-                    throw TypeError(".login.GroupInfo.BannedList: array expected");
-                message.BannedList = [];
-                for (var i = 0; i < object.BannedList.length; ++i) {
-                    if (typeof object.BannedList[i] !== "object")
-                        throw TypeError(".login.GroupInfo.BannedList: object expected");
-                    message.BannedList[i] = $root.login.SimplePlayerInfo.fromObject(object.BannedList[i]);
-                }
-            }
             return message;
         };
 
@@ -1681,8 +1701,8 @@ $root.login = (function() {
             var object = {};
             if (options.arrays || options.defaults) {
                 object.AdminList = [];
-                object.MemberList = [];
                 object.BannedList = [];
+                object.MemberList = [];
             }
             if (options.defaults) {
                 if ($util.Long) {
@@ -1722,17 +1742,23 @@ $root.login = (function() {
             if (message.AdminList && message.AdminList.length) {
                 object.AdminList = [];
                 for (var j = 0; j < message.AdminList.length; ++j)
-                    object.AdminList[j] = $root.login.SimplePlayerInfo.toObject(message.AdminList[j], options);
+                    if (typeof message.AdminList[j] === "number")
+                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
+                    else
+                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+            }
+            if (message.BannedList && message.BannedList.length) {
+                object.BannedList = [];
+                for (var j = 0; j < message.BannedList.length; ++j)
+                    if (typeof message.BannedList[j] === "number")
+                        object.BannedList[j] = options.longs === String ? String(message.BannedList[j]) : message.BannedList[j];
+                    else
+                        object.BannedList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.BannedList[j]) : options.longs === Number ? new $util.LongBits(message.BannedList[j].low >>> 0, message.BannedList[j].high >>> 0).toNumber(true) : message.BannedList[j];
             }
             if (message.MemberList && message.MemberList.length) {
                 object.MemberList = [];
                 for (var j = 0; j < message.MemberList.length; ++j)
                     object.MemberList[j] = $root.login.SimplePlayerInfo.toObject(message.MemberList[j], options);
-            }
-            if (message.BannedList && message.BannedList.length) {
-                object.BannedList = [];
-                for (var j = 0; j < message.BannedList.length; ++j)
-                    object.BannedList[j] = $root.login.SimplePlayerInfo.toObject(message.BannedList[j], options);
             }
             return object;
         };
