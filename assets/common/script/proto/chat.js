@@ -2966,6 +2966,248 @@ $root.chat = (function() {
         return GroupGetRewardResp;
     })();
 
+    chat.GroupRollDice = (function() {
+
+        function GroupRollDice(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupRollDice.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupRollDice.prototype.RollDice = null;
+
+        GroupRollDice.create = function create(properties) {
+            return new GroupRollDice(properties);
+        };
+
+        GroupRollDice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.RollDice != null && message.hasOwnProperty("RollDice"))
+                $root.luck.RollDice.encode(message.RollDice, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupRollDice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupRollDice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupRollDice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.RollDice = $root.luck.RollDice.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupRollDice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupRollDice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.RollDice != null && message.hasOwnProperty("RollDice")) {
+                var error = $root.luck.RollDice.verify(message.RollDice);
+                if (error)
+                    return "RollDice." + error;
+            }
+            return null;
+        };
+
+        GroupRollDice.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupRollDice)
+                return object;
+            var message = new $root.chat.GroupRollDice();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.RollDice != null) {
+                if (typeof object.RollDice !== "object")
+                    throw TypeError(".chat.GroupRollDice.RollDice: object expected");
+                message.RollDice = $root.luck.RollDice.fromObject(object.RollDice);
+            }
+            return message;
+        };
+
+        GroupRollDice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.RollDice = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.RollDice != null && message.hasOwnProperty("RollDice"))
+                object.RollDice = $root.luck.RollDice.toObject(message.RollDice, options);
+            return object;
+        };
+
+        GroupRollDice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupRollDice;
+    })();
+
+    chat.GroupRollDiceResp = (function() {
+
+        function GroupRollDiceResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GroupRollDiceResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GroupRollDiceResp.prototype.Resp = null;
+
+        GroupRollDiceResp.create = function create(properties) {
+            return new GroupRollDiceResp(properties);
+        };
+
+        GroupRollDiceResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.RollDiceResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GroupRollDiceResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GroupRollDiceResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.GroupRollDiceResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.RollDiceResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GroupRollDiceResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GroupRollDiceResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.RollDiceResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        GroupRollDiceResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.GroupRollDiceResp)
+                return object;
+            var message = new $root.chat.GroupRollDiceResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.GroupRollDiceResp.Resp: object expected");
+                message.Resp = $root.luck.RollDiceResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        GroupRollDiceResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.RollDiceResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        GroupRollDiceResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GroupRollDiceResp;
+    })();
+
     chat.PrivateSendReward = (function() {
 
         function PrivateSendReward(properties) {
@@ -3448,6 +3690,248 @@ $root.chat = (function() {
         };
 
         return PrivateGetRewardResp;
+    })();
+
+    chat.PrivateRollDice = (function() {
+
+        function PrivateRollDice(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateRollDice.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateRollDice.prototype.RollDice = null;
+
+        PrivateRollDice.create = function create(properties) {
+            return new PrivateRollDice(properties);
+        };
+
+        PrivateRollDice.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.RollDice != null && message.hasOwnProperty("RollDice"))
+                $root.luck.RollDice.encode(message.RollDice, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateRollDice.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateRollDice.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateRollDice();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.RollDice = $root.luck.RollDice.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateRollDice.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateRollDice.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.RollDice != null && message.hasOwnProperty("RollDice")) {
+                var error = $root.luck.RollDice.verify(message.RollDice);
+                if (error)
+                    return "RollDice." + error;
+            }
+            return null;
+        };
+
+        PrivateRollDice.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateRollDice)
+                return object;
+            var message = new $root.chat.PrivateRollDice();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.RollDice != null) {
+                if (typeof object.RollDice !== "object")
+                    throw TypeError(".chat.PrivateRollDice.RollDice: object expected");
+                message.RollDice = $root.luck.RollDice.fromObject(object.RollDice);
+            }
+            return message;
+        };
+
+        PrivateRollDice.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.RollDice = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.RollDice != null && message.hasOwnProperty("RollDice"))
+                object.RollDice = $root.luck.RollDice.toObject(message.RollDice, options);
+            return object;
+        };
+
+        PrivateRollDice.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateRollDice;
+    })();
+
+    chat.PrivateRollDiceResp = (function() {
+
+        function PrivateRollDiceResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PrivateRollDiceResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        PrivateRollDiceResp.prototype.Resp = null;
+
+        PrivateRollDiceResp.create = function create(properties) {
+            return new PrivateRollDiceResp(properties);
+        };
+
+        PrivateRollDiceResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                $root.luck.RollDiceResp.encode(message.Resp, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        PrivateRollDiceResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PrivateRollDiceResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.PrivateRollDiceResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    message.Resp = $root.luck.RollDiceResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PrivateRollDiceResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PrivateRollDiceResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.Resp != null && message.hasOwnProperty("Resp")) {
+                var error = $root.luck.RollDiceResp.verify(message.Resp);
+                if (error)
+                    return "Resp." + error;
+            }
+            return null;
+        };
+
+        PrivateRollDiceResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.PrivateRollDiceResp)
+                return object;
+            var message = new $root.chat.PrivateRollDiceResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.Resp != null) {
+                if (typeof object.Resp !== "object")
+                    throw TypeError(".chat.PrivateRollDiceResp.Resp: object expected");
+                message.Resp = $root.luck.RollDiceResp.fromObject(object.Resp);
+            }
+            return message;
+        };
+
+        PrivateRollDiceResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                object.Resp = null;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.Resp != null && message.hasOwnProperty("Resp"))
+                object.Resp = $root.luck.RollDiceResp.toObject(message.Resp, options);
+            return object;
+        };
+
+        PrivateRollDiceResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PrivateRollDiceResp;
     })();
 
     chat.PrivateChat = (function() {
