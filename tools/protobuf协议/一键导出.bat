@@ -1,0 +1,2 @@
+node onekey.js
+pause
