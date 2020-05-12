@@ -108,12 +108,14 @@ export default class UIChat extends BaseComponent {
                 }
             });
         }, redbtn);
+        this.m_ui.content.addChild(item);
     }
 
     onChatMsg(uid:number, cont:string, name:string, headImg:string) {
         if(isEmpty(name)) {
             name = uid.toString();
         }
+        cont = CommonUtil.utf8ArrayToString(cont);
         var item = null;
         if(uid==LoginUser.getInstance().UserID){
             item = cc.instantiate(this.ChatItemR);
