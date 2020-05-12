@@ -1,6 +1,7 @@
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import LoginUser from "../../../../common/script/model/LoginUser";
+import LogicCenter from "../../../../common/script/model/LogicCenter";
 
 const {ccclass, property} = cc._decorator;
 
@@ -22,7 +23,9 @@ export default class UIPersonal extends BaseComponent {
     }
 
     initUIEvent() {
-
+        CommonUtil.addClickEvent(this.m_ui.btn_unlogin, function(){ 
+            LogicCenter.getInstance().clear();
+        }, this);
     }
 
 }

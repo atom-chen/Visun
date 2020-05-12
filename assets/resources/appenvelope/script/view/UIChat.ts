@@ -1,12 +1,13 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
-import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil } from "../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../kernel/view/UIManager";
 import { chat_request, chat_msgs } from "../../../../common/script/proto/net_chat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import { luck_msgs, luck_request } from "../../../../common/script/proto/net_luck";
+import ChatMgr from "../../../../common/script/model/ChatMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -28,6 +29,8 @@ export default class UIChat extends BaseComponent {
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+
+        this.m_ui.lab_chattarget.getComponent(cc.Label).string = ChatMgr.getInstance().getChatingTarget();
         
         this.initUIEvent();
         
@@ -43,9 +46,14 @@ export default class UIChat extends BaseComponent {
                 UIManager.toast("请输入聊天内容");
                 return;
             }
+            var target = ChatMgr.getInstance().getChatGroup();
+            if(isNil(target)) {
+                UIManager.toast("请选择聊天对象");
+                return;
+            }
             chat_request.GroupChat({
                 Type: 0,
-                GroupId: 0,
+                GroupId: target,
                 Content: cont,
             });
         }, this);

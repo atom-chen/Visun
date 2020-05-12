@@ -3,6 +3,8 @@ import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import UIManager from "../../../../kernel/view/UIManager";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import ChatMgr from "../../../../common/script/model/ChatMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -12,7 +14,10 @@ export default class UIMain extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
-        this.switchPage(1);
+        this.switchPage(2);
+        EventCenter.getInstance().listen("switch_to_chat", function(){
+            this.switchPage(1);
+        }, this);
     }
 
     switchPage(idx:number) {
@@ -25,6 +30,9 @@ export default class UIMain extends BaseComponent {
             UIManager.closeWindow(ViewDefine.UIPersonal);
             UIManager.openPanel(ViewDefine.UIGroup, null);
         } else {
+            if(!LoginMgr.getInstance().checkLogin(true)) {
+                return;
+            }
             UIManager.closeWindow(ViewDefine.UIGroup);
             UIManager.closeWindow(ViewDefine.UIChat);
             UIManager.openPanel(ViewDefine.UIPersonal, null);
