@@ -27,24 +27,28 @@ export enum chat_msgs {
     GroupSendRewardResp = 37,
     GroupGetReward = 38,
     GroupGetRewardResp = 39,
-    PrivateSendReward = 40,
-    PrivateSendRewardResp = 41,
-    PrivateGetReward = 42,
-    PrivateGetRewardResp = 43,
-    PrivateChat = 44,
-    PrivateChatResp = 45,
-    GroupAddPerson = 46,
-    GroupAddPersonResp = 47,
-    GroupDelPerson = 48,
-    GroupDelPersonResp = 49,
-    GroupBanned = 50,
-    GroupBannedResp = 51,
-    GroupQuit = 52,
-    GroupQuitResp = 53,
-    GroupDismiss = 54,
-    GroupDismissResp = 55,
-    GroupChangeHost = 56,
-    GroupChangeHostResp = 57,
+    GroupRollDice = 40,
+    GroupRollDiceResp = 41,
+    PrivateSendReward = 42,
+    PrivateSendRewardResp = 43,
+    PrivateGetReward = 44,
+    PrivateGetRewardResp = 45,
+    PrivateRollDice = 46,
+    PrivateRollDiceResp = 47,
+    PrivateChat = 48,
+    PrivateChatResp = 49,
+    GroupAddPerson = 50,
+    GroupAddPersonResp = 51,
+    GroupDelPerson = 52,
+    GroupDelPersonResp = 53,
+    GroupBanned = 54,
+    GroupBannedResp = 55,
+    GroupQuit = 56,
+    GroupQuitResp = 57,
+    GroupDismiss = 58,
+    GroupDismissResp = 59,
+    GroupChangeHost = 60,
+    GroupChangeHostResp = 61,
 }
 
 export var chat_packet_define = {
@@ -68,24 +72,28 @@ export var chat_packet_define = {
     37: new LeafWsPacket(37, chat.GroupSendRewardResp, "chat.GroupSendRewardResp"),
     38: new LeafWsPacket(38, chat.GroupGetReward, "chat.GroupGetReward"),
     39: new LeafWsPacket(39, chat.GroupGetRewardResp, "chat.GroupGetRewardResp"),
-    40: new LeafWsPacket(40, chat.PrivateSendReward, "chat.PrivateSendReward"),
-    41: new LeafWsPacket(41, chat.PrivateSendRewardResp, "chat.PrivateSendRewardResp"),
-    42: new LeafWsPacket(42, chat.PrivateGetReward, "chat.PrivateGetReward"),
-    43: new LeafWsPacket(43, chat.PrivateGetRewardResp, "chat.PrivateGetRewardResp"),
-    44: new LeafWsPacket(44, chat.PrivateChat, "chat.PrivateChat"),
-    45: new LeafWsPacket(45, chat.PrivateChatResp, "chat.PrivateChatResp"),
-    46: new LeafWsPacket(46, chat.GroupAddPerson, "chat.GroupAddPerson"),
-    47: new LeafWsPacket(47, chat.GroupAddPersonResp, "chat.GroupAddPersonResp"),
-    48: new LeafWsPacket(48, chat.GroupDelPerson, "chat.GroupDelPerson"),
-    49: new LeafWsPacket(49, chat.GroupDelPersonResp, "chat.GroupDelPersonResp"),
-    50: new LeafWsPacket(50, chat.GroupBanned, "chat.GroupBanned"),
-    51: new LeafWsPacket(51, chat.GroupBannedResp, "chat.GroupBannedResp"),
-    52: new LeafWsPacket(52, chat.GroupQuit, "chat.GroupQuit"),
-    53: new LeafWsPacket(53, chat.GroupQuitResp, "chat.GroupQuitResp"),
-    54: new LeafWsPacket(54, chat.GroupDismiss, "chat.GroupDismiss"),
-    55: new LeafWsPacket(55, chat.GroupDismissResp, "chat.GroupDismissResp"),
-    56: new LeafWsPacket(56, chat.GroupChangeHost, "chat.GroupChangeHost"),
-    57: new LeafWsPacket(57, chat.GroupChangeHostResp, "chat.GroupChangeHostResp"),
+    40: new LeafWsPacket(40, chat.GroupRollDice, "chat.GroupRollDice"),
+    41: new LeafWsPacket(41, chat.GroupRollDiceResp, "chat.GroupRollDiceResp"),
+    42: new LeafWsPacket(42, chat.PrivateSendReward, "chat.PrivateSendReward"),
+    43: new LeafWsPacket(43, chat.PrivateSendRewardResp, "chat.PrivateSendRewardResp"),
+    44: new LeafWsPacket(44, chat.PrivateGetReward, "chat.PrivateGetReward"),
+    45: new LeafWsPacket(45, chat.PrivateGetRewardResp, "chat.PrivateGetRewardResp"),
+    46: new LeafWsPacket(46, chat.PrivateRollDice, "chat.PrivateRollDice"),
+    47: new LeafWsPacket(47, chat.PrivateRollDiceResp, "chat.PrivateRollDiceResp"),
+    48: new LeafWsPacket(48, chat.PrivateChat, "chat.PrivateChat"),
+    49: new LeafWsPacket(49, chat.PrivateChatResp, "chat.PrivateChatResp"),
+    50: new LeafWsPacket(50, chat.GroupAddPerson, "chat.GroupAddPerson"),
+    51: new LeafWsPacket(51, chat.GroupAddPersonResp, "chat.GroupAddPersonResp"),
+    52: new LeafWsPacket(52, chat.GroupDelPerson, "chat.GroupDelPerson"),
+    53: new LeafWsPacket(53, chat.GroupDelPersonResp, "chat.GroupDelPersonResp"),
+    54: new LeafWsPacket(54, chat.GroupBanned, "chat.GroupBanned"),
+    55: new LeafWsPacket(55, chat.GroupBannedResp, "chat.GroupBannedResp"),
+    56: new LeafWsPacket(56, chat.GroupQuit, "chat.GroupQuit"),
+    57: new LeafWsPacket(57, chat.GroupQuitResp, "chat.GroupQuitResp"),
+    58: new LeafWsPacket(58, chat.GroupDismiss, "chat.GroupDismiss"),
+    59: new LeafWsPacket(59, chat.GroupDismissResp, "chat.GroupDismissResp"),
+    60: new LeafWsPacket(60, chat.GroupChangeHost, "chat.GroupChangeHost"),
+    61: new LeafWsPacket(61, chat.GroupChangeHostResp, "chat.GroupChangeHostResp"),
 }
 
 export class chat_request {
@@ -109,23 +117,27 @@ export class chat_request {
     public static GroupSendRewardResp( data:{ GroupId:number, Resp:any } ) { chat_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupGetReward( data:{ GroupId:number, GetReward:any } ) { chat_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
     public static GroupGetRewardResp( data:{ GroupId:number, Resp:any } ) { chat_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateSendReward( data:{ TargetId:number, SendReward:any } ) { chat_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateSendRewardResp( data:{ TargetId:number, Resp:any } ) { chat_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateGetReward( data:{ TargetId:number, GetReward:any } ) { chat_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateGetRewardResp( data:{ TargetId:number, Resp:any } ) { chat_packet_define[43].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateChat( data:{ Type:number, TargetId:number, Content:any } ) { chat_packet_define[44].sendToChannel(ChannelDefine.game, data, false); }
-    public static PrivateChatResp( data:{ Type:number, Content:any, Timestamp:number, SenderID:number } ) { chat_packet_define[45].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupAddPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[46].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupAddPersonResp( data:{ GroupId:number, UserID:number, Timestamp:number, MemID:number } ) { chat_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupDelPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupDelPersonResp( data:{ GroupId:number, UserID:number, Timestamp:number, MemID:number } ) { chat_packet_define[49].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupBanned( data:{ GroupId:number, UserID:number, IsBanned:any } ) { chat_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupBannedResp( data:{ GroupId:number, UserID:number, IsBanned:any, Timestamp:number, MemID:number } ) { chat_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupQuit( data:{ GroupId:number } ) { chat_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupQuitResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupDismiss( data:{ GroupId:number, Timestamp:number } ) { chat_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupDismissResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupChangeHost( data:{ GroupId:number, OldID:number, NewID:number } ) { chat_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
-    public static GroupChangeHostResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupRollDice( data:{ GroupId:number, RollDice:any } ) { chat_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupRollDiceResp( data:{ GroupId:number, Resp:any } ) { chat_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateSendReward( data:{ TargetId:number, SendReward:any } ) { chat_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateSendRewardResp( data:{ TargetId:number, Resp:any } ) { chat_packet_define[43].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateGetReward( data:{ TargetId:number, GetReward:any } ) { chat_packet_define[44].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateGetRewardResp( data:{ TargetId:number, Resp:any } ) { chat_packet_define[45].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateRollDice( data:{ GroupId:number, RollDice:any } ) { chat_packet_define[46].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateRollDiceResp( data:{ GroupId:number, Resp:any } ) { chat_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateChat( data:{ Type:number, TargetId:number, Content:any } ) { chat_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
+    public static PrivateChatResp( data:{ Type:number, Content:any, Timestamp:number, SenderID:number } ) { chat_packet_define[49].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupAddPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupAddPersonResp( data:{ GroupId:number, UserID:number, Timestamp:number, MemID:number } ) { chat_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupDelPerson( data:{ GroupId:number, MemID:number } ) { chat_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupDelPersonResp( data:{ GroupId:number, UserID:number, Timestamp:number, MemID:number } ) { chat_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupBanned( data:{ GroupId:number, UserID:number, IsBanned:any } ) { chat_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupBannedResp( data:{ GroupId:number, UserID:number, IsBanned:any, Timestamp:number, MemID:number } ) { chat_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupQuit( data:{ GroupId:number } ) { chat_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupQuitResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupDismiss( data:{ GroupId:number, Timestamp:number } ) { chat_packet_define[58].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupDismissResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupChangeHost( data:{ GroupId:number, OldID:number, NewID:number } ) { chat_packet_define[60].sendToChannel(ChannelDefine.game, data, false); }
+    public static GroupChangeHostResp( data:{ GroupId:number, UserID:number, Timestamp:number } ) { chat_packet_define[61].sendToChannel(ChannelDefine.game, data, false); }
 }
 
