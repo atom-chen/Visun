@@ -6,8 +6,8 @@ import { chat_request, chat_msgs } from "../../../../common/script/proto/net_cha
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
-import { luck_msgs, luck_request } from "../../../../common/script/proto/net_luck";
 import ChatMgr from "../../../../common/script/model/ChatMgr";
+import UIEnvelopeRecv from "./UIEnvelopeRecv";
 
 
 const {ccclass, property} = cc._decorator;
@@ -37,6 +37,7 @@ export default class UIChat extends BaseComponent {
         EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.GroupSendRewardResp, this.GroupSendRewardResp, this);
+        EventCenter.getInstance().listen(chat_msgs.GroupGetRewardResp, this.GroupGetRewardResp, this);
     }
 
     initUIEvent() {
@@ -64,6 +65,12 @@ export default class UIChat extends BaseComponent {
         }, this);
     }
 
+    GroupGetRewardResp(param) {
+        UIManager.openPopwnd(ViewDefine.UIEnvelopeRecv, true, function(wnd){
+            wnd.getComponent(UIEnvelopeRecv).reflesh(param);
+        });
+    }
+
     GroupChatResp(param) {
         this.onChatMsg(param.SenderID, param.Content, "", "");
     }
@@ -72,20 +79,6 @@ export default class UIChat extends BaseComponent {
         this.onChatMsg(param.SenderID, param.Content, "", "");
     }
 
-    // message GroupSendRewardResp{
-    //     uint64 GroupId = 1;
-    //     SendRewardResp  Resp = 2;
-    // }
-    // message SendRewardResp {
-    //     int32 ID = 1;
-    //     int32 Type = 2; //发红包类型 0:固定 1:随机
-    //     int64 Count = 3; //个数
-    //     int64 Money = 4; //总金额(分)
-    //     int64 TimeStamp = 5;//发红包时间
-    //     uint64 SenderID = 6;//发送者
-    //     int64 StartTimeStamp = 7;//起始时间
-    //     int64 WaitTime = 8;//最长等待时间
-    // }
     GroupSendRewardResp(param) {
         if(isEmpty(param)) {
             return;

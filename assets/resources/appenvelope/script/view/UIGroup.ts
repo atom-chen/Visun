@@ -1,6 +1,4 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import { isNil } from "../../../../kernel/utils/GlobalFuncs";
-import LoginUser from "../../../../common/script/model/LoginUser";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import UIManager from "../../../../kernel/view/UIManager";
@@ -24,7 +22,7 @@ export default class UIGroup extends BaseComponent {
         EventCenter.getInstance().listen(login_msgs.MasterInfo, this.onMasterInfo, this, true);
     }
 
-    onMasterInfo(param) {
+    onMasterInfo() {
         this.m_ui.content.removeAllChildren(true);
 
         var grps = GroupMgr.getInstance().getGroupList();

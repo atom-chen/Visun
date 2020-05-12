@@ -26,6 +26,7 @@ export default class ViewDefine {
 	public static UIGroup = "appenvelope/prefabs/UIGroup";
 	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
 	public static UIEnvelopeSend = "appenvelope/prefabs/UIEnvelopeSend";
+	public static UIEnvelopeRecv = "appenvelope/prefabs/UIEnvelopeRecv";
 	//
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
