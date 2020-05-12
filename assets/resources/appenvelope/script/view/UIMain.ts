@@ -18,6 +18,9 @@ export default class UIMain extends BaseComponent {
         EventCenter.getInstance().listen("switch_to_chat", function(){
             this.switchPage(1);
         }, this);
+        EventCenter.getInstance().listen("switch_to_group", function(){
+            this.switchPage(2);
+        }, this);
     }
 
     switchPage(idx:number) {

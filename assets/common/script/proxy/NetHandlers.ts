@@ -48,6 +48,9 @@ var NetHandlers = {
                 var info = param.Groups[i];
                 var grp = new Group(info.ID, info.Name, info.HostID, info.Timestamp);
                 GroupMgr.getInstance().addGroup(grp);
+                grp.resetMemberList(info.MemberList);
+                grp.resetAdminList(info.AdminList);
+                grp.resetBannedList(info.BannedList);
             }
         }
     },
