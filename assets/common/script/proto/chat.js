@@ -964,6 +964,664 @@ $root.chat = (function() {
         return SetupGroupResp;
     })();
 
+    chat.SetupGroupAdmin = (function() {
+
+        function SetupGroupAdmin(properties) {
+            this.AdminList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SetupGroupAdmin.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SetupGroupAdmin.prototype.AdminList = $util.emptyArray;
+
+        SetupGroupAdmin.create = function create(properties) {
+            return new SetupGroupAdmin(properties);
+        };
+
+        SetupGroupAdmin.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.AdminList != null && message.AdminList.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    writer.uint64(message.AdminList[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        SetupGroupAdmin.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SetupGroupAdmin.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.SetupGroupAdmin();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.AdminList && message.AdminList.length))
+                        message.AdminList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AdminList.push(reader.uint64());
+                    } else
+                        message.AdminList.push(reader.uint64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SetupGroupAdmin.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SetupGroupAdmin.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
+                if (!Array.isArray(message.AdminList))
+                    return "AdminList: array expected";
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
+                        return "AdminList: integer|Long[] expected";
+            }
+            return null;
+        };
+
+        SetupGroupAdmin.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.SetupGroupAdmin)
+                return object;
+            var message = new $root.chat.SetupGroupAdmin();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.AdminList) {
+                if (!Array.isArray(object.AdminList))
+                    throw TypeError(".chat.SetupGroupAdmin.AdminList: array expected");
+                message.AdminList = [];
+                for (var i = 0; i < object.AdminList.length; ++i)
+                    if ($util.Long)
+                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
+                    else if (typeof object.AdminList[i] === "string")
+                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
+                    else if (typeof object.AdminList[i] === "number")
+                        message.AdminList[i] = object.AdminList[i];
+                    else if (typeof object.AdminList[i] === "object")
+                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+            }
+            return message;
+        };
+
+        SetupGroupAdmin.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.AdminList = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.AdminList && message.AdminList.length) {
+                object.AdminList = [];
+                for (var j = 0; j < message.AdminList.length; ++j)
+                    if (typeof message.AdminList[j] === "number")
+                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
+                    else
+                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+            }
+            return object;
+        };
+
+        SetupGroupAdmin.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SetupGroupAdmin;
+    })();
+
+    chat.SetupGroupAdminResp = (function() {
+
+        function SetupGroupAdminResp(properties) {
+            this.AdminList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SetupGroupAdminResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SetupGroupAdminResp.prototype.AdminList = $util.emptyArray;
+        SetupGroupAdminResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        SetupGroupAdminResp.create = function create(properties) {
+            return new SetupGroupAdminResp(properties);
+        };
+
+        SetupGroupAdminResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.AdminList != null && message.AdminList.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    writer.uint64(message.AdminList[i]);
+                writer.ldelim();
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                writer.uint32(24).int64(message.Timestamp);
+            return writer;
+        };
+
+        SetupGroupAdminResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SetupGroupAdminResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.SetupGroupAdminResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.AdminList && message.AdminList.length))
+                        message.AdminList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AdminList.push(reader.uint64());
+                    } else
+                        message.AdminList.push(reader.uint64());
+                    break;
+                case 3:
+                    message.Timestamp = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SetupGroupAdminResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SetupGroupAdminResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
+                if (!Array.isArray(message.AdminList))
+                    return "AdminList: array expected";
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
+                        return "AdminList: integer|Long[] expected";
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
+                    return "Timestamp: integer|Long expected";
+            return null;
+        };
+
+        SetupGroupAdminResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.SetupGroupAdminResp)
+                return object;
+            var message = new $root.chat.SetupGroupAdminResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.AdminList) {
+                if (!Array.isArray(object.AdminList))
+                    throw TypeError(".chat.SetupGroupAdminResp.AdminList: array expected");
+                message.AdminList = [];
+                for (var i = 0; i < object.AdminList.length; ++i)
+                    if ($util.Long)
+                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
+                    else if (typeof object.AdminList[i] === "string")
+                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
+                    else if (typeof object.AdminList[i] === "number")
+                        message.AdminList[i] = object.AdminList[i];
+                    else if (typeof object.AdminList[i] === "object")
+                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+            }
+            if (object.Timestamp != null)
+                if ($util.Long)
+                    (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
+                else if (typeof object.Timestamp === "string")
+                    message.Timestamp = parseInt(object.Timestamp, 10);
+                else if (typeof object.Timestamp === "number")
+                    message.Timestamp = object.Timestamp;
+                else if (typeof object.Timestamp === "object")
+                    message.Timestamp = new $util.LongBits(object.Timestamp.low >>> 0, object.Timestamp.high >>> 0).toNumber();
+            return message;
+        };
+
+        SetupGroupAdminResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.AdminList = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Timestamp = options.longs === String ? "0" : 0;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.AdminList && message.AdminList.length) {
+                object.AdminList = [];
+                for (var j = 0; j < message.AdminList.length; ++j)
+                    if (typeof message.AdminList[j] === "number")
+                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
+                    else
+                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (typeof message.Timestamp === "number")
+                    object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
+                else
+                    object.Timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.Timestamp) : options.longs === Number ? new $util.LongBits(message.Timestamp.low >>> 0, message.Timestamp.high >>> 0).toNumber() : message.Timestamp;
+            return object;
+        };
+
+        SetupGroupAdminResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SetupGroupAdminResp;
+    })();
+
+    chat.CancelGroupAdmin = (function() {
+
+        function CancelGroupAdmin(properties) {
+            this.AdminList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        CancelGroupAdmin.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        CancelGroupAdmin.prototype.AdminList = $util.emptyArray;
+
+        CancelGroupAdmin.create = function create(properties) {
+            return new CancelGroupAdmin(properties);
+        };
+
+        CancelGroupAdmin.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.AdminList != null && message.AdminList.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    writer.uint64(message.AdminList[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        CancelGroupAdmin.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        CancelGroupAdmin.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.CancelGroupAdmin();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.AdminList && message.AdminList.length))
+                        message.AdminList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AdminList.push(reader.uint64());
+                    } else
+                        message.AdminList.push(reader.uint64());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        CancelGroupAdmin.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        CancelGroupAdmin.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
+                if (!Array.isArray(message.AdminList))
+                    return "AdminList: array expected";
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
+                        return "AdminList: integer|Long[] expected";
+            }
+            return null;
+        };
+
+        CancelGroupAdmin.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.CancelGroupAdmin)
+                return object;
+            var message = new $root.chat.CancelGroupAdmin();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.AdminList) {
+                if (!Array.isArray(object.AdminList))
+                    throw TypeError(".chat.CancelGroupAdmin.AdminList: array expected");
+                message.AdminList = [];
+                for (var i = 0; i < object.AdminList.length; ++i)
+                    if ($util.Long)
+                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
+                    else if (typeof object.AdminList[i] === "string")
+                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
+                    else if (typeof object.AdminList[i] === "number")
+                        message.AdminList[i] = object.AdminList[i];
+                    else if (typeof object.AdminList[i] === "object")
+                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+            }
+            return message;
+        };
+
+        CancelGroupAdmin.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.AdminList = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.AdminList && message.AdminList.length) {
+                object.AdminList = [];
+                for (var j = 0; j < message.AdminList.length; ++j)
+                    if (typeof message.AdminList[j] === "number")
+                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
+                    else
+                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+            }
+            return object;
+        };
+
+        CancelGroupAdmin.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CancelGroupAdmin;
+    })();
+
+    chat.CancelGroupAdminResp = (function() {
+
+        function CancelGroupAdminResp(properties) {
+            this.AdminList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        CancelGroupAdminResp.prototype.GroupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        CancelGroupAdminResp.prototype.AdminList = $util.emptyArray;
+        CancelGroupAdminResp.prototype.Timestamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        CancelGroupAdminResp.create = function create(properties) {
+            return new CancelGroupAdminResp(properties);
+        };
+
+        CancelGroupAdminResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                writer.uint32(8).uint64(message.GroupId);
+            if (message.AdminList != null && message.AdminList.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    writer.uint64(message.AdminList[i]);
+                writer.ldelim();
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                writer.uint32(24).int64(message.Timestamp);
+            return writer;
+        };
+
+        CancelGroupAdminResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        CancelGroupAdminResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.chat.CancelGroupAdminResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GroupId = reader.uint64();
+                    break;
+                case 2:
+                    if (!(message.AdminList && message.AdminList.length))
+                        message.AdminList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AdminList.push(reader.uint64());
+                    } else
+                        message.AdminList.push(reader.uint64());
+                    break;
+                case 3:
+                    message.Timestamp = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        CancelGroupAdminResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        CancelGroupAdminResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (!$util.isInteger(message.GroupId) && !(message.GroupId && $util.isInteger(message.GroupId.low) && $util.isInteger(message.GroupId.high)))
+                    return "GroupId: integer|Long expected";
+            if (message.AdminList != null && message.hasOwnProperty("AdminList")) {
+                if (!Array.isArray(message.AdminList))
+                    return "AdminList: array expected";
+                for (var i = 0; i < message.AdminList.length; ++i)
+                    if (!$util.isInteger(message.AdminList[i]) && !(message.AdminList[i] && $util.isInteger(message.AdminList[i].low) && $util.isInteger(message.AdminList[i].high)))
+                        return "AdminList: integer|Long[] expected";
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (!$util.isInteger(message.Timestamp) && !(message.Timestamp && $util.isInteger(message.Timestamp.low) && $util.isInteger(message.Timestamp.high)))
+                    return "Timestamp: integer|Long expected";
+            return null;
+        };
+
+        CancelGroupAdminResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.chat.CancelGroupAdminResp)
+                return object;
+            var message = new $root.chat.CancelGroupAdminResp();
+            if (object.GroupId != null)
+                if ($util.Long)
+                    (message.GroupId = $util.Long.fromValue(object.GroupId)).unsigned = true;
+                else if (typeof object.GroupId === "string")
+                    message.GroupId = parseInt(object.GroupId, 10);
+                else if (typeof object.GroupId === "number")
+                    message.GroupId = object.GroupId;
+                else if (typeof object.GroupId === "object")
+                    message.GroupId = new $util.LongBits(object.GroupId.low >>> 0, object.GroupId.high >>> 0).toNumber(true);
+            if (object.AdminList) {
+                if (!Array.isArray(object.AdminList))
+                    throw TypeError(".chat.CancelGroupAdminResp.AdminList: array expected");
+                message.AdminList = [];
+                for (var i = 0; i < object.AdminList.length; ++i)
+                    if ($util.Long)
+                        (message.AdminList[i] = $util.Long.fromValue(object.AdminList[i])).unsigned = true;
+                    else if (typeof object.AdminList[i] === "string")
+                        message.AdminList[i] = parseInt(object.AdminList[i], 10);
+                    else if (typeof object.AdminList[i] === "number")
+                        message.AdminList[i] = object.AdminList[i];
+                    else if (typeof object.AdminList[i] === "object")
+                        message.AdminList[i] = new $util.LongBits(object.AdminList[i].low >>> 0, object.AdminList[i].high >>> 0).toNumber(true);
+            }
+            if (object.Timestamp != null)
+                if ($util.Long)
+                    (message.Timestamp = $util.Long.fromValue(object.Timestamp)).unsigned = false;
+                else if (typeof object.Timestamp === "string")
+                    message.Timestamp = parseInt(object.Timestamp, 10);
+                else if (typeof object.Timestamp === "number")
+                    message.Timestamp = object.Timestamp;
+                else if (typeof object.Timestamp === "object")
+                    message.Timestamp = new $util.LongBits(object.Timestamp.low >>> 0, object.Timestamp.high >>> 0).toNumber();
+            return message;
+        };
+
+        CancelGroupAdminResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.AdminList = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GroupId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GroupId = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Timestamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Timestamp = options.longs === String ? "0" : 0;
+            }
+            if (message.GroupId != null && message.hasOwnProperty("GroupId"))
+                if (typeof message.GroupId === "number")
+                    object.GroupId = options.longs === String ? String(message.GroupId) : message.GroupId;
+                else
+                    object.GroupId = options.longs === String ? $util.Long.prototype.toString.call(message.GroupId) : options.longs === Number ? new $util.LongBits(message.GroupId.low >>> 0, message.GroupId.high >>> 0).toNumber(true) : message.GroupId;
+            if (message.AdminList && message.AdminList.length) {
+                object.AdminList = [];
+                for (var j = 0; j < message.AdminList.length; ++j)
+                    if (typeof message.AdminList[j] === "number")
+                        object.AdminList[j] = options.longs === String ? String(message.AdminList[j]) : message.AdminList[j];
+                    else
+                        object.AdminList[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AdminList[j]) : options.longs === Number ? new $util.LongBits(message.AdminList[j].low >>> 0, message.AdminList[j].high >>> 0).toNumber(true) : message.AdminList[j];
+            }
+            if (message.Timestamp != null && message.hasOwnProperty("Timestamp"))
+                if (typeof message.Timestamp === "number")
+                    object.Timestamp = options.longs === String ? String(message.Timestamp) : message.Timestamp;
+                else
+                    object.Timestamp = options.longs === String ? $util.Long.prototype.toString.call(message.Timestamp) : options.longs === Number ? new $util.LongBits(message.Timestamp.low >>> 0, message.Timestamp.high >>> 0).toNumber() : message.Timestamp;
+            return object;
+        };
+
+        CancelGroupAdminResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CancelGroupAdminResp;
+    })();
+
     chat.InviteEnterGroup = (function() {
 
         function InviteEnterGroup(properties) {

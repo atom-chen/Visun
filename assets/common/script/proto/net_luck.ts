@@ -7,29 +7,29 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum luck_msgs {
-    SendReward = 53,
-    SendRewardResp = 54,
-    GetReward = 55,
-    GetRewardResp = 56,
-    RollDice = 57,
-    RollDiceResp = 58,
+    SendReward = 57,
+    SendRewardResp = 58,
+    GetReward = 59,
+    GetRewardResp = 60,
+    RollDice = 61,
+    RollDiceResp = 62,
 }
 
 export var luck_packet_define = {
-    53: new LeafWsPacket(53, luck.SendReward, "luck.SendReward"),
-    54: new LeafWsPacket(54, luck.SendRewardResp, "luck.SendRewardResp"),
-    55: new LeafWsPacket(55, luck.GetReward, "luck.GetReward"),
-    56: new LeafWsPacket(56, luck.GetRewardResp, "luck.GetRewardResp"),
-    57: new LeafWsPacket(57, luck.RollDice, "luck.RollDice"),
-    58: new LeafWsPacket(58, luck.RollDiceResp, "luck.RollDiceResp"),
+    57: new LeafWsPacket(57, luck.SendReward, "luck.SendReward"),
+    58: new LeafWsPacket(58, luck.SendRewardResp, "luck.SendRewardResp"),
+    59: new LeafWsPacket(59, luck.GetReward, "luck.GetReward"),
+    60: new LeafWsPacket(60, luck.GetRewardResp, "luck.GetRewardResp"),
+    61: new LeafWsPacket(61, luck.RollDice, "luck.RollDice"),
+    62: new LeafWsPacket(62, luck.RollDiceResp, "luck.RollDiceResp"),
 }
 
 export class luck_request {
-    public static SendReward( data:{ Type:number, Count:number, Money:number } ) { luck_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
-    public static SendRewardResp( data:{ ID:number, Type:number, Count:number, Money:number, TimeStamp:number, SenderID:number, StartTimeStamp:number, WaitTime:number } ) { luck_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
-    public static GetReward( data:{ ID:number } ) { luck_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
-    public static GetRewardResp( data:{ ID:number, SenderID:number, StartTimeStamp:number, WaitTime:number, Type:number, Count:number, Money:number, RemainCount:number, RemainMoney:number, BestMoney:number, BestMoneyIndex:number, MoneyList:number[] } ) { luck_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
-    public static RollDice( data:{ Count:number } ) { luck_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
-    public static RollDiceResp( data:{ Count:number, Numbers:any } ) { luck_packet_define[58].sendToChannel(ChannelDefine.game, data, false); }
+    public static SendReward( data:{ Type:number, Count:number, Money:number } ) { luck_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
+    public static SendRewardResp( data:{ ID:number, Type:number, Count:number, Money:number, TimeStamp:number, SenderID:number, StartTimeStamp:number, WaitTime:number } ) { luck_packet_define[58].sendToChannel(ChannelDefine.game, data, false); }
+    public static GetReward( data:{ ID:number } ) { luck_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }
+    public static GetRewardResp( data:{ ID:number, SenderID:number, StartTimeStamp:number, WaitTime:number, Type:number, Count:number, Money:number, RemainCount:number, RemainMoney:number, BestMoney:number, BestMoneyIndex:number, MoneyList:number[] } ) { luck_packet_define[60].sendToChannel(ChannelDefine.game, data, false); }
+    public static RollDice( data:{ Count:number } ) { luck_packet_define[61].sendToChannel(ChannelDefine.game, data, false); }
+    public static RollDiceResp( data:{ Count:number, Numbers:any } ) { luck_packet_define[62].sendToChannel(ChannelDefine.game, data, false); }
 }
 

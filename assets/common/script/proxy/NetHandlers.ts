@@ -46,7 +46,7 @@ var NetHandlers = {
         if(param.Groups) {
             for(var i in param.Groups) {
                 var info = param.Groups[i];
-                var grp = new Group(info.ID, info.Name, info.HostId, info.Timestamp);
+                var grp = new Group(info.ID, info.Name, info.HostID, info.Timestamp);
                 GroupMgr.getInstance().addGroup(grp);
             }
         }

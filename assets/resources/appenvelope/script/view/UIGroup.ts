@@ -5,6 +5,7 @@ import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import UIManager from "../../../../kernel/view/UIManager";
 import GroupMgr from "../../../../common/script/model/GroupMgr";
+import ChatMgr from '../../../../common/script/model/ChatMgr';
 
 const {ccclass, property} = cc._decorator;
 
@@ -25,6 +26,11 @@ export default class UIGroup extends BaseComponent {
             item.getChildByName("lab_grpname").getComponent(cc.Label).string = grps[grpId].GroupName;
             item.getChildByName("lab_grphost").getComponent(cc.Label).string = grps[grpId].HostID.toString();
             item.getChildByName("lab_grpmembercnt").getComponent(cc.Label).string = "0";
+            item.getChildByName("btn_chat")["_grpId"] = grps[grpId].GroupId;
+            CommonUtil.addClickEvent( item.getChildByName("btn_chat"), function(){
+                ChatMgr.getInstance().setChatingTarget(0, this._grpId);
+            }, item.getChildByName("btn_chat"));
+            ChatMgr.getInstance().setChatingTarget(0, grps[grpId].GroupId);
         }
     }
 
