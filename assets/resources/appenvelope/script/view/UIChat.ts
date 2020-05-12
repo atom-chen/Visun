@@ -33,7 +33,7 @@ export default class UIChat extends BaseComponent {
         
         EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
-        EventCenter.getInstance().listen(luck_msgs.GetRewardResp, this.GetRewardResp, this);
+        EventCenter.getInstance().listen(chat_msgs.GroupSendRewardResp, this.GroupSendRewardResp, this);
     }
 
     initUIEvent() {
@@ -62,6 +62,10 @@ export default class UIChat extends BaseComponent {
         this.onChatMsg(param.SenderID, param.Content, "", "");
     }
 
+    // message GroupSendRewardResp{
+    //     uint64 GroupId = 1;
+    //     SendRewardResp  Resp = 2;
+    // }
     // message SendRewardResp {
     //     int32 ID = 1;
     //     int32 Type = 2; //发红包类型 0:固定 1:随机
@@ -72,21 +76,28 @@ export default class UIChat extends BaseComponent {
     //     int64 StartTimeStamp = 7;//起始时间
     //     int64 WaitTime = 8;//最长等待时间
     // }
-    GetRewardResp(param) {
+    GroupSendRewardResp(param) {
         if(isEmpty(param)) {
             return;
         }
+        var info = param.Resp;
         var item = null;
-        if(param.SenderID==LoginUser.getInstance().UserID) {
-            item = cc.instantiate(this.ChatRedR)
+        if(info.SenderID==LoginUser.getInstance().UserID) {
+            item = cc.instantiate(this.ChatRedR);
         } else {
             item = cc.instantiate(this.ChatRedL);
         }
-        item.getChildByName("enveBg1")._info_ = param;
-        item.getChildByName("enveBg1").getChildByName("lab_sender").getComponent(cc.Label).string = param.SenderID;
-        CommonUtil.addClickEvent(item.getChildByName("enveBg1"), function(){
-            luck_request.GetReward(this._info_.ID);
-        }, item.getChildByName("enveBg1"));
+        var redbtn = item.getChildByName("enveBg1");
+        redbtn._info_ = info;
+        redbtn.getChildByName("lab_sender").getComponent(cc.Label).string = info.SenderID;
+        CommonUtil.addClickEvent(redbtn, function(){
+            chat_request.GroupGetReward({
+                GroupId: param.GroupId,
+                GetReward: {
+                    ID: this._info_.ID
+                }
+            });
+        }, redbtn);
     }
 
     onChatMsg(uid:number, cont:string, name:string, headImg:string) {
