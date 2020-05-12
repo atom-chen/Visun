@@ -2171,8 +2171,12 @@
     "ChatItemR": {
       "__uuid__": "65b76c06-a7d9-4adb-8373-142654d96a9f"
     },
-    "ChatRedL": null,
-    "ChatRedR": null,
+    "ChatRedL": {
+      "__uuid__": "74ef4ac9-d57e-48b8-b024-d62b5722900f"
+    },
+    "ChatRedR": {
+      "__uuid__": "65b76c06-a7d9-4adb-8373-142654d96a9f"
+    },
     "_id": ""
   },
   {
