@@ -1,8 +1,22 @@
 // UI路经
 export default class ViewDefine {
-	public static CpnChip = "common/prefabs/CpnChip";
+	//appenvelope
 	public static UILogin = "appenvelope/prefabs/UILoginV";
-	//
+	public static UIGroupCreate = "appenvelope/prefabs/UIGroupCreate";
+	public static UIGroupJoin = "appenvelope/prefabs/UIGroupJoin";
+	public static UIGroupAddMember = "appenvelope/prefabs/UIGroupAddMember";
+	public static UIGroupMember = "appenvelope/prefabs/UIGroupMember";
+	public static UIMain = "appenvelope/prefabs/UIMain";
+	public static UIChat = "appenvelope/prefabs/UIChat";
+	public static UIGroup = "appenvelope/prefabs/UIGroup";
+	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
+	public static UIEnvelopeSend = "appenvelope/prefabs/UIEnvelopeSend";
+	public static UIEnvelopeRecv = "appenvelope/prefabs/UIEnvelopeRecv";
+
+
+	//appqp
+	public static CpnChip = "appqp/script/comps/prefabs/CpnChip";
+	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIGames = "lobby/prefabs/UIGames";
 	public static UIHall = "lobby/prefabs/UIHall";
@@ -15,19 +29,7 @@ export default class ViewDefine {
 	public static UISpread = "lobby/prefabs/UISpread";
 	public static UIPerson = "lobby/prefabs/UIPerson";
 	public static UIRoom = "lobby/prefabs/UIRoom";
-
-	
-	public static UIGroupCreate = "appenvelope/prefabs/UIGroupCreate";
-	public static UIGroupJoin = "appenvelope/prefabs/UIGroupJoin";
-	public static UIGroupAddMember = "appenvelope/prefabs/UIGroupAddMember";
-	public static UIGroupMember = "appenvelope/prefabs/UIGroupMember";
-	public static UIMain = "appenvelope/prefabs/UIMain";
-	public static UIChat = "appenvelope/prefabs/UIChat";
-	public static UIGroup = "appenvelope/prefabs/UIGroup";
-	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
-	public static UIEnvelopeSend = "appenvelope/prefabs/UIEnvelopeSend";
-	public static UIEnvelopeRecv = "appenvelope/prefabs/UIEnvelopeRecv";
-	//
+	//subgames
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
 	public static UIfqzs = "subgames/fqzs/prefabs/UIfqzs";
