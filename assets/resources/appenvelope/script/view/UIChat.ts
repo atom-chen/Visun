@@ -27,15 +27,19 @@ export default class UIChat extends BaseComponent {
     @property(cc.Prefab)
     ChatRedR: cc.Prefab = null;
 
+    @property(cc.Prefab)
+    ChatImgL: cc.Prefab = null;
+    @property(cc.Prefab)
+    ChatImgR: cc.Prefab = null;
+
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
         this.m_ui.lab_chattarget.getComponent(cc.Label).string = ChatMgr.getInstance().getChatingTarget();
         
         this.initUIEvent();
-        
-        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.PrivateChatResp, this.PrivateChatResp, this);
+        EventCenter.getInstance().listen(chat_msgs.GroupChatResp, this.GroupChatResp, this);
         EventCenter.getInstance().listen(chat_msgs.GroupSendRewardResp, this.GroupSendRewardResp, this);
         EventCenter.getInstance().listen(chat_msgs.GroupGetRewardResp, this.GroupGetRewardResp, this);
     }

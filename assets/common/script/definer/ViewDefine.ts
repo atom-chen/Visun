@@ -2,11 +2,11 @@
 export default class ViewDefine {
 	//appenvelope
 	public static UILogin = "appenvelope/prefabs/UILoginV";
+	public static UIMain = "appenvelope/prefabs/UIMain";
 	public static UIGroupCreate = "appenvelope/prefabs/UIGroupCreate";
 	public static UIGroupJoin = "appenvelope/prefabs/UIGroupJoin";
 	public static UIGroupAddMember = "appenvelope/prefabs/UIGroupAddMember";
 	public static UIGroupMember = "appenvelope/prefabs/UIGroupMember";
-	public static UIMain = "appenvelope/prefabs/UIMain";
 	public static UIChat = "appenvelope/prefabs/UIChat";
 	public static UIGroup = "appenvelope/prefabs/UIGroup";
 	public static UIPersonal = "appenvelope/prefabs/UIPersonal";

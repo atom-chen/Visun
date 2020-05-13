@@ -4,7 +4,6 @@ import AudioManager from "../../../../kernel/audio/AudioManager";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
 import LocalCache from "../../../../kernel/localcache/LocalCache";
-import ChatMgr from "../../../../common/script/model/ChatMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,7 +14,6 @@ export default class LobbyScene extends BaseComponent {
         UIManager.openPanel(ViewDefine.UILobby, null);
         LoginMgr.getInstance().connectServer();
         LoginMgr.getInstance().checkLogin(true);
-        ChatMgr.getInstance().connectServer();
     }
 
     start () {

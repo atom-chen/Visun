@@ -1,8 +1,8 @@
-import BaseComponent from "../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
-import LoginMgr from "../model/LoginMgr";
-import EventCenter from '../../../kernel/basic/event/EventCenter';
-import { login_msgs } from "../proto/net_login";
+import BaseComponent from "../../../../kernel/view/BaseComponent";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import { login_msgs } from "../../../../common/script/proto/net_login";
+import LoginMgr from "../../../../common/script/model/LoginMgr";
 
 
 const {ccclass, property} = cc._decorator;
