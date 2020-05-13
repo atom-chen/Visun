@@ -67,6 +67,9 @@ export default class UIChat extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_fhb, function(){
             UIManager.openPopwnd(ViewDefine.UIEnvelopeSend, false, null);
         }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_close, function(){
+            CommonUtil.safeDelete(this);
+        }, this);
     }
 
     GroupGetRewardResp(param) {

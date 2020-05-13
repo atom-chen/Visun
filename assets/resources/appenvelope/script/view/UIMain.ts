@@ -4,7 +4,6 @@ import UIManager from "../../../../kernel/view/UIManager";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
-import ChatMgr from "../../../../common/script/model/ChatMgr";
 import EventDefine from "../../../../common/script/definer/EventDefine";
 
 const {ccclass, property} = cc._decorator;
@@ -28,9 +27,9 @@ export default class UIMain extends BaseComponent {
         if(idx == 1) {
             UIManager.closeWindow(ViewDefine.UIGroup);
             UIManager.closeWindow(ViewDefine.UIPersonal);
-            UIManager.openPanel(ViewDefine.UIChat, null);
+            UIManager.openPanel(ViewDefine.UIMessage, null);
         } else if(idx == 2) {
-            UIManager.closeWindow(ViewDefine.UIChat);
+            UIManager.closeWindow(ViewDefine.UIMessage);
             UIManager.closeWindow(ViewDefine.UIPersonal);
             UIManager.openPanel(ViewDefine.UIGroup, null);
         } else {
@@ -38,7 +37,7 @@ export default class UIMain extends BaseComponent {
                 return;
             }
             UIManager.closeWindow(ViewDefine.UIGroup);
-            UIManager.closeWindow(ViewDefine.UIChat);
+            UIManager.closeWindow(ViewDefine.UIMessage);
             UIManager.openPanel(ViewDefine.UIPersonal, null);
         }
     }

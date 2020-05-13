@@ -8,6 +8,7 @@ export default class ViewDefine {
 	public static UIGroupAddMember = "appenvelope/prefabs/UIGroupAddMember";
 	public static UIGroupMember = "appenvelope/prefabs/UIGroupMember";
 	public static UIChat = "appenvelope/prefabs/UIChat";
+	public static UIMessage = "appenvelope/prefabs/UIMessage";
 	public static UIGroup = "appenvelope/prefabs/UIGroup";
 	public static UIPersonal = "appenvelope/prefabs/UIPersonal";
 	public static UIEnvelopeSend = "appenvelope/prefabs/UIEnvelopeSend";
