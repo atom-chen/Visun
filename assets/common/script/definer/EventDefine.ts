@@ -2,5 +2,6 @@
 // 自定义事件
 //---------------------------------
 export default class EventDefine {
-	static NET_ERROR_RESULT = "NET_ERROR_RESULT";
+	static switch_to_group = "switch_to_group";
+	static switch_to_chat = "switch_to_chat";
 }

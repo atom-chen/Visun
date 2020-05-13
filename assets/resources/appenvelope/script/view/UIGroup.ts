@@ -6,6 +6,7 @@ import GroupMgr from "../../../../common/script/model/GroupMgr";
 import ChatMgr from '../../../../common/script/model/ChatMgr';
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../common/script/proto/net_login";
+import EventDefine from "../../../../common/script/definer/EventDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -35,7 +36,7 @@ export default class UIGroup extends BaseComponent {
             item.getChildByName("btn_chat")["_grpId"] = grps[grpId].GroupId;
             CommonUtil.addClickEvent( item.getChildByName("btn_chat"), function(){
                 ChatMgr.getInstance().setChatingTarget(0, this._grpId);
-                EventCenter.getInstance().fire("switch_to_chat");
+                EventCenter.getInstance().fire(EventDefine.switch_to_chat);
             }, item.getChildByName("btn_chat"));
         }
     }

@@ -4,6 +4,7 @@ import LoginUser from "../../../../common/script/model/LoginUser";
 import LogicCenter from "../../../../common/script/model/LogicCenter";
 import { login_request } from "../../../../common/script/proto/net_login";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import EventDefine from "../../../../common/script/definer/EventDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -27,7 +28,7 @@ export default class UIPersonal extends BaseComponent {
     initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_unlogin, function(){ 
             LogicCenter.getInstance().clear();
-            EventCenter.getInstance().fire("switch_to_group");
+            EventCenter.getInstance().fire(EventDefine.switch_to_group);
             login_request.Exit({});
         }, this);
     }

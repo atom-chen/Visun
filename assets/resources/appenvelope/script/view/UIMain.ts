@@ -5,6 +5,7 @@ import LoginMgr from "../../../../common/script/model/LoginMgr";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import ChatMgr from "../../../../common/script/model/ChatMgr";
+import EventDefine from "../../../../common/script/definer/EventDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -15,10 +16,10 @@ export default class UIMain extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
         this.switchPage(2);
-        EventCenter.getInstance().listen("switch_to_chat", function(){
+        EventCenter.getInstance().listen(EventDefine.switch_to_chat, function(){
             this.switchPage(1);
         }, this);
-        EventCenter.getInstance().listen("switch_to_group", function(){
+        EventCenter.getInstance().listen(EventDefine.switch_to_group, function(){
             this.switchPage(2);
         }, this);
     }
