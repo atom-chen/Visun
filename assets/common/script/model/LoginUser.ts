@@ -1,6 +1,4 @@
 import ModelBase from "../../../kernel/model/ModelBase";
-import Group from "./Group";
-import GroupMgr from "./GroupMgr";
 
 //登陆用户
 export default class LoginUser extends ModelBase {

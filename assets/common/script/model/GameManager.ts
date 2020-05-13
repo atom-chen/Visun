@@ -7,7 +7,6 @@ import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 //游戏管理器
 export default class GameManager extends ModelBase {

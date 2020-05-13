@@ -11,6 +11,9 @@ import ViewDefine from "../definer/ViewDefine";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import IChannel from "../../../kernel/net/channel/IChannel";
+import IProcessor from "../../../kernel/net/processor/IProcessor";
+import NetHandlers from "../proxy/NetHandlers";
+import ChatHandlers from "../proxy/ChatHandlers";
 import { login_request, login_packet_define } from '../proto/net_login';
 import { chat_packet_define } from "../proto/net_chat";
 import { comand_packet_define } from "../proto/net_comand";
@@ -20,10 +23,7 @@ import { cowcow_packet_define } from "../proto/net_cowcow";
 import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
-import NetHandlers from "../proxy/NetHandlers";
-import IProcessor from "../../../kernel/net/processor/IProcessor";
 import { luck_packet_define } from "../proto/net_luck";
-import ChatHandlers from "../proxy/ChatHandlers";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {

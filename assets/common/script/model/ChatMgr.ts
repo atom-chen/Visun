@@ -1,16 +1,4 @@
 import ModelBase from "../../../kernel/model/ModelBase";
-import EventCenter from "../../../kernel/basic/event/EventCenter";
-import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
-import IChannel from "../../../kernel/net/channel/IChannel";
-import ChannelDefine from "../definer/ChannelDefine";
-import { ConnState, ChannelType, ProcessorType } from "../../../kernel/basic/defines/KernelDefine";
-import UIManager from "../../../kernel/view/UIManager";
-import ServerConfig from "../definer/ServerConfig";
-import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
-import ChannelMgr from "../../../kernel/net/channel/ChannelMgr";
-import CHandler from "../../../kernel/basic/datastruct/CHandler";
-import IProcessor from "../../../kernel/net/processor/IProcessor";
-import ChatHandlers from "../proxy/ChatHandlers";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 export default class ChatMgr extends ModelBase {
@@ -29,8 +17,12 @@ export default class ChatMgr extends ModelBase {
 		
 	}
 
-	private _chatUser:number;
+
+	private _chatUser:number = 0;
 	private _chatGroup:number = 0;
+	private _groupRecords:{[key:number]:Array<any>};
+	private _privateRecords:{[key:number]:Array<any>};
+
 	setChatingTarget(uid:number, grpId:number) {
 		this._chatUser = uid;
 		this._chatGroup = grpId;
@@ -50,4 +42,27 @@ export default class ChatMgr extends ModelBase {
 		}
 		return "";
 	}
+
+	recordGroupMsg(grpId:number, msg:any) {
+		if(!this._groupRecords[grpId]) {
+			this._groupRecords[grpId] = [];
+		}
+		this._groupRecords[grpId].push(msg);
+	}
+
+	recordPrivateMsg(uid:number, msg:any) {
+		if(!this._privateRecords[uid]) {
+			this._privateRecords[uid] = [];
+		}
+		this._privateRecords[uid].push(msg);
+	}
+
+	loadGroupMsg(grpId:number) : Array<any> {
+		return this._groupRecords[grpId];
+	}
+
+	loadPrivateMsg(uid:number) : Array<any> {
+		return this._privateRecords[uid];
+	}
+
 }

@@ -21,9 +21,10 @@ export default class GroupMgr extends ModelBase {
 		this._groups = {};
 	}
 
+
 	private _groups:{[key:number]:Group};
 
-
+	
 	public addGroup(grp:Group) {
 		this._groups[grp.getId()] = grp;
 	}

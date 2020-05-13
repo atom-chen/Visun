@@ -8,8 +8,8 @@ export default class Group {
 	HostID:number = 0;
 	Timestamp:number = 0;
 
-	private AdminList:Array<number>;
 	private MemberList:{[key:number]:SimplePlayer};
+	private AdminList:Array<number>;
 	private BannedList:Array<number>;
 
 	constructor(id:number, name:string, hostId:number, timest:number) {
@@ -49,19 +49,31 @@ export default class Group {
 		}
 	}
 
-	addMember(info:any) {
-
+	addMember(uid:number, info:any) {
+		if(isNil(this.MemberList[uid])) {
+			this.MemberList[uid] = new SimplePlayer();
+		}
+		this.MemberList[uid].UserID = uid;
+		CommonUtil.simpleCopy(this.MemberList[uid], info);
 	}
 
 	delMember(uid:number) {
-		
+		this.MemberList[uid] = null;
 	}
 
-	getMember(uid) : SimplePlayer {
+	getMember(uid:number) : SimplePlayer {
 		if(!isNil(this.MemberList[uid])) {
 			return this.MemberList[uid];
 		}
 		return null;
+	}
+
+	isAdmin(uid:number) : boolean {
+		return this.AdminList.indexOf(uid) >= 0;
+	}
+
+	isBanned(uid:number) : boolean {
+		return this.BannedList.indexOf(uid) >= 0;
 	}
 	
 }
