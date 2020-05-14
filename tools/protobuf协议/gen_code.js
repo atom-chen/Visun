@@ -1,93 +1,22 @@
 const fs = require("fs");
 const { exec } = require('child_process');
+const cfgData = require("./export_cfg");
+const helputil = require("./helputil");
 
+//服务器导出目录
+var serverOutDir = cfgData.serverOutDir;
 
 //要生成的pb文件
-var pbfiles = [
-	{ 
-		name:"login", 
-		router:"login", 
-	},
-	{ 
-		name:"chat", 
-		router:"chat",
-	},
-	{ 
-		name:"luck", 
-		router:"chat",
-	},
-	{ 
-		name:"comand", 
-		router:"game",
-	},
-	{ 
-		name:"gamecomm", 
-		router:"game",
-	},
-	{ 
-		name:"baccarat", 
-		router:"game",
-	},
-	{ 
-		name:"cowcow", 
-		router:"game",
-	},
-	{ 
-		name:"landLords", 
-		router:"game",
-	},
-	{ 
-		name:"mahjong", 
-		router:"game",
-	},
-	{ 
-		name:"fishLord", 
-		router:"game",
-	},
-]
+var pbfiles = cfgData.pbfiles;
 
-
+console.log("开始生成自动化代码");
+console.log(serverOutDir);
+console.log(pbfiles);
 
 var g_CMDID = -1;
 function getCmdId() {
 	g_CMDID++;
 	return g_CMDID;
-}
-
-//检查import关系
-function getImportMud(data) {
-	var tmp = null;
-	var len = data.length;
-	if(len > 10) { len = 10 }
-	for(var n=0; n<len; n++) {
-		if(data[n].match("import") && !data[n].match("//")) {
-			tmp = data[n].slice(0, data[n].indexOf('\.'));
-			tmp = tmp.slice(tmp.indexOf("\"")+1, tmp.length);
-			break;
-		}
-	}
-	return tmp;
-}
-
-function getPackageName(data) {
-	for(var i=0, len=data.length; i<len; i++) {
-		var str = data[i];
-		str = str.replace(';', ' ');  //去分号
-		var arr = str.split(/\s+/); 	//去空白字符
-		if(arr[0].match("//") || (arr[0]=="" && arr[1] && arr[1].match("//"))){
-			//是一个注释
-		}
-		else {
-			//解析 "message Request"
-			if( arr[0]=="package" && arr[1].indexOf("\.")<0 ) {
-				return arr[1];
-			}
-			else if( arr[0]=="" && arr[1]=="package" && arr[2].indexOf("\.")<0 ){
-				return arr[2];
-			}
-		}
-	}
-	return null;
 }
 
 function isRequest(msgName) {
@@ -132,23 +61,13 @@ function getRequestParam(argInfo) {
 	return desc;
 }
 
-function write2file(filepath, str) {
-	try {
-		fs.writeFileSync(filepath, str, 'utf8');
-	} catch (err) {
-		console.log(err);
-	}
-}
 
-var autoOutPath = "E:/Go_PRJ/server"
 function doGenerate() {
 	//server begin
-	var serverPkgName = "go";
-
-	var outServerMsg = autoOutPath + "/msg/msg.go";
-	var outRouter = autoOutPath + "/gate/router.go";
-	var outServerHandler = autoOutPath + "/handler.go";
-	var outHandleFunc = autoOutPath + "/handlerFunc.go";
+	var outServerMsg = serverOutDir + "/msg/msg.go";
+	var outRouter = serverOutDir + "/gate/router.go";
+	var outServerHandler = serverOutDir + "/handler.go";
+	var outHandleFunc = serverOutDir + "/handlerFunc.go";
 
 	var msgStr = "";
 	var routerStr = "";
@@ -186,7 +105,7 @@ function doGenerate() {
 	routerStr += "package gate\n\n";
 	routerStr += 'import (\n';
 	routerStr += '    "server/chat"\n';
-	routerStr += '    "server/game"\n';
+	//routerStr += '    "server/game"\n';
 	routerStr += '    "server/login"\n';
 	routerStr += '    "server/msg"\n';
 	routerStr += '    protoMsg "server/msg/go"\n';
@@ -206,9 +125,9 @@ function doGenerate() {
 
 
 		//client begin
-		var mudname = getPackageName(line_list);
+		var mudname = helputil.getPackageName(line_list);
 		var channelName = "game";
-		var outClient = "../../assets/common/script/proto/net_" + pbfilename + ".ts";
+		var outClient = cfgData.clientOutDir + "net_" + pbfilename + ".ts";
 		var outClientHandler = null;
 		//client end
 
@@ -293,13 +212,13 @@ function doGenerate() {
 		cmdTblStr += "}\n\n";
 		reqStr += "}\n\n";
 		outstr += enumStr + cmdTblStr + reqStr;
-		write2file(outClient, outstr);
+		helputil.write2file(outClient, outstr);
 
 		clientHandleStr += "}\n\n";
 		clientHandleStr += "export default proxy_"+mudname+";\n";
 		if(outClientHandler) {
 			if(!fs.existsSync(outClientHandler)){
-				write2file(outClientHandler, clientHandleStr);
+				helputil.write2file(outClientHandler, clientHandleStr);
 			}
 		}
 		//client end
@@ -309,18 +228,13 @@ function doGenerate() {
 	routerStr += "}\n\n"
 	msgStr += "}\n"
 	
-	write2file(outServerMsg, msgStr);
-	write2file(outRouter, routerStr);
-	//write2file(outHandleFunc, funcStr);
-	//write2file(outServerHandler, handStr);
+	helputil.write2file(outServerMsg, msgStr);
+	helputil.write2file(outRouter, routerStr);
+	//helputil.write2file(outHandleFunc, funcStr);
+	//helputil.write2file(outServerHandler, handStr);
 	//server end
 }
 
-
-//执行生产
-// if(!fs.existsSync("./out")){
-// 	fs.mkdirSync("./out")
-// }
 
 var waitCnt = pbfiles.length;
 for(var iii in pbfiles) {
