@@ -142,7 +142,7 @@ export default class ShaderHelper extends cc.Component {
 cc.game.on(cc.game.EVENT_ENGINE_INITED, () => {
 	//cc.dynamicAtlasManager.enabled = false;
 	//@ts-ignore
-	cc.loader.loadResDir('effects', cc.EffectAsset ,(error, res) => {
+	cc.loader.loadResDir('launcher/effects', cc.EffectAsset ,(error, res) => {
 		ShaderHelper.effectAssets = res;
 		let array = ShaderHelper.effectAssets.map((item, i)  => { 
 			return {name:item._name, value: i}; 
