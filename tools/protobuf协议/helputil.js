@@ -15,6 +15,8 @@ function write2file(filepath, str) {
 function fixPackageName(filepath, wantName) {
 	const data = fs.readFileSync(filepath, 'utf8').split('\n');
 
+	var dependMuds = getImportMud(data);
+
 	var pkgName = "";
 	var needWrite = false;
 
@@ -51,6 +53,8 @@ function fixPackageName(filepath, wantName) {
 	} else {
 		console.log("package name: "+pkgName, "filename: "+wantName);
 	}
+
+	return dependMuds;
 }
 
 function createDir(dirName) {
@@ -75,7 +79,7 @@ function isProtoFile(pathstr) {
 	}
 }
 
-function fixClientOutput(protoName) {
+function fixClientOutput(protoName, dependMuds) {
 	var filepath = cfgData.clientOutDir + protoName + ".js";
 	const data = fs.readFileSync(filepath, 'utf8').split('\n');
 
@@ -86,10 +90,10 @@ function fixClientOutput(protoName) {
 		}
 	}
 
-	if(protoName != "gamecomm") {
+	if(dependMuds && dependMuds != "") {
 		var flag = false;
 		for(var from=0, len=data.length; from<len; from++) {
-			if(data[from].match("root.gamecomm = ") && data[from].match("function")){
+			if(data[from].match("root."+dependMuds+" = ") && data[from].match("function")){
 				console.log("第"+from+"行发现累赘import: "+data[from]);
 				data.splice(from);
 				flag = true;
@@ -106,6 +110,9 @@ function fixClientOutput(protoName) {
 
 //检查import关系
 function getImportMud(data) {
+	if(data===null || data===undefined) {
+		return null;
+	}
 	var tmp = null;
 	var len = data.length;
 	if(len > 10) { len = 10 }
