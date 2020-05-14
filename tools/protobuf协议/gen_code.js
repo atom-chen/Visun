@@ -120,7 +120,7 @@ function doGenerate() {
 		var cfg = pbfiles[iii];
 		var pbfilename = cfg.name;
 		var curRouter = cfg.router;  //for server
-		var filepath = "in/" + pbfilename + ".proto";
+		var filepath = cfgData.protoDir + "/" + pbfilename + ".proto";
 		var line_list = fs.readFileSync(filepath, 'utf8').split('\n');
 
 
@@ -239,7 +239,7 @@ function doGenerate() {
 var waitCnt = pbfiles.length;
 for(var iii in pbfiles) {
 	var pbfilename = pbfiles[iii].name;
-	var filepath = "in/" + pbfilename + ".proto";
+	var filepath = cfgData.protoDir + "/" + pbfilename + ".proto";
 	exec("pbjs -t json " + filepath + " -o tmps/" + pbfilename + ".json", ()=>{
 		waitCnt--;
 		console.log("waiting count: ", waitCnt);

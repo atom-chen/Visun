@@ -7,8 +7,6 @@ const cfgData = require("./export_cfg");
 
 helputil.createDir("tmps");
 
-
-const inputdir = "in";
 var protoFiles = [];
 
 
@@ -27,9 +25,9 @@ function genProto() {
 	console.log("生成：", filename);
 
 	var Proto = helputil.getFileName(filename);
-	var dependMuds = helputil.fixPackageName(inputdir+"/"+filename, Proto);
-	exec("pbjs -t json " + inputdir+"/"+filename + " -o tmps/" + Proto + ".json", (err, stdout, stderr)=>{
-		exec("pbjs -t static-module -w commonjs -o " + cfgData.clientOutDir + Proto + ".js " + inputdir + "/" + Proto + ".proto" + " " + "--no-comments", (err1, aaa, bbb)=>{
+	var dependMuds = helputil.fixPackageName(cfgData.protoDir+"/"+filename, Proto);
+	exec("pbjs -t json " + cfgData.protoDir+"/"+filename + " -o tmps/" + Proto + ".json", (err, stdout, stderr)=>{
+		exec("pbjs -t static-module -w commonjs -o " + cfgData.clientOutDir + Proto + ".js " + cfgData.protoDir + "/" + Proto + ".proto" + " " + "--no-comments", (err1, aaa, bbb)=>{
 			helputil.fixClientOutput(Proto, dependMuds);
 			genProto();
 		});
@@ -37,7 +35,7 @@ function genProto() {
 }
 
 
-fs.readdir(inputdir, null, (err, files)=>{
+fs.readdir(cfgData.protoDir, null, (err, files)=>{
 	if(err) {
 		console.log(err);
 		return;

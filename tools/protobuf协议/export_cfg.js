@@ -1,3 +1,5 @@
+var protoDir = "in";
+
 var serverOutDir = "E:/Go_PRJ/server";
 
 var clientOutDir = "../../assets/common/script/proto/";
@@ -47,6 +49,7 @@ var pbfiles = [
 ]
 
 module.exports = {
+	protoDir: protoDir,
 	serverOutDir: serverOutDir,
 	clientOutDir: clientOutDir,
 	pbfiles: pbfiles,
