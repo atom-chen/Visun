@@ -7,44 +7,54 @@ var clientOutDir = "../../assets/common/script/proto/";
 //要生成的pb文件
 var pbfiles = [
 	{ 
-		name:"login", 
-		router:"login", 
+		name:"login",
+		router:"login",
+		channel:"game"
 	},
 	{ 
 		name:"chat", 
 		router:"chat",
+		channel:"game"
 	},
 	{ 
 		name:"luck", 
 		router:"chat",
+		channel:"game"
 	},
 	{ 
 		name:"comand", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"gamecomm", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"baccarat", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"cowcow", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"landLords", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"mahjong", 
 		router:"game",
+		channel:"game"
 	},
 	{ 
 		name:"fishLord", 
 		router:"game",
+		channel:"game"
 	},
 ]
 

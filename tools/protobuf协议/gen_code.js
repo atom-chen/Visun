@@ -127,6 +127,9 @@ function doGenerate() {
 		//client begin
 		var mudname = helputil.getPackageName(line_list);
 		var channelName = "game";
+		if(cfg.channel!==null && cfg.channel!==undefined && cfg.channel!=="") {
+			channelName = cfg.channel;
+		}
 		var outClient = cfgData.clientOutDir + "net_" + pbfilename + ".ts";
 		var outClientHandler = null;
 		//client end
