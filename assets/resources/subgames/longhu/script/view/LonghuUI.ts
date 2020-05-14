@@ -119,7 +119,7 @@ export default class LonghuUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
+		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
@@ -131,7 +131,7 @@ export default class LonghuUI extends BaseComponent {
 				this.m_ui.chipLayer.addChild(chip);
 				var tmp = margin;
 				if(info.AreaId===0||info.AreaId===3) { tmp = margin03; }
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, tmp);
+				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.3, parseInt(j)*0.01, tmp);
 			}
 		}
 		//播音效

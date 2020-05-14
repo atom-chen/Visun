@@ -150,11 +150,11 @@ export default class BrnnUI extends BaseComponent {
 		var chip = this._pool.newObject();
 		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
 		this.m_ui.chipLayer.addChild(chip);
-		GameUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
+		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
-		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
+		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
@@ -165,7 +165,7 @@ export default class BrnnUI extends BaseComponent {
 				chip.getComponent(CpnChip).setChipValue(nums[j], true);
 				this.m_ui.chipLayer.addChild(chip);
 				chip.__areaId = info.AreaId;
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin);
+				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin);
 			}
 		}
 		//播音效

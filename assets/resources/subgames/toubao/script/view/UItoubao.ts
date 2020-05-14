@@ -155,7 +155,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
-		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
+		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
@@ -166,7 +166,7 @@ export default class ToubaoUI extends BaseComponent {
 				chip.getComponent(CpnChip).setChipValue(nums[j], true);
 				this.m_ui.chipLayer.addChild(chip);
 				chip.__areaId = info.AreaId;
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["betBtn"+info.AreaId], 0.14+0.02*info.AreaId, parseInt(j)*0.01, margin);
+				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["betBtn"+info.AreaId], 0.14+0.02*info.AreaId, parseInt(j)*0.01, margin);
 			}
 		}
 		//播音效

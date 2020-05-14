@@ -115,7 +115,7 @@ export default class FqzsUI extends BaseComponent {
 	}
 
     private onPlayersBet(tmr, param) {
-		GameUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
+		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
 		param = param || testdata;
 		for(var i in param) {
@@ -125,7 +125,7 @@ export default class FqzsUI extends BaseComponent {
 				var chip = this._pool.newObject();
 				chip.getComponent(CpnChip).setChipValue(nums[j], false);
 				this.m_ui.chipLayer.addChild(chip);
-				GameUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
+				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
 			}
 		}
 		//播音效
