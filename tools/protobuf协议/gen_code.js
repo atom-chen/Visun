@@ -19,18 +19,6 @@ function getCmdId() {
 	return g_CMDID;
 }
 
-function isRequest(msgName) {
-	return msgName.slice(0, 4) === "Req";
-}
-
-function isResponse(msgName) {
-	return msgName.slice(0, 5) === "Resp";
-}
-
-function isNotify(msgName) {
-	return msgName.slice(0, 7) === "Notify";
-}
-
 function getRequestParam(argInfo) {
 	if(!argInfo) { return "any"; }
 	var fields = argInfo.fields || {};
