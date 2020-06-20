@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "c347ecc9-a367-43ec-9938-4f8f06a33910",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 1904,
+  "height": 1904,
   "platformSettings": {},
   "subMetas": {
     "baijiale_h_fanpai": {

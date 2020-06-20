@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "394f9828-9f42-4c75-9c67-7b592c0b9827",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 293,
+  "height": 136,
   "platformSettings": {},
   "subMetas": {
     "quyu-renyibaozi": {

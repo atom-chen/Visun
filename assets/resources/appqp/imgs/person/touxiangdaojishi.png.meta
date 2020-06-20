@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "ae97fba2-1ffb-47e2-8e1a-5c7c5a9548b8",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 220,
+  "height": 298,
   "platformSettings": {},
   "subMetas": {
     "touxiangdaojishi": {

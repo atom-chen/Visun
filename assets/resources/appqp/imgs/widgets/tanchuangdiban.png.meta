@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "9df85862-1a18-4d6d-9ec9-71e81ebcd17d",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 649,
+  "height": 473,
   "platformSettings": {},
   "subMetas": {
     "tanchuangdiban": {

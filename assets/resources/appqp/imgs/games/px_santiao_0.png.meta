@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "a44ba599-e341-4c13-a2d9-9b58d25e43cd",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 205,
+  "height": 111,
   "platformSettings": {},
   "subMetas": {
     "px_santiao_0": {

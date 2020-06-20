@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "f4e406ed-8e99-4d00-913f-5d077ced26fc",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 606,
+  "height": 287,
   "platformSettings": {},
   "subMetas": {
     "baijialedizuo": {

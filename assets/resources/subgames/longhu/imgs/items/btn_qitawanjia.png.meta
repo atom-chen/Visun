@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "99d2e5d0-bc7f-400a-8fa7-ecf8ff0b6b21",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 193,
+  "height": 207,
   "platformSettings": {},
   "subMetas": {
     "btn_qitawanjia": {

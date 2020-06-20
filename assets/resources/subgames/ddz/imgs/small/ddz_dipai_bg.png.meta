@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "98a097c3-01e5-41fd-a680-c5921acd7dcf",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 253,
+  "height": 121,
   "platformSettings": {},
   "subMetas": {
     "ddz_dipai_bg": {

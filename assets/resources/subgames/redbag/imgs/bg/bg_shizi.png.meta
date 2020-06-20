@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "9309565d-a81a-4dad-969e-ff682f5344ca",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 250,
+  "height": 377,
   "platformSettings": {},
   "subMetas": {
     "bg_shizi": {

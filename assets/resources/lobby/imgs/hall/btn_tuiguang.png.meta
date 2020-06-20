@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "0174174d-4607-4509-9180-ca1da7f74664",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 103,
+  "height": 46,
   "platformSettings": {},
   "subMetas": {
     "btn_tuiguang": {

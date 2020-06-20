@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "10f10dcb-e128-4562-8f42-c8f0ffbc0236",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 606,
+  "height": 287,
   "platformSettings": {},
   "subMetas": {
     "dezhoudizuo": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "d8931ea5-58f8-467b-b9b1-aac9b7bba88e",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 354,
+  "height": 354,
   "platformSettings": {},
   "subMetas": {
     "ico_zhuang": {

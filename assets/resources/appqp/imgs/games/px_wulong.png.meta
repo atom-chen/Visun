@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "0b6009cd-b86d-483d-9c61-550581f345c5",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 207,
+  "height": 111,
   "platformSettings": {},
   "subMetas": {
     "px_wulong": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "6ee60095-c6dd-4a54-9504-7d79ddcacc8f",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 102,
+  "height": 134,
   "platformSettings": {},
   "subMetas": {
     "poker_95": {

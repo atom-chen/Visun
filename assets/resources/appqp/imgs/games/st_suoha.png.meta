@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "20104e44-399f-471b-a1e1-d7daa4fc9ddc",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 99,
+  "height": 48,
   "platformSettings": {},
   "subMetas": {
     "st_suoha": {

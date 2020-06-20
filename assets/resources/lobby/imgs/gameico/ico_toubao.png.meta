@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "4e01924c-db29-4fd5-ac0d-22e779ad52ac",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 250,
+  "height": 215,
   "platformSettings": {},
   "subMetas": {
     "ico_toubao": {

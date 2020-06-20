@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "4b932036-0307-4955-8471-78243951b5fc",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 658,
+  "height": 666,
   "platformSettings": {},
   "subMetas": {
     "wanrenshiyitu": {

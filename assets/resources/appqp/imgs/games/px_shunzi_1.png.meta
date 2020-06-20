@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "7f23b035-c3e6-4693-818a-f94af6345c4e",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 102,
+  "height": 53,
   "platformSettings": {},
   "subMetas": {
     "px_shunzi_1": {

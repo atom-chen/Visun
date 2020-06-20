@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "6f985e24-54e3-4a46-813c-704311de6fe5",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 683,
+  "height": 335,
   "platformSettings": {},
   "subMetas": {
     "quyu-xiao": {

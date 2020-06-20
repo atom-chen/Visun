@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "067f2b7a-0671-4ec3-97d4-6e8aebdc6854",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 913,
+  "height": 249,
   "platformSettings": {},
   "subMetas": {
     "bg_desk": {

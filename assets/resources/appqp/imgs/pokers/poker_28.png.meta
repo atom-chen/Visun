@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "5d5911a2-38ab-4afa-9507-18e3762d7aae",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 102,
+  "height": 133,
   "platformSettings": {},
   "subMetas": {
     "poker_28": {

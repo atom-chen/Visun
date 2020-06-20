@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "56efbc04-4801-425e-8ee8-5ea41eaafd6b",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 796,
+  "height": 796,
   "platformSettings": {},
   "subMetas": {
     "hg_shaibao": {

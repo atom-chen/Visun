@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "ccbab054-24a4-4b69-9c57-6ac03b7dab43",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 99,
+  "height": 48,
   "platformSettings": {},
   "subMetas": {
     "st_genzhu": {

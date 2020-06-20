@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "ed57fae7-6ea6-40eb-843e-e5c551b0c692",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 240,
+  "height": 219,
   "platformSettings": {},
   "subMetas": {
     "quyu-5": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "1d934e37-ffb0-44b7-87c5-9684a255e840",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 209,
+  "height": 112,
   "platformSettings": {},
   "subMetas": {
     "baisexuanzhong3": {

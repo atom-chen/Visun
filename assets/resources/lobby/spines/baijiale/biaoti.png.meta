@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "d0f64428-2609-4af2-90ec-3f73cff0563d",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 289,
+  "height": 221,
   "platformSettings": {},
   "subMetas": {
     "biaoti": {

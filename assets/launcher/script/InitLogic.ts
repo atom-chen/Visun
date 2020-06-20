@@ -2,7 +2,6 @@ import EventCenter from "../../kernel/basic/event/EventCenter";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelEvent from "../../kernel/basic/defines/KernelEvent";
 import TimerManager from "../../kernel/basic/timer/TimerManager";
-import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 import EcsSystem from "../../kernel/ecs/EcsSystem";
 
 

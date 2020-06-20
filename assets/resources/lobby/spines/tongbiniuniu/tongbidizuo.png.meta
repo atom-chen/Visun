@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "b375a9a5-ae6c-432e-ba50-e9cf870bafa4",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 606,
+  "height": 287,
   "platformSettings": {},
   "subMetas": {
     "tongbidizuo": {

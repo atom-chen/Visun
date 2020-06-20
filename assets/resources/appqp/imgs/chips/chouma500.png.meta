@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "5cf4a4ea-66bf-4532-8712-8fed17bda959",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 79,
+  "height": 84,
   "platformSettings": {},
   "subMetas": {
     "chouma500": {

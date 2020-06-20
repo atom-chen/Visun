@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "31abbcfb-77b3-449e-bcf0-18a3f84cb172",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 301,
+  "height": 168,
   "platformSettings": {},
   "subMetas": {
     "bg_deng": {

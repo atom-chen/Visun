@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "c0334595-285f-41ed-9f69-5a2dbf63c30a",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 2581,
+  "height": 1452,
   "platformSettings": {},
   "subMetas": {
     "qzpj_scene_bg": {

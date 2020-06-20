@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "518fb8f3-8ea3-42cc-ab1c-f4818ebe4077",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 292,
+  "height": 220,
   "platformSettings": {},
   "subMetas": {
     "wenzi": {

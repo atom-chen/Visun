@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "00fc8628-bc95-45e7-8c2c-8a23975f2118",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 606,
+  "height": 287,
   "platformSettings": {},
   "subMetas": {
     "qianghongbaodizuo": {

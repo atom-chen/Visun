@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "b21c4ce7-58d8-47bc-b955-094e48b4e927",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 180,
+  "height": 180,
   "platformSettings": {},
   "subMetas": {
     "ico_erba": {

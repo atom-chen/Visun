@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "ee29d316-31c9-4e5d-b7ac-2f7e378504ad",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 456,
+  "height": 97,
   "platformSettings": {},
   "subMetas": {
     "choumadiban": {

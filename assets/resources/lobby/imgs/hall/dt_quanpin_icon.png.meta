@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "d0b826a2-6601-47a9-ab07-3ba08a2bb741",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 69,
+  "height": 69,
   "platformSettings": {},
   "subMetas": {
     "dt_quanpin_icon": {

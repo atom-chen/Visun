@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "c1cdf54d-3f4d-449d-8ae7-4f58bce53595",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 1173,
+  "height": 149,
   "platformSettings": {},
   "subMetas": {
     "ddz_jipaiqi_bg": {

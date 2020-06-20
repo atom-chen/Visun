@@ -26,11 +26,11 @@ export default class HotupdateScene extends BaseComponent {
 
 	onLoad () {
 	//	Adaptor.setFullScreen(true);
-		Adaptor.adaptOrientation(false);
+		Adaptor.adaptOrientation(true);
 		
 		KernelUIDefine.GameScene.name = "GameScene";
-    //    KernelUIDefine.LobbyScene.name = "LobbyScene";
-        KernelUIDefine.LobbyScene.name = "EnvelopeScene";
+        KernelUIDefine.LobbyScene.name = "LobbyScene";
+    //    KernelUIDefine.LobbyScene.name = "EnvelopeScene";
         KernelUIDefine.HotupdateScene.name = "HotupdateScene";
         KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
         KernelUIDefine.UIToast = "launcher/prefabs/UIToast";

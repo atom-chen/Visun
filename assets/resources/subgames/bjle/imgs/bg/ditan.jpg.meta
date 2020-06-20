@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "6e080f84-cd80-412d-a3f0-5756ab73fbb9",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 1281,
+  "height": 740,
   "platformSettings": {},
   "subMetas": {
     "ditan": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "82a36cf3-3890-4e4d-b693-e36d6e89a868",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 606,
+  "height": 287,
   "platformSettings": {},
   "subMetas": {
     "zhajinhuadizuo": {

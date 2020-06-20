@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "bca302a4-a46d-47c0-88e3-7de717efd976",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 224,
+  "height": 302,
   "platformSettings": {},
   "subMetas": {
     "touxiangkuang": {

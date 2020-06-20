@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "a4fe5aff-d2ed-4464-9b00-72d9a1aab5eb",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 700,
+  "height": 700,
   "platformSettings": {},
   "subMetas": {
     "ico_ddz": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "3d93dbc7-a916-4dce-9567-f9c422fd8da7",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 1856,
+  "height": 632,
   "platformSettings": {},
   "subMetas": {
     "xiazhuqu": {

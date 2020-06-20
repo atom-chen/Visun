@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "ae3eb68a-417b-4d6b-91f0-b4a8f464850c",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 151,
+  "height": 189,
   "platformSettings": {},
   "subMetas": {
     "xianglu_shou": {

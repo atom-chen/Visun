@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "c0b8c765-330e-449b-a3a0-793d6086692e",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 44,
+  "height": 45,
   "platformSettings": {},
   "subMetas": {
     "zhuang": {

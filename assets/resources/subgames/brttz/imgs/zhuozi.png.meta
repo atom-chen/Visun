@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "722c3015-6dd8-4a46-afe8-78280fc8ad0c",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 742,
+  "height": 720,
   "platformSettings": {},
   "subMetas": {
     "zhuozi": {

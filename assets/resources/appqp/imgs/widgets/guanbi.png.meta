@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "9adddc88-a8ed-406f-9de4-8884988c404c",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 46,
+  "height": 45,
   "platformSettings": {},
   "subMetas": {
     "guanbi": {

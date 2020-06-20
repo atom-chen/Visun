@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "43c1b58b-f00c-48b6-bc4f-e5fb49d30321",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 158,
+  "height": 157,
   "platformSettings": {},
   "subMetas": {
     "tb_button_caidan": {

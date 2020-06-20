@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "328eddf0-f768-4bf9-a87a-3d1f596ecf58",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 85,
+  "height": 40,
   "platformSettings": {},
   "subMetas": {
     "px_jinhua_0": {

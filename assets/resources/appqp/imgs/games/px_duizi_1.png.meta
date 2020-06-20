@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "eba1b4d7-280c-4cdf-a795-f48db0c43d16",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 102,
+  "height": 53,
   "platformSettings": {},
   "subMetas": {
     "px_duizi_1": {

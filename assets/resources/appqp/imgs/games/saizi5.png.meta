@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "a7ff530e-d04b-409f-8299-55efef209e22",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 42,
+  "height": 42,
   "platformSettings": {},
   "subMetas": {
     "saizi5": {

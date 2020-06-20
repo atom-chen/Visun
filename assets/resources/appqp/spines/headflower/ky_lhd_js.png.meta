@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "847b0d3e-d6f4-4d75-8183-ddbc7a1f4f1d",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 511,
+  "height": 506,
   "platformSettings": {},
   "subMetas": {
     "ky_lhd_js": {

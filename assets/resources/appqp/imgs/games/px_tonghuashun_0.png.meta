@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "30b70e5d-a01a-4483-84e3-5d402121c879",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 298,
+  "height": 112,
   "platformSettings": {},
   "subMetas": {
     "px_tonghuashun_0": {

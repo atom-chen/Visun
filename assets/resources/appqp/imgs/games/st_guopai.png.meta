@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "f6b07c30-a5f7-41f7-9058-9f0a230730f1",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 99,
+  "height": 48,
   "platformSettings": {},
   "subMetas": {
     "st_guopai": {

@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "565ec9b2-b1fd-4b66-83b0-9a2d6acccc58",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 100,
+  "height": 50,
   "platformSettings": {},
   "subMetas": {
     "txt_quxiao": {

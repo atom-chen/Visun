@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "d61f6015-c027-4152-bc95-532938518084",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 158,
+  "height": 157,
   "platformSettings": {},
   "subMetas": {
     "tb_button_fanhui": {

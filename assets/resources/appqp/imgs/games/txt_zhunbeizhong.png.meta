@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "975e25ac-7d2d-4519-aa41-5b6a7a260931",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 220,
+  "height": 51,
   "platformSettings": {},
   "subMetas": {
     "txt_zhunbeizhong": {

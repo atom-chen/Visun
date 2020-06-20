@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "e6d9e7d2-7cfa-4630-aab5-d6aac1a3dc1a",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 42,
+  "height": 54,
   "platformSettings": {},
   "subMetas": {
     "sqhb_hongbaojinetubiao_icon": {

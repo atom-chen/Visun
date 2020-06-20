@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.3",
+  "ver": "2.3.4",
   "uuid": "977b76d0-d60b-4049-bea8-8d1c7832d321",
   "type": "sprite",
   "wrapMode": "clamp",
@@ -7,6 +7,8 @@
   "premultiplyAlpha": false,
   "genMipmaps": false,
   "packable": true,
+  "width": 64,
+  "height": 256,
   "platformSettings": {},
   "subMetas": {
     "font_jushufont_jushu": {
