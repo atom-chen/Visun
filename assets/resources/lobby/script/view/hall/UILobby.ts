@@ -70,10 +70,7 @@ export default class UILobby extends BaseComponent {
 			this.m_ui.content.addChild(bton);
 
 			CommonUtil.addClickEvent(bton, function(){ 
-				GameManager.getInstance().setGameId(this.gameData.ID);
-				gamecomm_request.ReqEnterGame({
-                    GameID: this.gameData.ID 
-                });
+				GameManager.getInstance().enterGame(this.gameData.ID);
 			}, bton);
 
 			this.refreshGameButton(bton, gameData);
@@ -124,7 +121,9 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
-			GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
+			//GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
+			UIManager.openPanel(ViewDefine.UIHall);
+			CommonUtil.safeDelete(this);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

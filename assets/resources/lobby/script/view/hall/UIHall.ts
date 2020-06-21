@@ -87,7 +87,6 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UIEmail, true); 
-			this.testProcedure(); 
 		}, this);
 		//商店
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
@@ -111,7 +110,9 @@ export default class UIHall extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
-			UIManager.toast("尚未实现"); 
+		//	UIManager.openPopwnd(ViewDefine.UISetting, true);
+			UIManager.openPanel(ViewDefine.UILobby);
+			CommonUtil.safeDelete(this);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

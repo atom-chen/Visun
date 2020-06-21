@@ -129,14 +129,20 @@ export default class GameManager extends ModelBase {
 	
 	//进入游戏的唯一入口
 	public enterGame(gameType:number) {
-		if( !this.canEnterGame(gameType) ) {
-			return;
-		}
+		// if( !this.canEnterGame(gameType) ) {
+		// 	return;
+		// }
 		cc.log("enterGame: ", gameType)
 	//	gamecomm_request.ReqEnterGame({GameType:gameType});
 		if(IS_DANJI_MODE) {
 			this.enterGameScene(gameType);
 		}
+
+		this.setGameId(gameType);
+
+		gamecomm_request.ReqEnterGame({
+            GameID: gameType
+        });
 	}
 
 	//跳转到游戏场景
