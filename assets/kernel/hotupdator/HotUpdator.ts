@@ -253,7 +253,7 @@ export default class HotUpdator {
 			return;
 		}
 		
-		UIManager.openDialog("hotretry", "更新失败，是否重试？", (menuId:number)=>{
+		UIManager.openDialog("hotretry", "更新失败，是否重试？", 2, (menuId:number)=>{
 			if(menuId===1){
 				cc.log('Retry failed Assets...');
 				this._canRetry = false;

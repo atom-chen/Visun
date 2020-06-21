@@ -27,16 +27,17 @@ export default class TimerManager {
 	private static update(dt:number) {
 		TimerManager.s_updating = true;
 		for(var i=0, len=TimerManager._timers.length; i<len; i++) {
+			let curTmr = TimerManager._timers[i];
 			try{
-				TimerManager._timers[i].tick(dt);
+				curTmr.tick(dt);
 			}
 			catch(err) {
-				TimerManager._timers[i].stop();
+				curTmr.stop();
 				cc.log(err);
 			}
 
-			if(TimerManager._timers[i].isStoped()) {
-				TimerManager._timers[i].stop();
+			if(curTmr.isStoped()) {
+				curTmr.stop();
 				TimerManager._timers.splice(i, 1);
 				i--;
 				len--;
@@ -89,16 +90,26 @@ export default class TimerManager {
 
 	public static delayFrame(delay:number, callback:CHandler) : number
 	{
+		if(delay <= 0) {
+			callback.invoke();
+			callback.clear();
+			return 0;
+		}
 		return TimerManager.loopFrame(delay, 1, callback);
 	}
 
 	public static delaySecond(delay:number, callback:CHandler) : number
 	{
+		if(delay <= 0) {
+			callback.invoke();
+			callback.clear();
+			return 0;
+		}
 		return TimerManager.loopSecond(delay, 1, callback);
 	}
 
 	public static delTimer(id:number) {
-		if(id===null || id===undefined || id <= 0){ return; }
+		if(id===null || id===undefined || id <= 0){ return -1; }
 		for(var i=TimerManager._timers.length-1; i>=0; i--) {
 			if(TimerManager._timers[i].getId()===id) {
 				TimerManager._timers[i].stop();
@@ -109,6 +120,7 @@ export default class TimerManager {
 				break;
 			}
 		}
+		return -1;
 	}
 
 	public static isValid(id:number) : boolean

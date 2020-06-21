@@ -4,11 +4,11 @@
 import CommonUtil from "../utils/CommonUtil";
 import { LayerDefine } from "../basic/defines/KernelDefine";
 import KernelUIDefine from "../basic/defines/KernelUIDefine";
-import LoadCenter from "../load/LoadCenter";
 import BaseComponent from "./BaseComponent";
 import EventCenter from "../basic/event/EventCenter";
 import KernelEvent from "../basic/defines/KernelEvent";
 import SceneManager from "./SceneManager";
+import { isNil } from "../utils/GlobalFuncs";
 
 export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
@@ -24,47 +24,49 @@ export default class UIManager {
 		this._allUI = {};
 	}
 
-	public static callReflesh(obj:any, args:any[]){
+	public static callSetViewData(obj:any, args:any[]){
 	//	if(args===null || args===undefined) { return; }
 		var compList = obj["_components"];
 		if(compList) {
 			for (var i in compList) {
-				if(compList[i].reflesh) {
-					cc.log("reflesh", args);
-					compList[i].reflesh.apply(compList[i], args);
+				if(compList[i].setViewData) {
+				//	cc.log("setViewData", args);
+					compList[i].setViewData.apply(compList[i], args);
 				}
 			}
 		}
 	}
 
-	public static getWindow(respath:string):any{
-		return UIManager._allUI[respath];
-	}
-
-	public static toggleWindow(respath:string) : any {
-		if(cc.isValid(UIManager._allUI[respath])) {
-			UIManager.closeWindow(respath);
-		} else {
-			UIManager.showSingleton(respath, null, LayerDefine.Panel, false, false, null, null);
+	private static configUI(wnd:cc.Node, parent:cc.Node, zIndex:LayerDefine, bModal:boolean, bCloseWhenClickMask:boolean) : cc.Node {
+		if(isNil(parent) || !cc.isValid(parent)) {
+			cc.warn("父节点已经失效");
+			return wnd;
 		}
+		if(isNil(wnd.parent) || wnd.parent!==parent) {
+			wnd.parent = parent;
+		}
+		wnd.zIndex = zIndex;
+		wnd.active = true;
+		if(bModal) {
+			CommonUtil.setModal(wnd, bCloseWhenClickMask);
+		}
+		return wnd;
 	}
 
 	//创建窗口
-	private static showSingleton(respath:string, parent:cc.Node, zIndex:LayerDefine, bModal:boolean, bCloseWhenClickMask:boolean, callback:Function, args:any[]) {
-		if(cc.isValid(UIManager._allUI[respath], true)){
+	private static showSingleton(respath:string, parent:cc.Node, zIndex:LayerDefine, bModal:boolean, bCloseWhenClickMask:boolean, args:any[]) {
+		if(UIManager._allUI[respath] && cc.isValid(UIManager._allUI[respath], true)){
 			cc.log("allready exist: ", respath);
 			var wnd = UIManager._allUI[respath];
-			if(wnd.parent===null || wnd.parent!==parent) {
-				wnd.parent = parent || cc.find("Canvas");
-			}
-			wnd.zIndex = zIndex;
-			wnd.active = true;
-			UIManager.callReflesh(wnd, args);
-			if(callback) { callback(wnd); }
+
+			UIManager.configUI(wnd, parent || cc.find("Canvas"), zIndex, bModal, bCloseWhenClickMask);
+
+			UIManager.callSetViewData(wnd, args);
+
 			if(zIndex===LayerDefine.Panel){
-				//	cc.log("进度: ", respath, completeCnt, totalCnt);
-				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, 1, 1);
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING_FINISH);
 			}
+
 			return;
 		}
 
@@ -72,65 +74,57 @@ export default class UIManager {
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
 			var cvs = cc.find("Canvas");
 			if( !cvs ) { cc.log("没有Canvas", respath); return; }
-			var obj = cc.instantiate(loadedResource);
-			if(!obj) { cc.log("实例化预制体失败", respath); return; }
+			
 			parent = parent || cvs;
+			var obj = null;
 
-			if(bModal) { 
-				CommonUtil.setModal(obj, bCloseWhenClickMask); 
-			}
-
-			if(zIndex!==LayerDefine.Panel) {
-				if(CommonUtil.hasEditbox(obj)) {
-					cc.log("----- yes has editbox");
-				} else {
-					let key = cc.loader["_getReferenceKey"](loadedResource);
-					LoadCenter.getInstance().retatinRes(key);
-					LoadCenter.getInstance().retainNodeRes(obj);
-					LoadCenter.getInstance().releaseRes(key);
-					LoadCenter.getInstance().releaseNodeRes(obj);
-					var baseComp = obj.getComponent(BaseComponent);
-					if(baseComp) {
-						baseComp.listenDestory((comp)=>{
-						//	TimerManager.loopFrame(2,1, new CHandler(null, ()=>{
-						//		LoadCenter.getInstance().gc();
-						//	}));
-						})
-					}
+			if(UIManager._allUI[respath] && cc.isValid(UIManager._allUI[respath], true)) {
+				obj = UIManager._allUI[respath];
+			} else {
+				obj = cc.instantiate(loadedResource);
+				if(!obj) { 
+					cc.log("实例化预制体失败", respath); 
+					return; 
 				}
+				parent.addChild(obj, zIndex);
+				UIManager._allUI[respath] = obj;
 			}
 
-			parent.addChild(obj, zIndex);
-			UIManager._allUI[respath] = obj;
-			UIManager.callReflesh(obj, args);
-			if(callback) { callback(obj); }
+			UIManager.configUI(obj, parent, zIndex, bModal, bCloseWhenClickMask);
+			
+			UIManager.callSetViewData(obj, args);
+
+			if(zIndex===LayerDefine.Panel){
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING_FINISH);
+			}
 		}
+
 		if(cc.loader.getRes(respath, cc.Prefab)){
 			completeCallback(null, cc.loader.getRes(respath, cc.Prefab));
 			if(zIndex===LayerDefine.Panel){
-				//	cc.log("进度: ", respath, completeCnt, totalCnt);
-				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, 1, 1);
+				EventCenter.getInstance().fire(KernelEvent.UI_LOADING_FINISH);
 			}
 			return;
 		}
+
 		cc.loader.loadRes(respath, cc.Prefab, 
-		(completeCnt:number, totalCnt:number, item:any)=>{
-			if(zIndex===LayerDefine.Panel){
-			//	cc.log("进度: ", respath, completeCnt, totalCnt);
-				EventCenter.getInstance().fire(KernelEvent.UI_LOADING, completeCnt, totalCnt);
-			}
-		}, 
-		completeCallback);
+				(completeCnt:number, totalCnt:number, item:any)=>{
+					if(zIndex===LayerDefine.Panel){
+					//	cc.log("进度: ", respath, completeCnt, totalCnt);
+						EventCenter.getInstance().fire(KernelEvent.UI_LOADING_PROGRESS, completeCnt, totalCnt);
+					}
+				}, 
+				completeCallback );
 	}
 
 	//打开面板
-	public static openPanel(respath:string, callback:Function, ...args:any[]) {
-		this.showSingleton(respath, null, LayerDefine.Panel, true, false, callback, args);
+	public static openPanel(respath:string, ...args:any[]) {
+		this.showSingleton(respath, null, LayerDefine.Panel, true, false, args);
 	}
 	
 	//打开弹窗
-	public static openPopwnd(respath:string, bCloseWhenClickMask:boolean, callback:Function, ...args:any[]) {
-		this.showSingleton(respath, null, LayerDefine.Popup, true, bCloseWhenClickMask, callback, args);
+	public static openPopwnd(respath:string, bCloseWhenClickMask:boolean, ...args:any[]) {
+		this.showSingleton(respath, null, LayerDefine.Popup, true, bCloseWhenClickMask, args);
 	}
 
 	//关闭窗口
@@ -163,12 +157,16 @@ export default class UIManager {
 			}
 		}
 	}
+
+	public static getWindow(respath:string):any{
+		return UIManager._allUI[respath];
+	}
 	
 
 	//-----------------------------------------------------------------
 
 
-	public static openDialog(dlgName:string, content:string, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
+	public static openDialog(dlgName:string, content:string, dlgType:number, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){
 			cc.log("allready exist: ", dlgName);
 			return;
@@ -182,17 +180,22 @@ export default class UIManager {
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
 			var cvs = cc.find("Canvas");
 			if( !cvs ) { cc.log("没有Canvas"); return; }
-			var obj = cc.instantiate(loadedResource);
-			if(!obj) { cc.log("实例化预制体失败"); return; }
 
-			CommonUtil.setModal(obj, false); 
+			var obj = UIManager._allUI[dlgName];
 
-			cvs.addChild(obj, LayerDefine.Dialog);
+			if(!cc.isValid(obj)) {
+				obj = cc.instantiate(loadedResource);
+				if(!obj) { cc.log("实例化预制体失败"); return; }
+				UIManager._allUI[dlgName] = obj;
+				cvs.addChild(obj, LayerDefine.Dialog);
+				CommonUtil.setModal(obj, false);
+			} 
+
 			UIManager._allDialog[dlgName] = obj;
 			
 			var logicComp = obj.getComponent(BaseComponent)
 			if(logicComp) {
-				logicComp.reflesh(callback, content, title, okTxt, cancelTxt);
+				logicComp.setViewData(dlgType, callback, content, title, okTxt, cancelTxt);
 			}
 		});
 	}
@@ -219,13 +222,13 @@ export default class UIManager {
 			//往上挪
 			var idx = 1;
 			for(var j=UIManager._toastList.length-1; j>=0; j--){
-				UIManager._toastList[j].y = 66*idx;
+				UIManager._toastList[j].y = 30 + 66*idx;
 				idx++;
 			}
 			//插入
 			cvs.addChild(obj, LayerDefine.Tips);
 			UIManager._toastList.push(obj);
-			obj.y = 0;
+			obj.y = 30;
 			//刷新数据并定时销毁
 			var scriptCpn = obj.getComponent(BaseComponent);
 			scriptCpn.setContent(content);

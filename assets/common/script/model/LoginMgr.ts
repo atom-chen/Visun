@@ -34,7 +34,7 @@ export default class LoginMgr extends ModelBase {
 		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
             if(chan.getName()===ChannelDefine.game) {
                 if(chan.getState()===ConnState.reconnectfail) {
-                    UIManager.openDialog("reconnectfail", "游戏连接断开，是否重连？", (menuId:number)=>{
+                    UIManager.openDialog("reconnectfail", "游戏连接断开，是否重连？", 2, (menuId:number)=>{
                         if(menuId===1) {
                             chan.reconnect();
                         }
@@ -101,7 +101,7 @@ export default class LoginMgr extends ModelBase {
 				
 			}),
 			new CHandler(this, ()=>{ 
-				UIManager.openDialog("loginconn_fail", "登陆服连接失败，是否重试？", (menuId:number)=>{
+				UIManager.openDialog("loginconn_fail", "登陆服连接失败，是否重试？", 2, (menuId:number)=>{
 					if(menuId===1) {
 						this.connectServer();
 					}
@@ -116,7 +116,7 @@ export default class LoginMgr extends ModelBase {
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
-			UIManager.openPopwnd(ViewDefine.UILogin, false, null);
+			UIManager.openPopwnd(ViewDefine.UILogin, false);
 		}
 		return hasLogin;
 	}

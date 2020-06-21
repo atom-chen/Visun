@@ -26,7 +26,7 @@ export default class UIRoom extends BaseComponent {
         }, this);
     }
 
-    reflesh(gameKind:any) {
+    setViewData(gameKind:any) {
         this._gameKind = gameKind;
         this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
 

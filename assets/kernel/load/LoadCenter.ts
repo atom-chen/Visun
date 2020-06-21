@@ -267,7 +267,7 @@ export default class LoadCenter {
 	//------------------------------------------------------------------------------
 
 
-	_replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
+	private _replaceTagetTexture(target: any, attrName: string, newNormalSprite: cc.SpriteFrame) {
 		if (target[attrName] === newNormalSprite) {
 			return;
 		}
@@ -278,7 +278,7 @@ export default class LoadCenter {
 		target[attrName] = newNormalSprite;
 	}
 
-	_parseStaticRes(item:  typeof cc.Asset, tag: string) {
+	private _parseStaticRes(item:  typeof cc.Asset, tag: string) {
 		if (item instanceof cc.Texture2D) {
 			cc.loader["_cache"][item.url].uStatic = true;
 			cc.loader["_cache"][item.url].uTag = tag;
@@ -303,7 +303,7 @@ export default class LoadCenter {
 		}
 	}
 
-	_parseStaticPrefab(node, tag: string) {
+	private _parseStaticPrefab(node, tag: string) {
 		var prefab = node;
 		if (node.data) {
 			prefab = node.data;
@@ -319,7 +319,7 @@ export default class LoadCenter {
 		});
 	}
 
-	_retatinStaticRes(res: string, tag: string) {
+	private _retatinStaticRes(res: string, tag: string) {
 		if (!cc.loader["_cache"][res]) {
 			return;
 		}
@@ -331,7 +331,7 @@ export default class LoadCenter {
 		cc.loader["_cache"][res].uTag = tag;
 	}
 
-	_parseStaticNode(node: cc.Node, tag: string) {
+	private _parseStaticNode(node: cc.Node, tag: string) {
 		// sprite 组件
 		let sprite = node.getComponent(cc.Sprite);
 		if (sprite && sprite.spriteFrame) {
@@ -400,7 +400,7 @@ export default class LoadCenter {
 	//------------------------------------------------------------------------
 
 
-	_parserNodeRes(node: cc.Node, num: number) {
+	private _parserNodeRes(node: cc.Node, num: number) {
 		let children = node.children;
 		this._parserNodeComponentRes(node, num);
 		children.forEach((child) => {
@@ -408,7 +408,7 @@ export default class LoadCenter {
 		});
 	}
 
-	_parserNodeComponentRes(node: cc.Node, num: number) {
+	private _parserNodeComponentRes(node: cc.Node, num: number) {
 		this._parserComponentSprite(node, num);
 		this._parserComponentButton(node, num);
 		this._parserComponentLabel(node, num);
@@ -419,7 +419,7 @@ export default class LoadCenter {
 		this._parserComponentMask(node, num);
 	}
 
-	_parserComponentSprite(node: cc.Node, num: number) {
+	private _parserComponentSprite(node: cc.Node, num: number) {
 		let sprite = node.getComponent(cc.Sprite);
 		if (!sprite || !sprite.spriteFrame) {
 			return;
@@ -432,7 +432,7 @@ export default class LoadCenter {
 		this.releaseRes(sprite.spriteFrame["_textureFilename"]);
 	}
 
-	_parserComponentButton(node: cc.Node, num: number) {
+	private _parserComponentButton(node: cc.Node, num: number) {
 		let button = node.getComponent(cc.Button);
 		if (!button) {
 			return;
@@ -472,7 +472,7 @@ export default class LoadCenter {
 		}
 	}
 
-	_parserComponentLabel(node: cc.Node, num: number) {
+	private _parserComponentLabel(node: cc.Node, num: number) {
 		let label = node.getComponent(cc.Label);
 		if (!label || !label.font || !(label.font instanceof cc.BitmapFont) || !label.font["spriteFrame"]) {
 			return;
@@ -485,7 +485,7 @@ export default class LoadCenter {
 		this.releaseRes(label.font["spriteFrame"]["_textureFilename"]);
 	}
 
-	_parserComponentRichText(node: cc.Node, num: number) {
+	private _parserComponentRichText(node: cc.Node, num: number) {
 		let richText = node.getComponent(cc.RichText);
 		if (!richText || !richText.imageAtlas) {
 			return;
@@ -503,7 +503,7 @@ export default class LoadCenter {
 		this.releaseRes(richText.imageAtlas["_spriteFrames"][keys[0]]["_textureFilename"]);
 	}
 
-	_parserComponentParticleSystem(node: cc.Node, num: number){
+	private _parserComponentParticleSystem(node: cc.Node, num: number){
 		let particleSystem = node.getComponent(cc.ParticleSystem);
 		if (!particleSystem || !particleSystem["_texture"]) {
 			return;
@@ -516,7 +516,7 @@ export default class LoadCenter {
 		this.releaseRes(particleSystem["_texture"]);
 	}
 
-	_parserComponentPageViewIndicator(node: cc.Node, num: number) {
+	private _parserComponentPageViewIndicator(node: cc.Node, num: number) {
 		let pageViewIndicator = node.getComponent(cc.PageViewIndicator);
 		if (!pageViewIndicator || !pageViewIndicator.spriteFrame) {
 		   return;
@@ -529,7 +529,7 @@ export default class LoadCenter {
 		this.releaseRes(pageViewIndicator.spriteFrame["_textureFilename"]);
 	}
 
-	_parserComponentEditBox(node: cc.Node, num: number) {
+	private _parserComponentEditBox(node: cc.Node, num: number) {
 		let editBox = node.getComponent(cc.EditBox);
 		if (!editBox || !editBox.backgroundImage) {
 			return;
@@ -548,7 +548,7 @@ export default class LoadCenter {
 		// }
 	}
 
-	_parserComponentMask(node: cc.Node, num: number) {
+	private _parserComponentMask(node: cc.Node, num: number) {
 		let mask = node.getComponent(cc.Mask);
 		if (!mask || !mask.spriteFrame) {
 			return;

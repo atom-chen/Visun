@@ -26,14 +26,15 @@ export default class ConfirmDlg extends BaseComponent {
 	}
 
 	
-	public reflesh(callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null, hasCancel:boolean=true) 
+	public setViewData(dlgType:number, callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) 
 	{
 		this._callback = callback;
 		this.m_ui.labelContent.getComponent(cc.Label).string = content;
 		if(title){ this.m_ui.labelTitle.getComponent(cc.Label).string = title; }
-		if(!hasCancel) {
+		if(dlgType == 1) {
 			this.m_ui.btn_no.active = false;
 			this.m_ui.btn_ok.x = 0;
+			this.m_ui.lineV.active = false;
 		}
 	}
 }

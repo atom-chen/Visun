@@ -20,31 +20,28 @@ export default class UILoading extends cc.Component {
     onLoad () {
         LoadCenter.getInstance().retainNodeRes(this.node);
         cc.log("显示加载页");
-        EventCenter.getInstance().listen(KernelEvent.SCENE_BEFORE_SWITCH, this.onBeforeSwitch, this);
-    //    EventCenter.getInstance().listen(KernelEvent.SCENE_AFTER_SWITCH, ()=>{ this.node.active=false; }, this);
-        EventCenter.getInstance().listen(KernelEvent.UI_LOADING, this.onProgress, this);
-
+        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_BEGIN, this.onBeforeSwitch, this);
+        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_PROGRESS, this.onProgress, this);
+        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_FINISH, this.onHideView, this);
         this.loading.node.runAction(cc.repeatForever(cc.rotateBy(1, 360)));
     }
 
     private onBeforeSwitch() {
-        TimerManager.delTimer(this._tmr);
-        this._tmr = 0;
+        this._tmr = TimerManager.delTimer(this._tmr);
         this.node.active = true;
         this.labelProgress.string = "";
     }
 
     private onProgress(sub:number, total:number) {
-        TimerManager.delTimer(this._tmr);
-        this._tmr = 0;
+        this._tmr = TimerManager.delTimer(this._tmr);
         this.labelProgress.string = sub + "/" + total;
         if(sub===total || total == 0) {
             this._tmr = TimerManager.delayFrame(2, new CHandler(this, this.onHideView));
         }
     }
 
-    private onHideView(tmr) {
-        this._tmr = 0;
+    private onHideView() {
+        this._tmr = TimerManager.delTimer(this._tmr);
         this.node.active = false;
     }
 

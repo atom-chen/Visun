@@ -5,10 +5,13 @@ import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
 
 export default class SceneManager {
-	private constructor() {}
 	public static preSceneName:string;
 	public static curSceneName:string;
 	private static _switching:boolean = false;
+
+	private constructor() {
+
+	}
 
 	public static isSwitching() : boolean {
 		return SceneManager._switching;
@@ -30,12 +33,13 @@ export default class SceneManager {
 		cc.log("-----切换场景开始: ", this.preSceneName, "--->", this.curSceneName);
 
 		EventCenter.getInstance().fire(KernelEvent.SCENE_BEFORE_SWITCH);
-		cc.log("--------释放旧资源--------")
+		EventCenter.getInstance().fire(KernelEvent.UI_LOADING_BEGIN);
+
+		cc.log("--------释放旧资源--------");
 		var cvs = cc.find("Canvas");
 		LoadCenter.getInstance().retainNodeRes(cvs);
 		LoadCenter.getInstance().releaseNodeRes(cvs);
 		UIManager.clear();
-	//	cvs.removeAllChildren(); //这样会导致组件的onDestroy调不到
 
 		cc.director.preloadScene(sceneName, 
 			(completeCount:number, totalCount:number, item:any)=>{
@@ -50,7 +54,7 @@ export default class SceneManager {
 					if(onLaunched) { onLaunched(); }
 					EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
 				}
-				return cc.director.loadScene(sceneName, afterLaunch.bind(this));
+				cc.director.loadScene(sceneName, afterLaunch.bind(this));
 			}
 		);
 		return true;

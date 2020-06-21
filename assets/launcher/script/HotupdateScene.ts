@@ -26,7 +26,7 @@ export default class HotupdateScene extends BaseComponent {
 
 	onLoad () {
 	//	Adaptor.setFullScreen(true);
-		Adaptor.adaptOrientation(true);
+		Adaptor.adaptScreen();
 		
 		KernelUIDefine.GameScene.name = "GameScene";
         KernelUIDefine.LobbyScene.name = "LobbyScene";

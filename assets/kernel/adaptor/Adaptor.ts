@@ -3,12 +3,22 @@
 //-------------------------------------
 import { DESIGN_SIZE } from "../basic/defines/KernelDefine";
 
-//切后台回来时布局错乱了，暂时这样处理
-window["__origin_onresize"] = window.onresize;
-window.onresize = function(...args: any[]) {
-//	window["__origin_onresize"](...args);
-	Adaptor.adaptScreen();
+
+if(CC_EDITOR) {
+	console.log("------editor------");
 }
+
+//切后台回来时布局错乱了，暂时这样处理
+if(cc.sys.isBrowser) {
+	console.log("------browser------");
+	window["__origin_onresize"] = window.onresize;
+	window.onresize = function(...args: any[]) {
+	//	window["__origin_onresize"](...args);
+		Adaptor.adaptScreen();
+	}
+}
+
+
 
 export default class Adaptor {
 
@@ -43,29 +53,6 @@ export default class Adaptor {
 		var width = fs.width / fitScale;
 		var height = fs.height / fitScale;
 		cc.view.setDesignResolutionSize( width, height, cc.ResolutionPolicy.SHOW_ALL);
-	}
-
-	//横竖屏适配
-	public static adaptOrientation(bLandspace:boolean) : void
-	{
-		var bigger = DESIGN_SIZE.width;
-		var smaller = DESIGN_SIZE.height;
-		if(bigger < smaller) {
-			bigger = DESIGN_SIZE.height;
-			smaller = DESIGN_SIZE.width;
-		}
-		if(bLandspace) {
-			DESIGN_SIZE.width = bigger;
-			DESIGN_SIZE.height = smaller;
-			DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
-			cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
-		} else {
-			DESIGN_SIZE.width = smaller;
-			DESIGN_SIZE.height = bigger;
-			DESIGN_SIZE.crown = DESIGN_SIZE.width/DESIGN_SIZE.height;
-			cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
-		}
-		Adaptor.adaptScreen();
 	}
 
 	//进入全屏

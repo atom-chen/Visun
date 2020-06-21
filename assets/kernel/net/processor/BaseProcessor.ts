@@ -84,7 +84,8 @@ export default class BaseProcessor implements IProcessor {
 
 	public isNetHolded() : boolean
 	{
-		return this._channel.getState() != ConnState.connectsucc && this._channel.getState() != ConnState.reconnectsucc || this._paused;
+		var curState = this._channel.getState();
+		return curState != ConnState.connectsucc && curState != ConnState.reconnectsucc || this._paused;
 	}
 
 	public flushRecvlist() : void

@@ -34,6 +34,9 @@ export default class WsChannel implements IChannel {
 		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
 		//	this.setPaused(false);
 		//	this.force_reconnect();
+			if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
+				this.notifyState();
+			}
 		}, this);
 	}
 

@@ -1,7 +1,8 @@
 // UI路经
 export default class ViewDefine {
 	//appqp
-	public static CpnChip = "appqp/script/comps/prefabs/CpnChip";
+	public static CpnChip = "appqp/prefabs/CpnChip";
+	public static UILogin = "appqp/prefabs/UILogin";
 	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIGames = "lobby/prefabs/UIGames";

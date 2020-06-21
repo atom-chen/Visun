@@ -1,7 +1,8 @@
 //---------------------------------
 // 通用辅助接口
 //---------------------------------
-import { isNil } from "./GlobalFuncs";
+import { isNil, newHandler, isEmpty } from "./GlobalFuncs";
+import TimerManager from "../basic/timer/TimerManager";
 
 
 if(!ArrayBuffer["transfer"]) {
@@ -67,6 +68,23 @@ export default class CommonUtil {
 		obj.destroy();
 	}
 
+	public static deleteChildren(obj:cc.Node, from?:number, to?:number) {
+		if(isNil(obj)) { return; }
+		var childs = obj.children;
+		if(childs) {
+			if(isNil(from)) { from = 0; }
+			if(isNil(to)) { to = childs.length-1; }
+
+			if(from<0) { from = 0; }
+			if(to<0 || to>childs.length-1) { to = childs.length-1; }
+			
+			for(var i=to; i>=from; i--) {
+				//childs[i].destroy();
+				childs[i].removeFromParent(true);
+			}
+		}
+	}
+
 	//判断root节点下是否挂有输入框
 	public static hasEditbox(root:any) 
 	{
@@ -87,12 +105,37 @@ export default class CommonUtil {
 	}
 
 	//移除节点上到点击事件
-	public static delClickEvent(target:cc.Node, callback:Function, thisObj?:any){
+	public static delClickEvent(target:cc.Node, callback:Function, thisObj?:any) {
 		target.off(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
+	public static longPress(target:cc.Node, cbLongPress:Function, cbClick:Function, thisObj?:any) {
+		if(isNil(thisObj)) { thisObj = target; }
+		target.on(cc.Node.EventType.TOUCH_START,function(evt){
+			this._is_long = false;
+			this.holdTimeEclipse = TimerManager.delTimer(this.holdTimeEclipse);
+            this.holdTimeEclipse = TimerManager.delaySecond(1, newHandler(()=>{
+				this._is_long = true;
+				cbLongPress.call(this);
+			}, this));
+        }, thisObj);
+
+        target.on(cc.Node.EventType.TOUCH_END,function(evt){   
+			this.holdTimeEclipse = TimerManager.delTimer(this.holdTimeEclipse);        
+			if(!this._is_long) { 
+				if(cbClick) {
+					cbClick.call(this);
+				}
+			}
+		}, thisObj);
+		
+		target.on(cc.Node.EventType.TOUCH_CANCEL,function(evt){
+			this.holdTimeEclipse = TimerManager.delTimer(this.holdTimeEclipse);
+        }, thisObj);
+	}
+
 	//将obj节点设置为模态对话框
-	public static setModal(obj:cc.Node, flag:boolean)
+	public static setModal(obj:cc.Node, bCloseWhenClickMask:boolean)
 	{
 		if(!obj || !cc.isValid(obj)){ return; }
 		obj.on(cc.Node.EventType.TOUCH_START, function(event:any){ 
@@ -100,7 +143,7 @@ export default class CommonUtil {
 		}, obj);
 		obj.on(cc.Node.EventType.TOUCH_END, function(event:any){ 
 			event.stopPropagation(); 
-			if(flag){ this.destroy(); } 
+			if(bCloseWhenClickMask){ this.destroy(); } 
 		}, obj);
 	}
 
@@ -112,7 +155,7 @@ export default class CommonUtil {
 	}
 
 	//坐标空间转换（原点为锚点）
-	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec3
+	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
 		var pt = srcObj.convertToWorldSpaceAR(cc.v2(x,y));
 		return dstObj.convertToNodeSpaceAR(pt);
@@ -137,39 +180,42 @@ export default class CommonUtil {
 	}
 
 	//根据超链接下载网络图片
-	public static loadWebImg(sp, url, auto): void {
+	public static loadWebImg(sp:cc.Sprite, url:string, auto:boolean): void {
+		if(isNil(sp) || isEmpty(url)) { return; }
+		
+		cc.log("load web img: ", url, auto);
 		var width = sp.node.width;
 		var height = sp.node.height;
+
 		if ("http" == url.substring(0, 4)) {
-			if (cc.sys.os == cc.sys.OS_IOS) {
-				if ("http:" == url.substring(0, 5)) {
-					url = "https" + url.substring(4, url.length);
-				}
-			}
 			cc.loader.load(url, function (err, textTure) {
 				if (err) {
-					cc.error('加载图片出错了' + err);
+					cc.warn('加载图片出错了' + err);
 				} else {
-					var spriteFrame = new cc.SpriteFrame();
-					spriteFrame.setTexture(textTure);
-					sp.spriteFrame = spriteFrame;
-					if (!auto) {
-						var nWidth = sp.node.width;
-						var nHeight = sp.node.height;
-						sp.node.setScale(width / nWidth, height / nHeight);
+					if(cc.isValid(sp.node)) {
+						var spriteFrame = new cc.SpriteFrame();
+						spriteFrame.setTexture(textTure);
+						sp.spriteFrame = spriteFrame;
+						if (!auto) {
+							var nWidth = sp.node.width;
+							var nHeight = sp.node.height;
+							sp.node.setScale(width / nWidth, height / nHeight);
+						}
 					}
 				}
 			});
 		} else {
-			cc.loader.loadRes(url, cc.SpriteFrame, function (spriteFrame) {
-				if (!spriteFrame) {
-					// 	cc.error('加载图片出错了' + err);
+			cc.loader.loadRes(url, cc.SpriteFrame, function (err, spriteFrame) {
+				if (err || !spriteFrame) {
+					cc.warn('加载图片出错了' + err);
 				} else {
-					sp.spriteFrame = spriteFrame;
-					if (!auto) {
-						var nWidth = sp.node.width;
-						var nHeight = sp.node.height;
-						sp.node.setScale(width / nWidth, height / nHeight);
+					if(cc.isValid(sp.node)) {
+						sp.spriteFrame = spriteFrame;
+						if (!auto) {
+							var nWidth = sp.node.width;
+							var nHeight = sp.node.height;
+							sp.node.setScale(width / nWidth, height / nHeight);
+						}
 					}
 				}
 			});
@@ -203,14 +249,21 @@ export default class CommonUtil {
 		for (var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
 	}
 
-	static getLocalTime(nS) {
+	static fixNum(v:number) : string {
+		if(v < 10) {
+			return "0" + v;
+		}
+		return v.toString();
+	}
+	static formatTime(nS) : string {
+		if(isNil(nS)) { return ""; }
 		var now = new Date(parseInt(nS) * 1000);
 		var year = now.getFullYear();
-		var month = now.getMonth() + 1;
-		var date = now.getDate();
-		var hour = now.getHours();
-		var minute = now.getMinutes();
-		var second = now.getSeconds();
+		var month = this.fixNum(now.getMonth() + 1);
+		var date = this.fixNum(now.getDate());
+		var hour = this.fixNum(now.getHours());
+		var minute = this.fixNum(now.getMinutes());
+		var second = this.fixNum(now.getSeconds());
 		return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
 	}
 
@@ -402,11 +455,17 @@ export default class CommonUtil {
 	}
 
 	//浅复制
-	static simpleCopy(target, source) {
+	static simpleCopy(target, source, ignoreKeys?:any) {
 		if(source === undefined || source === null) { return; }
+		if(target === undefined || target === null) { return; }
 		for (var key in source) {
 			if (source.hasOwnProperty(key)) {
-				target[key] = source[key];
+				if(ignoreKeys && ignoreKeys[key]) {
+					
+				} else {
+					target[key] = source[key];
+				}
+				
 			//	cc.log("copy: ", key, target[key]);
 			}
 		}
@@ -483,10 +542,10 @@ export default class CommonUtil {
 		return true;
 	}
 
-	//----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
 
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
-	public static lineTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
+	public static lineTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
 		if(!chipSpr) { return; }
 		chipSpr.setPosition(fromPos);
 		if(delay<=0)
@@ -515,7 +574,7 @@ export default class CommonUtil {
 	}
 
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
-	public static bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec3, toPos:cc.Vec3, duration:number, delay:number) {
+	public static bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
 		if(!chipSpr) { return; }
 		chipSpr.setPosition(fromPos);
 		var gj = cc.bezierTo(duration, 
@@ -550,7 +609,7 @@ export default class CommonUtil {
 	}
 
 	//在dstObj的包围盒内，给srcobj找一个随机位置，margin指位置距离toObj包围盒内的边距
-	public static getRandPos(parent:cc.Node, srcObj:cc.Node, dstObj:cc.Node, margin:any) : cc.Vec3
+	public static getRandPos(parent:cc.Node, srcObj:cc.Node, dstObj:cc.Node, margin:any) : cc.Vec2
 	{
 		var toPos = CommonUtil.convertSpaceAR(dstObj, parent);
 		
@@ -628,5 +687,66 @@ export default class CommonUtil {
 				cc.moveBy(dt, cc.v2(10,0))
 			), shakeTimes ) );
 	}
+
+	public static arrayBufferToBase64(buffer) : string {
+		var binary = '';
+		var bytes = new Uint8Array( buffer );  
+		var len = bytes.byteLength;  
+		for (var i = 0; i < len; i++) { 
+			binary += String.fromCharCode( bytes[ i ] );  
+		} 
+		return window.btoa( binary );
+	}
+
+	static isValidBase64Image(base64Str:string) : boolean {
+		if(isNil(base64Str)) { return false; }
+		if(typeof(base64Str) != "string") { return false; }
+		return base64Str.substring(0, 10) == "data:image";
+	}
+
+	static getGridInfo(itemCnt:number, wItem:number, hItem:number, parentWid:number, parentHei:number, spaceInfo:any) : any {
+        var left = spaceInfo.left;
+        var right = spaceInfo.right;
+        var top = spaceInfo.top;
+        var bottom = spaceInfo.bottom;
+        var spaceX = spaceInfo.spaceX;
+        var spaceY = spaceInfo.spaceY;
+
+        var col = 0;
+        var remainX = parentWid - left - right;
+        for(var i=0; i<1000; i++) {
+            remainX -= wItem;
+            col++;
+            if(remainX-spaceX < 0) {
+                break;
+            } else {
+                remainX -= spaceX;
+            }
+        }
+        if(col>1) {
+            spaceX = ((parentWid-left-right) - col*wItem) / (col-1);
+        }
+        
+        var rows = Math.ceil(itemCnt/col);
+        var totalH = rows*hItem + (rows-1) * spaceY + top + bottom;
+        var halfY = totalH/2;
+        var halfX = parentWid/2;
+        var posList = [];
+
+        for(var ii = 0; ii<itemCnt; ii++) {
+            var r = Math.floor((ii)/col) + 1;
+            var c = (ii+1) % col;
+            if(c==0) { c = col; }
+            posList.push(cc.v2(left + wItem/2 + (c-1)*wItem + spaceX*(c-1) - halfX, totalH - top - hItem/2 - (r-1)*hItem - spaceY*(r-1) - halfY));
+        }
+
+        return {
+            totalW : parentWid,
+            totalH : totalH,
+            rows : rows,
+            cols : col,
+            posList : posList
+        }
+    }
 
 }
