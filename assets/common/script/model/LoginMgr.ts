@@ -24,6 +24,7 @@ import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
 import { luck_packet_define } from "../proto/net_luck";
+import { IS_DANJI_MODE } from "../definer/ConstDefine";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -114,6 +115,9 @@ export default class LoginMgr extends ModelBase {
 	public checkLogin(bTip: boolean): boolean {
 		cc.log("用户: ", LoginUser.getInstance().UserID);
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserID > 0;
+		if(IS_DANJI_MODE) {
+			hasLogin = true;
+		}
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
 			UIManager.openPopwnd(ViewDefine.UILogin, false);
