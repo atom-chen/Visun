@@ -1,6 +1,6 @@
 var protoDir = "in";
 
-var serverOutDir = "E:/Go_PRJ/server";
+var serverOutDir = "E:/go_prj/go_server";
 
 var clientOutDir = "../../assets/common/script/proto/";
 
