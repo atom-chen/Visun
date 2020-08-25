@@ -57,7 +57,7 @@ export default class BacarratUI extends BaseComponent {
     }
 
     private onGameBetResult(param) {
-        if(param.State == 0) {
+        if(param.State != 0) {
             UIManager.toast("下注失败");
             return;
         }
