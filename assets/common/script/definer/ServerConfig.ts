@@ -9,7 +9,7 @@ var server_list = {
     },
     develop: {
         mainHttpUrl: "",
-        leafServer: "ws://172.18.11.133:9650",
+        leafServer: "ws://192.168.1.101:9650",
         chatServer: ""
     },
     jetten: {
@@ -25,6 +25,6 @@ var server_list = {
 };
 
 //选定某服
-var ServerConfig = server_list.jetten;
+var ServerConfig = server_list.develop;
 
 export default ServerConfig;
