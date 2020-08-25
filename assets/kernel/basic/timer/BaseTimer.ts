@@ -40,7 +40,7 @@ export class BaseTimer implements JTIPoolObject {
 		this._paused = false;
 		this._isLimit = looptimes > 0;
 		if(callOnAdd) {
-			this._callback.invoke();
+			this._callback.invoke(this);
 		}
 	}
 
@@ -76,7 +76,7 @@ export class BaseTimer implements JTIPoolObject {
 				this._remainTimes--;
 			}
 
-			this._callback.invoke();
+			this._callback.invoke(this);
 
 			if(this._isLimit && this._remainTimes<=0) {
 				this.stop();
