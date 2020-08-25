@@ -7,6 +7,7 @@ import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
+import PlatformUtil from "../../kernel/utils/PlatformUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -26,7 +27,8 @@ export default class HotupdateScene extends BaseComponent {
 
 	onLoad () {
 	//	Adaptor.setFullScreen(true);
-		Adaptor.adaptScreen();
+	//	Adaptor.adaptScreen();
+		PlatformUtil.setOrientation(true);
 		
 		KernelUIDefine.GameScene.name = "GameScene";
         KernelUIDefine.LobbyScene.name = "LobbyScene";

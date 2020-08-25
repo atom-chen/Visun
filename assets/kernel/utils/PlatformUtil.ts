@@ -7,6 +7,7 @@ import TimerManager from "../basic/timer/TimerManager";
 import { newHandler, isEmpty, isNil } from "./GlobalFuncs";
 import UIManager from "../view/UIManager";
 import { IMG_BASE64_JPEG, FILE_TYPE } from "../basic/defines/KernelDefine";
+import Adaptor from "../adaptor/Adaptor";
 
 
 export default class PlatformUtil {
@@ -30,7 +31,16 @@ export default class PlatformUtil {
 
 	//手动设置横竖屏
 	public static setOrientation(bLandspace:boolean) {
-		UIManager.toast("尚未实现");
+		if(cc.sys.isNative) {
+			Adaptor.adaptScreen();
+		} else {
+			if(bLandspace) {
+				cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+			} else {
+				cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+			}
+			Adaptor.adaptScreen();
+		}
 	}
 
 	static webCopyString(str) {
