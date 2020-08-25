@@ -12,8 +12,12 @@ import EventCenter from "../basic/event/EventCenter";
 import UIManager from "../view/UIManager";
 import { HttpResult } from "../basic/defines/KernelDefine";
 import KernelEvent from "../basic/defines/KernelEvent";
+import { isNil, isEmpty } from "../utils/GlobalFuncs";
 
-
+class HttpDownTask {
+	state:HttpResult = HttpResult.Idle;
+	data:any = null;
+}
 
 export default class HttpCore {
 	private static g_timeout:number = 8000;		//超时
@@ -193,7 +197,7 @@ export default class HttpCore {
 		// xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
 	}
 
-	public static callGet(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void) 
+	public static callGet(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void, headinfo?:any) 
 	{
 		var finalUrl = url;
 		if(addr && addr != "") {
@@ -231,6 +235,11 @@ export default class HttpCore {
 		xhr.open("GET", finalUrl, true);
 		xhr.timeout = this.g_timeout;
 		this.commonHead(xhr);
+		if(headinfo) {
+			for(var k in headinfo) {
+				xhr.setRequestHeader(k, headinfo[k]);
+			}
+		}
 		xhr.send();
 	}
 
@@ -272,9 +281,158 @@ export default class HttpCore {
 		xhr.send(paramStr);
 	}
 
-	public static callUpload(url:any, addr:any, params:any, callback:(iCode:HttpResult, data:any)=>void)
-	{
+	// blob: files[0]
+	public static callUpload(dstAddr:string, key:string, blob:Blob|string, formInfo:any, finishCallback?:Function) {
+		if(isEmpty(blob) || isEmpty(dstAddr)) {
+			cc.warn("无效的上传参数", blob, dstAddr);
+			return;
+		}
+		cc.log("开始上传......", dstAddr, blob);
 
+		var fd = new FormData();
+		fd.append(key, blob);
+		for(var k in formInfo) {
+			fd.append(k, formInfo[k]);
+		}
+		
+		var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function(ev1) {
+			cc.log("上传进度", ev1.loaded/ev1.total*100+"/100");
+		}, false);
+        xhr.addEventListener("load", function(ev2){
+			cc.log("上传完毕", ev2);
+		}, false);
+        xhr.addEventListener("error", function(ev3) {
+			UIManager.toast("文件上传失败");
+		}, false);
+        xhr.addEventListener("abort", function(ev4) {
+			UIManager.toast("文件上传失败");
+		}, false);
+		xhr.onreadystatechange = function () {
+			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
+				cc.log("[RESP]", xhr.responseText);
+				if(finishCallback) {
+					finishCallback(xhr.responseText);
+				}
+			} else {
+				cc.log("......", xhr.readyState, xhr.status, xhr.responseText);
+			}
+		};
+		xhr.open("POST", dstAddr);
+		//xhr.setRequestHeader("Content-Type", "application/octet-stream");
+		// xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+		// xhr.setRequestHeader("Access-Control-Allow-Headers", "X-Requested-With");
+		// xhr.setRequestHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+		// xhr.setRequestHeader('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+        xhr.send(fd);
+	}
+
+	public static genKey(url:any, addr:any, params:any, headinfo?:any, extraKey?:string) : string {
+		var finalUrl = url;
+		if(addr && addr != "") {
+			finalUrl = url + "/" + addr;
+		}
+
+		var paramStr = this._coder.encode(params, null);
+		if(paramStr && paramStr != "") {
+			finalUrl = finalUrl + "?" + paramStr;
+		}
+		
+		if(headinfo) {
+			for(var k in headinfo) {
+				finalUrl += k + headinfo[k];
+			}
+		}
+
+		if(!isNil(extraKey)) {
+			finalUrl += extraKey;
+		}
+
+		return finalUrl;
+	}
+
+	private static downCache : {[key:string]:HttpDownTask} = {};
+	private static downDispatcher = new EventCenter;
+	private static dispatchDown(downKey:string, iCode:HttpResult, data:any) {
+		this.downDispatcher.triger(downKey, iCode, data);
+	}
+	public static getDispatcher() {
+		return this.downDispatcher;
+	}
+	public static callDown(url:any, addr:any, params:any, headinfo:any, extraKey:string, callback:(iCode:HttpResult, data:any)=>void, thisObj:any) 
+	{
+		var finalUrl = url;
+		if(addr && addr != "") {
+			finalUrl = url + "/" + addr;
+		}
+
+		var paramStr = this._coder.encode(params, null);
+		if(paramStr && paramStr != "") {
+			finalUrl = finalUrl + "?" + paramStr;
+		}
+
+		var downKey = this.genKey(url, addr, params, headinfo, extraKey);
+
+		this.downDispatcher.listen(downKey, callback, thisObj);
+
+		if(this.downCache[downKey]) {
+			if(this.downCache[downKey].state === HttpResult.Succ) {
+				this.dispatchDown(downKey, HttpResult.Succ, HttpCore.downCache[downKey].data);
+				return;
+			}
+			if(this.downCache[downKey].state === HttpResult.Working) {
+				return;
+			}
+		}
+
+		this.downCache[downKey] = new HttpDownTask;
+		this.downCache[downKey].state = HttpResult.Working;
+		
+		var xhr = cc.loader.getXMLHttpRequest();
+
+		xhr.onabort = function() {
+			cc.log('[onabort]', finalUrl);
+			HttpCore.downCache[downKey].state = HttpResult.Aborted;
+			HttpCore.dispatchDown(downKey, HttpCore.downCache[downKey].state, HttpCore.downCache[downKey].data);
+		}
+		xhr.onerror = function() {
+			cc.log('[onerror]', finalUrl);
+			HttpCore.downCache[downKey].state = HttpResult.Error;
+			HttpCore.dispatchDown(downKey, HttpCore.downCache[downKey].state, HttpCore.downCache[downKey].data);
+		}
+		xhr.ontimeout = function() {
+			cc.log('[ontimeout]', finalUrl);
+			HttpCore.downCache[downKey].state = HttpResult.Timeout;
+			HttpCore.dispatchDown(downKey, HttpCore.downCache[downKey].state, HttpCore.downCache[downKey].data);
+		}
+		xhr.onreadystatechange = function () {
+			if ( xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 207) ) {
+				cc.log("[RESP]", finalUrl);
+				HttpCore.downCache[downKey].state = HttpResult.Succ;
+				HttpCore.downCache[downKey].data = xhr.response;
+				callback(HttpResult.Succ, xhr.response);
+				HttpCore.dispatchDown(downKey, HttpResult.Succ, xhr.response);
+			}
+		};
+
+		cc.log("[GET]: ", finalUrl);
+		xhr.open("GET", finalUrl, true);
+		xhr.timeout = this.g_timeout;
+		this.commonHead(xhr);
+		if(headinfo) {
+			for(var k in headinfo) {
+				xhr.setRequestHeader(k, headinfo[k]);
+			}
+		}
+
+		if(cc.sys.isNative) {
+			//@ts-ignore
+		//	xhr.responseType = "application/octet-stream";
+		} else {
+			xhr.responseType = "blob";
+		}
+
+		xhr.send();
 	}
 	
 }

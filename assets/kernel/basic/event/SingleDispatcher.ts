@@ -77,5 +77,6 @@ export default class SingleDispatcher {
 		}
 
 		EventCenter.getInstance().fire(cmd, info);
+		EventCenter.getInstance().fire("recv_proto", cmd, info);
 	}
 }

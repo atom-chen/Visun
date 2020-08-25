@@ -180,6 +180,8 @@ export default class WsChannel implements IChannel {
 		this.clear_ws();
 	}
 
+	//[request  setAuthenticationScheme:@"https"];  //设置验证方式
+	//[request  setValidatesSecureCertificate:NO];  //设置自签名证书验证
 	private do_connect() : void
 	{
 		var self = this;

@@ -4,6 +4,7 @@
 import EventCenter from "../basic/event/EventCenter";
 import UIManager from "./UIManager";
 import TimerManager from "../basic/timer/TimerManager";
+import HttpCore from "../net/HttpCore";
 
 
 const {ccclass, property} = cc._decorator;
@@ -18,6 +19,8 @@ export default class BaseComponent extends cc.Component {
     unuse(): void {
         EventCenter.getInstance().removeByTarget(this);
         TimerManager.removeByTarget(this);
+        HttpCore.getDispatcher().removeByTarget(this);
+        EventCenter.redInstance().removeByTarget(this);
     }
 
     //从对象池取出时回调
@@ -32,6 +35,9 @@ export default class BaseComponent extends cc.Component {
     onDestroy() {
         EventCenter.getInstance().removeByTarget(this);
         TimerManager.removeByTarget(this);
+        HttpCore.getDispatcher().removeByTarget(this);
+        EventCenter.redInstance().removeByTarget(this);
+        
         if(this.m_dtor_listeners){
             for(var i=0; i<this.m_dtor_listeners.length; i++){
                 this.m_dtor_listeners[i].callback.call(this.m_dtor_listeners[i].target, this, this.node);

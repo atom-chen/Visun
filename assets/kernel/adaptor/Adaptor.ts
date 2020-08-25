@@ -9,14 +9,14 @@ if(CC_EDITOR) {
 }
 
 //切后台回来时布局错乱了，暂时这样处理
-// if(cc.sys.isBrowser) {
-// 	console.log("------browser------");
-// 	window["__origin_onresize"] = window.onresize;
-// 	window.onresize = function(...args: any[]) {
-// 	//	window["__origin_onresize"](...args);
-// 		Adaptor.adaptScreen();
-// 	}
-// }
+if(cc.sys.isBrowser) {
+	console.log("------browser------");
+	// window["__origin_onresize"] = window.onresize;
+	// window.onresize = function(...args: any[]) {
+	// //	window["__origin_onresize"](...args);
+	// 	Adaptor.adaptScreen();
+	// }
+}
 
 
 
