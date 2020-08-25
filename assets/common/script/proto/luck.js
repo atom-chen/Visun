@@ -31,11 +31,11 @@ $root.luck = (function() {
         SendReward.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Type != null && message.hasOwnProperty("Type"))
+            if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
                 writer.uint32(8).int32(message.Type);
-            if (message.Count != null && message.hasOwnProperty("Count"))
+            if (message.Count != null && Object.hasOwnProperty.call(message, "Count"))
                 writer.uint32(16).int64(message.Count);
-            if (message.Money != null && message.hasOwnProperty("Money"))
+            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
                 writer.uint32(24).int64(message.Money);
             return writer;
         };
@@ -180,21 +180,21 @@ $root.luck = (function() {
         SendRewardResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ID != null && message.hasOwnProperty("ID"))
+            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
                 writer.uint32(8).int64(message.ID);
-            if (message.Type != null && message.hasOwnProperty("Type"))
+            if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
                 writer.uint32(16).int32(message.Type);
-            if (message.Count != null && message.hasOwnProperty("Count"))
+            if (message.Count != null && Object.hasOwnProperty.call(message, "Count"))
                 writer.uint32(24).int64(message.Count);
-            if (message.Money != null && message.hasOwnProperty("Money"))
+            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
                 writer.uint32(32).int64(message.Money);
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(40).int64(message.TimeStamp);
-            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+            if (message.SenderID != null && Object.hasOwnProperty.call(message, "SenderID"))
                 writer.uint32(48).uint64(message.SenderID);
-            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+            if (message.StartTimeStamp != null && Object.hasOwnProperty.call(message, "StartTimeStamp"))
                 writer.uint32(56).int64(message.StartTimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(64).int64(message.WaitTime);
             return writer;
         };
@@ -457,7 +457,7 @@ $root.luck = (function() {
         GetReward.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ID != null && message.hasOwnProperty("ID"))
+            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
                 writer.uint32(8).int64(message.ID);
             return writer;
         };
@@ -570,27 +570,27 @@ $root.luck = (function() {
         GetRewardResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ID != null && message.hasOwnProperty("ID"))
+            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
                 writer.uint32(8).int64(message.ID);
-            if (message.SenderID != null && message.hasOwnProperty("SenderID"))
+            if (message.SenderID != null && Object.hasOwnProperty.call(message, "SenderID"))
                 writer.uint32(16).uint64(message.SenderID);
-            if (message.StartTimeStamp != null && message.hasOwnProperty("StartTimeStamp"))
+            if (message.StartTimeStamp != null && Object.hasOwnProperty.call(message, "StartTimeStamp"))
                 writer.uint32(24).int64(message.StartTimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(32).int64(message.WaitTime);
-            if (message.Type != null && message.hasOwnProperty("Type"))
+            if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
                 writer.uint32(40).int32(message.Type);
-            if (message.Count != null && message.hasOwnProperty("Count"))
+            if (message.Count != null && Object.hasOwnProperty.call(message, "Count"))
                 writer.uint32(48).int64(message.Count);
-            if (message.Money != null && message.hasOwnProperty("Money"))
+            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
                 writer.uint32(56).int64(message.Money);
-            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
+            if (message.RemainCount != null && Object.hasOwnProperty.call(message, "RemainCount"))
                 writer.uint32(64).int64(message.RemainCount);
-            if (message.RemainMoney != null && message.hasOwnProperty("RemainMoney"))
+            if (message.RemainMoney != null && Object.hasOwnProperty.call(message, "RemainMoney"))
                 writer.uint32(72).int64(message.RemainMoney);
-            if (message.BestMoney != null && message.hasOwnProperty("BestMoney"))
+            if (message.BestMoney != null && Object.hasOwnProperty.call(message, "BestMoney"))
                 writer.uint32(80).int64(message.BestMoney);
-            if (message.BestMoneyIndex != null && message.hasOwnProperty("BestMoneyIndex"))
+            if (message.BestMoneyIndex != null && Object.hasOwnProperty.call(message, "BestMoneyIndex"))
                 writer.uint32(88).int64(message.BestMoneyIndex);
             if (message.MoneyList != null && message.MoneyList.length) {
                 writer.uint32(98).fork();
@@ -975,7 +975,7 @@ $root.luck = (function() {
         RollDice.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Count != null && message.hasOwnProperty("Count"))
+            if (message.Count != null && Object.hasOwnProperty.call(message, "Count"))
                 writer.uint32(8).int64(message.Count);
             return writer;
         };
@@ -1077,9 +1077,9 @@ $root.luck = (function() {
         RollDiceResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Count != null && message.hasOwnProperty("Count"))
+            if (message.Count != null && Object.hasOwnProperty.call(message, "Count"))
                 writer.uint32(8).int64(message.Count);
-            if (message.Numbers != null && message.hasOwnProperty("Numbers"))
+            if (message.Numbers != null && Object.hasOwnProperty.call(message, "Numbers"))
                 writer.uint32(18).bytes(message.Numbers);
             return writer;
         };

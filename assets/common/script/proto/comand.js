@@ -31,11 +31,11 @@ $root.comand = (function() {
         PacketData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.MainID != null && message.hasOwnProperty("MainID"))
+            if (message.MainID != null && Object.hasOwnProperty.call(message, "MainID"))
                 writer.uint32(8).uint32(message.MainID);
-            if (message.SubID != null && message.hasOwnProperty("SubID"))
+            if (message.SubID != null && Object.hasOwnProperty.call(message, "SubID"))
                 writer.uint32(16).uint32(message.SubID);
-            if (message.TransData != null && message.hasOwnProperty("TransData"))
+            if (message.TransData != null && Object.hasOwnProperty.call(message, "TransData"))
                 writer.uint32(26).bytes(message.TransData);
             return writer;
         };

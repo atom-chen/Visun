@@ -49,7 +49,7 @@ $root.fishLord = (function() {
             if (message.players != null && message.players.length)
                 for (var i = 0; i < message.players.length; ++i)
                     writer.uint32(18).string(message.players[i]);
-            if (message.Countdown != null && message.hasOwnProperty("Countdown"))
+            if (message.Countdown != null && Object.hasOwnProperty.call(message, "Countdown"))
                 writer.uint32(24).int32(message.Countdown);
             if (message.Chips != null && message.Chips.length) {
                 writer.uint32(34).fork();
@@ -63,11 +63,11 @@ $root.fishLord = (function() {
                     writer.int32(message.Odds[i]);
                 writer.ldelim();
             }
-            if (message.BankerScore != null && message.hasOwnProperty("BankerScore"))
+            if (message.BankerScore != null && Object.hasOwnProperty.call(message, "BankerScore"))
                 writer.uint32(48).int64(message.BankerScore);
-            if (message.PlayerScore != null && message.hasOwnProperty("PlayerScore"))
+            if (message.PlayerScore != null && Object.hasOwnProperty.call(message, "PlayerScore"))
                 writer.uint32(56).int64(message.PlayerScore);
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
+            if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
                 writer.uint32(64).int64(message.Acquire);
             return writer;
         };
@@ -348,9 +348,9 @@ $root.fishLord = (function() {
         GameFishLordPlaying.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(8).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(16).int64(message.BetScore);
             return writer;
         };
@@ -464,9 +464,9 @@ $root.fishLord = (function() {
         GameFishLordBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.State != null && message.hasOwnProperty("State"))
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
                 writer.uint32(8).int32(message.State);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
                 writer.uint32(18).string(message.Hints);
             return writer;
         };
@@ -589,7 +589,7 @@ $root.fishLord = (function() {
                     writer.int32(message.BankerCard[i]);
                 writer.ldelim();
             }
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
+            if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
                 writer.uint32(32).int64(message.Acquire);
             return writer;
         };

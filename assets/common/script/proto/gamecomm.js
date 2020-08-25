@@ -29,7 +29,7 @@ $root.gamecomm = (function() {
         ReqEnterGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
             return writer;
         };
@@ -116,7 +116,7 @@ $root.gamecomm = (function() {
         ReqExitGame.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
             return writer;
         };
@@ -203,7 +203,7 @@ $root.gamecomm = (function() {
         ReqChangeTable.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
             return writer;
         };
@@ -298,23 +298,23 @@ $root.gamecomm = (function() {
         PlayerInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.Name != null && message.hasOwnProperty("Name"))
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
                 writer.uint32(18).string(message.Name);
-            if (message.Age != null && message.hasOwnProperty("Age"))
+            if (message.Age != null && Object.hasOwnProperty.call(message, "Age"))
                 writer.uint32(24).int32(message.Age);
-            if (message.Sex != null && message.hasOwnProperty("Sex"))
+            if (message.Sex != null && Object.hasOwnProperty.call(message, "Sex"))
                 writer.uint32(32).int32(message.Sex);
-            if (message.Gold != null && message.hasOwnProperty("Gold"))
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
                 writer.uint32(40).int64(message.Gold);
-            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
+            if (message.VipLevel != null && Object.hasOwnProperty.call(message, "VipLevel"))
                 writer.uint32(48).int32(message.VipLevel);
-            if (message.Account != null && message.hasOwnProperty("Account"))
+            if (message.Account != null && Object.hasOwnProperty.call(message, "Account"))
                 writer.uint32(58).string(message.Account);
-            if (message.Sate != null && message.hasOwnProperty("Sate"))
+            if (message.Sate != null && Object.hasOwnProperty.call(message, "Sate"))
                 writer.uint32(64).int32(message.Sate);
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+            if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
                 writer.uint32(104).uint32(message.ChairID);
             return writer;
         };
@@ -630,15 +630,15 @@ $root.gamecomm = (function() {
         PlayerRecord.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.User != null && message.hasOwnProperty("User"))
+            if (message.User != null && Object.hasOwnProperty.call(message, "User"))
                 $root.gamecomm.PlayerInfo.encode(message.User, writer.uint32(10).fork()).ldelim();
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
+            if (message.Twice != null && Object.hasOwnProperty.call(message, "Twice"))
                 writer.uint32(16).int32(message.Twice);
-            if (message.Ranking != null && message.hasOwnProperty("Ranking"))
+            if (message.Ranking != null && Object.hasOwnProperty.call(message, "Ranking"))
                 writer.uint32(24).int32(message.Ranking);
-            if (message.Bankroll != null && message.hasOwnProperty("Bankroll"))
+            if (message.Bankroll != null && Object.hasOwnProperty.call(message, "Bankroll"))
                 writer.uint32(32).int32(message.Bankroll);
-            if (message.WinLos != null && message.hasOwnProperty("WinLos"))
+            if (message.WinLos != null && Object.hasOwnProperty.call(message, "WinLos"))
                 writer.uint32(40).int64(message.WinLos);
             return writer;
         };
@@ -790,9 +790,9 @@ $root.gamecomm = (function() {
         GameReady.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
                 writer.uint32(16).bool(message.IsReady);
             return writer;
         };
@@ -906,9 +906,9 @@ $root.gamecomm = (function() {
         GameBet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(8).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(16).int64(message.BetScore);
             return writer;
         };
@@ -1025,15 +1025,15 @@ $root.gamecomm = (function() {
         GameBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.State != null && message.hasOwnProperty("State"))
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
                 writer.uint32(16).int32(message.State);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
                 writer.uint32(26).string(message.Hints);
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(32).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(40).int64(message.BetScore);
             return writer;
         };
@@ -1195,11 +1195,11 @@ $root.gamecomm = (function() {
         GameRecord.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Pork != null && message.hasOwnProperty("Pork"))
+            if (message.Pork != null && Object.hasOwnProperty.call(message, "Pork"))
                 writer.uint32(10).bytes(message.Pork);
-            if (message.Type != null && message.hasOwnProperty("Type"))
+            if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
                 writer.uint32(16).int32(message.Type);
-            if (message.isWon != null && message.hasOwnProperty("isWon"))
+            if (message.isWon != null && Object.hasOwnProperty.call(message, "isWon"))
                 writer.uint32(24).bool(message.isWon);
             return writer;
         };
@@ -1418,7 +1418,7 @@ $root.gamecomm = (function() {
         }
 
         GameResult.prototype.Flag = 0;
-        GameResult.prototype.Reason = "";
+        GameResult.prototype.Reason = $util.newBuffer([]);
 
         GameResult.create = function create(properties) {
             return new GameResult(properties);
@@ -1427,10 +1427,10 @@ $root.gamecomm = (function() {
         GameResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Flag != null && message.hasOwnProperty("Flag"))
+            if (message.Flag != null && Object.hasOwnProperty.call(message, "Flag"))
                 writer.uint32(8).int32(message.Flag);
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                writer.uint32(18).string(message.Reason);
+            if (message.Reason != null && Object.hasOwnProperty.call(message, "Reason"))
+                writer.uint32(18).bytes(message.Reason);
             return writer;
         };
 
@@ -1449,7 +1449,7 @@ $root.gamecomm = (function() {
                     message.Flag = reader.int32();
                     break;
                 case 2:
-                    message.Reason = reader.string();
+                    message.Reason = reader.bytes();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1472,8 +1472,8 @@ $root.gamecomm = (function() {
                 if (!$util.isInteger(message.Flag))
                     return "Flag: integer expected";
             if (message.Reason != null && message.hasOwnProperty("Reason"))
-                if (!$util.isString(message.Reason))
-                    return "Reason: string expected";
+                if (!(message.Reason && typeof message.Reason.length === "number" || $util.isString(message.Reason)))
+                    return "Reason: buffer expected";
             return null;
         };
 
@@ -1484,7 +1484,10 @@ $root.gamecomm = (function() {
             if (object.Flag != null)
                 message.Flag = object.Flag | 0;
             if (object.Reason != null)
-                message.Reason = String(object.Reason);
+                if (typeof object.Reason === "string")
+                    $util.base64.decode(object.Reason, message.Reason = $util.newBuffer($util.base64.length(object.Reason)), 0);
+                else if (object.Reason.length)
+                    message.Reason = object.Reason;
             return message;
         };
 
@@ -1494,12 +1497,18 @@ $root.gamecomm = (function() {
             var object = {};
             if (options.defaults) {
                 object.Flag = 0;
-                object.Reason = "";
+                if (options.bytes === String)
+                    object.Reason = "";
+                else {
+                    object.Reason = [];
+                    if (options.bytes !== Array)
+                        object.Reason = $util.newBuffer(object.Reason);
+                }
             }
             if (message.Flag != null && message.hasOwnProperty("Flag"))
                 object.Flag = message.Flag;
             if (message.Reason != null && message.hasOwnProperty("Reason"))
-                object.Reason = message.Reason;
+                object.Reason = options.bytes === String ? $util.base64.encode(message.Reason, 0, message.Reason.length) : options.bytes === Array ? Array.prototype.slice.call(message.Reason) : message.Reason;
             return object;
         };
 
@@ -1530,11 +1539,11 @@ $root.gamecomm = (function() {
         NotifyChangeGold.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.Gold != null && message.hasOwnProperty("Gold"))
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
                 writer.uint32(16).int64(message.Gold);
-            if (message.Code != null && message.hasOwnProperty("Code"))
+            if (message.Code != null && Object.hasOwnProperty.call(message, "Code"))
                 writer.uint32(24).uint32(message.Code);
             return writer;
         };
@@ -1673,9 +1682,9 @@ $root.gamecomm = (function() {
         GameStateFree.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
@@ -1789,9 +1798,9 @@ $root.gamecomm = (function() {
         GameStateStart.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
@@ -1905,9 +1914,9 @@ $root.gamecomm = (function() {
         GameStatePlaying.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
@@ -2021,9 +2030,9 @@ $root.gamecomm = (function() {
         GameStateOver.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(16).uint32(message.WaitTime);
             return writer;
         };
@@ -2138,11 +2147,11 @@ $root.gamecomm = (function() {
         GameStateCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.WaitTime != null && message.hasOwnProperty("WaitTime"))
+            if (message.WaitTime != null && Object.hasOwnProperty.call(message, "WaitTime"))
                 writer.uint32(16).uint32(message.WaitTime);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(24).uint64(message.UserID);
             return writer;
         };
@@ -2273,7 +2282,7 @@ $root.gamecomm = (function() {
 
         GameBeOut.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         GameBeOut.prototype.Code = 0;
-        GameBeOut.prototype.Hints = "";
+        GameBeOut.prototype.Hints = $util.newBuffer([]);
 
         GameBeOut.create = function create(properties) {
             return new GameBeOut(properties);
@@ -2282,12 +2291,12 @@ $root.gamecomm = (function() {
         GameBeOut.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.Code != null && message.hasOwnProperty("Code"))
+            if (message.Code != null && Object.hasOwnProperty.call(message, "Code"))
                 writer.uint32(16).uint32(message.Code);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                writer.uint32(26).string(message.Hints);
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
+                writer.uint32(26).bytes(message.Hints);
             return writer;
         };
 
@@ -2309,7 +2318,7 @@ $root.gamecomm = (function() {
                     message.Code = reader.uint32();
                     break;
                 case 3:
-                    message.Hints = reader.string();
+                    message.Hints = reader.bytes();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2335,8 +2344,8 @@ $root.gamecomm = (function() {
                 if (!$util.isInteger(message.Code))
                     return "Code: integer expected";
             if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!$util.isString(message.Hints))
-                    return "Hints: string expected";
+                if (!(message.Hints && typeof message.Hints.length === "number" || $util.isString(message.Hints)))
+                    return "Hints: buffer expected";
             return null;
         };
 
@@ -2356,7 +2365,10 @@ $root.gamecomm = (function() {
             if (object.Code != null)
                 message.Code = object.Code >>> 0;
             if (object.Hints != null)
-                message.Hints = String(object.Hints);
+                if (typeof object.Hints === "string")
+                    $util.base64.decode(object.Hints, message.Hints = $util.newBuffer($util.base64.length(object.Hints)), 0);
+                else if (object.Hints.length)
+                    message.Hints = object.Hints;
             return message;
         };
 
@@ -2371,7 +2383,13 @@ $root.gamecomm = (function() {
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
                 object.Code = 0;
-                object.Hints = "";
+                if (options.bytes === String)
+                    object.Hints = "";
+                else {
+                    object.Hints = [];
+                    if (options.bytes !== Array)
+                        object.Hints = $util.newBuffer(object.Hints);
+                }
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -2381,7 +2399,7 @@ $root.gamecomm = (function() {
             if (message.Code != null && message.hasOwnProperty("Code"))
                 object.Code = message.Code;
             if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = message.Hints;
+                object.Hints = options.bytes === String ? $util.base64.encode(message.Hints, 0, message.Hints.length) : options.bytes === Array ? Array.prototype.slice.call(message.Hints) : message.Hints;
             return object;
         };
 
@@ -2410,7 +2428,7 @@ $root.gamecomm = (function() {
         GameHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(8).bool(message.IsWant);
             return writer;
         };
@@ -2497,7 +2515,7 @@ $root.gamecomm = (function() {
         GameSuperHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(8).bool(message.IsWant);
             return writer;
         };
@@ -2585,9 +2603,9 @@ $root.gamecomm = (function() {
         GameCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.Score != null && message.hasOwnProperty("Score"))
+            if (message.Score != null && Object.hasOwnProperty.call(message, "Score"))
                 writer.uint32(16).uint32(message.Score);
             return writer;
         };

@@ -81,7 +81,7 @@ message GameRecordList {
 //反馈结果
 message GameResult {
     int32 Flag = 1; //标识 0:成功 1:失败 2:其他
-    string Reason = 2; //原因
+    bytes Reason = 2; //原因
 }
 
 //通知金币变化
@@ -124,7 +124,7 @@ message GameStateCall {
 message GameBeOut {
     uint64 UserID = 1;  //玩家ID
     uint32 Code = 2;    //操作码 0:时间到被剔除 1:刷子
-    string Hints = 3;    //被踢出的原因
+    bytes Hints = 3;    //被踢出的原因
 }
 
 

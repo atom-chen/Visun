@@ -40,7 +40,7 @@ $root.baccarat = (function() {
         GameBaccaratEnter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
             if (message.Chips != null && message.Chips.length) {
                 writer.uint32(18).fork();
@@ -51,19 +51,19 @@ $root.baccarat = (function() {
             if (message.AwardAreas != null && message.AwardAreas.length)
                 for (var i = 0; i < message.AwardAreas.length; ++i)
                     writer.uint32(26).bytes(message.AwardAreas[i]);
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
+            if (message.FreeTime != null && Object.hasOwnProperty.call(message, "FreeTime"))
                 writer.uint32(32).uint32(message.FreeTime);
-            if (message.BetTime != null && message.hasOwnProperty("BetTime"))
+            if (message.BetTime != null && Object.hasOwnProperty.call(message, "BetTime"))
                 writer.uint32(40).uint32(message.BetTime);
-            if (message.OpenTime != null && message.hasOwnProperty("OpenTime"))
+            if (message.OpenTime != null && Object.hasOwnProperty.call(message, "OpenTime"))
                 writer.uint32(48).uint32(message.OpenTime);
-            if (message.Free != null && message.hasOwnProperty("Free"))
+            if (message.Free != null && Object.hasOwnProperty.call(message, "Free"))
                 $root.gamecomm.GameStateFree.encode(message.Free, writer.uint32(58).fork()).ldelim();
-            if (message.Start != null && message.hasOwnProperty("Start"))
+            if (message.Start != null && Object.hasOwnProperty.call(message, "Start"))
                 $root.gamecomm.GameStateStart.encode(message.Start, writer.uint32(66).fork()).ldelim();
-            if (message.Playing != null && message.hasOwnProperty("Playing"))
+            if (message.Playing != null && Object.hasOwnProperty.call(message, "Playing"))
                 $root.gamecomm.GameStatePlaying.encode(message.Playing, writer.uint32(74).fork()).ldelim();
-            if (message.Over != null && message.hasOwnProperty("Over"))
+            if (message.Over != null && Object.hasOwnProperty.call(message, "Over"))
                 $root.gamecomm.GameStateOver.encode(message.Over, writer.uint32(82).fork()).ldelim();
             return writer;
         };
@@ -323,9 +323,9 @@ $root.baccarat = (function() {
         GameBaccaratHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(16).bool(message.IsWant);
             return writer;
         };
@@ -439,9 +439,9 @@ $root.baccarat = (function() {
         GameBaccaratSuperHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(16).bool(message.IsWant);
             return writer;
         };
@@ -555,9 +555,9 @@ $root.baccarat = (function() {
         GameBaccaratBet.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(8).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(16).int64(message.BetScore);
             return writer;
         };
@@ -674,15 +674,15 @@ $root.baccarat = (function() {
         GameBaccaratBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.State != null && message.hasOwnProperty("State"))
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
                 writer.uint32(16).int32(message.State);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
                 writer.uint32(26).string(message.Hints);
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(32).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(40).int64(message.BetScore);
             return writer;
         };
@@ -844,11 +844,11 @@ $root.baccarat = (function() {
         GameBaccaratOver.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
+            if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
-            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
+            if (message.PlayerCard != null && Object.hasOwnProperty.call(message, "PlayerCard"))
                 writer.uint32(18).bytes(message.PlayerCard);
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
+            if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
                 writer.uint32(26).bytes(message.BankerCard);
             return writer;
         };
@@ -985,7 +985,7 @@ $root.baccarat = (function() {
         GameBaccaratCheckout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
+            if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
                 writer.uint32(8).int64(message.Acquire);
             return writer;
         };

@@ -37,9 +37,9 @@ $root.cowcow = (function() {
         GameCowcowEnter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
+            if (message.UserInfo != null && Object.hasOwnProperty.call(message, "UserInfo"))
                 $root.gamecomm.PlayerInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
-            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(16).int64(message.TimeStamp);
             if (message.Chips != null && message.Chips.length) {
                 writer.uint32(26).fork();
@@ -50,11 +50,11 @@ $root.cowcow = (function() {
             if (message.AwardAreas != null && message.AwardAreas.length)
                 for (var i = 0; i < message.AwardAreas.length; ++i)
                     writer.uint32(34).bytes(message.AwardAreas[i]);
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
+            if (message.FreeTime != null && Object.hasOwnProperty.call(message, "FreeTime"))
                 writer.uint32(40).uint32(message.FreeTime);
-            if (message.BetTime != null && message.hasOwnProperty("BetTime"))
+            if (message.BetTime != null && Object.hasOwnProperty.call(message, "BetTime"))
                 writer.uint32(48).uint32(message.BetTime);
-            if (message.OpenTime != null && message.hasOwnProperty("OpenTime"))
+            if (message.OpenTime != null && Object.hasOwnProperty.call(message, "OpenTime"))
                 writer.uint32(56).uint32(message.OpenTime);
             return writer;
         };
@@ -266,9 +266,9 @@ $root.cowcow = (function() {
         GameCowcowHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(16).bool(message.IsWant);
             return writer;
         };
@@ -382,9 +382,9 @@ $root.cowcow = (function() {
         GameCowcowSuperHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
                 writer.uint32(16).bool(message.IsWant);
             return writer;
         };
@@ -498,9 +498,9 @@ $root.cowcow = (function() {
         GameCowcowPlaying.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.BetArea != null && message.hasOwnProperty("BetArea"))
+            if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(8).int32(message.BetArea);
-            if (message.BetScore != null && message.hasOwnProperty("BetScore"))
+            if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
                 writer.uint32(16).int64(message.BetScore);
             return writer;
         };
@@ -614,9 +614,9 @@ $root.cowcow = (function() {
         GameCowcowBetResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.State != null && message.hasOwnProperty("State"))
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
                 writer.uint32(8).int32(message.State);
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
                 writer.uint32(18).string(message.Hints);
             return writer;
         };
@@ -721,19 +721,19 @@ $root.cowcow = (function() {
         GameCowcowOver.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
+            if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
+            if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
                 writer.uint32(18).bytes(message.BankerCard);
-            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
+            if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
                 writer.uint32(26).bytes(message.TianCard);
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
+            if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
                 writer.uint32(34).bytes(message.XuanCard);
-            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
+            if (message.DiCard != null && Object.hasOwnProperty.call(message, "DiCard"))
                 writer.uint32(42).bytes(message.DiCard);
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
+            if (message.HuangCard != null && Object.hasOwnProperty.call(message, "HuangCard"))
                 writer.uint32(50).bytes(message.HuangCard);
-            if (message.CardValue != null && message.hasOwnProperty("CardValue"))
+            if (message.CardValue != null && Object.hasOwnProperty.call(message, "CardValue"))
                 writer.uint32(58).bytes(message.CardValue);
             return writer;
         };
@@ -950,7 +950,7 @@ $root.cowcow = (function() {
         GameCowcowCheckout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
+            if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
                 writer.uint32(8).int64(message.Acquire);
             return writer;
         };
