@@ -1,6 +1,6 @@
 export const CLIENT_VERSION = "1.0.0";
 
-export const IS_DANJI_MODE = true
+export const IS_DANJI_MODE = false;
 
 export enum GameKindEnum {
 	//百人
