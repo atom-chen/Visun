@@ -12,16 +12,6 @@ var pbfiles = [
 		channel:"game"
 	},
 	{ 
-		name:"chat", 
-		router:"chat",
-		channel:"game"
-	},
-	{ 
-		name:"luck", 
-		router:"chat",
-		channel:"game"
-	},
-	{ 
 		name:"comand", 
 		router:"game",
 		channel:"game"

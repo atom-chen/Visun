@@ -92,8 +92,7 @@ function doGenerate() {
 	routerStr += "//---------------------------------\n";
 	routerStr += "package gate\n\n";
 	routerStr += 'import (\n';
-	routerStr += '    "server/chat"\n';
-	//routerStr += '    "server/game"\n';
+	routerStr += '    "server/game"\n';
 	routerStr += '    "server/login"\n';
 	routerStr += '    "server/msg"\n';
 	routerStr += '    protoMsg "server/msg/go"\n';
