@@ -3,6 +3,7 @@ const path = require("path");
 const { exec } = require('child_process');
 const helputil = require("./helputil");
 const cfgData = require("./export_cfg");
+const genDeclare = require("./genDeclare");
 
 
 helputil.createDir("tmps");
@@ -16,8 +17,9 @@ function genProto() {
 	
 	if(!filename) {  
 		console.log("-------完成生成客户端协议-------");
-		exec("node gen_code.js", (a,b,c)=>{
-			console.log(a,b,c);
+		exec("node gen_code.js", (err3, stdout3, stderr3)=>{
+			console.log(err3, stdout3, stderr3);
+			genDeclare();
 		});
 		return;
 	}
@@ -26,8 +28,10 @@ function genProto() {
 
 	var Proto = helputil.getFileName(filename);
 	var dependMuds = helputil.fixPackageName(cfgData.protoDir+"/"+filename, Proto);
-	exec("pbjs -t json " + cfgData.protoDir+"/"+filename + " -o tmps/" + Proto + ".json", (err, stdout, stderr)=>{
-		exec("pbjs -t static-module -w commonjs -o " + cfgData.clientOutDir + Proto + ".js " + cfgData.protoDir + "/" + Proto + ".proto" + " " + "--no-comments", (err1, aaa, bbb)=>{
+	exec("pbjs -t json " + cfgData.protoDir+"/"+filename + " -o tmps/" + Proto + ".json", 
+	(err1, stdout1, stderr1)=>{
+		exec("pbjs -t static-module -w commonjs -o " + cfgData.clientOutDir + Proto + ".js " + cfgData.protoDir + "/" + Proto + ".proto" + " " + "--no-comments", 
+		(err2, stdout2, stderr2)=>{
 			helputil.fixClientOutput(Proto, dependMuds);
 			genProto();
 		});
