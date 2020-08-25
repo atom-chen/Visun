@@ -3,10 +3,10 @@
 //---------------------------------
 export default class EventCenter {
 	private static _instance:EventCenter = null;
-	private static _neterrInst:EventCenter = null;
+	private static _redinstance:EventCenter = null;
 	private _events = {};
 	
-	
+
 	public static getInstance() : EventCenter
 	{
 		if(!EventCenter._instance){ EventCenter._instance = new EventCenter(); }
@@ -17,9 +17,10 @@ export default class EventCenter {
 		EventCenter._instance = null;
 	}
 
-	public static neterrInstance() : EventCenter {
-		if(!EventCenter._neterrInst){ EventCenter._neterrInst = new EventCenter(); }
-		return EventCenter._neterrInst;
+	public static redInstance() : EventCenter
+	{
+		if(!EventCenter._redinstance){ EventCenter._redinstance = new EventCenter(); }
+		return EventCenter._redinstance;
 	}
 	
 
@@ -128,6 +129,32 @@ export default class EventCenter {
 				listener.callBack.apply(listener.target, arglist);
 			}
 		}
+
+		return true;
+	}
+
+	//触发
+	public triger(evtName:string|number, ...arglist:any[]) : boolean
+	{
+		var evtList = this._events[evtName];
+		
+		if(!evtList || evtList.length<=0) { 
+			return false; 
+		}
+
+		if(arglist.length < 1) {
+			for(var i = 0, len = evtList.length; i < len; i++) {
+				var listener = evtList[i];
+				listener.callBack.call(listener.target);
+			}
+		} else {
+			for(var i = 0, len = evtList.length; i < len; i++) {
+				var listener = evtList[i];
+				listener.callBack.apply(listener.target, arglist);
+			}
+		}
+
+		this._events[evtName].length = 0;
 
 		return true;
 	}

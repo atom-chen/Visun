@@ -67,7 +67,9 @@ export enum ChannelType {
 
 // HTTP响应状态
 export enum HttpResult {
-	Succ = 0,
+	Idle,
+	Working,
+	Succ,
 	Timeout,
 	Aborted,
 	Error
@@ -81,3 +83,12 @@ export enum BEHAVIOR_STATE {
 	FAIL,
 	STOPED
 };
+
+export const IMG_BASE64_PNG = "data:image/jpeg;base64,";
+export const IMG_BASE64_JPEG = "data:image/jpeg;base64,";
+
+export enum FILE_TYPE {
+	Image,
+	Video,
+	Other,
+}

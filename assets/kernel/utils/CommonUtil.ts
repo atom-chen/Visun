@@ -104,6 +104,10 @@ export default class CommonUtil {
 		target.on(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 
+	public static addDoubleClick(target:cc.Node, callback:Function, thisObj?:any, arg?:any) {
+
+	}
+
 	//移除节点上到点击事件
 	public static delClickEvent(target:cc.Node, callback:Function, thisObj?:any) {
 		target.off(cc.Node.EventType.TOUCH_END, callback, thisObj);
