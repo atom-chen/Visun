@@ -15,7 +15,6 @@ import IProcessor from "../../../kernel/net/processor/IProcessor";
 import NetHandlers from "../proxy/NetHandlers";
 import ChatHandlers from "../proxy/ChatHandlers";
 import { login_request, login_packet_define } from '../proto/net_login';
-import { chat_packet_define } from "../proto/net_chat";
 import { comand_packet_define } from "../proto/net_comand";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";
 import { baccarat_packet_define } from "../proto/net_baccarat";
@@ -23,7 +22,6 @@ import { cowcow_packet_define } from "../proto/net_cowcow";
 import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
-import { luck_packet_define } from "../proto/net_luck";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
 
 //登陆管理
@@ -74,8 +72,6 @@ export default class LoginMgr extends ModelBase {
         var g_leafProcessor = ProcessorMgr.getInstance().createProcessor(ChannelDefine.game, ProcessorType.LeafWs);
 		g_leafProcessor.unregistAllCmds();
         g_leafProcessor.registCmds(login_packet_define);
-		g_leafProcessor.registCmds(chat_packet_define);
-		g_leafProcessor.registCmds(luck_packet_define);
         g_leafProcessor.registCmds(comand_packet_define);
         g_leafProcessor.registCmds(gamecomm_packet_define);
         g_leafProcessor.registCmds(baccarat_packet_define);
