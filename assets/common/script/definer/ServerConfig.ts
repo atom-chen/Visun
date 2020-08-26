@@ -9,7 +9,7 @@ var server_list = {
     },
     develop: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.1.101:9650",
+        leafServer: "ws://192.168.1.108:9650",
         chatServer: ""
     },
     jetten: {

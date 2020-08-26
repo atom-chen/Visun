@@ -14,14 +14,7 @@ http://nodejs.cn/download/
 
 客户端导协议步骤：
 1. 将xxxxxx.proto文件放入in目录
+2. 双击执行 "自动化代码.bat"
 
-2. 打开xxxxxx.proto文件，文件首部加上下面两条语句（如果已经有则忽略该步骤）
-syntax = "proto3";
-package xxxxxx;
-
-3. 仿照 “生成 login.bat”，写一个生成自己的接口的bat，然后双击执行bat文件
-
-
-
-导出自动化代码步骤：
-1. 双击执行 "自动化代码.bat"
+服务端导协议（ Mac ）：
+protoc --go_out=plugins=grpc:. *.proto

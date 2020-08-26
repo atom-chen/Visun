@@ -15,7 +15,7 @@ function genProto() {
 		return;
 	}
 
-	console.log("生成：", filename);
+	console.log("生成声明文件：", filename);
 
 	var Proto = helputil.getFileName(filename);
 	//var dependMuds = helputil.fixPackageName(cfgData.protoDir+"/"+filename, Proto);
