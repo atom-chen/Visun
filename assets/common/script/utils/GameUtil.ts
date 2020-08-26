@@ -59,7 +59,7 @@ export default class GameUtil {
 		if(isNil(spr)) { return; }
 		if(v<0) { v=0; } 
 		if(v>1) { v=1; }
-		var respath = "common/imgs/person/headIcon_"+v;
+		var respath = "appqp/imgs/person/headIcon_"+v;
 
 		var sf0 = cc.loader.getRes(respath, cc.SpriteFrame);
 		if(sf0) {

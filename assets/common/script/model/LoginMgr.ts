@@ -13,7 +13,6 @@ import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import IChannel from "../../../kernel/net/channel/IChannel";
 import IProcessor from "../../../kernel/net/processor/IProcessor";
 import NetHandlers from "../proxy/NetHandlers";
-import ChatHandlers from "../proxy/ChatHandlers";
 import { login_request, login_packet_define } from '../proto/net_login';
 import { comand_packet_define } from "../proto/net_comand";
 import { gamecomm_packet_define } from "../proto/net_gamecomm";
@@ -23,6 +22,10 @@ import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
 import { IS_DANJI_MODE } from "../definer/ConstDefine";
+import { isEmpty, isNil } from "../../../kernel/utils/GlobalFuncs";
+import MyCrypto from "../../../kernel/secret/MyCrypto";
+import LocalCache from "../../../kernel/localcache/LocalCache";
+import LogicCenter from "./LogicCenter";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -80,7 +83,6 @@ export default class LoginMgr extends ModelBase {
         g_leafProcessor.registCmds(mahjong_packet_define);
 		g_leafProcessor.registCmds(fishLord_packet_define);
 		g_leafProcessor.getDispatcher().addObserver(NetHandlers);
-		g_leafProcessor.getDispatcher().addObserver(ChatHandlers);
 		return g_leafProcessor;
 	}
 
@@ -140,6 +142,8 @@ export default class LoginMgr extends ModelBase {
 			SecurityCode: "4245", 
 			MachineCode: this.getMachineCode()
 		});
+
+		LoginMgr.saveQuickData(Account, Pswd);
 	}
 
 	//注册
@@ -164,6 +168,47 @@ export default class LoginMgr extends ModelBase {
 			MachineCode : this.getMachineCode(),
 			InvitationCode : InviteCode
 		})
+	}
+
+	//-------快速登陆------------
+	static saveQuickData(acc:string, pswd:string) {
+		if(isEmpty(acc) || isEmpty(pswd)) { return; }
+		var ms = new MyCrypto();
+        var priAccount = ms.encrypt(acc, "fagheiasjfiea", 256);
+		var priSecret = ms.encrypt(pswd, "fagheiasjfiea", 256);
+		LocalCache.getInstance("lusr").write("acc", priAccount);
+		LocalCache.getInstance("lusr").write("see", priSecret);
+	}
+
+	public quickLogin(){
+		var priAccount = LocalCache.getInstance("lusr").read("acc");
+		var priSecret = LocalCache.getInstance("lusr").read("see");
+		if(isNil(priAccount) || isNil(priSecret)) {
+			this.checkLogin(true);
+			return;
+		} else {
+			var ms = new MyCrypto();
+			var acc = ms.decrypt(priAccount, "fagheiasjfiea", 256);
+			var pswd = ms.decrypt(priSecret, "fagheiasjfiea", 256);
+			if(isNil(acc) || isNil(pswd)){
+				this.checkLogin(true);
+				return;
+			}
+			this.leafLogin(acc, pswd);
+		}
+	}
+
+	public logout() {
+		LocalCache.getInstance("lusr").remove("acc");
+		LocalCache.getInstance("lusr").remove("see");
+	//	login_request.Exit({});
+        LogicCenter.getInstance().clear();
+        LogicCenter.getInstance().init();
+		UIManager.openPopwnd(ViewDefine.UILogin, false);
+		var leafChan = ChannelMgr.getInstance().getChannel(ChannelDefine.game);
+		if(leafChan) {
+			leafChan.close();
+		}
 	}
 
 }

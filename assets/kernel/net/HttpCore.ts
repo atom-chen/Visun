@@ -352,12 +352,8 @@ export default class HttpCore {
 	}
 
 	private static downCache : {[key:string]:HttpDownTask} = {};
-	private static downDispatcher = new EventCenter;
 	private static dispatchDown(downKey:string, iCode:HttpResult, data:any) {
-		this.downDispatcher.triger(downKey, iCode, data);
-	}
-	public static getDispatcher() {
-		return this.downDispatcher;
+		EventCenter.downInstance().triger(downKey, iCode, data);
 	}
 	public static callDown(url:any, addr:any, params:any, headinfo:any, extraKey:string, callback:(iCode:HttpResult, data:any)=>void, thisObj:any) 
 	{
@@ -373,7 +369,7 @@ export default class HttpCore {
 
 		var downKey = this.genKey(url, addr, params, headinfo, extraKey);
 
-		this.downDispatcher.listen(downKey, callback, thisObj);
+		EventCenter.downInstance().listen(downKey, callback, thisObj);
 
 		if(this.downCache[downKey]) {
 			if(this.downCache[downKey].state === HttpResult.Succ) {

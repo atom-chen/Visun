@@ -2,6 +2,7 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LocalCache from "../../../../../kernel/localcache/LocalCache";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 const {ccclass, property} = cc._decorator;
 
@@ -51,6 +52,10 @@ export default class UISettor extends BaseComponent {
 			} else {
 				this.m_lab.lab_effect.string = "关";
 			}
+		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_quitlogin, function(){
+			LoginMgr.getInstance().logout();
 		}, this);
 	}
 }

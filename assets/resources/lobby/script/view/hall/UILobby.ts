@@ -8,8 +8,6 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
-import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
-import { gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 
 
@@ -101,7 +99,7 @@ export default class UILobby extends BaseComponent {
 		var hero = LoginUser.getInstance();
 		this.m_ui.lab_name.getComponent(cc.Label).string = "昵称：" + hero.Name;
 		this.m_ui.lab_id.getComponent(cc.Label).string = "ID：" + hero.UserID;
-		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.Gold.toString();
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.Gold);
 		GameUtil.setHeadIcon(this.m_ui.headNode, 1);
 	}
 
@@ -121,9 +119,7 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
-			//GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
-			UIManager.openPanel(ViewDefine.UIHall);
-			CommonUtil.safeDelete(this);
+			UIManager.openPopwnd(ViewDefine.UISetting, true);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

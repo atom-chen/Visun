@@ -751,6 +751,61 @@ export default class CommonUtil {
             cols : col,
             posList : posList
         }
+	}
+	
+
+	public static checkName(str:string) : boolean {
+		if(isNil(str) || str==="") { return false; }
+		var reg = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/;
+		return reg.test(str);
+	}
+
+	public static checkAccount(str:string) : boolean {
+		if(isNil(str) || str==="") { return false; }
+		var reg = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/;
+		return reg.test(str);
+	}
+
+	public static isValidSecret(sec:string) : boolean{
+        if(isEmpty(sec) || sec.length<6) {
+            return false;
+        }
+        var reg = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/;
+		return reg.test(sec);
     }
+
+	public static checkNumber(str:string) : boolean {
+		if(isNil(str) || str==="") { return false; }
+		if(str[0] === "-") {
+			str = str.substring(1);
+		}
+		var reg = /^[\.0-9]+$/;
+		return reg.test(str);
+	}
+
+	public static parseNumber(str:string) : number {
+		if(isNil(str) || str==="") { return 0; }
+		var v = parseFloat(str);
+		return v;
+	}
+
+	public static checkInt(str:string) : boolean {
+		if(isNil(str) || str==="") { return false; }
+		if(str[0] === "-") {
+			str = str.substring(1);
+		}
+		var reg = /^[0-9]+$/;
+		return reg.test(str);
+	}
+
+	public static fixRealMoney(v:number) : number {
+		if(isNil(v)) { return v; }
+		return v/100;
+	}
+
+	public static formRealMoney(v:number) : string {
+		var ret = (v/100).toFixed(2);
+		return ret;
+	}
 
 }

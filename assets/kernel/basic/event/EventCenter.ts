@@ -4,6 +4,8 @@
 export default class EventCenter {
 	private static _instance:EventCenter = null;
 	private static _redinstance:EventCenter = null;
+	private static _downinstance:EventCenter = null;
+	
 	private _events = {};
 	
 
@@ -21,6 +23,11 @@ export default class EventCenter {
 	{
 		if(!EventCenter._redinstance){ EventCenter._redinstance = new EventCenter(); }
 		return EventCenter._redinstance;
+	}
+
+	public static downInstance() : EventCenter {
+		if(!EventCenter._downinstance){ EventCenter._downinstance = new EventCenter(); }
+		return EventCenter._downinstance;
 	}
 	
 
