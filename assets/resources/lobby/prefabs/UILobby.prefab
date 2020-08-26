@@ -543,7 +543,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        509,
+        507,
         0,
         0,
         0,
@@ -799,7 +799,7 @@
     "_target": null,
     "_alignFlags": 33,
     "_left": 1177.3899999999999,
-    "_right": 108,
+    "_right": 110,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -923,7 +923,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 22.25,
+      "width": 16.68,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -976,7 +976,7 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 40,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
