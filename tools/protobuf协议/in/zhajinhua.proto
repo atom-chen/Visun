@@ -6,12 +6,12 @@ import "gamecomm.proto";
 //战士信息
 message FighterInfo {
 	uint64 UserId = 1;
-	uint64 RecentBetMoney = 2;	//最新下注金额
-	uint64 TotalBetMoney = 3;	//总共下注了多少
-	int32 SeatId = 3;			// 座位号
-	int32 FightState = 4; 		// 未准备 已准备  跟注 加注 弃牌 比牌输
-	bool IsSee = 5;				// 是否已看牌
-	CardInfo Cards = 6;			// 看牌时和游戏结束时亮自己的牌时才有数据
+	int32 SeatId = 2;			// 座位号
+	int32 FightState = 3; 		// 未准备 已准备  跟注 加注 弃牌 比牌输
+	bool IsSee = 4;				// 是否已看牌
+	uint64 RecentBetMoney = 5;	//最新下注金额
+	uint64 TotalBetMoney = 6;	//总共下注了多少
+	CardInfo Cards = 7;			// 看牌时和游戏结束时亮自己的牌时才有数据
 }
 
 
@@ -20,9 +20,9 @@ message GameZhajinhuaEnter {
     int64 TimeStamp = 1;					//时间戳
 	GameZhajinhuaState GameState = 2;		//当前状态
 	int64 TotalBet = 3;						//当前总下注额
-	uint64 MinBet = 5;						//当前注额
-	uint64 CurHost = 6;						//当前庄家
-	repeated FighterInfo Fighters = 7;		//参战玩家序列
+	uint64 MinBet = 4;						//当前注额
+	uint64 CurHost = 5;						//当前庄家
+	repeated FighterInfo Fighters = 6;		//参战玩家序列
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
@@ -95,5 +95,6 @@ message GameZhajinhuaGiveupResp {
 
 //结算
 message GameZhajinhuaOver {
-	uint64 WinnerId = 7;                //胜利者ID
+	uint64 WinnerId = 1;                //胜利者ID
+	repeated MoneyCalculateInfo = 2;	//各玩家输赢情况
 }

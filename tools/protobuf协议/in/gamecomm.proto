@@ -29,6 +29,13 @@ message CardInfo {
 	int32 CardType = 2;			//牌型
 }
 
+message MoneyCalculateInfo {
+    uint64 UserID = 1;
+    uint64 Money = 2;       //当前余额
+    int64 ChangeValue = 3;  //增减了多少
+    string Reason = 4;      //增减原因描述
+}
+
 //-----------------------------------------------------------------------------------------
 
 //进入游戏
