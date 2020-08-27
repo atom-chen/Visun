@@ -14,6 +14,9 @@ import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
+import { brcowcow } from "../../../../../../declares/brcowcow";
+import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 
 
 
@@ -75,40 +78,47 @@ export default class BrnnUI extends BaseComponent {
 	//准备阶段
 	private toStateReady() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
-		
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateBetting();
-		}));
 	}
 
 	//下注阶段
 	private toStateBetting() {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
-			this.toStateJiesuan();
-		}));
 	}
 
-	private playJiesuan() {
-		//开牌
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards([PokerCode.FK_10, PokerCode.HT_A, PokerCode.HT_J, PokerCode.MH_5, PokerCode.HX_9], true);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards([PokerCode.FK_3, PokerCode.HT_8, PokerCode.HT_2, PokerCode.MH_6, PokerCode.HX_A], true);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards([PokerCode.FK_7, PokerCode.HT_4, PokerCode.HT_3, PokerCode.MH_Q, PokerCode.HX_K], true);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards([PokerCode.HT_10, PokerCode.MH_A, PokerCode.HT_5, PokerCode.FK_K, PokerCode.HT_9], true);
-		
+	private GameBrcowcowBetResp(param:brcowcow.GameBrcowcowBetResp) {
+		if(isNil(param)) { return; }
+		var money = param.Money;
+		var idx = this.compBox.getIndexByMoney(money);
+		if(idx < 0) {
+			idx = this.compBox.getSelectedIndex();
+		}
+		var chip = this._pool.newObject();
+		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
+		this.m_ui.chipLayer.addChild(chip);
+		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
+	}
+
+	private GameBrcowcowOverResp(param:brcowcow.GameBrcowcowOverResp) {
+		if(isNil(param)) { return; }
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+
+		for(var i = 0; i < param.Cards.length; i++) {
+			this.m_ui["CpnHandcard"+(i+1)].getComponent(CpnHandcard).resetCards(param.Cards[i].Cards, true);
+		}
+
+		TimerManager.delaySecond(1, newHandler(this.playCollect, this, param));
+	}
+
+	private playCollect(tmr, param) {
 		//收集筹码
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
+
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -126,31 +136,6 @@ export default class BrnnUI extends BaseComponent {
 				}
 			}, this)
 		));
-		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
-	}
-
-	//结算阶段
-	private toStateJiesuan() {
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-
-		this.playJiesuan();
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateReady();
-		}));
-	}
-
-	private onRespBrcowcowBet(param) {
-		param = param || {AreaId:2};
-		var idx = this.compBox.getSelectedIndex();
-		var chip = this._pool.newObject();
-		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
-		this.m_ui.chipLayer.addChild(chip);
-		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
 	}
 
 	private onPlayersBet(tmr:BaseTimer, param:any) {
@@ -176,13 +161,20 @@ export default class BrnnUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
-	private onClickArea(areaId:number) {
-		var idx = this.compBox.getSelectedIndex();
-	//	brcowcow_request.ReqBrcowcowBet({AreaId: areaId, Money: this._rule[idx-1]});
+	GameBrcowcowStateResp(param:brcowcow.GameBrcowcowStateResp) {
+		if(isNil(param)) { return; }
+		// if(param.CurState == 1) {
+		// 	this.toStateReady();
+		// }
+		// else if(param.CurState == 2) {
+		// 	this.toStateBetting();
+		// }
 	}
 
 	private initNetEvent() {
-	//	EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowBetResp, this.GameBrcowcowBetResp, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowOverResp, this.GameBrcowcowOverResp ,this);
+		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowStateResp, this.GameBrcowcowStateResp, this);
 	}
 
 	private initUIEvent() {
@@ -198,6 +190,11 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.area2, function(){ this.onClickArea(2); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area3, function(){ this.onClickArea(3); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area4, function(){ this.onClickArea(4); }, this);
+	}
+
+	private onClickArea(areaId:number) {
+		var idx = this.compBox.getSelectedIndex();
+		brcowcow_request.GameBrcowcowBetReq({AreaId:areaId, Money:this._rule[idx-1]})
 	}
 
 }

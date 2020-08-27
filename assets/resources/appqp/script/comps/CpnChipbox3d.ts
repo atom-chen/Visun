@@ -42,7 +42,15 @@ export default class CpnChipbox3d extends BaseComponent {
         this.onSelect(v);
     }
 
-    
+    public getIndexByMoney(v:number) : number {
+        for(var i=this._values.length-1; i>=0; i--) {
+            if(v == this._values[i]) {
+                return i+1;
+            }
+        }
+        return -1;
+    }
+     
     public setChipValues(values:number[]) {
         if(!this._values) {
             CommonUtil.traverseNodes(this.node, this.m_ui);

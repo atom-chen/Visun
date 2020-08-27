@@ -29,7 +29,7 @@ export default class CpnHandcard extends cc.Component {
         this.initSelectflag();
     }
     
-    public resetCards(cards:Array<PokerCode>, bPlay:boolean) {
+    public resetCards(cards:Array<PokerCode>|Uint8Array, bPlay:boolean) {
         this.clearCards();
         if(cards===null || cards===undefined) {
             return;
