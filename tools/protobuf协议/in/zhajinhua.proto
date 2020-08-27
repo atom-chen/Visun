@@ -1,0 +1,91 @@
+syntax = "proto3";
+package go;
+import "gamecomm.proto";
+
+
+//战士信息
+message FighterInfo {
+	uint64 UserId = 1;
+	uint64 Money = 2;
+	int32 SeatId = 3;		// 座位号
+	int32 FightState = 4; 	// 未准备 已准备 是否已看牌 跟注 加注 弃牌 比牌输
+	CardInfo Cards = 5;		// 看牌时和游戏结束时亮自己的牌时才有数据
+}
+
+
+//入场
+message GameZhajinhuaEnter {
+    int64 TimeStamp = 1;					//时间戳
+	GameZhajinhuaState GameState = 2;		//当前状态
+	int32 CurRound = 3;						//当前回合
+	int32 TotalRound = 4;					//总回合数
+	uint64 MinBet = 5;						//当前注额
+	repeated FighterInfo Fighters = 6;		//参战玩家序列
+}
+
+//当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
+message GameZhajinhuaState {
+    uint32 CurState = 1;
+    uint64 CurStateTimeout = 2;
+	uint64 CurTurnTo = 3;		//轮到谁
+}
+
+//准备
+message GameZhajinhuaReadyReq {
+
+}
+message GameZhajinhuaReadyResp {
+	uint64 UserId = 1;
+}
+
+//跟注
+message GameZhajinhuaFollowReq {
+	
+}
+message GameZhajinhuaFollowResp {
+	uint64 UserId = 1;
+	int64 Money = 2;
+}
+
+//加注
+message GameZhajinhuaRaiseReq {
+	int64 Money = 1;
+}
+message GameZhajinhuaRaiseResp {
+	uint64 UserId = 1;
+	int64 Money = 2;
+}
+
+//看牌
+message GameZhajinhuaLookResp {
+	
+}
+message GameZhajinhuaLookResp {
+	uint64 UserId = 1;
+	CardInfo Cards = 2;
+}
+
+//比牌
+message GameZhajinhuaCompareReq {
+	uint64 HitId = 1;					//比牌对象ID
+}
+message GameZhajinhuaCompareResp {
+	uint64 AttackerId = 1;              //发起者ID
+	uint64 HitId = 2;                   //比牌对象ID
+	uint64 WinnerId = 3;                //胜利者ID
+	repeated CardInfo AttackerCards = 4;   //发起者手牌
+	repeated CardInfo HitCards = 5;        //比牌对象手牌
+}
+
+//弃牌
+message GameZhajinhuaGiveupReq {
+
+}
+message GameZhajinhuaGiveupResp {
+	uint64 UserId = 1;
+}
+
+//结算
+message GameZhajinhuaOver {
+	uint64 WinnerId = 7;                //胜利者ID
+}
