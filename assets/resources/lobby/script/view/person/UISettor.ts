@@ -8,54 +8,56 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UISettor extends BaseComponent {
+	
+	refreshMusic() {
+		if(LocalCache.getInstance("pub").read("music", 1)==1){
+			this.m_lab.lab_music.string = "开";
+			AudioManager.getInstance().enableMusic(true);
+		} else {
+			this.m_lab.lab_music.string = "关";
+			AudioManager.getInstance().enableMusic(false);
+		}
+	}
+
+	refreshEffect() {
+		if(LocalCache.getInstance("pub").read("effect", 1)==1){
+			this.m_lab.lab_effect.string = "开";
+			AudioManager.getInstance().enableEffects(true);
+		} else {
+			this.m_lab.lab_effect.string = "关";
+			AudioManager.getInstance().enableEffects(false);
+		}
+	}
+
 	start() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
 
-		if(LocalCache.getInstance("pub").read("music", 1)==1){
-			this.m_lab.lab_music.string = "开";
-		} else {
-			this.m_lab.lab_music.string = "关";
-		}
-
-		if(LocalCache.getInstance("pub").read("effect", 1)==1){
-			this.m_lab.lab_effect.string = "开";
-		} else {
-			this.m_lab.lab_effect.string = "关";
-		}
-
+		this.refreshMusic();
+		this.refreshEffect();
+		
 		CommonUtil.addClickEvent(this.m_ui.btn_music, function(){
 			if(LocalCache.getInstance("pub").read("music", 1)==1) {
 				LocalCache.getInstance("pub").write("music", 0);
-				AudioManager.getInstance().enableMusic(false);
 			} else {
-				LocalCache.getInstance("pub").read("music", 1);
-				AudioManager.getInstance().enableMusic(true);
+				LocalCache.getInstance("pub").write("music", 1);
 			}
-			if(LocalCache.getInstance("pub").read("music", 1)==1){
-				this.m_lab.lab_music.string = "开";
-			} else {
-				this.m_lab.lab_music.string = "关";
-			}
+			this.refreshMusic();
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_effect, function(){
-			if(LocalCache.getInstance("pub").read("effect", 1==1)) {
+			if(LocalCache.getInstance("pub").read("effect", 1)==1) {
 				LocalCache.getInstance("pub").write("effect", 0);
-				AudioManager.getInstance().enableEffects(false);
 			} else {
 				LocalCache.getInstance("pub").write("effect", 1);
-				AudioManager.getInstance().enableEffects(true);
 			}
-			if(LocalCache.getInstance("pub").read("effect", 1)==1){
-				this.m_lab.lab_effect.string = "开";
-			} else {
-				this.m_lab.lab_effect.string = "关";
-			}
+			this.refreshEffect();
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_quitlogin, function(){
+			CommonUtil.safeDelete(this);
 			LoginMgr.getInstance().logout();
 		}, this);
 	}
+
 }
