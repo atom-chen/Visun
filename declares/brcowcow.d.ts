@@ -1,740 +1,968 @@
 import * as $protobuf from "protobufjs";
-/** Namespace baccarat. */
-export namespace baccarat {
+/** Namespace brcowcow. */
+export namespace brcowcow {
 
-    /** Properties of a GameBaccaratEnter. */
-    interface IGameBaccaratEnter {
+    /** Properties of a GameBrcowcowEnterResp. */
+    interface IGameBrcowcowEnterResp {
 
-        /** GameBaccaratEnter TimeStamp */
+        /** GameBrcowcowEnterResp TimeStamp */
         TimeStamp?: (number|Long|null);
 
-        /** GameBaccaratEnter Chips */
-        Chips?: (number[]|null);
+        /** GameBrcowcowEnterResp AreaBets */
+        AreaBets?: ((number|Long)[]|null);
 
-        /** GameBaccaratEnter AwardAreas */
-        AwardAreas?: (Uint8Array[]|null);
+        /** GameBrcowcowEnterResp MyBets */
+        MyBets?: ((number|Long)[]|null);
 
-        /** GameBaccaratEnter FreeTime */
-        FreeTime?: (number|null);
-
-        /** GameBaccaratEnter BetTime */
-        BetTime?: (number|null);
-
-        /** GameBaccaratEnter OpenTime */
-        OpenTime?: (number|null);
-
-        /** GameBaccaratEnter Free */
-        Free?: (gamecomm.IGameStateFree|null);
-
-        /** GameBaccaratEnter Start */
-        Start?: (gamecomm.IGameStateStart|null);
-
-        /** GameBaccaratEnter Playing */
-        Playing?: (gamecomm.IGameStatePlaying|null);
-
-        /** GameBaccaratEnter Over */
-        Over?: (gamecomm.IGameStateOver|null);
+        /** GameBrcowcowEnterResp GameState */
+        GameState?: (brcowcow.IGameBrcowcowStateResp|null);
     }
 
-    /** Represents a GameBaccaratEnter. */
-    class GameBaccaratEnter implements IGameBaccaratEnter {
+    /** Represents a GameBrcowcowEnterResp. */
+    class GameBrcowcowEnterResp implements IGameBrcowcowEnterResp {
 
         /**
-         * Constructs a new GameBaccaratEnter.
+         * Constructs a new GameBrcowcowEnterResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IGameBaccaratEnter);
+        constructor(properties?: brcowcow.IGameBrcowcowEnterResp);
 
-        /** GameBaccaratEnter TimeStamp. */
+        /** GameBrcowcowEnterResp TimeStamp. */
         public TimeStamp: (number|Long);
 
-        /** GameBaccaratEnter Chips. */
-        public Chips: number[];
+        /** GameBrcowcowEnterResp AreaBets. */
+        public AreaBets: (number|Long)[];
 
-        /** GameBaccaratEnter AwardAreas. */
-        public AwardAreas: Uint8Array[];
+        /** GameBrcowcowEnterResp MyBets. */
+        public MyBets: (number|Long)[];
 
-        /** GameBaccaratEnter FreeTime. */
-        public FreeTime: number;
-
-        /** GameBaccaratEnter BetTime. */
-        public BetTime: number;
-
-        /** GameBaccaratEnter OpenTime. */
-        public OpenTime: number;
-
-        /** GameBaccaratEnter Free. */
-        public Free?: (gamecomm.IGameStateFree|null);
-
-        /** GameBaccaratEnter Start. */
-        public Start?: (gamecomm.IGameStateStart|null);
-
-        /** GameBaccaratEnter Playing. */
-        public Playing?: (gamecomm.IGameStatePlaying|null);
-
-        /** GameBaccaratEnter Over. */
-        public Over?: (gamecomm.IGameStateOver|null);
+        /** GameBrcowcowEnterResp GameState. */
+        public GameState?: (brcowcow.IGameBrcowcowStateResp|null);
 
         /**
-         * Creates a new GameBaccaratEnter instance using the specified properties.
+         * Creates a new GameBrcowcowEnterResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaccaratEnter instance
+         * @returns GameBrcowcowEnterResp instance
          */
-        public static create(properties?: baccarat.IGameBaccaratEnter): baccarat.GameBaccaratEnter;
+        public static create(properties?: brcowcow.IGameBrcowcowEnterResp): brcowcow.GameBrcowcowEnterResp;
 
         /**
-         * Encodes the specified GameBaccaratEnter message. Does not implicitly {@link baccarat.GameBaccaratEnter.verify|verify} messages.
-         * @param message GameBaccaratEnter message or plain object to encode
+         * Encodes the specified GameBrcowcowEnterResp message. Does not implicitly {@link brcowcow.GameBrcowcowEnterResp.verify|verify} messages.
+         * @param message GameBrcowcowEnterResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IGameBaccaratEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IGameBrcowcowEnterResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaccaratEnter message, length delimited. Does not implicitly {@link baccarat.GameBaccaratEnter.verify|verify} messages.
-         * @param message GameBaccaratEnter message or plain object to encode
+         * Encodes the specified GameBrcowcowEnterResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowEnterResp.verify|verify} messages.
+         * @param message GameBrcowcowEnterResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IGameBaccaratEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowEnterResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaccaratEnter message from the specified reader or buffer.
+         * Decodes a GameBrcowcowEnterResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaccaratEnter
+         * @returns GameBrcowcowEnterResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratEnter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowEnterResp;
 
         /**
-         * Decodes a GameBaccaratEnter message from the specified reader or buffer, length delimited.
+         * Decodes a GameBrcowcowEnterResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratEnter
+         * @returns GameBrcowcowEnterResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratEnter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowEnterResp;
 
         /**
-         * Verifies a GameBaccaratEnter message.
+         * Verifies a GameBrcowcowEnterResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaccaratEnter message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameBrcowcowEnterResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaccaratEnter
+         * @returns GameBrcowcowEnterResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratEnter;
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowEnterResp;
 
         /**
-         * Creates a plain object from a GameBaccaratEnter message. Also converts values to other types if specified.
-         * @param message GameBaccaratEnter
+         * Creates a plain object from a GameBrcowcowEnterResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowEnterResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.GameBaccaratEnter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.GameBrcowcowEnterResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaccaratEnter to JSON.
+         * Converts this GameBrcowcowEnterResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameBaccaratHost. */
-    interface IGameBaccaratHost {
+    /** Properties of a GameBrcowcowStateResp. */
+    interface IGameBrcowcowStateResp {
 
-        /** GameBaccaratHost UserID */
+        /** GameBrcowcowStateResp CurState */
+        CurState?: (number|null);
+
+        /** GameBrcowcowStateResp CurStateTimeout */
+        CurStateTimeout?: (number|Long|null);
+    }
+
+    /** Represents a GameBrcowcowStateResp. */
+    class GameBrcowcowStateResp implements IGameBrcowcowStateResp {
+
+        /**
+         * Constructs a new GameBrcowcowStateResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowStateResp);
+
+        /** GameBrcowcowStateResp CurState. */
+        public CurState: number;
+
+        /** GameBrcowcowStateResp CurStateTimeout. */
+        public CurStateTimeout: (number|Long);
+
+        /**
+         * Creates a new GameBrcowcowStateResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowStateResp instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowStateResp): brcowcow.GameBrcowcowStateResp;
+
+        /**
+         * Encodes the specified GameBrcowcowStateResp message. Does not implicitly {@link brcowcow.GameBrcowcowStateResp.verify|verify} messages.
+         * @param message GameBrcowcowStateResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowStateResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowStateResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowStateResp.verify|verify} messages.
+         * @param message GameBrcowcowStateResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowStateResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowStateResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowStateResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowStateResp;
+
+        /**
+         * Decodes a GameBrcowcowStateResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowStateResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowStateResp;
+
+        /**
+         * Verifies a GameBrcowcowStateResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowStateResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowStateResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowStateResp;
+
+        /**
+         * Creates a plain object from a GameBrcowcowStateResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowStateResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowStateResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowStateResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowBetReq. */
+    interface IGameBrcowcowBetReq {
+
+        /** GameBrcowcowBetReq AreaId */
+        AreaId?: (number|null);
+
+        /** GameBrcowcowBetReq Money */
+        Money?: (number|Long|null);
+    }
+
+    /** Represents a GameBrcowcowBetReq. */
+    class GameBrcowcowBetReq implements IGameBrcowcowBetReq {
+
+        /**
+         * Constructs a new GameBrcowcowBetReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowBetReq);
+
+        /** GameBrcowcowBetReq AreaId. */
+        public AreaId: number;
+
+        /** GameBrcowcowBetReq Money. */
+        public Money: (number|Long);
+
+        /**
+         * Creates a new GameBrcowcowBetReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowBetReq instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowBetReq): brcowcow.GameBrcowcowBetReq;
+
+        /**
+         * Encodes the specified GameBrcowcowBetReq message. Does not implicitly {@link brcowcow.GameBrcowcowBetReq.verify|verify} messages.
+         * @param message GameBrcowcowBetReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowBetReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowBetReq message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowBetReq.verify|verify} messages.
+         * @param message GameBrcowcowBetReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowBetReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowBetReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowBetReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowBetReq;
+
+        /**
+         * Decodes a GameBrcowcowBetReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowBetReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowBetReq;
+
+        /**
+         * Verifies a GameBrcowcowBetReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowBetReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowBetReq
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowBetReq;
+
+        /**
+         * Creates a plain object from a GameBrcowcowBetReq message. Also converts values to other types if specified.
+         * @param message GameBrcowcowBetReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowBetReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowBetReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowBetResp. */
+    interface IGameBrcowcowBetResp {
+
+        /** GameBrcowcowBetResp UserId */
+        UserId?: (number|Long|null);
+
+        /** GameBrcowcowBetResp AreaId */
+        AreaId?: (number|null);
+
+        /** GameBrcowcowBetResp Money */
+        Money?: (number|Long|null);
+    }
+
+    /** Represents a GameBrcowcowBetResp. */
+    class GameBrcowcowBetResp implements IGameBrcowcowBetResp {
+
+        /**
+         * Constructs a new GameBrcowcowBetResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowBetResp);
+
+        /** GameBrcowcowBetResp UserId. */
+        public UserId: (number|Long);
+
+        /** GameBrcowcowBetResp AreaId. */
+        public AreaId: number;
+
+        /** GameBrcowcowBetResp Money. */
+        public Money: (number|Long);
+
+        /**
+         * Creates a new GameBrcowcowBetResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowBetResp instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowBetResp): brcowcow.GameBrcowcowBetResp;
+
+        /**
+         * Encodes the specified GameBrcowcowBetResp message. Does not implicitly {@link brcowcow.GameBrcowcowBetResp.verify|verify} messages.
+         * @param message GameBrcowcowBetResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowBetResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowBetResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowBetResp.verify|verify} messages.
+         * @param message GameBrcowcowBetResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowBetResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowBetResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowBetResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowBetResp;
+
+        /**
+         * Decodes a GameBrcowcowBetResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowBetResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowBetResp;
+
+        /**
+         * Verifies a GameBrcowcowBetResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowBetResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowBetResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowBetResp;
+
+        /**
+         * Creates a plain object from a GameBrcowcowBetResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowBetResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowBetResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowBetResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowOverResp. */
+    interface IGameBrcowcowOverResp {
+
+        /** GameBrcowcowOverResp Cards */
+        Cards?: (gamecomm.ICardInfo[]|null);
+
+        /** GameBrcowcowOverResp AreaResult */
+        AreaResult?: (Uint8Array|null);
+
+        /** GameBrcowcowOverResp TotalSettlement */
+        TotalSettlement?: ((number|Long)[]|null);
+
+        /** GameBrcowcowOverResp MySettlement */
+        MySettlement?: (number|Long|null);
+    }
+
+    /** Represents a GameBrcowcowOverResp. */
+    class GameBrcowcowOverResp implements IGameBrcowcowOverResp {
+
+        /**
+         * Constructs a new GameBrcowcowOverResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowOverResp);
+
+        /** GameBrcowcowOverResp Cards. */
+        public Cards: gamecomm.ICardInfo[];
+
+        /** GameBrcowcowOverResp AreaResult. */
+        public AreaResult: Uint8Array;
+
+        /** GameBrcowcowOverResp TotalSettlement. */
+        public TotalSettlement: (number|Long)[];
+
+        /** GameBrcowcowOverResp MySettlement. */
+        public MySettlement: (number|Long);
+
+        /**
+         * Creates a new GameBrcowcowOverResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowOverResp instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowOverResp): brcowcow.GameBrcowcowOverResp;
+
+        /**
+         * Encodes the specified GameBrcowcowOverResp message. Does not implicitly {@link brcowcow.GameBrcowcowOverResp.verify|verify} messages.
+         * @param message GameBrcowcowOverResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowOverResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowOverResp.verify|verify} messages.
+         * @param message GameBrcowcowOverResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowOverResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowOverResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowOverResp;
+
+        /**
+         * Decodes a GameBrcowcowOverResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowOverResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowOverResp;
+
+        /**
+         * Verifies a GameBrcowcowOverResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowOverResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowOverResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowOverResp;
+
+        /**
+         * Creates a plain object from a GameBrcowcowOverResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowOverResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowOverResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowHistoryReq. */
+    interface IGameBrcowcowHistoryReq {
+
+        /** GameBrcowcowHistoryReq GameId */
+        GameId?: (number|null);
+    }
+
+    /** Represents a GameBrcowcowHistoryReq. */
+    class GameBrcowcowHistoryReq implements IGameBrcowcowHistoryReq {
+
+        /**
+         * Constructs a new GameBrcowcowHistoryReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowHistoryReq);
+
+        /** GameBrcowcowHistoryReq GameId. */
+        public GameId: number;
+
+        /**
+         * Creates a new GameBrcowcowHistoryReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowHistoryReq instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowHistoryReq): brcowcow.GameBrcowcowHistoryReq;
+
+        /**
+         * Encodes the specified GameBrcowcowHistoryReq message. Does not implicitly {@link brcowcow.GameBrcowcowHistoryReq.verify|verify} messages.
+         * @param message GameBrcowcowHistoryReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowHistoryReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowHistoryReq message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowHistoryReq.verify|verify} messages.
+         * @param message GameBrcowcowHistoryReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowHistoryReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowHistoryReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowHistoryReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowHistoryReq;
+
+        /**
+         * Decodes a GameBrcowcowHistoryReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowHistoryReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowHistoryReq;
+
+        /**
+         * Verifies a GameBrcowcowHistoryReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowHistoryReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowHistoryReq
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowHistoryReq;
+
+        /**
+         * Creates a plain object from a GameBrcowcowHistoryReq message. Also converts values to other types if specified.
+         * @param message GameBrcowcowHistoryReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowHistoryReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowHistoryReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowHistoryResp. */
+    interface IGameBrcowcowHistoryResp {
+
+        /** GameBrcowcowHistoryResp GameId */
+        GameId?: (number|null);
+    }
+
+    /** Represents a GameBrcowcowHistoryResp. */
+    class GameBrcowcowHistoryResp implements IGameBrcowcowHistoryResp {
+
+        /**
+         * Constructs a new GameBrcowcowHistoryResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IGameBrcowcowHistoryResp);
+
+        /** GameBrcowcowHistoryResp GameId. */
+        public GameId: number;
+
+        /**
+         * Creates a new GameBrcowcowHistoryResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameBrcowcowHistoryResp instance
+         */
+        public static create(properties?: brcowcow.IGameBrcowcowHistoryResp): brcowcow.GameBrcowcowHistoryResp;
+
+        /**
+         * Encodes the specified GameBrcowcowHistoryResp message. Does not implicitly {@link brcowcow.GameBrcowcowHistoryResp.verify|verify} messages.
+         * @param message GameBrcowcowHistoryResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IGameBrcowcowHistoryResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameBrcowcowHistoryResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowHistoryResp.verify|verify} messages.
+         * @param message GameBrcowcowHistoryResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowHistoryResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameBrcowcowHistoryResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameBrcowcowHistoryResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowHistoryResp;
+
+        /**
+         * Decodes a GameBrcowcowHistoryResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameBrcowcowHistoryResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowHistoryResp;
+
+        /**
+         * Verifies a GameBrcowcowHistoryResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameBrcowcowHistoryResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameBrcowcowHistoryResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowHistoryResp;
+
+        /**
+         * Creates a plain object from a GameBrcowcowHistoryResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowHistoryResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.GameBrcowcowHistoryResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameBrcowcowHistoryResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameBrcowcowHost. */
+    interface IGameBrcowcowHost {
+
+        /** GameBrcowcowHost UserID */
         UserID?: (number|Long|null);
 
-        /** GameBaccaratHost IsWant */
+        /** GameBrcowcowHost IsWant */
         IsWant?: (boolean|null);
     }
 
-    /** Represents a GameBaccaratHost. */
-    class GameBaccaratHost implements IGameBaccaratHost {
+    /** Represents a GameBrcowcowHost. */
+    class GameBrcowcowHost implements IGameBrcowcowHost {
 
         /**
-         * Constructs a new GameBaccaratHost.
+         * Constructs a new GameBrcowcowHost.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IGameBaccaratHost);
+        constructor(properties?: brcowcow.IGameBrcowcowHost);
 
-        /** GameBaccaratHost UserID. */
+        /** GameBrcowcowHost UserID. */
         public UserID: (number|Long);
 
-        /** GameBaccaratHost IsWant. */
+        /** GameBrcowcowHost IsWant. */
         public IsWant: boolean;
 
         /**
-         * Creates a new GameBaccaratHost instance using the specified properties.
+         * Creates a new GameBrcowcowHost instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaccaratHost instance
+         * @returns GameBrcowcowHost instance
          */
-        public static create(properties?: baccarat.IGameBaccaratHost): baccarat.GameBaccaratHost;
+        public static create(properties?: brcowcow.IGameBrcowcowHost): brcowcow.GameBrcowcowHost;
 
         /**
-         * Encodes the specified GameBaccaratHost message. Does not implicitly {@link baccarat.GameBaccaratHost.verify|verify} messages.
-         * @param message GameBaccaratHost message or plain object to encode
+         * Encodes the specified GameBrcowcowHost message. Does not implicitly {@link brcowcow.GameBrcowcowHost.verify|verify} messages.
+         * @param message GameBrcowcowHost message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IGameBaccaratHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IGameBrcowcowHost, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaccaratHost message, length delimited. Does not implicitly {@link baccarat.GameBaccaratHost.verify|verify} messages.
-         * @param message GameBaccaratHost message or plain object to encode
+         * Encodes the specified GameBrcowcowHost message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowHost.verify|verify} messages.
+         * @param message GameBrcowcowHost message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IGameBaccaratHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowHost, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaccaratHost message from the specified reader or buffer.
+         * Decodes a GameBrcowcowHost message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaccaratHost
+         * @returns GameBrcowcowHost
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratHost;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowHost;
 
         /**
-         * Decodes a GameBaccaratHost message from the specified reader or buffer, length delimited.
+         * Decodes a GameBrcowcowHost message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratHost
+         * @returns GameBrcowcowHost
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratHost;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowHost;
 
         /**
-         * Verifies a GameBaccaratHost message.
+         * Verifies a GameBrcowcowHost message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaccaratHost message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameBrcowcowHost message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaccaratHost
+         * @returns GameBrcowcowHost
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratHost;
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowHost;
 
         /**
-         * Creates a plain object from a GameBaccaratHost message. Also converts values to other types if specified.
-         * @param message GameBaccaratHost
+         * Creates a plain object from a GameBrcowcowHost message. Also converts values to other types if specified.
+         * @param message GameBrcowcowHost
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.GameBaccaratHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.GameBrcowcowHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaccaratHost to JSON.
+         * Converts this GameBrcowcowHost to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameBaccaratSuperHost. */
-    interface IGameBaccaratSuperHost {
-
-        /** GameBaccaratSuperHost UserID */
-        UserID?: (number|Long|null);
-
-        /** GameBaccaratSuperHost IsWant */
-        IsWant?: (boolean|null);
+    /** Properties of a GameBrcowcowHostListReq. */
+    interface IGameBrcowcowHostListReq {
     }
 
-    /** Represents a GameBaccaratSuperHost. */
-    class GameBaccaratSuperHost implements IGameBaccaratSuperHost {
+    /** Represents a GameBrcowcowHostListReq. */
+    class GameBrcowcowHostListReq implements IGameBrcowcowHostListReq {
 
         /**
-         * Constructs a new GameBaccaratSuperHost.
+         * Constructs a new GameBrcowcowHostListReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IGameBaccaratSuperHost);
-
-        /** GameBaccaratSuperHost UserID. */
-        public UserID: (number|Long);
-
-        /** GameBaccaratSuperHost IsWant. */
-        public IsWant: boolean;
+        constructor(properties?: brcowcow.IGameBrcowcowHostListReq);
 
         /**
-         * Creates a new GameBaccaratSuperHost instance using the specified properties.
+         * Creates a new GameBrcowcowHostListReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaccaratSuperHost instance
+         * @returns GameBrcowcowHostListReq instance
          */
-        public static create(properties?: baccarat.IGameBaccaratSuperHost): baccarat.GameBaccaratSuperHost;
+        public static create(properties?: brcowcow.IGameBrcowcowHostListReq): brcowcow.GameBrcowcowHostListReq;
 
         /**
-         * Encodes the specified GameBaccaratSuperHost message. Does not implicitly {@link baccarat.GameBaccaratSuperHost.verify|verify} messages.
-         * @param message GameBaccaratSuperHost message or plain object to encode
+         * Encodes the specified GameBrcowcowHostListReq message. Does not implicitly {@link brcowcow.GameBrcowcowHostListReq.verify|verify} messages.
+         * @param message GameBrcowcowHostListReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IGameBaccaratSuperHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IGameBrcowcowHostListReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaccaratSuperHost message, length delimited. Does not implicitly {@link baccarat.GameBaccaratSuperHost.verify|verify} messages.
-         * @param message GameBaccaratSuperHost message or plain object to encode
+         * Encodes the specified GameBrcowcowHostListReq message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowHostListReq.verify|verify} messages.
+         * @param message GameBrcowcowHostListReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IGameBaccaratSuperHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowHostListReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaccaratSuperHost message from the specified reader or buffer.
+         * Decodes a GameBrcowcowHostListReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaccaratSuperHost
+         * @returns GameBrcowcowHostListReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratSuperHost;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowHostListReq;
 
         /**
-         * Decodes a GameBaccaratSuperHost message from the specified reader or buffer, length delimited.
+         * Decodes a GameBrcowcowHostListReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratSuperHost
+         * @returns GameBrcowcowHostListReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratSuperHost;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowHostListReq;
 
         /**
-         * Verifies a GameBaccaratSuperHost message.
+         * Verifies a GameBrcowcowHostListReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaccaratSuperHost message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameBrcowcowHostListReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaccaratSuperHost
+         * @returns GameBrcowcowHostListReq
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratSuperHost;
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowHostListReq;
 
         /**
-         * Creates a plain object from a GameBaccaratSuperHost message. Also converts values to other types if specified.
-         * @param message GameBaccaratSuperHost
+         * Creates a plain object from a GameBrcowcowHostListReq message. Also converts values to other types if specified.
+         * @param message GameBrcowcowHostListReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.GameBaccaratSuperHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.GameBrcowcowHostListReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaccaratSuperHost to JSON.
+         * Converts this GameBrcowcowHostListReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameBaccaratBet. */
-    interface IGameBaccaratBet {
+    /** Properties of a GameBrcowcowHostListResp. */
+    interface IGameBrcowcowHostListResp {
 
-        /** GameBaccaratBet BetArea */
-        BetArea?: (number|null);
+        /** GameBrcowcowHostListResp CurHost */
+        CurHost?: (gamecomm.IPlayerInfo|null);
 
-        /** GameBaccaratBet BetScore */
-        BetScore?: (number|Long|null);
+        /** GameBrcowcowHostListResp Waitlist */
+        Waitlist?: ((number|Long)[]|null);
     }
 
-    /** Represents a GameBaccaratBet. */
-    class GameBaccaratBet implements IGameBaccaratBet {
+    /** Represents a GameBrcowcowHostListResp. */
+    class GameBrcowcowHostListResp implements IGameBrcowcowHostListResp {
 
         /**
-         * Constructs a new GameBaccaratBet.
+         * Constructs a new GameBrcowcowHostListResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IGameBaccaratBet);
+        constructor(properties?: brcowcow.IGameBrcowcowHostListResp);
 
-        /** GameBaccaratBet BetArea. */
-        public BetArea: number;
+        /** GameBrcowcowHostListResp CurHost. */
+        public CurHost?: (gamecomm.IPlayerInfo|null);
 
-        /** GameBaccaratBet BetScore. */
-        public BetScore: (number|Long);
+        /** GameBrcowcowHostListResp Waitlist. */
+        public Waitlist: (number|Long)[];
 
         /**
-         * Creates a new GameBaccaratBet instance using the specified properties.
+         * Creates a new GameBrcowcowHostListResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaccaratBet instance
+         * @returns GameBrcowcowHostListResp instance
          */
-        public static create(properties?: baccarat.IGameBaccaratBet): baccarat.GameBaccaratBet;
+        public static create(properties?: brcowcow.IGameBrcowcowHostListResp): brcowcow.GameBrcowcowHostListResp;
 
         /**
-         * Encodes the specified GameBaccaratBet message. Does not implicitly {@link baccarat.GameBaccaratBet.verify|verify} messages.
-         * @param message GameBaccaratBet message or plain object to encode
+         * Encodes the specified GameBrcowcowHostListResp message. Does not implicitly {@link brcowcow.GameBrcowcowHostListResp.verify|verify} messages.
+         * @param message GameBrcowcowHostListResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IGameBaccaratBet, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IGameBrcowcowHostListResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaccaratBet message, length delimited. Does not implicitly {@link baccarat.GameBaccaratBet.verify|verify} messages.
-         * @param message GameBaccaratBet message or plain object to encode
+         * Encodes the specified GameBrcowcowHostListResp message, length delimited. Does not implicitly {@link brcowcow.GameBrcowcowHostListResp.verify|verify} messages.
+         * @param message GameBrcowcowHostListResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IGameBaccaratBet, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IGameBrcowcowHostListResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaccaratBet message from the specified reader or buffer.
+         * Decodes a GameBrcowcowHostListResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaccaratBet
+         * @returns GameBrcowcowHostListResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratBet;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.GameBrcowcowHostListResp;
 
         /**
-         * Decodes a GameBaccaratBet message from the specified reader or buffer, length delimited.
+         * Decodes a GameBrcowcowHostListResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratBet
+         * @returns GameBrcowcowHostListResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratBet;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.GameBrcowcowHostListResp;
 
         /**
-         * Verifies a GameBaccaratBet message.
+         * Verifies a GameBrcowcowHostListResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaccaratBet message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameBrcowcowHostListResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaccaratBet
+         * @returns GameBrcowcowHostListResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratBet;
+        public static fromObject(object: { [k: string]: any }): brcowcow.GameBrcowcowHostListResp;
 
         /**
-         * Creates a plain object from a GameBaccaratBet message. Also converts values to other types if specified.
-         * @param message GameBaccaratBet
+         * Creates a plain object from a GameBrcowcowHostListResp message. Also converts values to other types if specified.
+         * @param message GameBrcowcowHostListResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.GameBaccaratBet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.GameBrcowcowHostListResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaccaratBet to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratBetResult. */
-    interface IGameBaccaratBetResult {
-
-        /** GameBaccaratBetResult UserID */
-        UserID?: (number|Long|null);
-
-        /** GameBaccaratBetResult BetArea */
-        BetArea?: (number|null);
-
-        /** GameBaccaratBetResult BetScore */
-        BetScore?: (number|Long|null);
-
-        /** GameBaccaratBetResult State */
-        State?: (number|null);
-
-        /** GameBaccaratBetResult Hints */
-        Hints?: (string|null);
-    }
-
-    /** Represents a GameBaccaratBetResult. */
-    class GameBaccaratBetResult implements IGameBaccaratBetResult {
-
-        /**
-         * Constructs a new GameBaccaratBetResult.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratBetResult);
-
-        /** GameBaccaratBetResult UserID. */
-        public UserID: (number|Long);
-
-        /** GameBaccaratBetResult BetArea. */
-        public BetArea: number;
-
-        /** GameBaccaratBetResult BetScore. */
-        public BetScore: (number|Long);
-
-        /** GameBaccaratBetResult State. */
-        public State: number;
-
-        /** GameBaccaratBetResult Hints. */
-        public Hints: string;
-
-        /**
-         * Creates a new GameBaccaratBetResult instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratBetResult instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratBetResult): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Encodes the specified GameBaccaratBetResult message. Does not implicitly {@link baccarat.GameBaccaratBetResult.verify|verify} messages.
-         * @param message GameBaccaratBetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratBetResult message, length delimited. Does not implicitly {@link baccarat.GameBaccaratBetResult.verify|verify} messages.
-         * @param message GameBaccaratBetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratBetResult message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratBetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Decodes a GameBaccaratBetResult message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratBetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Verifies a GameBaccaratBetResult message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratBetResult message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratBetResult
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Creates a plain object from a GameBaccaratBetResult message. Also converts values to other types if specified.
-         * @param message GameBaccaratBetResult
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratBetResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratBetResult to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratOver. */
-    interface IGameBaccaratOver {
-
-        /** GameBaccaratOver AwardArea */
-        AwardArea?: (Uint8Array|null);
-
-        /** GameBaccaratOver PlayerCard */
-        PlayerCard?: (Uint8Array|null);
-
-        /** GameBaccaratOver BankerCard */
-        BankerCard?: (Uint8Array|null);
-    }
-
-    /** Represents a GameBaccaratOver. */
-    class GameBaccaratOver implements IGameBaccaratOver {
-
-        /**
-         * Constructs a new GameBaccaratOver.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratOver);
-
-        /** GameBaccaratOver AwardArea. */
-        public AwardArea: Uint8Array;
-
-        /** GameBaccaratOver PlayerCard. */
-        public PlayerCard: Uint8Array;
-
-        /** GameBaccaratOver BankerCard. */
-        public BankerCard: Uint8Array;
-
-        /**
-         * Creates a new GameBaccaratOver instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratOver instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratOver): baccarat.GameBaccaratOver;
-
-        /**
-         * Encodes the specified GameBaccaratOver message. Does not implicitly {@link baccarat.GameBaccaratOver.verify|verify} messages.
-         * @param message GameBaccaratOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratOver message, length delimited. Does not implicitly {@link baccarat.GameBaccaratOver.verify|verify} messages.
-         * @param message GameBaccaratOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratOver message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratOver;
-
-        /**
-         * Decodes a GameBaccaratOver message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratOver;
-
-        /**
-         * Verifies a GameBaccaratOver message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratOver message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratOver
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratOver;
-
-        /**
-         * Creates a plain object from a GameBaccaratOver message. Also converts values to other types if specified.
-         * @param message GameBaccaratOver
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratOver, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratOver to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratCheckout. */
-    interface IGameBaccaratCheckout {
-
-        /** GameBaccaratCheckout Acquire */
-        Acquire?: (number|Long|null);
-    }
-
-    /** Represents a GameBaccaratCheckout. */
-    class GameBaccaratCheckout implements IGameBaccaratCheckout {
-
-        /**
-         * Constructs a new GameBaccaratCheckout.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratCheckout);
-
-        /** GameBaccaratCheckout Acquire. */
-        public Acquire: (number|Long);
-
-        /**
-         * Creates a new GameBaccaratCheckout instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratCheckout instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratCheckout): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Encodes the specified GameBaccaratCheckout message. Does not implicitly {@link baccarat.GameBaccaratCheckout.verify|verify} messages.
-         * @param message GameBaccaratCheckout message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratCheckout message, length delimited. Does not implicitly {@link baccarat.GameBaccaratCheckout.verify|verify} messages.
-         * @param message GameBaccaratCheckout message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratCheckout message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratCheckout
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Decodes a GameBaccaratCheckout message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratCheckout
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Verifies a GameBaccaratCheckout message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratCheckout message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratCheckout
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Creates a plain object from a GameBaccaratCheckout message. Also converts values to other types if specified.
-         * @param message GameBaccaratCheckout
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratCheckout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratCheckout to JSON.
+         * Converts this GameBrcowcowHostListResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

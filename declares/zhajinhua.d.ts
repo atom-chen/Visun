@@ -1,740 +1,128 @@
 import * as $protobuf from "protobufjs";
-/** Namespace baccarat. */
-export namespace baccarat {
+/** Namespace zhajinhua. */
+export namespace zhajinhua {
 
-    /** Properties of a GameBaccaratEnter. */
-    interface IGameBaccaratEnter {
+    /** Properties of a FighterInfo. */
+    interface IFighterInfo {
 
-        /** GameBaccaratEnter TimeStamp */
-        TimeStamp?: (number|Long|null);
+        /** FighterInfo UserId */
+        UserId?: (number|Long|null);
 
-        /** GameBaccaratEnter Chips */
-        Chips?: (number[]|null);
+        /** FighterInfo SeatId */
+        SeatId?: (number|null);
 
-        /** GameBaccaratEnter AwardAreas */
-        AwardAreas?: (Uint8Array[]|null);
+        /** FighterInfo FightState */
+        FightState?: (number|null);
 
-        /** GameBaccaratEnter FreeTime */
-        FreeTime?: (number|null);
+        /** FighterInfo IsSee */
+        IsSee?: (boolean|null);
 
-        /** GameBaccaratEnter BetTime */
-        BetTime?: (number|null);
+        /** FighterInfo RecentBetMoney */
+        RecentBetMoney?: (number|Long|null);
 
-        /** GameBaccaratEnter OpenTime */
-        OpenTime?: (number|null);
+        /** FighterInfo TotalBetMoney */
+        TotalBetMoney?: (number|Long|null);
 
-        /** GameBaccaratEnter Free */
-        Free?: (gamecomm.IGameStateFree|null);
-
-        /** GameBaccaratEnter Start */
-        Start?: (gamecomm.IGameStateStart|null);
-
-        /** GameBaccaratEnter Playing */
-        Playing?: (gamecomm.IGameStatePlaying|null);
-
-        /** GameBaccaratEnter Over */
-        Over?: (gamecomm.IGameStateOver|null);
+        /** FighterInfo Cards */
+        Cards?: (gamecomm.ICardInfo|null);
     }
 
-    /** Represents a GameBaccaratEnter. */
-    class GameBaccaratEnter implements IGameBaccaratEnter {
+    /** Represents a FighterInfo. */
+    class FighterInfo implements IFighterInfo {
 
         /**
-         * Constructs a new GameBaccaratEnter.
+         * Constructs a new FighterInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IGameBaccaratEnter);
+        constructor(properties?: zhajinhua.IFighterInfo);
 
-        /** GameBaccaratEnter TimeStamp. */
-        public TimeStamp: (number|Long);
+        /** FighterInfo UserId. */
+        public UserId: (number|Long);
 
-        /** GameBaccaratEnter Chips. */
-        public Chips: number[];
+        /** FighterInfo SeatId. */
+        public SeatId: number;
 
-        /** GameBaccaratEnter AwardAreas. */
-        public AwardAreas: Uint8Array[];
+        /** FighterInfo FightState. */
+        public FightState: number;
 
-        /** GameBaccaratEnter FreeTime. */
-        public FreeTime: number;
+        /** FighterInfo IsSee. */
+        public IsSee: boolean;
 
-        /** GameBaccaratEnter BetTime. */
-        public BetTime: number;
+        /** FighterInfo RecentBetMoney. */
+        public RecentBetMoney: (number|Long);
 
-        /** GameBaccaratEnter OpenTime. */
-        public OpenTime: number;
+        /** FighterInfo TotalBetMoney. */
+        public TotalBetMoney: (number|Long);
 
-        /** GameBaccaratEnter Free. */
-        public Free?: (gamecomm.IGameStateFree|null);
-
-        /** GameBaccaratEnter Start. */
-        public Start?: (gamecomm.IGameStateStart|null);
-
-        /** GameBaccaratEnter Playing. */
-        public Playing?: (gamecomm.IGameStatePlaying|null);
-
-        /** GameBaccaratEnter Over. */
-        public Over?: (gamecomm.IGameStateOver|null);
+        /** FighterInfo Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
 
         /**
-         * Creates a new GameBaccaratEnter instance using the specified properties.
+         * Creates a new FighterInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaccaratEnter instance
+         * @returns FighterInfo instance
          */
-        public static create(properties?: baccarat.IGameBaccaratEnter): baccarat.GameBaccaratEnter;
+        public static create(properties?: zhajinhua.IFighterInfo): zhajinhua.FighterInfo;
 
         /**
-         * Encodes the specified GameBaccaratEnter message. Does not implicitly {@link baccarat.GameBaccaratEnter.verify|verify} messages.
-         * @param message GameBaccaratEnter message or plain object to encode
+         * Encodes the specified FighterInfo message. Does not implicitly {@link zhajinhua.FighterInfo.verify|verify} messages.
+         * @param message FighterInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IGameBaccaratEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: zhajinhua.IFighterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaccaratEnter message, length delimited. Does not implicitly {@link baccarat.GameBaccaratEnter.verify|verify} messages.
-         * @param message GameBaccaratEnter message or plain object to encode
+         * Encodes the specified FighterInfo message, length delimited. Does not implicitly {@link zhajinhua.FighterInfo.verify|verify} messages.
+         * @param message FighterInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IGameBaccaratEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: zhajinhua.IFighterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaccaratEnter message from the specified reader or buffer.
+         * Decodes a FighterInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaccaratEnter
+         * @returns FighterInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratEnter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.FighterInfo;
 
         /**
-         * Decodes a GameBaccaratEnter message from the specified reader or buffer, length delimited.
+         * Decodes a FighterInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratEnter
+         * @returns FighterInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratEnter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.FighterInfo;
 
         /**
-         * Verifies a GameBaccaratEnter message.
+         * Verifies a FighterInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaccaratEnter message from a plain object. Also converts values to their respective internal types.
+         * Creates a FighterInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaccaratEnter
+         * @returns FighterInfo
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratEnter;
+        public static fromObject(object: { [k: string]: any }): zhajinhua.FighterInfo;
 
         /**
-         * Creates a plain object from a GameBaccaratEnter message. Also converts values to other types if specified.
-         * @param message GameBaccaratEnter
+         * Creates a plain object from a FighterInfo message. Also converts values to other types if specified.
+         * @param message FighterInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.GameBaccaratEnter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: zhajinhua.FighterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaccaratEnter to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratHost. */
-    interface IGameBaccaratHost {
-
-        /** GameBaccaratHost UserID */
-        UserID?: (number|Long|null);
-
-        /** GameBaccaratHost IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a GameBaccaratHost. */
-    class GameBaccaratHost implements IGameBaccaratHost {
-
-        /**
-         * Constructs a new GameBaccaratHost.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratHost);
-
-        /** GameBaccaratHost UserID. */
-        public UserID: (number|Long);
-
-        /** GameBaccaratHost IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new GameBaccaratHost instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratHost instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratHost): baccarat.GameBaccaratHost;
-
-        /**
-         * Encodes the specified GameBaccaratHost message. Does not implicitly {@link baccarat.GameBaccaratHost.verify|verify} messages.
-         * @param message GameBaccaratHost message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratHost message, length delimited. Does not implicitly {@link baccarat.GameBaccaratHost.verify|verify} messages.
-         * @param message GameBaccaratHost message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratHost message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratHost
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratHost;
-
-        /**
-         * Decodes a GameBaccaratHost message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratHost
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratHost;
-
-        /**
-         * Verifies a GameBaccaratHost message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratHost message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratHost
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratHost;
-
-        /**
-         * Creates a plain object from a GameBaccaratHost message. Also converts values to other types if specified.
-         * @param message GameBaccaratHost
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratHost to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratSuperHost. */
-    interface IGameBaccaratSuperHost {
-
-        /** GameBaccaratSuperHost UserID */
-        UserID?: (number|Long|null);
-
-        /** GameBaccaratSuperHost IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a GameBaccaratSuperHost. */
-    class GameBaccaratSuperHost implements IGameBaccaratSuperHost {
-
-        /**
-         * Constructs a new GameBaccaratSuperHost.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratSuperHost);
-
-        /** GameBaccaratSuperHost UserID. */
-        public UserID: (number|Long);
-
-        /** GameBaccaratSuperHost IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new GameBaccaratSuperHost instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratSuperHost instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratSuperHost): baccarat.GameBaccaratSuperHost;
-
-        /**
-         * Encodes the specified GameBaccaratSuperHost message. Does not implicitly {@link baccarat.GameBaccaratSuperHost.verify|verify} messages.
-         * @param message GameBaccaratSuperHost message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratSuperHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratSuperHost message, length delimited. Does not implicitly {@link baccarat.GameBaccaratSuperHost.verify|verify} messages.
-         * @param message GameBaccaratSuperHost message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratSuperHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratSuperHost message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratSuperHost
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratSuperHost;
-
-        /**
-         * Decodes a GameBaccaratSuperHost message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratSuperHost
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratSuperHost;
-
-        /**
-         * Verifies a GameBaccaratSuperHost message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratSuperHost message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratSuperHost
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratSuperHost;
-
-        /**
-         * Creates a plain object from a GameBaccaratSuperHost message. Also converts values to other types if specified.
-         * @param message GameBaccaratSuperHost
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratSuperHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratSuperHost to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratBet. */
-    interface IGameBaccaratBet {
-
-        /** GameBaccaratBet BetArea */
-        BetArea?: (number|null);
-
-        /** GameBaccaratBet BetScore */
-        BetScore?: (number|Long|null);
-    }
-
-    /** Represents a GameBaccaratBet. */
-    class GameBaccaratBet implements IGameBaccaratBet {
-
-        /**
-         * Constructs a new GameBaccaratBet.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratBet);
-
-        /** GameBaccaratBet BetArea. */
-        public BetArea: number;
-
-        /** GameBaccaratBet BetScore. */
-        public BetScore: (number|Long);
-
-        /**
-         * Creates a new GameBaccaratBet instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratBet instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratBet): baccarat.GameBaccaratBet;
-
-        /**
-         * Encodes the specified GameBaccaratBet message. Does not implicitly {@link baccarat.GameBaccaratBet.verify|verify} messages.
-         * @param message GameBaccaratBet message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratBet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratBet message, length delimited. Does not implicitly {@link baccarat.GameBaccaratBet.verify|verify} messages.
-         * @param message GameBaccaratBet message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratBet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratBet message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratBet
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratBet;
-
-        /**
-         * Decodes a GameBaccaratBet message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratBet
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratBet;
-
-        /**
-         * Verifies a GameBaccaratBet message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratBet message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratBet
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratBet;
-
-        /**
-         * Creates a plain object from a GameBaccaratBet message. Also converts values to other types if specified.
-         * @param message GameBaccaratBet
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratBet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratBet to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratBetResult. */
-    interface IGameBaccaratBetResult {
-
-        /** GameBaccaratBetResult UserID */
-        UserID?: (number|Long|null);
-
-        /** GameBaccaratBetResult BetArea */
-        BetArea?: (number|null);
-
-        /** GameBaccaratBetResult BetScore */
-        BetScore?: (number|Long|null);
-
-        /** GameBaccaratBetResult State */
-        State?: (number|null);
-
-        /** GameBaccaratBetResult Hints */
-        Hints?: (string|null);
-    }
-
-    /** Represents a GameBaccaratBetResult. */
-    class GameBaccaratBetResult implements IGameBaccaratBetResult {
-
-        /**
-         * Constructs a new GameBaccaratBetResult.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratBetResult);
-
-        /** GameBaccaratBetResult UserID. */
-        public UserID: (number|Long);
-
-        /** GameBaccaratBetResult BetArea. */
-        public BetArea: number;
-
-        /** GameBaccaratBetResult BetScore. */
-        public BetScore: (number|Long);
-
-        /** GameBaccaratBetResult State. */
-        public State: number;
-
-        /** GameBaccaratBetResult Hints. */
-        public Hints: string;
-
-        /**
-         * Creates a new GameBaccaratBetResult instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratBetResult instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratBetResult): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Encodes the specified GameBaccaratBetResult message. Does not implicitly {@link baccarat.GameBaccaratBetResult.verify|verify} messages.
-         * @param message GameBaccaratBetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratBetResult message, length delimited. Does not implicitly {@link baccarat.GameBaccaratBetResult.verify|verify} messages.
-         * @param message GameBaccaratBetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratBetResult message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratBetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Decodes a GameBaccaratBetResult message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratBetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Verifies a GameBaccaratBetResult message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratBetResult message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratBetResult
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratBetResult;
-
-        /**
-         * Creates a plain object from a GameBaccaratBetResult message. Also converts values to other types if specified.
-         * @param message GameBaccaratBetResult
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratBetResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratBetResult to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratOver. */
-    interface IGameBaccaratOver {
-
-        /** GameBaccaratOver AwardArea */
-        AwardArea?: (Uint8Array|null);
-
-        /** GameBaccaratOver PlayerCard */
-        PlayerCard?: (Uint8Array|null);
-
-        /** GameBaccaratOver BankerCard */
-        BankerCard?: (Uint8Array|null);
-    }
-
-    /** Represents a GameBaccaratOver. */
-    class GameBaccaratOver implements IGameBaccaratOver {
-
-        /**
-         * Constructs a new GameBaccaratOver.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratOver);
-
-        /** GameBaccaratOver AwardArea. */
-        public AwardArea: Uint8Array;
-
-        /** GameBaccaratOver PlayerCard. */
-        public PlayerCard: Uint8Array;
-
-        /** GameBaccaratOver BankerCard. */
-        public BankerCard: Uint8Array;
-
-        /**
-         * Creates a new GameBaccaratOver instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratOver instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratOver): baccarat.GameBaccaratOver;
-
-        /**
-         * Encodes the specified GameBaccaratOver message. Does not implicitly {@link baccarat.GameBaccaratOver.verify|verify} messages.
-         * @param message GameBaccaratOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratOver message, length delimited. Does not implicitly {@link baccarat.GameBaccaratOver.verify|verify} messages.
-         * @param message GameBaccaratOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratOver message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratOver;
-
-        /**
-         * Decodes a GameBaccaratOver message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratOver;
-
-        /**
-         * Verifies a GameBaccaratOver message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratOver message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratOver
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratOver;
-
-        /**
-         * Creates a plain object from a GameBaccaratOver message. Also converts values to other types if specified.
-         * @param message GameBaccaratOver
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratOver, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratOver to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameBaccaratCheckout. */
-    interface IGameBaccaratCheckout {
-
-        /** GameBaccaratCheckout Acquire */
-        Acquire?: (number|Long|null);
-    }
-
-    /** Represents a GameBaccaratCheckout. */
-    class GameBaccaratCheckout implements IGameBaccaratCheckout {
-
-        /**
-         * Constructs a new GameBaccaratCheckout.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: baccarat.IGameBaccaratCheckout);
-
-        /** GameBaccaratCheckout Acquire. */
-        public Acquire: (number|Long);
-
-        /**
-         * Creates a new GameBaccaratCheckout instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameBaccaratCheckout instance
-         */
-        public static create(properties?: baccarat.IGameBaccaratCheckout): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Encodes the specified GameBaccaratCheckout message. Does not implicitly {@link baccarat.GameBaccaratCheckout.verify|verify} messages.
-         * @param message GameBaccaratCheckout message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: baccarat.IGameBaccaratCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameBaccaratCheckout message, length delimited. Does not implicitly {@link baccarat.GameBaccaratCheckout.verify|verify} messages.
-         * @param message GameBaccaratCheckout message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: baccarat.IGameBaccaratCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameBaccaratCheckout message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameBaccaratCheckout
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Decodes a GameBaccaratCheckout message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameBaccaratCheckout
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Verifies a GameBaccaratCheckout message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameBaccaratCheckout message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameBaccaratCheckout
-         */
-        public static fromObject(object: { [k: string]: any }): baccarat.GameBaccaratCheckout;
-
-        /**
-         * Creates a plain object from a GameBaccaratCheckout message. Also converts values to other types if specified.
-         * @param message GameBaccaratCheckout
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: baccarat.GameBaccaratCheckout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameBaccaratCheckout to JSON.
+         * Converts this FighterInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

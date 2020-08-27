@@ -1,5 +1,5 @@
 syntax = "proto3";
-package go;
+package zhajinhua;
 import "gamecomm.proto";
 
 
@@ -8,7 +8,7 @@ message FighterInfo {
 	uint64 UserId = 1;
 	int32 SeatId = 2;			// 座位号
 	int32 FightState = 3; 		// 未准备 已准备  跟注 加注 弃牌 比牌输
-	bool IsSee = 4;				// 是否已看牌
+	byte IsSee = 4;				// 是否已看牌: 1已看 0未看
 	uint64 RecentBetMoney = 5;	//最新下注金额
 	uint64 TotalBetMoney = 6;	//总共下注了多少
 	CardInfo Cards = 7;			// 看牌时和游戏结束时亮自己的牌时才有数据
