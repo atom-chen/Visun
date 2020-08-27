@@ -668,199 +668,199 @@ export namespace baccarat {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratReq. */
-    interface IBaccaratReq {
+    /** Properties of a BaccaratBetReq. */
+    interface IBaccaratBetReq {
 
-        /** BaccaratReq BetArea */
+        /** BaccaratBetReq BetArea */
         BetArea?: (number|null);
 
-        /** BaccaratReq BetScore */
+        /** BaccaratBetReq BetScore */
         BetScore?: (number|Long|null);
     }
 
-    /** Represents a BaccaratReq. */
-    class BaccaratReq implements IBaccaratReq {
+    /** Represents a BaccaratBetReq. */
+    class BaccaratBetReq implements IBaccaratBetReq {
 
         /**
-         * Constructs a new BaccaratReq.
+         * Constructs a new BaccaratBetReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratReq);
+        constructor(properties?: baccarat.IBaccaratBetReq);
 
-        /** BaccaratReq BetArea. */
+        /** BaccaratBetReq BetArea. */
         public BetArea: number;
 
-        /** BaccaratReq BetScore. */
+        /** BaccaratBetReq BetScore. */
         public BetScore: (number|Long);
 
         /**
-         * Creates a new BaccaratReq instance using the specified properties.
+         * Creates a new BaccaratBetReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratReq instance
+         * @returns BaccaratBetReq instance
          */
-        public static create(properties?: baccarat.IBaccaratReq): baccarat.BaccaratReq;
+        public static create(properties?: baccarat.IBaccaratBetReq): baccarat.BaccaratBetReq;
 
         /**
-         * Encodes the specified BaccaratReq message. Does not implicitly {@link baccarat.BaccaratReq.verify|verify} messages.
-         * @param message BaccaratReq message or plain object to encode
+         * Encodes the specified BaccaratBetReq message. Does not implicitly {@link baccarat.BaccaratBetReq.verify|verify} messages.
+         * @param message BaccaratBetReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratBetReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratReq message, length delimited. Does not implicitly {@link baccarat.BaccaratReq.verify|verify} messages.
-         * @param message BaccaratReq message or plain object to encode
+         * Encodes the specified BaccaratBetReq message, length delimited. Does not implicitly {@link baccarat.BaccaratBetReq.verify|verify} messages.
+         * @param message BaccaratBetReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratBetReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratReq message from the specified reader or buffer.
+         * Decodes a BaccaratBetReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratReq
+         * @returns BaccaratBetReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratReq;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratBetReq;
 
         /**
-         * Decodes a BaccaratReq message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratBetReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratReq
+         * @returns BaccaratBetReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratReq;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratBetReq;
 
         /**
-         * Verifies a BaccaratReq message.
+         * Verifies a BaccaratBetReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratReq message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratBetReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratReq
+         * @returns BaccaratBetReq
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratReq;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratBetReq;
 
         /**
-         * Creates a plain object from a BaccaratReq message. Also converts values to other types if specified.
-         * @param message BaccaratReq
+         * Creates a plain object from a BaccaratBetReq message. Also converts values to other types if specified.
+         * @param message BaccaratBetReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratBetReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratReq to JSON.
+         * Converts this BaccaratBetReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratResp. */
-    interface IBaccaratResp {
+    /** Properties of a BaccaratBetResp. */
+    interface IBaccaratBetResp {
 
-        /** BaccaratResp UserID */
+        /** BaccaratBetResp UserID */
         UserID?: (number|Long|null);
 
-        /** BaccaratResp BetArea */
+        /** BaccaratBetResp BetArea */
         BetArea?: (number|null);
 
-        /** BaccaratResp BetScore */
+        /** BaccaratBetResp BetScore */
         BetScore?: (number|Long|null);
     }
 
-    /** Represents a BaccaratResp. */
-    class BaccaratResp implements IBaccaratResp {
+    /** Represents a BaccaratBetResp. */
+    class BaccaratBetResp implements IBaccaratBetResp {
 
         /**
-         * Constructs a new BaccaratResp.
+         * Constructs a new BaccaratBetResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratResp);
+        constructor(properties?: baccarat.IBaccaratBetResp);
 
-        /** BaccaratResp UserID. */
+        /** BaccaratBetResp UserID. */
         public UserID: (number|Long);
 
-        /** BaccaratResp BetArea. */
+        /** BaccaratBetResp BetArea. */
         public BetArea: number;
 
-        /** BaccaratResp BetScore. */
+        /** BaccaratBetResp BetScore. */
         public BetScore: (number|Long);
 
         /**
-         * Creates a new BaccaratResp instance using the specified properties.
+         * Creates a new BaccaratBetResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratResp instance
+         * @returns BaccaratBetResp instance
          */
-        public static create(properties?: baccarat.IBaccaratResp): baccarat.BaccaratResp;
+        public static create(properties?: baccarat.IBaccaratBetResp): baccarat.BaccaratBetResp;
 
         /**
-         * Encodes the specified BaccaratResp message. Does not implicitly {@link baccarat.BaccaratResp.verify|verify} messages.
-         * @param message BaccaratResp message or plain object to encode
+         * Encodes the specified BaccaratBetResp message. Does not implicitly {@link baccarat.BaccaratBetResp.verify|verify} messages.
+         * @param message BaccaratBetResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratBetResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratResp message, length delimited. Does not implicitly {@link baccarat.BaccaratResp.verify|verify} messages.
-         * @param message BaccaratResp message or plain object to encode
+         * Encodes the specified BaccaratBetResp message, length delimited. Does not implicitly {@link baccarat.BaccaratBetResp.verify|verify} messages.
+         * @param message BaccaratBetResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratBetResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratResp message from the specified reader or buffer.
+         * Decodes a BaccaratBetResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratResp
+         * @returns BaccaratBetResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratBetResp;
 
         /**
-         * Decodes a BaccaratResp message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratBetResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratResp
+         * @returns BaccaratBetResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratBetResp;
 
         /**
-         * Verifies a BaccaratResp message.
+         * Verifies a BaccaratBetResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratBetResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratResp
+         * @returns BaccaratBetResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratResp;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratBetResp;
 
         /**
-         * Creates a plain object from a BaccaratResp message. Also converts values to other types if specified.
-         * @param message BaccaratResp
+         * Creates a plain object from a BaccaratBetResp message. Also converts values to other types if specified.
+         * @param message BaccaratBetResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratBetResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratResp to JSON.
+         * Converts this BaccaratBetResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

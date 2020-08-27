@@ -48,13 +48,13 @@ message BaccaratHost {
  }
 
 //游戏中
-message BaccaratReq{
+message BaccaratBetReq{
     int32 BetArea = 1;				//下注区域
     int64 BetScore = 2;				//下注金额
 }
 
 //下注结果
-message BaccaratResp{
+message BaccaratBetResp{
 	uint64 UserID = 1;   			//ID
 	int32 BetArea = 2;				//下注区域
 	int64 BetScore = 3;				//下注金额
