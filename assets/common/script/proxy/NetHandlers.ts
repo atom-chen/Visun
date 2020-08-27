@@ -4,17 +4,7 @@ import LoginUser from "../model/LoginUser";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
-import { baccarat_msgs } from "../proto/net_baccarat";
-import { GameKindEnum } from "../definer/ConstDefine";
-import { landLords_msgs } from "../proto/net_landLords";
-import { gamecomm_msgs } from "../proto/net_gamecomm";
-import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
-
-//---------------------------------
-// 网络数据处理句柄
-//---------------------------------
 
 var NetHandlers = {
 
@@ -46,35 +36,6 @@ var NetHandlers = {
     [login_msgs.GameList] : function(param) {
         GameManager.getInstance().setGameArr(param.Items)
     },
-
-    [baccarat_msgs.GameBaccaratEnter] : function(param) {
-        GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
-    },
-
-    [landLords_msgs.GameLandLordsEnter] : function(param) {
-        DDzMgr.getInstance().EnterData = param;
-        DDzMgr.getInstance().clearFighters();
-        DDzMgr.getInstance().updateFighterList(param.Players);
-        for(var i in param.Players) {
-            if(param.Players[i].IsBanker) {
-                DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
-            }
-        }
-        if(!isNil(param.BeforeChairID)) {
-            var cur = (param.BeforeChairID + 1) % 3;
-            for(var i in param.Players) {
-                if(param.Players[i].ChairID == cur) {
-                    DDzMgr.getInstance().setCurAttacker(param.Players[i].UserID);
-                    break;
-                }
-            }
-        }
-        GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
-    },
-
-    [gamecomm_msgs.UserList] : function(param) {
-        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
-    }
 
 }
 

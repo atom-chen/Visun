@@ -26,6 +26,9 @@ import { isEmpty, isNil } from "../../../kernel/utils/GlobalFuncs";
 import MyCrypto from "../../../kernel/secret/MyCrypto";
 import LocalCache from "../../../kernel/localcache/LocalCache";
 import LogicCenter from "./LogicCenter";
+import { brcowcow_packet_define } from "../proto/net_brcowcow";
+import { zhajinhua_packet_define } from "../proto/net_zhajinhua";
+import GameHandlers from "../proxy/GameHandlers";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -82,7 +85,10 @@ export default class LoginMgr extends ModelBase {
         g_leafProcessor.registCmds(landLords_packet_define);
         g_leafProcessor.registCmds(mahjong_packet_define);
 		g_leafProcessor.registCmds(fishLord_packet_define);
+		g_leafProcessor.registCmds(brcowcow_packet_define);
+		g_leafProcessor.registCmds(zhajinhua_packet_define);
 		g_leafProcessor.getDispatcher().addObserver(NetHandlers);
+		g_leafProcessor.getDispatcher().addObserver(GameHandlers);
 		return g_leafProcessor;
 	}
 
