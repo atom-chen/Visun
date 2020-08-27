@@ -41,11 +41,11 @@ export default class HttpCore {
 		for( var i in ruleList) {
 			var ptoname:string = ruleList[i].name
 
-			if(this.g_allProtocol[ptoname]) {
-				cc.log("重新注册Http协议：", ptoname);
-			} else {
-				cc.log("注册Http协议：", ptoname);
-			}
+			// if(this.g_allProtocol[ptoname]) {
+			// 	cc.log("重新注册Http协议：", ptoname);
+			// } else {
+			// 	cc.log("注册Http协议：", ptoname);
+			// }
 			
 			if(!requestor[ptoname]) {
 				cc.error("没有请求接口", ptoname);

@@ -12,7 +12,7 @@ if(CC_EDITOR) {
 if(cc.sys.isBrowser) {
 	console.log("------browser------");
 	// window["__origin_onresize"] = window.onresize;
-	// window.onresize = function(...args: any[]) {
+	// window.onresize = function(this: any, ev: any) {
 	// //	window["__origin_onresize"](...args);
 	// 	Adaptor.adaptScreen();
 	// }
