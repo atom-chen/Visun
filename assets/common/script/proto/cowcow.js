@@ -479,23 +479,23 @@ $root.cowcow = (function() {
         return GameCowcowSuperHost;
     })();
 
-    cowcow.GameCowcowPlaying = (function() {
+    cowcow.GameCowcowReq = (function() {
 
-        function GameCowcowPlaying(properties) {
+        function GameCowcowReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameCowcowPlaying.prototype.BetArea = 0;
-        GameCowcowPlaying.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameCowcowReq.prototype.BetArea = 0;
+        GameCowcowReq.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameCowcowPlaying.create = function create(properties) {
-            return new GameCowcowPlaying(properties);
+        GameCowcowReq.create = function create(properties) {
+            return new GameCowcowReq(properties);
         };
 
-        GameCowcowPlaying.encode = function encode(message, writer) {
+        GameCowcowReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
@@ -505,14 +505,14 @@ $root.cowcow = (function() {
             return writer;
         };
 
-        GameCowcowPlaying.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameCowcowPlaying.decode = function decode(reader, length) {
+        GameCowcowReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowPlaying();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -530,13 +530,13 @@ $root.cowcow = (function() {
             return message;
         };
 
-        GameCowcowPlaying.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameCowcowPlaying.verify = function verify(message) {
+        GameCowcowReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -548,10 +548,10 @@ $root.cowcow = (function() {
             return null;
         };
 
-        GameCowcowPlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.cowcow.GameCowcowPlaying)
+        GameCowcowReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowReq)
                 return object;
-            var message = new $root.cowcow.GameCowcowPlaying();
+            var message = new $root.cowcow.GameCowcowReq();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -566,7 +566,7 @@ $root.cowcow = (function() {
             return message;
         };
 
-        GameCowcowPlaying.toObject = function toObject(message, options) {
+        GameCowcowReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -588,30 +588,30 @@ $root.cowcow = (function() {
             return object;
         };
 
-        GameCowcowPlaying.prototype.toJSON = function toJSON() {
+        GameCowcowReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameCowcowPlaying;
+        return GameCowcowReq;
     })();
 
-    cowcow.GameCowcowBetResult = (function() {
+    cowcow.GameCowcowBetResp = (function() {
 
-        function GameCowcowBetResult(properties) {
+        function GameCowcowBetResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameCowcowBetResult.prototype.State = 0;
-        GameCowcowBetResult.prototype.Hints = "";
+        GameCowcowBetResp.prototype.State = 0;
+        GameCowcowBetResp.prototype.Hints = "";
 
-        GameCowcowBetResult.create = function create(properties) {
-            return new GameCowcowBetResult(properties);
+        GameCowcowBetResp.create = function create(properties) {
+            return new GameCowcowBetResp(properties);
         };
 
-        GameCowcowBetResult.encode = function encode(message, writer) {
+        GameCowcowBetResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.State != null && Object.hasOwnProperty.call(message, "State"))
@@ -621,14 +621,14 @@ $root.cowcow = (function() {
             return writer;
         };
 
-        GameCowcowBetResult.encodeDelimited = function encodeDelimited(message, writer) {
+        GameCowcowBetResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameCowcowBetResult.decode = function decode(reader, length) {
+        GameCowcowBetResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowBetResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cowcow.GameCowcowBetResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -646,13 +646,13 @@ $root.cowcow = (function() {
             return message;
         };
 
-        GameCowcowBetResult.decodeDelimited = function decodeDelimited(reader) {
+        GameCowcowBetResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameCowcowBetResult.verify = function verify(message) {
+        GameCowcowBetResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.State != null && message.hasOwnProperty("State"))
@@ -664,10 +664,10 @@ $root.cowcow = (function() {
             return null;
         };
 
-        GameCowcowBetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.cowcow.GameCowcowBetResult)
+        GameCowcowBetResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.cowcow.GameCowcowBetResp)
                 return object;
-            var message = new $root.cowcow.GameCowcowBetResult();
+            var message = new $root.cowcow.GameCowcowBetResp();
             if (object.State != null)
                 message.State = object.State | 0;
             if (object.Hints != null)
@@ -675,7 +675,7 @@ $root.cowcow = (function() {
             return message;
         };
 
-        GameCowcowBetResult.toObject = function toObject(message, options) {
+        GameCowcowBetResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -690,11 +690,11 @@ $root.cowcow = (function() {
             return object;
         };
 
-        GameCowcowBetResult.prototype.toJSON = function toJSON() {
+        GameCowcowBetResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameCowcowBetResult;
+        return GameCowcowBetResp;
     })();
 
     cowcow.GameCowcowOver = (function() {
@@ -707,12 +707,11 @@ $root.cowcow = (function() {
         }
 
         GameCowcowOver.prototype.AwardArea = $util.newBuffer([]);
-        GameCowcowOver.prototype.BankerCard = $util.newBuffer([]);
-        GameCowcowOver.prototype.TianCard = $util.newBuffer([]);
-        GameCowcowOver.prototype.XuanCard = $util.newBuffer([]);
-        GameCowcowOver.prototype.DiCard = $util.newBuffer([]);
-        GameCowcowOver.prototype.HuangCard = $util.newBuffer([]);
-        GameCowcowOver.prototype.CardValue = $util.newBuffer([]);
+        GameCowcowOver.prototype.BankerCard = null;
+        GameCowcowOver.prototype.TianCard = null;
+        GameCowcowOver.prototype.XuanCard = null;
+        GameCowcowOver.prototype.DiCard = null;
+        GameCowcowOver.prototype.HuangCard = null;
 
         GameCowcowOver.create = function create(properties) {
             return new GameCowcowOver(properties);
@@ -724,17 +723,15 @@ $root.cowcow = (function() {
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
             if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
-                writer.uint32(18).bytes(message.BankerCard);
+                $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(18).fork()).ldelim();
             if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
-                writer.uint32(26).bytes(message.TianCard);
+                $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(26).fork()).ldelim();
             if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
-                writer.uint32(34).bytes(message.XuanCard);
+                $root.gamecomm.CardInfo.encode(message.XuanCard, writer.uint32(34).fork()).ldelim();
             if (message.DiCard != null && Object.hasOwnProperty.call(message, "DiCard"))
-                writer.uint32(42).bytes(message.DiCard);
+                $root.gamecomm.CardInfo.encode(message.DiCard, writer.uint32(42).fork()).ldelim();
             if (message.HuangCard != null && Object.hasOwnProperty.call(message, "HuangCard"))
-                writer.uint32(50).bytes(message.HuangCard);
-            if (message.CardValue != null && Object.hasOwnProperty.call(message, "CardValue"))
-                writer.uint32(58).bytes(message.CardValue);
+                $root.gamecomm.CardInfo.encode(message.HuangCard, writer.uint32(50).fork()).ldelim();
             return writer;
         };
 
@@ -753,22 +750,19 @@ $root.cowcow = (function() {
                     message.AwardArea = reader.bytes();
                     break;
                 case 2:
-                    message.BankerCard = reader.bytes();
+                    message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.TianCard = reader.bytes();
+                    message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.XuanCard = reader.bytes();
+                    message.XuanCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 5:
-                    message.DiCard = reader.bytes();
+                    message.DiCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 6:
-                    message.HuangCard = reader.bytes();
-                    break;
-                case 7:
-                    message.CardValue = reader.bytes();
+                    message.HuangCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -790,24 +784,31 @@ $root.cowcow = (function() {
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
                     return "AwardArea: buffer expected";
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                if (!(message.BankerCard && typeof message.BankerCard.length === "number" || $util.isString(message.BankerCard)))
-                    return "BankerCard: buffer expected";
-            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
-                if (!(message.TianCard && typeof message.TianCard.length === "number" || $util.isString(message.TianCard)))
-                    return "TianCard: buffer expected";
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
-                if (!(message.XuanCard && typeof message.XuanCard.length === "number" || $util.isString(message.XuanCard)))
-                    return "XuanCard: buffer expected";
-            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
-                if (!(message.DiCard && typeof message.DiCard.length === "number" || $util.isString(message.DiCard)))
-                    return "DiCard: buffer expected";
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
-                if (!(message.HuangCard && typeof message.HuangCard.length === "number" || $util.isString(message.HuangCard)))
-                    return "HuangCard: buffer expected";
-            if (message.CardValue != null && message.hasOwnProperty("CardValue"))
-                if (!(message.CardValue && typeof message.CardValue.length === "number" || $util.isString(message.CardValue)))
-                    return "CardValue: buffer expected";
+            if (message.BankerCard != null && message.hasOwnProperty("BankerCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.BankerCard);
+                if (error)
+                    return "BankerCard." + error;
+            }
+            if (message.TianCard != null && message.hasOwnProperty("TianCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.TianCard);
+                if (error)
+                    return "TianCard." + error;
+            }
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.XuanCard);
+                if (error)
+                    return "XuanCard." + error;
+            }
+            if (message.DiCard != null && message.hasOwnProperty("DiCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.DiCard);
+                if (error)
+                    return "DiCard." + error;
+            }
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.HuangCard);
+                if (error)
+                    return "HuangCard." + error;
+            }
             return null;
         };
 
@@ -820,36 +821,31 @@ $root.cowcow = (function() {
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
                 else if (object.AwardArea.length)
                     message.AwardArea = object.AwardArea;
-            if (object.BankerCard != null)
-                if (typeof object.BankerCard === "string")
-                    $util.base64.decode(object.BankerCard, message.BankerCard = $util.newBuffer($util.base64.length(object.BankerCard)), 0);
-                else if (object.BankerCard.length)
-                    message.BankerCard = object.BankerCard;
-            if (object.TianCard != null)
-                if (typeof object.TianCard === "string")
-                    $util.base64.decode(object.TianCard, message.TianCard = $util.newBuffer($util.base64.length(object.TianCard)), 0);
-                else if (object.TianCard.length)
-                    message.TianCard = object.TianCard;
-            if (object.XuanCard != null)
-                if (typeof object.XuanCard === "string")
-                    $util.base64.decode(object.XuanCard, message.XuanCard = $util.newBuffer($util.base64.length(object.XuanCard)), 0);
-                else if (object.XuanCard.length)
-                    message.XuanCard = object.XuanCard;
-            if (object.DiCard != null)
-                if (typeof object.DiCard === "string")
-                    $util.base64.decode(object.DiCard, message.DiCard = $util.newBuffer($util.base64.length(object.DiCard)), 0);
-                else if (object.DiCard.length)
-                    message.DiCard = object.DiCard;
-            if (object.HuangCard != null)
-                if (typeof object.HuangCard === "string")
-                    $util.base64.decode(object.HuangCard, message.HuangCard = $util.newBuffer($util.base64.length(object.HuangCard)), 0);
-                else if (object.HuangCard.length)
-                    message.HuangCard = object.HuangCard;
-            if (object.CardValue != null)
-                if (typeof object.CardValue === "string")
-                    $util.base64.decode(object.CardValue, message.CardValue = $util.newBuffer($util.base64.length(object.CardValue)), 0);
-                else if (object.CardValue.length)
-                    message.CardValue = object.CardValue;
+            if (object.BankerCard != null) {
+                if (typeof object.BankerCard !== "object")
+                    throw TypeError(".cowcow.GameCowcowOver.BankerCard: object expected");
+                message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
+            }
+            if (object.TianCard != null) {
+                if (typeof object.TianCard !== "object")
+                    throw TypeError(".cowcow.GameCowcowOver.TianCard: object expected");
+                message.TianCard = $root.gamecomm.CardInfo.fromObject(object.TianCard);
+            }
+            if (object.XuanCard != null) {
+                if (typeof object.XuanCard !== "object")
+                    throw TypeError(".cowcow.GameCowcowOver.XuanCard: object expected");
+                message.XuanCard = $root.gamecomm.CardInfo.fromObject(object.XuanCard);
+            }
+            if (object.DiCard != null) {
+                if (typeof object.DiCard !== "object")
+                    throw TypeError(".cowcow.GameCowcowOver.DiCard: object expected");
+                message.DiCard = $root.gamecomm.CardInfo.fromObject(object.DiCard);
+            }
+            if (object.HuangCard != null) {
+                if (typeof object.HuangCard !== "object")
+                    throw TypeError(".cowcow.GameCowcowOver.HuangCard: object expected");
+                message.HuangCard = $root.gamecomm.CardInfo.fromObject(object.HuangCard);
+            }
             return message;
         };
 
@@ -865,63 +861,24 @@ $root.cowcow = (function() {
                     if (options.bytes !== Array)
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
-                if (options.bytes === String)
-                    object.BankerCard = "";
-                else {
-                    object.BankerCard = [];
-                    if (options.bytes !== Array)
-                        object.BankerCard = $util.newBuffer(object.BankerCard);
-                }
-                if (options.bytes === String)
-                    object.TianCard = "";
-                else {
-                    object.TianCard = [];
-                    if (options.bytes !== Array)
-                        object.TianCard = $util.newBuffer(object.TianCard);
-                }
-                if (options.bytes === String)
-                    object.XuanCard = "";
-                else {
-                    object.XuanCard = [];
-                    if (options.bytes !== Array)
-                        object.XuanCard = $util.newBuffer(object.XuanCard);
-                }
-                if (options.bytes === String)
-                    object.DiCard = "";
-                else {
-                    object.DiCard = [];
-                    if (options.bytes !== Array)
-                        object.DiCard = $util.newBuffer(object.DiCard);
-                }
-                if (options.bytes === String)
-                    object.HuangCard = "";
-                else {
-                    object.HuangCard = [];
-                    if (options.bytes !== Array)
-                        object.HuangCard = $util.newBuffer(object.HuangCard);
-                }
-                if (options.bytes === String)
-                    object.CardValue = "";
-                else {
-                    object.CardValue = [];
-                    if (options.bytes !== Array)
-                        object.CardValue = $util.newBuffer(object.CardValue);
-                }
+                object.BankerCard = null;
+                object.TianCard = null;
+                object.XuanCard = null;
+                object.DiCard = null;
+                object.HuangCard = null;
             }
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                object.BankerCard = options.bytes === String ? $util.base64.encode(message.BankerCard, 0, message.BankerCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.BankerCard) : message.BankerCard;
+                object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
             if (message.TianCard != null && message.hasOwnProperty("TianCard"))
-                object.TianCard = options.bytes === String ? $util.base64.encode(message.TianCard, 0, message.TianCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.TianCard) : message.TianCard;
+                object.TianCard = $root.gamecomm.CardInfo.toObject(message.TianCard, options);
             if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
-                object.XuanCard = options.bytes === String ? $util.base64.encode(message.XuanCard, 0, message.XuanCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.XuanCard) : message.XuanCard;
+                object.XuanCard = $root.gamecomm.CardInfo.toObject(message.XuanCard, options);
             if (message.DiCard != null && message.hasOwnProperty("DiCard"))
-                object.DiCard = options.bytes === String ? $util.base64.encode(message.DiCard, 0, message.DiCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.DiCard) : message.DiCard;
+                object.DiCard = $root.gamecomm.CardInfo.toObject(message.DiCard, options);
             if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
-                object.HuangCard = options.bytes === String ? $util.base64.encode(message.HuangCard, 0, message.HuangCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.HuangCard) : message.HuangCard;
-            if (message.CardValue != null && message.hasOwnProperty("CardValue"))
-                object.CardValue = options.bytes === String ? $util.base64.encode(message.CardValue, 0, message.CardValue.length) : options.bytes === Array ? Array.prototype.slice.call(message.CardValue) : message.CardValue;
+                object.HuangCard = $root.gamecomm.CardInfo.toObject(message.HuangCard, options);
             return object;
         };
 

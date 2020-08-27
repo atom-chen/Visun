@@ -27,7 +27,11 @@ message ResResult{
      uint32 State = 1;			//状态:0成功 1失败 
      string Hints = 2;			//提示信息
 }
-
+message ResPopResult{
+     uint32 State = 1;			//状态:0成功 1失败 
+	 string Title = 2;			//标题
+     string Hints = 3;			//提示信息
+}
 /////////////list/////////////////
 //任务信息
 message TaskItem{
@@ -98,8 +102,6 @@ message MasterInfo{
 	UserInfo UserInfo = 2;			//用户信息
 	repeated RoomInfo RoomsInfo = 3;//房间号列表【普通用户,敲一下门就可以进来，但是没有修改房间配置的权限，只有带钥匙的，才可以进行房间修改，即房主权限】
 	TaskList Tasks = 4;				//任务列表
-
-
 }
 
 

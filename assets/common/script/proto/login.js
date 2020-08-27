@@ -489,6 +489,122 @@ $root.login = (function() {
         return ResResult;
     })();
 
+    login.ResPopResult = (function() {
+
+        function ResPopResult(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ResPopResult.prototype.State = 0;
+        ResPopResult.prototype.Title = "";
+        ResPopResult.prototype.Hints = "";
+
+        ResPopResult.create = function create(properties) {
+            return new ResPopResult(properties);
+        };
+
+        ResPopResult.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
+                writer.uint32(8).uint32(message.State);
+            if (message.Title != null && Object.hasOwnProperty.call(message, "Title"))
+                writer.uint32(18).string(message.Title);
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
+                writer.uint32(26).string(message.Hints);
+            return writer;
+        };
+
+        ResPopResult.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ResPopResult.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ResPopResult();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.State = reader.uint32();
+                    break;
+                case 2:
+                    message.Title = reader.string();
+                    break;
+                case 3:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ResPopResult.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ResPopResult.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.State != null && message.hasOwnProperty("State"))
+                if (!$util.isInteger(message.State))
+                    return "State: integer expected";
+            if (message.Title != null && message.hasOwnProperty("Title"))
+                if (!$util.isString(message.Title))
+                    return "Title: string expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        ResPopResult.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ResPopResult)
+                return object;
+            var message = new $root.login.ResPopResult();
+            if (object.State != null)
+                message.State = object.State >>> 0;
+            if (object.Title != null)
+                message.Title = String(object.Title);
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        ResPopResult.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.State = 0;
+                object.Title = "";
+                object.Hints = "";
+            }
+            if (message.State != null && message.hasOwnProperty("State"))
+                object.State = message.State;
+            if (message.Title != null && message.hasOwnProperty("Title"))
+                object.Title = message.Title;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        ResPopResult.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ResPopResult;
+    })();
+
     login.TaskItem = (function() {
 
         function TaskItem(properties) {

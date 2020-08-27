@@ -1,6 +1,8 @@
 syntax = "proto3";
 package gamecomm;
 
+//该协议文件不提供 req 和 resp 注:如需使用,请在子游戏协议中嵌套相关协议.
+
 
 //玩家信息
 message PlayerInfo {
@@ -19,24 +21,27 @@ message PlayerInfo {
     uint32 ChairID = 13; // 所在椅子ID 0:无效
 }
 
-//玩家列表
+
+//牌信息
+message CardInfo {
+	bytes Cards = 1;            //牌
+	int32 CardType = 2;			//牌型
+	int32 CardValue = 3;		//牌值
+}
+
+//时间信息
+message TimeInfo {
+    int64 TimeStamp = 1; //时间戳（起始时间戳）
+    int32 WaitTime = 2;  //等待时间
+	int32 OutTime = 3;   //服务器已过时长
+	int32 TotalTime = 4; //总时长
+}
+
+//玩家列表(信息)
 message UserList {
     repeated PlayerInfo AllInfos = 1; //所有玩家信息
 }
 
-//手牌信息
-message CardInfo {
-	bytes Cards = 1;            //牌
-	int32 CardType = 2;			//牌型
-}
-
-//结算金币变化
-message MoneyCalculateInfo {
-    uint64 UserID = 1;
-    uint64 Money = 2;       //当前余额
-    int64 ChangeValue = 3;  //增减了多少
-    string Reason = 4;      //增减原因描述
-}
 
 //-----------------------------------------------------------------------------------------
 
@@ -50,13 +55,101 @@ message ReqExitGame {
     uint32 GameID = 1; //游戏标识
 }
 
-//-----------------------------------------------------------------------------------------
-
 //换桌
 message ReqChangeTable {
     uint32 GameID = 1; //游戏标识
 }
 
+//金币变化通知
+message NotifyChangeGold {
+    uint64 UserID = 1; //ID
+    int64 Gold = 2; //金币 *100
+    uint32 Code = 3; //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结
+}
+
+//结算金币变化
+message MoneyCalculateInfo {
+    uint64 UserID = 1;
+    uint64 Money = 2;       //当前余额
+    int64 ChangeValue = 3;  //增减了多少
+    string Reason = 4;      //增减原因描述
+}
+
+
+//-----------------------------------------------------------------------------------------
+//游戏状态
+//(准备)
+message StateReady {
+	TimeInfo Times = 1;
+}
+
+//(空闲)
+message StateFree {
+    TimeInfo Times = 1;
+}
+//(开始)
+message StateStart {
+    TimeInfo Times = 1;
+}
+
+//(游戏中)
+message StatePlaying {
+    TimeInfo Times = 1;
+}
+
+//(结束)
+message StateOver {
+    TimeInfo Times = 1;
+}
+
+//(叫分)
+message StateCall {
+    TimeInfo Times = 1;//叫分剩余时间
+    uint64 UserID = 2; // 玩家ID
+}
+
+//-----------------------------------------------------------------------------------------
+//操作
+//抢庄
+message Host {
+    bool IsWant = 1; //true上庄 false取消上庄
+}
+
+//超级抢庄
+message HostEx {
+    bool IsWant = 1; //true上庄 false取消
+}
+
+// 叫分
+message Call {
+    uint64 UserID = 1; // 玩家ID
+    uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
+}
+
+//踢出
+message BeOut {
+    uint64 UserID = 1;  //玩家ID
+    uint32 Code = 2;    //操作码 0:时间到被剔除 1:刷子
+    bytes Hints = 3;    //被踢出的原因
+}
+
+
+//下注
+message Bet {
+    int32 AreaId = 1;
+    int64 Money = 2;
+}
+
+//下注结果：广播
+message BetResult {
+    uint64 UserId = 1;
+    int32 AreaId = 2;
+    int64 Money = 3;
+}
+
+
+
+//-----------------------------------------------------------------------------------------
 //玩家记录（从数据库中获取）ResResult
 message PlayerRecord {
     PlayerInfo User = 1; //玩家
@@ -64,26 +157,6 @@ message PlayerRecord {
     int32 Ranking = 3; //当前排名
     int32 Bankroll = 4; //投注额度
     int64 WinLos = 5; //总输赢 （当局）
-}
-
-//游戏状态(准备)
-message GameReady {
-    uint64 UserID = 1; //ID
-    bool IsReady = 2; // 玩家准备
-}
-
-//下注
-message GameBet {
-    int32 BetArea = 1; //下注区域
-    int64 BetScore = 2; //下注金额
-}
-//下注结果
-message GameBetResult {
-    uint64 UserID = 1; //ID
-    int32 BetArea = 4; //下注区域
-    int64 BetScore = 5; //下注金额
-    int32 State = 2; //状态
-    string Hints = 3; //提示
 }
 
 //游戏记录
@@ -97,68 +170,5 @@ message GameRecordList {
     repeated GameRecord list = 1; //所有历史信息
 }
 
-//反馈结果
-message GameResult {
-    int32 Flag = 1; //标识 0:成功 1:失败 2:其他
-    bytes Reason = 2; //原因
-}
-
-//通知金币变化
-message NotifyChangeGold {
-    uint64 UserID = 1; //ID
-    int64 Gold = 2; //金币 *100
-    uint32 Code = 3; //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结
-}
-//
-
-//游戏状态
-//(空闲)
-message GameStateFree {
-    int64 TimeStamp = 1; //时间戳
-    uint32 WaitTime = 2; //最长等待时间
-}
-//(开始)
-message GameStateStart {
-    int64 TimeStamp = 1; //时间戳
-    uint32 WaitTime = 2; //最长等待时间
-}
-
-//(游戏中)
-message GameStatePlaying {
-    int64 TimeStamp = 1; //时间戳
-    uint32 WaitTime = 2; //最长等待时间
-}
-//(结束)
-message GameStateOver {
-    int64 TimeStamp = 1; //时间戳
-    uint32 WaitTime = 2; //最长等待时间
-}
-//(叫分)
-message GameStateCall {
-    int64 TimeStamp = 1; //时间戳
-    uint32 WaitTime = 2; //最长等待时间
-    uint64 UserID = 3; // 玩家ID
-}
-//(踢出)
-message GameBeOut {
-    uint64 UserID = 1;  //玩家ID
-    uint32 Code = 2;    //操作码 0:时间到被剔除 1:刷子
-    bytes Hints = 3;    //被踢出的原因
-}
 
 
-
-//------------------值得考量是否需要放入共用------------------------
-//抢庄
-message GameHost {
-    bool IsWant = 1; //true上庄 false取消上庄
-}
-//超级抢庄
-message GameSuperHost {
-    bool IsWant = 1; //true上庄 false取消
-}
-// 叫分
-message GameCall {
-    uint64 UserID = 1; // 玩家ID
-    uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
-}

@@ -9,11 +9,11 @@ message GameLandLordsEnter {
     uint32 OutTime = 3; //最长出牌时间
     uint32 CallTime = 4; //最长叫分时间
 
-    GameStateFree Free = 5; //空闲状态(清场或游戏未启动)
-    GameStateStart Start = 6; //开始状态
-    GameStateCall Call = 7; //叫分状态
-    GameStatePlaying Playing = 8; //下注状态
-    GameStateOver Over = 9; //结算状态
+    StateFree Free = 5; //空闲状态(清场或游戏未启动)
+    StateStart Start = 6; //开始状态
+    StateCall Call = 7; //叫分状态
+    StatePlaying Playing = 8; //下注状态
+    StateOver Over = 9; //结算状态
 
     uint32 BeforeChairID = 10; //上一家的椅子号
     bytes BeforeCards = 11; //上一家的出牌(场景恢复)

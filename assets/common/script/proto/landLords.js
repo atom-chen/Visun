@@ -50,15 +50,15 @@ $root.landLords = (function() {
             if (message.CallTime != null && Object.hasOwnProperty.call(message, "CallTime"))
                 writer.uint32(32).uint32(message.CallTime);
             if (message.Free != null && Object.hasOwnProperty.call(message, "Free"))
-                $root.gamecomm.GameStateFree.encode(message.Free, writer.uint32(42).fork()).ldelim();
+                $root.gamecomm.StateFree.encode(message.Free, writer.uint32(42).fork()).ldelim();
             if (message.Start != null && Object.hasOwnProperty.call(message, "Start"))
-                $root.gamecomm.GameStateStart.encode(message.Start, writer.uint32(50).fork()).ldelim();
+                $root.gamecomm.StateStart.encode(message.Start, writer.uint32(50).fork()).ldelim();
             if (message.Call != null && Object.hasOwnProperty.call(message, "Call"))
-                $root.gamecomm.GameStateCall.encode(message.Call, writer.uint32(58).fork()).ldelim();
+                $root.gamecomm.StateCall.encode(message.Call, writer.uint32(58).fork()).ldelim();
             if (message.Playing != null && Object.hasOwnProperty.call(message, "Playing"))
-                $root.gamecomm.GameStatePlaying.encode(message.Playing, writer.uint32(66).fork()).ldelim();
+                $root.gamecomm.StatePlaying.encode(message.Playing, writer.uint32(66).fork()).ldelim();
             if (message.Over != null && Object.hasOwnProperty.call(message, "Over"))
-                $root.gamecomm.GameStateOver.encode(message.Over, writer.uint32(74).fork()).ldelim();
+                $root.gamecomm.StateOver.encode(message.Over, writer.uint32(74).fork()).ldelim();
             if (message.BeforeChairID != null && Object.hasOwnProperty.call(message, "BeforeChairID"))
                 writer.uint32(80).uint32(message.BeforeChairID);
             if (message.BeforeCards != null && Object.hasOwnProperty.call(message, "BeforeCards"))
@@ -93,19 +93,19 @@ $root.landLords = (function() {
                     message.CallTime = reader.uint32();
                     break;
                 case 5:
-                    message.Free = $root.gamecomm.GameStateFree.decode(reader, reader.uint32());
+                    message.Free = $root.gamecomm.StateFree.decode(reader, reader.uint32());
                     break;
                 case 6:
-                    message.Start = $root.gamecomm.GameStateStart.decode(reader, reader.uint32());
+                    message.Start = $root.gamecomm.StateStart.decode(reader, reader.uint32());
                     break;
                 case 7:
-                    message.Call = $root.gamecomm.GameStateCall.decode(reader, reader.uint32());
+                    message.Call = $root.gamecomm.StateCall.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.Playing = $root.gamecomm.GameStatePlaying.decode(reader, reader.uint32());
+                    message.Playing = $root.gamecomm.StatePlaying.decode(reader, reader.uint32());
                     break;
                 case 9:
-                    message.Over = $root.gamecomm.GameStateOver.decode(reader, reader.uint32());
+                    message.Over = $root.gamecomm.StateOver.decode(reader, reader.uint32());
                     break;
                 case 10:
                     message.BeforeChairID = reader.uint32();
@@ -148,27 +148,27 @@ $root.landLords = (function() {
                 if (!$util.isInteger(message.CallTime))
                     return "CallTime: integer expected";
             if (message.Free != null && message.hasOwnProperty("Free")) {
-                var error = $root.gamecomm.GameStateFree.verify(message.Free);
+                var error = $root.gamecomm.StateFree.verify(message.Free);
                 if (error)
                     return "Free." + error;
             }
             if (message.Start != null && message.hasOwnProperty("Start")) {
-                var error = $root.gamecomm.GameStateStart.verify(message.Start);
+                var error = $root.gamecomm.StateStart.verify(message.Start);
                 if (error)
                     return "Start." + error;
             }
             if (message.Call != null && message.hasOwnProperty("Call")) {
-                var error = $root.gamecomm.GameStateCall.verify(message.Call);
+                var error = $root.gamecomm.StateCall.verify(message.Call);
                 if (error)
                     return "Call." + error;
             }
             if (message.Playing != null && message.hasOwnProperty("Playing")) {
-                var error = $root.gamecomm.GameStatePlaying.verify(message.Playing);
+                var error = $root.gamecomm.StatePlaying.verify(message.Playing);
                 if (error)
                     return "Playing." + error;
             }
             if (message.Over != null && message.hasOwnProperty("Over")) {
-                var error = $root.gamecomm.GameStateOver.verify(message.Over);
+                var error = $root.gamecomm.StateOver.verify(message.Over);
                 if (error)
                     return "Over." + error;
             }
@@ -212,27 +212,27 @@ $root.landLords = (function() {
             if (object.Free != null) {
                 if (typeof object.Free !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Free: object expected");
-                message.Free = $root.gamecomm.GameStateFree.fromObject(object.Free);
+                message.Free = $root.gamecomm.StateFree.fromObject(object.Free);
             }
             if (object.Start != null) {
                 if (typeof object.Start !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Start: object expected");
-                message.Start = $root.gamecomm.GameStateStart.fromObject(object.Start);
+                message.Start = $root.gamecomm.StateStart.fromObject(object.Start);
             }
             if (object.Call != null) {
                 if (typeof object.Call !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Call: object expected");
-                message.Call = $root.gamecomm.GameStateCall.fromObject(object.Call);
+                message.Call = $root.gamecomm.StateCall.fromObject(object.Call);
             }
             if (object.Playing != null) {
                 if (typeof object.Playing !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Playing: object expected");
-                message.Playing = $root.gamecomm.GameStatePlaying.fromObject(object.Playing);
+                message.Playing = $root.gamecomm.StatePlaying.fromObject(object.Playing);
             }
             if (object.Over != null) {
                 if (typeof object.Over !== "object")
                     throw TypeError(".landLords.GameLandLordsEnter.Over: object expected");
-                message.Over = $root.gamecomm.GameStateOver.fromObject(object.Over);
+                message.Over = $root.gamecomm.StateOver.fromObject(object.Over);
             }
             if (object.BeforeChairID != null)
                 message.BeforeChairID = object.BeforeChairID >>> 0;
@@ -295,15 +295,15 @@ $root.landLords = (function() {
             if (message.CallTime != null && message.hasOwnProperty("CallTime"))
                 object.CallTime = message.CallTime;
             if (message.Free != null && message.hasOwnProperty("Free"))
-                object.Free = $root.gamecomm.GameStateFree.toObject(message.Free, options);
+                object.Free = $root.gamecomm.StateFree.toObject(message.Free, options);
             if (message.Start != null && message.hasOwnProperty("Start"))
-                object.Start = $root.gamecomm.GameStateStart.toObject(message.Start, options);
+                object.Start = $root.gamecomm.StateStart.toObject(message.Start, options);
             if (message.Call != null && message.hasOwnProperty("Call"))
-                object.Call = $root.gamecomm.GameStateCall.toObject(message.Call, options);
+                object.Call = $root.gamecomm.StateCall.toObject(message.Call, options);
             if (message.Playing != null && message.hasOwnProperty("Playing"))
-                object.Playing = $root.gamecomm.GameStatePlaying.toObject(message.Playing, options);
+                object.Playing = $root.gamecomm.StatePlaying.toObject(message.Playing, options);
             if (message.Over != null && message.hasOwnProperty("Over"))
-                object.Over = $root.gamecomm.GameStateOver.toObject(message.Over, options);
+                object.Over = $root.gamecomm.StateOver.toObject(message.Over, options);
             if (message.BeforeChairID != null && message.hasOwnProperty("BeforeChairID"))
                 object.BeforeChairID = message.BeforeChairID;
             if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))

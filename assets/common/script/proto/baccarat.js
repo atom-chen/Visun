@@ -11,33 +11,30 @@ $root.baccarat = (function() {
 
     var baccarat = {};
 
-    baccarat.GameBaccaratEnter = (function() {
+    baccarat.BaccaratScene = (function() {
 
-        function GameBaccaratEnter(properties) {
+        function BaccaratScene(properties) {
             this.Chips = [];
             this.AwardAreas = [];
+            this.AreaBets = [];
+            this.MyBets = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        GameBaccaratEnter.prototype.Chips = $util.emptyArray;
-        GameBaccaratEnter.prototype.AwardAreas = $util.emptyArray;
-        GameBaccaratEnter.prototype.FreeTime = 0;
-        GameBaccaratEnter.prototype.BetTime = 0;
-        GameBaccaratEnter.prototype.OpenTime = 0;
-        GameBaccaratEnter.prototype.Free = null;
-        GameBaccaratEnter.prototype.Start = null;
-        GameBaccaratEnter.prototype.Playing = null;
-        GameBaccaratEnter.prototype.Over = null;
+        BaccaratScene.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratScene.prototype.Chips = $util.emptyArray;
+        BaccaratScene.prototype.AwardAreas = $util.emptyArray;
+        BaccaratScene.prototype.AreaBets = $util.emptyArray;
+        BaccaratScene.prototype.MyBets = $util.emptyArray;
 
-        GameBaccaratEnter.create = function create(properties) {
-            return new GameBaccaratEnter(properties);
+        BaccaratScene.create = function create(properties) {
+            return new BaccaratScene(properties);
         };
 
-        GameBaccaratEnter.encode = function encode(message, writer) {
+        BaccaratScene.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
@@ -51,31 +48,29 @@ $root.baccarat = (function() {
             if (message.AwardAreas != null && message.AwardAreas.length)
                 for (var i = 0; i < message.AwardAreas.length; ++i)
                     writer.uint32(26).bytes(message.AwardAreas[i]);
-            if (message.FreeTime != null && Object.hasOwnProperty.call(message, "FreeTime"))
-                writer.uint32(32).uint32(message.FreeTime);
-            if (message.BetTime != null && Object.hasOwnProperty.call(message, "BetTime"))
-                writer.uint32(40).uint32(message.BetTime);
-            if (message.OpenTime != null && Object.hasOwnProperty.call(message, "OpenTime"))
-                writer.uint32(48).uint32(message.OpenTime);
-            if (message.Free != null && Object.hasOwnProperty.call(message, "Free"))
-                $root.gamecomm.GameStateFree.encode(message.Free, writer.uint32(58).fork()).ldelim();
-            if (message.Start != null && Object.hasOwnProperty.call(message, "Start"))
-                $root.gamecomm.GameStateStart.encode(message.Start, writer.uint32(66).fork()).ldelim();
-            if (message.Playing != null && Object.hasOwnProperty.call(message, "Playing"))
-                $root.gamecomm.GameStatePlaying.encode(message.Playing, writer.uint32(74).fork()).ldelim();
-            if (message.Over != null && Object.hasOwnProperty.call(message, "Over"))
-                $root.gamecomm.GameStateOver.encode(message.Over, writer.uint32(82).fork()).ldelim();
+            if (message.AreaBets != null && message.AreaBets.length) {
+                writer.uint32(34).fork();
+                for (var i = 0; i < message.AreaBets.length; ++i)
+                    writer.int64(message.AreaBets[i]);
+                writer.ldelim();
+            }
+            if (message.MyBets != null && message.MyBets.length) {
+                writer.uint32(42).fork();
+                for (var i = 0; i < message.MyBets.length; ++i)
+                    writer.int64(message.MyBets[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
-        GameBaccaratEnter.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratScene.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratEnter.decode = function decode(reader, length) {
+        BaccaratScene.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratEnter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratScene();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -98,25 +93,24 @@ $root.baccarat = (function() {
                     message.AwardAreas.push(reader.bytes());
                     break;
                 case 4:
-                    message.FreeTime = reader.uint32();
+                    if (!(message.AreaBets && message.AreaBets.length))
+                        message.AreaBets = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.AreaBets.push(reader.int64());
+                    } else
+                        message.AreaBets.push(reader.int64());
                     break;
                 case 5:
-                    message.BetTime = reader.uint32();
-                    break;
-                case 6:
-                    message.OpenTime = reader.uint32();
-                    break;
-                case 7:
-                    message.Free = $root.gamecomm.GameStateFree.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.Start = $root.gamecomm.GameStateStart.decode(reader, reader.uint32());
-                    break;
-                case 9:
-                    message.Playing = $root.gamecomm.GameStatePlaying.decode(reader, reader.uint32());
-                    break;
-                case 10:
-                    message.Over = $root.gamecomm.GameStateOver.decode(reader, reader.uint32());
+                    if (!(message.MyBets && message.MyBets.length))
+                        message.MyBets = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.MyBets.push(reader.int64());
+                    } else
+                        message.MyBets.push(reader.int64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -126,13 +120,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratEnter.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratScene.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratEnter.verify = function verify(message) {
+        BaccaratScene.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
@@ -152,42 +146,27 @@ $root.baccarat = (function() {
                     if (!(message.AwardAreas[i] && typeof message.AwardAreas[i].length === "number" || $util.isString(message.AwardAreas[i])))
                         return "AwardAreas: buffer[] expected";
             }
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
-                if (!$util.isInteger(message.FreeTime))
-                    return "FreeTime: integer expected";
-            if (message.BetTime != null && message.hasOwnProperty("BetTime"))
-                if (!$util.isInteger(message.BetTime))
-                    return "BetTime: integer expected";
-            if (message.OpenTime != null && message.hasOwnProperty("OpenTime"))
-                if (!$util.isInteger(message.OpenTime))
-                    return "OpenTime: integer expected";
-            if (message.Free != null && message.hasOwnProperty("Free")) {
-                var error = $root.gamecomm.GameStateFree.verify(message.Free);
-                if (error)
-                    return "Free." + error;
+            if (message.AreaBets != null && message.hasOwnProperty("AreaBets")) {
+                if (!Array.isArray(message.AreaBets))
+                    return "AreaBets: array expected";
+                for (var i = 0; i < message.AreaBets.length; ++i)
+                    if (!$util.isInteger(message.AreaBets[i]) && !(message.AreaBets[i] && $util.isInteger(message.AreaBets[i].low) && $util.isInteger(message.AreaBets[i].high)))
+                        return "AreaBets: integer|Long[] expected";
             }
-            if (message.Start != null && message.hasOwnProperty("Start")) {
-                var error = $root.gamecomm.GameStateStart.verify(message.Start);
-                if (error)
-                    return "Start." + error;
-            }
-            if (message.Playing != null && message.hasOwnProperty("Playing")) {
-                var error = $root.gamecomm.GameStatePlaying.verify(message.Playing);
-                if (error)
-                    return "Playing." + error;
-            }
-            if (message.Over != null && message.hasOwnProperty("Over")) {
-                var error = $root.gamecomm.GameStateOver.verify(message.Over);
-                if (error)
-                    return "Over." + error;
+            if (message.MyBets != null && message.hasOwnProperty("MyBets")) {
+                if (!Array.isArray(message.MyBets))
+                    return "MyBets: array expected";
+                for (var i = 0; i < message.MyBets.length; ++i)
+                    if (!$util.isInteger(message.MyBets[i]) && !(message.MyBets[i] && $util.isInteger(message.MyBets[i].low) && $util.isInteger(message.MyBets[i].high)))
+                        return "MyBets: integer|Long[] expected";
             }
             return null;
         };
 
-        GameBaccaratEnter.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratEnter)
+        BaccaratScene.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratScene)
                 return object;
-            var message = new $root.baccarat.GameBaccaratEnter();
+            var message = new $root.baccarat.BaccaratScene();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -199,14 +178,14 @@ $root.baccarat = (function() {
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
-                    throw TypeError(".baccarat.GameBaccaratEnter.Chips: array expected");
+                    throw TypeError(".baccarat.BaccaratScene.Chips: array expected");
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
             }
             if (object.AwardAreas) {
                 if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".baccarat.GameBaccaratEnter.AwardAreas: array expected");
+                    throw TypeError(".baccarat.BaccaratScene.AwardAreas: array expected");
                 message.AwardAreas = [];
                 for (var i = 0; i < object.AwardAreas.length; ++i)
                     if (typeof object.AwardAreas[i] === "string")
@@ -214,57 +193,53 @@ $root.baccarat = (function() {
                     else if (object.AwardAreas[i].length)
                         message.AwardAreas[i] = object.AwardAreas[i];
             }
-            if (object.FreeTime != null)
-                message.FreeTime = object.FreeTime >>> 0;
-            if (object.BetTime != null)
-                message.BetTime = object.BetTime >>> 0;
-            if (object.OpenTime != null)
-                message.OpenTime = object.OpenTime >>> 0;
-            if (object.Free != null) {
-                if (typeof object.Free !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.Free: object expected");
-                message.Free = $root.gamecomm.GameStateFree.fromObject(object.Free);
+            if (object.AreaBets) {
+                if (!Array.isArray(object.AreaBets))
+                    throw TypeError(".baccarat.BaccaratScene.AreaBets: array expected");
+                message.AreaBets = [];
+                for (var i = 0; i < object.AreaBets.length; ++i)
+                    if ($util.Long)
+                        (message.AreaBets[i] = $util.Long.fromValue(object.AreaBets[i])).unsigned = false;
+                    else if (typeof object.AreaBets[i] === "string")
+                        message.AreaBets[i] = parseInt(object.AreaBets[i], 10);
+                    else if (typeof object.AreaBets[i] === "number")
+                        message.AreaBets[i] = object.AreaBets[i];
+                    else if (typeof object.AreaBets[i] === "object")
+                        message.AreaBets[i] = new $util.LongBits(object.AreaBets[i].low >>> 0, object.AreaBets[i].high >>> 0).toNumber();
             }
-            if (object.Start != null) {
-                if (typeof object.Start !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.Start: object expected");
-                message.Start = $root.gamecomm.GameStateStart.fromObject(object.Start);
-            }
-            if (object.Playing != null) {
-                if (typeof object.Playing !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.Playing: object expected");
-                message.Playing = $root.gamecomm.GameStatePlaying.fromObject(object.Playing);
-            }
-            if (object.Over != null) {
-                if (typeof object.Over !== "object")
-                    throw TypeError(".baccarat.GameBaccaratEnter.Over: object expected");
-                message.Over = $root.gamecomm.GameStateOver.fromObject(object.Over);
+            if (object.MyBets) {
+                if (!Array.isArray(object.MyBets))
+                    throw TypeError(".baccarat.BaccaratScene.MyBets: array expected");
+                message.MyBets = [];
+                for (var i = 0; i < object.MyBets.length; ++i)
+                    if ($util.Long)
+                        (message.MyBets[i] = $util.Long.fromValue(object.MyBets[i])).unsigned = false;
+                    else if (typeof object.MyBets[i] === "string")
+                        message.MyBets[i] = parseInt(object.MyBets[i], 10);
+                    else if (typeof object.MyBets[i] === "number")
+                        message.MyBets[i] = object.MyBets[i];
+                    else if (typeof object.MyBets[i] === "object")
+                        message.MyBets[i] = new $util.LongBits(object.MyBets[i].low >>> 0, object.MyBets[i].high >>> 0).toNumber();
             }
             return message;
         };
 
-        GameBaccaratEnter.toObject = function toObject(message, options) {
+        BaccaratScene.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults) {
                 object.Chips = [];
                 object.AwardAreas = [];
+                object.AreaBets = [];
+                object.MyBets = [];
             }
-            if (options.defaults) {
+            if (options.defaults)
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TimeStamp = options.longs === String ? "0" : 0;
-                object.FreeTime = 0;
-                object.BetTime = 0;
-                object.OpenTime = 0;
-                object.Free = null;
-                object.Start = null;
-                object.Playing = null;
-                object.Over = null;
-            }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
@@ -280,47 +255,417 @@ $root.baccarat = (function() {
                 for (var j = 0; j < message.AwardAreas.length; ++j)
                     object.AwardAreas[j] = options.bytes === String ? $util.base64.encode(message.AwardAreas[j], 0, message.AwardAreas[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardAreas[j]) : message.AwardAreas[j];
             }
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
-                object.FreeTime = message.FreeTime;
-            if (message.BetTime != null && message.hasOwnProperty("BetTime"))
-                object.BetTime = message.BetTime;
-            if (message.OpenTime != null && message.hasOwnProperty("OpenTime"))
-                object.OpenTime = message.OpenTime;
-            if (message.Free != null && message.hasOwnProperty("Free"))
-                object.Free = $root.gamecomm.GameStateFree.toObject(message.Free, options);
-            if (message.Start != null && message.hasOwnProperty("Start"))
-                object.Start = $root.gamecomm.GameStateStart.toObject(message.Start, options);
-            if (message.Playing != null && message.hasOwnProperty("Playing"))
-                object.Playing = $root.gamecomm.GameStatePlaying.toObject(message.Playing, options);
-            if (message.Over != null && message.hasOwnProperty("Over"))
-                object.Over = $root.gamecomm.GameStateOver.toObject(message.Over, options);
+            if (message.AreaBets && message.AreaBets.length) {
+                object.AreaBets = [];
+                for (var j = 0; j < message.AreaBets.length; ++j)
+                    if (typeof message.AreaBets[j] === "number")
+                        object.AreaBets[j] = options.longs === String ? String(message.AreaBets[j]) : message.AreaBets[j];
+                    else
+                        object.AreaBets[j] = options.longs === String ? $util.Long.prototype.toString.call(message.AreaBets[j]) : options.longs === Number ? new $util.LongBits(message.AreaBets[j].low >>> 0, message.AreaBets[j].high >>> 0).toNumber() : message.AreaBets[j];
+            }
+            if (message.MyBets && message.MyBets.length) {
+                object.MyBets = [];
+                for (var j = 0; j < message.MyBets.length; ++j)
+                    if (typeof message.MyBets[j] === "number")
+                        object.MyBets[j] = options.longs === String ? String(message.MyBets[j]) : message.MyBets[j];
+                    else
+                        object.MyBets[j] = options.longs === String ? $util.Long.prototype.toString.call(message.MyBets[j]) : options.longs === Number ? new $util.LongBits(message.MyBets[j].low >>> 0, message.MyBets[j].high >>> 0).toNumber() : message.MyBets[j];
+            }
             return object;
         };
 
-        GameBaccaratEnter.prototype.toJSON = function toJSON() {
+        BaccaratScene.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratEnter;
+        return BaccaratScene;
     })();
 
-    baccarat.GameBaccaratHost = (function() {
+    baccarat.BaccaratStateFree = (function() {
 
-        function GameBaccaratHost(properties) {
+        function BaccaratStateFree(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratHost.prototype.IsWant = false;
+        BaccaratStateFree.prototype.Times = null;
 
-        GameBaccaratHost.create = function create(properties) {
-            return new GameBaccaratHost(properties);
+        BaccaratStateFree.create = function create(properties) {
+            return new BaccaratStateFree(properties);
         };
 
-        GameBaccaratHost.encode = function encode(message, writer) {
+        BaccaratStateFree.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        BaccaratStateFree.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratStateFree.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStateFree();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratStateFree.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratStateFree.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        BaccaratStateFree.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratStateFree)
+                return object;
+            var message = new $root.baccarat.BaccaratStateFree();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".baccarat.BaccaratStateFree.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        BaccaratStateFree.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        BaccaratStateFree.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratStateFree;
+    })();
+
+    baccarat.BaccaratStateStart = (function() {
+
+        function BaccaratStateStart(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratStateStart.prototype.Times = null;
+
+        BaccaratStateStart.create = function create(properties) {
+            return new BaccaratStateStart(properties);
+        };
+
+        BaccaratStateStart.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        BaccaratStateStart.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratStateStart.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStateStart();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratStateStart.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratStateStart.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        BaccaratStateStart.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratStateStart)
+                return object;
+            var message = new $root.baccarat.BaccaratStateStart();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".baccarat.BaccaratStateStart.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        BaccaratStateStart.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        BaccaratStateStart.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratStateStart;
+    })();
+
+    baccarat.BaccaratStatePlaying = (function() {
+
+        function BaccaratStatePlaying(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratStatePlaying.prototype.Times = null;
+
+        BaccaratStatePlaying.create = function create(properties) {
+            return new BaccaratStatePlaying(properties);
+        };
+
+        BaccaratStatePlaying.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        BaccaratStatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratStatePlaying.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStatePlaying();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratStatePlaying.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratStatePlaying.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        BaccaratStatePlaying.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratStatePlaying)
+                return object;
+            var message = new $root.baccarat.BaccaratStatePlaying();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".baccarat.BaccaratStatePlaying.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        BaccaratStatePlaying.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        BaccaratStatePlaying.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratStatePlaying;
+    })();
+
+    baccarat.BaccaratStateOver = (function() {
+
+        function BaccaratStateOver(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratStateOver.prototype.Times = null;
+
+        BaccaratStateOver.create = function create(properties) {
+            return new BaccaratStateOver(properties);
+        };
+
+        BaccaratStateOver.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        BaccaratStateOver.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratStateOver.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStateOver();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratStateOver.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratStateOver.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        BaccaratStateOver.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratStateOver)
+                return object;
+            var message = new $root.baccarat.BaccaratStateOver();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".baccarat.BaccaratStateOver.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        BaccaratStateOver.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        BaccaratStateOver.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratStateOver;
+    })();
+
+    baccarat.BaccaratHost = (function() {
+
+        function BaccaratHost(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BaccaratHost.prototype.IsWant = false;
+
+        BaccaratHost.create = function create(properties) {
+            return new BaccaratHost(properties);
+        };
+
+        BaccaratHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -330,14 +675,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratHost.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratHost.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratHost.decode = function decode(reader, length) {
+        BaccaratHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -355,13 +700,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratHost.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratHost.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratHost.verify = function verify(message) {
+        BaccaratHost.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -373,10 +718,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratHost)
+        BaccaratHost.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratHost();
+            var message = new $root.baccarat.BaccaratHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -391,7 +736,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratHost.toObject = function toObject(message, options) {
+        BaccaratHost.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -413,30 +758,30 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratHost.prototype.toJSON = function toJSON() {
+        BaccaratHost.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratHost;
+        return BaccaratHost;
     })();
 
-    baccarat.GameBaccaratSuperHost = (function() {
+    baccarat.BaccaratSuperHost = (function() {
 
-        function GameBaccaratSuperHost(properties) {
+        function BaccaratSuperHost(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratSuperHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratSuperHost.prototype.IsWant = false;
+        BaccaratSuperHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BaccaratSuperHost.prototype.IsWant = false;
 
-        GameBaccaratSuperHost.create = function create(properties) {
-            return new GameBaccaratSuperHost(properties);
+        BaccaratSuperHost.create = function create(properties) {
+            return new BaccaratSuperHost(properties);
         };
 
-        GameBaccaratSuperHost.encode = function encode(message, writer) {
+        BaccaratSuperHost.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -446,14 +791,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratSuperHost.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratSuperHost.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratSuperHost.decode = function decode(reader, length) {
+        BaccaratSuperHost.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratSuperHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratSuperHost();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -471,13 +816,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratSuperHost.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratSuperHost.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratSuperHost.verify = function verify(message) {
+        BaccaratSuperHost.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -489,10 +834,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratSuperHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratSuperHost)
+        BaccaratSuperHost.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratSuperHost)
                 return object;
-            var message = new $root.baccarat.GameBaccaratSuperHost();
+            var message = new $root.baccarat.BaccaratSuperHost();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -507,7 +852,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratSuperHost.toObject = function toObject(message, options) {
+        BaccaratSuperHost.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -529,30 +874,30 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratSuperHost.prototype.toJSON = function toJSON() {
+        BaccaratSuperHost.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratSuperHost;
+        return BaccaratSuperHost;
     })();
 
-    baccarat.GameBaccaratBet = (function() {
+    baccarat.BaccaratReq = (function() {
 
-        function GameBaccaratBet(properties) {
+        function BaccaratReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratBet.prototype.BetArea = 0;
-        GameBaccaratBet.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratReq.prototype.BetArea = 0;
+        BaccaratReq.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameBaccaratBet.create = function create(properties) {
-            return new GameBaccaratBet(properties);
+        BaccaratReq.create = function create(properties) {
+            return new BaccaratReq(properties);
         };
 
-        GameBaccaratBet.encode = function encode(message, writer) {
+        BaccaratReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
@@ -562,14 +907,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratBet.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratBet.decode = function decode(reader, length) {
+        BaccaratReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBet();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -587,13 +932,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBet.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratBet.verify = function verify(message) {
+        BaccaratReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -605,10 +950,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratBet.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBet)
+        BaccaratReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratReq)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBet();
+            var message = new $root.baccarat.BaccaratReq();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -623,7 +968,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBet.toObject = function toObject(message, options) {
+        BaccaratReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -645,73 +990,61 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratBet.prototype.toJSON = function toJSON() {
+        BaccaratReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratBet;
+        return BaccaratReq;
     })();
 
-    baccarat.GameBaccaratBetResult = (function() {
+    baccarat.BaccaratResp = (function() {
 
-        function GameBaccaratBetResult(properties) {
+        function BaccaratResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratBetResult.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameBaccaratBetResult.prototype.BetArea = 0;
-        GameBaccaratBetResult.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        GameBaccaratBetResult.prototype.State = 0;
-        GameBaccaratBetResult.prototype.Hints = "";
+        BaccaratResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BaccaratResp.prototype.BetArea = 0;
+        BaccaratResp.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameBaccaratBetResult.create = function create(properties) {
-            return new GameBaccaratBetResult(properties);
+        BaccaratResp.create = function create(properties) {
+            return new BaccaratResp(properties);
         };
 
-        GameBaccaratBetResult.encode = function encode(message, writer) {
+        BaccaratResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
-                writer.uint32(16).int32(message.State);
-            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
-                writer.uint32(26).string(message.Hints);
             if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
-                writer.uint32(32).int32(message.BetArea);
+                writer.uint32(16).int32(message.BetArea);
             if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
-                writer.uint32(40).int64(message.BetScore);
+                writer.uint32(24).int64(message.BetScore);
             return writer;
         };
 
-        GameBaccaratBetResult.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratBetResult.decode = function decode(reader, length) {
+        BaccaratResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratBetResult();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     message.UserID = reader.uint64();
                     break;
-                case 4:
+                case 2:
                     message.BetArea = reader.int32();
                     break;
-                case 5:
-                    message.BetScore = reader.int64();
-                    break;
-                case 2:
-                    message.State = reader.int32();
-                    break;
                 case 3:
-                    message.Hints = reader.string();
+                    message.BetScore = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -721,13 +1054,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratBetResult.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratBetResult.verify = function verify(message) {
+        BaccaratResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -739,19 +1072,13 @@ $root.baccarat = (function() {
             if (message.BetScore != null && message.hasOwnProperty("BetScore"))
                 if (!$util.isInteger(message.BetScore) && !(message.BetScore && $util.isInteger(message.BetScore.low) && $util.isInteger(message.BetScore.high)))
                     return "BetScore: integer|Long expected";
-            if (message.State != null && message.hasOwnProperty("State"))
-                if (!$util.isInteger(message.State))
-                    return "State: integer expected";
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!$util.isString(message.Hints))
-                    return "Hints: string expected";
             return null;
         };
 
-        GameBaccaratBetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratBetResult)
+        BaccaratResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratResp)
                 return object;
-            var message = new $root.baccarat.GameBaccaratBetResult();
+            var message = new $root.baccarat.BaccaratResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -772,14 +1099,10 @@ $root.baccarat = (function() {
                     message.BetScore = object.BetScore;
                 else if (typeof object.BetScore === "object")
                     message.BetScore = new $util.LongBits(object.BetScore.low >>> 0, object.BetScore.high >>> 0).toNumber();
-            if (object.State != null)
-                message.State = object.State | 0;
-            if (object.Hints != null)
-                message.Hints = String(object.Hints);
             return message;
         };
 
-        GameBaccaratBetResult.toObject = function toObject(message, options) {
+        BaccaratResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -789,8 +1112,6 @@ $root.baccarat = (function() {
                     object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
-                object.State = 0;
-                object.Hints = "";
                 object.BetArea = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -803,10 +1124,6 @@ $root.baccarat = (function() {
                     object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.State != null && message.hasOwnProperty("State"))
-                object.State = message.State;
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = message.Hints;
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
                 object.BetArea = message.BetArea;
             if (message.BetScore != null && message.hasOwnProperty("BetScore"))
@@ -817,50 +1134,50 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratBetResult.prototype.toJSON = function toJSON() {
+        BaccaratResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratBetResult;
+        return BaccaratResp;
     })();
 
-    baccarat.GameBaccaratOver = (function() {
+    baccarat.BaccaratOver = (function() {
 
-        function GameBaccaratOver(properties) {
+        function BaccaratOver(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratOver.prototype.AwardArea = $util.newBuffer([]);
-        GameBaccaratOver.prototype.PlayerCard = $util.newBuffer([]);
-        GameBaccaratOver.prototype.BankerCard = $util.newBuffer([]);
+        BaccaratOver.prototype.AwardArea = $util.newBuffer([]);
+        BaccaratOver.prototype.PlayerCard = null;
+        BaccaratOver.prototype.BankerCard = null;
 
-        GameBaccaratOver.create = function create(properties) {
-            return new GameBaccaratOver(properties);
+        BaccaratOver.create = function create(properties) {
+            return new BaccaratOver(properties);
         };
 
-        GameBaccaratOver.encode = function encode(message, writer) {
+        BaccaratOver.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
             if (message.PlayerCard != null && Object.hasOwnProperty.call(message, "PlayerCard"))
-                writer.uint32(18).bytes(message.PlayerCard);
+                $root.gamecomm.CardInfo.encode(message.PlayerCard, writer.uint32(18).fork()).ldelim();
             if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
-                writer.uint32(26).bytes(message.BankerCard);
+                $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(26).fork()).ldelim();
             return writer;
         };
 
-        GameBaccaratOver.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratOver.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratOver.decode = function decode(reader, length) {
+        BaccaratOver.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratOver();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -868,10 +1185,10 @@ $root.baccarat = (function() {
                     message.AwardArea = reader.bytes();
                     break;
                 case 2:
-                    message.PlayerCard = reader.bytes();
+                    message.PlayerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.BankerCard = reader.bytes();
+                    message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -881,50 +1198,54 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratOver.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratOver.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratOver.verify = function verify(message) {
+        BaccaratOver.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
                     return "AwardArea: buffer expected";
-            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
-                if (!(message.PlayerCard && typeof message.PlayerCard.length === "number" || $util.isString(message.PlayerCard)))
-                    return "PlayerCard: buffer expected";
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                if (!(message.BankerCard && typeof message.BankerCard.length === "number" || $util.isString(message.BankerCard)))
-                    return "BankerCard: buffer expected";
+            if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.PlayerCard);
+                if (error)
+                    return "PlayerCard." + error;
+            }
+            if (message.BankerCard != null && message.hasOwnProperty("BankerCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.BankerCard);
+                if (error)
+                    return "BankerCard." + error;
+            }
             return null;
         };
 
-        GameBaccaratOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratOver)
+        BaccaratOver.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratOver)
                 return object;
-            var message = new $root.baccarat.GameBaccaratOver();
+            var message = new $root.baccarat.BaccaratOver();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
                 else if (object.AwardArea.length)
                     message.AwardArea = object.AwardArea;
-            if (object.PlayerCard != null)
-                if (typeof object.PlayerCard === "string")
-                    $util.base64.decode(object.PlayerCard, message.PlayerCard = $util.newBuffer($util.base64.length(object.PlayerCard)), 0);
-                else if (object.PlayerCard.length)
-                    message.PlayerCard = object.PlayerCard;
-            if (object.BankerCard != null)
-                if (typeof object.BankerCard === "string")
-                    $util.base64.decode(object.BankerCard, message.BankerCard = $util.newBuffer($util.base64.length(object.BankerCard)), 0);
-                else if (object.BankerCard.length)
-                    message.BankerCard = object.BankerCard;
+            if (object.PlayerCard != null) {
+                if (typeof object.PlayerCard !== "object")
+                    throw TypeError(".baccarat.BaccaratOver.PlayerCard: object expected");
+                message.PlayerCard = $root.gamecomm.CardInfo.fromObject(object.PlayerCard);
+            }
+            if (object.BankerCard != null) {
+                if (typeof object.BankerCard !== "object")
+                    throw TypeError(".baccarat.BaccaratOver.BankerCard: object expected");
+                message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
+            }
             return message;
         };
 
-        GameBaccaratOver.toObject = function toObject(message, options) {
+        BaccaratOver.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -936,53 +1257,41 @@ $root.baccarat = (function() {
                     if (options.bytes !== Array)
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
-                if (options.bytes === String)
-                    object.PlayerCard = "";
-                else {
-                    object.PlayerCard = [];
-                    if (options.bytes !== Array)
-                        object.PlayerCard = $util.newBuffer(object.PlayerCard);
-                }
-                if (options.bytes === String)
-                    object.BankerCard = "";
-                else {
-                    object.BankerCard = [];
-                    if (options.bytes !== Array)
-                        object.BankerCard = $util.newBuffer(object.BankerCard);
-                }
+                object.PlayerCard = null;
+                object.BankerCard = null;
             }
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
             if (message.PlayerCard != null && message.hasOwnProperty("PlayerCard"))
-                object.PlayerCard = options.bytes === String ? $util.base64.encode(message.PlayerCard, 0, message.PlayerCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.PlayerCard) : message.PlayerCard;
+                object.PlayerCard = $root.gamecomm.CardInfo.toObject(message.PlayerCard, options);
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                object.BankerCard = options.bytes === String ? $util.base64.encode(message.BankerCard, 0, message.BankerCard.length) : options.bytes === Array ? Array.prototype.slice.call(message.BankerCard) : message.BankerCard;
+                object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
             return object;
         };
 
-        GameBaccaratOver.prototype.toJSON = function toJSON() {
+        BaccaratOver.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratOver;
+        return BaccaratOver;
     })();
 
-    baccarat.GameBaccaratCheckout = (function() {
+    baccarat.BaccaratCheckout = (function() {
 
-        function GameBaccaratCheckout(properties) {
+        function BaccaratCheckout(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameBaccaratCheckout.prototype.Acquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckout.prototype.Acquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameBaccaratCheckout.create = function create(properties) {
-            return new GameBaccaratCheckout(properties);
+        BaccaratCheckout.create = function create(properties) {
+            return new BaccaratCheckout(properties);
         };
 
-        GameBaccaratCheckout.encode = function encode(message, writer) {
+        BaccaratCheckout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
@@ -990,14 +1299,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        GameBaccaratCheckout.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratCheckout.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameBaccaratCheckout.decode = function decode(reader, length) {
+        BaccaratCheckout.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.GameBaccaratCheckout();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratCheckout();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1012,13 +1321,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratCheckout.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratCheckout.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameBaccaratCheckout.verify = function verify(message) {
+        BaccaratCheckout.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Acquire != null && message.hasOwnProperty("Acquire"))
@@ -1027,10 +1336,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        GameBaccaratCheckout.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.GameBaccaratCheckout)
+        BaccaratCheckout.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratCheckout)
                 return object;
-            var message = new $root.baccarat.GameBaccaratCheckout();
+            var message = new $root.baccarat.BaccaratCheckout();
             if (object.Acquire != null)
                 if ($util.Long)
                     (message.Acquire = $util.Long.fromValue(object.Acquire)).unsigned = false;
@@ -1043,7 +1352,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        GameBaccaratCheckout.toObject = function toObject(message, options) {
+        BaccaratCheckout.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1061,11 +1370,11 @@ $root.baccarat = (function() {
             return object;
         };
 
-        GameBaccaratCheckout.prototype.toJSON = function toJSON() {
+        BaccaratCheckout.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameBaccaratCheckout;
+        return BaccaratCheckout;
     })();
 
     return baccarat;

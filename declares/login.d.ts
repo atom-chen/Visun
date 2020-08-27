@@ -416,6 +416,108 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ResPopResult. */
+    interface IResPopResult {
+
+        /** ResPopResult State */
+        State?: (number|null);
+
+        /** ResPopResult Title */
+        Title?: (string|null);
+
+        /** ResPopResult Hints */
+        Hints?: (string|null);
+    }
+
+    /** Represents a ResPopResult. */
+    class ResPopResult implements IResPopResult {
+
+        /**
+         * Constructs a new ResPopResult.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IResPopResult);
+
+        /** ResPopResult State. */
+        public State: number;
+
+        /** ResPopResult Title. */
+        public Title: string;
+
+        /** ResPopResult Hints. */
+        public Hints: string;
+
+        /**
+         * Creates a new ResPopResult instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ResPopResult instance
+         */
+        public static create(properties?: login.IResPopResult): login.ResPopResult;
+
+        /**
+         * Encodes the specified ResPopResult message. Does not implicitly {@link login.ResPopResult.verify|verify} messages.
+         * @param message ResPopResult message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IResPopResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ResPopResult message, length delimited. Does not implicitly {@link login.ResPopResult.verify|verify} messages.
+         * @param message ResPopResult message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IResPopResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ResPopResult message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ResPopResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ResPopResult;
+
+        /**
+         * Decodes a ResPopResult message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ResPopResult
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ResPopResult;
+
+        /**
+         * Verifies a ResPopResult message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ResPopResult message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ResPopResult
+         */
+        public static fromObject(object: { [k: string]: any }): login.ResPopResult;
+
+        /**
+         * Creates a plain object from a ResPopResult message. Also converts values to other types if specified.
+         * @param message ResPopResult
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.ResPopResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ResPopResult to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a TaskItem. */
     interface ITaskItem {
 
