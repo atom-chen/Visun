@@ -1,0 +1,64 @@
+syntax = "proto3";
+package go;
+import "gamecomm.proto";
+
+//入场
+message GameBrcowcowEnterResp {
+	int64 TimeStamp = 1;					//时间戳
+	repeated uint64 AreaBets = 4;			//各下注区当前总下注额
+    repeated uint64 MyBets = 5;				//我在各下注区的总下注额
+	GameBrcowcowStateResp GameState = 6;	//当前游戏状态
+}
+
+//当前游戏状态：1：空闲 2：洗牌发牌 3：下注 4：开牌结算
+message GameBrcowcowStateResp {
+	uint32 CurState = 1;				//当前状态
+	uint64 CurStateTimeout = 2;			//传当前状态结束时的时间戳 或 剩余秒数
+}
+
+//下注
+message GameBrcowcowBetReq {
+    int32 AreaId = 1;
+    uint64 Money = 2;
+}
+//下注结果：广播
+message GameBrcowcowBetResp {
+    uint64 UserId = 1;
+    int32 AreaId = 2;
+    uint64 Money = 3;
+}
+
+//开牌结算
+message GameBrcowcowOverResp {
+	bytes Cards = 1;						//庄家牌+各下注区域的牌
+	bytes AreaResult = 2;					//各区域胜负：1胜，-1负
+	repeated int64 TotalSettlement = 3; 	//统计：庄家+各区域输赢钱数额结算
+	int64 MySettlement = 4;					//个人输赢钱数额结算
+}
+
+//----------------------------------------------------------------------------------
+
+//历史记录
+message GameBrcowcowHistoryReq {
+	int32 GameId = 1;
+}
+message GameBrcowcowHistoryResp {
+	int32 GameId = 1;
+}
+
+//----------------------------------------------------------------------------------
+
+//抢庄
+message GameBrcowcowHost {
+	uint64 UserID = 1;
+	bool IsWant = 2;	//true上庄 false取消上庄
+}
+
+//待上庄列表
+message GameBrcowcowHostListReq {
+	
+}
+message GameBrcowcowHostListResp {
+	PlayerInfo CurHost = 1;				//当前庄家
+	repeated uint64 Waitlist = 2;		//待上庄列表
+}
