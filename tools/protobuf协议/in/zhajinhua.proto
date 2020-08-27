@@ -26,12 +26,6 @@ message ZhajinhuaScene {
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
 //以下状态 由服务端推送
-//(准备)
-message ZhajinhuaStateReady {
-    uint64 UserID = 1; //ID
-    bool IsReady = 2; // 玩家准备
-}
-
 //(空闲)
 message ZhajinhuaStateFree {
     TimeInfo Times = 1;
@@ -64,7 +58,7 @@ message ZhajinhuaHost {
 
 //准备
 message ZhajinhuaReadyReq {
-
+	bool IsReady = 1; // 玩家准备，可以取消准备
 }
 message ZhajinhuaReadyResp {
 	uint64 UserId = 1;

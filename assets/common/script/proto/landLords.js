@@ -11,9 +11,9 @@ $root.landLords = (function() {
 
     var landLords = {};
 
-    landLords.GameLandLordsEnter = (function() {
+    landLords.LandLordsEnter = (function() {
 
-        function GameLandLordsEnter(properties) {
+        function LandLordsEnter(properties) {
             this.Players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -21,24 +21,24 @@ $root.landLords = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        GameLandLordsEnter.prototype.FreeTime = 0;
-        GameLandLordsEnter.prototype.OutTime = 0;
-        GameLandLordsEnter.prototype.CallTime = 0;
-        GameLandLordsEnter.prototype.Free = null;
-        GameLandLordsEnter.prototype.Start = null;
-        GameLandLordsEnter.prototype.Call = null;
-        GameLandLordsEnter.prototype.Playing = null;
-        GameLandLordsEnter.prototype.Over = null;
-        GameLandLordsEnter.prototype.BeforeChairID = 0;
-        GameLandLordsEnter.prototype.BeforeCards = $util.newBuffer([]);
-        GameLandLordsEnter.prototype.Players = $util.emptyArray;
+        LandLordsEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LandLordsEnter.prototype.FreeTime = 0;
+        LandLordsEnter.prototype.OutTime = 0;
+        LandLordsEnter.prototype.CallTime = 0;
+        LandLordsEnter.prototype.Free = null;
+        LandLordsEnter.prototype.Start = null;
+        LandLordsEnter.prototype.Call = null;
+        LandLordsEnter.prototype.Playing = null;
+        LandLordsEnter.prototype.Over = null;
+        LandLordsEnter.prototype.BeforeChairID = 0;
+        LandLordsEnter.prototype.BeforeCards = $util.newBuffer([]);
+        LandLordsEnter.prototype.Players = $util.emptyArray;
 
-        GameLandLordsEnter.create = function create(properties) {
-            return new GameLandLordsEnter(properties);
+        LandLordsEnter.create = function create(properties) {
+            return new LandLordsEnter(properties);
         };
 
-        GameLandLordsEnter.encode = function encode(message, writer) {
+        LandLordsEnter.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
@@ -65,18 +65,18 @@ $root.landLords = (function() {
                 writer.uint32(90).bytes(message.BeforeCards);
             if (message.Players != null && message.Players.length)
                 for (var i = 0; i < message.Players.length; ++i)
-                    $root.landLords.GameLandLordsPlayer.encode(message.Players[i], writer.uint32(98).fork()).ldelim();
+                    $root.landLords.LandLordsPlayer.encode(message.Players[i], writer.uint32(98).fork()).ldelim();
             return writer;
         };
 
-        GameLandLordsEnter.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsEnter.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsEnter.decode = function decode(reader, length) {
+        LandLordsEnter.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsEnter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsEnter();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -116,7 +116,7 @@ $root.landLords = (function() {
                 case 12:
                     if (!(message.Players && message.Players.length))
                         message.Players = [];
-                    message.Players.push($root.landLords.GameLandLordsPlayer.decode(reader, reader.uint32()));
+                    message.Players.push($root.landLords.LandLordsPlayer.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -126,13 +126,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsEnter.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsEnter.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsEnter.verify = function verify(message) {
+        LandLordsEnter.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
@@ -182,7 +182,7 @@ $root.landLords = (function() {
                 if (!Array.isArray(message.Players))
                     return "Players: array expected";
                 for (var i = 0; i < message.Players.length; ++i) {
-                    var error = $root.landLords.GameLandLordsPlayer.verify(message.Players[i]);
+                    var error = $root.landLords.LandLordsPlayer.verify(message.Players[i]);
                     if (error)
                         return "Players." + error;
                 }
@@ -190,10 +190,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsEnter.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsEnter)
+        LandLordsEnter.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsEnter)
                 return object;
-            var message = new $root.landLords.GameLandLordsEnter();
+            var message = new $root.landLords.LandLordsEnter();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -211,27 +211,27 @@ $root.landLords = (function() {
                 message.CallTime = object.CallTime >>> 0;
             if (object.Free != null) {
                 if (typeof object.Free !== "object")
-                    throw TypeError(".landLords.GameLandLordsEnter.Free: object expected");
+                    throw TypeError(".landLords.LandLordsEnter.Free: object expected");
                 message.Free = $root.gamecomm.StateFree.fromObject(object.Free);
             }
             if (object.Start != null) {
                 if (typeof object.Start !== "object")
-                    throw TypeError(".landLords.GameLandLordsEnter.Start: object expected");
+                    throw TypeError(".landLords.LandLordsEnter.Start: object expected");
                 message.Start = $root.gamecomm.StateStart.fromObject(object.Start);
             }
             if (object.Call != null) {
                 if (typeof object.Call !== "object")
-                    throw TypeError(".landLords.GameLandLordsEnter.Call: object expected");
+                    throw TypeError(".landLords.LandLordsEnter.Call: object expected");
                 message.Call = $root.gamecomm.StateCall.fromObject(object.Call);
             }
             if (object.Playing != null) {
                 if (typeof object.Playing !== "object")
-                    throw TypeError(".landLords.GameLandLordsEnter.Playing: object expected");
+                    throw TypeError(".landLords.LandLordsEnter.Playing: object expected");
                 message.Playing = $root.gamecomm.StatePlaying.fromObject(object.Playing);
             }
             if (object.Over != null) {
                 if (typeof object.Over !== "object")
-                    throw TypeError(".landLords.GameLandLordsEnter.Over: object expected");
+                    throw TypeError(".landLords.LandLordsEnter.Over: object expected");
                 message.Over = $root.gamecomm.StateOver.fromObject(object.Over);
             }
             if (object.BeforeChairID != null)
@@ -243,18 +243,18 @@ $root.landLords = (function() {
                     message.BeforeCards = object.BeforeCards;
             if (object.Players) {
                 if (!Array.isArray(object.Players))
-                    throw TypeError(".landLords.GameLandLordsEnter.Players: array expected");
+                    throw TypeError(".landLords.LandLordsEnter.Players: array expected");
                 message.Players = [];
                 for (var i = 0; i < object.Players.length; ++i) {
                     if (typeof object.Players[i] !== "object")
-                        throw TypeError(".landLords.GameLandLordsEnter.Players: object expected");
-                    message.Players[i] = $root.landLords.GameLandLordsPlayer.fromObject(object.Players[i]);
+                        throw TypeError(".landLords.LandLordsEnter.Players: object expected");
+                    message.Players[i] = $root.landLords.LandLordsPlayer.fromObject(object.Players[i]);
                 }
             }
             return message;
         };
 
-        GameLandLordsEnter.toObject = function toObject(message, options) {
+        LandLordsEnter.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -311,39 +311,227 @@ $root.landLords = (function() {
             if (message.Players && message.Players.length) {
                 object.Players = [];
                 for (var j = 0; j < message.Players.length; ++j)
-                    object.Players[j] = $root.landLords.GameLandLordsPlayer.toObject(message.Players[j], options);
+                    object.Players[j] = $root.landLords.LandLordsPlayer.toObject(message.Players[j], options);
             }
             return object;
         };
 
-        GameLandLordsEnter.prototype.toJSON = function toJSON() {
+        LandLordsEnter.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsEnter;
+        return LandLordsEnter;
     })();
 
-    landLords.GameLandLordsPlayer = (function() {
+    landLords.LandLordsReadyReq = (function() {
 
-        function GameLandLordsPlayer(properties) {
+        function LandLordsReadyReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsPlayer.prototype.ChairID = 0;
-        GameLandLordsPlayer.prototype.CardsLen = 0;
-        GameLandLordsPlayer.prototype.Cards = $util.newBuffer([]);
-        GameLandLordsPlayer.prototype.IsBanker = false;
-        GameLandLordsPlayer.prototype.IsTrustee = false;
+        LandLordsReadyReq.prototype.IsReady = false;
 
-        GameLandLordsPlayer.create = function create(properties) {
-            return new GameLandLordsPlayer(properties);
+        LandLordsReadyReq.create = function create(properties) {
+            return new LandLordsReadyReq(properties);
         };
 
-        GameLandLordsPlayer.encode = function encode(message, writer) {
+        LandLordsReadyReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
+                writer.uint32(8).bool(message.IsReady);
+            return writer;
+        };
+
+        LandLordsReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsReadyReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsReady = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsReadyReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsReadyReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                if (typeof message.IsReady !== "boolean")
+                    return "IsReady: boolean expected";
+            return null;
+        };
+
+        LandLordsReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsReadyReq)
+                return object;
+            var message = new $root.landLords.LandLordsReadyReq();
+            if (object.IsReady != null)
+                message.IsReady = Boolean(object.IsReady);
+            return message;
+        };
+
+        LandLordsReadyReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsReady = false;
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                object.IsReady = message.IsReady;
+            return object;
+        };
+
+        LandLordsReadyReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsReadyReq;
+    })();
+
+    landLords.LandLordsReadyResp = (function() {
+
+        function LandLordsReadyResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsReadyResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        LandLordsReadyResp.create = function create(properties) {
+            return new LandLordsReadyResp(properties);
+        };
+
+        LandLordsReadyResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
+            return writer;
+        };
+
+        LandLordsReadyResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsReadyResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsReadyResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsReadyResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
+            return null;
+        };
+
+        LandLordsReadyResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsReadyResp)
+                return object;
+            var message = new $root.landLords.LandLordsReadyResp();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        LandLordsReadyResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            return object;
+        };
+
+        LandLordsReadyResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsReadyResp;
+    })();
+
+    landLords.LandLordsPlayer = (function() {
+
+        function LandLordsPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsPlayer.prototype.ChairID = 0;
+        LandLordsPlayer.prototype.CardsLen = 0;
+        LandLordsPlayer.prototype.Cards = $util.newBuffer([]);
+        LandLordsPlayer.prototype.IsBanker = false;
+        LandLordsPlayer.prototype.IsTrustee = false;
+
+        LandLordsPlayer.create = function create(properties) {
+            return new LandLordsPlayer(properties);
+        };
+
+        LandLordsPlayer.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -361,14 +549,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsPlayer.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsPlayer.decode = function decode(reader, length) {
+        LandLordsPlayer.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsPlayer();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsPlayer();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -398,13 +586,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsPlayer.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsPlayer.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsPlayer.verify = function verify(message) {
+        LandLordsPlayer.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -428,10 +616,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsPlayer.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsPlayer)
+        LandLordsPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsPlayer)
                 return object;
-            var message = new $root.landLords.GameLandLordsPlayer();
+            var message = new $root.landLords.LandLordsPlayer();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -457,7 +645,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsPlayer.toObject = function toObject(message, options) {
+        LandLordsPlayer.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -497,30 +685,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsPlayer.prototype.toJSON = function toJSON() {
+        LandLordsPlayer.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsPlayer;
+        return LandLordsPlayer;
     })();
 
-    landLords.GameLandLordsDeal = (function() {
+    landLords.LandLordsDeal = (function() {
 
-        function GameLandLordsDeal(properties) {
+        function LandLordsDeal(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsDeal.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsDeal.prototype.CardsHand = $util.newBuffer([]);
+        LandLordsDeal.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsDeal.prototype.CardsHand = $util.newBuffer([]);
 
-        GameLandLordsDeal.create = function create(properties) {
-            return new GameLandLordsDeal(properties);
+        LandLordsDeal.create = function create(properties) {
+            return new LandLordsDeal(properties);
         };
 
-        GameLandLordsDeal.encode = function encode(message, writer) {
+        LandLordsDeal.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -530,14 +718,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsDeal.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsDeal.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsDeal.decode = function decode(reader, length) {
+        LandLordsDeal.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsDeal();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDeal();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -555,13 +743,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsDeal.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsDeal.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsDeal.verify = function verify(message) {
+        LandLordsDeal.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -573,10 +761,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsDeal.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsDeal)
+        LandLordsDeal.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsDeal)
                 return object;
-            var message = new $root.landLords.GameLandLordsDeal();
+            var message = new $root.landLords.LandLordsDeal();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -594,7 +782,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsDeal.toObject = function toObject(message, options) {
+        LandLordsDeal.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -622,30 +810,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsDeal.prototype.toJSON = function toJSON() {
+        LandLordsDeal.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsDeal;
+        return LandLordsDeal;
     })();
 
-    landLords.GameLandLordsCall = (function() {
+    landLords.LandLordsCall = (function() {
 
-        function GameLandLordsCall(properties) {
+        function LandLordsCall(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsCall.prototype.Score = 0;
+        LandLordsCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsCall.prototype.Score = 0;
 
-        GameLandLordsCall.create = function create(properties) {
-            return new GameLandLordsCall(properties);
+        LandLordsCall.create = function create(properties) {
+            return new LandLordsCall(properties);
         };
 
-        GameLandLordsCall.encode = function encode(message, writer) {
+        LandLordsCall.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -655,14 +843,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsCall.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsCall.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsCall.decode = function decode(reader, length) {
+        LandLordsCall.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsCall();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCall();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -680,13 +868,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsCall.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsCall.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsCall.verify = function verify(message) {
+        LandLordsCall.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -698,10 +886,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsCall.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsCall)
+        LandLordsCall.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsCall)
                 return object;
-            var message = new $root.landLords.GameLandLordsCall();
+            var message = new $root.landLords.LandLordsCall();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -716,7 +904,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsCall.toObject = function toObject(message, options) {
+        LandLordsCall.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -738,30 +926,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsCall.prototype.toJSON = function toJSON() {
+        LandLordsCall.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsCall;
+        return LandLordsCall;
     })();
 
-    landLords.GameLandLordsDouble = (function() {
+    landLords.LandLordsDouble = (function() {
 
-        function GameLandLordsDouble(properties) {
+        function LandLordsDouble(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsDouble.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsDouble.prototype.Number = 0;
+        LandLordsDouble.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsDouble.prototype.Number = 0;
 
-        GameLandLordsDouble.create = function create(properties) {
-            return new GameLandLordsDouble(properties);
+        LandLordsDouble.create = function create(properties) {
+            return new LandLordsDouble(properties);
         };
 
-        GameLandLordsDouble.encode = function encode(message, writer) {
+        LandLordsDouble.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -771,14 +959,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsDouble.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsDouble.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsDouble.decode = function decode(reader, length) {
+        LandLordsDouble.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsDouble();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDouble();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -796,13 +984,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsDouble.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsDouble.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsDouble.verify = function verify(message) {
+        LandLordsDouble.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -814,10 +1002,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsDouble.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsDouble)
+        LandLordsDouble.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsDouble)
                 return object;
-            var message = new $root.landLords.GameLandLordsDouble();
+            var message = new $root.landLords.LandLordsDouble();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -832,7 +1020,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsDouble.toObject = function toObject(message, options) {
+        LandLordsDouble.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -854,30 +1042,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsDouble.prototype.toJSON = function toJSON() {
+        LandLordsDouble.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsDouble;
+        return LandLordsDouble;
     })();
 
-    landLords.GameLandLordsTrustee = (function() {
+    landLords.LandLordsTrustee = (function() {
 
-        function GameLandLordsTrustee(properties) {
+        function LandLordsTrustee(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsTrustee.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsTrustee.prototype.IsTrustee = false;
+        LandLordsTrustee.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsTrustee.prototype.IsTrustee = false;
 
-        GameLandLordsTrustee.create = function create(properties) {
-            return new GameLandLordsTrustee(properties);
+        LandLordsTrustee.create = function create(properties) {
+            return new LandLordsTrustee(properties);
         };
 
-        GameLandLordsTrustee.encode = function encode(message, writer) {
+        LandLordsTrustee.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -887,14 +1075,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsTrustee.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsTrustee.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsTrustee.decode = function decode(reader, length) {
+        LandLordsTrustee.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsTrustee();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsTrustee();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -912,13 +1100,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsTrustee.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsTrustee.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsTrustee.verify = function verify(message) {
+        LandLordsTrustee.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -930,10 +1118,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsTrustee.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsTrustee)
+        LandLordsTrustee.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsTrustee)
                 return object;
-            var message = new $root.landLords.GameLandLordsTrustee();
+            var message = new $root.landLords.LandLordsTrustee();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -948,7 +1136,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsTrustee.toObject = function toObject(message, options) {
+        LandLordsTrustee.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -970,30 +1158,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsTrustee.prototype.toJSON = function toJSON() {
+        LandLordsTrustee.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsTrustee;
+        return LandLordsTrustee;
     })();
 
-    landLords.GameLandLordsBottomCard = (function() {
+    landLords.LandLordsBottomCard = (function() {
 
-        function GameLandLordsBottomCard(properties) {
+        function LandLordsBottomCard(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsBottomCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsBottomCard.prototype.CardsBottom = $util.newBuffer([]);
+        LandLordsBottomCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsBottomCard.prototype.CardsBottom = $util.newBuffer([]);
 
-        GameLandLordsBottomCard.create = function create(properties) {
-            return new GameLandLordsBottomCard(properties);
+        LandLordsBottomCard.create = function create(properties) {
+            return new LandLordsBottomCard(properties);
         };
 
-        GameLandLordsBottomCard.encode = function encode(message, writer) {
+        LandLordsBottomCard.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1003,14 +1191,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsBottomCard.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsBottomCard.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsBottomCard.decode = function decode(reader, length) {
+        LandLordsBottomCard.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsBottomCard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsBottomCard();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1028,13 +1216,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsBottomCard.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsBottomCard.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsBottomCard.verify = function verify(message) {
+        LandLordsBottomCard.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1046,10 +1234,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsBottomCard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsBottomCard)
+        LandLordsBottomCard.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsBottomCard)
                 return object;
-            var message = new $root.landLords.GameLandLordsBottomCard();
+            var message = new $root.landLords.LandLordsBottomCard();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1067,7 +1255,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsBottomCard.toObject = function toObject(message, options) {
+        LandLordsBottomCard.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1095,31 +1283,31 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsBottomCard.prototype.toJSON = function toJSON() {
+        LandLordsBottomCard.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsBottomCard;
+        return LandLordsBottomCard;
     })();
 
-    landLords.GameLandLordsOutCard = (function() {
+    landLords.LandLordsOutCard = (function() {
 
-        function GameLandLordsOutCard(properties) {
+        function LandLordsOutCard(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsOutCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsOutCard.prototype.Cards = $util.newBuffer([]);
-        GameLandLordsOutCard.prototype.Hints = "";
+        LandLordsOutCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsOutCard.prototype.Cards = $util.newBuffer([]);
+        LandLordsOutCard.prototype.Hints = "";
 
-        GameLandLordsOutCard.create = function create(properties) {
-            return new GameLandLordsOutCard(properties);
+        LandLordsOutCard.create = function create(properties) {
+            return new LandLordsOutCard(properties);
         };
 
-        GameLandLordsOutCard.encode = function encode(message, writer) {
+        LandLordsOutCard.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1131,14 +1319,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsOutCard.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsOutCard.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsOutCard.decode = function decode(reader, length) {
+        LandLordsOutCard.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsOutCard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsOutCard();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1159,13 +1347,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsOutCard.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsOutCard.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsOutCard.verify = function verify(message) {
+        LandLordsOutCard.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1180,10 +1368,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsOutCard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsOutCard)
+        LandLordsOutCard.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsOutCard)
                 return object;
-            var message = new $root.landLords.GameLandLordsOutCard();
+            var message = new $root.landLords.LandLordsOutCard();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1203,7 +1391,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsOutCard.toObject = function toObject(message, options) {
+        LandLordsOutCard.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1234,31 +1422,31 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsOutCard.prototype.toJSON = function toJSON() {
+        LandLordsOutCard.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsOutCard;
+        return LandLordsOutCard;
     })();
 
-    landLords.GameLandLordsAward = (function() {
+    landLords.LandLordsAward = (function() {
 
-        function GameLandLordsAward(properties) {
+        function LandLordsAward(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsAward.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameLandLordsAward.prototype.Codes = $util.newBuffer([]);
-        GameLandLordsAward.prototype.GetGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LandLordsAward.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsAward.prototype.Codes = $util.newBuffer([]);
+        LandLordsAward.prototype.GetGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        GameLandLordsAward.create = function create(properties) {
-            return new GameLandLordsAward(properties);
+        LandLordsAward.create = function create(properties) {
+            return new LandLordsAward(properties);
         };
 
-        GameLandLordsAward.encode = function encode(message, writer) {
+        LandLordsAward.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1270,14 +1458,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        GameLandLordsAward.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsAward.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsAward.decode = function decode(reader, length) {
+        LandLordsAward.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsAward();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsAward();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1298,13 +1486,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsAward.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsAward.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsAward.verify = function verify(message) {
+        LandLordsAward.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1319,10 +1507,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsAward.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsAward)
+        LandLordsAward.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsAward)
                 return object;
-            var message = new $root.landLords.GameLandLordsAward();
+            var message = new $root.landLords.LandLordsAward();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1349,7 +1537,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsAward.toObject = function toObject(message, options) {
+        LandLordsAward.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1387,16 +1575,16 @@ $root.landLords = (function() {
             return object;
         };
 
-        GameLandLordsAward.prototype.toJSON = function toJSON() {
+        LandLordsAward.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsAward;
+        return LandLordsAward;
     })();
 
-    landLords.GameLandLordsCheckout = (function() {
+    landLords.LandLordsCheckout = (function() {
 
-        function GameLandLordsCheckout(properties) {
+        function LandLordsCheckout(properties) {
             this.players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1404,36 +1592,36 @@ $root.landLords = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameLandLordsCheckout.prototype.players = $util.emptyArray;
+        LandLordsCheckout.prototype.players = $util.emptyArray;
 
-        GameLandLordsCheckout.create = function create(properties) {
-            return new GameLandLordsCheckout(properties);
+        LandLordsCheckout.create = function create(properties) {
+            return new LandLordsCheckout(properties);
         };
 
-        GameLandLordsCheckout.encode = function encode(message, writer) {
+        LandLordsCheckout.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.players != null && message.players.length)
                 for (var i = 0; i < message.players.length; ++i)
-                    $root.landLords.GameLandLordsAward.encode(message.players[i], writer.uint32(10).fork()).ldelim();
+                    $root.landLords.LandLordsAward.encode(message.players[i], writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
-        GameLandLordsCheckout.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsCheckout.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        GameLandLordsCheckout.decode = function decode(reader, length) {
+        LandLordsCheckout.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.GameLandLordsCheckout();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCheckout();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     if (!(message.players && message.players.length))
                         message.players = [];
-                    message.players.push($root.landLords.GameLandLordsAward.decode(reader, reader.uint32()));
+                    message.players.push($root.landLords.LandLordsAward.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1443,20 +1631,20 @@ $root.landLords = (function() {
             return message;
         };
 
-        GameLandLordsCheckout.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsCheckout.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        GameLandLordsCheckout.verify = function verify(message) {
+        LandLordsCheckout.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.players != null && message.hasOwnProperty("players")) {
                 if (!Array.isArray(message.players))
                     return "players: array expected";
                 for (var i = 0; i < message.players.length; ++i) {
-                    var error = $root.landLords.GameLandLordsAward.verify(message.players[i]);
+                    var error = $root.landLords.LandLordsAward.verify(message.players[i]);
                     if (error)
                         return "players." + error;
                 }
@@ -1464,24 +1652,24 @@ $root.landLords = (function() {
             return null;
         };
 
-        GameLandLordsCheckout.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.GameLandLordsCheckout)
+        LandLordsCheckout.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsCheckout)
                 return object;
-            var message = new $root.landLords.GameLandLordsCheckout();
+            var message = new $root.landLords.LandLordsCheckout();
             if (object.players) {
                 if (!Array.isArray(object.players))
-                    throw TypeError(".landLords.GameLandLordsCheckout.players: array expected");
+                    throw TypeError(".landLords.LandLordsCheckout.players: array expected");
                 message.players = [];
                 for (var i = 0; i < object.players.length; ++i) {
                     if (typeof object.players[i] !== "object")
-                        throw TypeError(".landLords.GameLandLordsCheckout.players: object expected");
-                    message.players[i] = $root.landLords.GameLandLordsAward.fromObject(object.players[i]);
+                        throw TypeError(".landLords.LandLordsCheckout.players: object expected");
+                    message.players[i] = $root.landLords.LandLordsAward.fromObject(object.players[i]);
                 }
             }
             return message;
         };
 
-        GameLandLordsCheckout.toObject = function toObject(message, options) {
+        LandLordsCheckout.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1490,16 +1678,16 @@ $root.landLords = (function() {
             if (message.players && message.players.length) {
                 object.players = [];
                 for (var j = 0; j < message.players.length; ++j)
-                    object.players[j] = $root.landLords.GameLandLordsAward.toObject(message.players[j], options);
+                    object.players[j] = $root.landLords.LandLordsAward.toObject(message.players[j], options);
             }
             return object;
         };
 
-        GameLandLordsCheckout.prototype.toJSON = function toJSON() {
+        LandLordsCheckout.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GameLandLordsCheckout;
+        return LandLordsCheckout;
     })();
 
     return landLords;

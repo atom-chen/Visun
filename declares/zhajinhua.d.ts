@@ -242,102 +242,6 @@ export namespace zhajinhua {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ZhajinhuaStateReady. */
-    interface IZhajinhuaStateReady {
-
-        /** ZhajinhuaStateReady UserID */
-        UserID?: (number|Long|null);
-
-        /** ZhajinhuaStateReady IsReady */
-        IsReady?: (boolean|null);
-    }
-
-    /** Represents a ZhajinhuaStateReady. */
-    class ZhajinhuaStateReady implements IZhajinhuaStateReady {
-
-        /**
-         * Constructs a new ZhajinhuaStateReady.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: zhajinhua.IZhajinhuaStateReady);
-
-        /** ZhajinhuaStateReady UserID. */
-        public UserID: (number|Long);
-
-        /** ZhajinhuaStateReady IsReady. */
-        public IsReady: boolean;
-
-        /**
-         * Creates a new ZhajinhuaStateReady instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ZhajinhuaStateReady instance
-         */
-        public static create(properties?: zhajinhua.IZhajinhuaStateReady): zhajinhua.ZhajinhuaStateReady;
-
-        /**
-         * Encodes the specified ZhajinhuaStateReady message. Does not implicitly {@link zhajinhua.ZhajinhuaStateReady.verify|verify} messages.
-         * @param message ZhajinhuaStateReady message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: zhajinhua.IZhajinhuaStateReady, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ZhajinhuaStateReady message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaStateReady.verify|verify} messages.
-         * @param message ZhajinhuaStateReady message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: zhajinhua.IZhajinhuaStateReady, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a ZhajinhuaStateReady message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns ZhajinhuaStateReady
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaStateReady;
-
-        /**
-         * Decodes a ZhajinhuaStateReady message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ZhajinhuaStateReady
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaStateReady;
-
-        /**
-         * Verifies a ZhajinhuaStateReady message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a ZhajinhuaStateReady message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns ZhajinhuaStateReady
-         */
-        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaStateReady;
-
-        /**
-         * Creates a plain object from a ZhajinhuaStateReady message. Also converts values to other types if specified.
-         * @param message ZhajinhuaStateReady
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: zhajinhua.ZhajinhuaStateReady, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this ZhajinhuaStateReady to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a ZhajinhuaStateFree. */
     interface IZhajinhuaStateFree {
 
@@ -796,6 +700,9 @@ export namespace zhajinhua {
 
     /** Properties of a ZhajinhuaReadyReq. */
     interface IZhajinhuaReadyReq {
+
+        /** ZhajinhuaReadyReq IsReady */
+        IsReady?: (boolean|null);
     }
 
     /** Represents a ZhajinhuaReadyReq. */
@@ -806,6 +713,9 @@ export namespace zhajinhua {
          * @param [properties] Properties to set
          */
         constructor(properties?: zhajinhua.IZhajinhuaReadyReq);
+
+        /** ZhajinhuaReadyReq IsReady. */
+        public IsReady: boolean;
 
         /**
          * Creates a new ZhajinhuaReadyReq instance using the specified properties.
