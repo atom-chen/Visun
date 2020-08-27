@@ -396,7 +396,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ResResult.prototype.State = 0;
+        ResResult.prototype.Flag = 0;
         ResResult.prototype.Hints = "";
 
         ResResult.create = function create(properties) {
@@ -406,8 +406,8 @@ $root.login = (function() {
         ResResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
-                writer.uint32(8).uint32(message.State);
+            if (message.Flag != null && Object.hasOwnProperty.call(message, "Flag"))
+                writer.uint32(8).int32(message.Flag);
             if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
                 writer.uint32(18).string(message.Hints);
             return writer;
@@ -425,7 +425,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.State = reader.uint32();
+                    message.Flag = reader.int32();
                     break;
                 case 2:
                     message.Hints = reader.string();
@@ -447,9 +447,9 @@ $root.login = (function() {
         ResResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.State != null && message.hasOwnProperty("State"))
-                if (!$util.isInteger(message.State))
-                    return "State: integer expected";
+            if (message.Flag != null && message.hasOwnProperty("Flag"))
+                if (!$util.isInteger(message.Flag))
+                    return "Flag: integer expected";
             if (message.Hints != null && message.hasOwnProperty("Hints"))
                 if (!$util.isString(message.Hints))
                     return "Hints: string expected";
@@ -460,8 +460,8 @@ $root.login = (function() {
             if (object instanceof $root.login.ResResult)
                 return object;
             var message = new $root.login.ResResult();
-            if (object.State != null)
-                message.State = object.State >>> 0;
+            if (object.Flag != null)
+                message.Flag = object.Flag | 0;
             if (object.Hints != null)
                 message.Hints = String(object.Hints);
             return message;
@@ -472,11 +472,11 @@ $root.login = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.State = 0;
+                object.Flag = 0;
                 object.Hints = "";
             }
-            if (message.State != null && message.hasOwnProperty("State"))
-                object.State = message.State;
+            if (message.Flag != null && message.hasOwnProperty("Flag"))
+                object.Flag = message.Flag;
             if (message.Hints != null && message.hasOwnProperty("Hints"))
                 object.Hints = message.Hints;
             return object;
@@ -498,7 +498,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ResPopResult.prototype.State = 0;
+        ResPopResult.prototype.Flag = 0;
         ResPopResult.prototype.Title = "";
         ResPopResult.prototype.Hints = "";
 
@@ -509,8 +509,8 @@ $root.login = (function() {
         ResPopResult.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
-                writer.uint32(8).uint32(message.State);
+            if (message.Flag != null && Object.hasOwnProperty.call(message, "Flag"))
+                writer.uint32(8).int32(message.Flag);
             if (message.Title != null && Object.hasOwnProperty.call(message, "Title"))
                 writer.uint32(18).string(message.Title);
             if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
@@ -530,7 +530,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.State = reader.uint32();
+                    message.Flag = reader.int32();
                     break;
                 case 2:
                     message.Title = reader.string();
@@ -555,9 +555,9 @@ $root.login = (function() {
         ResPopResult.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.State != null && message.hasOwnProperty("State"))
-                if (!$util.isInteger(message.State))
-                    return "State: integer expected";
+            if (message.Flag != null && message.hasOwnProperty("Flag"))
+                if (!$util.isInteger(message.Flag))
+                    return "Flag: integer expected";
             if (message.Title != null && message.hasOwnProperty("Title"))
                 if (!$util.isString(message.Title))
                     return "Title: string expected";
@@ -571,8 +571,8 @@ $root.login = (function() {
             if (object instanceof $root.login.ResPopResult)
                 return object;
             var message = new $root.login.ResPopResult();
-            if (object.State != null)
-                message.State = object.State >>> 0;
+            if (object.Flag != null)
+                message.Flag = object.Flag | 0;
             if (object.Title != null)
                 message.Title = String(object.Title);
             if (object.Hints != null)
@@ -585,12 +585,12 @@ $root.login = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.State = 0;
+                object.Flag = 0;
                 object.Title = "";
                 object.Hints = "";
             }
-            if (message.State != null && message.hasOwnProperty("State"))
-                object.State = message.State;
+            if (message.Flag != null && message.hasOwnProperty("Flag"))
+                object.Flag = message.Flag;
             if (message.Title != null && message.hasOwnProperty("Title"))
                 object.Title = message.Title;
             if (message.Hints != null && message.hasOwnProperty("Hints"))

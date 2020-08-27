@@ -24,11 +24,11 @@ message Login{
 
 //结果反馈
 message ResResult{
-     uint32 State = 1;			//状态:0成功 1失败 
+     int32 Flag = 1;			//状态:0成功 1失败 
      string Hints = 2;			//提示信息
 }
 message ResPopResult{
-     uint32 State = 1;			//状态:0成功 1失败 
+     int32 Flag = 1;			//状态:0成功 1失败 
 	 string Title = 2;			//标题
      string Hints = 3;			//提示信息
 }

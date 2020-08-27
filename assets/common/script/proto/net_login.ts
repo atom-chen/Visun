@@ -44,8 +44,8 @@ export class login_request {
     public static Register( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
     public static RegisterResult( data:{ State:number, Hints:string } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
     public static Login( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResResult( data:{ State:number, Hints:string } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResPopResult( data:{ State:number, Title:string, Hints:string } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResResult( data:{ Flag:number, Hints:string } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResPopResult( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }

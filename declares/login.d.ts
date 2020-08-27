@@ -323,8 +323,8 @@ export namespace login {
     /** Properties of a ResResult. */
     interface IResResult {
 
-        /** ResResult State */
-        State?: (number|null);
+        /** ResResult Flag */
+        Flag?: (number|null);
 
         /** ResResult Hints */
         Hints?: (string|null);
@@ -339,8 +339,8 @@ export namespace login {
          */
         constructor(properties?: login.IResResult);
 
-        /** ResResult State. */
-        public State: number;
+        /** ResResult Flag. */
+        public Flag: number;
 
         /** ResResult Hints. */
         public Hints: string;
@@ -419,8 +419,8 @@ export namespace login {
     /** Properties of a ResPopResult. */
     interface IResPopResult {
 
-        /** ResPopResult State */
-        State?: (number|null);
+        /** ResPopResult Flag */
+        Flag?: (number|null);
 
         /** ResPopResult Title */
         Title?: (string|null);
@@ -438,8 +438,8 @@ export namespace login {
          */
         constructor(properties?: login.IResPopResult);
 
-        /** ResPopResult State. */
-        public State: number;
+        /** ResPopResult Flag. */
+        public Flag: number;
 
         /** ResPopResult Title. */
         public Title: string;
