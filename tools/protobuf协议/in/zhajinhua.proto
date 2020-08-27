@@ -18,8 +18,7 @@ message FighterInfo {
 message GameZhajinhuaEnter {
     int64 TimeStamp = 1;					//时间戳
 	GameZhajinhuaState GameState = 2;		//当前状态
-	int32 CurRound = 3;						//当前回合
-	int32 TotalRound = 4;					//总回合数
+	int64 TotalBet = 3;						//当前总下注额
 	uint64 MinBet = 5;						//当前注额
 	repeated FighterInfo Fighters = 6;		//参战玩家序列
 }
