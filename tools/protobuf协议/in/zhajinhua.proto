@@ -21,7 +21,8 @@ message GameZhajinhuaEnter {
 	GameZhajinhuaState GameState = 2;		//当前状态
 	int64 TotalBet = 3;						//当前总下注额
 	uint64 MinBet = 5;						//当前注额
-	repeated FighterInfo Fighters = 6;		//参战玩家序列
+	uint64 CurHost = 6;						//当前庄家
+	repeated FighterInfo Fighters = 7;		//参战玩家序列
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
@@ -30,6 +31,12 @@ message GameZhajinhuaState {
     uint64 CurStateTimeout = 2;
 	uint64 CurTurnTo = 3;		//轮到谁
 }
+
+//定庄
+message GameZhajinhuaHost {
+	uint64 CurHost = 1;
+}
+
 
 //准备
 message GameZhajinhuaReadyReq {
