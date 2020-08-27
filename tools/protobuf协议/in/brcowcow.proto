@@ -31,7 +31,7 @@ message GameBrcowcowBetResp {
 //开牌结算
 message GameBrcowcowOverResp {
 	bytes Cards = 1;						//庄家牌+各下注区域的牌
-	bytes AreaResult = 2;					//各区域胜负：1胜，-1负
+	bytes AreaResult = 2;					//各区域胜负：1胜，0负
 	repeated int64 TotalSettlement = 3; 	//统计：庄家+各区域输赢钱数额结算
 	int64 MySettlement = 4;					//个人输赢钱数额结算
 }
