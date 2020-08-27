@@ -24,11 +24,13 @@ message UserList {
     repeated PlayerInfo AllInfos = 1; //所有玩家信息
 }
 
+//手牌信息
 message CardInfo {
 	bytes Cards = 1;            //牌
 	int32 CardType = 2;			//牌型
 }
 
+//结算金币变化
 message MoneyCalculateInfo {
     uint64 UserID = 1;
     uint64 Money = 2;       //当前余额
