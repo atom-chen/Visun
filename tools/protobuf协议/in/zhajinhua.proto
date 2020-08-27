@@ -6,11 +6,12 @@ import "gamecomm.proto";
 //战士信息
 message FighterInfo {
 	uint64 UserId = 1;
-	uint64 Money = 2;
-	int32 SeatId = 3;		// 座位号
-	int32 FightState = 4; 	// 未准备 已准备  跟注 加注 弃牌 比牌输
-	bool IsSee = 5;			// 是否已看牌
-	CardInfo Cards = 6;		// 看牌时和游戏结束时亮自己的牌时才有数据
+	uint64 RecentBetMoney = 2;	//最新下注金额
+	uint64 TotalBetMoney = 3;	//总共下注了多少
+	int32 SeatId = 3;			// 座位号
+	int32 FightState = 4; 		// 未准备 已准备  跟注 加注 弃牌 比牌输
+	bool IsSee = 5;				// 是否已看牌
+	CardInfo Cards = 6;			// 看牌时和游戏结束时亮自己的牌时才有数据
 }
 
 
