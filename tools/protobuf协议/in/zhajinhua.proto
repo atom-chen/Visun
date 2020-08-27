@@ -8,8 +8,9 @@ message FighterInfo {
 	uint64 UserId = 1;
 	uint64 Money = 2;
 	int32 SeatId = 3;		// 座位号
-	int32 FightState = 4; 	// 未准备 已准备 是否已看牌 跟注 加注 弃牌 比牌输
-	CardInfo Cards = 5;		// 看牌时和游戏结束时亮自己的牌时才有数据
+	int32 FightState = 4; 	// 未准备 已准备  跟注 加注 弃牌 比牌输
+	bool IsSee = 5;			// 是否已看牌
+	CardInfo Cards = 6;		// 看牌时和游戏结束时亮自己的牌时才有数据
 }
 
 
