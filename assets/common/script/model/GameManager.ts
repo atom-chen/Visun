@@ -5,9 +5,8 @@ import SceneManager from "../../../kernel/view/SceneManager";
 import ModelBase from "../../../kernel/model/ModelBase";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
-import { IS_DANJI_MODE } from "../definer/ConstDefine";
 import { gamecomm_request } from "../proto/net_gamecomm";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
+
 
 //游戏管理器
 export default class GameManager extends ModelBase {
@@ -40,13 +39,6 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getRoomsInfo() : any {
-		// if(IS_DANJI_MODE && isNil(this.roomsInfo) || this.roomsInfo.length<=0) {
-		// 	this.roomsInfo = [
-		// 		{RoomName:"百人房",RoomNum:"1",RoomKey:"000"},
-		// 		{RoomName:"对战房",RoomNum:"1",RoomKey:"000"},
-		// 		{RoomName:"街机房",RoomNum:"1",RoomKey:"000"},
-		// 	]
-		// }
 		return this.roomsInfo;
 	}
 
@@ -55,15 +47,6 @@ export default class GameManager extends ModelBase {
 	}
 
 	public getGameArr() : any {
-		// if(IS_DANJI_MODE && isNil(this.gameArr) || this.gameArr.length<=0) {
-		// 	this.gameArr = [
-		// 		{ID:101,Info:{Name:"牛牛",EnterScore:10,Level:0}},
-		// 		{ID:102,Info:{Name:"金花",EnterScore:10,Level:0}},
-		// 		{ID:103,Info:{Name:"德州",EnterScore:10,Level:0}},
-		// 		{ID:104,Info:{Name:"斗地主",EnterScore:10,Level:0}},
-		// 		{ID:105,Info:{Name:"二十一点",EnterScore:10,Level:0}},
-		// 	]
-		// }
 		return this.gameArr;
 	}
 
@@ -104,17 +87,14 @@ export default class GameManager extends ModelBase {
 			UIManager.toast("游戏不存在 "+cfg.GameKind);
 			return false;
 		}
-		if(!LoginMgr.getInstance().checkLogin(true)) {
-			return IS_DANJI_MODE;
-		}
-		return true;
+		return LoginMgr.getInstance().checkLogin(true);
 	}
 
 
 	//退出游戏的唯一出口
 	public quitGame(bForce?:boolean) {
 		gamecomm_request.ReqExitGame({GameID:this.gameId});
-		if(IS_DANJI_MODE || bForce) {
+		if(bForce) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
 	}
@@ -134,9 +114,6 @@ export default class GameManager extends ModelBase {
 		// }
 		cc.log("enterGame: ", gameType)
 	//	gamecomm_request.ReqEnterGame({GameType:gameType});
-		if(IS_DANJI_MODE) {
-			this.enterGameScene(gameType);
-		}
 
 		this.setGameId(gameType);
 
@@ -171,18 +148,6 @@ export default class GameManager extends ModelBase {
 	}
 	//获取服务器下发的游戏列表
 	public getGameList() : any[] {
-		if(IS_DANJI_MODE && (!this._gameList || this._gameList.length <= 0)) {
-			var testList = [];
-			for(var k in GameConfig) {
-				var info = {
-					GameKind : GameConfig[k].GameKind,
-					Name : GameConfig[k].name,
-					State : 2,
-				};
-				testList.push(info);
-			}
-			return testList;
-		}
 		return this._gameList;
 	}
 	//存储服务器下发的房间列表
@@ -194,20 +159,6 @@ export default class GameManager extends ModelBase {
 	}
 	//获取服务器下发的房间列表
 	public getRoomList(gameKind) {
-		if(IS_DANJI_MODE && !this._roomList[gameKind]) {
-			var testList = [];
-			var cfg = GameConfig[gameKind];
-			for(var i=1; i<=4; i++) {
-				var info = {
-					GameKind : cfg.GameKind,
-					GameType : cfg.GameKind+i,
-					Name : cfg.name,
-				}
-				testList.push(info);
-			}
-			this.setRoomList(gameKind, testList);
-			return testList;
-		}
 		return this._roomList[gameKind];
 	}
 

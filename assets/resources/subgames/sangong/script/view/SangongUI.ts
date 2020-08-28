@@ -58,6 +58,9 @@ export default class SangongUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
 		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
+            GameManager.getInstance().quitGame(true);
+		}, this);
 	}
 	
 }

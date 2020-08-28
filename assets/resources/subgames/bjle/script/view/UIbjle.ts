@@ -147,6 +147,9 @@ export default class UIbjle extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
 		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
+            GameManager.getInstance().quitGame(true);
+		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
 			cc.log("和");
 		}, this);

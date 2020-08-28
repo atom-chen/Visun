@@ -5,6 +5,7 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import GameManager from "../../../../../common/script/model/GameManager";
 import { isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
+import GameConfig from "../../../../../common/script/definer/GameConfig";
 
 const {ccclass, property} = cc._decorator;
 
@@ -62,12 +63,29 @@ export default class UISettor extends BaseComponent {
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_test, function(){
-			if(isEmpty(this.m_ui.editTest.getComponent(cc.EditBox).string)) {
-				return;
-			}
-			var gameType = parseInt(this.m_ui.editTest.getComponent(cc.EditBox).string)
-			GameManager.getInstance().enterGameScene(gameType)
+			this.m_ui.gamescroll.active = !this.m_ui.gamescroll.active;
 		}, this);
+
+		this.test();
+	}
+
+	test() {
+		var isFirst = true;
+		for(var i in GameConfig) {
+			var item;
+			if(isFirst) {
+				isFirst = false;
+				item = this.m_ui.item;
+			} else {
+				item = cc.instantiate(this.m_ui.item);
+				this.m_ui.content.addChild(item);
+			}
+			item.getChildByName("labgamename").getComponent(cc.Label).string = GameConfig[i].name;
+			item.gameType = GameConfig[i].GameKind;
+			CommonUtil.addClickEvent(item, function(){
+				GameManager.getInstance().enterGameScene(this.gameType);
+			}, item);
+		}
 	}
 
 }

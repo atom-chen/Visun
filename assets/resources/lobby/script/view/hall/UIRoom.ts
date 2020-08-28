@@ -3,7 +3,6 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import GameManager from "../../../../../common/script/model/GameManager";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
-import { IS_DANJI_MODE, GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import UIManager from "../../../../../kernel/view/UIManager";
 
 const {ccclass, property} = cc._decorator;
@@ -28,7 +27,6 @@ export default class UIRoom extends BaseComponent {
         this._gameKind = gameKind;
         this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
         cc.log("UIRoom: ", gameKind);
-   //     EventCenter.getInstance().listen(configure_msgs.RoomListResp, this.onRoomListResp, this, IS_DANJI_MODE);
     //    configure_request.RoomListReq({GameKind:gameKind});
         this.initRoomBtns();
     }
@@ -40,12 +38,8 @@ export default class UIRoom extends BaseComponent {
             btn["roomInfo"] = this.roomList && this.roomList[i-1];
             CommonUtil.addClickEvent(btn, function(){
                 if(isNil(this.roomInfo)) {
-                    if(IS_DANJI_MODE) {
-                        this.roomInfo = GameConfig[gameId];
-                    } else {
-                        UIManager.toast("数据刷新中，请稍后重试");
-                        return;
-                    }
+                    UIManager.toast("数据刷新中，请稍后重试");
+                    return;
                 }
                 GameManager.getInstance().enterGame(this.roomInfo.GameKind);
             }, btn)

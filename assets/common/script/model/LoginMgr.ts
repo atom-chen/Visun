@@ -21,7 +21,6 @@ import { cowcow_packet_define } from "../proto/net_cowcow";
 import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
-import { IS_DANJI_MODE } from "../definer/ConstDefine";
 import { isEmpty, isNil } from "../../../kernel/utils/GlobalFuncs";
 import MyCrypto from "../../../kernel/secret/MyCrypto";
 import LocalCache from "../../../kernel/localcache/LocalCache";
@@ -119,9 +118,6 @@ export default class LoginMgr extends ModelBase {
 	public checkLogin(bTip: boolean): boolean {
 		cc.log("用户: ", LoginUser.getInstance().UserId);
 		var hasLogin = LoginUser.getInstance() !== null && LoginUser.getInstance().UserId > 0;
-		if(IS_DANJI_MODE) {
-			hasLogin = true;
-		}
 		if (bTip && !hasLogin) {
 		//	UIManager.toast("请先登录");
 			UIManager.openPopwnd(ViewDefine.UILogin, false);

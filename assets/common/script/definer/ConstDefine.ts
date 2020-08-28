@@ -1,7 +1,5 @@
 export const CLIENT_VERSION = "1.0.0";
 
-export const IS_DANJI_MODE = false;
-
 export enum GameKindEnum {
 	//百人
 	Baccarat	= 2001,			//百家乐
