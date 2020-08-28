@@ -12,16 +12,14 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CpnPlayer extends BaseComponent {
 
-    @property(cc.Label)
-    label_name: cc.Label = null;
-    @property(cc.Label)
-    label_money: cc.Label = null;
-
     private _userId:number = 0;
     private _money:number = 0;
     private _clickCallback:Function = null;
 
     onLoad () {
+        CommonUtil.traverseNodes(this.node, this.m_ui);
+        CommonUtil.traverseLabels(this.node, this.m_lab);
+
         CommonUtil.addClickEvent(this.node, function(){ 
             cc.log("click"); 
             if(this._clickCallback) {
@@ -43,16 +41,16 @@ export default class CpnPlayer extends BaseComponent {
     }
 
     public setName(name:string) {
-        this.label_name.string = name;
+        this.m_lab.label_name.string = name;
     }
 
     public setMoney(money:number) {
         this._money = money;
-        this.label_money.string = money.toString();
+        this.m_lab.label_money.string = money.toString();
     }
 
     public setMoneyStr(moneyStr:string) {
-        this.label_money.string = moneyStr;
+        this.m_lab.label_money.string = moneyStr;
     }
 
     public setHeadImg(v:number) {
@@ -65,7 +63,7 @@ export default class CpnPlayer extends BaseComponent {
         this._money = toV;
         var delta = toV - fromV;
         var tic = Math.ceil(delta/128);
-        this.label_money.string = fromV.toString();
+        this.m_lab.label_money.string = fromV.toString();
         var f = function(){
             fromV += tic;
             if(fromV>=this._money){
