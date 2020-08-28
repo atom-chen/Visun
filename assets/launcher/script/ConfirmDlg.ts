@@ -15,12 +15,16 @@ export default class ConfirmDlg extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
         CommonUtil.addClickEvent(this.m_ui.btn_ok, function(){ 
-            this._callback(1);
+			if(this._callback) {
+				this._callback(1);
+			}
 			CommonUtil.safeDelete(this);
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_no, function(){ 
-            this._callback(0);
+            if(this._callback) {
+				this._callback(0);
+			}
 			CommonUtil.safeDelete(this);
 		}, this);
 	}

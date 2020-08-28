@@ -4,6 +4,8 @@ import LoginUser from "../model/LoginUser";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
+import { login } from "../../../../declares/login";
+import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 
 var NetHandlers = {
@@ -16,11 +18,16 @@ var NetHandlers = {
         UIManager.toast(param.Hints);
     },
 
-    [login_msgs.UserInfo] : function(param: any) {
-        CommonUtil.simpleCopy(LoginUser.getInstance(), param);
+    [login_msgs.ResPopResult] : function(param: login.ResPopResult) {
+        UIManager.openDialog(param.Title, param.Hints, 1, null, param.Title);
     },
 
-    [login_msgs.MasterInfo] : function(param) {
+    [login_msgs.UserInfo] : function(param: login.UserInfo) {
+        CommonUtil.simpleCopy(LoginUser.getInstance(), param);
+        //LoginUser.getInstance().UserId = LoginUser.getInstance().UserID;
+    },
+
+    [login_msgs.MasterInfo] : function(param:login.MasterInfo) {
         LogicCenter.getInstance().clear();
         LogicCenter.getInstance().init();
 
@@ -29,6 +36,7 @@ var NetHandlers = {
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
         if(param.UserID!==null && param.UserID!==undefined) {
+            LoginUser.getInstance().UserId = param.UserID;
             LoginUser.getInstance().UserID = param.UserID;
         }
     },

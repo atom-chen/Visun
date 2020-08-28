@@ -8,6 +8,7 @@ import { gamecomm_msgs } from "../proto/net_gamecomm";
 import { brcowcow_msgs } from "../proto/net_brcowcow";
 import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
+import { landLords } from "../../../../declares/landLords";
 
 var GameHandlers = {
 
@@ -15,15 +16,15 @@ var GameHandlers = {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
 	},
 	
-	[baccarat_msgs.GameBaccaratEnter] : function(param:baccarat.GameBaccaratEnter) {
+	[baccarat_msgs.BaccaratScene] : function(param:baccarat.BaccaratScene) {
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},
 	
-	[brcowcow_msgs.GameBrcowcowEnterResp] : function(param:brcowcow.GameBrcowcowEnterResp) {
+	[brcowcow_msgs.BrcowcowScene] : function(param:brcowcow.BrcowcowScene) {
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
 	},
 
-    [landLords_msgs.GameLandLordsEnter] : function(param) {
+    [landLords_msgs.LandLordsEnter] : function(param:landLords.LandLordsEnter) {
         DDzMgr.getInstance().EnterData = param;
         DDzMgr.getInstance().clearFighters();
         DDzMgr.getInstance().updateFighterList(param.Players);

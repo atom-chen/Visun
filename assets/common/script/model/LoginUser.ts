@@ -4,7 +4,8 @@ import ModelBase from "../../../kernel/model/ModelBase";
 export default class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
-	UserID: number = 0;			//用户ID
+	UserID: number = 0;			//
+	UserId: number = 0;			//用户ID
 	Accounts:string = "";		//帐号
 	Password:string = "";		//密码
 	Name:string = "";			//昵称

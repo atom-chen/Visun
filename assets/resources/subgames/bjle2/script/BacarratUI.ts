@@ -10,11 +10,11 @@ import GameManager from "../../../../common/script/model/GameManager";
 import UIManager from "../../../../kernel/view/UIManager";
 import { baccarat_request, baccarat_msgs } from "../../../../common/script/proto/net_baccarat";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
-import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import ResPool from "../../../../kernel/basic/pool/ResPool";
 import CpnChipbox2d from "../../../appqp/script/comps/CpnChipbox2d";
 import CpnChip from "../../../appqp/script/comps/CpnChip";
+import { baccarat } from "../../../../../declares/baccarat";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -42,7 +42,6 @@ export default class BacarratUI extends BaseComponent {
 
         ResPool.load(ViewDefine.CpnChip);
         this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
-		this.toStateReady();
 	}
 
 	onDestroy(){
@@ -51,20 +50,18 @@ export default class BacarratUI extends BaseComponent {
     }
     
     private initNetEvent() {
-        EventCenter.getInstance().listen(baccarat_msgs.GameBaccaratBetResult, this.onGameBetResult, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStatePlaying, this.toStateBetting, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStateOver, this.toStateJiesuan, this);
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlaying, this.BaccaratStatePlaying, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOver, this.BaccaratStateOver, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateFree, this.BaccaratStateFree, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStart, this.BaccaratStateStart, this);
     }
 
-    private onGameBetResult(param) {
-        if(param.State != 0) {
-            UIManager.toast("下注失败");
-            return;
-        }
+    private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
         //飞筹码
         var nums = GameUtil.parseChip(param.BetScore, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
-        if(param.UserID == LoginUser.getInstance().UserID || true) {
+        if(param.UserID == LoginUser.getInstance().UserId || true) {
             var idx = Math.max(0, this._rule.indexOf(param.BetScore));
             fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
         }
@@ -84,19 +81,32 @@ export default class BacarratUI extends BaseComponent {
 	}
 
 	//准备阶段
-	private toStateReady() {
+	private BaccaratStateFree(param) {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
 
-	//下注阶段
-	private toStateBetting(param) {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+	//开局：洗牌发牌
+	private BaccaratStateStart(param) {
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
 
-    //结算阶段
+	//下注阶段
+	private BaccaratStatePlaying(param) {
+	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+	}
+
+	//结算阶段
+	private BaccaratStateOver(param) {
+	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		this.playJiesuan();
+	}
     private playJiesuan() {
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
@@ -115,13 +125,8 @@ export default class BacarratUI extends BaseComponent {
 		));
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 	}
-	private toStateJiesuan(param) {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-		this.playJiesuan();
-	}
+	
     
-
     private onClickArea(areaID:number) {
         var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
         if(!money) {
@@ -129,7 +134,7 @@ export default class BacarratUI extends BaseComponent {
             return;
         }
         cc.log("下注：", areaID, money);
-        baccarat_request.GameBaccaratBet({
+        baccarat_request.BaccaratBetReq({
             BetArea : areaID,
             BetScore : money
         });

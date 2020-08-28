@@ -13,6 +13,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
+import { landLords } from "../../../../../../declares/landLords";
 
 const MAX_SOLDIER = 3;
 
@@ -46,7 +47,7 @@ export default class DdzUI extends BaseComponent {
         
         var EnterData = DDzMgr.getInstance().EnterData;
         if(EnterData) {
-            this._myHandor.resetCards(DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID).Cards, false);
+            this._myHandor.resetCards(DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId).Cards, false);
             this._myHandor.sortCards();
             this.refreshCurAttacker();
             this.refreshRemainCardCount(true);
@@ -75,7 +76,7 @@ export default class DdzUI extends BaseComponent {
     //玩家的UI位置
     private playerIndex(player:DdzPlayer) : number {
 		if(isNil(player)){ return -1; }
-		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
+		var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
 		if(hero.ChairID===1) { return player.ChairID-1; }
 		return (player.ChairID-hero.ChairID+MAX_SOLDIER) % MAX_SOLDIER;
     }
@@ -129,7 +130,7 @@ export default class DdzUI extends BaseComponent {
             cc.warn("bug 获取当前操作者失败");
         }
         this.m_ui.readyNode.active = false;
-        this.m_ui.grabNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserID);
+        this.m_ui.grabNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserId);
         this.m_ui.fightNode.active = false;
         this.m_ui.tipLayer.active = false;
         DDzMgr.getInstance().resetStates();
@@ -147,7 +148,7 @@ export default class DdzUI extends BaseComponent {
         }
         this.m_ui.readyNode.active = false;
         this.m_ui.grabNode.active = false;
-        this.m_ui.fightNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserID);
+        this.m_ui.fightNode.active = curFighter && (curFighter.UserID == LoginUser.getInstance().UserId);
         this.m_ui.tipLayer.active = true;
         this.m_ui.labGrab0.getComponent(cc.Label).string = "";
         this.m_ui.labGrab1.getComponent(cc.Label).string = "";
@@ -230,7 +231,7 @@ export default class DdzUI extends BaseComponent {
                 this.m_ui["lab_tuoguan"+idx].active = false;
             }
         }
-        var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
+        var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
         if(hero) {
             this.m_ui.lab_auto.getComponent(cc.Label).string = hero.IsTrustee && "取消托管" || "托 管";
         }
@@ -248,11 +249,11 @@ export default class DdzUI extends BaseComponent {
     }
 
 
-    private GameLandLordsPlayer(param) {
+    private LandLordsPlayer(param) {
         this._myHandor.resetCards(param.Cards, false);
         this._myHandor.sortCards();
     }
-    private GameLandLordsOutCard(param) {
+    private LandLordsOutCard(param) {
         this.toStateFight();
         if(isNil(param)) {
             return;
@@ -268,7 +269,7 @@ export default class DdzUI extends BaseComponent {
         var idx = this.playerIndex(p);
         if(idx>=0) {
             this._outs[idx].resetCards(param.Cards, false);
-            if(param.UserID === LoginUser.getInstance().UserID) {
+            if(param.UserID === LoginUser.getInstance().UserId) {
                 this._myHandor.delCards(param.Cards);
             }
             if(isNil(param.Cards) || param.Cards.length<=0) {
@@ -291,10 +292,10 @@ export default class DdzUI extends BaseComponent {
         this.toStateFight();
         this.refreshCurAttacker();
     }
-    private GameLandLordsDeal(param) {
+    private LandLordsDeal(param) {
         this._myHandor.resetCards(param.CardsHand, false);
     }
-    private GameLandLordsCheckout(param) {
+    private LandLordsCheckout(param) {
         this.toStateResult();
         if(isNil(param)) { return; }
         for(var i in param.players) {
@@ -306,12 +307,11 @@ export default class DdzUI extends BaseComponent {
             }
         }
     }
-    private GameStateCall(param) {
+    private LandLordsCall(param:landLords.LandLordsCall) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
         this.toStateGrab();
         this.refreshCurAttacker();
-    }
-    private GameLandLordsCall(param) {
+
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
         if(!p){
             UIManager.toast("bug：找不到玩家 "+param.UserID);
@@ -319,7 +319,7 @@ export default class DdzUI extends BaseComponent {
         }
         var idx = this.playerIndex(p);
         if(this.m_ui["labGrab"+idx]) {
-            this.m_ui["labGrab"+idx].getComponent(cc.Label).string = param.Score;
+            this.m_ui["labGrab"+idx].getComponent(cc.Label).string = param.Score.toString();
         }
 
         var nextPos = DDzMgr.nextPos(p.ChairID);
@@ -334,10 +334,10 @@ export default class DdzUI extends BaseComponent {
         this.toStateGrab();
         this.refreshCurAttacker();
     }
-    private GameLandLordsBottomCard(param) {
+    private LandLordsBottomCard(param) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
         DDzMgr.getInstance().setZhuang(param.UserID);
-        if(param.UserID == LoginUser.getInstance().UserID) {
+        if(param.UserID == LoginUser.getInstance().UserId) {
             this._myHandor.addCards(param.CardsBottom);
             this._myHandor.sortCards();
         }
@@ -353,44 +353,36 @@ export default class DdzUI extends BaseComponent {
         fighters[param.UserID].CardsLen = 20;
         this.refreshRemainCardCount(true);
     }
-    private onUserList(param) {
+    private LandLordsFighters(param) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
         this.refreshPlayers();
     }
-    private GameBeOut(param) {
-        DDzMgr.getInstance().removePlayer(param.UserID);
-
-        if(param.UserID == LoginUser.getInstance().UserID) {
-            GameManager.getInstance().quitGame(true);
+    private LandLordsTrustee(param:landLords.LandLordsTrustee) {
+        var p = DDzMgr.getInstance().getPlayer(param.UserID);
+        if(p) {
+            p.IsTrustee = param.IsTrustee;
         }
-
-        UIManager.toast("玩家被踢出房间"+param.UserID);
+        this.refreshTuoguan();
+    }
+    private LandLordsDouble(param:landLords.LandLordsDouble) {
+        UIManager.toast("玩家加倍 UserID: "+param.UserID);
+    }
+    private LandLordsReadyResp(param:landLords.LandLordsReadyResp) {
+        if(param.UserId==LoginUser.getInstance().UserId) {
+            this.m_ui.readyNode.active = false;
+        }
     }
     private initNetEvent() {
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsPlayer, this.GameLandLordsPlayer, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsOutCard, this.GameLandLordsOutCard, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDeal, this.GameLandLordsDeal, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCheckout, this.GameLandLordsCheckout, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsCall, this.GameLandLordsCall, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsBottomCard, this.GameLandLordsBottomCard, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.onUserList, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameBeOut, this.GameBeOut, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameStateCall, this.GameStateCall, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsTrustee, function(param){
-            var p = DDzMgr.getInstance().getPlayer(param.UserID);
-            if(p) {
-                p.IsTrustee = param.IsTrustee;
-            }
-            this.refreshTuoguan();
-        }, this);
-        EventCenter.getInstance().listen(landLords_msgs.GameLandLordsDouble, function(param){
-            UIManager.toast("玩家加倍 UserID: "+param.UserID);
-        }, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.GameReady, function(param){
-            if(param.UserID==LoginUser.getInstance().UserID) {
-                this.m_ui.readyNode.active = false;
-            }
-        }, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsPlayer, this.LandLordsPlayer, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsOutCard, this.LandLordsOutCard, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsDeal, this.LandLordsDeal, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsCheckout, this.LandLordsCheckout, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsCall, this.LandLordsCall, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsBottomCard, this.LandLordsBottomCard, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.LandLordsFighters, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsTrustee, this.LandLordsTrustee, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsDouble, this.LandLordsDouble, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsReadyResp, this.LandLordsReadyResp, this);
     }
 
     private initUIEvent() {
@@ -399,8 +391,7 @@ export default class DdzUI extends BaseComponent {
             GameManager.getInstance().quitGame();
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
-            gamecomm_request.GameReady({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsReadyReq({
                 IsReady:true
             });
         }, this);
@@ -410,57 +401,57 @@ export default class DdzUI extends BaseComponent {
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_out, function(){ 
-            landLords_request.GameLandLordsOutCard({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsOutCard({
+                UserID:LoginUser.getInstance().UserId,
                 Cards: this._myHandor.getSelectedCards(),
                 Hints:"",
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_pass, function(){ 
-            landLords_request.GameLandLordsOutCard({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsOutCard({
+                UserID:LoginUser.getInstance().UserId,
                 Cards: [],
                 Hints:"",
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score0, function(){ 
-            landLords_request.GameLandLordsCall({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsCall({
+                UserID:LoginUser.getInstance().UserId,
                 Score:0
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score1, function(){ 
-            landLords_request.GameLandLordsCall({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsCall({
+                UserID:LoginUser.getInstance().UserId,
                 Score:1
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score2, function(){ 
-            landLords_request.GameLandLordsCall({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsCall({
+                UserID:LoginUser.getInstance().UserId,
                 Score:2
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score3, function(){ 
-            landLords_request.GameLandLordsCall({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsCall({
+                UserID:LoginUser.getInstance().UserId,
                 Score:3
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_double, function(){ 
-            landLords_request.GameLandLordsDouble({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsDouble({
+                UserID:LoginUser.getInstance().UserId,
                 Number:2
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
-            var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserID);
+            var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
             if(!hero) {
                 cc.warn("hero is nil");
                 return;
             }
-            landLords_request.GameLandLordsTrustee({
-                UserID:LoginUser.getInstance().UserID,
+            landLords_request.LandLordsTrustee({
+                UserID:LoginUser.getInstance().UserId,
                 IsTrustee: hero.IsTrustee
             });
         }, this);
