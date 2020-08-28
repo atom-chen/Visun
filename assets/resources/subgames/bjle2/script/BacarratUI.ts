@@ -51,10 +51,10 @@ export default class BacarratUI extends BaseComponent {
     
     private initNetEvent() {
         EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
-        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlaying, this.BaccaratStatePlaying, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOver, this.BaccaratStateOver, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateFree, this.BaccaratStateFree, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStart, this.BaccaratStateStart, this);
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlaying, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOver, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateFreeResp, this.BaccaratStateFree, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStart, this);
     }
 
     private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
@@ -142,6 +142,9 @@ export default class BacarratUI extends BaseComponent {
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
+            GameManager.getInstance().quitGame(true);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);

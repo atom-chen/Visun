@@ -14,6 +14,8 @@ import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 import { landLords } from "../../../../../../declares/landLords";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 
 const MAX_SOLDIER = 3;
 
@@ -45,33 +47,19 @@ export default class DdzUI extends BaseComponent {
         this.refreshPlayers();
         this.toStateReady();
         
-        var EnterData = DDzMgr.getInstance().EnterData;
+        this.initContext();
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+    }
+
+    private initContext() {
+        var EnterData = DDzMgr.getInstance().getEnterData();
         if(EnterData) {
             this._myHandor.resetCards(DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId).Cards, false);
             this._myHandor.sortCards();
             this.refreshCurAttacker();
             this.refreshRemainCardCount(true);
-
-            if(EnterData.GameStateFree) {
-                this.toStateSearching();
-            }
-            else if(EnterData.GameStateStart) {
-                this.toStateReady();
-            }
-            else if(EnterData.GameStateCall) {
-                this.toStateGrab();
-                this.refreshCurAttacker();
-            }
-            else if(EnterData.GameStatePlaying) {
-                this.toStateFight();
-                this.refreshCurAttacker();
-            }
-            else if(EnterData.GameStateOver) {
-                this.toStateResult();
-            }
         }
     }
-
 
     //玩家的UI位置
     private playerIndex(player:DdzPlayer) : number {
@@ -307,7 +295,7 @@ export default class DdzUI extends BaseComponent {
             }
         }
     }
-    private LandLordsCall(param:landLords.LandLordsCall) {
+    private LandLordsCall(param:landLords.LandLordsCallResp) {
         DDzMgr.getInstance().setCurAttacker(param.UserID);
         this.toStateGrab();
         this.refreshCurAttacker();
@@ -357,14 +345,14 @@ export default class DdzUI extends BaseComponent {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
         this.refreshPlayers();
     }
-    private LandLordsTrustee(param:landLords.LandLordsTrustee) {
+    private LandLordsTrustee(param:landLords.LandLordsTrusteeResp) {
         var p = DDzMgr.getInstance().getPlayer(param.UserID);
         if(p) {
             p.IsTrustee = param.IsTrustee;
         }
         this.refreshTuoguan();
     }
-    private LandLordsDouble(param:landLords.LandLordsDouble) {
+    private LandLordsDouble(param:landLords.LandLordsDoubleResp) {
         UIManager.toast("玩家加倍 UserID: "+param.UserID);
     }
     private LandLordsReadyResp(param:landLords.LandLordsReadyResp) {
@@ -374,14 +362,14 @@ export default class DdzUI extends BaseComponent {
     }
     private initNetEvent() {
         EventCenter.getInstance().listen(landLords_msgs.LandLordsPlayer, this.LandLordsPlayer, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsOutCard, this.LandLordsOutCard, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsDeal, this.LandLordsDeal, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsCheckout, this.LandLordsCheckout, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsCall, this.LandLordsCall, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsBottomCard, this.LandLordsBottomCard, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.UserList, this.LandLordsFighters, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsTrustee, this.LandLordsTrustee, this);
-        EventCenter.getInstance().listen(landLords_msgs.LandLordsDouble, this.LandLordsDouble, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsOutCardResp, this.LandLordsOutCard, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsDealResp, this.LandLordsDeal, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsCheckoutResp, this.LandLordsCheckout, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsCallResp, this.LandLordsCall, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsBottomCardResp, this.LandLordsBottomCard, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.UserListInfo, this.LandLordsFighters, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsTrusteeResp, this.LandLordsTrustee, this);
+        EventCenter.getInstance().listen(landLords_msgs.LandLordsDoubleResp, this.LandLordsDouble, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsReadyResp, this.LandLordsReadyResp, this);
     }
 
@@ -390,6 +378,9 @@ export default class DdzUI extends BaseComponent {
             DDzMgr.getInstance().clearFighters();
             GameManager.getInstance().quitGame();
         }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
+            GameManager.getInstance().quitGame(true);
+		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             landLords_request.LandLordsReadyReq({
                 IsReady:true
@@ -401,46 +392,37 @@ export default class DdzUI extends BaseComponent {
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_out, function(){ 
-            landLords_request.LandLordsOutCard({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsOutCardReq({
                 Cards: this._myHandor.getSelectedCards(),
-                Hints:"",
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_pass, function(){ 
-            landLords_request.LandLordsOutCard({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsOutCardReq({
                 Cards: [],
-                Hints:"",
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score0, function(){ 
-            landLords_request.LandLordsCall({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsCallReq({
                 Score:0
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score1, function(){ 
-            landLords_request.LandLordsCall({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsCallReq({
                 Score:1
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score2, function(){ 
-            landLords_request.LandLordsCall({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsCallReq({
                 Score:2
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score3, function(){ 
-            landLords_request.LandLordsCall({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsCallReq({
                 Score:3
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_double, function(){ 
-            landLords_request.LandLordsDouble({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsDoubleReq({
                 Number:2
             });
         }, this);
@@ -450,8 +432,7 @@ export default class DdzUI extends BaseComponent {
                 cc.warn("hero is nil");
                 return;
             }
-            landLords_request.LandLordsTrustee({
-                UserID:LoginUser.getInstance().UserId,
+            landLords_request.LandLordsTrusteeReq({
                 IsTrustee: hero.IsTrustee
             });
         }, this);

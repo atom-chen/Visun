@@ -3,6 +3,8 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LocalCache from "../../../../../kernel/localcache/LocalCache";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import GameManager from "../../../../../common/script/model/GameManager";
+import { isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 
@@ -57,6 +59,14 @@ export default class UISettor extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_quitlogin, function(){
 			CommonUtil.safeDelete(this);
 			LoginMgr.getInstance().logout();
+		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_test, function(){
+			if(isEmpty(this.m_ui.editTest.getComponent(cc.EditBox).string)) {
+				return;
+			}
+			var gameType = parseInt(this.m_ui.editTest.getComponent(cc.EditBox).string)
+			GameManager.getInstance().enterGameScene(gameType)
 		}, this);
 	}
 

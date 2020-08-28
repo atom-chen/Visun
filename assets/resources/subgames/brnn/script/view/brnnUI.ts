@@ -62,18 +62,24 @@ export default class BrnnUI extends BaseComponent {
 
 		this.NotifyChangeGold(null);
 
-		var enterData = BrnnMgr.getInstance().getEnterData();
-		for(var i=0; i<enterData.AreaBets.length; i++) {
-			var areaName = "area"+(i+1);
-			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
-			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
-		}
+		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
 	onDestroy(){
 		this._pool.clear();
 		super.onDestroy();
+	}
+
+	private initContext() {
+		var enterData = BrnnMgr.getInstance().getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				var areaName = "area"+(i+1);
+				this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
+				this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
+			}
+		}
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
@@ -155,7 +161,7 @@ export default class BrnnUI extends BaseComponent {
 		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MySettlement), cc.v3(0,0,0), cc.v2(0, 100));
 	}
 
-	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFree) {
+	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFreeResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
@@ -163,16 +169,16 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
 	}
 
-	private BrcowcowStateStart(param:brcowcow.BrcowcowStateStart) {
+	private BrcowcowStateStart(param:brcowcow.BrcowcowStateStartResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
 	}
 
-	private BrcowcowStatePlaying(param:brcowcow.BrcowcowStatePlaying) {
+	private BrcowcowStatePlaying(param:brcowcow.BrcowcowStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 	}
 
-	private BrcowcowStateOver(param:brcowcow.BrcowcowStateOver) {
+	private BrcowcowStateOver(param:brcowcow.BrcowcowStateOverResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}
 
@@ -182,10 +188,10 @@ export default class BrnnUI extends BaseComponent {
 
 	private initNetEvent() {
 		EventCenter.getInstance().listen(gamecomm_msgs.NotifyChangeGold, this.NotifyChangeGold, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFree, this.BrcowcowStateFree, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStart, this.BrcowcowStateStart, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlaying, this.BrcowcowStatePlaying, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOver, this.BrcowcowStateOver, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFreeResp, this.BrcowcowStateFree, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStartResp, this.BrcowcowStateStart, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlayingResp, this.BrcowcowStatePlaying, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOverResp, this.BrcowcowStateOver, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp ,this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowCheckoutResp, this.BrcowcowCheckoutResp, this);
@@ -197,7 +203,7 @@ export default class BrnnUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-
+            GameManager.getInstance().quitGame(true);
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);

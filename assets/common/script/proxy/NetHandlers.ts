@@ -5,20 +5,15 @@ import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
 import { login } from "../../../../declares/login";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
 
 
 var NetHandlers = {
 
-    [login_msgs.RegisterResult] : function(param: any) {
+    [login_msgs.ResultResp] : function(param: login.ResultResp) {
         UIManager.toast(param.Hints);
     },
 
-    [login_msgs.ResResult] : function(param: any) {
-        UIManager.toast(param.Hints);
-    },
-
-    [login_msgs.ResPopResult] : function(param: login.ResPopResult) {
+    [login_msgs.ResultPopResp] : function(param: login.ResultPopResp) {
         UIManager.openDialog(param.Title, param.Hints, 1, null, param.Title);
     },
 
@@ -29,16 +24,9 @@ var NetHandlers = {
     [login_msgs.MasterInfo] : function(param:login.MasterInfo) {
         LogicCenter.getInstance().clear();
         LogicCenter.getInstance().init();
-
-        UIManager.toast("登陆成功");
-
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
-        if(!isNil(param.UserID)) {
-            LoginUser.getInstance().UserId = param.UserID;
-            LoginUser.getInstance().UserID = param.UserID;
-        }
-
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
+        UIManager.toast("登陆成功");
     },
 
     [login_msgs.GameList] : function(param) {

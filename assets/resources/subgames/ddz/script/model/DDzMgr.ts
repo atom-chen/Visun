@@ -2,6 +2,7 @@ import ModelBase from "../../../../../kernel/model/ModelBase";
 import DdzPlayer from "./DdzPlayer";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import { landLords } from "../../../../../../declares/landLords";
 
 export default class DDzMgr extends ModelBase {
 	private static _instance:DDzMgr = null;
@@ -27,7 +28,14 @@ export default class DDzMgr extends ModelBase {
 	private _players : {[key:number]:DdzPlayer} = {};
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
-	public EnterData = null;
+	private enterData:landLords.LandLordsScene = null;
+
+    setEnterData(data:landLords.LandLordsScene) {
+        this.enterData = data;
+    }
+    getEnterData() : landLords.LandLordsScene {
+        return this.enterData;
+    }
 
 	//---- 玩家 -----------
 	clearFighters() {

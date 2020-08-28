@@ -142,7 +142,7 @@ export default class LoginMgr extends ModelBase {
 
 		this.connectServer();
 		
-		login_request.Login({
+		login_request.LoginReq({
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
@@ -167,7 +167,7 @@ export default class LoginMgr extends ModelBase {
 
 		this.connectServer();
 
-		login_request.Register({
+		login_request.RegisterReq({
 			Name : Account,
 			Password : Pswd,
 			SecurityCode : SecurityCode,

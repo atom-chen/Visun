@@ -4,7 +4,7 @@ import "gamecomm.proto";
 
 
 //战士信息
-message FighterInfo {
+message ZhajinhuaPlayer {
   uint64 UserId = 1;
   int32 SeatId = 2;      // 座位号
   int32 FightState = 3;    // 未准备 已准备  跟注 加注 弃牌 比牌输
@@ -21,7 +21,7 @@ message ZhajinhuaSceneResp {
   int64 TotalBet = 3;            //当前总下注额
   uint64 MinBet = 4;            //当前注额
   uint64 CurHost = 5;            //当前庄家
-  repeated FighterInfo Fighters = 6;    //参战玩家序列
+  repeated ZhajinhuaPlayer Fighters = 6;    //参战玩家序列
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算

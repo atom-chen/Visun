@@ -13,32 +13,32 @@ import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import LoginUser from "../model/LoginUser";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 var GameHandlers = {
 
-	[gamecomm_msgs.UserList] : function(param) {
-        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
-    },
-    
     [gamecomm_msgs.NotifyChangeGold] : function(param:gamecomm.NotifyChangeGold) {
         if(param.UserID == LoginUser.getInstance().UserID) {
             LoginUser.getInstance().Gold = param.Gold;
         }
     },
+
+
+	[gamecomm_msgs.UserListInfo] : function(param) {
+        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
+    },
 	
-	[baccarat_msgs.BaccaratScene] : function(param:baccarat.BaccaratScene) {
+	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.BaccaratSceneResp) {
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},
 	
-	[brcowcow_msgs.BrcowcowScene] : function(param:brcowcow.BrcowcowScene) {
+	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.BrcowcowSceneResp) {
         BrnnMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
 	},
 
-    [landLords_msgs.LandLordsEnter] : function(param:landLords.LandLordsEnter) {
-        DDzMgr.getInstance().EnterData = param;
+    [landLords_msgs.LandLordsScene] : function(param:landLords.LandLordsScene) {
+        DDzMgr.getInstance().setEnterData(param);
         DDzMgr.getInstance().clearFighters();
         DDzMgr.getInstance().updateFighterList(param.Players);
         for(var i in param.Players) {
@@ -46,15 +46,7 @@ var GameHandlers = {
                 DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
             }
         }
-        if(!isNil(param.BeforeChairID)) {
-            var cur = (param.BeforeChairID + 1) % 3;
-            for(var i in param.Players) {
-                if(param.Players[i].ChairID == cur) {
-                    DDzMgr.getInstance().setCurAttacker(param.Players[i].UserID);
-                    break;
-                }
-            }
-        }
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
 }

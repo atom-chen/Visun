@@ -20,11 +20,11 @@ export default class BrnnMgr extends ModelBase {
 
     }
     
-    private enterData = null;
-    setEnterData(data:brcowcow.BrcowcowScene) {
+    private enterData:brcowcow.BrcowcowSceneResp = null;
+    setEnterData(data:brcowcow.BrcowcowSceneResp) {
         this.enterData = data;
     }
-    getEnterData() : brcowcow.BrcowcowScene {
+    getEnterData() : brcowcow.BrcowcowSceneResp {
         return this.enterData;
     }
 }
