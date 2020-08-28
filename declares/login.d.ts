@@ -11,8 +11,8 @@ export namespace login {
         /** UserInfo Name */
         Name?: (string|null);
 
-        /** UserInfo Accounts */
-        Accounts?: (string|null);
+        /** UserInfo Account */
+        Account?: (string|null);
 
         /** UserInfo Password */
         Password?: (string|null);
@@ -81,8 +81,8 @@ export namespace login {
         /** UserInfo Name. */
         public Name: string;
 
-        /** UserInfo Accounts. */
-        public Accounts: string;
+        /** UserInfo Account. */
+        public Account: string;
 
         /** UserInfo Password. */
         public Password: string;

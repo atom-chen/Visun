@@ -8,12 +8,12 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 export enum landLords_msgs {
     LandLordsPlayer = 47,
-    LandLordsScene = 48,
-    LandLordsStateFree = 49,
-    LandLordsStateStart = 50,
-    LandLordsStateCall = 51,
-    LandLordsStatePlaying = 52,
-    LandLordsStateOver = 53,
+    LandLordsSceneResp = 48,
+    LandLordsStateFreeResp = 49,
+    LandLordsStateStartResp = 50,
+    LandLordsStateCallResp = 51,
+    LandLordsStatePlayingResp = 52,
+    LandLordsStateOverResp = 53,
     LandLordsReadyReq = 54,
     LandLordsReadyResp = 55,
     LandLordsDealResp = 56,
@@ -32,12 +32,12 @@ export enum landLords_msgs {
 
 export var landLords_packet_define = {
     47: new LeafWsPacket(47, landLords.LandLordsPlayer, "landLords.LandLordsPlayer"),
-    48: new LeafWsPacket(48, landLords.LandLordsScene, "landLords.LandLordsScene"),
-    49: new LeafWsPacket(49, landLords.LandLordsStateFree, "landLords.LandLordsStateFree"),
-    50: new LeafWsPacket(50, landLords.LandLordsStateStart, "landLords.LandLordsStateStart"),
-    51: new LeafWsPacket(51, landLords.LandLordsStateCall, "landLords.LandLordsStateCall"),
-    52: new LeafWsPacket(52, landLords.LandLordsStatePlaying, "landLords.LandLordsStatePlaying"),
-    53: new LeafWsPacket(53, landLords.LandLordsStateOver, "landLords.LandLordsStateOver"),
+    48: new LeafWsPacket(48, landLords.LandLordsSceneResp, "landLords.LandLordsSceneResp"),
+    49: new LeafWsPacket(49, landLords.LandLordsStateFreeResp, "landLords.LandLordsStateFreeResp"),
+    50: new LeafWsPacket(50, landLords.LandLordsStateStartResp, "landLords.LandLordsStateStartResp"),
+    51: new LeafWsPacket(51, landLords.LandLordsStateCallResp, "landLords.LandLordsStateCallResp"),
+    52: new LeafWsPacket(52, landLords.LandLordsStatePlayingResp, "landLords.LandLordsStatePlayingResp"),
+    53: new LeafWsPacket(53, landLords.LandLordsStateOverResp, "landLords.LandLordsStateOverResp"),
     54: new LeafWsPacket(54, landLords.LandLordsReadyReq, "landLords.LandLordsReadyReq"),
     55: new LeafWsPacket(55, landLords.LandLordsReadyResp, "landLords.LandLordsReadyResp"),
     56: new LeafWsPacket(56, landLords.LandLordsDealResp, "landLords.LandLordsDealResp"),
@@ -56,12 +56,12 @@ export var landLords_packet_define = {
 
 export class landLords_request {
     public static LandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any, IsTrustee:any } ) { landLords_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsScene( data:{ TimeStamp:number, Players:any[] } ) { landLords_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStateFree( data:{ Times:any } ) { landLords_packet_define[49].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStateStart( data:{ Times:any } ) { landLords_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStateCall( data:{ Times:any, UserID:number } ) { landLords_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStatePlaying( data:{ Times:any, LastChairID:number, LastCards:any } ) { landLords_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStateOver( data:{ Times:any } ) { landLords_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsSceneResp( data:{ TimeStamp:number, Players:any[] } ) { landLords_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStateFreeResp( data:{ Times:any } ) { landLords_packet_define[49].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStateStartResp( data:{ Times:any } ) { landLords_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStateCallResp( data:{ Times:any, UserID:number } ) { landLords_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStatePlayingResp( data:{ Times:any, LastChairID:number, LastCards:any } ) { landLords_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStateOverResp( data:{ Times:any } ) { landLords_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsReadyReq( data:{ IsReady:any } ) { landLords_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsReadyResp( data:{ UserId:number } ) { landLords_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsDealResp( data:{ UserID:number, CardsHand:any } ) { landLords_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }

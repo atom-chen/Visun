@@ -192,9 +192,9 @@ $root.landLords = (function() {
         return LandLordsPlayer;
     })();
 
-    landLords.LandLordsScene = (function() {
+    landLords.LandLordsSceneResp = (function() {
 
-        function LandLordsScene(properties) {
+        function LandLordsSceneResp(properties) {
             this.Players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -202,14 +202,14 @@ $root.landLords = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsScene.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        LandLordsScene.prototype.Players = $util.emptyArray;
+        LandLordsSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LandLordsSceneResp.prototype.Players = $util.emptyArray;
 
-        LandLordsScene.create = function create(properties) {
-            return new LandLordsScene(properties);
+        LandLordsSceneResp.create = function create(properties) {
+            return new LandLordsSceneResp(properties);
         };
 
-        LandLordsScene.encode = function encode(message, writer) {
+        LandLordsSceneResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
@@ -220,14 +220,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsScene.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsSceneResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsScene.decode = function decode(reader, length) {
+        LandLordsSceneResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsScene();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsSceneResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -247,13 +247,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsScene.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsSceneResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsScene.verify = function verify(message) {
+        LandLordsSceneResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
@@ -271,10 +271,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsScene.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsScene)
+        LandLordsSceneResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsSceneResp)
                 return object;
-            var message = new $root.landLords.LandLordsScene();
+            var message = new $root.landLords.LandLordsSceneResp();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -286,18 +286,18 @@ $root.landLords = (function() {
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
             if (object.Players) {
                 if (!Array.isArray(object.Players))
-                    throw TypeError(".landLords.LandLordsScene.Players: array expected");
+                    throw TypeError(".landLords.LandLordsSceneResp.Players: array expected");
                 message.Players = [];
                 for (var i = 0; i < object.Players.length; ++i) {
                     if (typeof object.Players[i] !== "object")
-                        throw TypeError(".landLords.LandLordsScene.Players: object expected");
+                        throw TypeError(".landLords.LandLordsSceneResp.Players: object expected");
                     message.Players[i] = $root.landLords.LandLordsPlayer.fromObject(object.Players[i]);
                 }
             }
             return message;
         };
 
-        LandLordsScene.toObject = function toObject(message, options) {
+        LandLordsSceneResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -322,29 +322,29 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsScene.prototype.toJSON = function toJSON() {
+        LandLordsSceneResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsScene;
+        return LandLordsSceneResp;
     })();
 
-    landLords.LandLordsStateFree = (function() {
+    landLords.LandLordsStateFreeResp = (function() {
 
-        function LandLordsStateFree(properties) {
+        function LandLordsStateFreeResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsStateFree.prototype.Times = null;
+        LandLordsStateFreeResp.prototype.Times = null;
 
-        LandLordsStateFree.create = function create(properties) {
-            return new LandLordsStateFree(properties);
+        LandLordsStateFreeResp.create = function create(properties) {
+            return new LandLordsStateFreeResp(properties);
         };
 
-        LandLordsStateFree.encode = function encode(message, writer) {
+        LandLordsStateFreeResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -352,14 +352,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsStateFree.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsStateFree.decode = function decode(reader, length) {
+        LandLordsStateFreeResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateFree();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateFreeResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -374,13 +374,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStateFree.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsStateFree.verify = function verify(message) {
+        LandLordsStateFreeResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -391,19 +391,19 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsStateFree.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsStateFree)
+        LandLordsStateFreeResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsStateFreeResp)
                 return object;
-            var message = new $root.landLords.LandLordsStateFree();
+            var message = new $root.landLords.LandLordsStateFreeResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".landLords.LandLordsStateFree.Times: object expected");
+                    throw TypeError(".landLords.LandLordsStateFreeResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        LandLordsStateFree.toObject = function toObject(message, options) {
+        LandLordsStateFreeResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -414,29 +414,29 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsStateFree.prototype.toJSON = function toJSON() {
+        LandLordsStateFreeResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsStateFree;
+        return LandLordsStateFreeResp;
     })();
 
-    landLords.LandLordsStateStart = (function() {
+    landLords.LandLordsStateStartResp = (function() {
 
-        function LandLordsStateStart(properties) {
+        function LandLordsStateStartResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsStateStart.prototype.Times = null;
+        LandLordsStateStartResp.prototype.Times = null;
 
-        LandLordsStateStart.create = function create(properties) {
-            return new LandLordsStateStart(properties);
+        LandLordsStateStartResp.create = function create(properties) {
+            return new LandLordsStateStartResp(properties);
         };
 
-        LandLordsStateStart.encode = function encode(message, writer) {
+        LandLordsStateStartResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -444,14 +444,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsStateStart.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsStateStart.decode = function decode(reader, length) {
+        LandLordsStateStartResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateStart();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateStartResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -466,13 +466,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStateStart.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsStateStartResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsStateStart.verify = function verify(message) {
+        LandLordsStateStartResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -483,19 +483,19 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsStateStart.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsStateStart)
+        LandLordsStateStartResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsStateStartResp)
                 return object;
-            var message = new $root.landLords.LandLordsStateStart();
+            var message = new $root.landLords.LandLordsStateStartResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".landLords.LandLordsStateStart.Times: object expected");
+                    throw TypeError(".landLords.LandLordsStateStartResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        LandLordsStateStart.toObject = function toObject(message, options) {
+        LandLordsStateStartResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -506,30 +506,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsStateStart.prototype.toJSON = function toJSON() {
+        LandLordsStateStartResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsStateStart;
+        return LandLordsStateStartResp;
     })();
 
-    landLords.LandLordsStateCall = (function() {
+    landLords.LandLordsStateCallResp = (function() {
 
-        function LandLordsStateCall(properties) {
+        function LandLordsStateCallResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsStateCall.prototype.Times = null;
-        LandLordsStateCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsStateCallResp.prototype.Times = null;
+        LandLordsStateCallResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        LandLordsStateCall.create = function create(properties) {
-            return new LandLordsStateCall(properties);
+        LandLordsStateCallResp.create = function create(properties) {
+            return new LandLordsStateCallResp(properties);
         };
 
-        LandLordsStateCall.encode = function encode(message, writer) {
+        LandLordsStateCallResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -539,14 +539,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsStateCall.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsStateCallResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsStateCall.decode = function decode(reader, length) {
+        LandLordsStateCallResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateCall();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateCallResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -564,13 +564,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStateCall.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsStateCallResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsStateCall.verify = function verify(message) {
+        LandLordsStateCallResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -584,13 +584,13 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsStateCall.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsStateCall)
+        LandLordsStateCallResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsStateCallResp)
                 return object;
-            var message = new $root.landLords.LandLordsStateCall();
+            var message = new $root.landLords.LandLordsStateCallResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".landLords.LandLordsStateCall.Times: object expected");
+                    throw TypeError(".landLords.LandLordsStateCallResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             if (object.UserID != null)
@@ -605,7 +605,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStateCall.toObject = function toObject(message, options) {
+        LandLordsStateCallResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -627,31 +627,31 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsStateCall.prototype.toJSON = function toJSON() {
+        LandLordsStateCallResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsStateCall;
+        return LandLordsStateCallResp;
     })();
 
-    landLords.LandLordsStatePlaying = (function() {
+    landLords.LandLordsStatePlayingResp = (function() {
 
-        function LandLordsStatePlaying(properties) {
+        function LandLordsStatePlayingResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsStatePlaying.prototype.Times = null;
-        LandLordsStatePlaying.prototype.LastChairID = 0;
-        LandLordsStatePlaying.prototype.LastCards = null;
+        LandLordsStatePlayingResp.prototype.Times = null;
+        LandLordsStatePlayingResp.prototype.LastChairID = 0;
+        LandLordsStatePlayingResp.prototype.LastCards = null;
 
-        LandLordsStatePlaying.create = function create(properties) {
-            return new LandLordsStatePlaying(properties);
+        LandLordsStatePlayingResp.create = function create(properties) {
+            return new LandLordsStatePlayingResp(properties);
         };
 
-        LandLordsStatePlaying.encode = function encode(message, writer) {
+        LandLordsStatePlayingResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -663,14 +663,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsStatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsStatePlayingResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsStatePlaying.decode = function decode(reader, length) {
+        LandLordsStatePlayingResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStatePlaying();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStatePlayingResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -691,13 +691,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStatePlaying.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsStatePlayingResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsStatePlaying.verify = function verify(message) {
+        LandLordsStatePlayingResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -716,26 +716,26 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsStatePlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsStatePlaying)
+        LandLordsStatePlayingResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsStatePlayingResp)
                 return object;
-            var message = new $root.landLords.LandLordsStatePlaying();
+            var message = new $root.landLords.LandLordsStatePlayingResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".landLords.LandLordsStatePlaying.Times: object expected");
+                    throw TypeError(".landLords.LandLordsStatePlayingResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             if (object.LastChairID != null)
                 message.LastChairID = object.LastChairID >>> 0;
             if (object.LastCards != null) {
                 if (typeof object.LastCards !== "object")
-                    throw TypeError(".landLords.LandLordsStatePlaying.LastCards: object expected");
+                    throw TypeError(".landLords.LandLordsStatePlayingResp.LastCards: object expected");
                 message.LastCards = $root.gamecomm.CardInfo.fromObject(object.LastCards);
             }
             return message;
         };
 
-        LandLordsStatePlaying.toObject = function toObject(message, options) {
+        LandLordsStatePlayingResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -753,29 +753,29 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsStatePlaying.prototype.toJSON = function toJSON() {
+        LandLordsStatePlayingResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsStatePlaying;
+        return LandLordsStatePlayingResp;
     })();
 
-    landLords.LandLordsStateOver = (function() {
+    landLords.LandLordsStateOverResp = (function() {
 
-        function LandLordsStateOver(properties) {
+        function LandLordsStateOverResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsStateOver.prototype.Times = null;
+        LandLordsStateOverResp.prototype.Times = null;
 
-        LandLordsStateOver.create = function create(properties) {
-            return new LandLordsStateOver(properties);
+        LandLordsStateOverResp.create = function create(properties) {
+            return new LandLordsStateOverResp(properties);
         };
 
-        LandLordsStateOver.encode = function encode(message, writer) {
+        LandLordsStateOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -783,14 +783,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsStateOver.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsStateOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsStateOver.decode = function decode(reader, length) {
+        LandLordsStateOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsStateOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -805,13 +805,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsStateOver.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsStateOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsStateOver.verify = function verify(message) {
+        LandLordsStateOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -822,19 +822,19 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsStateOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsStateOver)
+        LandLordsStateOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsStateOverResp)
                 return object;
-            var message = new $root.landLords.LandLordsStateOver();
+            var message = new $root.landLords.LandLordsStateOverResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".landLords.LandLordsStateOver.Times: object expected");
+                    throw TypeError(".landLords.LandLordsStateOverResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        LandLordsStateOver.toObject = function toObject(message, options) {
+        LandLordsStateOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -845,11 +845,11 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsStateOver.prototype.toJSON = function toJSON() {
+        LandLordsStateOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsStateOver;
+        return LandLordsStateOverResp;
     })();
 
     landLords.LandLordsReadyReq = (function() {

@@ -22,7 +22,7 @@ $root.login = (function() {
 
         UserInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         UserInfo.prototype.Name = "";
-        UserInfo.prototype.Accounts = "";
+        UserInfo.prototype.Account = "";
         UserInfo.prototype.Password = "";
         UserInfo.prototype.FaceID = 0;
         UserInfo.prototype.Gender = 0;
@@ -52,8 +52,8 @@ $root.login = (function() {
                 writer.uint32(8).uint64(message.UserID);
             if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
                 writer.uint32(18).string(message.Name);
-            if (message.Accounts != null && Object.hasOwnProperty.call(message, "Accounts"))
-                writer.uint32(26).string(message.Accounts);
+            if (message.Account != null && Object.hasOwnProperty.call(message, "Account"))
+                writer.uint32(26).string(message.Account);
             if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
                 writer.uint32(34).string(message.Password);
             if (message.FaceID != null && Object.hasOwnProperty.call(message, "FaceID"))
@@ -109,7 +109,7 @@ $root.login = (function() {
                     message.Name = reader.string();
                     break;
                 case 3:
-                    message.Accounts = reader.string();
+                    message.Account = reader.string();
                     break;
                 case 4:
                     message.Password = reader.string();
@@ -185,9 +185,9 @@ $root.login = (function() {
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
-            if (message.Accounts != null && message.hasOwnProperty("Accounts"))
-                if (!$util.isString(message.Accounts))
-                    return "Accounts: string expected";
+            if (message.Account != null && message.hasOwnProperty("Account"))
+                if (!$util.isString(message.Account))
+                    return "Account: string expected";
             if (message.Password != null && message.hasOwnProperty("Password"))
                 if (!$util.isString(message.Password))
                     return "Password: string expected";
@@ -257,8 +257,8 @@ $root.login = (function() {
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.Name != null)
                 message.Name = String(object.Name);
-            if (object.Accounts != null)
-                message.Accounts = String(object.Accounts);
+            if (object.Account != null)
+                message.Account = String(object.Account);
             if (object.Password != null)
                 message.Password = String(object.Password);
             if (object.FaceID != null)
@@ -314,7 +314,7 @@ $root.login = (function() {
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
                 object.Name = "";
-                object.Accounts = "";
+                object.Account = "";
                 object.Password = "";
                 object.FaceID = 0;
                 object.Gender = 0;
@@ -344,8 +344,8 @@ $root.login = (function() {
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
-            if (message.Accounts != null && message.hasOwnProperty("Accounts"))
-                object.Accounts = message.Accounts;
+            if (message.Account != null && message.hasOwnProperty("Account"))
+                object.Account = message.Account;
             if (message.Password != null && message.hasOwnProperty("Password"))
                 object.Password = message.Password;
             if (message.FaceID != null && message.hasOwnProperty("FaceID"))

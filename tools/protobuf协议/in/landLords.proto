@@ -15,36 +15,36 @@ message LandLordsPlayer {
 
 
 //入场 (场景)
-message LandLordsScene {
+message LandLordsSceneResp {
   int64 TimeStamp = 1; //时间戳
   repeated LandLordsPlayer Players = 2; //玩家信息
 }
 
 // 服务端推送
 //(空闲)
-message LandLordsStateFree {
+message LandLordsStateFreeResp {
   TimeInfo Times = 1;
 }
 //(开始)
-message LandLordsStateStart {
+message LandLordsStateStartResp {
   TimeInfo Times = 1;
 }
 
 //(叫分)
-message LandLordsStateCall {
+message LandLordsStateCallResp {
   TimeInfo Times = 1;//叫分剩余时间
   uint64 UserID = 2; // 玩家ID
 }
 
 //(游戏中)
-message LandLordsStatePlaying {
+message LandLordsStatePlayingResp {
   TimeInfo Times = 1;
   uint32 LastChairID = 2; //上一家的椅子号(可以是自己)
   CardInfo LastCards = 3; //上一家的出牌(场景恢复)
 }
 
 //(结束)
-message LandLordsStateOver {
+message LandLordsStateOverResp {
   TimeInfo Times = 1;
 }
 

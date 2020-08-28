@@ -7,7 +7,7 @@ package login;
 message UserInfo{
   uint64 UserID = 1;      //ID
   string Name = 2;        //用户
-  string Accounts = 3;    //帐号
+  string Account = 3;    //帐号
   string Password = 4;    //密码
   uint32 FaceID = 5;      //头像
   uint32 Gender = 6;      //性别
