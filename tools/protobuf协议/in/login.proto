@@ -12,14 +12,22 @@ message UserInfo{
   uint32 FaceID = 5;      //头像
   uint32 Gender = 6;      //性别
   uint32 Age = 7;         //年龄
-  uint32 Level = 8;       //VIP级别
+  uint32 VIP = 20;		  //VIP级别
+  uint32 Level = 8;       //级别
   int64  Gold = 9;        //金币
-  string PassPortID = 10; //证件号
-  string RealName = 11;   //真实名字
-  uint32 AgentID = 12;    //代理标识
-  uint32 SpreaderGameID = 13; //推荐标识
-  uint32 ClientAddr = 14;     //连接地址
-  string MachineCode = 15;    //机器序列
+  
+  string PassPortID = 10; 	//证件号
+  string RealName = 11;   	//真实名字
+  string PhoneNum = 12;		//手机
+  string Email = 13;		//邮箱
+  string Address = 14;		//住址
+  string Identity = 15;     //识别码(平台生成)
+  
+  uint32 AgentID = 16;    	//代理标识
+  uint32 SpreaderGameID = 17; //推荐标识
+  string ClientAddr = 18;     //连接地址(跳转至该地址)
+  string MachineCode = 19;    //机器序列
+
 }
 //房间信息
 message RoomInfo{

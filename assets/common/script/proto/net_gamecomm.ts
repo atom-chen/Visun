@@ -11,7 +11,7 @@ export enum gamecomm_msgs {
     CardInfo = 15,
     TimeInfo = 16,
     AreaInfo = 17,
-    UserListInfo = 18,
+    PlayerListInfo = 18,
     PlayerRecord = 19,
     GameRecord = 20,
     GameRecordList = 21,
@@ -27,7 +27,7 @@ export var gamecomm_packet_define = {
     15: new LeafWsPacket(15, gamecomm.CardInfo, "gamecomm.CardInfo"),
     16: new LeafWsPacket(16, gamecomm.TimeInfo, "gamecomm.TimeInfo"),
     17: new LeafWsPacket(17, gamecomm.AreaInfo, "gamecomm.AreaInfo"),
-    18: new LeafWsPacket(18, gamecomm.UserListInfo, "gamecomm.UserListInfo"),
+    18: new LeafWsPacket(18, gamecomm.PlayerListInfo, "gamecomm.PlayerListInfo"),
     19: new LeafWsPacket(19, gamecomm.PlayerRecord, "gamecomm.PlayerRecord"),
     20: new LeafWsPacket(20, gamecomm.GameRecord, "gamecomm.GameRecord"),
     21: new LeafWsPacket(21, gamecomm.GameRecordList, "gamecomm.GameRecordList"),
@@ -39,11 +39,11 @@ export var gamecomm_packet_define = {
 }
 
 export class gamecomm_request {
-    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, VipLevel:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
     public static CardInfo( data:{ Cards:any, CardType:number, CardValue:number } ) { gamecomm_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
     public static TimeInfo( data:{ TimeStamp:number, WaitTime:number, OutTime:number, TotalTime:number } ) { gamecomm_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
     public static AreaInfo( data:{ ID:number, MyGold:number, TotalGold:number, AcquireGold:number } ) { gamecomm_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
-    public static UserListInfo( data:{ AllInfos:any[] } ) { gamecomm_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerListInfo( data:{ AllInfos:any[] } ) { gamecomm_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerRecord( data:{ User:any, Twice:number, Ranking:number, Bankroll:number, WinLos:number } ) { gamecomm_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecord( data:{ card:any, isWon:any } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }

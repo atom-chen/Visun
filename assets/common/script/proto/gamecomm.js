@@ -25,7 +25,7 @@ $root.gamecomm = (function() {
         PlayerInfo.prototype.Age = 0;
         PlayerInfo.prototype.Sex = 0;
         PlayerInfo.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        PlayerInfo.prototype.VipLevel = 0;
+        PlayerInfo.prototype.Level = 0;
         PlayerInfo.prototype.Account = "";
         PlayerInfo.prototype.Sate = 0;
         PlayerInfo.prototype.PlatformID = 0;
@@ -51,8 +51,8 @@ $root.gamecomm = (function() {
                 writer.uint32(32).int32(message.Sex);
             if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
                 writer.uint32(40).int64(message.Gold);
-            if (message.VipLevel != null && Object.hasOwnProperty.call(message, "VipLevel"))
-                writer.uint32(48).int32(message.VipLevel);
+            if (message.Level != null && Object.hasOwnProperty.call(message, "Level"))
+                writer.uint32(48).int32(message.Level);
             if (message.Account != null && Object.hasOwnProperty.call(message, "Account"))
                 writer.uint32(58).string(message.Account);
             if (message.Sate != null && Object.hasOwnProperty.call(message, "Sate"))
@@ -97,7 +97,7 @@ $root.gamecomm = (function() {
                     message.Gold = reader.int64();
                     break;
                 case 6:
-                    message.VipLevel = reader.int32();
+                    message.Level = reader.int32();
                     break;
                 case 7:
                     message.Account = reader.string();
@@ -152,9 +152,9 @@ $root.gamecomm = (function() {
             if (message.Gold != null && message.hasOwnProperty("Gold"))
                 if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
                     return "Gold: integer|Long expected";
-            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
-                if (!$util.isInteger(message.VipLevel))
-                    return "VipLevel: integer expected";
+            if (message.Level != null && message.hasOwnProperty("Level"))
+                if (!$util.isInteger(message.Level))
+                    return "Level: integer expected";
             if (message.Account != null && message.hasOwnProperty("Account"))
                 if (!$util.isString(message.Account))
                     return "Account: string expected";
@@ -207,8 +207,8 @@ $root.gamecomm = (function() {
                     message.Gold = object.Gold;
                 else if (typeof object.Gold === "object")
                     message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
-            if (object.VipLevel != null)
-                message.VipLevel = object.VipLevel | 0;
+            if (object.Level != null)
+                message.Level = object.Level | 0;
             if (object.Account != null)
                 message.Account = String(object.Account);
             if (object.Sate != null)
@@ -244,7 +244,7 @@ $root.gamecomm = (function() {
                     object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.Gold = options.longs === String ? "0" : 0;
-                object.VipLevel = 0;
+                object.Level = 0;
                 object.Account = "";
                 object.Sate = 0;
                 object.PlatformID = 0;
@@ -269,8 +269,8 @@ $root.gamecomm = (function() {
                     object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
                 else
                     object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
-            if (message.VipLevel != null && message.hasOwnProperty("VipLevel"))
-                object.VipLevel = message.VipLevel;
+            if (message.Level != null && message.hasOwnProperty("Level"))
+                object.Level = message.Level;
             if (message.Account != null && message.hasOwnProperty("Account"))
                 object.Account = message.Account;
             if (message.Sate != null && message.hasOwnProperty("Sate"))
@@ -736,9 +736,9 @@ $root.gamecomm = (function() {
         return AreaInfo;
     })();
 
-    gamecomm.UserListInfo = (function() {
+    gamecomm.PlayerListInfo = (function() {
 
-        function UserListInfo(properties) {
+        function PlayerListInfo(properties) {
             this.AllInfos = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -746,13 +746,13 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        UserListInfo.prototype.AllInfos = $util.emptyArray;
+        PlayerListInfo.prototype.AllInfos = $util.emptyArray;
 
-        UserListInfo.create = function create(properties) {
-            return new UserListInfo(properties);
+        PlayerListInfo.create = function create(properties) {
+            return new PlayerListInfo(properties);
         };
 
-        UserListInfo.encode = function encode(message, writer) {
+        PlayerListInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AllInfos != null && message.AllInfos.length)
@@ -761,14 +761,14 @@ $root.gamecomm = (function() {
             return writer;
         };
 
-        UserListInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        PlayerListInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        UserListInfo.decode = function decode(reader, length) {
+        PlayerListInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.UserListInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.PlayerListInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -785,13 +785,13 @@ $root.gamecomm = (function() {
             return message;
         };
 
-        UserListInfo.decodeDelimited = function decodeDelimited(reader) {
+        PlayerListInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        UserListInfo.verify = function verify(message) {
+        PlayerListInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AllInfos != null && message.hasOwnProperty("AllInfos")) {
@@ -806,24 +806,24 @@ $root.gamecomm = (function() {
             return null;
         };
 
-        UserListInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.gamecomm.UserListInfo)
+        PlayerListInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.PlayerListInfo)
                 return object;
-            var message = new $root.gamecomm.UserListInfo();
+            var message = new $root.gamecomm.PlayerListInfo();
             if (object.AllInfos) {
                 if (!Array.isArray(object.AllInfos))
-                    throw TypeError(".gamecomm.UserListInfo.AllInfos: array expected");
+                    throw TypeError(".gamecomm.PlayerListInfo.AllInfos: array expected");
                 message.AllInfos = [];
                 for (var i = 0; i < object.AllInfos.length; ++i) {
                     if (typeof object.AllInfos[i] !== "object")
-                        throw TypeError(".gamecomm.UserListInfo.AllInfos: object expected");
+                        throw TypeError(".gamecomm.PlayerListInfo.AllInfos: object expected");
                     message.AllInfos[i] = $root.gamecomm.PlayerInfo.fromObject(object.AllInfos[i]);
                 }
             }
             return message;
         };
 
-        UserListInfo.toObject = function toObject(message, options) {
+        PlayerListInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -837,11 +837,11 @@ $root.gamecomm = (function() {
             return object;
         };
 
-        UserListInfo.prototype.toJSON = function toJSON() {
+        PlayerListInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return UserListInfo;
+        return PlayerListInfo;
     })();
 
     gamecomm.PlayerRecord = (function() {

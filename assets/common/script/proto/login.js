@@ -27,13 +27,18 @@ $root.login = (function() {
         UserInfo.prototype.FaceID = 0;
         UserInfo.prototype.Gender = 0;
         UserInfo.prototype.Age = 0;
+        UserInfo.prototype.VIP = 0;
         UserInfo.prototype.Level = 0;
         UserInfo.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         UserInfo.prototype.PassPortID = "";
         UserInfo.prototype.RealName = "";
+        UserInfo.prototype.PhoneNum = "";
+        UserInfo.prototype.Email = "";
+        UserInfo.prototype.Address = "";
+        UserInfo.prototype.Identity = "";
         UserInfo.prototype.AgentID = 0;
         UserInfo.prototype.SpreaderGameID = 0;
-        UserInfo.prototype.ClientAddr = 0;
+        UserInfo.prototype.ClientAddr = "";
         UserInfo.prototype.MachineCode = "";
 
         UserInfo.create = function create(properties) {
@@ -65,14 +70,24 @@ $root.login = (function() {
                 writer.uint32(82).string(message.PassPortID);
             if (message.RealName != null && Object.hasOwnProperty.call(message, "RealName"))
                 writer.uint32(90).string(message.RealName);
+            if (message.PhoneNum != null && Object.hasOwnProperty.call(message, "PhoneNum"))
+                writer.uint32(98).string(message.PhoneNum);
+            if (message.Email != null && Object.hasOwnProperty.call(message, "Email"))
+                writer.uint32(106).string(message.Email);
+            if (message.Address != null && Object.hasOwnProperty.call(message, "Address"))
+                writer.uint32(114).string(message.Address);
+            if (message.Identity != null && Object.hasOwnProperty.call(message, "Identity"))
+                writer.uint32(122).string(message.Identity);
             if (message.AgentID != null && Object.hasOwnProperty.call(message, "AgentID"))
-                writer.uint32(96).uint32(message.AgentID);
+                writer.uint32(128).uint32(message.AgentID);
             if (message.SpreaderGameID != null && Object.hasOwnProperty.call(message, "SpreaderGameID"))
-                writer.uint32(104).uint32(message.SpreaderGameID);
+                writer.uint32(136).uint32(message.SpreaderGameID);
             if (message.ClientAddr != null && Object.hasOwnProperty.call(message, "ClientAddr"))
-                writer.uint32(112).uint32(message.ClientAddr);
+                writer.uint32(146).string(message.ClientAddr);
             if (message.MachineCode != null && Object.hasOwnProperty.call(message, "MachineCode"))
-                writer.uint32(122).string(message.MachineCode);
+                writer.uint32(154).string(message.MachineCode);
+            if (message.VIP != null && Object.hasOwnProperty.call(message, "VIP"))
+                writer.uint32(160).uint32(message.VIP);
             return writer;
         };
 
@@ -108,6 +123,9 @@ $root.login = (function() {
                 case 7:
                     message.Age = reader.uint32();
                     break;
+                case 20:
+                    message.VIP = reader.uint32();
+                    break;
                 case 8:
                     message.Level = reader.uint32();
                     break;
@@ -121,15 +139,27 @@ $root.login = (function() {
                     message.RealName = reader.string();
                     break;
                 case 12:
-                    message.AgentID = reader.uint32();
+                    message.PhoneNum = reader.string();
                     break;
                 case 13:
-                    message.SpreaderGameID = reader.uint32();
+                    message.Email = reader.string();
                     break;
                 case 14:
-                    message.ClientAddr = reader.uint32();
+                    message.Address = reader.string();
                     break;
                 case 15:
+                    message.Identity = reader.string();
+                    break;
+                case 16:
+                    message.AgentID = reader.uint32();
+                    break;
+                case 17:
+                    message.SpreaderGameID = reader.uint32();
+                    break;
+                case 18:
+                    message.ClientAddr = reader.string();
+                    break;
+                case 19:
                     message.MachineCode = reader.string();
                     break;
                 default:
@@ -170,6 +200,9 @@ $root.login = (function() {
             if (message.Age != null && message.hasOwnProperty("Age"))
                 if (!$util.isInteger(message.Age))
                     return "Age: integer expected";
+            if (message.VIP != null && message.hasOwnProperty("VIP"))
+                if (!$util.isInteger(message.VIP))
+                    return "VIP: integer expected";
             if (message.Level != null && message.hasOwnProperty("Level"))
                 if (!$util.isInteger(message.Level))
                     return "Level: integer expected";
@@ -182,6 +215,18 @@ $root.login = (function() {
             if (message.RealName != null && message.hasOwnProperty("RealName"))
                 if (!$util.isString(message.RealName))
                     return "RealName: string expected";
+            if (message.PhoneNum != null && message.hasOwnProperty("PhoneNum"))
+                if (!$util.isString(message.PhoneNum))
+                    return "PhoneNum: string expected";
+            if (message.Email != null && message.hasOwnProperty("Email"))
+                if (!$util.isString(message.Email))
+                    return "Email: string expected";
+            if (message.Address != null && message.hasOwnProperty("Address"))
+                if (!$util.isString(message.Address))
+                    return "Address: string expected";
+            if (message.Identity != null && message.hasOwnProperty("Identity"))
+                if (!$util.isString(message.Identity))
+                    return "Identity: string expected";
             if (message.AgentID != null && message.hasOwnProperty("AgentID"))
                 if (!$util.isInteger(message.AgentID))
                     return "AgentID: integer expected";
@@ -189,8 +234,8 @@ $root.login = (function() {
                 if (!$util.isInteger(message.SpreaderGameID))
                     return "SpreaderGameID: integer expected";
             if (message.ClientAddr != null && message.hasOwnProperty("ClientAddr"))
-                if (!$util.isInteger(message.ClientAddr))
-                    return "ClientAddr: integer expected";
+                if (!$util.isString(message.ClientAddr))
+                    return "ClientAddr: string expected";
             if (message.MachineCode != null && message.hasOwnProperty("MachineCode"))
                 if (!$util.isString(message.MachineCode))
                     return "MachineCode: string expected";
@@ -222,6 +267,8 @@ $root.login = (function() {
                 message.Gender = object.Gender >>> 0;
             if (object.Age != null)
                 message.Age = object.Age >>> 0;
+            if (object.VIP != null)
+                message.VIP = object.VIP >>> 0;
             if (object.Level != null)
                 message.Level = object.Level >>> 0;
             if (object.Gold != null)
@@ -237,12 +284,20 @@ $root.login = (function() {
                 message.PassPortID = String(object.PassPortID);
             if (object.RealName != null)
                 message.RealName = String(object.RealName);
+            if (object.PhoneNum != null)
+                message.PhoneNum = String(object.PhoneNum);
+            if (object.Email != null)
+                message.Email = String(object.Email);
+            if (object.Address != null)
+                message.Address = String(object.Address);
+            if (object.Identity != null)
+                message.Identity = String(object.Identity);
             if (object.AgentID != null)
                 message.AgentID = object.AgentID >>> 0;
             if (object.SpreaderGameID != null)
                 message.SpreaderGameID = object.SpreaderGameID >>> 0;
             if (object.ClientAddr != null)
-                message.ClientAddr = object.ClientAddr >>> 0;
+                message.ClientAddr = String(object.ClientAddr);
             if (object.MachineCode != null)
                 message.MachineCode = String(object.MachineCode);
             return message;
@@ -272,10 +327,15 @@ $root.login = (function() {
                     object.Gold = options.longs === String ? "0" : 0;
                 object.PassPortID = "";
                 object.RealName = "";
+                object.PhoneNum = "";
+                object.Email = "";
+                object.Address = "";
+                object.Identity = "";
                 object.AgentID = 0;
                 object.SpreaderGameID = 0;
-                object.ClientAddr = 0;
+                object.ClientAddr = "";
                 object.MachineCode = "";
+                object.VIP = 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -305,6 +365,14 @@ $root.login = (function() {
                 object.PassPortID = message.PassPortID;
             if (message.RealName != null && message.hasOwnProperty("RealName"))
                 object.RealName = message.RealName;
+            if (message.PhoneNum != null && message.hasOwnProperty("PhoneNum"))
+                object.PhoneNum = message.PhoneNum;
+            if (message.Email != null && message.hasOwnProperty("Email"))
+                object.Email = message.Email;
+            if (message.Address != null && message.hasOwnProperty("Address"))
+                object.Address = message.Address;
+            if (message.Identity != null && message.hasOwnProperty("Identity"))
+                object.Identity = message.Identity;
             if (message.AgentID != null && message.hasOwnProperty("AgentID"))
                 object.AgentID = message.AgentID;
             if (message.SpreaderGameID != null && message.hasOwnProperty("SpreaderGameID"))
@@ -313,6 +381,8 @@ $root.login = (function() {
                 object.ClientAddr = message.ClientAddr;
             if (message.MachineCode != null && message.hasOwnProperty("MachineCode"))
                 object.MachineCode = message.MachineCode;
+            if (message.VIP != null && message.hasOwnProperty("VIP"))
+                object.VIP = message.VIP;
             return object;
         };
 

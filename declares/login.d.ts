@@ -26,6 +26,9 @@ export namespace login {
         /** UserInfo Age */
         Age?: (number|null);
 
+        /** UserInfo VIP */
+        VIP?: (number|null);
+
         /** UserInfo Level */
         Level?: (number|null);
 
@@ -38,6 +41,18 @@ export namespace login {
         /** UserInfo RealName */
         RealName?: (string|null);
 
+        /** UserInfo PhoneNum */
+        PhoneNum?: (string|null);
+
+        /** UserInfo Email */
+        Email?: (string|null);
+
+        /** UserInfo Address */
+        Address?: (string|null);
+
+        /** UserInfo Identity */
+        Identity?: (string|null);
+
         /** UserInfo AgentID */
         AgentID?: (number|null);
 
@@ -45,7 +60,7 @@ export namespace login {
         SpreaderGameID?: (number|null);
 
         /** UserInfo ClientAddr */
-        ClientAddr?: (number|null);
+        ClientAddr?: (string|null);
 
         /** UserInfo MachineCode */
         MachineCode?: (string|null);
@@ -81,6 +96,9 @@ export namespace login {
         /** UserInfo Age. */
         public Age: number;
 
+        /** UserInfo VIP. */
+        public VIP: number;
+
         /** UserInfo Level. */
         public Level: number;
 
@@ -93,6 +111,18 @@ export namespace login {
         /** UserInfo RealName. */
         public RealName: string;
 
+        /** UserInfo PhoneNum. */
+        public PhoneNum: string;
+
+        /** UserInfo Email. */
+        public Email: string;
+
+        /** UserInfo Address. */
+        public Address: string;
+
+        /** UserInfo Identity. */
+        public Identity: string;
+
         /** UserInfo AgentID. */
         public AgentID: number;
 
@@ -100,7 +130,7 @@ export namespace login {
         public SpreaderGameID: number;
 
         /** UserInfo ClientAddr. */
-        public ClientAddr: number;
+        public ClientAddr: string;
 
         /** UserInfo MachineCode. */
         public MachineCode: string;
