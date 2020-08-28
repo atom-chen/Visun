@@ -13,6 +13,9 @@ import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
 import LoginUser from "../model/LoginUser";
+import SceneManager from "../../../kernel/view/SceneManager";
+import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
+import UIManager from "../../../kernel/view/UIManager";
 
 var GameHandlers = {
 
@@ -20,6 +23,13 @@ var GameHandlers = {
         if(param.UserID == LoginUser.getInstance().UserID) {
             LoginUser.getInstance().Gold = param.Gold;
         }
+    },
+
+    [gamecomm_msgs.BeOut] : function(param:gamecomm.BeOut) {
+        //GameManager.getInstance().quitGame(true);
+        UIManager.openDialog("cfg_kick", "你被踢出房间："+param.Hints, 1, function(){
+            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+        });
     },
 
 
