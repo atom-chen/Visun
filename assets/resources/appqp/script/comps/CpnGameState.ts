@@ -16,4 +16,24 @@ export default class CpnGameState extends cc.Component {
         this.getComponent(cc.Sprite).spriteFrame = this.Frames[st];
     }
 
+    setZhunbei() {
+        this.setState(0);
+    }
+
+    setFapai() {
+        this.setState(1);
+    }
+
+    setXiazhu() {
+        this.setState(2);
+    }
+
+    setKaipai() {
+        this.setState(3);
+    }
+
+    setPaijiang() {
+        this.setState(4);
+    }
+
 }

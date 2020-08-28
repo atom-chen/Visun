@@ -17,6 +17,7 @@ import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
 import { brcowcow } from "../../../../../../declares/brcowcow";
 import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import LoginUser from "../../../../../common/script/model/LoginUser";
 
 
 
@@ -71,25 +72,50 @@ export default class BrnnUI extends BaseComponent {
 
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+
+		if(tmr.getRemainTimes() < 3) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
+		} 
+		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
 	}
 
 	private BrcowcowBetResp(param:brcowcow.BrcowcowBetResp) {
 		if(isNil(param)) { return; }
 		var money = param.Money;
-		var idx = this.compBox.getIndexByMoney(money);
-		if(idx < 0) {
-			idx = this.compBox.getSelectedIndex();
+		if(param.UserId == LoginUser.getInstance().UserId) {
+			var idx = this.compBox.getIndexByMoney(money);
+			if(idx < 0) {
+				idx = this.compBox.getSelectedIndex();
+			}
+			if(idx >= 1) {
+				var chip = this._pool.newObject();
+				chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
+				this.m_ui.chipLayer.addChild(chip);
+				CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.Area], 0.2, 0, margin);
+			}
+		} else {
+			this.onPlayersBet(param)
 		}
-		var chip = this._pool.newObject();
-		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
-		this.m_ui.chipLayer.addChild(chip);
-		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.Area], 0.2, 0, margin);
+	}
+	private onPlayersBet(param:brcowcow.BrcowcowBetResp) {
+		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
+		//飞筹码
+		var nums = GameUtil.parseChip(param.Money, this._rule);
+		for(var j = 0; j < nums.length; j++) {
+			var chip = this._pool.newObject();
+			chip.getComponent(CpnChip).setChipValue(nums[j], true);
+			this.m_ui.chipLayer.addChild(chip);
+			chip.__areaId = param.Area;
+			CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+param.Area], 0.14+0.1*param.Area, j*0.01, margin);
+		}
+		//播音效
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
 	private BrcowcowOverResp(param:brcowcow.BrcowcowOverResp) {
 		if(isNil(param)) { return; }
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 
 		var cardlist = [param.BankerCard, param.TianCard, param.DiCard, param.XuanCard, param.HuangCard];
 		for(var i = 0; i < cardlist.length; i++) {
@@ -121,52 +147,34 @@ export default class BrnnUI extends BaseComponent {
 		));
 	}
 
-	private onPlayersBet(tmr:BaseTimer, param:any) {
-		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
-		//飞筹码
-		param = param || testdata;
-		for(var i in param) {
-			var info = param[i];
-			var nums = GameUtil.parseChip(info.Money, this._rule);
-			for(var j in nums) {
-				var chip = this._pool.newObject();
-				chip.getComponent(CpnChip).setChipValue(nums[j], true);
-				this.m_ui.chipLayer.addChild(chip);
-				chip.__areaId = info.AreaId;
-				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin);
-			}
-		}
-		//播音效
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
-	}
-
 	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFree) {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
 	}
 
+	private BrcowcowStateStart(param:brcowcow.BrcowcowStateStart) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
+	}
+
 	private BrcowcowStatePlaying(param:brcowcow.BrcowcowStatePlaying) {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 	}
 
 	private BrcowcowStateOver(param:brcowcow.BrcowcowStateOver) {
-		if(isNil(param)) { return; }
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}
 
 	private initNetEvent() {
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp ,this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFree, this.BrcowcowStateFree, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStart, this.BrcowcowStateStart, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlaying, this.BrcowcowStatePlaying, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOver, this.BrcowcowStateOver, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp ,this);
 	}
 
 	private initUIEvent() {
