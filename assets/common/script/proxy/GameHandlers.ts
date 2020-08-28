@@ -6,18 +6,26 @@ import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
 import { gamecomm_msgs } from "../proto/net_gamecomm";
 import { brcowcow_msgs } from "../proto/net_brcowcow";
-import { brcowcow } from "../../../../declares/brcowcow";
+import { brcowcow, gamecomm } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../definer/ChannelDefine";
+import LoginUser from "../model/LoginUser";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 var GameHandlers = {
 
 	[gamecomm_msgs.UserList] : function(param) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
-	},
+    },
+    
+    [gamecomm_msgs.NotifyChangeGold] : function(param:gamecomm.NotifyChangeGold) {
+        if(param.UserID == LoginUser.getInstance().UserID) {
+            LoginUser.getInstance().Gold = param.Gold;
+        }
+    },
 	
 	[baccarat_msgs.BaccaratScene] : function(param:baccarat.BaccaratScene) {
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);

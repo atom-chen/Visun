@@ -24,7 +24,6 @@ var NetHandlers = {
 
     [login_msgs.UserInfo] : function(param: login.UserInfo) {
         CommonUtil.simpleCopy(LoginUser.getInstance(), param);
-        //LoginUser.getInstance().UserId = LoginUser.getInstance().UserID;
     },
 
     [login_msgs.MasterInfo] : function(param:login.MasterInfo) {
@@ -34,11 +33,12 @@ var NetHandlers = {
         UIManager.toast("登陆成功");
 
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
-        GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
-        if(param.UserID!==null && param.UserID!==undefined) {
+        if(!isNil(param.UserID)) {
             LoginUser.getInstance().UserId = param.UserID;
             LoginUser.getInstance().UserID = param.UserID;
         }
+
+        GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
     },
 
     [login_msgs.GameList] : function(param) {

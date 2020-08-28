@@ -12,13 +12,14 @@ import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
-import { brcowcow } from "../../../../../../declares/brcowcow";
+import { brcowcow, gamecomm } from "../../../../../../declares/brcowcow";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import UIManager from "../../../../../kernel/view/UIManager";
 import BrnnMgr from "../model/BrnnMgr";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 
 
 var margin = { left:16,right:16,bottom:16,top:16 };
@@ -58,6 +59,8 @@ export default class BrnnUI extends BaseComponent {
 		this.initUIEvent();
 
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
+
+		this.NotifyChangeGold(null);
 
 		var enterData = BrnnMgr.getInstance().getEnterData();
 		for(var i=0; i<enterData.AreaBets.length; i++) {
@@ -149,7 +152,7 @@ export default class BrnnUI extends BaseComponent {
 			}, this)
 		));
 
-		UIManager.toast("赢得金币："+CommonUtil.formRealMoney(param.MySettlement));
+		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MySettlement), cc.v3(0,0,0), cc.v2(0, 100));
 	}
 
 	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFree) {
@@ -173,7 +176,12 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}
 
+	private NotifyChangeGold(param:gamecomm.NotifyChangeGold) {
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+	}
+
 	private initNetEvent() {
+		EventCenter.getInstance().listen(gamecomm_msgs.NotifyChangeGold, this.NotifyChangeGold, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFree, this.BrcowcowStateFree, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStart, this.BrcowcowStateStart, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlaying, this.BrcowcowStatePlaying, this);

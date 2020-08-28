@@ -1,5 +1,6 @@
 import { MajhongCode } from "../definer/MajhongDefine";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
+import CommonUtil from "../../../kernel/utils/CommonUtil";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -73,6 +74,23 @@ export default class GameUtil {
 				spr.spriteFrame = sf;
 			}
 		})
+	}
+
+	static playAddMoney(nd:cc.Node, v:number, fromPos:cc.Vec3, diff:cc.Vec2) {
+		var str = v.toString();
+		nd.color = cc.color(200,45,61,255);
+		if(v>0) { 
+			str = "+"+v;
+			nd.color = cc.color(0,145,61,255);
+		}
+		nd.getComponent(cc.Label).string = str;
+		nd.active = true;
+		nd.position = fromPos;
+		nd.runAction(cc.sequence(
+			cc.show(),
+			cc.moveBy(0.3, diff),
+			cc.hide()
+		));
 	}
 
 }
