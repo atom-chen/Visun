@@ -33,7 +33,7 @@ var GameHandlers = {
     },
 
 
-	[gamecomm_msgs.UserListInfo] : function(param) {
+	[gamecomm_msgs.PlayerListInfo] : function(param) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
     },
 	

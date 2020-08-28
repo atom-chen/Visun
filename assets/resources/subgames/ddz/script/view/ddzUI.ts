@@ -367,7 +367,7 @@ export default class DdzUI extends BaseComponent {
         EventCenter.getInstance().listen(landLords_msgs.LandLordsCheckoutResp, this.LandLordsCheckout, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsCallResp, this.LandLordsCall, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsBottomCardResp, this.LandLordsBottomCard, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.UserListInfo, this.LandLordsFighters, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.LandLordsFighters, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsTrusteeResp, this.LandLordsTrustee, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsDoubleResp, this.LandLordsDouble, this);
         EventCenter.getInstance().listen(landLords_msgs.LandLordsReadyResp, this.LandLordsReadyResp, this);
