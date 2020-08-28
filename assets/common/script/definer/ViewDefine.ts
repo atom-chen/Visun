@@ -5,7 +5,6 @@ export default class ViewDefine {
 	public static UILogin = "appqp/prefabs/UILogin";
 	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
-	public static UIGames = "lobby/prefabs/UIGames";
 	public static UIHall = "lobby/prefabs/UIHall";
 	public static UISetting = "lobby/prefabs/UISetting";
 	public static UISafebox = "lobby/prefabs/UISafebox";

@@ -3763,7 +3763,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
+      "width": 90,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3816,7 +3816,7 @@
     "_useOriginalSize": false,
     "_string": "昵称：",
     "_N$string": "昵称：",
-    "_fontSize": 40,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -3870,7 +3870,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
+      "width": 60,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -3923,7 +3923,7 @@
     "_useOriginalSize": false,
     "_string": "ID：",
     "_N$string": "ID：",
-    "_fontSize": 40,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

@@ -184,7 +184,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 80,
+      "width": 96,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -196,8 +196,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -6,
-        179.264,
+        0,
+        180,
         0,
         0,
         0,
@@ -237,7 +237,7 @@
     "_useOriginalSize": false,
     "_string": "客服",
     "_N$string": "客服",
-    "_fontSize": 40,
+    "_fontSize": 48,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
