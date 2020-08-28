@@ -30,6 +30,31 @@ message LandLordsReadyResp {
 	uint64 UserId = 1;
 }
 
+// 服务端推送
+//(空闲)
+message LandLordsStateFree {
+    TimeInfo Times = 1;
+}
+//(开始)
+message LandLordsStateStart {
+    TimeInfo Times = 1;
+}
+
+//(叫分)
+message LandLordsStateCall {
+    TimeInfo Times = 1;//叫分剩余时间
+    uint64 UserID = 2; // 玩家ID
+}
+
+//(游戏中)
+message LandLordsStatePlaying {
+    TimeInfo Times = 1;
+}
+
+//(结束)
+message LandLordsStateOver {
+    TimeInfo Times = 1;
+}
 
 
 //游戏消息
@@ -61,6 +86,7 @@ message LandLordsDouble {
     uint32 Number = 2; // 额外倍数  1:加倍 2:超级加倍:
 }
 
+
 message LandLordsTrustee {
     uint64 UserID = 1; // 玩家ID
     bool IsTrustee = 2; //是否托管
@@ -79,6 +105,7 @@ message LandLordsOutCard {
     string Hints = 3; // 操作提示
 }
 
+//-----------------------------
 // 得分
 message LandLordsAward {
     uint64 UserID = 1; // 玩家ID

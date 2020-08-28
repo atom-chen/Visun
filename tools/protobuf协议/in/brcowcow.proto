@@ -4,33 +4,33 @@ import "gamecomm.proto";
 
 //入场
 message BrcowcowScene {
-	int64 TimeStamp = 1;				//时间戳
-	repeated int32 Chips = 2; 			//筹码
-	repeated bytes AwardAreas = 3;		//开奖记录(路单)
-	repeated int64 AreaBets = 11;		//各下注区当前总下注额
-    repeated int64 MyBets = 12;			//我在各下注区的总下注额
+  int64 TimeStamp = 1;        //时间戳
+  repeated int32 Chips = 2;      //筹码
+  repeated bytes AwardAreas = 3;    //开奖记录(路单)
+  repeated int64 AreaBets = 11;    //各下注区当前总下注额
+  repeated int64 MyBets = 12;      //我在各下注区的总下注额
 }
 
 //状态
 // 服务端推送
 //(空闲)
 message BrcowcowStateFree {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(开始)
 message BrcowcowStateStart {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(游戏中)
 message BrcowcowStatePlaying {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(结束)
 message BrcowcowStateOver {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 
@@ -38,30 +38,30 @@ message BrcowcowStateOver {
 
 //下注
 message BrcowcowBetReq {
-    int32 Area = 1;
-    int64 Money = 2;
+  int32 Area = 1;
+  int64 Money = 2;
 }
 //下注结果：广播
 message BrcowcowBetResp {
-    uint64 UserId = 1;
-    int32 Area = 2;
-    int64 Money = 3;
+  uint64 UserId = 1;
+  int32 Area = 2;
+  int64 Money = 3;
 }
 
 //开牌
 message BrcowcowOverResp {
-	 bytes AwardArea = 1;		//各区域胜负：1胜，0负
-	 CardInfo BankerCard = 2;	//庄家
-	 CardInfo TianCard = 3;		//天
-	 CardInfo XuanCard = 4;		//玄
-	 CardInfo DiCard = 5;		//地
-	 CardInfo HuangCard = 6;	//黄
+  bytes AwardArea = 1;    //各区域胜负：1胜，0负
+  CardInfo BankerCard = 2;  //庄家
+  CardInfo TianCard = 3;    //天
+  CardInfo XuanCard = 4;    //玄
+  CardInfo DiCard = 5;    //地
+  CardInfo HuangCard = 6;  //黄
 }
 
 //结算
 message BrcowcowCheckoutResp{
-	int64 MySettlement = 1;		//个人所得
-	repeated int64 TotalSettlement = 2; 	//统计：庄家+各区域输赢钱数额结算
+  int64 MySettlement = 1;    //个人所得
+  repeated int64 TotalSettlement = 2;  //统计：庄家+各区域输赢钱数额结算
 }
 
 
@@ -69,15 +69,15 @@ message BrcowcowCheckoutResp{
 
 //抢庄
 message BrcowcowHost {
-	uint64 UserID = 1;
-	bool IsWant = 2;	//true上庄 false取消上庄
+  uint64 UserID = 1;
+  bool IsWant = 2;  //true上庄 false取消上庄
 }
 
 //待上庄列表
 message BrcowcowHostListReq {
-	
+
 }
 message BrcowcowHostListResp {
-	PlayerInfo CurHost = 1;				//当前庄家
-	repeated uint64 Waitlist = 2;		//待上庄列表
+  PlayerInfo CurHost = 1;        //当前庄家
+  repeated uint64 Waitlist = 2;    //待上庄列表
 }

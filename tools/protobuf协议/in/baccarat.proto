@@ -4,32 +4,32 @@ import "gamecomm.proto";
 
 //场景
 message BaccaratScene{
-	int64 TimeStamp = 1;				//时间戳
-	repeated int32 Chips = 2; 			//筹码
-	repeated bytes AwardAreas = 3;		//开奖记录(路单)
-	repeated int64 AreaBets = 4;		//各下注区当前总下注额
-    repeated int64 MyBets = 5;			//我在各下注区的总下注额
+  int64 TimeStamp = 1;        //时间戳
+  repeated int32 Chips = 2;      //筹码
+  repeated bytes AwardAreas = 3;    //开奖记录(路单)
+  repeated int64 AreaBets = 4;    //各下注区当前总下注额
+  repeated int64 MyBets = 5;      //我在各下注区的总下注额
 }
 
 //状态
 // 服务端推送
 //(空闲)
 message BaccaratStateFree {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 //(开始)
 message BaccaratStateStart {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(游戏中)
 message BaccaratStatePlaying {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(结束)
 message BaccaratStateOver {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 
@@ -38,38 +38,38 @@ message BaccaratStateOver {
 //游戏消息
 //抢庄
 message BaccaratHost {
-	uint64 UserID = 1;
-     bool IsWant = 2;//true上庄 false取消上庄
- }
- //超级抢庄
- message BaccaratSuperHost {
-	 uint64 UserID = 1;
-     bool IsWant = 2;//true上庄 false取消
- }
+  uint64 UserID = 1;
+  bool IsWant = 2;//true上庄 false取消上庄
+}
+//超级抢庄
+message BaccaratSuperHost {
+  uint64 UserID = 1;
+  bool IsWant = 2;//true上庄 false取消
+}
 
 //游戏中
 message BaccaratBetReq{
-    int32 BetArea = 1;				//下注区域
-    int64 BetScore = 2;				//下注金额
+  int32 BetArea = 1;        //下注区域
+  int64 BetScore = 2;        //下注金额
 }
 
 //下注结果
 message BaccaratBetResp{
-	uint64 UserID = 1;   			//ID
-	int32 BetArea = 2;				//下注区域
-	int64 BetScore = 3;				//下注金额
+  uint64 UserID = 1;        //ID
+  int32 BetArea = 2;        //下注区域
+  int64 BetScore = 3;        //下注金额
 }
 
 //结束
 message BaccaratOver{
-	 bytes AwardArea = 1;	//开奖区域
-	 CardInfo PlayerCard = 2;	//闲家的牌
-	 CardInfo BankerCard = 3;	//庄家的牌
+  bytes AwardArea = 1;  //开奖区域
+  CardInfo PlayerCard = 2;  //闲家的牌
+  CardInfo BankerCard = 3;  //庄家的牌
 }
 
 //结算
 message BaccaratCheckout{
-	int64 Acquire = 1;		//获得金币(结算)
+  int64 Acquire = 1;    //获得金币(结算)
 }
 
 
