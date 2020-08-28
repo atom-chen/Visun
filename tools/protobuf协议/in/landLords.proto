@@ -1,120 +1,126 @@
 syntax = "proto3";
 package landLords;
 import "gamecomm.proto";
-//【百人类游戏】
+
+//【对战类游戏】
+// 玩家信息(刚入场时,只有座位号和id)
+message LandLordsPlayer {
+  uint64 UserID = 1; // 玩家ID
+  uint32 ChairID = 2; // 座位号
+  uint32 CardsLen = 3; // 手牌的数目
+  bytes Cards = 4; // 牌 (仅提供手牌数目的牌值)
+  bool IsBanker = 5; // 是否是庄家
+  bool IsTrustee = 6; //是否托管中
+}
+
+
 //入场 (场景)
-message LandLordsEnter {
-    int64 TimeStamp = 1; //时间戳
-    uint32 FreeTime = 2; //最长等待时间
-    uint32 OutTime = 3; //最长出牌时间
-    uint32 CallTime = 4; //最长叫分时间
-
-    StateFree Free = 5; //空闲状态(清场或游戏未启动)
-    StateStart Start = 6; //开始状态
-    StateCall Call = 7; //叫分状态
-    StatePlaying Playing = 8; //下注状态
-    StateOver Over = 9; //结算状态
-
-    uint32 BeforeChairID = 10; //上一家的椅子号
-    bytes BeforeCards = 11; //上一家的出牌(场景恢复)
-    repeated LandLordsPlayer Players = 12;
-
-}
-
-//注:通过mainID->subID 区分游戏状态(subID:101空闲、102游戏、103开奖、104旁观)
-//准备
-message LandLordsReadyReq {
-	bool IsReady = 1; // 玩家准备，可以取消准备
-}
-message LandLordsReadyResp {
-	uint64 UserId = 1;
+message LandLordsScene {
+  int64 TimeStamp = 1; //时间戳
+  repeated LandLordsPlayer Players = 2; //玩家信息
 }
 
 // 服务端推送
 //(空闲)
 message LandLordsStateFree {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 //(开始)
 message LandLordsStateStart {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 //(叫分)
 message LandLordsStateCall {
-    TimeInfo Times = 1;//叫分剩余时间
-    uint64 UserID = 2; // 玩家ID
+  TimeInfo Times = 1;//叫分剩余时间
+  uint64 UserID = 2; // 玩家ID
 }
 
 //(游戏中)
 message LandLordsStatePlaying {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
+  uint32 LastChairID = 2; //上一家的椅子号(可以是自己)
+  CardInfo LastCards = 3; //上一家的出牌(场景恢复)
 }
 
 //(结束)
 message LandLordsStateOver {
-    TimeInfo Times = 1;
+  TimeInfo Times = 1;
 }
 
 
 //游戏消息
-// 玩家信息
-message LandLordsPlayer {
-    uint64 UserID = 1; // 玩家ID
-    uint32 ChairID = 2; // 座位号
-    uint32 CardsLen = 3; // 手牌的数目
-    bytes Cards = 4; // 牌 (若为其他玩家时,该值为空,仅提供手牌数目)
-    bool IsBanker = 5; // 是否是庄家
-    bool IsTrustee = 6; //是否托管中
+//准备
+message LandLordsReadyReq {
+  bool IsReady = 1; // 玩家准备，可以取消准备
+}
+message LandLordsReadyResp {
+  uint64 UserId = 1;
 }
 
-// 开始
-message LandLordsDeal {
-    uint64 UserID = 1; // 玩家ID
-    bytes CardsHand = 2; // 手牌
+
+// 发牌
+message LandLordsDealResp {
+  uint64 UserID = 1; // 玩家ID
+  bytes CardsHand = 2; // 手牌
 }
 
 // 叫分
-message LandLordsCall {
-    uint64 UserID = 1; // 玩家ID
-    uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
+message LandLordsCallReq {
+  uint32 Score = 1; // 叫分 0:不叫 1: 2: 3:
 }
+message LandLordsCallResp {
+  uint64 UserID = 1; // 玩家ID
+  uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
+}
+
 
 // 加倍
-message LandLordsDouble {
-    uint64 UserID = 1; // 玩家ID
-    uint32 Number = 2; // 额外倍数  1:加倍 2:超级加倍:
+message LandLordsDoubleReq {
+  uint32 Number = 1; // 额外倍数  1:加倍 2:超级加倍:
+}
+message LandLordsDoubleResp {
+  uint64 UserID = 1; // 玩家ID
+  uint32 Number = 2; // 额外倍数  1:加倍 2:超级加倍:
 }
 
 
-message LandLordsTrustee {
-    uint64 UserID = 1; // 玩家ID
-    bool IsTrustee = 2; //是否托管
+// 托管
+message LandLordsTrusteeReq {
+  bool IsTrustee = 1; //是否托管
 }
+message LandLordsTrusteeResp {
+  uint64 UserID = 1; // 玩家ID
+  bool IsTrustee = 2; //是否托管
+}
+
 
 // 广播抢地主后的玩家
-message LandLordsBottomCard {
-    uint64 UserID = 1; // 玩家ID
-    bytes CardsBottom = 2; // 三张底牌
+message LandLordsBottomCardResp {
+  uint64 UserID = 1; // 玩家ID
+  bytes CardsBottom = 2; // 三张底牌
 }
 
 // 出牌
-message LandLordsOutCard {
-    uint64 UserID = 1; // 玩家ID
-    bytes Cards = 2; // 牌值
-    string Hints = 3; // 操作提示
+message LandLordsOutCardReq {
+  CardInfo Cards = 1;//
 }
+message LandLordsOutCardResp {
+  uint64 UserID = 1; // 玩家ID
+  CardInfo Cards = 2;//
+}
+
 
 //-----------------------------
 // 得分
 message LandLordsAward {
-    uint64 UserID = 1; // 玩家ID
-    bytes Codes = 2; // 牌型
-    int64 GetGold = 3; // 获得的金币
+  uint64 UserID = 1;  // 玩家ID
+  bytes RemainCards = 2;    // 剩余的手牌
+  int64 GetGold = 3; // 获得的金币
 }
 
 // 结算
-message LandLordsCheckout {
-    repeated LandLordsAward players = 1; // 所有玩家得分
+message LandLordsCheckoutResp {
+  repeated LandLordsAward players = 1; // 所有玩家得分
 }
 

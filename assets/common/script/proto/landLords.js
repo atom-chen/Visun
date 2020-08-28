@@ -11,9 +11,190 @@ $root.landLords = (function() {
 
     var landLords = {};
 
-    landLords.LandLordsEnter = (function() {
+    landLords.LandLordsPlayer = (function() {
 
-        function LandLordsEnter(properties) {
+        function LandLordsPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsPlayer.prototype.ChairID = 0;
+        LandLordsPlayer.prototype.CardsLen = 0;
+        LandLordsPlayer.prototype.Cards = $util.newBuffer([]);
+        LandLordsPlayer.prototype.IsBanker = false;
+        LandLordsPlayer.prototype.IsTrustee = false;
+
+        LandLordsPlayer.create = function create(properties) {
+            return new LandLordsPlayer(properties);
+        };
+
+        LandLordsPlayer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
+                writer.uint32(16).uint32(message.ChairID);
+            if (message.CardsLen != null && Object.hasOwnProperty.call(message, "CardsLen"))
+                writer.uint32(24).uint32(message.CardsLen);
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                writer.uint32(34).bytes(message.Cards);
+            if (message.IsBanker != null && Object.hasOwnProperty.call(message, "IsBanker"))
+                writer.uint32(40).bool(message.IsBanker);
+            if (message.IsTrustee != null && Object.hasOwnProperty.call(message, "IsTrustee"))
+                writer.uint32(48).bool(message.IsTrustee);
+            return writer;
+        };
+
+        LandLordsPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsPlayer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsPlayer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.ChairID = reader.uint32();
+                    break;
+                case 3:
+                    message.CardsLen = reader.uint32();
+                    break;
+                case 4:
+                    message.Cards = reader.bytes();
+                    break;
+                case 5:
+                    message.IsBanker = reader.bool();
+                    break;
+                case 6:
+                    message.IsTrustee = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsPlayer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsPlayer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                if (!$util.isInteger(message.ChairID))
+                    return "ChairID: integer expected";
+            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
+                if (!$util.isInteger(message.CardsLen))
+                    return "CardsLen: integer expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
+                    return "Cards: buffer expected";
+            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
+                if (typeof message.IsBanker !== "boolean")
+                    return "IsBanker: boolean expected";
+            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
+                if (typeof message.IsTrustee !== "boolean")
+                    return "IsTrustee: boolean expected";
+            return null;
+        };
+
+        LandLordsPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsPlayer)
+                return object;
+            var message = new $root.landLords.LandLordsPlayer();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.ChairID != null)
+                message.ChairID = object.ChairID >>> 0;
+            if (object.CardsLen != null)
+                message.CardsLen = object.CardsLen >>> 0;
+            if (object.Cards != null)
+                if (typeof object.Cards === "string")
+                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
+                else if (object.Cards.length)
+                    message.Cards = object.Cards;
+            if (object.IsBanker != null)
+                message.IsBanker = Boolean(object.IsBanker);
+            if (object.IsTrustee != null)
+                message.IsTrustee = Boolean(object.IsTrustee);
+            return message;
+        };
+
+        LandLordsPlayer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.ChairID = 0;
+                object.CardsLen = 0;
+                if (options.bytes === String)
+                    object.Cards = "";
+                else {
+                    object.Cards = [];
+                    if (options.bytes !== Array)
+                        object.Cards = $util.newBuffer(object.Cards);
+                }
+                object.IsBanker = false;
+                object.IsTrustee = false;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
+                object.ChairID = message.ChairID;
+            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
+                object.CardsLen = message.CardsLen;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
+            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
+                object.IsBanker = message.IsBanker;
+            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
+                object.IsTrustee = message.IsTrustee;
+            return object;
+        };
+
+        LandLordsPlayer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsPlayer;
+    })();
+
+    landLords.LandLordsScene = (function() {
+
+        function LandLordsScene(properties) {
             this.Players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -21,62 +202,32 @@ $root.landLords = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsEnter.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        LandLordsEnter.prototype.FreeTime = 0;
-        LandLordsEnter.prototype.OutTime = 0;
-        LandLordsEnter.prototype.CallTime = 0;
-        LandLordsEnter.prototype.Free = null;
-        LandLordsEnter.prototype.Start = null;
-        LandLordsEnter.prototype.Call = null;
-        LandLordsEnter.prototype.Playing = null;
-        LandLordsEnter.prototype.Over = null;
-        LandLordsEnter.prototype.BeforeChairID = 0;
-        LandLordsEnter.prototype.BeforeCards = $util.newBuffer([]);
-        LandLordsEnter.prototype.Players = $util.emptyArray;
+        LandLordsScene.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LandLordsScene.prototype.Players = $util.emptyArray;
 
-        LandLordsEnter.create = function create(properties) {
-            return new LandLordsEnter(properties);
+        LandLordsScene.create = function create(properties) {
+            return new LandLordsScene(properties);
         };
 
-        LandLordsEnter.encode = function encode(message, writer) {
+        LandLordsScene.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
                 writer.uint32(8).int64(message.TimeStamp);
-            if (message.FreeTime != null && Object.hasOwnProperty.call(message, "FreeTime"))
-                writer.uint32(16).uint32(message.FreeTime);
-            if (message.OutTime != null && Object.hasOwnProperty.call(message, "OutTime"))
-                writer.uint32(24).uint32(message.OutTime);
-            if (message.CallTime != null && Object.hasOwnProperty.call(message, "CallTime"))
-                writer.uint32(32).uint32(message.CallTime);
-            if (message.Free != null && Object.hasOwnProperty.call(message, "Free"))
-                $root.go.StateFree.encode(message.Free, writer.uint32(42).fork()).ldelim();
-            if (message.Start != null && Object.hasOwnProperty.call(message, "Start"))
-                $root.go.StateStart.encode(message.Start, writer.uint32(50).fork()).ldelim();
-            if (message.Call != null && Object.hasOwnProperty.call(message, "Call"))
-                $root.go.StateCall.encode(message.Call, writer.uint32(58).fork()).ldelim();
-            if (message.Playing != null && Object.hasOwnProperty.call(message, "Playing"))
-                $root.go.StatePlaying.encode(message.Playing, writer.uint32(66).fork()).ldelim();
-            if (message.Over != null && Object.hasOwnProperty.call(message, "Over"))
-                $root.go.StateOver.encode(message.Over, writer.uint32(74).fork()).ldelim();
-            if (message.BeforeChairID != null && Object.hasOwnProperty.call(message, "BeforeChairID"))
-                writer.uint32(80).uint32(message.BeforeChairID);
-            if (message.BeforeCards != null && Object.hasOwnProperty.call(message, "BeforeCards"))
-                writer.uint32(90).bytes(message.BeforeCards);
             if (message.Players != null && message.Players.length)
                 for (var i = 0; i < message.Players.length; ++i)
-                    $root.landLords.LandLordsPlayer.encode(message.Players[i], writer.uint32(98).fork()).ldelim();
+                    $root.landLords.LandLordsPlayer.encode(message.Players[i], writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
-        LandLordsEnter.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsScene.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsEnter.decode = function decode(reader, length) {
+        LandLordsScene.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsEnter();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsScene();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -84,36 +235,6 @@ $root.landLords = (function() {
                     message.TimeStamp = reader.int64();
                     break;
                 case 2:
-                    message.FreeTime = reader.uint32();
-                    break;
-                case 3:
-                    message.OutTime = reader.uint32();
-                    break;
-                case 4:
-                    message.CallTime = reader.uint32();
-                    break;
-                case 5:
-                    message.Free = $root.go.StateFree.decode(reader, reader.uint32());
-                    break;
-                case 6:
-                    message.Start = $root.go.StateStart.decode(reader, reader.uint32());
-                    break;
-                case 7:
-                    message.Call = $root.go.StateCall.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.Playing = $root.go.StatePlaying.decode(reader, reader.uint32());
-                    break;
-                case 9:
-                    message.Over = $root.go.StateOver.decode(reader, reader.uint32());
-                    break;
-                case 10:
-                    message.BeforeChairID = reader.uint32();
-                    break;
-                case 11:
-                    message.BeforeCards = reader.bytes();
-                    break;
-                case 12:
                     if (!(message.Players && message.Players.length))
                         message.Players = [];
                     message.Players.push($root.landLords.LandLordsPlayer.decode(reader, reader.uint32()));
@@ -126,58 +247,18 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsEnter.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsScene.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsEnter.verify = function verify(message) {
+        LandLordsScene.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
                     return "TimeStamp: integer|Long expected";
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
-                if (!$util.isInteger(message.FreeTime))
-                    return "FreeTime: integer expected";
-            if (message.OutTime != null && message.hasOwnProperty("OutTime"))
-                if (!$util.isInteger(message.OutTime))
-                    return "OutTime: integer expected";
-            if (message.CallTime != null && message.hasOwnProperty("CallTime"))
-                if (!$util.isInteger(message.CallTime))
-                    return "CallTime: integer expected";
-            if (message.Free != null && message.hasOwnProperty("Free")) {
-                var error = $root.go.StateFree.verify(message.Free);
-                if (error)
-                    return "Free." + error;
-            }
-            if (message.Start != null && message.hasOwnProperty("Start")) {
-                var error = $root.go.StateStart.verify(message.Start);
-                if (error)
-                    return "Start." + error;
-            }
-            if (message.Call != null && message.hasOwnProperty("Call")) {
-                var error = $root.go.StateCall.verify(message.Call);
-                if (error)
-                    return "Call." + error;
-            }
-            if (message.Playing != null && message.hasOwnProperty("Playing")) {
-                var error = $root.go.StatePlaying.verify(message.Playing);
-                if (error)
-                    return "Playing." + error;
-            }
-            if (message.Over != null && message.hasOwnProperty("Over")) {
-                var error = $root.go.StateOver.verify(message.Over);
-                if (error)
-                    return "Over." + error;
-            }
-            if (message.BeforeChairID != null && message.hasOwnProperty("BeforeChairID"))
-                if (!$util.isInteger(message.BeforeChairID))
-                    return "BeforeChairID: integer expected";
-            if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))
-                if (!(message.BeforeCards && typeof message.BeforeCards.length === "number" || $util.isString(message.BeforeCards)))
-                    return "BeforeCards: buffer expected";
             if (message.Players != null && message.hasOwnProperty("Players")) {
                 if (!Array.isArray(message.Players))
                     return "Players: array expected";
@@ -190,10 +271,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsEnter.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsEnter)
+        LandLordsScene.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsScene)
                 return object;
-            var message = new $root.landLords.LandLordsEnter();
+            var message = new $root.landLords.LandLordsScene();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -203,111 +284,36 @@ $root.landLords = (function() {
                     message.TimeStamp = object.TimeStamp;
                 else if (typeof object.TimeStamp === "object")
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
-            if (object.FreeTime != null)
-                message.FreeTime = object.FreeTime >>> 0;
-            if (object.OutTime != null)
-                message.OutTime = object.OutTime >>> 0;
-            if (object.CallTime != null)
-                message.CallTime = object.CallTime >>> 0;
-            if (object.Free != null) {
-                if (typeof object.Free !== "object")
-                    throw TypeError(".landLords.LandLordsEnter.Free: object expected");
-                message.Free = $root.go.StateFree.fromObject(object.Free);
-            }
-            if (object.Start != null) {
-                if (typeof object.Start !== "object")
-                    throw TypeError(".landLords.LandLordsEnter.Start: object expected");
-                message.Start = $root.go.StateStart.fromObject(object.Start);
-            }
-            if (object.Call != null) {
-                if (typeof object.Call !== "object")
-                    throw TypeError(".landLords.LandLordsEnter.Call: object expected");
-                message.Call = $root.go.StateCall.fromObject(object.Call);
-            }
-            if (object.Playing != null) {
-                if (typeof object.Playing !== "object")
-                    throw TypeError(".landLords.LandLordsEnter.Playing: object expected");
-                message.Playing = $root.go.StatePlaying.fromObject(object.Playing);
-            }
-            if (object.Over != null) {
-                if (typeof object.Over !== "object")
-                    throw TypeError(".landLords.LandLordsEnter.Over: object expected");
-                message.Over = $root.go.StateOver.fromObject(object.Over);
-            }
-            if (object.BeforeChairID != null)
-                message.BeforeChairID = object.BeforeChairID >>> 0;
-            if (object.BeforeCards != null)
-                if (typeof object.BeforeCards === "string")
-                    $util.base64.decode(object.BeforeCards, message.BeforeCards = $util.newBuffer($util.base64.length(object.BeforeCards)), 0);
-                else if (object.BeforeCards.length)
-                    message.BeforeCards = object.BeforeCards;
             if (object.Players) {
                 if (!Array.isArray(object.Players))
-                    throw TypeError(".landLords.LandLordsEnter.Players: array expected");
+                    throw TypeError(".landLords.LandLordsScene.Players: array expected");
                 message.Players = [];
                 for (var i = 0; i < object.Players.length; ++i) {
                     if (typeof object.Players[i] !== "object")
-                        throw TypeError(".landLords.LandLordsEnter.Players: object expected");
+                        throw TypeError(".landLords.LandLordsScene.Players: object expected");
                     message.Players[i] = $root.landLords.LandLordsPlayer.fromObject(object.Players[i]);
                 }
             }
             return message;
         };
 
-        LandLordsEnter.toObject = function toObject(message, options) {
+        LandLordsScene.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
                 object.Players = [];
-            if (options.defaults) {
+            if (options.defaults)
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TimeStamp = options.longs === String ? "0" : 0;
-                object.FreeTime = 0;
-                object.OutTime = 0;
-                object.CallTime = 0;
-                object.Free = null;
-                object.Start = null;
-                object.Call = null;
-                object.Playing = null;
-                object.Over = null;
-                object.BeforeChairID = 0;
-                if (options.bytes === String)
-                    object.BeforeCards = "";
-                else {
-                    object.BeforeCards = [];
-                    if (options.bytes !== Array)
-                        object.BeforeCards = $util.newBuffer(object.BeforeCards);
-                }
-            }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
                 else
                     object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
-            if (message.FreeTime != null && message.hasOwnProperty("FreeTime"))
-                object.FreeTime = message.FreeTime;
-            if (message.OutTime != null && message.hasOwnProperty("OutTime"))
-                object.OutTime = message.OutTime;
-            if (message.CallTime != null && message.hasOwnProperty("CallTime"))
-                object.CallTime = message.CallTime;
-            if (message.Free != null && message.hasOwnProperty("Free"))
-                object.Free = $root.go.StateFree.toObject(message.Free, options);
-            if (message.Start != null && message.hasOwnProperty("Start"))
-                object.Start = $root.go.StateStart.toObject(message.Start, options);
-            if (message.Call != null && message.hasOwnProperty("Call"))
-                object.Call = $root.go.StateCall.toObject(message.Call, options);
-            if (message.Playing != null && message.hasOwnProperty("Playing"))
-                object.Playing = $root.go.StatePlaying.toObject(message.Playing, options);
-            if (message.Over != null && message.hasOwnProperty("Over"))
-                object.Over = $root.go.StateOver.toObject(message.Over, options);
-            if (message.BeforeChairID != null && message.hasOwnProperty("BeforeChairID"))
-                object.BeforeChairID = message.BeforeChairID;
-            if (message.BeforeCards != null && message.hasOwnProperty("BeforeCards"))
-                object.BeforeCards = options.bytes === String ? $util.base64.encode(message.BeforeCards, 0, message.BeforeCards.length) : options.bytes === Array ? Array.prototype.slice.call(message.BeforeCards) : message.BeforeCards;
             if (message.Players && message.Players.length) {
                 object.Players = [];
                 for (var j = 0; j < message.Players.length; ++j)
@@ -316,199 +322,11 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsEnter.prototype.toJSON = function toJSON() {
+        LandLordsScene.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsEnter;
-    })();
-
-    landLords.LandLordsReadyReq = (function() {
-
-        function LandLordsReadyReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        LandLordsReadyReq.prototype.IsReady = false;
-
-        LandLordsReadyReq.create = function create(properties) {
-            return new LandLordsReadyReq(properties);
-        };
-
-        LandLordsReadyReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
-                writer.uint32(8).bool(message.IsReady);
-            return writer;
-        };
-
-        LandLordsReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        LandLordsReadyReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.IsReady = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        LandLordsReadyReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        LandLordsReadyReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
-                if (typeof message.IsReady !== "boolean")
-                    return "IsReady: boolean expected";
-            return null;
-        };
-
-        LandLordsReadyReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsReadyReq)
-                return object;
-            var message = new $root.landLords.LandLordsReadyReq();
-            if (object.IsReady != null)
-                message.IsReady = Boolean(object.IsReady);
-            return message;
-        };
-
-        LandLordsReadyReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsReady = false;
-            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
-                object.IsReady = message.IsReady;
-            return object;
-        };
-
-        LandLordsReadyReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return LandLordsReadyReq;
-    })();
-
-    landLords.LandLordsReadyResp = (function() {
-
-        function LandLordsReadyResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        LandLordsReadyResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-        LandLordsReadyResp.create = function create(properties) {
-            return new LandLordsReadyResp(properties);
-        };
-
-        LandLordsReadyResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
-                writer.uint32(8).uint64(message.UserId);
-            return writer;
-        };
-
-        LandLordsReadyResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        LandLordsReadyResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserId = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        LandLordsReadyResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        LandLordsReadyResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
-                    return "UserId: integer|Long expected";
-            return null;
-        };
-
-        LandLordsReadyResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsReadyResp)
-                return object;
-            var message = new $root.landLords.LandLordsReadyResp();
-            if (object.UserId != null)
-                if ($util.Long)
-                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
-                else if (typeof object.UserId === "string")
-                    message.UserId = parseInt(object.UserId, 10);
-                else if (typeof object.UserId === "number")
-                    message.UserId = object.UserId;
-                else if (typeof object.UserId === "object")
-                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
-            return message;
-        };
-
-        LandLordsReadyResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserId = options.longs === String ? "0" : 0;
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (typeof message.UserId === "number")
-                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
-                else
-                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
-            return object;
-        };
-
-        LandLordsReadyResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return LandLordsReadyResp;
+        return LandLordsScene;
     })();
 
     landLords.LandLordsStateFree = (function() {
@@ -826,6 +644,8 @@ $root.landLords = (function() {
         }
 
         LandLordsStatePlaying.prototype.Times = null;
+        LandLordsStatePlaying.prototype.LastChairID = 0;
+        LandLordsStatePlaying.prototype.LastCards = null;
 
         LandLordsStatePlaying.create = function create(properties) {
             return new LandLordsStatePlaying(properties);
@@ -836,6 +656,10 @@ $root.landLords = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.LastChairID != null && Object.hasOwnProperty.call(message, "LastChairID"))
+                writer.uint32(16).uint32(message.LastChairID);
+            if (message.LastCards != null && Object.hasOwnProperty.call(message, "LastCards"))
+                $root.go.CardInfo.encode(message.LastCards, writer.uint32(26).fork()).ldelim();
             return writer;
         };
 
@@ -852,6 +676,12 @@ $root.landLords = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.LastChairID = reader.uint32();
+                    break;
+                case 3:
+                    message.LastCards = $root.go.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -875,6 +705,14 @@ $root.landLords = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.LastChairID != null && message.hasOwnProperty("LastChairID"))
+                if (!$util.isInteger(message.LastChairID))
+                    return "LastChairID: integer expected";
+            if (message.LastCards != null && message.hasOwnProperty("LastCards")) {
+                var error = $root.go.CardInfo.verify(message.LastCards);
+                if (error)
+                    return "LastCards." + error;
+            }
             return null;
         };
 
@@ -887,6 +725,13 @@ $root.landLords = (function() {
                     throw TypeError(".landLords.LandLordsStatePlaying.Times: object expected");
                 message.Times = $root.go.TimeInfo.fromObject(object.Times);
             }
+            if (object.LastChairID != null)
+                message.LastChairID = object.LastChairID >>> 0;
+            if (object.LastCards != null) {
+                if (typeof object.LastCards !== "object")
+                    throw TypeError(".landLords.LandLordsStatePlaying.LastCards: object expected");
+                message.LastCards = $root.go.CardInfo.fromObject(object.LastCards);
+            }
             return message;
         };
 
@@ -894,10 +739,17 @@ $root.landLords = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                object.LastChairID = 0;
+                object.LastCards = null;
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.go.TimeInfo.toObject(message.Times, options);
+            if (message.LastChairID != null && message.hasOwnProperty("LastChairID"))
+                object.LastChairID = message.LastChairID;
+            if (message.LastCards != null && message.hasOwnProperty("LastCards"))
+                object.LastCards = $root.go.CardInfo.toObject(message.LastCards, options);
             return object;
         };
 
@@ -1000,72 +852,42 @@ $root.landLords = (function() {
         return LandLordsStateOver;
     })();
 
-    landLords.LandLordsPlayer = (function() {
+    landLords.LandLordsReadyReq = (function() {
 
-        function LandLordsPlayer(properties) {
+        function LandLordsReadyReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsPlayer.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsPlayer.prototype.ChairID = 0;
-        LandLordsPlayer.prototype.CardsLen = 0;
-        LandLordsPlayer.prototype.Cards = $util.newBuffer([]);
-        LandLordsPlayer.prototype.IsBanker = false;
-        LandLordsPlayer.prototype.IsTrustee = false;
+        LandLordsReadyReq.prototype.IsReady = false;
 
-        LandLordsPlayer.create = function create(properties) {
-            return new LandLordsPlayer(properties);
+        LandLordsReadyReq.create = function create(properties) {
+            return new LandLordsReadyReq(properties);
         };
 
-        LandLordsPlayer.encode = function encode(message, writer) {
+        LandLordsReadyReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
-                writer.uint32(16).uint32(message.ChairID);
-            if (message.CardsLen != null && Object.hasOwnProperty.call(message, "CardsLen"))
-                writer.uint32(24).uint32(message.CardsLen);
-            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
-                writer.uint32(34).bytes(message.Cards);
-            if (message.IsBanker != null && Object.hasOwnProperty.call(message, "IsBanker"))
-                writer.uint32(40).bool(message.IsBanker);
-            if (message.IsTrustee != null && Object.hasOwnProperty.call(message, "IsTrustee"))
-                writer.uint32(48).bool(message.IsTrustee);
+            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
+                writer.uint32(8).bool(message.IsReady);
             return writer;
         };
 
-        LandLordsPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsPlayer.decode = function decode(reader, length) {
+        LandLordsReadyReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsPlayer();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.ChairID = reader.uint32();
-                    break;
-                case 3:
-                    message.CardsLen = reader.uint32();
-                    break;
-                case 4:
-                    message.Cards = reader.bytes();
-                    break;
-                case 5:
-                    message.IsBanker = reader.bool();
-                    break;
-                case 6:
-                    message.IsTrustee = reader.bool();
+                    message.IsReady = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1075,129 +897,166 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsPlayer.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsReadyReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsPlayer.verify = function verify(message) {
+        LandLordsReadyReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
-                if (!$util.isInteger(message.ChairID))
-                    return "ChairID: integer expected";
-            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
-                if (!$util.isInteger(message.CardsLen))
-                    return "CardsLen: integer expected";
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
-                    return "Cards: buffer expected";
-            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
-                if (typeof message.IsBanker !== "boolean")
-                    return "IsBanker: boolean expected";
-            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
-                if (typeof message.IsTrustee !== "boolean")
-                    return "IsTrustee: boolean expected";
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                if (typeof message.IsReady !== "boolean")
+                    return "IsReady: boolean expected";
             return null;
         };
 
-        LandLordsPlayer.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsPlayer)
+        LandLordsReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsReadyReq)
                 return object;
-            var message = new $root.landLords.LandLordsPlayer();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.ChairID != null)
-                message.ChairID = object.ChairID >>> 0;
-            if (object.CardsLen != null)
-                message.CardsLen = object.CardsLen >>> 0;
-            if (object.Cards != null)
-                if (typeof object.Cards === "string")
-                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
-                else if (object.Cards.length)
-                    message.Cards = object.Cards;
-            if (object.IsBanker != null)
-                message.IsBanker = Boolean(object.IsBanker);
-            if (object.IsTrustee != null)
-                message.IsTrustee = Boolean(object.IsTrustee);
+            var message = new $root.landLords.LandLordsReadyReq();
+            if (object.IsReady != null)
+                message.IsReady = Boolean(object.IsReady);
             return message;
         };
 
-        LandLordsPlayer.toObject = function toObject(message, options) {
+        LandLordsReadyReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.ChairID = 0;
-                object.CardsLen = 0;
-                if (options.bytes === String)
-                    object.Cards = "";
-                else {
-                    object.Cards = [];
-                    if (options.bytes !== Array)
-                        object.Cards = $util.newBuffer(object.Cards);
-                }
-                object.IsBanker = false;
-                object.IsTrustee = false;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.ChairID != null && message.hasOwnProperty("ChairID"))
-                object.ChairID = message.ChairID;
-            if (message.CardsLen != null && message.hasOwnProperty("CardsLen"))
-                object.CardsLen = message.CardsLen;
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
-            if (message.IsBanker != null && message.hasOwnProperty("IsBanker"))
-                object.IsBanker = message.IsBanker;
-            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
-                object.IsTrustee = message.IsTrustee;
+            if (options.defaults)
+                object.IsReady = false;
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                object.IsReady = message.IsReady;
             return object;
         };
 
-        LandLordsPlayer.prototype.toJSON = function toJSON() {
+        LandLordsReadyReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsPlayer;
+        return LandLordsReadyReq;
     })();
 
-    landLords.LandLordsDeal = (function() {
+    landLords.LandLordsReadyResp = (function() {
 
-        function LandLordsDeal(properties) {
+        function LandLordsReadyResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsDeal.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsDeal.prototype.CardsHand = $util.newBuffer([]);
+        LandLordsReadyResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        LandLordsDeal.create = function create(properties) {
-            return new LandLordsDeal(properties);
+        LandLordsReadyResp.create = function create(properties) {
+            return new LandLordsReadyResp(properties);
         };
 
-        LandLordsDeal.encode = function encode(message, writer) {
+        LandLordsReadyResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
+            return writer;
+        };
+
+        LandLordsReadyResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsReadyResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsReadyResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsReadyResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsReadyResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
+            return null;
+        };
+
+        LandLordsReadyResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsReadyResp)
+                return object;
+            var message = new $root.landLords.LandLordsReadyResp();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        LandLordsReadyResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            return object;
+        };
+
+        LandLordsReadyResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsReadyResp;
+    })();
+
+    landLords.LandLordsDealResp = (function() {
+
+        function LandLordsDealResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsDealResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsDealResp.prototype.CardsHand = $util.newBuffer([]);
+
+        LandLordsDealResp.create = function create(properties) {
+            return new LandLordsDealResp(properties);
+        };
+
+        LandLordsDealResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1207,14 +1066,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsDeal.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsDealResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsDeal.decode = function decode(reader, length) {
+        LandLordsDealResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDeal();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDealResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1232,13 +1091,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsDeal.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsDealResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsDeal.verify = function verify(message) {
+        LandLordsDealResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1250,10 +1109,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsDeal.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsDeal)
+        LandLordsDealResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsDealResp)
                 return object;
-            var message = new $root.landLords.LandLordsDeal();
+            var message = new $root.landLords.LandLordsDealResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1271,7 +1130,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsDeal.toObject = function toObject(message, options) {
+        LandLordsDealResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1299,30 +1158,117 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsDeal.prototype.toJSON = function toJSON() {
+        LandLordsDealResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsDeal;
+        return LandLordsDealResp;
     })();
 
-    landLords.LandLordsCall = (function() {
+    landLords.LandLordsCallReq = (function() {
 
-        function LandLordsCall(properties) {
+        function LandLordsCallReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsCall.prototype.Score = 0;
+        LandLordsCallReq.prototype.Score = 0;
 
-        LandLordsCall.create = function create(properties) {
-            return new LandLordsCall(properties);
+        LandLordsCallReq.create = function create(properties) {
+            return new LandLordsCallReq(properties);
         };
 
-        LandLordsCall.encode = function encode(message, writer) {
+        LandLordsCallReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Score != null && Object.hasOwnProperty.call(message, "Score"))
+                writer.uint32(8).uint32(message.Score);
+            return writer;
+        };
+
+        LandLordsCallReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsCallReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCallReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Score = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsCallReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsCallReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Score != null && message.hasOwnProperty("Score"))
+                if (!$util.isInteger(message.Score))
+                    return "Score: integer expected";
+            return null;
+        };
+
+        LandLordsCallReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsCallReq)
+                return object;
+            var message = new $root.landLords.LandLordsCallReq();
+            if (object.Score != null)
+                message.Score = object.Score >>> 0;
+            return message;
+        };
+
+        LandLordsCallReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Score = 0;
+            if (message.Score != null && message.hasOwnProperty("Score"))
+                object.Score = message.Score;
+            return object;
+        };
+
+        LandLordsCallReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsCallReq;
+    })();
+
+    landLords.LandLordsCallResp = (function() {
+
+        function LandLordsCallResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsCallResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsCallResp.prototype.Score = 0;
+
+        LandLordsCallResp.create = function create(properties) {
+            return new LandLordsCallResp(properties);
+        };
+
+        LandLordsCallResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1332,14 +1278,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsCall.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsCallResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsCall.decode = function decode(reader, length) {
+        LandLordsCallResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCall();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCallResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1357,13 +1303,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsCall.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsCallResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsCall.verify = function verify(message) {
+        LandLordsCallResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1375,10 +1321,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsCall.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsCall)
+        LandLordsCallResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsCallResp)
                 return object;
-            var message = new $root.landLords.LandLordsCall();
+            var message = new $root.landLords.LandLordsCallResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1393,7 +1339,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsCall.toObject = function toObject(message, options) {
+        LandLordsCallResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1415,30 +1361,117 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsCall.prototype.toJSON = function toJSON() {
+        LandLordsCallResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsCall;
+        return LandLordsCallResp;
     })();
 
-    landLords.LandLordsDouble = (function() {
+    landLords.LandLordsDoubleReq = (function() {
 
-        function LandLordsDouble(properties) {
+        function LandLordsDoubleReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsDouble.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsDouble.prototype.Number = 0;
+        LandLordsDoubleReq.prototype.Number = 0;
 
-        LandLordsDouble.create = function create(properties) {
-            return new LandLordsDouble(properties);
+        LandLordsDoubleReq.create = function create(properties) {
+            return new LandLordsDoubleReq(properties);
         };
 
-        LandLordsDouble.encode = function encode(message, writer) {
+        LandLordsDoubleReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Number != null && Object.hasOwnProperty.call(message, "Number"))
+                writer.uint32(8).uint32(message.Number);
+            return writer;
+        };
+
+        LandLordsDoubleReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsDoubleReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDoubleReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Number = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsDoubleReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsDoubleReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                if (!$util.isInteger(message.Number))
+                    return "Number: integer expected";
+            return null;
+        };
+
+        LandLordsDoubleReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsDoubleReq)
+                return object;
+            var message = new $root.landLords.LandLordsDoubleReq();
+            if (object.Number != null)
+                message.Number = object.Number >>> 0;
+            return message;
+        };
+
+        LandLordsDoubleReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Number = 0;
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                object.Number = message.Number;
+            return object;
+        };
+
+        LandLordsDoubleReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsDoubleReq;
+    })();
+
+    landLords.LandLordsDoubleResp = (function() {
+
+        function LandLordsDoubleResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsDoubleResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsDoubleResp.prototype.Number = 0;
+
+        LandLordsDoubleResp.create = function create(properties) {
+            return new LandLordsDoubleResp(properties);
+        };
+
+        LandLordsDoubleResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1448,14 +1481,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsDouble.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsDoubleResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsDouble.decode = function decode(reader, length) {
+        LandLordsDoubleResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDouble();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsDoubleResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1473,13 +1506,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsDouble.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsDoubleResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsDouble.verify = function verify(message) {
+        LandLordsDoubleResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1491,10 +1524,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsDouble.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsDouble)
+        LandLordsDoubleResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsDoubleResp)
                 return object;
-            var message = new $root.landLords.LandLordsDouble();
+            var message = new $root.landLords.LandLordsDoubleResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1509,7 +1542,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsDouble.toObject = function toObject(message, options) {
+        LandLordsDoubleResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1531,30 +1564,117 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsDouble.prototype.toJSON = function toJSON() {
+        LandLordsDoubleResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsDouble;
+        return LandLordsDoubleResp;
     })();
 
-    landLords.LandLordsTrustee = (function() {
+    landLords.LandLordsTrusteeReq = (function() {
 
-        function LandLordsTrustee(properties) {
+        function LandLordsTrusteeReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsTrustee.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsTrustee.prototype.IsTrustee = false;
+        LandLordsTrusteeReq.prototype.IsTrustee = false;
 
-        LandLordsTrustee.create = function create(properties) {
-            return new LandLordsTrustee(properties);
+        LandLordsTrusteeReq.create = function create(properties) {
+            return new LandLordsTrusteeReq(properties);
         };
 
-        LandLordsTrustee.encode = function encode(message, writer) {
+        LandLordsTrusteeReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsTrustee != null && Object.hasOwnProperty.call(message, "IsTrustee"))
+                writer.uint32(8).bool(message.IsTrustee);
+            return writer;
+        };
+
+        LandLordsTrusteeReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsTrusteeReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsTrusteeReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsTrustee = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsTrusteeReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsTrusteeReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
+                if (typeof message.IsTrustee !== "boolean")
+                    return "IsTrustee: boolean expected";
+            return null;
+        };
+
+        LandLordsTrusteeReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsTrusteeReq)
+                return object;
+            var message = new $root.landLords.LandLordsTrusteeReq();
+            if (object.IsTrustee != null)
+                message.IsTrustee = Boolean(object.IsTrustee);
+            return message;
+        };
+
+        LandLordsTrusteeReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsTrustee = false;
+            if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
+                object.IsTrustee = message.IsTrustee;
+            return object;
+        };
+
+        LandLordsTrusteeReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsTrusteeReq;
+    })();
+
+    landLords.LandLordsTrusteeResp = (function() {
+
+        function LandLordsTrusteeResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsTrusteeResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsTrusteeResp.prototype.IsTrustee = false;
+
+        LandLordsTrusteeResp.create = function create(properties) {
+            return new LandLordsTrusteeResp(properties);
+        };
+
+        LandLordsTrusteeResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1564,14 +1684,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsTrustee.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsTrusteeResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsTrustee.decode = function decode(reader, length) {
+        LandLordsTrusteeResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsTrustee();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsTrusteeResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1589,13 +1709,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsTrustee.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsTrusteeResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsTrustee.verify = function verify(message) {
+        LandLordsTrusteeResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1607,10 +1727,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsTrustee.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsTrustee)
+        LandLordsTrusteeResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsTrusteeResp)
                 return object;
-            var message = new $root.landLords.LandLordsTrustee();
+            var message = new $root.landLords.LandLordsTrusteeResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1625,7 +1745,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsTrustee.toObject = function toObject(message, options) {
+        LandLordsTrusteeResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1647,30 +1767,30 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsTrustee.prototype.toJSON = function toJSON() {
+        LandLordsTrusteeResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsTrustee;
+        return LandLordsTrusteeResp;
     })();
 
-    landLords.LandLordsBottomCard = (function() {
+    landLords.LandLordsBottomCardResp = (function() {
 
-        function LandLordsBottomCard(properties) {
+        function LandLordsBottomCardResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsBottomCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsBottomCard.prototype.CardsBottom = $util.newBuffer([]);
+        LandLordsBottomCardResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsBottomCardResp.prototype.CardsBottom = $util.newBuffer([]);
 
-        LandLordsBottomCard.create = function create(properties) {
-            return new LandLordsBottomCard(properties);
+        LandLordsBottomCardResp.create = function create(properties) {
+            return new LandLordsBottomCardResp(properties);
         };
 
-        LandLordsBottomCard.encode = function encode(message, writer) {
+        LandLordsBottomCardResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1680,14 +1800,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsBottomCard.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsBottomCardResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsBottomCard.decode = function decode(reader, length) {
+        LandLordsBottomCardResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsBottomCard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsBottomCardResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1705,13 +1825,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsBottomCard.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsBottomCardResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsBottomCard.verify = function verify(message) {
+        LandLordsBottomCardResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1723,10 +1843,10 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsBottomCard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsBottomCard)
+        LandLordsBottomCardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsBottomCardResp)
                 return object;
-            var message = new $root.landLords.LandLordsBottomCard();
+            var message = new $root.landLords.LandLordsBottomCardResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1744,7 +1864,7 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsBottomCard.toObject = function toObject(message, options) {
+        LandLordsBottomCardResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1772,61 +1892,49 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsBottomCard.prototype.toJSON = function toJSON() {
+        LandLordsBottomCardResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsBottomCard;
+        return LandLordsBottomCardResp;
     })();
 
-    landLords.LandLordsOutCard = (function() {
+    landLords.LandLordsOutCardReq = (function() {
 
-        function LandLordsOutCard(properties) {
+        function LandLordsOutCardReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsOutCard.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsOutCard.prototype.Cards = $util.newBuffer([]);
-        LandLordsOutCard.prototype.Hints = "";
+        LandLordsOutCardReq.prototype.Cards = null;
 
-        LandLordsOutCard.create = function create(properties) {
-            return new LandLordsOutCard(properties);
+        LandLordsOutCardReq.create = function create(properties) {
+            return new LandLordsOutCardReq(properties);
         };
 
-        LandLordsOutCard.encode = function encode(message, writer) {
+        LandLordsOutCardReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
             if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
-                writer.uint32(18).bytes(message.Cards);
-            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
-                writer.uint32(26).string(message.Hints);
+                $root.go.CardInfo.encode(message.Cards, writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
-        LandLordsOutCard.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsOutCardReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsOutCard.decode = function decode(reader, length) {
+        LandLordsOutCardReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsOutCard();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsOutCardReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.Cards = reader.bytes();
-                    break;
-                case 3:
-                    message.Hints = reader.string();
+                    message.Cards = $root.go.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1836,31 +1944,128 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsOutCard.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsOutCardReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsOutCard.verify = function verify(message) {
+        LandLordsOutCardReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.go.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
+            return null;
+        };
+
+        LandLordsOutCardReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsOutCardReq)
+                return object;
+            var message = new $root.landLords.LandLordsOutCardReq();
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".landLords.LandLordsOutCardReq.Cards: object expected");
+                message.Cards = $root.go.CardInfo.fromObject(object.Cards);
+            }
+            return message;
+        };
+
+        LandLordsOutCardReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Cards = null;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.go.CardInfo.toObject(message.Cards, options);
+            return object;
+        };
+
+        LandLordsOutCardReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LandLordsOutCardReq;
+    })();
+
+    landLords.LandLordsOutCardResp = (function() {
+
+        function LandLordsOutCardResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LandLordsOutCardResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LandLordsOutCardResp.prototype.Cards = null;
+
+        LandLordsOutCardResp.create = function create(properties) {
+            return new LandLordsOutCardResp(properties);
+        };
+
+        LandLordsOutCardResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.go.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        LandLordsOutCardResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LandLordsOutCardResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsOutCardResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.Cards = $root.go.CardInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LandLordsOutCardResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LandLordsOutCardResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
                     return "UserID: integer|Long expected";
-            if (message.Cards != null && message.hasOwnProperty("Cards"))
-                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
-                    return "Cards: buffer expected";
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!$util.isString(message.Hints))
-                    return "Hints: string expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.go.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
             return null;
         };
 
-        LandLordsOutCard.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsOutCard)
+        LandLordsOutCardResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsOutCardResp)
                 return object;
-            var message = new $root.landLords.LandLordsOutCard();
+            var message = new $root.landLords.LandLordsOutCardResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1870,17 +2075,15 @@ $root.landLords = (function() {
                     message.UserID = object.UserID;
                 else if (typeof object.UserID === "object")
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.Cards != null)
-                if (typeof object.Cards === "string")
-                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
-                else if (object.Cards.length)
-                    message.Cards = object.Cards;
-            if (object.Hints != null)
-                message.Hints = String(object.Hints);
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".landLords.LandLordsOutCardResp.Cards: object expected");
+                message.Cards = $root.go.CardInfo.fromObject(object.Cards);
+            }
             return message;
         };
 
-        LandLordsOutCard.toObject = function toObject(message, options) {
+        LandLordsOutCardResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1890,14 +2093,7 @@ $root.landLords = (function() {
                     object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
-                if (options.bytes === String)
-                    object.Cards = "";
-                else {
-                    object.Cards = [];
-                    if (options.bytes !== Array)
-                        object.Cards = $util.newBuffer(object.Cards);
-                }
-                object.Hints = "";
+                object.Cards = null;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -1905,17 +2101,15 @@ $root.landLords = (function() {
                 else
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.Cards != null && message.hasOwnProperty("Cards"))
-                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = message.Hints;
+                object.Cards = $root.go.CardInfo.toObject(message.Cards, options);
             return object;
         };
 
-        LandLordsOutCard.prototype.toJSON = function toJSON() {
+        LandLordsOutCardResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsOutCard;
+        return LandLordsOutCardResp;
     })();
 
     landLords.LandLordsAward = (function() {
@@ -1928,7 +2122,7 @@ $root.landLords = (function() {
         }
 
         LandLordsAward.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        LandLordsAward.prototype.Codes = $util.newBuffer([]);
+        LandLordsAward.prototype.RemainCards = $util.newBuffer([]);
         LandLordsAward.prototype.GetGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         LandLordsAward.create = function create(properties) {
@@ -1940,8 +2134,8 @@ $root.landLords = (function() {
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
                 writer.uint32(8).uint64(message.UserID);
-            if (message.Codes != null && Object.hasOwnProperty.call(message, "Codes"))
-                writer.uint32(18).bytes(message.Codes);
+            if (message.RemainCards != null && Object.hasOwnProperty.call(message, "RemainCards"))
+                writer.uint32(18).bytes(message.RemainCards);
             if (message.GetGold != null && Object.hasOwnProperty.call(message, "GetGold"))
                 writer.uint32(24).int64(message.GetGold);
             return writer;
@@ -1962,7 +2156,7 @@ $root.landLords = (function() {
                     message.UserID = reader.uint64();
                     break;
                 case 2:
-                    message.Codes = reader.bytes();
+                    message.RemainCards = reader.bytes();
                     break;
                 case 3:
                     message.GetGold = reader.int64();
@@ -1987,9 +2181,9 @@ $root.landLords = (function() {
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
                     return "UserID: integer|Long expected";
-            if (message.Codes != null && message.hasOwnProperty("Codes"))
-                if (!(message.Codes && typeof message.Codes.length === "number" || $util.isString(message.Codes)))
-                    return "Codes: buffer expected";
+            if (message.RemainCards != null && message.hasOwnProperty("RemainCards"))
+                if (!(message.RemainCards && typeof message.RemainCards.length === "number" || $util.isString(message.RemainCards)))
+                    return "RemainCards: buffer expected";
             if (message.GetGold != null && message.hasOwnProperty("GetGold"))
                 if (!$util.isInteger(message.GetGold) && !(message.GetGold && $util.isInteger(message.GetGold.low) && $util.isInteger(message.GetGold.high)))
                     return "GetGold: integer|Long expected";
@@ -2009,11 +2203,11 @@ $root.landLords = (function() {
                     message.UserID = object.UserID;
                 else if (typeof object.UserID === "object")
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.Codes != null)
-                if (typeof object.Codes === "string")
-                    $util.base64.decode(object.Codes, message.Codes = $util.newBuffer($util.base64.length(object.Codes)), 0);
-                else if (object.Codes.length)
-                    message.Codes = object.Codes;
+            if (object.RemainCards != null)
+                if (typeof object.RemainCards === "string")
+                    $util.base64.decode(object.RemainCards, message.RemainCards = $util.newBuffer($util.base64.length(object.RemainCards)), 0);
+                else if (object.RemainCards.length)
+                    message.RemainCards = object.RemainCards;
             if (object.GetGold != null)
                 if ($util.Long)
                     (message.GetGold = $util.Long.fromValue(object.GetGold)).unsigned = false;
@@ -2037,11 +2231,11 @@ $root.landLords = (function() {
                 } else
                     object.UserID = options.longs === String ? "0" : 0;
                 if (options.bytes === String)
-                    object.Codes = "";
+                    object.RemainCards = "";
                 else {
-                    object.Codes = [];
+                    object.RemainCards = [];
                     if (options.bytes !== Array)
-                        object.Codes = $util.newBuffer(object.Codes);
+                        object.RemainCards = $util.newBuffer(object.RemainCards);
                 }
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -2054,8 +2248,8 @@ $root.landLords = (function() {
                     object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
                 else
                     object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.Codes != null && message.hasOwnProperty("Codes"))
-                object.Codes = options.bytes === String ? $util.base64.encode(message.Codes, 0, message.Codes.length) : options.bytes === Array ? Array.prototype.slice.call(message.Codes) : message.Codes;
+            if (message.RemainCards != null && message.hasOwnProperty("RemainCards"))
+                object.RemainCards = options.bytes === String ? $util.base64.encode(message.RemainCards, 0, message.RemainCards.length) : options.bytes === Array ? Array.prototype.slice.call(message.RemainCards) : message.RemainCards;
             if (message.GetGold != null && message.hasOwnProperty("GetGold"))
                 if (typeof message.GetGold === "number")
                     object.GetGold = options.longs === String ? String(message.GetGold) : message.GetGold;
@@ -2071,9 +2265,9 @@ $root.landLords = (function() {
         return LandLordsAward;
     })();
 
-    landLords.LandLordsCheckout = (function() {
+    landLords.LandLordsCheckoutResp = (function() {
 
-        function LandLordsCheckout(properties) {
+        function LandLordsCheckoutResp(properties) {
             this.players = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2081,13 +2275,13 @@ $root.landLords = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LandLordsCheckout.prototype.players = $util.emptyArray;
+        LandLordsCheckoutResp.prototype.players = $util.emptyArray;
 
-        LandLordsCheckout.create = function create(properties) {
-            return new LandLordsCheckout(properties);
+        LandLordsCheckoutResp.create = function create(properties) {
+            return new LandLordsCheckoutResp(properties);
         };
 
-        LandLordsCheckout.encode = function encode(message, writer) {
+        LandLordsCheckoutResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.players != null && message.players.length)
@@ -2096,14 +2290,14 @@ $root.landLords = (function() {
             return writer;
         };
 
-        LandLordsCheckout.encodeDelimited = function encodeDelimited(message, writer) {
+        LandLordsCheckoutResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        LandLordsCheckout.decode = function decode(reader, length) {
+        LandLordsCheckoutResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCheckout();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.landLords.LandLordsCheckoutResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2120,13 +2314,13 @@ $root.landLords = (function() {
             return message;
         };
 
-        LandLordsCheckout.decodeDelimited = function decodeDelimited(reader) {
+        LandLordsCheckoutResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        LandLordsCheckout.verify = function verify(message) {
+        LandLordsCheckoutResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.players != null && message.hasOwnProperty("players")) {
@@ -2141,24 +2335,24 @@ $root.landLords = (function() {
             return null;
         };
 
-        LandLordsCheckout.fromObject = function fromObject(object) {
-            if (object instanceof $root.landLords.LandLordsCheckout)
+        LandLordsCheckoutResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.landLords.LandLordsCheckoutResp)
                 return object;
-            var message = new $root.landLords.LandLordsCheckout();
+            var message = new $root.landLords.LandLordsCheckoutResp();
             if (object.players) {
                 if (!Array.isArray(object.players))
-                    throw TypeError(".landLords.LandLordsCheckout.players: array expected");
+                    throw TypeError(".landLords.LandLordsCheckoutResp.players: array expected");
                 message.players = [];
                 for (var i = 0; i < object.players.length; ++i) {
                     if (typeof object.players[i] !== "object")
-                        throw TypeError(".landLords.LandLordsCheckout.players: object expected");
+                        throw TypeError(".landLords.LandLordsCheckoutResp.players: object expected");
                     message.players[i] = $root.landLords.LandLordsAward.fromObject(object.players[i]);
                 }
             }
             return message;
         };
 
-        LandLordsCheckout.toObject = function toObject(message, options) {
+        LandLordsCheckoutResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -2172,11 +2366,11 @@ $root.landLords = (function() {
             return object;
         };
 
-        LandLordsCheckout.prototype.toJSON = function toJSON() {
+        LandLordsCheckoutResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return LandLordsCheckout;
+        return LandLordsCheckoutResp;
     })();
 
     return landLords;
@@ -2229,7 +2423,7 @@ $root.go = (function() {
             if (message.Sate != null && Object.hasOwnProperty.call(message, "Sate"))
                 writer.uint32(64).int32(message.Sate);
             if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
-                writer.uint32(104).uint32(message.ChairID);
+                writer.uint32(72).uint32(message.ChairID);
             return writer;
         };
 
@@ -2268,7 +2462,7 @@ $root.go = (function() {
                 case 8:
                     message.Sate = reader.int32();
                     break;
-                case 13:
+                case 9:
                     message.ChairID = reader.uint32();
                     break;
                 default:
@@ -2683,9 +2877,181 @@ $root.go = (function() {
         return TimeInfo;
     })();
 
-    go.UserList = (function() {
+    go.AreaInfo = (function() {
 
-        function UserList(properties) {
+        function AreaInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        AreaInfo.prototype.ID = 0;
+        AreaInfo.prototype.MyGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        AreaInfo.prototype.TotalGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        AreaInfo.prototype.AcquireGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        AreaInfo.create = function create(properties) {
+            return new AreaInfo(properties);
+        };
+
+        AreaInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
+                writer.uint32(8).int32(message.ID);
+            if (message.MyGold != null && Object.hasOwnProperty.call(message, "MyGold"))
+                writer.uint32(16).int64(message.MyGold);
+            if (message.TotalGold != null && Object.hasOwnProperty.call(message, "TotalGold"))
+                writer.uint32(24).int64(message.TotalGold);
+            if (message.AcquireGold != null && Object.hasOwnProperty.call(message, "AcquireGold"))
+                writer.uint32(32).int64(message.AcquireGold);
+            return writer;
+        };
+
+        AreaInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        AreaInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.AreaInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ID = reader.int32();
+                    break;
+                case 2:
+                    message.MyGold = reader.int64();
+                    break;
+                case 3:
+                    message.TotalGold = reader.int64();
+                    break;
+                case 4:
+                    message.AcquireGold = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        AreaInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        AreaInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (!$util.isInteger(message.ID))
+                    return "ID: integer expected";
+            if (message.MyGold != null && message.hasOwnProperty("MyGold"))
+                if (!$util.isInteger(message.MyGold) && !(message.MyGold && $util.isInteger(message.MyGold.low) && $util.isInteger(message.MyGold.high)))
+                    return "MyGold: integer|Long expected";
+            if (message.TotalGold != null && message.hasOwnProperty("TotalGold"))
+                if (!$util.isInteger(message.TotalGold) && !(message.TotalGold && $util.isInteger(message.TotalGold.low) && $util.isInteger(message.TotalGold.high)))
+                    return "TotalGold: integer|Long expected";
+            if (message.AcquireGold != null && message.hasOwnProperty("AcquireGold"))
+                if (!$util.isInteger(message.AcquireGold) && !(message.AcquireGold && $util.isInteger(message.AcquireGold.low) && $util.isInteger(message.AcquireGold.high)))
+                    return "AcquireGold: integer|Long expected";
+            return null;
+        };
+
+        AreaInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.AreaInfo)
+                return object;
+            var message = new $root.go.AreaInfo();
+            if (object.ID != null)
+                message.ID = object.ID | 0;
+            if (object.MyGold != null)
+                if ($util.Long)
+                    (message.MyGold = $util.Long.fromValue(object.MyGold)).unsigned = false;
+                else if (typeof object.MyGold === "string")
+                    message.MyGold = parseInt(object.MyGold, 10);
+                else if (typeof object.MyGold === "number")
+                    message.MyGold = object.MyGold;
+                else if (typeof object.MyGold === "object")
+                    message.MyGold = new $util.LongBits(object.MyGold.low >>> 0, object.MyGold.high >>> 0).toNumber();
+            if (object.TotalGold != null)
+                if ($util.Long)
+                    (message.TotalGold = $util.Long.fromValue(object.TotalGold)).unsigned = false;
+                else if (typeof object.TotalGold === "string")
+                    message.TotalGold = parseInt(object.TotalGold, 10);
+                else if (typeof object.TotalGold === "number")
+                    message.TotalGold = object.TotalGold;
+                else if (typeof object.TotalGold === "object")
+                    message.TotalGold = new $util.LongBits(object.TotalGold.low >>> 0, object.TotalGold.high >>> 0).toNumber();
+            if (object.AcquireGold != null)
+                if ($util.Long)
+                    (message.AcquireGold = $util.Long.fromValue(object.AcquireGold)).unsigned = false;
+                else if (typeof object.AcquireGold === "string")
+                    message.AcquireGold = parseInt(object.AcquireGold, 10);
+                else if (typeof object.AcquireGold === "number")
+                    message.AcquireGold = object.AcquireGold;
+                else if (typeof object.AcquireGold === "object")
+                    message.AcquireGold = new $util.LongBits(object.AcquireGold.low >>> 0, object.AcquireGold.high >>> 0).toNumber();
+            return message;
+        };
+
+        AreaInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.ID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.MyGold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.MyGold = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TotalGold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TotalGold = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.AcquireGold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.AcquireGold = options.longs === String ? "0" : 0;
+            }
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                object.ID = message.ID;
+            if (message.MyGold != null && message.hasOwnProperty("MyGold"))
+                if (typeof message.MyGold === "number")
+                    object.MyGold = options.longs === String ? String(message.MyGold) : message.MyGold;
+                else
+                    object.MyGold = options.longs === String ? $util.Long.prototype.toString.call(message.MyGold) : options.longs === Number ? new $util.LongBits(message.MyGold.low >>> 0, message.MyGold.high >>> 0).toNumber() : message.MyGold;
+            if (message.TotalGold != null && message.hasOwnProperty("TotalGold"))
+                if (typeof message.TotalGold === "number")
+                    object.TotalGold = options.longs === String ? String(message.TotalGold) : message.TotalGold;
+                else
+                    object.TotalGold = options.longs === String ? $util.Long.prototype.toString.call(message.TotalGold) : options.longs === Number ? new $util.LongBits(message.TotalGold.low >>> 0, message.TotalGold.high >>> 0).toNumber() : message.TotalGold;
+            if (message.AcquireGold != null && message.hasOwnProperty("AcquireGold"))
+                if (typeof message.AcquireGold === "number")
+                    object.AcquireGold = options.longs === String ? String(message.AcquireGold) : message.AcquireGold;
+                else
+                    object.AcquireGold = options.longs === String ? $util.Long.prototype.toString.call(message.AcquireGold) : options.longs === Number ? new $util.LongBits(message.AcquireGold.low >>> 0, message.AcquireGold.high >>> 0).toNumber() : message.AcquireGold;
+            return object;
+        };
+
+        AreaInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return AreaInfo;
+    })();
+
+    go.UserListInfo = (function() {
+
+        function UserListInfo(properties) {
             this.AllInfos = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -2693,13 +3059,13 @@ $root.go = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        UserList.prototype.AllInfos = $util.emptyArray;
+        UserListInfo.prototype.AllInfos = $util.emptyArray;
 
-        UserList.create = function create(properties) {
-            return new UserList(properties);
+        UserListInfo.create = function create(properties) {
+            return new UserListInfo(properties);
         };
 
-        UserList.encode = function encode(message, writer) {
+        UserListInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AllInfos != null && message.AllInfos.length)
@@ -2708,14 +3074,14 @@ $root.go = (function() {
             return writer;
         };
 
-        UserList.encodeDelimited = function encodeDelimited(message, writer) {
+        UserListInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        UserList.decode = function decode(reader, length) {
+        UserListInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.UserList();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.UserListInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -2732,13 +3098,13 @@ $root.go = (function() {
             return message;
         };
 
-        UserList.decodeDelimited = function decodeDelimited(reader) {
+        UserListInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        UserList.verify = function verify(message) {
+        UserListInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AllInfos != null && message.hasOwnProperty("AllInfos")) {
@@ -2753,24 +3119,24 @@ $root.go = (function() {
             return null;
         };
 
-        UserList.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.UserList)
+        UserListInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.UserListInfo)
                 return object;
-            var message = new $root.go.UserList();
+            var message = new $root.go.UserListInfo();
             if (object.AllInfos) {
                 if (!Array.isArray(object.AllInfos))
-                    throw TypeError(".go.UserList.AllInfos: array expected");
+                    throw TypeError(".go.UserListInfo.AllInfos: array expected");
                 message.AllInfos = [];
                 for (var i = 0; i < object.AllInfos.length; ++i) {
                     if (typeof object.AllInfos[i] !== "object")
-                        throw TypeError(".go.UserList.AllInfos: object expected");
+                        throw TypeError(".go.UserListInfo.AllInfos: object expected");
                     message.AllInfos[i] = $root.go.PlayerInfo.fromObject(object.AllInfos[i]);
                 }
             }
             return message;
         };
 
-        UserList.toObject = function toObject(message, options) {
+        UserListInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -2784,11 +3150,403 @@ $root.go = (function() {
             return object;
         };
 
-        UserList.prototype.toJSON = function toJSON() {
+        UserListInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return UserList;
+        return UserListInfo;
+    })();
+
+    go.PlayerRecord = (function() {
+
+        function PlayerRecord(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        PlayerRecord.prototype.User = null;
+        PlayerRecord.prototype.Twice = 0;
+        PlayerRecord.prototype.Ranking = 0;
+        PlayerRecord.prototype.Bankroll = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        PlayerRecord.prototype.WinLos = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        PlayerRecord.create = function create(properties) {
+            return new PlayerRecord(properties);
+        };
+
+        PlayerRecord.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.User != null && Object.hasOwnProperty.call(message, "User"))
+                $root.go.PlayerInfo.encode(message.User, writer.uint32(10).fork()).ldelim();
+            if (message.Twice != null && Object.hasOwnProperty.call(message, "Twice"))
+                writer.uint32(16).int32(message.Twice);
+            if (message.Ranking != null && Object.hasOwnProperty.call(message, "Ranking"))
+                writer.uint32(24).int32(message.Ranking);
+            if (message.Bankroll != null && Object.hasOwnProperty.call(message, "Bankroll"))
+                writer.uint32(32).int64(message.Bankroll);
+            if (message.WinLos != null && Object.hasOwnProperty.call(message, "WinLos"))
+                writer.uint32(40).int64(message.WinLos);
+            return writer;
+        };
+
+        PlayerRecord.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        PlayerRecord.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.PlayerRecord();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.User = $root.go.PlayerInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Twice = reader.int32();
+                    break;
+                case 3:
+                    message.Ranking = reader.int32();
+                    break;
+                case 4:
+                    message.Bankroll = reader.int64();
+                    break;
+                case 5:
+                    message.WinLos = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        PlayerRecord.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        PlayerRecord.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.User != null && message.hasOwnProperty("User")) {
+                var error = $root.go.PlayerInfo.verify(message.User);
+                if (error)
+                    return "User." + error;
+            }
+            if (message.Twice != null && message.hasOwnProperty("Twice"))
+                if (!$util.isInteger(message.Twice))
+                    return "Twice: integer expected";
+            if (message.Ranking != null && message.hasOwnProperty("Ranking"))
+                if (!$util.isInteger(message.Ranking))
+                    return "Ranking: integer expected";
+            if (message.Bankroll != null && message.hasOwnProperty("Bankroll"))
+                if (!$util.isInteger(message.Bankroll) && !(message.Bankroll && $util.isInteger(message.Bankroll.low) && $util.isInteger(message.Bankroll.high)))
+                    return "Bankroll: integer|Long expected";
+            if (message.WinLos != null && message.hasOwnProperty("WinLos"))
+                if (!$util.isInteger(message.WinLos) && !(message.WinLos && $util.isInteger(message.WinLos.low) && $util.isInteger(message.WinLos.high)))
+                    return "WinLos: integer|Long expected";
+            return null;
+        };
+
+        PlayerRecord.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.PlayerRecord)
+                return object;
+            var message = new $root.go.PlayerRecord();
+            if (object.User != null) {
+                if (typeof object.User !== "object")
+                    throw TypeError(".go.PlayerRecord.User: object expected");
+                message.User = $root.go.PlayerInfo.fromObject(object.User);
+            }
+            if (object.Twice != null)
+                message.Twice = object.Twice | 0;
+            if (object.Ranking != null)
+                message.Ranking = object.Ranking | 0;
+            if (object.Bankroll != null)
+                if ($util.Long)
+                    (message.Bankroll = $util.Long.fromValue(object.Bankroll)).unsigned = false;
+                else if (typeof object.Bankroll === "string")
+                    message.Bankroll = parseInt(object.Bankroll, 10);
+                else if (typeof object.Bankroll === "number")
+                    message.Bankroll = object.Bankroll;
+                else if (typeof object.Bankroll === "object")
+                    message.Bankroll = new $util.LongBits(object.Bankroll.low >>> 0, object.Bankroll.high >>> 0).toNumber();
+            if (object.WinLos != null)
+                if ($util.Long)
+                    (message.WinLos = $util.Long.fromValue(object.WinLos)).unsigned = false;
+                else if (typeof object.WinLos === "string")
+                    message.WinLos = parseInt(object.WinLos, 10);
+                else if (typeof object.WinLos === "number")
+                    message.WinLos = object.WinLos;
+                else if (typeof object.WinLos === "object")
+                    message.WinLos = new $util.LongBits(object.WinLos.low >>> 0, object.WinLos.high >>> 0).toNumber();
+            return message;
+        };
+
+        PlayerRecord.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.User = null;
+                object.Twice = 0;
+                object.Ranking = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Bankroll = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Bankroll = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.WinLos = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WinLos = options.longs === String ? "0" : 0;
+            }
+            if (message.User != null && message.hasOwnProperty("User"))
+                object.User = $root.go.PlayerInfo.toObject(message.User, options);
+            if (message.Twice != null && message.hasOwnProperty("Twice"))
+                object.Twice = message.Twice;
+            if (message.Ranking != null && message.hasOwnProperty("Ranking"))
+                object.Ranking = message.Ranking;
+            if (message.Bankroll != null && message.hasOwnProperty("Bankroll"))
+                if (typeof message.Bankroll === "number")
+                    object.Bankroll = options.longs === String ? String(message.Bankroll) : message.Bankroll;
+                else
+                    object.Bankroll = options.longs === String ? $util.Long.prototype.toString.call(message.Bankroll) : options.longs === Number ? new $util.LongBits(message.Bankroll.low >>> 0, message.Bankroll.high >>> 0).toNumber() : message.Bankroll;
+            if (message.WinLos != null && message.hasOwnProperty("WinLos"))
+                if (typeof message.WinLos === "number")
+                    object.WinLos = options.longs === String ? String(message.WinLos) : message.WinLos;
+                else
+                    object.WinLos = options.longs === String ? $util.Long.prototype.toString.call(message.WinLos) : options.longs === Number ? new $util.LongBits(message.WinLos.low >>> 0, message.WinLos.high >>> 0).toNumber() : message.WinLos;
+            return object;
+        };
+
+        PlayerRecord.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PlayerRecord;
+    })();
+
+    go.GameRecord = (function() {
+
+        function GameRecord(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameRecord.prototype.card = null;
+        GameRecord.prototype.isWon = false;
+
+        GameRecord.create = function create(properties) {
+            return new GameRecord(properties);
+        };
+
+        GameRecord.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.card != null && Object.hasOwnProperty.call(message, "card"))
+                $root.go.CardInfo.encode(message.card, writer.uint32(10).fork()).ldelim();
+            if (message.isWon != null && Object.hasOwnProperty.call(message, "isWon"))
+                writer.uint32(24).bool(message.isWon);
+            return writer;
+        };
+
+        GameRecord.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameRecord.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecord();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.card = $root.go.CardInfo.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.isWon = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameRecord.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameRecord.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.card != null && message.hasOwnProperty("card")) {
+                var error = $root.go.CardInfo.verify(message.card);
+                if (error)
+                    return "card." + error;
+            }
+            if (message.isWon != null && message.hasOwnProperty("isWon"))
+                if (typeof message.isWon !== "boolean")
+                    return "isWon: boolean expected";
+            return null;
+        };
+
+        GameRecord.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.GameRecord)
+                return object;
+            var message = new $root.go.GameRecord();
+            if (object.card != null) {
+                if (typeof object.card !== "object")
+                    throw TypeError(".go.GameRecord.card: object expected");
+                message.card = $root.go.CardInfo.fromObject(object.card);
+            }
+            if (object.isWon != null)
+                message.isWon = Boolean(object.isWon);
+            return message;
+        };
+
+        GameRecord.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.card = null;
+                object.isWon = false;
+            }
+            if (message.card != null && message.hasOwnProperty("card"))
+                object.card = $root.go.CardInfo.toObject(message.card, options);
+            if (message.isWon != null && message.hasOwnProperty("isWon"))
+                object.isWon = message.isWon;
+            return object;
+        };
+
+        GameRecord.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameRecord;
+    })();
+
+    go.GameRecordList = (function() {
+
+        function GameRecordList(properties) {
+            this.list = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameRecordList.prototype.list = $util.emptyArray;
+
+        GameRecordList.create = function create(properties) {
+            return new GameRecordList(properties);
+        };
+
+        GameRecordList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.list != null && message.list.length)
+                for (var i = 0; i < message.list.length; ++i)
+                    $root.go.GameRecord.encode(message.list[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        GameRecordList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameRecordList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecordList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.list && message.list.length))
+                        message.list = [];
+                    message.list.push($root.go.GameRecord.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameRecordList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameRecordList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.list != null && message.hasOwnProperty("list")) {
+                if (!Array.isArray(message.list))
+                    return "list: array expected";
+                for (var i = 0; i < message.list.length; ++i) {
+                    var error = $root.go.GameRecord.verify(message.list[i]);
+                    if (error)
+                        return "list." + error;
+                }
+            }
+            return null;
+        };
+
+        GameRecordList.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.GameRecordList)
+                return object;
+            var message = new $root.go.GameRecordList();
+            if (object.list) {
+                if (!Array.isArray(object.list))
+                    throw TypeError(".go.GameRecordList.list: array expected");
+                message.list = [];
+                for (var i = 0; i < object.list.length; ++i) {
+                    if (typeof object.list[i] !== "object")
+                        throw TypeError(".go.GameRecordList.list: object expected");
+                    message.list[i] = $root.go.GameRecord.fromObject(object.list[i]);
+                }
+            }
+            return message;
+        };
+
+        GameRecordList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.list = [];
+            if (message.list && message.list.length) {
+                object.list = [];
+                for (var j = 0; j < message.list.length; ++j)
+                    object.list[j] = $root.go.GameRecord.toObject(message.list[j], options);
+            }
+            return object;
+        };
+
+        GameRecordList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameRecordList;
     })();
 
     go.ReqEnterGame = (function() {
@@ -3052,6 +3810,150 @@ $root.go = (function() {
         return ReqChangeTable;
     })();
 
+    go.BeOut = (function() {
+
+        function BeOut(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BeOut.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BeOut.prototype.GameID = 0;
+        BeOut.prototype.Code = 0;
+        BeOut.prototype.Hints = "";
+
+        BeOut.create = function create(properties) {
+            return new BeOut(properties);
+        };
+
+        BeOut.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(16).uint32(message.GameID);
+            if (message.Code != null && Object.hasOwnProperty.call(message, "Code"))
+                writer.uint32(24).uint32(message.Code);
+            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
+                writer.uint32(34).string(message.Hints);
+            return writer;
+        };
+
+        BeOut.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BeOut.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.BeOut();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.GameID = reader.uint32();
+                    break;
+                case 3:
+                    message.Code = reader.uint32();
+                    break;
+                case 4:
+                    message.Hints = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BeOut.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BeOut.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID))
+                    return "GameID: integer expected";
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                if (!$util.isInteger(message.Code))
+                    return "Code: integer expected";
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                if (!$util.isString(message.Hints))
+                    return "Hints: string expected";
+            return null;
+        };
+
+        BeOut.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.BeOut)
+                return object;
+            var message = new $root.go.BeOut();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.GameID != null)
+                message.GameID = object.GameID >>> 0;
+            if (object.Code != null)
+                message.Code = object.Code >>> 0;
+            if (object.Hints != null)
+                message.Hints = String(object.Hints);
+            return message;
+        };
+
+        BeOut.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.GameID = 0;
+                object.Code = 0;
+                object.Hints = "";
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                object.GameID = message.GameID;
+            if (message.Code != null && message.hasOwnProperty("Code"))
+                object.Code = message.Code;
+            if (message.Hints != null && message.hasOwnProperty("Hints"))
+                object.Hints = message.Hints;
+            return object;
+        };
+
+        BeOut.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BeOut;
+    })();
+
     go.NotifyChangeGold = (function() {
 
         function NotifyChangeGold(properties) {
@@ -3063,7 +3965,9 @@ $root.go = (function() {
 
         NotifyChangeGold.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         NotifyChangeGold.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        NotifyChangeGold.prototype.AlterGold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         NotifyChangeGold.prototype.Code = 0;
+        NotifyChangeGold.prototype.Reason = "";
 
         NotifyChangeGold.create = function create(properties) {
             return new NotifyChangeGold(properties);
@@ -3076,8 +3980,12 @@ $root.go = (function() {
                 writer.uint32(8).uint64(message.UserID);
             if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
                 writer.uint32(16).int64(message.Gold);
+            if (message.AlterGold != null && Object.hasOwnProperty.call(message, "AlterGold"))
+                writer.uint32(24).int64(message.AlterGold);
             if (message.Code != null && Object.hasOwnProperty.call(message, "Code"))
-                writer.uint32(24).uint32(message.Code);
+                writer.uint32(32).uint32(message.Code);
+            if (message.Reason != null && Object.hasOwnProperty.call(message, "Reason"))
+                writer.uint32(42).string(message.Reason);
             return writer;
         };
 
@@ -3099,7 +4007,13 @@ $root.go = (function() {
                     message.Gold = reader.int64();
                     break;
                 case 3:
+                    message.AlterGold = reader.int64();
+                    break;
+                case 4:
                     message.Code = reader.uint32();
+                    break;
+                case 5:
+                    message.Reason = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3124,9 +4038,15 @@ $root.go = (function() {
             if (message.Gold != null && message.hasOwnProperty("Gold"))
                 if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
                     return "Gold: integer|Long expected";
+            if (message.AlterGold != null && message.hasOwnProperty("AlterGold"))
+                if (!$util.isInteger(message.AlterGold) && !(message.AlterGold && $util.isInteger(message.AlterGold.low) && $util.isInteger(message.AlterGold.high)))
+                    return "AlterGold: integer|Long expected";
             if (message.Code != null && message.hasOwnProperty("Code"))
                 if (!$util.isInteger(message.Code))
                     return "Code: integer expected";
+            if (message.Reason != null && message.hasOwnProperty("Reason"))
+                if (!$util.isString(message.Reason))
+                    return "Reason: string expected";
             return null;
         };
 
@@ -3152,8 +4072,19 @@ $root.go = (function() {
                     message.Gold = object.Gold;
                 else if (typeof object.Gold === "object")
                     message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
+            if (object.AlterGold != null)
+                if ($util.Long)
+                    (message.AlterGold = $util.Long.fromValue(object.AlterGold)).unsigned = false;
+                else if (typeof object.AlterGold === "string")
+                    message.AlterGold = parseInt(object.AlterGold, 10);
+                else if (typeof object.AlterGold === "number")
+                    message.AlterGold = object.AlterGold;
+                else if (typeof object.AlterGold === "object")
+                    message.AlterGold = new $util.LongBits(object.AlterGold.low >>> 0, object.AlterGold.high >>> 0).toNumber();
             if (object.Code != null)
                 message.Code = object.Code >>> 0;
+            if (object.Reason != null)
+                message.Reason = String(object.Reason);
             return message;
         };
 
@@ -3172,7 +4103,13 @@ $root.go = (function() {
                     object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.Gold = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.AlterGold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.AlterGold = options.longs === String ? "0" : 0;
                 object.Code = 0;
+                object.Reason = "";
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -3184,8 +4121,15 @@ $root.go = (function() {
                     object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
                 else
                     object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
+            if (message.AlterGold != null && message.hasOwnProperty("AlterGold"))
+                if (typeof message.AlterGold === "number")
+                    object.AlterGold = options.longs === String ? String(message.AlterGold) : message.AlterGold;
+                else
+                    object.AlterGold = options.longs === String ? $util.Long.prototype.toString.call(message.AlterGold) : options.longs === Number ? new $util.LongBits(message.AlterGold.low >>> 0, message.AlterGold.high >>> 0).toNumber() : message.AlterGold;
             if (message.Code != null && message.hasOwnProperty("Code"))
                 object.Code = message.Code;
+            if (message.Reason != null && message.hasOwnProperty("Reason"))
+                object.Reason = message.Reason;
             return object;
         };
 
@@ -3194,1844 +4138,6 @@ $root.go = (function() {
         };
 
         return NotifyChangeGold;
-    })();
-
-    go.MoneyCalculateInfo = (function() {
-
-        function MoneyCalculateInfo(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        MoneyCalculateInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        MoneyCalculateInfo.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        MoneyCalculateInfo.prototype.ChangeValue = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        MoneyCalculateInfo.prototype.Reason = "";
-
-        MoneyCalculateInfo.create = function create(properties) {
-            return new MoneyCalculateInfo(properties);
-        };
-
-        MoneyCalculateInfo.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
-                writer.uint32(16).uint64(message.Money);
-            if (message.ChangeValue != null && Object.hasOwnProperty.call(message, "ChangeValue"))
-                writer.uint32(24).int64(message.ChangeValue);
-            if (message.Reason != null && Object.hasOwnProperty.call(message, "Reason"))
-                writer.uint32(34).string(message.Reason);
-            return writer;
-        };
-
-        MoneyCalculateInfo.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        MoneyCalculateInfo.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.MoneyCalculateInfo();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.Money = reader.uint64();
-                    break;
-                case 3:
-                    message.ChangeValue = reader.int64();
-                    break;
-                case 4:
-                    message.Reason = reader.string();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        MoneyCalculateInfo.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        MoneyCalculateInfo.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
-                    return "Money: integer|Long expected";
-            if (message.ChangeValue != null && message.hasOwnProperty("ChangeValue"))
-                if (!$util.isInteger(message.ChangeValue) && !(message.ChangeValue && $util.isInteger(message.ChangeValue.low) && $util.isInteger(message.ChangeValue.high)))
-                    return "ChangeValue: integer|Long expected";
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                if (!$util.isString(message.Reason))
-                    return "Reason: string expected";
-            return null;
-        };
-
-        MoneyCalculateInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.MoneyCalculateInfo)
-                return object;
-            var message = new $root.go.MoneyCalculateInfo();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.Money != null)
-                if ($util.Long)
-                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = true;
-                else if (typeof object.Money === "string")
-                    message.Money = parseInt(object.Money, 10);
-                else if (typeof object.Money === "number")
-                    message.Money = object.Money;
-                else if (typeof object.Money === "object")
-                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber(true);
-            if (object.ChangeValue != null)
-                if ($util.Long)
-                    (message.ChangeValue = $util.Long.fromValue(object.ChangeValue)).unsigned = false;
-                else if (typeof object.ChangeValue === "string")
-                    message.ChangeValue = parseInt(object.ChangeValue, 10);
-                else if (typeof object.ChangeValue === "number")
-                    message.ChangeValue = object.ChangeValue;
-                else if (typeof object.ChangeValue === "object")
-                    message.ChangeValue = new $util.LongBits(object.ChangeValue.low >>> 0, object.ChangeValue.high >>> 0).toNumber();
-            if (object.Reason != null)
-                message.Reason = String(object.Reason);
-            return message;
-        };
-
-        MoneyCalculateInfo.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Money = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.ChangeValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.ChangeValue = options.longs === String ? "0" : 0;
-                object.Reason = "";
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (typeof message.Money === "number")
-                    object.Money = options.longs === String ? String(message.Money) : message.Money;
-                else
-                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber(true) : message.Money;
-            if (message.ChangeValue != null && message.hasOwnProperty("ChangeValue"))
-                if (typeof message.ChangeValue === "number")
-                    object.ChangeValue = options.longs === String ? String(message.ChangeValue) : message.ChangeValue;
-                else
-                    object.ChangeValue = options.longs === String ? $util.Long.prototype.toString.call(message.ChangeValue) : options.longs === Number ? new $util.LongBits(message.ChangeValue.low >>> 0, message.ChangeValue.high >>> 0).toNumber() : message.ChangeValue;
-            if (message.Reason != null && message.hasOwnProperty("Reason"))
-                object.Reason = message.Reason;
-            return object;
-        };
-
-        MoneyCalculateInfo.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return MoneyCalculateInfo;
-    })();
-
-    go.StateReady = (function() {
-
-        function StateReady(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StateReady.prototype.Times = null;
-
-        StateReady.create = function create(properties) {
-            return new StateReady(properties);
-        };
-
-        StateReady.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        StateReady.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StateReady.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StateReady();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StateReady.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StateReady.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        StateReady.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StateReady)
-                return object;
-            var message = new $root.go.StateReady();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StateReady.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        StateReady.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        StateReady.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StateReady;
-    })();
-
-    go.StateFree = (function() {
-
-        function StateFree(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StateFree.prototype.Times = null;
-
-        StateFree.create = function create(properties) {
-            return new StateFree(properties);
-        };
-
-        StateFree.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        StateFree.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StateFree.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StateFree();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StateFree.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StateFree.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        StateFree.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StateFree)
-                return object;
-            var message = new $root.go.StateFree();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StateFree.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        StateFree.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        StateFree.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StateFree;
-    })();
-
-    go.StateStart = (function() {
-
-        function StateStart(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StateStart.prototype.Times = null;
-
-        StateStart.create = function create(properties) {
-            return new StateStart(properties);
-        };
-
-        StateStart.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        StateStart.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StateStart.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StateStart();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StateStart.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StateStart.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        StateStart.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StateStart)
-                return object;
-            var message = new $root.go.StateStart();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StateStart.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        StateStart.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        StateStart.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StateStart;
-    })();
-
-    go.StatePlaying = (function() {
-
-        function StatePlaying(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StatePlaying.prototype.Times = null;
-
-        StatePlaying.create = function create(properties) {
-            return new StatePlaying(properties);
-        };
-
-        StatePlaying.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        StatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StatePlaying.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StatePlaying();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StatePlaying.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StatePlaying.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        StatePlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StatePlaying)
-                return object;
-            var message = new $root.go.StatePlaying();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StatePlaying.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        StatePlaying.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        StatePlaying.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StatePlaying;
-    })();
-
-    go.StateOver = (function() {
-
-        function StateOver(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StateOver.prototype.Times = null;
-
-        StateOver.create = function create(properties) {
-            return new StateOver(properties);
-        };
-
-        StateOver.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        StateOver.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StateOver.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StateOver();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StateOver.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StateOver.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        StateOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StateOver)
-                return object;
-            var message = new $root.go.StateOver();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StateOver.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        StateOver.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        StateOver.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StateOver;
-    })();
-
-    go.StateCall = (function() {
-
-        function StateCall(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        StateCall.prototype.Times = null;
-        StateCall.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-        StateCall.create = function create(properties) {
-            return new StateCall(properties);
-        };
-
-        StateCall.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(16).uint64(message.UserID);
-            return writer;
-        };
-
-        StateCall.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        StateCall.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.StateCall();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.UserID = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        StateCall.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        StateCall.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            return null;
-        };
-
-        StateCall.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.StateCall)
-                return object;
-            var message = new $root.go.StateCall();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".go.StateCall.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            return message;
-        };
-
-        StateCall.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.Times = null;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-            }
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            return object;
-        };
-
-        StateCall.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return StateCall;
-    })();
-
-    go.Host = (function() {
-
-        function Host(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        Host.prototype.IsWant = false;
-
-        Host.create = function create(properties) {
-            return new Host(properties);
-        };
-
-        Host.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(8).bool(message.IsWant);
-            return writer;
-        };
-
-        Host.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        Host.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.Host();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        Host.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        Host.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        Host.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.Host)
-                return object;
-            var message = new $root.go.Host();
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        Host.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsWant = false;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        Host.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Host;
-    })();
-
-    go.HostEx = (function() {
-
-        function HostEx(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        HostEx.prototype.IsWant = false;
-
-        HostEx.create = function create(properties) {
-            return new HostEx(properties);
-        };
-
-        HostEx.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(8).bool(message.IsWant);
-            return writer;
-        };
-
-        HostEx.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        HostEx.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.HostEx();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        HostEx.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        HostEx.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        HostEx.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.HostEx)
-                return object;
-            var message = new $root.go.HostEx();
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        HostEx.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsWant = false;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        HostEx.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return HostEx;
-    })();
-
-    go.Call = (function() {
-
-        function Call(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        Call.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        Call.prototype.Score = 0;
-
-        Call.create = function create(properties) {
-            return new Call(properties);
-        };
-
-        Call.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.Score != null && Object.hasOwnProperty.call(message, "Score"))
-                writer.uint32(16).uint32(message.Score);
-            return writer;
-        };
-
-        Call.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        Call.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.Call();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.Score = reader.uint32();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        Call.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        Call.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.Score != null && message.hasOwnProperty("Score"))
-                if (!$util.isInteger(message.Score))
-                    return "Score: integer expected";
-            return null;
-        };
-
-        Call.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.Call)
-                return object;
-            var message = new $root.go.Call();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.Score != null)
-                message.Score = object.Score >>> 0;
-            return message;
-        };
-
-        Call.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.Score = 0;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.Score != null && message.hasOwnProperty("Score"))
-                object.Score = message.Score;
-            return object;
-        };
-
-        Call.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Call;
-    })();
-
-    go.BeOut = (function() {
-
-        function BeOut(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        BeOut.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        BeOut.prototype.Code = 0;
-        BeOut.prototype.Hints = $util.newBuffer([]);
-
-        BeOut.create = function create(properties) {
-            return new BeOut(properties);
-        };
-
-        BeOut.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.Code != null && Object.hasOwnProperty.call(message, "Code"))
-                writer.uint32(16).uint32(message.Code);
-            if (message.Hints != null && Object.hasOwnProperty.call(message, "Hints"))
-                writer.uint32(26).bytes(message.Hints);
-            return writer;
-        };
-
-        BeOut.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        BeOut.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.BeOut();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.Code = reader.uint32();
-                    break;
-                case 3:
-                    message.Hints = reader.bytes();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        BeOut.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        BeOut.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                if (!$util.isInteger(message.Code))
-                    return "Code: integer expected";
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                if (!(message.Hints && typeof message.Hints.length === "number" || $util.isString(message.Hints)))
-                    return "Hints: buffer expected";
-            return null;
-        };
-
-        BeOut.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.BeOut)
-                return object;
-            var message = new $root.go.BeOut();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.Code != null)
-                message.Code = object.Code >>> 0;
-            if (object.Hints != null)
-                if (typeof object.Hints === "string")
-                    $util.base64.decode(object.Hints, message.Hints = $util.newBuffer($util.base64.length(object.Hints)), 0);
-                else if (object.Hints.length)
-                    message.Hints = object.Hints;
-            return message;
-        };
-
-        BeOut.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.Code = 0;
-                if (options.bytes === String)
-                    object.Hints = "";
-                else {
-                    object.Hints = [];
-                    if (options.bytes !== Array)
-                        object.Hints = $util.newBuffer(object.Hints);
-                }
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.Code != null && message.hasOwnProperty("Code"))
-                object.Code = message.Code;
-            if (message.Hints != null && message.hasOwnProperty("Hints"))
-                object.Hints = options.bytes === String ? $util.base64.encode(message.Hints, 0, message.Hints.length) : options.bytes === Array ? Array.prototype.slice.call(message.Hints) : message.Hints;
-            return object;
-        };
-
-        BeOut.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return BeOut;
-    })();
-
-    go.Bet = (function() {
-
-        function Bet(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        Bet.prototype.AreaId = 0;
-        Bet.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        Bet.create = function create(properties) {
-            return new Bet(properties);
-        };
-
-        Bet.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.AreaId != null && Object.hasOwnProperty.call(message, "AreaId"))
-                writer.uint32(8).int32(message.AreaId);
-            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
-                writer.uint32(16).int64(message.Money);
-            return writer;
-        };
-
-        Bet.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        Bet.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.Bet();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.AreaId = reader.int32();
-                    break;
-                case 2:
-                    message.Money = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        Bet.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        Bet.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.AreaId != null && message.hasOwnProperty("AreaId"))
-                if (!$util.isInteger(message.AreaId))
-                    return "AreaId: integer expected";
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
-                    return "Money: integer|Long expected";
-            return null;
-        };
-
-        Bet.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.Bet)
-                return object;
-            var message = new $root.go.Bet();
-            if (object.AreaId != null)
-                message.AreaId = object.AreaId | 0;
-            if (object.Money != null)
-                if ($util.Long)
-                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
-                else if (typeof object.Money === "string")
-                    message.Money = parseInt(object.Money, 10);
-                else if (typeof object.Money === "number")
-                    message.Money = object.Money;
-                else if (typeof object.Money === "object")
-                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
-            return message;
-        };
-
-        Bet.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.AreaId = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Money = options.longs === String ? "0" : 0;
-            }
-            if (message.AreaId != null && message.hasOwnProperty("AreaId"))
-                object.AreaId = message.AreaId;
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (typeof message.Money === "number")
-                    object.Money = options.longs === String ? String(message.Money) : message.Money;
-                else
-                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
-            return object;
-        };
-
-        Bet.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Bet;
-    })();
-
-    go.BetResult = (function() {
-
-        function BetResult(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        BetResult.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        BetResult.prototype.AreaId = 0;
-        BetResult.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        BetResult.create = function create(properties) {
-            return new BetResult(properties);
-        };
-
-        BetResult.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
-                writer.uint32(8).uint64(message.UserId);
-            if (message.AreaId != null && Object.hasOwnProperty.call(message, "AreaId"))
-                writer.uint32(16).int32(message.AreaId);
-            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
-                writer.uint32(24).int64(message.Money);
-            return writer;
-        };
-
-        BetResult.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        BetResult.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.BetResult();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserId = reader.uint64();
-                    break;
-                case 2:
-                    message.AreaId = reader.int32();
-                    break;
-                case 3:
-                    message.Money = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        BetResult.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        BetResult.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
-                    return "UserId: integer|Long expected";
-            if (message.AreaId != null && message.hasOwnProperty("AreaId"))
-                if (!$util.isInteger(message.AreaId))
-                    return "AreaId: integer expected";
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
-                    return "Money: integer|Long expected";
-            return null;
-        };
-
-        BetResult.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.BetResult)
-                return object;
-            var message = new $root.go.BetResult();
-            if (object.UserId != null)
-                if ($util.Long)
-                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
-                else if (typeof object.UserId === "string")
-                    message.UserId = parseInt(object.UserId, 10);
-                else if (typeof object.UserId === "number")
-                    message.UserId = object.UserId;
-                else if (typeof object.UserId === "object")
-                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
-            if (object.AreaId != null)
-                message.AreaId = object.AreaId | 0;
-            if (object.Money != null)
-                if ($util.Long)
-                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
-                else if (typeof object.Money === "string")
-                    message.Money = parseInt(object.Money, 10);
-                else if (typeof object.Money === "number")
-                    message.Money = object.Money;
-                else if (typeof object.Money === "object")
-                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
-            return message;
-        };
-
-        BetResult.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserId = options.longs === String ? "0" : 0;
-                object.AreaId = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.Money = options.longs === String ? "0" : 0;
-            }
-            if (message.UserId != null && message.hasOwnProperty("UserId"))
-                if (typeof message.UserId === "number")
-                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
-                else
-                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
-            if (message.AreaId != null && message.hasOwnProperty("AreaId"))
-                object.AreaId = message.AreaId;
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (typeof message.Money === "number")
-                    object.Money = options.longs === String ? String(message.Money) : message.Money;
-                else
-                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
-            return object;
-        };
-
-        BetResult.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return BetResult;
-    })();
-
-    go.PlayerRecord = (function() {
-
-        function PlayerRecord(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        PlayerRecord.prototype.User = null;
-        PlayerRecord.prototype.Twice = 0;
-        PlayerRecord.prototype.Ranking = 0;
-        PlayerRecord.prototype.Bankroll = 0;
-        PlayerRecord.prototype.WinLos = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        PlayerRecord.create = function create(properties) {
-            return new PlayerRecord(properties);
-        };
-
-        PlayerRecord.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.User != null && Object.hasOwnProperty.call(message, "User"))
-                $root.go.PlayerInfo.encode(message.User, writer.uint32(10).fork()).ldelim();
-            if (message.Twice != null && Object.hasOwnProperty.call(message, "Twice"))
-                writer.uint32(16).int32(message.Twice);
-            if (message.Ranking != null && Object.hasOwnProperty.call(message, "Ranking"))
-                writer.uint32(24).int32(message.Ranking);
-            if (message.Bankroll != null && Object.hasOwnProperty.call(message, "Bankroll"))
-                writer.uint32(32).int32(message.Bankroll);
-            if (message.WinLos != null && Object.hasOwnProperty.call(message, "WinLos"))
-                writer.uint32(40).int64(message.WinLos);
-            return writer;
-        };
-
-        PlayerRecord.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        PlayerRecord.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.PlayerRecord();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.User = $root.go.PlayerInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.Twice = reader.int32();
-                    break;
-                case 3:
-                    message.Ranking = reader.int32();
-                    break;
-                case 4:
-                    message.Bankroll = reader.int32();
-                    break;
-                case 5:
-                    message.WinLos = reader.int64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        PlayerRecord.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        PlayerRecord.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.User != null && message.hasOwnProperty("User")) {
-                var error = $root.go.PlayerInfo.verify(message.User);
-                if (error)
-                    return "User." + error;
-            }
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
-                if (!$util.isInteger(message.Twice))
-                    return "Twice: integer expected";
-            if (message.Ranking != null && message.hasOwnProperty("Ranking"))
-                if (!$util.isInteger(message.Ranking))
-                    return "Ranking: integer expected";
-            if (message.Bankroll != null && message.hasOwnProperty("Bankroll"))
-                if (!$util.isInteger(message.Bankroll))
-                    return "Bankroll: integer expected";
-            if (message.WinLos != null && message.hasOwnProperty("WinLos"))
-                if (!$util.isInteger(message.WinLos) && !(message.WinLos && $util.isInteger(message.WinLos.low) && $util.isInteger(message.WinLos.high)))
-                    return "WinLos: integer|Long expected";
-            return null;
-        };
-
-        PlayerRecord.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.PlayerRecord)
-                return object;
-            var message = new $root.go.PlayerRecord();
-            if (object.User != null) {
-                if (typeof object.User !== "object")
-                    throw TypeError(".go.PlayerRecord.User: object expected");
-                message.User = $root.go.PlayerInfo.fromObject(object.User);
-            }
-            if (object.Twice != null)
-                message.Twice = object.Twice | 0;
-            if (object.Ranking != null)
-                message.Ranking = object.Ranking | 0;
-            if (object.Bankroll != null)
-                message.Bankroll = object.Bankroll | 0;
-            if (object.WinLos != null)
-                if ($util.Long)
-                    (message.WinLos = $util.Long.fromValue(object.WinLos)).unsigned = false;
-                else if (typeof object.WinLos === "string")
-                    message.WinLos = parseInt(object.WinLos, 10);
-                else if (typeof object.WinLos === "number")
-                    message.WinLos = object.WinLos;
-                else if (typeof object.WinLos === "object")
-                    message.WinLos = new $util.LongBits(object.WinLos.low >>> 0, object.WinLos.high >>> 0).toNumber();
-            return message;
-        };
-
-        PlayerRecord.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.User = null;
-                object.Twice = 0;
-                object.Ranking = 0;
-                object.Bankroll = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.WinLos = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.WinLos = options.longs === String ? "0" : 0;
-            }
-            if (message.User != null && message.hasOwnProperty("User"))
-                object.User = $root.go.PlayerInfo.toObject(message.User, options);
-            if (message.Twice != null && message.hasOwnProperty("Twice"))
-                object.Twice = message.Twice;
-            if (message.Ranking != null && message.hasOwnProperty("Ranking"))
-                object.Ranking = message.Ranking;
-            if (message.Bankroll != null && message.hasOwnProperty("Bankroll"))
-                object.Bankroll = message.Bankroll;
-            if (message.WinLos != null && message.hasOwnProperty("WinLos"))
-                if (typeof message.WinLos === "number")
-                    object.WinLos = options.longs === String ? String(message.WinLos) : message.WinLos;
-                else
-                    object.WinLos = options.longs === String ? $util.Long.prototype.toString.call(message.WinLos) : options.longs === Number ? new $util.LongBits(message.WinLos.low >>> 0, message.WinLos.high >>> 0).toNumber() : message.WinLos;
-            return object;
-        };
-
-        PlayerRecord.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return PlayerRecord;
-    })();
-
-    go.GameRecord = (function() {
-
-        function GameRecord(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameRecord.prototype.Pork = $util.newBuffer([]);
-        GameRecord.prototype.Type = 0;
-        GameRecord.prototype.isWon = false;
-
-        GameRecord.create = function create(properties) {
-            return new GameRecord(properties);
-        };
-
-        GameRecord.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Pork != null && Object.hasOwnProperty.call(message, "Pork"))
-                writer.uint32(10).bytes(message.Pork);
-            if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
-                writer.uint32(16).int32(message.Type);
-            if (message.isWon != null && Object.hasOwnProperty.call(message, "isWon"))
-                writer.uint32(24).bool(message.isWon);
-            return writer;
-        };
-
-        GameRecord.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameRecord.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecord();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Pork = reader.bytes();
-                    break;
-                case 2:
-                    message.Type = reader.int32();
-                    break;
-                case 3:
-                    message.isWon = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameRecord.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameRecord.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Pork != null && message.hasOwnProperty("Pork"))
-                if (!(message.Pork && typeof message.Pork.length === "number" || $util.isString(message.Pork)))
-                    return "Pork: buffer expected";
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
-            if (message.isWon != null && message.hasOwnProperty("isWon"))
-                if (typeof message.isWon !== "boolean")
-                    return "isWon: boolean expected";
-            return null;
-        };
-
-        GameRecord.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameRecord)
-                return object;
-            var message = new $root.go.GameRecord();
-            if (object.Pork != null)
-                if (typeof object.Pork === "string")
-                    $util.base64.decode(object.Pork, message.Pork = $util.newBuffer($util.base64.length(object.Pork)), 0);
-                else if (object.Pork.length)
-                    message.Pork = object.Pork;
-            if (object.Type != null)
-                message.Type = object.Type | 0;
-            if (object.isWon != null)
-                message.isWon = Boolean(object.isWon);
-            return message;
-        };
-
-        GameRecord.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if (options.bytes === String)
-                    object.Pork = "";
-                else {
-                    object.Pork = [];
-                    if (options.bytes !== Array)
-                        object.Pork = $util.newBuffer(object.Pork);
-                }
-                object.Type = 0;
-                object.isWon = false;
-            }
-            if (message.Pork != null && message.hasOwnProperty("Pork"))
-                object.Pork = options.bytes === String ? $util.base64.encode(message.Pork, 0, message.Pork.length) : options.bytes === Array ? Array.prototype.slice.call(message.Pork) : message.Pork;
-            if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
-            if (message.isWon != null && message.hasOwnProperty("isWon"))
-                object.isWon = message.isWon;
-            return object;
-        };
-
-        GameRecord.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameRecord;
-    })();
-
-    go.GameRecordList = (function() {
-
-        function GameRecordList(properties) {
-            this.list = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameRecordList.prototype.list = $util.emptyArray;
-
-        GameRecordList.create = function create(properties) {
-            return new GameRecordList(properties);
-        };
-
-        GameRecordList.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.list != null && message.list.length)
-                for (var i = 0; i < message.list.length; ++i)
-                    $root.go.GameRecord.encode(message.list[i], writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        GameRecordList.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameRecordList.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameRecordList();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    if (!(message.list && message.list.length))
-                        message.list = [];
-                    message.list.push($root.go.GameRecord.decode(reader, reader.uint32()));
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameRecordList.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameRecordList.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.list != null && message.hasOwnProperty("list")) {
-                if (!Array.isArray(message.list))
-                    return "list: array expected";
-                for (var i = 0; i < message.list.length; ++i) {
-                    var error = $root.go.GameRecord.verify(message.list[i]);
-                    if (error)
-                        return "list." + error;
-                }
-            }
-            return null;
-        };
-
-        GameRecordList.fromObject = function fromObject(object) {
-            if (object instanceof $root.go.GameRecordList)
-                return object;
-            var message = new $root.go.GameRecordList();
-            if (object.list) {
-                if (!Array.isArray(object.list))
-                    throw TypeError(".go.GameRecordList.list: array expected");
-                message.list = [];
-                for (var i = 0; i < object.list.length; ++i) {
-                    if (typeof object.list[i] !== "object")
-                        throw TypeError(".go.GameRecordList.list: object expected");
-                    message.list[i] = $root.go.GameRecord.fromObject(object.list[i]);
-                }
-            }
-            return message;
-        };
-
-        GameRecordList.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.list = [];
-            if (message.list && message.list.length) {
-                object.list = [];
-                for (var j = 0; j < message.list.length; ++j)
-                    object.list[j] = $root.go.GameRecord.toObject(message.list[j], options);
-            }
-            return object;
-        };
-
-        GameRecordList.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameRecordList;
     })();
 
     return go;

@@ -7,32 +7,32 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum cowcow_msgs {
-    GameCowcowEnter = 50,
-    GameCowcowHost = 51,
-    GameCowcowSuperHost = 52,
-    GameCowcowReq = 53,
-    GameCowcowBetResp = 54,
-    GameCowcowOver = 55,
-    GameCowcowCheckout = 56,
+    GameCowcowEnter = 40,
+    GameCowcowHost = 41,
+    GameCowcowSuperHost = 42,
+    GameCowcowReq = 43,
+    GameCowcowBetResp = 44,
+    GameCowcowOver = 45,
+    GameCowcowCheckout = 46,
 }
 
 export var cowcow_packet_define = {
-    50: new LeafWsPacket(50, cowcow.GameCowcowEnter, "cowcow.GameCowcowEnter"),
-    51: new LeafWsPacket(51, cowcow.GameCowcowHost, "cowcow.GameCowcowHost"),
-    52: new LeafWsPacket(52, cowcow.GameCowcowSuperHost, "cowcow.GameCowcowSuperHost"),
-    53: new LeafWsPacket(53, cowcow.GameCowcowReq, "cowcow.GameCowcowReq"),
-    54: new LeafWsPacket(54, cowcow.GameCowcowBetResp, "cowcow.GameCowcowBetResp"),
-    55: new LeafWsPacket(55, cowcow.GameCowcowOver, "cowcow.GameCowcowOver"),
-    56: new LeafWsPacket(56, cowcow.GameCowcowCheckout, "cowcow.GameCowcowCheckout"),
+    40: new LeafWsPacket(40, cowcow.GameCowcowEnter, "cowcow.GameCowcowEnter"),
+    41: new LeafWsPacket(41, cowcow.GameCowcowHost, "cowcow.GameCowcowHost"),
+    42: new LeafWsPacket(42, cowcow.GameCowcowSuperHost, "cowcow.GameCowcowSuperHost"),
+    43: new LeafWsPacket(43, cowcow.GameCowcowReq, "cowcow.GameCowcowReq"),
+    44: new LeafWsPacket(44, cowcow.GameCowcowBetResp, "cowcow.GameCowcowBetResp"),
+    45: new LeafWsPacket(45, cowcow.GameCowcowOver, "cowcow.GameCowcowOver"),
+    46: new LeafWsPacket(46, cowcow.GameCowcowCheckout, "cowcow.GameCowcowCheckout"),
 }
 
 export class cowcow_request {
-    public static GameCowcowEnter( data:{ UserInfo:any, TimeStamp:number, Chips:number[], AwardAreas:any[], FreeTime:number, BetTime:number, OpenTime:number } ) { cowcow_packet_define[50].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowHost( data:{ UserID:number, IsWant:any } ) { cowcow_packet_define[51].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowSuperHost( data:{ UserID:number, IsWant:any } ) { cowcow_packet_define[52].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowReq( data:{ BetArea:number, BetScore:number } ) { cowcow_packet_define[53].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowBetResp( data:{ State:number, Hints:string } ) { cowcow_packet_define[54].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowOver( data:{ AwardArea:any, BankerCard:any, TianCard:any, XuanCard:any, DiCard:any, HuangCard:any } ) { cowcow_packet_define[55].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameCowcowCheckout( data:{ Acquire:number } ) { cowcow_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowEnter( data:{ UserInfo:any, TimeStamp:number, Chips:number[], AwardAreas:any[], FreeTime:number, BetTime:number, OpenTime:number } ) { cowcow_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowHost( data:{ UserID:number, IsWant:any } ) { cowcow_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowSuperHost( data:{ UserID:number, IsWant:any } ) { cowcow_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowReq( data:{ BetArea:number, BetScore:number } ) { cowcow_packet_define[43].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowBetResp( data:{ State:number, Hints:string } ) { cowcow_packet_define[44].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowOver( data:{ AwardArea:any, BankerCard:any, TianCard:any, XuanCard:any, DiCard:any, HuangCard:any } ) { cowcow_packet_define[45].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameCowcowCheckout( data:{ Acquire:number } ) { cowcow_packet_define[46].sendToChannel(ChannelDefine.game, data, false); }
 }
 

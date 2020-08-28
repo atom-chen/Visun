@@ -649,47 +649,41 @@ $root.baccarat = (function() {
         return BaccaratStateOver;
     })();
 
-    baccarat.BaccaratHost = (function() {
+    baccarat.BaccaratHostReq = (function() {
 
-        function BaccaratHost(properties) {
+        function BaccaratHostReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BaccaratHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        BaccaratHost.prototype.IsWant = false;
+        BaccaratHostReq.prototype.IsWant = false;
 
-        BaccaratHost.create = function create(properties) {
-            return new BaccaratHost(properties);
+        BaccaratHostReq.create = function create(properties) {
+            return new BaccaratHostReq(properties);
         };
 
-        BaccaratHost.encode = function encode(message, writer) {
+        BaccaratHostReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
             if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(16).bool(message.IsWant);
+                writer.uint32(8).bool(message.IsWant);
             return writer;
         };
 
-        BaccaratHost.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratHostReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BaccaratHost.decode = function decode(reader, length) {
+        BaccaratHostReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratHostReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
                     message.IsWant = reader.bool();
                     break;
                 default:
@@ -700,88 +694,65 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratHost.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratHostReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BaccaratHost.verify = function verify(message) {
+        BaccaratHostReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
             if (message.IsWant != null && message.hasOwnProperty("IsWant"))
                 if (typeof message.IsWant !== "boolean")
                     return "IsWant: boolean expected";
             return null;
         };
 
-        BaccaratHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratHost)
+        BaccaratHostReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratHostReq)
                 return object;
-            var message = new $root.baccarat.BaccaratHost();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            var message = new $root.baccarat.BaccaratHostReq();
             if (object.IsWant != null)
                 message.IsWant = Boolean(object.IsWant);
             return message;
         };
 
-        BaccaratHost.toObject = function toObject(message, options) {
+        BaccaratHostReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
+            if (options.defaults)
                 object.IsWant = false;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
             if (message.IsWant != null && message.hasOwnProperty("IsWant"))
                 object.IsWant = message.IsWant;
             return object;
         };
 
-        BaccaratHost.prototype.toJSON = function toJSON() {
+        BaccaratHostReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BaccaratHost;
+        return BaccaratHostReq;
     })();
 
-    baccarat.BaccaratSuperHost = (function() {
+    baccarat.BaccaratHostResp = (function() {
 
-        function BaccaratSuperHost(properties) {
+        function BaccaratHostResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BaccaratSuperHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        BaccaratSuperHost.prototype.IsWant = false;
+        BaccaratHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BaccaratHostResp.prototype.IsWant = false;
 
-        BaccaratSuperHost.create = function create(properties) {
-            return new BaccaratSuperHost(properties);
+        BaccaratHostResp.create = function create(properties) {
+            return new BaccaratHostResp(properties);
         };
 
-        BaccaratSuperHost.encode = function encode(message, writer) {
+        BaccaratHostResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -791,14 +762,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        BaccaratSuperHost.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratHostResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BaccaratSuperHost.decode = function decode(reader, length) {
+        BaccaratHostResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratSuperHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratHostResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -816,13 +787,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratSuperHost.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratHostResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BaccaratSuperHost.verify = function verify(message) {
+        BaccaratHostResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -834,10 +805,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        BaccaratSuperHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratSuperHost)
+        BaccaratHostResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratHostResp)
                 return object;
-            var message = new $root.baccarat.BaccaratSuperHost();
+            var message = new $root.baccarat.BaccaratHostResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -852,7 +823,7 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratSuperHost.toObject = function toObject(message, options) {
+        BaccaratHostResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -874,11 +845,214 @@ $root.baccarat = (function() {
             return object;
         };
 
-        BaccaratSuperHost.prototype.toJSON = function toJSON() {
+        BaccaratHostResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BaccaratSuperHost;
+        return BaccaratHostResp;
+    })();
+
+    baccarat.BaccaratSuperHostReq = (function() {
+
+        function BaccaratSuperHostReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratSuperHostReq.prototype.IsWant = false;
+
+        BaccaratSuperHostReq.create = function create(properties) {
+            return new BaccaratSuperHostReq(properties);
+        };
+
+        BaccaratSuperHostReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
+                writer.uint32(8).bool(message.IsWant);
+            return writer;
+        };
+
+        BaccaratSuperHostReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratSuperHostReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratSuperHostReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsWant = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratSuperHostReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratSuperHostReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                if (typeof message.IsWant !== "boolean")
+                    return "IsWant: boolean expected";
+            return null;
+        };
+
+        BaccaratSuperHostReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratSuperHostReq)
+                return object;
+            var message = new $root.baccarat.BaccaratSuperHostReq();
+            if (object.IsWant != null)
+                message.IsWant = Boolean(object.IsWant);
+            return message;
+        };
+
+        BaccaratSuperHostReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsWant = false;
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                object.IsWant = message.IsWant;
+            return object;
+        };
+
+        BaccaratSuperHostReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratSuperHostReq;
+    })();
+
+    baccarat.BaccaratSuperHostResp = (function() {
+
+        function BaccaratSuperHostResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratSuperHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BaccaratSuperHostResp.prototype.IsWant = false;
+
+        BaccaratSuperHostResp.create = function create(properties) {
+            return new BaccaratSuperHostResp(properties);
+        };
+
+        BaccaratSuperHostResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
+                writer.uint32(16).bool(message.IsWant);
+            return writer;
+        };
+
+        BaccaratSuperHostResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratSuperHostResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratSuperHostResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.IsWant = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratSuperHostResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratSuperHostResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                if (typeof message.IsWant !== "boolean")
+                    return "IsWant: boolean expected";
+            return null;
+        };
+
+        BaccaratSuperHostResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratSuperHostResp)
+                return object;
+            var message = new $root.baccarat.BaccaratSuperHostResp();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.IsWant != null)
+                message.IsWant = Boolean(object.IsWant);
+            return message;
+        };
+
+        BaccaratSuperHostResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                object.IsWant = false;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                object.IsWant = message.IsWant;
+            return object;
+        };
+
+        BaccaratSuperHostResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratSuperHostResp;
     })();
 
     baccarat.BaccaratBetReq = (function() {
@@ -1141,24 +1315,24 @@ $root.baccarat = (function() {
         return BaccaratBetResp;
     })();
 
-    baccarat.BaccaratOver = (function() {
+    baccarat.BaccaratOverResp = (function() {
 
-        function BaccaratOver(properties) {
+        function BaccaratOverResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BaccaratOver.prototype.AwardArea = $util.newBuffer([]);
-        BaccaratOver.prototype.PlayerCard = null;
-        BaccaratOver.prototype.BankerCard = null;
+        BaccaratOverResp.prototype.AwardArea = $util.newBuffer([]);
+        BaccaratOverResp.prototype.PlayerCard = null;
+        BaccaratOverResp.prototype.BankerCard = null;
 
-        BaccaratOver.create = function create(properties) {
-            return new BaccaratOver(properties);
+        BaccaratOverResp.create = function create(properties) {
+            return new BaccaratOverResp(properties);
         };
 
-        BaccaratOver.encode = function encode(message, writer) {
+        BaccaratOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
@@ -1170,14 +1344,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        BaccaratOver.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BaccaratOver.decode = function decode(reader, length) {
+        BaccaratOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1198,13 +1372,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratOver.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BaccaratOver.verify = function verify(message) {
+        BaccaratOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
@@ -1223,10 +1397,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        BaccaratOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratOver)
+        BaccaratOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratOverResp)
                 return object;
-            var message = new $root.baccarat.BaccaratOver();
+            var message = new $root.baccarat.BaccaratOverResp();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -1234,18 +1408,18 @@ $root.baccarat = (function() {
                     message.AwardArea = object.AwardArea;
             if (object.PlayerCard != null) {
                 if (typeof object.PlayerCard !== "object")
-                    throw TypeError(".baccarat.BaccaratOver.PlayerCard: object expected");
+                    throw TypeError(".baccarat.BaccaratOverResp.PlayerCard: object expected");
                 message.PlayerCard = $root.gamecomm.CardInfo.fromObject(object.PlayerCard);
             }
             if (object.BankerCard != null) {
                 if (typeof object.BankerCard !== "object")
-                    throw TypeError(".baccarat.BaccaratOver.BankerCard: object expected");
+                    throw TypeError(".baccarat.BaccaratOverResp.BankerCard: object expected");
                 message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
             }
             return message;
         };
 
-        BaccaratOver.toObject = function toObject(message, options) {
+        BaccaratOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1269,49 +1443,67 @@ $root.baccarat = (function() {
             return object;
         };
 
-        BaccaratOver.prototype.toJSON = function toJSON() {
+        BaccaratOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BaccaratOver;
+        return BaccaratOverResp;
     })();
 
-    baccarat.BaccaratCheckout = (function() {
+    baccarat.BaccaratCheckoutResp = (function() {
 
-        function BaccaratCheckout(properties) {
+        function BaccaratCheckoutResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BaccaratCheckout.prototype.Acquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckoutResp.prototype.MyAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckoutResp.prototype.BankerAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckoutResp.prototype.PlayerAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckoutResp.prototype.DrawAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        BaccaratCheckout.create = function create(properties) {
-            return new BaccaratCheckout(properties);
+        BaccaratCheckoutResp.create = function create(properties) {
+            return new BaccaratCheckoutResp(properties);
         };
 
-        BaccaratCheckout.encode = function encode(message, writer) {
+        BaccaratCheckoutResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Acquire != null && Object.hasOwnProperty.call(message, "Acquire"))
-                writer.uint32(8).int64(message.Acquire);
+            if (message.MyAcquire != null && Object.hasOwnProperty.call(message, "MyAcquire"))
+                writer.uint32(8).int64(message.MyAcquire);
+            if (message.BankerAcquire != null && Object.hasOwnProperty.call(message, "BankerAcquire"))
+                writer.uint32(16).int64(message.BankerAcquire);
+            if (message.PlayerAcquire != null && Object.hasOwnProperty.call(message, "PlayerAcquire"))
+                writer.uint32(24).int64(message.PlayerAcquire);
+            if (message.DrawAcquire != null && Object.hasOwnProperty.call(message, "DrawAcquire"))
+                writer.uint32(32).int64(message.DrawAcquire);
             return writer;
         };
 
-        BaccaratCheckout.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratCheckoutResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BaccaratCheckout.decode = function decode(reader, length) {
+        BaccaratCheckoutResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratCheckout();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratCheckoutResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Acquire = reader.int64();
+                    message.MyAcquire = reader.int64();
+                    break;
+                case 2:
+                    message.BankerAcquire = reader.int64();
+                    break;
+                case 3:
+                    message.PlayerAcquire = reader.int64();
+                    break;
+                case 4:
+                    message.DrawAcquire = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1321,60 +1513,127 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratCheckout.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratCheckoutResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BaccaratCheckout.verify = function verify(message) {
+        BaccaratCheckoutResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
-                if (!$util.isInteger(message.Acquire) && !(message.Acquire && $util.isInteger(message.Acquire.low) && $util.isInteger(message.Acquire.high)))
-                    return "Acquire: integer|Long expected";
+            if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
+                if (!$util.isInteger(message.MyAcquire) && !(message.MyAcquire && $util.isInteger(message.MyAcquire.low) && $util.isInteger(message.MyAcquire.high)))
+                    return "MyAcquire: integer|Long expected";
+            if (message.BankerAcquire != null && message.hasOwnProperty("BankerAcquire"))
+                if (!$util.isInteger(message.BankerAcquire) && !(message.BankerAcquire && $util.isInteger(message.BankerAcquire.low) && $util.isInteger(message.BankerAcquire.high)))
+                    return "BankerAcquire: integer|Long expected";
+            if (message.PlayerAcquire != null && message.hasOwnProperty("PlayerAcquire"))
+                if (!$util.isInteger(message.PlayerAcquire) && !(message.PlayerAcquire && $util.isInteger(message.PlayerAcquire.low) && $util.isInteger(message.PlayerAcquire.high)))
+                    return "PlayerAcquire: integer|Long expected";
+            if (message.DrawAcquire != null && message.hasOwnProperty("DrawAcquire"))
+                if (!$util.isInteger(message.DrawAcquire) && !(message.DrawAcquire && $util.isInteger(message.DrawAcquire.low) && $util.isInteger(message.DrawAcquire.high)))
+                    return "DrawAcquire: integer|Long expected";
             return null;
         };
 
-        BaccaratCheckout.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratCheckout)
+        BaccaratCheckoutResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratCheckoutResp)
                 return object;
-            var message = new $root.baccarat.BaccaratCheckout();
-            if (object.Acquire != null)
+            var message = new $root.baccarat.BaccaratCheckoutResp();
+            if (object.MyAcquire != null)
                 if ($util.Long)
-                    (message.Acquire = $util.Long.fromValue(object.Acquire)).unsigned = false;
-                else if (typeof object.Acquire === "string")
-                    message.Acquire = parseInt(object.Acquire, 10);
-                else if (typeof object.Acquire === "number")
-                    message.Acquire = object.Acquire;
-                else if (typeof object.Acquire === "object")
-                    message.Acquire = new $util.LongBits(object.Acquire.low >>> 0, object.Acquire.high >>> 0).toNumber();
+                    (message.MyAcquire = $util.Long.fromValue(object.MyAcquire)).unsigned = false;
+                else if (typeof object.MyAcquire === "string")
+                    message.MyAcquire = parseInt(object.MyAcquire, 10);
+                else if (typeof object.MyAcquire === "number")
+                    message.MyAcquire = object.MyAcquire;
+                else if (typeof object.MyAcquire === "object")
+                    message.MyAcquire = new $util.LongBits(object.MyAcquire.low >>> 0, object.MyAcquire.high >>> 0).toNumber();
+            if (object.BankerAcquire != null)
+                if ($util.Long)
+                    (message.BankerAcquire = $util.Long.fromValue(object.BankerAcquire)).unsigned = false;
+                else if (typeof object.BankerAcquire === "string")
+                    message.BankerAcquire = parseInt(object.BankerAcquire, 10);
+                else if (typeof object.BankerAcquire === "number")
+                    message.BankerAcquire = object.BankerAcquire;
+                else if (typeof object.BankerAcquire === "object")
+                    message.BankerAcquire = new $util.LongBits(object.BankerAcquire.low >>> 0, object.BankerAcquire.high >>> 0).toNumber();
+            if (object.PlayerAcquire != null)
+                if ($util.Long)
+                    (message.PlayerAcquire = $util.Long.fromValue(object.PlayerAcquire)).unsigned = false;
+                else if (typeof object.PlayerAcquire === "string")
+                    message.PlayerAcquire = parseInt(object.PlayerAcquire, 10);
+                else if (typeof object.PlayerAcquire === "number")
+                    message.PlayerAcquire = object.PlayerAcquire;
+                else if (typeof object.PlayerAcquire === "object")
+                    message.PlayerAcquire = new $util.LongBits(object.PlayerAcquire.low >>> 0, object.PlayerAcquire.high >>> 0).toNumber();
+            if (object.DrawAcquire != null)
+                if ($util.Long)
+                    (message.DrawAcquire = $util.Long.fromValue(object.DrawAcquire)).unsigned = false;
+                else if (typeof object.DrawAcquire === "string")
+                    message.DrawAcquire = parseInt(object.DrawAcquire, 10);
+                else if (typeof object.DrawAcquire === "number")
+                    message.DrawAcquire = object.DrawAcquire;
+                else if (typeof object.DrawAcquire === "object")
+                    message.DrawAcquire = new $util.LongBits(object.DrawAcquire.low >>> 0, object.DrawAcquire.high >>> 0).toNumber();
             return message;
         };
 
-        BaccaratCheckout.toObject = function toObject(message, options) {
+        BaccaratCheckoutResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.Acquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.MyAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.Acquire = options.longs === String ? "0" : 0;
-            if (message.Acquire != null && message.hasOwnProperty("Acquire"))
-                if (typeof message.Acquire === "number")
-                    object.Acquire = options.longs === String ? String(message.Acquire) : message.Acquire;
+                    object.MyAcquire = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.BankerAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.BankerAcquire = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.PlayerAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlayerAcquire = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.DrawAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.DrawAcquire = options.longs === String ? "0" : 0;
+            }
+            if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
+                if (typeof message.MyAcquire === "number")
+                    object.MyAcquire = options.longs === String ? String(message.MyAcquire) : message.MyAcquire;
                 else
-                    object.Acquire = options.longs === String ? $util.Long.prototype.toString.call(message.Acquire) : options.longs === Number ? new $util.LongBits(message.Acquire.low >>> 0, message.Acquire.high >>> 0).toNumber() : message.Acquire;
+                    object.MyAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.MyAcquire) : options.longs === Number ? new $util.LongBits(message.MyAcquire.low >>> 0, message.MyAcquire.high >>> 0).toNumber() : message.MyAcquire;
+            if (message.BankerAcquire != null && message.hasOwnProperty("BankerAcquire"))
+                if (typeof message.BankerAcquire === "number")
+                    object.BankerAcquire = options.longs === String ? String(message.BankerAcquire) : message.BankerAcquire;
+                else
+                    object.BankerAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.BankerAcquire) : options.longs === Number ? new $util.LongBits(message.BankerAcquire.low >>> 0, message.BankerAcquire.high >>> 0).toNumber() : message.BankerAcquire;
+            if (message.PlayerAcquire != null && message.hasOwnProperty("PlayerAcquire"))
+                if (typeof message.PlayerAcquire === "number")
+                    object.PlayerAcquire = options.longs === String ? String(message.PlayerAcquire) : message.PlayerAcquire;
+                else
+                    object.PlayerAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.PlayerAcquire) : options.longs === Number ? new $util.LongBits(message.PlayerAcquire.low >>> 0, message.PlayerAcquire.high >>> 0).toNumber() : message.PlayerAcquire;
+            if (message.DrawAcquire != null && message.hasOwnProperty("DrawAcquire"))
+                if (typeof message.DrawAcquire === "number")
+                    object.DrawAcquire = options.longs === String ? String(message.DrawAcquire) : message.DrawAcquire;
+                else
+                    object.DrawAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.DrawAcquire) : options.longs === Number ? new $util.LongBits(message.DrawAcquire.low >>> 0, message.DrawAcquire.high >>> 0).toNumber() : message.DrawAcquire;
             return object;
         };
 
-        BaccaratCheckout.prototype.toJSON = function toJSON() {
+        BaccaratCheckoutResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BaccaratCheckout;
+        return BaccaratCheckoutResp;
     })();
 
     return baccarat;

@@ -2,337 +2,217 @@ import * as $protobuf from "protobufjs";
 /** Namespace landLords. */
 export namespace landLords {
 
-    /** Properties of a LandLordsEnter. */
-    interface ILandLordsEnter {
+    /** Properties of a LandLordsPlayer. */
+    interface ILandLordsPlayer {
 
-        /** LandLordsEnter TimeStamp */
+        /** LandLordsPlayer UserID */
+        UserID?: (number|Long|null);
+
+        /** LandLordsPlayer ChairID */
+        ChairID?: (number|null);
+
+        /** LandLordsPlayer CardsLen */
+        CardsLen?: (number|null);
+
+        /** LandLordsPlayer Cards */
+        Cards?: (Uint8Array|null);
+
+        /** LandLordsPlayer IsBanker */
+        IsBanker?: (boolean|null);
+
+        /** LandLordsPlayer IsTrustee */
+        IsTrustee?: (boolean|null);
+    }
+
+    /** Represents a LandLordsPlayer. */
+    class LandLordsPlayer implements ILandLordsPlayer {
+
+        /**
+         * Constructs a new LandLordsPlayer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsPlayer);
+
+        /** LandLordsPlayer UserID. */
+        public UserID: (number|Long);
+
+        /** LandLordsPlayer ChairID. */
+        public ChairID: number;
+
+        /** LandLordsPlayer CardsLen. */
+        public CardsLen: number;
+
+        /** LandLordsPlayer Cards. */
+        public Cards: Uint8Array;
+
+        /** LandLordsPlayer IsBanker. */
+        public IsBanker: boolean;
+
+        /** LandLordsPlayer IsTrustee. */
+        public IsTrustee: boolean;
+
+        /**
+         * Creates a new LandLordsPlayer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsPlayer instance
+         */
+        public static create(properties?: landLords.ILandLordsPlayer): landLords.LandLordsPlayer;
+
+        /**
+         * Encodes the specified LandLordsPlayer message. Does not implicitly {@link landLords.LandLordsPlayer.verify|verify} messages.
+         * @param message LandLordsPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsPlayer message, length delimited. Does not implicitly {@link landLords.LandLordsPlayer.verify|verify} messages.
+         * @param message LandLordsPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsPlayer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsPlayer;
+
+        /**
+         * Decodes a LandLordsPlayer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsPlayer;
+
+        /**
+         * Verifies a LandLordsPlayer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsPlayer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsPlayer
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsPlayer;
+
+        /**
+         * Creates a plain object from a LandLordsPlayer message. Also converts values to other types if specified.
+         * @param message LandLordsPlayer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsScene. */
+    interface ILandLordsScene {
+
+        /** LandLordsScene TimeStamp */
         TimeStamp?: (number|Long|null);
 
-        /** LandLordsEnter FreeTime */
-        FreeTime?: (number|null);
-
-        /** LandLordsEnter OutTime */
-        OutTime?: (number|null);
-
-        /** LandLordsEnter CallTime */
-        CallTime?: (number|null);
-
-        /** LandLordsEnter Free */
-        Free?: (gamecomm.IStateFree|null);
-
-        /** LandLordsEnter Start */
-        Start?: (gamecomm.IStateStart|null);
-
-        /** LandLordsEnter Call */
-        Call?: (gamecomm.IStateCall|null);
-
-        /** LandLordsEnter Playing */
-        Playing?: (gamecomm.IStatePlaying|null);
-
-        /** LandLordsEnter Over */
-        Over?: (gamecomm.IStateOver|null);
-
-        /** LandLordsEnter BeforeChairID */
-        BeforeChairID?: (number|null);
-
-        /** LandLordsEnter BeforeCards */
-        BeforeCards?: (Uint8Array|null);
-
-        /** LandLordsEnter Players */
+        /** LandLordsScene Players */
         Players?: (landLords.ILandLordsPlayer[]|null);
     }
 
-    /** Represents a LandLordsEnter. */
-    class LandLordsEnter implements ILandLordsEnter {
+    /** Represents a LandLordsScene. */
+    class LandLordsScene implements ILandLordsScene {
 
         /**
-         * Constructs a new LandLordsEnter.
+         * Constructs a new LandLordsScene.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsEnter);
+        constructor(properties?: landLords.ILandLordsScene);
 
-        /** LandLordsEnter TimeStamp. */
+        /** LandLordsScene TimeStamp. */
         public TimeStamp: (number|Long);
 
-        /** LandLordsEnter FreeTime. */
-        public FreeTime: number;
-
-        /** LandLordsEnter OutTime. */
-        public OutTime: number;
-
-        /** LandLordsEnter CallTime. */
-        public CallTime: number;
-
-        /** LandLordsEnter Free. */
-        public Free?: (gamecomm.IStateFree|null);
-
-        /** LandLordsEnter Start. */
-        public Start?: (gamecomm.IStateStart|null);
-
-        /** LandLordsEnter Call. */
-        public Call?: (gamecomm.IStateCall|null);
-
-        /** LandLordsEnter Playing. */
-        public Playing?: (gamecomm.IStatePlaying|null);
-
-        /** LandLordsEnter Over. */
-        public Over?: (gamecomm.IStateOver|null);
-
-        /** LandLordsEnter BeforeChairID. */
-        public BeforeChairID: number;
-
-        /** LandLordsEnter BeforeCards. */
-        public BeforeCards: Uint8Array;
-
-        /** LandLordsEnter Players. */
+        /** LandLordsScene Players. */
         public Players: landLords.ILandLordsPlayer[];
 
         /**
-         * Creates a new LandLordsEnter instance using the specified properties.
+         * Creates a new LandLordsScene instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsEnter instance
+         * @returns LandLordsScene instance
          */
-        public static create(properties?: landLords.ILandLordsEnter): landLords.LandLordsEnter;
+        public static create(properties?: landLords.ILandLordsScene): landLords.LandLordsScene;
 
         /**
-         * Encodes the specified LandLordsEnter message. Does not implicitly {@link landLords.LandLordsEnter.verify|verify} messages.
-         * @param message LandLordsEnter message or plain object to encode
+         * Encodes the specified LandLordsScene message. Does not implicitly {@link landLords.LandLordsScene.verify|verify} messages.
+         * @param message LandLordsScene message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsScene, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsEnter message, length delimited. Does not implicitly {@link landLords.LandLordsEnter.verify|verify} messages.
-         * @param message LandLordsEnter message or plain object to encode
+         * Encodes the specified LandLordsScene message, length delimited. Does not implicitly {@link landLords.LandLordsScene.verify|verify} messages.
+         * @param message LandLordsScene message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsEnter, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsScene, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsEnter message from the specified reader or buffer.
+         * Decodes a LandLordsScene message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsEnter
+         * @returns LandLordsScene
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsEnter;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsScene;
 
         /**
-         * Decodes a LandLordsEnter message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsScene message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsEnter
+         * @returns LandLordsScene
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsEnter;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsScene;
 
         /**
-         * Verifies a LandLordsEnter message.
+         * Verifies a LandLordsScene message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsEnter message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsScene message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsEnter
+         * @returns LandLordsScene
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsEnter;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsScene;
 
         /**
-         * Creates a plain object from a LandLordsEnter message. Also converts values to other types if specified.
-         * @param message LandLordsEnter
+         * Creates a plain object from a LandLordsScene message. Also converts values to other types if specified.
+         * @param message LandLordsScene
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsEnter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsScene, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsEnter to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a LandLordsReadyReq. */
-    interface ILandLordsReadyReq {
-
-        /** LandLordsReadyReq IsReady */
-        IsReady?: (boolean|null);
-    }
-
-    /** Represents a LandLordsReadyReq. */
-    class LandLordsReadyReq implements ILandLordsReadyReq {
-
-        /**
-         * Constructs a new LandLordsReadyReq.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: landLords.ILandLordsReadyReq);
-
-        /** LandLordsReadyReq IsReady. */
-        public IsReady: boolean;
-
-        /**
-         * Creates a new LandLordsReadyReq instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns LandLordsReadyReq instance
-         */
-        public static create(properties?: landLords.ILandLordsReadyReq): landLords.LandLordsReadyReq;
-
-        /**
-         * Encodes the specified LandLordsReadyReq message. Does not implicitly {@link landLords.LandLordsReadyReq.verify|verify} messages.
-         * @param message LandLordsReadyReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: landLords.ILandLordsReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified LandLordsReadyReq message, length delimited. Does not implicitly {@link landLords.LandLordsReadyReq.verify|verify} messages.
-         * @param message LandLordsReadyReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: landLords.ILandLordsReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a LandLordsReadyReq message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns LandLordsReadyReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsReadyReq;
-
-        /**
-         * Decodes a LandLordsReadyReq message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns LandLordsReadyReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsReadyReq;
-
-        /**
-         * Verifies a LandLordsReadyReq message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a LandLordsReadyReq message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns LandLordsReadyReq
-         */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsReadyReq;
-
-        /**
-         * Creates a plain object from a LandLordsReadyReq message. Also converts values to other types if specified.
-         * @param message LandLordsReadyReq
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: landLords.LandLordsReadyReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this LandLordsReadyReq to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a LandLordsReadyResp. */
-    interface ILandLordsReadyResp {
-
-        /** LandLordsReadyResp UserId */
-        UserId?: (number|Long|null);
-    }
-
-    /** Represents a LandLordsReadyResp. */
-    class LandLordsReadyResp implements ILandLordsReadyResp {
-
-        /**
-         * Constructs a new LandLordsReadyResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: landLords.ILandLordsReadyResp);
-
-        /** LandLordsReadyResp UserId. */
-        public UserId: (number|Long);
-
-        /**
-         * Creates a new LandLordsReadyResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns LandLordsReadyResp instance
-         */
-        public static create(properties?: landLords.ILandLordsReadyResp): landLords.LandLordsReadyResp;
-
-        /**
-         * Encodes the specified LandLordsReadyResp message. Does not implicitly {@link landLords.LandLordsReadyResp.verify|verify} messages.
-         * @param message LandLordsReadyResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: landLords.ILandLordsReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified LandLordsReadyResp message, length delimited. Does not implicitly {@link landLords.LandLordsReadyResp.verify|verify} messages.
-         * @param message LandLordsReadyResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: landLords.ILandLordsReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a LandLordsReadyResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns LandLordsReadyResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsReadyResp;
-
-        /**
-         * Decodes a LandLordsReadyResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns LandLordsReadyResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsReadyResp;
-
-        /**
-         * Verifies a LandLordsReadyResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a LandLordsReadyResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns LandLordsReadyResp
-         */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsReadyResp;
-
-        /**
-         * Creates a plain object from a LandLordsReadyResp message. Also converts values to other types if specified.
-         * @param message LandLordsReadyResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: landLords.LandLordsReadyResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this LandLordsReadyResp to JSON.
+         * Converts this LandLordsScene to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -619,6 +499,12 @@ export namespace landLords {
 
         /** LandLordsStatePlaying Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** LandLordsStatePlaying LastChairID */
+        LastChairID?: (number|null);
+
+        /** LandLordsStatePlaying LastCards */
+        LastCards?: (gamecomm.ICardInfo|null);
     }
 
     /** Represents a LandLordsStatePlaying. */
@@ -632,6 +518,12 @@ export namespace landLords {
 
         /** LandLordsStatePlaying Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** LandLordsStatePlaying LastChairID. */
+        public LastChairID: number;
+
+        /** LandLordsStatePlaying LastCards. */
+        public LastCards?: (gamecomm.ICardInfo|null);
 
         /**
          * Creates a new LandLordsStatePlaying instance using the specified properties.
@@ -794,703 +686,1117 @@ export namespace landLords {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsPlayer. */
-    interface ILandLordsPlayer {
+    /** Properties of a LandLordsReadyReq. */
+    interface ILandLordsReadyReq {
 
-        /** LandLordsPlayer UserID */
-        UserID?: (number|Long|null);
-
-        /** LandLordsPlayer ChairID */
-        ChairID?: (number|null);
-
-        /** LandLordsPlayer CardsLen */
-        CardsLen?: (number|null);
-
-        /** LandLordsPlayer Cards */
-        Cards?: (Uint8Array|null);
-
-        /** LandLordsPlayer IsBanker */
-        IsBanker?: (boolean|null);
-
-        /** LandLordsPlayer IsTrustee */
-        IsTrustee?: (boolean|null);
+        /** LandLordsReadyReq IsReady */
+        IsReady?: (boolean|null);
     }
 
-    /** Represents a LandLordsPlayer. */
-    class LandLordsPlayer implements ILandLordsPlayer {
+    /** Represents a LandLordsReadyReq. */
+    class LandLordsReadyReq implements ILandLordsReadyReq {
 
         /**
-         * Constructs a new LandLordsPlayer.
+         * Constructs a new LandLordsReadyReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsPlayer);
+        constructor(properties?: landLords.ILandLordsReadyReq);
 
-        /** LandLordsPlayer UserID. */
-        public UserID: (number|Long);
-
-        /** LandLordsPlayer ChairID. */
-        public ChairID: number;
-
-        /** LandLordsPlayer CardsLen. */
-        public CardsLen: number;
-
-        /** LandLordsPlayer Cards. */
-        public Cards: Uint8Array;
-
-        /** LandLordsPlayer IsBanker. */
-        public IsBanker: boolean;
-
-        /** LandLordsPlayer IsTrustee. */
-        public IsTrustee: boolean;
+        /** LandLordsReadyReq IsReady. */
+        public IsReady: boolean;
 
         /**
-         * Creates a new LandLordsPlayer instance using the specified properties.
+         * Creates a new LandLordsReadyReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsPlayer instance
+         * @returns LandLordsReadyReq instance
          */
-        public static create(properties?: landLords.ILandLordsPlayer): landLords.LandLordsPlayer;
+        public static create(properties?: landLords.ILandLordsReadyReq): landLords.LandLordsReadyReq;
 
         /**
-         * Encodes the specified LandLordsPlayer message. Does not implicitly {@link landLords.LandLordsPlayer.verify|verify} messages.
-         * @param message LandLordsPlayer message or plain object to encode
+         * Encodes the specified LandLordsReadyReq message. Does not implicitly {@link landLords.LandLordsReadyReq.verify|verify} messages.
+         * @param message LandLordsReadyReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsPlayer message, length delimited. Does not implicitly {@link landLords.LandLordsPlayer.verify|verify} messages.
-         * @param message LandLordsPlayer message or plain object to encode
+         * Encodes the specified LandLordsReadyReq message, length delimited. Does not implicitly {@link landLords.LandLordsReadyReq.verify|verify} messages.
+         * @param message LandLordsReadyReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsPlayer message from the specified reader or buffer.
+         * Decodes a LandLordsReadyReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsPlayer
+         * @returns LandLordsReadyReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsPlayer;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsReadyReq;
 
         /**
-         * Decodes a LandLordsPlayer message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsReadyReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsPlayer
+         * @returns LandLordsReadyReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsPlayer;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsReadyReq;
 
         /**
-         * Verifies a LandLordsPlayer message.
+         * Verifies a LandLordsReadyReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsPlayer message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsReadyReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsPlayer
+         * @returns LandLordsReadyReq
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsPlayer;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsReadyReq;
 
         /**
-         * Creates a plain object from a LandLordsPlayer message. Also converts values to other types if specified.
-         * @param message LandLordsPlayer
+         * Creates a plain object from a LandLordsReadyReq message. Also converts values to other types if specified.
+         * @param message LandLordsReadyReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsReadyReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsPlayer to JSON.
+         * Converts this LandLordsReadyReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsDeal. */
-    interface ILandLordsDeal {
+    /** Properties of a LandLordsReadyResp. */
+    interface ILandLordsReadyResp {
 
-        /** LandLordsDeal UserID */
+        /** LandLordsReadyResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents a LandLordsReadyResp. */
+    class LandLordsReadyResp implements ILandLordsReadyResp {
+
+        /**
+         * Constructs a new LandLordsReadyResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsReadyResp);
+
+        /** LandLordsReadyResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new LandLordsReadyResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsReadyResp instance
+         */
+        public static create(properties?: landLords.ILandLordsReadyResp): landLords.LandLordsReadyResp;
+
+        /**
+         * Encodes the specified LandLordsReadyResp message. Does not implicitly {@link landLords.LandLordsReadyResp.verify|verify} messages.
+         * @param message LandLordsReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsReadyResp message, length delimited. Does not implicitly {@link landLords.LandLordsReadyResp.verify|verify} messages.
+         * @param message LandLordsReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsReadyResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsReadyResp;
+
+        /**
+         * Decodes a LandLordsReadyResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsReadyResp;
+
+        /**
+         * Verifies a LandLordsReadyResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsReadyResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsReadyResp
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsReadyResp;
+
+        /**
+         * Creates a plain object from a LandLordsReadyResp message. Also converts values to other types if specified.
+         * @param message LandLordsReadyResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsReadyResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsReadyResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsDealResp. */
+    interface ILandLordsDealResp {
+
+        /** LandLordsDealResp UserID */
         UserID?: (number|Long|null);
 
-        /** LandLordsDeal CardsHand */
+        /** LandLordsDealResp CardsHand */
         CardsHand?: (Uint8Array|null);
     }
 
-    /** Represents a LandLordsDeal. */
-    class LandLordsDeal implements ILandLordsDeal {
+    /** Represents a LandLordsDealResp. */
+    class LandLordsDealResp implements ILandLordsDealResp {
 
         /**
-         * Constructs a new LandLordsDeal.
+         * Constructs a new LandLordsDealResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsDeal);
+        constructor(properties?: landLords.ILandLordsDealResp);
 
-        /** LandLordsDeal UserID. */
+        /** LandLordsDealResp UserID. */
         public UserID: (number|Long);
 
-        /** LandLordsDeal CardsHand. */
+        /** LandLordsDealResp CardsHand. */
         public CardsHand: Uint8Array;
 
         /**
-         * Creates a new LandLordsDeal instance using the specified properties.
+         * Creates a new LandLordsDealResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsDeal instance
+         * @returns LandLordsDealResp instance
          */
-        public static create(properties?: landLords.ILandLordsDeal): landLords.LandLordsDeal;
+        public static create(properties?: landLords.ILandLordsDealResp): landLords.LandLordsDealResp;
 
         /**
-         * Encodes the specified LandLordsDeal message. Does not implicitly {@link landLords.LandLordsDeal.verify|verify} messages.
-         * @param message LandLordsDeal message or plain object to encode
+         * Encodes the specified LandLordsDealResp message. Does not implicitly {@link landLords.LandLordsDealResp.verify|verify} messages.
+         * @param message LandLordsDealResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsDeal, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsDeal message, length delimited. Does not implicitly {@link landLords.LandLordsDeal.verify|verify} messages.
-         * @param message LandLordsDeal message or plain object to encode
+         * Encodes the specified LandLordsDealResp message, length delimited. Does not implicitly {@link landLords.LandLordsDealResp.verify|verify} messages.
+         * @param message LandLordsDealResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsDeal, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsDeal message from the specified reader or buffer.
+         * Decodes a LandLordsDealResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsDeal
+         * @returns LandLordsDealResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsDeal;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsDealResp;
 
         /**
-         * Decodes a LandLordsDeal message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsDealResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsDeal
+         * @returns LandLordsDealResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsDeal;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsDealResp;
 
         /**
-         * Verifies a LandLordsDeal message.
+         * Verifies a LandLordsDealResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsDeal message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsDealResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsDeal
+         * @returns LandLordsDealResp
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsDeal;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsDealResp;
 
         /**
-         * Creates a plain object from a LandLordsDeal message. Also converts values to other types if specified.
-         * @param message LandLordsDeal
+         * Creates a plain object from a LandLordsDealResp message. Also converts values to other types if specified.
+         * @param message LandLordsDealResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsDeal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsDealResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsDeal to JSON.
+         * Converts this LandLordsDealResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsCall. */
-    interface ILandLordsCall {
+    /** Properties of a LandLordsCallReq. */
+    interface ILandLordsCallReq {
 
-        /** LandLordsCall UserID */
-        UserID?: (number|Long|null);
-
-        /** LandLordsCall Score */
+        /** LandLordsCallReq Score */
         Score?: (number|null);
     }
 
-    /** Represents a LandLordsCall. */
-    class LandLordsCall implements ILandLordsCall {
+    /** Represents a LandLordsCallReq. */
+    class LandLordsCallReq implements ILandLordsCallReq {
 
         /**
-         * Constructs a new LandLordsCall.
+         * Constructs a new LandLordsCallReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsCall);
+        constructor(properties?: landLords.ILandLordsCallReq);
 
-        /** LandLordsCall UserID. */
-        public UserID: (number|Long);
-
-        /** LandLordsCall Score. */
+        /** LandLordsCallReq Score. */
         public Score: number;
 
         /**
-         * Creates a new LandLordsCall instance using the specified properties.
+         * Creates a new LandLordsCallReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsCall instance
+         * @returns LandLordsCallReq instance
          */
-        public static create(properties?: landLords.ILandLordsCall): landLords.LandLordsCall;
+        public static create(properties?: landLords.ILandLordsCallReq): landLords.LandLordsCallReq;
 
         /**
-         * Encodes the specified LandLordsCall message. Does not implicitly {@link landLords.LandLordsCall.verify|verify} messages.
-         * @param message LandLordsCall message or plain object to encode
+         * Encodes the specified LandLordsCallReq message. Does not implicitly {@link landLords.LandLordsCallReq.verify|verify} messages.
+         * @param message LandLordsCallReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsCall, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsCallReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsCall message, length delimited. Does not implicitly {@link landLords.LandLordsCall.verify|verify} messages.
-         * @param message LandLordsCall message or plain object to encode
+         * Encodes the specified LandLordsCallReq message, length delimited. Does not implicitly {@link landLords.LandLordsCallReq.verify|verify} messages.
+         * @param message LandLordsCallReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsCall, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsCallReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsCall message from the specified reader or buffer.
+         * Decodes a LandLordsCallReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsCall
+         * @returns LandLordsCallReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsCall;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsCallReq;
 
         /**
-         * Decodes a LandLordsCall message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsCallReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsCall
+         * @returns LandLordsCallReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsCall;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsCallReq;
 
         /**
-         * Verifies a LandLordsCall message.
+         * Verifies a LandLordsCallReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsCall message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsCallReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsCall
+         * @returns LandLordsCallReq
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsCall;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsCallReq;
 
         /**
-         * Creates a plain object from a LandLordsCall message. Also converts values to other types if specified.
-         * @param message LandLordsCall
+         * Creates a plain object from a LandLordsCallReq message. Also converts values to other types if specified.
+         * @param message LandLordsCallReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsCallReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsCall to JSON.
+         * Converts this LandLordsCallReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsDouble. */
-    interface ILandLordsDouble {
+    /** Properties of a LandLordsCallResp. */
+    interface ILandLordsCallResp {
 
-        /** LandLordsDouble UserID */
+        /** LandLordsCallResp UserID */
         UserID?: (number|Long|null);
 
-        /** LandLordsDouble Number */
+        /** LandLordsCallResp Score */
+        Score?: (number|null);
+    }
+
+    /** Represents a LandLordsCallResp. */
+    class LandLordsCallResp implements ILandLordsCallResp {
+
+        /**
+         * Constructs a new LandLordsCallResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsCallResp);
+
+        /** LandLordsCallResp UserID. */
+        public UserID: (number|Long);
+
+        /** LandLordsCallResp Score. */
+        public Score: number;
+
+        /**
+         * Creates a new LandLordsCallResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsCallResp instance
+         */
+        public static create(properties?: landLords.ILandLordsCallResp): landLords.LandLordsCallResp;
+
+        /**
+         * Encodes the specified LandLordsCallResp message. Does not implicitly {@link landLords.LandLordsCallResp.verify|verify} messages.
+         * @param message LandLordsCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsCallResp message, length delimited. Does not implicitly {@link landLords.LandLordsCallResp.verify|verify} messages.
+         * @param message LandLordsCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsCallResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsCallResp;
+
+        /**
+         * Decodes a LandLordsCallResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsCallResp;
+
+        /**
+         * Verifies a LandLordsCallResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsCallResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsCallResp
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsCallResp;
+
+        /**
+         * Creates a plain object from a LandLordsCallResp message. Also converts values to other types if specified.
+         * @param message LandLordsCallResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsCallResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsCallResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsDoubleReq. */
+    interface ILandLordsDoubleReq {
+
+        /** LandLordsDoubleReq Number */
         Number?: (number|null);
     }
 
-    /** Represents a LandLordsDouble. */
-    class LandLordsDouble implements ILandLordsDouble {
+    /** Represents a LandLordsDoubleReq. */
+    class LandLordsDoubleReq implements ILandLordsDoubleReq {
 
         /**
-         * Constructs a new LandLordsDouble.
+         * Constructs a new LandLordsDoubleReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsDouble);
+        constructor(properties?: landLords.ILandLordsDoubleReq);
 
-        /** LandLordsDouble UserID. */
-        public UserID: (number|Long);
-
-        /** LandLordsDouble Number. */
+        /** LandLordsDoubleReq Number. */
         public Number: number;
 
         /**
-         * Creates a new LandLordsDouble instance using the specified properties.
+         * Creates a new LandLordsDoubleReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsDouble instance
+         * @returns LandLordsDoubleReq instance
          */
-        public static create(properties?: landLords.ILandLordsDouble): landLords.LandLordsDouble;
+        public static create(properties?: landLords.ILandLordsDoubleReq): landLords.LandLordsDoubleReq;
 
         /**
-         * Encodes the specified LandLordsDouble message. Does not implicitly {@link landLords.LandLordsDouble.verify|verify} messages.
-         * @param message LandLordsDouble message or plain object to encode
+         * Encodes the specified LandLordsDoubleReq message. Does not implicitly {@link landLords.LandLordsDoubleReq.verify|verify} messages.
+         * @param message LandLordsDoubleReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsDouble, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsDoubleReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsDouble message, length delimited. Does not implicitly {@link landLords.LandLordsDouble.verify|verify} messages.
-         * @param message LandLordsDouble message or plain object to encode
+         * Encodes the specified LandLordsDoubleReq message, length delimited. Does not implicitly {@link landLords.LandLordsDoubleReq.verify|verify} messages.
+         * @param message LandLordsDoubleReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsDouble, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsDoubleReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsDouble message from the specified reader or buffer.
+         * Decodes a LandLordsDoubleReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsDouble
+         * @returns LandLordsDoubleReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsDouble;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsDoubleReq;
 
         /**
-         * Decodes a LandLordsDouble message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsDoubleReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsDouble
+         * @returns LandLordsDoubleReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsDouble;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsDoubleReq;
 
         /**
-         * Verifies a LandLordsDouble message.
+         * Verifies a LandLordsDoubleReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsDouble message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsDoubleReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsDouble
+         * @returns LandLordsDoubleReq
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsDouble;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsDoubleReq;
 
         /**
-         * Creates a plain object from a LandLordsDouble message. Also converts values to other types if specified.
-         * @param message LandLordsDouble
+         * Creates a plain object from a LandLordsDoubleReq message. Also converts values to other types if specified.
+         * @param message LandLordsDoubleReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsDouble, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsDoubleReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsDouble to JSON.
+         * Converts this LandLordsDoubleReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsTrustee. */
-    interface ILandLordsTrustee {
+    /** Properties of a LandLordsDoubleResp. */
+    interface ILandLordsDoubleResp {
 
-        /** LandLordsTrustee UserID */
+        /** LandLordsDoubleResp UserID */
         UserID?: (number|Long|null);
 
-        /** LandLordsTrustee IsTrustee */
+        /** LandLordsDoubleResp Number */
+        Number?: (number|null);
+    }
+
+    /** Represents a LandLordsDoubleResp. */
+    class LandLordsDoubleResp implements ILandLordsDoubleResp {
+
+        /**
+         * Constructs a new LandLordsDoubleResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsDoubleResp);
+
+        /** LandLordsDoubleResp UserID. */
+        public UserID: (number|Long);
+
+        /** LandLordsDoubleResp Number. */
+        public Number: number;
+
+        /**
+         * Creates a new LandLordsDoubleResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsDoubleResp instance
+         */
+        public static create(properties?: landLords.ILandLordsDoubleResp): landLords.LandLordsDoubleResp;
+
+        /**
+         * Encodes the specified LandLordsDoubleResp message. Does not implicitly {@link landLords.LandLordsDoubleResp.verify|verify} messages.
+         * @param message LandLordsDoubleResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsDoubleResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsDoubleResp message, length delimited. Does not implicitly {@link landLords.LandLordsDoubleResp.verify|verify} messages.
+         * @param message LandLordsDoubleResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsDoubleResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsDoubleResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsDoubleResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsDoubleResp;
+
+        /**
+         * Decodes a LandLordsDoubleResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsDoubleResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsDoubleResp;
+
+        /**
+         * Verifies a LandLordsDoubleResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsDoubleResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsDoubleResp
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsDoubleResp;
+
+        /**
+         * Creates a plain object from a LandLordsDoubleResp message. Also converts values to other types if specified.
+         * @param message LandLordsDoubleResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsDoubleResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsDoubleResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsTrusteeReq. */
+    interface ILandLordsTrusteeReq {
+
+        /** LandLordsTrusteeReq IsTrustee */
         IsTrustee?: (boolean|null);
     }
 
-    /** Represents a LandLordsTrustee. */
-    class LandLordsTrustee implements ILandLordsTrustee {
+    /** Represents a LandLordsTrusteeReq. */
+    class LandLordsTrusteeReq implements ILandLordsTrusteeReq {
 
         /**
-         * Constructs a new LandLordsTrustee.
+         * Constructs a new LandLordsTrusteeReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsTrustee);
+        constructor(properties?: landLords.ILandLordsTrusteeReq);
 
-        /** LandLordsTrustee UserID. */
-        public UserID: (number|Long);
-
-        /** LandLordsTrustee IsTrustee. */
+        /** LandLordsTrusteeReq IsTrustee. */
         public IsTrustee: boolean;
 
         /**
-         * Creates a new LandLordsTrustee instance using the specified properties.
+         * Creates a new LandLordsTrusteeReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsTrustee instance
+         * @returns LandLordsTrusteeReq instance
          */
-        public static create(properties?: landLords.ILandLordsTrustee): landLords.LandLordsTrustee;
+        public static create(properties?: landLords.ILandLordsTrusteeReq): landLords.LandLordsTrusteeReq;
 
         /**
-         * Encodes the specified LandLordsTrustee message. Does not implicitly {@link landLords.LandLordsTrustee.verify|verify} messages.
-         * @param message LandLordsTrustee message or plain object to encode
+         * Encodes the specified LandLordsTrusteeReq message. Does not implicitly {@link landLords.LandLordsTrusteeReq.verify|verify} messages.
+         * @param message LandLordsTrusteeReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsTrustee, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsTrusteeReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsTrustee message, length delimited. Does not implicitly {@link landLords.LandLordsTrustee.verify|verify} messages.
-         * @param message LandLordsTrustee message or plain object to encode
+         * Encodes the specified LandLordsTrusteeReq message, length delimited. Does not implicitly {@link landLords.LandLordsTrusteeReq.verify|verify} messages.
+         * @param message LandLordsTrusteeReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsTrustee, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsTrusteeReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsTrustee message from the specified reader or buffer.
+         * Decodes a LandLordsTrusteeReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsTrustee
+         * @returns LandLordsTrusteeReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsTrustee;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsTrusteeReq;
 
         /**
-         * Decodes a LandLordsTrustee message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsTrusteeReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsTrustee
+         * @returns LandLordsTrusteeReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsTrustee;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsTrusteeReq;
 
         /**
-         * Verifies a LandLordsTrustee message.
+         * Verifies a LandLordsTrusteeReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsTrustee message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsTrusteeReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsTrustee
+         * @returns LandLordsTrusteeReq
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsTrustee;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsTrusteeReq;
 
         /**
-         * Creates a plain object from a LandLordsTrustee message. Also converts values to other types if specified.
-         * @param message LandLordsTrustee
+         * Creates a plain object from a LandLordsTrusteeReq message. Also converts values to other types if specified.
+         * @param message LandLordsTrusteeReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsTrustee, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsTrusteeReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsTrustee to JSON.
+         * Converts this LandLordsTrusteeReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsBottomCard. */
-    interface ILandLordsBottomCard {
+    /** Properties of a LandLordsTrusteeResp. */
+    interface ILandLordsTrusteeResp {
 
-        /** LandLordsBottomCard UserID */
+        /** LandLordsTrusteeResp UserID */
         UserID?: (number|Long|null);
 
-        /** LandLordsBottomCard CardsBottom */
+        /** LandLordsTrusteeResp IsTrustee */
+        IsTrustee?: (boolean|null);
+    }
+
+    /** Represents a LandLordsTrusteeResp. */
+    class LandLordsTrusteeResp implements ILandLordsTrusteeResp {
+
+        /**
+         * Constructs a new LandLordsTrusteeResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsTrusteeResp);
+
+        /** LandLordsTrusteeResp UserID. */
+        public UserID: (number|Long);
+
+        /** LandLordsTrusteeResp IsTrustee. */
+        public IsTrustee: boolean;
+
+        /**
+         * Creates a new LandLordsTrusteeResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsTrusteeResp instance
+         */
+        public static create(properties?: landLords.ILandLordsTrusteeResp): landLords.LandLordsTrusteeResp;
+
+        /**
+         * Encodes the specified LandLordsTrusteeResp message. Does not implicitly {@link landLords.LandLordsTrusteeResp.verify|verify} messages.
+         * @param message LandLordsTrusteeResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsTrusteeResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsTrusteeResp message, length delimited. Does not implicitly {@link landLords.LandLordsTrusteeResp.verify|verify} messages.
+         * @param message LandLordsTrusteeResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsTrusteeResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsTrusteeResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsTrusteeResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsTrusteeResp;
+
+        /**
+         * Decodes a LandLordsTrusteeResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsTrusteeResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsTrusteeResp;
+
+        /**
+         * Verifies a LandLordsTrusteeResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsTrusteeResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsTrusteeResp
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsTrusteeResp;
+
+        /**
+         * Creates a plain object from a LandLordsTrusteeResp message. Also converts values to other types if specified.
+         * @param message LandLordsTrusteeResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsTrusteeResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsTrusteeResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsBottomCardResp. */
+    interface ILandLordsBottomCardResp {
+
+        /** LandLordsBottomCardResp UserID */
+        UserID?: (number|Long|null);
+
+        /** LandLordsBottomCardResp CardsBottom */
         CardsBottom?: (Uint8Array|null);
     }
 
-    /** Represents a LandLordsBottomCard. */
-    class LandLordsBottomCard implements ILandLordsBottomCard {
+    /** Represents a LandLordsBottomCardResp. */
+    class LandLordsBottomCardResp implements ILandLordsBottomCardResp {
 
         /**
-         * Constructs a new LandLordsBottomCard.
+         * Constructs a new LandLordsBottomCardResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsBottomCard);
+        constructor(properties?: landLords.ILandLordsBottomCardResp);
 
-        /** LandLordsBottomCard UserID. */
+        /** LandLordsBottomCardResp UserID. */
         public UserID: (number|Long);
 
-        /** LandLordsBottomCard CardsBottom. */
+        /** LandLordsBottomCardResp CardsBottom. */
         public CardsBottom: Uint8Array;
 
         /**
-         * Creates a new LandLordsBottomCard instance using the specified properties.
+         * Creates a new LandLordsBottomCardResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsBottomCard instance
+         * @returns LandLordsBottomCardResp instance
          */
-        public static create(properties?: landLords.ILandLordsBottomCard): landLords.LandLordsBottomCard;
+        public static create(properties?: landLords.ILandLordsBottomCardResp): landLords.LandLordsBottomCardResp;
 
         /**
-         * Encodes the specified LandLordsBottomCard message. Does not implicitly {@link landLords.LandLordsBottomCard.verify|verify} messages.
-         * @param message LandLordsBottomCard message or plain object to encode
+         * Encodes the specified LandLordsBottomCardResp message. Does not implicitly {@link landLords.LandLordsBottomCardResp.verify|verify} messages.
+         * @param message LandLordsBottomCardResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsBottomCard, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsBottomCardResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsBottomCard message, length delimited. Does not implicitly {@link landLords.LandLordsBottomCard.verify|verify} messages.
-         * @param message LandLordsBottomCard message or plain object to encode
+         * Encodes the specified LandLordsBottomCardResp message, length delimited. Does not implicitly {@link landLords.LandLordsBottomCardResp.verify|verify} messages.
+         * @param message LandLordsBottomCardResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsBottomCard, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsBottomCardResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsBottomCard message from the specified reader or buffer.
+         * Decodes a LandLordsBottomCardResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsBottomCard
+         * @returns LandLordsBottomCardResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsBottomCard;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsBottomCardResp;
 
         /**
-         * Decodes a LandLordsBottomCard message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsBottomCardResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsBottomCard
+         * @returns LandLordsBottomCardResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsBottomCard;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsBottomCardResp;
 
         /**
-         * Verifies a LandLordsBottomCard message.
+         * Verifies a LandLordsBottomCardResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsBottomCard message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsBottomCardResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsBottomCard
+         * @returns LandLordsBottomCardResp
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsBottomCard;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsBottomCardResp;
 
         /**
-         * Creates a plain object from a LandLordsBottomCard message. Also converts values to other types if specified.
-         * @param message LandLordsBottomCard
+         * Creates a plain object from a LandLordsBottomCardResp message. Also converts values to other types if specified.
+         * @param message LandLordsBottomCardResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsBottomCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsBottomCardResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsBottomCard to JSON.
+         * Converts this LandLordsBottomCardResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsOutCard. */
-    interface ILandLordsOutCard {
+    /** Properties of a LandLordsOutCardReq. */
+    interface ILandLordsOutCardReq {
 
-        /** LandLordsOutCard UserID */
-        UserID?: (number|Long|null);
-
-        /** LandLordsOutCard Cards */
-        Cards?: (Uint8Array|null);
-
-        /** LandLordsOutCard Hints */
-        Hints?: (string|null);
+        /** LandLordsOutCardReq Cards */
+        Cards?: (gamecomm.ICardInfo|null);
     }
 
-    /** Represents a LandLordsOutCard. */
-    class LandLordsOutCard implements ILandLordsOutCard {
+    /** Represents a LandLordsOutCardReq. */
+    class LandLordsOutCardReq implements ILandLordsOutCardReq {
 
         /**
-         * Constructs a new LandLordsOutCard.
+         * Constructs a new LandLordsOutCardReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsOutCard);
+        constructor(properties?: landLords.ILandLordsOutCardReq);
 
-        /** LandLordsOutCard UserID. */
-        public UserID: (number|Long);
-
-        /** LandLordsOutCard Cards. */
-        public Cards: Uint8Array;
-
-        /** LandLordsOutCard Hints. */
-        public Hints: string;
+        /** LandLordsOutCardReq Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
 
         /**
-         * Creates a new LandLordsOutCard instance using the specified properties.
+         * Creates a new LandLordsOutCardReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsOutCard instance
+         * @returns LandLordsOutCardReq instance
          */
-        public static create(properties?: landLords.ILandLordsOutCard): landLords.LandLordsOutCard;
+        public static create(properties?: landLords.ILandLordsOutCardReq): landLords.LandLordsOutCardReq;
 
         /**
-         * Encodes the specified LandLordsOutCard message. Does not implicitly {@link landLords.LandLordsOutCard.verify|verify} messages.
-         * @param message LandLordsOutCard message or plain object to encode
+         * Encodes the specified LandLordsOutCardReq message. Does not implicitly {@link landLords.LandLordsOutCardReq.verify|verify} messages.
+         * @param message LandLordsOutCardReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsOutCard, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsOutCardReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsOutCard message, length delimited. Does not implicitly {@link landLords.LandLordsOutCard.verify|verify} messages.
-         * @param message LandLordsOutCard message or plain object to encode
+         * Encodes the specified LandLordsOutCardReq message, length delimited. Does not implicitly {@link landLords.LandLordsOutCardReq.verify|verify} messages.
+         * @param message LandLordsOutCardReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsOutCard, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsOutCardReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsOutCard message from the specified reader or buffer.
+         * Decodes a LandLordsOutCardReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsOutCard
+         * @returns LandLordsOutCardReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsOutCard;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsOutCardReq;
 
         /**
-         * Decodes a LandLordsOutCard message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsOutCardReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsOutCard
+         * @returns LandLordsOutCardReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsOutCard;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsOutCardReq;
 
         /**
-         * Verifies a LandLordsOutCard message.
+         * Verifies a LandLordsOutCardReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsOutCard message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsOutCardReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsOutCard
+         * @returns LandLordsOutCardReq
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsOutCard;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsOutCardReq;
 
         /**
-         * Creates a plain object from a LandLordsOutCard message. Also converts values to other types if specified.
-         * @param message LandLordsOutCard
+         * Creates a plain object from a LandLordsOutCardReq message. Also converts values to other types if specified.
+         * @param message LandLordsOutCardReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsOutCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsOutCardReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsOutCard to JSON.
+         * Converts this LandLordsOutCardReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LandLordsOutCardResp. */
+    interface ILandLordsOutCardResp {
+
+        /** LandLordsOutCardResp UserID */
+        UserID?: (number|Long|null);
+
+        /** LandLordsOutCardResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a LandLordsOutCardResp. */
+    class LandLordsOutCardResp implements ILandLordsOutCardResp {
+
+        /**
+         * Constructs a new LandLordsOutCardResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: landLords.ILandLordsOutCardResp);
+
+        /** LandLordsOutCardResp UserID. */
+        public UserID: (number|Long);
+
+        /** LandLordsOutCardResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new LandLordsOutCardResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LandLordsOutCardResp instance
+         */
+        public static create(properties?: landLords.ILandLordsOutCardResp): landLords.LandLordsOutCardResp;
+
+        /**
+         * Encodes the specified LandLordsOutCardResp message. Does not implicitly {@link landLords.LandLordsOutCardResp.verify|verify} messages.
+         * @param message LandLordsOutCardResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: landLords.ILandLordsOutCardResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LandLordsOutCardResp message, length delimited. Does not implicitly {@link landLords.LandLordsOutCardResp.verify|verify} messages.
+         * @param message LandLordsOutCardResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: landLords.ILandLordsOutCardResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LandLordsOutCardResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LandLordsOutCardResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsOutCardResp;
+
+        /**
+         * Decodes a LandLordsOutCardResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LandLordsOutCardResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsOutCardResp;
+
+        /**
+         * Verifies a LandLordsOutCardResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LandLordsOutCardResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LandLordsOutCardResp
+         */
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsOutCardResp;
+
+        /**
+         * Creates a plain object from a LandLordsOutCardResp message. Also converts values to other types if specified.
+         * @param message LandLordsOutCardResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: landLords.LandLordsOutCardResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LandLordsOutCardResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -1502,8 +1808,8 @@ export namespace landLords {
         /** LandLordsAward UserID */
         UserID?: (number|Long|null);
 
-        /** LandLordsAward Codes */
-        Codes?: (Uint8Array|null);
+        /** LandLordsAward RemainCards */
+        RemainCards?: (Uint8Array|null);
 
         /** LandLordsAward GetGold */
         GetGold?: (number|Long|null);
@@ -1521,8 +1827,8 @@ export namespace landLords {
         /** LandLordsAward UserID. */
         public UserID: (number|Long);
 
-        /** LandLordsAward Codes. */
-        public Codes: Uint8Array;
+        /** LandLordsAward RemainCards. */
+        public RemainCards: Uint8Array;
 
         /** LandLordsAward GetGold. */
         public GetGold: (number|Long);
@@ -1598,91 +1904,91 @@ export namespace landLords {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a LandLordsCheckout. */
-    interface ILandLordsCheckout {
+    /** Properties of a LandLordsCheckoutResp. */
+    interface ILandLordsCheckoutResp {
 
-        /** LandLordsCheckout players */
+        /** LandLordsCheckoutResp players */
         players?: (landLords.ILandLordsAward[]|null);
     }
 
-    /** Represents a LandLordsCheckout. */
-    class LandLordsCheckout implements ILandLordsCheckout {
+    /** Represents a LandLordsCheckoutResp. */
+    class LandLordsCheckoutResp implements ILandLordsCheckoutResp {
 
         /**
-         * Constructs a new LandLordsCheckout.
+         * Constructs a new LandLordsCheckoutResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: landLords.ILandLordsCheckout);
+        constructor(properties?: landLords.ILandLordsCheckoutResp);
 
-        /** LandLordsCheckout players. */
+        /** LandLordsCheckoutResp players. */
         public players: landLords.ILandLordsAward[];
 
         /**
-         * Creates a new LandLordsCheckout instance using the specified properties.
+         * Creates a new LandLordsCheckoutResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns LandLordsCheckout instance
+         * @returns LandLordsCheckoutResp instance
          */
-        public static create(properties?: landLords.ILandLordsCheckout): landLords.LandLordsCheckout;
+        public static create(properties?: landLords.ILandLordsCheckoutResp): landLords.LandLordsCheckoutResp;
 
         /**
-         * Encodes the specified LandLordsCheckout message. Does not implicitly {@link landLords.LandLordsCheckout.verify|verify} messages.
-         * @param message LandLordsCheckout message or plain object to encode
+         * Encodes the specified LandLordsCheckoutResp message. Does not implicitly {@link landLords.LandLordsCheckoutResp.verify|verify} messages.
+         * @param message LandLordsCheckoutResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: landLords.ILandLordsCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: landLords.ILandLordsCheckoutResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified LandLordsCheckout message, length delimited. Does not implicitly {@link landLords.LandLordsCheckout.verify|verify} messages.
-         * @param message LandLordsCheckout message or plain object to encode
+         * Encodes the specified LandLordsCheckoutResp message, length delimited. Does not implicitly {@link landLords.LandLordsCheckoutResp.verify|verify} messages.
+         * @param message LandLordsCheckoutResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: landLords.ILandLordsCheckout, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: landLords.ILandLordsCheckoutResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a LandLordsCheckout message from the specified reader or buffer.
+         * Decodes a LandLordsCheckoutResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns LandLordsCheckout
+         * @returns LandLordsCheckoutResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsCheckout;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): landLords.LandLordsCheckoutResp;
 
         /**
-         * Decodes a LandLordsCheckout message from the specified reader or buffer, length delimited.
+         * Decodes a LandLordsCheckoutResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns LandLordsCheckout
+         * @returns LandLordsCheckoutResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsCheckout;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): landLords.LandLordsCheckoutResp;
 
         /**
-         * Verifies a LandLordsCheckout message.
+         * Verifies a LandLordsCheckoutResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a LandLordsCheckout message from a plain object. Also converts values to their respective internal types.
+         * Creates a LandLordsCheckoutResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns LandLordsCheckout
+         * @returns LandLordsCheckoutResp
          */
-        public static fromObject(object: { [k: string]: any }): landLords.LandLordsCheckout;
+        public static fromObject(object: { [k: string]: any }): landLords.LandLordsCheckoutResp;
 
         /**
-         * Creates a plain object from a LandLordsCheckout message. Also converts values to other types if specified.
-         * @param message LandLordsCheckout
+         * Creates a plain object from a LandLordsCheckoutResp message. Also converts values to other types if specified.
+         * @param message LandLordsCheckoutResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: landLords.LandLordsCheckout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: landLords.LandLordsCheckoutResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this LandLordsCheckout to JSON.
+         * Converts this LandLordsCheckoutResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -2040,91 +2346,499 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a UserList. */
-    interface IUserList {
+    /** Properties of an AreaInfo. */
+    interface IAreaInfo {
 
-        /** UserList AllInfos */
-        AllInfos?: (gamecomm.IPlayerInfo[]|null);
+        /** AreaInfo ID */
+        ID?: (number|null);
+
+        /** AreaInfo MyGold */
+        MyGold?: (number|Long|null);
+
+        /** AreaInfo TotalGold */
+        TotalGold?: (number|Long|null);
+
+        /** AreaInfo AcquireGold */
+        AcquireGold?: (number|Long|null);
     }
 
-    /** Represents a UserList. */
-    class UserList implements IUserList {
+    /** Represents an AreaInfo. */
+    class AreaInfo implements IAreaInfo {
 
         /**
-         * Constructs a new UserList.
+         * Constructs a new AreaInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IUserList);
+        constructor(properties?: gamecomm.IAreaInfo);
 
-        /** UserList AllInfos. */
-        public AllInfos: gamecomm.IPlayerInfo[];
+        /** AreaInfo ID. */
+        public ID: number;
+
+        /** AreaInfo MyGold. */
+        public MyGold: (number|Long);
+
+        /** AreaInfo TotalGold. */
+        public TotalGold: (number|Long);
+
+        /** AreaInfo AcquireGold. */
+        public AcquireGold: (number|Long);
 
         /**
-         * Creates a new UserList instance using the specified properties.
+         * Creates a new AreaInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns UserList instance
+         * @returns AreaInfo instance
          */
-        public static create(properties?: gamecomm.IUserList): gamecomm.UserList;
+        public static create(properties?: gamecomm.IAreaInfo): gamecomm.AreaInfo;
 
         /**
-         * Encodes the specified UserList message. Does not implicitly {@link gamecomm.UserList.verify|verify} messages.
-         * @param message UserList message or plain object to encode
+         * Encodes the specified AreaInfo message. Does not implicitly {@link gamecomm.AreaInfo.verify|verify} messages.
+         * @param message AreaInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.IAreaInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserList message, length delimited. Does not implicitly {@link gamecomm.UserList.verify|verify} messages.
-         * @param message UserList message or plain object to encode
+         * Encodes the specified AreaInfo message, length delimited. Does not implicitly {@link gamecomm.AreaInfo.verify|verify} messages.
+         * @param message AreaInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IUserList, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.IAreaInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a UserList message from the specified reader or buffer.
+         * Decodes an AreaInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns UserList
+         * @returns AreaInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.UserList;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.AreaInfo;
 
         /**
-         * Decodes a UserList message from the specified reader or buffer, length delimited.
+         * Decodes an AreaInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns UserList
+         * @returns AreaInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.UserList;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.AreaInfo;
 
         /**
-         * Verifies a UserList message.
+         * Verifies an AreaInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a UserList message from a plain object. Also converts values to their respective internal types.
+         * Creates an AreaInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns UserList
+         * @returns AreaInfo
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.UserList;
+        public static fromObject(object: { [k: string]: any }): gamecomm.AreaInfo;
 
         /**
-         * Creates a plain object from a UserList message. Also converts values to other types if specified.
-         * @param message UserList
+         * Creates a plain object from an AreaInfo message. Also converts values to other types if specified.
+         * @param message AreaInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.UserList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.AreaInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this UserList to JSON.
+         * Converts this AreaInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a UserListInfo. */
+    interface IUserListInfo {
+
+        /** UserListInfo AllInfos */
+        AllInfos?: (gamecomm.IPlayerInfo[]|null);
+    }
+
+    /** Represents a UserListInfo. */
+    class UserListInfo implements IUserListInfo {
+
+        /**
+         * Constructs a new UserListInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IUserListInfo);
+
+        /** UserListInfo AllInfos. */
+        public AllInfos: gamecomm.IPlayerInfo[];
+
+        /**
+         * Creates a new UserListInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns UserListInfo instance
+         */
+        public static create(properties?: gamecomm.IUserListInfo): gamecomm.UserListInfo;
+
+        /**
+         * Encodes the specified UserListInfo message. Does not implicitly {@link gamecomm.UserListInfo.verify|verify} messages.
+         * @param message UserListInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IUserListInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified UserListInfo message, length delimited. Does not implicitly {@link gamecomm.UserListInfo.verify|verify} messages.
+         * @param message UserListInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IUserListInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a UserListInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UserListInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.UserListInfo;
+
+        /**
+         * Decodes a UserListInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns UserListInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.UserListInfo;
+
+        /**
+         * Verifies a UserListInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a UserListInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns UserListInfo
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.UserListInfo;
+
+        /**
+         * Creates a plain object from a UserListInfo message. Also converts values to other types if specified.
+         * @param message UserListInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.UserListInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this UserListInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a PlayerRecord. */
+    interface IPlayerRecord {
+
+        /** PlayerRecord User */
+        User?: (gamecomm.IPlayerInfo|null);
+
+        /** PlayerRecord Twice */
+        Twice?: (number|null);
+
+        /** PlayerRecord Ranking */
+        Ranking?: (number|null);
+
+        /** PlayerRecord Bankroll */
+        Bankroll?: (number|Long|null);
+
+        /** PlayerRecord WinLos */
+        WinLos?: (number|Long|null);
+    }
+
+    /** Represents a PlayerRecord. */
+    class PlayerRecord implements IPlayerRecord {
+
+        /**
+         * Constructs a new PlayerRecord.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IPlayerRecord);
+
+        /** PlayerRecord User. */
+        public User?: (gamecomm.IPlayerInfo|null);
+
+        /** PlayerRecord Twice. */
+        public Twice: number;
+
+        /** PlayerRecord Ranking. */
+        public Ranking: number;
+
+        /** PlayerRecord Bankroll. */
+        public Bankroll: (number|Long);
+
+        /** PlayerRecord WinLos. */
+        public WinLos: (number|Long);
+
+        /**
+         * Creates a new PlayerRecord instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns PlayerRecord instance
+         */
+        public static create(properties?: gamecomm.IPlayerRecord): gamecomm.PlayerRecord;
+
+        /**
+         * Encodes the specified PlayerRecord message. Does not implicitly {@link gamecomm.PlayerRecord.verify|verify} messages.
+         * @param message PlayerRecord message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IPlayerRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified PlayerRecord message, length delimited. Does not implicitly {@link gamecomm.PlayerRecord.verify|verify} messages.
+         * @param message PlayerRecord message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IPlayerRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a PlayerRecord message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns PlayerRecord
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.PlayerRecord;
+
+        /**
+         * Decodes a PlayerRecord message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns PlayerRecord
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.PlayerRecord;
+
+        /**
+         * Verifies a PlayerRecord message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a PlayerRecord message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns PlayerRecord
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.PlayerRecord;
+
+        /**
+         * Creates a plain object from a PlayerRecord message. Also converts values to other types if specified.
+         * @param message PlayerRecord
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.PlayerRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this PlayerRecord to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameRecord. */
+    interface IGameRecord {
+
+        /** GameRecord card */
+        card?: (gamecomm.ICardInfo|null);
+
+        /** GameRecord isWon */
+        isWon?: (boolean|null);
+    }
+
+    /** Represents a GameRecord. */
+    class GameRecord implements IGameRecord {
+
+        /**
+         * Constructs a new GameRecord.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGameRecord);
+
+        /** GameRecord card. */
+        public card?: (gamecomm.ICardInfo|null);
+
+        /** GameRecord isWon. */
+        public isWon: boolean;
+
+        /**
+         * Creates a new GameRecord instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameRecord instance
+         */
+        public static create(properties?: gamecomm.IGameRecord): gamecomm.GameRecord;
+
+        /**
+         * Encodes the specified GameRecord message. Does not implicitly {@link gamecomm.GameRecord.verify|verify} messages.
+         * @param message GameRecord message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGameRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameRecord message, length delimited. Does not implicitly {@link gamecomm.GameRecord.verify|verify} messages.
+         * @param message GameRecord message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGameRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameRecord message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameRecord
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameRecord;
+
+        /**
+         * Decodes a GameRecord message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameRecord
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameRecord;
+
+        /**
+         * Verifies a GameRecord message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameRecord message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameRecord
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GameRecord;
+
+        /**
+         * Creates a plain object from a GameRecord message. Also converts values to other types if specified.
+         * @param message GameRecord
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GameRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameRecord to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameRecordList. */
+    interface IGameRecordList {
+
+        /** GameRecordList list */
+        list?: (gamecomm.IGameRecord[]|null);
+    }
+
+    /** Represents a GameRecordList. */
+    class GameRecordList implements IGameRecordList {
+
+        /**
+         * Constructs a new GameRecordList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGameRecordList);
+
+        /** GameRecordList list. */
+        public list: gamecomm.IGameRecord[];
+
+        /**
+         * Creates a new GameRecordList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameRecordList instance
+         */
+        public static create(properties?: gamecomm.IGameRecordList): gamecomm.GameRecordList;
+
+        /**
+         * Encodes the specified GameRecordList message. Does not implicitly {@link gamecomm.GameRecordList.verify|verify} messages.
+         * @param message GameRecordList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGameRecordList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameRecordList message, length delimited. Does not implicitly {@link gamecomm.GameRecordList.verify|verify} messages.
+         * @param message GameRecordList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGameRecordList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameRecordList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameRecordList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameRecordList;
+
+        /**
+         * Decodes a GameRecordList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameRecordList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameRecordList;
+
+        /**
+         * Verifies a GameRecordList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameRecordList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameRecordList
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GameRecordList;
+
+        /**
+         * Creates a plain object from a GameRecordList message. Also converts values to other types if specified.
+         * @param message GameRecordList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GameRecordList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameRecordList to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -2400,1049 +3114,20 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a NotifyChangeGold. */
-    interface INotifyChangeGold {
-
-        /** NotifyChangeGold UserID */
-        UserID?: (number|Long|null);
-
-        /** NotifyChangeGold Gold */
-        Gold?: (number|Long|null);
-
-        /** NotifyChangeGold Code */
-        Code?: (number|null);
-    }
-
-    /** Represents a NotifyChangeGold. */
-    class NotifyChangeGold implements INotifyChangeGold {
-
-        /**
-         * Constructs a new NotifyChangeGold.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.INotifyChangeGold);
-
-        /** NotifyChangeGold UserID. */
-        public UserID: (number|Long);
-
-        /** NotifyChangeGold Gold. */
-        public Gold: (number|Long);
-
-        /** NotifyChangeGold Code. */
-        public Code: number;
-
-        /**
-         * Creates a new NotifyChangeGold instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns NotifyChangeGold instance
-         */
-        public static create(properties?: gamecomm.INotifyChangeGold): gamecomm.NotifyChangeGold;
-
-        /**
-         * Encodes the specified NotifyChangeGold message. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
-         * @param message NotifyChangeGold message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified NotifyChangeGold message, length delimited. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
-         * @param message NotifyChangeGold message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a NotifyChangeGold message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns NotifyChangeGold
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.NotifyChangeGold;
-
-        /**
-         * Decodes a NotifyChangeGold message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns NotifyChangeGold
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.NotifyChangeGold;
-
-        /**
-         * Verifies a NotifyChangeGold message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a NotifyChangeGold message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns NotifyChangeGold
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.NotifyChangeGold;
-
-        /**
-         * Creates a plain object from a NotifyChangeGold message. Also converts values to other types if specified.
-         * @param message NotifyChangeGold
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.NotifyChangeGold, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this NotifyChangeGold to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a MoneyCalculateInfo. */
-    interface IMoneyCalculateInfo {
-
-        /** MoneyCalculateInfo UserID */
-        UserID?: (number|Long|null);
-
-        /** MoneyCalculateInfo Money */
-        Money?: (number|Long|null);
-
-        /** MoneyCalculateInfo ChangeValue */
-        ChangeValue?: (number|Long|null);
-
-        /** MoneyCalculateInfo Reason */
-        Reason?: (string|null);
-    }
-
-    /** Represents a MoneyCalculateInfo. */
-    class MoneyCalculateInfo implements IMoneyCalculateInfo {
-
-        /**
-         * Constructs a new MoneyCalculateInfo.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IMoneyCalculateInfo);
-
-        /** MoneyCalculateInfo UserID. */
-        public UserID: (number|Long);
-
-        /** MoneyCalculateInfo Money. */
-        public Money: (number|Long);
-
-        /** MoneyCalculateInfo ChangeValue. */
-        public ChangeValue: (number|Long);
-
-        /** MoneyCalculateInfo Reason. */
-        public Reason: string;
-
-        /**
-         * Creates a new MoneyCalculateInfo instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns MoneyCalculateInfo instance
-         */
-        public static create(properties?: gamecomm.IMoneyCalculateInfo): gamecomm.MoneyCalculateInfo;
-
-        /**
-         * Encodes the specified MoneyCalculateInfo message. Does not implicitly {@link gamecomm.MoneyCalculateInfo.verify|verify} messages.
-         * @param message MoneyCalculateInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IMoneyCalculateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified MoneyCalculateInfo message, length delimited. Does not implicitly {@link gamecomm.MoneyCalculateInfo.verify|verify} messages.
-         * @param message MoneyCalculateInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IMoneyCalculateInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a MoneyCalculateInfo message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns MoneyCalculateInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.MoneyCalculateInfo;
-
-        /**
-         * Decodes a MoneyCalculateInfo message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns MoneyCalculateInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.MoneyCalculateInfo;
-
-        /**
-         * Verifies a MoneyCalculateInfo message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a MoneyCalculateInfo message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns MoneyCalculateInfo
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.MoneyCalculateInfo;
-
-        /**
-         * Creates a plain object from a MoneyCalculateInfo message. Also converts values to other types if specified.
-         * @param message MoneyCalculateInfo
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.MoneyCalculateInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this MoneyCalculateInfo to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StateReady. */
-    interface IStateReady {
-
-        /** StateReady Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a StateReady. */
-    class StateReady implements IStateReady {
-
-        /**
-         * Constructs a new StateReady.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStateReady);
-
-        /** StateReady Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new StateReady instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StateReady instance
-         */
-        public static create(properties?: gamecomm.IStateReady): gamecomm.StateReady;
-
-        /**
-         * Encodes the specified StateReady message. Does not implicitly {@link gamecomm.StateReady.verify|verify} messages.
-         * @param message StateReady message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStateReady, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StateReady message, length delimited. Does not implicitly {@link gamecomm.StateReady.verify|verify} messages.
-         * @param message StateReady message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStateReady, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StateReady message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StateReady
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StateReady;
-
-        /**
-         * Decodes a StateReady message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StateReady
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StateReady;
-
-        /**
-         * Verifies a StateReady message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StateReady message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StateReady
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StateReady;
-
-        /**
-         * Creates a plain object from a StateReady message. Also converts values to other types if specified.
-         * @param message StateReady
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StateReady, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StateReady to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StateFree. */
-    interface IStateFree {
-
-        /** StateFree Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a StateFree. */
-    class StateFree implements IStateFree {
-
-        /**
-         * Constructs a new StateFree.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStateFree);
-
-        /** StateFree Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new StateFree instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StateFree instance
-         */
-        public static create(properties?: gamecomm.IStateFree): gamecomm.StateFree;
-
-        /**
-         * Encodes the specified StateFree message. Does not implicitly {@link gamecomm.StateFree.verify|verify} messages.
-         * @param message StateFree message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StateFree message, length delimited. Does not implicitly {@link gamecomm.StateFree.verify|verify} messages.
-         * @param message StateFree message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StateFree message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StateFree
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StateFree;
-
-        /**
-         * Decodes a StateFree message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StateFree
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StateFree;
-
-        /**
-         * Verifies a StateFree message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StateFree message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StateFree
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StateFree;
-
-        /**
-         * Creates a plain object from a StateFree message. Also converts values to other types if specified.
-         * @param message StateFree
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StateFree, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StateFree to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StateStart. */
-    interface IStateStart {
-
-        /** StateStart Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a StateStart. */
-    class StateStart implements IStateStart {
-
-        /**
-         * Constructs a new StateStart.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStateStart);
-
-        /** StateStart Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new StateStart instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StateStart instance
-         */
-        public static create(properties?: gamecomm.IStateStart): gamecomm.StateStart;
-
-        /**
-         * Encodes the specified StateStart message. Does not implicitly {@link gamecomm.StateStart.verify|verify} messages.
-         * @param message StateStart message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StateStart message, length delimited. Does not implicitly {@link gamecomm.StateStart.verify|verify} messages.
-         * @param message StateStart message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StateStart message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StateStart
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StateStart;
-
-        /**
-         * Decodes a StateStart message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StateStart
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StateStart;
-
-        /**
-         * Verifies a StateStart message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StateStart message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StateStart
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StateStart;
-
-        /**
-         * Creates a plain object from a StateStart message. Also converts values to other types if specified.
-         * @param message StateStart
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StateStart, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StateStart to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StatePlaying. */
-    interface IStatePlaying {
-
-        /** StatePlaying Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a StatePlaying. */
-    class StatePlaying implements IStatePlaying {
-
-        /**
-         * Constructs a new StatePlaying.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStatePlaying);
-
-        /** StatePlaying Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new StatePlaying instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StatePlaying instance
-         */
-        public static create(properties?: gamecomm.IStatePlaying): gamecomm.StatePlaying;
-
-        /**
-         * Encodes the specified StatePlaying message. Does not implicitly {@link gamecomm.StatePlaying.verify|verify} messages.
-         * @param message StatePlaying message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StatePlaying message, length delimited. Does not implicitly {@link gamecomm.StatePlaying.verify|verify} messages.
-         * @param message StatePlaying message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StatePlaying message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StatePlaying
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StatePlaying;
-
-        /**
-         * Decodes a StatePlaying message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StatePlaying
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StatePlaying;
-
-        /**
-         * Verifies a StatePlaying message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StatePlaying message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StatePlaying
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StatePlaying;
-
-        /**
-         * Creates a plain object from a StatePlaying message. Also converts values to other types if specified.
-         * @param message StatePlaying
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StatePlaying, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StatePlaying to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StateOver. */
-    interface IStateOver {
-
-        /** StateOver Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a StateOver. */
-    class StateOver implements IStateOver {
-
-        /**
-         * Constructs a new StateOver.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStateOver);
-
-        /** StateOver Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new StateOver instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StateOver instance
-         */
-        public static create(properties?: gamecomm.IStateOver): gamecomm.StateOver;
-
-        /**
-         * Encodes the specified StateOver message. Does not implicitly {@link gamecomm.StateOver.verify|verify} messages.
-         * @param message StateOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StateOver message, length delimited. Does not implicitly {@link gamecomm.StateOver.verify|verify} messages.
-         * @param message StateOver message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StateOver message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StateOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StateOver;
-
-        /**
-         * Decodes a StateOver message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StateOver
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StateOver;
-
-        /**
-         * Verifies a StateOver message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StateOver message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StateOver
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StateOver;
-
-        /**
-         * Creates a plain object from a StateOver message. Also converts values to other types if specified.
-         * @param message StateOver
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StateOver, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StateOver to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a StateCall. */
-    interface IStateCall {
-
-        /** StateCall Times */
-        Times?: (gamecomm.ITimeInfo|null);
-
-        /** StateCall UserID */
-        UserID?: (number|Long|null);
-    }
-
-    /** Represents a StateCall. */
-    class StateCall implements IStateCall {
-
-        /**
-         * Constructs a new StateCall.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IStateCall);
-
-        /** StateCall Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /** StateCall UserID. */
-        public UserID: (number|Long);
-
-        /**
-         * Creates a new StateCall instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns StateCall instance
-         */
-        public static create(properties?: gamecomm.IStateCall): gamecomm.StateCall;
-
-        /**
-         * Encodes the specified StateCall message. Does not implicitly {@link gamecomm.StateCall.verify|verify} messages.
-         * @param message StateCall message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IStateCall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified StateCall message, length delimited. Does not implicitly {@link gamecomm.StateCall.verify|verify} messages.
-         * @param message StateCall message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IStateCall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a StateCall message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns StateCall
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.StateCall;
-
-        /**
-         * Decodes a StateCall message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns StateCall
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.StateCall;
-
-        /**
-         * Verifies a StateCall message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a StateCall message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns StateCall
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.StateCall;
-
-        /**
-         * Creates a plain object from a StateCall message. Also converts values to other types if specified.
-         * @param message StateCall
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.StateCall, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this StateCall to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a Host. */
-    interface IHost {
-
-        /** Host IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a Host. */
-    class Host implements IHost {
-
-        /**
-         * Constructs a new Host.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IHost);
-
-        /** Host IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new Host instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Host instance
-         */
-        public static create(properties?: gamecomm.IHost): gamecomm.Host;
-
-        /**
-         * Encodes the specified Host message. Does not implicitly {@link gamecomm.Host.verify|verify} messages.
-         * @param message Host message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Host message, length delimited. Does not implicitly {@link gamecomm.Host.verify|verify} messages.
-         * @param message Host message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IHost, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a Host message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns Host
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.Host;
-
-        /**
-         * Decodes a Host message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Host
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.Host;
-
-        /**
-         * Verifies a Host message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a Host message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns Host
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.Host;
-
-        /**
-         * Creates a plain object from a Host message. Also converts values to other types if specified.
-         * @param message Host
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.Host, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this Host to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a HostEx. */
-    interface IHostEx {
-
-        /** HostEx IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a HostEx. */
-    class HostEx implements IHostEx {
-
-        /**
-         * Constructs a new HostEx.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IHostEx);
-
-        /** HostEx IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new HostEx instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns HostEx instance
-         */
-        public static create(properties?: gamecomm.IHostEx): gamecomm.HostEx;
-
-        /**
-         * Encodes the specified HostEx message. Does not implicitly {@link gamecomm.HostEx.verify|verify} messages.
-         * @param message HostEx message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IHostEx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified HostEx message, length delimited. Does not implicitly {@link gamecomm.HostEx.verify|verify} messages.
-         * @param message HostEx message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IHostEx, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a HostEx message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns HostEx
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.HostEx;
-
-        /**
-         * Decodes a HostEx message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns HostEx
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.HostEx;
-
-        /**
-         * Verifies a HostEx message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a HostEx message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns HostEx
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.HostEx;
-
-        /**
-         * Creates a plain object from a HostEx message. Also converts values to other types if specified.
-         * @param message HostEx
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.HostEx, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this HostEx to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a Call. */
-    interface ICall {
-
-        /** Call UserID */
-        UserID?: (number|Long|null);
-
-        /** Call Score */
-        Score?: (number|null);
-    }
-
-    /** Represents a Call. */
-    class Call implements ICall {
-
-        /**
-         * Constructs a new Call.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.ICall);
-
-        /** Call UserID. */
-        public UserID: (number|Long);
-
-        /** Call Score. */
-        public Score: number;
-
-        /**
-         * Creates a new Call instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns Call instance
-         */
-        public static create(properties?: gamecomm.ICall): gamecomm.Call;
-
-        /**
-         * Encodes the specified Call message. Does not implicitly {@link gamecomm.Call.verify|verify} messages.
-         * @param message Call message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.ICall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified Call message, length delimited. Does not implicitly {@link gamecomm.Call.verify|verify} messages.
-         * @param message Call message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.ICall, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a Call message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns Call
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.Call;
-
-        /**
-         * Decodes a Call message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns Call
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.Call;
-
-        /**
-         * Verifies a Call message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a Call message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns Call
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.Call;
-
-        /**
-         * Creates a plain object from a Call message. Also converts values to other types if specified.
-         * @param message Call
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.Call, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this Call to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a BeOut. */
     interface IBeOut {
 
         /** BeOut UserID */
         UserID?: (number|Long|null);
 
+        /** BeOut GameID */
+        GameID?: (number|null);
+
         /** BeOut Code */
         Code?: (number|null);
 
         /** BeOut Hints */
-        Hints?: (Uint8Array|null);
+        Hints?: (string|null);
     }
 
     /** Represents a BeOut. */
@@ -3457,11 +3142,14 @@ export namespace gamecomm {
         /** BeOut UserID. */
         public UserID: (number|Long);
 
+        /** BeOut GameID. */
+        public GameID: number;
+
         /** BeOut Code. */
         public Code: number;
 
         /** BeOut Hints. */
-        public Hints: Uint8Array;
+        public Hints: string;
 
         /**
          * Creates a new BeOut instance using the specified properties.
@@ -3534,505 +3222,115 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a Bet. */
-    interface IBet {
+    /** Properties of a NotifyChangeGold. */
+    interface INotifyChangeGold {
 
-        /** Bet AreaId */
-        AreaId?: (number|null);
+        /** NotifyChangeGold UserID */
+        UserID?: (number|Long|null);
 
-        /** Bet Money */
-        Money?: (number|Long|null);
+        /** NotifyChangeGold Gold */
+        Gold?: (number|Long|null);
+
+        /** NotifyChangeGold AlterGold */
+        AlterGold?: (number|Long|null);
+
+        /** NotifyChangeGold Code */
+        Code?: (number|null);
+
+        /** NotifyChangeGold Reason */
+        Reason?: (string|null);
     }
 
-    /** Represents a Bet. */
-    class Bet implements IBet {
+    /** Represents a NotifyChangeGold. */
+    class NotifyChangeGold implements INotifyChangeGold {
 
         /**
-         * Constructs a new Bet.
+         * Constructs a new NotifyChangeGold.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IBet);
+        constructor(properties?: gamecomm.INotifyChangeGold);
 
-        /** Bet AreaId. */
-        public AreaId: number;
+        /** NotifyChangeGold UserID. */
+        public UserID: (number|Long);
 
-        /** Bet Money. */
-        public Money: (number|Long);
+        /** NotifyChangeGold Gold. */
+        public Gold: (number|Long);
+
+        /** NotifyChangeGold AlterGold. */
+        public AlterGold: (number|Long);
+
+        /** NotifyChangeGold Code. */
+        public Code: number;
+
+        /** NotifyChangeGold Reason. */
+        public Reason: string;
 
         /**
-         * Creates a new Bet instance using the specified properties.
+         * Creates a new NotifyChangeGold instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Bet instance
+         * @returns NotifyChangeGold instance
          */
-        public static create(properties?: gamecomm.IBet): gamecomm.Bet;
+        public static create(properties?: gamecomm.INotifyChangeGold): gamecomm.NotifyChangeGold;
 
         /**
-         * Encodes the specified Bet message. Does not implicitly {@link gamecomm.Bet.verify|verify} messages.
-         * @param message Bet message or plain object to encode
+         * Encodes the specified NotifyChangeGold message. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
+         * @param message NotifyChangeGold message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IBet, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Bet message, length delimited. Does not implicitly {@link gamecomm.Bet.verify|verify} messages.
-         * @param message Bet message or plain object to encode
+         * Encodes the specified NotifyChangeGold message, length delimited. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
+         * @param message NotifyChangeGold message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IBet, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a Bet message from the specified reader or buffer.
+         * Decodes a NotifyChangeGold message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Bet
+         * @returns NotifyChangeGold
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.Bet;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.NotifyChangeGold;
 
         /**
-         * Decodes a Bet message from the specified reader or buffer, length delimited.
+         * Decodes a NotifyChangeGold message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Bet
+         * @returns NotifyChangeGold
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.Bet;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.NotifyChangeGold;
 
         /**
-         * Verifies a Bet message.
+         * Verifies a NotifyChangeGold message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a Bet message from a plain object. Also converts values to their respective internal types.
+         * Creates a NotifyChangeGold message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Bet
+         * @returns NotifyChangeGold
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.Bet;
+        public static fromObject(object: { [k: string]: any }): gamecomm.NotifyChangeGold;
 
         /**
-         * Creates a plain object from a Bet message. Also converts values to other types if specified.
-         * @param message Bet
+         * Creates a plain object from a NotifyChangeGold message. Also converts values to other types if specified.
+         * @param message NotifyChangeGold
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.Bet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.NotifyChangeGold, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Bet to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a BetResult. */
-    interface IBetResult {
-
-        /** BetResult UserId */
-        UserId?: (number|Long|null);
-
-        /** BetResult AreaId */
-        AreaId?: (number|null);
-
-        /** BetResult Money */
-        Money?: (number|Long|null);
-    }
-
-    /** Represents a BetResult. */
-    class BetResult implements IBetResult {
-
-        /**
-         * Constructs a new BetResult.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IBetResult);
-
-        /** BetResult UserId. */
-        public UserId: (number|Long);
-
-        /** BetResult AreaId. */
-        public AreaId: number;
-
-        /** BetResult Money. */
-        public Money: (number|Long);
-
-        /**
-         * Creates a new BetResult instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns BetResult instance
-         */
-        public static create(properties?: gamecomm.IBetResult): gamecomm.BetResult;
-
-        /**
-         * Encodes the specified BetResult message. Does not implicitly {@link gamecomm.BetResult.verify|verify} messages.
-         * @param message BetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified BetResult message, length delimited. Does not implicitly {@link gamecomm.BetResult.verify|verify} messages.
-         * @param message BetResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IBetResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a BetResult message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns BetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.BetResult;
-
-        /**
-         * Decodes a BetResult message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns BetResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.BetResult;
-
-        /**
-         * Verifies a BetResult message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a BetResult message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns BetResult
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.BetResult;
-
-        /**
-         * Creates a plain object from a BetResult message. Also converts values to other types if specified.
-         * @param message BetResult
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.BetResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this BetResult to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a PlayerRecord. */
-    interface IPlayerRecord {
-
-        /** PlayerRecord User */
-        User?: (gamecomm.IPlayerInfo|null);
-
-        /** PlayerRecord Twice */
-        Twice?: (number|null);
-
-        /** PlayerRecord Ranking */
-        Ranking?: (number|null);
-
-        /** PlayerRecord Bankroll */
-        Bankroll?: (number|null);
-
-        /** PlayerRecord WinLos */
-        WinLos?: (number|Long|null);
-    }
-
-    /** Represents a PlayerRecord. */
-    class PlayerRecord implements IPlayerRecord {
-
-        /**
-         * Constructs a new PlayerRecord.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IPlayerRecord);
-
-        /** PlayerRecord User. */
-        public User?: (gamecomm.IPlayerInfo|null);
-
-        /** PlayerRecord Twice. */
-        public Twice: number;
-
-        /** PlayerRecord Ranking. */
-        public Ranking: number;
-
-        /** PlayerRecord Bankroll. */
-        public Bankroll: number;
-
-        /** PlayerRecord WinLos. */
-        public WinLos: (number|Long);
-
-        /**
-         * Creates a new PlayerRecord instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns PlayerRecord instance
-         */
-        public static create(properties?: gamecomm.IPlayerRecord): gamecomm.PlayerRecord;
-
-        /**
-         * Encodes the specified PlayerRecord message. Does not implicitly {@link gamecomm.PlayerRecord.verify|verify} messages.
-         * @param message PlayerRecord message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IPlayerRecord, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified PlayerRecord message, length delimited. Does not implicitly {@link gamecomm.PlayerRecord.verify|verify} messages.
-         * @param message PlayerRecord message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IPlayerRecord, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a PlayerRecord message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns PlayerRecord
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.PlayerRecord;
-
-        /**
-         * Decodes a PlayerRecord message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns PlayerRecord
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.PlayerRecord;
-
-        /**
-         * Verifies a PlayerRecord message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a PlayerRecord message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns PlayerRecord
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.PlayerRecord;
-
-        /**
-         * Creates a plain object from a PlayerRecord message. Also converts values to other types if specified.
-         * @param message PlayerRecord
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.PlayerRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this PlayerRecord to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameRecord. */
-    interface IGameRecord {
-
-        /** GameRecord Pork */
-        Pork?: (Uint8Array|null);
-
-        /** GameRecord Type */
-        Type?: (number|null);
-
-        /** GameRecord isWon */
-        isWon?: (boolean|null);
-    }
-
-    /** Represents a GameRecord. */
-    class GameRecord implements IGameRecord {
-
-        /**
-         * Constructs a new GameRecord.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IGameRecord);
-
-        /** GameRecord Pork. */
-        public Pork: Uint8Array;
-
-        /** GameRecord Type. */
-        public Type: number;
-
-        /** GameRecord isWon. */
-        public isWon: boolean;
-
-        /**
-         * Creates a new GameRecord instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameRecord instance
-         */
-        public static create(properties?: gamecomm.IGameRecord): gamecomm.GameRecord;
-
-        /**
-         * Encodes the specified GameRecord message. Does not implicitly {@link gamecomm.GameRecord.verify|verify} messages.
-         * @param message GameRecord message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IGameRecord, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameRecord message, length delimited. Does not implicitly {@link gamecomm.GameRecord.verify|verify} messages.
-         * @param message GameRecord message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IGameRecord, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameRecord message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameRecord
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameRecord;
-
-        /**
-         * Decodes a GameRecord message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameRecord
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameRecord;
-
-        /**
-         * Verifies a GameRecord message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameRecord message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameRecord
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.GameRecord;
-
-        /**
-         * Creates a plain object from a GameRecord message. Also converts values to other types if specified.
-         * @param message GameRecord
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.GameRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameRecord to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a GameRecordList. */
-    interface IGameRecordList {
-
-        /** GameRecordList list */
-        list?: (gamecomm.IGameRecord[]|null);
-    }
-
-    /** Represents a GameRecordList. */
-    class GameRecordList implements IGameRecordList {
-
-        /**
-         * Constructs a new GameRecordList.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.IGameRecordList);
-
-        /** GameRecordList list. */
-        public list: gamecomm.IGameRecord[];
-
-        /**
-         * Creates a new GameRecordList instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameRecordList instance
-         */
-        public static create(properties?: gamecomm.IGameRecordList): gamecomm.GameRecordList;
-
-        /**
-         * Encodes the specified GameRecordList message. Does not implicitly {@link gamecomm.GameRecordList.verify|verify} messages.
-         * @param message GameRecordList message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.IGameRecordList, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameRecordList message, length delimited. Does not implicitly {@link gamecomm.GameRecordList.verify|verify} messages.
-         * @param message GameRecordList message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.IGameRecordList, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameRecordList message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameRecordList
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameRecordList;
-
-        /**
-         * Decodes a GameRecordList message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameRecordList
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameRecordList;
-
-        /**
-         * Verifies a GameRecordList message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameRecordList message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameRecordList
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.GameRecordList;
-
-        /**
-         * Creates a plain object from a GameRecordList message. Also converts values to other types if specified.
-         * @param message GameRecordList
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.GameRecordList, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameRecordList to JSON.
+         * Converts this NotifyChangeGold to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

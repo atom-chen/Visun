@@ -2,6 +2,8 @@ syntax = "proto3";
 package baccarat;
 import "gamecomm.proto";
 
+//0:庄 1:和 2:闲
+
 //场景
 message BaccaratScene{
   int64 TimeStamp = 1;        //时间戳
@@ -37,39 +39,49 @@ message BaccaratStateOver {
 
 //游戏消息
 //抢庄
-message BaccaratHost {
+message BaccaratHostReq {
+  bool IsWant = 1;//true上庄 false取消上庄
+}
+message BaccaratHostResp {
   uint64 UserID = 1;
   bool IsWant = 2;//true上庄 false取消上庄
 }
+
+
 //超级抢庄
-message BaccaratSuperHost {
+message BaccaratSuperHostReq {
+  bool IsWant = 1;//true上庄 false取消
+}
+message BaccaratSuperHostResp {
   uint64 UserID = 1;
   bool IsWant = 2;//true上庄 false取消
 }
 
-//游戏中
+
+//下注
 message BaccaratBetReq{
   int32 BetArea = 1;        //下注区域
   int64 BetScore = 2;        //下注金额
 }
-
-//下注结果
 message BaccaratBetResp{
-  uint64 UserID = 1;        //ID
+  uint64 UserID = 1;
   int32 BetArea = 2;        //下注区域
   int64 BetScore = 3;        //下注金额
 }
 
 //结束
-message BaccaratOver{
+message BaccaratOverResp{
   bytes AwardArea = 1;  //开奖区域
   CardInfo PlayerCard = 2;  //闲家的牌
   CardInfo BankerCard = 3;  //庄家的牌
 }
 
 //结算
-message BaccaratCheckout{
-  int64 Acquire = 1;    //获得金币(结算)
+message BaccaratCheckoutResp{
+  int64 MyAcquire = 1;    //获得金币(结算)
+  int64 BankerAcquire = 2;    //获得金币(结算)
+  int64 PlayerAcquire = 3;    //获得金币(结算)
+  int64 DrawAcquire = 4;    //闲 获得金币(结算)
 }
 
 

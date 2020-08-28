@@ -3,7 +3,6 @@ package gamecomm;
 
 //该协议文件不提供 req 和 resp 注:如需使用,请在子游戏协议中嵌套相关协议.
 
-
 //玩家信息
 message PlayerInfo {
   uint64 UserID = 1; //ID
@@ -13,33 +12,63 @@ message PlayerInfo {
   int64 Gold = 5; //金币 *100
   int32 VipLevel = 6; //vip级别
   string Account = 7; // 账号(手机号码/邮箱/真名)
-  int32 Sate = 8; // 状态 0:旁观 1:坐下 2:同意  3:站起
+  int32 Sate = 8; // 状态 0:旁观 1:坐下 2:已准备(同意) 3:站起
+  uint32 ChairID = 9; // 所在椅子ID 0:无效
   //    uint32 PlatformID = 9; // 平台ID 0:无效
   //    uint32 RoomNum = 10; // 房间号 0:无效
   //    uint32 GameID = 11; // 所在游戏ID 0:无效
   //    uint32 TableID = 12; // 所在桌号ID 0:无效
-  uint32 ChairID = 13; // 所在椅子ID 0:无效
 }
 
 
 //牌信息
 message CardInfo {
-  bytes Cards = 1;            //牌
-  int32 CardType = 2;      //牌型
+  bytes Cards = 1;        //牌
+  int32 CardType = 2;     //牌型
   int32 CardValue = 3;    //牌值
 }
 
 //时间信息
 message TimeInfo {
   int64 TimeStamp = 1; //时间戳（起始时间戳）
-  int32 WaitTime = 2;  //等待时间
+  int32 WaitTime = 2;  //仍需等待时长
   int32 OutTime = 3;   //服务器已过时长
   int32 TotalTime = 4; //总时长
 }
 
+message AreaInfo {
+  int32 ID = 1;           //区域ID
+  int64 MyGold = 2;       //my
+  int64 TotalGold = 3;    //总
+  int64 AcquireGold = 4;  //输赢情况
+}
+
 //玩家列表(信息)
-message UserList {
+message UserListInfo {
   repeated PlayerInfo AllInfos = 1; //所有玩家信息
+}
+
+
+//-----------------------------------------------------------------------------------------
+
+//玩家记录（从数据库中获取）ResResult
+message PlayerRecord {
+  PlayerInfo User = 1;//玩家
+  int32 Twice = 2;    //游戏次数
+  int32 Ranking = 3;  //当前排名
+  int64 Bankroll = 4; //投注额度
+  int64 WinLos = 5;   //总输赢 （当局）
+}
+
+//游戏记录
+message GameRecord {
+  CardInfo card = 1;
+  bool isWon = 3; //输赢情况
+}
+
+//历史记录(保存十二条记录)
+message GameRecordList {
+  repeated GameRecord list = 1; //所有历史信息
 }
 
 
@@ -60,21 +89,26 @@ message ReqChangeTable {
   uint32 GameID = 1; //游戏标识
 }
 
+//踢出
+message BeOut {
+  uint64 UserID = 1;  //玩家ID
+  uint32 GameID = 2; //游戏标识
+  uint32 Code = 3;    //操作码 0:时间到被剔除 1:刷子
+  string Hints = 4;    //被踢出的原因
+}
+
 //金币变化通知
 message NotifyChangeGold {
-  uint64 UserID = 1; //ID
-  int64 Gold = 2; //金币 *100
-  uint32 Code = 3; //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结
-}
-
-//结算金币变化
-message MoneyCalculateInfo {
   uint64 UserID = 1;
-  uint64 Money = 2;       //当前余额
-  int64 ChangeValue = 3;  //增减了多少
-  string Reason = 4;      //增减原因描述
+  int64 Gold = 2;     //金币 (客户端统一 */100)
+  int64 AlterGold = 3;//增减了多少 (客户端统一 */100)
+  uint32 Code = 4;    //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结 5:提币
+  string Reason = 5;  //备注详情
 }
 
+
+
+/*
 
 //-----------------------------------------------------------------------------------------
 //游戏状态
@@ -126,20 +160,11 @@ message Call {
   uint32 Score = 2; // 叫分 0:不叫 1: 2: 3:
 }
 
-//踢出
-message BeOut {
-  uint64 UserID = 1;  //玩家ID
-  uint32 Code = 2;    //操作码 0:时间到被剔除 1:刷子
-  bytes Hints = 3;    //被踢出的原因
-}
-
-
 //下注
 message Bet {
   int32 AreaId = 1;
   int64 Money = 2;
 }
-
 //下注结果：广播
 message BetResult {
   uint64 UserId = 1;
@@ -147,28 +172,4 @@ message BetResult {
   int64 Money = 3;
 }
 
-
-
-//-----------------------------------------------------------------------------------------
-//玩家记录（从数据库中获取）ResResult
-message PlayerRecord {
-  PlayerInfo User = 1; //玩家
-  int32 Twice = 2; //游戏次数
-  int32 Ranking = 3; //当前排名
-  int32 Bankroll = 4; //投注额度
-  int64 WinLos = 5; //总输赢 （当局）
-}
-
-//游戏记录
-message GameRecord {
-  bytes Pork = 1; //牌
-  int32 Type = 2; //类型
-  bool isWon = 3; //输赢情况
-}
-//历史记录(保存十二条记录)
-message GameRecordList {
-  repeated GameRecord list = 1; //所有历史信息
-}
-
-
-
+*/

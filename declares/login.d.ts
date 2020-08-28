@@ -2,517 +2,619 @@ import * as $protobuf from "protobufjs";
 /** Namespace login. */
 export namespace login {
 
-    /** Properties of a Register. */
-    interface IRegister {
+    /** Properties of a UserInfo. */
+    interface IUserInfo {
 
-        /** Register Name */
+        /** UserInfo UserID */
+        UserID?: (number|Long|null);
+
+        /** UserInfo Name */
         Name?: (string|null);
 
-        /** Register Password */
+        /** UserInfo Accounts */
+        Accounts?: (string|null);
+
+        /** UserInfo Password */
         Password?: (string|null);
 
-        /** Register SecurityCode */
-        SecurityCode?: (string|null);
+        /** UserInfo FaceID */
+        FaceID?: (number|null);
 
-        /** Register MachineCode */
+        /** UserInfo Gender */
+        Gender?: (number|null);
+
+        /** UserInfo Age */
+        Age?: (number|null);
+
+        /** UserInfo Level */
+        Level?: (number|null);
+
+        /** UserInfo Gold */
+        Gold?: (number|Long|null);
+
+        /** UserInfo PassPortID */
+        PassPortID?: (string|null);
+
+        /** UserInfo RealName */
+        RealName?: (string|null);
+
+        /** UserInfo AgentID */
+        AgentID?: (number|null);
+
+        /** UserInfo SpreaderGameID */
+        SpreaderGameID?: (number|null);
+
+        /** UserInfo ClientAddr */
+        ClientAddr?: (number|null);
+
+        /** UserInfo MachineCode */
         MachineCode?: (string|null);
-
-        /** Register InvitationCode */
-        InvitationCode?: (string|null);
     }
 
-    /** Represents a Register. */
-    class Register implements IRegister {
+    /** Represents a UserInfo. */
+    class UserInfo implements IUserInfo {
 
         /**
-         * Constructs a new Register.
+         * Constructs a new UserInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IRegister);
+        constructor(properties?: login.IUserInfo);
 
-        /** Register Name. */
+        /** UserInfo UserID. */
+        public UserID: (number|Long);
+
+        /** UserInfo Name. */
         public Name: string;
 
-        /** Register Password. */
+        /** UserInfo Accounts. */
+        public Accounts: string;
+
+        /** UserInfo Password. */
         public Password: string;
 
-        /** Register SecurityCode. */
-        public SecurityCode: string;
+        /** UserInfo FaceID. */
+        public FaceID: number;
 
-        /** Register MachineCode. */
+        /** UserInfo Gender. */
+        public Gender: number;
+
+        /** UserInfo Age. */
+        public Age: number;
+
+        /** UserInfo Level. */
+        public Level: number;
+
+        /** UserInfo Gold. */
+        public Gold: (number|Long);
+
+        /** UserInfo PassPortID. */
+        public PassPortID: string;
+
+        /** UserInfo RealName. */
+        public RealName: string;
+
+        /** UserInfo AgentID. */
+        public AgentID: number;
+
+        /** UserInfo SpreaderGameID. */
+        public SpreaderGameID: number;
+
+        /** UserInfo ClientAddr. */
+        public ClientAddr: number;
+
+        /** UserInfo MachineCode. */
         public MachineCode: string;
 
-        /** Register InvitationCode. */
-        public InvitationCode: string;
-
         /**
-         * Creates a new Register instance using the specified properties.
+         * Creates a new UserInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Register instance
+         * @returns UserInfo instance
          */
-        public static create(properties?: login.IRegister): login.Register;
+        public static create(properties?: login.IUserInfo): login.UserInfo;
 
         /**
-         * Encodes the specified Register message. Does not implicitly {@link login.Register.verify|verify} messages.
-         * @param message Register message or plain object to encode
+         * Encodes the specified UserInfo message. Does not implicitly {@link login.UserInfo.verify|verify} messages.
+         * @param message UserInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IRegister, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Register message, length delimited. Does not implicitly {@link login.Register.verify|verify} messages.
-         * @param message Register message or plain object to encode
+         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link login.UserInfo.verify|verify} messages.
+         * @param message UserInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IRegister, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a Register message from the specified reader or buffer.
+         * Decodes a UserInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Register
+         * @returns UserInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.Register;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.UserInfo;
 
         /**
-         * Decodes a Register message from the specified reader or buffer, length delimited.
+         * Decodes a UserInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Register
+         * @returns UserInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.Register;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.UserInfo;
 
         /**
-         * Verifies a Register message.
+         * Verifies a UserInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a Register message from a plain object. Also converts values to their respective internal types.
+         * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Register
+         * @returns UserInfo
          */
-        public static fromObject(object: { [k: string]: any }): login.Register;
+        public static fromObject(object: { [k: string]: any }): login.UserInfo;
 
         /**
-         * Creates a plain object from a Register message. Also converts values to other types if specified.
-         * @param message Register
+         * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
+         * @param message UserInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.Register, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Register to JSON.
+         * Converts this UserInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a RegisterResult. */
-    interface IRegisterResult {
+    /** Properties of a RoomInfo. */
+    interface IRoomInfo {
 
-        /** RegisterResult State */
+        /** RoomInfo RoomNum */
+        RoomNum?: (number|null);
+
+        /** RoomInfo RoomKey */
+        RoomKey?: (string|null);
+
+        /** RoomInfo RoomName */
+        RoomName?: (string|null);
+
+        /** RoomInfo Games */
+        Games?: (login.IGameList|null);
+    }
+
+    /** Represents a RoomInfo. */
+    class RoomInfo implements IRoomInfo {
+
+        /**
+         * Constructs a new RoomInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IRoomInfo);
+
+        /** RoomInfo RoomNum. */
+        public RoomNum: number;
+
+        /** RoomInfo RoomKey. */
+        public RoomKey: string;
+
+        /** RoomInfo RoomName. */
+        public RoomName: string;
+
+        /** RoomInfo Games. */
+        public Games?: (login.IGameList|null);
+
+        /**
+         * Creates a new RoomInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RoomInfo instance
+         */
+        public static create(properties?: login.IRoomInfo): login.RoomInfo;
+
+        /**
+         * Encodes the specified RoomInfo message. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
+         * @param message RoomInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RoomInfo message, length delimited. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
+         * @param message RoomInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RoomInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RoomInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RoomInfo;
+
+        /**
+         * Decodes a RoomInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RoomInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RoomInfo;
+
+        /**
+         * Verifies a RoomInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RoomInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RoomInfo
+         */
+        public static fromObject(object: { [k: string]: any }): login.RoomInfo;
+
+        /**
+         * Creates a plain object from a RoomInfo message. Also converts values to other types if specified.
+         * @param message RoomInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.RoomInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RoomInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameInfo. */
+    interface IGameInfo {
+
+        /** GameInfo Type */
+        Type?: (number|null);
+
+        /** GameInfo KindID */
+        KindID?: (number|null);
+
+        /** GameInfo Level */
+        Level?: (number|null);
+
+        /** GameInfo Name */
+        Name?: (string|null);
+
+        /** GameInfo EnterScore */
+        EnterScore?: (number|null);
+
+        /** GameInfo LessScore */
+        LessScore?: (number|null);
+
+        /** GameInfo MaxOnline */
+        MaxOnline?: (number|null);
+
+        /** GameInfo State */
         State?: (number|null);
 
-        /** RegisterResult Hints */
-        Hints?: (string|null);
+        /** GameInfo Commission */
+        Commission?: (number|null);
     }
 
-    /** Represents a RegisterResult. */
-    class RegisterResult implements IRegisterResult {
+    /** Represents a GameInfo. */
+    class GameInfo implements IGameInfo {
 
         /**
-         * Constructs a new RegisterResult.
+         * Constructs a new GameInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IRegisterResult);
+        constructor(properties?: login.IGameInfo);
 
-        /** RegisterResult State. */
+        /** GameInfo Type. */
+        public Type: number;
+
+        /** GameInfo KindID. */
+        public KindID: number;
+
+        /** GameInfo Level. */
+        public Level: number;
+
+        /** GameInfo Name. */
+        public Name: string;
+
+        /** GameInfo EnterScore. */
+        public EnterScore: number;
+
+        /** GameInfo LessScore. */
+        public LessScore: number;
+
+        /** GameInfo MaxOnline. */
+        public MaxOnline: number;
+
+        /** GameInfo State. */
         public State: number;
 
-        /** RegisterResult Hints. */
-        public Hints: string;
+        /** GameInfo Commission. */
+        public Commission: number;
 
         /**
-         * Creates a new RegisterResult instance using the specified properties.
+         * Creates a new GameInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns RegisterResult instance
+         * @returns GameInfo instance
          */
-        public static create(properties?: login.IRegisterResult): login.RegisterResult;
+        public static create(properties?: login.IGameInfo): login.GameInfo;
 
         /**
-         * Encodes the specified RegisterResult message. Does not implicitly {@link login.RegisterResult.verify|verify} messages.
-         * @param message RegisterResult message or plain object to encode
+         * Encodes the specified GameInfo message. Does not implicitly {@link login.GameInfo.verify|verify} messages.
+         * @param message GameInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IRegisterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IGameInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RegisterResult message, length delimited. Does not implicitly {@link login.RegisterResult.verify|verify} messages.
-         * @param message RegisterResult message or plain object to encode
+         * Encodes the specified GameInfo message, length delimited. Does not implicitly {@link login.GameInfo.verify|verify} messages.
+         * @param message GameInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IRegisterResult, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IGameInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a RegisterResult message from the specified reader or buffer.
+         * Decodes a GameInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns RegisterResult
+         * @returns GameInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RegisterResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameInfo;
 
         /**
-         * Decodes a RegisterResult message from the specified reader or buffer, length delimited.
+         * Decodes a GameInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns RegisterResult
+         * @returns GameInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RegisterResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameInfo;
 
         /**
-         * Verifies a RegisterResult message.
+         * Verifies a GameInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a RegisterResult message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns RegisterResult
+         * @returns GameInfo
          */
-        public static fromObject(object: { [k: string]: any }): login.RegisterResult;
+        public static fromObject(object: { [k: string]: any }): login.GameInfo;
 
         /**
-         * Creates a plain object from a RegisterResult message. Also converts values to other types if specified.
-         * @param message RegisterResult
+         * Creates a plain object from a GameInfo message. Also converts values to other types if specified.
+         * @param message GameInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.RegisterResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.GameInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this RegisterResult to JSON.
+         * Converts this GameInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a Login. */
-    interface ILogin {
+    /** Properties of a GameItem. */
+    interface IGameItem {
 
-        /** Login Account */
-        Account?: (string|null);
+        /** GameItem ID */
+        ID?: (number|null);
 
-        /** Login Password */
-        Password?: (string|null);
-
-        /** Login SecurityCode */
-        SecurityCode?: (string|null);
-
-        /** Login MachineCode */
-        MachineCode?: (string|null);
+        /** GameItem Info */
+        Info?: (login.IGameInfo|null);
     }
 
-    /** Represents a Login. */
-    class Login implements ILogin {
+    /** Represents a GameItem. */
+    class GameItem implements IGameItem {
 
         /**
-         * Constructs a new Login.
+         * Constructs a new GameItem.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.ILogin);
+        constructor(properties?: login.IGameItem);
 
-        /** Login Account. */
-        public Account: string;
+        /** GameItem ID. */
+        public ID: number;
 
-        /** Login Password. */
-        public Password: string;
-
-        /** Login SecurityCode. */
-        public SecurityCode: string;
-
-        /** Login MachineCode. */
-        public MachineCode: string;
+        /** GameItem Info. */
+        public Info?: (login.IGameInfo|null);
 
         /**
-         * Creates a new Login instance using the specified properties.
+         * Creates a new GameItem instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns Login instance
+         * @returns GameItem instance
          */
-        public static create(properties?: login.ILogin): login.Login;
+        public static create(properties?: login.IGameItem): login.GameItem;
 
         /**
-         * Encodes the specified Login message. Does not implicitly {@link login.Login.verify|verify} messages.
-         * @param message Login message or plain object to encode
+         * Encodes the specified GameItem message. Does not implicitly {@link login.GameItem.verify|verify} messages.
+         * @param message GameItem message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.ILogin, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified Login message, length delimited. Does not implicitly {@link login.Login.verify|verify} messages.
-         * @param message Login message or plain object to encode
+         * Encodes the specified GameItem message, length delimited. Does not implicitly {@link login.GameItem.verify|verify} messages.
+         * @param message GameItem message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.ILogin, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a Login message from the specified reader or buffer.
+         * Decodes a GameItem message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns Login
+         * @returns GameItem
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.Login;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameItem;
 
         /**
-         * Decodes a Login message from the specified reader or buffer, length delimited.
+         * Decodes a GameItem message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns Login
+         * @returns GameItem
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.Login;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameItem;
 
         /**
-         * Verifies a Login message.
+         * Verifies a GameItem message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a Login message from a plain object. Also converts values to their respective internal types.
+         * Creates a GameItem message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns Login
+         * @returns GameItem
          */
-        public static fromObject(object: { [k: string]: any }): login.Login;
+        public static fromObject(object: { [k: string]: any }): login.GameItem;
 
         /**
-         * Creates a plain object from a Login message. Also converts values to other types if specified.
-         * @param message Login
+         * Creates a plain object from a GameItem message. Also converts values to other types if specified.
+         * @param message GameItem
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.Login, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.GameItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this Login to JSON.
+         * Converts this GameItem to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ResResult. */
-    interface IResResult {
+    /** Properties of a MasterInfo. */
+    interface IMasterInfo {
 
-        /** ResResult Flag */
-        Flag?: (number|null);
+        /** MasterInfo UserInfo */
+        UserInfo?: (login.IUserInfo|null);
 
-        /** ResResult Hints */
-        Hints?: (string|null);
+        /** MasterInfo RoomsInfo */
+        RoomsInfo?: (login.IRoomInfo[]|null);
+
+        /** MasterInfo Tasks */
+        Tasks?: (login.ITaskList|null);
     }
 
-    /** Represents a ResResult. */
-    class ResResult implements IResResult {
+    /** Represents a MasterInfo. */
+    class MasterInfo implements IMasterInfo {
 
         /**
-         * Constructs a new ResResult.
+         * Constructs a new MasterInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IResResult);
+        constructor(properties?: login.IMasterInfo);
 
-        /** ResResult Flag. */
-        public Flag: number;
+        /** MasterInfo UserInfo. */
+        public UserInfo?: (login.IUserInfo|null);
 
-        /** ResResult Hints. */
-        public Hints: string;
+        /** MasterInfo RoomsInfo. */
+        public RoomsInfo: login.IRoomInfo[];
+
+        /** MasterInfo Tasks. */
+        public Tasks?: (login.ITaskList|null);
 
         /**
-         * Creates a new ResResult instance using the specified properties.
+         * Creates a new MasterInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ResResult instance
+         * @returns MasterInfo instance
          */
-        public static create(properties?: login.IResResult): login.ResResult;
+        public static create(properties?: login.IMasterInfo): login.MasterInfo;
 
         /**
-         * Encodes the specified ResResult message. Does not implicitly {@link login.ResResult.verify|verify} messages.
-         * @param message ResResult message or plain object to encode
+         * Encodes the specified MasterInfo message. Does not implicitly {@link login.MasterInfo.verify|verify} messages.
+         * @param message MasterInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IResResult, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IMasterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ResResult message, length delimited. Does not implicitly {@link login.ResResult.verify|verify} messages.
-         * @param message ResResult message or plain object to encode
+         * Encodes the specified MasterInfo message, length delimited. Does not implicitly {@link login.MasterInfo.verify|verify} messages.
+         * @param message MasterInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IResResult, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IMasterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ResResult message from the specified reader or buffer.
+         * Decodes a MasterInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ResResult
+         * @returns MasterInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ResResult;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.MasterInfo;
 
         /**
-         * Decodes a ResResult message from the specified reader or buffer, length delimited.
+         * Decodes a MasterInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ResResult
+         * @returns MasterInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ResResult;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.MasterInfo;
 
         /**
-         * Verifies a ResResult message.
+         * Verifies a MasterInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ResResult message from a plain object. Also converts values to their respective internal types.
+         * Creates a MasterInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ResResult
+         * @returns MasterInfo
          */
-        public static fromObject(object: { [k: string]: any }): login.ResResult;
+        public static fromObject(object: { [k: string]: any }): login.MasterInfo;
 
         /**
-         * Creates a plain object from a ResResult message. Also converts values to other types if specified.
-         * @param message ResResult
+         * Creates a plain object from a MasterInfo message. Also converts values to other types if specified.
+         * @param message MasterInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.ResResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.MasterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ResResult to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a ResPopResult. */
-    interface IResPopResult {
-
-        /** ResPopResult Flag */
-        Flag?: (number|null);
-
-        /** ResPopResult Title */
-        Title?: (string|null);
-
-        /** ResPopResult Hints */
-        Hints?: (string|null);
-    }
-
-    /** Represents a ResPopResult. */
-    class ResPopResult implements IResPopResult {
-
-        /**
-         * Constructs a new ResPopResult.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: login.IResPopResult);
-
-        /** ResPopResult Flag. */
-        public Flag: number;
-
-        /** ResPopResult Title. */
-        public Title: string;
-
-        /** ResPopResult Hints. */
-        public Hints: string;
-
-        /**
-         * Creates a new ResPopResult instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ResPopResult instance
-         */
-        public static create(properties?: login.IResPopResult): login.ResPopResult;
-
-        /**
-         * Encodes the specified ResPopResult message. Does not implicitly {@link login.ResPopResult.verify|verify} messages.
-         * @param message ResPopResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: login.IResPopResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ResPopResult message, length delimited. Does not implicitly {@link login.ResPopResult.verify|verify} messages.
-         * @param message ResPopResult message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: login.IResPopResult, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a ResPopResult message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns ResPopResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ResPopResult;
-
-        /**
-         * Decodes a ResPopResult message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ResPopResult
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ResPopResult;
-
-        /**
-         * Verifies a ResPopResult message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a ResPopResult message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns ResPopResult
-         */
-        public static fromObject(object: { [k: string]: any }): login.ResPopResult;
-
-        /**
-         * Creates a plain object from a ResPopResult message. Also converts values to other types if specified.
-         * @param message ResPopResult
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: login.ResPopResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this ResPopResult to JSON.
+         * Converts this MasterInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -800,715 +902,517 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a UserInfo. */
-    interface IUserInfo {
+    /** Properties of a RegisterReq. */
+    interface IRegisterReq {
 
-        /** UserInfo Name */
+        /** RegisterReq Name */
         Name?: (string|null);
 
-        /** UserInfo Accounts */
-        Accounts?: (string|null);
-
-        /** UserInfo Password */
+        /** RegisterReq Password */
         Password?: (string|null);
 
-        /** UserInfo FaceID */
-        FaceID?: (number|null);
+        /** RegisterReq SecurityCode */
+        SecurityCode?: (string|null);
 
-        /** UserInfo Gender */
-        Gender?: (number|null);
+        /** RegisterReq MachineCode */
+        MachineCode?: (string|null);
 
-        /** UserInfo Age */
-        Age?: (number|null);
+        /** RegisterReq InvitationCode */
+        InvitationCode?: (string|null);
+    }
 
-        /** UserInfo Level */
-        Level?: (number|null);
+    /** Represents a RegisterReq. */
+    class RegisterReq implements IRegisterReq {
 
-        /** UserInfo Gold */
-        Gold?: (number|Long|null);
+        /**
+         * Constructs a new RegisterReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IRegisterReq);
 
-        /** UserInfo PassPortID */
-        PassPortID?: (string|null);
+        /** RegisterReq Name. */
+        public Name: string;
 
-        /** UserInfo Compellation */
-        Compellation?: (string|null);
+        /** RegisterReq Password. */
+        public Password: string;
 
-        /** UserInfo AgentID */
-        AgentID?: (number|null);
+        /** RegisterReq SecurityCode. */
+        public SecurityCode: string;
 
-        /** UserInfo SpreaderGameID */
-        SpreaderGameID?: (number|null);
+        /** RegisterReq MachineCode. */
+        public MachineCode: string;
 
-        /** UserInfo ClientAddr */
-        ClientAddr?: (number|null);
+        /** RegisterReq InvitationCode. */
+        public InvitationCode: string;
 
-        /** UserInfo MachineCode */
+        /**
+         * Creates a new RegisterReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RegisterReq instance
+         */
+        public static create(properties?: login.IRegisterReq): login.RegisterReq;
+
+        /**
+         * Encodes the specified RegisterReq message. Does not implicitly {@link login.RegisterReq.verify|verify} messages.
+         * @param message RegisterReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IRegisterReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RegisterReq message, length delimited. Does not implicitly {@link login.RegisterReq.verify|verify} messages.
+         * @param message RegisterReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IRegisterReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RegisterReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RegisterReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RegisterReq;
+
+        /**
+         * Decodes a RegisterReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RegisterReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RegisterReq;
+
+        /**
+         * Verifies a RegisterReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RegisterReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RegisterReq
+         */
+        public static fromObject(object: { [k: string]: any }): login.RegisterReq;
+
+        /**
+         * Creates a plain object from a RegisterReq message. Also converts values to other types if specified.
+         * @param message RegisterReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.RegisterReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RegisterReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a LoginReq. */
+    interface ILoginReq {
+
+        /** LoginReq Account */
+        Account?: (string|null);
+
+        /** LoginReq Password */
+        Password?: (string|null);
+
+        /** LoginReq SecurityCode */
+        SecurityCode?: (string|null);
+
+        /** LoginReq MachineCode */
         MachineCode?: (string|null);
     }
 
-    /** Represents a UserInfo. */
-    class UserInfo implements IUserInfo {
+    /** Represents a LoginReq. */
+    class LoginReq implements ILoginReq {
 
         /**
-         * Constructs a new UserInfo.
+         * Constructs a new LoginReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IUserInfo);
+        constructor(properties?: login.ILoginReq);
 
-        /** UserInfo Name. */
-        public Name: string;
+        /** LoginReq Account. */
+        public Account: string;
 
-        /** UserInfo Accounts. */
-        public Accounts: string;
-
-        /** UserInfo Password. */
+        /** LoginReq Password. */
         public Password: string;
 
-        /** UserInfo FaceID. */
-        public FaceID: number;
+        /** LoginReq SecurityCode. */
+        public SecurityCode: string;
 
-        /** UserInfo Gender. */
-        public Gender: number;
-
-        /** UserInfo Age. */
-        public Age: number;
-
-        /** UserInfo Level. */
-        public Level: number;
-
-        /** UserInfo Gold. */
-        public Gold: (number|Long);
-
-        /** UserInfo PassPortID. */
-        public PassPortID: string;
-
-        /** UserInfo Compellation. */
-        public Compellation: string;
-
-        /** UserInfo AgentID. */
-        public AgentID: number;
-
-        /** UserInfo SpreaderGameID. */
-        public SpreaderGameID: number;
-
-        /** UserInfo ClientAddr. */
-        public ClientAddr: number;
-
-        /** UserInfo MachineCode. */
+        /** LoginReq MachineCode. */
         public MachineCode: string;
 
         /**
-         * Creates a new UserInfo instance using the specified properties.
+         * Creates a new LoginReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns UserInfo instance
+         * @returns LoginReq instance
          */
-        public static create(properties?: login.IUserInfo): login.UserInfo;
+        public static create(properties?: login.ILoginReq): login.LoginReq;
 
         /**
-         * Encodes the specified UserInfo message. Does not implicitly {@link login.UserInfo.verify|verify} messages.
-         * @param message UserInfo message or plain object to encode
+         * Encodes the specified LoginReq message. Does not implicitly {@link login.LoginReq.verify|verify} messages.
+         * @param message LoginReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.ILoginReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified UserInfo message, length delimited. Does not implicitly {@link login.UserInfo.verify|verify} messages.
-         * @param message UserInfo message or plain object to encode
+         * Encodes the specified LoginReq message, length delimited. Does not implicitly {@link login.LoginReq.verify|verify} messages.
+         * @param message LoginReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IUserInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.ILoginReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a UserInfo message from the specified reader or buffer.
+         * Decodes a LoginReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns UserInfo
+         * @returns LoginReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.UserInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.LoginReq;
 
         /**
-         * Decodes a UserInfo message from the specified reader or buffer, length delimited.
+         * Decodes a LoginReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns UserInfo
+         * @returns LoginReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.UserInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.LoginReq;
 
         /**
-         * Verifies a UserInfo message.
+         * Verifies a LoginReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a UserInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a LoginReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns UserInfo
+         * @returns LoginReq
          */
-        public static fromObject(object: { [k: string]: any }): login.UserInfo;
+        public static fromObject(object: { [k: string]: any }): login.LoginReq;
 
         /**
-         * Creates a plain object from a UserInfo message. Also converts values to other types if specified.
-         * @param message UserInfo
+         * Creates a plain object from a LoginReq message. Also converts values to other types if specified.
+         * @param message LoginReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.UserInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.LoginReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this UserInfo to JSON.
+         * Converts this LoginReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a RoomInfo. */
-    interface IRoomInfo {
+    /** Properties of an EnterRoomReq. */
+    interface IEnterRoomReq {
 
-        /** RoomInfo RoomNum */
+        /** EnterRoomReq RoomNum */
         RoomNum?: (number|null);
 
-        /** RoomInfo RoomKey */
+        /** EnterRoomReq RoomKey */
         RoomKey?: (string|null);
-
-        /** RoomInfo RoomName */
-        RoomName?: (string|null);
-
-        /** RoomInfo Games */
-        Games?: (login.IGameList|null);
     }
 
-    /** Represents a RoomInfo. */
-    class RoomInfo implements IRoomInfo {
+    /** Represents an EnterRoomReq. */
+    class EnterRoomReq implements IEnterRoomReq {
 
         /**
-         * Constructs a new RoomInfo.
+         * Constructs a new EnterRoomReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IRoomInfo);
+        constructor(properties?: login.IEnterRoomReq);
 
-        /** RoomInfo RoomNum. */
+        /** EnterRoomReq RoomNum. */
         public RoomNum: number;
 
-        /** RoomInfo RoomKey. */
+        /** EnterRoomReq RoomKey. */
         public RoomKey: string;
 
-        /** RoomInfo RoomName. */
-        public RoomName: string;
-
-        /** RoomInfo Games. */
-        public Games?: (login.IGameList|null);
-
         /**
-         * Creates a new RoomInfo instance using the specified properties.
+         * Creates a new EnterRoomReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns RoomInfo instance
+         * @returns EnterRoomReq instance
          */
-        public static create(properties?: login.IRoomInfo): login.RoomInfo;
+        public static create(properties?: login.IEnterRoomReq): login.EnterRoomReq;
 
         /**
-         * Encodes the specified RoomInfo message. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
-         * @param message RoomInfo message or plain object to encode
+         * Encodes the specified EnterRoomReq message. Does not implicitly {@link login.EnterRoomReq.verify|verify} messages.
+         * @param message EnterRoomReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IEnterRoomReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RoomInfo message, length delimited. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
-         * @param message RoomInfo message or plain object to encode
+         * Encodes the specified EnterRoomReq message, length delimited. Does not implicitly {@link login.EnterRoomReq.verify|verify} messages.
+         * @param message EnterRoomReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IEnterRoomReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer.
+         * Decodes an EnterRoomReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns RoomInfo
+         * @returns EnterRoomReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RoomInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.EnterRoomReq;
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer, length delimited.
+         * Decodes an EnterRoomReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns RoomInfo
+         * @returns EnterRoomReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RoomInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.EnterRoomReq;
 
         /**
-         * Verifies a RoomInfo message.
+         * Verifies an EnterRoomReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a RoomInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates an EnterRoomReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns RoomInfo
+         * @returns EnterRoomReq
          */
-        public static fromObject(object: { [k: string]: any }): login.RoomInfo;
+        public static fromObject(object: { [k: string]: any }): login.EnterRoomReq;
 
         /**
-         * Creates a plain object from a RoomInfo message. Also converts values to other types if specified.
-         * @param message RoomInfo
+         * Creates a plain object from an EnterRoomReq message. Also converts values to other types if specified.
+         * @param message EnterRoomReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.RoomInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.EnterRoomReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this RoomInfo to JSON.
+         * Converts this EnterRoomReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameBaseInfo. */
-    interface IGameBaseInfo {
+    /** Properties of a ResultResp. */
+    interface IResultResp {
 
-        /** GameBaseInfo Type */
-        Type?: (number|null);
-
-        /** GameBaseInfo KindID */
-        KindID?: (number|null);
-
-        /** GameBaseInfo Level */
-        Level?: (number|null);
-
-        /** GameBaseInfo Name */
-        Name?: (string|null);
-
-        /** GameBaseInfo EnterScore */
-        EnterScore?: (number|null);
-
-        /** GameBaseInfo LessScore */
-        LessScore?: (number|null);
-
-        /** GameBaseInfo MaxOnline */
-        MaxOnline?: (number|null);
-
-        /** GameBaseInfo State */
+        /** ResultResp State */
         State?: (number|null);
 
-        /** GameBaseInfo Commission */
-        Commission?: (number|null);
+        /** ResultResp Hints */
+        Hints?: (string|null);
     }
 
-    /** Represents a GameBaseInfo. */
-    class GameBaseInfo implements IGameBaseInfo {
+    /** Represents a ResultResp. */
+    class ResultResp implements IResultResp {
 
         /**
-         * Constructs a new GameBaseInfo.
+         * Constructs a new ResultResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IGameBaseInfo);
+        constructor(properties?: login.IResultResp);
 
-        /** GameBaseInfo Type. */
-        public Type: number;
-
-        /** GameBaseInfo KindID. */
-        public KindID: number;
-
-        /** GameBaseInfo Level. */
-        public Level: number;
-
-        /** GameBaseInfo Name. */
-        public Name: string;
-
-        /** GameBaseInfo EnterScore. */
-        public EnterScore: number;
-
-        /** GameBaseInfo LessScore. */
-        public LessScore: number;
-
-        /** GameBaseInfo MaxOnline. */
-        public MaxOnline: number;
-
-        /** GameBaseInfo State. */
+        /** ResultResp State. */
         public State: number;
 
-        /** GameBaseInfo Commission. */
-        public Commission: number;
+        /** ResultResp Hints. */
+        public Hints: string;
 
         /**
-         * Creates a new GameBaseInfo instance using the specified properties.
+         * Creates a new ResultResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameBaseInfo instance
+         * @returns ResultResp instance
          */
-        public static create(properties?: login.IGameBaseInfo): login.GameBaseInfo;
+        public static create(properties?: login.IResultResp): login.ResultResp;
 
         /**
-         * Encodes the specified GameBaseInfo message. Does not implicitly {@link login.GameBaseInfo.verify|verify} messages.
-         * @param message GameBaseInfo message or plain object to encode
+         * Encodes the specified ResultResp message. Does not implicitly {@link login.ResultResp.verify|verify} messages.
+         * @param message ResultResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IGameBaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IResultResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameBaseInfo message, length delimited. Does not implicitly {@link login.GameBaseInfo.verify|verify} messages.
-         * @param message GameBaseInfo message or plain object to encode
+         * Encodes the specified ResultResp message, length delimited. Does not implicitly {@link login.ResultResp.verify|verify} messages.
+         * @param message ResultResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IGameBaseInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IResultResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameBaseInfo message from the specified reader or buffer.
+         * Decodes a ResultResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameBaseInfo
+         * @returns ResultResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameBaseInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ResultResp;
 
         /**
-         * Decodes a GameBaseInfo message from the specified reader or buffer, length delimited.
+         * Decodes a ResultResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameBaseInfo
+         * @returns ResultResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameBaseInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ResultResp;
 
         /**
-         * Verifies a GameBaseInfo message.
+         * Verifies a ResultResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameBaseInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a ResultResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameBaseInfo
+         * @returns ResultResp
          */
-        public static fromObject(object: { [k: string]: any }): login.GameBaseInfo;
+        public static fromObject(object: { [k: string]: any }): login.ResultResp;
 
         /**
-         * Creates a plain object from a GameBaseInfo message. Also converts values to other types if specified.
-         * @param message GameBaseInfo
+         * Creates a plain object from a ResultResp message. Also converts values to other types if specified.
+         * @param message ResultResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.GameBaseInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ResultResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameBaseInfo to JSON.
+         * Converts this ResultResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameItem. */
-    interface IGameItem {
+    /** Properties of a ResultPopResp. */
+    interface IResultPopResp {
 
-        /** GameItem ID */
-        ID?: (number|null);
+        /** ResultPopResp Flag */
+        Flag?: (number|null);
 
-        /** GameItem Info */
-        Info?: (login.IGameBaseInfo|null);
+        /** ResultPopResp Title */
+        Title?: (string|null);
+
+        /** ResultPopResp Hints */
+        Hints?: (string|null);
     }
 
-    /** Represents a GameItem. */
-    class GameItem implements IGameItem {
+    /** Represents a ResultPopResp. */
+    class ResultPopResp implements IResultPopResp {
 
         /**
-         * Constructs a new GameItem.
+         * Constructs a new ResultPopResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IGameItem);
+        constructor(properties?: login.IResultPopResp);
 
-        /** GameItem ID. */
-        public ID: number;
+        /** ResultPopResp Flag. */
+        public Flag: number;
 
-        /** GameItem Info. */
-        public Info?: (login.IGameBaseInfo|null);
+        /** ResultPopResp Title. */
+        public Title: string;
+
+        /** ResultPopResp Hints. */
+        public Hints: string;
 
         /**
-         * Creates a new GameItem instance using the specified properties.
+         * Creates a new ResultPopResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns GameItem instance
+         * @returns ResultPopResp instance
          */
-        public static create(properties?: login.IGameItem): login.GameItem;
+        public static create(properties?: login.IResultPopResp): login.ResultPopResp;
 
         /**
-         * Encodes the specified GameItem message. Does not implicitly {@link login.GameItem.verify|verify} messages.
-         * @param message GameItem message or plain object to encode
+         * Encodes the specified ResultPopResp message. Does not implicitly {@link login.ResultPopResp.verify|verify} messages.
+         * @param message ResultPopResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IResultPopResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified GameItem message, length delimited. Does not implicitly {@link login.GameItem.verify|verify} messages.
-         * @param message GameItem message or plain object to encode
+         * Encodes the specified ResultPopResp message, length delimited. Does not implicitly {@link login.ResultPopResp.verify|verify} messages.
+         * @param message ResultPopResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IResultPopResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a GameItem message from the specified reader or buffer.
+         * Decodes a ResultPopResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns GameItem
+         * @returns ResultPopResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameItem;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ResultPopResp;
 
         /**
-         * Decodes a GameItem message from the specified reader or buffer, length delimited.
+         * Decodes a ResultPopResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns GameItem
+         * @returns ResultPopResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameItem;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ResultPopResp;
 
         /**
-         * Verifies a GameItem message.
+         * Verifies a ResultPopResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a GameItem message from a plain object. Also converts values to their respective internal types.
+         * Creates a ResultPopResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns GameItem
+         * @returns ResultPopResp
          */
-        public static fromObject(object: { [k: string]: any }): login.GameItem;
+        public static fromObject(object: { [k: string]: any }): login.ResultPopResp;
 
         /**
-         * Creates a plain object from a GameItem message. Also converts values to other types if specified.
-         * @param message GameItem
+         * Creates a plain object from a ResultPopResp message. Also converts values to other types if specified.
+         * @param message ResultPopResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.GameItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ResultPopResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this GameItem to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a MasterInfo. */
-    interface IMasterInfo {
-
-        /** MasterInfo UserID */
-        UserID?: (number|Long|null);
-
-        /** MasterInfo UserInfo */
-        UserInfo?: (login.IUserInfo|null);
-
-        /** MasterInfo RoomsInfo */
-        RoomsInfo?: (login.IRoomInfo[]|null);
-
-        /** MasterInfo Tasks */
-        Tasks?: (login.ITaskList|null);
-    }
-
-    /** Represents a MasterInfo. */
-    class MasterInfo implements IMasterInfo {
-
-        /**
-         * Constructs a new MasterInfo.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: login.IMasterInfo);
-
-        /** MasterInfo UserID. */
-        public UserID: (number|Long);
-
-        /** MasterInfo UserInfo. */
-        public UserInfo?: (login.IUserInfo|null);
-
-        /** MasterInfo RoomsInfo. */
-        public RoomsInfo: login.IRoomInfo[];
-
-        /** MasterInfo Tasks. */
-        public Tasks?: (login.ITaskList|null);
-
-        /**
-         * Creates a new MasterInfo instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns MasterInfo instance
-         */
-        public static create(properties?: login.IMasterInfo): login.MasterInfo;
-
-        /**
-         * Encodes the specified MasterInfo message. Does not implicitly {@link login.MasterInfo.verify|verify} messages.
-         * @param message MasterInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: login.IMasterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified MasterInfo message, length delimited. Does not implicitly {@link login.MasterInfo.verify|verify} messages.
-         * @param message MasterInfo message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: login.IMasterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a MasterInfo message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns MasterInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.MasterInfo;
-
-        /**
-         * Decodes a MasterInfo message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns MasterInfo
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.MasterInfo;
-
-        /**
-         * Verifies a MasterInfo message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a MasterInfo message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns MasterInfo
-         */
-        public static fromObject(object: { [k: string]: any }): login.MasterInfo;
-
-        /**
-         * Creates a plain object from a MasterInfo message. Also converts values to other types if specified.
-         * @param message MasterInfo
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: login.MasterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this MasterInfo to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a ReqEnterRoom. */
-    interface IReqEnterRoom {
-
-        /** ReqEnterRoom RoomNum */
-        RoomNum?: (number|null);
-
-        /** ReqEnterRoom RoomKey */
-        RoomKey?: (string|null);
-    }
-
-    /** Represents a ReqEnterRoom. */
-    class ReqEnterRoom implements IReqEnterRoom {
-
-        /**
-         * Constructs a new ReqEnterRoom.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: login.IReqEnterRoom);
-
-        /** ReqEnterRoom RoomNum. */
-        public RoomNum: number;
-
-        /** ReqEnterRoom RoomKey. */
-        public RoomKey: string;
-
-        /**
-         * Creates a new ReqEnterRoom instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns ReqEnterRoom instance
-         */
-        public static create(properties?: login.IReqEnterRoom): login.ReqEnterRoom;
-
-        /**
-         * Encodes the specified ReqEnterRoom message. Does not implicitly {@link login.ReqEnterRoom.verify|verify} messages.
-         * @param message ReqEnterRoom message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: login.IReqEnterRoom, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified ReqEnterRoom message, length delimited. Does not implicitly {@link login.ReqEnterRoom.verify|verify} messages.
-         * @param message ReqEnterRoom message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: login.IReqEnterRoom, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a ReqEnterRoom message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns ReqEnterRoom
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ReqEnterRoom;
-
-        /**
-         * Decodes a ReqEnterRoom message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns ReqEnterRoom
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ReqEnterRoom;
-
-        /**
-         * Verifies a ReqEnterRoom message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a ReqEnterRoom message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns ReqEnterRoom
-         */
-        public static fromObject(object: { [k: string]: any }): login.ReqEnterRoom;
-
-        /**
-         * Creates a plain object from a ReqEnterRoom message. Also converts values to other types if specified.
-         * @param message ReqEnterRoom
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: login.ReqEnterRoom, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this ReqEnterRoom to JSON.
+         * Converts this ResultPopResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

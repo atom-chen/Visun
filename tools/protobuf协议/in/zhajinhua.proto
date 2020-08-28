@@ -114,5 +114,5 @@ message ZhajinhuaGiveupResp {
 //结算
 message ZhajinhuaOver {
   uint64 WinnerId = 1;                //胜利者ID
-  repeated MoneyCalculateInfo Infos = 2;  //各玩家输赢情况
+  repeated NotifyChangeGold Infos = 2;  //各玩家输赢情况
 }
