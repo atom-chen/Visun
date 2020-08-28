@@ -2,475 +2,475 @@ import * as $protobuf from "protobufjs";
 /** Namespace brcowcow. */
 export namespace brcowcow {
 
-    /** Properties of a BrcowcowScene. */
-    interface IBrcowcowScene {
+    /** Properties of a BrcowcowSceneResp. */
+    interface IBrcowcowSceneResp {
 
-        /** BrcowcowScene TimeStamp */
+        /** BrcowcowSceneResp TimeStamp */
         TimeStamp?: (number|Long|null);
 
-        /** BrcowcowScene Chips */
+        /** BrcowcowSceneResp Chips */
         Chips?: (number[]|null);
 
-        /** BrcowcowScene AwardAreas */
+        /** BrcowcowSceneResp AwardAreas */
         AwardAreas?: (Uint8Array[]|null);
 
-        /** BrcowcowScene AreaBets */
+        /** BrcowcowSceneResp AreaBets */
         AreaBets?: ((number|Long)[]|null);
 
-        /** BrcowcowScene MyBets */
+        /** BrcowcowSceneResp MyBets */
         MyBets?: ((number|Long)[]|null);
     }
 
-    /** Represents a BrcowcowScene. */
-    class BrcowcowScene implements IBrcowcowScene {
+    /** Represents a BrcowcowSceneResp. */
+    class BrcowcowSceneResp implements IBrcowcowSceneResp {
 
         /**
-         * Constructs a new BrcowcowScene.
+         * Constructs a new BrcowcowSceneResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowScene);
+        constructor(properties?: brcowcow.IBrcowcowSceneResp);
 
-        /** BrcowcowScene TimeStamp. */
+        /** BrcowcowSceneResp TimeStamp. */
         public TimeStamp: (number|Long);
 
-        /** BrcowcowScene Chips. */
+        /** BrcowcowSceneResp Chips. */
         public Chips: number[];
 
-        /** BrcowcowScene AwardAreas. */
+        /** BrcowcowSceneResp AwardAreas. */
         public AwardAreas: Uint8Array[];
 
-        /** BrcowcowScene AreaBets. */
+        /** BrcowcowSceneResp AreaBets. */
         public AreaBets: (number|Long)[];
 
-        /** BrcowcowScene MyBets. */
+        /** BrcowcowSceneResp MyBets. */
         public MyBets: (number|Long)[];
 
         /**
-         * Creates a new BrcowcowScene instance using the specified properties.
+         * Creates a new BrcowcowSceneResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowScene instance
+         * @returns BrcowcowSceneResp instance
          */
-        public static create(properties?: brcowcow.IBrcowcowScene): brcowcow.BrcowcowScene;
+        public static create(properties?: brcowcow.IBrcowcowSceneResp): brcowcow.BrcowcowSceneResp;
 
         /**
-         * Encodes the specified BrcowcowScene message. Does not implicitly {@link brcowcow.BrcowcowScene.verify|verify} messages.
-         * @param message BrcowcowScene message or plain object to encode
+         * Encodes the specified BrcowcowSceneResp message. Does not implicitly {@link brcowcow.BrcowcowSceneResp.verify|verify} messages.
+         * @param message BrcowcowSceneResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowScene, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowSceneResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowScene message, length delimited. Does not implicitly {@link brcowcow.BrcowcowScene.verify|verify} messages.
-         * @param message BrcowcowScene message or plain object to encode
+         * Encodes the specified BrcowcowSceneResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowSceneResp.verify|verify} messages.
+         * @param message BrcowcowSceneResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowScene, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowSceneResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowScene message from the specified reader or buffer.
+         * Decodes a BrcowcowSceneResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowScene
+         * @returns BrcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowScene;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowSceneResp;
 
         /**
-         * Decodes a BrcowcowScene message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowSceneResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowScene
+         * @returns BrcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowScene;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowSceneResp;
 
         /**
-         * Verifies a BrcowcowScene message.
+         * Verifies a BrcowcowSceneResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowScene message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowSceneResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowScene
+         * @returns BrcowcowSceneResp
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowScene;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowSceneResp;
 
         /**
-         * Creates a plain object from a BrcowcowScene message. Also converts values to other types if specified.
-         * @param message BrcowcowScene
+         * Creates a plain object from a BrcowcowSceneResp message. Also converts values to other types if specified.
+         * @param message BrcowcowSceneResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowScene, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowSceneResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowScene to JSON.
+         * Converts this BrcowcowSceneResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BrcowcowStateFree. */
-    interface IBrcowcowStateFree {
+    /** Properties of a BrcowcowStateFreeResp. */
+    interface IBrcowcowStateFreeResp {
 
-        /** BrcowcowStateFree Times */
+        /** BrcowcowStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BrcowcowStateFree. */
-    class BrcowcowStateFree implements IBrcowcowStateFree {
+    /** Represents a BrcowcowStateFreeResp. */
+    class BrcowcowStateFreeResp implements IBrcowcowStateFreeResp {
 
         /**
-         * Constructs a new BrcowcowStateFree.
+         * Constructs a new BrcowcowStateFreeResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowStateFree);
+        constructor(properties?: brcowcow.IBrcowcowStateFreeResp);
 
-        /** BrcowcowStateFree Times. */
+        /** BrcowcowStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BrcowcowStateFree instance using the specified properties.
+         * Creates a new BrcowcowStateFreeResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowStateFree instance
+         * @returns BrcowcowStateFreeResp instance
          */
-        public static create(properties?: brcowcow.IBrcowcowStateFree): brcowcow.BrcowcowStateFree;
+        public static create(properties?: brcowcow.IBrcowcowStateFreeResp): brcowcow.BrcowcowStateFreeResp;
 
         /**
-         * Encodes the specified BrcowcowStateFree message. Does not implicitly {@link brcowcow.BrcowcowStateFree.verify|verify} messages.
-         * @param message BrcowcowStateFree message or plain object to encode
+         * Encodes the specified BrcowcowStateFreeResp message. Does not implicitly {@link brcowcow.BrcowcowStateFreeResp.verify|verify} messages.
+         * @param message BrcowcowStateFreeResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowStateFree message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateFree.verify|verify} messages.
-         * @param message BrcowcowStateFree message or plain object to encode
+         * Encodes the specified BrcowcowStateFreeResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateFreeResp.verify|verify} messages.
+         * @param message BrcowcowStateFreeResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowStateFree message from the specified reader or buffer.
+         * Decodes a BrcowcowStateFreeResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowStateFree
+         * @returns BrcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateFree;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateFreeResp;
 
         /**
-         * Decodes a BrcowcowStateFree message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowStateFreeResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowStateFree
+         * @returns BrcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateFree;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateFreeResp;
 
         /**
-         * Verifies a BrcowcowStateFree message.
+         * Verifies a BrcowcowStateFreeResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowStateFree message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowStateFreeResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowStateFree
+         * @returns BrcowcowStateFreeResp
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateFree;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateFreeResp;
 
         /**
-         * Creates a plain object from a BrcowcowStateFree message. Also converts values to other types if specified.
-         * @param message BrcowcowStateFree
+         * Creates a plain object from a BrcowcowStateFreeResp message. Also converts values to other types if specified.
+         * @param message BrcowcowStateFreeResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowStateFree, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowStateFreeResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowStateFree to JSON.
+         * Converts this BrcowcowStateFreeResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BrcowcowStateStart. */
-    interface IBrcowcowStateStart {
+    /** Properties of a BrcowcowStateStartResp. */
+    interface IBrcowcowStateStartResp {
 
-        /** BrcowcowStateStart Times */
+        /** BrcowcowStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BrcowcowStateStart. */
-    class BrcowcowStateStart implements IBrcowcowStateStart {
+    /** Represents a BrcowcowStateStartResp. */
+    class BrcowcowStateStartResp implements IBrcowcowStateStartResp {
 
         /**
-         * Constructs a new BrcowcowStateStart.
+         * Constructs a new BrcowcowStateStartResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowStateStart);
+        constructor(properties?: brcowcow.IBrcowcowStateStartResp);
 
-        /** BrcowcowStateStart Times. */
+        /** BrcowcowStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BrcowcowStateStart instance using the specified properties.
+         * Creates a new BrcowcowStateStartResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowStateStart instance
+         * @returns BrcowcowStateStartResp instance
          */
-        public static create(properties?: brcowcow.IBrcowcowStateStart): brcowcow.BrcowcowStateStart;
+        public static create(properties?: brcowcow.IBrcowcowStateStartResp): brcowcow.BrcowcowStateStartResp;
 
         /**
-         * Encodes the specified BrcowcowStateStart message. Does not implicitly {@link brcowcow.BrcowcowStateStart.verify|verify} messages.
-         * @param message BrcowcowStateStart message or plain object to encode
+         * Encodes the specified BrcowcowStateStartResp message. Does not implicitly {@link brcowcow.BrcowcowStateStartResp.verify|verify} messages.
+         * @param message BrcowcowStateStartResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowStateStart message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateStart.verify|verify} messages.
-         * @param message BrcowcowStateStart message or plain object to encode
+         * Encodes the specified BrcowcowStateStartResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateStartResp.verify|verify} messages.
+         * @param message BrcowcowStateStartResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowStateStart message from the specified reader or buffer.
+         * Decodes a BrcowcowStateStartResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowStateStart
+         * @returns BrcowcowStateStartResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateStart;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateStartResp;
 
         /**
-         * Decodes a BrcowcowStateStart message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowStateStartResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowStateStart
+         * @returns BrcowcowStateStartResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateStart;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateStartResp;
 
         /**
-         * Verifies a BrcowcowStateStart message.
+         * Verifies a BrcowcowStateStartResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowStateStart message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowStateStartResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowStateStart
+         * @returns BrcowcowStateStartResp
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateStart;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateStartResp;
 
         /**
-         * Creates a plain object from a BrcowcowStateStart message. Also converts values to other types if specified.
-         * @param message BrcowcowStateStart
+         * Creates a plain object from a BrcowcowStateStartResp message. Also converts values to other types if specified.
+         * @param message BrcowcowStateStartResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowStateStart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowStateStartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowStateStart to JSON.
+         * Converts this BrcowcowStateStartResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BrcowcowStatePlaying. */
-    interface IBrcowcowStatePlaying {
+    /** Properties of a BrcowcowStatePlayingResp. */
+    interface IBrcowcowStatePlayingResp {
 
-        /** BrcowcowStatePlaying Times */
+        /** BrcowcowStatePlayingResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BrcowcowStatePlaying. */
-    class BrcowcowStatePlaying implements IBrcowcowStatePlaying {
+    /** Represents a BrcowcowStatePlayingResp. */
+    class BrcowcowStatePlayingResp implements IBrcowcowStatePlayingResp {
 
         /**
-         * Constructs a new BrcowcowStatePlaying.
+         * Constructs a new BrcowcowStatePlayingResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowStatePlaying);
+        constructor(properties?: brcowcow.IBrcowcowStatePlayingResp);
 
-        /** BrcowcowStatePlaying Times. */
+        /** BrcowcowStatePlayingResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BrcowcowStatePlaying instance using the specified properties.
+         * Creates a new BrcowcowStatePlayingResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowStatePlaying instance
+         * @returns BrcowcowStatePlayingResp instance
          */
-        public static create(properties?: brcowcow.IBrcowcowStatePlaying): brcowcow.BrcowcowStatePlaying;
+        public static create(properties?: brcowcow.IBrcowcowStatePlayingResp): brcowcow.BrcowcowStatePlayingResp;
 
         /**
-         * Encodes the specified BrcowcowStatePlaying message. Does not implicitly {@link brcowcow.BrcowcowStatePlaying.verify|verify} messages.
-         * @param message BrcowcowStatePlaying message or plain object to encode
+         * Encodes the specified BrcowcowStatePlayingResp message. Does not implicitly {@link brcowcow.BrcowcowStatePlayingResp.verify|verify} messages.
+         * @param message BrcowcowStatePlayingResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowStatePlayingResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowStatePlaying message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStatePlaying.verify|verify} messages.
-         * @param message BrcowcowStatePlaying message or plain object to encode
+         * Encodes the specified BrcowcowStatePlayingResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStatePlayingResp.verify|verify} messages.
+         * @param message BrcowcowStatePlayingResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowStatePlayingResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowStatePlaying message from the specified reader or buffer.
+         * Decodes a BrcowcowStatePlayingResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowStatePlaying
+         * @returns BrcowcowStatePlayingResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStatePlaying;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStatePlayingResp;
 
         /**
-         * Decodes a BrcowcowStatePlaying message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowStatePlayingResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowStatePlaying
+         * @returns BrcowcowStatePlayingResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStatePlaying;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStatePlayingResp;
 
         /**
-         * Verifies a BrcowcowStatePlaying message.
+         * Verifies a BrcowcowStatePlayingResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowStatePlaying message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowStatePlayingResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowStatePlaying
+         * @returns BrcowcowStatePlayingResp
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStatePlaying;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStatePlayingResp;
 
         /**
-         * Creates a plain object from a BrcowcowStatePlaying message. Also converts values to other types if specified.
-         * @param message BrcowcowStatePlaying
+         * Creates a plain object from a BrcowcowStatePlayingResp message. Also converts values to other types if specified.
+         * @param message BrcowcowStatePlayingResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowStatePlaying, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowStatePlayingResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowStatePlaying to JSON.
+         * Converts this BrcowcowStatePlayingResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BrcowcowStateOver. */
-    interface IBrcowcowStateOver {
+    /** Properties of a BrcowcowStateOverResp. */
+    interface IBrcowcowStateOverResp {
 
-        /** BrcowcowStateOver Times */
+        /** BrcowcowStateOverResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BrcowcowStateOver. */
-    class BrcowcowStateOver implements IBrcowcowStateOver {
+    /** Represents a BrcowcowStateOverResp. */
+    class BrcowcowStateOverResp implements IBrcowcowStateOverResp {
 
         /**
-         * Constructs a new BrcowcowStateOver.
+         * Constructs a new BrcowcowStateOverResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowStateOver);
+        constructor(properties?: brcowcow.IBrcowcowStateOverResp);
 
-        /** BrcowcowStateOver Times. */
+        /** BrcowcowStateOverResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BrcowcowStateOver instance using the specified properties.
+         * Creates a new BrcowcowStateOverResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowStateOver instance
+         * @returns BrcowcowStateOverResp instance
          */
-        public static create(properties?: brcowcow.IBrcowcowStateOver): brcowcow.BrcowcowStateOver;
+        public static create(properties?: brcowcow.IBrcowcowStateOverResp): brcowcow.BrcowcowStateOverResp;
 
         /**
-         * Encodes the specified BrcowcowStateOver message. Does not implicitly {@link brcowcow.BrcowcowStateOver.verify|verify} messages.
-         * @param message BrcowcowStateOver message or plain object to encode
+         * Encodes the specified BrcowcowStateOverResp message. Does not implicitly {@link brcowcow.BrcowcowStateOverResp.verify|verify} messages.
+         * @param message BrcowcowStateOverResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowStateOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowStateOver message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateOver.verify|verify} messages.
-         * @param message BrcowcowStateOver message or plain object to encode
+         * Encodes the specified BrcowcowStateOverResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateOverResp.verify|verify} messages.
+         * @param message BrcowcowStateOverResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowStateOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowStateOver message from the specified reader or buffer.
+         * Decodes a BrcowcowStateOverResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowStateOver
+         * @returns BrcowcowStateOverResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateOver;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateOverResp;
 
         /**
-         * Decodes a BrcowcowStateOver message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowStateOverResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowStateOver
+         * @returns BrcowcowStateOverResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateOver;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateOverResp;
 
         /**
-         * Verifies a BrcowcowStateOver message.
+         * Verifies a BrcowcowStateOverResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowStateOver message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowStateOverResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowStateOver
+         * @returns BrcowcowStateOverResp
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateOver;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateOverResp;
 
         /**
-         * Creates a plain object from a BrcowcowStateOver message. Also converts values to other types if specified.
-         * @param message BrcowcowStateOver
+         * Creates a plain object from a BrcowcowStateOverResp message. Also converts values to other types if specified.
+         * @param message BrcowcowStateOverResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowStateOver, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowStateOverResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowStateOver to JSON.
+         * Converts this BrcowcowStateOverResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -890,97 +890,187 @@ export namespace brcowcow {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BrcowcowHost. */
-    interface IBrcowcowHost {
+    /** Properties of a BrcowcowHostReq. */
+    interface IBrcowcowHostReq {
 
-        /** BrcowcowHost UserID */
-        UserID?: (number|Long|null);
-
-        /** BrcowcowHost IsWant */
+        /** BrcowcowHostReq IsWant */
         IsWant?: (boolean|null);
     }
 
-    /** Represents a BrcowcowHost. */
-    class BrcowcowHost implements IBrcowcowHost {
+    /** Represents a BrcowcowHostReq. */
+    class BrcowcowHostReq implements IBrcowcowHostReq {
 
         /**
-         * Constructs a new BrcowcowHost.
+         * Constructs a new BrcowcowHostReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: brcowcow.IBrcowcowHost);
+        constructor(properties?: brcowcow.IBrcowcowHostReq);
 
-        /** BrcowcowHost UserID. */
-        public UserID: (number|Long);
-
-        /** BrcowcowHost IsWant. */
+        /** BrcowcowHostReq IsWant. */
         public IsWant: boolean;
 
         /**
-         * Creates a new BrcowcowHost instance using the specified properties.
+         * Creates a new BrcowcowHostReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BrcowcowHost instance
+         * @returns BrcowcowHostReq instance
          */
-        public static create(properties?: brcowcow.IBrcowcowHost): brcowcow.BrcowcowHost;
+        public static create(properties?: brcowcow.IBrcowcowHostReq): brcowcow.BrcowcowHostReq;
 
         /**
-         * Encodes the specified BrcowcowHost message. Does not implicitly {@link brcowcow.BrcowcowHost.verify|verify} messages.
-         * @param message BrcowcowHost message or plain object to encode
+         * Encodes the specified BrcowcowHostReq message. Does not implicitly {@link brcowcow.BrcowcowHostReq.verify|verify} messages.
+         * @param message BrcowcowHostReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: brcowcow.IBrcowcowHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: brcowcow.IBrcowcowHostReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BrcowcowHost message, length delimited. Does not implicitly {@link brcowcow.BrcowcowHost.verify|verify} messages.
-         * @param message BrcowcowHost message or plain object to encode
+         * Encodes the specified BrcowcowHostReq message, length delimited. Does not implicitly {@link brcowcow.BrcowcowHostReq.verify|verify} messages.
+         * @param message BrcowcowHostReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: brcowcow.IBrcowcowHost, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: brcowcow.IBrcowcowHostReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BrcowcowHost message from the specified reader or buffer.
+         * Decodes a BrcowcowHostReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BrcowcowHost
+         * @returns BrcowcowHostReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowHost;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowHostReq;
 
         /**
-         * Decodes a BrcowcowHost message from the specified reader or buffer, length delimited.
+         * Decodes a BrcowcowHostReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BrcowcowHost
+         * @returns BrcowcowHostReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowHost;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowHostReq;
 
         /**
-         * Verifies a BrcowcowHost message.
+         * Verifies a BrcowcowHostReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BrcowcowHost message from a plain object. Also converts values to their respective internal types.
+         * Creates a BrcowcowHostReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BrcowcowHost
+         * @returns BrcowcowHostReq
          */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowHost;
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowHostReq;
 
         /**
-         * Creates a plain object from a BrcowcowHost message. Also converts values to other types if specified.
-         * @param message BrcowcowHost
+         * Creates a plain object from a BrcowcowHostReq message. Also converts values to other types if specified.
+         * @param message BrcowcowHostReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: brcowcow.BrcowcowHost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: brcowcow.BrcowcowHostReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BrcowcowHost to JSON.
+         * Converts this BrcowcowHostReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a BrcowcowHostResp. */
+    interface IBrcowcowHostResp {
+
+        /** BrcowcowHostResp UserID */
+        UserID?: (number|Long|null);
+
+        /** BrcowcowHostResp IsWant */
+        IsWant?: (boolean|null);
+    }
+
+    /** Represents a BrcowcowHostResp. */
+    class BrcowcowHostResp implements IBrcowcowHostResp {
+
+        /**
+         * Constructs a new BrcowcowHostResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IBrcowcowHostResp);
+
+        /** BrcowcowHostResp UserID. */
+        public UserID: (number|Long);
+
+        /** BrcowcowHostResp IsWant. */
+        public IsWant: boolean;
+
+        /**
+         * Creates a new BrcowcowHostResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns BrcowcowHostResp instance
+         */
+        public static create(properties?: brcowcow.IBrcowcowHostResp): brcowcow.BrcowcowHostResp;
+
+        /**
+         * Encodes the specified BrcowcowHostResp message. Does not implicitly {@link brcowcow.BrcowcowHostResp.verify|verify} messages.
+         * @param message BrcowcowHostResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IBrcowcowHostResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified BrcowcowHostResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowHostResp.verify|verify} messages.
+         * @param message BrcowcowHostResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IBrcowcowHostResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a BrcowcowHostResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns BrcowcowHostResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowHostResp;
+
+        /**
+         * Decodes a BrcowcowHostResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns BrcowcowHostResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowHostResp;
+
+        /**
+         * Verifies a BrcowcowHostResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a BrcowcowHostResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns BrcowcowHostResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowHostResp;
+
+        /**
+         * Creates a plain object from a BrcowcowHostResp message. Also converts values to other types if specified.
+         * @param message BrcowcowHostResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.BrcowcowHostResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this BrcowcowHostResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

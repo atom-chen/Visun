@@ -2,475 +2,475 @@ import * as $protobuf from "protobufjs";
 /** Namespace baccarat. */
 export namespace baccarat {
 
-    /** Properties of a BaccaratScene. */
-    interface IBaccaratScene {
+    /** Properties of a BaccaratSceneResp. */
+    interface IBaccaratSceneResp {
 
-        /** BaccaratScene TimeStamp */
+        /** BaccaratSceneResp TimeStamp */
         TimeStamp?: (number|Long|null);
 
-        /** BaccaratScene Chips */
+        /** BaccaratSceneResp Chips */
         Chips?: (number[]|null);
 
-        /** BaccaratScene AwardAreas */
+        /** BaccaratSceneResp AwardAreas */
         AwardAreas?: (Uint8Array[]|null);
 
-        /** BaccaratScene AreaBets */
+        /** BaccaratSceneResp AreaBets */
         AreaBets?: ((number|Long)[]|null);
 
-        /** BaccaratScene MyBets */
+        /** BaccaratSceneResp MyBets */
         MyBets?: ((number|Long)[]|null);
     }
 
-    /** Represents a BaccaratScene. */
-    class BaccaratScene implements IBaccaratScene {
+    /** Represents a BaccaratSceneResp. */
+    class BaccaratSceneResp implements IBaccaratSceneResp {
 
         /**
-         * Constructs a new BaccaratScene.
+         * Constructs a new BaccaratSceneResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratScene);
+        constructor(properties?: baccarat.IBaccaratSceneResp);
 
-        /** BaccaratScene TimeStamp. */
+        /** BaccaratSceneResp TimeStamp. */
         public TimeStamp: (number|Long);
 
-        /** BaccaratScene Chips. */
+        /** BaccaratSceneResp Chips. */
         public Chips: number[];
 
-        /** BaccaratScene AwardAreas. */
+        /** BaccaratSceneResp AwardAreas. */
         public AwardAreas: Uint8Array[];
 
-        /** BaccaratScene AreaBets. */
+        /** BaccaratSceneResp AreaBets. */
         public AreaBets: (number|Long)[];
 
-        /** BaccaratScene MyBets. */
+        /** BaccaratSceneResp MyBets. */
         public MyBets: (number|Long)[];
 
         /**
-         * Creates a new BaccaratScene instance using the specified properties.
+         * Creates a new BaccaratSceneResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratScene instance
+         * @returns BaccaratSceneResp instance
          */
-        public static create(properties?: baccarat.IBaccaratScene): baccarat.BaccaratScene;
+        public static create(properties?: baccarat.IBaccaratSceneResp): baccarat.BaccaratSceneResp;
 
         /**
-         * Encodes the specified BaccaratScene message. Does not implicitly {@link baccarat.BaccaratScene.verify|verify} messages.
-         * @param message BaccaratScene message or plain object to encode
+         * Encodes the specified BaccaratSceneResp message. Does not implicitly {@link baccarat.BaccaratSceneResp.verify|verify} messages.
+         * @param message BaccaratSceneResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratScene, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratSceneResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratScene message, length delimited. Does not implicitly {@link baccarat.BaccaratScene.verify|verify} messages.
-         * @param message BaccaratScene message or plain object to encode
+         * Encodes the specified BaccaratSceneResp message, length delimited. Does not implicitly {@link baccarat.BaccaratSceneResp.verify|verify} messages.
+         * @param message BaccaratSceneResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratScene, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratSceneResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratScene message from the specified reader or buffer.
+         * Decodes a BaccaratSceneResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratScene
+         * @returns BaccaratSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratScene;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratSceneResp;
 
         /**
-         * Decodes a BaccaratScene message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratSceneResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratScene
+         * @returns BaccaratSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratScene;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratSceneResp;
 
         /**
-         * Verifies a BaccaratScene message.
+         * Verifies a BaccaratSceneResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratScene message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratSceneResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratScene
+         * @returns BaccaratSceneResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratScene;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratSceneResp;
 
         /**
-         * Creates a plain object from a BaccaratScene message. Also converts values to other types if specified.
-         * @param message BaccaratScene
+         * Creates a plain object from a BaccaratSceneResp message. Also converts values to other types if specified.
+         * @param message BaccaratSceneResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratScene, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratSceneResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratScene to JSON.
+         * Converts this BaccaratSceneResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratStateFree. */
-    interface IBaccaratStateFree {
+    /** Properties of a BaccaratStateFreeResp. */
+    interface IBaccaratStateFreeResp {
 
-        /** BaccaratStateFree Times */
+        /** BaccaratStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BaccaratStateFree. */
-    class BaccaratStateFree implements IBaccaratStateFree {
+    /** Represents a BaccaratStateFreeResp. */
+    class BaccaratStateFreeResp implements IBaccaratStateFreeResp {
 
         /**
-         * Constructs a new BaccaratStateFree.
+         * Constructs a new BaccaratStateFreeResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratStateFree);
+        constructor(properties?: baccarat.IBaccaratStateFreeResp);
 
-        /** BaccaratStateFree Times. */
+        /** BaccaratStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BaccaratStateFree instance using the specified properties.
+         * Creates a new BaccaratStateFreeResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratStateFree instance
+         * @returns BaccaratStateFreeResp instance
          */
-        public static create(properties?: baccarat.IBaccaratStateFree): baccarat.BaccaratStateFree;
+        public static create(properties?: baccarat.IBaccaratStateFreeResp): baccarat.BaccaratStateFreeResp;
 
         /**
-         * Encodes the specified BaccaratStateFree message. Does not implicitly {@link baccarat.BaccaratStateFree.verify|verify} messages.
-         * @param message BaccaratStateFree message or plain object to encode
+         * Encodes the specified BaccaratStateFreeResp message. Does not implicitly {@link baccarat.BaccaratStateFreeResp.verify|verify} messages.
+         * @param message BaccaratStateFreeResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratStateFree message, length delimited. Does not implicitly {@link baccarat.BaccaratStateFree.verify|verify} messages.
-         * @param message BaccaratStateFree message or plain object to encode
+         * Encodes the specified BaccaratStateFreeResp message, length delimited. Does not implicitly {@link baccarat.BaccaratStateFreeResp.verify|verify} messages.
+         * @param message BaccaratStateFreeResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratStateFree, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratStateFree message from the specified reader or buffer.
+         * Decodes a BaccaratStateFreeResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratStateFree
+         * @returns BaccaratStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateFree;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateFreeResp;
 
         /**
-         * Decodes a BaccaratStateFree message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratStateFreeResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratStateFree
+         * @returns BaccaratStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateFree;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateFreeResp;
 
         /**
-         * Verifies a BaccaratStateFree message.
+         * Verifies a BaccaratStateFreeResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratStateFree message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratStateFreeResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratStateFree
+         * @returns BaccaratStateFreeResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateFree;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateFreeResp;
 
         /**
-         * Creates a plain object from a BaccaratStateFree message. Also converts values to other types if specified.
-         * @param message BaccaratStateFree
+         * Creates a plain object from a BaccaratStateFreeResp message. Also converts values to other types if specified.
+         * @param message BaccaratStateFreeResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratStateFree, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratStateFreeResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratStateFree to JSON.
+         * Converts this BaccaratStateFreeResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratStateStart. */
-    interface IBaccaratStateStart {
+    /** Properties of a BaccaratStateStartResp. */
+    interface IBaccaratStateStartResp {
 
-        /** BaccaratStateStart Times */
+        /** BaccaratStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BaccaratStateStart. */
-    class BaccaratStateStart implements IBaccaratStateStart {
+    /** Represents a BaccaratStateStartResp. */
+    class BaccaratStateStartResp implements IBaccaratStateStartResp {
 
         /**
-         * Constructs a new BaccaratStateStart.
+         * Constructs a new BaccaratStateStartResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratStateStart);
+        constructor(properties?: baccarat.IBaccaratStateStartResp);
 
-        /** BaccaratStateStart Times. */
+        /** BaccaratStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BaccaratStateStart instance using the specified properties.
+         * Creates a new BaccaratStateStartResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratStateStart instance
+         * @returns BaccaratStateStartResp instance
          */
-        public static create(properties?: baccarat.IBaccaratStateStart): baccarat.BaccaratStateStart;
+        public static create(properties?: baccarat.IBaccaratStateStartResp): baccarat.BaccaratStateStartResp;
 
         /**
-         * Encodes the specified BaccaratStateStart message. Does not implicitly {@link baccarat.BaccaratStateStart.verify|verify} messages.
-         * @param message BaccaratStateStart message or plain object to encode
+         * Encodes the specified BaccaratStateStartResp message. Does not implicitly {@link baccarat.BaccaratStateStartResp.verify|verify} messages.
+         * @param message BaccaratStateStartResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratStateStart message, length delimited. Does not implicitly {@link baccarat.BaccaratStateStart.verify|verify} messages.
-         * @param message BaccaratStateStart message or plain object to encode
+         * Encodes the specified BaccaratStateStartResp message, length delimited. Does not implicitly {@link baccarat.BaccaratStateStartResp.verify|verify} messages.
+         * @param message BaccaratStateStartResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratStateStart, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratStateStart message from the specified reader or buffer.
+         * Decodes a BaccaratStateStartResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratStateStart
+         * @returns BaccaratStateStartResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateStart;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateStartResp;
 
         /**
-         * Decodes a BaccaratStateStart message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratStateStartResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratStateStart
+         * @returns BaccaratStateStartResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateStart;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateStartResp;
 
         /**
-         * Verifies a BaccaratStateStart message.
+         * Verifies a BaccaratStateStartResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratStateStart message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratStateStartResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratStateStart
+         * @returns BaccaratStateStartResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateStart;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateStartResp;
 
         /**
-         * Creates a plain object from a BaccaratStateStart message. Also converts values to other types if specified.
-         * @param message BaccaratStateStart
+         * Creates a plain object from a BaccaratStateStartResp message. Also converts values to other types if specified.
+         * @param message BaccaratStateStartResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratStateStart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratStateStartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratStateStart to JSON.
+         * Converts this BaccaratStateStartResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratStatePlaying. */
-    interface IBaccaratStatePlaying {
+    /** Properties of a BaccaratStatePlayingResp. */
+    interface IBaccaratStatePlayingResp {
 
-        /** BaccaratStatePlaying Times */
+        /** BaccaratStatePlayingResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BaccaratStatePlaying. */
-    class BaccaratStatePlaying implements IBaccaratStatePlaying {
+    /** Represents a BaccaratStatePlayingResp. */
+    class BaccaratStatePlayingResp implements IBaccaratStatePlayingResp {
 
         /**
-         * Constructs a new BaccaratStatePlaying.
+         * Constructs a new BaccaratStatePlayingResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratStatePlaying);
+        constructor(properties?: baccarat.IBaccaratStatePlayingResp);
 
-        /** BaccaratStatePlaying Times. */
+        /** BaccaratStatePlayingResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BaccaratStatePlaying instance using the specified properties.
+         * Creates a new BaccaratStatePlayingResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratStatePlaying instance
+         * @returns BaccaratStatePlayingResp instance
          */
-        public static create(properties?: baccarat.IBaccaratStatePlaying): baccarat.BaccaratStatePlaying;
+        public static create(properties?: baccarat.IBaccaratStatePlayingResp): baccarat.BaccaratStatePlayingResp;
 
         /**
-         * Encodes the specified BaccaratStatePlaying message. Does not implicitly {@link baccarat.BaccaratStatePlaying.verify|verify} messages.
-         * @param message BaccaratStatePlaying message or plain object to encode
+         * Encodes the specified BaccaratStatePlayingResp message. Does not implicitly {@link baccarat.BaccaratStatePlayingResp.verify|verify} messages.
+         * @param message BaccaratStatePlayingResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratStatePlayingResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratStatePlaying message, length delimited. Does not implicitly {@link baccarat.BaccaratStatePlaying.verify|verify} messages.
-         * @param message BaccaratStatePlaying message or plain object to encode
+         * Encodes the specified BaccaratStatePlayingResp message, length delimited. Does not implicitly {@link baccarat.BaccaratStatePlayingResp.verify|verify} messages.
+         * @param message BaccaratStatePlayingResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratStatePlaying, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratStatePlayingResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratStatePlaying message from the specified reader or buffer.
+         * Decodes a BaccaratStatePlayingResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratStatePlaying
+         * @returns BaccaratStatePlayingResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStatePlaying;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStatePlayingResp;
 
         /**
-         * Decodes a BaccaratStatePlaying message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratStatePlayingResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratStatePlaying
+         * @returns BaccaratStatePlayingResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStatePlaying;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStatePlayingResp;
 
         /**
-         * Verifies a BaccaratStatePlaying message.
+         * Verifies a BaccaratStatePlayingResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratStatePlaying message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratStatePlayingResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratStatePlaying
+         * @returns BaccaratStatePlayingResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStatePlaying;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStatePlayingResp;
 
         /**
-         * Creates a plain object from a BaccaratStatePlaying message. Also converts values to other types if specified.
-         * @param message BaccaratStatePlaying
+         * Creates a plain object from a BaccaratStatePlayingResp message. Also converts values to other types if specified.
+         * @param message BaccaratStatePlayingResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratStatePlaying, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratStatePlayingResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratStatePlaying to JSON.
+         * Converts this BaccaratStatePlayingResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratStateOver. */
-    interface IBaccaratStateOver {
+    /** Properties of a BaccaratStateOverResp. */
+    interface IBaccaratStateOverResp {
 
-        /** BaccaratStateOver Times */
+        /** BaccaratStateOverResp Times */
         Times?: (gamecomm.ITimeInfo|null);
     }
 
-    /** Represents a BaccaratStateOver. */
-    class BaccaratStateOver implements IBaccaratStateOver {
+    /** Represents a BaccaratStateOverResp. */
+    class BaccaratStateOverResp implements IBaccaratStateOverResp {
 
         /**
-         * Constructs a new BaccaratStateOver.
+         * Constructs a new BaccaratStateOverResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratStateOver);
+        constructor(properties?: baccarat.IBaccaratStateOverResp);
 
-        /** BaccaratStateOver Times. */
+        /** BaccaratStateOverResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
 
         /**
-         * Creates a new BaccaratStateOver instance using the specified properties.
+         * Creates a new BaccaratStateOverResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratStateOver instance
+         * @returns BaccaratStateOverResp instance
          */
-        public static create(properties?: baccarat.IBaccaratStateOver): baccarat.BaccaratStateOver;
+        public static create(properties?: baccarat.IBaccaratStateOverResp): baccarat.BaccaratStateOverResp;
 
         /**
-         * Encodes the specified BaccaratStateOver message. Does not implicitly {@link baccarat.BaccaratStateOver.verify|verify} messages.
-         * @param message BaccaratStateOver message or plain object to encode
+         * Encodes the specified BaccaratStateOverResp message. Does not implicitly {@link baccarat.BaccaratStateOverResp.verify|verify} messages.
+         * @param message BaccaratStateOverResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratStateOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratStateOver message, length delimited. Does not implicitly {@link baccarat.BaccaratStateOver.verify|verify} messages.
-         * @param message BaccaratStateOver message or plain object to encode
+         * Encodes the specified BaccaratStateOverResp message, length delimited. Does not implicitly {@link baccarat.BaccaratStateOverResp.verify|verify} messages.
+         * @param message BaccaratStateOverResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratStateOver, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratStateOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratStateOver message from the specified reader or buffer.
+         * Decodes a BaccaratStateOverResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratStateOver
+         * @returns BaccaratStateOverResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateOver;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratStateOverResp;
 
         /**
-         * Decodes a BaccaratStateOver message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratStateOverResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratStateOver
+         * @returns BaccaratStateOverResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateOver;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratStateOverResp;
 
         /**
-         * Verifies a BaccaratStateOver message.
+         * Verifies a BaccaratStateOverResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratStateOver message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratStateOverResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratStateOver
+         * @returns BaccaratStateOverResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateOver;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratStateOverResp;
 
         /**
-         * Creates a plain object from a BaccaratStateOver message. Also converts values to other types if specified.
-         * @param message BaccaratStateOver
+         * Creates a plain object from a BaccaratStateOverResp message. Also converts values to other types if specified.
+         * @param message BaccaratStateOverResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratStateOver, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratStateOverResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratStateOver to JSON.
+         * Converts this BaccaratStateOverResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

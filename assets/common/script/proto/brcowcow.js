@@ -11,9 +11,9 @@ $root.brcowcow = (function() {
 
     var brcowcow = {};
 
-    brcowcow.BrcowcowScene = (function() {
+    brcowcow.BrcowcowSceneResp = (function() {
 
-        function BrcowcowScene(properties) {
+        function BrcowcowSceneResp(properties) {
             this.Chips = [];
             this.AwardAreas = [];
             this.AreaBets = [];
@@ -24,17 +24,17 @@ $root.brcowcow = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowScene.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        BrcowcowScene.prototype.Chips = $util.emptyArray;
-        BrcowcowScene.prototype.AwardAreas = $util.emptyArray;
-        BrcowcowScene.prototype.AreaBets = $util.emptyArray;
-        BrcowcowScene.prototype.MyBets = $util.emptyArray;
+        BrcowcowSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BrcowcowSceneResp.prototype.Chips = $util.emptyArray;
+        BrcowcowSceneResp.prototype.AwardAreas = $util.emptyArray;
+        BrcowcowSceneResp.prototype.AreaBets = $util.emptyArray;
+        BrcowcowSceneResp.prototype.MyBets = $util.emptyArray;
 
-        BrcowcowScene.create = function create(properties) {
-            return new BrcowcowScene(properties);
+        BrcowcowSceneResp.create = function create(properties) {
+            return new BrcowcowSceneResp(properties);
         };
 
-        BrcowcowScene.encode = function encode(message, writer) {
+        BrcowcowSceneResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
@@ -63,14 +63,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowScene.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowSceneResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowScene.decode = function decode(reader, length) {
+        BrcowcowSceneResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowScene();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowSceneResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -120,13 +120,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowScene.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowSceneResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowScene.verify = function verify(message) {
+        BrcowcowSceneResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
@@ -163,10 +163,10 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowScene.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowScene)
+        BrcowcowSceneResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowSceneResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowScene();
+            var message = new $root.brcowcow.BrcowcowSceneResp();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -178,14 +178,14 @@ $root.brcowcow = (function() {
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
-                    throw TypeError(".brcowcow.BrcowcowScene.Chips: array expected");
+                    throw TypeError(".brcowcow.BrcowcowSceneResp.Chips: array expected");
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
             }
             if (object.AwardAreas) {
                 if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".brcowcow.BrcowcowScene.AwardAreas: array expected");
+                    throw TypeError(".brcowcow.BrcowcowSceneResp.AwardAreas: array expected");
                 message.AwardAreas = [];
                 for (var i = 0; i < object.AwardAreas.length; ++i)
                     if (typeof object.AwardAreas[i] === "string")
@@ -195,7 +195,7 @@ $root.brcowcow = (function() {
             }
             if (object.AreaBets) {
                 if (!Array.isArray(object.AreaBets))
-                    throw TypeError(".brcowcow.BrcowcowScene.AreaBets: array expected");
+                    throw TypeError(".brcowcow.BrcowcowSceneResp.AreaBets: array expected");
                 message.AreaBets = [];
                 for (var i = 0; i < object.AreaBets.length; ++i)
                     if ($util.Long)
@@ -209,7 +209,7 @@ $root.brcowcow = (function() {
             }
             if (object.MyBets) {
                 if (!Array.isArray(object.MyBets))
-                    throw TypeError(".brcowcow.BrcowcowScene.MyBets: array expected");
+                    throw TypeError(".brcowcow.BrcowcowSceneResp.MyBets: array expected");
                 message.MyBets = [];
                 for (var i = 0; i < object.MyBets.length; ++i)
                     if ($util.Long)
@@ -224,7 +224,7 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowScene.toObject = function toObject(message, options) {
+        BrcowcowSceneResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -274,29 +274,29 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowScene.prototype.toJSON = function toJSON() {
+        BrcowcowSceneResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowScene;
+        return BrcowcowSceneResp;
     })();
 
-    brcowcow.BrcowcowStateFree = (function() {
+    brcowcow.BrcowcowStateFreeResp = (function() {
 
-        function BrcowcowStateFree(properties) {
+        function BrcowcowStateFreeResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowStateFree.prototype.Times = null;
+        BrcowcowStateFreeResp.prototype.Times = null;
 
-        BrcowcowStateFree.create = function create(properties) {
-            return new BrcowcowStateFree(properties);
+        BrcowcowStateFreeResp.create = function create(properties) {
+            return new BrcowcowStateFreeResp(properties);
         };
 
-        BrcowcowStateFree.encode = function encode(message, writer) {
+        BrcowcowStateFreeResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -304,14 +304,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowStateFree.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowStateFree.decode = function decode(reader, length) {
+        BrcowcowStateFreeResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateFree();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateFreeResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -326,13 +326,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowStateFree.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowStateFree.verify = function verify(message) {
+        BrcowcowStateFreeResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -343,19 +343,19 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowStateFree.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowStateFree)
+        BrcowcowStateFreeResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowStateFreeResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowStateFree();
+            var message = new $root.brcowcow.BrcowcowStateFreeResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".brcowcow.BrcowcowStateFree.Times: object expected");
+                    throw TypeError(".brcowcow.BrcowcowStateFreeResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        BrcowcowStateFree.toObject = function toObject(message, options) {
+        BrcowcowStateFreeResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -366,29 +366,29 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowStateFree.prototype.toJSON = function toJSON() {
+        BrcowcowStateFreeResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowStateFree;
+        return BrcowcowStateFreeResp;
     })();
 
-    brcowcow.BrcowcowStateStart = (function() {
+    brcowcow.BrcowcowStateStartResp = (function() {
 
-        function BrcowcowStateStart(properties) {
+        function BrcowcowStateStartResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowStateStart.prototype.Times = null;
+        BrcowcowStateStartResp.prototype.Times = null;
 
-        BrcowcowStateStart.create = function create(properties) {
-            return new BrcowcowStateStart(properties);
+        BrcowcowStateStartResp.create = function create(properties) {
+            return new BrcowcowStateStartResp(properties);
         };
 
-        BrcowcowStateStart.encode = function encode(message, writer) {
+        BrcowcowStateStartResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -396,14 +396,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowStateStart.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowStateStart.decode = function decode(reader, length) {
+        BrcowcowStateStartResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateStart();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateStartResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -418,13 +418,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowStateStart.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowStateStartResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowStateStart.verify = function verify(message) {
+        BrcowcowStateStartResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -435,19 +435,19 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowStateStart.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowStateStart)
+        BrcowcowStateStartResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowStateStartResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowStateStart();
+            var message = new $root.brcowcow.BrcowcowStateStartResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".brcowcow.BrcowcowStateStart.Times: object expected");
+                    throw TypeError(".brcowcow.BrcowcowStateStartResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        BrcowcowStateStart.toObject = function toObject(message, options) {
+        BrcowcowStateStartResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -458,29 +458,29 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowStateStart.prototype.toJSON = function toJSON() {
+        BrcowcowStateStartResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowStateStart;
+        return BrcowcowStateStartResp;
     })();
 
-    brcowcow.BrcowcowStatePlaying = (function() {
+    brcowcow.BrcowcowStatePlayingResp = (function() {
 
-        function BrcowcowStatePlaying(properties) {
+        function BrcowcowStatePlayingResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowStatePlaying.prototype.Times = null;
+        BrcowcowStatePlayingResp.prototype.Times = null;
 
-        BrcowcowStatePlaying.create = function create(properties) {
-            return new BrcowcowStatePlaying(properties);
+        BrcowcowStatePlayingResp.create = function create(properties) {
+            return new BrcowcowStatePlayingResp(properties);
         };
 
-        BrcowcowStatePlaying.encode = function encode(message, writer) {
+        BrcowcowStatePlayingResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -488,14 +488,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowStatePlaying.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowStatePlayingResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowStatePlaying.decode = function decode(reader, length) {
+        BrcowcowStatePlayingResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStatePlaying();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStatePlayingResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -510,13 +510,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowStatePlaying.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowStatePlayingResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowStatePlaying.verify = function verify(message) {
+        BrcowcowStatePlayingResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -527,19 +527,19 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowStatePlaying.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowStatePlaying)
+        BrcowcowStatePlayingResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowStatePlayingResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowStatePlaying();
+            var message = new $root.brcowcow.BrcowcowStatePlayingResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".brcowcow.BrcowcowStatePlaying.Times: object expected");
+                    throw TypeError(".brcowcow.BrcowcowStatePlayingResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        BrcowcowStatePlaying.toObject = function toObject(message, options) {
+        BrcowcowStatePlayingResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -550,29 +550,29 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowStatePlaying.prototype.toJSON = function toJSON() {
+        BrcowcowStatePlayingResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowStatePlaying;
+        return BrcowcowStatePlayingResp;
     })();
 
-    brcowcow.BrcowcowStateOver = (function() {
+    brcowcow.BrcowcowStateOverResp = (function() {
 
-        function BrcowcowStateOver(properties) {
+        function BrcowcowStateOverResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowStateOver.prototype.Times = null;
+        BrcowcowStateOverResp.prototype.Times = null;
 
-        BrcowcowStateOver.create = function create(properties) {
-            return new BrcowcowStateOver(properties);
+        BrcowcowStateOverResp.create = function create(properties) {
+            return new BrcowcowStateOverResp(properties);
         };
 
-        BrcowcowStateOver.encode = function encode(message, writer) {
+        BrcowcowStateOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -580,14 +580,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowStateOver.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowStateOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowStateOver.decode = function decode(reader, length) {
+        BrcowcowStateOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateOver();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -602,13 +602,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowStateOver.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowStateOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowStateOver.verify = function verify(message) {
+        BrcowcowStateOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -619,19 +619,19 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowStateOver.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowStateOver)
+        BrcowcowStateOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowStateOverResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowStateOver();
+            var message = new $root.brcowcow.BrcowcowStateOverResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".brcowcow.BrcowcowStateOver.Times: object expected");
+                    throw TypeError(".brcowcow.BrcowcowStateOverResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        BrcowcowStateOver.toObject = function toObject(message, options) {
+        BrcowcowStateOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -642,11 +642,11 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowStateOver.prototype.toJSON = function toJSON() {
+        BrcowcowStateOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowStateOver;
+        return BrcowcowStateOverResp;
     })();
 
     brcowcow.BrcowcowBetReq = (function() {
@@ -1251,23 +1251,110 @@ $root.brcowcow = (function() {
         return BrcowcowCheckoutResp;
     })();
 
-    brcowcow.BrcowcowHost = (function() {
+    brcowcow.BrcowcowHostReq = (function() {
 
-        function BrcowcowHost(properties) {
+        function BrcowcowHostReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowHost.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        BrcowcowHost.prototype.IsWant = false;
+        BrcowcowHostReq.prototype.IsWant = false;
 
-        BrcowcowHost.create = function create(properties) {
-            return new BrcowcowHost(properties);
+        BrcowcowHostReq.create = function create(properties) {
+            return new BrcowcowHostReq(properties);
         };
 
-        BrcowcowHost.encode = function encode(message, writer) {
+        BrcowcowHostReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
+                writer.uint32(8).bool(message.IsWant);
+            return writer;
+        };
+
+        BrcowcowHostReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BrcowcowHostReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowHostReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsWant = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BrcowcowHostReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BrcowcowHostReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                if (typeof message.IsWant !== "boolean")
+                    return "IsWant: boolean expected";
+            return null;
+        };
+
+        BrcowcowHostReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowHostReq)
+                return object;
+            var message = new $root.brcowcow.BrcowcowHostReq();
+            if (object.IsWant != null)
+                message.IsWant = Boolean(object.IsWant);
+            return message;
+        };
+
+        BrcowcowHostReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsWant = false;
+            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
+                object.IsWant = message.IsWant;
+            return object;
+        };
+
+        BrcowcowHostReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BrcowcowHostReq;
+    })();
+
+    brcowcow.BrcowcowHostResp = (function() {
+
+        function BrcowcowHostResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BrcowcowHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BrcowcowHostResp.prototype.IsWant = false;
+
+        BrcowcowHostResp.create = function create(properties) {
+            return new BrcowcowHostResp(properties);
+        };
+
+        BrcowcowHostResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1277,14 +1364,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowHost.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowHostResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowHost.decode = function decode(reader, length) {
+        BrcowcowHostResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowHost();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowHostResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1302,13 +1389,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowHost.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowHostResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowHost.verify = function verify(message) {
+        BrcowcowHostResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1320,10 +1407,10 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowHost.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowHost)
+        BrcowcowHostResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowHostResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowHost();
+            var message = new $root.brcowcow.BrcowcowHostResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1338,7 +1425,7 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowHost.toObject = function toObject(message, options) {
+        BrcowcowHostResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1360,11 +1447,11 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowHost.prototype.toJSON = function toJSON() {
+        BrcowcowHostResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowHost;
+        return BrcowcowHostResp;
     })();
 
     brcowcow.BrcowcowHostListReq = (function() {

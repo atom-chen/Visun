@@ -3,7 +3,7 @@ package brcowcow;
 import "gamecomm.proto";
 
 //入场
-message BrcowcowScene {
+message BrcowcowSceneResp {
   int64 TimeStamp = 1;        //时间戳
   repeated int32 Chips = 2;      //筹码
   repeated bytes AwardAreas = 3;    //开奖记录(路单)
@@ -14,22 +14,22 @@ message BrcowcowScene {
 //状态
 // 服务端推送
 //(空闲)
-message BrcowcowStateFree {
+message BrcowcowStateFreeResp {
   TimeInfo Times = 1;
 }
 
 //(开始)
-message BrcowcowStateStart {
+message BrcowcowStateStartResp {
   TimeInfo Times = 1;
 }
 
 //(游戏中)
-message BrcowcowStatePlaying {
+message BrcowcowStatePlayingResp {
   TimeInfo Times = 1;
 }
 
 //(结束)
-message BrcowcowStateOver {
+message BrcowcowStateOverResp {
   TimeInfo Times = 1;
 }
 
@@ -68,10 +68,14 @@ message BrcowcowCheckoutResp{
 //----------------------------------------------------------------------------------
 
 //抢庄
-message BrcowcowHost {
+message BrcowcowHostReq {
+  bool IsWant = 1;  //true上庄 false取消上庄
+}
+message BrcowcowHostResp {
   uint64 UserID = 1;
   bool IsWant = 2;  //true上庄 false取消上庄
 }
+
 
 //待上庄列表
 message BrcowcowHostListReq {

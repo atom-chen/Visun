@@ -7,11 +7,11 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum baccarat_msgs {
-    BaccaratScene = 27,
-    BaccaratStateFree = 28,
-    BaccaratStateStart = 29,
-    BaccaratStatePlaying = 30,
-    BaccaratStateOver = 31,
+    BaccaratSceneResp = 27,
+    BaccaratStateFreeResp = 28,
+    BaccaratStateStartResp = 29,
+    BaccaratStatePlayingResp = 30,
+    BaccaratStateOverResp = 31,
     BaccaratHostReq = 32,
     BaccaratHostResp = 33,
     BaccaratSuperHostReq = 34,
@@ -23,11 +23,11 @@ export enum baccarat_msgs {
 }
 
 export var baccarat_packet_define = {
-    27: new LeafWsPacket(27, baccarat.BaccaratScene, "baccarat.BaccaratScene"),
-    28: new LeafWsPacket(28, baccarat.BaccaratStateFree, "baccarat.BaccaratStateFree"),
-    29: new LeafWsPacket(29, baccarat.BaccaratStateStart, "baccarat.BaccaratStateStart"),
-    30: new LeafWsPacket(30, baccarat.BaccaratStatePlaying, "baccarat.BaccaratStatePlaying"),
-    31: new LeafWsPacket(31, baccarat.BaccaratStateOver, "baccarat.BaccaratStateOver"),
+    27: new LeafWsPacket(27, baccarat.BaccaratSceneResp, "baccarat.BaccaratSceneResp"),
+    28: new LeafWsPacket(28, baccarat.BaccaratStateFreeResp, "baccarat.BaccaratStateFreeResp"),
+    29: new LeafWsPacket(29, baccarat.BaccaratStateStartResp, "baccarat.BaccaratStateStartResp"),
+    30: new LeafWsPacket(30, baccarat.BaccaratStatePlayingResp, "baccarat.BaccaratStatePlayingResp"),
+    31: new LeafWsPacket(31, baccarat.BaccaratStateOverResp, "baccarat.BaccaratStateOverResp"),
     32: new LeafWsPacket(32, baccarat.BaccaratHostReq, "baccarat.BaccaratHostReq"),
     33: new LeafWsPacket(33, baccarat.BaccaratHostResp, "baccarat.BaccaratHostResp"),
     34: new LeafWsPacket(34, baccarat.BaccaratSuperHostReq, "baccarat.BaccaratSuperHostReq"),
@@ -39,11 +39,11 @@ export var baccarat_packet_define = {
 }
 
 export class baccarat_request {
-    public static BaccaratScene( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[] } ) { baccarat_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratStateFree( data:{ Times:any } ) { baccarat_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratStateStart( data:{ Times:any } ) { baccarat_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratStatePlaying( data:{ Times:any } ) { baccarat_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratStateOver( data:{ Times:any } ) { baccarat_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[] } ) { baccarat_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratStateFreeResp( data:{ Times:any } ) { baccarat_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratStateStartResp( data:{ Times:any } ) { baccarat_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratStatePlayingResp( data:{ Times:any } ) { baccarat_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratStateOverResp( data:{ Times:any } ) { baccarat_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratHostReq( data:{ IsWant:any } ) { baccarat_packet_define[32].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratHostResp( data:{ UserID:number, IsWant:any } ) { baccarat_packet_define[33].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratSuperHostReq( data:{ IsWant:any } ) { baccarat_packet_define[34].sendToChannel(ChannelDefine.game, data, false); }

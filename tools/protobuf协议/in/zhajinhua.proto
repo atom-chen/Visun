@@ -16,7 +16,7 @@ message FighterInfo {
 
 
 //入场
-message ZhajinhuaScene {
+message ZhajinhuaSceneResp {
   int64 TimeStamp = 1;          //时间戳
   int64 TotalBet = 3;            //当前总下注额
   uint64 MinBet = 4;            //当前注额
@@ -27,23 +27,23 @@ message ZhajinhuaScene {
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
 //以下状态 由服务端推送
 //(空闲)
-message ZhajinhuaStateFree {
+message ZhajinhuaStateFreeResp {
   TimeInfo Times = 1;
 }
 
 //(开始)
-message ZhajinhuaStateStart {
+message ZhajinhuaStateStartResp {
   TimeInfo Times = 1;
 }
 
 //(游戏中)
-message ZhajinhuaStatePlaying {
+message ZhajinhuaStatePlayingResp {
   TimeInfo Times = 1;
   uint64 UserID = 2;    //轮到谁
 }
 
 //(结束)
-message ZhajinhuaStateOver {
+message ZhajinhuaStateOverResp {
   TimeInfo Times = 1;
 }
 
@@ -51,7 +51,7 @@ message ZhajinhuaStateOver {
 
 
 //定庄
-message ZhajinhuaHost {
+message ZhajinhuaHostResp {
   uint64 CurHost = 1;
 }
 
@@ -112,7 +112,7 @@ message ZhajinhuaGiveupResp {
 }
 
 //结算
-message ZhajinhuaOver {
+message ZhajinhuaOverResp {
   uint64 WinnerId = 1;                //胜利者ID
   repeated NotifyChangeGold Infos = 2;  //各玩家输赢情况
 }
