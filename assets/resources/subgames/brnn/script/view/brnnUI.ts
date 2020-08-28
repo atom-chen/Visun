@@ -61,8 +61,6 @@ export default class BrnnUI extends BaseComponent {
 		this.initNetEvent();
 		this.initUIEvent();
 
-		this.toStateReady();
-
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 	}
 
@@ -75,22 +73,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
-	//准备阶段
-	private toStateReady() {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
-	}
-
-	//下注阶段
-	private toStateBetting() {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-	}
-
-	private GameBrcowcowBetResp(param:brcowcow.GameBrcowcowBetResp) {
+	private BrcowcowBetResp(param:brcowcow.BrcowcowBetResp) {
 		if(isNil(param)) { return; }
 		var money = param.Money;
 		var idx = this.compBox.getIndexByMoney(money);
@@ -100,21 +83,21 @@ export default class BrnnUI extends BaseComponent {
 		var chip = this._pool.newObject();
 		chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
 		this.m_ui.chipLayer.addChild(chip);
-		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.AreaId], 0.2, 0, margin);
+		CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.Area], 0.2, 0, margin);
 	}
 
-	private GameBrcowcowOverResp(param:brcowcow.GameBrcowcowOverResp) {
+	private BrcowcowOverResp(param:brcowcow.BrcowcowOverResp) {
 		if(isNil(param)) { return; }
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 
-		for(var i = 0; i < param.Cards.length; i++) {
-			this.m_ui["CpnHandcard"+(i+1)].getComponent(CpnHandcard).resetCards(param.Cards[i].Cards, true);
+		var cardlist = [param.BankerCard, param.TianCard, param.DiCard, param.XuanCard, param.HuangCard];
+		for(var i = 0; i < cardlist.length; i++) {
+			this.m_ui["CpnHandcard"+(i+1)].getComponent(CpnHandcard).resetCards(cardlist[i].Cards, true);
 		}
 
 		TimerManager.delaySecond(1, newHandler(this.playCollect, this, param));
 	}
-
 	private playCollect(tmr, param) {
 		//收集筹码
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
@@ -161,20 +144,29 @@ export default class BrnnUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
-	GameBrcowcowStateResp(param:brcowcow.GameBrcowcowStateResp) {
+	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFree) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+	}
+
+	private BrcowcowStatePlaying(param:brcowcow.BrcowcowStatePlaying) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+	}
+
+	private BrcowcowStateOver(param:brcowcow.BrcowcowStateOver) {
 		if(isNil(param)) { return; }
-		// if(param.CurState == 1) {
-		// 	this.toStateReady();
-		// }
-		// else if(param.CurState == 2) {
-		// 	this.toStateBetting();
-		// }
 	}
 
 	private initNetEvent() {
-		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowBetResp, this.GameBrcowcowBetResp, this);
-		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowOverResp, this.GameBrcowcowOverResp ,this);
-		EventCenter.getInstance().listen(brcowcow_msgs.GameBrcowcowStateResp, this.GameBrcowcowStateResp, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp ,this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFree, this.BrcowcowStateFree, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlaying, this.BrcowcowStatePlaying, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOver, this.BrcowcowStateOver, this);
 	}
 
 	private initUIEvent() {
@@ -191,10 +183,9 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.area3, function(){ this.onClickArea(3); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area4, function(){ this.onClickArea(4); }, this);
 	}
-
 	private onClickArea(areaId:number) {
 		var idx = this.compBox.getSelectedIndex();
-		brcowcow_request.GameBrcowcowBetReq({AreaId:areaId, Money:this._rule[idx-1]})
+		brcowcow_request.BrcowcowBetReq({Area:areaId, Money:this._rule[idx-1]})
 	}
 
 }
