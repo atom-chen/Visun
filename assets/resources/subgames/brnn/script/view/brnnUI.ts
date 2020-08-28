@@ -5,9 +5,6 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../../common/script/model/GameManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
-import { PokerCode } from "../../../../../common/script/definer/PokerDefine";
-import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
@@ -16,18 +13,13 @@ import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
 import { brcowcow } from "../../../../../../declares/brcowcow";
-import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
-
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var margin = { left:16,right:16,bottom:16,top:16 };
-var testdata = [ 
-	{AreaId:1,Money:25280}, 
-	{AreaId:2,Money:28650}, 
-	{AreaId:3,Money:26455}, 
-	{AreaId:4,Money:24255} 
-];
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -81,9 +73,9 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowBetResp(param:brcowcow.BrcowcowBetResp) {
 		if(isNil(param)) { return; }
-		var money = param.Money;
+		
 		if(param.UserId == LoginUser.getInstance().UserId) {
-			var idx = this.compBox.getIndexByMoney(money);
+			var idx = this.compBox.getIndexByMoney(CommonUtil.fixRealMoney(param.Money));
 			if(idx < 0) {
 				idx = this.compBox.getSelectedIndex();
 			}
@@ -100,7 +92,7 @@ export default class BrnnUI extends BaseComponent {
 	private onPlayersBet(param:brcowcow.BrcowcowBetResp) {
 		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
 		//飞筹码
-		var nums = GameUtil.parseChip(param.Money, this._rule);
+		var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.Money), this._rule);
 		for(var j = 0; j < nums.length; j++) {
 			var chip = this._pool.newObject();
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
@@ -115,17 +107,17 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowOverResp(param:brcowcow.BrcowcowOverResp) {
 		if(isNil(param)) { return; }
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
 
 		var cardlist = [param.BankerCard, param.TianCard, param.DiCard, param.XuanCard, param.HuangCard];
 		for(var i = 0; i < cardlist.length; i++) {
 			this.m_ui["CpnHandcard"+(i+1)].getComponent(CpnHandcard).resetCards(cardlist[i].Cards, true);
 		}
-
-		TimerManager.delaySecond(1, newHandler(this.playCollect, this, param));
 	}
-	private playCollect(tmr, param) {
-		//收集筹码
+
+	private BrcowcowCheckoutResp(param:brcowcow.BrcowcowCheckoutResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
+
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
 		var self = this;
@@ -145,6 +137,8 @@ export default class BrnnUI extends BaseComponent {
 				}
 			}, this)
 		));
+
+		UIManager.toast("赢得金币："+CommonUtil.formRealMoney(param.MySettlement));
 	}
 
 	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFree) {
@@ -175,6 +169,7 @@ export default class BrnnUI extends BaseComponent {
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOver, this.BrcowcowStateOver, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp ,this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowCheckoutResp, this.BrcowcowCheckoutResp, this);
 	}
 
 	private initUIEvent() {
@@ -193,7 +188,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 	private onClickArea(areaId:number) {
 		var idx = this.compBox.getSelectedIndex();
-		brcowcow_request.BrcowcowBetReq({Area:areaId, Money:this._rule[idx-1]})
+		brcowcow_request.BrcowcowBetReq({Area:areaId, Money:CommonUtil.toServerMoney(this._rule[idx-1])})
 	}
 
 }

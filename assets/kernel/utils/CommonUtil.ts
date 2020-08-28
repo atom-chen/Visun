@@ -808,4 +808,8 @@ export default class CommonUtil {
 		return ret;
 	}
 
+	public static toServerMoney(v:number) : number {
+		return v * 100;
+	}
+
 }
