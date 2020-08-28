@@ -1,4 +1,5 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
+import { brcowcow } from "../../../../../../declares/brcowcow";
 
 export default class BrnnMgr extends ModelBase {
 	private static _instance:BrnnMgr = null;
@@ -17,5 +18,13 @@ export default class BrnnMgr extends ModelBase {
 	}
     on_clear(): void {
 
-	}
+    }
+    
+    private enterData = null;
+    setEnterData(data:brcowcow.BrcowcowScene) {
+        this.enterData = data;
+    }
+    getEnterData() : brcowcow.BrcowcowScene {
+        return this.enterData;
+    }
 }

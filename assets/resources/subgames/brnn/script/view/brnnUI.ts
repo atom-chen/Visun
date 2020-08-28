@@ -16,6 +16,9 @@ import { brcowcow } from "../../../../../../declares/brcowcow";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import UIManager from "../../../../../kernel/view/UIManager";
+import BrnnMgr from "../model/BrnnMgr";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 
 
 var margin = { left:16,right:16,bottom:16,top:16 };
@@ -55,6 +58,14 @@ export default class BrnnUI extends BaseComponent {
 		this.initUIEvent();
 
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
+
+		var enterData = BrnnMgr.getInstance().getEnterData();
+		for(var i=0; i<enterData.AreaBets.length; i++) {
+			var areaName = "area"+(i+1);
+			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
+			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
+		}
+		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
 	onDestroy(){

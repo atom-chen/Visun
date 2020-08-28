@@ -9,6 +9,9 @@ import { brcowcow_msgs } from "../proto/net_brcowcow";
 import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
+import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
+import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../definer/ChannelDefine";
 
 var GameHandlers = {
 
@@ -21,6 +24,8 @@ var GameHandlers = {
 	},
 	
 	[brcowcow_msgs.BrcowcowScene] : function(param:brcowcow.BrcowcowScene) {
+        BrnnMgr.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
 	},
 
