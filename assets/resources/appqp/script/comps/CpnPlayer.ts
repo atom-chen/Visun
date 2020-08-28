@@ -41,16 +41,16 @@ export default class CpnPlayer extends BaseComponent {
     }
 
     public setName(name:string) {
-        this.m_lab.label_name.string = name;
+        this.m_lab.lab_name.string = name;
     }
 
     public setMoney(money:number) {
         this._money = money;
-        this.m_lab.label_money.string = money.toString();
+        this.m_lab.lab_money.string = money.toString();
     }
 
     public setMoneyStr(moneyStr:string) {
-        this.m_lab.label_money.string = moneyStr;
+        this.m_lab.lab_money.string = moneyStr;
     }
 
     public setHeadImg(v:number) {
@@ -63,13 +63,13 @@ export default class CpnPlayer extends BaseComponent {
         this._money = toV;
         var delta = toV - fromV;
         var tic = Math.ceil(delta/128);
-        this.m_lab.label_money.string = fromV.toString();
+        this.m_lab.lab_money.string = fromV.toString();
         var f = function(){
             fromV += tic;
             if(fromV>=this._money){
                 fromV = this._money;
             }
-            this.label_money.string = fromV.toString();
+            this.lab_money.string = fromV.toString();
             if(fromV>=this._money){
                 this.unschedule(f);
             }
