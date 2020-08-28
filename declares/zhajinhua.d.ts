@@ -2,127 +2,127 @@ import * as $protobuf from "protobufjs";
 /** Namespace zhajinhua. */
 export namespace zhajinhua {
 
-    /** Properties of a FighterInfo. */
-    interface IFighterInfo {
+    /** Properties of a ZhajinhuaPlayer. */
+    interface IZhajinhuaPlayer {
 
-        /** FighterInfo UserId */
+        /** ZhajinhuaPlayer UserId */
         UserId?: (number|Long|null);
 
-        /** FighterInfo SeatId */
+        /** ZhajinhuaPlayer SeatId */
         SeatId?: (number|null);
 
-        /** FighterInfo FightState */
+        /** ZhajinhuaPlayer FightState */
         FightState?: (number|null);
 
-        /** FighterInfo IsSee */
+        /** ZhajinhuaPlayer IsSee */
         IsSee?: (boolean|null);
 
-        /** FighterInfo RecentBetMoney */
+        /** ZhajinhuaPlayer RecentBetMoney */
         RecentBetMoney?: (number|Long|null);
 
-        /** FighterInfo TotalBetMoney */
+        /** ZhajinhuaPlayer TotalBetMoney */
         TotalBetMoney?: (number|Long|null);
 
-        /** FighterInfo Cards */
+        /** ZhajinhuaPlayer Cards */
         Cards?: (gamecomm.ICardInfo|null);
     }
 
-    /** Represents a FighterInfo. */
-    class FighterInfo implements IFighterInfo {
+    /** Represents a ZhajinhuaPlayer. */
+    class ZhajinhuaPlayer implements IZhajinhuaPlayer {
 
         /**
-         * Constructs a new FighterInfo.
+         * Constructs a new ZhajinhuaPlayer.
          * @param [properties] Properties to set
          */
-        constructor(properties?: zhajinhua.IFighterInfo);
+        constructor(properties?: zhajinhua.IZhajinhuaPlayer);
 
-        /** FighterInfo UserId. */
+        /** ZhajinhuaPlayer UserId. */
         public UserId: (number|Long);
 
-        /** FighterInfo SeatId. */
+        /** ZhajinhuaPlayer SeatId. */
         public SeatId: number;
 
-        /** FighterInfo FightState. */
+        /** ZhajinhuaPlayer FightState. */
         public FightState: number;
 
-        /** FighterInfo IsSee. */
+        /** ZhajinhuaPlayer IsSee. */
         public IsSee: boolean;
 
-        /** FighterInfo RecentBetMoney. */
+        /** ZhajinhuaPlayer RecentBetMoney. */
         public RecentBetMoney: (number|Long);
 
-        /** FighterInfo TotalBetMoney. */
+        /** ZhajinhuaPlayer TotalBetMoney. */
         public TotalBetMoney: (number|Long);
 
-        /** FighterInfo Cards. */
+        /** ZhajinhuaPlayer Cards. */
         public Cards?: (gamecomm.ICardInfo|null);
 
         /**
-         * Creates a new FighterInfo instance using the specified properties.
+         * Creates a new ZhajinhuaPlayer instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns FighterInfo instance
+         * @returns ZhajinhuaPlayer instance
          */
-        public static create(properties?: zhajinhua.IFighterInfo): zhajinhua.FighterInfo;
+        public static create(properties?: zhajinhua.IZhajinhuaPlayer): zhajinhua.ZhajinhuaPlayer;
 
         /**
-         * Encodes the specified FighterInfo message. Does not implicitly {@link zhajinhua.FighterInfo.verify|verify} messages.
-         * @param message FighterInfo message or plain object to encode
+         * Encodes the specified ZhajinhuaPlayer message. Does not implicitly {@link zhajinhua.ZhajinhuaPlayer.verify|verify} messages.
+         * @param message ZhajinhuaPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: zhajinhua.IFighterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: zhajinhua.IZhajinhuaPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified FighterInfo message, length delimited. Does not implicitly {@link zhajinhua.FighterInfo.verify|verify} messages.
-         * @param message FighterInfo message or plain object to encode
+         * Encodes the specified ZhajinhuaPlayer message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaPlayer.verify|verify} messages.
+         * @param message ZhajinhuaPlayer message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: zhajinhua.IFighterInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a FighterInfo message from the specified reader or buffer.
+         * Decodes a ZhajinhuaPlayer message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns FighterInfo
+         * @returns ZhajinhuaPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.FighterInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaPlayer;
 
         /**
-         * Decodes a FighterInfo message from the specified reader or buffer, length delimited.
+         * Decodes a ZhajinhuaPlayer message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns FighterInfo
+         * @returns ZhajinhuaPlayer
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.FighterInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaPlayer;
 
         /**
-         * Verifies a FighterInfo message.
+         * Verifies a ZhajinhuaPlayer message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a FighterInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a ZhajinhuaPlayer message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns FighterInfo
+         * @returns ZhajinhuaPlayer
          */
-        public static fromObject(object: { [k: string]: any }): zhajinhua.FighterInfo;
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaPlayer;
 
         /**
-         * Creates a plain object from a FighterInfo message. Also converts values to other types if specified.
-         * @param message FighterInfo
+         * Creates a plain object from a ZhajinhuaPlayer message. Also converts values to other types if specified.
+         * @param message ZhajinhuaPlayer
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: zhajinhua.FighterInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: zhajinhua.ZhajinhuaPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this FighterInfo to JSON.
+         * Converts this ZhajinhuaPlayer to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -144,7 +144,7 @@ export namespace zhajinhua {
         CurHost?: (number|Long|null);
 
         /** ZhajinhuaSceneResp Fighters */
-        Fighters?: (zhajinhua.IFighterInfo[]|null);
+        Fighters?: (zhajinhua.IZhajinhuaPlayer[]|null);
     }
 
     /** Represents a ZhajinhuaSceneResp. */
@@ -169,7 +169,7 @@ export namespace zhajinhua {
         public CurHost: (number|Long);
 
         /** ZhajinhuaSceneResp Fighters. */
-        public Fighters: zhajinhua.IFighterInfo[];
+        public Fighters: zhajinhua.IZhajinhuaPlayer[];
 
         /**
          * Creates a new ZhajinhuaSceneResp instance using the specified properties.
@@ -1929,6 +1929,18 @@ export namespace gamecomm {
         /** PlayerInfo Sate */
         Sate?: (number|null);
 
+        /** PlayerInfo PlatformID */
+        PlatformID?: (number|null);
+
+        /** PlayerInfo RoomNum */
+        RoomNum?: (number|null);
+
+        /** PlayerInfo GameID */
+        GameID?: (number|null);
+
+        /** PlayerInfo TableID */
+        TableID?: (number|null);
+
         /** PlayerInfo ChairID */
         ChairID?: (number|null);
     }
@@ -1965,6 +1977,18 @@ export namespace gamecomm {
 
         /** PlayerInfo Sate. */
         public Sate: number;
+
+        /** PlayerInfo PlatformID. */
+        public PlatformID: number;
+
+        /** PlayerInfo RoomNum. */
+        public RoomNum: number;
+
+        /** PlayerInfo GameID. */
+        public GameID: number;
+
+        /** PlayerInfo TableID. */
+        public TableID: number;
 
         /** PlayerInfo ChairID. */
         public ChairID: number;

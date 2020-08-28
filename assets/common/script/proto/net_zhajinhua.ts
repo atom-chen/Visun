@@ -7,7 +7,7 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 
 export enum zhajinhua_msgs {
-    FighterInfo = 92,
+    ZhajinhuaPlayer = 92,
     ZhajinhuaSceneResp = 93,
     ZhajinhuaStateFreeResp = 94,
     ZhajinhuaStateStartResp = 95,
@@ -30,7 +30,7 @@ export enum zhajinhua_msgs {
 }
 
 export var zhajinhua_packet_define = {
-    92: new LeafWsPacket(92, zhajinhua.FighterInfo, "zhajinhua.FighterInfo"),
+    92: new LeafWsPacket(92, zhajinhua.ZhajinhuaPlayer, "zhajinhua.ZhajinhuaPlayer"),
     93: new LeafWsPacket(93, zhajinhua.ZhajinhuaSceneResp, "zhajinhua.ZhajinhuaSceneResp"),
     94: new LeafWsPacket(94, zhajinhua.ZhajinhuaStateFreeResp, "zhajinhua.ZhajinhuaStateFreeResp"),
     95: new LeafWsPacket(95, zhajinhua.ZhajinhuaStateStartResp, "zhajinhua.ZhajinhuaStateStartResp"),
@@ -53,7 +53,7 @@ export var zhajinhua_packet_define = {
 }
 
 export class zhajinhua_request {
-    public static FighterInfo( data:{ UserId:number, SeatId:number, FightState:number, IsSee:any, RecentBetMoney:number, TotalBetMoney:number, Cards:any } ) { zhajinhua_packet_define[92].sendToChannel(ChannelDefine.game, data, false); }
+    public static ZhajinhuaPlayer( data:{ UserId:number, SeatId:number, FightState:number, IsSee:any, RecentBetMoney:number, TotalBetMoney:number, Cards:any } ) { zhajinhua_packet_define[92].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaSceneResp( data:{ TimeStamp:number, TotalBet:number, MinBet:number, CurHost:number, Fighters:any[] } ) { zhajinhua_packet_define[93].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateFreeResp( data:{ Times:any } ) { zhajinhua_packet_define[94].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateStartResp( data:{ Times:any } ) { zhajinhua_packet_define[95].sendToChannel(ChannelDefine.game, data, false); }

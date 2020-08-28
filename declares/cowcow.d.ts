@@ -753,6 +753,18 @@ export namespace gamecomm {
         /** PlayerInfo Sate */
         Sate?: (number|null);
 
+        /** PlayerInfo PlatformID */
+        PlatformID?: (number|null);
+
+        /** PlayerInfo RoomNum */
+        RoomNum?: (number|null);
+
+        /** PlayerInfo GameID */
+        GameID?: (number|null);
+
+        /** PlayerInfo TableID */
+        TableID?: (number|null);
+
         /** PlayerInfo ChairID */
         ChairID?: (number|null);
     }
@@ -789,6 +801,18 @@ export namespace gamecomm {
 
         /** PlayerInfo Sate. */
         public Sate: number;
+
+        /** PlayerInfo PlatformID. */
+        public PlatformID: number;
+
+        /** PlayerInfo RoomNum. */
+        public RoomNum: number;
+
+        /** PlayerInfo GameID. */
+        public GameID: number;
+
+        /** PlayerInfo TableID. */
+        public TableID: number;
 
         /** PlayerInfo ChairID. */
         public ChairID: number;

@@ -28,6 +28,10 @@ $root.gamecomm = (function() {
         PlayerInfo.prototype.VipLevel = 0;
         PlayerInfo.prototype.Account = "";
         PlayerInfo.prototype.Sate = 0;
+        PlayerInfo.prototype.PlatformID = 0;
+        PlayerInfo.prototype.RoomNum = 0;
+        PlayerInfo.prototype.GameID = 0;
+        PlayerInfo.prototype.TableID = 0;
         PlayerInfo.prototype.ChairID = 0;
 
         PlayerInfo.create = function create(properties) {
@@ -53,8 +57,16 @@ $root.gamecomm = (function() {
                 writer.uint32(58).string(message.Account);
             if (message.Sate != null && Object.hasOwnProperty.call(message, "Sate"))
                 writer.uint32(64).int32(message.Sate);
+            if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
+                writer.uint32(72).uint32(message.PlatformID);
+            if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
+                writer.uint32(80).uint32(message.RoomNum);
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(88).uint32(message.GameID);
+            if (message.TableID != null && Object.hasOwnProperty.call(message, "TableID"))
+                writer.uint32(96).uint32(message.TableID);
             if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
-                writer.uint32(72).uint32(message.ChairID);
+                writer.uint32(104).uint32(message.ChairID);
             return writer;
         };
 
@@ -94,6 +106,18 @@ $root.gamecomm = (function() {
                     message.Sate = reader.int32();
                     break;
                 case 9:
+                    message.PlatformID = reader.uint32();
+                    break;
+                case 10:
+                    message.RoomNum = reader.uint32();
+                    break;
+                case 11:
+                    message.GameID = reader.uint32();
+                    break;
+                case 12:
+                    message.TableID = reader.uint32();
+                    break;
+                case 13:
                     message.ChairID = reader.uint32();
                     break;
                 default:
@@ -137,6 +161,18 @@ $root.gamecomm = (function() {
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 if (!$util.isInteger(message.Sate))
                     return "Sate: integer expected";
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                if (!$util.isInteger(message.PlatformID))
+                    return "PlatformID: integer expected";
+            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
+                if (!$util.isInteger(message.RoomNum))
+                    return "RoomNum: integer expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID))
+                    return "GameID: integer expected";
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                if (!$util.isInteger(message.TableID))
+                    return "TableID: integer expected";
             if (message.ChairID != null && message.hasOwnProperty("ChairID"))
                 if (!$util.isInteger(message.ChairID))
                     return "ChairID: integer expected";
@@ -177,6 +213,14 @@ $root.gamecomm = (function() {
                 message.Account = String(object.Account);
             if (object.Sate != null)
                 message.Sate = object.Sate | 0;
+            if (object.PlatformID != null)
+                message.PlatformID = object.PlatformID >>> 0;
+            if (object.RoomNum != null)
+                message.RoomNum = object.RoomNum >>> 0;
+            if (object.GameID != null)
+                message.GameID = object.GameID >>> 0;
+            if (object.TableID != null)
+                message.TableID = object.TableID >>> 0;
             if (object.ChairID != null)
                 message.ChairID = object.ChairID >>> 0;
             return message;
@@ -203,6 +247,10 @@ $root.gamecomm = (function() {
                 object.VipLevel = 0;
                 object.Account = "";
                 object.Sate = 0;
+                object.PlatformID = 0;
+                object.RoomNum = 0;
+                object.GameID = 0;
+                object.TableID = 0;
                 object.ChairID = 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -227,6 +275,14 @@ $root.gamecomm = (function() {
                 object.Account = message.Account;
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 object.Sate = message.Sate;
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                object.PlatformID = message.PlatformID;
+            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
+                object.RoomNum = message.RoomNum;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                object.GameID = message.GameID;
+            if (message.TableID != null && message.hasOwnProperty("TableID"))
+                object.TableID = message.TableID;
             if (message.ChairID != null && message.hasOwnProperty("ChairID"))
                 object.ChairID = message.ChairID;
             return object;
