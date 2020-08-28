@@ -1030,8 +1030,8 @@ $root.gamecomm = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameRecord.prototype.card = null;
-        GameRecord.prototype.isWon = false;
+        GameRecord.prototype.CardInfo = null;
+        GameRecord.prototype.IsWon = false;
 
         GameRecord.create = function create(properties) {
             return new GameRecord(properties);
@@ -1040,10 +1040,10 @@ $root.gamecomm = (function() {
         GameRecord.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.card != null && Object.hasOwnProperty.call(message, "card"))
-                $root.gamecomm.CardInfo.encode(message.card, writer.uint32(10).fork()).ldelim();
-            if (message.isWon != null && Object.hasOwnProperty.call(message, "isWon"))
-                writer.uint32(24).bool(message.isWon);
+            if (message.CardInfo != null && Object.hasOwnProperty.call(message, "CardInfo"))
+                $root.gamecomm.CardInfo.encode(message.CardInfo, writer.uint32(10).fork()).ldelim();
+            if (message.IsWon != null && Object.hasOwnProperty.call(message, "IsWon"))
+                writer.uint32(24).bool(message.IsWon);
             return writer;
         };
 
@@ -1059,10 +1059,10 @@ $root.gamecomm = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.card = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    message.CardInfo = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.isWon = reader.bool();
+                    message.IsWon = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1081,14 +1081,14 @@ $root.gamecomm = (function() {
         GameRecord.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.card != null && message.hasOwnProperty("card")) {
-                var error = $root.gamecomm.CardInfo.verify(message.card);
+            if (message.CardInfo != null && message.hasOwnProperty("CardInfo")) {
+                var error = $root.gamecomm.CardInfo.verify(message.CardInfo);
                 if (error)
-                    return "card." + error;
+                    return "CardInfo." + error;
             }
-            if (message.isWon != null && message.hasOwnProperty("isWon"))
-                if (typeof message.isWon !== "boolean")
-                    return "isWon: boolean expected";
+            if (message.IsWon != null && message.hasOwnProperty("IsWon"))
+                if (typeof message.IsWon !== "boolean")
+                    return "IsWon: boolean expected";
             return null;
         };
 
@@ -1096,13 +1096,13 @@ $root.gamecomm = (function() {
             if (object instanceof $root.gamecomm.GameRecord)
                 return object;
             var message = new $root.gamecomm.GameRecord();
-            if (object.card != null) {
-                if (typeof object.card !== "object")
-                    throw TypeError(".gamecomm.GameRecord.card: object expected");
-                message.card = $root.gamecomm.CardInfo.fromObject(object.card);
+            if (object.CardInfo != null) {
+                if (typeof object.CardInfo !== "object")
+                    throw TypeError(".gamecomm.GameRecord.CardInfo: object expected");
+                message.CardInfo = $root.gamecomm.CardInfo.fromObject(object.CardInfo);
             }
-            if (object.isWon != null)
-                message.isWon = Boolean(object.isWon);
+            if (object.IsWon != null)
+                message.IsWon = Boolean(object.IsWon);
             return message;
         };
 
@@ -1111,13 +1111,13 @@ $root.gamecomm = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.card = null;
-                object.isWon = false;
+                object.CardInfo = null;
+                object.IsWon = false;
             }
-            if (message.card != null && message.hasOwnProperty("card"))
-                object.card = $root.gamecomm.CardInfo.toObject(message.card, options);
-            if (message.isWon != null && message.hasOwnProperty("isWon"))
-                object.isWon = message.isWon;
+            if (message.CardInfo != null && message.hasOwnProperty("CardInfo"))
+                object.CardInfo = $root.gamecomm.CardInfo.toObject(message.CardInfo, options);
+            if (message.IsWon != null && message.hasOwnProperty("IsWon"))
+                object.IsWon = message.IsWon;
             return object;
         };
 

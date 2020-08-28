@@ -1413,11 +1413,11 @@ export namespace gamecomm {
     /** Properties of a GameRecord. */
     interface IGameRecord {
 
-        /** GameRecord card */
-        card?: (gamecomm.ICardInfo|null);
+        /** GameRecord CardInfo */
+        CardInfo?: (gamecomm.ICardInfo|null);
 
-        /** GameRecord isWon */
-        isWon?: (boolean|null);
+        /** GameRecord IsWon */
+        IsWon?: (boolean|null);
     }
 
     /** Represents a GameRecord. */
@@ -1429,11 +1429,11 @@ export namespace gamecomm {
          */
         constructor(properties?: gamecomm.IGameRecord);
 
-        /** GameRecord card. */
-        public card?: (gamecomm.ICardInfo|null);
+        /** GameRecord CardInfo. */
+        public CardInfo?: (gamecomm.ICardInfo|null);
 
-        /** GameRecord isWon. */
-        public isWon: boolean;
+        /** GameRecord IsWon. */
+        public IsWon: boolean;
 
         /**
          * Creates a new GameRecord instance using the specified properties.

@@ -62,8 +62,8 @@ message PlayerRecord {
 
 //游戏记录
 message GameRecord {
-  CardInfo card = 1;
-  bool isWon = 3; //输赢情况
+  CardInfo CardInfo = 1;
+  bool IsWon = 3; //输赢情况
 }
 
 //历史记录(保存十二条记录)

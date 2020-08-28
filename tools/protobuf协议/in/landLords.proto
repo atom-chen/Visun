@@ -107,7 +107,7 @@ message LandLordsOutCardReq {
 }
 message LandLordsOutCardResp {
   uint64 UserID = 1; // 玩家ID
-  CardInfo Cards = 2;//
+  CardInfo Cards = 2;// 牌值为空==要不起
 }
 
 

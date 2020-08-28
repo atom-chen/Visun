@@ -45,7 +45,7 @@ export class gamecomm_request {
     public static AreaInfo( data:{ ID:number, MyGold:number, TotalGold:number, AcquireGold:number } ) { gamecomm_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerListInfo( data:{ AllInfos:any[] } ) { gamecomm_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static PlayerRecord( data:{ User:any, Twice:number, Ranking:number, Bankroll:number, WinLos:number } ) { gamecomm_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameRecord( data:{ card:any, isWon:any } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameRecord( data:{ CardInfo:any, IsWon:any } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqEnterGame( data:{ GameID:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static ReqExitGame( data:{ GameID:number } ) { gamecomm_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
