@@ -32,7 +32,7 @@ function genProto() {
 	(err1, stdout1, stderr1)=>{
 		exec("pbjs -t static-module -w commonjs -o " + cfgData.clientOutDir + Proto + ".js " + cfgData.protoDir + "/" + Proto + ".proto" + " " + "--no-comments", 
 		(err2, stdout2, stderr2)=>{
-			helputil.fixClientOutput(Proto, dependMuds);
+			helputil.fixClientOutput(cfgData.clientOutDir + Proto + ".js", dependMuds);
 			genProto();
 		});
 	});

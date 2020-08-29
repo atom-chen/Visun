@@ -18,10 +18,11 @@ function genProto() {
 	console.log("生成声明文件：", filename);
 
 	var Proto = helputil.getFileName(filename);
-	//var dependMuds = helputil.fixPackageName(cfgData.protoDir+"/"+filename, Proto);
+	var dependMuds = helputil.fixPackageName(cfgData.protoDir+"/"+filename, Proto);
 	exec("pbjs -t static-module -w commonjs -o tmps/" + Proto + ".js " + cfgData.protoDir + "/" + Proto + ".proto", 
 	(err1, aaa1, bbb1)=>{
 		console.log(err1, aaa1, bbb1);
+		helputil.fixClientOutput("tmps/"+Proto+".js", dependMuds);
 		exec("pbts -o ../../declares/" + Proto + ".d.ts tmps/" + Proto + ".js", 
 		(err2,bbb2,ccc2)=>{
 			console.log(err2,bbb2,ccc2);
@@ -30,7 +31,7 @@ function genProto() {
 	});
 }
 
-function doGenerate() {
+function genDeclare() {
 	helputil.createDir("tmps");
 
 	fs.readdir(cfgData.protoDir, null, (err, files)=>{
@@ -51,4 +52,4 @@ function doGenerate() {
 	});
 }
 
-module.exports = doGenerate;
+module.exports = genDeclare;

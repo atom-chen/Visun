@@ -10,12 +10,14 @@ import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import SceneManager from "../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import UIManager from "../../../kernel/view/UIManager";
-import { brcowcow, gamecomm } from "../../../../declares/brcowcow";
+import { gamecomm } from "../../../../declares/gamecomm";
+import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
 import BacarratMgr from "../../../resources/subgames/bjle2/script/BacarratMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
+
 
 var GameHandlers = {
 

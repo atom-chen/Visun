@@ -79,8 +79,7 @@ function isProtoFile(pathstr) {
 	}
 }
 
-function fixClientOutput(protoName, dependMuds) {
-	var filepath = cfgData.clientOutDir + protoName + ".js";
+function fixClientOutput(filepath, dependMuds) {
 	const data = fs.readFileSync(filepath, 'utf8').split('\n');
 
 	for(var i=0, len=data.length; i<len; i++) {
