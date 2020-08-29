@@ -26,6 +26,7 @@ export default class UILobby extends BaseComponent {
 		this.initUiEvents();
 		this.initNetEvents();
 
+		this.m_ui.btn_fs.active = !cc.sys.isNative;
 		this.refleshRoomsInfo();
 		this.refleshGameList();
 		this.refleshUI(null);
@@ -45,7 +46,7 @@ export default class UILobby extends BaseComponent {
 			CommonUtil.traverseNodes(bton, m_ui);
 			m_ui.lab_roomname.getComponent(cc.Label).string = info.RoomName;
 			CommonUtil.addClickEvent(bton, function(){ 
-				login_request.ReqEnterRoom({
+				login_request.EnterRoomReq({
 					RoomNum: this.RoomInfo.RoomNum,
 					RoomKey: this.RoomInfo.RoomKey
 				});
@@ -103,11 +104,13 @@ export default class UILobby extends BaseComponent {
 		GameUtil.setHeadIcon(this.m_ui.headNode, 1);
 	}
 
+	private MasterInfo(param) {
+		this.refleshUI(null);
+		this.refleshRoomsInfo();
+	}
+
 	private initNetEvents() {
-		EventCenter.getInstance().listen(login_msgs.MasterInfo, (param:any)=>{
-			this.refleshUI(null);
-			this.refleshRoomsInfo();
-		}, this);
+		EventCenter.getInstance().listen(login_msgs.MasterInfo, this.MasterInfo, this);
 		EventCenter.getInstance().listen(login_msgs.GameList, this.refleshGameList, this);
 	}
 

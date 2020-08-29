@@ -156,7 +156,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        38,
+        50,
         0,
         0,
         0,
@@ -1472,8 +1472,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 50
+      "width": 170,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1543,8 +1543,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
-      "height": 50
+      "width": 170,
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1882,7 +1882,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 50
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1893,7 +1893,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -216.9,
+        -220,
         -168,
         0,
         0,
@@ -2148,7 +2148,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 150,
-      "height": 50
+      "height": 70
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2159,7 +2159,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        227.84,
+        220,
         -168,
         0,
         0,
@@ -2425,8 +2425,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        274.251,
-        186.937,
+        283,
+        192,
         0,
         0,
         0,
@@ -2489,8 +2489,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        16,
-        13,
+        0,
+        0,
         0,
         0,
         0,
@@ -2671,8 +2671,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 247,
-      "g": 190,
-      "b": 78,
+      "g": 180,
+      "b": 48,
       "a": 255
     },
     "_contentSize": {
@@ -2852,7 +2852,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -482,
+        -490,
         -375.648,
         0,
         0,

@@ -17,6 +17,14 @@ var NetHandlers = {
         UIManager.openDialog(param.Title, param.Hints, 1, null, param.Title);
     },
 
+    [login_msgs.RegisterResp] : function(param:login.RegisterResp) {
+        UIManager.toast("注册成功");
+    },
+
+    [login_msgs.LoginResp] : function(param:login.LoginResp) {
+        UIManager.toast("登陆成功");
+    },
+
     [login_msgs.UserInfo] : function(param: login.UserInfo) {
         CommonUtil.simpleCopy(LoginUser.getInstance(), param);
     },
