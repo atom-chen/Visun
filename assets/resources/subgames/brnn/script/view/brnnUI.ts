@@ -12,7 +12,7 @@ import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
-import { brcowcow, gamecomm } from "../../../../../../declares/brcowcow";
+import { brcowcow } from "../../../../../../declares/brcowcow";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import UIManager from "../../../../../kernel/view/UIManager";
@@ -20,6 +20,7 @@ import BrnnMgr from "../model/BrnnMgr";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../../declares/gamecomm";
 
 
 var margin = { left:16,right:16,bottom:16,top:16 };
@@ -33,6 +34,7 @@ export default class BrnnUI extends BaseComponent {
 	compBox:CpnChipbox3d = null;
 	_rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
+	private isJoined = false;
 
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
@@ -93,26 +95,14 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowBetResp(param:brcowcow.BrcowcowBetResp) {
 		if(isNil(param)) { return; }
-		
+		var money = CommonUtil.fixRealMoney(param.Money);
+		var nums = GameUtil.parseChip(money, this._rule);
+		var fromObj = this.m_ui.btnPlayerlist;
 		if(param.UserId == LoginUser.getInstance().UserId) {
-			var idx = this.compBox.getIndexByMoney(CommonUtil.fixRealMoney(param.Money));
-			if(idx < 0) {
-				idx = this.compBox.getSelectedIndex();
-			}
-			if(idx >= 1) {
-				var chip = this._pool.newObject();
-				chip.getComponent(CpnChip).setChipValue(this._rule[idx-1], true);
-				this.m_ui.chipLayer.addChild(chip);
-				CommonUtil.lineTo1(chip, this.compBox.getChipNode(idx), this.m_ui["area"+param.Area], 0.2, 0, margin);
-			}
-		} else {
-			this.onPlayersBet(param)
+            var idx = Math.max(0, this._rule.indexOf(money));
+			fromObj = this.compBox.getChipNode(idx);
+			this.isJoined = true;
 		}
-	}
-	private onPlayersBet(param:brcowcow.BrcowcowBetResp) {
-		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
-		//飞筹码
-		var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.Money), this._rule);
 		for(var j = 0; j < nums.length; j++) {
 			var chip = this._pool.newObject();
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
@@ -120,7 +110,6 @@ export default class BrnnUI extends BaseComponent {
 			chip.__areaId = param.Area;
 			CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+param.Area], 0.14+0.1*param.Area, j*0.01, margin);
 		}
-		//播音效
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 
@@ -128,6 +117,7 @@ export default class BrnnUI extends BaseComponent {
 		if(isNil(param)) { return; }
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+		this.isJoined = false;
 
 		var cardlist = [param.BankerCard, param.TianCard, param.DiCard, param.XuanCard, param.HuangCard];
 		for(var i = 0; i < cardlist.length; i++) {
@@ -136,6 +126,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowCheckoutResp(param:brcowcow.BrcowcowCheckoutResp) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
@@ -162,6 +153,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowStateFree(param:brcowcow.BrcowcowStateFreeResp) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
@@ -179,6 +171,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowStateOver(param:brcowcow.BrcowcowStateOverResp) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}
 
@@ -199,7 +192,13 @@ export default class BrnnUI extends BaseComponent {
 
 	private initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame();
+			if(this.isJoined) {
+				UIManager.openDialog("cfmquitgame", "确认退出游戏？", 2, function(mnuId){
+					if(mnuId==1) { GameManager.getInstance().quitGame(); }
+				})
+			} else {
+				GameManager.getInstance().quitGame();
+			}
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 

@@ -38,6 +38,7 @@ const {ccclass, property} = cc._decorator;
 export default class BacarratUI extends BaseComponent {
     _rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
+	private isJoined = false;
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -77,12 +78,12 @@ export default class BacarratUI extends BaseComponent {
 
     private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
 		var money = CommonUtil.fixRealMoney(param.BetScore);
-        //飞筹码
         var nums = GameUtil.parseChip(money, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
         if(param.UserID == LoginUser.getInstance().UserId) {
             var idx = Math.max(0, this._rule.indexOf(money));
-            fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+			this.isJoined = true;
         }
 		for(var j in nums) {
 			var chip = ResPool.newObject(ViewDefine.CpnChip);
@@ -91,7 +92,6 @@ export default class BacarratUI extends BaseComponent {
 			chip.__areaId = param.BetArea;
 			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
 		}
-		//播音效
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
@@ -101,6 +101,7 @@ export default class BacarratUI extends BaseComponent {
 
 	//准备阶段
 	private BaccaratStateFree(param) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -123,6 +124,7 @@ export default class BacarratUI extends BaseComponent {
 
 	//结算阶段
 	private BaccaratStateOver(param) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.playJiesuan();
@@ -149,7 +151,13 @@ export default class BacarratUI extends BaseComponent {
     
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame();
+			if(this.isJoined) {
+				UIManager.openDialog("cfmquitgame", "确认退出游戏？", 2, function(mnuId){
+					if(mnuId==1) { GameManager.getInstance().quitGame(); }
+				})
+			} else {
+				GameManager.getInstance().quitGame();
+			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);

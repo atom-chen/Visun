@@ -9,6 +9,7 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var margin = [
@@ -32,6 +33,7 @@ const {ccclass, property} = cc._decorator;
 export default class UIbjle extends BaseComponent {
 	_rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
+	private isJoined = false;
 
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
@@ -145,7 +147,13 @@ export default class UIbjle extends BaseComponent {
 	
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame();
+			if(this.isJoined) {
+				UIManager.openDialog("cfmquitgame", "确认退出游戏？", 2, function(mnuId){
+					if(mnuId==1) { GameManager.getInstance().quitGame(); }
+				})
+			} else {
+				GameManager.getInstance().quitGame();
+			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);

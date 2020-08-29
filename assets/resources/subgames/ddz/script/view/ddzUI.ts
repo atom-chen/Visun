@@ -26,6 +26,7 @@ export default class DdzUI extends BaseComponent {
     private _myHandor:CpnHandcard;
     private _players:Array<CpnPlayer1> = [];
     private _outs:Array<CpnHandcard> = [];
+    private isJoined = false;
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -375,9 +376,18 @@ export default class DdzUI extends BaseComponent {
 
     private initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            DDzMgr.getInstance().clearFighters();
-            GameManager.getInstance().quitGame();
-        }, this);
+			if(this.isJoined) {
+				UIManager.openDialog("cfmquitgame", "确认退出游戏？", 2, function(mnuId){
+					if(mnuId==1) { 
+                        DDzMgr.getInstance().clearFighters();
+                        GameManager.getInstance().quitGame(); 
+                    }
+				})
+			} else {
+                DDzMgr.getInstance().clearFighters();
+				GameManager.getInstance().quitGame();
+			}
+		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);
 		}, this);
