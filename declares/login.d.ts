@@ -1046,6 +1046,96 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a RegisterResp. */
+    interface IRegisterResp {
+
+        /** RegisterResp Info */
+        Info?: (login.IUserInfo|null);
+    }
+
+    /** Represents a RegisterResp. */
+    class RegisterResp implements IRegisterResp {
+
+        /**
+         * Constructs a new RegisterResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IRegisterResp);
+
+        /** RegisterResp Info. */
+        public Info?: (login.IUserInfo|null);
+
+        /**
+         * Creates a new RegisterResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns RegisterResp instance
+         */
+        public static create(properties?: login.IRegisterResp): login.RegisterResp;
+
+        /**
+         * Encodes the specified RegisterResp message. Does not implicitly {@link login.RegisterResp.verify|verify} messages.
+         * @param message RegisterResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IRegisterResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RegisterResp message, length delimited. Does not implicitly {@link login.RegisterResp.verify|verify} messages.
+         * @param message RegisterResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IRegisterResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RegisterResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RegisterResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RegisterResp;
+
+        /**
+         * Decodes a RegisterResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RegisterResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RegisterResp;
+
+        /**
+         * Verifies a RegisterResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RegisterResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RegisterResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.RegisterResp;
+
+        /**
+         * Creates a plain object from a RegisterResp message. Also converts values to other types if specified.
+         * @param message RegisterResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.RegisterResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RegisterResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a LoginReq. */
     interface ILoginReq {
 
@@ -1154,6 +1244,96 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a LoginResp. */
+    interface ILoginResp {
+
+        /** LoginResp Info */
+        Info?: (login.IUserInfo|null);
+    }
+
+    /** Represents a LoginResp. */
+    class LoginResp implements ILoginResp {
+
+        /**
+         * Constructs a new LoginResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ILoginResp);
+
+        /** LoginResp Info. */
+        public Info?: (login.IUserInfo|null);
+
+        /**
+         * Creates a new LoginResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LoginResp instance
+         */
+        public static create(properties?: login.ILoginResp): login.LoginResp;
+
+        /**
+         * Encodes the specified LoginResp message. Does not implicitly {@link login.LoginResp.verify|verify} messages.
+         * @param message LoginResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ILoginResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LoginResp message, length delimited. Does not implicitly {@link login.LoginResp.verify|verify} messages.
+         * @param message LoginResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ILoginResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LoginResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LoginResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.LoginResp;
+
+        /**
+         * Decodes a LoginResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LoginResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.LoginResp;
+
+        /**
+         * Verifies a LoginResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LoginResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LoginResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.LoginResp;
+
+        /**
+         * Creates a plain object from a LoginResp message. Also converts values to other types if specified.
+         * @param message LoginResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.LoginResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LoginResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of an EnterRoomReq. */
     interface IEnterRoomReq {
 
@@ -1245,6 +1425,96 @@ export namespace login {
 
         /**
          * Converts this EnterRoomReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an EnterRoomResp. */
+    interface IEnterRoomResp {
+
+        /** EnterRoomResp Games */
+        Games?: (login.IGameList|null);
+    }
+
+    /** Represents an EnterRoomResp. */
+    class EnterRoomResp implements IEnterRoomResp {
+
+        /**
+         * Constructs a new EnterRoomResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IEnterRoomResp);
+
+        /** EnterRoomResp Games. */
+        public Games?: (login.IGameList|null);
+
+        /**
+         * Creates a new EnterRoomResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns EnterRoomResp instance
+         */
+        public static create(properties?: login.IEnterRoomResp): login.EnterRoomResp;
+
+        /**
+         * Encodes the specified EnterRoomResp message. Does not implicitly {@link login.EnterRoomResp.verify|verify} messages.
+         * @param message EnterRoomResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IEnterRoomResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified EnterRoomResp message, length delimited. Does not implicitly {@link login.EnterRoomResp.verify|verify} messages.
+         * @param message EnterRoomResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IEnterRoomResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an EnterRoomResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns EnterRoomResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.EnterRoomResp;
+
+        /**
+         * Decodes an EnterRoomResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns EnterRoomResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.EnterRoomResp;
+
+        /**
+         * Verifies an EnterRoomResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an EnterRoomResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns EnterRoomResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.EnterRoomResp;
+
+        /**
+         * Creates a plain object from an EnterRoomResp message. Also converts values to other types if specified.
+         * @param message EnterRoomResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.EnterRoomResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this EnterRoomResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

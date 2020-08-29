@@ -16,10 +16,13 @@ export enum login_msgs {
     TaskList = 6,
     GameList = 7,
     RegisterReq = 8,
-    LoginReq = 9,
-    EnterRoomReq = 10,
-    ResultResp = 11,
-    ResultPopResp = 12,
+    RegisterResp = 9,
+    LoginReq = 10,
+    LoginResp = 11,
+    EnterRoomReq = 12,
+    EnterRoomResp = 13,
+    ResultResp = 14,
+    ResultPopResp = 15,
 }
 
 export var login_packet_define = {
@@ -32,10 +35,13 @@ export var login_packet_define = {
     6: new LeafWsPacket(6, login.TaskList, "login.TaskList"),
     7: new LeafWsPacket(7, login.GameList, "login.GameList"),
     8: new LeafWsPacket(8, login.RegisterReq, "login.RegisterReq"),
-    9: new LeafWsPacket(9, login.LoginReq, "login.LoginReq"),
-    10: new LeafWsPacket(10, login.EnterRoomReq, "login.EnterRoomReq"),
-    11: new LeafWsPacket(11, login.ResultResp, "login.ResultResp"),
-    12: new LeafWsPacket(12, login.ResultPopResp, "login.ResultPopResp"),
+    9: new LeafWsPacket(9, login.RegisterResp, "login.RegisterResp"),
+    10: new LeafWsPacket(10, login.LoginReq, "login.LoginReq"),
+    11: new LeafWsPacket(11, login.LoginResp, "login.LoginResp"),
+    12: new LeafWsPacket(12, login.EnterRoomReq, "login.EnterRoomReq"),
+    13: new LeafWsPacket(13, login.EnterRoomResp, "login.EnterRoomResp"),
+    14: new LeafWsPacket(14, login.ResultResp, "login.ResultResp"),
+    15: new LeafWsPacket(15, login.ResultPopResp, "login.ResultPopResp"),
 }
 
 export class login_request {
@@ -48,9 +54,12 @@ export class login_request {
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
     public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
-    public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
+    public static RegisterResp( data:{ Info:any } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
+    public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
+    public static LoginResp( data:{ Info:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterRoomResp( data:{ Games:any } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
 }
 

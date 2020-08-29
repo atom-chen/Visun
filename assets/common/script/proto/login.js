@@ -1459,6 +1459,98 @@ $root.login = (function() {
         return RegisterReq;
     })();
 
+    login.RegisterResp = (function() {
+
+        function RegisterResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        RegisterResp.prototype.Info = null;
+
+        RegisterResp.create = function create(properties) {
+            return new RegisterResp(properties);
+        };
+
+        RegisterResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.UserInfo.encode(message.Info, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        RegisterResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        RegisterResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.RegisterResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Info = $root.login.UserInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        RegisterResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        RegisterResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.UserInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        RegisterResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.RegisterResp)
+                return object;
+            var message = new $root.login.RegisterResp();
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.RegisterResp.Info: object expected");
+                message.Info = $root.login.UserInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        RegisterResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Info = null;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.UserInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        RegisterResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RegisterResp;
+    })();
+
     login.LoginReq = (function() {
 
         function LoginReq(properties) {
@@ -1589,6 +1681,98 @@ $root.login = (function() {
         return LoginReq;
     })();
 
+    login.LoginResp = (function() {
+
+        function LoginResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        LoginResp.prototype.Info = null;
+
+        LoginResp.create = function create(properties) {
+            return new LoginResp(properties);
+        };
+
+        LoginResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.UserInfo.encode(message.Info, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        LoginResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        LoginResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.LoginResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Info = $root.login.UserInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        LoginResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        LoginResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.UserInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        LoginResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.LoginResp)
+                return object;
+            var message = new $root.login.LoginResp();
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.LoginResp.Info: object expected");
+                message.Info = $root.login.UserInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        LoginResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Info = null;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.UserInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        LoginResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LoginResp;
+    })();
+
     login.EnterRoomReq = (function() {
 
         function EnterRoomReq(properties) {
@@ -1689,6 +1873,98 @@ $root.login = (function() {
         };
 
         return EnterRoomReq;
+    })();
+
+    login.EnterRoomResp = (function() {
+
+        function EnterRoomResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        EnterRoomResp.prototype.Games = null;
+
+        EnterRoomResp.create = function create(properties) {
+            return new EnterRoomResp(properties);
+        };
+
+        EnterRoomResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Games != null && Object.hasOwnProperty.call(message, "Games"))
+                $root.login.GameList.encode(message.Games, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        EnterRoomResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        EnterRoomResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.EnterRoomResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Games = $root.login.GameList.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        EnterRoomResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        EnterRoomResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Games != null && message.hasOwnProperty("Games")) {
+                var error = $root.login.GameList.verify(message.Games);
+                if (error)
+                    return "Games." + error;
+            }
+            return null;
+        };
+
+        EnterRoomResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.EnterRoomResp)
+                return object;
+            var message = new $root.login.EnterRoomResp();
+            if (object.Games != null) {
+                if (typeof object.Games !== "object")
+                    throw TypeError(".login.EnterRoomResp.Games: object expected");
+                message.Games = $root.login.GameList.fromObject(object.Games);
+            }
+            return message;
+        };
+
+        EnterRoomResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Games = null;
+            if (message.Games != null && message.hasOwnProperty("Games"))
+                object.Games = $root.login.GameList.toObject(message.Games, options);
+            return object;
+        };
+
+        EnterRoomResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EnterRoomResp;
     })();
 
     login.ResultResp = (function() {
