@@ -949,6 +949,9 @@ export namespace login {
 
         /** RegisterReq InvitationCode */
         InvitationCode?: (string|null);
+
+        /** RegisterReq PlatformID */
+        PlatformID?: (number|null);
     }
 
     /** Represents a RegisterReq. */
@@ -974,6 +977,9 @@ export namespace login {
 
         /** RegisterReq InvitationCode. */
         public InvitationCode: string;
+
+        /** RegisterReq PlatformID. */
+        public PlatformID: number;
 
         /**
          * Creates a new RegisterReq instance using the specified properties.

@@ -53,7 +53,7 @@ export class login_request {
     public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
-    public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
+    public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string, PlatformID:number } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
     public static RegisterResp( data:{ Info:any } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginResp( data:{ Info:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
