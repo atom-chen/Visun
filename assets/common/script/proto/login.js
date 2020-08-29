@@ -1329,6 +1329,7 @@ $root.login = (function() {
         RegisterReq.prototype.SecurityCode = "";
         RegisterReq.prototype.MachineCode = "";
         RegisterReq.prototype.InvitationCode = "";
+        RegisterReq.prototype.PlatformID = 0;
 
         RegisterReq.create = function create(properties) {
             return new RegisterReq(properties);
@@ -1347,6 +1348,8 @@ $root.login = (function() {
                 writer.uint32(34).string(message.MachineCode);
             if (message.InvitationCode != null && Object.hasOwnProperty.call(message, "InvitationCode"))
                 writer.uint32(42).string(message.InvitationCode);
+            if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
+                writer.uint32(48).uint32(message.PlatformID);
             return writer;
         };
 
@@ -1375,6 +1378,9 @@ $root.login = (function() {
                     break;
                 case 5:
                     message.InvitationCode = reader.string();
+                    break;
+                case 6:
+                    message.PlatformID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1408,6 +1414,9 @@ $root.login = (function() {
             if (message.InvitationCode != null && message.hasOwnProperty("InvitationCode"))
                 if (!$util.isString(message.InvitationCode))
                     return "InvitationCode: string expected";
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                if (!$util.isInteger(message.PlatformID))
+                    return "PlatformID: integer expected";
             return null;
         };
 
@@ -1425,6 +1434,8 @@ $root.login = (function() {
                 message.MachineCode = String(object.MachineCode);
             if (object.InvitationCode != null)
                 message.InvitationCode = String(object.InvitationCode);
+            if (object.PlatformID != null)
+                message.PlatformID = object.PlatformID >>> 0;
             return message;
         };
 
@@ -1438,6 +1449,7 @@ $root.login = (function() {
                 object.SecurityCode = "";
                 object.MachineCode = "";
                 object.InvitationCode = "";
+                object.PlatformID = 0;
             }
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
@@ -1449,6 +1461,8 @@ $root.login = (function() {
                 object.MachineCode = message.MachineCode;
             if (message.InvitationCode != null && message.hasOwnProperty("InvitationCode"))
                 object.InvitationCode = message.InvitationCode;
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                object.PlatformID = message.PlatformID;
             return object;
         };
 

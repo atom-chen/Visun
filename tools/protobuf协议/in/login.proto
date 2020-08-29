@@ -28,6 +28,7 @@ message UserInfo{
   string ClientAddr = 18;     //连接地址(跳转至该地址)
   string MachineCode = 19;    //机器序列
 
+
 }
 //房间信息
 message RoomInfo{
@@ -91,6 +92,7 @@ message RegisterReq{
   string SecurityCode = 3;  //验证码
   string MachineCode = 4;  //机器码
   string InvitationCode = 5;  //邀请码
+  uint32 PlatformID = 6; //需要注明平台ID (测试用: id == 1)
 }
 message RegisterResp{
   UserInfo Info = 1;
