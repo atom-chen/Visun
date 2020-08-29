@@ -3,9 +3,6 @@ import { brcowcow } from "../../../../../../declares/brcowcow";
 
 export default class BrnnMgr extends ModelBase {
 	private static _instance:BrnnMgr = null;
-    private constructor() {
-        super();
-    }
     public static getInstance() : BrnnMgr {
         if(!BrnnMgr._instance) { BrnnMgr._instance = new BrnnMgr; }
         return BrnnMgr._instance;

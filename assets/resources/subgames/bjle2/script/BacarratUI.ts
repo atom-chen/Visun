@@ -15,6 +15,10 @@ import ResPool from "../../../../kernel/basic/pool/ResPool";
 import CpnChipbox2d from "../../../appqp/script/comps/CpnChipbox2d";
 import CpnChip from "../../../appqp/script/comps/CpnChip";
 import { baccarat } from "../../../../../declares/baccarat";
+import BacarratMgr from "./BacarratMgr";
+import ProcessorMgr from "../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
+import CpnGameState from "../../../appqp/script/comps/CpnGameState";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -41,13 +45,27 @@ export default class BacarratUI extends BaseComponent {
         this.initNetEvent();
 
         ResPool.load(ViewDefine.CpnChip);
-        this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
+		this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
+		
+		this.initContext();
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
 	onDestroy(){
 		ResPool.unload(ViewDefine.CpnChip);
 		super.onDestroy();
-    }
+	}
+	
+	private initContext() {
+		var enterData = BacarratMgr.getInstance().getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				var areaName = "area"+i;
+				this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
+				this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
+			}
+		}
+	}
     
     private initNetEvent() {
         EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
@@ -58,11 +76,12 @@ export default class BacarratUI extends BaseComponent {
     }
 
     private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
+		var money = CommonUtil.fixRealMoney(param.BetScore);
         //飞筹码
-        var nums = GameUtil.parseChip(param.BetScore, this._rule);
+        var nums = GameUtil.parseChip(money, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
-        if(param.UserID == LoginUser.getInstance().UserId || true) {
-            var idx = Math.max(0, this._rule.indexOf(param.BetScore));
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            var idx = Math.max(0, this._rule.indexOf(money));
             fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
         }
 		for(var j in nums) {
@@ -82,20 +101,21 @@ export default class BacarratUI extends BaseComponent {
 
 	//准备阶段
 	private BaccaratStateFree(param) {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
 
 	//开局：洗牌发牌
 	private BaccaratStateStart(param) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 	}
 
 	//下注阶段
 	private BaccaratStatePlaying(param) {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -103,7 +123,7 @@ export default class BacarratUI extends BaseComponent {
 
 	//结算阶段
 	private BaccaratStateOver(param) {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.playJiesuan();
 	}
@@ -127,18 +147,6 @@ export default class BacarratUI extends BaseComponent {
 	}
 	
     
-    private onClickArea(areaID:number) {
-        var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
-        if(!money) {
-            UIManager.toast("请选择下注区域");
-            return;
-        }
-        cc.log("下注：", areaID, money);
-        baccarat_request.BaccaratBetReq({
-            BetArea : areaID,
-            BetScore : money
-        });
-    }
 	private initUIEvents() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
@@ -155,4 +163,16 @@ export default class BacarratUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.area6, function(){ this.onClickArea(6); }, this);
         CommonUtil.addClickEvent(this.m_ui.area7, function(){ this.onClickArea(7); }, this);
 	}
+	private onClickArea(areaID:number) {
+        var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
+        if(!money) {
+            UIManager.toast("请选择下注区域");
+            return;
+        }
+        baccarat_request.BaccaratBetReq({
+            BetArea : areaID,
+            BetScore : CommonUtil.toServerMoney(money)
+        });
+	}
+	
 }

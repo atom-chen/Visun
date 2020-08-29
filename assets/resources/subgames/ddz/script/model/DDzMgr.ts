@@ -6,9 +6,6 @@ import { landLords } from "../../../../../../declares/landLords";
 
 export default class DDzMgr extends ModelBase {
 	private static _instance:DDzMgr = null;
-    private constructor() {
-        super();
-    }
     public static getInstance() : DDzMgr {
         if(!DDzMgr._instance) { DDzMgr._instance = new DDzMgr; }
         return DDzMgr._instance;
@@ -28,12 +25,12 @@ export default class DDzMgr extends ModelBase {
 	private _players : {[key:number]:DdzPlayer} = {};
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
-	private enterData:landLords.LandLordsScene = null;
+	private enterData:landLords.LandLordsSceneResp = null;
 
-    setEnterData(data:landLords.LandLordsScene) {
+    setEnterData(data:landLords.LandLordsSceneResp) {
         this.enterData = data;
     }
-    getEnterData() : landLords.LandLordsScene {
+    getEnterData() : landLords.LandLordsSceneResp {
         return this.enterData;
     }
 
