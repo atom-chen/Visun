@@ -31,10 +31,12 @@ export default class zjhUI extends BaseComponent {
     private _cdCpns:Array<CpnCircleCD> = [];
 
     private _tmrState = 0;
-    
+    private _zhuangPos = null;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+
+        this._zhuangPos = this.m_ui.zhuang.position;
 
         for(var i = 0; i <= 4; i++) {
             var nd = this.m_ui["p"+i];
@@ -111,6 +113,8 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
 
+        this.m_ui.zhuang.position = this._zhuangPos;
+        
         for(var i in this._stateCpns){
             this._stateCpns[i].idle();
             this._cdCpns[i].node.active = false;
@@ -199,6 +203,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].qipai();
+            this._cdCpns[idx].setRunning(false);
         }
     }
 

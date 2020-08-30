@@ -23,16 +23,17 @@ export default class ZjhServer extends ModelBase {
 	}
 
 	private _fighters:Array<zhajinhua.ZhajinhuaPlayer> = [];
+	private curSeat:number = 0;
 
 	initFighters() {
-		for(var i=0; i<4; i++) {
+		for(var i=1; i<5; i++) {
 			var man:any = {};
-			man.UserId = i+1;
+			man.UserId = i;
 			man.IsSee = false;
 			man.FightState = 0;
 			man.RecentBetMoney = 0;
 			man.TotalBetMoney = 0;
-			man.SeatId = i+1;
+			man.SeatId = i;
 			this._fighters.push(man);
 		}
 		LoginUser.getInstance().UserId = 2;
@@ -46,6 +47,30 @@ export default class ZjhServer extends ModelBase {
 			}
 		}
 		return null;
+	}
+
+	findById(uid:number) : zhajinhua.ZhajinhuaPlayer {
+		for(var i in this._fighters) {
+			if(this._fighters[i].UserId == uid) {
+				return this._fighters[i];
+			}
+		}
+		return null;
+	}
+
+	nextMan() : zhajinhua.ZhajinhuaPlayer {
+		var nextSeat = this.curSeat+1;
+		if(this.findBySeat(nextSeat)) {
+			return this.findBySeat(nextSeat);
+		} else {
+			var minSeat = this.curSeat;
+			for(var i in this._fighters) {
+				if(this._fighters[i].SeatId < minSeat) {
+					minSeat = this._fighters[i].SeatId;
+				}
+			}
+			return this.findBySeat(minSeat);
+		}
 	}
 
 	run() {
@@ -63,6 +88,10 @@ export default class ZjhServer extends ModelBase {
 	}
 
 	toReady(tmr) {
+		for(var i in this._fighters) {
+			this._fighters[i].FightState = 0;
+		}
+
 		var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateFreeResp].pack({}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 
@@ -73,15 +102,62 @@ export default class ZjhServer extends ModelBase {
 		var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateStartResp].pack({}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 
-		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:3}, false);
+		this.curSeat = 3;
+		var data = {CurHost:this.findBySeat(this.curSeat).UserId};
+		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack(data, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
-		TimerManager.delaySecond(3, newHandler(this.fight, this, 3));
+		TimerManager.delaySecond(3, newHandler(this.fight, this, this.curSeat));
 	}
 
+	checkFinish() : boolean {
+		var cnt = 0;
+		for(var i in this._fighters) {
+			if(!(this._fighters[i].FightState == 3 || this._fighters[i].FightState == 4)) {
+				cnt++;
+			}
+		}
+		return cnt <= 1;
+	}
+	fightAi(tmr, uid:number) {
+		var man = this.findById(uid);
+		man.FightState = 3;
+		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:man.UserId}, false);
+		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+
+		if(this.checkFinish()) {
+			TimerManager.delaySecond(0.5, newHandler(this.toFinish, this));
+		} else {
+			TimerManager.delaySecond(0.5, newHandler(function(tmr){
+				var nextMan = this.nextMan();
+				this.fight(tmr, nextMan.SeatId);
+			}, this));
+		}
+	}
 	fight(tmr, SeatId) {
+		if(this.checkFinish()) {
+			TimerManager.delaySecond(0.5, newHandler(this.toFinish, this));
+			return;
+		}
+		this.curSeat = SeatId;
 		var man = this.findBySeat(SeatId);
 		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStatePlayingResp].pack({UserID:man.UserId}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+
+		TimerManager.delaySecond(3, newHandler(this.fightAi, this, man.UserId));
+	}
+
+	toFinish() {
+		var winner = 0;
+		for(var i in this._fighters) {
+			if(!(this._fighters[i].FightState == 3 || this._fighters[i].FightState == 4)) {
+				winner = this._fighters[i].UserId;
+			}
+		}
+
+		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateOverResp].pack({}, false);
+		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+
+		TimerManager.delaySecond(3, newHandler(this.toReady, this));
 	}
 }

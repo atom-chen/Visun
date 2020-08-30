@@ -19,7 +19,7 @@ export default class CpnCircleCD extends cc.Component {
         this._running = this._remainCD > 0;
     }
 
-    serRunning(b:boolean) {
+    setRunning(b:boolean) {
         this._running = b;
     }
 
