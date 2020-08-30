@@ -120,6 +120,7 @@ export default class zjhUI extends BaseComponent {
             this._stateCpns[i].idle();
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null, false);
+            this._pnodes[i].getChildByName("ust_kanpai").active = false;
         }
     }
 
