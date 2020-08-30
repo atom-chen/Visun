@@ -9,9 +9,19 @@ message ZhajinhuaPlayer {
   int32 SeatId = 2;      // 座位号
   int32 FightState = 3;    // 未准备 已准备  跟注 加注 弃牌 比牌输
   bool  IsSee = 4;      // 是否已看牌: 1已看 0未看
-  int64 RecentBetMoney = 5;  // 最新下注金额
-  int64 TotalBetMoney = 6;  // 总共下注了多少
-  CardInfo Cards = 7;      // 看牌时和游戏结束时亮自己的牌时才有数据
+  int64 Gold = 5;       //
+  int64 RecentBetMoney = 6;  // 最新下注金额
+  int64 TotalBetMoney = 7;  // 总共下注了多少
+  CardInfo Cards = 8;      // 看牌时和游戏结束时亮自己的牌时才有数据
+}
+
+
+message ZhajinhuaAddPlayerResp {
+  ZhajinhuaPlayer Player = 1;
+}
+
+message ZhajinhuaDelPlayerResp {
+  uint64 UserId = 1;
 }
 
 

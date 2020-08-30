@@ -24,6 +24,9 @@ export default class LoginUI extends BaseComponent {
         EventCenter.getInstance().listen(login_msgs.LoginResp, function(data){
             CommonUtil.safeDelete(this);
         }, this);
+        EventCenter.getInstance().listen(login_msgs.MasterInfo, function(data){
+            CommonUtil.safeDelete(this);
+        }, this);
     }
 
     private initUIEvent() {

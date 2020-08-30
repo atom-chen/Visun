@@ -21,20 +21,33 @@ var NetHandlers = {
         UIManager.toast("注册成功");
     },
 
-    [login_msgs.LoginResp] : function(param:login.LoginResp) {
-        UIManager.toast("登陆成功");
-    },
+    [login_msgs.LoginResp] : function(param:login.ILoginResp) {
+        LogicCenter.getInstance().clear();
+        LogicCenter.getInstance().init();
 
-    [login_msgs.UserInfo] : function(param: login.UserInfo) {
-        CommonUtil.simpleCopy(LoginUser.getInstance(), param);
+        LoginUser.getInstance().UserId = param.MainInfo.UserInfo.UserID;
+        CommonUtil.simpleCopy(LoginUser.getInstance(), param.MainInfo.UserInfo);
+
+        GameManager.getInstance().setRoomsInfo(param.MainInfo.RoomsInfo);
+
+        UIManager.toast("登陆成功");
     },
 
     [login_msgs.MasterInfo] : function(param:login.MasterInfo) {
         LogicCenter.getInstance().clear();
         LogicCenter.getInstance().init();
+
+        LoginUser.getInstance().UserId = param.UserInfo.UserID;
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
+
         GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
+
         UIManager.toast("登陆成功");
+    },
+
+    [login_msgs.UserInfo] : function(param: login.UserInfo) {
+        LoginUser.getInstance().UserId = param.UserID;
+        CommonUtil.simpleCopy(LoginUser.getInstance(), param);
     },
 
     [login_msgs.GameList] : function(param) {

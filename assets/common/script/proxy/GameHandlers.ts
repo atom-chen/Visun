@@ -22,7 +22,7 @@ import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 var GameHandlers = {
 
     [gamecomm_msgs.NotifyChangeGold] : function(param:gamecomm.NotifyChangeGold) {
-        if(param.UserID == LoginUser.getInstance().UserID) {
+        if(param.UserID == LoginUser.getInstance().UserId) {
             LoginUser.getInstance().Gold = param.Gold;
         }
     },

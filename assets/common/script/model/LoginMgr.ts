@@ -170,7 +170,15 @@ export default class LoginMgr extends ModelBase {
 			SecurityCode : SecurityCode,
 			MachineCode : this.getMachineCode(),
 			InvitationCode : InviteCode,
-			PlatformID : 1
+			PlatformID : 1,
+			Gender : 0,
+			Age : 18,
+			FaceID : 0,
+			PassPortID : "",
+			RealName : "",
+			PhoneNum : "",
+			Email : "",
+			Address : "",
 		})
 	}
 
