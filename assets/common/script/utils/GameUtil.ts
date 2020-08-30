@@ -91,6 +91,7 @@ export default class GameUtil {
 		nd.runAction(cc.sequence(
 			cc.show(),
 			cc.moveBy(1, diff),
+			cc.delayTime(1),
 			cc.hide()
 		));
 	}
