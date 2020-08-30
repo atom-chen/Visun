@@ -19,12 +19,13 @@ export enum login_msgs {
     RegisterResp = 9,
     LoginReq = 10,
     LoginResp = 11,
-    ReconnectReq = 12,
-    ReconnectResp = 13,
-    EnterRoomReq = 14,
-    EnterRoomResp = 15,
-    ResultResp = 16,
-    ResultPopResp = 17,
+    AllopatricResp = 12,
+    ReconnectReq = 13,
+    ReconnectResp = 14,
+    EnterRoomReq = 15,
+    EnterRoomResp = 16,
+    ResultResp = 17,
+    ResultPopResp = 18,
 }
 
 export var login_packet_define = {
@@ -40,12 +41,13 @@ export var login_packet_define = {
     9: new LeafWsPacket(9, login.RegisterResp, "login.RegisterResp"),
     10: new LeafWsPacket(10, login.LoginReq, "login.LoginReq"),
     11: new LeafWsPacket(11, login.LoginResp, "login.LoginResp"),
-    12: new LeafWsPacket(12, login.ReconnectReq, "login.ReconnectReq"),
-    13: new LeafWsPacket(13, login.ReconnectResp, "login.ReconnectResp"),
-    14: new LeafWsPacket(14, login.EnterRoomReq, "login.EnterRoomReq"),
-    15: new LeafWsPacket(15, login.EnterRoomResp, "login.EnterRoomResp"),
-    16: new LeafWsPacket(16, login.ResultResp, "login.ResultResp"),
-    17: new LeafWsPacket(17, login.ResultPopResp, "login.ResultPopResp"),
+    12: new LeafWsPacket(12, login.AllopatricResp, "login.AllopatricResp"),
+    13: new LeafWsPacket(13, login.ReconnectReq, "login.ReconnectReq"),
+    14: new LeafWsPacket(14, login.ReconnectResp, "login.ReconnectResp"),
+    15: new LeafWsPacket(15, login.EnterRoomReq, "login.EnterRoomReq"),
+    16: new LeafWsPacket(16, login.EnterRoomResp, "login.EnterRoomResp"),
+    17: new LeafWsPacket(17, login.ResultResp, "login.ResultResp"),
+    18: new LeafWsPacket(18, login.ResultPopResp, "login.ResultPopResp"),
 }
 
 export class login_request {
@@ -61,11 +63,12 @@ export class login_request {
     public static RegisterResp( data:{ Info:any } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string, PlatformID:number } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginResp( data:{ MainInfo:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReconnectReq( data:{ Account:string, Password:string, MachineCode:string, PlatformID:number } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
-    public static ReconnectResp( data:{ MainInfo:any } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterRoomResp( data:{ Games:any } ) { login_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
-    public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
+    public static AllopatricResp( data:{ UserId:number } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
+    public static ReconnectReq( data:{ Account:string, Password:string, MachineCode:string, PlatformID:number } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
+    public static ReconnectResp( data:{ MainInfo:any } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterRoomResp( data:{ Games:any } ) { login_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
+    public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
 }
 
