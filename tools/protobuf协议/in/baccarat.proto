@@ -13,18 +13,19 @@ message BaccaratSceneResp{
 
 //状态
 // 服务端推送
-//(空闲)
-message BaccaratStateFreeResp {
-  TimeInfo Times = 1;
-}
 
-//(开始)
+//(准备)
 message BaccaratStateStartResp {
   TimeInfo Times = 1;
 }
 
-//(游戏中)
+//(下注)
 message BaccaratStatePlayingResp {
+  TimeInfo Times = 1;
+}
+
+//(开奖)
+message BaccaratStateOpenResp {
   TimeInfo Times = 1;
 }
 

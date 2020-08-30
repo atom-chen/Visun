@@ -17,6 +17,9 @@ export namespace zhajinhua {
         /** ZhajinhuaPlayer IsSee */
         IsSee?: (boolean|null);
 
+        /** ZhajinhuaPlayer Gold */
+        Gold?: (number|Long|null);
+
         /** ZhajinhuaPlayer RecentBetMoney */
         RecentBetMoney?: (number|Long|null);
 
@@ -47,6 +50,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer IsSee. */
         public IsSee: boolean;
+
+        /** ZhajinhuaPlayer Gold. */
+        public Gold: (number|Long);
 
         /** ZhajinhuaPlayer RecentBetMoney. */
         public RecentBetMoney: (number|Long);
@@ -123,6 +129,186 @@ export namespace zhajinhua {
 
         /**
          * Converts this ZhajinhuaPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZhajinhuaAddPlayerResp. */
+    interface IZhajinhuaAddPlayerResp {
+
+        /** ZhajinhuaAddPlayerResp Player */
+        Player?: (zhajinhua.IZhajinhuaPlayer|null);
+    }
+
+    /** Represents a ZhajinhuaAddPlayerResp. */
+    class ZhajinhuaAddPlayerResp implements IZhajinhuaAddPlayerResp {
+
+        /**
+         * Constructs a new ZhajinhuaAddPlayerResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: zhajinhua.IZhajinhuaAddPlayerResp);
+
+        /** ZhajinhuaAddPlayerResp Player. */
+        public Player?: (zhajinhua.IZhajinhuaPlayer|null);
+
+        /**
+         * Creates a new ZhajinhuaAddPlayerResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZhajinhuaAddPlayerResp instance
+         */
+        public static create(properties?: zhajinhua.IZhajinhuaAddPlayerResp): zhajinhua.ZhajinhuaAddPlayerResp;
+
+        /**
+         * Encodes the specified ZhajinhuaAddPlayerResp message. Does not implicitly {@link zhajinhua.ZhajinhuaAddPlayerResp.verify|verify} messages.
+         * @param message ZhajinhuaAddPlayerResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: zhajinhua.IZhajinhuaAddPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZhajinhuaAddPlayerResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaAddPlayerResp.verify|verify} messages.
+         * @param message ZhajinhuaAddPlayerResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaAddPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZhajinhuaAddPlayerResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZhajinhuaAddPlayerResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaAddPlayerResp;
+
+        /**
+         * Decodes a ZhajinhuaAddPlayerResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZhajinhuaAddPlayerResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaAddPlayerResp;
+
+        /**
+         * Verifies a ZhajinhuaAddPlayerResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZhajinhuaAddPlayerResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZhajinhuaAddPlayerResp
+         */
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaAddPlayerResp;
+
+        /**
+         * Creates a plain object from a ZhajinhuaAddPlayerResp message. Also converts values to other types if specified.
+         * @param message ZhajinhuaAddPlayerResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: zhajinhua.ZhajinhuaAddPlayerResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZhajinhuaAddPlayerResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZhajinhuaDelPlayerResp. */
+    interface IZhajinhuaDelPlayerResp {
+
+        /** ZhajinhuaDelPlayerResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents a ZhajinhuaDelPlayerResp. */
+    class ZhajinhuaDelPlayerResp implements IZhajinhuaDelPlayerResp {
+
+        /**
+         * Constructs a new ZhajinhuaDelPlayerResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: zhajinhua.IZhajinhuaDelPlayerResp);
+
+        /** ZhajinhuaDelPlayerResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new ZhajinhuaDelPlayerResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZhajinhuaDelPlayerResp instance
+         */
+        public static create(properties?: zhajinhua.IZhajinhuaDelPlayerResp): zhajinhua.ZhajinhuaDelPlayerResp;
+
+        /**
+         * Encodes the specified ZhajinhuaDelPlayerResp message. Does not implicitly {@link zhajinhua.ZhajinhuaDelPlayerResp.verify|verify} messages.
+         * @param message ZhajinhuaDelPlayerResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: zhajinhua.IZhajinhuaDelPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZhajinhuaDelPlayerResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaDelPlayerResp.verify|verify} messages.
+         * @param message ZhajinhuaDelPlayerResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaDelPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZhajinhuaDelPlayerResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZhajinhuaDelPlayerResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaDelPlayerResp;
+
+        /**
+         * Decodes a ZhajinhuaDelPlayerResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZhajinhuaDelPlayerResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaDelPlayerResp;
+
+        /**
+         * Verifies a ZhajinhuaDelPlayerResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZhajinhuaDelPlayerResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZhajinhuaDelPlayerResp
+         */
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaDelPlayerResp;
+
+        /**
+         * Creates a plain object from a ZhajinhuaDelPlayerResp message. Also converts values to other types if specified.
+         * @param message ZhajinhuaDelPlayerResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: zhajinhua.ZhajinhuaDelPlayerResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZhajinhuaDelPlayerResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

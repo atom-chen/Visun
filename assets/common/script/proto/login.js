@@ -1357,7 +1357,7 @@ $root.login = (function() {
         RegisterReq.prototype.SecurityCode = "";
         RegisterReq.prototype.MachineCode = "";
         RegisterReq.prototype.InvitationCode = "";
-        RegisterReq.prototype.PlatformID = 0;
+        RegisterReq.prototype.PlatformID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         RegisterReq.prototype.Gender = 0;
         RegisterReq.prototype.Age = 0;
         RegisterReq.prototype.FaceID = 0;
@@ -1385,7 +1385,7 @@ $root.login = (function() {
             if (message.InvitationCode != null && Object.hasOwnProperty.call(message, "InvitationCode"))
                 writer.uint32(42).string(message.InvitationCode);
             if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
-                writer.uint32(48).uint32(message.PlatformID);
+                writer.uint32(48).uint64(message.PlatformID);
             if (message.Gender != null && Object.hasOwnProperty.call(message, "Gender"))
                 writer.uint32(56).uint32(message.Gender);
             if (message.Age != null && Object.hasOwnProperty.call(message, "Age"))
@@ -1432,7 +1432,7 @@ $root.login = (function() {
                     message.InvitationCode = reader.string();
                     break;
                 case 6:
-                    message.PlatformID = reader.uint32();
+                    message.PlatformID = reader.uint64();
                     break;
                 case 7:
                     message.Gender = reader.uint32();
@@ -1491,8 +1491,8 @@ $root.login = (function() {
                 if (!$util.isString(message.InvitationCode))
                     return "InvitationCode: string expected";
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                if (!$util.isInteger(message.PlatformID))
-                    return "PlatformID: integer expected";
+                if (!$util.isInteger(message.PlatformID) && !(message.PlatformID && $util.isInteger(message.PlatformID.low) && $util.isInteger(message.PlatformID.high)))
+                    return "PlatformID: integer|Long expected";
             if (message.Gender != null && message.hasOwnProperty("Gender"))
                 if (!$util.isInteger(message.Gender))
                     return "Gender: integer expected";
@@ -1535,7 +1535,14 @@ $root.login = (function() {
             if (object.InvitationCode != null)
                 message.InvitationCode = String(object.InvitationCode);
             if (object.PlatformID != null)
-                message.PlatformID = object.PlatformID >>> 0;
+                if ($util.Long)
+                    (message.PlatformID = $util.Long.fromValue(object.PlatformID)).unsigned = true;
+                else if (typeof object.PlatformID === "string")
+                    message.PlatformID = parseInt(object.PlatformID, 10);
+                else if (typeof object.PlatformID === "number")
+                    message.PlatformID = object.PlatformID;
+                else if (typeof object.PlatformID === "object")
+                    message.PlatformID = new $util.LongBits(object.PlatformID.low >>> 0, object.PlatformID.high >>> 0).toNumber(true);
             if (object.Gender != null)
                 message.Gender = object.Gender >>> 0;
             if (object.Age != null)
@@ -1565,7 +1572,11 @@ $root.login = (function() {
                 object.SecurityCode = "";
                 object.MachineCode = "";
                 object.InvitationCode = "";
-                object.PlatformID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.PlatformID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformID = options.longs === String ? "0" : 0;
                 object.Gender = 0;
                 object.Age = 0;
                 object.FaceID = 0;
@@ -1586,7 +1597,10 @@ $root.login = (function() {
             if (message.InvitationCode != null && message.hasOwnProperty("InvitationCode"))
                 object.InvitationCode = message.InvitationCode;
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                object.PlatformID = message.PlatformID;
+                if (typeof message.PlatformID === "number")
+                    object.PlatformID = options.longs === String ? String(message.PlatformID) : message.PlatformID;
+                else
+                    object.PlatformID = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformID) : options.longs === Number ? new $util.LongBits(message.PlatformID.low >>> 0, message.PlatformID.high >>> 0).toNumber(true) : message.PlatformID;
             if (message.Gender != null && message.hasOwnProperty("Gender"))
                 object.Gender = message.Gender;
             if (message.Age != null && message.hasOwnProperty("Age"))
@@ -1718,7 +1732,7 @@ $root.login = (function() {
         LoginReq.prototype.Password = "";
         LoginReq.prototype.SecurityCode = "";
         LoginReq.prototype.MachineCode = "";
-        LoginReq.prototype.PlatformID = 0;
+        LoginReq.prototype.PlatformID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         LoginReq.create = function create(properties) {
             return new LoginReq(properties);
@@ -1736,7 +1750,7 @@ $root.login = (function() {
             if (message.MachineCode != null && Object.hasOwnProperty.call(message, "MachineCode"))
                 writer.uint32(34).string(message.MachineCode);
             if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
-                writer.uint32(40).uint32(message.PlatformID);
+                writer.uint32(40).uint64(message.PlatformID);
             return writer;
         };
 
@@ -1764,7 +1778,7 @@ $root.login = (function() {
                     message.MachineCode = reader.string();
                     break;
                 case 5:
-                    message.PlatformID = reader.uint32();
+                    message.PlatformID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1796,8 +1810,8 @@ $root.login = (function() {
                 if (!$util.isString(message.MachineCode))
                     return "MachineCode: string expected";
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                if (!$util.isInteger(message.PlatformID))
-                    return "PlatformID: integer expected";
+                if (!$util.isInteger(message.PlatformID) && !(message.PlatformID && $util.isInteger(message.PlatformID.low) && $util.isInteger(message.PlatformID.high)))
+                    return "PlatformID: integer|Long expected";
             return null;
         };
 
@@ -1814,7 +1828,14 @@ $root.login = (function() {
             if (object.MachineCode != null)
                 message.MachineCode = String(object.MachineCode);
             if (object.PlatformID != null)
-                message.PlatformID = object.PlatformID >>> 0;
+                if ($util.Long)
+                    (message.PlatformID = $util.Long.fromValue(object.PlatformID)).unsigned = true;
+                else if (typeof object.PlatformID === "string")
+                    message.PlatformID = parseInt(object.PlatformID, 10);
+                else if (typeof object.PlatformID === "number")
+                    message.PlatformID = object.PlatformID;
+                else if (typeof object.PlatformID === "object")
+                    message.PlatformID = new $util.LongBits(object.PlatformID.low >>> 0, object.PlatformID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -1827,7 +1848,11 @@ $root.login = (function() {
                 object.Password = "";
                 object.SecurityCode = "";
                 object.MachineCode = "";
-                object.PlatformID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.PlatformID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformID = options.longs === String ? "0" : 0;
             }
             if (message.Account != null && message.hasOwnProperty("Account"))
                 object.Account = message.Account;
@@ -1838,7 +1863,10 @@ $root.login = (function() {
             if (message.MachineCode != null && message.hasOwnProperty("MachineCode"))
                 object.MachineCode = message.MachineCode;
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                object.PlatformID = message.PlatformID;
+                if (typeof message.PlatformID === "number")
+                    object.PlatformID = options.longs === String ? String(message.PlatformID) : message.PlatformID;
+                else
+                    object.PlatformID = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformID) : options.longs === Number ? new $util.LongBits(message.PlatformID.low >>> 0, message.PlatformID.high >>> 0).toNumber(true) : message.PlatformID;
             return object;
         };
 

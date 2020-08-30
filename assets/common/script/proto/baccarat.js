@@ -281,98 +281,6 @@ $root.baccarat = (function() {
         return BaccaratSceneResp;
     })();
 
-    baccarat.BaccaratStateFreeResp = (function() {
-
-        function BaccaratStateFreeResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        BaccaratStateFreeResp.prototype.Times = null;
-
-        BaccaratStateFreeResp.create = function create(properties) {
-            return new BaccaratStateFreeResp(properties);
-        };
-
-        BaccaratStateFreeResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        BaccaratStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        BaccaratStateFreeResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStateFreeResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        BaccaratStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        BaccaratStateFreeResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.gamecomm.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        BaccaratStateFreeResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratStateFreeResp)
-                return object;
-            var message = new $root.baccarat.BaccaratStateFreeResp();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".baccarat.BaccaratStateFreeResp.Times: object expected");
-                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        BaccaratStateFreeResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        BaccaratStateFreeResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return BaccaratStateFreeResp;
-    })();
-
     baccarat.BaccaratStateStartResp = (function() {
 
         function BaccaratStateStartResp(properties) {
@@ -555,6 +463,98 @@ $root.baccarat = (function() {
         };
 
         return BaccaratStatePlayingResp;
+    })();
+
+    baccarat.BaccaratStateOpenResp = (function() {
+
+        function BaccaratStateOpenResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BaccaratStateOpenResp.prototype.Times = null;
+
+        BaccaratStateOpenResp.create = function create(properties) {
+            return new BaccaratStateOpenResp(properties);
+        };
+
+        BaccaratStateOpenResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        BaccaratStateOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BaccaratStateOpenResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratStateOpenResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BaccaratStateOpenResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BaccaratStateOpenResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        BaccaratStateOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratStateOpenResp)
+                return object;
+            var message = new $root.baccarat.BaccaratStateOpenResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".baccarat.BaccaratStateOpenResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        BaccaratStateOpenResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        BaccaratStateOpenResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BaccaratStateOpenResp;
     })();
 
     baccarat.BaccaratStateOverResp = (function() {

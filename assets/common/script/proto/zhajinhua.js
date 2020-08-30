@@ -24,6 +24,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaPlayer.prototype.SeatId = 0;
         ZhajinhuaPlayer.prototype.FightState = 0;
         ZhajinhuaPlayer.prototype.IsSee = false;
+        ZhajinhuaPlayer.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.RecentBetMoney = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.TotalBetMoney = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.Cards = null;
@@ -43,12 +44,14 @@ $root.zhajinhua = (function() {
                 writer.uint32(24).int32(message.FightState);
             if (message.IsSee != null && Object.hasOwnProperty.call(message, "IsSee"))
                 writer.uint32(32).bool(message.IsSee);
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
+                writer.uint32(40).int64(message.Gold);
             if (message.RecentBetMoney != null && Object.hasOwnProperty.call(message, "RecentBetMoney"))
-                writer.uint32(40).int64(message.RecentBetMoney);
+                writer.uint32(48).int64(message.RecentBetMoney);
             if (message.TotalBetMoney != null && Object.hasOwnProperty.call(message, "TotalBetMoney"))
-                writer.uint32(48).int64(message.TotalBetMoney);
+                writer.uint32(56).int64(message.TotalBetMoney);
             if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
-                $root.go.CardInfo.encode(message.Cards, writer.uint32(58).fork()).ldelim();
+                $root.go.CardInfo.encode(message.Cards, writer.uint32(66).fork()).ldelim();
             return writer;
         };
 
@@ -76,12 +79,15 @@ $root.zhajinhua = (function() {
                     message.IsSee = reader.bool();
                     break;
                 case 5:
-                    message.RecentBetMoney = reader.int64();
+                    message.Gold = reader.int64();
                     break;
                 case 6:
-                    message.TotalBetMoney = reader.int64();
+                    message.RecentBetMoney = reader.int64();
                     break;
                 case 7:
+                    message.TotalBetMoney = reader.int64();
+                    break;
+                case 8:
                     message.Cards = $root.go.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -113,6 +119,9 @@ $root.zhajinhua = (function() {
             if (message.IsSee != null && message.hasOwnProperty("IsSee"))
                 if (typeof message.IsSee !== "boolean")
                     return "IsSee: boolean expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
             if (message.RecentBetMoney != null && message.hasOwnProperty("RecentBetMoney"))
                 if (!$util.isInteger(message.RecentBetMoney) && !(message.RecentBetMoney && $util.isInteger(message.RecentBetMoney.low) && $util.isInteger(message.RecentBetMoney.high)))
                     return "RecentBetMoney: integer|Long expected";
@@ -146,6 +155,15 @@ $root.zhajinhua = (function() {
                 message.FightState = object.FightState | 0;
             if (object.IsSee != null)
                 message.IsSee = Boolean(object.IsSee);
+            if (object.Gold != null)
+                if ($util.Long)
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
             if (object.RecentBetMoney != null)
                 if ($util.Long)
                     (message.RecentBetMoney = $util.Long.fromValue(object.RecentBetMoney)).unsigned = false;
@@ -187,6 +205,11 @@ $root.zhajinhua = (function() {
                 object.IsSee = false;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Gold = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
                     object.RecentBetMoney = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.RecentBetMoney = options.longs === String ? "0" : 0;
@@ -208,6 +231,11 @@ $root.zhajinhua = (function() {
                 object.FightState = message.FightState;
             if (message.IsSee != null && message.hasOwnProperty("IsSee"))
                 object.IsSee = message.IsSee;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
+                else
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
             if (message.RecentBetMoney != null && message.hasOwnProperty("RecentBetMoney"))
                 if (typeof message.RecentBetMoney === "number")
                     object.RecentBetMoney = options.longs === String ? String(message.RecentBetMoney) : message.RecentBetMoney;
@@ -228,6 +256,199 @@ $root.zhajinhua = (function() {
         };
 
         return ZhajinhuaPlayer;
+    })();
+
+    zhajinhua.ZhajinhuaAddPlayerResp = (function() {
+
+        function ZhajinhuaAddPlayerResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ZhajinhuaAddPlayerResp.prototype.Player = null;
+
+        ZhajinhuaAddPlayerResp.create = function create(properties) {
+            return new ZhajinhuaAddPlayerResp(properties);
+        };
+
+        ZhajinhuaAddPlayerResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Player != null && Object.hasOwnProperty.call(message, "Player"))
+                $root.zhajinhua.ZhajinhuaPlayer.encode(message.Player, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        ZhajinhuaAddPlayerResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ZhajinhuaAddPlayerResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ZhajinhuaAddPlayerResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Player = $root.zhajinhua.ZhajinhuaPlayer.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ZhajinhuaAddPlayerResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ZhajinhuaAddPlayerResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Player != null && message.hasOwnProperty("Player")) {
+                var error = $root.zhajinhua.ZhajinhuaPlayer.verify(message.Player);
+                if (error)
+                    return "Player." + error;
+            }
+            return null;
+        };
+
+        ZhajinhuaAddPlayerResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.zhajinhua.ZhajinhuaAddPlayerResp)
+                return object;
+            var message = new $root.zhajinhua.ZhajinhuaAddPlayerResp();
+            if (object.Player != null) {
+                if (typeof object.Player !== "object")
+                    throw TypeError(".zhajinhua.ZhajinhuaAddPlayerResp.Player: object expected");
+                message.Player = $root.zhajinhua.ZhajinhuaPlayer.fromObject(object.Player);
+            }
+            return message;
+        };
+
+        ZhajinhuaAddPlayerResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Player = null;
+            if (message.Player != null && message.hasOwnProperty("Player"))
+                object.Player = $root.zhajinhua.ZhajinhuaPlayer.toObject(message.Player, options);
+            return object;
+        };
+
+        ZhajinhuaAddPlayerResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ZhajinhuaAddPlayerResp;
+    })();
+
+    zhajinhua.ZhajinhuaDelPlayerResp = (function() {
+
+        function ZhajinhuaDelPlayerResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ZhajinhuaDelPlayerResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        ZhajinhuaDelPlayerResp.create = function create(properties) {
+            return new ZhajinhuaDelPlayerResp(properties);
+        };
+
+        ZhajinhuaDelPlayerResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
+            return writer;
+        };
+
+        ZhajinhuaDelPlayerResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ZhajinhuaDelPlayerResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ZhajinhuaDelPlayerResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ZhajinhuaDelPlayerResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ZhajinhuaDelPlayerResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
+            return null;
+        };
+
+        ZhajinhuaDelPlayerResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.zhajinhua.ZhajinhuaDelPlayerResp)
+                return object;
+            var message = new $root.zhajinhua.ZhajinhuaDelPlayerResp();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        ZhajinhuaDelPlayerResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            return object;
+        };
+
+        ZhajinhuaDelPlayerResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ZhajinhuaDelPlayerResp;
     })();
 
     zhajinhua.ZhajinhuaSceneResp = (function() {

@@ -30,7 +30,7 @@ export namespace gamecomm {
         Sate?: (number|null);
 
         /** PlayerInfo PlatformID */
-        PlatformID?: (number|null);
+        PlatformID?: (number|Long|null);
 
         /** PlayerInfo RoomNum */
         RoomNum?: (number|null);
@@ -79,7 +79,7 @@ export namespace gamecomm {
         public Sate: number;
 
         /** PlayerInfo PlatformID. */
-        public PlatformID: number;
+        public PlatformID: (number|Long);
 
         /** PlayerInfo RoomNum. */
         public RoomNum: number;

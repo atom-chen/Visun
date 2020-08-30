@@ -957,7 +957,7 @@ export namespace login {
         InvitationCode?: (string|null);
 
         /** RegisterReq PlatformID */
-        PlatformID?: (number|null);
+        PlatformID?: (number|Long|null);
 
         /** RegisterReq Gender */
         Gender?: (number|null);
@@ -1009,7 +1009,7 @@ export namespace login {
         public InvitationCode: string;
 
         /** RegisterReq PlatformID. */
-        public PlatformID: number;
+        public PlatformID: (number|Long);
 
         /** RegisterReq Gender. */
         public Gender: number;
@@ -1212,7 +1212,7 @@ export namespace login {
         MachineCode?: (string|null);
 
         /** LoginReq PlatformID */
-        PlatformID?: (number|null);
+        PlatformID?: (number|Long|null);
     }
 
     /** Represents a LoginReq. */
@@ -1237,7 +1237,7 @@ export namespace login {
         public MachineCode: string;
 
         /** LoginReq PlatformID. */
-        public PlatformID: number;
+        public PlatformID: (number|Long);
 
         /**
          * Creates a new LoginReq instance using the specified properties.

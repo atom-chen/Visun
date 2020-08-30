@@ -93,7 +93,7 @@ message RegisterReq{
   string SecurityCode = 3;    //验证码
   string MachineCode = 4;     //机器码
   string InvitationCode = 5;  //邀请码
-  uint32 PlatformID = 6;      //需要注明平台ID (测试用: id == 1)
+  uint64 PlatformID = 6;      //需要注明平台ID (测试用: id == 1)
   //选填
   uint32 Gender = 7;       //性别
   uint32 Age = 8;          //年龄
@@ -115,7 +115,7 @@ message LoginReq{
   string Password = 2;    //密码
   string SecurityCode = 3;  //验证码
   string MachineCode = 4;  //机器码
-  uint32 PlatformID = 5; //需要注明平台ID (测试用: id == 1)
+  uint64 PlatformID = 5; //需要注明平台ID (测试用: id == 1)
 }
 message LoginResp{
   MasterInfo MainInfo = 1;
