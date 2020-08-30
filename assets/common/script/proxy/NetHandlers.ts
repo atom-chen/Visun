@@ -5,9 +5,16 @@ import CommonUtil from "../../../kernel/utils/CommonUtil";
 import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
 import { login } from "../../../../declares/login";
+import LoginMgr from "../model/LoginMgr";
 
 
 var NetHandlers = {
+
+    [login_msgs.AllopatricResp] : function(param) {
+        if(param.UserId == LoginUser.getInstance().UserId) {
+            LoginMgr.getInstance().logout();
+        }
+    },
 
     [login_msgs.ResultResp] : function(param: login.ResultResp) {
         UIManager.toast(param.Hints);

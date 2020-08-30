@@ -23,7 +23,7 @@ export default class LeafWsProcessor extends BaseProcessor {
 		if (this.isNetHolded()) {
 			cc.log(cc.js.formatStr("%s [push send] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, buff.length));
 			this._send_list.push(buff);
-			if(this._channel.getState() === ConnState.reconnectfail) {
+			if(this._channel.getState() === ConnState.reconnectfail || this._channel.getState() === ConnState.connectfail) {
 				EventCenter.getInstance().fire(KernelEvent.NET_STATE, this._channel);
 			}
 			return false;
