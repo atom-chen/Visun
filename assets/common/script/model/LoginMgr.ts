@@ -32,23 +32,6 @@ import GameHandlers from "../proxy/GameHandlers";
 //登陆管理
 export default class LoginMgr extends ModelBase {
 	private static _instance:LoginMgr = null;
-	private constructor(){
-		super();
-		//重连逻辑
-		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
-            if(chan.getName()===ChannelDefine.game) {
-                if(chan.getState()===ConnState.reconnectfail) {
-                    UIManager.openDialog("reconnectfail", "游戏连接断开，是否重连？", 2, (menuId:number)=>{
-                        if(menuId===1) {
-                            chan.reconnect();
-                        }
-                    });
-                } else if(chan.getState()===ConnState.reconnectsucc) {
-					LoginMgr.getInstance().quickLogin(true);
-				}
-            }
-        }, this);
-	}
     public static getInstance() : LoginMgr {
         if(!LoginMgr._instance) { LoginMgr._instance = new LoginMgr; }
         return LoginMgr._instance;
@@ -64,9 +47,29 @@ export default class LoginMgr extends ModelBase {
 	}
 
 
+	private static PlatformID = 1;
+
 	//获取机器码
-	private getMachineCode() : string {
+	private static getMachineCode() : string {
 		return "54143213";
+	}
+
+	private constructor(){
+		super();
+		//重连逻辑
+		EventCenter.getInstance().listen(KernelEvent.NET_STATE, (chan:IChannel)=>{
+            if(chan.getName()===ChannelDefine.game) {
+                if(chan.getState()===ConnState.reconnectfail) {
+                    UIManager.openDialog("reconnectfail", "游戏连接断开，是否重连？", 2, (menuId:number)=>{
+                        if(menuId===1) {
+                            chan.reconnect();
+                        }
+                    });
+                } else if(chan.getState()===ConnState.reconnectsucc) {
+					LoginMgr.reconnect();
+				}
+            }
+        }, this);
 	}
 
 	private initGameProcessor() : IProcessor {
@@ -125,6 +128,29 @@ export default class LoginMgr extends ModelBase {
 		return hasLogin;
 	}
 
+	public static reconnect() {
+		var priAccount = LocalCache.getInstance("lusr").read("acc");
+		var priSecret = LocalCache.getInstance("lusr").read("see");
+		if(isNil(priAccount) || isNil(priSecret)) {
+			LoginMgr.getInstance().checkLogin(true);
+			return;
+		} else {
+			var ms = new MyCrypto();
+			var acc = ms.decrypt(priAccount, "fagheiasjfiea", 256);
+			var pswd = ms.decrypt(priSecret, "fagheiasjfiea", 256);
+			if(isNil(acc) || isNil(pswd)){
+				LoginMgr.getInstance().checkLogin(true);
+				return;
+			}
+			login_request.ReconnectReq({
+				Account: acc, 
+				Password: pswd, 
+				MachineCode: LoginMgr.getMachineCode(),
+				PlatformID: LoginMgr.PlatformID
+			});
+		}
+	}
+
 	//登陆
 	public leafLogin(Account:string, Pswd:string) {
 		if(!Account || Account==="") {
@@ -142,8 +168,8 @@ export default class LoginMgr extends ModelBase {
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
-			MachineCode: this.getMachineCode(),
-			PlatformID: 1
+			MachineCode: LoginMgr.getMachineCode(),
+			PlatformID: LoginMgr.PlatformID
 		});
 
 		LoginMgr.saveQuickData(Account, Pswd);
@@ -168,9 +194,9 @@ export default class LoginMgr extends ModelBase {
 			Name : Account,
 			Password : Pswd,
 			SecurityCode : SecurityCode,
-			MachineCode : this.getMachineCode(),
+			MachineCode : LoginMgr.getMachineCode(),
 			InvitationCode : InviteCode,
-			PlatformID : 1,
+			PlatformID : LoginMgr.PlatformID,
 			Gender : 0,
 			Age : 18,
 			FaceID : 0,

@@ -6,14 +6,13 @@ import ModelBase from "../../../kernel/model/ModelBase";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import LoginMgr from "./LoginMgr";
 import { gamecomm_request } from "../proto/net_gamecomm";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import EventDefine from "../definer/EventDefine";
 
 
 //游戏管理器
 export default class GameManager extends ModelBase {
 	private static _instance:GameManager;
-	private constructor() {
-		super();
-	}
 	public static getInstance() : GameManager {
 		if(!GameManager._instance){ GameManager._instance = new GameManager; }
 		return GameManager._instance;
@@ -26,6 +25,15 @@ export default class GameManager extends ModelBase {
 	}
 	public on_clear() {
 		
+	}
+
+	private constructor() {
+		super();
+		EventCenter.getInstance().listen(EventDefine.reconn_succ, function(){
+			if(SceneManager.curSceneName === KernelUIDefine.GameScene.name && LoginMgr.getInstance().checkLogin(false)) {
+				this.enterGame(this.getGameId());
+			}
+		}, this);
 	}
 
 	//------------------------------------------------------------------------------

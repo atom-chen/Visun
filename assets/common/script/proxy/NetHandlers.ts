@@ -6,6 +6,8 @@ import LogicCenter from "../model/LogicCenter";
 import GameManager from "../model/GameManager";
 import { login } from "../../../../declares/login";
 import LoginMgr from "../model/LoginMgr";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import EventDefine from "../definer/EventDefine";
 
 
 var NetHandlers = {
@@ -14,6 +16,10 @@ var NetHandlers = {
         if(param.UserId == LoginUser.getInstance().UserId) {
             LoginMgr.getInstance().logout();
         }
+    },
+
+    [login_msgs.ReconnectResp] : function(param) {
+        EventCenter.getInstance().fire(EventDefine.reconn_succ);
     },
 
     [login_msgs.ResultResp] : function(param: login.ResultResp) {
