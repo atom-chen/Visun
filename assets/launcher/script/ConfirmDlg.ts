@@ -38,7 +38,7 @@ export default class ConfirmDlg extends BaseComponent {
 		if(dlgType == 1) {
 			this.m_ui.btn_no.active = false;
 			this.m_ui.btn_ok.x = 0;
-			this.m_ui.lineV.active = false;
+		//	this.m_ui.lineV.active = false;
 		}
 	}
 }
