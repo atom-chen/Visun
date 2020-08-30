@@ -118,7 +118,11 @@ export default class UIbjle extends BaseComponent {
 	private setWinAreas(arr:any) {
 		for(var i=4; i>=0; i--) {
 			if(this.m_ui["area"+i]) {
-				this.m_ui["area"+i].getChildByName("sprhigh").active = !isNil(arr[this.node2Area(i)]) && arr[this.node2Area(i)] > 0;
+				var nd = this.m_ui["area"+i].getChildByName("sprhigh");
+				nd.active = !isNil(arr[this.node2Area(i)]) && arr[this.node2Area(i)] > 0;
+				if(nd.active) {
+					nd.runAction(cc.blink(1, 3));
+				}
 			}
 		}
 	}
