@@ -28,7 +28,7 @@ $root.gamecomm = (function() {
         PlayerInfo.prototype.Level = 0;
         PlayerInfo.prototype.Account = "";
         PlayerInfo.prototype.Sate = 0;
-        PlayerInfo.prototype.PlatformID = 0;
+        PlayerInfo.prototype.PlatformID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         PlayerInfo.prototype.RoomNum = 0;
         PlayerInfo.prototype.GameID = 0;
         PlayerInfo.prototype.TableID = 0;
@@ -46,19 +46,19 @@ $root.gamecomm = (function() {
             if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
                 writer.uint32(18).string(message.Name);
             if (message.Age != null && Object.hasOwnProperty.call(message, "Age"))
-                writer.uint32(24).int32(message.Age);
+                writer.uint32(24).uint32(message.Age);
             if (message.Sex != null && Object.hasOwnProperty.call(message, "Sex"))
-                writer.uint32(32).int32(message.Sex);
+                writer.uint32(32).uint32(message.Sex);
             if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
                 writer.uint32(40).int64(message.Gold);
             if (message.Level != null && Object.hasOwnProperty.call(message, "Level"))
-                writer.uint32(48).int32(message.Level);
+                writer.uint32(48).uint32(message.Level);
             if (message.Account != null && Object.hasOwnProperty.call(message, "Account"))
                 writer.uint32(58).string(message.Account);
             if (message.Sate != null && Object.hasOwnProperty.call(message, "Sate"))
                 writer.uint32(64).int32(message.Sate);
             if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
-                writer.uint32(72).uint32(message.PlatformID);
+                writer.uint32(72).uint64(message.PlatformID);
             if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
                 writer.uint32(80).uint32(message.RoomNum);
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
@@ -88,16 +88,16 @@ $root.gamecomm = (function() {
                     message.Name = reader.string();
                     break;
                 case 3:
-                    message.Age = reader.int32();
+                    message.Age = reader.uint32();
                     break;
                 case 4:
-                    message.Sex = reader.int32();
+                    message.Sex = reader.uint32();
                     break;
                 case 5:
                     message.Gold = reader.int64();
                     break;
                 case 6:
-                    message.Level = reader.int32();
+                    message.Level = reader.uint32();
                     break;
                 case 7:
                     message.Account = reader.string();
@@ -106,7 +106,7 @@ $root.gamecomm = (function() {
                     message.Sate = reader.int32();
                     break;
                 case 9:
-                    message.PlatformID = reader.uint32();
+                    message.PlatformID = reader.uint64();
                     break;
                 case 10:
                     message.RoomNum = reader.uint32();
@@ -162,8 +162,8 @@ $root.gamecomm = (function() {
                 if (!$util.isInteger(message.Sate))
                     return "Sate: integer expected";
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                if (!$util.isInteger(message.PlatformID))
-                    return "PlatformID: integer expected";
+                if (!$util.isInteger(message.PlatformID) && !(message.PlatformID && $util.isInteger(message.PlatformID.low) && $util.isInteger(message.PlatformID.high)))
+                    return "PlatformID: integer|Long expected";
             if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
                 if (!$util.isInteger(message.RoomNum))
                     return "RoomNum: integer expected";
@@ -195,9 +195,9 @@ $root.gamecomm = (function() {
             if (object.Name != null)
                 message.Name = String(object.Name);
             if (object.Age != null)
-                message.Age = object.Age | 0;
+                message.Age = object.Age >>> 0;
             if (object.Sex != null)
-                message.Sex = object.Sex | 0;
+                message.Sex = object.Sex >>> 0;
             if (object.Gold != null)
                 if ($util.Long)
                     (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
@@ -208,13 +208,20 @@ $root.gamecomm = (function() {
                 else if (typeof object.Gold === "object")
                     message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
             if (object.Level != null)
-                message.Level = object.Level | 0;
+                message.Level = object.Level >>> 0;
             if (object.Account != null)
                 message.Account = String(object.Account);
             if (object.Sate != null)
                 message.Sate = object.Sate | 0;
             if (object.PlatformID != null)
-                message.PlatformID = object.PlatformID >>> 0;
+                if ($util.Long)
+                    (message.PlatformID = $util.Long.fromValue(object.PlatformID)).unsigned = true;
+                else if (typeof object.PlatformID === "string")
+                    message.PlatformID = parseInt(object.PlatformID, 10);
+                else if (typeof object.PlatformID === "number")
+                    message.PlatformID = object.PlatformID;
+                else if (typeof object.PlatformID === "object")
+                    message.PlatformID = new $util.LongBits(object.PlatformID.low >>> 0, object.PlatformID.high >>> 0).toNumber(true);
             if (object.RoomNum != null)
                 message.RoomNum = object.RoomNum >>> 0;
             if (object.GameID != null)
@@ -247,7 +254,11 @@ $root.gamecomm = (function() {
                 object.Level = 0;
                 object.Account = "";
                 object.Sate = 0;
-                object.PlatformID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.PlatformID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformID = options.longs === String ? "0" : 0;
                 object.RoomNum = 0;
                 object.GameID = 0;
                 object.TableID = 0;
@@ -276,7 +287,10 @@ $root.gamecomm = (function() {
             if (message.Sate != null && message.hasOwnProperty("Sate"))
                 object.Sate = message.Sate;
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
-                object.PlatformID = message.PlatformID;
+                if (typeof message.PlatformID === "number")
+                    object.PlatformID = options.longs === String ? String(message.PlatformID) : message.PlatformID;
+                else
+                    object.PlatformID = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformID) : options.longs === Number ? new $util.LongBits(message.PlatformID.low >>> 0, message.PlatformID.high >>> 0).toNumber(true) : message.PlatformID;
             if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
                 object.RoomNum = message.RoomNum;
             if (message.GameID != null && message.hasOwnProperty("GameID"))
