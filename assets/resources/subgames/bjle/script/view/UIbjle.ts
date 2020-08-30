@@ -24,6 +24,14 @@ import { baccarat } from "../../../../../../declares/baccarat";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 
+const AREA_XIAN        = 0 //闲家
+const AREA_PING        = 1 //平家
+const AREA_ZHUANG      = 2 //庄家
+const AREA_XIAN_TIAN   = 3 //闲天王
+const AREA_ZHUANG_TIAN = 4 //庄天王
+const AREA_TONG_DUI    = 5 //同点平
+const AREA_XIAN_DUI    = 6 //闲对子
+const AREA_ZHUANG_DUI  = 7 //庄对子
 
 var margin = [
 	{ left:40,right:40,bottom:25,top:25 },
@@ -40,6 +48,7 @@ export default class UIbjle extends BaseComponent {
 	_rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
 	private isJoined = false;
+	private areaToNode = [];
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -52,7 +61,25 @@ export default class UIbjle extends BaseComponent {
 		this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 		
 		this.initContext();
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+		
+		this.areaToNode[0] = 3;
+		this.areaToNode[1] = 0;
+		this.areaToNode[2] = 4;
+		this.areaToNode[3] = -1;
+		this.areaToNode[4] = -1;
+		this.areaToNode[5] = -1;
+		this.areaToNode[6] = 1;
+		this.areaToNode[7] = 2;
+	}
+
+	node2Area(v:number) : number {
+		for(var i=0; i<8; i++) {
+			if(this.areaToNode[i] == v) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	onDestroy(){
@@ -64,7 +91,7 @@ export default class UIbjle extends BaseComponent {
 		var enterData = BjleMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
-				var areaName = "area"+i;
+				var areaName = "area"+this.areaToNode[i];
 				if(this.m_ui[areaName]) {
 					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
 					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
@@ -91,7 +118,7 @@ export default class UIbjle extends BaseComponent {
 	private setWinAreas(arr:any) {
 		for(var i=4; i>=0; i--) {
 			if(this.m_ui["area"+i]) {
-				this.m_ui["area"+i].getChildByName("sprhigh").active = !isNil(arr[i]) && arr[i] > 0;
+				this.m_ui["area"+i].getChildByName("sprhigh").active = !isNil(arr[this.node2Area(i)]) && arr[this.node2Area(i)] > 0;
 			}
 		}
 	}
@@ -123,7 +150,7 @@ export default class UIbjle extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
-			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
+			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+this.areaToNode[param.BetArea]], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[this.areaToNode[param.BetArea]]);
 		}
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
@@ -225,19 +252,19 @@ export default class UIbjle extends BaseComponent {
             GameManager.getInstance().quitGame(true);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
-			this.onClickArea(0);
+			this.onClickArea(this.node2Area(0));
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button1, function(){ 
-            this.onClickArea(1);
+            this.onClickArea(this.node2Area(1));
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button2, function(){ 
-            this.onClickArea(2);
+            this.onClickArea(this.node2Area(2));
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button3, function(){ 
-            this.onClickArea(3);
+            this.onClickArea(this.node2Area(3));
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button4, function(){ 
-            this.onClickArea(4);
+            this.onClickArea(this.node2Area(4));
 		}, this);
 	}
 	private onClickArea(areaID:number) {
