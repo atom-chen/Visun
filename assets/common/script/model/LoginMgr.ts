@@ -142,7 +142,8 @@ export default class LoginMgr extends ModelBase {
 			Account: Account, 
 			Password: Pswd, 
 			SecurityCode: "4245", 
-			MachineCode: this.getMachineCode()
+			MachineCode: this.getMachineCode(),
+			PlatformID: 1
 		});
 
 		LoginMgr.saveQuickData(Account, Pswd);
