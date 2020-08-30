@@ -965,6 +965,9 @@ export namespace login {
         /** RegisterReq Age */
         Age?: (number|null);
 
+        /** RegisterReq FaceID */
+        FaceID?: (number|null);
+
         /** RegisterReq PassPortID */
         PassPortID?: (string|null);
 
@@ -1013,6 +1016,9 @@ export namespace login {
 
         /** RegisterReq Age. */
         public Age: number;
+
+        /** RegisterReq FaceID. */
+        public FaceID: number;
 
         /** RegisterReq PassPortID. */
         public PassPortID: string;
