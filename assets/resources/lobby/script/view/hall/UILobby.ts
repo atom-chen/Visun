@@ -9,6 +9,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -117,8 +118,11 @@ export default class UILobby extends BaseComponent {
 	private initUiEvents() {
 		//头像
 		CommonUtil.addClickEvent(this.m_ui.headNode, function(){ 
-		//	UIManager.openPopwnd(ViewDefine.UISetting, true); 
-			UIManager.openPopwnd(ViewDefine.UILogin, false);
+			if(LoginMgr.getInstance().checkLogin(false)) {
+				UIManager.openPopwnd(ViewDefine.UIPerson, true);
+			} else {
+				UIManager.openPopwnd(ViewDefine.UILogin, false);
+			}
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
