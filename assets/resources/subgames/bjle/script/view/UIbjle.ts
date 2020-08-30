@@ -19,7 +19,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
-import { isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import { baccarat } from "../../../../../../declares/baccarat";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
@@ -87,6 +87,14 @@ export default class UIbjle extends BaseComponent {
 	private onStateTimer(tmr:BaseTimer) {
 		//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
+
+	private setWinAreas(arr:any) {
+		for(var i=4; i>=0; i--) {
+			if(this.m_ui["area"+i]) {
+				this.m_ui["area"+i].getChildByName("sprhigh").active = !isNil(arr[i]) && arr[i] > 0;
+			}
+		}
+	}
 	
 	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
 		if(param.UserID == LoginUser.getInstance().UserId) {
@@ -127,6 +135,7 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
+		this.setWinAreas([]);
 	}
 
 	//开局：洗牌发牌
@@ -135,6 +144,7 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
+		this.setWinAreas([]);
 	}
 
 	//下注阶段
@@ -144,6 +154,7 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
+		this.setWinAreas([]);
 	}
 
 	//结算阶段
@@ -171,6 +182,7 @@ export default class UIbjle extends BaseComponent {
 		}
 		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards(aaa, true);
 		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards(bbb, true);
+		this.setWinAreas(param.AwardArea);
 	}
 
 	private BaccaratCheckoutResp(param:baccarat.BaccaratCheckoutResp) {
