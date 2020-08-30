@@ -122,6 +122,17 @@ export default class UIbjle extends BaseComponent {
 			}
 		}
 	}
+
+	private clearBets() {
+		var childs = this.m_ui.chipLayer.children;
+		for(var i=childs.length-1; i>=0; i--){
+			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
+		}
+		for(var j=0; j<5; j++) {
+			this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+			this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		}
+	}
 	
 	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
 		if(param.UserID == LoginUser.getInstance().UserId) {
@@ -163,6 +174,7 @@ export default class UIbjle extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
+		this.clearBets();
 	}
 
 	//开局：洗牌发牌
@@ -172,6 +184,7 @@ export default class UIbjle extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
+		this.clearBets();
 	}
 
 	//下注阶段
