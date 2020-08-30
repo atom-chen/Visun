@@ -43,5 +43,12 @@ export default class LoginUser extends ModelBase {
 	public getMoney() : number {
 		return this.Gold;
 	}
+
+	public getHead() : number {
+		if(this.FaceID < 10) {
+			return this.Gender;
+		}
+		return this.FaceID;
+	}
 	
 }

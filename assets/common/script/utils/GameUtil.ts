@@ -58,9 +58,11 @@ export default class GameUtil {
 	//设置头像图片
 	public static setHeadSpr(spr:cc.Sprite, v:number) {
 		if(isNil(spr)) { return; }
-		if(v<0) { v=0; } 
-		if(v>1) { v=1; }
-		var respath = "appqp/imgs/person/headIcon_"+v;
+		if(v!=0 && v!=1 && v<1001 && v>1008 && v<2001 && v>2008) {
+			return;
+		}
+		
+		var respath = "appqp/imgs/person/head"+v;
 
 		var sf0 = cc.loader.getRes(respath, cc.SpriteFrame);
 		if(sf0) {

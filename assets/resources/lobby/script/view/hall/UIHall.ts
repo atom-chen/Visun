@@ -70,7 +70,7 @@ export default class UIHall extends BaseComponent {
 		this.m_ui.lab_name.getComponent(cc.Label).string = "昵称：" + hero.Name;
 		this.m_ui.lab_id.getComponent(cc.Label).string = "ID：" + hero.UserId;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.getMoney().toString();
-		GameUtil.setHeadIcon(this.m_ui.headNode, 1);
+		GameUtil.setHeadIcon(this.m_ui.headNode, LoginUser.getInstance().getHead());
 	}
 
 	private initUiEvents() {
