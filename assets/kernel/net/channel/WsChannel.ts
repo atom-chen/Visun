@@ -279,6 +279,9 @@ export default class WsChannel implements IChannel {
 		}
 		if(this._curState !== ConnState.connectsucc && this._curState !== ConnState.reconnectsucc) {
 			cc.log(this._name, "尚未建立连接");
+			if(this._curState === ConnState.reconnectfail) {
+				this.notifyState();
+			}
 			return false;
 		}
 		if(!this._ws) {
