@@ -1718,7 +1718,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        LoginResp.prototype.Info = null;
+        LoginResp.prototype.MainInfo = null;
 
         LoginResp.create = function create(properties) {
             return new LoginResp(properties);
@@ -1727,8 +1727,8 @@ $root.login = (function() {
         LoginResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.login.UserInfo.encode(message.Info, writer.uint32(10).fork()).ldelim();
+            if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
+                $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -1744,7 +1744,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Info = $root.login.UserInfo.decode(reader, reader.uint32());
+                    message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1763,10 +1763,10 @@ $root.login = (function() {
         LoginResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.login.UserInfo.verify(message.Info);
+            if (message.MainInfo != null && message.hasOwnProperty("MainInfo")) {
+                var error = $root.login.MasterInfo.verify(message.MainInfo);
                 if (error)
-                    return "Info." + error;
+                    return "MainInfo." + error;
             }
             return null;
         };
@@ -1775,10 +1775,10 @@ $root.login = (function() {
             if (object instanceof $root.login.LoginResp)
                 return object;
             var message = new $root.login.LoginResp();
-            if (object.Info != null) {
-                if (typeof object.Info !== "object")
-                    throw TypeError(".login.LoginResp.Info: object expected");
-                message.Info = $root.login.UserInfo.fromObject(object.Info);
+            if (object.MainInfo != null) {
+                if (typeof object.MainInfo !== "object")
+                    throw TypeError(".login.LoginResp.MainInfo: object expected");
+                message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
             }
             return message;
         };
@@ -1788,9 +1788,9 @@ $root.login = (function() {
                 options = {};
             var object = {};
             if (options.defaults)
-                object.Info = null;
-            if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.login.UserInfo.toObject(message.Info, options);
+                object.MainInfo = null;
+            if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
+                object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
             return object;
         };
 

@@ -56,7 +56,7 @@ export class login_request {
     public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string, PlatformID:number } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
     public static RegisterResp( data:{ Info:any } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string, PlatformID:number } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
-    public static LoginResp( data:{ Info:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
+    public static LoginResp( data:{ MainInfo:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[12].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterRoomResp( data:{ Games:any } ) { login_packet_define[13].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[14].sendToChannel(ChannelDefine.game, data, false); }

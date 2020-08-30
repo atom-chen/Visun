@@ -108,7 +108,7 @@ message LoginReq{
   uint32 PlatformID = 5; //需要注明平台ID (测试用: id == 1)
 }
 message LoginResp{
-  UserInfo Info = 1;
+  MasterInfo MainInfo = 1;
 }
 
 

@@ -1259,8 +1259,8 @@ export namespace login {
     /** Properties of a LoginResp. */
     interface ILoginResp {
 
-        /** LoginResp Info */
-        Info?: (login.IUserInfo|null);
+        /** LoginResp MainInfo */
+        MainInfo?: (login.IMasterInfo|null);
     }
 
     /** Represents a LoginResp. */
@@ -1272,8 +1272,8 @@ export namespace login {
          */
         constructor(properties?: login.ILoginResp);
 
-        /** LoginResp Info. */
-        public Info?: (login.IUserInfo|null);
+        /** LoginResp MainInfo. */
+        public MainInfo?: (login.IMasterInfo|null);
 
         /**
          * Creates a new LoginResp instance using the specified properties.
