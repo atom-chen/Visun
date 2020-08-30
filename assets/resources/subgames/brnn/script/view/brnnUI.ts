@@ -62,7 +62,7 @@ export default class BrnnUI extends BaseComponent {
 
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
-		this.NotifyChangeGold(null);
+		this.GoldChangeInfo(null);
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
@@ -175,12 +175,12 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}
 
-	private NotifyChangeGold(param:gamecomm.NotifyChangeGold) {
+	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 	}
 
 	private initNetEvent() {
-		EventCenter.getInstance().listen(gamecomm_msgs.NotifyChangeGold, this.NotifyChangeGold, this);
+		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFreeResp, this.BrcowcowStateFree, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStartResp, this.BrcowcowStateStart, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlayingResp, this.BrcowcowStatePlaying, this);

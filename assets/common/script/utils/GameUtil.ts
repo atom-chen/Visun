@@ -90,7 +90,7 @@ export default class GameUtil {
 		nd.position = fromPos;
 		nd.runAction(cc.sequence(
 			cc.show(),
-			cc.moveBy(0.3, diff),
+			cc.moveBy(1, diff),
 			cc.hide()
 		));
 	}

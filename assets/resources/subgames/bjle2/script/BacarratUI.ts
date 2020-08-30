@@ -19,6 +19,10 @@ import BacarratMgr from "./BacarratMgr";
 import ProcessorMgr from "../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
 import CpnGameState from "../../../appqp/script/comps/CpnGameState";
+import CpnHandcard from "../../../appqp/script/comps/CpnHandcard";
+import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../declares/gamecomm";
+import { isEmpty } from "../../../../kernel/utils/GlobalFuncs";
 
 var margin = [
 	{ left:32,right:32,bottom:32,top:32 },
@@ -43,7 +47,9 @@ export default class BacarratUI extends BaseComponent {
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvents();
-        this.initNetEvent();
+		this.initNetEvent();
+		
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 
         ResPool.load(ViewDefine.CpnChip);
 		this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
@@ -72,11 +78,31 @@ export default class BacarratUI extends BaseComponent {
         EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
         EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlaying, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOver, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateFreeResp, this.BaccaratStateFree, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOpenResp, this.BaccaratStateOpenResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStart, this);
-    }
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratCheckoutResp, this.BaccaratCheckoutResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOverResp, this.BaccaratOverResp, this);
+		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
+	}
+
+	private onStateTimer(tmr:BaseTimer) {
+		//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+	}
+	
+	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			LoginUser.getInstance().Gold = param.Gold;
+			if(!isEmpty(param.AlterGold)) {
+				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 100));
+			}
+		} 
+	}
 
     private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			LoginUser.getInstance().Gold -= param.BetScore;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+		}
 		var money = CommonUtil.fixRealMoney(param.BetScore);
         var nums = GameUtil.parseChip(money, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
@@ -95,23 +121,21 @@ export default class BacarratUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
-	private onStateTimer(tmr:BaseTimer) {
-	//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
-	}
-
 	//准备阶段
-	private BaccaratStateFree(param) {
-		this.isJoined = false;
+	private BaccaratStateStart(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = false;
 	}
 
 	//开局：洗牌发牌
-	private BaccaratStateStart(param) {
+	private BaccaratStateOpenResp(param) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = false;
 	}
 
 	//下注阶段
@@ -120,6 +144,7 @@ export default class BacarratUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = false;
 	}
 
 	//结算阶段
@@ -129,6 +154,33 @@ export default class BacarratUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		this.playJiesuan();
 	}
+
+	private BaccaratOverResp(param:baccarat.BaccaratOverResp) {
+		this.isJoined = false;
+		var aaa = [];
+		var bbb = [];
+		this.m_ui.cardLayer.active = true;
+		for(var i=param.BankerCard.Cards.length-1; i>=0; i--) {
+			if(param.BankerCard.Cards[i] != 0) {
+				aaa.push(param.BankerCard.Cards[i]);
+			}
+		}
+		for(var j=param.PlayerCard.Cards.length-1; j>=0; j--) {
+			if(param.PlayerCard.Cards[j] != 0) {
+				bbb.push(param.PlayerCard.Cards[j]);
+			}
+		}
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards(aaa, true);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards(bbb, true);
+	}
+
+	private BaccaratCheckoutResp(param:baccarat.BaccaratCheckoutResp) {
+		this.isJoined = false;
+		LoginUser.getInstance().Gold += param.MyAcquire;
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 100));
+	}
+
     private playJiesuan() {
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(

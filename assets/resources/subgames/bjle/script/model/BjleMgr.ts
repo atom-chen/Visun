@@ -1,4 +1,5 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
+import { baccarat } from "../../../../../../declares/baccarat";
 
 export default class BjleMgr extends ModelBase {
     private static _instance:BjleMgr = null;
@@ -16,4 +17,11 @@ export default class BjleMgr extends ModelBase {
         
     }
 
+    private enterData:baccarat.BaccaratSceneResp = null;
+    setEnterData(data:baccarat.BaccaratSceneResp) {
+        this.enterData = data;
+    }
+    getEnterData() : baccarat.BaccaratSceneResp {
+        return this.enterData;
+    }
 }

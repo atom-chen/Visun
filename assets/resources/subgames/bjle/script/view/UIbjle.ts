@@ -1,7 +1,6 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
@@ -10,6 +9,20 @@ import AudioManager from "../../../../../kernel/audio/AudioManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import UIManager from "../../../../../kernel/view/UIManager";
+import CpnChipbox2d from "../../../../appqp/script/comps/CpnChipbox2d";
+import { baccarat_request, baccarat_msgs } from "../../../../../common/script/proto/net_baccarat";
+import BjleMgr from "../model/BjleMgr";
+import LoginUser from "../../../../../common/script/model/LoginUser";
+import ResPool from "../../../../../kernel/basic/pool/ResPool";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../../declares/gamecomm";
+import { isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
+import { baccarat } from "../../../../../../declares/baccarat";
+import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
+import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 
 
 var margin = [
@@ -18,13 +31,6 @@ var margin = [
 	{ left:40,right:40,bottom:25,top:25 },
 	{ left:80,right:80,bottom:90,top:90 },
 	{ left:80,right:80,bottom:90,top:90 },
-];
-var testdata = [ 
-	{AreaId:0,Money:25280}, 
-	{AreaId:1,Money:25280}, 
-	{AreaId:2,Money:28650}, 
-	{AreaId:3,Money:26455}, 
-	{AreaId:4,Money:24255} 
 ];
 
 const {ccclass, property} = cc._decorator;
@@ -35,61 +41,144 @@ export default class UIbjle extends BaseComponent {
 	private tmrState = 0;
 	private isJoined = false;
 
-	_loadedRes:any;
-	_pool:SimplePool = new SimplePool(():cc.Node=>{
-		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.4;
-		return obj;
-	});
-
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
-		this.initUIEvents();
+        this.initUIEvents();
+		this.initNetEvent();
+		
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 
-		var self = this;
-		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {
-			if(err) { cc.log("error: "+err); return; }
-			if(!cc.isValid(self)) { return; }
-			self._loadedRes = loadedRes;
-		});
-
-		this.toStateReady();
+        ResPool.load(ViewDefine.CpnChip);
+		this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
+		
+		this.initContext();
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
 	onDestroy(){
-		this._pool.clear();
+		ResPool.unload(ViewDefine.CpnChip);
 		super.onDestroy();
 	}
 
-	private onStateTimer(tmr:BaseTimer) {
-	//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+	private initContext() {
+		var enterData = BjleMgr.getInstance().getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				var areaName = "area"+i;
+				if(this.m_ui[areaName]) {
+					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
+					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
+				}
+			}
+		}
 	}
 
+	private initNetEvent() {
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlaying, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOver, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOpenResp, this.BaccaratStateOpenResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStart, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratCheckoutResp, this.BaccaratCheckoutResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOverResp, this.BaccaratOverResp, this);
+		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
+	}
+
+	private onStateTimer(tmr:BaseTimer) {
+		//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+	}
+	
+	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			LoginUser.getInstance().Gold = param.Gold;
+			if(!isEmpty(param.AlterGold)) {
+				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 100));
+			}
+		} 
+	}
+
+    private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			LoginUser.getInstance().Gold -= param.BetScore;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+		}
+		var money = CommonUtil.fixRealMoney(param.BetScore);
+        var nums = GameUtil.parseChip(money, this._rule);
+        var fromObj = this.m_ui.btnPlayerlist; 
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            var idx = Math.max(0, this._rule.indexOf(money));
+			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+			this.isJoined = true;
+        }
+		for(var j in nums) {
+			var chip = ResPool.newObject(ViewDefine.CpnChip);
+			chip.getComponent(CpnChip).setChipValue(nums[j], true);
+			this.m_ui.chipLayer.addChild(chip);
+			chip.__areaId = param.BetArea;
+			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
+		}
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
+    }
+
 	//准备阶段
-	private toStateReady() {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
-		
+	private BaccaratStateStart(param) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateBetting();
-		}));
+		this.m_ui.cardLayer.active = false;
+	}
+
+	//开局：洗牌发牌
+	private BaccaratStateOpenResp(param) {
+		this.isJoined = false;
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = false;
 	}
 
 	//下注阶段
-	private toStateBetting() {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
+	private BaccaratStatePlaying(param) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
-			this.toStateJiesuan();
-		}));
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = false;
 	}
 
-	private playJiesuan() {
+	//结算阶段
+	private BaccaratStateOver(param) {
+		this.isJoined = false;
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		this.playJiesuan();
+	}
+
+	private BaccaratOverResp(param:baccarat.BaccaratOverResp) {
+		this.isJoined = false;
+		this.m_ui.cardLayer.active = true;
+		for(var i=param.BankerCard.Cards.length-1; i>=0; i--) {
+			if(param.BankerCard.Cards[i] == 0) {
+				param.BankerCard.Cards.splice(i, 1);
+			}
+		}
+		for(var j=param.PlayerCard.Cards.length-1; j>=0; j--) {
+			if(param.PlayerCard.Cards[j] == 0) {
+				param.PlayerCard.Cards.splice(j, 1);
+			}
+		}
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards(param.BankerCard.Cards, true);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards(param.PlayerCard.Cards, true);
+	}
+
+	private BaccaratCheckoutResp(param:baccarat.BaccaratCheckoutResp) {
+		this.isJoined = false;
+		LoginUser.getInstance().Gold += param.MyAcquire;
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 100));
+	}
+
+    private playJiesuan() {
 		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
 			cc.delayTime(1),
@@ -99,50 +188,13 @@ export default class UIbjle extends BaseComponent {
 				for(var i=len-1; i>=0; i--){
 					childs[i].runAction(
 						cc.callFunc(function(obj){
-							self._pool.delObject(obj);
+                            ResPool.delObject(ViewDefine.CpnChip, obj);
 						}, childs[i])
 					);
 				}
 			}, this)
 		));
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
-	}
-
-	//结算阶段
-	private toStateJiesuan() {
-	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-
-		this.playJiesuan();
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateReady();
-		}));
-	}
-
-	private onPlayersBet(tmr:BaseTimer, param:any) {
-		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
-		//飞筹码
-		param = param || testdata;
-		for(var i in param) {
-			var info = param[i];
-			var nums = GameUtil.parseChip(info.Money, this._rule);
-			for(var j in nums) {
-				var chip = this._pool.newObject();
-				chip.getComponent(CpnChip).setChipValue(nums[j], true);
-				this.m_ui.chipLayer.addChild(chip);
-				chip.__areaId = info.AreaId;
-				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.14+0.1*info.AreaId, parseInt(j)*0.01, margin[info.AreaId]);
-			}
-		}
-		//播音效
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
 	
 	private initUIEvents() {
@@ -159,19 +211,30 @@ export default class UIbjle extends BaseComponent {
             GameManager.getInstance().quitGame(true);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
-			cc.log("和");
+			this.onClickArea(0);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button1, function(){ 
-            cc.log("闲");
+            this.onClickArea(1);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button2, function(){ 
-            cc.log("庄");
+            this.onClickArea(2);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button3, function(){ 
-            cc.log("闲对");
+            this.onClickArea(3);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button4, function(){ 
-            cc.log("庄对");
+            this.onClickArea(4);
 		}, this);
+	}
+	private onClickArea(areaID:number) {
+        var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
+        if(!money) {
+            UIManager.toast("请选择下注区域");
+            return;
+        }
+        baccarat_request.BaccaratBetReq({
+            BetArea : areaID,
+            BetScore : CommonUtil.toServerMoney(money)
+        });
 	}
 }

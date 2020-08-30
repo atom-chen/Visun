@@ -21,18 +21,23 @@ import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 
 var GameHandlers = {
 
-    [gamecomm_msgs.NotifyChangeGold] : function(param:gamecomm.NotifyChangeGold) {
+    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.GoldChangeInfo) {
         if(param.UserID == LoginUser.getInstance().UserId) {
             LoginUser.getInstance().Gold = param.Gold;
         }
     },
 
-    [gamecomm_msgs.BeOut] : function(param:gamecomm.BeOut) {
+    [gamecomm_msgs.BeOutResp] : function(param:gamecomm.BeOutResp) {
         UIManager.openDialog("cfg_kick", "你被踢出房间："+param.Hints, 1, function(){
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
         });
     },
 
+    [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.ExitGameResp) {
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+        }
+    },
 
 	[gamecomm_msgs.PlayerListInfo] : function(param) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);

@@ -93,9 +93,11 @@ export default class GameManager extends ModelBase {
 
 	//退出游戏的唯一出口
 	public quitGame(bForce?:boolean) {
-		gamecomm_request.ReqExitGame({GameID:this.gameId});
+		gamecomm_request.ExitGameReq({GameID:this.gameId});
 		if(bForce) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		} else {
+		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
 	}
 
@@ -117,7 +119,7 @@ export default class GameManager extends ModelBase {
 
 		this.setGameId(gameType);
 
-		gamecomm_request.ReqEnterGame({
+		gamecomm_request.EnterGameReq({
             GameID: gameType
         });
 	}
