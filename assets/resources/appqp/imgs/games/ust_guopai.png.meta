@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "26942295-f54b-4516-8a56-55270bda8644",
+  "uuid": "f6b07c30-a5f7-41f7-9058-9f0a230730f1",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,10 +11,10 @@
   "height": 48,
   "platformSettings": {},
   "subMetas": {
-    "st_jiazhu": {
+    "ust_guopai": {
       "ver": "1.0.4",
-      "uuid": "742e1a58-7f51-4684-a6a8-ba6953252281",
-      "rawTextureUuid": "26942295-f54b-4516-8a56-55270bda8644",
+      "uuid": "9cad58c4-5a2f-41fb-b434-723c1722b80f",
+      "rawTextureUuid": "f6b07c30-a5f7-41f7-9058-9f0a230730f1",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

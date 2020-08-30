@@ -1,4 +1,5 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
+import { zhajinhua } from "../../../../../../declares/zhajinhua";
 
 export default class ZjhMgr extends ModelBase {
 	private static _instance:ZjhMgr = null;
@@ -17,5 +18,25 @@ export default class ZjhMgr extends ModelBase {
 	}
     on_clear(): void {
 
+    }
+    
+    private _players : {[key:number]:zhajinhua.ZhajinhuaPlayer} = {};
+	private _zhuangId : number = 0;
+	private _curAttackerId : number = null;
+	private enterData:zhajinhua.ZhajinhuaSceneResp = null;
+
+    setEnterData(data:zhajinhua.ZhajinhuaSceneResp) {
+        this.enterData = data;
+    }
+    getEnterData() : zhajinhua.ZhajinhuaSceneResp {
+        return this.enterData;
+    }
+
+    removePlayer(uid:number) {
+		this._players[uid] = null;
+	}
+
+	getPlayer(uid:number) : zhajinhua.ZhajinhuaPlayer {
+		return this._players[uid];
 	}
 }
