@@ -45,7 +45,7 @@ export var login_packet_define = {
 }
 
 export class login_request {
-    public static UserInfo( data:{ UserID:number, Name:string, Account:string, Password:string, FaceID:number, Gender:number, Age:number, VIP:number, Level:number, Gold:number, PassPortID:string, RealName:string, PhoneNum:string, Email:string, Address:string, Identity:string, AgentID:number, SpreaderGameID:number, ClientAddr:string, MachineCode:string } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
+    public static UserInfo( data:{ UserID:number, Name:string, Account:string, Password:string, FaceID:number, Gender:number, Age:number, VIP:number, Level:number, Gold:number, PassPortID:string, RealName:string, PhoneNum:string, Email:string, Address:string, Identity:string, AgentID:number, ReferralCode:string, ClientAddr:string, ServerAddr:string, MachineCode:string } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
     public static RoomInfo( data:{ RoomNum:number, RoomKey:string, RoomName:string, Games:any } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
     public static GameInfo( data:{ Type:number, KindID:number, Level:number, Name:string, EnterScore:number, LessScore:number, MaxOnline:number, State:number, Commission:number } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
     public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
@@ -53,7 +53,7 @@ export class login_request {
     public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
-    public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string, PlatformID:number } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
+    public static RegisterReq( data:{ Name:string, Password:string, SecurityCode:string, MachineCode:string, InvitationCode:string, PlatformID:number, Gender:number, Age:number, PassPortID:string, RealName:string, PhoneNum:string, Email:string, Address:string } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
     public static RegisterResp( data:{ Info:any } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginReq( data:{ Account:string, Password:string, SecurityCode:string, MachineCode:string, PlatformID:number } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
     public static LoginResp( data:{ MainInfo:any } ) { login_packet_define[11].sendToChannel(ChannelDefine.game, data, false); }

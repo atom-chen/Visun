@@ -7,26 +7,27 @@ package login;
 message UserInfo{
   uint64 UserID = 1;      //ID
   string Name = 2;        //用户
-  string Account = 3;    //帐号
+  string Account = 3;     //帐号
   string Password = 4;    //密码
   uint32 FaceID = 5;      //头像
   uint32 Gender = 6;      //性别
   uint32 Age = 7;         //年龄
-  uint32 VIP = 20;		  //VIP级别
-  uint32 Level = 8;       //级别
-  int64  Gold = 9;        //金币
-  
-  string PassPortID = 10; 	//证件号
-  string RealName = 11;   	//真实名字
-  string PhoneNum = 12;		//手机
-  string Email = 13;		//邮箱
-  string Address = 14;		//住址
-  string Identity = 15;     //识别码(平台生成)
-  
-  uint32 AgentID = 16;    	//代理标识
-  uint32 SpreaderGameID = 17; //推荐标识
-  string ClientAddr = 18;     //连接地址(跳转至该地址)
-  string MachineCode = 19;    //机器序列
+  uint32 VIP = 8;         //VIP级别
+  uint32 Level = 9;       //级别
+  int64  Gold = 10;       //金币
+
+  string PassPortID = 11;   //证件号
+  string RealName = 12;     //真实名字
+  string PhoneNum = 13;     //手机
+  string Email = 14;        //邮箱
+  string Address = 15;      //住址
+  string Identity = 16;     //识别码(平台生成)
+
+  uint64 AgentID = 17;        //代理标识(上级代理人)
+  string ReferralCode = 18;   //推荐标识(推荐码,由邀请码生成)
+  string ClientAddr = 19;     //连接地址(当前实际IP)
+  string ServerAddr = 20;     //(跳转至该地址 由登录服务返回的真实服务器地址)
+  string MachineCode = 21;    //机器序列
 
 
 }
@@ -87,12 +88,20 @@ message GameList{
 /////////////entrance///////////////////////////////////
 //注册
 message RegisterReq{
-  string Name = 1;      //用户
-  string Password = 2;    //密码
-  string SecurityCode = 3;  //验证码
-  string MachineCode = 4;  //机器码
+  string Name = 1;            //用户
+  string Password = 2;        //密码
+  string SecurityCode = 3;    //验证码
+  string MachineCode = 4;     //机器码
   string InvitationCode = 5;  //邀请码
-  uint32 PlatformID = 6; //需要注明平台ID (测试用: id == 1)
+  uint32 PlatformID = 6;      //需要注明平台ID (测试用: id == 1)
+  //选填
+  uint32 Gender = 7;       //性别
+  uint32 Age = 8;          //年龄
+  string PassPortID = 10;  //证件号
+  string RealName = 11;    //真实名字
+  string PhoneNum = 12;    //手机
+  string Email = 13;       //邮箱
+  string Address = 14;     //住址
 }
 message RegisterResp{
   UserInfo Info = 1;
@@ -118,7 +127,7 @@ message EnterRoomReq{
   string RoomKey = 2;      //房间钥匙
 }
 message EnterRoomResp{
-    GameList Games = 1;
+  GameList Games = 1;
 }
 
 

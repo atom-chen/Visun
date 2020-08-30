@@ -54,13 +54,16 @@ export namespace login {
         Identity?: (string|null);
 
         /** UserInfo AgentID */
-        AgentID?: (number|null);
+        AgentID?: (number|Long|null);
 
-        /** UserInfo SpreaderGameID */
-        SpreaderGameID?: (number|null);
+        /** UserInfo ReferralCode */
+        ReferralCode?: (string|null);
 
         /** UserInfo ClientAddr */
         ClientAddr?: (string|null);
+
+        /** UserInfo ServerAddr */
+        ServerAddr?: (string|null);
 
         /** UserInfo MachineCode */
         MachineCode?: (string|null);
@@ -124,13 +127,16 @@ export namespace login {
         public Identity: string;
 
         /** UserInfo AgentID. */
-        public AgentID: number;
+        public AgentID: (number|Long);
 
-        /** UserInfo SpreaderGameID. */
-        public SpreaderGameID: number;
+        /** UserInfo ReferralCode. */
+        public ReferralCode: string;
 
         /** UserInfo ClientAddr. */
         public ClientAddr: string;
+
+        /** UserInfo ServerAddr. */
+        public ServerAddr: string;
 
         /** UserInfo MachineCode. */
         public MachineCode: string;
@@ -952,6 +958,27 @@ export namespace login {
 
         /** RegisterReq PlatformID */
         PlatformID?: (number|null);
+
+        /** RegisterReq Gender */
+        Gender?: (number|null);
+
+        /** RegisterReq Age */
+        Age?: (number|null);
+
+        /** RegisterReq PassPortID */
+        PassPortID?: (string|null);
+
+        /** RegisterReq RealName */
+        RealName?: (string|null);
+
+        /** RegisterReq PhoneNum */
+        PhoneNum?: (string|null);
+
+        /** RegisterReq Email */
+        Email?: (string|null);
+
+        /** RegisterReq Address */
+        Address?: (string|null);
     }
 
     /** Represents a RegisterReq. */
@@ -980,6 +1007,27 @@ export namespace login {
 
         /** RegisterReq PlatformID. */
         public PlatformID: number;
+
+        /** RegisterReq Gender. */
+        public Gender: number;
+
+        /** RegisterReq Age. */
+        public Age: number;
+
+        /** RegisterReq PassPortID. */
+        public PassPortID: string;
+
+        /** RegisterReq RealName. */
+        public RealName: string;
+
+        /** RegisterReq PhoneNum. */
+        public PhoneNum: string;
+
+        /** RegisterReq Email. */
+        public Email: string;
+
+        /** RegisterReq Address. */
+        public Address: string;
 
         /**
          * Creates a new RegisterReq instance using the specified properties.
