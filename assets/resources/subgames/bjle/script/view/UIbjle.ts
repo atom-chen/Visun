@@ -142,7 +142,7 @@ export default class UIbjle extends BaseComponent {
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			LoginUser.getInstance().Gold = param.Gold;
 			if(!isEmpty(param.AlterGold)) {
-				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 100));
+				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
 			}
 		} 
 	}
@@ -233,7 +233,7 @@ export default class UIbjle extends BaseComponent {
 		this.isJoined = false;
 		LoginUser.getInstance().Gold += param.MyAcquire;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
-		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 100));
+		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
 	}
 
     private playJiesuan() {

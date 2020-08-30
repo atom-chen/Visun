@@ -87,10 +87,11 @@ export default class GameUtil {
 		}
 		nd.getComponent(cc.Label).string = str;
 		nd.active = true;
+		nd.stopAllActions();
 		nd.position = fromPos;
 		nd.runAction(cc.sequence(
 			cc.show(),
-			cc.moveBy(1, diff),
+			cc.moveBy(0.5, diff),
 			cc.delayTime(1),
 			cc.hide()
 		));
