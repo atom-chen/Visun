@@ -4,6 +4,9 @@
 //--------------------------------------
 import BaseProcessor from "./BaseProcessor";
 import MemoryStream from "../../basic/datastruct/MemoryStream";
+import { ConnState } from "../../basic/defines/KernelDefine";
+import EventCenter from "../../basic/event/EventCenter";
+import KernelEvent from "../../basic/defines/KernelEvent";
 
 
 const HEAD_SIZE = 2;
@@ -20,6 +23,9 @@ export default class LeafWsProcessor extends BaseProcessor {
 		if (this.isNetHolded()) {
 			cc.log(cc.js.formatStr("%s [push send] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, buff.length));
 			this._send_list.push(buff);
+			if(this._channel.getState() === ConnState.reconnectfail) {
+				EventCenter.getInstance().fire(KernelEvent.NET_STATE, this._channel);
+			}
 			return false;
 		}
 
