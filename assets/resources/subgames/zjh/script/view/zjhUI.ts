@@ -14,6 +14,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 import { gamecomm } from "../../../../../../declares/gamecomm";
+import ZjhServer from "../model/ZjhServer";
 
 
 const MAX_SOLDIER = 5;
@@ -48,6 +49,9 @@ export default class zjhUI extends BaseComponent {
         this.initNetEvent();
 
         this.ZhajinhuaStateFreeResp(null);
+
+        //for test
+        ZjhServer.getInstance().run();
     }
 
     //玩家的UI位置
@@ -69,13 +73,16 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[n].active = false;
         }
         if(param.Fighters) {
+            for(var ii in param.Fighters) {
+                ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
+            }
             for(var i in param.Fighters) {
                 var cur = param.Fighters[i];
                 var idx = this.playerIndex(cur);
                 this._pnodes[idx].active = true;
-                this._playerCpns[idx].setName(cur.UserId.tostring());
+                this._playerCpns[idx].setName(cur.UserId);
                 this._playerCpns[idx].setMoney(0);
-                this._pnodes[idx].getChildByName("ust_kanpai").active = param.Fighters[idx].IsSee == true;
+                this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
                 if(cur.FightState == 1) {
                     this._stateCpns[idx].genzhu();
                 }
@@ -102,19 +109,22 @@ export default class zjhUI extends BaseComponent {
     //准备阶段
     ZhajinhuaStateFreeResp(param:any) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
-        this.m_ui.gameLayer.active = false;
         this.m_ui.opLayer.active = false;
 
         for(var i in this._stateCpns){
             this._stateCpns[i].idle();
+            this._cdCpns[i].node.active = false;
+            this._handors[i].resetCards(null, false);
         }
     }
 
     //开始游戏: 播发牌动画
     ZhajinhuaStateStartResp(param:any) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
-        this.m_ui.gameLayer.active = true;
-        this.m_ui.opLayer.active = true;
+        this.m_ui.opLayer.active = false;
+        for(var i in this._stateCpns){
+            this._handors[i].resetCards([0,0,0], false);
+        }
 
         UIManager.showSpineAsync("common/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
             on_complete: (sk, trackEntry)=>{
@@ -126,8 +136,7 @@ export default class zjhUI extends BaseComponent {
     //战斗阶段
     ZhajinhuaStatePlayingResp(param:zhajinhua.ZhajinhuaStatePlayingResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
-        this.m_ui.gameLayer.active = true;
-        this.m_ui.opLayer.active = true;
+        this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserID;
 
         var idx = this.playerIdx(param.UserID);
         for(var i=0; i<MAX_SOLDIER; i++) {
@@ -139,7 +148,6 @@ export default class zjhUI extends BaseComponent {
     //结算阶段
     ZhajinhuaStateOverResp(param:any) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
-        this.m_ui.gameLayer.active = true;
         this.m_ui.opLayer.active = false;
     }
 
@@ -199,6 +207,8 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.CurHost);
         if(idx >= 0) {
             this.m_ui.zhuang.position = this._pnodes[idx].position;
+            this.m_ui.zhuang.x += 50;
+            this.m_ui.zhuang.y += 75;
         }
     }
 

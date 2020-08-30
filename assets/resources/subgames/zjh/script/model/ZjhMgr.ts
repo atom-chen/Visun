@@ -32,6 +32,10 @@ export default class ZjhMgr extends ModelBase {
         return this.enterData;
     }
 
+    addPlayer(man) {
+        this._players[man.UserId] = man;
+    }
+
     removePlayer(uid:number) {
 		this._players[uid] = null;
 	}
