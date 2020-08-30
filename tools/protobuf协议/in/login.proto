@@ -105,6 +105,7 @@ message LoginReq{
   string Password = 2;    //密码
   string SecurityCode = 3;  //验证码
   string MachineCode = 4;  //机器码
+  uint32 PlatformID = 5; //需要注明平台ID (测试用: id == 1)
 }
 message LoginResp{
   UserInfo Info = 1;

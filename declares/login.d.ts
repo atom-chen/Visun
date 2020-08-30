@@ -1156,6 +1156,9 @@ export namespace login {
 
         /** LoginReq MachineCode */
         MachineCode?: (string|null);
+
+        /** LoginReq PlatformID */
+        PlatformID?: (number|null);
     }
 
     /** Represents a LoginReq. */
@@ -1178,6 +1181,9 @@ export namespace login {
 
         /** LoginReq MachineCode. */
         public MachineCode: string;
+
+        /** LoginReq PlatformID. */
+        public PlatformID: number;
 
         /**
          * Creates a new LoginReq instance using the specified properties.
