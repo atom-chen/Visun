@@ -15,6 +15,7 @@ import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import ZjhServer from "../model/ZjhServer";
+import { ZjhFightState } from "../model/ZjhDefine";
 
 
 const MAX_SOLDIER = 5;
@@ -85,16 +86,16 @@ export default class zjhUI extends BaseComponent {
                 this._playerCpns[idx].setName(cur.UserId);
                 this._playerCpns[idx].setMoney(0);
                 this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
-                if(cur.FightState == 1) {
+                if(cur.FightState == ZjhFightState.genzhu) {
                     this._stateCpns[idx].genzhu();
                 }
-                else if(cur.FightState == 2) {
+                else if(cur.FightState == ZjhFightState.jiazhu) {
                     this._stateCpns[idx].jiazhu();
                 }
-                else if(cur.FightState == 3) {
+                else if(cur.FightState == ZjhFightState.qipai) {
                     this._stateCpns[idx].qipai();
                 }
-                else if(cur.FightState == 4) {
+                else if(cur.FightState == ZjhFightState.bipaishu) {
                     this._stateCpns[idx].bipaishu();
                 }
                 else {
@@ -114,7 +115,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.opLayer.active = false;
 
         this.m_ui.zhuang.position = this._zhuangPos;
-        
+
         for(var i in this._stateCpns){
             this._stateCpns[i].idle();
             this._cdCpns[i].node.active = false;

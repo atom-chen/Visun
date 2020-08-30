@@ -5,6 +5,7 @@ import { zhajinhua_packet_define, zhajinhua_msgs } from "../../../../../common/s
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { ZjhFightState } from "./ZjhDefine";
 
 export default class ZjhServer extends ModelBase {
 	private static _instance:ZjhServer = null;
@@ -30,7 +31,7 @@ export default class ZjhServer extends ModelBase {
 			var man:any = {};
 			man.UserId = i;
 			man.IsSee = false;
-			man.FightState = 0;
+			man.FightState = ZjhFightState.idle;
 			man.RecentBetMoney = 0;
 			man.TotalBetMoney = 0;
 			man.SeatId = i;
@@ -73,8 +74,14 @@ export default class ZjhServer extends ModelBase {
 		}
 	}
 
+	isLosed(uid:number) : boolean {
+		var man = this.findById(uid);
+		return man.FightState == ZjhFightState.bipaishu || man.FightState == ZjhFightState.qipai;
+	}
+
 	run() {
 		this.initFighters();
+
 		var data:any = {};
 		data.CurHost = 3;
 		data.Fighters = this._fighters;
@@ -89,7 +96,7 @@ export default class ZjhServer extends ModelBase {
 
 	toReady(tmr) {
 		for(var i in this._fighters) {
-			this._fighters[i].FightState = 0;
+			this._fighters[i].FightState = ZjhFightState.idle;
 		}
 
 		var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateFreeResp].pack({}, false);
@@ -113,7 +120,7 @@ export default class ZjhServer extends ModelBase {
 	checkFinish() : boolean {
 		var cnt = 0;
 		for(var i in this._fighters) {
-			if(!(this._fighters[i].FightState == 3 || this._fighters[i].FightState == 4)) {
+			if(!this.isLosed(this._fighters[i].UserId)) {
 				cnt++;
 			}
 		}
@@ -121,7 +128,7 @@ export default class ZjhServer extends ModelBase {
 	}
 	fightAi(tmr, uid:number) {
 		var man = this.findById(uid);
-		man.FightState = 3;
+		man.FightState = ZjhFightState.qipai;
 		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:man.UserId}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
@@ -150,7 +157,7 @@ export default class ZjhServer extends ModelBase {
 	toFinish() {
 		var winner = 0;
 		for(var i in this._fighters) {
-			if(!(this._fighters[i].FightState == 3 || this._fighters[i].FightState == 4)) {
+			if(!this.isLosed(this._fighters[i].UserId)) {
 				winner = this._fighters[i].UserId;
 			}
 		}
