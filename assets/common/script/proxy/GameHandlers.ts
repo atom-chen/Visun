@@ -17,6 +17,7 @@ import { landLords } from "../../../../declares/landLords";
 import BacarratMgr from "../../../resources/subgames/bjle2/script/BacarratMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
+import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
 
 
 var GameHandlers = {
@@ -46,6 +47,7 @@ var GameHandlers = {
 	
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.BaccaratSceneResp) {
         BacarratMgr.getInstance().setEnterData(param);
+        BjleMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},

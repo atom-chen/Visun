@@ -42,9 +42,9 @@ export default class LoginMgr extends ModelBase {
                         if(menuId===1) {
                             chan.reconnect();
                         }
-                    })
+                    });
                 } else if(chan.getState()===ConnState.reconnectsucc) {
-					LoginMgr.getInstance().quickLogin();
+					LoginMgr.getInstance().quickLogin(true);
 				}
             }
         }, this);
@@ -192,8 +192,8 @@ export default class LoginMgr extends ModelBase {
 		LocalCache.getInstance("lusr").write("see", priSecret);
 	}
 
-	public quickLogin(){
-		if(this.checkLogin(false)) {
+	public quickLogin(bForce:boolean = false){
+		if(!bForce && this.checkLogin(false)) {
 			return;
 		}
 		var priAccount = LocalCache.getInstance("lusr").read("acc");

@@ -21,7 +21,7 @@ var GameConfig = {
 		name: "百家乐",
 		icon: "lobby/imgs/gameico/ico_bjl",
 		dir: "bjle",
-		viewpath: ViewDefine.UIBacarrat
+		viewpath: ViewDefine.UIbjle
 	},
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,

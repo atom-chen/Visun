@@ -122,16 +122,16 @@ export default class BacarratUI extends BaseComponent {
     }
 
 	//准备阶段
-	private BaccaratStateStart(param) {
+	private BaccaratStateOpenResp(param) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 	}
-
+	
 	//开局：洗牌发牌
-	private BaccaratStateOpenResp(param) {
-		this.isJoined = false;
+	private BaccaratStateStart(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);

@@ -121,7 +121,8 @@ export default class UIbjle extends BaseComponent {
     }
 
 	//准备阶段
-	private BaccaratStateStart(param) {
+	private BaccaratStateOpenResp(param) {
+		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -129,8 +130,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//开局：洗牌发牌
-	private BaccaratStateOpenResp(param) {
-		this.isJoined = false;
+	private BaccaratStateStart(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -156,19 +156,21 @@ export default class UIbjle extends BaseComponent {
 
 	private BaccaratOverResp(param:baccarat.BaccaratOverResp) {
 		this.isJoined = false;
+		var aaa = [];
+		var bbb = [];
 		this.m_ui.cardLayer.active = true;
 		for(var i=param.BankerCard.Cards.length-1; i>=0; i--) {
-			if(param.BankerCard.Cards[i] == 0) {
-				param.BankerCard.Cards.splice(i, 1);
+			if(param.BankerCard.Cards[i] != 0) {
+				aaa.push(param.BankerCard.Cards[i]);
 			}
 		}
 		for(var j=param.PlayerCard.Cards.length-1; j>=0; j--) {
-			if(param.PlayerCard.Cards[j] == 0) {
-				param.PlayerCard.Cards.splice(j, 1);
+			if(param.PlayerCard.Cards[j] != 0) {
+				bbb.push(param.PlayerCard.Cards[j]);
 			}
 		}
-		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards(param.BankerCard.Cards, true);
-		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards(param.PlayerCard.Cards, true);
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards(aaa, true);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards(bbb, true);
 	}
 
 	private BaccaratCheckoutResp(param:baccarat.BaccaratCheckoutResp) {
