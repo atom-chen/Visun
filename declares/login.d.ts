@@ -1400,6 +1400,96 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of an AllopatricResp. */
+    interface IAllopatricResp {
+
+        /** AllopatricResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents an AllopatricResp. */
+    class AllopatricResp implements IAllopatricResp {
+
+        /**
+         * Constructs a new AllopatricResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IAllopatricResp);
+
+        /** AllopatricResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new AllopatricResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns AllopatricResp instance
+         */
+        public static create(properties?: login.IAllopatricResp): login.AllopatricResp;
+
+        /**
+         * Encodes the specified AllopatricResp message. Does not implicitly {@link login.AllopatricResp.verify|verify} messages.
+         * @param message AllopatricResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IAllopatricResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AllopatricResp message, length delimited. Does not implicitly {@link login.AllopatricResp.verify|verify} messages.
+         * @param message AllopatricResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IAllopatricResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AllopatricResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AllopatricResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.AllopatricResp;
+
+        /**
+         * Decodes an AllopatricResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AllopatricResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.AllopatricResp;
+
+        /**
+         * Verifies an AllopatricResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AllopatricResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AllopatricResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.AllopatricResp;
+
+        /**
+         * Creates a plain object from an AllopatricResp message. Also converts values to other types if specified.
+         * @param message AllopatricResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.AllopatricResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AllopatricResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ReconnectReq. */
     interface IReconnectReq {
 

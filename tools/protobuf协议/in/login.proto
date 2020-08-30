@@ -120,6 +120,10 @@ message LoginReq{
 message LoginResp{
   MasterInfo MainInfo = 1;
 }
+//异地
+message AllopatricResp{
+    uint64 UserId = 1;
+}
 
 
 //重连
