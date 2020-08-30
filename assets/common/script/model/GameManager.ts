@@ -115,7 +115,6 @@ export default class GameManager extends ModelBase {
 		// 	return;
 		// }
 		cc.log("enterGame: ", gameType)
-	//	gamecomm_request.ReqEnterGame({GameType:gameType});
 
 		this.setGameId(gameType);
 
