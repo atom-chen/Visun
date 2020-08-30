@@ -97,6 +97,7 @@ message RegisterReq{
   //选填
   uint32 Gender = 7;       //性别
   uint32 Age = 8;          //年龄
+  uint32 FaceID = 9;       //头像
   string PassPortID = 10;  //证件号
   string RealName = 11;    //真实名字
   string PhoneNum = 12;    //手机

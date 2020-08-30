@@ -1360,6 +1360,7 @@ $root.login = (function() {
         RegisterReq.prototype.PlatformID = 0;
         RegisterReq.prototype.Gender = 0;
         RegisterReq.prototype.Age = 0;
+        RegisterReq.prototype.FaceID = 0;
         RegisterReq.prototype.PassPortID = "";
         RegisterReq.prototype.RealName = "";
         RegisterReq.prototype.PhoneNum = "";
@@ -1389,6 +1390,8 @@ $root.login = (function() {
                 writer.uint32(56).uint32(message.Gender);
             if (message.Age != null && Object.hasOwnProperty.call(message, "Age"))
                 writer.uint32(64).uint32(message.Age);
+            if (message.FaceID != null && Object.hasOwnProperty.call(message, "FaceID"))
+                writer.uint32(72).uint32(message.FaceID);
             if (message.PassPortID != null && Object.hasOwnProperty.call(message, "PassPortID"))
                 writer.uint32(82).string(message.PassPortID);
             if (message.RealName != null && Object.hasOwnProperty.call(message, "RealName"))
@@ -1436,6 +1439,9 @@ $root.login = (function() {
                     break;
                 case 8:
                     message.Age = reader.uint32();
+                    break;
+                case 9:
+                    message.FaceID = reader.uint32();
                     break;
                 case 10:
                     message.PassPortID = reader.string();
@@ -1493,6 +1499,9 @@ $root.login = (function() {
             if (message.Age != null && message.hasOwnProperty("Age"))
                 if (!$util.isInteger(message.Age))
                     return "Age: integer expected";
+            if (message.FaceID != null && message.hasOwnProperty("FaceID"))
+                if (!$util.isInteger(message.FaceID))
+                    return "FaceID: integer expected";
             if (message.PassPortID != null && message.hasOwnProperty("PassPortID"))
                 if (!$util.isString(message.PassPortID))
                     return "PassPortID: string expected";
@@ -1531,6 +1540,8 @@ $root.login = (function() {
                 message.Gender = object.Gender >>> 0;
             if (object.Age != null)
                 message.Age = object.Age >>> 0;
+            if (object.FaceID != null)
+                message.FaceID = object.FaceID >>> 0;
             if (object.PassPortID != null)
                 message.PassPortID = String(object.PassPortID);
             if (object.RealName != null)
@@ -1557,6 +1568,7 @@ $root.login = (function() {
                 object.PlatformID = 0;
                 object.Gender = 0;
                 object.Age = 0;
+                object.FaceID = 0;
                 object.PassPortID = "";
                 object.RealName = "";
                 object.PhoneNum = "";
@@ -1579,6 +1591,8 @@ $root.login = (function() {
                 object.Gender = message.Gender;
             if (message.Age != null && message.hasOwnProperty("Age"))
                 object.Age = message.Age;
+            if (message.FaceID != null && message.hasOwnProperty("FaceID"))
+                object.FaceID = message.FaceID;
             if (message.PassPortID != null && message.hasOwnProperty("PassPortID"))
                 object.PassPortID = message.PassPortID;
             if (message.RealName != null && message.hasOwnProperty("RealName"))
