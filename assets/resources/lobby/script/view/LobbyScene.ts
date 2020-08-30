@@ -13,7 +13,6 @@ export default class LobbyScene extends BaseComponent {
     onLoad () {
         UIManager.openPanel(ViewDefine.UILobby, null);
         LoginMgr.getInstance().connectServer();
-        LoginMgr.getInstance().checkLogin(true);
         LoginMgr.getInstance().quickLogin();
     }
 

@@ -193,6 +193,9 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	public quickLogin(){
+		if(this.checkLogin(false)) {
+			return;
+		}
 		var priAccount = LocalCache.getInstance("lusr").read("acc");
 		var priSecret = LocalCache.getInstance("lusr").read("see");
 		if(isNil(priAccount) || isNil(priSecret)) {

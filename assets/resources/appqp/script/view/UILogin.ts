@@ -3,6 +3,8 @@ import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import { login_msgs } from "../../../../common/script/proto/net_login";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
+import TimerManager from "../../../../kernel/basic/timer/TimerManager";
+import { newHandler } from "../../../../kernel/utils/GlobalFuncs";
 
 
 const {ccclass, property} = cc._decorator;
@@ -18,6 +20,11 @@ export default class LoginUI extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
         this.initNetEvent();
+        if(LoginMgr.getInstance().checkLogin(false)) {
+            TimerManager.delayFrame(1, newHandler(function(tmr){
+                CommonUtil.safeDelete(this);
+            }, this));
+        }
     }
 
     private initNetEvent() {
