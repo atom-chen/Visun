@@ -1969,6 +1969,242 @@ $root.login = (function() {
         return LoginResp;
     })();
 
+    login.ReconnectReq = (function() {
+
+        function ReconnectReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ReconnectReq.prototype.Account = "";
+        ReconnectReq.prototype.Password = "";
+        ReconnectReq.prototype.MachineCode = "";
+        ReconnectReq.prototype.PlatformID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        ReconnectReq.create = function create(properties) {
+            return new ReconnectReq(properties);
+        };
+
+        ReconnectReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Account != null && Object.hasOwnProperty.call(message, "Account"))
+                writer.uint32(10).string(message.Account);
+            if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
+                writer.uint32(18).string(message.Password);
+            if (message.MachineCode != null && Object.hasOwnProperty.call(message, "MachineCode"))
+                writer.uint32(26).string(message.MachineCode);
+            if (message.PlatformID != null && Object.hasOwnProperty.call(message, "PlatformID"))
+                writer.uint32(32).uint64(message.PlatformID);
+            return writer;
+        };
+
+        ReconnectReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ReconnectReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReconnectReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Account = reader.string();
+                    break;
+                case 2:
+                    message.Password = reader.string();
+                    break;
+                case 3:
+                    message.MachineCode = reader.string();
+                    break;
+                case 4:
+                    message.PlatformID = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ReconnectReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ReconnectReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Account != null && message.hasOwnProperty("Account"))
+                if (!$util.isString(message.Account))
+                    return "Account: string expected";
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                if (!$util.isString(message.Password))
+                    return "Password: string expected";
+            if (message.MachineCode != null && message.hasOwnProperty("MachineCode"))
+                if (!$util.isString(message.MachineCode))
+                    return "MachineCode: string expected";
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                if (!$util.isInteger(message.PlatformID) && !(message.PlatformID && $util.isInteger(message.PlatformID.low) && $util.isInteger(message.PlatformID.high)))
+                    return "PlatformID: integer|Long expected";
+            return null;
+        };
+
+        ReconnectReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ReconnectReq)
+                return object;
+            var message = new $root.login.ReconnectReq();
+            if (object.Account != null)
+                message.Account = String(object.Account);
+            if (object.Password != null)
+                message.Password = String(object.Password);
+            if (object.MachineCode != null)
+                message.MachineCode = String(object.MachineCode);
+            if (object.PlatformID != null)
+                if ($util.Long)
+                    (message.PlatformID = $util.Long.fromValue(object.PlatformID)).unsigned = true;
+                else if (typeof object.PlatformID === "string")
+                    message.PlatformID = parseInt(object.PlatformID, 10);
+                else if (typeof object.PlatformID === "number")
+                    message.PlatformID = object.PlatformID;
+                else if (typeof object.PlatformID === "object")
+                    message.PlatformID = new $util.LongBits(object.PlatformID.low >>> 0, object.PlatformID.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        ReconnectReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Account = "";
+                object.Password = "";
+                object.MachineCode = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.PlatformID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlatformID = options.longs === String ? "0" : 0;
+            }
+            if (message.Account != null && message.hasOwnProperty("Account"))
+                object.Account = message.Account;
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                object.Password = message.Password;
+            if (message.MachineCode != null && message.hasOwnProperty("MachineCode"))
+                object.MachineCode = message.MachineCode;
+            if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
+                if (typeof message.PlatformID === "number")
+                    object.PlatformID = options.longs === String ? String(message.PlatformID) : message.PlatformID;
+                else
+                    object.PlatformID = options.longs === String ? $util.Long.prototype.toString.call(message.PlatformID) : options.longs === Number ? new $util.LongBits(message.PlatformID.low >>> 0, message.PlatformID.high >>> 0).toNumber(true) : message.PlatformID;
+            return object;
+        };
+
+        ReconnectReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ReconnectReq;
+    })();
+
+    login.ReconnectResp = (function() {
+
+        function ReconnectResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ReconnectResp.prototype.MainInfo = null;
+
+        ReconnectResp.create = function create(properties) {
+            return new ReconnectResp(properties);
+        };
+
+        ReconnectResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
+                $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        ReconnectResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ReconnectResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ReconnectResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ReconnectResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ReconnectResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.MainInfo != null && message.hasOwnProperty("MainInfo")) {
+                var error = $root.login.MasterInfo.verify(message.MainInfo);
+                if (error)
+                    return "MainInfo." + error;
+            }
+            return null;
+        };
+
+        ReconnectResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ReconnectResp)
+                return object;
+            var message = new $root.login.ReconnectResp();
+            if (object.MainInfo != null) {
+                if (typeof object.MainInfo !== "object")
+                    throw TypeError(".login.ReconnectResp.MainInfo: object expected");
+                message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
+            }
+            return message;
+        };
+
+        ReconnectResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.MainInfo = null;
+            if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
+                object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
+            return object;
+        };
+
+        ReconnectResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ReconnectResp;
+    })();
+
     login.EnterRoomReq = (function() {
 
         function EnterRoomReq(properties) {

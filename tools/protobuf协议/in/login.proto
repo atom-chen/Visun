@@ -122,6 +122,21 @@ message LoginResp{
 }
 
 
+//重连
+message ReconnectReq{
+  string Account = 1;    //账号
+  string Password = 2;    //密码
+  string MachineCode = 3;  //机器码
+  uint64 PlatformID = 4; //需要注明平台ID (测试用: id == 1)
+}
+message ReconnectResp{
+  MasterInfo MainInfo = 1;
+}
+
+
+
+
+
 //进入房间
 message EnterRoomReq{
   uint32 RoomNum = 1;      //房间号码
