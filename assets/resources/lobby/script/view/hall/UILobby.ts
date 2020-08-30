@@ -10,6 +10,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import { login } from "../../../../../../declares/login";
 
 
 const {ccclass, property} = cc._decorator;
@@ -87,10 +88,15 @@ export default class UILobby extends BaseComponent {
 		tbl.lab_roomkey.getComponent(cc.Label).string = gameData.Info.Level;
 		
 		if(cfg) {
-			cc.loader.loadRes(cfg.icon, cc.SpriteFrame, (err, rsc)=>{
-				if(err) { cc.log("load fail", err); return; }
-				tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
-			});
+			var tmp = cc.loader.getRes(cfg.icon, cc.SpriteFrame);
+			if(tmp) {
+				tbl.Background.getComponent(cc.Sprite).spriteFrame = tmp;
+			} else {
+				cc.loader.loadRes(cfg.icon, cc.SpriteFrame, (err, rsc)=>{
+					if(err) { cc.log("load fail", err); return; }
+					tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
+				});
+			}
 		} else {
 			cc.warn("缺少配置信息：", gameData.Info.KindID);
 		}
@@ -105,13 +111,13 @@ export default class UILobby extends BaseComponent {
 		GameUtil.setHeadIcon(this.m_ui.headNode, LoginUser.getInstance().getHead());
 	}
 
-	private MasterInfo(param) {
+	private LoginResp(param) {
 		this.refleshUI(null);
 		this.refleshRoomsInfo();
 	}
 
 	private initNetEvents() {
-		EventCenter.getInstance().listen(login_msgs.MasterInfo, this.MasterInfo, this);
+		EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
 		EventCenter.getInstance().listen(login_msgs.GameList, this.refleshGameList, this);
 	}
 
