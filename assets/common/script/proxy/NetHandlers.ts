@@ -46,25 +46,8 @@ var NetHandlers = {
         UIManager.toast("登陆成功");
     },
 
-    [login_msgs.MasterInfo] : function(param:login.MasterInfo) {
-        LogicCenter.getInstance().clear();
-        LogicCenter.getInstance().init();
-
-        LoginUser.getInstance().UserId = param.UserInfo.UserID;
-        CommonUtil.simpleCopy(LoginUser.getInstance(), param.UserInfo);
-
-        GameManager.getInstance().setRoomsInfo(param.RoomsInfo);
-
-        UIManager.toast("登陆成功");
-    },
-
-    [login_msgs.UserInfo] : function(param: login.UserInfo) {
-        LoginUser.getInstance().UserId = param.UserID;
-        CommonUtil.simpleCopy(LoginUser.getInstance(), param);
-    },
-
-    [login_msgs.GameList] : function(param) {
-        GameManager.getInstance().setGameArr(param.Items)
+    [login_msgs.EnterRoomResp] : function(param:login.EnterRoomResp) {
+        GameManager.getInstance().setGameArr(param.Games.Items);
     },
 
 }

@@ -118,7 +118,7 @@ export default class UILobby extends BaseComponent {
 
 	private initNetEvents() {
 		EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
-		EventCenter.getInstance().listen(login_msgs.GameList, this.refleshGameList, this);
+		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 	}
 
 	private initUiEvents() {
