@@ -20,11 +20,6 @@ export default class LoginUI extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
         this.initNetEvent();
-        if(LoginMgr.getInstance().checkLogin(false)) {
-            TimerManager.delayFrame(1, newHandler(function(tmr){
-                CommonUtil.safeDelete(this);
-            }, this));
-        }
     }
 
     private initNetEvent() {
