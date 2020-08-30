@@ -36,6 +36,8 @@ message TimeInfo {
   int32 TotalTime = 4; //总时长
 }
 
+
+//区域信息
 message AreaInfo {
   int32 ID = 1;           //区域ID
   int64 MyGold = 2;       //my
@@ -46,6 +48,14 @@ message AreaInfo {
 //玩家列表(信息)
 message PlayerListInfo {
   repeated PlayerInfo AllInfos = 1; //所有玩家信息
+}
+//金币变化通知
+message GoldChangeInfo {
+  uint64 UserID = 1;
+  int64 Gold = 2;     //金币 (客户端统一 */100)
+  int64 AlterGold = 3;//增减了多少 (客户端统一 */100)
+  uint32 Code = 4;    //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结 5:提币
+  string Reason = 5;  //备注详情
 }
 
 
@@ -75,36 +85,44 @@ message GameRecordList {
 //-----------------------------------------------------------------------------------------
 
 //进入游戏
-message ReqEnterGame {
+message EnterGameReq {
   uint32 GameID = 1; //游戏标识
+}
+message EnterGameResp {
+  uint32 GameID = 1; //游戏标识
+  uint64 UserID = 2;
 }
 
 //退出游戏
-message ReqExitGame {
+message ExitGameReq {
   uint32 GameID = 1; //游戏标识
 }
+message ExitGameResp {
+  uint32 GameID = 1; //游戏标识
+  uint64 UserID = 2;
+}
+
 
 //换桌
-message ReqChangeTable {
+message ChangeTableReq {
   uint32 GameID = 1; //游戏标识
 }
+message ChangeTableResp {
+  uint32 GameID = 1; //游戏ID
+  uint32 TableID = 2; //桌子ID
+  uint64 UserID = 3;  //玩家ID
+
+}
+
 
 //踢出
-message BeOut {
+message BeOutResp {
   uint64 UserID = 1;  //玩家ID
   uint32 GameID = 2; //游戏标识
   uint32 Code = 3;    //操作码 0:时间到被剔除 1:刷子
   string Hints = 4;    //被踢出的原因
 }
 
-//金币变化通知
-message NotifyChangeGold {
-  uint64 UserID = 1;
-  int64 Gold = 2;     //金币 (客户端统一 */100)
-  int64 AlterGold = 3;//增减了多少 (客户端统一 */100)
-  uint32 Code = 4;    //操作原因 0:结算 1:充值 2:平台扣除 3:平台奖励 4:冻结 5:提币
-  string Reason = 5;  //备注详情
-}
 
 
 

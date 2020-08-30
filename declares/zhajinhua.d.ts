@@ -1995,7 +1995,7 @@ export namespace zhajinhua {
         WinnerId?: (number|Long|null);
 
         /** ZhajinhuaOverResp Infos */
-        Infos?: (gamecomm.INotifyChangeGold[]|null);
+        Infos?: (gamecomm.IGoldChangeInfo[]|null);
     }
 
     /** Represents a ZhajinhuaOverResp. */
@@ -2011,7 +2011,7 @@ export namespace zhajinhua {
         public WinnerId: (number|Long);
 
         /** ZhajinhuaOverResp Infos. */
-        public Infos: gamecomm.INotifyChangeGold[];
+        public Infos: gamecomm.IGoldChangeInfo[];
 
         /**
          * Creates a new ZhajinhuaOverResp instance using the specified properties.

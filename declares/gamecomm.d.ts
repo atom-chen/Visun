@@ -572,6 +572,120 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a GoldChangeInfo. */
+    interface IGoldChangeInfo {
+
+        /** GoldChangeInfo UserID */
+        UserID?: (number|Long|null);
+
+        /** GoldChangeInfo Gold */
+        Gold?: (number|Long|null);
+
+        /** GoldChangeInfo AlterGold */
+        AlterGold?: (number|Long|null);
+
+        /** GoldChangeInfo Code */
+        Code?: (number|null);
+
+        /** GoldChangeInfo Reason */
+        Reason?: (string|null);
+    }
+
+    /** Represents a GoldChangeInfo. */
+    class GoldChangeInfo implements IGoldChangeInfo {
+
+        /**
+         * Constructs a new GoldChangeInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGoldChangeInfo);
+
+        /** GoldChangeInfo UserID. */
+        public UserID: (number|Long);
+
+        /** GoldChangeInfo Gold. */
+        public Gold: (number|Long);
+
+        /** GoldChangeInfo AlterGold. */
+        public AlterGold: (number|Long);
+
+        /** GoldChangeInfo Code. */
+        public Code: number;
+
+        /** GoldChangeInfo Reason. */
+        public Reason: string;
+
+        /**
+         * Creates a new GoldChangeInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GoldChangeInfo instance
+         */
+        public static create(properties?: gamecomm.IGoldChangeInfo): gamecomm.GoldChangeInfo;
+
+        /**
+         * Encodes the specified GoldChangeInfo message. Does not implicitly {@link gamecomm.GoldChangeInfo.verify|verify} messages.
+         * @param message GoldChangeInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGoldChangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GoldChangeInfo message, length delimited. Does not implicitly {@link gamecomm.GoldChangeInfo.verify|verify} messages.
+         * @param message GoldChangeInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGoldChangeInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GoldChangeInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GoldChangeInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GoldChangeInfo;
+
+        /**
+         * Decodes a GoldChangeInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GoldChangeInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GoldChangeInfo;
+
+        /**
+         * Verifies a GoldChangeInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GoldChangeInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GoldChangeInfo
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GoldChangeInfo;
+
+        /**
+         * Creates a plain object from a GoldChangeInfo message. Also converts values to other types if specified.
+         * @param message GoldChangeInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GoldChangeInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GoldChangeInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a PlayerRecord. */
     interface IPlayerRecord {
 
@@ -872,493 +986,673 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ReqEnterGame. */
-    interface IReqEnterGame {
+    /** Properties of an EnterGameReq. */
+    interface IEnterGameReq {
 
-        /** ReqEnterGame GameID */
+        /** EnterGameReq GameID */
         GameID?: (number|null);
     }
 
-    /** Represents a ReqEnterGame. */
-    class ReqEnterGame implements IReqEnterGame {
+    /** Represents an EnterGameReq. */
+    class EnterGameReq implements IEnterGameReq {
 
         /**
-         * Constructs a new ReqEnterGame.
+         * Constructs a new EnterGameReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IReqEnterGame);
+        constructor(properties?: gamecomm.IEnterGameReq);
 
-        /** ReqEnterGame GameID. */
+        /** EnterGameReq GameID. */
         public GameID: number;
 
         /**
-         * Creates a new ReqEnterGame instance using the specified properties.
+         * Creates a new EnterGameReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ReqEnterGame instance
+         * @returns EnterGameReq instance
          */
-        public static create(properties?: gamecomm.IReqEnterGame): gamecomm.ReqEnterGame;
+        public static create(properties?: gamecomm.IEnterGameReq): gamecomm.EnterGameReq;
 
         /**
-         * Encodes the specified ReqEnterGame message. Does not implicitly {@link gamecomm.ReqEnterGame.verify|verify} messages.
-         * @param message ReqEnterGame message or plain object to encode
+         * Encodes the specified EnterGameReq message. Does not implicitly {@link gamecomm.EnterGameReq.verify|verify} messages.
+         * @param message EnterGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IReqEnterGame, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.IEnterGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ReqEnterGame message, length delimited. Does not implicitly {@link gamecomm.ReqEnterGame.verify|verify} messages.
-         * @param message ReqEnterGame message or plain object to encode
+         * Encodes the specified EnterGameReq message, length delimited. Does not implicitly {@link gamecomm.EnterGameReq.verify|verify} messages.
+         * @param message EnterGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IReqEnterGame, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.IEnterGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ReqEnterGame message from the specified reader or buffer.
+         * Decodes an EnterGameReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ReqEnterGame
+         * @returns EnterGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ReqEnterGame;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.EnterGameReq;
 
         /**
-         * Decodes a ReqEnterGame message from the specified reader or buffer, length delimited.
+         * Decodes an EnterGameReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ReqEnterGame
+         * @returns EnterGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ReqEnterGame;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.EnterGameReq;
 
         /**
-         * Verifies a ReqEnterGame message.
+         * Verifies an EnterGameReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ReqEnterGame message from a plain object. Also converts values to their respective internal types.
+         * Creates an EnterGameReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ReqEnterGame
+         * @returns EnterGameReq
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.ReqEnterGame;
+        public static fromObject(object: { [k: string]: any }): gamecomm.EnterGameReq;
 
         /**
-         * Creates a plain object from a ReqEnterGame message. Also converts values to other types if specified.
-         * @param message ReqEnterGame
+         * Creates a plain object from an EnterGameReq message. Also converts values to other types if specified.
+         * @param message EnterGameReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.ReqEnterGame, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.EnterGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ReqEnterGame to JSON.
+         * Converts this EnterGameReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ReqExitGame. */
-    interface IReqExitGame {
+    /** Properties of an EnterGameResp. */
+    interface IEnterGameResp {
 
-        /** ReqExitGame GameID */
+        /** EnterGameResp GameID */
         GameID?: (number|null);
+
+        /** EnterGameResp UserID */
+        UserID?: (number|Long|null);
     }
 
-    /** Represents a ReqExitGame. */
-    class ReqExitGame implements IReqExitGame {
+    /** Represents an EnterGameResp. */
+    class EnterGameResp implements IEnterGameResp {
 
         /**
-         * Constructs a new ReqExitGame.
+         * Constructs a new EnterGameResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IReqExitGame);
+        constructor(properties?: gamecomm.IEnterGameResp);
 
-        /** ReqExitGame GameID. */
+        /** EnterGameResp GameID. */
         public GameID: number;
 
+        /** EnterGameResp UserID. */
+        public UserID: (number|Long);
+
         /**
-         * Creates a new ReqExitGame instance using the specified properties.
+         * Creates a new EnterGameResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ReqExitGame instance
+         * @returns EnterGameResp instance
          */
-        public static create(properties?: gamecomm.IReqExitGame): gamecomm.ReqExitGame;
+        public static create(properties?: gamecomm.IEnterGameResp): gamecomm.EnterGameResp;
 
         /**
-         * Encodes the specified ReqExitGame message. Does not implicitly {@link gamecomm.ReqExitGame.verify|verify} messages.
-         * @param message ReqExitGame message or plain object to encode
+         * Encodes the specified EnterGameResp message. Does not implicitly {@link gamecomm.EnterGameResp.verify|verify} messages.
+         * @param message EnterGameResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IReqExitGame, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.IEnterGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ReqExitGame message, length delimited. Does not implicitly {@link gamecomm.ReqExitGame.verify|verify} messages.
-         * @param message ReqExitGame message or plain object to encode
+         * Encodes the specified EnterGameResp message, length delimited. Does not implicitly {@link gamecomm.EnterGameResp.verify|verify} messages.
+         * @param message EnterGameResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IReqExitGame, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.IEnterGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ReqExitGame message from the specified reader or buffer.
+         * Decodes an EnterGameResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ReqExitGame
+         * @returns EnterGameResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ReqExitGame;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.EnterGameResp;
 
         /**
-         * Decodes a ReqExitGame message from the specified reader or buffer, length delimited.
+         * Decodes an EnterGameResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ReqExitGame
+         * @returns EnterGameResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ReqExitGame;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.EnterGameResp;
 
         /**
-         * Verifies a ReqExitGame message.
+         * Verifies an EnterGameResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ReqExitGame message from a plain object. Also converts values to their respective internal types.
+         * Creates an EnterGameResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ReqExitGame
+         * @returns EnterGameResp
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.ReqExitGame;
+        public static fromObject(object: { [k: string]: any }): gamecomm.EnterGameResp;
 
         /**
-         * Creates a plain object from a ReqExitGame message. Also converts values to other types if specified.
-         * @param message ReqExitGame
+         * Creates a plain object from an EnterGameResp message. Also converts values to other types if specified.
+         * @param message EnterGameResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.ReqExitGame, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.EnterGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ReqExitGame to JSON.
+         * Converts this EnterGameResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ReqChangeTable. */
-    interface IReqChangeTable {
+    /** Properties of an ExitGameReq. */
+    interface IExitGameReq {
 
-        /** ReqChangeTable GameID */
+        /** ExitGameReq GameID */
         GameID?: (number|null);
     }
 
-    /** Represents a ReqChangeTable. */
-    class ReqChangeTable implements IReqChangeTable {
+    /** Represents an ExitGameReq. */
+    class ExitGameReq implements IExitGameReq {
 
         /**
-         * Constructs a new ReqChangeTable.
+         * Constructs a new ExitGameReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IReqChangeTable);
+        constructor(properties?: gamecomm.IExitGameReq);
 
-        /** ReqChangeTable GameID. */
+        /** ExitGameReq GameID. */
         public GameID: number;
 
         /**
-         * Creates a new ReqChangeTable instance using the specified properties.
+         * Creates a new ExitGameReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ReqChangeTable instance
+         * @returns ExitGameReq instance
          */
-        public static create(properties?: gamecomm.IReqChangeTable): gamecomm.ReqChangeTable;
+        public static create(properties?: gamecomm.IExitGameReq): gamecomm.ExitGameReq;
 
         /**
-         * Encodes the specified ReqChangeTable message. Does not implicitly {@link gamecomm.ReqChangeTable.verify|verify} messages.
-         * @param message ReqChangeTable message or plain object to encode
+         * Encodes the specified ExitGameReq message. Does not implicitly {@link gamecomm.ExitGameReq.verify|verify} messages.
+         * @param message ExitGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IReqChangeTable, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.IExitGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ReqChangeTable message, length delimited. Does not implicitly {@link gamecomm.ReqChangeTable.verify|verify} messages.
-         * @param message ReqChangeTable message or plain object to encode
+         * Encodes the specified ExitGameReq message, length delimited. Does not implicitly {@link gamecomm.ExitGameReq.verify|verify} messages.
+         * @param message ExitGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IReqChangeTable, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.IExitGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ReqChangeTable message from the specified reader or buffer.
+         * Decodes an ExitGameReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ReqChangeTable
+         * @returns ExitGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ReqChangeTable;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ExitGameReq;
 
         /**
-         * Decodes a ReqChangeTable message from the specified reader or buffer, length delimited.
+         * Decodes an ExitGameReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ReqChangeTable
+         * @returns ExitGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ReqChangeTable;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ExitGameReq;
 
         /**
-         * Verifies a ReqChangeTable message.
+         * Verifies an ExitGameReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ReqChangeTable message from a plain object. Also converts values to their respective internal types.
+         * Creates an ExitGameReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ReqChangeTable
+         * @returns ExitGameReq
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.ReqChangeTable;
+        public static fromObject(object: { [k: string]: any }): gamecomm.ExitGameReq;
 
         /**
-         * Creates a plain object from a ReqChangeTable message. Also converts values to other types if specified.
-         * @param message ReqChangeTable
+         * Creates a plain object from an ExitGameReq message. Also converts values to other types if specified.
+         * @param message ExitGameReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.ReqChangeTable, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.ExitGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ReqChangeTable to JSON.
+         * Converts this ExitGameReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BeOut. */
-    interface IBeOut {
+    /** Properties of an ExitGameResp. */
+    interface IExitGameResp {
 
-        /** BeOut UserID */
+        /** ExitGameResp GameID */
+        GameID?: (number|null);
+
+        /** ExitGameResp UserID */
+        UserID?: (number|Long|null);
+    }
+
+    /** Represents an ExitGameResp. */
+    class ExitGameResp implements IExitGameResp {
+
+        /**
+         * Constructs a new ExitGameResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IExitGameResp);
+
+        /** ExitGameResp GameID. */
+        public GameID: number;
+
+        /** ExitGameResp UserID. */
+        public UserID: (number|Long);
+
+        /**
+         * Creates a new ExitGameResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ExitGameResp instance
+         */
+        public static create(properties?: gamecomm.IExitGameResp): gamecomm.ExitGameResp;
+
+        /**
+         * Encodes the specified ExitGameResp message. Does not implicitly {@link gamecomm.ExitGameResp.verify|verify} messages.
+         * @param message ExitGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IExitGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ExitGameResp message, length delimited. Does not implicitly {@link gamecomm.ExitGameResp.verify|verify} messages.
+         * @param message ExitGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IExitGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an ExitGameResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ExitGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ExitGameResp;
+
+        /**
+         * Decodes an ExitGameResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ExitGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ExitGameResp;
+
+        /**
+         * Verifies an ExitGameResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an ExitGameResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ExitGameResp
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.ExitGameResp;
+
+        /**
+         * Creates a plain object from an ExitGameResp message. Also converts values to other types if specified.
+         * @param message ExitGameResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.ExitGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ExitGameResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ChangeTableReq. */
+    interface IChangeTableReq {
+
+        /** ChangeTableReq GameID */
+        GameID?: (number|null);
+    }
+
+    /** Represents a ChangeTableReq. */
+    class ChangeTableReq implements IChangeTableReq {
+
+        /**
+         * Constructs a new ChangeTableReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IChangeTableReq);
+
+        /** ChangeTableReq GameID. */
+        public GameID: number;
+
+        /**
+         * Creates a new ChangeTableReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ChangeTableReq instance
+         */
+        public static create(properties?: gamecomm.IChangeTableReq): gamecomm.ChangeTableReq;
+
+        /**
+         * Encodes the specified ChangeTableReq message. Does not implicitly {@link gamecomm.ChangeTableReq.verify|verify} messages.
+         * @param message ChangeTableReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IChangeTableReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ChangeTableReq message, length delimited. Does not implicitly {@link gamecomm.ChangeTableReq.verify|verify} messages.
+         * @param message ChangeTableReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IChangeTableReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ChangeTableReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ChangeTableReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ChangeTableReq;
+
+        /**
+         * Decodes a ChangeTableReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ChangeTableReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ChangeTableReq;
+
+        /**
+         * Verifies a ChangeTableReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ChangeTableReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ChangeTableReq
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.ChangeTableReq;
+
+        /**
+         * Creates a plain object from a ChangeTableReq message. Also converts values to other types if specified.
+         * @param message ChangeTableReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.ChangeTableReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ChangeTableReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ChangeTableResp. */
+    interface IChangeTableResp {
+
+        /** ChangeTableResp GameID */
+        GameID?: (number|null);
+
+        /** ChangeTableResp TableID */
+        TableID?: (number|null);
+
+        /** ChangeTableResp UserID */
+        UserID?: (number|Long|null);
+    }
+
+    /** Represents a ChangeTableResp. */
+    class ChangeTableResp implements IChangeTableResp {
+
+        /**
+         * Constructs a new ChangeTableResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IChangeTableResp);
+
+        /** ChangeTableResp GameID. */
+        public GameID: number;
+
+        /** ChangeTableResp TableID. */
+        public TableID: number;
+
+        /** ChangeTableResp UserID. */
+        public UserID: (number|Long);
+
+        /**
+         * Creates a new ChangeTableResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ChangeTableResp instance
+         */
+        public static create(properties?: gamecomm.IChangeTableResp): gamecomm.ChangeTableResp;
+
+        /**
+         * Encodes the specified ChangeTableResp message. Does not implicitly {@link gamecomm.ChangeTableResp.verify|verify} messages.
+         * @param message ChangeTableResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IChangeTableResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ChangeTableResp message, length delimited. Does not implicitly {@link gamecomm.ChangeTableResp.verify|verify} messages.
+         * @param message ChangeTableResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IChangeTableResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ChangeTableResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ChangeTableResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ChangeTableResp;
+
+        /**
+         * Decodes a ChangeTableResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ChangeTableResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ChangeTableResp;
+
+        /**
+         * Verifies a ChangeTableResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ChangeTableResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ChangeTableResp
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.ChangeTableResp;
+
+        /**
+         * Creates a plain object from a ChangeTableResp message. Also converts values to other types if specified.
+         * @param message ChangeTableResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.ChangeTableResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ChangeTableResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a BeOutResp. */
+    interface IBeOutResp {
+
+        /** BeOutResp UserID */
         UserID?: (number|Long|null);
 
-        /** BeOut GameID */
+        /** BeOutResp GameID */
         GameID?: (number|null);
 
-        /** BeOut Code */
+        /** BeOutResp Code */
         Code?: (number|null);
 
-        /** BeOut Hints */
+        /** BeOutResp Hints */
         Hints?: (string|null);
     }
 
-    /** Represents a BeOut. */
-    class BeOut implements IBeOut {
+    /** Represents a BeOutResp. */
+    class BeOutResp implements IBeOutResp {
 
         /**
-         * Constructs a new BeOut.
+         * Constructs a new BeOutResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: gamecomm.IBeOut);
+        constructor(properties?: gamecomm.IBeOutResp);
 
-        /** BeOut UserID. */
+        /** BeOutResp UserID. */
         public UserID: (number|Long);
 
-        /** BeOut GameID. */
+        /** BeOutResp GameID. */
         public GameID: number;
 
-        /** BeOut Code. */
+        /** BeOutResp Code. */
         public Code: number;
 
-        /** BeOut Hints. */
+        /** BeOutResp Hints. */
         public Hints: string;
 
         /**
-         * Creates a new BeOut instance using the specified properties.
+         * Creates a new BeOutResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BeOut instance
+         * @returns BeOutResp instance
          */
-        public static create(properties?: gamecomm.IBeOut): gamecomm.BeOut;
+        public static create(properties?: gamecomm.IBeOutResp): gamecomm.BeOutResp;
 
         /**
-         * Encodes the specified BeOut message. Does not implicitly {@link gamecomm.BeOut.verify|verify} messages.
-         * @param message BeOut message or plain object to encode
+         * Encodes the specified BeOutResp message. Does not implicitly {@link gamecomm.BeOutResp.verify|verify} messages.
+         * @param message BeOutResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: gamecomm.IBeOut, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: gamecomm.IBeOutResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BeOut message, length delimited. Does not implicitly {@link gamecomm.BeOut.verify|verify} messages.
-         * @param message BeOut message or plain object to encode
+         * Encodes the specified BeOutResp message, length delimited. Does not implicitly {@link gamecomm.BeOutResp.verify|verify} messages.
+         * @param message BeOutResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: gamecomm.IBeOut, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: gamecomm.IBeOutResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BeOut message from the specified reader or buffer.
+         * Decodes a BeOutResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BeOut
+         * @returns BeOutResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.BeOut;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.BeOutResp;
 
         /**
-         * Decodes a BeOut message from the specified reader or buffer, length delimited.
+         * Decodes a BeOutResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BeOut
+         * @returns BeOutResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.BeOut;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.BeOutResp;
 
         /**
-         * Verifies a BeOut message.
+         * Verifies a BeOutResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BeOut message from a plain object. Also converts values to their respective internal types.
+         * Creates a BeOutResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BeOut
+         * @returns BeOutResp
          */
-        public static fromObject(object: { [k: string]: any }): gamecomm.BeOut;
+        public static fromObject(object: { [k: string]: any }): gamecomm.BeOutResp;
 
         /**
-         * Creates a plain object from a BeOut message. Also converts values to other types if specified.
-         * @param message BeOut
+         * Creates a plain object from a BeOutResp message. Also converts values to other types if specified.
+         * @param message BeOutResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: gamecomm.BeOut, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: gamecomm.BeOutResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BeOut to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a NotifyChangeGold. */
-    interface INotifyChangeGold {
-
-        /** NotifyChangeGold UserID */
-        UserID?: (number|Long|null);
-
-        /** NotifyChangeGold Gold */
-        Gold?: (number|Long|null);
-
-        /** NotifyChangeGold AlterGold */
-        AlterGold?: (number|Long|null);
-
-        /** NotifyChangeGold Code */
-        Code?: (number|null);
-
-        /** NotifyChangeGold Reason */
-        Reason?: (string|null);
-    }
-
-    /** Represents a NotifyChangeGold. */
-    class NotifyChangeGold implements INotifyChangeGold {
-
-        /**
-         * Constructs a new NotifyChangeGold.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: gamecomm.INotifyChangeGold);
-
-        /** NotifyChangeGold UserID. */
-        public UserID: (number|Long);
-
-        /** NotifyChangeGold Gold. */
-        public Gold: (number|Long);
-
-        /** NotifyChangeGold AlterGold. */
-        public AlterGold: (number|Long);
-
-        /** NotifyChangeGold Code. */
-        public Code: number;
-
-        /** NotifyChangeGold Reason. */
-        public Reason: string;
-
-        /**
-         * Creates a new NotifyChangeGold instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns NotifyChangeGold instance
-         */
-        public static create(properties?: gamecomm.INotifyChangeGold): gamecomm.NotifyChangeGold;
-
-        /**
-         * Encodes the specified NotifyChangeGold message. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
-         * @param message NotifyChangeGold message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified NotifyChangeGold message, length delimited. Does not implicitly {@link gamecomm.NotifyChangeGold.verify|verify} messages.
-         * @param message NotifyChangeGold message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: gamecomm.INotifyChangeGold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a NotifyChangeGold message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns NotifyChangeGold
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.NotifyChangeGold;
-
-        /**
-         * Decodes a NotifyChangeGold message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns NotifyChangeGold
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.NotifyChangeGold;
-
-        /**
-         * Verifies a NotifyChangeGold message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a NotifyChangeGold message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns NotifyChangeGold
-         */
-        public static fromObject(object: { [k: string]: any }): gamecomm.NotifyChangeGold;
-
-        /**
-         * Creates a plain object from a NotifyChangeGold message. Also converts values to other types if specified.
-         * @param message NotifyChangeGold
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: gamecomm.NotifyChangeGold, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this NotifyChangeGold to JSON.
+         * Converts this BeOutResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
