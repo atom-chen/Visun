@@ -48,7 +48,7 @@ export default class ZjhServer extends ModelBase {
 			this._seatFighters[man.SeatId] = man;
 		}
 		if(!LoginMgr.getInstance().checkLogin(false)) {
-			LoginUser.getInstance().UserId = 1;
+			LoginUser.getInstance().UserId = this._seatFighters[1].UserId;
 		} else {
 			this._seatFighters[1].UserId = LoginUser.getInstance().UserId;
 		}
