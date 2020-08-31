@@ -7,6 +7,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import { ZjhFightState } from "./ZjhDefine";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
 
 export default class ZjhServer extends ModelBase {
 	private static _instance:ZjhServer = null;
@@ -46,7 +47,11 @@ export default class ZjhServer extends ModelBase {
 			man.SeatId = i;
 			this._fighters.push(man);
 		}
-		LoginUser.getInstance().UserId = 2;
+		if(LoginMgr.getInstance().checkLogin(false)) {
+			LoginUser.getInstance().UserId = 2;
+		} else {
+			this._fighters[2].UserId = LoginUser.getInstance().UserId;
+		}
 	}
 
 	findBySeat(seatid:number) : zhajinhua.ZhajinhuaPlayer{
@@ -186,7 +191,7 @@ export default class ZjhServer extends ModelBase {
 		var pak = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateFreeResp].pack({}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak);
 
-		TimerManager.delaySecond(3, newHandler(this.toBegin, this));
+		TimerManager.delaySecond(1, newHandler(this.toBegin, this));
 	}
 
 	//开局（洗牌发牌）
