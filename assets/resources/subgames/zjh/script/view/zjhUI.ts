@@ -61,7 +61,7 @@ export default class zjhUI extends BaseComponent {
     private playerIndex(player:zhajinhua.IZhajinhuaPlayer) : number {
 		if(isNil(player)){ return -1; }
 		var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
-		if(hero.SeatId===1) { return player.SeatId-1; }
+		if(hero.SeatId===0) { return player.SeatId; }
 		return (player.SeatId-hero.SeatId+MAX_SOLDIER) % MAX_SOLDIER;
     }
 

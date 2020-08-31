@@ -4,7 +4,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import { zhajinhua_packet_define, zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import { newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import { ZjhFightState } from "./ZjhDefine";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
@@ -27,7 +27,7 @@ export default class ZjhServer extends ModelBase {
 
 	private MaxFighterCnt:number = 5;
 	private _running:boolean = false;
-	private _fighters:Array<zhajinhua.ZhajinhuaPlayer> = [];	//参战玩家序列
+	private _seatFighters:Array<zhajinhua.ZhajinhuaPlayer> = [];	//参战玩家序列
 	private curTurn2Seat:number = 1;		//当前轮到谁
 	private CurHost:number = 0;
 	private bottomBet:number = 5; 	//底注
@@ -37,36 +37,41 @@ export default class ZjhServer extends ModelBase {
 	
 
 	initFighters() {
-		for(var i=1; i<5; i++) {
+		for(var i=0; i<5; i++) {
 			var man:any = {};
-			man.UserId = i;
+			man.UserId = i+10001;
 			man.IsSee = false;
 			man.FightState = ZjhFightState.idle;
 			man.RecentBetMoney = 0;
 			man.TotalBetMoney = 0;
 			man.SeatId = i;
-			this._fighters.push(man);
+			this._seatFighters[man.SeatId] = man;
 		}
 		if(!LoginMgr.getInstance().checkLogin(false)) {
-			LoginUser.getInstance().UserId = 2;
+			LoginUser.getInstance().UserId = 1;
 		} else {
-			this._fighters[2].UserId = LoginUser.getInstance().UserId;
+			this._seatFighters[1].UserId = LoginUser.getInstance().UserId;
 		}
+	}
+
+	fighterCnt() : number {
+		var cnt = 0
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i])) {
+				cnt++;
+			}
+		}
+		return cnt;
 	}
 
 	findBySeat(seatid:number) : zhajinhua.ZhajinhuaPlayer{
-		for(var i in this._fighters) {
-			if(this._fighters[i].SeatId == seatid) {
-				return this._fighters[i];
-			}
-		}
-		return null;
+		return this._seatFighters[seatid];
 	}
 
 	findById(uid:number) : zhajinhua.ZhajinhuaPlayer {
-		for(var i in this._fighters) {
-			if(this._fighters[i].UserId == uid) {
-				return this._fighters[i];
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i]) && this._seatFighters[i].UserId == uid) {
+				return this._seatFighters[i];
 			}
 		}
 		return null;
@@ -78,9 +83,9 @@ export default class ZjhServer extends ModelBase {
 			return this.findBySeat(nextSeat);
 		} else {
 			var minSeat = this.curTurn2Seat;
-			for(var i in this._fighters) {
-				if(this._fighters[i].SeatId < minSeat) {
-					minSeat = this._fighters[i].SeatId;
+			for(var i in this._seatFighters) {
+				if(!isNil(this._seatFighters[i]) && this._seatFighters[i].SeatId < minSeat) {
+					minSeat = this._seatFighters[i].SeatId;
 				}
 			}
 			return this.findBySeat(minSeat);
@@ -94,8 +99,8 @@ export default class ZjhServer extends ModelBase {
 
 	checkFinish() : boolean {
 		var cnt = 0;
-		for(var i in this._fighters) {
-			if(!this.isLosed(this._fighters[i].UserId)) {
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i]) && !this.isLosed(this._seatFighters[i].UserId)) {
 				cnt++;
 			}
 		}
@@ -136,12 +141,18 @@ export default class ZjhServer extends ModelBase {
 	}
 
 	sendSceneInfo() {
+		var fightlist = [];
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i])) {
+				fightlist.push(this._seatFighters[i]);
+			}
+		}
 		var data:any = {};
 		data.CurHost = this.CurHost;
 		data.MinBet = this.bottomBet;
 		data.TotalBet = this.totalBet;
 		data.TimeStamp = new Date().getTime();
-		data.Fighters = this._fighters;
+		data.Fighters = fightlist;
 		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaSceneResp].pack(data, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 	}
@@ -180,12 +191,14 @@ export default class ZjhServer extends ModelBase {
 	//准备阶段
 	toReady(tmr) {
 		this.curGameState = 1;
-		for(var i in this._fighters) {
-			this._fighters[i].FightState = ZjhFightState.idle;
-			this._fighters[i].IsSee = false;
-			this._fighters[i].Cards = null;
-			this._fighters[i].RecentBetMoney = 0;
-			this._fighters[i].TotalBetMoney = 0;
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i])) {
+				this._seatFighters[i].FightState = ZjhFightState.idle;
+				this._seatFighters[i].IsSee = false;
+				this._seatFighters[i].Cards = null;
+				this._seatFighters[i].RecentBetMoney = 0;
+				this._seatFighters[i].TotalBetMoney = 0;
+			}
 		}
 
 		var pak = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateFreeResp].pack({}, false);
@@ -202,7 +215,17 @@ export default class ZjhServer extends ModelBase {
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak);
 
 		//定庄
-		var zhuangSeat = CommonUtil.getRandomInt(1, this._fighters.length);
+		var zhuangSeat = 0;
+		var fcnt = this.fighterCnt();
+		var idx = CommonUtil.getRandomInt(0, fcnt-1);
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i])) {
+				idx--;
+				if(idx==0) {
+					zhuangSeat = this._seatFighters[i].SeatId;
+				}
+			}
+		}
 		this.CurHost = this.findBySeat(zhuangSeat).UserId;
 		this.curTurn2Seat = zhuangSeat;
 
@@ -237,9 +260,9 @@ export default class ZjhServer extends ModelBase {
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
 		var winner = 0;
-		for(var i in this._fighters) {
-			if(!this.isLosed(this._fighters[i].UserId)) {
-				winner = this._fighters[i].UserId;
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i]) && !this.isLosed(this._seatFighters[i].UserId)) {
+				winner = this._seatFighters[i].UserId;
 			}
 		}
 
@@ -248,15 +271,15 @@ export default class ZjhServer extends ModelBase {
 			WinnerId: winner,
 			Infos: []
 		}
-		for(var i in this._fighters) {
+		for(var i in this._seatFighters) {
 			var item = {
-				UserID : this._fighters[i].UserId,
+				UserID : this._seatFighters[i].UserId,
 				Gold : 0,
 				AlterGold : 0,
 				Code : 0,
 		   	}
-		   	if(this._fighters[i].UserId == winner) {
-				item.AlterGold = CommonUtil.toServerMoney(this.bottomBet*this._fighters.length);
+		   	if(this._seatFighters[i].UserId == winner) {
+				item.AlterGold = CommonUtil.toServerMoney(this.bottomBet*this.fighterCnt());
 			} else {
 				item.AlterGold = -CommonUtil.toServerMoney(this.bottomBet);
 			}
