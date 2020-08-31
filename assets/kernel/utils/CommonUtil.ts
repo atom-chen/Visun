@@ -175,9 +175,11 @@ export default class CommonUtil {
 		let s = node.getComponentsInChildren(cc.Sprite);
 		for (let i = 0; i < s.length; i++) {
 			if(bGray) {
-				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-gray-sprite', s[i]));
+				s[i].setMaterial(0, cc.MaterialVariant.createWithBuiltin("2d-gray-sprite", s[i]));
+				//s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-gray-sprite', s[i]));
 			} else {
-				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-sprite', s[i]));
+				s[i].setMaterial(0, cc.MaterialVariant.createWithBuiltin("2d-sprite", s[i]));
+				//s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-sprite', s[i]));
 			}
 		}
 	}

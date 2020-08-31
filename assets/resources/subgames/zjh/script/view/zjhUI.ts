@@ -90,7 +90,7 @@ export default class zjhUI extends BaseComponent {
                 this._playerCpns[idx].setName(cur.UserId);
                 this._playerCpns[idx].setMoney(0);
                 this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
-                CommonUtil.darkNode(this._pnodes[idx], this.isLoseFightState(cur.FightState));
+                CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(cur.FightState));
                 if(cur.FightState == ZjhFightState.genzhu) {
                     this._stateCpns[idx].genzhu();
                 }
@@ -126,7 +126,7 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
-            CommonUtil.darkNode(this._pnodes[i], false);
+            CommonUtil.grayNode(this._pnodes[i], false);
         }
     }
 
@@ -135,7 +135,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
 
-        UIManager.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
+        UIManager.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
             }
@@ -231,7 +231,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(losser);
         if(idx >= 0) {
             this._stateCpns[idx].bipaishu();
-            CommonUtil.darkNode(this._pnodes[idx], true);
+            CommonUtil.grayNode(this._pnodes[idx], true);
         }
     }
 
@@ -241,7 +241,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].qipai();
-            CommonUtil.darkNode(this._pnodes[idx], true);
+            CommonUtil.grayNode(this._pnodes[idx], true);
             this._cdCpns[idx].setRunning(false);
         }
     }
