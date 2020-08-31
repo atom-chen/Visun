@@ -24,4 +24,15 @@ export default class BjleMgr extends ModelBase {
     getEnterData() : baccarat.BaccaratSceneResp {
         return this.enterData;
     }
+
+    clearBets() {
+		if(this.enterData) {
+			for(var i=0; i<this.enterData.AreaBets.length; i++) {
+				this.enterData.AreaBets[i] = 0;
+			}
+			for(var i=0; i<this.enterData.MyBets.length; i++) {
+				this.enterData.MyBets[i] = 0;
+			}
+		}
+    }
 }

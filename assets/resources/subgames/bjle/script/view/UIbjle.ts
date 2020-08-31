@@ -129,6 +129,8 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private clearBets() {
+		BjleMgr.getInstance().clearBets();
+		
 		var childs = this.m_ui.chipLayer.children;
 		for(var i=childs.length-1; i>=0; i--){
 			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
@@ -192,9 +194,9 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//下注阶段
-	private BaccaratStatePlayingResp(param) {
+	private BaccaratStatePlayingResp(param:baccarat.BaccaratStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+		
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
@@ -202,23 +204,29 @@ export default class UIbjle extends BaseComponent {
 		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
 		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
 
-		UIManager.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
-            on_complete: (sk, trackEntry)=>{
-                CommonUtil.safeDelete(sk);
-            }
-        });
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+			UIManager.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
 	}
 
 	//开牌阶段
-	private BaccaratStateOpenResp(param) {
+	private BaccaratStateOpenResp(param:baccarat.BaccaratStateOpenResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
 		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
 		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
+
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		}
 	}
 
 	//结算阶段
