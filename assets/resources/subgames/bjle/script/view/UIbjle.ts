@@ -170,17 +170,7 @@ export default class UIbjle extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
-	private BaccaratStateOpenResp(param) {
-		this.isJoined = false;
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		this.m_ui.cardLayer.active = false;
-		this.setWinAreas([]);
-		this.clearBets();
-	}
-
-	//开局：洗牌发牌
+	//准备阶段
 	private BaccaratStateStart(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
@@ -198,6 +188,17 @@ export default class UIbjle extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
+	}
+
+	//开牌阶段
+	private BaccaratStateOpenResp(param) {
+		this.isJoined = false;
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.m_ui.cardLayer.active = true;
+		this.setWinAreas([]);
+		this.clearBets();
 	}
 
 	//结算阶段
