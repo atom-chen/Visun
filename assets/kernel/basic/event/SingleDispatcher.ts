@@ -2,10 +2,10 @@
 //-- 响应句柄：观察者模式
 //-------------------------------------
 import EventCenter from "./EventCenter";
+import KernelEvent from "../defines/KernelEvent";
 
 export default class SingleDispatcher {
 	protected _observers = [];
-	protected _responders = {};
 
 	public addObserver(observer:any) : void
 	{
@@ -28,31 +28,6 @@ export default class SingleDispatcher {
 		this._observers = [];
 	}
 
-
-	public registResponder(ptoname:string|number, func:Function, thisObj:any) : void
-	{
-		this._responders[ptoname] = { func:func, thisObj:thisObj };
-	}
-
-	public removeResponder(ptoname:string|number) : void
-	{
-		this._responders[ptoname] = null;
-	}
-
-	public removeResponderByTarget(thisObj:any) : void
-	{
-		for(var ptoname in this._responders) {
-			if( this._responders[ptoname].thisObj === thisObj ) {
-				this._responders[ptoname] = null;
-			}
-		}
-	}
-
-	public clearResponder() : void
-	{
-		this._responders = {};
-	}
-
 	
 	public fire(cmd:string|number, info:any) : void
 	{
@@ -67,16 +42,7 @@ export default class SingleDispatcher {
 			}
 		}
 
-		if(this._responders[cmd]) {
-			var callback = this._responders[cmd];
-			if(callback.thisObj){
-				callback.func.call(callback.thisObj, info);
-			} else {
-				callback.func(info);
-			}
-		}
-
 		EventCenter.getInstance().fire(cmd, info);
-		EventCenter.getInstance().fire("recv_proto", cmd, info);
+		EventCenter.getInstance().fire(KernelEvent.recv_proto, cmd, info);
 	}
 }

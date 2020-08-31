@@ -59,7 +59,6 @@ export default class BaseProcessor implements IProcessor {
 	{
 		this.clearSendlist();
 		this.clearRecvlist();
-		this._dispatcher.clearResponder();
 		this._channel = null;
 	}
 

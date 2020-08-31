@@ -9,14 +9,24 @@ export default class CpnUserState extends cc.Component {
     @property(cc.SpriteFrame)
     Frames: cc.SpriteFrame[] = [];
 
+    private _originY = 0;
+
+    onLoad() {
+        this._originY = this.node.y;
+    }
+
     private _st = 0;
 
     private setState(st:number) {
         this._st = st;
         if(st < 0) {
             this.getComponent(cc.Sprite).spriteFrame = null;
+        } else {
+            this.getComponent(cc.Sprite).spriteFrame = this.Frames[st];
+            this.node.stopAllActions();
+            this.node.y = this._originY - 50;
+            this.node.runAction(cc.moveTo(0.2, cc.v2(this.node.x, this._originY)));
         }
-        this.getComponent(cc.Sprite).spriteFrame = this.Frames[st];
     }
 
     idle() {

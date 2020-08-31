@@ -16,6 +16,9 @@ import ZjhServer from "../model/ZjhServer";
 import { ZjhFightState } from "../model/ZjhDefine";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import ZjhHandlers from "../model/ZjhHandlers";
 
 
 const MAX_SOLDIER = 5;
@@ -52,6 +55,8 @@ export default class zjhUI extends BaseComponent {
         this.initNetEvent();
 
         this.ZhajinhuaStateFreeResp(null);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().addObserver(ZjhHandlers);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
         ZjhServer.getInstance().run();
@@ -80,9 +85,6 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[n].active = false;
         }
         if(param.Fighters) {
-            for(var ii in param.Fighters) {
-                ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
-            }
             for(var i in param.Fighters) {
                 var cur = param.Fighters[i];
                 var idx = this.playerIndex(cur);
@@ -213,8 +215,6 @@ export default class zjhUI extends BaseComponent {
     //看牌
     ZhajinhuaLookResp(param:zhajinhua.ZhajinhuaLookResp) {
         cc.log("看牌", param.UserId, param.Cards);
-        ZjhMgr.getInstance().getPlayer(param.UserId).IsSee = true;
-
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._pnodes[idx].getChildByName("ust_kanpai").active = true;
