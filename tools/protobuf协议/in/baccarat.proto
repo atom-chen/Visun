@@ -27,6 +27,7 @@ message BaccaratStatePlayingResp {
 //(开奖)
 message BaccaratStateOpenResp {
   TimeInfo Times = 1;
+  BaccaratOpenResp OpenInfo = 2;
 }
 
 //(结束)
@@ -70,7 +71,7 @@ message BaccaratBetResp{
 }
 
 //结束
-message BaccaratOverResp{
+message BaccaratOpenResp{
   bytes AwardArea = 1;  //开奖区域
   CardInfo PlayerCard = 2;  //闲家的牌
   CardInfo BankerCard = 3;  //庄家的牌

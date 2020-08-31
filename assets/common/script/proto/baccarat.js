@@ -475,6 +475,7 @@ $root.baccarat = (function() {
         }
 
         BaccaratStateOpenResp.prototype.Times = null;
+        BaccaratStateOpenResp.prototype.OpenInfo = null;
 
         BaccaratStateOpenResp.create = function create(properties) {
             return new BaccaratStateOpenResp(properties);
@@ -485,6 +486,8 @@ $root.baccarat = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.OpenInfo != null && Object.hasOwnProperty.call(message, "OpenInfo"))
+                $root.baccarat.BaccaratOpenResp.encode(message.OpenInfo, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -501,6 +504,9 @@ $root.baccarat = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.OpenInfo = $root.baccarat.BaccaratOpenResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -524,6 +530,11 @@ $root.baccarat = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo")) {
+                var error = $root.baccarat.BaccaratOpenResp.verify(message.OpenInfo);
+                if (error)
+                    return "OpenInfo." + error;
+            }
             return null;
         };
 
@@ -536,6 +547,11 @@ $root.baccarat = (function() {
                     throw TypeError(".baccarat.BaccaratStateOpenResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
+            if (object.OpenInfo != null) {
+                if (typeof object.OpenInfo !== "object")
+                    throw TypeError(".baccarat.BaccaratStateOpenResp.OpenInfo: object expected");
+                message.OpenInfo = $root.baccarat.BaccaratOpenResp.fromObject(object.OpenInfo);
+            }
             return message;
         };
 
@@ -543,10 +559,14 @@ $root.baccarat = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                object.OpenInfo = null;
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo"))
+                object.OpenInfo = $root.baccarat.BaccaratOpenResp.toObject(message.OpenInfo, options);
             return object;
         };
 
@@ -1315,24 +1335,24 @@ $root.baccarat = (function() {
         return BaccaratBetResp;
     })();
 
-    baccarat.BaccaratOverResp = (function() {
+    baccarat.BaccaratOpenResp = (function() {
 
-        function BaccaratOverResp(properties) {
+        function BaccaratOpenResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BaccaratOverResp.prototype.AwardArea = $util.newBuffer([]);
-        BaccaratOverResp.prototype.PlayerCard = null;
-        BaccaratOverResp.prototype.BankerCard = null;
+        BaccaratOpenResp.prototype.AwardArea = $util.newBuffer([]);
+        BaccaratOpenResp.prototype.PlayerCard = null;
+        BaccaratOpenResp.prototype.BankerCard = null;
 
-        BaccaratOverResp.create = function create(properties) {
-            return new BaccaratOverResp(properties);
+        BaccaratOpenResp.create = function create(properties) {
+            return new BaccaratOpenResp(properties);
         };
 
-        BaccaratOverResp.encode = function encode(message, writer) {
+        BaccaratOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
@@ -1344,14 +1364,14 @@ $root.baccarat = (function() {
             return writer;
         };
 
-        BaccaratOverResp.encodeDelimited = function encodeDelimited(message, writer) {
+        BaccaratOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BaccaratOverResp.decode = function decode(reader, length) {
+        BaccaratOpenResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratOverResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.baccarat.BaccaratOpenResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1372,13 +1392,13 @@ $root.baccarat = (function() {
             return message;
         };
 
-        BaccaratOverResp.decodeDelimited = function decodeDelimited(reader) {
+        BaccaratOpenResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BaccaratOverResp.verify = function verify(message) {
+        BaccaratOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
@@ -1397,10 +1417,10 @@ $root.baccarat = (function() {
             return null;
         };
 
-        BaccaratOverResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.baccarat.BaccaratOverResp)
+        BaccaratOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.baccarat.BaccaratOpenResp)
                 return object;
-            var message = new $root.baccarat.BaccaratOverResp();
+            var message = new $root.baccarat.BaccaratOpenResp();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -1408,18 +1428,18 @@ $root.baccarat = (function() {
                     message.AwardArea = object.AwardArea;
             if (object.PlayerCard != null) {
                 if (typeof object.PlayerCard !== "object")
-                    throw TypeError(".baccarat.BaccaratOverResp.PlayerCard: object expected");
+                    throw TypeError(".baccarat.BaccaratOpenResp.PlayerCard: object expected");
                 message.PlayerCard = $root.gamecomm.CardInfo.fromObject(object.PlayerCard);
             }
             if (object.BankerCard != null) {
                 if (typeof object.BankerCard !== "object")
-                    throw TypeError(".baccarat.BaccaratOverResp.BankerCard: object expected");
+                    throw TypeError(".baccarat.BaccaratOpenResp.BankerCard: object expected");
                 message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
             }
             return message;
         };
 
-        BaccaratOverResp.toObject = function toObject(message, options) {
+        BaccaratOpenResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1443,11 +1463,11 @@ $root.baccarat = (function() {
             return object;
         };
 
-        BaccaratOverResp.prototype.toJSON = function toJSON() {
+        BaccaratOpenResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BaccaratOverResp;
+        return BaccaratOpenResp;
     })();
 
     baccarat.BaccaratCheckoutResp = (function() {

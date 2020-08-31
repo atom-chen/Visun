@@ -18,7 +18,7 @@ export enum baccarat_msgs {
     BaccaratSuperHostResp = 44,
     BaccaratBetReq = 45,
     BaccaratBetResp = 46,
-    BaccaratOverResp = 47,
+    BaccaratOpenResp = 47,
     BaccaratCheckoutResp = 48,
 }
 
@@ -34,7 +34,7 @@ export var baccarat_packet_define = {
     44: new LeafWsPacket(44, baccarat.BaccaratSuperHostResp, "baccarat.BaccaratSuperHostResp"),
     45: new LeafWsPacket(45, baccarat.BaccaratBetReq, "baccarat.BaccaratBetReq"),
     46: new LeafWsPacket(46, baccarat.BaccaratBetResp, "baccarat.BaccaratBetResp"),
-    47: new LeafWsPacket(47, baccarat.BaccaratOverResp, "baccarat.BaccaratOverResp"),
+    47: new LeafWsPacket(47, baccarat.BaccaratOpenResp, "baccarat.BaccaratOpenResp"),
     48: new LeafWsPacket(48, baccarat.BaccaratCheckoutResp, "baccarat.BaccaratCheckoutResp"),
 }
 
@@ -42,7 +42,7 @@ export class baccarat_request {
     public static BaccaratSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[] } ) { baccarat_packet_define[36].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStateStartResp( data:{ Times:any } ) { baccarat_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStatePlayingResp( data:{ Times:any } ) { baccarat_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratStateOpenResp( data:{ Times:any } ) { baccarat_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratStateOpenResp( data:{ Times:any, OpenInfo:any } ) { baccarat_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStateOverResp( data:{ Times:any } ) { baccarat_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratHostReq( data:{ IsWant:any } ) { baccarat_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratHostResp( data:{ UserID:number, IsWant:any } ) { baccarat_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }
@@ -50,7 +50,7 @@ export class baccarat_request {
     public static BaccaratSuperHostResp( data:{ UserID:number, IsWant:any } ) { baccarat_packet_define[44].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratBetReq( data:{ BetArea:number, BetScore:number } ) { baccarat_packet_define[45].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratBetResp( data:{ UserID:number, BetArea:number, BetScore:number } ) { baccarat_packet_define[46].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratOverResp( data:{ AwardArea:any, PlayerCard:any, BankerCard:any } ) { baccarat_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratOpenResp( data:{ AwardArea:any, PlayerCard:any, BankerCard:any } ) { baccarat_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratCheckoutResp( data:{ MyAcquire:number, BankerAcquire:number, PlayerAcquire:number, DrawAcquire:number } ) { baccarat_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
 }
 

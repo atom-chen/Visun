@@ -301,6 +301,9 @@ export namespace baccarat {
 
         /** BaccaratStateOpenResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** BaccaratStateOpenResp OpenInfo */
+        OpenInfo?: (baccarat.IBaccaratOpenResp|null);
     }
 
     /** Represents a BaccaratStateOpenResp. */
@@ -314,6 +317,9 @@ export namespace baccarat {
 
         /** BaccaratStateOpenResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** BaccaratStateOpenResp OpenInfo. */
+        public OpenInfo?: (baccarat.IBaccaratOpenResp|null);
 
         /**
          * Creates a new BaccaratStateOpenResp instance using the specified properties.
@@ -1046,103 +1052,103 @@ export namespace baccarat {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a BaccaratOverResp. */
-    interface IBaccaratOverResp {
+    /** Properties of a BaccaratOpenResp. */
+    interface IBaccaratOpenResp {
 
-        /** BaccaratOverResp AwardArea */
+        /** BaccaratOpenResp AwardArea */
         AwardArea?: (Uint8Array|null);
 
-        /** BaccaratOverResp PlayerCard */
+        /** BaccaratOpenResp PlayerCard */
         PlayerCard?: (gamecomm.ICardInfo|null);
 
-        /** BaccaratOverResp BankerCard */
+        /** BaccaratOpenResp BankerCard */
         BankerCard?: (gamecomm.ICardInfo|null);
     }
 
-    /** Represents a BaccaratOverResp. */
-    class BaccaratOverResp implements IBaccaratOverResp {
+    /** Represents a BaccaratOpenResp. */
+    class BaccaratOpenResp implements IBaccaratOpenResp {
 
         /**
-         * Constructs a new BaccaratOverResp.
+         * Constructs a new BaccaratOpenResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: baccarat.IBaccaratOverResp);
+        constructor(properties?: baccarat.IBaccaratOpenResp);
 
-        /** BaccaratOverResp AwardArea. */
+        /** BaccaratOpenResp AwardArea. */
         public AwardArea: Uint8Array;
 
-        /** BaccaratOverResp PlayerCard. */
+        /** BaccaratOpenResp PlayerCard. */
         public PlayerCard?: (gamecomm.ICardInfo|null);
 
-        /** BaccaratOverResp BankerCard. */
+        /** BaccaratOpenResp BankerCard. */
         public BankerCard?: (gamecomm.ICardInfo|null);
 
         /**
-         * Creates a new BaccaratOverResp instance using the specified properties.
+         * Creates a new BaccaratOpenResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns BaccaratOverResp instance
+         * @returns BaccaratOpenResp instance
          */
-        public static create(properties?: baccarat.IBaccaratOverResp): baccarat.BaccaratOverResp;
+        public static create(properties?: baccarat.IBaccaratOpenResp): baccarat.BaccaratOpenResp;
 
         /**
-         * Encodes the specified BaccaratOverResp message. Does not implicitly {@link baccarat.BaccaratOverResp.verify|verify} messages.
-         * @param message BaccaratOverResp message or plain object to encode
+         * Encodes the specified BaccaratOpenResp message. Does not implicitly {@link baccarat.BaccaratOpenResp.verify|verify} messages.
+         * @param message BaccaratOpenResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: baccarat.IBaccaratOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: baccarat.IBaccaratOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified BaccaratOverResp message, length delimited. Does not implicitly {@link baccarat.BaccaratOverResp.verify|verify} messages.
-         * @param message BaccaratOverResp message or plain object to encode
+         * Encodes the specified BaccaratOpenResp message, length delimited. Does not implicitly {@link baccarat.BaccaratOpenResp.verify|verify} messages.
+         * @param message BaccaratOpenResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: baccarat.IBaccaratOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: baccarat.IBaccaratOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a BaccaratOverResp message from the specified reader or buffer.
+         * Decodes a BaccaratOpenResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns BaccaratOverResp
+         * @returns BaccaratOpenResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratOverResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): baccarat.BaccaratOpenResp;
 
         /**
-         * Decodes a BaccaratOverResp message from the specified reader or buffer, length delimited.
+         * Decodes a BaccaratOpenResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns BaccaratOverResp
+         * @returns BaccaratOpenResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratOverResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): baccarat.BaccaratOpenResp;
 
         /**
-         * Verifies a BaccaratOverResp message.
+         * Verifies a BaccaratOpenResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a BaccaratOverResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a BaccaratOpenResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns BaccaratOverResp
+         * @returns BaccaratOpenResp
          */
-        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratOverResp;
+        public static fromObject(object: { [k: string]: any }): baccarat.BaccaratOpenResp;
 
         /**
-         * Creates a plain object from a BaccaratOverResp message. Also converts values to other types if specified.
-         * @param message BaccaratOverResp
+         * Creates a plain object from a BaccaratOpenResp message. Also converts values to other types if specified.
+         * @param message BaccaratOpenResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: baccarat.BaccaratOverResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: baccarat.BaccaratOpenResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this BaccaratOverResp to JSON.
+         * Converts this BaccaratOpenResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
