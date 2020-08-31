@@ -144,6 +144,7 @@ export default class UIbjle extends BaseComponent {
 	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			LoginUser.getInstance().Gold = param.Gold;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
 			if(!isEmpty(param.AlterGold)) {
 				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
 			}
