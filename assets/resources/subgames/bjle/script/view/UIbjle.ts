@@ -52,6 +52,16 @@ export default class UIbjle extends BaseComponent {
 
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
+
+		this.areaToNode[0] = 3;
+		this.areaToNode[1] = 0;
+		this.areaToNode[2] = 4;
+		this.areaToNode[3] = -1;
+		this.areaToNode[4] = -1;
+		this.areaToNode[5] = -1;
+		this.areaToNode[6] = 1;
+		this.areaToNode[7] = 2;
+
         this.initUIEvents();
 		this.initNetEvent();
 		
@@ -62,15 +72,6 @@ export default class UIbjle extends BaseComponent {
 		
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
-		
-		this.areaToNode[0] = 3;
-		this.areaToNode[1] = 0;
-		this.areaToNode[2] = 4;
-		this.areaToNode[3] = -1;
-		this.areaToNode[4] = -1;
-		this.areaToNode[5] = -1;
-		this.areaToNode[6] = 1;
-		this.areaToNode[7] = 2;
 	}
 
 	node2Area(v:number) : number {
@@ -93,8 +94,8 @@ export default class UIbjle extends BaseComponent {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
 				var areaName = "area"+this.areaToNode[i];
 				if(this.m_ui[areaName]) {
-					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = enterData.AreaBets[i];
-					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = enterData.MyBets[i];
+					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
+					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
 				}
 			}
 		}
@@ -148,10 +149,20 @@ export default class UIbjle extends BaseComponent {
 	}
 
     private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
+		var enterData = BjleMgr.getInstance().getEnterData();
+		enterData.AreaBets[param.BetArea] += param.BetScore;
 		if(param.UserID == LoginUser.getInstance().UserId) {
+			enterData.MyBets[param.BetArea] += param.BetScore;
 			LoginUser.getInstance().Gold -= param.BetScore;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 		}
+
+		var areaName = "area"+this.areaToNode[param.BetArea];
+		if(this.m_ui[areaName]) {
+			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
+			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
+		}
+
 		var money = CommonUtil.fixRealMoney(param.BetScore);
         var nums = GameUtil.parseChip(money, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
