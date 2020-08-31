@@ -4,6 +4,7 @@ import AudioManager from "../../../../kernel/audio/AudioManager";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import LoginMgr from "../../../../common/script/model/LoginMgr";
 import LocalCache from "../../../../kernel/localcache/LocalCache";
+import Preloader from "../../../../common/script/utils/Preloader";
 
 const {ccclass, property} = cc._decorator;
 
@@ -14,6 +15,7 @@ export default class LobbyScene extends BaseComponent {
         UIManager.openPanel(ViewDefine.UILobby, null);
         LoginMgr.getInstance().connectServer();
         LoginMgr.getInstance().quickLogin();
+        Preloader.loadGameIcons();
     }
 
     start () {

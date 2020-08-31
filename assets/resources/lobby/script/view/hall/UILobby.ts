@@ -10,7 +10,6 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
-import { login } from "../../../../../../declares/login";
 
 
 const {ccclass, property} = cc._decorator;
@@ -40,19 +39,26 @@ export default class UILobby extends BaseComponent {
 		var roomsInfo = GameManager.getInstance().getRoomsInfo();
 		if(!roomsInfo) { return; }
 
+		var self = this;
 		for(var i in roomsInfo) {
 			var info = roomsInfo[i];
 			var bton = cc.instantiate(this.roomTab);
 			bton["RoomInfo"] = info;
-			var m_ui:any = {};
-			CommonUtil.traverseNodes(bton, m_ui);
-			m_ui.lab_roomname.getComponent(cc.Label).string = info.RoomName;
+
+			bton.getChildByName("lab_roomname").getComponent(cc.Label).string = info.RoomName;
+
 			CommonUtil.addClickEvent(bton, function(){ 
 				login_request.EnterRoomReq({
 					RoomNum: this.RoomInfo.RoomNum,
 					RoomKey: this.RoomInfo.RoomKey
 				});
+				var childs = self.m_ui.contentLeft.children;
+				for(var i in childs) {
+					childs[i].getChildByName("tab_unsel").active = childs[i] != this;
+					childs[i].getChildByName("tab_sel").active = childs[i] == this;
+				}
 			}, bton);
+
 			this.m_ui.contentLeft.addChild(bton);
 		}
 	}
@@ -83,9 +89,6 @@ export default class UILobby extends BaseComponent {
 
 		var tbl : any = {};
 		CommonUtil.traverseNodes(bton, tbl);
-		tbl.lab_roomname.getComponent(cc.Label).string = gameData.Info.Name;
-		tbl.lab_roomnum.getComponent(cc.Label).string = gameData.Info.EnterScore;
-		tbl.lab_roomkey.getComponent(cc.Label).string = gameData.Info.Level;
 		
 		if(cfg) {
 			var tmp = cc.loader.getRes(cfg.icon, cc.SpriteFrame);
