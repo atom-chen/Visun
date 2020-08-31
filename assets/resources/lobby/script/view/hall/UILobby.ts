@@ -33,6 +33,20 @@ export default class UILobby extends BaseComponent {
 		this.refleshUI(null);
 	}
 
+	private selectRoomBtn(btn) {
+		var childs = this.m_ui.contentLeft.children;
+		for(var i in childs) {
+			childs[i].getChildByName("tab_unsel").active = childs[i] != btn;
+			childs[i].getChildByName("tab_sel").active = childs[i] == btn;
+		}
+
+		if(btn) {
+			login_request.EnterRoomReq({
+				RoomNum: btn.RoomInfo.RoomNum,
+				RoomKey: btn.RoomInfo.RoomKey
+			});
+		}
+	}
 	private refleshRoomsInfo() {
 		this.m_ui.contentLeft.removeAllChildren();
 
@@ -48,19 +62,13 @@ export default class UILobby extends BaseComponent {
 			bton.getChildByName("lab_roomname").getComponent(cc.Label).string = info.RoomName;
 
 			CommonUtil.addClickEvent(bton, function(){ 
-				login_request.EnterRoomReq({
-					RoomNum: this.RoomInfo.RoomNum,
-					RoomKey: this.RoomInfo.RoomKey
-				});
-				var childs = self.m_ui.contentLeft.children;
-				for(var i in childs) {
-					childs[i].getChildByName("tab_unsel").active = childs[i] != this;
-					childs[i].getChildByName("tab_sel").active = childs[i] == this;
-				}
+				self.selectRoomBtn(this);
 			}, bton);
 
 			this.m_ui.contentLeft.addChild(bton);
 		}
+
+		this.selectRoomBtn(this.m_ui.contentLeft.children[0]);
 	}
 
 	private refleshGameList() {
