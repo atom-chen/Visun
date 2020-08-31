@@ -101,11 +101,11 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private initNetEvent() {
-        EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
-        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlaying, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOver, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStartResp, this);
+        EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlayingResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOpenResp, this.BaccaratStateOpenResp, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStart, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOverResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratCheckoutResp, this.BaccaratCheckoutResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOverResp, this.BaccaratOverResp, this);
 		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
@@ -171,7 +171,7 @@ export default class UIbjle extends BaseComponent {
     }
 
 	//准备阶段
-	private BaccaratStateStart(param) {
+	private BaccaratStateStartResp(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -181,7 +181,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//下注阶段
-	private BaccaratStatePlaying(param) {
+	private BaccaratStatePlayingResp(param) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 		TimerManager.delTimer(this.tmrState);
@@ -197,12 +197,10 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
-		this.setWinAreas([]);
-		this.clearBets();
 	}
 
 	//结算阶段
-	private BaccaratStateOver(param) {
+	private BaccaratStateOverResp(param) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
