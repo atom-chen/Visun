@@ -178,6 +178,8 @@ export default class UIbjle extends BaseComponent {
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
 		this.clearBets();
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
 	}
 
 	//下注阶段
@@ -188,6 +190,8 @@ export default class UIbjle extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
 	}
 
 	//开牌阶段
@@ -197,6 +201,8 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
+		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
+		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
 	}
 
 	//结算阶段
