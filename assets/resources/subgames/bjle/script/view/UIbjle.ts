@@ -213,6 +213,7 @@ export default class UIbjle extends BaseComponent {
 	private BaccaratStateOpenResp(param) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
@@ -224,7 +225,7 @@ export default class UIbjle extends BaseComponent {
 	private BaccaratStateOverResp(param) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		
 		this.playJiesuan();
 	}
 
