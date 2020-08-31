@@ -170,15 +170,26 @@ export default class CommonUtil {
      * @static
      * @memberof Util
      */
-	static grayNode(node: cc.Node, state: number) {
-		cc.log(node)
-		if (node == null) { return }
+	static grayNode(node: cc.Node, bGray: boolean) {
+		if (!node) { return }
 		let s = node.getComponentsInChildren(cc.Sprite);
 		for (let i = 0; i < s.length; i++) {
-			if (state === 1) {
+			if(bGray) {
 				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-gray-sprite', s[i]));
-			} else if (state === 0) {
+			} else {
 				s[i].setMaterial(0, cc["Material"]["getInstantiatedBuiltinMaterial"]('2d-sprite', s[i]));
+			}
+		}
+	}
+
+	static darkNode(node: cc.Node, bDark: boolean) {
+		if (!node) { return }
+		let s = node.getComponentsInChildren(cc.Sprite);
+		for (let i = 0; i < s.length; i++) {
+			if(bDark) {
+				s[i].node.color = cc.color(111,111,111,255);
+			} else {
+				s[i].node.color = cc.color(255,255,255,255);
 			}
 		}
 	}

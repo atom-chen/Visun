@@ -70,6 +70,10 @@ export default class zjhUI extends BaseComponent {
         return this.playerIndex(p);
     }
 
+    private isLoseFightState(v) : boolean {
+        return v == ZjhFightState.qipai || v == ZjhFightState.bipaishu
+    }
+
     //场景信息
     ZhajinhuaSceneResp(param:zhajinhua.ZhajinhuaSceneResp) {
         for(var n=0; n<MAX_SOLDIER; n++) {
@@ -86,6 +90,7 @@ export default class zjhUI extends BaseComponent {
                 this._playerCpns[idx].setName(cur.UserId);
                 this._playerCpns[idx].setMoney(0);
                 this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
+                CommonUtil.darkNode(this._pnodes[idx], this.isLoseFightState(cur.FightState));
                 if(cur.FightState == ZjhFightState.genzhu) {
                     this._stateCpns[idx].genzhu();
                 }
@@ -121,6 +126,7 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
+            CommonUtil.darkNode(this._pnodes[i], false);
         }
     }
 
@@ -225,6 +231,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(losser);
         if(idx >= 0) {
             this._stateCpns[idx].bipaishu();
+            CommonUtil.darkNode(this._pnodes[idx], true);
         }
     }
 
@@ -234,6 +241,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].qipai();
+            CommonUtil.darkNode(this._pnodes[idx], true);
             this._cdCpns[idx].setRunning(false);
         }
     }
