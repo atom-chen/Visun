@@ -153,8 +153,6 @@ export default class UIbjle extends BaseComponent {
 		enterData.AreaBets[param.BetArea] += param.BetScore;
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			enterData.MyBets[param.BetArea] += param.BetScore;
-			LoginUser.getInstance().Gold -= param.BetScore;
-			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 		}
 
 		var areaName = "area"+this.areaToNode[param.BetArea];
@@ -203,6 +201,12 @@ export default class UIbjle extends BaseComponent {
 		this.setWinAreas([]);
 		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
 		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
+
+		UIManager.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+            on_complete: (sk, trackEntry)=>{
+                CommonUtil.safeDelete(sk);
+            }
+        });
 	}
 
 	//开牌阶段
