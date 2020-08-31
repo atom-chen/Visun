@@ -204,7 +204,7 @@ export default class ZjhServer extends ModelBase {
 		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:this.CurHost}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
-		TimerManager.delaySecond(3, newHandler(this.toFight, this, this.curTurn2Seat));
+		TimerManager.delaySecond(5, newHandler(this.toFight, this, this.curTurn2Seat));
 	}
 
 	//战斗阶段

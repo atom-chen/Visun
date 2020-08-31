@@ -3,19 +3,19 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import GameManager from "../../../../../common/script/model/GameManager";
 import UIManager from "../../../../../kernel/view/UIManager";
-import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnUserState from "../../../../appqp/script/comps/CpnUserState";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/proto/net_zhajinhua";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import ZjhMgr from "../model/ZjhMgr";
-import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
-import { gamecomm } from "../../../../../../declares/gamecomm";
 import ZjhServer from "../model/ZjhServer";
 import { ZjhFightState } from "../model/ZjhDefine";
+import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
+import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 
 
 const MAX_SOLDIER = 5;
@@ -27,7 +27,7 @@ const {ccclass, property} = cc._decorator;
 export default class zjhUI extends BaseComponent {
     private _pnodes:Array<cc.Node> = [];
     private _playerCpns:Array<CpnPlayer1> = [];
-    private _handors:Array<CpnHandcard> = [];
+    private _handors:Array<CpnHandcard2> = [];
     private _stateCpns:Array<CpnUserState> = [];
     private _cdCpns:Array<CpnCircleCD> = [];
 
@@ -43,7 +43,7 @@ export default class zjhUI extends BaseComponent {
             var nd = this.m_ui["p"+i];
             this._pnodes.push(nd);
             this._playerCpns.push(nd.getChildByName("CpnPlayer").getComponent(CpnPlayer1));
-            this._handors.push(nd.getChildByName("CpnHandcard").getComponent(CpnHandcard));
+            this._handors.push(nd.getChildByName("handor").getComponent(CpnHandcard2));
             this._stateCpns.push(nd.getChildByName("stateTip").getComponent(CpnUserState));
             this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
         }
@@ -105,7 +105,7 @@ export default class zjhUI extends BaseComponent {
         }
         var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
         if(hero) {
-            this._handors[0].resetCards(hero.Cards && hero.Cards.Cards || null, false);
+            this._handors[0].resetCards(hero.Cards && hero.Cards.Cards || null);
         }
     }
 
@@ -119,7 +119,7 @@ export default class zjhUI extends BaseComponent {
         for(var i in this._stateCpns){
             this._stateCpns[i].idle();
             this._cdCpns[i].node.active = false;
-            this._handors[i].resetCards(null, false);
+            this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
         }
     }
@@ -128,16 +128,40 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateStartResp(param:any) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
-        for(var i in this._stateCpns){
-            this._handors[i].resetCards([0,0,0], false);
-        }
 
         UIManager.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
             }
         });
+
+        TimerManager.delaySecond(3, newHandler(function(){
+            var nn = 0;
+            for(var i in this._stateCpns){
+                this._handors[i].resetCards([0,0,0]);
+    
+                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                for(var j=0; j<3; j++) {
+                    nn++;
+                    this.bezierTo0(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                }
+            }
+        }, this));
     }
+    private bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
+		if(!chipSpr) { return; }
+		chipSpr.setPosition(fromPos);
+		var gj = cc.bezierTo(duration, 
+			[
+				new cc.Vec2(fromPos.x+15,fromPos.y-20),
+				new cc.Vec2(fromPos.x+55,fromPos.y-140), 
+				new cc.Vec2(toPos.x,toPos.y)
+			]).easing(cc.easeInOut(2))
+		if(delay<=0)
+			chipSpr.runAction( gj );
+		else
+			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
+	}
 
     //战斗阶段
     ZhajinhuaStatePlayingResp(param:zhajinhua.ZhajinhuaStatePlayingResp) {
@@ -218,9 +242,11 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaHostResp(param:zhajinhua.ZhajinhuaHostResp) {
         var idx = this.playerIdx(param.CurHost);
         if(idx >= 0) {
-            this.m_ui.zhuang.position = this._pnodes[idx].position;
-            this.m_ui.zhuang.x += 50;
-            this.m_ui.zhuang.y += 75;
+            var dstPos = cc.v3(this._pnodes[idx].position);
+            dstPos.x += 50;
+            dstPos.y += 75;
+            this.m_ui.zhuang.position = this._zhuangPos;
+            this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
         }
     }
 

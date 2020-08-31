@@ -40,9 +40,8 @@ export default class CpnPoker extends cc.Component {
         }
     }
 
-    setCode(v:number, bFront:boolean = true) {
+    setCode(v:number) {
         this._code = v;
-        if(bFront) { this.refresh(); }
     }
 
     getCode() : number {

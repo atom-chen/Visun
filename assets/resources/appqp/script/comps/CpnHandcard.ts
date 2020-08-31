@@ -70,7 +70,7 @@ export default class CpnHandcard extends cc.Component {
     private addCard(cardV:PokerCode) : CpnPoker {
         var card = cc.instantiate(this.pokerTemplate);
         var comp:CpnPoker = card.getComponent(CpnPoker);
-        comp.setCode(cardV, false);
+        comp.setCode(cardV);
         this.node.addChild(card);
         return comp;
     }
