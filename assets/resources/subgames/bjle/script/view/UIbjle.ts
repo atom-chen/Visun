@@ -34,11 +34,11 @@ const AREA_XIAN_DUI    = 6 //闲对子
 const AREA_ZHUANG_DUI  = 7 //庄对子
 
 var margin = [
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:40,right:40,bottom:25,top:25 },
-	{ left:80,right:80,bottom:90,top:90 },
-	{ left:80,right:80,bottom:90,top:90 },
+	{ left:55,right:55,bottom:30,top:30 },
+	{ left:50,right:50,bottom:30,top:30 },
+	{ left:50,right:50,bottom:30,top:30 },
+	{ left:90,right:90,bottom:100,top:100 },
+	{ left:90,right:90,bottom:100,top:100 },
 ];
 
 const {ccclass, property} = cc._decorator;
