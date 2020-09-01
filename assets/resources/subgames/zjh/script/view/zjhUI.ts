@@ -12,7 +12,6 @@ import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
-import ZjhServer from "../model/ZjhServer";
 import { ZjhFightState } from "../model/ZjhDefine";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
@@ -21,6 +20,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
+//import ZjhServer from "../model/ZjhServer";
 
 
 const MAX_SOLDIER = 5;
@@ -62,7 +62,7 @@ export default class zjhUI extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
-        ZjhServer.getInstance().run();
+    //    ZjhServer.getInstance().run();
     }
 
     //玩家的UI位置
