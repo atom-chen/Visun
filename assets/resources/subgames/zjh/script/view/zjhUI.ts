@@ -63,6 +63,10 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
         }
 
+        for(var n=0; n<MAX_SOLDIER; n++) {
+            this._pnodes[n].active = false;
+        }
+
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().addObserver(ZjhHandlers);
 
         this.initUIEvent();
