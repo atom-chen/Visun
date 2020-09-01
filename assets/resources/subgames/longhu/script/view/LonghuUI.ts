@@ -38,7 +38,7 @@ export default class LonghuUI extends BaseComponent {
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
 		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.6;
+		obj.scale = 0.2;
 		return obj;
     });
 	
