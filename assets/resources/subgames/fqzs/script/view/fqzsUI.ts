@@ -35,7 +35,7 @@ export default class FqzsUI extends BaseComponent {
     _loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
 		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.2;
+		obj.scale = 0.15;
 		return obj;
     });
 	
