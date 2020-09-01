@@ -22,6 +22,12 @@ export namespace landLords {
 
         /** LandLordsPlayer IsTrustee */
         IsTrustee?: (boolean|null);
+
+        /** LandLordsPlayer Name */
+        Name?: (string|null);
+
+        /** LandLordsPlayer Gold */
+        Gold?: (number|Long|null);
     }
 
     /** Represents a LandLordsPlayer. */
@@ -50,6 +56,12 @@ export namespace landLords {
 
         /** LandLordsPlayer IsTrustee. */
         public IsTrustee: boolean;
+
+        /** LandLordsPlayer Name. */
+        public Name: string;
+
+        /** LandLordsPlayer Gold. */
+        public Gold: (number|Long);
 
         /**
          * Creates a new LandLordsPlayer instance using the specified properties.

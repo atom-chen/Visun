@@ -8,23 +8,26 @@ export namespace zhajinhua {
         /** ZhajinhuaPlayer UserId */
         UserId?: (number|Long|null);
 
-        /** ZhajinhuaPlayer SeatId */
-        SeatId?: (number|null);
-
-        /** ZhajinhuaPlayer FightState */
-        FightState?: (number|null);
-
-        /** ZhajinhuaPlayer IsSee */
-        IsSee?: (boolean|null);
+        /** ZhajinhuaPlayer Name */
+        Name?: (string|null);
 
         /** ZhajinhuaPlayer Gold */
         Gold?: (number|Long|null);
 
-        /** ZhajinhuaPlayer RecentBetMoney */
-        RecentBetMoney?: (number|Long|null);
+        /** ZhajinhuaPlayer SeatId */
+        SeatId?: (number|null);
 
-        /** ZhajinhuaPlayer TotalBetMoney */
-        TotalBetMoney?: (number|Long|null);
+        /** ZhajinhuaPlayer SeatState */
+        SeatState?: (number|null);
+
+        /** ZhajinhuaPlayer IsSee */
+        IsSee?: (boolean|null);
+
+        /** ZhajinhuaPlayer RecentScore */
+        RecentScore?: (number|Long|null);
+
+        /** ZhajinhuaPlayer TotalScore */
+        TotalScore?: (number|Long|null);
 
         /** ZhajinhuaPlayer Cards */
         Cards?: (gamecomm.ICardInfo|null);
@@ -42,23 +45,26 @@ export namespace zhajinhua {
         /** ZhajinhuaPlayer UserId. */
         public UserId: (number|Long);
 
-        /** ZhajinhuaPlayer SeatId. */
-        public SeatId: number;
-
-        /** ZhajinhuaPlayer FightState. */
-        public FightState: number;
-
-        /** ZhajinhuaPlayer IsSee. */
-        public IsSee: boolean;
+        /** ZhajinhuaPlayer Name. */
+        public Name: string;
 
         /** ZhajinhuaPlayer Gold. */
         public Gold: (number|Long);
 
-        /** ZhajinhuaPlayer RecentBetMoney. */
-        public RecentBetMoney: (number|Long);
+        /** ZhajinhuaPlayer SeatId. */
+        public SeatId: number;
 
-        /** ZhajinhuaPlayer TotalBetMoney. */
-        public TotalBetMoney: (number|Long);
+        /** ZhajinhuaPlayer SeatState. */
+        public SeatState: number;
+
+        /** ZhajinhuaPlayer IsSee. */
+        public IsSee: boolean;
+
+        /** ZhajinhuaPlayer RecentScore. */
+        public RecentScore: (number|Long);
+
+        /** ZhajinhuaPlayer TotalScore. */
+        public TotalScore: (number|Long);
 
         /** ZhajinhuaPlayer Cards. */
         public Cards?: (gamecomm.ICardInfo|null);
@@ -320,14 +326,14 @@ export namespace zhajinhua {
         /** ZhajinhuaSceneResp TimeStamp */
         TimeStamp?: (number|Long|null);
 
-        /** ZhajinhuaSceneResp TotalBet */
-        TotalBet?: (number|Long|null);
+        /** ZhajinhuaSceneResp TotalScore */
+        TotalScore?: (number|Long|null);
 
-        /** ZhajinhuaSceneResp MinBet */
-        MinBet?: (number|Long|null);
+        /** ZhajinhuaSceneResp MinScore */
+        MinScore?: (number|Long|null);
 
-        /** ZhajinhuaSceneResp CurHost */
-        CurHost?: (number|Long|null);
+        /** ZhajinhuaSceneResp Banker */
+        Banker?: (number|Long|null);
 
         /** ZhajinhuaSceneResp Fighters */
         Fighters?: (zhajinhua.IZhajinhuaPlayer[]|null);
@@ -345,14 +351,14 @@ export namespace zhajinhua {
         /** ZhajinhuaSceneResp TimeStamp. */
         public TimeStamp: (number|Long);
 
-        /** ZhajinhuaSceneResp TotalBet. */
-        public TotalBet: (number|Long);
+        /** ZhajinhuaSceneResp TotalScore. */
+        public TotalScore: (number|Long);
 
-        /** ZhajinhuaSceneResp MinBet. */
-        public MinBet: (number|Long);
+        /** ZhajinhuaSceneResp MinScore. */
+        public MinScore: (number|Long);
 
-        /** ZhajinhuaSceneResp CurHost. */
-        public CurHost: (number|Long);
+        /** ZhajinhuaSceneResp Banker. */
+        public Banker: (number|Long);
 
         /** ZhajinhuaSceneResp Fighters. */
         public Fighters: zhajinhua.IZhajinhuaPlayer[];
@@ -704,11 +710,110 @@ export namespace zhajinhua {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ZhajinhuaStateCompareResp. */
+    interface IZhajinhuaStateCompareResp {
+
+        /** ZhajinhuaStateCompareResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateCompareResp Info */
+        Info?: (zhajinhua.IZhajinhuaCompareResp|null);
+    }
+
+    /** Represents a ZhajinhuaStateCompareResp. */
+    class ZhajinhuaStateCompareResp implements IZhajinhuaStateCompareResp {
+
+        /**
+         * Constructs a new ZhajinhuaStateCompareResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: zhajinhua.IZhajinhuaStateCompareResp);
+
+        /** ZhajinhuaStateCompareResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateCompareResp Info. */
+        public Info?: (zhajinhua.IZhajinhuaCompareResp|null);
+
+        /**
+         * Creates a new ZhajinhuaStateCompareResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZhajinhuaStateCompareResp instance
+         */
+        public static create(properties?: zhajinhua.IZhajinhuaStateCompareResp): zhajinhua.ZhajinhuaStateCompareResp;
+
+        /**
+         * Encodes the specified ZhajinhuaStateCompareResp message. Does not implicitly {@link zhajinhua.ZhajinhuaStateCompareResp.verify|verify} messages.
+         * @param message ZhajinhuaStateCompareResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: zhajinhua.IZhajinhuaStateCompareResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZhajinhuaStateCompareResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaStateCompareResp.verify|verify} messages.
+         * @param message ZhajinhuaStateCompareResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaStateCompareResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZhajinhuaStateCompareResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZhajinhuaStateCompareResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaStateCompareResp;
+
+        /**
+         * Decodes a ZhajinhuaStateCompareResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZhajinhuaStateCompareResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaStateCompareResp;
+
+        /**
+         * Verifies a ZhajinhuaStateCompareResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZhajinhuaStateCompareResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZhajinhuaStateCompareResp
+         */
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaStateCompareResp;
+
+        /**
+         * Creates a plain object from a ZhajinhuaStateCompareResp message. Also converts values to other types if specified.
+         * @param message ZhajinhuaStateCompareResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: zhajinhua.ZhajinhuaStateCompareResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZhajinhuaStateCompareResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ZhajinhuaStateOverResp. */
     interface IZhajinhuaStateOverResp {
 
         /** ZhajinhuaStateOverResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateOverResp WinnerId */
+        WinnerId?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaStateOverResp. */
@@ -722,6 +827,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaStateOverResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateOverResp WinnerId. */
+        public WinnerId: (number|Long);
 
         /**
          * Creates a new ZhajinhuaStateOverResp instance using the specified properties.
@@ -1154,8 +1262,8 @@ export namespace zhajinhua {
         /** ZhajinhuaFollowResp UserId */
         UserId?: (number|Long|null);
 
-        /** ZhajinhuaFollowResp Money */
-        Money?: (number|Long|null);
+        /** ZhajinhuaFollowResp Score */
+        Score?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaFollowResp. */
@@ -1170,8 +1278,8 @@ export namespace zhajinhua {
         /** ZhajinhuaFollowResp UserId. */
         public UserId: (number|Long);
 
-        /** ZhajinhuaFollowResp Money. */
-        public Money: (number|Long);
+        /** ZhajinhuaFollowResp Score. */
+        public Score: (number|Long);
 
         /**
          * Creates a new ZhajinhuaFollowResp instance using the specified properties.
@@ -1247,8 +1355,8 @@ export namespace zhajinhua {
     /** Properties of a ZhajinhuaRaiseReq. */
     interface IZhajinhuaRaiseReq {
 
-        /** ZhajinhuaRaiseReq Money */
-        Money?: (number|Long|null);
+        /** ZhajinhuaRaiseReq Score */
+        Score?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaRaiseReq. */
@@ -1260,8 +1368,8 @@ export namespace zhajinhua {
          */
         constructor(properties?: zhajinhua.IZhajinhuaRaiseReq);
 
-        /** ZhajinhuaRaiseReq Money. */
-        public Money: (number|Long);
+        /** ZhajinhuaRaiseReq Score. */
+        public Score: (number|Long);
 
         /**
          * Creates a new ZhajinhuaRaiseReq instance using the specified properties.
@@ -1340,8 +1448,8 @@ export namespace zhajinhua {
         /** ZhajinhuaRaiseResp UserId */
         UserId?: (number|Long|null);
 
-        /** ZhajinhuaRaiseResp Money */
-        Money?: (number|Long|null);
+        /** ZhajinhuaRaiseResp Score */
+        Score?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaRaiseResp. */
@@ -1356,8 +1464,8 @@ export namespace zhajinhua {
         /** ZhajinhuaRaiseResp UserId. */
         public UserId: (number|Long);
 
-        /** ZhajinhuaRaiseResp Money. */
-        public Money: (number|Long);
+        /** ZhajinhuaRaiseResp Score. */
+        public Score: (number|Long);
 
         /**
          * Creates a new ZhajinhuaRaiseResp instance using the specified properties.

@@ -55,7 +55,7 @@ export var landLords_packet_define = {
 }
 
 export class landLords_request {
-    public static LandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any, IsTrustee:any } ) { landLords_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any, IsTrustee:any, Name:string, Gold:number } ) { landLords_packet_define[56].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsSceneResp( data:{ TimeStamp:number, Players:any[] } ) { landLords_packet_define[57].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStateFreeResp( data:{ Times:any } ) { landLords_packet_define[58].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStateStartResp( data:{ Times:any } ) { landLords_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }

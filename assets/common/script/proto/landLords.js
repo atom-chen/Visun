@@ -26,6 +26,8 @@ $root.landLords = (function() {
         LandLordsPlayer.prototype.Cards = $util.newBuffer([]);
         LandLordsPlayer.prototype.IsBanker = false;
         LandLordsPlayer.prototype.IsTrustee = false;
+        LandLordsPlayer.prototype.Name = "";
+        LandLordsPlayer.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         LandLordsPlayer.create = function create(properties) {
             return new LandLordsPlayer(properties);
@@ -46,6 +48,10 @@ $root.landLords = (function() {
                 writer.uint32(40).bool(message.IsBanker);
             if (message.IsTrustee != null && Object.hasOwnProperty.call(message, "IsTrustee"))
                 writer.uint32(48).bool(message.IsTrustee);
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(58).string(message.Name);
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
+                writer.uint32(64).int64(message.Gold);
             return writer;
         };
 
@@ -77,6 +83,12 @@ $root.landLords = (function() {
                     break;
                 case 6:
                     message.IsTrustee = reader.bool();
+                    break;
+                case 7:
+                    message.Name = reader.string();
+                    break;
+                case 8:
+                    message.Gold = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -113,6 +125,12 @@ $root.landLords = (function() {
             if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
                 if (typeof message.IsTrustee !== "boolean")
                     return "IsTrustee: boolean expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
             return null;
         };
 
@@ -142,6 +160,17 @@ $root.landLords = (function() {
                 message.IsBanker = Boolean(object.IsBanker);
             if (object.IsTrustee != null)
                 message.IsTrustee = Boolean(object.IsTrustee);
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            if (object.Gold != null)
+                if ($util.Long)
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
             return message;
         };
 
@@ -166,6 +195,12 @@ $root.landLords = (function() {
                 }
                 object.IsBanker = false;
                 object.IsTrustee = false;
+                object.Name = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Gold = options.longs === String ? "0" : 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -182,6 +217,13 @@ $root.landLords = (function() {
                 object.IsBanker = message.IsBanker;
             if (message.IsTrustee != null && message.hasOwnProperty("IsTrustee"))
                 object.IsTrustee = message.IsTrustee;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
+                else
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
             return object;
         };
 

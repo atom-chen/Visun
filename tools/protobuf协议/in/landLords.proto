@@ -11,6 +11,8 @@ message LandLordsPlayer {
   bytes Cards = 4; // 牌 (仅提供手牌数目的牌值)
   bool IsBanker = 5; // 是否是庄家
   bool IsTrustee = 6; //是否托管中
+  string Name = 7;//玩家名字
+  int64  Gold = 8;// 金币
 }
 
 
