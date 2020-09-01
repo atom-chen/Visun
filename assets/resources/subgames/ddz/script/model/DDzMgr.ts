@@ -25,12 +25,12 @@ export default class DDzMgr extends ModelBase {
 	private _players : {[key:number]:DdzPlayer} = {};
 	private _zhuangId : number = 0;
 	private _curAttackerId : number = null;
-	private enterData:landLords.LandLordsSceneResp = null;
+	private enterData:landLords.ILandLordsSceneResp = null;
 
-    setEnterData(data:landLords.LandLordsSceneResp) {
+    setEnterData(data:landLords.ILandLordsSceneResp) {
         this.enterData = data;
     }
-    getEnterData() : landLords.LandLordsSceneResp {
+    getEnterData() : landLords.ILandLordsSceneResp {
         return this.enterData;
     }
 

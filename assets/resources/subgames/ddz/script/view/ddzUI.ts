@@ -397,7 +397,7 @@ export default class DdzUI extends BaseComponent {
             });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){ 
-            gamecomm_request.ReqChangeTable({
+            gamecomm_request.ChangeTableReq({
                 GameID : GameManager.getInstance().getGameId()
             });
         }, this);

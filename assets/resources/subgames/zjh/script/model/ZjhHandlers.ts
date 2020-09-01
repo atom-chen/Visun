@@ -1,5 +1,6 @@
 import { zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua";
 import ZjhMgr from "./ZjhMgr";
+import { zhajinhua } from "../../../../../../declares/zhajinhua";
 
 var ZjhHandlers = {
 
@@ -12,9 +13,7 @@ var ZjhHandlers = {
 	},
 
 	[zhajinhua_msgs.ZhajinhuaSceneResp] : function(param) {
-		for(var ii in param.Fighters) {
-			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
-		}
+		
 	},
 
 	[zhajinhua_msgs.ZhajinhuaStateFreeResp] : function(param) {
@@ -33,8 +32,10 @@ var ZjhHandlers = {
 		
 	},
 
-	[zhajinhua_msgs.ZhajinhuaHostResp] : function(param) {
-		
+	[zhajinhua_msgs.ZhajinhuaHostResp] : function(param:zhajinhua.IZhajinhuaHostResp) {
+		if(ZjhMgr.getInstance().getEnterData()) {
+			ZjhMgr.getInstance().getEnterData().Banker = param.CurHost;
+		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaReadyResp] : function(param) {

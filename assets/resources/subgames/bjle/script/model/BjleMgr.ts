@@ -17,11 +17,11 @@ export default class BjleMgr extends ModelBase {
         
     }
 
-    private enterData:baccarat.BaccaratSceneResp = null;
-    setEnterData(data:baccarat.BaccaratSceneResp) {
+    private enterData:baccarat.IBaccaratSceneResp = null;
+    setEnterData(data:baccarat.IBaccaratSceneResp) {
         this.enterData = data;
     }
-    getEnterData() : baccarat.BaccaratSceneResp {
+    getEnterData() : baccarat.IBaccaratSceneResp {
         return this.enterData;
     }
 

@@ -17,22 +17,21 @@ export default class ZjhMgr extends ModelBase {
 		}
 	}
     on_clear(): void {
-
+        this._players = {};
+        this.enterData = null;
     }
     
-    private _players : {[key:number]:zhajinhua.ZhajinhuaPlayer} = {};
-	private _zhuangId : number = 0;
-	private _curAttackerId : number = null;
-	private enterData:zhajinhua.ZhajinhuaSceneResp = null;
+    private _players : {[key:number]:zhajinhua.IZhajinhuaPlayer} = {};
+	private enterData:zhajinhua.IZhajinhuaSceneResp = null;
 
-    setEnterData(data:zhajinhua.ZhajinhuaSceneResp) {
+    setEnterData(data:zhajinhua.IZhajinhuaSceneResp) {
         this.enterData = data;
     }
-    getEnterData() : zhajinhua.ZhajinhuaSceneResp {
+    getEnterData() : zhajinhua.IZhajinhuaSceneResp {
         return this.enterData;
     }
 
-    addPlayer(man) {
+    addPlayer(man:zhajinhua.IZhajinhuaPlayer) {
         this._players[man.UserId] = man;
     }
 
@@ -40,7 +39,8 @@ export default class ZjhMgr extends ModelBase {
 		this._players[uid] = null;
 	}
 
-	getPlayer(uid:number) : zhajinhua.ZhajinhuaPlayer {
+	getPlayer(uid:number) : zhajinhua.IZhajinhuaPlayer {
 		return this._players[uid];
-	}
+    }
+
 }

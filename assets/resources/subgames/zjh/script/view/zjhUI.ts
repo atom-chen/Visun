@@ -53,11 +53,12 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
         }
 
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().addObserver(ZjhHandlers);
+
         this.initUIEvent();
         this.initNetEvent();
 
-        this.ZhajinhuaStateFreeResp(null);
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().addObserver(ZjhHandlers);
+        this.ZhajinhuaSceneResp(ZjhMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
@@ -87,6 +88,10 @@ export default class zjhUI extends BaseComponent {
 
     //场景信息
     ZhajinhuaSceneResp(param:zhajinhua.IZhajinhuaSceneResp) {
+        if(isNil(param)) {
+            this.ZhajinhuaStateFreeResp(null);
+            return;
+        }
         this.m_ui.labBottomBet.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(500);
         this.m_ui.labRound.getComponent(cc.Label).string = "第1/20轮";
         this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(param.MinScore);

@@ -18,23 +18,26 @@ import BacarratMgr from "../../../resources/subgames/bjle2/script/BacarratMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
+import { zhajinhua_msgs } from "../proto/net_zhajinhua";
+import { zhajinhua } from "../../../../declares/zhajinhua";
+import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
 
 
 var GameHandlers = {
 
-    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.GoldChangeInfo) {
+    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.IGoldChangeInfo) {
         if(param.UserID == LoginUser.getInstance().UserId) {
             LoginUser.getInstance().Gold = param.Gold;
         }
     },
 
-    [gamecomm_msgs.BeOutResp] : function(param:gamecomm.BeOutResp) {
+    [gamecomm_msgs.BeOutResp] : function(param:gamecomm.IBeOutResp) {
         UIManager.openDialog("cfg_kick", "你被踢出房间："+param.Hints, 1, function(){
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
         });
     },
 
-    [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.ExitGameResp) {
+    [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
         if(param.UserID == LoginUser.getInstance().UserId) {
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
         }
@@ -45,20 +48,20 @@ var GameHandlers = {
     },
 
 	
-	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.BaccaratSceneResp) {
+	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
         BacarratMgr.getInstance().setEnterData(param);
         BjleMgr.getInstance().setEnterData(param);
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},
 	
-	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.BrcowcowSceneResp) {
+	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
         BrnnMgr.getInstance().setEnterData(param);
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
 	},
 
-    [landLords_msgs.LandLordsSceneResp] : function(param:landLords.LandLordsSceneResp) {
+    [landLords_msgs.LandLordsSceneResp] : function(param:landLords.ILandLordsSceneResp) {
         DDzMgr.getInstance().setEnterData(param);
         DDzMgr.getInstance().clearFighters();
         DDzMgr.getInstance().updateFighterList(param.Players);
@@ -67,9 +70,18 @@ var GameHandlers = {
                 DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
             }
         }
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(true);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
+
+    [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
+        ZjhMgr.getInstance().clear();
+        for(var ii in param.Fighters) {
+			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
+        }
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
+    }
 }
 
 export default GameHandlers;

@@ -144,6 +144,10 @@ export default class GameManager extends ModelBase {
 		});
 	}
 
+	public static isInGameScene() : boolean {
+		return SceneManager.curSceneName === KernelUIDefine.GameScene.name;
+	}
+
 	//------------------------------------------------------------------------------
 
 	private _gameList = [];		//服务器游戏列表
