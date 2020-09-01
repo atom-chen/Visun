@@ -22,7 +22,8 @@ export default class ZjhMgr extends ModelBase {
     }
     
     private _players : {[key:number]:zhajinhua.IZhajinhuaPlayer} = {};
-	private enterData:zhajinhua.IZhajinhuaSceneResp = null;
+    private enterData:zhajinhua.IZhajinhuaSceneResp = null;
+    public CurTurnTo:number = -1; 
 
     setEnterData(data:zhajinhua.IZhajinhuaSceneResp) {
         this.enterData = data;
@@ -41,6 +42,10 @@ export default class ZjhMgr extends ModelBase {
 
 	getPlayer(uid:number) : zhajinhua.IZhajinhuaPlayer {
 		return this._players[uid];
+    }
+
+    getPlayerList() : {[key:number]:zhajinhua.IZhajinhuaPlayer} {
+        return this._players;
     }
 
 }

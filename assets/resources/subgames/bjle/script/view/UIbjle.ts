@@ -19,7 +19,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
-import { isEmpty, isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import { baccarat } from "../../../../../../declares/baccarat";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
@@ -238,8 +238,6 @@ export default class UIbjle extends BaseComponent {
 	private BaccaratStateOverResp(param) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
-		
-		this.playJiesuan();
 	}
 
 	private BaccaratOpenResp(param:baccarat.IBaccaratOpenResp) {
@@ -263,22 +261,24 @@ export default class UIbjle extends BaseComponent {
 		this.setWinAreas(param.AwardArea);
 	}
 
-	private BaccaratCheckoutResp(param:baccarat.BaccaratCheckoutResp) {
+	private BaccaratCheckoutResp(param:baccarat.IBaccaratCheckoutResp) {
 		this.isJoined = false;
 		LoginUser.getInstance().Gold += param.MyAcquire;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
+		this.playCollectChip(param);
 	}
+    private playCollectChip(param:baccarat.IBaccaratCheckoutResp) {
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
-    private playJiesuan() {
-		var self = this;
 		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(1),
+			cc.delayTime(0.1),
 			cc.callFunc(function(){
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
 				for(var i=len-1; i>=0; i--){
 					childs[i].runAction(
+						cc.moveTo(0.36, cc.v2(0, 150)),
 						cc.callFunc(function(obj){
                             ResPool.delObject(ViewDefine.CpnChip, obj);
 						}, childs[i])
@@ -286,7 +286,36 @@ export default class UIbjle extends BaseComponent {
 				}
 			}, this)
 		));
-		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
+
+		var shouTime = 0.1 + 0.36;
+		TimerManager.delaySecond(shouTime, newHandler(function(){
+			if(param.MyAcquire > 0) {
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.chipLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.chipLayer);
+				this.playFly(50, fromPos, toPos);
+			}
+			if(param.PlayerAcquire > 0) {
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.chipLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.chipLayer);
+				this.playFly(50, fromPos, toPos);
+			}
+		}, this));
+	}
+	private playFly(cnt, fromPos, toPos) {
+		for(var j = 0; j<cnt; j++) {
+			var chip = ResPool.newObject(ViewDefine.CpnChip);
+			chip.getComponent(CpnChip).setChipValue(this._rule[0], true);
+			this.m_ui.chipLayer.addChild(chip);
+
+			chip.runAction(cc.sequence(
+				cc.place(fromPos),
+				cc.delayTime(j*0.15),
+				cc.moveTo(0.3, toPos),
+				cc.callFunc(function(){
+					ResPool.delObject(ViewDefine.CpnChip, this)
+				}, chip)
+			));
+		}
 	}
 	
 	private initUIEvents() {

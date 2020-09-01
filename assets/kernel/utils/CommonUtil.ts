@@ -654,46 +654,6 @@ export default class CommonUtil {
 		return toPos;
 	}
 
-	//
-	public static playAddMoney(lab: cc.Label, fromV: number, toV: number, jmpTimes:number, delayT:number) {
-		if (isNil(fromV)) { fromV = parseInt(lab.string) || 0; }
-		lab.node.active = true;
-		lab.node.stopAllActions();
-
-		var delta = toV - fromV;
-		if(jmpTimes < 10) { jmpTimes = 10; }
-		var tic = Math.ceil(Math.abs(delta) / jmpTimes);
-		if(tic < 1) { tic = 1; }
-		var prefix = "+";
-		if (delta < 0) { tic = -tic; prefix = ""; }
-
-		lab.string = prefix + fromV;
-		var f = function () {
-			fromV += tic;
-			if (fromV >= toV && delta > 0) { 
-				fromV = toV; 
-				lab.string = prefix + fromV;
-				lab.unschedule(f); 
-			} else if (fromV <= toV && delta < 0) { 
-				fromV = toV; 
-				lab.string = prefix + fromV;
-				lab.unschedule(f); 
-			}
-			lab.string = prefix + fromV;
-		}
-
-		if(delayT > 0) {
-			lab.node.runAction(cc.sequence(
-				cc.delayTime(delayT),
-				cc.callFunc(()=>{
-					lab.schedule(f, 0);
-				},lab)
-			));
-		} else {
-			lab.schedule(f, 0);
-		}
-	}
-
 	public static playShake(obj:cc.Node, duration: number, shakeTimes: number) : void {
 		if(isNil(obj)) { return; }
 		var dt = duration / (shakeTimes*4);
