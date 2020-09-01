@@ -11,6 +11,9 @@ export namespace gamecomm {
         /** PlayerInfo Name */
         Name?: (string|null);
 
+        /** PlayerInfo FaceID */
+        FaceID?: (number|null);
+
         /** PlayerInfo Age */
         Age?: (number|null);
 
@@ -59,6 +62,9 @@ export namespace gamecomm {
 
         /** PlayerInfo Name. */
         public Name: string;
+
+        /** PlayerInfo FaceID. */
+        public FaceID: number;
 
         /** PlayerInfo Age. */
         public Age: number;
@@ -1082,8 +1088,8 @@ export namespace gamecomm {
         /** EnterGameResp GameID */
         GameID?: (number|null);
 
-        /** EnterGameResp UserID */
-        UserID?: (number|Long|null);
+        /** EnterGameResp UserInfo */
+        UserInfo?: (gamecomm.IPlayerInfo|null);
     }
 
     /** Represents an EnterGameResp. */
@@ -1098,8 +1104,8 @@ export namespace gamecomm {
         /** EnterGameResp GameID. */
         public GameID: number;
 
-        /** EnterGameResp UserID. */
-        public UserID: (number|Long);
+        /** EnterGameResp UserInfo. */
+        public UserInfo?: (gamecomm.IPlayerInfo|null);
 
         /**
          * Creates a new EnterGameResp instance using the specified properties.

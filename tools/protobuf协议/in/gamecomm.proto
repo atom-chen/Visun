@@ -7,6 +7,7 @@ package gamecomm;
 message PlayerInfo {
   uint64 UserID = 1; //ID
   string Name = 2; //账号
+  uint32 FaceID = 14; //头像
   uint32 Age = 3; //年龄
   uint32 Sex = 4; //性别
   int64 Gold = 5; //金币 *100
@@ -90,7 +91,7 @@ message EnterGameReq {
 }
 message EnterGameResp {
   uint32 GameID = 1; //游戏标识
-  uint64 UserID = 2;
+  PlayerInfo UserInfo = 2;//玩家信息
 }
 
 //退出游戏

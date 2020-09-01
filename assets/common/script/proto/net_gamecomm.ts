@@ -45,7 +45,7 @@ export var gamecomm_packet_define = {
 }
 
 export class gamecomm_request {
-    public static PlayerInfo( data:{ UserID:number, Name:string, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerInfo( data:{ UserID:number, Name:string, FaceID:number, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static CardInfo( data:{ Cards:any, CardType:number, CardValue:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static TimeInfo( data:{ TimeStamp:number, WaitTime:number, OutTime:number, TotalTime:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static AreaInfo( data:{ ID:number, MyGold:number, TotalGold:number, AcquireGold:number } ) { gamecomm_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
@@ -55,7 +55,7 @@ export class gamecomm_request {
     public static GameRecord( data:{ CardInfo:any, IsWon:any } ) { gamecomm_packet_define[27].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[28].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGameReq( data:{ GameID:number } ) { gamecomm_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterGameResp( data:{ GameID:number, UserID:number } ) { gamecomm_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterGameResp( data:{ GameID:number, UserInfo:any } ) { gamecomm_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
     public static ExitGameReq( data:{ GameID:number } ) { gamecomm_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
     public static ExitGameResp( data:{ GameID:number, UserID:number } ) { gamecomm_packet_define[32].sendToChannel(ChannelDefine.game, data, false); }
     public static ChangeTableReq( data:{ GameID:number } ) { gamecomm_packet_define[33].sendToChannel(ChannelDefine.game, data, false); }

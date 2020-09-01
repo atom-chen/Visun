@@ -22,6 +22,7 @@ $root.gamecomm = (function() {
 
         PlayerInfo.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         PlayerInfo.prototype.Name = "";
+        PlayerInfo.prototype.FaceID = 0;
         PlayerInfo.prototype.Age = 0;
         PlayerInfo.prototype.Sex = 0;
         PlayerInfo.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
@@ -67,6 +68,8 @@ $root.gamecomm = (function() {
                 writer.uint32(96).uint32(message.TableID);
             if (message.ChairID != null && Object.hasOwnProperty.call(message, "ChairID"))
                 writer.uint32(104).uint32(message.ChairID);
+            if (message.FaceID != null && Object.hasOwnProperty.call(message, "FaceID"))
+                writer.uint32(112).uint32(message.FaceID);
             return writer;
         };
 
@@ -86,6 +89,9 @@ $root.gamecomm = (function() {
                     break;
                 case 2:
                     message.Name = reader.string();
+                    break;
+                case 14:
+                    message.FaceID = reader.uint32();
                     break;
                 case 3:
                     message.Age = reader.uint32();
@@ -143,6 +149,9 @@ $root.gamecomm = (function() {
             if (message.Name != null && message.hasOwnProperty("Name"))
                 if (!$util.isString(message.Name))
                     return "Name: string expected";
+            if (message.FaceID != null && message.hasOwnProperty("FaceID"))
+                if (!$util.isInteger(message.FaceID))
+                    return "FaceID: integer expected";
             if (message.Age != null && message.hasOwnProperty("Age"))
                 if (!$util.isInteger(message.Age))
                     return "Age: integer expected";
@@ -194,6 +203,8 @@ $root.gamecomm = (function() {
                     message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
             if (object.Name != null)
                 message.Name = String(object.Name);
+            if (object.FaceID != null)
+                message.FaceID = object.FaceID >>> 0;
             if (object.Age != null)
                 message.Age = object.Age >>> 0;
             if (object.Sex != null)
@@ -263,6 +274,7 @@ $root.gamecomm = (function() {
                 object.GameID = 0;
                 object.TableID = 0;
                 object.ChairID = 0;
+                object.FaceID = 0;
             }
             if (message.UserID != null && message.hasOwnProperty("UserID"))
                 if (typeof message.UserID === "number")
@@ -299,6 +311,8 @@ $root.gamecomm = (function() {
                 object.TableID = message.TableID;
             if (message.ChairID != null && message.hasOwnProperty("ChairID"))
                 object.ChairID = message.ChairID;
+            if (message.FaceID != null && message.hasOwnProperty("FaceID"))
+                object.FaceID = message.FaceID;
             return object;
         };
 
@@ -1533,7 +1547,7 @@ $root.gamecomm = (function() {
         }
 
         EnterGameResp.prototype.GameID = 0;
-        EnterGameResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EnterGameResp.prototype.UserInfo = null;
 
         EnterGameResp.create = function create(properties) {
             return new EnterGameResp(properties);
@@ -1544,8 +1558,8 @@ $root.gamecomm = (function() {
                 writer = $Writer.create();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(16).uint64(message.UserID);
+            if (message.UserInfo != null && Object.hasOwnProperty.call(message, "UserInfo"))
+                $root.gamecomm.PlayerInfo.encode(message.UserInfo, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -1564,7 +1578,7 @@ $root.gamecomm = (function() {
                     message.GameID = reader.uint32();
                     break;
                 case 2:
-                    message.UserID = reader.uint64();
+                    message.UserInfo = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1586,9 +1600,11 @@ $root.gamecomm = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID))
                     return "GameID: integer expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
+            if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
+                var error = $root.gamecomm.PlayerInfo.verify(message.UserInfo);
+                if (error)
+                    return "UserInfo." + error;
+            }
             return null;
         };
 
@@ -1598,15 +1614,11 @@ $root.gamecomm = (function() {
             var message = new $root.gamecomm.EnterGameResp();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.UserInfo != null) {
+                if (typeof object.UserInfo !== "object")
+                    throw TypeError(".gamecomm.EnterGameResp.UserInfo: object expected");
+                message.UserInfo = $root.gamecomm.PlayerInfo.fromObject(object.UserInfo);
+            }
             return message;
         };
 
@@ -1616,19 +1628,12 @@ $root.gamecomm = (function() {
             var object = {};
             if (options.defaults) {
                 object.GameID = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
+                object.UserInfo = null;
             }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 object.GameID = message.GameID;
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
+                object.UserInfo = $root.gamecomm.PlayerInfo.toObject(message.UserInfo, options);
             return object;
         };
 

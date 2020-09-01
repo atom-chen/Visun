@@ -1787,6 +1787,9 @@ export namespace login {
     /** Properties of an EnterRoomResp. */
     interface IEnterRoomResp {
 
+        /** EnterRoomResp RoomNum */
+        RoomNum?: (number|null);
+
         /** EnterRoomResp Games */
         Games?: (login.IGameList|null);
     }
@@ -1799,6 +1802,9 @@ export namespace login {
          * @param [properties] Properties to set
          */
         constructor(properties?: login.IEnterRoomResp);
+
+        /** EnterRoomResp RoomNum. */
+        public RoomNum: number;
 
         /** EnterRoomResp Games. */
         public Games?: (login.IGameList|null);
