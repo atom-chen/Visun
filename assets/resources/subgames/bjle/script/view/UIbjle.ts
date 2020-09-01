@@ -290,13 +290,13 @@ export default class UIbjle extends BaseComponent {
 		var shouTime = 0.1 + 0.36;
 		TimerManager.delaySecond(shouTime, newHandler(function(){
 			if(param.MyAcquire > 0) {
-				var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.MyAcquire), [this._rule[0], this._rule[1]]);
+				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
 				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
 				this.playFly(nums, fromPos, toPos);
 			}
 			if(param.PlayerAcquire > 0) {
-				var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.PlayerAcquire), [this._rule[0], this._rule[1]]);
+				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
 				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 				var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
 				this.playFly(nums, fromPos, toPos);

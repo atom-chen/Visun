@@ -29,6 +29,22 @@ export default class GameUtil {
 		return chips;
 	}
 
+	public static splitChip(total:number, chipRule?:number[]) : number[] {
+		if(!chipRule) {
+			chipRule = this.CHIP_RULE;
+		}
+		var tmpRule = [];
+		for(var i=0; i<chipRule.length; i++) {
+			if(total > chipRule[i]) {
+				tmpRule.push(chipRule[i]);
+			}
+		}
+		if(tmpRule.length > 1 && total < tmpRule[tmpRule.length-1]*2) {
+			tmpRule.splice(tmpRule.length-1, 1);
+		}
+		return GameUtil.parseChip(total, tmpRule);
+	}
+
 	//获取筹码图片资源路经
 	public static chipPath(v:number|string, b3d:boolean) : string {
 		if(b3d) {
