@@ -64,7 +64,7 @@ export default class CpnChipbox3d extends BaseComponent {
     }
 
     private setChipValue(index:number, v:number) {
-        var respath = GameUtil.chipPath(v, false);
+        var respath = GameUtil.chipPath(v, true);
         var res = cc.loader.getRes(respath, cc.SpriteFrame);
         if(res){ 
             this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;
