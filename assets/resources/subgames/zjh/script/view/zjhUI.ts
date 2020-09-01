@@ -417,7 +417,6 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaHostResp, this.ZhajinhuaHostResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.resetFighters, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
     }

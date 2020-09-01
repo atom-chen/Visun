@@ -44,15 +44,6 @@ var GameHandlers = {
 
 	[gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
         DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
-        
-        ZjhMgr.getInstance().clearPlayers()
-        for(var i in param.AllInfos) {
-            ZjhMgr.getInstance().addPlayer({
-                UserId:param.AllInfos[i].UserID,
-                Name:param.AllInfos[i].Name,
-                Gold:param.AllInfos[i].Gold,
-            })
-        }
     },
 
 	
