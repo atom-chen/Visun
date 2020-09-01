@@ -8,6 +8,8 @@ import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import { ZjhFightState } from "./ZjhDefine";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import { gamecomm } from "../../../../../../declares/gamecomm";
+import { gamecomm_msgs, gamecomm_packet_define } from "../../../../../common/script/proto/net_gamecomm";
 
 export default class ZjhServer extends ModelBase {
 	private static _instance:ZjhServer = null;
@@ -55,6 +57,29 @@ export default class ZjhServer extends ModelBase {
 		} else {
 			this._seatFighters[1].UserId = LoginUser.getInstance().UserId;
 		}
+	}
+
+	//改变失败时返回-1，成功则返回新的金额
+	changeUserMoney(uid:number, v:number, code:number, reason:string) : gamecomm.IGoldChangeInfo {
+		var man = this.findById(uid);
+		if(isNil(man)) { 
+			return null; 
+		}
+
+		var newGold = man.Gold + v;
+		if(newGold < 0) {
+			return null;
+		}
+
+		man.Gold = newGold;
+
+		return {
+			UserID: uid,
+			Gold: newGold,
+			AlterGold: v,
+			Code: code,
+			Reason: reason
+		};
 	}
 
 	fighterCnt() : number {
@@ -140,7 +165,7 @@ export default class ZjhServer extends ModelBase {
 		return cnt <= 1;
 	}
 
-	fightAi(tmr, uid:number) {
+	fightAi(uid:number) {
 		var attacker = this.findById(uid);
 
 		var nnn = CommonUtil.getRandomInt(1,100);
@@ -150,20 +175,76 @@ export default class ZjhServer extends ModelBase {
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 		}
 		else if(nnn <= 40) {
+			var v = this.curMinBet;
+			if(this.findById(uid).IsSee) {
+				v = v * 2;
+			}
+			var chgInfo = this.changeUserMoney(uid, -v, 0, "");
+
+			if(isNil(chgInfo)) {
+				//返回金币不足提示，并弃牌
+				attacker.SeatState = ZjhFightState.qipai;
+				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
+				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+				return;
+			}
+
+			this.totalBet += v;
+
 			attacker.SeatState = ZjhFightState.genzhu;
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaFollowResp].pack({UserId:attacker.UserId, Score:this.curMinBet}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+
+			var pak2 = gamecomm_packet_define[gamecomm_msgs.GoldChangeInfo].pack(chgInfo, false);
+			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 		}
 		else if(nnn <= 60) {
 			var raiseNum = 5000;
+
+			var v = this.curMinBet + raiseNum;
+			if(this.findById(uid).IsSee) {
+				v = this.curMinBet * 2 + raiseNum;
+			}
+			var chgInfo = this.changeUserMoney(uid, -v, 0, "");
+
+			if(isNil(chgInfo)) {
+				//返回金币不足提示，并弃牌
+				attacker.SeatState = ZjhFightState.qipai;
+				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
+				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+				return;
+			}
+
+			this.totalBet += v;
 			this.curMinBet = this.curMinBet + raiseNum; //加注会提升最低下注额
+
 			attacker.SeatState = ZjhFightState.jiazhu;
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaRaiseResp].pack({UserId:attacker.UserId, Score:this.curMinBet+raiseNum}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+
+			var pak2 = gamecomm_packet_define[gamecomm_msgs.GoldChangeInfo].pack(chgInfo, false);
+			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 		}
 		else {
 			var bipaiTarget = this.randBipaiFighter(uid);
 			if(!isNil(bipaiTarget)) {
+				var needMoney = this.curMinBet;
+				if(bipaiTarget.IsSee) {
+					needMoney = this.curMinBet * 2;
+				}
+
+				var chgInfo = this.changeUserMoney(uid, -needMoney, 0, "");
+
+				if(isNil(chgInfo)) {
+					//返回金币不足提示，并弃牌
+					attacker.SeatState = ZjhFightState.qipai;
+					var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
+					ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+					return;
+				}
+
+				this.totalBet += needMoney;
+
 				var winnerUid = uid;
 				var loserUid = bipaiTarget.UserId;
 				//比较双方牌大小，没有发牌，瞎几把比
@@ -181,20 +262,10 @@ export default class ZjhServer extends ModelBase {
 				}
 				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaCompareResp].pack(info, false);
 				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
-			}
-		}
 
-		if(this.checkFinish()) {
-			TimerManager.delaySecond(0.5, newHandler(this.toFinish, this));
-		} else {
-			TimerManager.delaySecond(0.5, newHandler(function(tmr){
-				var nextMan = this.nextMan();
-				if(isNil(nextMan)) {
-					this.toFinish();
-				} else {
-					this.toFight(tmr, nextMan.SeatId);
-				}
-			}, this));
+				var pak2 = gamecomm_packet_define[gamecomm_msgs.GoldChangeInfo].pack(chgInfo, false);
+				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
+			}
 		}
 	}
 
@@ -325,7 +396,22 @@ export default class ZjhServer extends ModelBase {
 		var pak = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStatePlayingResp].pack({UserID:man.UserId}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak);
 
-		TimerManager.delaySecond(3, newHandler(this.fightAi, this, man.UserId));
+		TimerManager.delaySecond(3, newHandler(function(tmr, uid){
+			this.fightAi(uid);
+
+			if(this.checkFinish()) {
+				TimerManager.delaySecond(0.5, newHandler(this.toFinish, this));
+			} else {
+				TimerManager.delaySecond(0.5, newHandler(function(tmr){
+					var nextMan = this.nextMan();
+					if(isNil(nextMan)) {
+						this.toFinish();
+					} else {
+						this.toFight(tmr, nextMan.SeatId);
+					}
+				}, this));
+			}
+		}, this, man.UserId));
 	}
 
 	//结算阶段
@@ -350,14 +436,15 @@ export default class ZjhServer extends ModelBase {
 		for(var i in this._seatFighters) {
 			var item = {
 				UserID : this._seatFighters[i].UserId,
-				Gold : 0,
+				Gold : this._seatFighters[i].Gold,
 				AlterGold : 0,
 				Code : 0,
-		   	}
+			}
+			
 		   	if(this._seatFighters[i].UserId == winner) {
-				item.AlterGold = CommonUtil.toServerMoney(this.bottomBet*this.fighterCnt());
-			} else {
-				item.AlterGold = -CommonUtil.toServerMoney(this.bottomBet);
+				item.AlterGold = this.totalBet;
+				this._seatFighters[i].Gold += this.totalBet;
+				item.Gold = this._seatFighters[i].Gold;
 			}
 		   	info.Infos.push(item);
 		}

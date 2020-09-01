@@ -221,7 +221,12 @@ export default class zjhUI extends BaseComponent {
 
     //结算数据
     ZhajinhuaOverResp(param:zhajinhua.IZhajinhuaOverResp) {
-
+        UIManager.toast("赢家ID：" + param.WinnerId);
+        if(param.Infos) {
+            for(var i in param.Infos) {
+                this.GoldChangeInfo(param.Infos[i]);
+            }
+        }
     }
 
     //跟注
