@@ -15,6 +15,7 @@ export default class GameUtil {
 		var chips:number[] = [];
 		while(total>0) {
 			if(total<chipRule[0]) {
+				chips.push(chipRule[0]);
 				break;
 			}
 			for(var i=chipRule.length-1; i>=0; i--) {

@@ -277,12 +277,12 @@ export default class UIbjle extends BaseComponent {
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
 				for(var i=len-1; i>=0; i--){
-					childs[i].runAction(
+					childs[i].runAction(cc.sequence(
 						cc.moveTo(0.36, cc.v2(0, 150)),
 						cc.callFunc(function(obj){
                             ResPool.delObject(ViewDefine.CpnChip, obj);
 						}, childs[i])
-					);
+					));
 				}
 			}, this)
 		));
@@ -290,27 +290,29 @@ export default class UIbjle extends BaseComponent {
 		var shouTime = 0.1 + 0.36;
 		TimerManager.delaySecond(shouTime, newHandler(function(){
 			if(param.MyAcquire > 0) {
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.chipLayer);
-				this.playFly(50, fromPos, toPos);
+				var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.MyAcquire), [this._rule[0], this._rule[1]]);
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
+				this.playFly(nums, fromPos, toPos);
 			}
 			if(param.PlayerAcquire > 0) {
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.chipLayer);
-				this.playFly(50, fromPos, toPos);
+				var nums = GameUtil.parseChip(CommonUtil.fixRealMoney(param.PlayerAcquire), [this._rule[0], this._rule[1]]);
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
+				this.playFly(nums, fromPos, toPos);
 			}
 		}, this));
 	}
-	private playFly(cnt, fromPos, toPos) {
-		for(var j = 0; j<cnt; j++) {
+	private playFly(nums, fromPos, toPos) {
+		for(var j = 0; j<nums.length; j++) {
 			var chip = ResPool.newObject(ViewDefine.CpnChip);
-			chip.getComponent(CpnChip).setChipValue(this._rule[0], true);
+			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
-				cc.delayTime(j*0.15),
-				cc.moveTo(0.3, toPos),
+				cc.delayTime(j*0.08),
+				cc.moveTo(0.25, toPos),
 				cc.callFunc(function(){
 					ResPool.delObject(ViewDefine.CpnChip, this)
 				}, chip)
