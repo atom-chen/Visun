@@ -635,8 +635,12 @@ export default class CommonUtil {
 				var szSrc = srcObj.getContentSize();
 				var szDst = dstObj.getContentSize();
 				var angle = CommonUtil.getRandomInt(0,360) * this.angle2ridian;
-				toPos.x = toPos.x + Math.cos(angle) * margin.rx;
-				toPos.y = toPos.y + Math.sin(angle) * margin.ry;
+				var ratio = 1;
+				if(!isNil(margin.rr)) {
+					ratio = CommonUtil.getRandomInt(margin.rr, 100) / 100;
+				}
+				toPos.x = toPos.x + Math.cos(angle) * margin.rx * ratio;
+				toPos.y = toPos.y + Math.sin(angle) * margin.ry * ratio;
 			} else {
 				var szSrc = srcObj.getContentSize();
 				var szDst = dstObj.getContentSize();

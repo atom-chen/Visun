@@ -49,6 +49,7 @@ var GameConfig = {
 		GameKind: GameKindEnum.Zhajinhua,
 		name: "炸金花",
 		icon: "lobby/imgs/gameico/icon_zjh",
+		spine: "lobby/spines/zhajinhua/skeleton",
 		dir: "zjh",
 		viewpath: ViewDefine.UIzjh
 	},

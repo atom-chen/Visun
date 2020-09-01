@@ -1,6 +1,7 @@
 import { MajhongCode } from "../definer/MajhongDefine";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import GameConfig from "../definer/GameConfig";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -112,6 +113,12 @@ export default class GameUtil {
 			cc.delayTime(1),
 			cc.hide()
 		));
+	}
+
+	static loadGameIcons() {
+		for(var k in GameConfig) {
+			cc.loader.loadRes(GameConfig[k].icon, cc.SpriteFrame);
+		}
 	}
 
 }

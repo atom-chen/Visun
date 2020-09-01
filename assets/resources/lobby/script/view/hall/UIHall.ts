@@ -16,6 +16,7 @@ import { login_msgs, login_request } from "../../../../../common/script/proto/ne
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import { login } from "../../../../../../declares/login";
+import Preloader from "../../../../../kernel/utils/Preloader";
 
 const {ccclass, property} = cc._decorator;
 
@@ -70,23 +71,13 @@ export default class UIHall extends BaseComponent {
 
 	private refreshGameButton(bton, gameData) {
 		var cfg = GameConfig[gameData.Info.KindID];
-
+		if(!cfg) { return; }
 		var tbl : any = {};
 		CommonUtil.traverseNodes(bton, tbl);
-		
-		if(cfg) {
-			var tmp = cc.loader.getRes(cfg.icon, cc.SpriteFrame);
-			if(tmp) {
-				tbl.Background.getComponent(cc.Sprite).spriteFrame = tmp;
-			} else {
-				cc.loader.loadRes(cfg.icon, cc.SpriteFrame, (err, rsc)=>{
-					if(err) { cc.log("load fail", err); return; }
-					tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
-				});
-			}
-		} else {
-			cc.warn("缺少配置信息：", gameData.Info.KindID);
-		}
+		Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);
+		// if(cfg.spine) {
+		// 	UIManager.showSpineAsync(cfg.spine, 0, "animation", -1, bton, {zIndex:10, x:0, y:-150, scale:0.4});
+		// }
 	}
 
 	private refleshUI(data:any) {

@@ -20,10 +20,20 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
-//import ZjhServer from "../model/ZjhServer";
+import Preloader from "../../../../../kernel/utils/Preloader";
+import ZjhServer from "../model/ZjhServer";
 
 
 const MAX_SOLDIER = 5;
+var CMLIST = [
+    "appqp/imgs/chips/cm1", 
+    "appqp/imgs/chips/cm2", 
+    "appqp/imgs/chips/cm3", 
+    "appqp/imgs/chips/cm4", 
+    "appqp/imgs/chips/cm5",
+    "appqp/imgs/chips/cm6"
+];
+var CMVLIST = [ 5, 10, 20, 50, 100, 150 ];
 
 
 const {ccclass, property} = cc._decorator;
@@ -83,8 +93,26 @@ export default class zjhUI extends BaseComponent {
         return v == ZjhFightState.qipai || v == ZjhFightState.bipaishu
     }
 
-    private playBetAni(uid:number, v:number) {
+    private getImgPath(v:number) : string {
+        for(var i in CMVLIST) {
+            if(v <= CMVLIST[i]) {
+                return CMLIST[i];
+            }
+        }
+        return CMLIST[5];
+    }
 
+    private playBetAni(uid:number, v:number) {
+        var idx = this.playerIdx(uid);
+        if(idx < 0) { return; }
+
+        var imgpath = this.getImgPath(v);
+        var sprChip = new cc.Node();
+        var comp = sprChip.addComponent(cc.Sprite);
+        Preloader.setNodeSprite(comp, imgpath, this);
+        this.m_ui.chipLayer.addChild(sprChip);
+        sprChip.scale = 0.2;
+        CommonUtil.lineTo1(sprChip, this._pnodes[idx], this.m_ui.chipCen, 0.3, 0, {rx:50,ry:40,rr:0});
     }
 
     //场景信息
@@ -153,12 +181,16 @@ export default class zjhUI extends BaseComponent {
             CommonUtil.grayNode(this._pnodes[i], false);
             this._playerCpns[i].setLabGray(false);
         }
+
+        this.m_ui.chipLayer.removeAllChildren();
     }
 
     //开始游戏: 播发牌动画
     ZhajinhuaStateStartResp(param:zhajinhua.IZhajinhuaStateStartResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
+
+        this.m_ui.chipLayer.removeAllChildren();
 
         UIManager.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
@@ -178,6 +210,13 @@ export default class zjhUI extends BaseComponent {
                 }
             }
         }, this));
+
+        TimerManager.delaySecond(4, newHandler(function(){
+            var mans = ZjhMgr.getInstance().getPlayerList();
+            for(var m in mans) {
+                this.playBetAni(mans[m].UserId, 5);
+            }
+        }, this));
     }
     private bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
 		if(!chipSpr) { return; }
@@ -194,8 +233,8 @@ export default class zjhUI extends BaseComponent {
 			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
 	}
 
-    //战斗阶段
-    ZhajinhuaStatePlayingResp(param:zhajinhua.ZhajinhuaStatePlayingResp) {
+    //战斗阶段-轮到新操作者
+    ZhajinhuaStatePlayingResp(param:zhajinhua.IZhajinhuaStatePlayingResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
         this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserId;
 
@@ -206,7 +245,7 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
-    //
+    //战斗阶段-比牌
     ZhajinhuaStateCompareResp(param:zhajinhua.IZhajinhuaStateCompareResp) {
         if(param.Info) {
             this.ZhajinhuaCompareResp(param.Info);
@@ -234,6 +273,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].genzhu();
+            this.playBetAni(param.UserId, CommonUtil.fixRealMoney(param.Score));
         }
     }
 
@@ -242,6 +282,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].jiazhu();
+            this.playBetAni(param.UserId, CommonUtil.fixRealMoney(param.Score));
         }
     }
 
@@ -266,6 +307,8 @@ export default class zjhUI extends BaseComponent {
             this._playerCpns[idx].setLabGray(true);
         }
         var mgr = ZjhMgr.getInstance();
+
+        this.playBetAni(param.AttackerId, 100);
 
         var tipStr = cc.js.formatStr("%s和%s比牌，%s赢", mgr.getPlayer(param.AttackerId).Name, mgr.getPlayer(param.HitId).Name, mgr.getPlayer(param.WinnerId).Name)
         UIManager.toast(tipStr)

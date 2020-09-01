@@ -4,7 +4,7 @@
 import EventCenter from "../basic/event/EventCenter";
 import UIManager from "./UIManager";
 import TimerManager from "../basic/timer/TimerManager";
-import HttpCore from "../net/HttpCore";
+import Preloader from "../utils/Preloader";
 
 
 const {ccclass, property} = cc._decorator;
@@ -20,6 +20,7 @@ export default class BaseComponent extends cc.Component {
         EventCenter.getInstance().removeByTarget(this);
         EventCenter.downInstance().removeByTarget(this);
         EventCenter.redInstance().removeByTarget(this);
+        Preloader.resDispatcher.removeByTarget(this);
         TimerManager.removeByTarget(this);
     }
 
@@ -36,6 +37,7 @@ export default class BaseComponent extends cc.Component {
         EventCenter.getInstance().removeByTarget(this);
         EventCenter.downInstance().removeByTarget(this);
         EventCenter.redInstance().removeByTarget(this);
+        Preloader.resDispatcher.removeByTarget(this);
         TimerManager.removeByTarget(this);
         
         if(this.m_dtor_listeners){
