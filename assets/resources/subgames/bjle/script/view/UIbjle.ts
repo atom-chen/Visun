@@ -68,7 +68,6 @@ export default class UIbjle extends BaseComponent {
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 
         ResPool.load(ViewDefine.CpnChip);
-		this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 		
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
@@ -98,6 +97,12 @@ export default class UIbjle extends BaseComponent {
 					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
 				}
 			}
+			if(enterData.Chips && enterData.Chips.length >= 5) {
+				this._rule = enterData.Chips;
+				this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(enterData.Chips);
+			}
+		} else {
+			this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 		}
 	}
 
@@ -168,8 +173,7 @@ export default class UIbjle extends BaseComponent {
         var nums = GameUtil.parseChip(money, this._rule);
         var fromObj = this.m_ui.btnPlayerlist; 
         if(param.UserID == LoginUser.getInstance().UserId) {
-            var idx = Math.max(0, this._rule.indexOf(money));
-			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNode(idx);
+			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNodeByValue(money);
 			this.isJoined = true;
         }
 		for(var j in nums) {
