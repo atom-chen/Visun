@@ -14,7 +14,6 @@ import { gamecomm } from "../../../../declares/gamecomm";
 import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
-import BacarratMgr from "../../../resources/subgames/bjle2/script/BacarratMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
@@ -49,7 +48,6 @@ var GameHandlers = {
 
 	
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
-        BacarratMgr.getInstance().setEnterData(param);
         BjleMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
