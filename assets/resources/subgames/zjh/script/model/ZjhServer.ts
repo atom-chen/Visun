@@ -45,6 +45,8 @@ export default class ZjhServer extends ModelBase {
 			man.RecentBetMoney = 0;
 			man.TotalBetMoney = 0;
 			man.SeatId = i;
+			man.Name = "测试"+man.UserId;
+			man.Gold = 1000000;
 			this._seatFighters[man.SeatId] = man;
 		}
 		if(!LoginMgr.getInstance().checkLogin(false)) {
@@ -94,7 +96,7 @@ export default class ZjhServer extends ModelBase {
 
 	isLosed(uid:number) : boolean {
 		var man = this.findById(uid);
-		return man.FightState == ZjhFightState.bipaishu || man.FightState == ZjhFightState.qipai;
+		return man.SeatState == ZjhFightState.bipaishu || man.SeatState == ZjhFightState.qipai;
 	}
 
 	checkFinish() : boolean {
@@ -109,7 +111,7 @@ export default class ZjhServer extends ModelBase {
 
 	fightAi(tmr, uid:number) {
 		var man = this.findById(uid);
-		man.FightState = ZjhFightState.qipai;
+		man.SeatState = ZjhFightState.qipai;
 		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:man.UserId}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
@@ -193,11 +195,11 @@ export default class ZjhServer extends ModelBase {
 		this.curGameState = 1;
 		for(var i in this._seatFighters) {
 			if(!isNil(this._seatFighters[i])) {
-				this._seatFighters[i].FightState = ZjhFightState.idle;
+				this._seatFighters[i].SeatState = ZjhFightState.idle;
 				this._seatFighters[i].IsSee = false;
 				this._seatFighters[i].Cards = null;
-				this._seatFighters[i].RecentBetMoney = 0;
-				this._seatFighters[i].TotalBetMoney = 0;
+				this._seatFighters[i].RecentScore = 0;
+				this._seatFighters[i].TotalScore = 0;
 			}
 		}
 

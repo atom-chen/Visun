@@ -19,6 +19,8 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../../declares/gamecomm";
 
 
 const MAX_SOLDIER = 5;
@@ -79,8 +81,12 @@ export default class zjhUI extends BaseComponent {
         return v == ZjhFightState.qipai || v == ZjhFightState.bipaishu
     }
 
+    private playBetAni(uid:number, v:number) {
+
+    }
+
     //场景信息
-    ZhajinhuaSceneResp(param:zhajinhua.ZhajinhuaSceneResp) {
+    ZhajinhuaSceneResp(param:zhajinhua.IZhajinhuaSceneResp) {
         for(var n=0; n<MAX_SOLDIER; n++) {
             this._pnodes[n].active = false;
         }
@@ -89,21 +95,21 @@ export default class zjhUI extends BaseComponent {
                 var cur = param.Fighters[i];
                 var idx = this.playerIndex(cur);
                 this._pnodes[idx].active = true;
-                this._playerCpns[idx].setName(cur.UserId);
-                this._playerCpns[idx].setMoney(0);
+                this._playerCpns[idx].setName(cur.Name);
+                this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(cur.Gold));
                 this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
-                CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(cur.FightState));
-                this._playerCpns[idx].setLabGray(this.isLoseFightState(cur.FightState));
-                if(cur.FightState == ZjhFightState.genzhu) {
+                CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(cur.SeatState));
+                this._playerCpns[idx].setLabGray(this.isLoseFightState(cur.SeatState));
+                if(cur.SeatState == ZjhFightState.genzhu) {
                     this._stateCpns[idx].genzhu();
                 }
-                else if(cur.FightState == ZjhFightState.jiazhu) {
+                else if(cur.SeatState == ZjhFightState.jiazhu) {
                     this._stateCpns[idx].jiazhu();
                 }
-                else if(cur.FightState == ZjhFightState.qipai) {
+                else if(cur.SeatState == ZjhFightState.qipai) {
                     this._stateCpns[idx].qipai();
                 }
-                else if(cur.FightState == ZjhFightState.bipaishu) {
+                else if(cur.SeatState == ZjhFightState.bipaishu) {
                     this._stateCpns[idx].bipaishu();
                 }
                 else {
@@ -118,7 +124,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //准备阶段
-    ZhajinhuaStateFreeResp(param:any) {
+    ZhajinhuaStateFreeResp(param:zhajinhua.IZhajinhuaStateFreeResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
 
@@ -135,7 +141,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //开始游戏: 播发牌动画
-    ZhajinhuaStateStartResp(param:any) {
+    ZhajinhuaStateStartResp(param:zhajinhua.IZhajinhuaStateStartResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
 
@@ -185,8 +191,15 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
+    //
+    ZhajinhuaStateCompareResp(param:zhajinhua.IZhajinhuaStateCompareResp) {
+        if(param.Info) {
+            this.ZhajinhuaCompareResp(param.Info);
+        }
+    }
+
     //结算阶段
-    ZhajinhuaStateOverResp(param:any) {
+    ZhajinhuaStateOverResp(param:zhajinhua.IZhajinhuaStateOverResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
         this.m_ui.opLayer.active = false;
     }
@@ -197,8 +210,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //跟注
-    ZhajinhuaFollowResp(param:zhajinhua.ZhajinhuaFollowResp) {
-        cc.log("跟注", param.UserId, CommonUtil.fixRealMoney(param.Money));
+    ZhajinhuaFollowResp(param:zhajinhua.IZhajinhuaFollowResp) {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].genzhu();
@@ -206,8 +218,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //加注
-    ZhajinhuaRaiseResp(param:zhajinhua.ZhajinhuaRaiseResp) {
-        cc.log("加注", param.UserId, CommonUtil.fixRealMoney(param.Money));
+    ZhajinhuaRaiseResp(param:zhajinhua.IZhajinhuaRaiseResp) {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].jiazhu();
@@ -215,8 +226,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //看牌
-    ZhajinhuaLookResp(param:zhajinhua.ZhajinhuaLookResp) {
-        cc.log("看牌", param.UserId, param.Cards);
+    ZhajinhuaLookResp(param:zhajinhua.IZhajinhuaLookResp) {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._pnodes[idx].getChildByName("ust_kanpai").active = true;
@@ -224,8 +234,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //比牌
-    ZhajinhuaCompareResp(param:zhajinhua.ZhajinhuaCompareResp) {
-        cc.log("比牌", param);
+    ZhajinhuaCompareResp(param:zhajinhua.IZhajinhuaCompareResp) {
         var losser = param.AttackerId;
         if(losser == param.WinnerId) {
             losser = param.HitId;
@@ -236,11 +245,14 @@ export default class zjhUI extends BaseComponent {
             CommonUtil.grayNode(this._pnodes[idx], true);
             this._playerCpns[idx].setLabGray(true);
         }
+        var mgr = ZjhMgr.getInstance();
+
+        var tipStr = cc.js.formatStr("%s和%s比牌，%s赢", mgr.getPlayer(param.AttackerId).Name, mgr.getPlayer(param.HitId).Name, mgr.getPlayer(param.WinnerId).Name)
+        UIManager.toast(tipStr)
     }
 
     //弃牌
-    ZhajinhuaGiveupResp(param:zhajinhua.ZhajinhuaGiveupResp) {
-        cc.log("弃牌", param.UserId);
+    ZhajinhuaGiveupResp(param:zhajinhua.IZhajinhuaGiveupResp) {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
             this._stateCpns[idx].qipai();
@@ -251,7 +263,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     //定庄
-    ZhajinhuaHostResp(param:zhajinhua.ZhajinhuaHostResp) {
+    ZhajinhuaHostResp(param:zhajinhua.IZhajinhuaHostResp) {
         var idx = this.playerIdx(param.CurHost);
         if(idx >= 0) {
             var dstPos = cc.v3(this._pnodes[idx].position);
@@ -262,7 +274,19 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
+    GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
+        var man = ZjhMgr.getInstance().getPlayer(param.UserID);
+        if(man) {
+            man.Gold = param.Gold;
+        }
+        var idx = this.playerIdx(param.UserID);
+        if(idx >= 0) {
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Gold));
+        }
+    }
+
     initNetEvent() {
+        EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaSceneResp, this.ZhajinhuaSceneResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaStateFreeResp, this.ZhajinhuaStateFreeResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaStateStartResp, this.ZhajinhuaStateStartResp, this);
@@ -272,6 +296,7 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaRaiseResp, this.ZhajinhuaRaiseResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaLookResp, this.ZhajinhuaLookResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaCompareResp, this.ZhajinhuaCompareResp, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaStateCompareResp, this.ZhajinhuaStateCompareResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaGiveupResp, this.ZhajinhuaGiveupResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaHostResp, this.ZhajinhuaHostResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
@@ -298,7 +323,7 @@ export default class zjhUI extends BaseComponent {
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_add, function(){ 
-            zhajinhua_request.ZhajinhuaRaiseReq({Money:20});
+            zhajinhua_request.ZhajinhuaRaiseReq({Score:20});
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 
