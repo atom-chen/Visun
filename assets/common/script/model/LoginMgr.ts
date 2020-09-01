@@ -21,13 +21,16 @@ import { cowcow_packet_define } from "../proto/net_cowcow";
 import { landLords_packet_define } from "../proto/net_landLords";
 import { mahjong_packet_define } from "../proto/net_mahjong";
 import { fishLord_packet_define } from "../proto/net_fishLord";
-import { isEmpty, isNil } from "../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import MyCrypto from "../../../kernel/secret/MyCrypto";
 import LocalCache from "../../../kernel/localcache/LocalCache";
 import LogicCenter from "./LogicCenter";
 import { brcowcow_packet_define } from "../proto/net_brcowcow";
 import { zhajinhua_packet_define } from "../proto/net_zhajinhua";
 import GameHandlers from "../proxy/GameHandlers";
+import SceneManager from "../../../kernel/view/SceneManager";
+import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
+import TimerManager from "../../../kernel/basic/timer/TimerManager";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -250,6 +253,11 @@ export default class LoginMgr extends ModelBase {
 		if(leafChan) {
 			leafChan.close();
 		}
+		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, function(){
+			TimerManager.delayFrame(5, newHandler(function(){
+				LoginMgr.getInstance().checkLogin(true);
+			}, null));
+		});
 	}
 
 }
