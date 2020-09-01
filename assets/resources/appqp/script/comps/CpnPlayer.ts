@@ -15,10 +15,15 @@ export default class CpnPlayer extends BaseComponent {
     private _userId:number = 0;
     private _money:number = 0;
     private _clickCallback:Function = null;
+    private moneyColor:cc.Color;
+    private nameColor:cc.Color;
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traverseLabels(this.node, this.m_lab);
+
+        this.moneyColor = this.m_ui.lab_money.color;
+        this.nameColor = this.m_ui.lab_name.color;
 
         CommonUtil.addClickEvent(this.node, function(){ 
             cc.log("click"); 
@@ -47,6 +52,17 @@ export default class CpnPlayer extends BaseComponent {
     public setMoney(money:number) {
         this._money = money;
         this.m_lab.lab_money.string = money.toString();
+    }
+
+    public setLabGray(bGray:boolean) {
+        if(bGray) {
+            var grayC = cc.color(111,111,111,255);
+            this.m_ui.lab_money.color = grayC;
+            this.m_ui.lab_name.color = grayC;
+        } else {
+            this.m_ui.lab_money.color = this.moneyColor;
+            this.m_ui.lab_name.color = this.nameColor;
+        }
     }
 
     public setMoneyStr(moneyStr:string) {

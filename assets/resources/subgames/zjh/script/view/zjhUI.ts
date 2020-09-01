@@ -93,6 +93,7 @@ export default class zjhUI extends BaseComponent {
                 this._playerCpns[idx].setMoney(0);
                 this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
                 CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(cur.FightState));
+                this._playerCpns[idx].setLabGray(this.isLoseFightState(cur.FightState));
                 if(cur.FightState == ZjhFightState.genzhu) {
                     this._stateCpns[idx].genzhu();
                 }
@@ -129,6 +130,7 @@ export default class zjhUI extends BaseComponent {
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
             CommonUtil.grayNode(this._pnodes[i], false);
+            this._playerCpns[i].setLabGray(false);
         }
     }
 
@@ -232,6 +234,7 @@ export default class zjhUI extends BaseComponent {
         if(idx >= 0) {
             this._stateCpns[idx].bipaishu();
             CommonUtil.grayNode(this._pnodes[idx], true);
+            this._playerCpns[idx].setLabGray(true);
         }
     }
 
@@ -242,6 +245,7 @@ export default class zjhUI extends BaseComponent {
         if(idx >= 0) {
             this._stateCpns[idx].qipai();
             CommonUtil.grayNode(this._pnodes[idx], true);
+            this._playerCpns[idx].setLabGray(true);
             this._cdCpns[idx].setRunning(false);
         }
     }
