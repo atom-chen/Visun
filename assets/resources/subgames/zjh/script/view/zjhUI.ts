@@ -128,11 +128,28 @@ export default class zjhUI extends BaseComponent {
         for(var uid in mans) {
             var idx = this.playerIndex(mans[uid]);
             if(idx >= 0) {
-                this._pnodes[n].active = true;
+                this._pnodes[idx].active = true;
                 this._playerCpns[idx].setName(mans[uid].Name);
                 this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(mans[uid].Gold));
                 this._pnodes[idx].getChildByName("ust_kanpai").active = mans[uid].IsSee == true;
             }
+        }
+    }
+
+    ZhajinhuaAddPlayerResp(param:zhajinhua.IZhajinhuaAddPlayerResp) {
+        var idx = this.playerIdx(param.Player.UserId);
+        if(idx >= 0) {
+            this._pnodes[idx].active = true;
+            this._playerCpns[idx].setName(param.Player.Name);
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Player.Gold));
+            this._pnodes[idx].getChildByName("ust_kanpai").active = param.Player.IsSee == true;
+        }
+    }
+
+    ZhajinhuaDelPlayerResp(param:zhajinhua.IZhajinhuaDelPlayerResp) {
+        var idx = this.playerIdx(param.UserId);
+        if(idx >= 0) {
+            this._pnodes[idx].active = false;
         }
     }
 
@@ -401,6 +418,8 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.resetFighters, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
     }
 
     initUIEvent() {
