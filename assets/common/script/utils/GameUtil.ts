@@ -31,9 +31,9 @@ export default class GameUtil {
 	//获取筹码图片资源路经
 	public static chipPath(v:number|string, b3d:boolean) : string {
 		if(b3d) {
-			return "appqp/imgs/chips/cm_"+v;
+			return "appqp/imgs/chips2/cm"+v;
 		} else {
-			return "appqp/imgs/chips/chouma"+v;
+			return "appqp/imgs/chips2/cmz"+v;
 		}
 	}
 

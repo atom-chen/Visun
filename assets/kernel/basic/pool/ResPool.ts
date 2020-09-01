@@ -15,7 +15,7 @@ export default class ResPool {
 			self._loaded[resPath] = loadedRes;
 			self._pools[resPath] = new SimplePool(():cc.Node=>{
 				var obj = cc.instantiate(loadedRes);
-				obj.scale = 0.4;
+				obj.scale = 0.2;
 				return obj;
 			});
 		});

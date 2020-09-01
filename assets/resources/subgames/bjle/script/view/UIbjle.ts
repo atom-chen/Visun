@@ -108,7 +108,7 @@ export default class UIbjle extends BaseComponent {
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOpenResp, this.BaccaratStateOpenResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOverResp, this.BaccaratStateOverResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratCheckoutResp, this.BaccaratCheckoutResp, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOverResp, this.BaccaratOverResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOpenResp, this.BaccaratOpenResp, this);
 		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
 	}
 
@@ -222,8 +222,8 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
-		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
-		this.m_ui.CpnHandcardM.getComponent(CpnHandcard).resetCards([], false);
+
+		this.BaccaratOpenResp(param.OpenInfo);
 
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
@@ -238,7 +238,8 @@ export default class UIbjle extends BaseComponent {
 		this.playJiesuan();
 	}
 
-	private BaccaratOverResp(param:baccarat.BaccaratOverResp) {
+	private BaccaratOpenResp(param:baccarat.IBaccaratOpenResp) {
+		if(isNil(param)) { return; }
 		this.isJoined = false;
 		var aaa = [];
 		var bbb = [];
