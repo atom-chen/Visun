@@ -10,6 +10,7 @@ import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import { login } from "../../../../../../declares/login";
 
 
 const {ccclass, property} = cc._decorator;
@@ -20,6 +21,8 @@ export default class UILobby extends BaseComponent {
 	gameBtn: cc.Prefab = null;
 	@property(cc.Prefab)
 	roomTab: cc.Prefab = null;
+
+	private selectedRoom:login.IRoomInfo = null;
 
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -41,6 +44,8 @@ export default class UILobby extends BaseComponent {
 		}
 
 		if(btn) {
+			this.selectedRoom = btn.RoomInfo;
+
 			login_request.EnterRoomReq({
 				RoomNum: btn.RoomInfo.RoomNum,
 				RoomKey: btn.RoomInfo.RoomKey
@@ -73,8 +78,12 @@ export default class UILobby extends BaseComponent {
 
 	private refleshGameList() {
 		this.m_ui.content.removeAllChildren();
+		
+		if(!this.selectedRoom) {
+			return;
+		}
 
-		var gameList = GameManager.getInstance().getGameArr();
+		var gameList = GameManager.getInstance().getGameArr(this.selectedRoom.RoomNum);
 		if(!gameList) { return; }
 
 		for(var i in gameList) {
@@ -111,7 +120,6 @@ export default class UILobby extends BaseComponent {
 		} else {
 			cc.warn("缺少配置信息：", gameData.Info.KindID);
 		}
-		
 	}
 
 	private refleshUI(data:any) {

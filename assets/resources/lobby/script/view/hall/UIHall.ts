@@ -12,9 +12,10 @@ import PF from "../../../../../kernel/pathfinder/PathFinding";
 import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
-import { login_msgs } from "../../../../../common/script/proto/net_login";
+import { login_msgs, login_request } from "../../../../../common/script/proto/net_login";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
+import { login } from "../../../../../../declares/login";
 
 const {ccclass, property} = cc._decorator;
 
@@ -28,17 +29,21 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		this.initUiEvents();
+		this.initNetEvents();
+
 		this.refleshGameList();
 		this.refleshUI(null);
-	//	this.testSpine();
+	
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
-		
-		EventCenter.getInstance().listen(login_msgs.UserInfo, this.refleshUI, this);
-	//	EventCenter.getInstance().listen(configure_msgs.GameListResp, this.refleshGameList, this);
+	}
 
-	//	LoginMgr.getInstance().checkLogin(true);
+	private LoginResp(param:login.ILoginResp) {
+		this.refleshUI(null);
+	}
 
-	//	configure_request.GameListReq(null);
+	private initNetEvents() {
+		EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
+		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 	}
 
 	private refleshGameList() {
@@ -49,19 +54,38 @@ export default class UIHall extends BaseComponent {
 
 		for(var i in gameList) {
 			var info = gameList[i];
-			var cfg = GameConfig[info.GameKind]
-			if(cfg) {
-				var bton = cc.instantiate(this.gameBtn);
-				bton["GameKind"] = info.GameKind;
-				bton.getComponent(game_btn).setGameInfo(cfg);
-				CommonUtil.addClickEvent(bton, function(){ 
-					UIManager.openPopwnd(ViewDefine.UIRoom, false, this.GameKind);
-				}, bton);
-				this.m_ui.content.addChild(bton);
+
+			var bton = cc.instantiate(this.gameBtn);
+			bton["gameData"] = info;
+
+			CommonUtil.addClickEvent(bton, function(){ 
+				GameManager.getInstance().enterGame(this.gameData.ID);
+			}, bton);
+
+			this.m_ui.content.addChild(bton);
+
+			this.refreshGameButton(bton, info);
+		}
+	}
+
+	private refreshGameButton(bton, gameData) {
+		var cfg = GameConfig[gameData.Info.KindID];
+
+		var tbl : any = {};
+		CommonUtil.traverseNodes(bton, tbl);
+		
+		if(cfg) {
+			var tmp = cc.loader.getRes(cfg.icon, cc.SpriteFrame);
+			if(tmp) {
+				tbl.Background.getComponent(cc.Sprite).spriteFrame = tmp;
+			} else {
+				cc.loader.loadRes(cfg.icon, cc.SpriteFrame, (err, rsc)=>{
+					if(err) { cc.log("load fail", err); return; }
+					tbl.Background.getComponent(cc.Sprite).spriteFrame = rsc;
+				});
 			}
-			else {
-				cc.log("------ no GameConfig: ", info.GameKind);
-			}
+		} else {
+			cc.warn("缺少配置信息：", gameData.Info.KindID);
 		}
 	}
 

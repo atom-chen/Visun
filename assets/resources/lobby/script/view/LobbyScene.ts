@@ -12,7 +12,7 @@ const {ccclass, property} = cc._decorator;
 export default class LobbyScene extends BaseComponent {
 
     onLoad () {
-        UIManager.openPanel(ViewDefine.UILobby, null);
+        UIManager.openPanel(ViewDefine.UIHall, null);
         LoginMgr.getInstance().connectServer();
         LoginMgr.getInstance().quickLogin();
         Preloader.loadGameIcons();

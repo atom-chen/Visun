@@ -9,6 +9,7 @@ import { gamecomm_request } from "../proto/net_gamecomm";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
 import { login } from "../../../../declares/login";
+import { login_request } from "../proto/net_login";
 
 
 //游戏管理器
@@ -40,8 +41,20 @@ export default class GameManager extends ModelBase {
 	//------------------------------------------------------------------------------
 
 	private roomsInfo:Array<login.IRoomInfo> = [];
-	private gameArr:Array<login.IGameItem> = [];
+	private gameArr:{[key:number]:Array<login.IGameItem>} = {};
 	private gameId:number = 0;
+
+	public pullAll() {
+		var roomsInfo = this.getRoomsInfo();
+		if(roomsInfo) {
+			for(var i in roomsInfo) {
+				login_request.EnterRoomReq({
+					RoomNum: roomsInfo[i].RoomNum,
+					RoomKey: roomsInfo[i].RoomKey
+				});
+			}
+		}
+	}
 
 	public setRoomsInfo(info:Array<login.IRoomInfo>) {
 		this.roomsInfo = info;
@@ -51,13 +64,24 @@ export default class GameManager extends ModelBase {
 		return this.roomsInfo;
 	}
 
-	public setGameArr(data:Array<login.IGameItem>) {
-		this.gameArr = data;
+	public setGameArr(roomNum:number, data:Array<login.IGameItem>) {
+		this.gameArr[roomNum] = data;
 	}
 
-	public getGameArr() : Array<login.IGameItem> {
-		return this.gameArr;
+	public getGameArr(roomNum:number) : Array<login.IGameItem> {
+		return this.gameArr[roomNum];
 	}
+
+	public getGameList() : Array<login.IGameItem> {
+		var data = [];
+		for(var n in this.gameArr) {
+			for(var j in this.gameArr[n]) {
+				data.push(this.gameArr[n][j]);
+			}
+		}
+		return data;
+	}
+
 
 	//获取子游戏的客户端配置
 	public clientConfig(gameType:string|number) : any{
@@ -146,34 +170,6 @@ export default class GameManager extends ModelBase {
 
 	public static isInGameScene() : boolean {
 		return SceneManager.curSceneName === KernelUIDefine.GameScene.name;
-	}
-
-	//------------------------------------------------------------------------------
-
-	private _gameList = [];		//服务器游戏列表
-	private _roomList = {};		//服务器房间列表
-	private _allRooms = {}		//根据游戏ID索引游戏数据
-	//存储服务器下发的游戏列表
-	public setGameList(data) {
-		this._gameList = data;
-		this._gameList.sort((a,b)=>{
-			return a.GameKind-b.GameKind
-		})
-	}
-	//获取服务器下发的游戏列表
-	public getGameList() : any[] {
-		return this._gameList;
-	}
-	//存储服务器下发的房间列表
-	public setRoomList(gameKind, data) {
-		this._roomList[gameKind] = data
-		for(var i in data) {
-			this._allRooms[data[i].GameType] = data[i];
-		}
-	}
-	//获取服务器下发的房间列表
-	public getRoomList(gameKind) {
-		return this._roomList[gameKind];
 	}
 
 }

@@ -43,11 +43,13 @@ var NetHandlers = {
 
         GameManager.getInstance().setRoomsInfo(param.MainInfo.RoomsInfo);
 
+        GameManager.getInstance().pullAll();
+
         UIManager.toast("登陆成功");
     },
 
-    [login_msgs.EnterRoomResp] : function(param:login.EnterRoomResp) {
-        GameManager.getInstance().setGameArr(param.Games.Items);
+    [login_msgs.EnterRoomResp] : function(param:login.IEnterRoomResp) {
+        GameManager.getInstance().setGameArr(param.RoomNum, param.Games.Items);
     },
 
 }

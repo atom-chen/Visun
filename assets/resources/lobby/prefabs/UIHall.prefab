@@ -130,7 +130,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1334,
-      "height": 420
+      "height": 460
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -201,7 +201,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1334,
-      "height": 420
+      "height": 460
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -271,7 +271,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 1334,
-      "height": 420
+      "height": 460
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -348,7 +348,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 1334,
-      "height": 420
+      "height": 460
     },
     "_resize": 1,
     "_N$layoutType": 3,
@@ -358,7 +358,7 @@
       "height": 200
     },
     "_N$startAxis": 1,
-    "_N$paddingLeft": 25,
+    "_N$paddingLeft": 50,
     "_N$paddingRight": 0,
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
@@ -379,7 +379,7 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 13,
+    "_alignFlags": 5,
     "_left": 0,
     "_right": 0,
     "_top": 0,
@@ -4274,7 +4274,7 @@
     },
     "_enabled": true,
     "gameBtn": {
-      "__uuid__": "bc37e8b2-3673-4ff1-b1ef-9fc95c366011"
+      "__uuid__": "75c91204-5d62-4aef-902b-f0d656bb0578"
     },
     "_id": ""
   },
