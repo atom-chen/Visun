@@ -18,7 +18,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
-import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
@@ -79,6 +79,7 @@ export default class zjhUI extends BaseComponent {
     private playerIndex(player:zhajinhua.IZhajinhuaPlayer) : number {
 		if(isNil(player)){ return -1; }
         var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+        if(isNil(player.SeatId)) { return -1; }
         if(isNil(hero)) { return player.SeatId; }
 		if(hero.SeatId===0) { return player.SeatId; }
 		return (player.SeatId-hero.SeatId+MAX_SOLDIER) % MAX_SOLDIER;
@@ -113,6 +114,22 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.chipLayer.addChild(sprChip);
         sprChip.scale = 0.2;
         CommonUtil.lineTo1(sprChip, this._pnodes[idx], this.m_ui.chipCen, 0.3, 0, {rx:50,ry:40,rr:0});
+    }
+
+    private resetFighters() {
+        for(var n=0; n<MAX_SOLDIER; n++) {
+            this._pnodes[n].active = false;
+        }
+        var mans = ZjhMgr.getInstance().getPlayerList();
+        for(var uid in mans) {
+            var idx = this.playerIndex(mans[uid]);
+            if(idx >= 0) {
+                this._pnodes[n].active = true;
+                this._playerCpns[idx].setName(mans[uid].Name);
+                this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(mans[uid].Gold));
+                this._pnodes[idx].getChildByName("ust_kanpai").active = mans[uid].IsSee == true;
+            }
+        }
     }
 
     //场景信息
@@ -170,6 +187,8 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
 
+        this.m_ui.btn_ready.active = true;
+
         this.m_ui.zhuang.stopAllActions();
         this.m_ui.zhuang.position = this._zhuangPos;
 
@@ -189,6 +208,8 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateStartResp(param:zhajinhua.IZhajinhuaStateStartResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
+
+        this.m_ui.btn_ready.active = false;
 
         this.m_ui.chipLayer.removeAllChildren();
 
@@ -237,6 +258,7 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStatePlayingResp(param:zhajinhua.IZhajinhuaStatePlayingResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
         this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserId;
+        this.m_ui.btn_ready.active = false;
 
         var idx = this.playerIdx(param.UserID);
         for(var i=0; i<MAX_SOLDIER; i++) {
@@ -247,6 +269,7 @@ export default class zjhUI extends BaseComponent {
 
     //战斗阶段-比牌
     ZhajinhuaStateCompareResp(param:zhajinhua.IZhajinhuaStateCompareResp) {
+        this.m_ui.btn_ready.active = false;
         if(param.Info) {
             this.ZhajinhuaCompareResp(param.Info);
         }
@@ -256,6 +279,7 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateOverResp(param:zhajinhua.IZhajinhuaStateOverResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
         this.m_ui.opLayer.active = false;
+        this.m_ui.btn_ready.active = false;
     }
 
     //结算数据
@@ -350,6 +374,12 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
+    ZhajinhuaReadyResp(param:zhajinhua.IZhajinhuaReadyResp) {
+        if(param.UserId == LoginUser.getInstance().UserId) {
+            this.m_ui.btn_ready.active = false;
+        }
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaSceneResp, this.ZhajinhuaSceneResp, this);
@@ -365,6 +395,8 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaGiveupResp, this.ZhajinhuaGiveupResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaHostResp, this.ZhajinhuaHostResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.resetFighters, this);
     }
 
     initUIEvent() {
@@ -393,7 +425,11 @@ export default class zjhUI extends BaseComponent {
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 
             zhajinhua_request.ZhajinhuaCompareReq({HitId:0});
-		}, this);
+        }, this);
+        
+        CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){
+            zhajinhua_request.ZhajinhuaReadyReq({IsReady:true});
+        }, this);
     }
     
 }

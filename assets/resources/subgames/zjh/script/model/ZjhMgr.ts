@@ -32,6 +32,10 @@ export default class ZjhMgr extends ModelBase {
         return this.enterData;
     }
 
+    clearPlayers() {
+        this._players = {};
+    }
+
     addPlayer(man:zhajinhua.IZhajinhuaPlayer) {
         this._players[man.UserId] = man;
     }
