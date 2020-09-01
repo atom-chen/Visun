@@ -54,11 +54,7 @@ export default class CpnUserState extends cc.Component {
     }
 
     bipaishu() {
-        this.setState(5);
-    }
-
-    yikanpai() {
-        this.setState(6);
+        this.setState(7);
     }
 
 }

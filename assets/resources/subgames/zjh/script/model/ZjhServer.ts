@@ -29,11 +29,12 @@ export default class ZjhServer extends ModelBase {
 	private _running:boolean = false;
 	private _seatFighters:Array<zhajinhua.ZhajinhuaPlayer> = [];	//参战玩家序列
 	private curTurn2Seat:number = 1;		//当前轮到谁
-	private CurHost:number = 0;
-	private bottomBet:number = 5; 	//底注
+	private Banker:number = 0;
+	private bottomBet:number = 500; 	//底注
 	private totalBet:number = 0;
 	private curGameState:number = 0;
 	private jiesuanData = null;
+	private curMinBet:number = 0;
 	
 
 	initFighters() {
@@ -80,18 +81,48 @@ export default class ZjhServer extends ModelBase {
 	}
 
 	nextMan() : zhajinhua.ZhajinhuaPlayer {
-		var nextSeat = this.curTurn2Seat+1;
-		if(this.findBySeat(nextSeat)) {
-			return this.findBySeat(nextSeat);
-		} else {
-			var minSeat = this.curTurn2Seat;
-			for(var i in this._seatFighters) {
-				if(!isNil(this._seatFighters[i]) && this._seatFighters[i].SeatId < minSeat) {
-					minSeat = this._seatFighters[i].SeatId;
+		var man = null;
+		var nextSeat = this.curTurn2Seat + 1;
+		while(nextSeat < this.MaxFighterCnt) {
+			var tmp = this.findBySeat(nextSeat);
+			if(tmp && this.isFightState(tmp.SeatState)) {
+				man = tmp;
+				break;
+			} else {
+				nextSeat++;
+			}
+		}
+		if(man) {
+			return man;
+		}
+
+		nextSeat = 0;
+		while(nextSeat < this.curTurn2Seat) {
+			var tmp = this.findBySeat(nextSeat);
+			if(tmp && this.isFightState(tmp.SeatState)) {
+				man = tmp;
+				break;
+			} else {
+				nextSeat++;
+			}
+		}
+		return man;
+	}
+
+	//随机找一个人比牌
+	randBipaiFighter(uid:number) : zhajinhua.ZhajinhuaPlayer {
+		for(var i in this._seatFighters) {
+			if(!isNil(this._seatFighters[i]) && this._seatFighters[i].UserId != uid) {
+				if(this.isFightState(this._seatFighters[i].SeatState)) {
+					return this._seatFighters[i];
 				}
 			}
-			return this.findBySeat(minSeat);
 		}
+		return null;
+	}
+
+	isFightState(st:ZjhFightState) {
+		return st == ZjhFightState.genzhu || st == ZjhFightState.jiazhu || st == ZjhFightState.readyed;
 	}
 
 	isLosed(uid:number) : boolean {
@@ -110,17 +141,59 @@ export default class ZjhServer extends ModelBase {
 	}
 
 	fightAi(tmr, uid:number) {
-		var man = this.findById(uid);
-		man.SeatState = ZjhFightState.qipai;
-		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:man.UserId}, false);
-		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+		var attacker = this.findById(uid);
+
+		var nnn = CommonUtil.getRandomInt(1,100);
+		if(nnn <= 20) {
+			attacker.SeatState = ZjhFightState.qipai;
+			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
+			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+		}
+		else if(nnn <= 40) {
+			attacker.SeatState = ZjhFightState.genzhu;
+			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaFollowResp].pack({UserId:attacker.UserId, Score:this.curMinBet}, false);
+			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+		}
+		else if(nnn <= 60) {
+			var raiseNum = 5000;
+			this.curMinBet = this.curMinBet + raiseNum; //加注会提升最低下注额
+			attacker.SeatState = ZjhFightState.jiazhu;
+			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaRaiseResp].pack({UserId:attacker.UserId, Score:this.curMinBet+raiseNum}, false);
+			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+		}
+		else {
+			var bipaiTarget = this.randBipaiFighter(uid);
+			if(!isNil(bipaiTarget)) {
+				var winnerUid = uid;
+				var loserUid = bipaiTarget.UserId;
+				//比较双方牌大小，没有发牌，瞎几把比
+				if(CommonUtil.getRandomInt(1,100) <= 50) {
+					winnerUid = bipaiTarget.UserId;
+					loserUid = uid;
+				}
+
+				this.findById(loserUid).SeatState = ZjhFightState.bipaishu;
+
+				var info = {
+					AttackerId: uid,
+					HitId: bipaiTarget.UserId,
+					WinnerId: winnerUid,
+				}
+				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaCompareResp].pack(info, false);
+				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
+			}
+		}
 
 		if(this.checkFinish()) {
 			TimerManager.delaySecond(0.5, newHandler(this.toFinish, this));
 		} else {
 			TimerManager.delaySecond(0.5, newHandler(function(tmr){
 				var nextMan = this.nextMan();
-				this.toFight(tmr, nextMan.SeatId);
+				if(isNil(nextMan)) {
+					this.toFinish();
+				} else {
+					this.toFight(tmr, nextMan.SeatId);
+				}
 			}, this));
 		}
 	}
@@ -150,7 +223,7 @@ export default class ZjhServer extends ModelBase {
 			}
 		}
 		var data:any = {};
-		data.CurHost = this.CurHost;
+		data.Banker = this.Banker;
 		data.MinBet = this.bottomBet;
 		data.TotalBet = this.totalBet;
 		data.TimeStamp = new Date().getTime();
@@ -167,11 +240,11 @@ export default class ZjhServer extends ModelBase {
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateStartResp].pack({}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
-			var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:this.CurHost}, false);
+			var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({BankerID:this.Banker}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 		}
 		else if(this.curGameState == 3) {
-			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:this.CurHost}, false);
+			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({BankerID:this.Banker}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
 			var man = this.findBySeat(this.curTurn2Seat);
@@ -179,7 +252,7 @@ export default class ZjhServer extends ModelBase {
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak2);
 		}
 		else if(this.curGameState == 4) {
-			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:this.CurHost}, false);
+			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({BankerID:this.Banker}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
 			var pak2 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaStateOverResp].pack({}, false);
@@ -193,9 +266,10 @@ export default class ZjhServer extends ModelBase {
 	//准备阶段
 	toReady(tmr) {
 		this.curGameState = 1;
+		this.curMinBet = this.bottomBet;
 		for(var i in this._seatFighters) {
 			if(!isNil(this._seatFighters[i])) {
-				this._seatFighters[i].SeatState = ZjhFightState.idle;
+				this._seatFighters[i].SeatState = ZjhFightState.readyed;
 				this._seatFighters[i].IsSee = false;
 				this._seatFighters[i].Cards = null;
 				this._seatFighters[i].RecentScore = 0;
@@ -228,10 +302,10 @@ export default class ZjhServer extends ModelBase {
 				}
 			}
 		}
-		this.CurHost = this.findBySeat(zhuangSeat).UserId;
+		this.Banker = this.findBySeat(zhuangSeat).UserId;
 		this.curTurn2Seat = zhuangSeat;
 
-		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({CurHost:this.CurHost}, false);
+		var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaHostResp].pack({BankerID:this.Banker}, false);
 		ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
 		TimerManager.delaySecond(5, newHandler(this.toFight, this, this.curTurn2Seat));

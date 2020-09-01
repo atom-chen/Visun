@@ -49,7 +49,7 @@ export default class zjhUI extends BaseComponent {
             this._pnodes.push(nd);
             this._playerCpns.push(nd.getChildByName("CpnPlayer").getComponent(CpnPlayer1));
             this._handors.push(nd.getChildByName("handor").getComponent(CpnHandcard2));
-            this._stateCpns.push(nd.getChildByName("stateTip").getComponent(CpnUserState));
+            this._stateCpns.push(nd.getChildByName("CpnUserState").getComponent(CpnUserState));
             this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
         }
 
@@ -68,7 +68,8 @@ export default class zjhUI extends BaseComponent {
     //玩家的UI位置
     private playerIndex(player:zhajinhua.IZhajinhuaPlayer) : number {
 		if(isNil(player)){ return -1; }
-		var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+        var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+        if(isNil(hero)) { return player.SeatId; }
 		if(hero.SeatId===0) { return player.SeatId; }
 		return (player.SeatId-hero.SeatId+MAX_SOLDIER) % MAX_SOLDIER;
     }
@@ -97,7 +98,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(param.MinScore);
 
         if(param.Banker) {
-            this.ZhajinhuaHostResp({CurHost:param.Banker});
+            this.ZhajinhuaHostResp({BankerID:param.Banker});
         }
 
         for(var n=0; n<MAX_SOLDIER; n++) {
@@ -278,7 +279,7 @@ export default class zjhUI extends BaseComponent {
 
     //定庄
     ZhajinhuaHostResp(param:zhajinhua.IZhajinhuaHostResp) {
-        var idx = this.playerIdx(param.CurHost);
+        var idx = this.playerIdx(param.BankerID);
         if(idx >= 0) {
             var dstPos = cc.v3(this._pnodes[idx].position);
             dstPos.x += 50;

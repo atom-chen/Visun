@@ -34,7 +34,7 @@ var ZjhHandlers = {
 
 	[zhajinhua_msgs.ZhajinhuaHostResp] : function(param:zhajinhua.IZhajinhuaHostResp) {
 		if(ZjhMgr.getInstance().getEnterData()) {
-			ZjhMgr.getInstance().getEnterData().Banker = param.CurHost;
+			ZjhMgr.getInstance().getEnterData().Banker = param.BankerID;
 		}
 	},
 
