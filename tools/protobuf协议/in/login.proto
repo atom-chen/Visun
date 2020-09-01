@@ -147,7 +147,6 @@ message EnterRoomReq{
   string RoomKey = 2;      //房间钥匙
 }
 message EnterRoomResp{
-  uint32 RoomNum = 1;      //房间号码
   GameList Games = 1;
 }
 

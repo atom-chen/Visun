@@ -902,11 +902,107 @@ export namespace zhajinhua {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ZhajinhuaDealResp. */
+    interface IZhajinhuaDealResp {
+
+        /** ZhajinhuaDealResp UserID */
+        UserID?: (number|Long|null);
+
+        /** ZhajinhuaDealResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a ZhajinhuaDealResp. */
+    class ZhajinhuaDealResp implements IZhajinhuaDealResp {
+
+        /**
+         * Constructs a new ZhajinhuaDealResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: zhajinhua.IZhajinhuaDealResp);
+
+        /** ZhajinhuaDealResp UserID. */
+        public UserID: (number|Long);
+
+        /** ZhajinhuaDealResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new ZhajinhuaDealResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZhajinhuaDealResp instance
+         */
+        public static create(properties?: zhajinhua.IZhajinhuaDealResp): zhajinhua.ZhajinhuaDealResp;
+
+        /**
+         * Encodes the specified ZhajinhuaDealResp message. Does not implicitly {@link zhajinhua.ZhajinhuaDealResp.verify|verify} messages.
+         * @param message ZhajinhuaDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: zhajinhua.IZhajinhuaDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZhajinhuaDealResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaDealResp.verify|verify} messages.
+         * @param message ZhajinhuaDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZhajinhuaDealResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZhajinhuaDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaDealResp;
+
+        /**
+         * Decodes a ZhajinhuaDealResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZhajinhuaDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaDealResp;
+
+        /**
+         * Verifies a ZhajinhuaDealResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZhajinhuaDealResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZhajinhuaDealResp
+         */
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaDealResp;
+
+        /**
+         * Creates a plain object from a ZhajinhuaDealResp message. Also converts values to other types if specified.
+         * @param message ZhajinhuaDealResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: zhajinhua.ZhajinhuaDealResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZhajinhuaDealResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a ZhajinhuaHostResp. */
     interface IZhajinhuaHostResp {
 
-        /** ZhajinhuaHostResp CurHost */
-        CurHost?: (number|Long|null);
+        /** ZhajinhuaHostResp BankerID */
+        BankerID?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaHostResp. */
@@ -918,8 +1014,8 @@ export namespace zhajinhua {
          */
         constructor(properties?: zhajinhua.IZhajinhuaHostResp);
 
-        /** ZhajinhuaHostResp CurHost. */
-        public CurHost: (number|Long);
+        /** ZhajinhuaHostResp BankerID. */
+        public BankerID: (number|Long);
 
         /**
          * Creates a new ZhajinhuaHostResp instance using the specified properties.
@@ -1627,9 +1723,6 @@ export namespace zhajinhua {
 
         /** ZhajinhuaLookResp UserId */
         UserId?: (number|Long|null);
-
-        /** ZhajinhuaLookResp Cards */
-        Cards?: (gamecomm.ICardInfo|null);
     }
 
     /** Represents a ZhajinhuaLookResp. */
@@ -1643,9 +1736,6 @@ export namespace zhajinhua {
 
         /** ZhajinhuaLookResp UserId. */
         public UserId: (number|Long);
-
-        /** ZhajinhuaLookResp Cards. */
-        public Cards?: (gamecomm.ICardInfo|null);
 
         /**
          * Creates a new ZhajinhuaLookResp instance using the specified properties.
