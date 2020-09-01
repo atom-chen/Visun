@@ -81,7 +81,7 @@ export default class BacarratUI extends BaseComponent {
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateOpenResp, this.BaccaratStateOpenResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStart, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratCheckoutResp, this.BaccaratCheckoutResp, this);
-		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOverResp, this.BaccaratOverResp, this);
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratOpenResp, this.BaccaratOpenResp, this);
 		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
 	}
 
@@ -155,7 +155,7 @@ export default class BacarratUI extends BaseComponent {
 		this.playJiesuan();
 	}
 
-	private BaccaratOverResp(param:baccarat.BaccaratOverResp) {
+	private BaccaratOpenResp(param:baccarat.BaccaratOpenResp) {
 		this.isJoined = false;
 		var aaa = [];
 		var bbb = [];
