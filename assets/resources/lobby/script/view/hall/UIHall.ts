@@ -69,7 +69,7 @@ export default class UIHall extends BaseComponent {
 		var hero = LoginUser.getInstance();
 		this.m_ui.lab_name.getComponent(cc.Label).string = "昵称：" + hero.Name;
 		this.m_ui.lab_id.getComponent(cc.Label).string = "ID：" + hero.UserId;
-		this.m_ui.lab_hmoney.getComponent(cc.Label).string = hero.getMoney().toString();
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
 		GameUtil.setHeadIcon(this.m_ui.headNode, LoginUser.getInstance().getHead());
 	}
 
@@ -110,9 +110,7 @@ export default class UIHall extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
-		//	UIManager.openPopwnd(ViewDefine.UISetting, true);
-			UIManager.openPanel(ViewDefine.UILobby);
-			CommonUtil.safeDelete(this);
+			UIManager.openPopwnd(ViewDefine.UISetting, true);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

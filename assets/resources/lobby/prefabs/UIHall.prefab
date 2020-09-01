@@ -2927,7 +2927,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        481,
+        497,
         0,
         0,
         0,
@@ -3183,7 +3183,7 @@
     "_target": null,
     "_alignFlags": 33,
     "_left": 1177.3899999999999,
-    "_right": 136,
+    "_right": 120,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -3307,8 +3307,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 22.25,
-      "height": 50.4
+      "width": 15.57,
+      "height": 35.28
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3360,8 +3360,8 @@
     "_useOriginalSize": false,
     "_string": "0",
     "_N$string": "0",
-    "_fontSize": 40,
-    "_lineHeight": 40,
+    "_fontSize": 28,
+    "_lineHeight": 28,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -3490,8 +3490,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 90,
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3546,7 +3546,7 @@
       "__uuid__": "951e84b7-e1a9-43b2-a97d-35a4a052a171"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -3569,10 +3569,10 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 9,
-    "_left": 0,
+    "_alignFlags": 8,
+    "_left": 5,
     "_right": 0,
-    "_top": 0,
+    "_top": 2,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -3763,8 +3763,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 90,
-      "height": 50.4
+      "width": 84,
+      "height": 35.28
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3816,8 +3816,8 @@
     "_useOriginalSize": false,
     "_string": "昵称：",
     "_N$string": "昵称：",
-    "_fontSize": 30,
-    "_lineHeight": 40,
+    "_fontSize": 28,
+    "_lineHeight": 28,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -3870,8 +3870,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
-      "height": 50.4
+      "width": 56,
+      "height": 35.28
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3923,8 +3923,8 @@
     "_useOriginalSize": false,
     "_string": "ID：",
     "_N$string": "ID：",
-    "_fontSize": 30,
-    "_lineHeight": 40,
+    "_fontSize": 28,
+    "_lineHeight": 28,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,

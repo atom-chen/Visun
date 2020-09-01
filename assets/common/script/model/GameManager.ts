@@ -8,6 +8,7 @@ import LoginMgr from "./LoginMgr";
 import { gamecomm_request } from "../proto/net_gamecomm";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
+import { login } from "../../../../declares/login";
 
 
 //游戏管理器
@@ -38,23 +39,23 @@ export default class GameManager extends ModelBase {
 
 	//------------------------------------------------------------------------------
 
-	private roomsInfo = [];
-	private gameArr = [];
-	private gameId = 0;
+	private roomsInfo:Array<login.IRoomInfo> = [];
+	private gameArr:Array<login.IGameItem> = [];
+	private gameId:number = 0;
 
-	public setRoomsInfo(info:any) {
+	public setRoomsInfo(info:Array<login.IRoomInfo>) {
 		this.roomsInfo = info;
 	}
 
-	public getRoomsInfo() : any {
+	public getRoomsInfo() : Array<login.IRoomInfo> {
 		return this.roomsInfo;
 	}
 
-	public setGameArr(data) {
+	public setGameArr(data:Array<login.IGameItem>) {
 		this.gameArr = data;
 	}
 
-	public getGameArr() : any {
+	public getGameArr() : Array<login.IGameItem> {
 		return this.gameArr;
 	}
 
