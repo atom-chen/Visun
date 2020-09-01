@@ -2417,6 +2417,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
+        EnterRoomResp.prototype.RoomNum = 0;
         EnterRoomResp.prototype.Games = null;
 
         EnterRoomResp.create = function create(properties) {
@@ -2426,8 +2427,10 @@ $root.login = (function() {
         EnterRoomResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
+            if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
+                writer.uint32(8).uint32(message.RoomNum);
             if (message.Games != null && Object.hasOwnProperty.call(message, "Games"))
-                $root.login.GameList.encode(message.Games, writer.uint32(10).fork()).ldelim();
+                $root.login.GameList.encode(message.Games, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -2443,6 +2446,9 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
+                    message.RoomNum = reader.uint32();
+                    break;
+                case 2:
                     message.Games = $root.login.GameList.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2462,6 +2468,9 @@ $root.login = (function() {
         EnterRoomResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
+                if (!$util.isInteger(message.RoomNum))
+                    return "RoomNum: integer expected";
             if (message.Games != null && message.hasOwnProperty("Games")) {
                 var error = $root.login.GameList.verify(message.Games);
                 if (error)
@@ -2474,6 +2483,8 @@ $root.login = (function() {
             if (object instanceof $root.login.EnterRoomResp)
                 return object;
             var message = new $root.login.EnterRoomResp();
+            if (object.RoomNum != null)
+                message.RoomNum = object.RoomNum >>> 0;
             if (object.Games != null) {
                 if (typeof object.Games !== "object")
                     throw TypeError(".login.EnterRoomResp.Games: object expected");
@@ -2486,8 +2497,12 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
+                object.RoomNum = 0;
                 object.Games = null;
+            }
+            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
+                object.RoomNum = message.RoomNum;
             if (message.Games != null && message.hasOwnProperty("Games"))
                 object.Games = $root.login.GameList.toObject(message.Games, options);
             return object;
