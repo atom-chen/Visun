@@ -87,6 +87,14 @@ export default class zjhUI extends BaseComponent {
 
     //场景信息
     ZhajinhuaSceneResp(param:zhajinhua.IZhajinhuaSceneResp) {
+        this.m_ui.labBottomBet.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(500);
+        this.m_ui.labRound.getComponent(cc.Label).string = "第1/20轮";
+        this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(param.MinScore);
+
+        if(param.Banker) {
+            this.ZhajinhuaHostResp({CurHost:param.Banker});
+        }
+
         for(var n=0; n<MAX_SOLDIER; n++) {
             this._pnodes[n].active = false;
         }
@@ -128,6 +136,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
 
+        this.m_ui.zhuang.stopAllActions();
         this.m_ui.zhuang.position = this._zhuangPos;
 
         for(var i in this._stateCpns){
@@ -269,11 +278,13 @@ export default class zjhUI extends BaseComponent {
             var dstPos = cc.v3(this._pnodes[idx].position);
             dstPos.x += 50;
             dstPos.y += 75;
+            this.m_ui.zhuang.stopAllActions();
             this.m_ui.zhuang.position = this._zhuangPos;
             this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
         }
     }
 
+    //
     GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
         var man = ZjhMgr.getInstance().getPlayer(param.UserID);
         if(man) {

@@ -29,11 +29,14 @@ message ZhajinhuaDelPlayerResp {
 
 //入场
 message ZhajinhuaSceneResp {
-  int64 TimeStamp = 1;                  //时间戳
-  int64 TotalScore = 2;                 //当前总下注额
-  uint64 MinScore = 3;                  //当前注额
-  uint64 Banker = 4;                    //当前庄家
-  repeated ZhajinhuaPlayer Fighters = 5;//参战玩家序列
+  int64 TimeStamp = 1;                    //时间戳
+  int64 BottomScore = 2;                  //底注
+  int32 MaxRound = 3;                     //最多进行多少轮，超过MaxRound轮则强制进入结算
+  int64 TotalScore = 4;                   //当前总下注额
+  uint64 MinScore = 5;                    //当前注额
+  int32 CurRound = 6;                     //当前第几轮
+  uint64 Banker = 7;                      //当前庄家
+  repeated ZhajinhuaPlayer Fighters = 8;  //参战玩家序列
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
@@ -68,6 +71,10 @@ message ZhajinhuaStateOverResp {
 
 
 
+//进入新一轮时下发
+message ZhajinhuaNewRountResp {
+  int32 CurRound = 1;       //进入到第几轮了
+}
 
 //定庄
 message ZhajinhuaHostResp {
