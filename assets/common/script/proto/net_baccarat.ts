@@ -51,6 +51,6 @@ export class baccarat_request {
     public static BaccaratBetReq( data:{ BetArea:number, BetScore:number } ) { baccarat_packet_define[45].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratBetResp( data:{ UserID:number, BetArea:number, BetScore:number } ) { baccarat_packet_define[46].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratOpenResp( data:{ AwardArea:any, PlayerCard:any, BankerCard:any } ) { baccarat_packet_define[47].sendToChannel(ChannelDefine.game, data, false); }
-    public static BaccaratCheckoutResp( data:{ MyAcquire:number, BankerAcquire:number, PlayerAcquire:number, DrawAcquire:number } ) { baccarat_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratCheckoutResp( data:{ MyAcquire:number, Acquires:number[] } ) { baccarat_packet_define[48].sendToChannel(ChannelDefine.game, data, false); }
 }
 

@@ -1160,14 +1160,8 @@ export namespace baccarat {
         /** BaccaratCheckoutResp MyAcquire */
         MyAcquire?: (number|Long|null);
 
-        /** BaccaratCheckoutResp BankerAcquire */
-        BankerAcquire?: (number|Long|null);
-
-        /** BaccaratCheckoutResp PlayerAcquire */
-        PlayerAcquire?: (number|Long|null);
-
-        /** BaccaratCheckoutResp DrawAcquire */
-        DrawAcquire?: (number|Long|null);
+        /** BaccaratCheckoutResp Acquires */
+        Acquires?: ((number|Long)[]|null);
     }
 
     /** Represents a BaccaratCheckoutResp. */
@@ -1182,14 +1176,8 @@ export namespace baccarat {
         /** BaccaratCheckoutResp MyAcquire. */
         public MyAcquire: (number|Long);
 
-        /** BaccaratCheckoutResp BankerAcquire. */
-        public BankerAcquire: (number|Long);
-
-        /** BaccaratCheckoutResp PlayerAcquire. */
-        public PlayerAcquire: (number|Long);
-
-        /** BaccaratCheckoutResp DrawAcquire. */
-        public DrawAcquire: (number|Long);
+        /** BaccaratCheckoutResp Acquires. */
+        public Acquires: (number|Long)[];
 
         /**
          * Creates a new BaccaratCheckoutResp instance using the specified properties.
