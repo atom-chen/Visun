@@ -5,7 +5,7 @@ export default class LoginUser extends ModelBase {
 	private static _instance:LoginUser = null;
 
 	UserId: number = 0;			//用户ID
-	Accounts:string = "";		//帐号
+	Account:string = "";		//帐号
 	Password:string = "";		//密码
 	Name:string = "";			//昵称
 	FaceID:number = 0;			//头像
