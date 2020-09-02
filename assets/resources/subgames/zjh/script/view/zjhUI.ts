@@ -173,6 +173,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     getSeatPlayer(idx:number) : zhajinhua.IZhajinhuaPlayer {
+        if(idx < 0) { return null; }
         var mans = ZjhMgr.getInstance().getPlayerList();
         if(mans) {
             for(var uid in mans) {
@@ -185,6 +186,7 @@ export default class zjhUI extends BaseComponent {
     }
 
     refreshSeat(idx:number) {
+        if(idx < 0) { return; }
         var man = this.getSeatPlayer(idx);
         if(isNil(man)) {
             this._pnodes[idx].active = false;
