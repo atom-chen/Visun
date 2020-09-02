@@ -18,7 +18,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
-import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
@@ -432,6 +432,7 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.resetFighters, this);
     }
 
     initUIEvent() {
