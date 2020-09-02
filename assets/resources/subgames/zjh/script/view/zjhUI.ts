@@ -545,10 +545,11 @@ export default class zjhUI extends BaseComponent {
     
     selectBipaiTarget(idx:number) {
         this._bipaiTarget = -1;
+
         var man:zhajinhua.IZhajinhuaPlayer = null;
         if(idx >= 0) {
             man = this.getSeatPlayer(idx);
-            if(!isNil(man)) {
+            if(!isNil(man) && man.UserId != LoginUser.getInstance().UserId) {
                 this._bipaiTarget = man.UserId;
             }
         }
