@@ -34,8 +34,8 @@ message ZhajinhuaSceneResp {
   int64 TotalScore = 2;                 //当前总下注额
   uint64 MinScore = 3;                  //当前注额
   uint64 Banker = 4;                    //当前庄家
-  string Inning = 5;                    // 牌局号
-  repeated ZhajinhuaPlayer Fighters = 6;//参战玩家序列
+  repeated ZhajinhuaPlayer Fighters = 5;//参战玩家序列
+  string Inning = 6;                    // 牌局号
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算

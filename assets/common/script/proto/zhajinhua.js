@@ -479,8 +479,8 @@ $root.zhajinhua = (function() {
         ZhajinhuaSceneResp.prototype.TotalScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaSceneResp.prototype.MinScore = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         ZhajinhuaSceneResp.prototype.Banker = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        ZhajinhuaSceneResp.prototype.Inning = "";
         ZhajinhuaSceneResp.prototype.Fighters = $util.emptyArray;
+        ZhajinhuaSceneResp.prototype.Inning = "";
 
         ZhajinhuaSceneResp.create = function create(properties) {
             return new ZhajinhuaSceneResp(properties);
@@ -497,11 +497,11 @@ $root.zhajinhua = (function() {
                 writer.uint32(24).uint64(message.MinScore);
             if (message.Banker != null && Object.hasOwnProperty.call(message, "Banker"))
                 writer.uint32(32).uint64(message.Banker);
-            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
-                writer.uint32(42).string(message.Inning);
             if (message.Fighters != null && message.Fighters.length)
                 for (var i = 0; i < message.Fighters.length; ++i)
-                    $root.zhajinhua.ZhajinhuaPlayer.encode(message.Fighters[i], writer.uint32(50).fork()).ldelim();
+                    $root.zhajinhua.ZhajinhuaPlayer.encode(message.Fighters[i], writer.uint32(42).fork()).ldelim();
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(50).string(message.Inning);
             return writer;
         };
 
@@ -529,12 +529,12 @@ $root.zhajinhua = (function() {
                     message.Banker = reader.uint64();
                     break;
                 case 5:
-                    message.Inning = reader.string();
-                    break;
-                case 6:
                     if (!(message.Fighters && message.Fighters.length))
                         message.Fighters = [];
                     message.Fighters.push($root.zhajinhua.ZhajinhuaPlayer.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -565,9 +565,6 @@ $root.zhajinhua = (function() {
             if (message.Banker != null && message.hasOwnProperty("Banker"))
                 if (!$util.isInteger(message.Banker) && !(message.Banker && $util.isInteger(message.Banker.low) && $util.isInteger(message.Banker.high)))
                     return "Banker: integer|Long expected";
-            if (message.Inning != null && message.hasOwnProperty("Inning"))
-                if (!$util.isString(message.Inning))
-                    return "Inning: string expected";
             if (message.Fighters != null && message.hasOwnProperty("Fighters")) {
                 if (!Array.isArray(message.Fighters))
                     return "Fighters: array expected";
@@ -577,6 +574,9 @@ $root.zhajinhua = (function() {
                         return "Fighters." + error;
                 }
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -620,8 +620,6 @@ $root.zhajinhua = (function() {
                     message.Banker = object.Banker;
                 else if (typeof object.Banker === "object")
                     message.Banker = new $util.LongBits(object.Banker.low >>> 0, object.Banker.high >>> 0).toNumber(true);
-            if (object.Inning != null)
-                message.Inning = String(object.Inning);
             if (object.Fighters) {
                 if (!Array.isArray(object.Fighters))
                     throw TypeError(".zhajinhua.ZhajinhuaSceneResp.Fighters: array expected");
@@ -632,6 +630,8 @@ $root.zhajinhua = (function() {
                     message.Fighters[i] = $root.zhajinhua.ZhajinhuaPlayer.fromObject(object.Fighters[i]);
                 }
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -684,13 +684,13 @@ $root.zhajinhua = (function() {
                     object.Banker = options.longs === String ? String(message.Banker) : message.Banker;
                 else
                     object.Banker = options.longs === String ? $util.Long.prototype.toString.call(message.Banker) : options.longs === Number ? new $util.LongBits(message.Banker.low >>> 0, message.Banker.high >>> 0).toNumber(true) : message.Banker;
-            if (message.Inning != null && message.hasOwnProperty("Inning"))
-                object.Inning = message.Inning;
             if (message.Fighters && message.Fighters.length) {
                 object.Fighters = [];
                 for (var j = 0; j < message.Fighters.length; ++j)
                     object.Fighters[j] = $root.zhajinhua.ZhajinhuaPlayer.toObject(message.Fighters[j], options);
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 
