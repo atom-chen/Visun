@@ -189,6 +189,7 @@ export default class UIManager {
 
 		if(SceneManager.isSwitching()) {
 			UIManager._waitList.push({op:"openDialog", arglist:[dlgName, content, dlgType, callback, title, okTxt, cancelTxt]});
+			cc.log("场景切换中，延迟显示界面：", dlgName);
 			return;
 		}
 		
