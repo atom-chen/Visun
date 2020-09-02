@@ -128,7 +128,7 @@ export default class GameUtil {
 	}
 
 	static loadChipIcons() {
-		var n = 0;
+		var n = 2;
 		for(var i in GameUtil.CHIP_RULE) {
 			n += 2;
 			TimerManager.delayFrame(n, newHandler(function(tmr, ii){
