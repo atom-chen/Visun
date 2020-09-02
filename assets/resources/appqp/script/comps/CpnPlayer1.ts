@@ -23,17 +23,6 @@ export default class CpnPlayer1 extends BaseComponent {
 
         this.moneyColor = this.m_ui.lab_money.color;
         this.nameColor = this.m_ui.lab_name.color;
-
-        CommonUtil.addClickEvent(this.node, function(){ 
-            cc.log("click"); 
-            if(this._clickCallback) {
-                this._clickCallback();
-            }
-        }, this);
-    }
-
-    public setClickCallback(callback:Function) {
-        this._clickCallback = callback;
     }
 
     public getUserId() : number {
