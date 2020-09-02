@@ -64,6 +64,7 @@ var GameHandlers = {
         for(var ii in param.Fighters) {
 			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
         }
+        ZjhMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
     },
