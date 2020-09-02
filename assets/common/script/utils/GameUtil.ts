@@ -1,7 +1,8 @@
 import { MajhongCode } from "../definer/MajhongDefine";
-import { isNil } from "../../../kernel/utils/GlobalFuncs";
+import { isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import GameConfig from "../definer/GameConfig";
+import TimerManager from "../../../kernel/basic/timer/TimerManager";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -116,8 +117,28 @@ export default class GameUtil {
 	}
 
 	static loadGameIcons() {
+		var i = 1;
 		for(var k in GameConfig) {
-			cc.loader.loadRes(GameConfig[k].icon, cc.SpriteFrame);
+			i += 2;
+			TimerManager.delayFrame(i, newHandler(function(tmr, kk){
+			//	cc.log("---preload---", GameConfig[kk].icon);
+				cc.loader.loadRes(GameConfig[kk].icon, cc.SpriteFrame);
+			}, GameUtil, k));
+		}
+	}
+
+	static loadChipIcons() {
+		var n = 0;
+		for(var i in GameUtil.CHIP_RULE) {
+			n += 2;
+			TimerManager.delayFrame(n, newHandler(function(tmr, ii){
+				var respath1 = GameUtil.chipPath(GameUtil.CHIP_RULE[ii], true);
+				cc.loader.loadRes(respath1, cc.SpriteFrame);
+				var respath2 = GameUtil.chipPath(GameUtil.CHIP_RULE[ii], false);
+				cc.loader.loadRes(respath2, cc.SpriteFrame);
+			//	cc.log("---preload---", respath1);
+			//	cc.log("---preload---", respath2);
+			}, GameUtil, i));
 		}
 	}
 
