@@ -263,6 +263,10 @@ export default class zjhUI extends BaseComponent {
 
         this.m_ui.chipLayer.removeAllChildren();
 
+        for(var n = 0; n < MAX_SOLDIER; n++) {
+            this._pnodes[n].getChildByName("ust_yizhunbei").active = false;
+        }
+
         Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
