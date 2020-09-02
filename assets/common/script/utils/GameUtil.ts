@@ -77,7 +77,12 @@ export default class GameUtil {
 	//设置头像图片
 	public static setHeadSpr(spr:cc.Sprite, v:number) {
 		if(isNil(spr)) { return; }
-		if(v!=0 && v!=1 && v<1001 && v>1008 && v<2001 && v>2008) {
+		if(isNil(v)) {
+			cc.warn("无效的头像ID: ", v);
+			return;
+		}
+		if( !(v==0 || v==1 || (v>=1001 && v<=1008) || (v>=2001 && v<2008)) ) {
+			cc.warn("无效的头像ID：", v);
 			return;
 		}
 		
