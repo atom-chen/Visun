@@ -32,9 +32,9 @@ export default class GameManager extends ModelBase {
 	private constructor() {
 		super();
 		EventCenter.getInstance().listen(EventDefine.reconn_succ, function(){
-			if(SceneManager.curSceneName === KernelUIDefine.GameScene.name && LoginMgr.getInstance().checkLogin(false)) {
-				this.enterGame(this.getGameId());
-			}
+			// if(SceneManager.curSceneName === KernelUIDefine.GameScene.name && LoginMgr.getInstance().checkLogin(false)) {
+			// 	this.enterGame(this.getGameId());
+			// }
 		}, this);
 	}
 
