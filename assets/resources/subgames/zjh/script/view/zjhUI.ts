@@ -24,6 +24,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnShandian from "../../../../appqp/script/comps/CpnShandian";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 
 
 const MAX_SOLDIER = 5;
@@ -215,7 +216,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.labBottomBet.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(500);
         this.m_ui.labRound.getComponent(cc.Label).string = "第1/20轮";
         this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(param.MinScore);
-
+        this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
         if(param.Banker) {
             this.ZhajinhuaHostResp({BankerID:param.Banker});
         }
@@ -383,9 +384,11 @@ export default class zjhUI extends BaseComponent {
 
     //比牌
     ZhajinhuaCompareResp(param:zhajinhua.IZhajinhuaCompareResp) {
+        var winStr = "sprK";
         var losser = param.AttackerId;
         if(losser == param.WinnerId) {
             losser = param.HitId;
+            winStr = "sprP";
         }
         var idx = this.playerIdx(losser);
         if(idx >= 0) {
@@ -398,7 +401,18 @@ export default class zjhUI extends BaseComponent {
         this.playBetAni(param.AttackerId, 100);
 
         var tipStr = cc.js.formatStr("%s和%s比牌，%s赢", mgr.getPlayer(param.AttackerId).Name, mgr.getPlayer(param.HitId).Name, mgr.getPlayer(param.WinnerId).Name)
-        UIManager.toast(tipStr)
+        UIManager.toast(tipStr);
+
+        var manP = ZjhMgr.getInstance().getPlayer(param.AttackerId);
+        var manK = ZjhMgr.getInstance().getPlayer(param.HitId);
+        var pkinfo = {
+            phead: manP && manP["FaceID"] || 1004,
+            khead: manK && manK["FaceID"] || 2006,
+            pname: manP && manP.Name || param.AttackerId,
+            kname: manK && manK.Name || param.HitId,
+            winner: winStr
+        }
+        UIManager.openPopwnd(ViewDefine.UIpk, false, pkinfo);
     }
 
     //弃牌

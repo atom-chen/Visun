@@ -3,6 +3,7 @@ export default class ViewDefine {
 	//appqp
 	public static CpnChip = "appqp/prefabs/CpnChip";
 	public static UILogin = "appqp/prefabs/UILogin";
+	public static UIpk = "appqp/prefabs/UIpk";
 	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIHall = "lobby/prefabs/UIHall";
