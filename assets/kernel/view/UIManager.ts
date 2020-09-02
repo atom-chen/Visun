@@ -80,10 +80,10 @@ export default class UIManager {
 			return;
 		}
 
-		if(SceneManager.isSwitching()) {
-			UIManager._waitList.push({op:"showSingleton", arglist:[respath, parent, zIndex, bModal, bCloseWhenClickMask, args]});
-			return;
-		}
+		// if(SceneManager.isSwitching()) {
+		// 	UIManager._waitList.push({op:"showSingleton", arglist:[respath, parent, zIndex, bModal, bCloseWhenClickMask, args]});
+		// 	return;
+		// }
 
 		var completeCallback = function(err, loadedResource) {
 			if( err ) { cc.log( '载入预制资源失败:' + err ); return; }
