@@ -141,7 +141,7 @@ export default class zjhUI extends BaseComponent {
             this._playerCpns[idx].setName(man.Name);
             this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(man.Gold));
             this._playerCpns[idx].setHeadImg(man["FaceID"]);
-            this._pnodes[idx].getChildByName("ust_kanpai").active = man.IsSee == true;
+            this._pnodes[idx].getChildByName("ust_kanpai").active = man.IsSee == true && man.UserId!=LoginUser.getInstance().UserId;
             this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.SeatState == ZjhFightState.readyed;
             if(man.SeatState == ZjhFightState.genzhu) {
                 this._stateCpns[idx].genzhu();
@@ -159,7 +159,11 @@ export default class zjhUI extends BaseComponent {
                 this._stateCpns[idx].idle();
                 this._pnodes[idx].getChildByName("ust_yizhunbei").active = false;
             }
-            if(man.IsSee == true) {
+            // if(man.IsSee == true) {
+            //     this._handors[idx].resetCards(man.Cards.Cards);
+            //     this._handors[idx].playOpen();
+            // }
+            if(uid == LoginUser.getInstance().UserId && man.IsSee) {
                 this._handors[idx].resetCards(man.Cards.Cards);
                 this._handors[idx].playOpen();
             }
@@ -362,7 +366,12 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaLookResp(param:zhajinhua.IZhajinhuaLookResp) {
         var idx = this.playerIdx(param.UserId);
         if(idx >= 0) {
-            this._pnodes[idx].getChildByName("ust_kanpai").active = true;
+            this._pnodes[idx].getChildByName("ust_kanpai").active = true && param.UserId != LoginUser.getInstance().UserId;
+        }
+        var man = ZjhMgr.getInstance().getPlayer(param.UserId);
+        if(man && man.UserId == LoginUser.getInstance().UserId) {
+            this._handors[idx].resetCards(man.Cards.Cards);
+            this._handors[idx].playOpen();
         }
     }
 
