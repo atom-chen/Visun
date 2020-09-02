@@ -5,10 +5,12 @@ import "gamecomm.proto";
 //场景
 message BaccaratSceneResp{
   int64 TimeStamp = 1;            //时间戳
+  string Inning = 6;              //牌局号
   repeated int32 Chips = 2;       //筹 码
   repeated bytes AwardAreas = 3;  //开奖记录(路单)
   repeated int64 AreaBets = 4;    //各下注区当前总下注额
-  repeated int64 MyBets = 5;      //我在各下注区的总下注额
+  repeated int64 MyBets = 5;      //个人在各下注区的总下注额
+  PlayerListInfo AllPlayers = 7;  //玩家列表
 }
 
 //状态

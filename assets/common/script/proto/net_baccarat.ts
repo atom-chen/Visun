@@ -39,7 +39,7 @@ export var baccarat_packet_define = {
 }
 
 export class baccarat_request {
-    public static BaccaratSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[] } ) { baccarat_packet_define[36].sendToChannel(ChannelDefine.game, data, false); }
+    public static BaccaratSceneResp( data:{ TimeStamp:number, Inning:string, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], AllPlayers:any } ) { baccarat_packet_define[36].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStateStartResp( data:{ Times:any } ) { baccarat_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStatePlayingResp( data:{ Times:any } ) { baccarat_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
     public static BaccaratStateOpenResp( data:{ Times:any, OpenInfo:any } ) { baccarat_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }

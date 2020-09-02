@@ -1887,6 +1887,7 @@ $root.login = (function() {
         }
 
         LoginResp.prototype.MainInfo = null;
+        LoginResp.prototype.InGameID = 0;
 
         LoginResp.create = function create(properties) {
             return new LoginResp(properties);
@@ -1897,6 +1898,8 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
+            if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
+                writer.uint32(16).uint32(message.InGameID);
             return writer;
         };
 
@@ -1913,6 +1916,9 @@ $root.login = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.InGameID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1936,6 +1942,9 @@ $root.login = (function() {
                 if (error)
                     return "MainInfo." + error;
             }
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                if (!$util.isInteger(message.InGameID))
+                    return "InGameID: integer expected";
             return null;
         };
 
@@ -1948,6 +1957,8 @@ $root.login = (function() {
                     throw TypeError(".login.LoginResp.MainInfo: object expected");
                 message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
             }
+            if (object.InGameID != null)
+                message.InGameID = object.InGameID >>> 0;
             return message;
         };
 
@@ -1955,10 +1966,14 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.MainInfo = null;
+                object.InGameID = 0;
+            }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                object.InGameID = message.InGameID;
             return object;
         };
 
@@ -2224,6 +2239,7 @@ $root.login = (function() {
         }
 
         ReconnectResp.prototype.MainInfo = null;
+        ReconnectResp.prototype.InGameID = 0;
 
         ReconnectResp.create = function create(properties) {
             return new ReconnectResp(properties);
@@ -2234,6 +2250,8 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
+            if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
+                writer.uint32(16).uint32(message.InGameID);
             return writer;
         };
 
@@ -2250,6 +2268,9 @@ $root.login = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.InGameID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2273,6 +2294,9 @@ $root.login = (function() {
                 if (error)
                     return "MainInfo." + error;
             }
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                if (!$util.isInteger(message.InGameID))
+                    return "InGameID: integer expected";
             return null;
         };
 
@@ -2285,6 +2309,8 @@ $root.login = (function() {
                     throw TypeError(".login.ReconnectResp.MainInfo: object expected");
                 message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
             }
+            if (object.InGameID != null)
+                message.InGameID = object.InGameID >>> 0;
             return message;
         };
 
@@ -2292,10 +2318,14 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.MainInfo = null;
+                object.InGameID = 0;
+            }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                object.InGameID = message.InGameID;
             return object;
         };
 
