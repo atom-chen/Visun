@@ -80,7 +80,7 @@ export default class zjhUI extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
-        ZjhServer.getInstance().run();
+     //   ZjhServer.getInstance().run();
     }
 
     //玩家的UI位置
