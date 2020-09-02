@@ -876,6 +876,7 @@ $root.login = (function() {
         MasterInfo.prototype.UserInfo = null;
         MasterInfo.prototype.RoomsInfo = $util.emptyArray;
         MasterInfo.prototype.Tasks = null;
+        MasterInfo.prototype.InGameID = 0;
 
         MasterInfo.create = function create(properties) {
             return new MasterInfo(properties);
@@ -891,6 +892,8 @@ $root.login = (function() {
                     $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
             if (message.Tasks != null && Object.hasOwnProperty.call(message, "Tasks"))
                 $root.login.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
+            if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
+                writer.uint32(32).uint32(message.InGameID);
             return writer;
         };
 
@@ -915,6 +918,9 @@ $root.login = (function() {
                     break;
                 case 3:
                     message.Tasks = $root.login.TaskList.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.InGameID = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -952,6 +958,9 @@ $root.login = (function() {
                 if (error)
                     return "Tasks." + error;
             }
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                if (!$util.isInteger(message.InGameID))
+                    return "InGameID: integer expected";
             return null;
         };
 
@@ -979,6 +988,8 @@ $root.login = (function() {
                     throw TypeError(".login.MasterInfo.Tasks: object expected");
                 message.Tasks = $root.login.TaskList.fromObject(object.Tasks);
             }
+            if (object.InGameID != null)
+                message.InGameID = object.InGameID >>> 0;
             return message;
         };
 
@@ -991,6 +1002,7 @@ $root.login = (function() {
             if (options.defaults) {
                 object.UserInfo = null;
                 object.Tasks = null;
+                object.InGameID = 0;
             }
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
                 object.UserInfo = $root.login.UserInfo.toObject(message.UserInfo, options);
@@ -1001,6 +1013,8 @@ $root.login = (function() {
             }
             if (message.Tasks != null && message.hasOwnProperty("Tasks"))
                 object.Tasks = $root.login.TaskList.toObject(message.Tasks, options);
+            if (message.InGameID != null && message.hasOwnProperty("InGameID"))
+                object.InGameID = message.InGameID;
             return object;
         };
 

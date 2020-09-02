@@ -55,7 +55,7 @@ export class login_request {
     public static RoomInfo( data:{ RoomNum:number, RoomKey:string, RoomName:string, Games:any } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
     public static GameInfo( data:{ Type:number, KindID:number, Level:number, Name:string, EnterScore:number, LessScore:number, MaxOnline:number, State:number, Commission:number } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
     public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
-    public static MasterInfo( data:{ UserInfo:any, RoomsInfo:any[], Tasks:any } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
+    public static MasterInfo( data:{ UserInfo:any, RoomsInfo:any[], Tasks:any, InGameID:number } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }

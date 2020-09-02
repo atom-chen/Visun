@@ -25,10 +25,12 @@ $root.baccarat = (function() {
         }
 
         BaccaratSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratSceneResp.prototype.Inning = "";
         BaccaratSceneResp.prototype.Chips = $util.emptyArray;
         BaccaratSceneResp.prototype.AwardAreas = $util.emptyArray;
         BaccaratSceneResp.prototype.AreaBets = $util.emptyArray;
         BaccaratSceneResp.prototype.MyBets = $util.emptyArray;
+        BaccaratSceneResp.prototype.AllPlayers = null;
 
         BaccaratSceneResp.create = function create(properties) {
             return new BaccaratSceneResp(properties);
@@ -60,6 +62,10 @@ $root.baccarat = (function() {
                     writer.int64(message.MyBets[i]);
                 writer.ldelim();
             }
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(50).string(message.Inning);
+            if (message.AllPlayers != null && Object.hasOwnProperty.call(message, "AllPlayers"))
+                $root.gamecomm.PlayerListInfo.encode(message.AllPlayers, writer.uint32(58).fork()).ldelim();
             return writer;
         };
 
@@ -76,6 +82,9 @@ $root.baccarat = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.TimeStamp = reader.int64();
+                    break;
+                case 6:
+                    message.Inning = reader.string();
                     break;
                 case 2:
                     if (!(message.Chips && message.Chips.length))
@@ -112,6 +121,9 @@ $root.baccarat = (function() {
                     } else
                         message.MyBets.push(reader.int64());
                     break;
+                case 7:
+                    message.AllPlayers = $root.gamecomm.PlayerListInfo.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -132,6 +144,9 @@ $root.baccarat = (function() {
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
                     return "TimeStamp: integer|Long expected";
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             if (message.Chips != null && message.hasOwnProperty("Chips")) {
                 if (!Array.isArray(message.Chips))
                     return "Chips: array expected";
@@ -160,6 +175,11 @@ $root.baccarat = (function() {
                     if (!$util.isInteger(message.MyBets[i]) && !(message.MyBets[i] && $util.isInteger(message.MyBets[i].low) && $util.isInteger(message.MyBets[i].high)))
                         return "MyBets: integer|Long[] expected";
             }
+            if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers")) {
+                var error = $root.gamecomm.PlayerListInfo.verify(message.AllPlayers);
+                if (error)
+                    return "AllPlayers." + error;
+            }
             return null;
         };
 
@@ -176,6 +196,8 @@ $root.baccarat = (function() {
                     message.TimeStamp = object.TimeStamp;
                 else if (typeof object.TimeStamp === "object")
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
                     throw TypeError(".baccarat.BaccaratSceneResp.Chips: array expected");
@@ -221,6 +243,11 @@ $root.baccarat = (function() {
                     else if (typeof object.MyBets[i] === "object")
                         message.MyBets[i] = new $util.LongBits(object.MyBets[i].low >>> 0, object.MyBets[i].high >>> 0).toNumber();
             }
+            if (object.AllPlayers != null) {
+                if (typeof object.AllPlayers !== "object")
+                    throw TypeError(".baccarat.BaccaratSceneResp.AllPlayers: object expected");
+                message.AllPlayers = $root.gamecomm.PlayerListInfo.fromObject(object.AllPlayers);
+            }
             return message;
         };
 
@@ -234,12 +261,15 @@ $root.baccarat = (function() {
                 object.AreaBets = [];
                 object.MyBets = [];
             }
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TimeStamp = options.longs === String ? "0" : 0;
+                object.Inning = "";
+                object.AllPlayers = null;
+            }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
@@ -271,6 +301,10 @@ $root.baccarat = (function() {
                     else
                         object.MyBets[j] = options.longs === String ? $util.Long.prototype.toString.call(message.MyBets[j]) : options.longs === Number ? new $util.LongBits(message.MyBets[j].low >>> 0, message.MyBets[j].high >>> 0).toNumber() : message.MyBets[j];
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
+            if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers"))
+                object.AllPlayers = $root.gamecomm.PlayerListInfo.toObject(message.AllPlayers, options);
             return object;
         };
 

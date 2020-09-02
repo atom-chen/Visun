@@ -8,6 +8,9 @@ export namespace baccarat {
         /** BaccaratSceneResp TimeStamp */
         TimeStamp?: (number|Long|null);
 
+        /** BaccaratSceneResp Inning */
+        Inning?: (string|null);
+
         /** BaccaratSceneResp Chips */
         Chips?: (number[]|null);
 
@@ -19,6 +22,9 @@ export namespace baccarat {
 
         /** BaccaratSceneResp MyBets */
         MyBets?: ((number|Long)[]|null);
+
+        /** BaccaratSceneResp AllPlayers */
+        AllPlayers?: (gamecomm.IPlayerListInfo|null);
     }
 
     /** Represents a BaccaratSceneResp. */
@@ -33,6 +39,9 @@ export namespace baccarat {
         /** BaccaratSceneResp TimeStamp. */
         public TimeStamp: (number|Long);
 
+        /** BaccaratSceneResp Inning. */
+        public Inning: string;
+
         /** BaccaratSceneResp Chips. */
         public Chips: number[];
 
@@ -44,6 +53,9 @@ export namespace baccarat {
 
         /** BaccaratSceneResp MyBets. */
         public MyBets: (number|Long)[];
+
+        /** BaccaratSceneResp AllPlayers. */
+        public AllPlayers?: (gamecomm.IPlayerListInfo|null);
 
         /**
          * Creates a new BaccaratSceneResp instance using the specified properties.

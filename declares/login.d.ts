@@ -565,6 +565,9 @@ export namespace login {
 
         /** MasterInfo Tasks */
         Tasks?: (login.ITaskList|null);
+
+        /** MasterInfo InGameID */
+        InGameID?: (number|null);
     }
 
     /** Represents a MasterInfo. */
@@ -584,6 +587,9 @@ export namespace login {
 
         /** MasterInfo Tasks. */
         public Tasks?: (login.ITaskList|null);
+
+        /** MasterInfo InGameID. */
+        public InGameID: number;
 
         /**
          * Creates a new MasterInfo instance using the specified properties.
