@@ -223,6 +223,7 @@ export default class zjhUI extends BaseComponent {
         }
 
         this.m_ui.chipLayer.removeAllChildren();
+        this.m_ui.zhuang.active = false;
     }
 
     //开始游戏: 播发牌动画
@@ -234,7 +235,7 @@ export default class zjhUI extends BaseComponent {
 
         this.m_ui.chipLayer.removeAllChildren();
 
-        UIManager.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
+        Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk);
             }

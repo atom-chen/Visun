@@ -23,6 +23,7 @@ import { isEmpty, isNil, newHandler } from "../../../../../kernel/utils/GlobalFu
 import { baccarat } from "../../../../../../declares/baccarat";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
+import Preloader from "../../../../../kernel/utils/Preloader";
 
 const AREA_XIAN        = 0 //闲家
 const AREA_PING        = 1 //平家
@@ -211,7 +212,7 @@ export default class UIbjle extends BaseComponent {
 
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-			UIManager.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
 				on_complete: (sk, trackEntry)=>{
 					CommonUtil.safeDelete(sk);
 				}

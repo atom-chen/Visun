@@ -16,6 +16,7 @@ import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 import { landLords } from "../../../../../../declares/landLords";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import Preloader from "../../../../../kernel/utils/Preloader";
 
 const MAX_SOLDIER = 3;
 
@@ -292,7 +293,7 @@ export default class DdzUI extends BaseComponent {
             var idx = this.playerIndex(DDzMgr.getInstance().getPlayer(p.UserID));
             this.m_ui["player"+idx].getComponent(CpnPlayer1).addMoney(p.GetGold);
             if(p.GetGold > 0) {
-                UIManager.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1, y:19}, null);
+                Preloader.showSpineAsync("common/spines/headflower/ky_lhd_js", 0, "1", 3, this._players[idx].node, {scale:1.1, y:19}, null);
             }
         }
     }

@@ -76,7 +76,7 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.traverseNodes(bton, tbl);
 		Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);
 		// if(cfg.spine) {
-		// 	UIManager.showSpineAsync(cfg.spine, 0, "animation", -1, bton, {zIndex:10, x:0, y:-150, scale:0.4});
+		// 	Preloader.showSpineAsync(cfg.spine, 0, "animation", -1, bton, {zIndex:10, x:0, y:-150, scale:0.4});
 		// }
 	}
 
