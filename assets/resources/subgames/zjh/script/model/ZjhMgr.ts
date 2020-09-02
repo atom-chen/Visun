@@ -55,15 +55,6 @@ export default class ZjhMgr extends ModelBase {
 		return this._players[uid];
     }
 
-    getSeatPlayer(seatId:number) : zhajinhua.IZhajinhuaPlayer {
-        for(var uid in this._players) {
-            if(!isNil(this._players[uid]) && this._players[uid].SeatId == seatId) {
-                return this._players[uid];
-            }
-        }
-        return null;
-    }
-
     getPlayerList() : {[key:number]:zhajinhua.IZhajinhuaPlayer} {
         return this._players;
     }

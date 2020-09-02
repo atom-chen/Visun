@@ -23,6 +23,7 @@ import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
+import CpnShandian from "../../../../appqp/script/comps/CpnShandian";
 
 
 const MAX_SOLDIER = 5;
@@ -50,6 +51,7 @@ export default class zjhUI extends BaseComponent {
 
     private _tmrState = 0;
     private _zhuangPos = null;
+    private _bipaiTarget = -1;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -78,7 +80,7 @@ export default class zjhUI extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
-        //ZjhServer.getInstance().run();
+        ZjhServer.getInstance().run();
     }
 
     //玩家的UI位置
@@ -166,8 +168,20 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
+    getSeatPlayer(idx:number) : zhajinhua.IZhajinhuaPlayer {
+        var mans = ZjhMgr.getInstance().getPlayerList();
+        if(mans) {
+            for(var uid in mans) {
+                if(this.playerIndex(mans[uid]) == idx) {
+                    return mans[uid];
+                }
+            }
+        }
+        return null;
+    }
+
     refreshSeat(idx:number) {
-        var man = ZjhMgr.getInstance().getSeatPlayer(idx);
+        var man = this.getSeatPlayer(idx);
         if(isNil(man)) {
             this._pnodes[idx].active = false;
             return;
@@ -460,7 +474,12 @@ export default class zjhUI extends BaseComponent {
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 
-            zhajinhua_request.ZhajinhuaCompareReq({HitId:0});
+            if(this._bipaiTarget < 0) {
+                UIManager.toast("请选择比牌对象");
+                return;
+            }
+            zhajinhua_request.ZhajinhuaCompareReq({HitId:this._bipaiTarget});
+            this.selectBipaiTarget(-1);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){
@@ -472,6 +491,36 @@ export default class zjhUI extends BaseComponent {
                 GameID : GameManager.getInstance().getGameId()
             });
         }, this);
+
+        CommonUtil.addClickEvent(this.m_ui.p0.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(0); }, this);
+        CommonUtil.addClickEvent(this.m_ui.p1.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(1); }, this);
+        CommonUtil.addClickEvent(this.m_ui.p2.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(2); }, this);
+        CommonUtil.addClickEvent(this.m_ui.p3.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(3); }, this);
+        CommonUtil.addClickEvent(this.m_ui.p4.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(4); }, this);
     }
     
+    selectBipaiTarget(idx:number) {
+        this._bipaiTarget = -1;
+        var man:zhajinhua.IZhajinhuaPlayer = null;
+        if(idx >= 0) {
+            man = this.getSeatPlayer(idx);
+            if(!isNil(man)) {
+                this._bipaiTarget = man.UserId;
+            }
+        }
+        
+        this.m_ui.shandian.active = this._bipaiTarget >= 0;
+
+        if(this._bipaiTarget > 0) {
+            var id1 = LoginUser.getInstance().UserId;
+            var id2 = man.UserId;
+            var idx1 = this.playerIdx(id1);
+            var idx2 = this.playerIdx(id2);
+            if(idx1 >= 0 && idx2 >= 0) {
+                var nd1 = this._pnodes[idx1];
+                var nd2 = this._pnodes[idx2];
+                this.m_ui.shandian.getComponent(CpnShandian).setLighting(nd1.x, nd1.y, nd2.x, nd2.y, 150);
+            }
+        }
+    }
 }
