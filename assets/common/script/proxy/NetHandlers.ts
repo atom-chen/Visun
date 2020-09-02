@@ -30,6 +30,10 @@ var NetHandlers = {
         GameManager.getInstance().pullAll();
 
         EventCenter.getInstance().fire(EventDefine.reconn_succ);
+
+        if(param.InGameID && param.InGameID > 0) {
+            GameManager.getInstance().enterGame(param.InGameID);
+        }
     },
 
     [login_msgs.ResultResp] : function(param: login.ResultResp) {
@@ -56,6 +60,10 @@ var NetHandlers = {
         GameManager.getInstance().pullAll();
 
         UIManager.toast("登陆成功");
+
+        if(param.InGameID && param.InGameID > 0) {
+            GameManager.getInstance().enterGame(param.InGameID);
+        }
     },
 
     [login_msgs.EnterRoomResp] : function(param:login.IEnterRoomResp) {
