@@ -18,7 +18,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import ZjhHandlers from "../model/ZjhHandlers";
-import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
@@ -215,7 +215,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
 
-        this.m_ui.btn_ready.active = true;
+        this.m_ui.readyNode.active = true;
 
         this.m_ui.zhuang.stopAllActions();
         this.m_ui.zhuang.position = this._zhuangPos;
@@ -239,7 +239,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
 
-        this.m_ui.btn_ready.active = false;
+        this.m_ui.readyNode.active = false;
 
         this.m_ui.chipLayer.removeAllChildren();
 
@@ -288,7 +288,7 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStatePlayingResp(param:zhajinhua.IZhajinhuaStatePlayingResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
         this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserId;
-        this.m_ui.btn_ready.active = false;
+        this.m_ui.readyNode.active = false;
 
         var idx = this.playerIdx(param.UserID);
         for(var i=0; i<MAX_SOLDIER; i++) {
@@ -299,7 +299,7 @@ export default class zjhUI extends BaseComponent {
 
     //战斗阶段-比牌
     ZhajinhuaStateCompareResp(param:zhajinhua.IZhajinhuaStateCompareResp) {
-        this.m_ui.btn_ready.active = false;
+        this.m_ui.readyNode.active = false;
         if(param.Info) {
             this.ZhajinhuaCompareResp(param.Info);
         }
@@ -309,7 +309,7 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateOverResp(param:zhajinhua.IZhajinhuaStateOverResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
         this.m_ui.opLayer.active = false;
-        this.m_ui.btn_ready.active = false;
+        this.m_ui.readyNode.active = false;
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._cdCpns[i].setRunning(false);
             this._cdCpns[i].node.active = false;
@@ -410,7 +410,7 @@ export default class zjhUI extends BaseComponent {
 
     ZhajinhuaReadyResp(param:zhajinhua.IZhajinhuaReadyResp) {
         if(param.UserId == LoginUser.getInstance().UserId) {
-            this.m_ui.btn_ready.active = false;
+            this.m_ui.readyNode.active = false;
         }
     }
 
@@ -465,6 +465,12 @@ export default class zjhUI extends BaseComponent {
         
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){
             zhajinhua_request.ZhajinhuaReadyReq({IsReady:true});
+        }, this);
+
+        CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
+            gamecomm_request.ChangeTableReq({
+                GameID : GameManager.getInstance().getGameId()
+            });
         }, this);
     }
     
