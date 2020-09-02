@@ -66,7 +66,7 @@ var ZjhHandlers = {
 		var mans = ZjhMgr.getInstance().getPlayerList();
 		if(mans) {
 			for(var uid in mans) {
-				mans[uid].SeatState = ZjhFightState.readyed;
+				mans[uid].SeatState = ZjhFightState.fighting;
 				mans[uid].IsSee = false;
 			}
 		}
@@ -77,7 +77,12 @@ var ZjhHandlers = {
 	},
 
 	[zhajinhua_msgs.ZhajinhuaStateOverResp] : function(param) {
-		
+		var mans = ZjhMgr.getInstance().getPlayerList();
+		if(mans) {
+			for(var uid in mans) {
+				mans[uid].SeatState = ZjhFightState.fightover;
+			}
+		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaHostResp] : function(param:zhajinhua.IZhajinhuaHostResp) {

@@ -437,6 +437,10 @@ export default class zjhUI extends BaseComponent {
         if(param.UserId == LoginUser.getInstance().UserId) {
             this.m_ui.readyNode.active = false;
         }
+        var idx = this.playerIdx(param.UserId);
+        if(idx >= 0) {
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = true;
+        }
     }
 
     EnterGameResp(param:gamecomm.IEnterGameResp) {

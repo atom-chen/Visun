@@ -6,5 +6,7 @@ export enum ZjhFightState {
 	jiazhu,
 	qipai,
 	bipaishu,
-	standby
+	standby,
+	fighting = 100,
+	fightover = 101,
 }
