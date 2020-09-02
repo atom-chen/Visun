@@ -80,6 +80,9 @@ export default class zjhUI extends BaseComponent {
         this.ZhajinhuaSceneResp(ZjhMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
+        //预加载
+        cc.loader.loadRes(ViewDefine.UIpk, cc.Prefab)
+
         //for test
      //   ZjhServer.getInstance().run();
     }
