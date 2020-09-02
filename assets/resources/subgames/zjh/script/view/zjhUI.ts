@@ -437,6 +437,34 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
+    EnterGameResp(param:gamecomm.IEnterGameResp) {
+        if(param.GameID != GameManager.getInstance().getGameId()) {
+			return;
+		}
+		var info:gamecomm.IPlayerInfo = param.UserInfo;
+		var man:zhajinhua.IZhajinhuaPlayer = {};
+		man.UserId = info.UserID;
+		man.Gold = info.Gold;
+		man.Name = info.Name;
+		man.SeatId = info.ChairID;
+		man.SeatState = info.Sate;
+        ZjhMgr.getInstance().addPlayer(man);
+        
+        var idx = this.playerIdx(info.UserID);
+        this.refreshSeat(idx);
+    }
+
+    ExitGameResp(param:gamecomm.IExitGameResp) {
+        if(param.GameID == GameManager.getInstance().getGameId()) {
+			return;
+		}
+        ZjhMgr.getInstance().removePlayer(param.UserID);
+        var idx = this.playerIdx(param.UserID);
+        if(idx >= 0) {
+            this._pnodes[idx].active = false;
+        }
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaSceneResp, this.ZhajinhuaSceneResp, this);
@@ -455,7 +483,8 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.PlayerListInfo, this.resetFighters, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.resetFighters, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.resetFighters, this);
     }
 
     initUIEvent() {

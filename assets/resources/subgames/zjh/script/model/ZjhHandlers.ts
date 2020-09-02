@@ -4,21 +4,44 @@ import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import { ZjhFightState } from "./ZjhDefine";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
+import { login_msgs } from "../../../../../common/script/proto/net_login";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 var ZjhHandlers = {
 
-	[gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
-		ZjhMgr.getInstance().clearPlayers();
-		for(var i in param.AllInfos) {
-			var info:gamecomm.IPlayerInfo = param.AllInfos[i];
-			var man:zhajinhua.IZhajinhuaPlayer = {};
-			man.UserId = info.UserID;
-			man.Gold = info.Gold;
-			man.Name = info.Name;
-			man.SeatId = info.ChairID;
-			man.SeatState = info.Sate;
-			ZjhMgr.getInstance().addPlayer(man);
+	// [gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
+	// 	ZjhMgr.getInstance().clearPlayers();
+	// 	for(var i in param.AllInfos) {
+	// 		var info:gamecomm.IPlayerInfo = param.AllInfos[i];
+	// 		var man:zhajinhua.IZhajinhuaPlayer = {};
+	// 		man.UserId = info.UserID;
+	// 		man.Gold = info.Gold;
+	// 		man.Name = info.Name;
+	// 		man.SeatId = info.ChairID;
+	// 		man.SeatState = info.Sate;
+	// 		ZjhMgr.getInstance().addPlayer(man);
+	// 	}
+	// },
+
+	[gamecomm_msgs.EnterGameResp] : function(param:gamecomm.EnterGameResp) {
+		if(param.GameID != GameManager.getInstance().getGameId()) {
+			return;
 		}
+		var info:gamecomm.IPlayerInfo = param.UserInfo;
+		var man:zhajinhua.IZhajinhuaPlayer = {};
+		man.UserId = info.UserID;
+		man.Gold = info.Gold;
+		man.Name = info.Name;
+		man.SeatId = info.ChairID;
+		man.SeatState = info.Sate;
+		ZjhMgr.getInstance().addPlayer(man);
+	},
+
+	[gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
+		if(param.GameID == GameManager.getInstance().getGameId()) {
+			return;
+		}
+		ZjhMgr.getInstance().removePlayer(param.UserID);
 	},
 
 	[zhajinhua_msgs.ZhajinhuaAddPlayerResp] : function(param:zhajinhua.IZhajinhuaAddPlayerResp) {
