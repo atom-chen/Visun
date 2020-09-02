@@ -14,7 +14,7 @@ message ZhajinhuaPlayer {
   int64 RecentScore = 7;  // 最新下注金额
   int64 TotalScore = 8;   // 总共下注了多少
   CardInfo Cards = 9;     // 看牌时和游戏结束时亮自己的牌时才有数据
-   string Inning = 10;    // 牌局号
+
 
 }
 
@@ -34,7 +34,8 @@ message ZhajinhuaSceneResp {
   int64 TotalScore = 2;                 //当前总下注额
   uint64 MinScore = 3;                  //当前注额
   uint64 Banker = 4;                    //当前庄家
-  repeated ZhajinhuaPlayer Fighters = 5;//参战玩家序列
+  string Inning = 5;                    // 牌局号
+  repeated ZhajinhuaPlayer Fighters = 6;//参战玩家序列
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算

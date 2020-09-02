@@ -31,9 +31,6 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards */
         Cards?: (gamecomm.ICardInfo|null);
-
-        /** ZhajinhuaPlayer Inning */
-        Inning?: (string|null);
     }
 
     /** Represents a ZhajinhuaPlayer. */
@@ -71,9 +68,6 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards. */
         public Cards?: (gamecomm.ICardInfo|null);
-
-        /** ZhajinhuaPlayer Inning. */
-        public Inning: string;
 
         /**
          * Creates a new ZhajinhuaPlayer instance using the specified properties.
@@ -341,6 +335,9 @@ export namespace zhajinhua {
         /** ZhajinhuaSceneResp Banker */
         Banker?: (number|Long|null);
 
+        /** ZhajinhuaSceneResp Inning */
+        Inning?: (string|null);
+
         /** ZhajinhuaSceneResp Fighters */
         Fighters?: (zhajinhua.IZhajinhuaPlayer[]|null);
     }
@@ -365,6 +362,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp Banker. */
         public Banker: (number|Long);
+
+        /** ZhajinhuaSceneResp Inning. */
+        public Inning: string;
 
         /** ZhajinhuaSceneResp Fighters. */
         public Fighters: zhajinhua.IZhajinhuaPlayer[];
