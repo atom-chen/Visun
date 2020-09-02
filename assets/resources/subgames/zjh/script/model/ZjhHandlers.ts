@@ -56,7 +56,7 @@ var ZjhHandlers = {
 		var mans = ZjhMgr.getInstance().getPlayerList();
 		if(mans) {
 			for(var uid in mans) {
-				mans[uid].SeatState = ZjhFightState.idle;
+			//	mans[uid].SeatState = ZjhFightState.idle;
 				mans[uid].IsSee = false;
 			}
 		}
