@@ -122,28 +122,56 @@ export default class zjhUI extends BaseComponent {
 
     private resetFighters() {
         for(var n=0; n<MAX_SOLDIER; n++) {
-            this._pnodes[n].active = false;
-        }
-        var mans = ZjhMgr.getInstance().getPlayerList();
-        for(var uid in mans) {
-            var idx = this.playerIndex(mans[uid]);
-            if(idx >= 0) {
-                this._pnodes[idx].active = true;
-                this._playerCpns[idx].setName(mans[uid].Name);
-                this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(mans[uid].Gold));
-                this._pnodes[idx].getChildByName("ust_kanpai").active = mans[uid].IsSee == true;
-            }
+            this.refreshSeat(n);
         }
     }
 
-    ZhajinhuaAddPlayerResp(param:zhajinhua.IZhajinhuaAddPlayerResp) {
-        var idx = this.playerIdx(param.Player.UserId);
+    private refreshFighter(uid) {
+        var man = ZjhMgr.getInstance().getPlayer(uid);
+        var idx = this.playerIdx(uid);
         if(idx >= 0) {
             this._pnodes[idx].active = true;
-            this._playerCpns[idx].setName(param.Player.Name);
-            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Player.Gold));
-            this._pnodes[idx].getChildByName("ust_kanpai").active = param.Player.IsSee == true;
+            this._playerCpns[idx].setName(man.Name);
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(man.Gold));
+            this._playerCpns[idx].setHeadImg(man["FaceID"]);
+            this._pnodes[idx].getChildByName("ust_kanpai").active = man.IsSee == true;
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.SeatState == ZjhFightState.readyed;
+            if(man.SeatState == ZjhFightState.genzhu) {
+                this._stateCpns[idx].genzhu();
+            }
+            else if(man.SeatState == ZjhFightState.jiazhu) {
+                this._stateCpns[idx].jiazhu();
+            }
+            else if(man.SeatState == ZjhFightState.qipai) {
+                this._stateCpns[idx].qipai();
+            }
+            else if(man.SeatState == ZjhFightState.bipaishu) {
+                this._stateCpns[idx].bipaishu();
+            }
+            else {
+                this._stateCpns[idx].idle();
+                this._pnodes[idx].getChildByName("ust_yizhunbei").active = false;
+            }
+            if(man.IsSee == true) {
+                this._handors[idx].resetCards(man.Cards.Cards);
+                this._handors[idx].playOpen();
+            }
+            CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(man.SeatState));
+            this._playerCpns[idx].setLabGray(this.isLoseFightState(man.SeatState));
         }
+    }
+
+    refreshSeat(idx:number) {
+        var man = ZjhMgr.getInstance().getSeatPlayer(idx);
+        if(isNil(man)) {
+            this._pnodes[idx].active = false;
+            return;
+        }
+        this.refreshFighter(man.UserId);
+    }
+
+    ZhajinhuaAddPlayerResp(param:zhajinhua.IZhajinhuaAddPlayerResp) {
+        this.refreshFighter(param.Player.UserId);
     }
 
     ZhajinhuaDelPlayerResp(param:zhajinhua.IZhajinhuaDelPlayerResp) {
@@ -168,38 +196,7 @@ export default class zjhUI extends BaseComponent {
         }
 
         for(var n=0; n<MAX_SOLDIER; n++) {
-            this._pnodes[n].active = false;
-        }
-        if(param.Fighters) {
-            for(var i in param.Fighters) {
-                var cur = param.Fighters[i];
-                var idx = this.playerIndex(cur);
-                this._pnodes[idx].active = true;
-                this._playerCpns[idx].setName(cur.Name);
-                this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(cur.Gold));
-                this._pnodes[idx].getChildByName("ust_kanpai").active = cur.IsSee == true;
-                CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(cur.SeatState));
-                this._playerCpns[idx].setLabGray(this.isLoseFightState(cur.SeatState));
-                if(cur.SeatState == ZjhFightState.genzhu) {
-                    this._stateCpns[idx].genzhu();
-                }
-                else if(cur.SeatState == ZjhFightState.jiazhu) {
-                    this._stateCpns[idx].jiazhu();
-                }
-                else if(cur.SeatState == ZjhFightState.qipai) {
-                    this._stateCpns[idx].qipai();
-                }
-                else if(cur.SeatState == ZjhFightState.bipaishu) {
-                    this._stateCpns[idx].bipaishu();
-                }
-                else {
-                    this._stateCpns[idx].idle();
-                }
-            }
-        }
-        var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
-        if(hero) {
-            this._handors[0].resetCards(hero.Cards && hero.Cards.Cards || null);
+            this.refreshSeat(n);
         }
     }
 
@@ -218,6 +215,7 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
+            this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
             CommonUtil.grayNode(this._pnodes[i], false);
             this._playerCpns[i].setLabGray(false);
         }
@@ -302,6 +300,10 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
         this.m_ui.opLayer.active = false;
         this.m_ui.btn_ready.active = false;
+        for(var i=0; i<MAX_SOLDIER; i++) {
+            this._cdCpns[i].setRunning(false);
+            this._cdCpns[i].node.active = false;
+        }
     }
 
     //结算数据

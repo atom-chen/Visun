@@ -2,8 +2,24 @@ import { zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua
 import ZjhMgr from "./ZjhMgr";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import { ZjhFightState } from "./ZjhDefine";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../../declares/gamecomm";
 
 var ZjhHandlers = {
+
+	[gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
+		ZjhMgr.getInstance().clearPlayers();
+		for(var i in param.AllInfos) {
+			var info:gamecomm.IPlayerInfo = param.AllInfos[i];
+			var man:zhajinhua.IZhajinhuaPlayer = {};
+			man.UserId = info.UserID;
+			man.Gold = info.Gold;
+			man.Name = info.Name;
+			man.SeatId = info.ChairID;
+			man.SeatState = info.Sate;
+			ZjhMgr.getInstance().addPlayer(man);
+		}
+	},
 
 	[zhajinhua_msgs.ZhajinhuaAddPlayerResp] : function(param:zhajinhua.IZhajinhuaAddPlayerResp) {
 		ZjhMgr.getInstance().addPlayer(param.Player);

@@ -41,11 +41,6 @@ var GameHandlers = {
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
         }
     },
-
-	[gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
-        DDzMgr.getInstance().updateFighterList(param && param.AllInfos);
-    },
-
 	
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
         BjleMgr.getInstance().setEnterData(param);

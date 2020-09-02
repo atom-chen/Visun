@@ -1,5 +1,7 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 
 export default class ZjhMgr extends ModelBase {
 	private static _instance:ZjhMgr = null;
@@ -37,15 +39,29 @@ export default class ZjhMgr extends ModelBase {
     }
 
     addPlayer(man:zhajinhua.IZhajinhuaPlayer) {
-        this._players[man.UserId] = man;
+        if(isNil(this._players[man.UserId])) {
+            this._players[man.UserId] = man;
+        } else {
+            CommonUtil.simpleCopy(this._players[man.UserId], man);
+        }
     }
 
     removePlayer(uid:number) {
-		this._players[uid] = null;
+        this._players[uid] = null;
+        delete this._players[uid];
 	}
 
 	getPlayer(uid:number) : zhajinhua.IZhajinhuaPlayer {
 		return this._players[uid];
+    }
+
+    getSeatPlayer(seatId:number) : zhajinhua.IZhajinhuaPlayer {
+        for(var uid in this._players) {
+            if(!isNil(this._players[uid]) && this._players[uid].SeatId == seatId) {
+                return this._players[uid];
+            }
+        }
+        return null;
     }
 
     getPlayerList() : {[key:number]:zhajinhua.IZhajinhuaPlayer} {
