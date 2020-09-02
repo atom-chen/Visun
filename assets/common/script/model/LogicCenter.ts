@@ -9,6 +9,9 @@ import ServerConfig from "../definer/ServerConfig";
 import http_rules from "../proto/http_rules";
 import HallRequest from "../proto/HallRequest";
 import HallRespond from "../proxy/HallRespond";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
+import UIManager from "../../../kernel/view/UIManager";
 
 
 //模块管理器
@@ -20,7 +23,11 @@ export default class LogicCenter {
     private constructor() {
         //初始化Http协议
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
-		HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
+        HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
+        
+        EventCenter.getInstance().listen(KernelEvent.SCENE_AFTER_SWITCH, function(){
+            UIManager.onSceneAfterSwitch();
+        }, this);
     }
     
     public static getInstance() : LogicCenter {

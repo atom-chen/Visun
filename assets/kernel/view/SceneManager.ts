@@ -3,6 +3,8 @@ import EventCenter from "../basic/event/EventCenter";
 import KernelEvent from "../basic/defines/KernelEvent";
 import UIManager from "./UIManager";
 import Adaptor from "../adaptor/Adaptor";
+import TimerManager from "../basic/timer/TimerManager";
+import { newHandler } from "../utils/GlobalFuncs";
 
 export default class SceneManager {
 	public static preSceneName:string;
@@ -52,7 +54,9 @@ export default class SceneManager {
 					LoadCenter.getInstance().gc();
 					SceneManager._switching = false;
 					if(onLaunched) { onLaunched(); }
-					EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
+					TimerManager.delayFrame(2, newHandler(function(tmr){
+						EventCenter.getInstance().fire(KernelEvent.SCENE_AFTER_SWITCH);
+					}, this));
 				}
 				cc.director.loadScene(sceneName, afterLaunch.bind(this));
 			}

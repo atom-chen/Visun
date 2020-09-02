@@ -14,6 +14,7 @@ export default class UIManager {
 	private static _allUI = {};  				//面板和弹窗
 	private static _allDialog = {};
 	private static _toastList:any[] = [];
+	private static _waitList = [];
 
 
 
@@ -22,6 +23,15 @@ export default class UIManager {
 		this._toastList = [];
 		this._allDialog = {};
 		this._allUI = {};
+	}
+
+	public static onSceneAfterSwitch() {
+		for(var i in UIManager._waitList) {
+			var info = UIManager._waitList[i];
+			UIManager[info.op].apply(UIManager, info.arglist);
+		}
+		UIManager._waitList.length = 0;
+		UIManager._waitList = [];
 	}
 
 	public static callSetViewData(obj:any, args:any[]){
@@ -67,6 +77,11 @@ export default class UIManager {
 				EventCenter.getInstance().fire(KernelEvent.UI_LOADING_FINISH);
 			}
 
+			return;
+		}
+
+		if(SceneManager.isSwitching()) {
+			UIManager._waitList.push({op:"showSingleton", arglist:[respath, parent, zIndex, bModal, bCloseWhenClickMask, args]});
 			return;
 		}
 
@@ -169,6 +184,11 @@ export default class UIManager {
 	public static openDialog(dlgName:string, content:string, dlgType:number, callback:(menuId:number)=>void, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) {
 		if(cc.isValid(UIManager._allDialog[dlgName])){
 			cc.log("allready exist: ", dlgName);
+			return;
+		}
+
+		if(SceneManager.isSwitching()) {
+			UIManager._waitList.push({op:"openDialog", arglist:[dlgName, content, dlgType, callback, title, okTxt, cancelTxt]});
 			return;
 		}
 		
