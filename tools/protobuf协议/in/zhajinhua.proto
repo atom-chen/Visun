@@ -14,6 +14,7 @@ message ZhajinhuaPlayer {
   int64 RecentScore = 7;  // 最新下注金额
   int64 TotalScore = 8;   // 总共下注了多少
   CardInfo Cards = 9;     // 看牌时和游戏结束时亮自己的牌时才有数据
+   string Inning = 10;    // 牌局号
 
 }
 

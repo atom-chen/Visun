@@ -31,6 +31,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards */
         Cards?: (gamecomm.ICardInfo|null);
+
+        /** ZhajinhuaPlayer Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a ZhajinhuaPlayer. */
@@ -68,6 +71,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards. */
         public Cards?: (gamecomm.ICardInfo|null);
+
+        /** ZhajinhuaPlayer Inning. */
+        public Inning: string;
 
         /**
          * Creates a new ZhajinhuaPlayer instance using the specified properties.
