@@ -23,14 +23,15 @@ export default class UIRoom extends BaseComponent {
     setViewData(items:Array<login.IGameItem>) {
         this.m_lab.lab_roomname.string = items[0].Info.Name;
 
-        for(var i=1; i<=4; i++) {
-            var btn = this.m_ui["button"+i];
+        for(var i=0; i<4; i++) {
+            var idx = i+1;
+            var btn = this.m_ui["button"+idx];
             if(items[i]) {
                 btn["gameData"] = items[i];
                 CommonUtil.addClickEvent(btn, function(){
                     GameManager.getInstance().enterGame(this.gameData.ID);
                 }, btn);
-                this.m_lab["Label"+i].string = ""+items[i].Info.EnterScore;
+                this.m_lab["Label"+idx].string = ""+(items[i].Info.EnterScore/100);
             }
             btn.active = !isNil(items[i]);
         }

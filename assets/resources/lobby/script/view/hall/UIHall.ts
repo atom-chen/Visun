@@ -47,7 +47,7 @@ export default class UIHall extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 	}
 
-	private refleshList() {
+	private refleshGameList() {
 		this.m_ui.content.removeAllChildren();
 
 		var gameList = GameManager.getInstance().gamesByKindId();
@@ -67,7 +67,8 @@ export default class UIHall extends BaseComponent {
 	
 				this.m_ui.content.addChild(bton);
 				this.refreshGameButton(bton, arr[0]);
-			} else {
+			} 
+			else if(arr.length > 1) {
 				bton["gameData"] = arr;
 	
 				CommonUtil.addClickEvent(bton, function(){ 
@@ -80,27 +81,27 @@ export default class UIHall extends BaseComponent {
 		}
 	}
 
-	private refleshGameList() {
-		this.m_ui.content.removeAllChildren();
+	// private refleshGameList() {
+	// 	this.m_ui.content.removeAllChildren();
 
-		var gameList = GameManager.getInstance().getGameList();
-		if(!gameList) { return; }
+	// 	var gameList = GameManager.getInstance().getGameList();
+	// 	if(!gameList) { return; }
 
-		for(var i in gameList) {
-			var info = gameList[i];
+	// 	for(var i in gameList) {
+	// 		var info = gameList[i];
 
-			var bton = cc.instantiate(this.gameBtn);
-			bton["gameData"] = info;
+	// 		var bton = cc.instantiate(this.gameBtn);
+	// 		bton["gameData"] = info;
 
-			CommonUtil.addClickEvent(bton, function(){ 
-				GameManager.getInstance().enterGame(this.gameData.ID);
-			}, bton);
+	// 		CommonUtil.addClickEvent(bton, function(){ 
+	// 			GameManager.getInstance().enterGame(this.gameData.ID);
+	// 		}, bton);
 
-			this.m_ui.content.addChild(bton);
+	// 		this.m_ui.content.addChild(bton);
 
-			this.refreshGameButton(bton, info);
-		}
-	}
+	// 		this.refreshGameButton(bton, info);
+	// 	}
+	// }
 
 	private refreshGameButton(bton, gameData:login.IGameItem) {
 		var cfg = GameConfig[gameData.Info.KindID];
