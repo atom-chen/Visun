@@ -82,6 +82,16 @@ export default class GameManager extends ModelBase {
 		return data;
 	}
 
+	public gamesByKindId() : {[key:number]:Array<login.IGameItem>} {
+		var gameList = this.getGameList();
+		var tbl = {};
+		for(var i in gameList) {
+			tbl[gameList[i].Info.KindID] = tbl[gameList[i].Info.KindID] || [];
+			tbl[gameList[i].Info.KindID].push(gameList[i]);
+		}
+		return tbl;
+	}
+
 
 	//获取子游戏的客户端配置
 	public clientConfig(gameType:string|number) : any{

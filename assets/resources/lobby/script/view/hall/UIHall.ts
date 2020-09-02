@@ -47,6 +47,39 @@ export default class UIHall extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 	}
 
+	private refleshList() {
+		this.m_ui.content.removeAllChildren();
+
+		var gameList = GameManager.getInstance().gamesByKindId();
+		if(!gameList) { return; }
+
+		for(var KindID in gameList) {
+			var arr = gameList[KindID];
+
+			var bton = cc.instantiate(this.gameBtn);
+
+			if(arr.length == 1) {
+				bton["gameData"] = arr[0];
+	
+				CommonUtil.addClickEvent(bton, function(){ 
+					GameManager.getInstance().enterGame(this.gameData.ID);
+				}, bton);
+	
+				this.m_ui.content.addChild(bton);
+				this.refreshGameButton(bton, arr[0]);
+			} else {
+				bton["gameData"] = arr;
+	
+				CommonUtil.addClickEvent(bton, function(){ 
+					UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData)
+				}, bton);
+	
+				this.m_ui.content.addChild(bton);
+				this.refreshGameButton(bton, arr[0]);
+			}
+		}
+	}
+
 	private refleshGameList() {
 		this.m_ui.content.removeAllChildren();
 
@@ -69,7 +102,7 @@ export default class UIHall extends BaseComponent {
 		}
 	}
 
-	private refreshGameButton(bton, gameData) {
+	private refreshGameButton(bton, gameData:login.IGameItem) {
 		var cfg = GameConfig[gameData.Info.KindID];
 		if(!cfg) { return; }
 		var tbl : any = {};

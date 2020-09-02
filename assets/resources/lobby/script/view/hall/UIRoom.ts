@@ -4,13 +4,12 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import GameConfig from "../../../../../common/script/definer/GameConfig";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
+import { login } from "../../../../../../declares/login";
 
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIRoom extends BaseComponent {
-    private roomList = null;
-    private _gameKind = 0;
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -19,42 +18,24 @@ export default class UIRoom extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
             CommonUtil.safeDelete(this);
         }, this);
-
-        this.runEnterAni();
     }
 
-    setViewData(gameKind:any) {
-        this._gameKind = gameKind;
-        this.m_lab.lab_roomname.string = GameConfig[gameKind].name;
-        cc.log("UIRoom: ", gameKind);
-    //    configure_request.RoomListReq({GameKind:gameKind});
-        this.initRoomBtns();
-    }
+    setViewData(items:Array<login.IGameItem>) {
+        this.m_lab.lab_roomname.string = items[0].Info.Name;
 
-    private initRoomBtns(){
-        var gameId = this._gameKind;
         for(var i=1; i<=4; i++) {
             var btn = this.m_ui["button"+i];
-            btn["roomInfo"] = this.roomList && this.roomList[i-1];
-            CommonUtil.addClickEvent(btn, function(){
-                if(isNil(this.roomInfo)) {
-                    UIManager.toast("数据刷新中，请稍后重试");
-                    return;
-                }
-                GameManager.getInstance().enterGame(this.roomInfo.GameKind);
-            }, btn)
-        }
-    }
-
-    private onRoomListResp(param) {
-        var rooms = GameManager.getInstance().getRoomList(this._gameKind);
-        if(rooms!==null && rooms!==undefined){
-            this.roomList = rooms;
-            for(var i=1; i<=4; i++){
-                this.m_lab["Label"+i].string = rooms[i-1] && rooms[i-1].GameType;
+            if(items[i]) {
+                btn["gameData"] = items[i];
+                CommonUtil.addClickEvent(btn, function(){
+                    GameManager.getInstance().enterGame(this.gameData.ID);
+                }, btn);
+                this.m_lab["Label"+i].string = ""+items[i].Info.EnterScore;
             }
-            this.initRoomBtns();
+            btn.active = !isNil(items[i]);
         }
+
+        this.runEnterAni();
     }
 
     runEnterAni() {
