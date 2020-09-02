@@ -565,9 +565,6 @@ export namespace login {
 
         /** MasterInfo Tasks */
         Tasks?: (login.ITaskList|null);
-
-        /** MasterInfo InGameID */
-        InGameID?: (number|null);
     }
 
     /** Represents a MasterInfo. */
@@ -587,9 +584,6 @@ export namespace login {
 
         /** MasterInfo Tasks. */
         public Tasks?: (login.ITaskList|null);
-
-        /** MasterInfo InGameID. */
-        public InGameID: number;
 
         /**
          * Creates a new MasterInfo instance using the specified properties.
@@ -1321,6 +1315,9 @@ export namespace login {
 
         /** LoginResp MainInfo */
         MainInfo?: (login.IMasterInfo|null);
+
+        /** LoginResp InGameID */
+        InGameID?: (number|null);
     }
 
     /** Represents a LoginResp. */
@@ -1334,6 +1331,9 @@ export namespace login {
 
         /** LoginResp MainInfo. */
         public MainInfo?: (login.IMasterInfo|null);
+
+        /** LoginResp InGameID. */
+        public InGameID: number;
 
         /**
          * Creates a new LoginResp instance using the specified properties.
@@ -1609,6 +1609,9 @@ export namespace login {
 
         /** ReconnectResp MainInfo */
         MainInfo?: (login.IMasterInfo|null);
+
+        /** ReconnectResp InGameID */
+        InGameID?: (number|null);
     }
 
     /** Represents a ReconnectResp. */
@@ -1622,6 +1625,9 @@ export namespace login {
 
         /** ReconnectResp MainInfo. */
         public MainInfo?: (login.IMasterInfo|null);
+
+        /** ReconnectResp InGameID. */
+        public InGameID: number;
 
         /**
          * Creates a new ReconnectResp instance using the specified properties.
