@@ -296,12 +296,12 @@ export default class UIbjle extends BaseComponent {
 				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
 				this.playFly(nums, fromPos, toPos);
 			}
-			if(param.PlayerAcquire > 0) {
-				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
-				this.playFly(nums, fromPos, toPos);
-			}
+			// if(param.PlayerAcquire > 0) {
+			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
+			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
+			// 	this.playFly(nums, fromPos, toPos);
+			// }
 		}, this));
 	}
 	private playFly(nums, fromPos, toPos) {

@@ -18,7 +18,17 @@ var NetHandlers = {
         }
     },
 
-    [login_msgs.ReconnectResp] : function(param) {
+    [login_msgs.ReconnectResp] : function(param:login.IReconnectResp) {
+        LogicCenter.getInstance().clear();
+        LogicCenter.getInstance().init();
+
+        LoginUser.getInstance().UserId = param.MainInfo.UserInfo.UserID;
+        CommonUtil.simpleCopy(LoginUser.getInstance(), param.MainInfo.UserInfo);
+
+        GameManager.getInstance().setRoomsInfo(param.MainInfo.RoomsInfo);
+
+        GameManager.getInstance().pullAll();
+
         EventCenter.getInstance().fire(EventDefine.reconn_succ);
     },
 
