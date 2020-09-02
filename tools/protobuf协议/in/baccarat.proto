@@ -36,8 +36,6 @@ message BaccaratStateOverResp {
 }
 
 
-
-
 //游戏消息
 //抢庄
 message BaccaratHostReq {
@@ -79,21 +77,18 @@ message BaccaratOpenResp{
 
 //结算
 message BaccaratCheckoutResp{
-  int64 MyAcquire = 1;    //获得金币(结算)
-  int64 BankerAcquire = 2;    //庄 获得金币
-  int64 PlayerAcquire = 3;    //闲 获得金币
-  int64 DrawAcquire = 4;      //和 获得金币
+  int64 MyAcquire = 1;        //获得金币(结算)
+  repeated int64 Acquires = 2;//
 }
-
-
-
-//比赛
-//旁观者扔鸡蛋
-//下注者掐小妞
-//赢了抱金鸡、金猪
-//局中下注，局外吆喝，局前预热。 局中局玩法
-
-
+// 下注区域
+//    AREA_XIAN        = 0 //闲家
+//    AREA_PING        = 1 //平家
+//    AREA_ZHUANG      = 2 //庄家
+//    AREA_XIAN_TIAN   = 3 //闲天王
+//    AREA_ZHUANG_TIAN = 4 //庄天王
+//    AREA_TONG_DUI    = 5 //同点平
+//    AREA_XIAN_DUI    = 6 //闲对子
+//    AREA_ZHUANG_DUI  = 7 //庄对子
 //游戏规则:
 //使用3～8副，每副52张纸牌，洗在一起，置於发牌盒中，由荷官从其中分发。
 //各家力争手中有两三张牌总点数为9或接近9，K、Q、J和10都计为0，其他牌按牌面计点。

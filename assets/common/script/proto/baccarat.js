@@ -1473,6 +1473,7 @@ $root.baccarat = (function() {
     baccarat.BaccaratCheckoutResp = (function() {
 
         function BaccaratCheckoutResp(properties) {
+            this.Acquires = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1480,9 +1481,7 @@ $root.baccarat = (function() {
         }
 
         BaccaratCheckoutResp.prototype.MyAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        BaccaratCheckoutResp.prototype.BankerAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        BaccaratCheckoutResp.prototype.PlayerAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        BaccaratCheckoutResp.prototype.DrawAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BaccaratCheckoutResp.prototype.Acquires = $util.emptyArray;
 
         BaccaratCheckoutResp.create = function create(properties) {
             return new BaccaratCheckoutResp(properties);
@@ -1493,12 +1492,12 @@ $root.baccarat = (function() {
                 writer = $Writer.create();
             if (message.MyAcquire != null && Object.hasOwnProperty.call(message, "MyAcquire"))
                 writer.uint32(8).int64(message.MyAcquire);
-            if (message.BankerAcquire != null && Object.hasOwnProperty.call(message, "BankerAcquire"))
-                writer.uint32(16).int64(message.BankerAcquire);
-            if (message.PlayerAcquire != null && Object.hasOwnProperty.call(message, "PlayerAcquire"))
-                writer.uint32(24).int64(message.PlayerAcquire);
-            if (message.DrawAcquire != null && Object.hasOwnProperty.call(message, "DrawAcquire"))
-                writer.uint32(32).int64(message.DrawAcquire);
+            if (message.Acquires != null && message.Acquires.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.Acquires.length; ++i)
+                    writer.int64(message.Acquires[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -1517,13 +1516,14 @@ $root.baccarat = (function() {
                     message.MyAcquire = reader.int64();
                     break;
                 case 2:
-                    message.BankerAcquire = reader.int64();
-                    break;
-                case 3:
-                    message.PlayerAcquire = reader.int64();
-                    break;
-                case 4:
-                    message.DrawAcquire = reader.int64();
+                    if (!(message.Acquires && message.Acquires.length))
+                        message.Acquires = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.Acquires.push(reader.int64());
+                    } else
+                        message.Acquires.push(reader.int64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1545,15 +1545,13 @@ $root.baccarat = (function() {
             if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
                 if (!$util.isInteger(message.MyAcquire) && !(message.MyAcquire && $util.isInteger(message.MyAcquire.low) && $util.isInteger(message.MyAcquire.high)))
                     return "MyAcquire: integer|Long expected";
-            if (message.BankerAcquire != null && message.hasOwnProperty("BankerAcquire"))
-                if (!$util.isInteger(message.BankerAcquire) && !(message.BankerAcquire && $util.isInteger(message.BankerAcquire.low) && $util.isInteger(message.BankerAcquire.high)))
-                    return "BankerAcquire: integer|Long expected";
-            if (message.PlayerAcquire != null && message.hasOwnProperty("PlayerAcquire"))
-                if (!$util.isInteger(message.PlayerAcquire) && !(message.PlayerAcquire && $util.isInteger(message.PlayerAcquire.low) && $util.isInteger(message.PlayerAcquire.high)))
-                    return "PlayerAcquire: integer|Long expected";
-            if (message.DrawAcquire != null && message.hasOwnProperty("DrawAcquire"))
-                if (!$util.isInteger(message.DrawAcquire) && !(message.DrawAcquire && $util.isInteger(message.DrawAcquire.low) && $util.isInteger(message.DrawAcquire.high)))
-                    return "DrawAcquire: integer|Long expected";
+            if (message.Acquires != null && message.hasOwnProperty("Acquires")) {
+                if (!Array.isArray(message.Acquires))
+                    return "Acquires: array expected";
+                for (var i = 0; i < message.Acquires.length; ++i)
+                    if (!$util.isInteger(message.Acquires[i]) && !(message.Acquires[i] && $util.isInteger(message.Acquires[i].low) && $util.isInteger(message.Acquires[i].high)))
+                        return "Acquires: integer|Long[] expected";
+            }
             return null;
         };
 
@@ -1570,33 +1568,20 @@ $root.baccarat = (function() {
                     message.MyAcquire = object.MyAcquire;
                 else if (typeof object.MyAcquire === "object")
                     message.MyAcquire = new $util.LongBits(object.MyAcquire.low >>> 0, object.MyAcquire.high >>> 0).toNumber();
-            if (object.BankerAcquire != null)
-                if ($util.Long)
-                    (message.BankerAcquire = $util.Long.fromValue(object.BankerAcquire)).unsigned = false;
-                else if (typeof object.BankerAcquire === "string")
-                    message.BankerAcquire = parseInt(object.BankerAcquire, 10);
-                else if (typeof object.BankerAcquire === "number")
-                    message.BankerAcquire = object.BankerAcquire;
-                else if (typeof object.BankerAcquire === "object")
-                    message.BankerAcquire = new $util.LongBits(object.BankerAcquire.low >>> 0, object.BankerAcquire.high >>> 0).toNumber();
-            if (object.PlayerAcquire != null)
-                if ($util.Long)
-                    (message.PlayerAcquire = $util.Long.fromValue(object.PlayerAcquire)).unsigned = false;
-                else if (typeof object.PlayerAcquire === "string")
-                    message.PlayerAcquire = parseInt(object.PlayerAcquire, 10);
-                else if (typeof object.PlayerAcquire === "number")
-                    message.PlayerAcquire = object.PlayerAcquire;
-                else if (typeof object.PlayerAcquire === "object")
-                    message.PlayerAcquire = new $util.LongBits(object.PlayerAcquire.low >>> 0, object.PlayerAcquire.high >>> 0).toNumber();
-            if (object.DrawAcquire != null)
-                if ($util.Long)
-                    (message.DrawAcquire = $util.Long.fromValue(object.DrawAcquire)).unsigned = false;
-                else if (typeof object.DrawAcquire === "string")
-                    message.DrawAcquire = parseInt(object.DrawAcquire, 10);
-                else if (typeof object.DrawAcquire === "number")
-                    message.DrawAcquire = object.DrawAcquire;
-                else if (typeof object.DrawAcquire === "object")
-                    message.DrawAcquire = new $util.LongBits(object.DrawAcquire.low >>> 0, object.DrawAcquire.high >>> 0).toNumber();
+            if (object.Acquires) {
+                if (!Array.isArray(object.Acquires))
+                    throw TypeError(".baccarat.BaccaratCheckoutResp.Acquires: array expected");
+                message.Acquires = [];
+                for (var i = 0; i < object.Acquires.length; ++i)
+                    if ($util.Long)
+                        (message.Acquires[i] = $util.Long.fromValue(object.Acquires[i])).unsigned = false;
+                    else if (typeof object.Acquires[i] === "string")
+                        message.Acquires[i] = parseInt(object.Acquires[i], 10);
+                    else if (typeof object.Acquires[i] === "number")
+                        message.Acquires[i] = object.Acquires[i];
+                    else if (typeof object.Acquires[i] === "object")
+                        message.Acquires[i] = new $util.LongBits(object.Acquires[i].low >>> 0, object.Acquires[i].high >>> 0).toNumber();
+            }
             return message;
         };
 
@@ -1604,48 +1589,27 @@ $root.baccarat = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
+            if (options.arrays || options.defaults)
+                object.Acquires = [];
+            if (options.defaults)
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.MyAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.MyAcquire = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.BankerAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.BankerAcquire = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.PlayerAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.PlayerAcquire = options.longs === String ? "0" : 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.DrawAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.DrawAcquire = options.longs === String ? "0" : 0;
-            }
             if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
                 if (typeof message.MyAcquire === "number")
                     object.MyAcquire = options.longs === String ? String(message.MyAcquire) : message.MyAcquire;
                 else
                     object.MyAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.MyAcquire) : options.longs === Number ? new $util.LongBits(message.MyAcquire.low >>> 0, message.MyAcquire.high >>> 0).toNumber() : message.MyAcquire;
-            if (message.BankerAcquire != null && message.hasOwnProperty("BankerAcquire"))
-                if (typeof message.BankerAcquire === "number")
-                    object.BankerAcquire = options.longs === String ? String(message.BankerAcquire) : message.BankerAcquire;
-                else
-                    object.BankerAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.BankerAcquire) : options.longs === Number ? new $util.LongBits(message.BankerAcquire.low >>> 0, message.BankerAcquire.high >>> 0).toNumber() : message.BankerAcquire;
-            if (message.PlayerAcquire != null && message.hasOwnProperty("PlayerAcquire"))
-                if (typeof message.PlayerAcquire === "number")
-                    object.PlayerAcquire = options.longs === String ? String(message.PlayerAcquire) : message.PlayerAcquire;
-                else
-                    object.PlayerAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.PlayerAcquire) : options.longs === Number ? new $util.LongBits(message.PlayerAcquire.low >>> 0, message.PlayerAcquire.high >>> 0).toNumber() : message.PlayerAcquire;
-            if (message.DrawAcquire != null && message.hasOwnProperty("DrawAcquire"))
-                if (typeof message.DrawAcquire === "number")
-                    object.DrawAcquire = options.longs === String ? String(message.DrawAcquire) : message.DrawAcquire;
-                else
-                    object.DrawAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.DrawAcquire) : options.longs === Number ? new $util.LongBits(message.DrawAcquire.low >>> 0, message.DrawAcquire.high >>> 0).toNumber() : message.DrawAcquire;
+            if (message.Acquires && message.Acquires.length) {
+                object.Acquires = [];
+                for (var j = 0; j < message.Acquires.length; ++j)
+                    if (typeof message.Acquires[j] === "number")
+                        object.Acquires[j] = options.longs === String ? String(message.Acquires[j]) : message.Acquires[j];
+                    else
+                        object.Acquires[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Acquires[j]) : options.longs === Number ? new $util.LongBits(message.Acquires[j].low >>> 0, message.Acquires[j].high >>> 0).toNumber() : message.Acquires[j];
+            }
             return object;
         };
 
