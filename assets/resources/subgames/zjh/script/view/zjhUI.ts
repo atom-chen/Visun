@@ -22,6 +22,7 @@ import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/pr
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import ZjhServer from "../model/ZjhServer";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
 
 
 const MAX_SOLDIER = 5;
@@ -34,6 +35,7 @@ var CMLIST = [
     "appqp/imgs/chips/cm6"
 ];
 var CMVLIST = [ 5, 10, 20, 50, 100, 150 ];
+var margin = {rx:100,ry:60,rr:0};
 
 
 const {ccclass, property} = cc._decorator;
@@ -76,7 +78,7 @@ export default class zjhUI extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //for test
-    //    ZjhServer.getInstance().run();
+        //ZjhServer.getInstance().run();
     }
 
     //玩家的UI位置
@@ -111,13 +113,16 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(uid);
         if(idx < 0) { return; }
 
-        var imgpath = this.getImgPath(v);
-        var sprChip = new cc.Node();
-        var comp = sprChip.addComponent(cc.Sprite);
-        Preloader.setNodeSprite(comp, imgpath, this);
-        this.m_ui.chipLayer.addChild(sprChip);
-        sprChip.scale = 0.2;
-        CommonUtil.lineTo1(sprChip, this._pnodes[idx], this.m_ui.chipCen, 0.3, 0, {rx:50,ry:40,rr:0});
+        var nums = GameUtil.parseChip(v, CMVLIST);
+        for(var nn in nums) {
+            var imgpath = this.getImgPath(nums[nn]);
+            var sprChip = new cc.Node();
+            var comp = sprChip.addComponent(cc.Sprite);
+            Preloader.setNodeSprite(comp, imgpath, this);
+            this.m_ui.chipLayer.addChild(sprChip);
+            sprChip.scale = 0.2;
+            CommonUtil.lineTo1(sprChip, this._pnodes[idx], this.m_ui.chipCen, 0.3, 0, margin);
+        }
     }
 
     private resetFighters() {
@@ -197,6 +202,11 @@ export default class zjhUI extends BaseComponent {
 
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshSeat(n);
+        }
+
+        var mans = ZjhMgr.getInstance().getPlayerList();
+        for(var uid in mans) {
+            this.playBetAni(mans[uid].UserId, CommonUtil.fixRealMoney(mans[uid].TotalScore));
         }
     }
 

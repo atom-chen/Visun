@@ -6,6 +6,7 @@ import { landLords_msgs } from "../proto/net_landLords";
 import { gamecomm_msgs } from "../proto/net_gamecomm";
 import { brcowcow_msgs } from "../proto/net_brcowcow";
 import { baccarat_msgs } from "../proto/net_baccarat";
+import { zhajinhua_msgs } from "../proto/net_zhajinhua";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import SceneManager from "../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
@@ -14,21 +15,14 @@ import { gamecomm } from "../../../../declares/gamecomm";
 import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
+import { zhajinhua } from "../../../../declares/zhajinhua";
+import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
-import { zhajinhua_msgs } from "../proto/net_zhajinhua";
-import { zhajinhua } from "../../../../declares/zhajinhua";
-import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
 
 
 var GameHandlers = {
-
-    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.IGoldChangeInfo) {
-        if(param.UserID == LoginUser.getInstance().UserId) {
-            LoginUser.getInstance().Gold = param.Gold;
-        }
-    },
 
     [gamecomm_msgs.BeOutResp] : function(param:gamecomm.IBeOutResp) {
         UIManager.openDialog("cfg_kick", "你被踢出房间："+param.Hints, 1, function(){
@@ -36,25 +30,46 @@ var GameHandlers = {
         });
     },
 
+    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.IGoldChangeInfo) {
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            LoginUser.getInstance().Gold = param.Gold;
+        }
+    },
+
+
     [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
         if(param.UserID == LoginUser.getInstance().UserId) {
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
         }
     },
-	
+    
+    
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
+        BjleMgr.delInstance();
         BjleMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},
 	
 	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
+        BrnnMgr.delInstance();
         BrnnMgr.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
-	},
+    },
+    
+    [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
+        ZjhMgr.delInstance();
+        ZjhMgr.getInstance();
+        for(var ii in param.Fighters) {
+			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
+        }
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
+    },
 
     [landLords_msgs.LandLordsSceneResp] : function(param:landLords.ILandLordsSceneResp) {
+        DDzMgr.delInstance();
         DDzMgr.getInstance().setEnterData(param);
         DDzMgr.getInstance().clearFighters();
         DDzMgr.getInstance().updateFighterList(param.Players);
@@ -67,14 +82,6 @@ var GameHandlers = {
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
 
-    [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
-        ZjhMgr.getInstance().clear();
-        for(var ii in param.Fighters) {
-			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
-        }
-        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
-        GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
-    }
 }
 
 export default GameHandlers;
