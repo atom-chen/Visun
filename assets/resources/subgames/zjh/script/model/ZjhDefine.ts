@@ -12,8 +12,6 @@ export enum ZjhGameState {
 //正在游戏 	== PlayerPlaying
 //弃牌 		== PlayerGiveUp
 //比牌失败 	== PlayerCompareLose
-
-// 未准备 已准备 战斗中 跟注 加注 弃牌 比牌输
 export enum ZjhFighterState {
 	idle = 1, //gamecomm.PlayerState.PlayerSitDown,			//未准备
 	readyed = 2, //gamecomm.PlayerState.PlayerAgree,			//已准备
