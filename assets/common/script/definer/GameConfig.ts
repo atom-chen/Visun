@@ -12,7 +12,7 @@ var GameConfig = {
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
 		name: "龙虎斗",
-		icon: "lobby/imgs/gameico/icon_lhd",
+		icon: "lobby/imgs/gameico/ico_longhu",
 		dir: "longhu",
 		viewpath: ViewDefine.UIlonghu
 	},
@@ -33,22 +33,37 @@ var GameConfig = {
 	[GameKindEnum.Redblack] : {
 		GameKind: GameKindEnum.Redblack,
 		name: "红黑大战",
-		icon: "lobby/imgs/gameico/icon_hhdz",
+		icon: "lobby/imgs/gameico/ico_redblack",
 		dir: "honhei",
 		viewpath: ViewDefine.UIhonghei
 	},
 	[GameKindEnum.BirdBeast] : {
 		GameKind: GameKindEnum.BirdBeast,
 		name: "飞禽走兽",
-		icon: "lobby/imgs/gameico/icon_fqzs",
+		icon: "lobby/imgs/gameico/ico_fqzs",
 		dir: "fqzs",
 		viewpath: ViewDefine.UIfqzs
 	},
+	[GameKindEnum.Brttz] : {
+		GameKind: GameKindEnum.Brttz,
+		name: "百人推筒子",
+		icon: "lobby/imgs/gameico/ico_brttz",
+		dir: "jskb",
+		viewpath: ViewDefine.UIbrttz
+	},
+	[GameKindEnum.Toubao] : {
+		GameKind: GameKindEnum.Toubao,
+		name: "骰宝",
+		icon: "lobby/imgs/gameico/ico_toubao",
+		dir: "saibao",
+		viewpath: ViewDefine.UItoubao
+	},
+
 	
 	[GameKindEnum.Zhajinhua] : {
 		GameKind: GameKindEnum.Zhajinhua,
 		name: "炸金花",
-		icon: "lobby/imgs/gameico/icon_zjh",
+		icon: "lobby/imgs/gameico/ico_zjh",
 		spine: "lobby/spines/zhajinhua/skeleton",
 		dir: "zjh",
 		viewpath: ViewDefine.UIzjh
@@ -112,7 +127,7 @@ var GameConfig = {
 	[GameKindEnum.Texas] : {
 		GameKind: GameKindEnum.Texas,
 		name: "德州扑克",
-		icon: "lobby/imgs/gameico/ico_dezhou",
+		icon: "lobby/imgs/gameico/ico_dzpk",
 		dir: "paodk",
 		viewpath: ViewDefine.UItexas
 	},
@@ -126,16 +141,9 @@ var GameConfig = {
 	[GameKindEnum.Buyu] : {
 		GameKind: GameKindEnum.Buyu,
 		name: "捕鱼",
-		icon: "lobby/imgs/gameico/ico_by",
+		icon: "lobby/imgs/gameico/ico_bydr",
 		dir: "buyu",
 		viewpath: ViewDefine.UIbuyu
-	},
-	[GameKindEnum.Toubao] : {
-		GameKind: GameKindEnum.Toubao,
-		name: "骰宝",
-		icon: "lobby/imgs/gameico/ico_toubao",
-		dir: "saibao",
-		viewpath: ViewDefine.UItoubao
 	},
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
@@ -150,13 +158,6 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico/ico_jskb",
 		dir: "jskb",
 		viewpath: ViewDefine.UIjskb
-	},
-	[GameKindEnum.Brttz] : {
-		GameKind: GameKindEnum.Brttz,
-		name: "百人推筒子",
-		icon: "lobby/imgs/gameico/ico_brttz",
-		dir: "jskb",
-		viewpath: ViewDefine.UIbrttz
 	},
 
 	[GameKindEnum.RPG] : {

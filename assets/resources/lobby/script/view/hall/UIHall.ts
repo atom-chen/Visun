@@ -9,14 +9,14 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import Adaptor from "../../../../../kernel/adaptor/Adaptor";
 import PF from "../../../../../kernel/pathfinder/PathFinding";
-import game_btn from "./game_btn";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
-import { login_msgs, login_request } from "../../../../../common/script/proto/net_login";
+import { login_msgs } from "../../../../../common/script/proto/net_login";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import { login } from "../../../../../../declares/login";
 import Preloader from "../../../../../kernel/utils/Preloader";
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -36,6 +36,8 @@ export default class UIHall extends BaseComponent {
 		this.refleshUI(null);
 	
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
+
+	//	this.test();
 	}
 
 	private LoginResp(param:login.ILoginResp) {
@@ -81,34 +83,10 @@ export default class UIHall extends BaseComponent {
 		}
 	}
 
-	// private refleshGameList() {
-	// 	this.m_ui.content.removeAllChildren();
-
-	// 	var gameList = GameManager.getInstance().getGameList();
-	// 	if(!gameList) { return; }
-
-	// 	for(var i in gameList) {
-	// 		var info = gameList[i];
-
-	// 		var bton = cc.instantiate(this.gameBtn);
-	// 		bton["gameData"] = info;
-
-	// 		CommonUtil.addClickEvent(bton, function(){ 
-	// 			GameManager.getInstance().enterGame(this.gameData.ID);
-	// 		}, bton);
-
-	// 		this.m_ui.content.addChild(bton);
-
-	// 		this.refreshGameButton(bton, info);
-	// 	}
-	// }
-
-	private refreshGameButton(bton, gameData:login.IGameItem) {
+	private refreshGameButton(bton:cc.Node, gameData:login.IGameItem) {
 		var cfg = GameConfig[gameData.Info.KindID];
 		if(!cfg) { return; }
-		var tbl : any = {};
-		CommonUtil.traverseNodes(bton, tbl);
-		Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);
+		Preloader.setNodeSprite(bton.getChildByName("Background").getComponent(cc.Sprite), cfg.icon, this);
 		// if(cfg.spine) {
 		// 	Preloader.showSpineAsync(cfg.spine, 0, "animation", -1, bton, {zIndex:10, x:0, y:-150, scale:0.4});
 		// }
@@ -173,6 +151,16 @@ export default class UIHall extends BaseComponent {
 
 
 	//----------- tests --------------------------------------------
+
+	private test() {
+		for(var i in GameConfig) {
+			var bton = cc.instantiate(this.gameBtn);
+			this.m_ui.content.addChild(bton);
+			var tbl : any = {};
+			CommonUtil.traverseNodes(bton, tbl);
+			Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), GameConfig[i].icon, this);
+		}
+	}
 
 	private testAStart() {
 		var matrix = [
