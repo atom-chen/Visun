@@ -47,6 +47,9 @@ var GameHandlers = {
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
         BjleMgr.delInstance();
         BjleMgr.getInstance().setEnterData(param);
+        
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
 	},
@@ -54,6 +57,9 @@ var GameHandlers = {
 	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
         BrnnMgr.delInstance();
         BrnnMgr.getInstance().setEnterData(param);
+
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
     },
@@ -65,6 +71,9 @@ var GameHandlers = {
 			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
         }
         ZjhMgr.getInstance().setEnterData(param);
+
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
     },
@@ -79,6 +88,9 @@ var GameHandlers = {
                 DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
             }
         }
+
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },

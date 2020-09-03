@@ -26,7 +26,9 @@ export default class GameManager extends ModelBase {
 		}
 	}
 	public on_clear() {
-		
+		if(this.gameModal) {
+			this.gameModal.delInstance();
+		}
 	}
 
 	private constructor() {
@@ -43,6 +45,8 @@ export default class GameManager extends ModelBase {
 	private roomsInfo:Array<login.IRoomInfo> = [];
 	private gameArr:{[key:number]:Array<login.IGameItem>} = {};
 	private gameId:number = 0;
+	private enterData = null;
+	private gameModal = null;
 
 	public pullAll() {
 		var roomsInfo = this.getRoomsInfo();
@@ -151,6 +155,30 @@ export default class GameManager extends ModelBase {
 	public getGameId() : number {
 		return this.gameId;
 	}
+
+	public setEnterData(data:any) {
+		this.enterData = data;
+	}
+
+	public getEnterData() : any {
+		return this.enterData;
+	}
+
+	public registGameModel(cls:any) {
+		if(!cls.delInstance) { cc.error("no delInstance", cls); }
+		this.unregistGameModel();
+        this.gameModal = cls.getInstance();
+		cc.log("regist game model ");
+    }
+
+    public unregistGameModel() {
+        if(this.gameModal) {
+            this.gameModal.getInstance().clear();
+			this.gameModal.delInstance();
+			this.gameModal = null;
+            cc.log("unregist game model");
+        }
+    }
 	
 	//进入游戏的唯一入口
 	public enterGame(gameType:number) {
