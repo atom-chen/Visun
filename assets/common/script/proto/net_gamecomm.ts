@@ -48,7 +48,7 @@ export var gamecomm_packet_define = {
 
 export class gamecomm_request {
     public static PlayerState( data:{} ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
-    public static PlayerInfo( data:{ UserID:number, Name:string, FaceID:number, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:number, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static PlayerInfo( data:{ UserID:number, Name:string, FaceID:number, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:any, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static CardInfo( data:{ Cards:any, CardType:number, CardValue:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static TimeInfo( data:{ TimeStamp:number, WaitTime:number, OutTime:number, TotalTime:number } ) { gamecomm_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static AreaInfo( data:{ ID:number, MyGold:number, TotalGold:number, AcquireGold:number } ) { gamecomm_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }

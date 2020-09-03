@@ -10,7 +10,9 @@ export namespace gamecomm {
         PlayerCall = 3,
         PlayerPlaying = 4,
         PlayerPickUp = 5,
-        PlayerStandUp = 6
+        PlayerStandUp = 6,
+        PlayerGiveUp = 7,
+        PlayerCompareLose = 8
     }
 
     /** Properties of a PlayerInfo. */
@@ -41,7 +43,7 @@ export namespace gamecomm {
         Account?: (string|null);
 
         /** PlayerInfo Sate */
-        Sate?: (number|null);
+        Sate?: (gamecomm.PlayerState|null);
 
         /** PlayerInfo PlatformID */
         PlatformID?: (number|Long|null);
@@ -93,7 +95,7 @@ export namespace gamecomm {
         public Account: string;
 
         /** PlayerInfo Sate. */
-        public Sate: number;
+        public Sate: gamecomm.PlayerState;
 
         /** PlayerInfo PlatformID. */
         public PlatformID: (number|Long);

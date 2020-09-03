@@ -2784,6 +2784,8 @@ $root.go = (function() {
         values[valuesById[4] = "PlayerPlaying"] = 4;
         values[valuesById[5] = "PlayerPickUp"] = 5;
         values[valuesById[6] = "PlayerStandUp"] = 6;
+        values[valuesById[7] = "PlayerGiveUp"] = 7;
+        values[valuesById[8] = "PlayerCompareLose"] = 8;
         return values;
     })();
 
@@ -2944,8 +2946,20 @@ $root.go = (function() {
                 if (!$util.isString(message.Account))
                     return "Account: string expected";
             if (message.Sate != null && message.hasOwnProperty("Sate"))
-                if (!$util.isInteger(message.Sate))
-                    return "Sate: integer expected";
+                switch (message.Sate) {
+                default:
+                    return "Sate: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                    break;
+                }
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
                 if (!$util.isInteger(message.PlatformID) && !(message.PlatformID && $util.isInteger(message.PlatformID.low) && $util.isInteger(message.PlatformID.high)))
                     return "PlatformID: integer|Long expected";
@@ -2998,8 +3012,44 @@ $root.go = (function() {
                 message.Level = object.Level >>> 0;
             if (object.Account != null)
                 message.Account = String(object.Account);
-            if (object.Sate != null)
-                message.Sate = object.Sate | 0;
+            switch (object.Sate) {
+            case "PlayerLookOn":
+            case 0:
+                message.Sate = 0;
+                break;
+            case "PlayerSitDown":
+            case 1:
+                message.Sate = 1;
+                break;
+            case "PlayerAgree":
+            case 2:
+                message.Sate = 2;
+                break;
+            case "PlayerCall":
+            case 3:
+                message.Sate = 3;
+                break;
+            case "PlayerPlaying":
+            case 4:
+                message.Sate = 4;
+                break;
+            case "PlayerPickUp":
+            case 5:
+                message.Sate = 5;
+                break;
+            case "PlayerStandUp":
+            case 6:
+                message.Sate = 6;
+                break;
+            case "PlayerGiveUp":
+            case 7:
+                message.Sate = 7;
+                break;
+            case "PlayerCompareLose":
+            case 8:
+                message.Sate = 8;
+                break;
+            }
             if (object.PlatformID != null)
                 if ($util.Long)
                     (message.PlatformID = $util.Long.fromValue(object.PlatformID)).unsigned = true;
@@ -3040,7 +3090,7 @@ $root.go = (function() {
                     object.Gold = options.longs === String ? "0" : 0;
                 object.Level = 0;
                 object.Account = "";
-                object.Sate = 0;
+                object.Sate = options.enums === String ? "PlayerLookOn" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.PlatformID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
@@ -3073,7 +3123,7 @@ $root.go = (function() {
             if (message.Account != null && message.hasOwnProperty("Account"))
                 object.Account = message.Account;
             if (message.Sate != null && message.hasOwnProperty("Sate"))
-                object.Sate = message.Sate;
+                object.Sate = options.enums === String ? $root.go.PlayerState[message.Sate] : message.Sate;
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
                 if (typeof message.PlatformID === "number")
                     object.PlatformID = options.longs === String ? String(message.PlatformID) : message.PlatformID;

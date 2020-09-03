@@ -4,9 +4,11 @@ import "gamecomm.proto";
 
 
 //玩家信息
-//未准备 == PlayerSitDown
-//已准备 == PlayerAgree
-//正在游戏 ==	PlayerPlaying
+//未准备 	== PlayerSitDown
+//已准备 	== PlayerAgree
+//正在游戏 	== PlayerPlaying
+//弃牌 		== PlayerGiveUp
+//比牌失败 	== PlayerCompareLose
 message ZhajinhuaPlayer {
   PlayerInfo  MyInfo = 1;  //其中State
   bool  IsSee =2;        // 是否已看牌: true:已看 false:未看
