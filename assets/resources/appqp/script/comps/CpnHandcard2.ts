@@ -47,10 +47,16 @@ export default class CpnHandcard2 extends cc.Component {
         }
     }
 
-    public playOpen() {
+    public playOpen(bAni:boolean = true) {
         var childs = this.node.children;
         for(var i=0, len=childs.length; i<len; i++) {
-            childs[i].getComponent(CpnPoker).playFlip(i*0.1);
+            var cpn = childs[i].getComponent(CpnPoker)
+            if(bAni){
+                cpn.playFlip(i*0.1);
+            } else {
+                cpn.node.stopAllActions();
+                cpn.setFace(true);
+            }
         }
     }
 

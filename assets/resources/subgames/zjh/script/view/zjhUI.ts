@@ -336,6 +336,17 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.readyNode.active = false;
 
         var idx = this.playerIdx(param.UserID);
+
+        var man = ZjhMgr.getInstance().getPlayer(param.UserID);
+        if(man) {
+            if(param.UserID == LoginUser.getInstance().UserId && man.IsSee) {
+                this._handors[idx].resetCards(man.Cards.Cards);
+                this._handors[idx].playOpen(false);
+            } else {
+                this._handors[idx].resetCards([0,0,0]);
+            }
+        }
+
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._cdCpns[i].node.active = idx == i;
             if(idx == i) {
