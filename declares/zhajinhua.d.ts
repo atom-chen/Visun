@@ -328,6 +328,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp Inning */
         Inning?: (string|null);
+
+        /** ZhajinhuaSceneResp NoReadyTime */
+        NoReadyTime?: (number|null);
     }
 
     /** Represents a ZhajinhuaSceneResp. */
@@ -356,6 +359,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp Inning. */
         public Inning: string;
+
+        /** ZhajinhuaSceneResp NoReadyTime. */
+        public NoReadyTime: number;
 
         /**
          * Creates a new ZhajinhuaSceneResp instance using the specified properties.
