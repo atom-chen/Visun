@@ -22,10 +22,12 @@ message ZhajinhuaPlayer {
 
 message EnterGameZjhResp {
   ZhajinhuaPlayer Player = 1;
+  uint32 GameID = 2; //游戏标识
 }
 
 message ExitGameZjhResp {
   uint64 UserId = 1;
+  uint32 GameID = 2; //游戏标识
 }
 
 

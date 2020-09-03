@@ -121,6 +121,9 @@ export namespace zhajinhua {
 
         /** EnterGameZjhResp Player */
         Player?: (zhajinhua.IZhajinhuaPlayer|null);
+
+        /** EnterGameZjhResp GameID */
+        GameID?: (number|null);
     }
 
     /** Represents an EnterGameZjhResp. */
@@ -134,6 +137,9 @@ export namespace zhajinhua {
 
         /** EnterGameZjhResp Player. */
         public Player?: (zhajinhua.IZhajinhuaPlayer|null);
+
+        /** EnterGameZjhResp GameID. */
+        public GameID: number;
 
         /**
          * Creates a new EnterGameZjhResp instance using the specified properties.
@@ -211,6 +217,9 @@ export namespace zhajinhua {
 
         /** ExitGameZjhResp UserId */
         UserId?: (number|Long|null);
+
+        /** ExitGameZjhResp GameID */
+        GameID?: (number|null);
     }
 
     /** Represents an ExitGameZjhResp. */
@@ -224,6 +233,9 @@ export namespace zhajinhua {
 
         /** ExitGameZjhResp UserId. */
         public UserId: (number|Long);
+
+        /** ExitGameZjhResp GameID. */
+        public GameID: number;
 
         /**
          * Creates a new ExitGameZjhResp instance using the specified properties.
