@@ -5,7 +5,7 @@ import { zhajinhua_packet_define, zhajinhua_msgs } from "../../../../../common/s
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
-import { ZjhFightState } from "./ZjhDefine";
+import { ZjhFighterState } from "./ZjhDefine";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
 import { gamecomm } from "../../../../../../declares/gamecomm";
@@ -44,7 +44,7 @@ export default class ZjhServer extends ModelBase {
 			var man:any = {};
 			man.UserId = i+10001;
 			man.IsSee = false;
-			man.FightState = ZjhFightState.idle;
+			man.FightState = ZjhFighterState.idle;
 			man.RecentBetMoney = 0;
 			man.TotalBetMoney = 0;
 			man.SeatId = i;
@@ -146,13 +146,13 @@ export default class ZjhServer extends ModelBase {
 		return null;
 	}
 
-	isFightState(st:ZjhFightState) {
-		return st == ZjhFightState.genzhu || st == ZjhFightState.jiazhu || st == ZjhFightState.readyed;
+	isFightState(st:ZjhFighterState) {
+		return st == ZjhFighterState.genzhu || st == ZjhFighterState.jiazhu || st == ZjhFighterState.readyed;
 	}
 
 	isLosed(uid:number) : boolean {
 		var man = this.findById(uid);
-		return man.SeatState == ZjhFightState.bipaishu || man.SeatState == ZjhFightState.qipai;
+		return man.SeatState == ZjhFighterState.bipaishu || man.SeatState == ZjhFighterState.qipai;
 	}
 
 	checkFinish() : boolean {
@@ -170,7 +170,7 @@ export default class ZjhServer extends ModelBase {
 
 		var nnn = CommonUtil.getRandomInt(1,100);
 		if(nnn <= 20) {
-			attacker.SeatState = ZjhFightState.qipai;
+			attacker.SeatState = ZjhFighterState.qipai;
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 		}
@@ -183,7 +183,7 @@ export default class ZjhServer extends ModelBase {
 
 			if(isNil(chgInfo)) {
 				//返回金币不足提示，并弃牌
-				attacker.SeatState = ZjhFightState.qipai;
+				attacker.SeatState = ZjhFighterState.qipai;
 				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
 				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 				return;
@@ -191,7 +191,7 @@ export default class ZjhServer extends ModelBase {
 
 			this.totalBet += v;
 
-			attacker.SeatState = ZjhFightState.genzhu;
+			attacker.SeatState = ZjhFighterState.genzhu;
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaFollowResp].pack({UserId:attacker.UserId, Score:this.curMinBet}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
@@ -209,7 +209,7 @@ export default class ZjhServer extends ModelBase {
 
 			if(isNil(chgInfo)) {
 				//返回金币不足提示，并弃牌
-				attacker.SeatState = ZjhFightState.qipai;
+				attacker.SeatState = ZjhFighterState.qipai;
 				var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
 				ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 				return;
@@ -218,7 +218,7 @@ export default class ZjhServer extends ModelBase {
 			this.totalBet += v;
 			this.curMinBet = this.curMinBet + raiseNum; //加注会提升最低下注额
 
-			attacker.SeatState = ZjhFightState.jiazhu;
+			attacker.SeatState = ZjhFighterState.jiazhu;
 			var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaRaiseResp].pack({UserId:attacker.UserId, Score:this.curMinBet+raiseNum}, false);
 			ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 
@@ -237,7 +237,7 @@ export default class ZjhServer extends ModelBase {
 
 				if(isNil(chgInfo)) {
 					//返回金币不足提示，并弃牌
-					attacker.SeatState = ZjhFightState.qipai;
+					attacker.SeatState = ZjhFighterState.qipai;
 					var pak1 = zhajinhua_packet_define[zhajinhua_msgs.ZhajinhuaGiveupResp].pack({UserId:attacker.UserId}, false);
 					ProcessorMgr.getInstance().getProcessor("game").onrecvBuff(pak1);
 					return;
@@ -253,7 +253,7 @@ export default class ZjhServer extends ModelBase {
 					loserUid = uid;
 				}
 
-				this.findById(loserUid).SeatState = ZjhFightState.bipaishu;
+				this.findById(loserUid).SeatState = ZjhFighterState.bipaishu;
 
 				var info = {
 					AttackerId: uid,
@@ -340,7 +340,7 @@ export default class ZjhServer extends ModelBase {
 		this.curMinBet = this.bottomBet;
 		for(var i in this._seatFighters) {
 			if(!isNil(this._seatFighters[i])) {
-				this._seatFighters[i].SeatState = ZjhFightState.readyed;
+				this._seatFighters[i].SeatState = ZjhFighterState.readyed;
 				this._seatFighters[i].IsSee = false;
 				this._seatFighters[i].Cards = null;
 				this._seatFighters[i].RecentScore = 0;

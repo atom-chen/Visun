@@ -1,29 +1,14 @@
 import { zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua";
 import ZjhMgr from "./ZjhMgr";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
-import { ZjhFightState } from "./ZjhDefine";
+import { ZjhFighterState, ZjhGameState } from "./ZjhDefine";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
-import { login_msgs } from "../../../../../common/script/proto/net_login";
 import GameManager from "../../../../../common/script/model/GameManager";
 
 var ZjhHandlers = {
 
-	// [gamecomm_msgs.PlayerListInfo] : function(param:gamecomm.IPlayerListInfo) {
-	// 	ZjhMgr.getInstance().clearPlayers();
-	// 	for(var i in param.AllInfos) {
-	// 		var info:gamecomm.IPlayerInfo = param.AllInfos[i];
-	// 		var man:zhajinhua.IZhajinhuaPlayer = {};
-	// 		man.UserId = info.UserID;
-	// 		man.Gold = info.Gold;
-	// 		man.Name = info.Name;
-	// 		man.SeatId = info.ChairID;
-	// 		man.SeatState = info.Sate;
-	// 		ZjhMgr.getInstance().addPlayer(man);
-	// 	}
-	// },
-
-	[gamecomm_msgs.EnterGameResp] : function(param:gamecomm.EnterGameResp) {
+	[gamecomm_msgs.EnterGameResp] : function(param:gamecomm.IEnterGameResp) {
 		if(param.GameID != GameManager.getInstance().getGameId()) {
 			return;
 		}
@@ -32,8 +17,8 @@ var ZjhHandlers = {
 		man.UserId = info.UserID;
 		man.Gold = info.Gold;
 		man.Name = info.Name;
-		man.SeatId = info.ChairID;
-		man.SeatState = info.Sate;
+	//	man.SeatId = info.ChairID;
+	//	man.SeatState = info.Sate;
 		ZjhMgr.getInstance().addPlayer(man);
 	},
 
@@ -52,37 +37,33 @@ var ZjhHandlers = {
 		ZjhMgr.getInstance().removePlayer(param.UserId);
 	},
 
-	[zhajinhua_msgs.ZhajinhuaStateFreeResp] : function(param) {
+	[zhajinhua_msgs.ZhajinhuaStateFreeResp] : function(param:zhajinhua.IZhajinhuaStateFreeResp) {
+		ZjhMgr.getInstance().GameState = ZjhGameState.ready;
 		var mans = ZjhMgr.getInstance().getPlayerList();
 		if(mans) {
 			for(var uid in mans) {
-			//	mans[uid].SeatState = ZjhFightState.idle;
 				mans[uid].IsSee = false;
 			}
 		}
 	},
 
-	[zhajinhua_msgs.ZhajinhuaStateStartResp] : function(param) {
+	[zhajinhua_msgs.ZhajinhuaStateStartResp] : function(param:zhajinhua.IZhajinhuaStateStartResp) {
+		ZjhMgr.getInstance().GameState = ZjhGameState.started;
 		var mans = ZjhMgr.getInstance().getPlayerList();
 		if(mans) {
 			for(var uid in mans) {
-				mans[uid].SeatState = ZjhFightState.fighting;
 				mans[uid].IsSee = false;
 			}
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaStatePlayingResp] : function(param:zhajinhua.IZhajinhuaStatePlayingResp) {
+		ZjhMgr.getInstance().GameState = ZjhGameState.fighting;
 		ZjhMgr.getInstance().CurTurnTo = param.UserID;
 	},
 
 	[zhajinhua_msgs.ZhajinhuaStateOverResp] : function(param) {
-		var mans = ZjhMgr.getInstance().getPlayerList();
-		if(mans) {
-			for(var uid in mans) {
-				mans[uid].SeatState = ZjhFightState.fightover;
-			}
-		}
+		ZjhMgr.getInstance().GameState = ZjhGameState.settle;
 	},
 
 	[zhajinhua_msgs.ZhajinhuaHostResp] : function(param:zhajinhua.IZhajinhuaHostResp) {
@@ -94,21 +75,21 @@ var ZjhHandlers = {
 	[zhajinhua_msgs.ZhajinhuaReadyResp] : function(param:zhajinhua.IZhajinhuaReadyResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFightState.readyed;
+			man.SeatState = ZjhFighterState.readyed;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaFollowResp] : function(param:zhajinhua.IZhajinhuaFollowResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFightState.genzhu;
+			man.SeatState = ZjhFighterState.genzhu;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaRaiseResp] : function(param:zhajinhua.IZhajinhuaRaiseResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFightState.jiazhu;
+			man.SeatState = ZjhFighterState.jiazhu;
 		}
 	},
 
@@ -126,14 +107,14 @@ var ZjhHandlers = {
 		}
 		var man = ZjhMgr.getInstance().getPlayer(loser);
 		if(man) {
-			man.SeatState = ZjhFightState.bipaishu;
+			man.SeatState = ZjhFighterState.bipaishu;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaGiveupResp] : function(param) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFightState.qipai;
+			man.SeatState = ZjhFighterState.qipai;
 		}
 	},
 

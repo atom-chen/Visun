@@ -2,6 +2,7 @@ import ModelBase from "../../../../../kernel/model/ModelBase";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import { ZjhGameState } from "./ZjhDefine";
 
 export default class ZjhMgr extends ModelBase {
 	private static _instance:ZjhMgr = null;
@@ -25,7 +26,8 @@ export default class ZjhMgr extends ModelBase {
     
     private _players : {[key:number]:zhajinhua.IZhajinhuaPlayer} = {};
     private enterData:zhajinhua.IZhajinhuaSceneResp = null;
-    public CurTurnTo:number = -1; 
+    public GameState:ZjhGameState = ZjhGameState.ready;
+    public CurTurnTo:number = -1;
 
     setEnterData(data:zhajinhua.IZhajinhuaSceneResp) {
         this.enterData = data;
