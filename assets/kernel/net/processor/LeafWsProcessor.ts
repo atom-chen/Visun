@@ -7,6 +7,7 @@ import MemoryStream from "../../basic/datastruct/MemoryStream";
 import { ConnState } from "../../basic/defines/KernelDefine";
 import EventCenter from "../../basic/event/EventCenter";
 import KernelEvent from "../../basic/defines/KernelEvent";
+import CommonUtil from "../../utils/CommonUtil";
 
 
 const HEAD_SIZE = 2;
@@ -62,7 +63,7 @@ export default class LeafWsProcessor extends BaseProcessor {
 				cc.log(cc.js.formatStr("%s [recv] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, bytes.length));
 			}
 		//	cc.log(CommonUtil.Bytes2Str(bytes));
-			cc.log(data);
+			cc.log(CommonUtil.deepClone(data));
 		}
 
 		if(this._paused) {
