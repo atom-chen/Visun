@@ -272,22 +272,22 @@ $root.zhajinhua = (function() {
         return ZhajinhuaPlayer;
     })();
 
-    zhajinhua.ZhajinhuaAddPlayerResp = (function() {
+    zhajinhua.EnterGameZjhResp = (function() {
 
-        function ZhajinhuaAddPlayerResp(properties) {
+        function EnterGameZjhResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ZhajinhuaAddPlayerResp.prototype.Player = null;
+        EnterGameZjhResp.prototype.Player = null;
 
-        ZhajinhuaAddPlayerResp.create = function create(properties) {
-            return new ZhajinhuaAddPlayerResp(properties);
+        EnterGameZjhResp.create = function create(properties) {
+            return new EnterGameZjhResp(properties);
         };
 
-        ZhajinhuaAddPlayerResp.encode = function encode(message, writer) {
+        EnterGameZjhResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Player != null && Object.hasOwnProperty.call(message, "Player"))
@@ -295,14 +295,14 @@ $root.zhajinhua = (function() {
             return writer;
         };
 
-        ZhajinhuaAddPlayerResp.encodeDelimited = function encodeDelimited(message, writer) {
+        EnterGameZjhResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        ZhajinhuaAddPlayerResp.decode = function decode(reader, length) {
+        EnterGameZjhResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ZhajinhuaAddPlayerResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.EnterGameZjhResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -317,13 +317,13 @@ $root.zhajinhua = (function() {
             return message;
         };
 
-        ZhajinhuaAddPlayerResp.decodeDelimited = function decodeDelimited(reader) {
+        EnterGameZjhResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        ZhajinhuaAddPlayerResp.verify = function verify(message) {
+        EnterGameZjhResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Player != null && message.hasOwnProperty("Player")) {
@@ -334,19 +334,19 @@ $root.zhajinhua = (function() {
             return null;
         };
 
-        ZhajinhuaAddPlayerResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.zhajinhua.ZhajinhuaAddPlayerResp)
+        EnterGameZjhResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.zhajinhua.EnterGameZjhResp)
                 return object;
-            var message = new $root.zhajinhua.ZhajinhuaAddPlayerResp();
+            var message = new $root.zhajinhua.EnterGameZjhResp();
             if (object.Player != null) {
                 if (typeof object.Player !== "object")
-                    throw TypeError(".zhajinhua.ZhajinhuaAddPlayerResp.Player: object expected");
+                    throw TypeError(".zhajinhua.EnterGameZjhResp.Player: object expected");
                 message.Player = $root.zhajinhua.ZhajinhuaPlayer.fromObject(object.Player);
             }
             return message;
         };
 
-        ZhajinhuaAddPlayerResp.toObject = function toObject(message, options) {
+        EnterGameZjhResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -357,29 +357,29 @@ $root.zhajinhua = (function() {
             return object;
         };
 
-        ZhajinhuaAddPlayerResp.prototype.toJSON = function toJSON() {
+        EnterGameZjhResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return ZhajinhuaAddPlayerResp;
+        return EnterGameZjhResp;
     })();
 
-    zhajinhua.ZhajinhuaDelPlayerResp = (function() {
+    zhajinhua.ExitGameZjhResp = (function() {
 
-        function ZhajinhuaDelPlayerResp(properties) {
+        function ExitGameZjhResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        ZhajinhuaDelPlayerResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ExitGameZjhResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        ZhajinhuaDelPlayerResp.create = function create(properties) {
-            return new ZhajinhuaDelPlayerResp(properties);
+        ExitGameZjhResp.create = function create(properties) {
+            return new ExitGameZjhResp(properties);
         };
 
-        ZhajinhuaDelPlayerResp.encode = function encode(message, writer) {
+        ExitGameZjhResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
@@ -387,14 +387,14 @@ $root.zhajinhua = (function() {
             return writer;
         };
 
-        ZhajinhuaDelPlayerResp.encodeDelimited = function encodeDelimited(message, writer) {
+        ExitGameZjhResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        ZhajinhuaDelPlayerResp.decode = function decode(reader, length) {
+        ExitGameZjhResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ZhajinhuaDelPlayerResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ExitGameZjhResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -409,13 +409,13 @@ $root.zhajinhua = (function() {
             return message;
         };
 
-        ZhajinhuaDelPlayerResp.decodeDelimited = function decodeDelimited(reader) {
+        ExitGameZjhResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        ZhajinhuaDelPlayerResp.verify = function verify(message) {
+        ExitGameZjhResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserId != null && message.hasOwnProperty("UserId"))
@@ -424,10 +424,10 @@ $root.zhajinhua = (function() {
             return null;
         };
 
-        ZhajinhuaDelPlayerResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.zhajinhua.ZhajinhuaDelPlayerResp)
+        ExitGameZjhResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.zhajinhua.ExitGameZjhResp)
                 return object;
-            var message = new $root.zhajinhua.ZhajinhuaDelPlayerResp();
+            var message = new $root.zhajinhua.ExitGameZjhResp();
             if (object.UserId != null)
                 if ($util.Long)
                     (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
@@ -440,7 +440,7 @@ $root.zhajinhua = (function() {
             return message;
         };
 
-        ZhajinhuaDelPlayerResp.toObject = function toObject(message, options) {
+        ExitGameZjhResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -458,11 +458,11 @@ $root.zhajinhua = (function() {
             return object;
         };
 
-        ZhajinhuaDelPlayerResp.prototype.toJSON = function toJSON() {
+        ExitGameZjhResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return ZhajinhuaDelPlayerResp;
+        return ExitGameZjhResp;
     })();
 
     zhajinhua.ZhajinhuaSceneResp = (function() {

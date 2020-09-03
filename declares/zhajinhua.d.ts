@@ -140,181 +140,181 @@ export namespace zhajinhua {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ZhajinhuaAddPlayerResp. */
-    interface IZhajinhuaAddPlayerResp {
+    /** Properties of an EnterGameZjhResp. */
+    interface IEnterGameZjhResp {
 
-        /** ZhajinhuaAddPlayerResp Player */
+        /** EnterGameZjhResp Player */
         Player?: (zhajinhua.IZhajinhuaPlayer|null);
     }
 
-    /** Represents a ZhajinhuaAddPlayerResp. */
-    class ZhajinhuaAddPlayerResp implements IZhajinhuaAddPlayerResp {
+    /** Represents an EnterGameZjhResp. */
+    class EnterGameZjhResp implements IEnterGameZjhResp {
 
         /**
-         * Constructs a new ZhajinhuaAddPlayerResp.
+         * Constructs a new EnterGameZjhResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: zhajinhua.IZhajinhuaAddPlayerResp);
+        constructor(properties?: zhajinhua.IEnterGameZjhResp);
 
-        /** ZhajinhuaAddPlayerResp Player. */
+        /** EnterGameZjhResp Player. */
         public Player?: (zhajinhua.IZhajinhuaPlayer|null);
 
         /**
-         * Creates a new ZhajinhuaAddPlayerResp instance using the specified properties.
+         * Creates a new EnterGameZjhResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ZhajinhuaAddPlayerResp instance
+         * @returns EnterGameZjhResp instance
          */
-        public static create(properties?: zhajinhua.IZhajinhuaAddPlayerResp): zhajinhua.ZhajinhuaAddPlayerResp;
+        public static create(properties?: zhajinhua.IEnterGameZjhResp): zhajinhua.EnterGameZjhResp;
 
         /**
-         * Encodes the specified ZhajinhuaAddPlayerResp message. Does not implicitly {@link zhajinhua.ZhajinhuaAddPlayerResp.verify|verify} messages.
-         * @param message ZhajinhuaAddPlayerResp message or plain object to encode
+         * Encodes the specified EnterGameZjhResp message. Does not implicitly {@link zhajinhua.EnterGameZjhResp.verify|verify} messages.
+         * @param message EnterGameZjhResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: zhajinhua.IZhajinhuaAddPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: zhajinhua.IEnterGameZjhResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ZhajinhuaAddPlayerResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaAddPlayerResp.verify|verify} messages.
-         * @param message ZhajinhuaAddPlayerResp message or plain object to encode
+         * Encodes the specified EnterGameZjhResp message, length delimited. Does not implicitly {@link zhajinhua.EnterGameZjhResp.verify|verify} messages.
+         * @param message EnterGameZjhResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: zhajinhua.IZhajinhuaAddPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: zhajinhua.IEnterGameZjhResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ZhajinhuaAddPlayerResp message from the specified reader or buffer.
+         * Decodes an EnterGameZjhResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ZhajinhuaAddPlayerResp
+         * @returns EnterGameZjhResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaAddPlayerResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.EnterGameZjhResp;
 
         /**
-         * Decodes a ZhajinhuaAddPlayerResp message from the specified reader or buffer, length delimited.
+         * Decodes an EnterGameZjhResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ZhajinhuaAddPlayerResp
+         * @returns EnterGameZjhResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaAddPlayerResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.EnterGameZjhResp;
 
         /**
-         * Verifies a ZhajinhuaAddPlayerResp message.
+         * Verifies an EnterGameZjhResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ZhajinhuaAddPlayerResp message from a plain object. Also converts values to their respective internal types.
+         * Creates an EnterGameZjhResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ZhajinhuaAddPlayerResp
+         * @returns EnterGameZjhResp
          */
-        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaAddPlayerResp;
+        public static fromObject(object: { [k: string]: any }): zhajinhua.EnterGameZjhResp;
 
         /**
-         * Creates a plain object from a ZhajinhuaAddPlayerResp message. Also converts values to other types if specified.
-         * @param message ZhajinhuaAddPlayerResp
+         * Creates a plain object from an EnterGameZjhResp message. Also converts values to other types if specified.
+         * @param message EnterGameZjhResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: zhajinhua.ZhajinhuaAddPlayerResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: zhajinhua.EnterGameZjhResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ZhajinhuaAddPlayerResp to JSON.
+         * Converts this EnterGameZjhResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a ZhajinhuaDelPlayerResp. */
-    interface IZhajinhuaDelPlayerResp {
+    /** Properties of an ExitGameZjhResp. */
+    interface IExitGameZjhResp {
 
-        /** ZhajinhuaDelPlayerResp UserId */
+        /** ExitGameZjhResp UserId */
         UserId?: (number|Long|null);
     }
 
-    /** Represents a ZhajinhuaDelPlayerResp. */
-    class ZhajinhuaDelPlayerResp implements IZhajinhuaDelPlayerResp {
+    /** Represents an ExitGameZjhResp. */
+    class ExitGameZjhResp implements IExitGameZjhResp {
 
         /**
-         * Constructs a new ZhajinhuaDelPlayerResp.
+         * Constructs a new ExitGameZjhResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: zhajinhua.IZhajinhuaDelPlayerResp);
+        constructor(properties?: zhajinhua.IExitGameZjhResp);
 
-        /** ZhajinhuaDelPlayerResp UserId. */
+        /** ExitGameZjhResp UserId. */
         public UserId: (number|Long);
 
         /**
-         * Creates a new ZhajinhuaDelPlayerResp instance using the specified properties.
+         * Creates a new ExitGameZjhResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns ZhajinhuaDelPlayerResp instance
+         * @returns ExitGameZjhResp instance
          */
-        public static create(properties?: zhajinhua.IZhajinhuaDelPlayerResp): zhajinhua.ZhajinhuaDelPlayerResp;
+        public static create(properties?: zhajinhua.IExitGameZjhResp): zhajinhua.ExitGameZjhResp;
 
         /**
-         * Encodes the specified ZhajinhuaDelPlayerResp message. Does not implicitly {@link zhajinhua.ZhajinhuaDelPlayerResp.verify|verify} messages.
-         * @param message ZhajinhuaDelPlayerResp message or plain object to encode
+         * Encodes the specified ExitGameZjhResp message. Does not implicitly {@link zhajinhua.ExitGameZjhResp.verify|verify} messages.
+         * @param message ExitGameZjhResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: zhajinhua.IZhajinhuaDelPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: zhajinhua.IExitGameZjhResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified ZhajinhuaDelPlayerResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaDelPlayerResp.verify|verify} messages.
-         * @param message ZhajinhuaDelPlayerResp message or plain object to encode
+         * Encodes the specified ExitGameZjhResp message, length delimited. Does not implicitly {@link zhajinhua.ExitGameZjhResp.verify|verify} messages.
+         * @param message ExitGameZjhResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: zhajinhua.IZhajinhuaDelPlayerResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: zhajinhua.IExitGameZjhResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a ZhajinhuaDelPlayerResp message from the specified reader or buffer.
+         * Decodes an ExitGameZjhResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns ZhajinhuaDelPlayerResp
+         * @returns ExitGameZjhResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaDelPlayerResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ExitGameZjhResp;
 
         /**
-         * Decodes a ZhajinhuaDelPlayerResp message from the specified reader or buffer, length delimited.
+         * Decodes an ExitGameZjhResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns ZhajinhuaDelPlayerResp
+         * @returns ExitGameZjhResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaDelPlayerResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ExitGameZjhResp;
 
         /**
-         * Verifies a ZhajinhuaDelPlayerResp message.
+         * Verifies an ExitGameZjhResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a ZhajinhuaDelPlayerResp message from a plain object. Also converts values to their respective internal types.
+         * Creates an ExitGameZjhResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns ZhajinhuaDelPlayerResp
+         * @returns ExitGameZjhResp
          */
-        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaDelPlayerResp;
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ExitGameZjhResp;
 
         /**
-         * Creates a plain object from a ZhajinhuaDelPlayerResp message. Also converts values to other types if specified.
-         * @param message ZhajinhuaDelPlayerResp
+         * Creates a plain object from an ExitGameZjhResp message. Also converts values to other types if specified.
+         * @param message ExitGameZjhResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: zhajinhua.ZhajinhuaDelPlayerResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: zhajinhua.ExitGameZjhResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this ZhajinhuaDelPlayerResp to JSON.
+         * Converts this ExitGameZjhResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

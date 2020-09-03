@@ -19,11 +19,11 @@ message ZhajinhuaPlayer {
 }
 
 
-message ZhajinhuaAddPlayerResp {
+message EnterGameZjhResp {
   ZhajinhuaPlayer Player = 1;
 }
 
-message ZhajinhuaDelPlayerResp {
+message ExitGameZjhResp {
   uint64 UserId = 1;
 }
 

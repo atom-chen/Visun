@@ -8,8 +8,8 @@ import LeafWsPacket from "../../../kernel/net/packet/LeafWsPacket";
 
 export enum zhajinhua_msgs {
     ZhajinhuaPlayer = 101,
-    ZhajinhuaAddPlayerResp = 102,
-    ZhajinhuaDelPlayerResp = 103,
+    EnterGameZjhResp = 102,
+    ExitGameZjhResp = 103,
     ZhajinhuaSceneResp = 104,
     ZhajinhuaStateFreeResp = 105,
     ZhajinhuaStateStartResp = 106,
@@ -35,8 +35,8 @@ export enum zhajinhua_msgs {
 
 export var zhajinhua_packet_define = {
     101: new LeafWsPacket(101, zhajinhua.ZhajinhuaPlayer, "zhajinhua.ZhajinhuaPlayer"),
-    102: new LeafWsPacket(102, zhajinhua.ZhajinhuaAddPlayerResp, "zhajinhua.ZhajinhuaAddPlayerResp"),
-    103: new LeafWsPacket(103, zhajinhua.ZhajinhuaDelPlayerResp, "zhajinhua.ZhajinhuaDelPlayerResp"),
+    102: new LeafWsPacket(102, zhajinhua.EnterGameZjhResp, "zhajinhua.EnterGameZjhResp"),
+    103: new LeafWsPacket(103, zhajinhua.ExitGameZjhResp, "zhajinhua.ExitGameZjhResp"),
     104: new LeafWsPacket(104, zhajinhua.ZhajinhuaSceneResp, "zhajinhua.ZhajinhuaSceneResp"),
     105: new LeafWsPacket(105, zhajinhua.ZhajinhuaStateFreeResp, "zhajinhua.ZhajinhuaStateFreeResp"),
     106: new LeafWsPacket(106, zhajinhua.ZhajinhuaStateStartResp, "zhajinhua.ZhajinhuaStateStartResp"),
@@ -62,8 +62,8 @@ export var zhajinhua_packet_define = {
 
 export class zhajinhua_request {
     public static ZhajinhuaPlayer( data:{ UserId:number, Name:string, Gold:number, SeatId:number, SeatState:number, IsSee:any, RecentScore:number, TotalScore:number, Cards:any } ) { zhajinhua_packet_define[101].sendToChannel(ChannelDefine.game, data, false); }
-    public static ZhajinhuaAddPlayerResp( data:{ Player:any } ) { zhajinhua_packet_define[102].sendToChannel(ChannelDefine.game, data, false); }
-    public static ZhajinhuaDelPlayerResp( data:{ UserId:number } ) { zhajinhua_packet_define[103].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterGameZjhResp( data:{ Player:any } ) { zhajinhua_packet_define[102].sendToChannel(ChannelDefine.game, data, false); }
+    public static ExitGameZjhResp( data:{ UserId:number } ) { zhajinhua_packet_define[103].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaSceneResp( data:{ TimeStamp:number, TotalScore:number, MinScore:number, Banker:number, Fighters:any[], Inning:string } ) { zhajinhua_packet_define[104].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateFreeResp( data:{ Times:any } ) { zhajinhua_packet_define[105].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateStartResp( data:{ Times:any } ) { zhajinhua_packet_define[106].sendToChannel(ChannelDefine.game, data, false); }
