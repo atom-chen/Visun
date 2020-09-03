@@ -1,15 +1,15 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
-import { zhajinhua } from "../../../../../../declares/zhajinhua";
-import LoginUser from "../../../../../common/script/model/LoginUser";
-import { zhajinhua_packet_define, zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua";
-import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
-import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
-import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
-import { ZjhFighterState } from "./ZjhDefine";
-import CommonUtil from "../../../../../kernel/utils/CommonUtil";
-import LoginMgr from "../../../../../common/script/model/LoginMgr";
-import { gamecomm } from "../../../../../../declares/gamecomm";
-import { gamecomm_msgs, gamecomm_packet_define } from "../../../../../common/script/proto/net_gamecomm";
+// import { zhajinhua } from "../../../../../../declares/zhajinhua";
+// import LoginUser from "../../../../../common/script/model/LoginUser";
+// import { zhajinhua_packet_define, zhajinhua_msgs } from "../../../../../common/script/proto/net_zhajinhua";
+// import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+// import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
+// import { newHandler, isNil } from "../../../../../kernel/utils/GlobalFuncs";
+// import { ZjhFighterState } from "./ZjhDefine";
+// import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+// import LoginMgr from "../../../../../common/script/model/LoginMgr";
+// import { gamecomm } from "../../../../../../declares/gamecomm";
+// import { gamecomm_msgs, gamecomm_packet_define } from "../../../../../common/script/proto/net_gamecomm";
 
 export default class ZjhServer extends ModelBase {
 	private static _instance:ZjhServer = null;
@@ -27,6 +27,7 @@ export default class ZjhServer extends ModelBase {
 
 	}
 
+	/*
 	private MaxFighterCnt:number = 5;
 	private _running:boolean = false;
 	private _seatFighters:Array<zhajinhua.ZhajinhuaPlayer> = [];	//参战玩家序列
@@ -455,4 +456,5 @@ export default class ZjhServer extends ModelBase {
 
 		TimerManager.delaySecond(3, newHandler(this.toReady, this));
 	}
+	*/
 }

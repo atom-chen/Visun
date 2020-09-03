@@ -91,10 +91,10 @@ export default class zjhUI extends BaseComponent {
     private playerIndex(player:zhajinhua.IZhajinhuaPlayer) : number {
 		if(isNil(player)){ return -1; }
         var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
-        if(isNil(player.SeatId)) { return -1; }
-        if(isNil(hero)) { return player.SeatId; }
-		if(hero.SeatId===0) { return player.SeatId; }
-		return (player.SeatId-hero.SeatId+MAX_SOLDIER) % MAX_SOLDIER;
+        if(isNil((player.MyInfo as gamecomm.IPlayerInfo).ChairID)) { return -1; }
+        if(isNil(hero)) { return (player.MyInfo as gamecomm.IPlayerInfo).ChairID; }
+		if((hero.MyInfo as gamecomm.IPlayerInfo).ChairID===0) { return (player.MyInfo as gamecomm.IPlayerInfo).ChairID; }
+		return ((player.MyInfo as gamecomm.IPlayerInfo).ChairID-(hero.MyInfo as gamecomm.IPlayerInfo).ChairID+MAX_SOLDIER) % MAX_SOLDIER;
     }
 
     private playerIdx(uid:number) : number {
@@ -139,21 +139,21 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(uid);
         if(idx >= 0) {
             this._pnodes[idx].active = true;
-            this._playerCpns[idx].setName(man.Name);
-            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(man.Gold));
-            this._playerCpns[idx].setHeadImg(man["FaceID"]);
-            this._pnodes[idx].getChildByName("ust_kanpai").active = man.IsSee == true && man.UserId!=LoginUser.getInstance().UserId;
-            this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.SeatState == ZjhFighterState.readyed;
-            if(man.SeatState == ZjhFighterState.genzhu) {
+            this._playerCpns[idx].setName((man.MyInfo as gamecomm.IPlayerInfo).Name);
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney((man.MyInfo as gamecomm.IPlayerInfo).Gold));
+            this._playerCpns[idx].setHeadImg((man.MyInfo as gamecomm.IPlayerInfo).FaceID);
+            this._pnodes[idx].getChildByName("ust_kanpai").active = man.IsSee == true && (man.MyInfo as gamecomm.IPlayerInfo).UserID!=LoginUser.getInstance().UserId;
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
+            if(man.MyInfo.Sate == ZjhFighterState.genzhu) {
                 this._stateCpns[idx].genzhu();
             }
-            else if(man.SeatState == ZjhFighterState.jiazhu) {
+            else if(man.MyInfo.Sate == ZjhFighterState.jiazhu) {
                 this._stateCpns[idx].jiazhu();
             }
-            else if(man.SeatState == ZjhFighterState.qipai) {
+            else if(man.MyInfo.Sate == ZjhFighterState.qipai) {
                 this._stateCpns[idx].qipai();
             }
-            else if(man.SeatState == ZjhFighterState.bipaishu) {
+            else if(man.MyInfo.Sate == ZjhFighterState.bipaishu) {
                 this._stateCpns[idx].bipaishu();
             }
             else {
@@ -168,8 +168,8 @@ export default class zjhUI extends BaseComponent {
                 this._handors[idx].resetCards(man.Cards.Cards);
                 this._handors[idx].playOpen();
             }
-            CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState(man.SeatState));
-            this._playerCpns[idx].setLabGray(this.isLoseFightState(man.SeatState));
+            CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
+            this._playerCpns[idx].setLabGray(this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
         }
     }
 
@@ -194,12 +194,12 @@ export default class zjhUI extends BaseComponent {
             return;
         }
         if(flag) {
-            this.refreshFighter(man.UserId);
+            this.refreshFighter((man.MyInfo as gamecomm.IPlayerInfo).UserID);
         }
     }
 
     EnterGameZjhResp(param:zhajinhua.IEnterGameZjhResp) {
-        this.refreshFighter(param.Player.UserId);
+        this.refreshFighter((param.Player.MyInfo as gamecomm.IPlayerInfo).UserID);
     }
 
     ExitGameZjhResp(param:zhajinhua.IExitGameZjhResp) {
@@ -245,7 +245,7 @@ export default class zjhUI extends BaseComponent {
 
         var mans = ZjhMgr.getInstance().getPlayerList();
         for(var uid in mans) {
-            this.playBetAni(mans[uid].UserId, CommonUtil.fixRealMoney(mans[uid].TotalScore));
+            this.playBetAni((mans[uid].MyInfo as gamecomm.IPlayerInfo).UserID, CommonUtil.fixRealMoney(mans[uid].TotalScore));
         }
     }
 
@@ -307,7 +307,7 @@ export default class zjhUI extends BaseComponent {
         TimerManager.delaySecond(4, newHandler(function(){
             var mans = ZjhMgr.getInstance().getPlayerList();
             for(var m in mans) {
-                this.playBetAni(mans[m].UserId, 5);
+                this.playBetAni((mans[m].MyInfo as gamecomm.IPlayerInfo).UserID, 5);
             }
         }, this));
     }
@@ -423,7 +423,7 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[idx].getChildByName("ust_kanpai").active = true && param.UserId != LoginUser.getInstance().UserId;
         }
         var man = ZjhMgr.getInstance().getPlayer(param.UserId);
-        if(man && man.UserId == LoginUser.getInstance().UserId) {
+        if(man && (man.MyInfo as gamecomm.IPlayerInfo).UserID == LoginUser.getInstance().UserId) {
             this._handors[idx].resetCards(man.Cards.Cards);
             this._handors[idx].playOpen();
         }
@@ -447,16 +447,13 @@ export default class zjhUI extends BaseComponent {
 
         this.playBetAni(param.AttackerId, 100);
 
-        var tipStr = cc.js.formatStr("%s和%s比牌，%s赢", mgr.getPlayer(param.AttackerId).Name, mgr.getPlayer(param.HitId).Name, mgr.getPlayer(param.WinnerId).Name)
-        UIManager.toast(tipStr);
-
         var manP = ZjhMgr.getInstance().getPlayer(param.AttackerId);
         var manK = ZjhMgr.getInstance().getPlayer(param.HitId);
         var pkinfo = {
             phead: manP && manP["FaceID"] || 1004,
             khead: manK && manK["FaceID"] || 2006,
-            pname: manP && manP.Name || param.AttackerId,
-            kname: manK && manK.Name || param.HitId,
+            pname: manP && (manP.MyInfo as gamecomm.IPlayerInfo).Name || param.AttackerId,
+            kname: manK && (manK.MyInfo as gamecomm.IPlayerInfo).Name || param.HitId,
             winner: winStr
         }
         UIManager.openPopwnd(ViewDefine.UIpk, false, pkinfo);
@@ -490,7 +487,7 @@ export default class zjhUI extends BaseComponent {
     GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
         var man = ZjhMgr.getInstance().getPlayer(param.UserID);
         if(man) {
-            man.Gold = param.Gold;
+            (man.MyInfo as gamecomm.IPlayerInfo).Gold = param.Gold;
         }
         var idx = this.playerIdx(param.UserID);
         if(idx >= 0) {
@@ -586,8 +583,8 @@ export default class zjhUI extends BaseComponent {
         var man:zhajinhua.IZhajinhuaPlayer = null;
         if(idx >= 0) {
             man = this.getPlayerByIndex(idx);
-            if(!isNil(man) && man.UserId != LoginUser.getInstance().UserId) {
-                this._bipaiTarget = man.UserId;
+            if(!isNil(man) && (man.MyInfo as gamecomm.IPlayerInfo).UserID != LoginUser.getInstance().UserId) {
+                this._bipaiTarget = (man.MyInfo as gamecomm.IPlayerInfo).UserID;
             }
         }
         
@@ -595,7 +592,7 @@ export default class zjhUI extends BaseComponent {
 
         if(this._bipaiTarget > 0) {
             var id1 = LoginUser.getInstance().UserId;
-            var id2 = man.UserId;
+            var id2 = (man.MyInfo as gamecomm.IPlayerInfo).UserID;
             var idx1 = this.playerIdx(id1);
             var idx2 = this.playerIdx(id2);
             if(idx1 >= 0 && idx2 >= 0) {

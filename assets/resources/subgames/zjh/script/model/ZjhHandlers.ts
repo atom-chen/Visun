@@ -12,13 +12,7 @@ var ZjhHandlers = {
 		if(param.GameID != GameManager.getInstance().getGameId()) {
 			return;
 		}
-		var info:gamecomm.IPlayerInfo = param.UserInfo;
 		var man:zhajinhua.IZhajinhuaPlayer = {};
-		man.UserId = info.UserID;
-		man.Gold = info.Gold;
-		man.Name = info.Name;
-	//	man.SeatId = info.ChairID;
-	//	man.SeatState = info.Sate;
 		ZjhMgr.getInstance().addPlayer(man);
 	},
 
@@ -75,21 +69,21 @@ var ZjhHandlers = {
 	[zhajinhua_msgs.ZhajinhuaReadyResp] : function(param:zhajinhua.IZhajinhuaReadyResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFighterState.readyed;
+			man.MyInfo.Sate = ZjhFighterState.readyed;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaFollowResp] : function(param:zhajinhua.IZhajinhuaFollowResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFighterState.genzhu;
+			man.MyInfo.Sate = ZjhFighterState.genzhu;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaRaiseResp] : function(param:zhajinhua.IZhajinhuaRaiseResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFighterState.jiazhu;
+			man.MyInfo.Sate = ZjhFighterState.jiazhu;
 		}
 	},
 
@@ -107,14 +101,14 @@ var ZjhHandlers = {
 		}
 		var man = ZjhMgr.getInstance().getPlayer(loser);
 		if(man) {
-			man.SeatState = ZjhFighterState.bipaishu;
+			man.MyInfo.Sate = ZjhFighterState.bipaishu;
 		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaGiveupResp] : function(param) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
-			man.SeatState = ZjhFighterState.qipai;
+			man.MyInfo.Sate = ZjhFighterState.qipai;
 		}
 	},
 

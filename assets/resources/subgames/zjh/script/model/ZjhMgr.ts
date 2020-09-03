@@ -3,6 +3,7 @@ import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import { ZjhGameState } from "./ZjhDefine";
+import { gamecomm } from "../../../../../../declares/gamecomm";
 
 export default class ZjhMgr extends ModelBase {
 	private static _instance:ZjhMgr = null;
@@ -41,10 +42,10 @@ export default class ZjhMgr extends ModelBase {
     }
 
     addPlayer(man:zhajinhua.IZhajinhuaPlayer) {
-        if(isNil(this._players[man.UserId])) {
-            this._players[man.UserId] = man;
+        if(isNil(this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID])) {
+            this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID] = man;
         } else {
-            CommonUtil.simpleCopy(this._players[man.UserId], man);
+            CommonUtil.simpleCopy(this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID], man);
         }
     }
 
