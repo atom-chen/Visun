@@ -432,6 +432,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaSceneResp.prototype.Banker = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         ZhajinhuaSceneResp.prototype.Fighters = $util.emptyArray;
         ZhajinhuaSceneResp.prototype.Inning = "";
+        ZhajinhuaSceneResp.prototype.NoReadyTime = 0;
 
         ZhajinhuaSceneResp.create = function create(properties) {
             return new ZhajinhuaSceneResp(properties);
@@ -453,6 +454,8 @@ $root.zhajinhua = (function() {
                     $root.zhajinhua.ZhajinhuaPlayer.encode(message.Fighters[i], writer.uint32(42).fork()).ldelim();
             if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
                 writer.uint32(50).string(message.Inning);
+            if (message.NoReadyTime != null && Object.hasOwnProperty.call(message, "NoReadyTime"))
+                writer.uint32(56).int32(message.NoReadyTime);
             return writer;
         };
 
@@ -486,6 +489,9 @@ $root.zhajinhua = (function() {
                     break;
                 case 6:
                     message.Inning = reader.string();
+                    break;
+                case 7:
+                    message.NoReadyTime = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -528,6 +534,9 @@ $root.zhajinhua = (function() {
             if (message.Inning != null && message.hasOwnProperty("Inning"))
                 if (!$util.isString(message.Inning))
                     return "Inning: string expected";
+            if (message.NoReadyTime != null && message.hasOwnProperty("NoReadyTime"))
+                if (!$util.isInteger(message.NoReadyTime))
+                    return "NoReadyTime: integer expected";
             return null;
         };
 
@@ -583,6 +592,8 @@ $root.zhajinhua = (function() {
             }
             if (object.Inning != null)
                 message.Inning = String(object.Inning);
+            if (object.NoReadyTime != null)
+                message.NoReadyTime = object.NoReadyTime | 0;
             return message;
         };
 
@@ -614,6 +625,7 @@ $root.zhajinhua = (function() {
                 } else
                     object.Banker = options.longs === String ? "0" : 0;
                 object.Inning = "";
+                object.NoReadyTime = 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -642,6 +654,8 @@ $root.zhajinhua = (function() {
             }
             if (message.Inning != null && message.hasOwnProperty("Inning"))
                 object.Inning = message.Inning;
+            if (message.NoReadyTime != null && message.hasOwnProperty("NoReadyTime"))
+                object.NoReadyTime = message.NoReadyTime;
             return object;
         };
 
