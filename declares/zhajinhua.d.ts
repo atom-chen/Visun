@@ -5,20 +5,8 @@ export namespace zhajinhua {
     /** Properties of a ZhajinhuaPlayer. */
     interface IZhajinhuaPlayer {
 
-        /** ZhajinhuaPlayer UserId */
-        UserId?: (number|Long|null);
-
-        /** ZhajinhuaPlayer Name */
-        Name?: (string|null);
-
-        /** ZhajinhuaPlayer Gold */
-        Gold?: (number|Long|null);
-
-        /** ZhajinhuaPlayer SeatId */
-        SeatId?: (number|null);
-
-        /** ZhajinhuaPlayer SeatState */
-        SeatState?: (number|null);
+        /** ZhajinhuaPlayer MyInfo */
+        MyInfo?: (gamecomm.IPlayerInfo|null);
 
         /** ZhajinhuaPlayer IsSee */
         IsSee?: (boolean|null);
@@ -42,20 +30,8 @@ export namespace zhajinhua {
          */
         constructor(properties?: zhajinhua.IZhajinhuaPlayer);
 
-        /** ZhajinhuaPlayer UserId. */
-        public UserId: (number|Long);
-
-        /** ZhajinhuaPlayer Name. */
-        public Name: string;
-
-        /** ZhajinhuaPlayer Gold. */
-        public Gold: (number|Long);
-
-        /** ZhajinhuaPlayer SeatId. */
-        public SeatId: number;
-
-        /** ZhajinhuaPlayer SeatState. */
-        public SeatState: number;
+        /** ZhajinhuaPlayer MyInfo. */
+        public MyInfo?: (gamecomm.IPlayerInfo|null);
 
         /** ZhajinhuaPlayer IsSee. */
         public IsSee: boolean;

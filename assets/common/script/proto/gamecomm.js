@@ -11,6 +11,18 @@ $root.gamecomm = (function() {
 
     var gamecomm = {};
 
+    gamecomm.PlayerState = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "PlayerLookOn"] = 0;
+        values[valuesById[1] = "PlayerSitDown"] = 1;
+        values[valuesById[2] = "PlayerAgree"] = 2;
+        values[valuesById[3] = "PlayerCall"] = 3;
+        values[valuesById[4] = "PlayerPlaying"] = 4;
+        values[valuesById[5] = "PlayerPickUp"] = 5;
+        values[valuesById[6] = "PlayerStandUp"] = 6;
+        return values;
+    })();
+
     gamecomm.PlayerInfo = (function() {
 
         function PlayerInfo(properties) {

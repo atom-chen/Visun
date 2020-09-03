@@ -2,6 +2,17 @@ import * as $protobuf from "protobufjs";
 /** Namespace gamecomm. */
 export namespace gamecomm {
 
+    /** PlayerState enum. */
+    enum PlayerState {
+        PlayerLookOn = 0,
+        PlayerSitDown = 1,
+        PlayerAgree = 2,
+        PlayerCall = 3,
+        PlayerPlaying = 4,
+        PlayerPickUp = 5,
+        PlayerStandUp = 6
+    }
+
     /** Properties of a PlayerInfo. */
     interface IPlayerInfo {
 

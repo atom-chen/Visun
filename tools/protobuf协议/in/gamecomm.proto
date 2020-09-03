@@ -3,6 +3,18 @@ package gamecomm;
 
 //该协议文件不提供 req 和 resp 注:如需使用,请在子游戏协议中嵌套相关协议.
 
+enum PlayerState {
+   	PlayerLookOn    = 0; 	 //旁观(可作为刚入场时的初始状态)
+	PlayerSitDown   = 1;     //坐下(此状态下，才能参与游戏)
+	PlayerAgree     = 2;     //同意(可作为准备状态)
+	PlayerCall      = 3;     //叫分
+	PlayerPlaying   = 4;     //游戏
+	PlayerPickUp    = 5;     //托管
+	PlayerStandUp   = 6;     //站起(可作为结束状态)
+}
+
+
+
 //玩家信息
 message PlayerInfo {
   uint64 UserID = 1; //ID

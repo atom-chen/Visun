@@ -3,19 +3,16 @@ package zhajinhua;
 import "gamecomm.proto";
 
 
-//战士信息
+//玩家信息
+//未准备 == PlayerSitDown
+//已准备 == PlayerAgree
+//正在游戏 ==	PlayerPlaying
 message ZhajinhuaPlayer {
-  uint64 UserId = 1;
-  string Name = 2;        //玩家名字
-  int64 Gold = 3;         // 金币
-  int32 SeatId = 4;       // 座位号
-  int32 SeatState = 5;    // 0：未准备 1：已准备 2：跟注 3：加注 4：弃牌 5：比牌 6：旁观
-  bool  IsSee = 6;        // 是否已看牌: true:已看 false:未看
-  int64 RecentScore = 7;  // 最新下注金额
-  int64 TotalScore = 8;   // 总共下注了多少
-  CardInfo Cards = 9;     // 看牌时和游戏结束时亮自己的牌时才有数据
-
-
+  PlayerInfo  MyInfo = 1;  //其中State
+  bool  IsSee =2;        // 是否已看牌: true:已看 false:未看
+  int64 RecentScore = 3;  // 最新下注金额
+  int64 TotalScore = 4;   // 总共下注了多少
+  CardInfo Cards = 5;     // 看牌时和游戏结束时亮自己的牌时才有数据
 }
 
 
