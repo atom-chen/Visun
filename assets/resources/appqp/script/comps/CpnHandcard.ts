@@ -6,6 +6,7 @@ import CpnPoker from "./CpnPoker";
 import RuleDdz from "../../../subgames/ddz/script/rule/RuleDdz";
 import DDzMgr from "../../../subgames/ddz/script/model/DDzMgr";
 import SlidePicker from "../../../subgames/ddz/script/rule/SlidePicker";
+import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 
 const {ccclass, property} = cc._decorator;
 
@@ -30,10 +31,26 @@ export default class CpnHandcard extends cc.Component {
     }
     
     public resetCards(cards:Array<PokerCode>|Uint8Array, bPlay:boolean) {
+        if(!isNil(cards) && cards.length == this.node.children.length) {
+            var bSame = true;
+            var childs = this.node.children;
+            for(var n=0; n<cards.length; n++) {
+                if(cards[i] != childs[i].getComponent(CpnPoker).getCode()) {
+                    bSame = false;
+                    break;
+                }
+            }
+            if(bSame) {
+                return;
+            }
+        }
+        
         this.clearCards();
+
         if(cards===null || cards===undefined) {
             return;
         }
+        
         if(bPlay) {
             for(var i=0, len=cards.length; i<len; i++) {
                 this.addCard(cards[i]).playFlip(i*0.1);
