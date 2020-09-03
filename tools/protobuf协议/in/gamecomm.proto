@@ -12,6 +12,8 @@ enum PlayerState {
 	PlayerStandUp   = 6;     //站起(可作为结束状态)
 	PlayerGiveUp   	= 7;     //放弃
 	PlayerCompareLose   = 8; //比牌失败
+	PlayerFollow   	= 9; 	 //跟牌
+	PlayerRaise   	= 10; 	 //加注
 }
 
 

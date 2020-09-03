@@ -12,7 +12,9 @@ export namespace gamecomm {
         PlayerPickUp = 5,
         PlayerStandUp = 6,
         PlayerGiveUp = 7,
-        PlayerCompareLose = 8
+        PlayerCompareLose = 8,
+        PlayerFollow = 9,
+        PlayerRaise = 10
     }
 
     /** Properties of a PlayerInfo. */

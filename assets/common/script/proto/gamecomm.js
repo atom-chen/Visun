@@ -22,6 +22,8 @@ $root.gamecomm = (function() {
         values[valuesById[6] = "PlayerStandUp"] = 6;
         values[valuesById[7] = "PlayerGiveUp"] = 7;
         values[valuesById[8] = "PlayerCompareLose"] = 8;
+        values[valuesById[9] = "PlayerFollow"] = 9;
+        values[valuesById[10] = "PlayerRaise"] = 10;
         return values;
     })();
 
@@ -194,6 +196,8 @@ $root.gamecomm = (function() {
                 case 6:
                 case 7:
                 case 8:
+                case 9:
+                case 10:
                     break;
                 }
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
@@ -284,6 +288,14 @@ $root.gamecomm = (function() {
             case "PlayerCompareLose":
             case 8:
                 message.Sate = 8;
+                break;
+            case "PlayerFollow":
+            case 9:
+                message.Sate = 9;
+                break;
+            case "PlayerRaise":
+            case 10:
+                message.Sate = 10;
                 break;
             }
             if (object.PlatformID != null)
