@@ -158,15 +158,19 @@ export default class zjhUI extends BaseComponent {
             }
             else {
                 this._stateCpns[idx].idle();
-                this._pnodes[idx].getChildByName("ust_yizhunbei").active = false;
             }
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
             // if(man.IsSee == true) {
             //     this._handors[idx].resetCards(man.Cards.Cards);
             //     this._handors[idx].playOpen();
             // }
-            if(uid == LoginUser.getInstance().UserId && man.IsSee) {
-                this._handors[idx].resetCards(man.Cards.Cards);
-                this._handors[idx].playOpen();
+            if(ZjhMgr.getInstance().GameState != ZjhGameState.ready) {
+                if(uid == LoginUser.getInstance().UserId && man.IsSee) {
+                    this._handors[idx].resetCards(man.Cards.Cards);
+                    this._handors[idx].playOpen();
+                } else {
+                    this._handors[idx].resetCards([0,0,0]);
+                }
             }
             CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
             this._playerCpns[idx].setLabGray(this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
@@ -260,7 +264,6 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.zhuang.position = this._zhuangPos;
 
         for(var i in this._stateCpns){
-            this._stateCpns[i].idle();
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
@@ -337,6 +340,7 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns[i].node.active = idx == i;
             if(idx == i) {
                 this._cdCpns[i].setRemainCD(param.Times.TotalTime, param.Times.WaitTime);
+                this._stateCpns[i].idle();
             }
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
