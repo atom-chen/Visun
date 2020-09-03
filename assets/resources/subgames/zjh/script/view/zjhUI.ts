@@ -131,12 +131,6 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
-    private resetFighters() {
-        for(var n=0; n<MAX_SOLDIER; n++) {
-            this.refreshSeat(n);
-        }
-    }
-
     private refreshFighter(uid) {
         var man = ZjhMgr.getInstance().getPlayer(uid);
         var idx = this.playerIdx(uid);
@@ -189,14 +183,16 @@ export default class zjhUI extends BaseComponent {
         return null;
     }
 
-    refreshSeat(idx:number) {
+    refreshSeat(idx:number, flag:boolean = true) {
         if(idx < 0) { return; }
         var man = this.getSeatPlayer(idx);
         if(isNil(man)) {
             this._pnodes[idx].active = false;
             return;
         }
-        this.refreshFighter(man.UserId);
+        if(flag) {
+            this.refreshFighter(man.UserId);
+        }
     }
 
     ZhajinhuaAddPlayerResp(param:zhajinhua.IZhajinhuaAddPlayerResp) {
@@ -204,9 +200,25 @@ export default class zjhUI extends BaseComponent {
     }
 
     ZhajinhuaDelPlayerResp(param:zhajinhua.IZhajinhuaDelPlayerResp) {
-        var idx = this.playerIdx(param.UserId);
-        if(idx >= 0) {
-            this._pnodes[idx].active = false;
+        for(var n=0; n<MAX_SOLDIER; n++) {
+            this.refreshSeat(n, false);
+        }
+    }
+
+    EnterGameResp(param:gamecomm.IEnterGameResp) {
+        if(param.GameID != GameManager.getInstance().getGameId()) {
+			return;
+		}
+        var idx = this.playerIdx(param.UserInfo.UserID);
+        this.refreshSeat(idx);
+    }
+
+    ExitGameResp(param:gamecomm.IExitGameResp) {
+        if(param.GameID == GameManager.getInstance().getGameId()) {
+			return;
+		}
+        for(var n=0; n<MAX_SOLDIER; n++) {
+            this.refreshSeat(n, false);
         }
     }
 
@@ -321,7 +333,7 @@ export default class zjhUI extends BaseComponent {
         var idx = this.playerIdx(param.UserID);
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._cdCpns[i].node.active = idx == i;
-            this._cdCpns[i].setRemainCD(15, 15);
+            this._cdCpns[i].setRemainCD(param.Times.TotalTime, param.Times.WaitTime);
         }
     }
 
@@ -464,34 +476,6 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
-    EnterGameResp(param:gamecomm.IEnterGameResp) {
-        if(param.GameID != GameManager.getInstance().getGameId()) {
-			return;
-		}
-		var info:gamecomm.IPlayerInfo = param.UserInfo;
-		var man:zhajinhua.IZhajinhuaPlayer = {};
-		man.UserId = info.UserID;
-		man.Gold = info.Gold;
-		man.Name = info.Name;
-		man.SeatId = info.ChairID;
-		man.SeatState = info.Sate;
-        ZjhMgr.getInstance().addPlayer(man);
-        
-        var idx = this.playerIdx(info.UserID);
-        this.refreshSeat(idx);
-    }
-
-    ExitGameResp(param:gamecomm.IExitGameResp) {
-        if(param.GameID == GameManager.getInstance().getGameId()) {
-			return;
-		}
-        ZjhMgr.getInstance().removePlayer(param.UserID);
-        var idx = this.playerIdx(param.UserID);
-        if(idx >= 0) {
-            this._pnodes[idx].active = false;
-        }
-    }
-
     initNetEvent() {
         EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaSceneResp, this.ZhajinhuaSceneResp, this);
@@ -510,8 +494,8 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.resetFighters, this);
-        EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.resetFighters, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
     }
 
     initUIEvent() {
