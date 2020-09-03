@@ -364,6 +364,7 @@ export default class zjhUI extends BaseComponent {
 
     //结算数据
     ZhajinhuaOverResp(param:zhajinhua.IZhajinhuaOverResp) {
+        if(isNil(param)) { return; }
         UIManager.toast("赢家ID：" + param.WinnerId);
         if(param.Infos) {
             for(var i in param.Infos) {
@@ -373,14 +374,28 @@ export default class zjhUI extends BaseComponent {
         this.playJiesuan(param);
     }
     playJiesuan(param:zhajinhua.IZhajinhuaOverResp) {
+        if(isNil(param)) { return; }
+        var idx = this.playerIdx(param.WinnerId);
+        
         var childs = this.m_ui.chipLayer.children;
-        for(var i in childs) {
-            childs[i].runAction(cc.sequence(
-                cc.moveTo(0.2, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
-                cc.destroySelf()
-            ))
-        }
 
+        if(idx >= 0) {
+            for(var i=0; i<childs.length; i++) {
+                childs[i].runAction(cc.sequence(
+                    cc.moveTo(0.2, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
+                    cc.delayTime(0.03*i),
+                    cc.moveTo(0.2, cc.v2(this._pnodes[idx].x, this._pnodes[idx].y)),
+                    cc.destroySelf()
+                ));
+            }
+        } else {
+            for(var i=0; i<childs.length; i++) {
+                childs[i].runAction(cc.sequence(
+                    cc.moveTo(0.2, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
+                    cc.destroySelf()
+                ));
+            }
+        }
     }
 
     //跟注
