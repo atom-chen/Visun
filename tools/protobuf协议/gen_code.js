@@ -162,39 +162,42 @@ function doGenerate() {
 
 		//遍历proto文件中的message定义
 		for(var msgName in ptoJs) {
-			var cmdId = getCmdId();
 			var argInfo = ptoJs[msgName];
-	
-			//client begin
-			enumStr += "    " + msgName + " = " + cmdId + ",\n";
-	
-			cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + ", \"" + mudname+"."+msgName + "\"" + "),\n";
-			
-			reqStr += "    public static "+msgName+"( data:"+getRequestParam(argInfo)+" ) ";
-			reqStr += "{ ";
-			reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
-			reqStr += "}\n";
+			if(argInfo.values != null && argInfo.values != undefined && (argInfo.fields == null || argInfo.fields == undefined)) {
+				console.log("enum不生成为协议", msgName);
+			} else {
+				var cmdId = getCmdId();
+				//client begin
+				enumStr += "    " + msgName + " = " + cmdId + ",\n";
+					
+				cmdTblStr += "    " + cmdId + ": new LeafWsPacket(" + cmdId + ", " + mudname+"."+msgName + ", \"" + mudname+"."+msgName + "\"" + "),\n";
 
-			clientHandleStr += "    [" + mudname+"_msgs"+"."+msgName + "] : function(param: any) {\n";
-			clientHandleStr += "\n";
-			clientHandleStr += "    },\n\n"
-			//client end
+				reqStr += "    public static "+msgName+"( data:"+getRequestParam(argInfo)+" ) ";
+				reqStr += "{ ";
+				reqStr += mudname+"_packet_define["+cmdId+"].sendToChannel(ChannelDefine."+channelName+", data, false); ";
+				reqStr += "}\n";
+
+				clientHandleStr += "    [" + mudname+"_msgs"+"."+msgName + "] : function(param: any) {\n";
+				clientHandleStr += "\n";
+				clientHandleStr += "    },\n\n"
+				//client end
 
 
-			//server begin
-			msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
+				//server begin
+				msgStr += "    RegisterMessage(&protoMsg." + msgName + "{})\n";
 
-			routerStr += "    msg.ProcessorProto.SetRouter(&protoMsg."+ msgName +"{}, "+ curRouter +".ChanRPC)\n";
+				routerStr += "    msg.ProcessorProto.SetRouter(&protoMsg."+ msgName +"{}, "+ curRouter +".ChanRPC)\n";
 
-			handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
+				handStr += "    handleMsg(&protoMsg." +msgName+ "{}, handle" + msgName + ")\n";
 
-			funcStr += "// \n";
-			funcStr += "func handle"+msgName+"(args []interface{}) {\n";
-			funcStr += "    m := args[0].(*protoMsg."+msgName+")\n";
-			funcStr += "    a := args[1].(gate.Agent)\n";
-			funcStr += '    log.Debug("[receive]'+msgName+':->%v", m)\n';
-			funcStr += "\n}\n\n";
-			//server end
+				funcStr += "// \n";
+				funcStr += "func handle"+msgName+"(args []interface{}) {\n";
+				funcStr += "    m := args[0].(*protoMsg."+msgName+")\n";
+				funcStr += "    a := args[1].(gate.Agent)\n";
+				funcStr += '    log.Debug("[receive]'+msgName+':->%v", m)\n';
+				funcStr += "\n}\n\n";
+				//server end
+			}
 		}
 	
 		//client begin
