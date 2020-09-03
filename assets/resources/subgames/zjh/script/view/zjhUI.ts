@@ -87,6 +87,11 @@ export default class zjhUI extends BaseComponent {
      //   ZjhServer.getInstance().run();
     }
 
+    onDestroy() {
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().removeObserver(ZjhHandlers);
+        super.onDestroy();
+    }
+
     //玩家的UI位置
     private playerIndex(player:zhajinhua.IZhajinhuaPlayer) : number {
 		if(isNil(player)){ return -1; }
