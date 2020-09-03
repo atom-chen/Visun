@@ -29,14 +29,13 @@ export default class WsChannel implements IChannel {
 	constructor(name:string) {
 		this._name = name;
 		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
-		//	this.setPaused(true);
+			this.disconnect();
 		}, this);
 		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
-		//	this.setPaused(false);
-		//	this.force_reconnect();
-			if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
-				this.notifyState();
-			}
+			this.force_reconnect();
+			// if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
+			// 	this.notifyState();
+			// }
 		}, this);
 	}
 

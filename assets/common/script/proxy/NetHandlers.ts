@@ -8,6 +8,8 @@ import { login } from "../../../../declares/login";
 import LoginMgr from "../model/LoginMgr";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
+import SceneManager from "../../../kernel/view/SceneManager";
+import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 
 
 var NetHandlers = {
@@ -33,6 +35,12 @@ var NetHandlers = {
 
         if(param.InGameID && param.InGameID > 0) {
             GameManager.getInstance().enterGame(param.InGameID);
+        } else {
+            if(GameManager.getInstance().getGameId() > 0 && SceneManager.curSceneName == KernelUIDefine.GameScene.name) {
+                UIManager.openDialog("dlg_game_miss", "游戏已解散", 1, function(){
+                    GameManager.getInstance().quitGame(true);
+                });
+            }
         }
     },
 
