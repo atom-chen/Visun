@@ -44,11 +44,11 @@ var ZjhHandlers = {
 		ZjhMgr.getInstance().removePlayer(param.UserID);
 	},
 
-	[zhajinhua_msgs.ZhajinhuaAddPlayerResp] : function(param:zhajinhua.IZhajinhuaAddPlayerResp) {
+	[zhajinhua_msgs.EnterGameZjhResp] : function(param:zhajinhua.IEnterGameZjhResp) {
 		ZjhMgr.getInstance().addPlayer(param.Player);
 	},
 
-	[zhajinhua_msgs.ZhajinhuaDelPlayerResp] : function(param:zhajinhua.IZhajinhuaDelPlayerResp) {
+	[zhajinhua_msgs.ExitGameZjhResp] : function(param:zhajinhua.IExitGameZjhResp) {
 		ZjhMgr.getInstance().removePlayer(param.UserId);
 	},
 

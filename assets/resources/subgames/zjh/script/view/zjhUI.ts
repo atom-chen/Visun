@@ -195,11 +195,11 @@ export default class zjhUI extends BaseComponent {
         }
     }
 
-    ZhajinhuaAddPlayerResp(param:zhajinhua.IZhajinhuaAddPlayerResp) {
+    EnterGameZjhResp(param:zhajinhua.IEnterGameZjhResp) {
         this.refreshFighter(param.Player.UserId);
     }
 
-    ZhajinhuaDelPlayerResp(param:zhajinhua.IZhajinhuaDelPlayerResp) {
+    ExitGameZjhResp(param:zhajinhua.IExitGameZjhResp) {
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshSeat(n, false);
         }
@@ -492,8 +492,8 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaHostResp, this.ZhajinhuaHostResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
-        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaAddPlayerResp, this.ZhajinhuaAddPlayerResp, this);
-        EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaDelPlayerResp, this.ZhajinhuaDelPlayerResp, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.EnterGameZjhResp, this.EnterGameZjhResp, this);
+        EventCenter.getInstance().listen(zhajinhua_msgs.ExitGameZjhResp, this.ExitGameZjhResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
     }
