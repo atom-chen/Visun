@@ -428,7 +428,7 @@ $root.zhajinhua = (function() {
 
         ZhajinhuaSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaSceneResp.prototype.TotalScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        ZhajinhuaSceneResp.prototype.MinScore = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ZhajinhuaSceneResp.prototype.MinScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaSceneResp.prototype.Banker = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         ZhajinhuaSceneResp.prototype.Fighters = $util.emptyArray;
         ZhajinhuaSceneResp.prototype.Inning = "";
@@ -446,7 +446,7 @@ $root.zhajinhua = (function() {
             if (message.TotalScore != null && Object.hasOwnProperty.call(message, "TotalScore"))
                 writer.uint32(16).int64(message.TotalScore);
             if (message.MinScore != null && Object.hasOwnProperty.call(message, "MinScore"))
-                writer.uint32(24).uint64(message.MinScore);
+                writer.uint32(24).int64(message.MinScore);
             if (message.Banker != null && Object.hasOwnProperty.call(message, "Banker"))
                 writer.uint32(32).uint64(message.Banker);
             if (message.Fighters != null && message.Fighters.length)
@@ -477,7 +477,7 @@ $root.zhajinhua = (function() {
                     message.TotalScore = reader.int64();
                     break;
                 case 3:
-                    message.MinScore = reader.uint64();
+                    message.MinScore = reader.int64();
                     break;
                 case 4:
                     message.Banker = reader.uint64();
@@ -564,13 +564,13 @@ $root.zhajinhua = (function() {
                     message.TotalScore = new $util.LongBits(object.TotalScore.low >>> 0, object.TotalScore.high >>> 0).toNumber();
             if (object.MinScore != null)
                 if ($util.Long)
-                    (message.MinScore = $util.Long.fromValue(object.MinScore)).unsigned = true;
+                    (message.MinScore = $util.Long.fromValue(object.MinScore)).unsigned = false;
                 else if (typeof object.MinScore === "string")
                     message.MinScore = parseInt(object.MinScore, 10);
                 else if (typeof object.MinScore === "number")
                     message.MinScore = object.MinScore;
                 else if (typeof object.MinScore === "object")
-                    message.MinScore = new $util.LongBits(object.MinScore.low >>> 0, object.MinScore.high >>> 0).toNumber(true);
+                    message.MinScore = new $util.LongBits(object.MinScore.low >>> 0, object.MinScore.high >>> 0).toNumber();
             if (object.Banker != null)
                 if ($util.Long)
                     (message.Banker = $util.Long.fromValue(object.Banker)).unsigned = true;
@@ -615,7 +615,7 @@ $root.zhajinhua = (function() {
                 } else
                     object.TotalScore = options.longs === String ? "0" : 0;
                 if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
+                    var long = new $util.Long(0, 0, false);
                     object.MinScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.MinScore = options.longs === String ? "0" : 0;
@@ -641,7 +641,7 @@ $root.zhajinhua = (function() {
                 if (typeof message.MinScore === "number")
                     object.MinScore = options.longs === String ? String(message.MinScore) : message.MinScore;
                 else
-                    object.MinScore = options.longs === String ? $util.Long.prototype.toString.call(message.MinScore) : options.longs === Number ? new $util.LongBits(message.MinScore.low >>> 0, message.MinScore.high >>> 0).toNumber(true) : message.MinScore;
+                    object.MinScore = options.longs === String ? $util.Long.prototype.toString.call(message.MinScore) : options.longs === Number ? new $util.LongBits(message.MinScore.low >>> 0, message.MinScore.high >>> 0).toNumber() : message.MinScore;
             if (message.Banker != null && message.hasOwnProperty("Banker"))
                 if (typeof message.Banker === "number")
                     object.Banker = options.longs === String ? String(message.Banker) : message.Banker;

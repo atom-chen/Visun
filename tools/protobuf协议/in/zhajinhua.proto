@@ -33,11 +33,11 @@ message ExitGameZjhResp {
 
 //入场
 message ZhajinhuaSceneResp {
-  int64 TimeStamp = 1;                  //时间戳
-  int64 TotalScore = 2;                 //当前总下注额
-  uint64 MinScore = 3;                  //当前注额
-  uint64 Banker = 4;                    //当前庄家
-  repeated ZhajinhuaPlayer Fighters = 5;//参战玩家序列
+  int64 TimeStamp = 1;                  // 时间戳
+  int64 TotalScore = 2;                 // 当前总下注额
+  int64 MinScore = 3;                   // 当前注额
+  uint64 Banker = 4;                    // 当前庄家
+  repeated ZhajinhuaPlayer Fighters = 5;// 参战玩家序列
   string Inning = 6;                    // 牌局号
   int32  NoReadyTime = 7;               // 最长不准备
 }
