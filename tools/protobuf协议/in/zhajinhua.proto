@@ -40,6 +40,7 @@ message ZhajinhuaSceneResp {
   repeated ZhajinhuaPlayer Fighters = 5;// 参战玩家序列
   string Inning = 6;                    // 牌局号
   int32  NoReadyTime = 7;               // 最长不准备
+  int64 LimitScore = 8;                 // 上限金币
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算

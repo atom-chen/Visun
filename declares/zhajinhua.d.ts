@@ -331,6 +331,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp NoReadyTime */
         NoReadyTime?: (number|null);
+
+        /** ZhajinhuaSceneResp LimitScore */
+        LimitScore?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaSceneResp. */
@@ -362,6 +365,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp NoReadyTime. */
         public NoReadyTime: number;
+
+        /** ZhajinhuaSceneResp LimitScore. */
+        public LimitScore: (number|Long);
 
         /**
          * Creates a new ZhajinhuaSceneResp instance using the specified properties.

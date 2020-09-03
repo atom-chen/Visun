@@ -433,6 +433,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaSceneResp.prototype.Fighters = $util.emptyArray;
         ZhajinhuaSceneResp.prototype.Inning = "";
         ZhajinhuaSceneResp.prototype.NoReadyTime = 0;
+        ZhajinhuaSceneResp.prototype.LimitScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         ZhajinhuaSceneResp.create = function create(properties) {
             return new ZhajinhuaSceneResp(properties);
@@ -456,6 +457,8 @@ $root.zhajinhua = (function() {
                 writer.uint32(50).string(message.Inning);
             if (message.NoReadyTime != null && Object.hasOwnProperty.call(message, "NoReadyTime"))
                 writer.uint32(56).int32(message.NoReadyTime);
+            if (message.LimitScore != null && Object.hasOwnProperty.call(message, "LimitScore"))
+                writer.uint32(64).int64(message.LimitScore);
             return writer;
         };
 
@@ -492,6 +495,9 @@ $root.zhajinhua = (function() {
                     break;
                 case 7:
                     message.NoReadyTime = reader.int32();
+                    break;
+                case 8:
+                    message.LimitScore = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -537,6 +543,9 @@ $root.zhajinhua = (function() {
             if (message.NoReadyTime != null && message.hasOwnProperty("NoReadyTime"))
                 if (!$util.isInteger(message.NoReadyTime))
                     return "NoReadyTime: integer expected";
+            if (message.LimitScore != null && message.hasOwnProperty("LimitScore"))
+                if (!$util.isInteger(message.LimitScore) && !(message.LimitScore && $util.isInteger(message.LimitScore.low) && $util.isInteger(message.LimitScore.high)))
+                    return "LimitScore: integer|Long expected";
             return null;
         };
 
@@ -594,6 +603,15 @@ $root.zhajinhua = (function() {
                 message.Inning = String(object.Inning);
             if (object.NoReadyTime != null)
                 message.NoReadyTime = object.NoReadyTime | 0;
+            if (object.LimitScore != null)
+                if ($util.Long)
+                    (message.LimitScore = $util.Long.fromValue(object.LimitScore)).unsigned = false;
+                else if (typeof object.LimitScore === "string")
+                    message.LimitScore = parseInt(object.LimitScore, 10);
+                else if (typeof object.LimitScore === "number")
+                    message.LimitScore = object.LimitScore;
+                else if (typeof object.LimitScore === "object")
+                    message.LimitScore = new $util.LongBits(object.LimitScore.low >>> 0, object.LimitScore.high >>> 0).toNumber();
             return message;
         };
 
@@ -626,6 +644,11 @@ $root.zhajinhua = (function() {
                     object.Banker = options.longs === String ? "0" : 0;
                 object.Inning = "";
                 object.NoReadyTime = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.LimitScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.LimitScore = options.longs === String ? "0" : 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -656,6 +679,11 @@ $root.zhajinhua = (function() {
                 object.Inning = message.Inning;
             if (message.NoReadyTime != null && message.hasOwnProperty("NoReadyTime"))
                 object.NoReadyTime = message.NoReadyTime;
+            if (message.LimitScore != null && message.hasOwnProperty("LimitScore"))
+                if (typeof message.LimitScore === "number")
+                    object.LimitScore = options.longs === String ? String(message.LimitScore) : message.LimitScore;
+                else
+                    object.LimitScore = options.longs === String ? $util.Long.prototype.toString.call(message.LimitScore) : options.longs === Number ? new $util.LongBits(message.LimitScore.low >>> 0, message.LimitScore.high >>> 0).toNumber() : message.LimitScore;
             return object;
         };
 
