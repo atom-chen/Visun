@@ -54,6 +54,7 @@ export default class zjhUI extends BaseComponent {
     private _bipaiTarget = -1;
     private ksyxSpn:cc.Node = null;
     private tmrFapaiAni = 0;
+    private tmrCheckKickout = 0;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -274,6 +275,27 @@ export default class zjhUI extends BaseComponent {
 
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
+
+        if(this.quietCheck() && !TimerManager.isValid(this.tmrCheckKickout)) {
+            this.tmrCheckKickout = TimerManager.delaySecond(6, newHandler(function(tmr){
+                if(this.quietCheck()) {
+                    cc.log("长时间未准备踢出场");
+                    GameManager.getInstance().quitGame();
+                }
+            }, this));
+        }
+    }
+
+    quietCheck() : boolean {
+        var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+        if(!isNil(hero)) {
+            if(ZjhMgr.getInstance().GameState == ZjhGameState.ready && hero.MyInfo.Sate == ZjhFighterState.idle) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     //开始游戏: 播发牌动画
@@ -281,6 +303,8 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
         this.m_ui.readyNode.active = false;
+        
+        this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
 
         for(var i=0; i<MAX_SOLDIER; i++){
             var man = this.getPlayerByIndex(i);
@@ -390,6 +414,7 @@ export default class zjhUI extends BaseComponent {
 
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
+        this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
     }
 
     //战斗阶段-比牌
@@ -402,6 +427,7 @@ export default class zjhUI extends BaseComponent {
         this.ksyxSpn = null;
         this.refreshCards(false);
         this.selectBipaiTarget(-1);
+        this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
     }
 
     //结算阶段
@@ -418,6 +444,7 @@ export default class zjhUI extends BaseComponent {
         this.ksyxSpn = null;
         this.refreshCards(true);
         this.selectBipaiTarget(-1);
+        this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
     }
 
     //结算数据
