@@ -7566,7 +7566,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 74.02,
+      "width": 64.01,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7617,8 +7617,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "底注：10",
-    "_N$string": "底注：10",
+    "_string": "底注：0",
+    "_N$string": "底注：0",
     "_fontSize": 18,
     "_lineHeight": 20,
     "_enableWrapText": true,
@@ -7724,8 +7724,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "第1/20轮",
-    "_N$string": "第1/20轮",
+    "_string": "第0/20轮",
+    "_N$string": "第0/20轮",
     "_fontSize": 18,
     "_lineHeight": 20,
     "_enableWrapText": true,
@@ -7780,7 +7780,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 110.02,
+      "width": 100.01,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7831,8 +7831,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "最低下注：10",
-    "_N$string": "最低下注：10",
+    "_string": "最低下注：0",
+    "_N$string": "最低下注：0",
     "_fontSize": 18,
     "_lineHeight": 20,
     "_enableWrapText": true,
@@ -7887,7 +7887,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 92.02,
+      "width": 82.01,
       "height": 25.2
     },
     "_anchorPoint": {
@@ -7938,8 +7938,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "总下注：10",
-    "_N$string": "总下注：10",
+    "_string": "总下注：0",
+    "_N$string": "总下注：0",
     "_fontSize": 18,
     "_lineHeight": 20,
     "_enableWrapText": true,
