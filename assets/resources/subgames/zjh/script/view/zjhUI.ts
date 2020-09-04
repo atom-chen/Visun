@@ -166,18 +166,6 @@ export default class zjhUI extends BaseComponent {
                 this._stateCpns[idx].idle();
             }
             
-            // if(man.IsSee == true) {
-            //     this._handors[idx].resetCards(man.Cards.Cards);
-            //     this._handors[idx].playOpen();
-            // }
-            if(ZjhMgr.getInstance().GameState != ZjhGameState.ready) {
-                if(uid == LoginUser.getInstance().UserId && man.IsSee) {
-                    this._handors[idx].resetCards(man.Cards.Cards);
-                    this._handors[idx].playOpen();
-                } else {
-                    this._handors[idx].resetCards([0,0,0]);
-                }
-            }
             CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
             this._playerCpns[idx].setLabGray(this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
         }
@@ -343,7 +331,25 @@ export default class zjhUI extends BaseComponent {
 			chipSpr.runAction( gj );
 		else
 			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
-	}
+    }
+    
+    refreshCards() {
+        for(var nn=0; nn<MAX_SOLDIER; nn++) {
+            var man = this.getPlayerByIndex(nn);
+            if(!isNil(man)) {
+                if(man.MyInfo.UserID == LoginUser.getInstance().UserId && man.IsSee) {
+                    this._handors[nn].resetCards(man.Cards.Cards);
+                    this._handors[nn].playOpen(false);
+                } else {
+                    if(man.MyInfo.Sate != ZjhFighterState.idle) {
+                        this._handors[nn].resetCards([0,0,0]);
+                    } else {
+                        this._handors[nn].resetCards(null);
+                    }
+                }
+            }
+        }
+    }
 
     //战斗阶段-轮到新操作者
     ZhajinhuaStatePlayingResp(param:zhajinhua.IZhajinhuaStatePlayingResp) {
@@ -353,19 +359,7 @@ export default class zjhUI extends BaseComponent {
 
         var idx = this.playerIdx(param.UserID);
 
-        var man = ZjhMgr.getInstance().getPlayer(param.UserID);
-        if(man) {
-            if(param.UserID == LoginUser.getInstance().UserId && man.IsSee) {
-                this._handors[idx].resetCards(man.Cards.Cards);
-                this._handors[idx].playOpen(false);
-            } else {
-                if(man.MyInfo.Sate == ZjhFighterState.idle) {
-                    this._handors[idx].resetCards(null);
-                } else {
-                    this._handors[idx].resetCards([0,0,0]);
-                }
-            }
-        }
+        this.refreshCards();
 
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._cdCpns[i].node.active = idx == i;
@@ -388,6 +382,7 @@ export default class zjhUI extends BaseComponent {
             this.ZhajinhuaCompareResp(param.Info);
         }
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.refreshCards();
     }
 
     //结算阶段
@@ -401,6 +396,7 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.refreshCards();
     }
 
     //结算数据
