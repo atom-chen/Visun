@@ -35,7 +35,7 @@ export default class CpnHandcard extends cc.Component {
             var bSame = true;
             var childs = this.node.children;
             for(var n=0; n<cards.length; n++) {
-                if(cards[i] != childs[i].getComponent(CpnPoker).getCode()) {
+                if(cards[n] != childs[n].getComponent(CpnPoker).getCode()) {
                     bSame = false;
                     break;
                 }
