@@ -54,6 +54,7 @@ export default class zjhUI extends BaseComponent {
     private _zhuangPos = null;
     private _bipaiTarget = -1;
     private ksyxSpn:cc.Node = null;
+    private tmrFapaiAni = 0;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -294,7 +295,7 @@ export default class zjhUI extends BaseComponent {
             }
         });
 
-        TimerManager.delaySecond(3, newHandler(function(){
+        this.tmrFapaiAni = TimerManager.delaySecond(3, newHandler(function(){
             var nn = 0;
             for(var i=0; i<MAX_SOLDIER; i++){
                 var man:zhajinhua.IZhajinhuaPlayer = this.getPlayerByIndex(i);
@@ -314,7 +315,9 @@ export default class zjhUI extends BaseComponent {
         TimerManager.delaySecond(4, newHandler(function(){
             var mans = ZjhMgr.getInstance().getPlayerList();
             for(var m in mans) {
-                this.playBetAni((mans[m].MyInfo as gamecomm.IPlayerInfo).UserID, 5);
+                if(mans[m].MyInfo.Sate != ZjhFighterState.idle) {
+                    this.playBetAni((mans[m].MyInfo as gamecomm.IPlayerInfo).UserID, 5);
+                }
             }
         }, this));
     }
@@ -334,6 +337,9 @@ export default class zjhUI extends BaseComponent {
     }
     
     refreshCards() {
+        TimerManager.delTimer(this.tmrFapaiAni);
+        this.tmrFapaiAni = 0;
+        
         for(var nn=0; nn<MAX_SOLDIER; nn++) {
             var man = this.getPlayerByIndex(nn);
             if(!isNil(man)) {
