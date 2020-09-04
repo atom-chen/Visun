@@ -19,6 +19,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards */
         Cards?: (gamecomm.ICardInfo|null);
+
+        /** ZhajinhuaPlayer Compares */
+        Compares?: ((number|Long)[]|null);
     }
 
     /** Represents a ZhajinhuaPlayer. */
@@ -44,6 +47,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Cards. */
         public Cards?: (gamecomm.ICardInfo|null);
+
+        /** ZhajinhuaPlayer Compares. */
+        public Compares: (number|Long)[];
 
         /**
          * Creates a new ZhajinhuaPlayer instance using the specified properties.
@@ -2103,7 +2109,7 @@ export namespace zhajinhua {
         WinnerId?: (number|Long|null);
 
         /** ZhajinhuaOverResp Infos */
-        Infos?: (gamecomm.IGoldChangeInfo[]|null);
+        Infos?: (zhajinhua.IZhajinhuaPlayer[]|null);
     }
 
     /** Represents a ZhajinhuaOverResp. */
@@ -2119,7 +2125,7 @@ export namespace zhajinhua {
         public WinnerId: (number|Long);
 
         /** ZhajinhuaOverResp Infos. */
-        public Infos: gamecomm.IGoldChangeInfo[];
+        public Infos: zhajinhua.IZhajinhuaPlayer[];
 
         /**
          * Creates a new ZhajinhuaOverResp instance using the specified properties.
