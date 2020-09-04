@@ -209,12 +209,6 @@ export default class zjhUI extends BaseComponent {
         this.refreshFighter((param.Player.MyInfo as gamecomm.IPlayerInfo).UserID);
     }
 
-    ExitGameZjhResp(param:zhajinhua.IExitGameZjhResp) {
-        for(var n=0; n<MAX_SOLDIER; n++) {
-            this.refreshPlayerByIndex(n, false);
-        }
-    }
-
     EnterGameResp(param:gamecomm.IEnterGameResp) {
         if(param.GameID != GameManager.getInstance().getGameId()) {
 			return;
@@ -347,14 +341,14 @@ export default class zjhUI extends BaseComponent {
 			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
     }
     
-    refreshCards() {
+    refreshCards(bJiesuan:boolean) {
         TimerManager.delTimer(this.tmrFapaiAni);
         this.tmrFapaiAni = 0;
         
         for(var nn=0; nn<MAX_SOLDIER; nn++) {
             var man = this.getPlayerByIndex(nn);
             if(!isNil(man)) {
-                if(man.MyInfo.UserID == LoginUser.getInstance().UserId && man.IsSee) {
+                if(man.MyInfo.UserID == LoginUser.getInstance().UserId && (man.IsSee || bJiesuan)) {
                     this._handors[nn].resetCards(man.Cards.Cards);
                     this._handors[nn].playOpen(false);
                 } else {
@@ -376,7 +370,7 @@ export default class zjhUI extends BaseComponent {
 
         var idx = this.playerIdx(param.UserID);
 
-        this.refreshCards();
+        this.refreshCards(false);
 
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._cdCpns[i].node.active = idx == i;
@@ -399,7 +393,7 @@ export default class zjhUI extends BaseComponent {
             this.ZhajinhuaCompareResp(param.Info);
         }
         CommonUtil.safeDelete(this.ksyxSpn);
-        this.refreshCards();
+        this.refreshCards(false);
     }
 
     //结算阶段
@@ -413,7 +407,7 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
         CommonUtil.safeDelete(this.ksyxSpn);
-        this.refreshCards();
+        this.refreshCards(true);
     }
 
     //结算数据
@@ -586,7 +580,6 @@ export default class zjhUI extends BaseComponent {
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaOverResp, this.ZhajinhuaOverResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.ZhajinhuaReadyResp, this.ZhajinhuaReadyResp, this);
         EventCenter.getInstance().listen(zhajinhua_msgs.EnterGameZjhResp, this.EnterGameZjhResp, this);
-        EventCenter.getInstance().listen(zhajinhua_msgs.ExitGameZjhResp, this.ExitGameZjhResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
     }

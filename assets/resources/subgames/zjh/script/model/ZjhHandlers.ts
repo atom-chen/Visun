@@ -27,10 +27,6 @@ var ZjhHandlers = {
 		ZjhMgr.getInstance().addPlayer(param.Player);
 	},
 
-	[zhajinhua_msgs.ExitGameZjhResp] : function(param:zhajinhua.IExitGameZjhResp) {
-		ZjhMgr.getInstance().removePlayer(param.UserId);
-	},
-
 	[zhajinhua_msgs.ZhajinhuaStateFreeResp] : function(param:zhajinhua.IZhajinhuaStateFreeResp) {
 		ZjhMgr.getInstance().GameState = ZjhGameState.ready;
 		var mans = ZjhMgr.getInstance().getPlayerList();
