@@ -127,13 +127,22 @@ export default class EventCenter {
 
 		if(arglist.length < 1) {
 			for(var i = 0, len = evtList.length; i < len; i++) {
-				var listener = evtList[i];
-				listener.callBack.call(listener.target);
+				try{
+					var listener = evtList[i];
+					listener.callBack.call(listener.target);
+				} catch(e) {
+					cc.warn(e);
+				}
+				
 			}
 		} else {
 			for(var i = 0, len = evtList.length; i < len; i++) {
-				var listener = evtList[i];
-				listener.callBack.apply(listener.target, arglist);
+				try{
+					var listener = evtList[i];
+					listener.callBack.apply(listener.target, arglist);
+				} catch(ee) {
+					cc.warn(ee);
+				}
 			}
 		}
 
@@ -151,13 +160,21 @@ export default class EventCenter {
 
 		if(arglist.length < 1) {
 			for(var i = 0, len = evtList.length; i < len; i++) {
-				var listener = evtList[i];
-				listener.callBack.call(listener.target);
+				try{
+					var listener = evtList[i];
+					listener.callBack.call(listener.target);
+				} catch(e) {
+					cc.warn(e);
+				}
 			}
 		} else {
 			for(var i = 0, len = evtList.length; i < len; i++) {
-				var listener = evtList[i];
-				listener.callBack.apply(listener.target, arglist);
+				try{
+					var listener = evtList[i];
+					listener.callBack.apply(listener.target, arglist);
+				} catch(ee) {
+					cc.warn(ee);
+				}
 			}
 		}
 
