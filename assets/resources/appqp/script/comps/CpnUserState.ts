@@ -30,7 +30,6 @@ export default class CpnUserState extends cc.Component {
 
     onDestroy() {
         Preloader.resDispatcher.removeByTarget(this);
-        super.onDestroy();
     }
 
     private _st = 0;
