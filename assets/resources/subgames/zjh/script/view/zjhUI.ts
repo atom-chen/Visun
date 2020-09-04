@@ -279,6 +279,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.zhuang.active = false;
 
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.ksyxSpn = null;
     }
 
     //开始游戏: 播发牌动画
@@ -384,6 +385,7 @@ export default class zjhUI extends BaseComponent {
         }
 
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.ksyxSpn = null;
     }
 
     //战斗阶段-比牌
@@ -393,6 +395,7 @@ export default class zjhUI extends BaseComponent {
             this.ZhajinhuaCompareResp(param.Info);
         }
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.ksyxSpn = null;
         this.refreshCards(false);
     }
 
@@ -407,6 +410,7 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
         CommonUtil.safeDelete(this.ksyxSpn);
+        this.ksyxSpn = null;
         this.refreshCards(true);
     }
 
