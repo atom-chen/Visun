@@ -1,4 +1,5 @@
 import EventCenter from "../basic/event/EventCenter";
+import CommonUtil from "./CommonUtil";
 
 export default class Preloader {
 	static resDispatcher = new EventCenter();
@@ -43,7 +44,7 @@ export default class Preloader {
 				cc.log("[track %s][animation %s] complete: %s", trackEntry.trackIndex, animationName, loopCount);
 				if(listeners && listeners.on_complete){ listeners.on_complete(sk, trackEntry); }
 				if(loopTimes>0 && loopCount>=loopTimes) {
-					obj.removeFromParent(true);
+					CommonUtil.safeDelete(obj);
 				}
 			});
 		}
