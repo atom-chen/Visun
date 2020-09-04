@@ -164,7 +164,7 @@ export default class zjhUI extends BaseComponent {
             else {
                 this._stateCpns[idx].idle();
             }
-            this._pnodes[idx].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
+            
             // if(man.IsSee == true) {
             //     this._handors[idx].resetCards(man.Cards.Cards);
             //     this._handors[idx].playOpen();
@@ -268,12 +268,16 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.zhuang.stopAllActions();
         this.m_ui.zhuang.position = this._zhuangPos;
 
-        for(var i in this._stateCpns){
+        for(var i=0; i<MAX_SOLDIER; i++){
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
             CommonUtil.grayNode(this._pnodes[i], false);
             this._playerCpns[i].setLabGray(false);
+            var man = this.getPlayerByIndex(i);
+            if(!isNil(man)) {
+                this._pnodes[i].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
+            }
         }
 
         this.m_ui.chipLayer.removeAllChildren();
