@@ -50,7 +50,6 @@ export default class zjhUI extends BaseComponent {
     private _stateCpns:Array<CpnUserState> = [];
     private _cdCpns:Array<CpnCircleCD> = [];
 
-    private _tmrState = 0;
     private _zhuangPos = null;
     private _bipaiTarget = -1;
     private ksyxSpn:cc.Node = null;
@@ -210,17 +209,11 @@ export default class zjhUI extends BaseComponent {
     }
 
     EnterGameResp(param:gamecomm.IEnterGameResp) {
-        if(param.GameID != GameManager.getInstance().getGameId()) {
-			return;
-		}
         var idx = this.playerIdx(param.UserInfo.UserID);
         this.refreshPlayerByIndex(idx);
     }
 
     ExitGameResp(param:gamecomm.IExitGameResp) {
-        if(param.GameID == GameManager.getInstance().getGameId()) {
-			return;
-		}
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshPlayerByIndex(n, false);
         }
@@ -240,7 +233,7 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
         
         if(param.Banker) {
-            this.ZhajinhuaHostResp({BankerID:param.Banker});
+            this.playDingzhuan(param.Banker, false);
         }
 
         for(var n=0; n<MAX_SOLDIER; n++) {
@@ -257,25 +250,26 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateFreeResp(param:zhajinhua.IZhajinhuaStateFreeResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
         this.m_ui.opLayer.active = false;
-
         this.m_ui.readyNode.active = true;
 
-        this.m_ui.zhuang.stopAllActions();
-        this.m_ui.zhuang.position = this._zhuangPos;
-
         for(var i=0; i<MAX_SOLDIER; i++){
+            var man = this.getPlayerByIndex(i);
+            this._pnodes[i].active = !isNil(man);
             this._cdCpns[i].node.active = false;
             this._handors[i].resetCards(null);
             this._pnodes[i].getChildByName("ust_kanpai").active = false;
             CommonUtil.grayNode(this._pnodes[i], false);
             this._playerCpns[i].setLabGray(false);
-            var man = this.getPlayerByIndex(i);
+            
             if(!isNil(man)) {
                 this._pnodes[i].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
             }
         }
 
         this.m_ui.chipLayer.removeAllChildren();
+        this.selectBipaiTarget(-1);
+
+        this.playDingzhuan(-99, false);
         this.m_ui.zhuang.active = false;
 
         CommonUtil.safeDelete(this.ksyxSpn);
@@ -286,8 +280,21 @@ export default class zjhUI extends BaseComponent {
     ZhajinhuaStateStartResp(param:zhajinhua.IZhajinhuaStateStartResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
         this.m_ui.opLayer.active = false;
-
         this.m_ui.readyNode.active = false;
+
+        for(var i=0; i<MAX_SOLDIER; i++){
+            var man = this.getPlayerByIndex(i);
+            this._pnodes[i].active = !isNil(man);
+            this._cdCpns[i].node.active = false;
+            this._handors[i].resetCards(null);
+            this._pnodes[i].getChildByName("ust_kanpai").active = false;
+            CommonUtil.grayNode(this._pnodes[i], false);
+            this._playerCpns[i].setLabGray(false);
+            
+            if(!isNil(man)) {
+                this._pnodes[i].getChildByName("ust_yizhunbei").active = man.MyInfo.Sate == ZjhFighterState.readyed;
+            }
+        }
 
         this.m_ui.chipLayer.removeAllChildren();
 
@@ -295,6 +302,9 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[n].getChildByName("ust_yizhunbei").active = false;
         }
 
+        this.playFapaiAni();
+    }
+    private playFapaiAni() {
         this.ksyxSpn = Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
                 CommonUtil.safeDelete(sk.node);
@@ -310,7 +320,7 @@ export default class zjhUI extends BaseComponent {
                     var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
                     for(var j=0; j<3; j++) {
                         nn++;
-                        this.bezierTo0(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                        CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
                     }
                 } else {
                     this._handors[i].resetCards(null);
@@ -327,20 +337,6 @@ export default class zjhUI extends BaseComponent {
             }
         }, this));
     }
-    private bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
-		if(!chipSpr) { return; }
-		chipSpr.setPosition(fromPos);
-		var gj = cc.bezierTo(duration, 
-			[
-				new cc.Vec2(fromPos.x+15,fromPos.y-20),
-				new cc.Vec2(fromPos.x+55,fromPos.y-140), 
-				new cc.Vec2(toPos.x,toPos.y)
-			]).easing(cc.easeInOut(2))
-		if(delay<=0)
-			chipSpr.runAction( gj );
-		else
-			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
-    }
     
     refreshCards(bJiesuan:boolean) {
         TimerManager.delTimer(this.tmrFapaiAni);
@@ -349,9 +345,17 @@ export default class zjhUI extends BaseComponent {
         for(var nn=0; nn<MAX_SOLDIER; nn++) {
             var man = this.getPlayerByIndex(nn);
             if(!isNil(man)) {
-                if(man.MyInfo.UserID == LoginUser.getInstance().UserId && (man.IsSee || bJiesuan)) {
-                    this._handors[nn].resetCards(man.Cards.Cards);
-                    this._handors[nn].playOpen(false);
+                if(man.MyInfo.UserID == LoginUser.getInstance().UserId) {
+                    if(man.IsSee || bJiesuan) {
+                        this._handors[nn].resetCards(man.Cards.Cards);
+                        this._handors[nn].playOpen(false);
+                    } else {
+                        if(man.MyInfo.Sate != ZjhFighterState.idle) {
+                            this._handors[nn].resetCards([0,0,0]);
+                        } else {
+                            this._handors[nn].resetCards(null);
+                        }
+                    }
                 } else {
                     if(man.MyInfo.Sate != ZjhFighterState.idle) {
                         this._handors[nn].resetCards([0,0,0]);
@@ -397,6 +401,7 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
         this.refreshCards(false);
+        this.selectBipaiTarget(-1);
     }
 
     //结算阶段
@@ -412,6 +417,7 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
         this.refreshCards(true);
+        this.selectBipaiTarget(-1);
     }
 
     //结算数据
@@ -420,7 +426,27 @@ export default class zjhUI extends BaseComponent {
         
         if(param.Infos) {
             for(var i in param.Infos) {
-                this.GoldChangeInfo(param.Infos[i]);
+                var cur = param.Infos[i];
+                for(var j in param.Infos[i].Compares) {
+                    var uid = cur.Compares[j];
+                    var idx = this.playerIdx(uid);
+                    if(idx >= 0) {
+                        var cardlist = cur.Cards && cur.Cards.Cards;
+                        if(isNil(cardlist) || cardlist.length <= 0) {
+                            cardlist = ZjhMgr.getInstance().getPlayer(uid).Cards.Cards;
+                        }
+                        this._handors[idx].resetCards(cardlist);
+                        this._handors[idx].playOpen();
+                    }
+                }
+
+                var tipStr = "";
+                if(cur.WinScore > 0) {
+                    tipStr += cur.MyInfo.Name + "赢" + cur.WinScore;
+                } else {
+                    tipStr += cur.MyInfo.Name + "输" + cur.WinScore;
+                }
+                UIManager.toast(tipStr);
             }
         }
         this.playJiesuan(param);
@@ -477,6 +503,7 @@ export default class zjhUI extends BaseComponent {
 
     //比牌
     ZhajinhuaCompareResp(param:zhajinhua.IZhajinhuaCompareResp) {
+        this.selectBipaiTarget(-1);
         var winStr = "sprK";
         var losser = param.AttackerId;
         if(losser == param.WinnerId) {
@@ -534,14 +561,30 @@ export default class zjhUI extends BaseComponent {
 
     //定庄
     ZhajinhuaHostResp(param:zhajinhua.IZhajinhuaHostResp) {
-        var idx = this.playerIdx(param.BankerID);
+        this.playDingzhuan(param.BankerID, true);
+    }
+
+    playDingzhuan(BankerID:number, bAni:boolean) {
+        this.m_ui.zhuang.stopAllActions();
+
+        if(BankerID < 0) {
+            this.m_ui.zhuang.position = this._zhuangPos;
+            return;
+        }
+
+        var idx = this.playerIdx(BankerID);
         if(idx >= 0) {
             var dstPos = cc.v3(this._pnodes[idx].position);
             dstPos.x += 50;
             dstPos.y += 75;
-            this.m_ui.zhuang.stopAllActions();
+            if(bAni) {
+                this.m_ui.zhuang.position = this._zhuangPos;
+                this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
+            } else {
+                this.m_ui.zhuang.position = dstPos;
+            }
+        } else {
             this.m_ui.zhuang.position = this._zhuangPos;
-            this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
         }
     }
 

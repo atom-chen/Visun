@@ -261,7 +261,7 @@ export default class UIManager {
 					}
 				}
 				this.node.destroy();
-			}, 1);
+			}, 2);
 		}
 		if(cc.loader.getRes(KernelUIDefine.UIToast, cc.Prefab)) {
 			completeCallback(null, cc.loader.getRes(KernelUIDefine.UIToast, cc.Prefab));

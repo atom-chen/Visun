@@ -590,6 +590,21 @@ export default class CommonUtil {
 		this.lineTo0(chipSpr, fromPos, toPos, duration, delay);
 	}
 
+	public static bezierTo3(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
+		if(!chipSpr) { return; }
+		chipSpr.setPosition(fromPos);
+		var gj = cc.bezierTo(duration, 
+			[
+				new cc.Vec2(fromPos.x+15,fromPos.y-20),
+				new cc.Vec2(fromPos.x+55,fromPos.y-140), 
+				new cc.Vec2(toPos.x,toPos.y)
+			]).easing(cc.easeInOut(2))
+		if(delay<=0)
+			chipSpr.runAction( gj );
+		else
+			chipSpr.runAction( cc.sequence(cc.delayTime(delay), gj) )
+	}
+	
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
 	public static bezierTo0(chipSpr:cc.Node, fromPos:cc.Vec2, toPos:cc.Vec2, duration:number, delay:number) {
 		if(!chipSpr) { return; }

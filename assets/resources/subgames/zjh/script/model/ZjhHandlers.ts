@@ -5,21 +5,17 @@ import { ZjhFighterState, ZjhGameState } from "./ZjhDefine";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import GameManager from "../../../../../common/script/model/GameManager";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 var ZjhHandlers = {
 
 	[gamecomm_msgs.EnterGameResp] : function(param:gamecomm.IEnterGameResp) {
-		if(param.GameID != GameManager.getInstance().getGameId()) {
-			return;
-		}
-		var man:zhajinhua.IZhajinhuaPlayer = {};
+		var man:any = {};
+		man.MyInfo = param.UserInfo;
 		ZjhMgr.getInstance().addPlayer(man);
 	},
 
 	[gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
-		if(param.GameID == GameManager.getInstance().getGameId()) {
-			return;
-		}
 		ZjhMgr.getInstance().removePlayer(param.UserID);
 	},
 
@@ -118,8 +114,28 @@ var ZjhHandlers = {
 		}
 	},
 
-	[zhajinhua_msgs.ZhajinhuaOverResp] : function(param) {
-		
+	[zhajinhua_msgs.ZhajinhuaOverResp] : function(param:zhajinhua.IZhajinhuaOverResp) {
+		if(param.Infos) {
+            for(var i in param.Infos) {
+                for(var j in param.Infos[i].Compares) {
+                    var cur = param.Infos[i];
+                    var uid = cur.Compares[j];
+					var cardlist = cur.Cards && cur.Cards.Cards;
+					var man = ZjhMgr.getInstance().getPlayer(uid);
+                    if(isNil(cardlist) || cardlist.length <= 0) {
+						if(isNil(man.Cards)) {
+							man.Cards = { Cards:[] };
+						}
+                        cardlist = man.Cards.Cards;
+                    } else {
+						if(isNil(man.Cards)) {
+							man.Cards = { Cards:[] };
+						}
+						man.Cards.Cards = cardlist;
+					}
+                }
+            }
+        }
 	},
 
 };
