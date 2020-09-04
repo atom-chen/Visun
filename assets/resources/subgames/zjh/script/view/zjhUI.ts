@@ -357,7 +357,11 @@ export default class zjhUI extends BaseComponent {
                 this._handors[idx].resetCards(man.Cards.Cards);
                 this._handors[idx].playOpen(false);
             } else {
-                this._handors[idx].resetCards([0,0,0]);
+                if(man.MyInfo.Sate == ZjhFighterState.idle) {
+                    this._handors[idx].resetCards(null);
+                } else {
+                    this._handors[idx].resetCards([0,0,0]);
+                }
             }
         }
 
@@ -366,6 +370,8 @@ export default class zjhUI extends BaseComponent {
             if(idx == i) {
                 this._cdCpns[i].setRemainCD(param.Times.TotalTime, param.Times.WaitTime);
                 this._stateCpns[i].idle();
+            } else {
+                this._cdCpns[i].setRunning(false);
             }
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
