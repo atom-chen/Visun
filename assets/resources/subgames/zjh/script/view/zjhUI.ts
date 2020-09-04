@@ -606,6 +606,11 @@ export default class zjhUI extends BaseComponent {
     selectBipaiTarget(idx:number) {
         this._bipaiTarget = -1;
 
+        var man = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+        if(isNil(man) || this.isLoseFightState(man.MyInfo.Sate)) {
+            return;
+        }
+
         var man:zhajinhua.IZhajinhuaPlayer = null;
         if(idx >= 0) {
             man = this.getPlayerByIndex(idx);
