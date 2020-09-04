@@ -14,6 +14,7 @@ $root.zhajinhua = (function() {
     zhajinhua.ZhajinhuaPlayer = (function() {
 
         function ZhajinhuaPlayer(properties) {
+            this.Compares = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -25,6 +26,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaPlayer.prototype.RecentScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.TotalScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.Cards = null;
+        ZhajinhuaPlayer.prototype.Compares = $util.emptyArray;
 
         ZhajinhuaPlayer.create = function create(properties) {
             return new ZhajinhuaPlayer(properties);
@@ -43,6 +45,12 @@ $root.zhajinhua = (function() {
                 writer.uint32(32).int64(message.TotalScore);
             if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
                 $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(42).fork()).ldelim();
+            if (message.Compares != null && message.Compares.length) {
+                writer.uint32(50).fork();
+                for (var i = 0; i < message.Compares.length; ++i)
+                    writer.uint64(message.Compares[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -71,6 +79,16 @@ $root.zhajinhua = (function() {
                     break;
                 case 5:
                     message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    if (!(message.Compares && message.Compares.length))
+                        message.Compares = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.Compares.push(reader.uint64());
+                    } else
+                        message.Compares.push(reader.uint64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -107,6 +125,13 @@ $root.zhajinhua = (function() {
                 var error = $root.gamecomm.CardInfo.verify(message.Cards);
                 if (error)
                     return "Cards." + error;
+            }
+            if (message.Compares != null && message.hasOwnProperty("Compares")) {
+                if (!Array.isArray(message.Compares))
+                    return "Compares: array expected";
+                for (var i = 0; i < message.Compares.length; ++i)
+                    if (!$util.isInteger(message.Compares[i]) && !(message.Compares[i] && $util.isInteger(message.Compares[i].low) && $util.isInteger(message.Compares[i].high)))
+                        return "Compares: integer|Long[] expected";
             }
             return null;
         };
@@ -145,6 +170,20 @@ $root.zhajinhua = (function() {
                     throw TypeError(".zhajinhua.ZhajinhuaPlayer.Cards: object expected");
                 message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
             }
+            if (object.Compares) {
+                if (!Array.isArray(object.Compares))
+                    throw TypeError(".zhajinhua.ZhajinhuaPlayer.Compares: array expected");
+                message.Compares = [];
+                for (var i = 0; i < object.Compares.length; ++i)
+                    if ($util.Long)
+                        (message.Compares[i] = $util.Long.fromValue(object.Compares[i])).unsigned = true;
+                    else if (typeof object.Compares[i] === "string")
+                        message.Compares[i] = parseInt(object.Compares[i], 10);
+                    else if (typeof object.Compares[i] === "number")
+                        message.Compares[i] = object.Compares[i];
+                    else if (typeof object.Compares[i] === "object")
+                        message.Compares[i] = new $util.LongBits(object.Compares[i].low >>> 0, object.Compares[i].high >>> 0).toNumber(true);
+            }
             return message;
         };
 
@@ -152,6 +191,8 @@ $root.zhajinhua = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.Compares = [];
             if (options.defaults) {
                 object.MyInfo = null;
                 object.IsSee = false;
@@ -183,6 +224,14 @@ $root.zhajinhua = (function() {
                     object.TotalScore = options.longs === String ? $util.Long.prototype.toString.call(message.TotalScore) : options.longs === Number ? new $util.LongBits(message.TotalScore.low >>> 0, message.TotalScore.high >>> 0).toNumber() : message.TotalScore;
             if (message.Cards != null && message.hasOwnProperty("Cards"))
                 object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
+            if (message.Compares && message.Compares.length) {
+                object.Compares = [];
+                for (var j = 0; j < message.Compares.length; ++j)
+                    if (typeof message.Compares[j] === "number")
+                        object.Compares[j] = options.longs === String ? String(message.Compares[j]) : message.Compares[j];
+                    else
+                        object.Compares[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Compares[j]) : options.longs === Number ? new $util.LongBits(message.Compares[j].low >>> 0, message.Compares[j].high >>> 0).toNumber(true) : message.Compares[j];
+            }
             return object;
         };
 
@@ -2611,7 +2660,7 @@ $root.zhajinhua = (function() {
                 writer.uint32(8).uint64(message.WinnerId);
             if (message.Infos != null && message.Infos.length)
                 for (var i = 0; i < message.Infos.length; ++i)
-                    $root.gamecomm.GoldChangeInfo.encode(message.Infos[i], writer.uint32(18).fork()).ldelim();
+                    $root.zhajinhua.ZhajinhuaPlayer.encode(message.Infos[i], writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -2632,7 +2681,7 @@ $root.zhajinhua = (function() {
                 case 2:
                     if (!(message.Infos && message.Infos.length))
                         message.Infos = [];
-                    message.Infos.push($root.gamecomm.GoldChangeInfo.decode(reader, reader.uint32()));
+                    message.Infos.push($root.zhajinhua.ZhajinhuaPlayer.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2658,7 +2707,7 @@ $root.zhajinhua = (function() {
                 if (!Array.isArray(message.Infos))
                     return "Infos: array expected";
                 for (var i = 0; i < message.Infos.length; ++i) {
-                    var error = $root.gamecomm.GoldChangeInfo.verify(message.Infos[i]);
+                    var error = $root.zhajinhua.ZhajinhuaPlayer.verify(message.Infos[i]);
                     if (error)
                         return "Infos." + error;
                 }
@@ -2686,7 +2735,7 @@ $root.zhajinhua = (function() {
                 for (var i = 0; i < object.Infos.length; ++i) {
                     if (typeof object.Infos[i] !== "object")
                         throw TypeError(".zhajinhua.ZhajinhuaOverResp.Infos: object expected");
-                    message.Infos[i] = $root.gamecomm.GoldChangeInfo.fromObject(object.Infos[i]);
+                    message.Infos[i] = $root.zhajinhua.ZhajinhuaPlayer.fromObject(object.Infos[i]);
                 }
             }
             return message;
@@ -2712,7 +2761,7 @@ $root.zhajinhua = (function() {
             if (message.Infos && message.Infos.length) {
                 object.Infos = [];
                 for (var j = 0; j < message.Infos.length; ++j)
-                    object.Infos[j] = $root.gamecomm.GoldChangeInfo.toObject(message.Infos[j], options);
+                    object.Infos[j] = $root.zhajinhua.ZhajinhuaPlayer.toObject(message.Infos[j], options);
             }
             return object;
         };

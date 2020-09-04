@@ -13,10 +13,11 @@ import "gamecomm.proto";
 //加注 		PlayerRaise   = 10; 
 message ZhajinhuaPlayer {
   PlayerInfo  MyInfo = 1;  //其中State
-  bool  IsSee =2;        // 是否已看牌: true:已看 false:未看
+  bool  IsSee = 2;        // 是否已看牌: true:已看 false:未看
   int64 RecentScore = 3;  // 最新下注金额
   int64 TotalScore = 4;   // 总共下注了多少
   CardInfo Cards = 5;     // 看牌时和游戏结束时亮自己的牌时才有数据
+  repeated uint64 Compares = 6;// 比过牌的用户
 }
 
 
@@ -138,6 +139,6 @@ message ZhajinhuaGiveupResp {
 
 //结算
 message ZhajinhuaOverResp {
-  uint64 WinnerId = 1;                //胜利者ID
-  repeated GoldChangeInfo Infos = 2;  //各玩家输赢情况
+  uint64 WinnerId = 1;                  // 胜利者ID
+  repeated ZhajinhuaPlayer Infos = 2;   // 各玩家输赢情况
 }
