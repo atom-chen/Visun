@@ -31,8 +31,14 @@ export default class WsChannel implements IChannel {
 		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
 			//this.disconnect();
 		}, this);
-		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function () {
-			//this.force_reconnect();
+		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function (passedTime) {
+			// if(passedTime > 1000) {
+			// 	this.force_reconnect();
+			// } else {
+			// 	if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
+			// 		this.notifyState();
+			// 	}
+			// }
 			if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
 				this.notifyState();
 			}
