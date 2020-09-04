@@ -175,6 +175,8 @@ export default class UIbjle extends BaseComponent {
         var fromObj = this.m_ui.btnPlayerlist; 
         if(param.UserID == LoginUser.getInstance().UserId) {
 			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNodeByValue(money);
+			LoginUser.getInstance().Gold -= param.BetScore;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 			this.isJoined = true;
         }
 		for(var j in nums) {
