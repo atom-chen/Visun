@@ -423,16 +423,16 @@ export default class zjhUI extends BaseComponent {
         if(idx >= 0) {
             for(var i=0; i<childs.length; i++) {
                 childs[i].runAction(cc.sequence(
-                    cc.moveTo(0.2, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
-                    cc.delayTime(0.03*i),
-                    cc.moveTo(0.2, cc.v2(this._pnodes[idx].x, this._pnodes[idx].y)),
+                    cc.moveTo(0.25, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
+                    cc.delayTime(0.05*i),
+                    cc.moveTo(0.25, cc.v2(this._pnodes[idx].x, this._pnodes[idx].y)),
                     cc.destroySelf()
                 ));
             }
         } else {
             for(var i=0; i<childs.length; i++) {
                 childs[i].runAction(cc.sequence(
-                    cc.moveTo(0.2, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
+                    cc.moveTo(0.25, cc.v2(this.m_ui.chipCen.x, this.m_ui.chipCen.y)),
                     cc.destroySelf()
                 ));
             }
