@@ -53,6 +53,7 @@ export default class zjhUI extends BaseComponent {
     private _tmrState = 0;
     private _zhuangPos = null;
     private _bipaiTarget = -1;
+    private ksyxSpn:cc.Node = null;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -282,6 +283,8 @@ export default class zjhUI extends BaseComponent {
 
         this.m_ui.chipLayer.removeAllChildren();
         this.m_ui.zhuang.active = false;
+
+        CommonUtil.safeDelete(this.ksyxSpn);
     }
 
     //开始游戏: 播发牌动画
@@ -297,9 +300,9 @@ export default class zjhUI extends BaseComponent {
             this._pnodes[n].getChildByName("ust_yizhunbei").active = false;
         }
 
-        Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
+        this.ksyxSpn = Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
             on_complete: (sk, trackEntry)=>{
-                CommonUtil.safeDelete(sk);
+                CommonUtil.safeDelete(sk.node);
             }
         });
 
@@ -366,6 +369,8 @@ export default class zjhUI extends BaseComponent {
             }
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
+
+        CommonUtil.safeDelete(this.ksyxSpn);
     }
 
     //战斗阶段-比牌
@@ -374,6 +379,7 @@ export default class zjhUI extends BaseComponent {
         if(param.Info) {
             this.ZhajinhuaCompareResp(param.Info);
         }
+        CommonUtil.safeDelete(this.ksyxSpn);
     }
 
     //结算阶段
@@ -386,6 +392,7 @@ export default class zjhUI extends BaseComponent {
             this._cdCpns[i].node.active = false;
             this._pnodes[i].getChildByName("ust_yizhunbei").active = false;
         }
+        CommonUtil.safeDelete(this.ksyxSpn);
     }
 
     //结算数据
