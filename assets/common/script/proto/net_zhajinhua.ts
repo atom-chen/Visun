@@ -59,7 +59,7 @@ export var zhajinhua_packet_define = {
 }
 
 export class zhajinhua_request {
-    public static ZhajinhuaPlayer( data:{ MyInfo:any, IsSee:any, RecentScore:number, TotalScore:number, Cards:any, Compares:number[] } ) { zhajinhua_packet_define[101].sendToChannel(ChannelDefine.game, data, false); }
+    public static ZhajinhuaPlayer( data:{ MyInfo:any, IsSee:any, RecentScore:number, TotalScore:number, Cards:any, Compares:number[], WinScore:number } ) { zhajinhua_packet_define[101].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGameZjhResp( data:{ Player:any, GameID:number } ) { zhajinhua_packet_define[102].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaSceneResp( data:{ TimeStamp:number, TotalScore:number, MinScore:number, Banker:number, Fighters:any[], Inning:string, NoReadyTime:number, LimitScore:number } ) { zhajinhua_packet_define[103].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateFreeResp( data:{ Times:any } ) { zhajinhua_packet_define[104].sendToChannel(ChannelDefine.game, data, false); }

@@ -27,6 +27,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaPlayer.prototype.TotalScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         ZhajinhuaPlayer.prototype.Cards = null;
         ZhajinhuaPlayer.prototype.Compares = $util.emptyArray;
+        ZhajinhuaPlayer.prototype.WinScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         ZhajinhuaPlayer.create = function create(properties) {
             return new ZhajinhuaPlayer(properties);
@@ -51,6 +52,8 @@ $root.zhajinhua = (function() {
                     writer.uint64(message.Compares[i]);
                 writer.ldelim();
             }
+            if (message.WinScore != null && Object.hasOwnProperty.call(message, "WinScore"))
+                writer.uint32(56).int64(message.WinScore);
             return writer;
         };
 
@@ -89,6 +92,9 @@ $root.zhajinhua = (function() {
                             message.Compares.push(reader.uint64());
                     } else
                         message.Compares.push(reader.uint64());
+                    break;
+                case 7:
+                    message.WinScore = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -133,6 +139,9 @@ $root.zhajinhua = (function() {
                     if (!$util.isInteger(message.Compares[i]) && !(message.Compares[i] && $util.isInteger(message.Compares[i].low) && $util.isInteger(message.Compares[i].high)))
                         return "Compares: integer|Long[] expected";
             }
+            if (message.WinScore != null && message.hasOwnProperty("WinScore"))
+                if (!$util.isInteger(message.WinScore) && !(message.WinScore && $util.isInteger(message.WinScore.low) && $util.isInteger(message.WinScore.high)))
+                    return "WinScore: integer|Long expected";
             return null;
         };
 
@@ -184,6 +193,15 @@ $root.zhajinhua = (function() {
                     else if (typeof object.Compares[i] === "object")
                         message.Compares[i] = new $util.LongBits(object.Compares[i].low >>> 0, object.Compares[i].high >>> 0).toNumber(true);
             }
+            if (object.WinScore != null)
+                if ($util.Long)
+                    (message.WinScore = $util.Long.fromValue(object.WinScore)).unsigned = false;
+                else if (typeof object.WinScore === "string")
+                    message.WinScore = parseInt(object.WinScore, 10);
+                else if (typeof object.WinScore === "number")
+                    message.WinScore = object.WinScore;
+                else if (typeof object.WinScore === "object")
+                    message.WinScore = new $util.LongBits(object.WinScore.low >>> 0, object.WinScore.high >>> 0).toNumber();
             return message;
         };
 
@@ -207,6 +225,11 @@ $root.zhajinhua = (function() {
                 } else
                     object.TotalScore = options.longs === String ? "0" : 0;
                 object.Cards = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.WinScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WinScore = options.longs === String ? "0" : 0;
             }
             if (message.MyInfo != null && message.hasOwnProperty("MyInfo"))
                 object.MyInfo = $root.gamecomm.PlayerInfo.toObject(message.MyInfo, options);
@@ -232,6 +255,11 @@ $root.zhajinhua = (function() {
                     else
                         object.Compares[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Compares[j]) : options.longs === Number ? new $util.LongBits(message.Compares[j].low >>> 0, message.Compares[j].high >>> 0).toNumber(true) : message.Compares[j];
             }
+            if (message.WinScore != null && message.hasOwnProperty("WinScore"))
+                if (typeof message.WinScore === "number")
+                    object.WinScore = options.longs === String ? String(message.WinScore) : message.WinScore;
+                else
+                    object.WinScore = options.longs === String ? $util.Long.prototype.toString.call(message.WinScore) : options.longs === Number ? new $util.LongBits(message.WinScore.low >>> 0, message.WinScore.high >>> 0).toNumber() : message.WinScore;
             return object;
         };
 

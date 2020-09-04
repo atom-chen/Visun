@@ -22,6 +22,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Compares */
         Compares?: ((number|Long)[]|null);
+
+        /** ZhajinhuaPlayer WinScore */
+        WinScore?: (number|Long|null);
     }
 
     /** Represents a ZhajinhuaPlayer. */
@@ -50,6 +53,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaPlayer Compares. */
         public Compares: (number|Long)[];
+
+        /** ZhajinhuaPlayer WinScore. */
+        public WinScore: (number|Long);
 
         /**
          * Creates a new ZhajinhuaPlayer instance using the specified properties.

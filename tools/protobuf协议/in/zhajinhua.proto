@@ -18,6 +18,7 @@ message ZhajinhuaPlayer {
   int64 TotalScore = 4;   // 总共下注了多少
   CardInfo Cards = 5;     // 看牌时和游戏结束时亮自己的牌时才有数据
   repeated uint64 Compares = 6;// 比过牌的用户
+  int64 WinScore = 7;         //输赢金币数
 }
 
 
