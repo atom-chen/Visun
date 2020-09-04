@@ -305,13 +305,15 @@ export default class zjhUI extends BaseComponent {
 
         TimerManager.delaySecond(3, newHandler(function(){
             var nn = 0;
-            for(var i in this._stateCpns){
+            for(var i=0; i<MAX_SOLDIER; i++){
                 this._handors[i].resetCards([0,0,0]);
-    
-                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-                for(var j=0; j<3; j++) {
-                    nn++;
-                    this.bezierTo0(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                var man:zhajinhua.IZhajinhuaPlayer = this.getPlayerByIndex(i);
+                if(!isNil(man) && man.MyInfo.Sate == ZjhFighterState.readyed) {
+                    var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                    for(var j=0; j<3; j++) {
+                        nn++;
+                        this.bezierTo0(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                    }
                 }
             }
         }, this));
