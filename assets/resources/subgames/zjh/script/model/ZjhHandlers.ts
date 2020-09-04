@@ -77,6 +77,8 @@ var ZjhHandlers = {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
 			man.MyInfo.Sate = ZjhFighterState.genzhu;
+			man.MyInfo.Gold -= param.Score;
+			ZjhMgr.getInstance().getEnterData().TotalScore += param.Score;
 		}
 	},
 
@@ -84,13 +86,8 @@ var ZjhHandlers = {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
 			man.MyInfo.Sate = ZjhFighterState.jiazhu;
-		}
-	},
-
-	[zhajinhua_msgs.ZhajinhuaLookResp] : function(param) {
-		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
-		if(man) {
-			man.IsSee = true;
+			man.MyInfo.Gold -= param.Score;
+			ZjhMgr.getInstance().getEnterData().TotalScore += param.Score;
 		}
 	},
 
@@ -103,12 +100,25 @@ var ZjhHandlers = {
 		if(man) {
 			man.MyInfo.Sate = ZjhFighterState.bipaishu;
 		}
+
+		var attacker = ZjhMgr.getInstance().getPlayer(param.AttackerId);
+		if(attacker && param["Score"]) {
+			attacker.MyInfo.Gold -= param["Score"];
+			ZjhMgr.getInstance().getEnterData().TotalScore += param["Score"];
+		}
 	},
 
 	[zhajinhua_msgs.ZhajinhuaGiveupResp] : function(param) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
 			man.MyInfo.Sate = ZjhFighterState.qipai;
+		}
+	},
+
+	[zhajinhua_msgs.ZhajinhuaLookResp] : function(param) {
+		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
+		if(man) {
+			man.IsSee = true;
 		}
 	},
 

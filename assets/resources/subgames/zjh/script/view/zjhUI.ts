@@ -127,7 +127,7 @@ export default class zjhUI extends BaseComponent {
 
     private playBetAni(uid:number, v:number) {
         var idx = this.playerIdx(uid);
-        if(idx < 0) { return; }
+        if(idx < 0 || v <= 0) { return; }
 
         var nums = GameUtil.parseChip(v, CMVLIST);
         for(var nn in nums) {
@@ -169,6 +169,14 @@ export default class zjhUI extends BaseComponent {
             
             CommonUtil.grayNode(this._pnodes[idx], this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
             this._playerCpns[idx].setLabGray(this.isLoseFightState((man.MyInfo as gamecomm.IPlayerInfo).Sate));
+        }
+    }
+
+    refreshFighterGold(uid:number) {
+        var idx = this.playerIdx(uid);
+        if(idx >= 0) {
+            var man = ZjhMgr.getInstance().getPlayer(uid);
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney((man.MyInfo as gamecomm.IPlayerInfo).Gold));
         }
     }
 
@@ -230,10 +238,13 @@ export default class zjhUI extends BaseComponent {
             this.ZhajinhuaStateFreeResp(null);
             return;
         }
+
         this.m_ui.labBottomBet.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(500);
         this.m_ui.labRound.getComponent(cc.Label).string = "第1/20轮";
         this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(param.MinScore);
+        this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(param.TotalScore);
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+        
         if(param.Banker) {
             this.ZhajinhuaHostResp({BankerID:param.Banker});
         }
@@ -448,6 +459,9 @@ export default class zjhUI extends BaseComponent {
         if(idx >= 0) {
             this._stateCpns[idx].genzhu();
             this.playBetAni(param.UserId, CommonUtil.fixRealMoney(param.Score));
+            this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().MinScore);
+            this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().TotalScore);
+            this.refreshFighterGold(param.UserId);
         }
     }
 
@@ -457,19 +471,9 @@ export default class zjhUI extends BaseComponent {
         if(idx >= 0) {
             this._stateCpns[idx].jiazhu();
             this.playBetAni(param.UserId, CommonUtil.fixRealMoney(param.Score));
-        }
-    }
-
-    //看牌
-    ZhajinhuaLookResp(param:zhajinhua.IZhajinhuaLookResp) {
-        var idx = this.playerIdx(param.UserId);
-        if(idx >= 0) {
-            this._pnodes[idx].getChildByName("ust_kanpai").active = true && param.UserId != LoginUser.getInstance().UserId;
-        }
-        var man = ZjhMgr.getInstance().getPlayer(param.UserId);
-        if(man && (man.MyInfo as gamecomm.IPlayerInfo).UserID == LoginUser.getInstance().UserId) {
-            this._handors[idx].resetCards(man.Cards.Cards);
-            this._handors[idx].playOpen();
+            this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().MinScore);
+            this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().TotalScore);
+            this.refreshFighterGold(param.UserId);
         }
     }
 
@@ -490,6 +494,9 @@ export default class zjhUI extends BaseComponent {
         var mgr = ZjhMgr.getInstance();
 
         this.playBetAni(param.AttackerId, 100);
+        this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().MinScore);
+        this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().TotalScore);
+        this.refreshFighterGold(param.AttackerId);
 
         var manP = ZjhMgr.getInstance().getPlayer(param.AttackerId);
         var manK = ZjhMgr.getInstance().getPlayer(param.HitId);
@@ -501,6 +508,19 @@ export default class zjhUI extends BaseComponent {
             winner: winStr
         }
         UIManager.openPopwnd(ViewDefine.UIpk, false, pkinfo);
+    }
+
+    //看牌
+    ZhajinhuaLookResp(param:zhajinhua.IZhajinhuaLookResp) {
+        var idx = this.playerIdx(param.UserId);
+        if(idx >= 0) {
+            this._pnodes[idx].getChildByName("ust_kanpai").active = true && param.UserId != LoginUser.getInstance().UserId;
+        }
+        var man = ZjhMgr.getInstance().getPlayer(param.UserId);
+        if(man && (man.MyInfo as gamecomm.IPlayerInfo).UserID == LoginUser.getInstance().UserId) {
+            this._handors[idx].resetCards(man.Cards.Cards);
+            this._handors[idx].playOpen();
+        }
     }
 
     //弃牌
