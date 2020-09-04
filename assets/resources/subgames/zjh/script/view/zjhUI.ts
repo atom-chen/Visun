@@ -408,7 +408,7 @@ export default class zjhUI extends BaseComponent {
     //结算数据
     ZhajinhuaOverResp(param:zhajinhua.IZhajinhuaOverResp) {
         if(isNil(param)) { return; }
-        UIManager.toast("赢家ID：" + param.WinnerId);
+        
         if(param.Infos) {
             for(var i in param.Infos) {
                 this.GoldChangeInfo(param.Infos[i]);
@@ -431,6 +431,7 @@ export default class zjhUI extends BaseComponent {
                     cc.destroySelf()
                 ));
             }
+            Preloader.showSpineAsync("appqp/spines/headflower/ky_lhd_js", 0, "1", 3, this._pnodes[idx], {y:20, scale:1.12});
         } else {
             for(var i=0; i<childs.length; i++) {
                 childs[i].runAction(cc.sequence(
