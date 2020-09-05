@@ -10,6 +10,9 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import { brtoubao } from "../../../../../../declares/brtoubao";
+import Preloader from "../../../../../kernel/utils/Preloader";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 
 var margin = { rx:10, ry:10 };
@@ -53,13 +56,22 @@ export default class ToubaoUI extends BaseComponent {
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
 		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.2;
+		obj.scale = 0.14;
 		return obj;
 	});
+	touzilist = [];
+	touziposlist = [];
+	touziscalelist = [];
 	
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
+
+		for(var i=0; i<3; i++) {
+			this.touzilist.push(this.m_ui["touzi"+i]);
+			this.touziposlist.push(this.m_ui["touzi"+i].position);
+			this.touziscalelist.push(this.m_ui["touzi"+i].scale);
+		}
 
 		var self = this;
 		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {
@@ -88,19 +100,22 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private playTipBetting() {
-		var childs = this.m_ui.betLayer.children;
-		for (var i in childs) {
-			childs[i].runAction(cc.blink(1, 3));
-		}
+		// var childs = this.m_ui.highLayer.children;
+		// for (var i in childs) {
+		// 	childs[i].runAction(cc.blink(1, 3));
+		// }
+		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.hide()));
 	}
 
 	//准备阶段
 	private toStateReady() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
-		
+		this.m_ui.tzNode.active = false;
+		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "shake", false);
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, (tmr:BaseTimer)=>{
+		TimerManager.delaySecond(3, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateBetting();
 			this.playTipBetting();
 		}));
@@ -111,10 +126,19 @@ export default class ToubaoUI extends BaseComponent {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
+		this.m_ui.tzNode.active = false;
+		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "wait", true);
+
+		Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+			on_complete: (sk, trackEntry)=>{
+				CommonUtil.safeDelete(sk);
+			}
+		});
+
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
 		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.loopSecond(10, 1, new CHandler(this, (tmr:BaseTimer)=>{
+		TimerManager.delaySecond(10, new CHandler(this, (tmr:BaseTimer)=>{
 			this.toStateJiesuan();
 		}));
 	}
@@ -140,16 +164,53 @@ export default class ToubaoUI extends BaseComponent {
 		));
 	}
 
+	private setPoints(points:Array<number>) {
+		if(isNil(points) || points.length < 3) {
+			return;
+		}
+		for(var i=0; i<3; i++) {
+			Preloader.setNodeSprite(this.touzilist[i].getComponent(cc.Sprite), "appqp/imgs/games/saizi"+points[i], this);
+		}
+	}
 	//结算阶段
 	private toStateJiesuan() {
 	//	this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 
+		//开拍动画
+		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "open", false);
+		this.m_ui.tzNode.active = true;
+		this.setPoints([
+			CommonUtil.getRandomInt(1,6),
+			CommonUtil.getRandomInt(1,6),
+			CommonUtil.getRandomInt(1,6),
+		]);
+		for(var n=0; n<3; n++) {
+			this.touzilist[n].scale = this.touziscalelist[n];
+			this.touzilist[n].position = this.touziposlist[n];
+			this.touzilist[n].runAction(cc.sequence(
+				cc.hide(),
+				cc.delayTime(0.4),
+				cc.show(),
+				cc.delayTime(1.3),
+				cc.spawn(
+					cc.scaleTo(0.3, 2),
+					cc.moveTo(0.3, cc.v2((n-1)*100, -120))
+				),
+				cc.delayTime(0.5),
+				cc.spawn(
+					cc.scaleTo(0.3, 0.8),
+					cc.moveTo(0.3, cc.v2((n-1)*38+200, -4))
+				)
+			));
+		}
+		
+
 		this.playJiesuan();
 
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
+		this.tmrState = TimerManager.loopSecond(1, 5, new CHandler(this, this.onStateTimer), true);
+		TimerManager.delaySecond(5, new CHandler(this, ()=>{
 			this.toStateReady();
 		}));
 	}
@@ -188,6 +249,40 @@ export default class ToubaoUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);
 		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.betBtn0, function(){ this.onClickArea(0); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn1, function(){ this.onClickArea(1); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn2, function(){ this.onClickArea(2); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn3, function(){ this.onClickArea(3); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn4, function(){ this.onClickArea(4); }, this);
+
+		CommonUtil.addClickEvent(this.m_ui.betBtn5, function(){ this.onClickArea(5); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn6, function(){ this.onClickArea(6); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn7, function(){ this.onClickArea(7); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn8, function(){ this.onClickArea(8); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn9, function(){ this.onClickArea(9); }, this);
+
+		CommonUtil.addClickEvent(this.m_ui.betBtn10, function(){ this.onClickArea(10); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn11, function(){ this.onClickArea(11); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn12, function(){ this.onClickArea(12); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn13, function(){ this.onClickArea(13); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn14, function(){ this.onClickArea(14); }, this);
+
+		CommonUtil.addClickEvent(this.m_ui.betBtn15, function(){ this.onClickArea(15); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn16, function(){ this.onClickArea(16); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn17, function(){ this.onClickArea(17); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn18, function(){ this.onClickArea(18); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn19, function(){ this.onClickArea(19); }, this);
+
+		CommonUtil.addClickEvent(this.m_ui.betBtn20, function(){ this.onClickArea(20); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn21, function(){ this.onClickArea(21); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn22, function(){ this.onClickArea(22); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn23, function(){ this.onClickArea(23); }, this);
+		CommonUtil.addClickEvent(this.m_ui.betBtn24, function(){ this.onClickArea(24); }, this);
+	}
+	onClickArea(idx) {
+		cc.log("投", idx);
+		//brtoubao_request.BrtoubaoBetReq({})
 	}
 
 }
