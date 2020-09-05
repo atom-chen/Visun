@@ -287,6 +287,9 @@ export default class zjhUI extends BaseComponent {
     }
 
     quietCheck() : boolean {
+        if(ZjhMgr.getInstance().fighterCnt() <= 1) {
+            return false;
+        }
         var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
         if(!isNil(hero)) {
             if(ZjhMgr.getInstance().GameState == ZjhGameState.ready && hero.MyInfo.Sate == ZjhFighterState.idle) {

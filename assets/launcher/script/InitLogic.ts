@@ -25,6 +25,7 @@ export default class InitLogic {
             console.log("游戏进入前台", passedTime);
             cc.audioEngine.resumeAll();
             EventCenter.getInstance().fire(cc.game.EVENT_SHOW, passedTime);
+            TimerManager.amend(passedTime);
         });
 
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);

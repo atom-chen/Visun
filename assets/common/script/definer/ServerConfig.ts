@@ -19,7 +19,7 @@ var server_list = {
     },
     mac: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.43.7:9650",
+        leafServer: "ws://192.168.1.100:9650",
         chatServer: ""
     }
 };

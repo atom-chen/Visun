@@ -62,4 +62,14 @@ export default class ZjhMgr extends ModelBase {
         return this._players;
     }
 
+    fighterCnt() : number {
+        var cnt = 0;
+        for(var uid in this._players) {
+            if(!isNil(this._players[uid])) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+
 }

@@ -37,7 +37,7 @@ export default class UIHall extends BaseComponent {
 	
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
 
-	//	this.test();
+		//this.test();
 	}
 
 	private LoginResp(param:login.ILoginResp) {
@@ -154,11 +154,15 @@ export default class UIHall extends BaseComponent {
 
 	private test() {
 		for(var i in GameConfig) {
-			var bton = cc.instantiate(this.gameBtn);
+			var bton:any = cc.instantiate(this.gameBtn);
 			this.m_ui.content.addChild(bton);
 			var tbl : any = {};
 			CommonUtil.traverseNodes(bton, tbl);
 			Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), GameConfig[i].icon, this);
+			bton.gameType = GameConfig[i].GameKind;
+			CommonUtil.addClickEvent(bton, function(){
+				GameManager.getInstance().enterGameScene(this.gameType);
+			}, bton);
 		}
 	}
 

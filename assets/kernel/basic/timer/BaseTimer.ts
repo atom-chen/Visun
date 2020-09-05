@@ -14,6 +14,7 @@ export class BaseTimer implements JTIPoolObject {
 	protected _totalTimes:number;
 	protected _type:TimerType;
 	protected _isLimit:boolean;
+	protected _useFix:boolean = false;
 
 	protected _passedTime:number = 0;
 	protected _stoped:boolean = false;
@@ -28,7 +29,7 @@ export class BaseTimer implements JTIPoolObject {
 		return this._callback.isSame(cb);
 	}
     
-    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) {
+    public reset(type:TimerType, id:number, interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false, useFix:boolean=false) {
 		this._type = type;
 		this._id = id;
 		this._interval = interval;
@@ -39,8 +40,36 @@ export class BaseTimer implements JTIPoolObject {
 		this._stoped = false;
 		this._paused = false;
 		this._isLimit = looptimes > 0;
+		this._useFix = useFix;
 		if(callOnAdd) {
 			this._callback.invoke(this);
+		}
+	}
+
+	public isUseFix() : boolean {
+		return this._useFix;
+	}
+
+	public doFix(millSec:number) {
+		if(!this._useFix) { return; }
+		var sec = millSec/1000;
+		if(this._passedTime+sec < this._interval) {
+			sec = 0;
+			this.tick(sec);
+		} else {
+			var tmp = this._interval-this._passedTime;
+			sec -= tmp;
+			this.tick(tmp);
+			while(sec > 0 && !this._stoped) {
+				if(sec >= this._interval) {
+					sec -= this._interval;
+					this.tick(this._interval);
+				} else {
+					var t1 = sec;
+					sec = -1;
+					this.tick(t1);
+				}
+			}
 		}
 	}
 
@@ -64,8 +93,7 @@ export class BaseTimer implements JTIPoolObject {
 
 		if(this._type===TimerType.frame){
 			this._passedTime++;
-		}
-		else {
+		} else {
 			this._passedTime += dt;
 		}
 

@@ -12,9 +12,42 @@ export default class TimerManager {
 	private static s_updating:boolean = false;
 	private static _timers:BaseTimer[] = [];
 //	private static _pool:JTPool<BaseTimer> = JTPool.getInstance(BaseTimer) as JTPool<BaseTimer>;
+	private static willAment = false;
+	private static amentMillSec = 0;
 	
 	private constructor() {
 		
+	}
+
+	public static amend(millSec:number) {
+		if(TimerManager.s_updating) { 
+			TimerManager.willAment = true;
+			TimerManager.amentMillSec = millSec;
+			return; 
+		}
+		TimerManager.willAment = false;
+		TimerManager.amentMillSec = 0;
+		TimerManager.s_updating = true;
+		for(var i=0, len=TimerManager._timers.length; i<len; i++) {
+			let curTmr = TimerManager._timers[i];
+			try{
+				if(curTmr.isUseFix()) {
+					curTmr.doFix(millSec);
+				}
+			}
+			catch(err) {
+				curTmr.stop();
+				cc.log(err);
+			}
+
+			if(curTmr.isStoped()) {
+				curTmr.stop();
+				TimerManager._timers.splice(i, 1);
+				i--;
+				len--;
+			}
+		}
+		TimerManager.s_updating = false;
 	}
 
 	public static start(node:cc.Component) {
@@ -44,6 +77,10 @@ export default class TimerManager {
 			}
 		}
 		TimerManager.s_updating = false;
+		
+		if(TimerManager.willAment) {
+			TimerManager.amend(TimerManager.amentMillSec);
+		}
 	}
 
 	private static getIndex(callback:CHandler) : number
@@ -72,7 +109,7 @@ export default class TimerManager {
 		return id;
 	}
 
-	public static loopSecond(interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false) : number
+	public static loopSecond(interval:number, looptimes:number, callback:CHandler, callOnAdd:boolean=false, useFix:boolean=false) : number
 	{
 		var tmp = TimerManager.getIndex(callback);
 		if(tmp >= 0) {
@@ -90,21 +127,11 @@ export default class TimerManager {
 
 	public static delayFrame(delay:number, callback:CHandler) : number
 	{
-		if(delay <= 0) {
-			callback.invoke();
-			callback.clear();
-			return 0;
-		}
 		return TimerManager.loopFrame(delay, 1, callback);
 	}
 
 	public static delaySecond(delay:number, callback:CHandler) : number
 	{
-		if(delay <= 0) {
-			callback.invoke();
-			callback.clear();
-			return 0;
-		}
 		return TimerManager.loopSecond(delay, 1, callback);
 	}
 
