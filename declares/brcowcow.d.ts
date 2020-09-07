@@ -788,9 +788,6 @@ export namespace brcowcow {
         /** BrcowcowOpenResp AwardArea */
         AwardArea?: (Uint8Array|null);
 
-        /** BrcowcowOpenResp BankerCard */
-        BankerCard?: (gamecomm.ICardInfo|null);
-
         /** BrcowcowOpenResp TianCard */
         TianCard?: (gamecomm.ICardInfo|null);
 
@@ -815,9 +812,6 @@ export namespace brcowcow {
 
         /** BrcowcowOpenResp AwardArea. */
         public AwardArea: Uint8Array;
-
-        /** BrcowcowOpenResp BankerCard. */
-        public BankerCard?: (gamecomm.ICardInfo|null);
 
         /** BrcowcowOpenResp TianCard. */
         public TianCard?: (gamecomm.ICardInfo|null);
