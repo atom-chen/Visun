@@ -61,6 +61,11 @@ var pbfiles = [
 		router:"game",
 		channel:"game"
 	},
+	{
+		name:"tigerXdragon", 
+		router:"game",
+		channel:"game"
+	}
 ]
 
 module.exports = {
