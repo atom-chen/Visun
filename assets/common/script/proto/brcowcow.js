@@ -805,7 +805,7 @@ $root.brcowcow = (function() {
         }
 
         BrcowcowBetReq.prototype.Area = 0;
-        BrcowcowBetReq.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BrcowcowBetReq.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         BrcowcowBetReq.create = function create(properties) {
             return new BrcowcowBetReq(properties);
@@ -816,8 +816,8 @@ $root.brcowcow = (function() {
                 writer = $Writer.create();
             if (message.Area != null && Object.hasOwnProperty.call(message, "Area"))
                 writer.uint32(8).int32(message.Area);
-            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
-                writer.uint32(16).int64(message.Money);
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
+                writer.uint32(16).int64(message.Gold);
             return writer;
         };
 
@@ -836,7 +836,7 @@ $root.brcowcow = (function() {
                     message.Area = reader.int32();
                     break;
                 case 2:
-                    message.Money = reader.int64();
+                    message.Gold = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -858,9 +858,9 @@ $root.brcowcow = (function() {
             if (message.Area != null && message.hasOwnProperty("Area"))
                 if (!$util.isInteger(message.Area))
                     return "Area: integer expected";
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
-                    return "Money: integer|Long expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
             return null;
         };
 
@@ -870,15 +870,15 @@ $root.brcowcow = (function() {
             var message = new $root.brcowcow.BrcowcowBetReq();
             if (object.Area != null)
                 message.Area = object.Area | 0;
-            if (object.Money != null)
+            if (object.Gold != null)
                 if ($util.Long)
-                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
-                else if (typeof object.Money === "string")
-                    message.Money = parseInt(object.Money, 10);
-                else if (typeof object.Money === "number")
-                    message.Money = object.Money;
-                else if (typeof object.Money === "object")
-                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
             return message;
         };
 
@@ -890,17 +890,17 @@ $root.brcowcow = (function() {
                 object.Area = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.Money = options.longs === String ? "0" : 0;
+                    object.Gold = options.longs === String ? "0" : 0;
             }
             if (message.Area != null && message.hasOwnProperty("Area"))
                 object.Area = message.Area;
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (typeof message.Money === "number")
-                    object.Money = options.longs === String ? String(message.Money) : message.Money;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
                 else
-                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
             return object;
         };
 
@@ -922,7 +922,7 @@ $root.brcowcow = (function() {
 
         BrcowcowBetResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         BrcowcowBetResp.prototype.Area = 0;
-        BrcowcowBetResp.prototype.Money = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BrcowcowBetResp.prototype.Gold = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         BrcowcowBetResp.create = function create(properties) {
             return new BrcowcowBetResp(properties);
@@ -935,8 +935,8 @@ $root.brcowcow = (function() {
                 writer.uint32(8).uint64(message.UserId);
             if (message.Area != null && Object.hasOwnProperty.call(message, "Area"))
                 writer.uint32(16).int32(message.Area);
-            if (message.Money != null && Object.hasOwnProperty.call(message, "Money"))
-                writer.uint32(24).int64(message.Money);
+            if (message.Gold != null && Object.hasOwnProperty.call(message, "Gold"))
+                writer.uint32(24).int64(message.Gold);
             return writer;
         };
 
@@ -958,7 +958,7 @@ $root.brcowcow = (function() {
                     message.Area = reader.int32();
                     break;
                 case 3:
-                    message.Money = reader.int64();
+                    message.Gold = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -983,9 +983,9 @@ $root.brcowcow = (function() {
             if (message.Area != null && message.hasOwnProperty("Area"))
                 if (!$util.isInteger(message.Area))
                     return "Area: integer expected";
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (!$util.isInteger(message.Money) && !(message.Money && $util.isInteger(message.Money.low) && $util.isInteger(message.Money.high)))
-                    return "Money: integer|Long expected";
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (!$util.isInteger(message.Gold) && !(message.Gold && $util.isInteger(message.Gold.low) && $util.isInteger(message.Gold.high)))
+                    return "Gold: integer|Long expected";
             return null;
         };
 
@@ -1004,15 +1004,15 @@ $root.brcowcow = (function() {
                     message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
             if (object.Area != null)
                 message.Area = object.Area | 0;
-            if (object.Money != null)
+            if (object.Gold != null)
                 if ($util.Long)
-                    (message.Money = $util.Long.fromValue(object.Money)).unsigned = false;
-                else if (typeof object.Money === "string")
-                    message.Money = parseInt(object.Money, 10);
-                else if (typeof object.Money === "number")
-                    message.Money = object.Money;
-                else if (typeof object.Money === "object")
-                    message.Money = new $util.LongBits(object.Money.low >>> 0, object.Money.high >>> 0).toNumber();
+                    (message.Gold = $util.Long.fromValue(object.Gold)).unsigned = false;
+                else if (typeof object.Gold === "string")
+                    message.Gold = parseInt(object.Gold, 10);
+                else if (typeof object.Gold === "number")
+                    message.Gold = object.Gold;
+                else if (typeof object.Gold === "object")
+                    message.Gold = new $util.LongBits(object.Gold.low >>> 0, object.Gold.high >>> 0).toNumber();
             return message;
         };
 
@@ -1029,9 +1029,9 @@ $root.brcowcow = (function() {
                 object.Area = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.Money = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.Gold = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.Money = options.longs === String ? "0" : 0;
+                    object.Gold = options.longs === String ? "0" : 0;
             }
             if (message.UserId != null && message.hasOwnProperty("UserId"))
                 if (typeof message.UserId === "number")
@@ -1040,11 +1040,11 @@ $root.brcowcow = (function() {
                     object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
             if (message.Area != null && message.hasOwnProperty("Area"))
                 object.Area = message.Area;
-            if (message.Money != null && message.hasOwnProperty("Money"))
-                if (typeof message.Money === "number")
-                    object.Money = options.longs === String ? String(message.Money) : message.Money;
+            if (message.Gold != null && message.hasOwnProperty("Gold"))
+                if (typeof message.Gold === "number")
+                    object.Gold = options.longs === String ? String(message.Gold) : message.Gold;
                 else
-                    object.Money = options.longs === String ? $util.Long.prototype.toString.call(message.Money) : options.longs === Number ? new $util.LongBits(message.Money.low >>> 0, message.Money.high >>> 0).toNumber() : message.Money;
+                    object.Gold = options.longs === String ? $util.Long.prototype.toString.call(message.Gold) : options.longs === Number ? new $util.LongBits(message.Gold.low >>> 0, message.Gold.high >>> 0).toNumber() : message.Gold;
             return object;
         };
 

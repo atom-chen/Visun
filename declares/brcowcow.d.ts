@@ -590,8 +590,8 @@ export namespace brcowcow {
         /** BrcowcowBetReq Area */
         Area?: (number|null);
 
-        /** BrcowcowBetReq Money */
-        Money?: (number|Long|null);
+        /** BrcowcowBetReq Gold */
+        Gold?: (number|Long|null);
     }
 
     /** Represents a BrcowcowBetReq. */
@@ -606,8 +606,8 @@ export namespace brcowcow {
         /** BrcowcowBetReq Area. */
         public Area: number;
 
-        /** BrcowcowBetReq Money. */
-        public Money: (number|Long);
+        /** BrcowcowBetReq Gold. */
+        public Gold: (number|Long);
 
         /**
          * Creates a new BrcowcowBetReq instance using the specified properties.
@@ -689,8 +689,8 @@ export namespace brcowcow {
         /** BrcowcowBetResp Area */
         Area?: (number|null);
 
-        /** BrcowcowBetResp Money */
-        Money?: (number|Long|null);
+        /** BrcowcowBetResp Gold */
+        Gold?: (number|Long|null);
     }
 
     /** Represents a BrcowcowBetResp. */
@@ -708,8 +708,8 @@ export namespace brcowcow {
         /** BrcowcowBetResp Area. */
         public Area: number;
 
-        /** BrcowcowBetResp Money. */
-        public Money: (number|Long);
+        /** BrcowcowBetResp Gold. */
+        public Gold: (number|Long);
 
         /**
          * Creates a new BrcowcowBetResp instance using the specified properties.
