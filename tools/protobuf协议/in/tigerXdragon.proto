@@ -52,8 +52,8 @@ message TigerXdragonBetResp{
 
 //结束
 message TigerXdragonOpenResp{
-  bytes Dice = 1;       //开奖数据
-  bytes AwardArea = 2;  //中奖区域 1~24
+  bytes Cards = 1;       //开奖数据
+  bytes AwardArea = 2;  //中奖区域 1~13
 }
 
 //结算
@@ -85,7 +85,7 @@ message TigerXdragonSuperHostResp {
 
 
 // 从零开始，后面累加1 共13区域
-//    Area_Win             //庄赢
+//    Area_Win             //庄赢 (除庄输和庄赢两个区域外,对玩家下注情况进行统计)
 //    Area_Lose            //庄输
 //    Area_Dragon          //龙
 //    Area_Tiger           //虎

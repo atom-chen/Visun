@@ -84,7 +84,7 @@ message BrtoubaoSuperHostResp {
 }
 
 
-// 从零开始，后面累加1 共24区域
+// 从零开始，后面累加1 共25区域
 // 下注区域
 //    AREA_Big    = 0 //大
 //    AREA_Small         //小

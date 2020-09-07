@@ -386,6 +386,102 @@ export namespace brcowcow {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a BrcowcowStateOpenResp. */
+    interface IBrcowcowStateOpenResp {
+
+        /** BrcowcowStateOpenResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** BrcowcowStateOpenResp OpenInfo */
+        OpenInfo?: (brcowcow.IBrcowcowOpenResp|null);
+    }
+
+    /** Represents a BrcowcowStateOpenResp. */
+    class BrcowcowStateOpenResp implements IBrcowcowStateOpenResp {
+
+        /**
+         * Constructs a new BrcowcowStateOpenResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IBrcowcowStateOpenResp);
+
+        /** BrcowcowStateOpenResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** BrcowcowStateOpenResp OpenInfo. */
+        public OpenInfo?: (brcowcow.IBrcowcowOpenResp|null);
+
+        /**
+         * Creates a new BrcowcowStateOpenResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns BrcowcowStateOpenResp instance
+         */
+        public static create(properties?: brcowcow.IBrcowcowStateOpenResp): brcowcow.BrcowcowStateOpenResp;
+
+        /**
+         * Encodes the specified BrcowcowStateOpenResp message. Does not implicitly {@link brcowcow.BrcowcowStateOpenResp.verify|verify} messages.
+         * @param message BrcowcowStateOpenResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IBrcowcowStateOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified BrcowcowStateOpenResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowStateOpenResp.verify|verify} messages.
+         * @param message BrcowcowStateOpenResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IBrcowcowStateOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a BrcowcowStateOpenResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns BrcowcowStateOpenResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowStateOpenResp;
+
+        /**
+         * Decodes a BrcowcowStateOpenResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns BrcowcowStateOpenResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowStateOpenResp;
+
+        /**
+         * Verifies a BrcowcowStateOpenResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a BrcowcowStateOpenResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns BrcowcowStateOpenResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowStateOpenResp;
+
+        /**
+         * Creates a plain object from a BrcowcowStateOpenResp message. Also converts values to other types if specified.
+         * @param message BrcowcowStateOpenResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.BrcowcowStateOpenResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this BrcowcowStateOpenResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a BrcowcowStateOverResp. */
     interface IBrcowcowStateOverResp {
 
@@ -674,26 +770,134 @@ export namespace brcowcow {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a BrcowcowOpenResp. */
+    interface IBrcowcowOpenResp {
+
+        /** BrcowcowOpenResp AwardArea */
+        AwardArea?: (Uint8Array|null);
+
+        /** BrcowcowOpenResp BankerCard */
+        BankerCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp TianCard */
+        TianCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp XuanCard */
+        XuanCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp DiCard */
+        DiCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp HuangCard */
+        HuangCard?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a BrcowcowOpenResp. */
+    class BrcowcowOpenResp implements IBrcowcowOpenResp {
+
+        /**
+         * Constructs a new BrcowcowOpenResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: brcowcow.IBrcowcowOpenResp);
+
+        /** BrcowcowOpenResp AwardArea. */
+        public AwardArea: Uint8Array;
+
+        /** BrcowcowOpenResp BankerCard. */
+        public BankerCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp TianCard. */
+        public TianCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp XuanCard. */
+        public XuanCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp DiCard. */
+        public DiCard?: (gamecomm.ICardInfo|null);
+
+        /** BrcowcowOpenResp HuangCard. */
+        public HuangCard?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new BrcowcowOpenResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns BrcowcowOpenResp instance
+         */
+        public static create(properties?: brcowcow.IBrcowcowOpenResp): brcowcow.BrcowcowOpenResp;
+
+        /**
+         * Encodes the specified BrcowcowOpenResp message. Does not implicitly {@link brcowcow.BrcowcowOpenResp.verify|verify} messages.
+         * @param message BrcowcowOpenResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: brcowcow.IBrcowcowOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified BrcowcowOpenResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowOpenResp.verify|verify} messages.
+         * @param message BrcowcowOpenResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: brcowcow.IBrcowcowOpenResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a BrcowcowOpenResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns BrcowcowOpenResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowOpenResp;
+
+        /**
+         * Decodes a BrcowcowOpenResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns BrcowcowOpenResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowOpenResp;
+
+        /**
+         * Verifies a BrcowcowOpenResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a BrcowcowOpenResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns BrcowcowOpenResp
+         */
+        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowOpenResp;
+
+        /**
+         * Creates a plain object from a BrcowcowOpenResp message. Also converts values to other types if specified.
+         * @param message BrcowcowOpenResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: brcowcow.BrcowcowOpenResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this BrcowcowOpenResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a BrcowcowOverResp. */
     interface IBrcowcowOverResp {
 
-        /** BrcowcowOverResp AwardArea */
-        AwardArea?: (Uint8Array|null);
+        /** BrcowcowOverResp MySettlement */
+        MySettlement?: (number|Long|null);
 
-        /** BrcowcowOverResp BankerCard */
-        BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp TianCard */
-        TianCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp XuanCard */
-        XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp DiCard */
-        DiCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp HuangCard */
-        HuangCard?: (gamecomm.ICardInfo|null);
+        /** BrcowcowOverResp TotalSettlement */
+        TotalSettlement?: ((number|Long)[]|null);
     }
 
     /** Represents a BrcowcowOverResp. */
@@ -705,23 +909,11 @@ export namespace brcowcow {
          */
         constructor(properties?: brcowcow.IBrcowcowOverResp);
 
-        /** BrcowcowOverResp AwardArea. */
-        public AwardArea: Uint8Array;
+        /** BrcowcowOverResp MySettlement. */
+        public MySettlement: (number|Long);
 
-        /** BrcowcowOverResp BankerCard. */
-        public BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp TianCard. */
-        public TianCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp XuanCard. */
-        public XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp DiCard. */
-        public DiCard?: (gamecomm.ICardInfo|null);
-
-        /** BrcowcowOverResp HuangCard. */
-        public HuangCard?: (gamecomm.ICardInfo|null);
+        /** BrcowcowOverResp TotalSettlement. */
+        public TotalSettlement: (number|Long)[];
 
         /**
          * Creates a new BrcowcowOverResp instance using the specified properties.
@@ -789,102 +981,6 @@ export namespace brcowcow {
 
         /**
          * Converts this BrcowcowOverResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a BrcowcowCheckoutResp. */
-    interface IBrcowcowCheckoutResp {
-
-        /** BrcowcowCheckoutResp MySettlement */
-        MySettlement?: (number|Long|null);
-
-        /** BrcowcowCheckoutResp TotalSettlement */
-        TotalSettlement?: ((number|Long)[]|null);
-    }
-
-    /** Represents a BrcowcowCheckoutResp. */
-    class BrcowcowCheckoutResp implements IBrcowcowCheckoutResp {
-
-        /**
-         * Constructs a new BrcowcowCheckoutResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: brcowcow.IBrcowcowCheckoutResp);
-
-        /** BrcowcowCheckoutResp MySettlement. */
-        public MySettlement: (number|Long);
-
-        /** BrcowcowCheckoutResp TotalSettlement. */
-        public TotalSettlement: (number|Long)[];
-
-        /**
-         * Creates a new BrcowcowCheckoutResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns BrcowcowCheckoutResp instance
-         */
-        public static create(properties?: brcowcow.IBrcowcowCheckoutResp): brcowcow.BrcowcowCheckoutResp;
-
-        /**
-         * Encodes the specified BrcowcowCheckoutResp message. Does not implicitly {@link brcowcow.BrcowcowCheckoutResp.verify|verify} messages.
-         * @param message BrcowcowCheckoutResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: brcowcow.IBrcowcowCheckoutResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified BrcowcowCheckoutResp message, length delimited. Does not implicitly {@link brcowcow.BrcowcowCheckoutResp.verify|verify} messages.
-         * @param message BrcowcowCheckoutResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: brcowcow.IBrcowcowCheckoutResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a BrcowcowCheckoutResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns BrcowcowCheckoutResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): brcowcow.BrcowcowCheckoutResp;
-
-        /**
-         * Decodes a BrcowcowCheckoutResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns BrcowcowCheckoutResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): brcowcow.BrcowcowCheckoutResp;
-
-        /**
-         * Verifies a BrcowcowCheckoutResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a BrcowcowCheckoutResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns BrcowcowCheckoutResp
-         */
-        public static fromObject(object: { [k: string]: any }): brcowcow.BrcowcowCheckoutResp;
-
-        /**
-         * Creates a plain object from a BrcowcowCheckoutResp message. Also converts values to other types if specified.
-         * @param message BrcowcowCheckoutResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: brcowcow.BrcowcowCheckoutResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this BrcowcowCheckoutResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

@@ -972,7 +972,7 @@ $root.tigerXdragon = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TigerXdragonOpenResp.prototype.Dice = $util.newBuffer([]);
+        TigerXdragonOpenResp.prototype.Cards = $util.newBuffer([]);
         TigerXdragonOpenResp.prototype.AwardArea = $util.newBuffer([]);
 
         TigerXdragonOpenResp.create = function create(properties) {
@@ -982,8 +982,8 @@ $root.tigerXdragon = (function() {
         TigerXdragonOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Dice != null && Object.hasOwnProperty.call(message, "Dice"))
-                writer.uint32(10).bytes(message.Dice);
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                writer.uint32(10).bytes(message.Cards);
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(18).bytes(message.AwardArea);
             return writer;
@@ -1001,7 +1001,7 @@ $root.tigerXdragon = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Dice = reader.bytes();
+                    message.Cards = reader.bytes();
                     break;
                 case 2:
                     message.AwardArea = reader.bytes();
@@ -1023,9 +1023,9 @@ $root.tigerXdragon = (function() {
         TigerXdragonOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.Dice != null && message.hasOwnProperty("Dice"))
-                if (!(message.Dice && typeof message.Dice.length === "number" || $util.isString(message.Dice)))
-                    return "Dice: buffer expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                if (!(message.Cards && typeof message.Cards.length === "number" || $util.isString(message.Cards)))
+                    return "Cards: buffer expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
                     return "AwardArea: buffer expected";
@@ -1036,11 +1036,11 @@ $root.tigerXdragon = (function() {
             if (object instanceof $root.tigerXdragon.TigerXdragonOpenResp)
                 return object;
             var message = new $root.tigerXdragon.TigerXdragonOpenResp();
-            if (object.Dice != null)
-                if (typeof object.Dice === "string")
-                    $util.base64.decode(object.Dice, message.Dice = $util.newBuffer($util.base64.length(object.Dice)), 0);
-                else if (object.Dice.length)
-                    message.Dice = object.Dice;
+            if (object.Cards != null)
+                if (typeof object.Cards === "string")
+                    $util.base64.decode(object.Cards, message.Cards = $util.newBuffer($util.base64.length(object.Cards)), 0);
+                else if (object.Cards.length)
+                    message.Cards = object.Cards;
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -1055,11 +1055,11 @@ $root.tigerXdragon = (function() {
             var object = {};
             if (options.defaults) {
                 if (options.bytes === String)
-                    object.Dice = "";
+                    object.Cards = "";
                 else {
-                    object.Dice = [];
+                    object.Cards = [];
                     if (options.bytes !== Array)
-                        object.Dice = $util.newBuffer(object.Dice);
+                        object.Cards = $util.newBuffer(object.Cards);
                 }
                 if (options.bytes === String)
                     object.AwardArea = "";
@@ -1069,8 +1069,8 @@ $root.tigerXdragon = (function() {
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
             }
-            if (message.Dice != null && message.hasOwnProperty("Dice"))
-                object.Dice = options.bytes === String ? $util.base64.encode(message.Dice, 0, message.Dice.length) : options.bytes === Array ? Array.prototype.slice.call(message.Dice) : message.Dice;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = options.bytes === String ? $util.base64.encode(message.Cards, 0, message.Cards.length) : options.bytes === Array ? Array.prototype.slice.call(message.Cards) : message.Cards;
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
             return object;

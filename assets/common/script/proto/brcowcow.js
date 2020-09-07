@@ -557,6 +557,118 @@ $root.brcowcow = (function() {
         return BrcowcowStatePlayingResp;
     })();
 
+    brcowcow.BrcowcowStateOpenResp = (function() {
+
+        function BrcowcowStateOpenResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        BrcowcowStateOpenResp.prototype.Times = null;
+        BrcowcowStateOpenResp.prototype.OpenInfo = null;
+
+        BrcowcowStateOpenResp.create = function create(properties) {
+            return new BrcowcowStateOpenResp(properties);
+        };
+
+        BrcowcowStateOpenResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.OpenInfo != null && Object.hasOwnProperty.call(message, "OpenInfo"))
+                $root.brcowcow.BrcowcowOpenResp.encode(message.OpenInfo, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        BrcowcowStateOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        BrcowcowStateOpenResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowStateOpenResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.OpenInfo = $root.brcowcow.BrcowcowOpenResp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        BrcowcowStateOpenResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        BrcowcowStateOpenResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo")) {
+                var error = $root.brcowcow.BrcowcowOpenResp.verify(message.OpenInfo);
+                if (error)
+                    return "OpenInfo." + error;
+            }
+            return null;
+        };
+
+        BrcowcowStateOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowStateOpenResp)
+                return object;
+            var message = new $root.brcowcow.BrcowcowStateOpenResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".brcowcow.BrcowcowStateOpenResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            if (object.OpenInfo != null) {
+                if (typeof object.OpenInfo !== "object")
+                    throw TypeError(".brcowcow.BrcowcowStateOpenResp.OpenInfo: object expected");
+                message.OpenInfo = $root.brcowcow.BrcowcowOpenResp.fromObject(object.OpenInfo);
+            }
+            return message;
+        };
+
+        BrcowcowStateOpenResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Times = null;
+                object.OpenInfo = null;
+            }
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo"))
+                object.OpenInfo = $root.brcowcow.BrcowcowOpenResp.toObject(message.OpenInfo, options);
+            return object;
+        };
+
+        BrcowcowStateOpenResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BrcowcowStateOpenResp;
+    })();
+
     brcowcow.BrcowcowStateOverResp = (function() {
 
         function BrcowcowStateOverResp(properties) {
@@ -909,27 +1021,27 @@ $root.brcowcow = (function() {
         return BrcowcowBetResp;
     })();
 
-    brcowcow.BrcowcowOverResp = (function() {
+    brcowcow.BrcowcowOpenResp = (function() {
 
-        function BrcowcowOverResp(properties) {
+        function BrcowcowOpenResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowOverResp.prototype.AwardArea = $util.newBuffer([]);
-        BrcowcowOverResp.prototype.BankerCard = null;
-        BrcowcowOverResp.prototype.TianCard = null;
-        BrcowcowOverResp.prototype.XuanCard = null;
-        BrcowcowOverResp.prototype.DiCard = null;
-        BrcowcowOverResp.prototype.HuangCard = null;
+        BrcowcowOpenResp.prototype.AwardArea = $util.newBuffer([]);
+        BrcowcowOpenResp.prototype.BankerCard = null;
+        BrcowcowOpenResp.prototype.TianCard = null;
+        BrcowcowOpenResp.prototype.XuanCard = null;
+        BrcowcowOpenResp.prototype.DiCard = null;
+        BrcowcowOpenResp.prototype.HuangCard = null;
 
-        BrcowcowOverResp.create = function create(properties) {
-            return new BrcowcowOverResp(properties);
+        BrcowcowOpenResp.create = function create(properties) {
+            return new BrcowcowOpenResp(properties);
         };
 
-        BrcowcowOverResp.encode = function encode(message, writer) {
+        BrcowcowOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
@@ -947,14 +1059,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowOverResp.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowOverResp.decode = function decode(reader, length) {
+        BrcowcowOpenResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowOverResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowOpenResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -984,13 +1096,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowOverResp.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowOpenResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowOverResp.verify = function verify(message) {
+        BrcowcowOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
@@ -1024,10 +1136,10 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowOverResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowOverResp)
+        BrcowcowOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowOpenResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowOverResp();
+            var message = new $root.brcowcow.BrcowcowOpenResp();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -1035,33 +1147,33 @@ $root.brcowcow = (function() {
                     message.AwardArea = object.AwardArea;
             if (object.BankerCard != null) {
                 if (typeof object.BankerCard !== "object")
-                    throw TypeError(".brcowcow.BrcowcowOverResp.BankerCard: object expected");
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.BankerCard: object expected");
                 message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
             }
             if (object.TianCard != null) {
                 if (typeof object.TianCard !== "object")
-                    throw TypeError(".brcowcow.BrcowcowOverResp.TianCard: object expected");
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.TianCard: object expected");
                 message.TianCard = $root.gamecomm.CardInfo.fromObject(object.TianCard);
             }
             if (object.XuanCard != null) {
                 if (typeof object.XuanCard !== "object")
-                    throw TypeError(".brcowcow.BrcowcowOverResp.XuanCard: object expected");
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.XuanCard: object expected");
                 message.XuanCard = $root.gamecomm.CardInfo.fromObject(object.XuanCard);
             }
             if (object.DiCard != null) {
                 if (typeof object.DiCard !== "object")
-                    throw TypeError(".brcowcow.BrcowcowOverResp.DiCard: object expected");
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.DiCard: object expected");
                 message.DiCard = $root.gamecomm.CardInfo.fromObject(object.DiCard);
             }
             if (object.HuangCard != null) {
                 if (typeof object.HuangCard !== "object")
-                    throw TypeError(".brcowcow.BrcowcowOverResp.HuangCard: object expected");
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.HuangCard: object expected");
                 message.HuangCard = $root.gamecomm.CardInfo.fromObject(object.HuangCard);
             }
             return message;
         };
 
-        BrcowcowOverResp.toObject = function toObject(message, options) {
+        BrcowcowOpenResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1094,16 +1206,16 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowOverResp.prototype.toJSON = function toJSON() {
+        BrcowcowOpenResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowOverResp;
+        return BrcowcowOpenResp;
     })();
 
-    brcowcow.BrcowcowCheckoutResp = (function() {
+    brcowcow.BrcowcowOverResp = (function() {
 
-        function BrcowcowCheckoutResp(properties) {
+        function BrcowcowOverResp(properties) {
             this.TotalSettlement = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -1111,14 +1223,14 @@ $root.brcowcow = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        BrcowcowCheckoutResp.prototype.MySettlement = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        BrcowcowCheckoutResp.prototype.TotalSettlement = $util.emptyArray;
+        BrcowcowOverResp.prototype.MySettlement = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        BrcowcowOverResp.prototype.TotalSettlement = $util.emptyArray;
 
-        BrcowcowCheckoutResp.create = function create(properties) {
-            return new BrcowcowCheckoutResp(properties);
+        BrcowcowOverResp.create = function create(properties) {
+            return new BrcowcowOverResp(properties);
         };
 
-        BrcowcowCheckoutResp.encode = function encode(message, writer) {
+        BrcowcowOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.MySettlement != null && Object.hasOwnProperty.call(message, "MySettlement"))
@@ -1132,14 +1244,14 @@ $root.brcowcow = (function() {
             return writer;
         };
 
-        BrcowcowCheckoutResp.encodeDelimited = function encodeDelimited(message, writer) {
+        BrcowcowOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        BrcowcowCheckoutResp.decode = function decode(reader, length) {
+        BrcowcowOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowCheckoutResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1164,13 +1276,13 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowCheckoutResp.decodeDelimited = function decodeDelimited(reader) {
+        BrcowcowOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        BrcowcowCheckoutResp.verify = function verify(message) {
+        BrcowcowOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.MySettlement != null && message.hasOwnProperty("MySettlement"))
@@ -1186,10 +1298,10 @@ $root.brcowcow = (function() {
             return null;
         };
 
-        BrcowcowCheckoutResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowCheckoutResp)
+        BrcowcowOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.brcowcow.BrcowcowOverResp)
                 return object;
-            var message = new $root.brcowcow.BrcowcowCheckoutResp();
+            var message = new $root.brcowcow.BrcowcowOverResp();
             if (object.MySettlement != null)
                 if ($util.Long)
                     (message.MySettlement = $util.Long.fromValue(object.MySettlement)).unsigned = false;
@@ -1201,7 +1313,7 @@ $root.brcowcow = (function() {
                     message.MySettlement = new $util.LongBits(object.MySettlement.low >>> 0, object.MySettlement.high >>> 0).toNumber();
             if (object.TotalSettlement) {
                 if (!Array.isArray(object.TotalSettlement))
-                    throw TypeError(".brcowcow.BrcowcowCheckoutResp.TotalSettlement: array expected");
+                    throw TypeError(".brcowcow.BrcowcowOverResp.TotalSettlement: array expected");
                 message.TotalSettlement = [];
                 for (var i = 0; i < object.TotalSettlement.length; ++i)
                     if ($util.Long)
@@ -1216,7 +1328,7 @@ $root.brcowcow = (function() {
             return message;
         };
 
-        BrcowcowCheckoutResp.toObject = function toObject(message, options) {
+        BrcowcowOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1244,11 +1356,11 @@ $root.brcowcow = (function() {
             return object;
         };
 
-        BrcowcowCheckoutResp.prototype.toJSON = function toJSON() {
+        BrcowcowOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return BrcowcowCheckoutResp;
+        return BrcowcowOverResp;
     })();
 
     brcowcow.BrcowcowHostReq = (function() {

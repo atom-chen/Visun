@@ -695,8 +695,8 @@ export namespace tigerXdragon {
     /** Properties of a TigerXdragonOpenResp. */
     interface ITigerXdragonOpenResp {
 
-        /** TigerXdragonOpenResp Dice */
-        Dice?: (Uint8Array|null);
+        /** TigerXdragonOpenResp Cards */
+        Cards?: (Uint8Array|null);
 
         /** TigerXdragonOpenResp AwardArea */
         AwardArea?: (Uint8Array|null);
@@ -711,8 +711,8 @@ export namespace tigerXdragon {
          */
         constructor(properties?: tigerXdragon.ITigerXdragonOpenResp);
 
-        /** TigerXdragonOpenResp Dice. */
-        public Dice: Uint8Array;
+        /** TigerXdragonOpenResp Cards. */
+        public Cards: Uint8Array;
 
         /** TigerXdragonOpenResp AwardArea. */
         public AwardArea: Uint8Array;
