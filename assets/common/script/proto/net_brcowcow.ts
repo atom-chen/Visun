@@ -41,7 +41,7 @@ export var brcowcow_packet_define = {
 }
 
 export class brcowcow_request {
-    public static BrcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[] } ) { brcowcow_packet_define[88].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any } ) { brcowcow_packet_define[88].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStateFreeResp( data:{ Times:any } ) { brcowcow_packet_define[89].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStateStartResp( data:{ Times:any } ) { brcowcow_packet_define[90].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStatePlayingResp( data:{ Times:any } ) { brcowcow_packet_define[91].sendToChannel(ChannelDefine.game, data, false); }

@@ -19,6 +19,12 @@ export namespace brcowcow {
 
         /** BrcowcowSceneResp MyBets */
         MyBets?: ((number|Long)[]|null);
+
+        /** BrcowcowSceneResp Inning */
+        Inning?: (string|null);
+
+        /** BrcowcowSceneResp AllPlayers */
+        AllPlayers?: (gamecomm.IPlayerListInfo|null);
     }
 
     /** Represents a BrcowcowSceneResp. */
@@ -44,6 +50,12 @@ export namespace brcowcow {
 
         /** BrcowcowSceneResp MyBets. */
         public MyBets: (number|Long)[];
+
+        /** BrcowcowSceneResp Inning. */
+        public Inning: string;
+
+        /** BrcowcowSceneResp AllPlayers. */
+        public AllPlayers?: (gamecomm.IPlayerListInfo|null);
 
         /**
          * Creates a new BrcowcowSceneResp instance using the specified properties.

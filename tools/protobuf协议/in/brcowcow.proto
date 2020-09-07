@@ -7,8 +7,10 @@ message BrcowcowSceneResp {
   int64 TimeStamp = 1;        //时间戳
   repeated int32 Chips = 2;      //筹码
   repeated bytes AwardAreas = 3;    //开奖记录(路单)
-  repeated int64 AreaBets = 11;    //各下注区当前总下注额
-  repeated int64 MyBets = 12;      //我在各下注区的总下注额
+  repeated int64 AreaBets = 4;    //各下注区当前总下注额
+  repeated int64 MyBets = 5;      //我在各下注区的总下注额
+  string Inning = 6;               // 牌局号
+  PlayerListInfo AllPlayers = 7;  //玩家列表
 }
 
 //状态

@@ -29,6 +29,8 @@ $root.brcowcow = (function() {
         BrcowcowSceneResp.prototype.AwardAreas = $util.emptyArray;
         BrcowcowSceneResp.prototype.AreaBets = $util.emptyArray;
         BrcowcowSceneResp.prototype.MyBets = $util.emptyArray;
+        BrcowcowSceneResp.prototype.Inning = "";
+        BrcowcowSceneResp.prototype.AllPlayers = null;
 
         BrcowcowSceneResp.create = function create(properties) {
             return new BrcowcowSceneResp(properties);
@@ -49,17 +51,21 @@ $root.brcowcow = (function() {
                 for (var i = 0; i < message.AwardAreas.length; ++i)
                     writer.uint32(26).bytes(message.AwardAreas[i]);
             if (message.AreaBets != null && message.AreaBets.length) {
-                writer.uint32(90).fork();
+                writer.uint32(34).fork();
                 for (var i = 0; i < message.AreaBets.length; ++i)
                     writer.int64(message.AreaBets[i]);
                 writer.ldelim();
             }
             if (message.MyBets != null && message.MyBets.length) {
-                writer.uint32(98).fork();
+                writer.uint32(42).fork();
                 for (var i = 0; i < message.MyBets.length; ++i)
                     writer.int64(message.MyBets[i]);
                 writer.ldelim();
             }
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(50).string(message.Inning);
+            if (message.AllPlayers != null && Object.hasOwnProperty.call(message, "AllPlayers"))
+                $root.gamecomm.PlayerListInfo.encode(message.AllPlayers, writer.uint32(58).fork()).ldelim();
             return writer;
         };
 
@@ -92,7 +98,7 @@ $root.brcowcow = (function() {
                         message.AwardAreas = [];
                     message.AwardAreas.push(reader.bytes());
                     break;
-                case 11:
+                case 4:
                     if (!(message.AreaBets && message.AreaBets.length))
                         message.AreaBets = [];
                     if ((tag & 7) === 2) {
@@ -102,7 +108,7 @@ $root.brcowcow = (function() {
                     } else
                         message.AreaBets.push(reader.int64());
                     break;
-                case 12:
+                case 5:
                     if (!(message.MyBets && message.MyBets.length))
                         message.MyBets = [];
                     if ((tag & 7) === 2) {
@@ -111,6 +117,12 @@ $root.brcowcow = (function() {
                             message.MyBets.push(reader.int64());
                     } else
                         message.MyBets.push(reader.int64());
+                    break;
+                case 6:
+                    message.Inning = reader.string();
+                    break;
+                case 7:
+                    message.AllPlayers = $root.gamecomm.PlayerListInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -159,6 +171,14 @@ $root.brcowcow = (function() {
                 for (var i = 0; i < message.MyBets.length; ++i)
                     if (!$util.isInteger(message.MyBets[i]) && !(message.MyBets[i] && $util.isInteger(message.MyBets[i].low) && $util.isInteger(message.MyBets[i].high)))
                         return "MyBets: integer|Long[] expected";
+            }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
+            if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers")) {
+                var error = $root.gamecomm.PlayerListInfo.verify(message.AllPlayers);
+                if (error)
+                    return "AllPlayers." + error;
             }
             return null;
         };
@@ -221,6 +241,13 @@ $root.brcowcow = (function() {
                     else if (typeof object.MyBets[i] === "object")
                         message.MyBets[i] = new $util.LongBits(object.MyBets[i].low >>> 0, object.MyBets[i].high >>> 0).toNumber();
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
+            if (object.AllPlayers != null) {
+                if (typeof object.AllPlayers !== "object")
+                    throw TypeError(".brcowcow.BrcowcowSceneResp.AllPlayers: object expected");
+                message.AllPlayers = $root.gamecomm.PlayerListInfo.fromObject(object.AllPlayers);
+            }
             return message;
         };
 
@@ -234,12 +261,15 @@ $root.brcowcow = (function() {
                 object.AreaBets = [];
                 object.MyBets = [];
             }
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TimeStamp = options.longs === String ? "0" : 0;
+                object.Inning = "";
+                object.AllPlayers = null;
+            }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
@@ -271,6 +301,10 @@ $root.brcowcow = (function() {
                     else
                         object.MyBets[j] = options.longs === String ? $util.Long.prototype.toString.call(message.MyBets[j]) : options.longs === Number ? new $util.LongBits(message.MyBets[j].low >>> 0, message.MyBets[j].high >>> 0).toNumber() : message.MyBets[j];
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
+            if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers"))
+                object.AllPlayers = $root.gamecomm.PlayerListInfo.toObject(message.AllPlayers, options);
             return object;
         };
 
