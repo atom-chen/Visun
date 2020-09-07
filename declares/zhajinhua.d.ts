@@ -1645,6 +1645,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaLookResp UserId */
         UserId?: (number|Long|null);
+
+        /** ZhajinhuaLookResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
     }
 
     /** Represents a ZhajinhuaLookResp. */
@@ -1658,6 +1661,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaLookResp UserId. */
         public UserId: (number|Long);
+
+        /** ZhajinhuaLookResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
 
         /**
          * Creates a new ZhajinhuaLookResp instance using the specified properties.

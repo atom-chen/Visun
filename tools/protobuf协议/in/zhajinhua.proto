@@ -116,6 +116,7 @@ message ZhajinhuaLookReq {
 }
 message ZhajinhuaLookResp {
   uint64 UserId = 1;
+  CardInfo Cards = 2;     //[只有该玩家才有牌数据]
 }
 
 //比牌

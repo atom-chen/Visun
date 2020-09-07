@@ -76,7 +76,7 @@ export class zhajinhua_request {
     public static ZhajinhuaRaiseReq( data:{ Score:number } ) { zhajinhua_packet_define[115].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaRaiseResp( data:{ UserId:number, Score:number } ) { zhajinhua_packet_define[116].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaLookReq( data:{} ) { zhajinhua_packet_define[117].sendToChannel(ChannelDefine.game, data, false); }
-    public static ZhajinhuaLookResp( data:{ UserId:number } ) { zhajinhua_packet_define[118].sendToChannel(ChannelDefine.game, data, false); }
+    public static ZhajinhuaLookResp( data:{ UserId:number, Cards:any } ) { zhajinhua_packet_define[118].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaCompareReq( data:{ HitId:number } ) { zhajinhua_packet_define[119].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaCompareResp( data:{ AttackerId:number, HitId:number, WinnerId:number, AttackerCards:any, HitCards:any } ) { zhajinhua_packet_define[120].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaGiveupReq( data:{} ) { zhajinhua_packet_define[121].sendToChannel(ChannelDefine.game, data, false); }

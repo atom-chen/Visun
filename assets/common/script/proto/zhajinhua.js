@@ -2108,6 +2108,7 @@ $root.zhajinhua = (function() {
         }
 
         ZhajinhuaLookResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ZhajinhuaLookResp.prototype.Cards = null;
 
         ZhajinhuaLookResp.create = function create(properties) {
             return new ZhajinhuaLookResp(properties);
@@ -2118,6 +2119,8 @@ $root.zhajinhua = (function() {
                 writer = $Writer.create();
             if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
                 writer.uint32(8).uint64(message.UserId);
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -2134,6 +2137,9 @@ $root.zhajinhua = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.UserId = reader.uint64();
+                    break;
+                case 2:
+                    message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2155,6 +2161,11 @@ $root.zhajinhua = (function() {
             if (message.UserId != null && message.hasOwnProperty("UserId"))
                 if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
                     return "UserId: integer|Long expected";
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.gamecomm.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
             return null;
         };
 
@@ -2171,6 +2182,11 @@ $root.zhajinhua = (function() {
                     message.UserId = object.UserId;
                 else if (typeof object.UserId === "object")
                     message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".zhajinhua.ZhajinhuaLookResp.Cards: object expected");
+                message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
+            }
             return message;
         };
 
@@ -2178,17 +2194,21 @@ $root.zhajinhua = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
                     object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.UserId = options.longs === String ? "0" : 0;
+                object.Cards = null;
+            }
             if (message.UserId != null && message.hasOwnProperty("UserId"))
                 if (typeof message.UserId === "number")
                     object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
                 else
                     object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
             return object;
         };
 
