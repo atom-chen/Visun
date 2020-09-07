@@ -89,6 +89,8 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private initContext() {
+		this.setWinAreas([]);
+		this.clearBets();
 		var enterData = BjleMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {

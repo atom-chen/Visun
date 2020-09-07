@@ -56,7 +56,6 @@ export default class ToubaoUI extends BaseComponent {
 		this.initNetEvent();
 		this.initUIEvent();
 
-		this.setWinAreas([]);
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
 		this.initContext();
@@ -69,6 +68,10 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private initContext() {
+		this.m_ui.tzNode.active = false;
+		this.setWinAreas([]);
+		this.clearBets();
+		
 		var enterData = ToubaoMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
