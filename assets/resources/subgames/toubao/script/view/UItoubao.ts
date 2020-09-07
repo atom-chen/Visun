@@ -25,6 +25,7 @@ import ResPool from "../../../../../kernel/basic/pool/ResPool";
 
 
 var margin = { rx:10, ry:10 };
+var MaxAreaCnt = 25;
 
 
 const {ccclass, property} = cc._decorator;
@@ -70,10 +71,10 @@ export default class ToubaoUI extends BaseComponent {
 		var enterData = ToubaoMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
-				var areaName = "area"+i;
+				var areaName = "btnBet"+i;
 				if(this.m_ui[areaName]) {
-				//	this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
-				//	this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
+					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
+					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
 				}
 			}
 			if(enterData.Chips && enterData.Chips.length >= 5) {
@@ -100,15 +101,15 @@ export default class ToubaoUI extends BaseComponent {
 		for(var i=childs.length-1; i>=0; i--){
 			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
 		}
-		for(var j=0; j<5; j++) {
-		//	this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
-		//	this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		for(var j=0; j<MaxAreaCnt; j++) {
+			this.m_ui["btnBet"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+			this.m_ui["btnBet"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
 		}
 	}
 
 	private setWinAreas(arr:any) {
 		this.m_ui.highLayer.active = true;
-		for(var i=0; i<=24; i++) {
+		for(var i=0; i<MaxAreaCnt; i++) {
 			if(this.m_ui["area"+i]) {
 				var nd = this.m_ui["area"+i];
 				nd.active = !isNil(arr[i]) && arr[i] > 0;
@@ -188,10 +189,10 @@ export default class ToubaoUI extends BaseComponent {
 			enterData.MyBets[param.BetArea] += param.BetScore;
 		}
 
-		var areaName = "area"+param.BetArea;
+		var areaName = "btnBet"+param.BetArea;
 		if(this.m_ui[areaName]) {
-		//	this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
-		//	this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
+			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
+			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
 		}
 
 		var money = CommonUtil.fixRealMoney(param.BetScore);
