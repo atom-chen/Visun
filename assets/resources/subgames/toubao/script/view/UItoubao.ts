@@ -25,33 +25,7 @@ import ResPool from "../../../../../kernel/basic/pool/ResPool";
 
 
 var margin = { rx:10, ry:10 };
-var testdata = [ 
-	{AreaId:0,Money:5280},
-	{AreaId:1,Money:5280},
-	{AreaId:2,Money:8650},
-	{AreaId:3,Money:6455},
-	{AreaId:4,Money:4255},
-	{AreaId:5,Money:5280},
-	{AreaId:6,Money:5280},
-	{AreaId:7,Money:8650},
-	{AreaId:8,Money:6455},
-	{AreaId:9,Money:4255},
-	{AreaId:10,Money:5280},
-	{AreaId:11,Money:5280},
-	{AreaId:12,Money:8650},
-	{AreaId:13,Money:6455},
-	{AreaId:14,Money:4255},
-	{AreaId:15,Money:5280},
-	{AreaId:16,Money:5280},
-	{AreaId:17,Money:8650},
-	{AreaId:18,Money:6455},
-	{AreaId:19,Money:4255},
-	{AreaId:20,Money:5280},
-	{AreaId:21,Money:5280},
-	{AreaId:22,Money:8650},
-	{AreaId:23,Money:6455},
-	{AreaId:24,Money:4255},
-];
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -134,7 +108,7 @@ export default class ToubaoUI extends BaseComponent {
 
 	private setWinAreas(arr:any) {
 		this.m_ui.highLayer.active = true;
-		for(var i=4; i>=0; i--) {
+		for(var i=0; i<=24; i++) {
 			if(this.m_ui["area"+i]) {
 				var nd = this.m_ui["area"+i];
 				nd.active = !isNil(arr[i]) && arr[i] > 0;
@@ -244,14 +218,16 @@ export default class ToubaoUI extends BaseComponent {
 		this.m_ui.tzNode.active = false;
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "shake", false);
 		this.isJoined = false;
+		this.clearBets();
+		this.setWinAreas([]);
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
 
 	//下注阶段
 	BrtoubaoStatePlayingResp(param:brtoubao.IBrtoubaoStatePlayingResp) {
+		this.setWinAreas([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
 		this.playTipBetting();
-
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
 		this.m_ui.tzNode.active = false;
@@ -269,6 +245,7 @@ export default class ToubaoUI extends BaseComponent {
 
 	//开拍阶段
 	BrtoubaoStateOpenResp(param:brtoubao.IBrtoubaoStateOpenResp) {
+		this.setWinAreas([]);
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		
 		this.BrtoubaoOpenResp(param.OpenInfo);
