@@ -16,11 +16,11 @@ export default class CpnChipbox3d extends BaseComponent {
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
+        CommonUtil.addClickEvent(this.m_ui.chip0, function(){ this.onSelect(0); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip1, function(){ this.onSelect(1); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
-        CommonUtil.addClickEvent(this.m_ui.chip0, function(){ this.onSelect(0); }, this);
         this.setSelectedIndex(1);
     }
 
@@ -49,6 +49,19 @@ export default class CpnChipbox3d extends BaseComponent {
             }
         }
         return -1;
+    }
+
+    public getSelectValue() : number {
+        return this._values[this.selectedIndex];
+    }
+
+    public getChipNodeByValue(v:number) : cc.Node {
+        var idx = this._values.indexOf(v);
+        if(idx >= 0) {
+            return this.m_ui["chip"+idx];
+        } else {
+            return this.m_ui.chip0;
+        }
     }
      
     public setChipValues(values:number[]) {

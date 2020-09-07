@@ -20,6 +20,9 @@ import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
 import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
 import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
+import { brtoubao_msgs } from "../proto/net_brtoubao";
+import { brtoubao } from "../../../../declares/brtoubao";
+import ToubaoMgr from "../../../resources/subgames/toubao/script/model/ToubaoMgr";
 
 
 var GameHandlers = {
@@ -52,6 +55,16 @@ var GameHandlers = {
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
+    },
+    
+    [brtoubao_msgs.BrtoubaoSceneResp] : function(param:brtoubao.IBrtoubaoSceneResp) {
+        ToubaoMgr.delInstance();
+        ToubaoMgr.getInstance().setEnterData(param);
+        
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.Toubao);
 	},
 	
 	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
