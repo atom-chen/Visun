@@ -56,6 +56,7 @@ export default class ToubaoUI extends BaseComponent {
 		this.initNetEvent();
 		this.initUIEvent();
 
+		this.setWinAreas([]);
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
 		this.initContext();
