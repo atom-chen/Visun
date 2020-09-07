@@ -47,14 +47,14 @@ message BrcowcowStateOverResp {
 
 //下注
 message BrcowcowBetReq {
-  int32 Area = 1;
-  int64 Gold = 2;
+  int32 BetArea = 2;        //下注区域
+  int64 BetScore = 3;        //下注金额
 }
 //下注结果：广播
 message BrcowcowBetResp {
   uint64 UserId = 1;
-  int32 Area = 2;
-  int64 Gold = 3;
+  int32 BetArea = 2;        //下注区域
+  int64 BetScore = 3;        //下注金额
 }
 
 //开牌

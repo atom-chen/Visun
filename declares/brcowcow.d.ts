@@ -587,11 +587,11 @@ export namespace brcowcow {
     /** Properties of a BrcowcowBetReq. */
     interface IBrcowcowBetReq {
 
-        /** BrcowcowBetReq Area */
-        Area?: (number|null);
+        /** BrcowcowBetReq BetArea */
+        BetArea?: (number|null);
 
-        /** BrcowcowBetReq Gold */
-        Gold?: (number|Long|null);
+        /** BrcowcowBetReq BetScore */
+        BetScore?: (number|Long|null);
     }
 
     /** Represents a BrcowcowBetReq. */
@@ -603,11 +603,11 @@ export namespace brcowcow {
          */
         constructor(properties?: brcowcow.IBrcowcowBetReq);
 
-        /** BrcowcowBetReq Area. */
-        public Area: number;
+        /** BrcowcowBetReq BetArea. */
+        public BetArea: number;
 
-        /** BrcowcowBetReq Gold. */
-        public Gold: (number|Long);
+        /** BrcowcowBetReq BetScore. */
+        public BetScore: (number|Long);
 
         /**
          * Creates a new BrcowcowBetReq instance using the specified properties.
@@ -686,11 +686,11 @@ export namespace brcowcow {
         /** BrcowcowBetResp UserId */
         UserId?: (number|Long|null);
 
-        /** BrcowcowBetResp Area */
-        Area?: (number|null);
+        /** BrcowcowBetResp BetArea */
+        BetArea?: (number|null);
 
-        /** BrcowcowBetResp Gold */
-        Gold?: (number|Long|null);
+        /** BrcowcowBetResp BetScore */
+        BetScore?: (number|Long|null);
     }
 
     /** Represents a BrcowcowBetResp. */
@@ -705,11 +705,11 @@ export namespace brcowcow {
         /** BrcowcowBetResp UserId. */
         public UserId: (number|Long);
 
-        /** BrcowcowBetResp Area. */
-        public Area: number;
+        /** BrcowcowBetResp BetArea. */
+        public BetArea: number;
 
-        /** BrcowcowBetResp Gold. */
-        public Gold: (number|Long);
+        /** BrcowcowBetResp BetScore. */
+        public BetScore: (number|Long);
 
         /**
          * Creates a new BrcowcowBetResp instance using the specified properties.
