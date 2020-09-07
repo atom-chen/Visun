@@ -1,7 +1,6 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
-import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
@@ -99,8 +98,8 @@ export default class ToubaoUI extends BaseComponent {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
 				var areaName = "area"+i;
 				if(this.m_ui[areaName]) {
-					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
-					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
+				//	this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
+				//	this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
 				}
 			}
 			if(enterData.Chips && enterData.Chips.length >= 5) {
@@ -117,10 +116,6 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private playTipBetting() {
-		// var childs = this.m_ui.highLayer.children;
-		// for (var i in childs) {
-		// 	childs[i].runAction(cc.blink(1, 3));
-		// }
 		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.hide()));
 	}
 
@@ -132,8 +127,21 @@ export default class ToubaoUI extends BaseComponent {
 			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
 		}
 		for(var j=0; j<5; j++) {
-			this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
-			this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		//	this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+		//	this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		}
+	}
+
+	private setWinAreas(arr:any) {
+		this.m_ui.highLayer.active = true;
+		for(var i=4; i>=0; i--) {
+			if(this.m_ui["area"+i]) {
+				var nd = this.m_ui["area"+i];
+				nd.active = !isNil(arr[i]) && arr[i] > 0;
+				if(nd.active) {
+					nd.runAction(cc.blink(1, 3));
+				}
+			}
 		}
 	}
 
@@ -208,8 +216,8 @@ export default class ToubaoUI extends BaseComponent {
 
 		var areaName = "area"+param.BetArea;
 		if(this.m_ui[areaName]) {
-			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
-			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
+		//	this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
+		//	this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
 		}
 
 		var money = CommonUtil.fixRealMoney(param.BetScore);
@@ -235,7 +243,7 @@ export default class ToubaoUI extends BaseComponent {
 	BrtoubaoStateStartResp(param:brtoubao.IBrtoubaoStateStartResp) {
 		this.m_ui.tzNode.active = false;
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "shake", false);
-
+		this.isJoined = false;
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
@@ -271,7 +279,7 @@ export default class ToubaoUI extends BaseComponent {
 
 	//结算阶段
 	BrtoubaoStateOverResp(param:brtoubao.IBrtoubaoStateOverResp) {
-		
+		this.isJoined = false;
 	}
 
 	BrtoubaoOpenResp(param:brtoubao.IBrtoubaoOpenResp) {

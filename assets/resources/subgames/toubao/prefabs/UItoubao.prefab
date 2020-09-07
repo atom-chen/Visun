@@ -1127,7 +1127,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high0",
+    "_name": "area0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1234,7 +1234,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high1",
+    "_name": "area1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1341,7 +1341,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high2",
+    "_name": "area2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1448,7 +1448,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high3",
+    "_name": "area3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1555,7 +1555,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high4",
+    "_name": "area4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1662,7 +1662,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high5",
+    "_name": "area5",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1769,7 +1769,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high6",
+    "_name": "area6",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1876,7 +1876,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high7",
+    "_name": "area7",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -1983,7 +1983,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high8",
+    "_name": "area8",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2090,7 +2090,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high9",
+    "_name": "area9",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2197,7 +2197,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high10",
+    "_name": "area10",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2304,7 +2304,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high11",
+    "_name": "area11",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2411,7 +2411,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high12",
+    "_name": "area12",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2518,7 +2518,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high13",
+    "_name": "area13",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2625,7 +2625,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high14",
+    "_name": "area14",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2732,7 +2732,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high15",
+    "_name": "area15",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2839,7 +2839,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high16",
+    "_name": "area16",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -2946,7 +2946,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high17",
+    "_name": "area17",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3053,7 +3053,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high18",
+    "_name": "area18",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3160,7 +3160,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high19",
+    "_name": "area19",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3267,7 +3267,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high20",
+    "_name": "area20",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3374,7 +3374,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high21",
+    "_name": "area21",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3481,7 +3481,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high22",
+    "_name": "area22",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3588,7 +3588,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high23",
+    "_name": "area23",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
@@ -3695,7 +3695,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "high24",
+    "_name": "area24",
     "_objFlags": 0,
     "_parent": {
       "__id__": 24
