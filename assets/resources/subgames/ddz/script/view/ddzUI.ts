@@ -440,7 +440,7 @@ export default class DdzUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
             var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
             if(!hero) {
-                cc.warn("hero is nil");
+                cc.log("hero is nil");
                 return;
             }
             landLords_request.LandLordsTrusteeReq({
