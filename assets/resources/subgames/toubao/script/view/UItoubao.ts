@@ -305,6 +305,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private initNetEvent() {
+		EventCenter.getInstance().listen(brtoubao_msgs.BrtoubaoSceneResp, this.initContext, this);
 		EventCenter.getInstance().listen(brtoubao_msgs.BrtoubaoBetResp, this.BrtoubaoBetResp, this);
 		EventCenter.getInstance().listen(brtoubao_msgs.BrtoubaoStateStartResp, this.BrtoubaoStateStartResp, this);
         EventCenter.getInstance().listen(brtoubao_msgs.BrtoubaoStatePlayingResp, this.BrtoubaoStatePlayingResp, this);
