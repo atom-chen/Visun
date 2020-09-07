@@ -71,11 +71,11 @@ export default class ToubaoUI extends BaseComponent {
 		this.m_ui.tzNode.active = false;
 		this.setWinAreas([]);
 		this.clearBets();
-		
+
 		var enterData = ToubaoMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
-				var areaName = "btnBet"+i;
+				var areaName = "betBtn"+i;
 				if(this.m_ui[areaName]) {
 					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
 					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
@@ -106,8 +106,8 @@ export default class ToubaoUI extends BaseComponent {
 			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
 		}
 		for(var j=0; j<MaxAreaCnt; j++) {
-			this.m_ui["btnBet"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
-			this.m_ui["btnBet"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+			this.m_ui["betBtn"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+			this.m_ui["betBtn"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
 		}
 	}
 
@@ -193,7 +193,7 @@ export default class ToubaoUI extends BaseComponent {
 			enterData.MyBets[param.BetArea] += param.BetScore;
 		}
 
-		var areaName = "btnBet"+param.BetArea;
+		var areaName = "betBtn"+param.BetArea;
 		if(this.m_ui[areaName]) {
 			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
 			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
