@@ -23,6 +23,7 @@ import { gamecomm } from "../../../../../../declares/gamecomm";
 import ResPool from "../../../../../kernel/basic/pool/ResPool";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
+import Preloader from "../../../../../kernel/utils/Preloader";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -199,7 +200,17 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowStatePlaying(param:brcowcow.IBrcowcowStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+
+		if(param.Times.OutTime <= 1) {
+			this.setWinAreas([]);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);

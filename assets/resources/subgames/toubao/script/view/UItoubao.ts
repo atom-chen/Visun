@@ -241,7 +241,6 @@ export default class ToubaoUI extends BaseComponent {
 			});
 		}
 		
-
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
