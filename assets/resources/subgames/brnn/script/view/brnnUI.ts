@@ -168,8 +168,15 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowStateStart(param:brcowcow.IBrcowcowStateStartResp) {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
-
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
+		this.isJoined = false;
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
+		this.m_ui.CpnHandcard0.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+		this.clearBets();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
