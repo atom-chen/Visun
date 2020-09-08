@@ -185,10 +185,16 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowStateOver(param:brcowcow.IBrcowcowStateOverResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
+	}
+
+	private BrcowcowStateOpenResp(param:brcowcow.IBrcowcowStateOpenResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		if(!isNil(param.OpenInfo)) {
+			this.BrcowcowOpenResp(param.OpenInfo);
+		}
 	}
 
 	private BrcowcowOpenResp(param:brcowcow.IBrcowcowOpenResp) {
@@ -212,7 +218,7 @@ export default class BrnnUI extends BaseComponent {
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
 				for(var i=len-1; i>=0; i--){
-					var pos = CommonUtil.convertSpaceAR(this.m_ui["betBtn"+childs[i].__areaId], this.m_ui.chipLayer);
+					var pos = CommonUtil.convertSpaceAR(this.m_ui["area"+childs[i].__areaId], this.m_ui.chipLayer);
 					childs[i].runAction(cc.sequence(
 						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
 						cc.callFunc(function(obj){
@@ -278,6 +284,7 @@ export default class BrnnUI extends BaseComponent {
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFreeResp, this.BrcowcowStateFree, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStartResp, this.BrcowcowStateStart, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlayingResp, this.BrcowcowStatePlaying, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOpenResp, this.BrcowcowStateOpenResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateOverResp, this.BrcowcowStateOver, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp, this);
