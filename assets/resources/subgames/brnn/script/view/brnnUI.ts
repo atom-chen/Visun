@@ -220,7 +220,7 @@ export default class BrnnUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
 		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(1),
+			cc.delayTime(0.1),
 			cc.callFunc(function(){
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
