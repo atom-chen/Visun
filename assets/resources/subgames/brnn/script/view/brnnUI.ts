@@ -185,7 +185,7 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowStateStart(param:brcowcow.IBrcowcowStateStartResp) {
 		BrnnMgr.getInstance().getEnterData().HostID = param.HostID;
-
+		this.refreshZhuang();
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();

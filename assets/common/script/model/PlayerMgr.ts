@@ -2,6 +2,8 @@ import ModelBase from "../../../kernel/model/ModelBase";
 import { gamecomm } from "../../../../declares/gamecomm";
 import { isNil } from "../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
+import LoginUser from "./LoginUser";
+
 
 export default class PlayerMgr extends ModelBase {
 	private static _instance:PlayerMgr = null;
@@ -34,6 +36,9 @@ export default class PlayerMgr extends ModelBase {
 	}
 
 	playerHead(uid:number) : number {
+		if(uid == LoginUser.getInstance().UserId) {
+			return LoginUser.getInstance().getHead();
+		} 
 		if(this.allInfo[uid]) {
 			if(isNil(this.allInfo[uid].FaceID)) {
 				if(isNil(this.allInfo[uid].Sex)) {
@@ -50,6 +55,9 @@ export default class PlayerMgr extends ModelBase {
 	}
 
 	playerName(uid:number) : string {
+		if(uid == LoginUser.getInstance().UserId) {
+			return LoginUser.getInstance().Name;
+		}
 		if(this.allInfo[uid]) {
 			if(isNil(this.allInfo[uid].Name)) {
 				return ""+uid;
@@ -62,6 +70,9 @@ export default class PlayerMgr extends ModelBase {
 	}
 
 	playerMoney(uid:number) : number {
+		if(uid == LoginUser.getInstance().UserId) {
+			return LoginUser.getInstance().Gold;
+		}
 		if(this.allInfo[uid]) {
 			if(isNil(this.allInfo[uid].Gold)) {
 				return 0;
