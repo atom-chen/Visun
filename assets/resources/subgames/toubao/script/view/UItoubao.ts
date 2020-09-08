@@ -51,6 +51,8 @@ export default class ToubaoUI extends BaseComponent {
 			this.touziscalelist.push(this.m_ui["touzi"+i].scale);
 		}
 
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+		
 		ResPool.load(ViewDefine.CpnChip);
 
 		this.initNetEvent();

@@ -1,5 +1,6 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
 import { baccarat } from "../../../../../../declares/baccarat";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 export default class BjleMgr extends ModelBase {
     private static _instance:BjleMgr = null;
@@ -17,21 +18,18 @@ export default class BjleMgr extends ModelBase {
         
     }
 
-    private enterData:baccarat.IBaccaratSceneResp = null;
-    setEnterData(data:baccarat.IBaccaratSceneResp) {
-        this.enterData = data;
-    }
     getEnterData() : baccarat.IBaccaratSceneResp {
-        return this.enterData;
+        return GameManager.getInstance().getEnterData();
     }
 
     clearBets() {
-		if(this.enterData) {
-			for(var i=0; i<this.enterData.AreaBets.length; i++) {
-				this.enterData.AreaBets[i] = 0;
+        var enterData = this.getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				enterData.AreaBets[i] = 0;
 			}
-			for(var i=0; i<this.enterData.MyBets.length; i++) {
-				this.enterData.MyBets[i] = 0;
+			for(var i=0; i<enterData.MyBets.length; i++) {
+				enterData.MyBets[i] = 0;
 			}
 		}
     }

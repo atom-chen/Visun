@@ -18,11 +18,8 @@ import { landLords } from "../../../../declares/landLords";
 import { zhajinhua } from "../../../../declares/zhajinhua";
 import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
 import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
-import BrnnMgr from "../../../resources/subgames/brnn/script/model/BrnnMgr";
-import BjleMgr from "../../../resources/subgames/bjle/script/model/BjleMgr";
 import { brtoubao_msgs } from "../proto/net_brtoubao";
 import { brtoubao } from "../../../../declares/brtoubao";
-import ToubaoMgr from "../../../resources/subgames/toubao/script/model/ToubaoMgr";
 
 
 var GameHandlers = {
@@ -48,9 +45,6 @@ var GameHandlers = {
     
     
 	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
-        BjleMgr.delInstance();
-        BjleMgr.getInstance().setEnterData(param);
-        
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
@@ -58,9 +52,6 @@ var GameHandlers = {
     },
     
     [brtoubao_msgs.BrtoubaoSceneResp] : function(param:brtoubao.IBrtoubaoSceneResp) {
-        ToubaoMgr.delInstance();
-        ToubaoMgr.getInstance().setEnterData(param);
-        
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
@@ -68,9 +59,6 @@ var GameHandlers = {
 	},
 	
 	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
-        BrnnMgr.delInstance();
-        BrnnMgr.getInstance().setEnterData(param);
-
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
@@ -78,6 +66,9 @@ var GameHandlers = {
     },
     
     [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+
         ZjhMgr.delInstance();
         ZjhMgr.getInstance();
         for(var ii in param.Fighters) {
@@ -85,13 +76,14 @@ var GameHandlers = {
         }
         ZjhMgr.getInstance().setEnterData(param);
 
-        GameManager.getInstance().unregistGameModel();
-        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
     },
 
     [landLords_msgs.LandLordsSceneResp] : function(param:landLords.ILandLordsSceneResp) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+
         DDzMgr.delInstance();
         DDzMgr.getInstance().setEnterData(param);
         DDzMgr.getInstance().clearFighters();
@@ -102,8 +94,6 @@ var GameHandlers = {
             }
         }
 
-        GameManager.getInstance().unregistGameModel();
-        GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },

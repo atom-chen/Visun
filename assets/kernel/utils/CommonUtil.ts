@@ -154,6 +154,8 @@ export default class CommonUtil {
 	//坐标空间转换（原点为左下角）
 	public static convertSpace(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
+		if(isNil(srcObj)) { cc.warn("no srcObj"); }
+		if(isNil(dstObj)) { cc.warn("no dstObj"); }
 		var pt = srcObj.convertToWorldSpace(cc.v2(x,y));
 		return dstObj.convertToNodeSpace(pt);
 	}
@@ -161,6 +163,8 @@ export default class CommonUtil {
 	//坐标空间转换（原点为锚点）
 	public static convertSpaceAR(srcObj:cc.Node, dstObj:cc.Node, x:number=0, y:number=0) : cc.Vec2
 	{
+		if(isNil(srcObj)) { cc.warn("no srcObj"); }
+		if(isNil(dstObj)) { cc.warn("no dstObj"); }
 		var pt = srcObj.convertToWorldSpaceAR(cc.v2(x,y));
 		return dstObj.convertToNodeSpaceAR(pt);
 	}
