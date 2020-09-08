@@ -4,12 +4,10 @@ import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import { ZjhGameState } from "./ZjhDefine";
 import { gamecomm } from "../../../../../../declares/gamecomm";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 export default class ZjhMgr extends ModelBase {
 	private static _instance:ZjhMgr = null;
-    private constructor() {
-        super();
-    }
     public static getInstance() : ZjhMgr {
         if(!ZjhMgr._instance) { ZjhMgr._instance = new ZjhMgr; }
         return ZjhMgr._instance;
@@ -19,22 +17,19 @@ export default class ZjhMgr extends ModelBase {
 			ZjhMgr._instance.clear();
 			ZjhMgr._instance = null;
 		}
-	}
+    }
+    
     on_clear(): void {
         this._players = {};
-        this.enterData = null;
     }
     
     private _players : {[key:number]:zhajinhua.IZhajinhuaPlayer} = {};
-    private enterData:zhajinhua.IZhajinhuaSceneResp = null;
     public GameState:ZjhGameState = ZjhGameState.ready;
     public CurTurnTo:number = -1;
+    
 
-    setEnterData(data:zhajinhua.IZhajinhuaSceneResp) {
-        this.enterData = data;
-    }
     getEnterData() : zhajinhua.IZhajinhuaSceneResp {
-        return this.enterData;
+        return GameManager.getInstance().getEnterData();
     }
 
     clearPlayers() {

@@ -21,7 +21,6 @@ import ZjhHandlers from "../model/ZjhHandlers";
 import { gamecomm_msgs, gamecomm_request } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
-//import ZjhServer from "../model/ZjhServer";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnShandian from "../../../../appqp/script/comps/CpnShandian";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
@@ -84,9 +83,6 @@ export default class zjhUI extends BaseComponent {
 
         //预加载
         cc.loader.loadRes(ViewDefine.UIpk, cc.Prefab)
-
-        //for test
-     //   ZjhServer.getInstance().run();
     }
 
     onDestroy() {
@@ -225,6 +221,12 @@ export default class zjhUI extends BaseComponent {
         if(isNil(param)) {
             this.ZhajinhuaStateFreeResp(null);
             return;
+        }
+
+        ZjhMgr.delInstance();
+        ZjhMgr.getInstance();
+        for(var ii in param.Fighters) {
+			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
         }
 
         this.m_ui.labBottomBet.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(500);

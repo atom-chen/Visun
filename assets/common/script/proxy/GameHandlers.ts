@@ -1,25 +1,23 @@
 import GameManager from "../model/GameManager";
 import LoginUser from "../model/LoginUser";
-import { GameKindEnum } from "../definer/ConstDefine";
 import ChannelDefine from "../definer/ChannelDefine";
-import { landLords_msgs } from "../proto/net_landLords";
-import { gamecomm_msgs } from "../proto/net_gamecomm";
-import { brcowcow_msgs } from "../proto/net_brcowcow";
-import { baccarat_msgs } from "../proto/net_baccarat";
-import { zhajinhua_msgs } from "../proto/net_zhajinhua";
 import ProcessorMgr from "../../../kernel/net/processor/ProcessorMgr";
 import SceneManager from "../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import UIManager from "../../../kernel/view/UIManager";
+import { GameKindEnum } from "../definer/ConstDefine";
 import { gamecomm } from "../../../../declares/gamecomm";
 import { brcowcow } from "../../../../declares/brcowcow";
 import { baccarat } from "../../../../declares/baccarat";
 import { landLords } from "../../../../declares/landLords";
 import { zhajinhua } from "../../../../declares/zhajinhua";
-import ZjhMgr from "../../../resources/subgames/zjh/script/model/ZjhMgr";
-import DDzMgr from "../../../resources/subgames/ddz/script/model/DDzMgr";
-import { brtoubao_msgs } from "../proto/net_brtoubao";
 import { brtoubao } from "../../../../declares/brtoubao";
+import { brtoubao_msgs } from "../proto/net_brtoubao";
+import { landLords_msgs } from "../proto/net_landLords";
+import { gamecomm_msgs } from "../proto/net_gamecomm";
+import { brcowcow_msgs } from "../proto/net_brcowcow";
+import { baccarat_msgs } from "../proto/net_baccarat";
+import { zhajinhua_msgs } from "../proto/net_zhajinhua";
 
 
 var GameHandlers = {
@@ -30,16 +28,15 @@ var GameHandlers = {
         });
     },
 
-    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.IGoldChangeInfo) {
-        if(param.UserID == LoginUser.getInstance().UserId) {
-            LoginUser.getInstance().Gold = param.Gold;
-        }
-    },
-
-
     [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
         if(param.UserID == LoginUser.getInstance().UserId) {
             SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+        }
+    },
+
+    [gamecomm_msgs.GoldChangeInfo] : function(param:gamecomm.IGoldChangeInfo) {
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            LoginUser.getInstance().Gold = param.Gold;
         }
     },
     
@@ -68,14 +65,6 @@ var GameHandlers = {
     [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
-
-        ZjhMgr.delInstance();
-        ZjhMgr.getInstance();
-        for(var ii in param.Fighters) {
-			ZjhMgr.getInstance().addPlayer(param.Fighters[ii]);
-        }
-        ZjhMgr.getInstance().setEnterData(param);
-
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
     },
@@ -83,17 +72,6 @@ var GameHandlers = {
     [landLords_msgs.LandLordsSceneResp] : function(param:landLords.ILandLordsSceneResp) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
-
-        DDzMgr.delInstance();
-        DDzMgr.getInstance().setEnterData(param);
-        DDzMgr.getInstance().clearFighters();
-        DDzMgr.getInstance().updateFighterList(param.Players);
-        for(var i in param.Players) {
-            if(param.Players[i].IsBanker) {
-                DDzMgr.getInstance().setZhuang(param.Players[i].UserID);
-            }
-        }
-
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
