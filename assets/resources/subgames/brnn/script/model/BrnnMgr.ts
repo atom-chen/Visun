@@ -1,6 +1,7 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
 import { brcowcow } from "../../../../../../declares/brcowcow";
 import GameManager from "../../../../../common/script/model/GameManager";
+import LoginUser from "../../../../../common/script/model/LoginUser";
 
 export default class BrnnMgr extends ModelBase {
 	private static _instance:BrnnMgr = null;
@@ -32,5 +33,14 @@ export default class BrnnMgr extends ModelBase {
 				enterData.MyBets[i] = 0;
 			}
 		}
-    }
+	}
+	
+	isMeHost() : boolean {
+		var enterData = this.getEnterData();
+		if(enterData) {
+			return enterData.HostID == LoginUser.getInstance().UserId;
+		} else {
+			return false;
+		}
+	}
 }

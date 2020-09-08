@@ -85,7 +85,8 @@ export default class BrnnUI extends BaseComponent {
 		} else {
 			this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).setChipValues(this._rule);
 		}
-		this.m_ui.btn_xz.active = false;
+		this.m_ui.btn_xz.active = BrnnMgr.getInstance().isMeHost();
+		this.m_ui.btn_sz.active = !BrnnMgr.getInstance().isMeHost();
 		brcowcow_request.BrcowcowHostListReq({});
 		this.refreshZhuang();
 	}
@@ -102,6 +103,8 @@ export default class BrnnUI extends BaseComponent {
 			this.m_ui.lab_zjname.getComponent(cc.Label).string = "系统庄家";
 			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = "0";
 		}
+		this.m_ui.btn_xz.active = BrnnMgr.getInstance().isMeHost();
+		this.m_ui.btn_sz.active = !BrnnMgr.getInstance().isMeHost();
 	}
 
 	private setWinAreas(arr:any) {
