@@ -109,6 +109,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private initNetEvent() {
+		EventCenter.getInstance().listen(baccarat_msgs.BaccaratSceneResp, this.initContext, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratBetResp, this.BaccaratBetResp, this);
 		EventCenter.getInstance().listen(baccarat_msgs.BaccaratStateStartResp, this.BaccaratStateStartResp, this);
         EventCenter.getInstance().listen(baccarat_msgs.BaccaratStatePlayingResp, this.BaccaratStatePlayingResp, this);

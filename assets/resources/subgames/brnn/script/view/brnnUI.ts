@@ -266,6 +266,7 @@ export default class BrnnUI extends BaseComponent {
 
 	private initNetEvent() {
 		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowSceneResp, this.initContext, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateFreeResp, this.BrcowcowStateFree, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStateStartResp, this.BrcowcowStateStart, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowStatePlayingResp, this.BrcowcowStatePlaying, this);
