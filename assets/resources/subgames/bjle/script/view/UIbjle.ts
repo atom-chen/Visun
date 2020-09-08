@@ -276,21 +276,16 @@ export default class UIbjle extends BaseComponent {
     private playCollectChip(param:baccarat.IBaccaratCheckoutResp) {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
-		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(0.1),
-			cc.callFunc(function(){
-				var childs = this.m_ui.chipLayer.children
-				var len = childs.length;
-				for(var i=len-1; i>=0; i--){
-					childs[i].runAction(cc.sequence(
-						cc.moveTo(0.36, cc.v2(0, 150)),
-						cc.callFunc(function(obj){
-                            ResPool.delObject(ViewDefine.CpnChip, obj);
-						}, childs[i])
-					));
-				}
-			}, this)
-		));
+		var childs = this.m_ui.chipLayer.children
+		var len = childs.length;
+		for(var i=len-1; i>=0; i--){
+			childs[i].runAction(cc.sequence(
+				cc.moveTo(0.36, cc.v2(0, 150)),
+				cc.callFunc(function(obj){
+                    ResPool.delObject(ViewDefine.CpnChip, obj);
+				}, childs[i])
+			));
+		}
 
 		var shouTime = 0.1 + 0.36;
 		TimerManager.delaySecond(shouTime, newHandler(function(){

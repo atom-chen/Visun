@@ -24,7 +24,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import ResPool from "../../../../../kernel/basic/pool/ResPool";
 
 
-var margin = { rx:10, ry:10 };
+var margin = { rx:10, ry:10, rr:0 };
 var MaxAreaCnt = 25;
 
 
@@ -128,22 +128,18 @@ export default class ToubaoUI extends BaseComponent {
 	private playCollectChip(param:brtoubao.IBrtoubaoCheckoutResp) {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
-		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(0.1),
-			cc.callFunc(function(){
-				var childs = this.m_ui.chipLayer.children
-				var len = childs.length;
-				for(var i=len-1; i>=0; i--){
-					var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-					childs[i].runAction(cc.sequence(
-						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
-						cc.callFunc(function(obj){
-							ResPool.delObject(ViewDefine.CpnChip, obj);
-						}, childs[i])
-					))
-				}
-			}, this)
-		));
+		var childs = this.m_ui.chipLayer.children
+		var len = childs.length;
+		for(var i=len-1; i>=0; i--){
+			var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+			childs[i].runAction(cc.sequence(
+				cc.delayTime(i*0.03),
+				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
+				cc.callFunc(function(obj){
+					ResPool.delObject(ViewDefine.CpnChip, obj);
+				}, childs[i])
+			))
+		}
 
 		var shouTime = 0.1 + 0.36;
 		TimerManager.delaySecond(shouTime, newHandler(function(){
@@ -214,7 +210,7 @@ export default class ToubaoUI extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
-			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
+			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin);
 		}
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }

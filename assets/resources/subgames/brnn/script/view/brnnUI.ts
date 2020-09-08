@@ -235,23 +235,17 @@ export default class BrnnUI extends BaseComponent {
 	private playCollectChip(param:brcowcow.IBrcowcowOverResp) {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
-		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(0.1),
-			cc.callFunc(function(){
-				var childs = this.m_ui.chipLayer.children
-				var len = childs.length;
-				for(var i=len-1; i>=0; i--){
-					var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-					cc.log(pos.x, pos.y);
-					childs[i].runAction(cc.sequence(
-						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
-						cc.callFunc(function(obj){
-							ResPool.delObject(ViewDefine.CpnChip, obj);
-						}, childs[i])
-					))
-				}
-			}, this)
-		));
+		var childs = this.m_ui.chipLayer.children
+		var len = childs.length;
+		for(var i=len-1; i>=0; i--){
+			var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+			childs[i].runAction(cc.sequence(
+				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
+				cc.callFunc(function(obj){
+					ResPool.delObject(ViewDefine.CpnChip, obj);
+				}, childs[i])
+			))
+		}
 
 		var shouTime = 0.1 + 0.36;
 		TimerManager.delaySecond(shouTime, newHandler(function(){
