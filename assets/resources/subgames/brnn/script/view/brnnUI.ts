@@ -25,7 +25,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 
 
-var margin = { left:16,right:16,bottom:16,top:16 };
+var margin = { rx:50,ry:50,rr:0 };
 
 
 const {ccclass, property} = cc._decorator;
@@ -149,7 +149,7 @@ export default class BrnnUI extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
-			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[param.BetArea]);
+			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin);
 		}
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
 	}
@@ -225,7 +225,8 @@ export default class BrnnUI extends BaseComponent {
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
 				for(var i=len-1; i>=0; i--){
-					var pos = CommonUtil.convertSpaceAR(this.m_ui["area"+childs[i].__areaId], this.m_ui.chipLayer);
+					var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
+					cc.log(pos.x, pos.y);
 					childs[i].runAction(cc.sequence(
 						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
 						cc.callFunc(function(obj){
@@ -240,8 +241,8 @@ export default class BrnnUI extends BaseComponent {
 		TimerManager.delaySecond(shouTime, newHandler(function(){
 			if(param.MySettlement > 0) {
 				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MySettlement), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
 				this.playFly(nums, fromPos, toPos);
 			}
 			// if(param.PlayerAcquire > 0) {
@@ -252,12 +253,13 @@ export default class BrnnUI extends BaseComponent {
 			// }
 		}, this));
 	}
-	private playFly(nums, fromPos, toPos) {
+	private playFly(nums:Array<number>, fromPos:cc.Vec2, toPos:cc.Vec2) {
 		for(var j = 0; j<nums.length; j++) {
-			var chip = ResPool.newObject(ViewDefine.CpnChip);
+			var chip:cc.Node = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
-			this.m_ui.chipLayer.addChild(chip);
-
+			this.m_ui.chipEffLayer.addChild(chip);
+			chip.x = fromPos.x;
+			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
 				cc.delayTime(j*0.08),
