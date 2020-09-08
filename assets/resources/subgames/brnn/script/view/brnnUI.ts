@@ -87,6 +87,20 @@ export default class BrnnUI extends BaseComponent {
 		brcowcow_request.BrcowcowHostListReq({});
 	}
 
+	private refreshZhuang() {
+		var enterData = BrnnMgr.getInstance().getEnterData();
+		if(enterData) {
+			var HostID = enterData.HostID;
+			GameUtil.setHeadIcon(this.m_ui.headIcon, 1001);
+			this.m_ui.lab_zjname.getComponent(cc.Label).string = ""+HostID;
+			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = "0";
+		} else {
+			GameUtil.setHeadIcon(this.m_ui.headIcon, 2007);
+			this.m_ui.lab_zjname.getComponent(cc.Label).string = "系统庄家";
+			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = "0";
+		}
+	}
+
 	private setWinAreas(arr:any) {
 		for(var i=4; i>=0; i--) {
 			// if(this.m_ui["area"+i]) {
@@ -168,6 +182,8 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowStateStart(param:brcowcow.IBrcowcowStateStartResp) {
+		BrnnMgr.getInstance().getEnterData().HostID = param.HostID;
+
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
@@ -283,6 +299,11 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowHostListResp(param:brcowcow.IBrcowcowHostListResp) {
 		var curZj:gamecomm.IPlayerInfo = param.CurHost;
+		if(curZj) {
+			BrnnMgr.getInstance().getEnterData().HostID = curZj.UserID;
+		}
+		
+		GameUtil.setHeadIcon(this.m_ui.headIcon, curZj && curZj.FaceID || 1001);
 		this.m_ui.lab_zjname.getComponent(cc.Label).string = curZj && curZj.Name || "系统庄家";
 		this.m_ui.lab_zjmoney.getComponent(cc.Label).string = curZj && CommonUtil.formRealMoney(curZj.Gold) || "0";
 	}
