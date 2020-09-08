@@ -49,7 +49,7 @@ export class brcowcow_request {
     public static BrcowcowStateOverResp( data:{ Times:any } ) { brcowcow_packet_define[93].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowBetReq( data:{ BetArea:number, BetScore:number } ) { brcowcow_packet_define[94].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowBetResp( data:{ UserId:number, BetArea:number, BetScore:number } ) { brcowcow_packet_define[95].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrcowcowOpenResp( data:{ AwardArea:any, TianCard:any, XuanCard:any, DiCard:any, HuangCard:any } ) { brcowcow_packet_define[96].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowOpenResp( data:{ AwardArea:any, BankerCard:any, TianCard:any, XuanCard:any, DiCard:any, HuangCard:any } ) { brcowcow_packet_define[96].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowOverResp( data:{ MySettlement:number, TotalSettlement:number[] } ) { brcowcow_packet_define[97].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowHostReq( data:{ IsWant:any } ) { brcowcow_packet_define[98].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowHostResp( data:{ UserID:number, IsWant:any } ) { brcowcow_packet_define[99].sendToChannel(ChannelDefine.game, data, false); }

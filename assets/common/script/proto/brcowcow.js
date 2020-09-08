@@ -1065,6 +1065,7 @@ $root.brcowcow = (function() {
         }
 
         BrcowcowOpenResp.prototype.AwardArea = $util.newBuffer([]);
+        BrcowcowOpenResp.prototype.BankerCard = null;
         BrcowcowOpenResp.prototype.TianCard = null;
         BrcowcowOpenResp.prototype.XuanCard = null;
         BrcowcowOpenResp.prototype.DiCard = null;
@@ -1079,6 +1080,8 @@ $root.brcowcow = (function() {
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
+            if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
+                $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(18).fork()).ldelim();
             if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
                 $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(26).fork()).ldelim();
             if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
@@ -1103,6 +1106,9 @@ $root.brcowcow = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.AwardArea = reader.bytes();
+                    break;
+                case 2:
+                    message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
@@ -1136,6 +1142,11 @@ $root.brcowcow = (function() {
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
                     return "AwardArea: buffer expected";
+            if (message.BankerCard != null && message.hasOwnProperty("BankerCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.BankerCard);
+                if (error)
+                    return "BankerCard." + error;
+            }
             if (message.TianCard != null && message.hasOwnProperty("TianCard")) {
                 var error = $root.gamecomm.CardInfo.verify(message.TianCard);
                 if (error)
@@ -1168,6 +1179,11 @@ $root.brcowcow = (function() {
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
                 else if (object.AwardArea.length)
                     message.AwardArea = object.AwardArea;
+            if (object.BankerCard != null) {
+                if (typeof object.BankerCard !== "object")
+                    throw TypeError(".brcowcow.BrcowcowOpenResp.BankerCard: object expected");
+                message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
+            }
             if (object.TianCard != null) {
                 if (typeof object.TianCard !== "object")
                     throw TypeError(".brcowcow.BrcowcowOpenResp.TianCard: object expected");
@@ -1203,6 +1219,7 @@ $root.brcowcow = (function() {
                     if (options.bytes !== Array)
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
+                object.BankerCard = null;
                 object.TianCard = null;
                 object.XuanCard = null;
                 object.DiCard = null;
@@ -1210,6 +1227,8 @@ $root.brcowcow = (function() {
             }
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
+            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
+                object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
             if (message.TianCard != null && message.hasOwnProperty("TianCard"))
                 object.TianCard = $root.gamecomm.CardInfo.toObject(message.TianCard, options);
             if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))

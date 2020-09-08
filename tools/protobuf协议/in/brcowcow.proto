@@ -60,6 +60,7 @@ message BrcowcowBetResp {
 //开牌
 message BrcowcowOpenResp {
   bytes AwardArea = 1;    //各区域胜负：1胜，0负
+  CardInfo BankerCard = 2;    //天
   CardInfo TianCard = 3;    //天
   CardInfo XuanCard = 4;    //玄
   CardInfo DiCard = 5;    //地
