@@ -1,5 +1,6 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
 import { brcowcow } from "../../../../../../declares/brcowcow";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 export default class BrnnMgr extends ModelBase {
 	private static _instance:BrnnMgr = null;
@@ -17,11 +18,19 @@ export default class BrnnMgr extends ModelBase {
 
     }
     
-    private enterData:brcowcow.IBrcowcowSceneResp = null;
-    setEnterData(data:brcowcow.IBrcowcowSceneResp) {
-        this.enterData = data;
-    }
     getEnterData() : brcowcow.IBrcowcowSceneResp {
-        return this.enterData;
+        return GameManager.getInstance().getEnterData();
+    }
+
+    clearBets() {
+        var enterData = this.getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				enterData.AreaBets[i] = 0;
+			}
+			for(var i=0; i<enterData.MyBets.length; i++) {
+				enterData.MyBets[i] = 0;
+			}
+		}
     }
 }
