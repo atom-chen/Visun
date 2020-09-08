@@ -98,6 +98,19 @@ export default class BrnnUI extends BaseComponent {
 		}
 	}
 
+	private clearBets() {
+		BrnnMgr.getInstance().clearBets();
+		
+		var childs = this.m_ui.chipLayer.children;
+		for(var i=childs.length-1; i>=0; i--){
+			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
+		}
+		for(var j=0; j<4; j++) {
+			this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+			this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		}
+	}
+
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 
@@ -148,7 +161,7 @@ export default class BrnnUI extends BaseComponent {
 		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
 		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
-
+		this.clearBets();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
