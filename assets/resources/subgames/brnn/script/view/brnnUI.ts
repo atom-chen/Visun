@@ -87,6 +87,7 @@ export default class BrnnUI extends BaseComponent {
 		}
 		this.m_ui.btn_xz.active = false;
 		brcowcow_request.BrcowcowHostListReq({});
+		this.refreshZhuang();
 	}
 
 	private refreshZhuang() {
@@ -158,6 +159,7 @@ export default class BrnnUI extends BaseComponent {
 			fromObj = this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).getChipNodeByValue(money);
 			LoginUser.getInstance().Gold -= param.BetScore;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+			this.refreshZhuang();
 			this.isJoined = true;
         }
 		for(var j in nums) {
@@ -296,6 +298,7 @@ export default class BrnnUI extends BaseComponent {
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			LoginUser.getInstance().Gold = param.Gold;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
+			this.refreshZhuang();
 			if(!isEmpty(param.AlterGold)) {
 				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
 			}
