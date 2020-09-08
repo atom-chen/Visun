@@ -1,0 +1,98 @@
+syntax = "proto3";
+package tuitongzi;
+import "gamecomm.proto";
+//36个筒子加4个白板 白板算半点
+//白板 = 10 
+// 1~9筒 = 1~9
+
+//场景
+message TuitongziSceneResp{
+  int64 TimeStamp = 1;            //时间戳
+  string Inning = 6;              //牌局号
+  repeated int32 Chips = 2;       //筹 码
+  repeated bytes AwardAreas = 3;  //开奖记录(路单)
+  repeated int64 AreaBets = 4;    //各下注区当前总下注额
+  repeated int64 MyBets = 5;      //个人在各下注区的总下注额
+  PlayerListInfo AllPlayers = 7;  //玩家列表
+  int32  RemainCount = 8;		  //剩余张数
+}
+
+//状态
+// 服务端推送
+
+//(准备)
+message TuitongziStateStartResp {
+  TimeInfo Times = 1;
+}
+
+//(下注)
+message TuitongziStatePlayingResp {
+  TimeInfo Times = 1;
+}
+
+//(开奖)
+message TuitongziStateOpenResp {
+  TimeInfo Times = 1;
+  TuitongziOpenResp OpenInfo = 2;
+}
+
+//(结束)
+message TuitongziStateOverResp {
+  TimeInfo Times = 1;
+}
+
+
+//游戏消息
+//下注
+message TuitongziBetReq{
+  int32 BetArea = 1;        //下注区域
+  int64 BetScore = 2;        //下注金额
+}
+message TuitongziBetResp{
+  uint64 UserID = 1;
+  int32 BetArea = 2;        //下注区域
+  int64 BetScore = 3;        //下注金额
+}
+
+//开奖
+message TuitongziOpenResp{
+  bytes AwardArea = 1;    //各区域胜负：1胜，0负
+  CardInfo BankerCard = 2;    //天
+  CardInfo ShunCard = 3;    //顺
+  CardInfo TianCard = 4;    //天
+  CardInfo DiCard = 5;    //地
+}
+
+//结算
+message TuitongziCheckoutResp{
+  int64 MyAcquire = 1;        //获得金币(结算)
+  repeated int64 Acquires = 2;//各个区域输赢情况
+}
+
+
+/////////////预留协议///////////////////////////
+//抢庄
+message TuitongziHostReq {
+  bool IsWant = 1;//true上庄 false取消上庄
+}
+message TuitongziHostResp {
+  uint64 UserID = 1;
+  bool IsWant = 2;//true上庄 false取消上庄
+}
+
+
+//超级抢庄
+message TuitongziSuperHostReq {
+  bool IsWant = 1;//true上庄 false取消
+}
+message TuitongziSuperHostResp {
+  uint64 UserID = 1;
+  bool IsWant = 2;//true上庄 false取消
+}
+
+
+// 从零开始，后面累加1 共13区域
+//    Area_Shun             //顺 (除庄输和庄赢两个区域外,对玩家下注情况进行统计)
+//    Area_Tian            	//天
+//    Area_Di          		//地
+//    Area_Zhuang          	//庄
