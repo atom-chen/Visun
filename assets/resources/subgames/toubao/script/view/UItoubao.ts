@@ -133,7 +133,6 @@ export default class ToubaoUI extends BaseComponent {
 		for(var i=len-1; i>=0; i--){
 			var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 			childs[i].runAction(cc.sequence(
-				cc.delayTime(i*0.03),
 				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
 				cc.callFunc(function(obj){
 					ResPool.delObject(ViewDefine.CpnChip, obj);
@@ -142,30 +141,29 @@ export default class ToubaoUI extends BaseComponent {
 		}
 
 		var shouTime = 0.1 + 0.36;
-		TimerManager.delaySecond(shouTime, newHandler(function(){
-			if(param.MyAcquire > 0) {
-				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
-				this.playFly(nums, fromPos, toPos);
-			}
-			// if(param.PlayerAcquire > 0) {
-			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
-			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
-			// 	this.playFly(nums, fromPos, toPos);
-			// }
-		}, this));
+		if(param.MyAcquire > 0) {
+			var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
+			var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
+			this.playFly(nums, fromPos, toPos, shouTime);
+		}
+		// if(param.PlayerAcquire > 0) {
+		// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
+		// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+		// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
+		// 	this.playFly(nums, fromPos, toPos, shouTime);
+		// }
 	}
-	private playFly(nums, fromPos, toPos) {
+	private playFly(nums:Array<number>, fromPos:cc.Vec2, toPos:cc.Vec2, delaySec:number) {
 		for(var j = 0; j<nums.length; j++) {
-			var chip = ResPool.newObject(ViewDefine.CpnChip);
+			var chip:cc.Node = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipEffLayer.addChild(chip);
-
+			chip.x = fromPos.x;
+			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
-				cc.delayTime(j*0.08),
+				cc.delayTime(delaySec + j*0.08),
 				cc.moveTo(0.25, toPos),
 				cc.callFunc(function(){
 					ResPool.delObject(ViewDefine.CpnChip, this)

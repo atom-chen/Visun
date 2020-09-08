@@ -248,22 +248,20 @@ export default class BrnnUI extends BaseComponent {
 		}
 
 		var shouTime = 0.1 + 0.36;
-		TimerManager.delaySecond(shouTime, newHandler(function(){
-			if(param.MySettlement > 0) {
-				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MySettlement), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
-				this.playFly(nums, fromPos, toPos);
-			}
-			// if(param.PlayerAcquire > 0) {
-			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
-			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
-			// 	this.playFly(nums, fromPos, toPos);
-			// }
-		}, this));
+		if(param.MySettlement > 0) {
+			var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MySettlement), this._rule);
+			var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
+			this.playFly(nums, fromPos, toPos, shouTime);
+		}
+		// if(param.PlayerAcquire > 0) {
+		// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
+		// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+		// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
+		// 	this.playFly(nums, fromPos, toPos, shouTime);
+		// }
 	}
-	private playFly(nums:Array<number>, fromPos:cc.Vec2, toPos:cc.Vec2) {
+	private playFly(nums:Array<number>, fromPos:cc.Vec2, toPos:cc.Vec2, delaySec:number) {
 		for(var j = 0; j<nums.length; j++) {
 			var chip:cc.Node = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
@@ -272,7 +270,7 @@ export default class BrnnUI extends BaseComponent {
 			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
-				cc.delayTime(j*0.08),
+				cc.delayTime(delaySec + j*0.08),
 				cc.moveTo(0.25, toPos),
 				cc.callFunc(function(){
 					ResPool.delObject(ViewDefine.CpnChip, this)
