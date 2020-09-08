@@ -95,7 +95,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private playTipBetting() {
-		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.hide()));
+		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.callFunc(function(){ this.setWinAreas([]) }, this)));
 	}
 
 	private clearBets() {
@@ -231,18 +231,21 @@ export default class ToubaoUI extends BaseComponent {
 
 	//下注阶段
 	BrtoubaoStatePlayingResp(param:brtoubao.IBrtoubaoStatePlayingResp) {
-		this.setWinAreas([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
-		this.playTipBetting();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-
 		this.m_ui.tzNode.active = false;
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "wait", true);
 
-		Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
-			on_complete: (sk, trackEntry)=>{
-				CommonUtil.safeDelete(sk);
-			}
-		});
+		if(param.Times.OutTime <= 1) {
+			this.setWinAreas([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+			this.playTipBetting();
+			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
+		
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
@@ -250,7 +253,6 @@ export default class ToubaoUI extends BaseComponent {
 
 	//开拍阶段
 	BrtoubaoStateOpenResp(param:brtoubao.IBrtoubaoStateOpenResp) {
-		this.setWinAreas([]);
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 		
 		this.BrtoubaoOpenResp(param.OpenInfo);
@@ -266,6 +268,8 @@ export default class ToubaoUI extends BaseComponent {
 
 	BrtoubaoOpenResp(param:brtoubao.IBrtoubaoOpenResp) {
 		if(isNil(param)) { return; }
+		this.setWinAreas(param.AwardArea);
+
 		//开拍动画
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "open", false);
 		this.m_ui.tzNode.active = true;
@@ -292,7 +296,6 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	BrtoubaoCheckoutResp(param:brtoubao.IBrtoubaoCheckoutResp) {
-		this.isJoined = false;
 		LoginUser.getInstance().Gold += param.MyAcquire;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
@@ -323,7 +326,13 @@ export default class ToubaoUI extends BaseComponent {
 
 	initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame();
+            if(this.isJoined) {
+				UIManager.openDialog("cfmquitgame", "确认退出游戏？", 2, function(mnuId){
+					if(mnuId==1) { GameManager.getInstance().quitGame(); }
+				})
+			} else {
+				GameManager.getInstance().quitGame();
+			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);
@@ -366,7 +375,7 @@ export default class ToubaoUI extends BaseComponent {
             return;
         }
 		cc.log("投", idx);
-		brtoubao_request.BrtoubaoBetReq({BetArea:idx, BetScore:10});
+		brtoubao_request.BrtoubaoBetReq({BetArea:idx, BetScore:CommonUtil.toServerMoney(money)});
 	}
 
 }
