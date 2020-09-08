@@ -1,5 +1,4 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../../common/script/model/GameManager";
