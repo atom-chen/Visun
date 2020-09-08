@@ -83,6 +83,8 @@ export default class BrnnUI extends BaseComponent {
 		} else {
 			this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).setChipValues(this._rule);
 		}
+		this.m_ui.btn_xz.active = false;
+		brcowcow_request.BrcowcowHostListReq({});
 	}
 
 	private setWinAreas(arr:any) {
@@ -119,7 +121,7 @@ export default class BrnnUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
 	}
 
-	private BrcowcowBetResp(param:brcowcow.BrcowcowBetResp) {
+	private BrcowcowBetResp(param:brcowcow.IBrcowcowBetResp) {
 		if(isNil(param)) { return; }
 		var enterData = BrnnMgr.getInstance().getEnterData();
 		enterData.AreaBets[param.BetArea] += param.BetScore;
@@ -254,7 +256,7 @@ export default class BrnnUI extends BaseComponent {
 		}
 	}
 
-	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
+	private GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			LoginUser.getInstance().Gold = param.Gold;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
@@ -262,6 +264,12 @@ export default class BrnnUI extends BaseComponent {
 				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
 			}
 		} 
+	}
+
+	private BrcowcowHostListResp(param:brcowcow.IBrcowcowHostListResp) {
+		var curZj:gamecomm.IPlayerInfo = param.CurHost;
+		this.m_ui.lab_zjname.getComponent(cc.Label).string = curZj && curZj.Name || "系统庄家";
+		this.m_ui.lab_zjmoney.getComponent(cc.Label).string = curZj && CommonUtil.formRealMoney(curZj.Gold) || "0";
 	}
 
 	private initNetEvent() {
@@ -274,6 +282,7 @@ export default class BrnnUI extends BaseComponent {
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowBetResp, this.BrcowcowBetResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOverResp, this.BrcowcowOverResp, this);
 		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowOpenResp, this.BrcowcowOpenResp, this);
+		EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowHostListResp, this.BrcowcowHostListResp, this);
 	//	EventCenter.getInstance().listen(brcowcow_msgs.BrcowcowCheckoutResp, this.BrcowcowCheckoutResp, this);
 	}
 
@@ -290,6 +299,13 @@ export default class BrnnUI extends BaseComponent {
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             GameManager.getInstance().quitGame(true);
+		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_sz, function(){ 
+            brcowcow_request.BrcowcowHostReq({IsWant:true});
+		}, this);
+		CommonUtil.addClickEvent(this.m_ui.btn_xz, function(){ 
+            brcowcow_request.BrcowcowHostReq({IsWant:false});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);
