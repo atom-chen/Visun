@@ -24,6 +24,7 @@ import ResPool from "../../../../../kernel/basic/pool/ResPool";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import PlayerMgr from "../../../../../common/script/model/PlayerMgr";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -92,9 +93,9 @@ export default class BrnnUI extends BaseComponent {
 		var enterData = BrnnMgr.getInstance().getEnterData();
 		if(enterData) {
 			var HostID = enterData.HostID;
-			GameUtil.setHeadIcon(this.m_ui.headIcon, 1001);
-			this.m_ui.lab_zjname.getComponent(cc.Label).string = ""+HostID;
-			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = "0";
+			GameUtil.setHeadIcon(this.m_ui.headIcon, PlayerMgr.getInstance().playerHead(HostID));
+			this.m_ui.lab_zjname.getComponent(cc.Label).string = PlayerMgr.getInstance().playerName(HostID);
+			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = PlayerMgr.getInstance().playerMoney(HostID)+"";
 		} else {
 			GameUtil.setHeadIcon(this.m_ui.headIcon, 2007);
 			this.m_ui.lab_zjname.getComponent(cc.Label).string = "系统庄家";
@@ -299,11 +300,18 @@ export default class BrnnUI extends BaseComponent {
 				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
 			}
 		} 
+
+		PlayerMgr.getInstance().updateInfo(param.UserID, {Gold:param.Gold});
+
+		if(!isNil(BrnnMgr.getInstance().getEnterData()) && BrnnMgr.getInstance().getEnterData().HostID == param.UserID) {
+			this.refreshZhuang();
+		}
 	}
 
 	private BrcowcowHostListResp(param:brcowcow.IBrcowcowHostListResp) {
 		var curZj:gamecomm.IPlayerInfo = param.CurHost;
 		if(curZj) {
+			PlayerMgr.getInstance().updateInfo(curZj.UserID, curZj);
 			BrnnMgr.getInstance().getEnterData().HostID = curZj.UserID;
 		}
 
