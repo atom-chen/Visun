@@ -263,8 +263,8 @@ export default class BrnnUI extends BaseComponent {
 			}
 			// if(param.PlayerAcquire > 0) {
 			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
+			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
 			// 	this.playFly(nums, fromPos, toPos);
 			// }
 		}, this));
@@ -302,7 +302,7 @@ export default class BrnnUI extends BaseComponent {
 		if(curZj) {
 			BrnnMgr.getInstance().getEnterData().HostID = curZj.UserID;
 		}
-		
+
 		GameUtil.setHeadIcon(this.m_ui.headIcon, curZj && curZj.FaceID || 1001);
 		this.m_ui.lab_zjname.getComponent(cc.Label).string = curZj && curZj.Name || "系统庄家";
 		this.m_ui.lab_zjmoney.getComponent(cc.Label).string = curZj && CommonUtil.formRealMoney(curZj.Gold) || "0";

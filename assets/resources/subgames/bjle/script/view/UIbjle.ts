@@ -296,14 +296,14 @@ export default class UIbjle extends BaseComponent {
 		TimerManager.delaySecond(shouTime, newHandler(function(){
 			if(param.MyAcquire > 0) {
 				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
 				this.playFly(nums, fromPos, toPos);
 			}
 			// if(param.PlayerAcquire > 0) {
 			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
+			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
 			// 	this.playFly(nums, fromPos, toPos);
 			// }
 		}, this));
@@ -312,7 +312,7 @@ export default class UIbjle extends BaseComponent {
 		for(var j = 0; j<nums.length; j++) {
 			var chip = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
-			this.m_ui.chipLayer.addChild(chip);
+			this.m_ui.chipEffLayer.addChild(chip);
 
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),

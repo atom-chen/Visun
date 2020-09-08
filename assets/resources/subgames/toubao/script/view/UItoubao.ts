@@ -129,12 +129,12 @@ export default class ToubaoUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 
 		this.m_ui.chipLayer.runAction(cc.sequence(
-			cc.delayTime(1),
+			cc.delayTime(0.1),
 			cc.callFunc(function(){
 				var childs = this.m_ui.chipLayer.children
 				var len = childs.length;
 				for(var i=len-1; i>=0; i--){
-					var pos = CommonUtil.convertSpaceAR(this.m_ui["betBtn"+childs[i].__areaId], this.m_ui.chipLayer);
+					var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 					childs[i].runAction(cc.sequence(
 						cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
 						cc.callFunc(function(obj){
@@ -149,14 +149,14 @@ export default class ToubaoUI extends BaseComponent {
 		TimerManager.delaySecond(shouTime, newHandler(function(){
 			if(param.MyAcquire > 0) {
 				var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
-				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipLayer);
+				var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+				var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
 				this.playFly(nums, fromPos, toPos);
 			}
 			// if(param.PlayerAcquire > 0) {
 			// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
-			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
-			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipLayer);
+			// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
 			// 	this.playFly(nums, fromPos, toPos);
 			// }
 		}, this));
@@ -165,7 +165,7 @@ export default class ToubaoUI extends BaseComponent {
 		for(var j = 0; j<nums.length; j++) {
 			var chip = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
-			this.m_ui.chipLayer.addChild(chip);
+			this.m_ui.chipEffLayer.addChild(chip);
 
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
