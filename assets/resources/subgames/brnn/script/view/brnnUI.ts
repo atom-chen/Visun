@@ -248,9 +248,10 @@ export default class BrnnUI extends BaseComponent {
 
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
+		var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 		for(var i=len-1; i>=0; i--){
-			var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 			childs[i].runAction(cc.sequence(
+				cc.delayTime(0.03*(len-i)),
 				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
 				cc.callFunc(function(obj){
 					ResPool.delObject(ViewDefine.CpnChip, obj);
