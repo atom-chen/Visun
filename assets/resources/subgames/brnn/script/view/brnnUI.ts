@@ -91,7 +91,7 @@ export default class BrnnUI extends BaseComponent {
 
 	private refreshZhuang() {
 		var enterData = BrnnMgr.getInstance().getEnterData();
-		if(enterData && enterData.HostID) {
+		if(enterData && !isEmpty(enterData.HostID)) {
 			var HostID = enterData.HostID;
 			GameUtil.setHeadIcon(this.m_ui.headIcon, PlayerMgr.getInstance().playerHead(HostID));
 			this.m_ui.lab_zjname.getComponent(cc.Label).string = PlayerMgr.getInstance().playerName(HostID);
@@ -313,6 +313,8 @@ export default class BrnnUI extends BaseComponent {
 		if(curZj) {
 			PlayerMgr.getInstance().updateInfo(curZj.UserID, curZj);
 			BrnnMgr.getInstance().getEnterData().HostID = curZj.UserID;
+		} else {
+			BrnnMgr.getInstance().getEnterData().HostID = null;
 		}
 		this.refreshZhuang();
 	}
