@@ -31,6 +31,7 @@ $root.brcowcow = (function() {
         BrcowcowSceneResp.prototype.MyBets = $util.emptyArray;
         BrcowcowSceneResp.prototype.Inning = "";
         BrcowcowSceneResp.prototype.AllPlayers = null;
+        BrcowcowSceneResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         BrcowcowSceneResp.create = function create(properties) {
             return new BrcowcowSceneResp(properties);
@@ -66,6 +67,8 @@ $root.brcowcow = (function() {
                 writer.uint32(50).string(message.Inning);
             if (message.AllPlayers != null && Object.hasOwnProperty.call(message, "AllPlayers"))
                 $root.gamecomm.PlayerListInfo.encode(message.AllPlayers, writer.uint32(58).fork()).ldelim();
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(64).uint64(message.HostID);
             return writer;
         };
 
@@ -124,6 +127,9 @@ $root.brcowcow = (function() {
                 case 7:
                     message.AllPlayers = $root.gamecomm.PlayerListInfo.decode(reader, reader.uint32());
                     break;
+                case 8:
+                    message.HostID = reader.uint64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -180,6 +186,9 @@ $root.brcowcow = (function() {
                 if (error)
                     return "AllPlayers." + error;
             }
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
             return null;
         };
 
@@ -248,6 +257,15 @@ $root.brcowcow = (function() {
                     throw TypeError(".brcowcow.BrcowcowSceneResp.AllPlayers: object expected");
                 message.AllPlayers = $root.gamecomm.PlayerListInfo.fromObject(object.AllPlayers);
             }
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -269,6 +287,11 @@ $root.brcowcow = (function() {
                     object.TimeStamp = options.longs === String ? "0" : 0;
                 object.Inning = "";
                 object.AllPlayers = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -305,6 +328,11 @@ $root.brcowcow = (function() {
                 object.Inning = message.Inning;
             if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers"))
                 object.AllPlayers = $root.gamecomm.PlayerListInfo.toObject(message.AllPlayers, options);
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             return object;
         };
 
@@ -417,6 +445,7 @@ $root.brcowcow = (function() {
         }
 
         BrcowcowStateStartResp.prototype.Times = null;
+        BrcowcowStateStartResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         BrcowcowStateStartResp.create = function create(properties) {
             return new BrcowcowStateStartResp(properties);
@@ -427,6 +456,8 @@ $root.brcowcow = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(16).uint64(message.HostID);
             return writer;
         };
 
@@ -443,6 +474,9 @@ $root.brcowcow = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.HostID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -466,6 +500,9 @@ $root.brcowcow = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
             return null;
         };
 
@@ -478,6 +515,15 @@ $root.brcowcow = (function() {
                     throw TypeError(".brcowcow.BrcowcowStateStartResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -485,10 +531,21 @@ $root.brcowcow = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             return object;
         };
 
@@ -1598,107 +1655,6 @@ $root.brcowcow = (function() {
         };
 
         return BrcowcowHostResp;
-    })();
-
-    brcowcow.BrcowcowDecideHostResp = (function() {
-
-        function BrcowcowDecideHostResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        BrcowcowDecideHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-        BrcowcowDecideHostResp.create = function create(properties) {
-            return new BrcowcowDecideHostResp(properties);
-        };
-
-        BrcowcowDecideHostResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            return writer;
-        };
-
-        BrcowcowDecideHostResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        BrcowcowDecideHostResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.brcowcow.BrcowcowDecideHostResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        BrcowcowDecideHostResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        BrcowcowDecideHostResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            return null;
-        };
-
-        BrcowcowDecideHostResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.brcowcow.BrcowcowDecideHostResp)
-                return object;
-            var message = new $root.brcowcow.BrcowcowDecideHostResp();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            return message;
-        };
-
-        BrcowcowDecideHostResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            return object;
-        };
-
-        BrcowcowDecideHostResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return BrcowcowDecideHostResp;
     })();
 
     brcowcow.BrcowcowHostListReq = (function() {

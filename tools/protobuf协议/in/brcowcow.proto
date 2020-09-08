@@ -11,21 +11,23 @@ message BrcowcowSceneResp {
   repeated int64 MyBets = 5;      //我在各下注区的总下注额
   string Inning = 6;               // 牌局号
   PlayerListInfo AllPlayers = 7;  //玩家列表
+  uint64 HostID = 8;
 }
 
 //状态
 // 服务端推送
-//(空闲)
+//(空闲 - 喊庄)
 message BrcowcowStateFreeResp {
   TimeInfo Times = 1;
 }
 
-//(开始)
+//(开始 - 定庄)
 message BrcowcowStateStartResp {
   TimeInfo Times = 1;
+  uint64 HostID = 2;
 }
 
-//(游戏中)
+//(游戏中 - 下注)
 message BrcowcowStatePlayingResp {
   TimeInfo Times = 1;
 }
@@ -83,10 +85,6 @@ message BrcowcowHostReq {
 message BrcowcowHostResp {
   uint64 UserID = 1;
   bool IsWant = 2;  //true上庄 false取消上庄
-}
-
-message BrcowcowDecideHostResp{
-  uint64 UserID = 1;// =0 表示系统坐庄
 }
 
 //待上庄列表

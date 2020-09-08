@@ -19,9 +19,8 @@ export enum brcowcow_msgs {
     BrcowcowOverResp = 97,
     BrcowcowHostReq = 98,
     BrcowcowHostResp = 99,
-    BrcowcowDecideHostResp = 100,
-    BrcowcowHostListReq = 101,
-    BrcowcowHostListResp = 102,
+    BrcowcowHostListReq = 100,
+    BrcowcowHostListResp = 101,
 }
 
 export var brcowcow_packet_define = {
@@ -37,15 +36,14 @@ export var brcowcow_packet_define = {
     97: new LeafWsPacket(97, brcowcow.BrcowcowOverResp, "brcowcow.BrcowcowOverResp"),
     98: new LeafWsPacket(98, brcowcow.BrcowcowHostReq, "brcowcow.BrcowcowHostReq"),
     99: new LeafWsPacket(99, brcowcow.BrcowcowHostResp, "brcowcow.BrcowcowHostResp"),
-    100: new LeafWsPacket(100, brcowcow.BrcowcowDecideHostResp, "brcowcow.BrcowcowDecideHostResp"),
-    101: new LeafWsPacket(101, brcowcow.BrcowcowHostListReq, "brcowcow.BrcowcowHostListReq"),
-    102: new LeafWsPacket(102, brcowcow.BrcowcowHostListResp, "brcowcow.BrcowcowHostListResp"),
+    100: new LeafWsPacket(100, brcowcow.BrcowcowHostListReq, "brcowcow.BrcowcowHostListReq"),
+    101: new LeafWsPacket(101, brcowcow.BrcowcowHostListResp, "brcowcow.BrcowcowHostListResp"),
 }
 
 export class brcowcow_request {
-    public static BrcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any } ) { brcowcow_packet_define[88].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any, HostID:number } ) { brcowcow_packet_define[88].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStateFreeResp( data:{ Times:any } ) { brcowcow_packet_define[89].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrcowcowStateStartResp( data:{ Times:any } ) { brcowcow_packet_define[90].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowStateStartResp( data:{ Times:any, HostID:number } ) { brcowcow_packet_define[90].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStatePlayingResp( data:{ Times:any } ) { brcowcow_packet_define[91].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStateOpenResp( data:{ Times:any, OpenInfo:any } ) { brcowcow_packet_define[92].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowStateOverResp( data:{ Times:any } ) { brcowcow_packet_define[93].sendToChannel(ChannelDefine.game, data, false); }
@@ -55,8 +53,7 @@ export class brcowcow_request {
     public static BrcowcowOverResp( data:{ MySettlement:number, TotalSettlement:number[] } ) { brcowcow_packet_define[97].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowHostReq( data:{ IsWant:any } ) { brcowcow_packet_define[98].sendToChannel(ChannelDefine.game, data, false); }
     public static BrcowcowHostResp( data:{ UserID:number, IsWant:any } ) { brcowcow_packet_define[99].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrcowcowDecideHostResp( data:{ UserID:number } ) { brcowcow_packet_define[100].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrcowcowHostListReq( data:{} ) { brcowcow_packet_define[101].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrcowcowHostListResp( data:{ CurHost:any, Waitlist:number[] } ) { brcowcow_packet_define[102].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowHostListReq( data:{} ) { brcowcow_packet_define[100].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrcowcowHostListResp( data:{ CurHost:any, Waitlist:number[] } ) { brcowcow_packet_define[101].sendToChannel(ChannelDefine.game, data, false); }
 }
 
