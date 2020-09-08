@@ -52,7 +52,7 @@ export default class ToubaoUI extends BaseComponent {
 		}
 
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
-		
+
 		ResPool.load(ViewDefine.CpnChip);
 
 		this.initNetEvent();
@@ -72,7 +72,6 @@ export default class ToubaoUI extends BaseComponent {
 	private initContext() {
 		this.m_ui.tzNode.active = false;
 		this.setWinAreas([]);
-		this.clearBets();
 
 		var enterData = ToubaoMgr.getInstance().getEnterData();
 		if(enterData) {
