@@ -33,7 +33,7 @@ message BrcowcowStatePlayingResp {
 //(开奖)
 message BrcowcowStateOpenResp {
   TimeInfo Times = 1;
-    BrcowcowOpenResp OpenInfo = 2;
+  BrcowcowOpenResp OpenInfo = 2;
 }
 
 
@@ -85,6 +85,9 @@ message BrcowcowHostResp {
   bool IsWant = 2;  //true上庄 false取消上庄
 }
 
+message BrcowcowDecideHostResp{
+  uint64 UserID = 1;// =0 表示系统坐庄
+}
 
 //待上庄列表
 message BrcowcowHostListReq {
