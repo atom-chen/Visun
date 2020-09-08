@@ -275,6 +275,7 @@ export default class ToubaoUI extends BaseComponent {
 		this.m_ui.tzNode.active = true;
 		this.setPoints(param.Dice)
 		for(var n=0; n<3; n++) {
+			this.touzilist[n].stopAllActions();
 			this.touzilist[n].scale = this.touziscalelist[n];
 			this.touzilist[n].position = this.touziposlist[n];
 			this.touzilist[n].runAction(cc.sequence(
