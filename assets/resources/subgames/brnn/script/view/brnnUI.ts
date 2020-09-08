@@ -95,7 +95,7 @@ export default class BrnnUI extends BaseComponent {
 			var HostID = enterData.HostID;
 			GameUtil.setHeadIcon(this.m_ui.headIcon, PlayerMgr.getInstance().playerHead(HostID));
 			this.m_ui.lab_zjname.getComponent(cc.Label).string = PlayerMgr.getInstance().playerName(HostID);
-			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = PlayerMgr.getInstance().playerMoney(HostID)+"";
+			this.m_ui.lab_zjmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(PlayerMgr.getInstance().playerMoney(HostID));
 		} else {
 			GameUtil.setHeadIcon(this.m_ui.headIcon, 2007);
 			this.m_ui.lab_zjname.getComponent(cc.Label).string = "系统庄家";
@@ -314,10 +314,7 @@ export default class BrnnUI extends BaseComponent {
 			PlayerMgr.getInstance().updateInfo(curZj.UserID, curZj);
 			BrnnMgr.getInstance().getEnterData().HostID = curZj.UserID;
 		}
-
-		GameUtil.setHeadIcon(this.m_ui.headIcon, curZj && curZj.FaceID || 1001);
-		this.m_ui.lab_zjname.getComponent(cc.Label).string = curZj && curZj.Name || "系统庄家";
-		this.m_ui.lab_zjmoney.getComponent(cc.Label).string = curZj && CommonUtil.formRealMoney(curZj.Gold) || "0";
+		this.refreshZhuang();
 	}
 
 	private initNetEvent() {
