@@ -119,7 +119,7 @@ export default class ToubaoUI extends BaseComponent {
 				var nd = this.m_ui["area"+i];
 				nd.active = !isNil(arr[i]) && arr[i] > 0;
 				if(nd.active) {
-					nd.runAction(cc.blink(1, 3));
+					nd.runAction(cc.sequence(cc.blink(1, 3),cc.show()));
 				}
 			}
 		}
