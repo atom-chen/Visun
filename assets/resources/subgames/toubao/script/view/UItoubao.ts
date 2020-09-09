@@ -96,7 +96,7 @@ export default class ToubaoUI extends BaseComponent {
 	}
 
 	private playTipBetting() {
-		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.callFunc(function(){ this.setWinAreas([]) }, this)));
+		this.m_ui.highLayer.runAction(cc.sequence(cc.blink(1, 3), cc.show(), cc.callFunc(function(){ this.setWinAreas([]) }, this)));
 	}
 
 	private clearBets() {
@@ -112,13 +112,13 @@ export default class ToubaoUI extends BaseComponent {
 		}
 	}
 
-	private setWinAreas(arr:any) {
+	private setWinAreas(arr:any, bAni:boolean = true) {
 		this.m_ui.highLayer.active = true;
 		for(var i=0; i<MaxAreaCnt; i++) {
 			if(this.m_ui["area"+i]) {
 				var nd = this.m_ui["area"+i];
 				nd.active = !isNil(arr[i]) && arr[i] > 0;
-				if(nd.active) {
+				if(bAni && nd.active) {
 					nd.runAction(cc.sequence(cc.blink(1, 3),cc.show()));
 				}
 			}
@@ -231,7 +231,7 @@ export default class ToubaoUI extends BaseComponent {
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "wait", true);
 
 		if(param.Times.OutTime <= 1) {
-			this.setWinAreas([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+			this.setWinAreas([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1], false);
 			this.playTipBetting();
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
