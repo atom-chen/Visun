@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "1774c535-54a5-4883-b34e-7038dcce975e",
+  "uuid": "f35cef03-f29c-4045-becd-015eb27b9d73",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,10 +11,10 @@
   "height": 773,
   "platformSettings": {},
   "subMetas": {
-    "zhuomian": {
+    "desk_zi": {
       "ver": "1.0.4",
-      "uuid": "0727ee00-f7fa-4aef-96ee-d2d3833a1247",
-      "rawTextureUuid": "1774c535-54a5-4883-b34e-7038dcce975e",
+      "uuid": "ce98be91-98a6-4a0a-a17f-cc0a3f0bfa8e",
+      "rawTextureUuid": "f35cef03-f29c-4045-becd-015eb27b9d73",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
