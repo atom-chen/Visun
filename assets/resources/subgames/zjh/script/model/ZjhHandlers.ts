@@ -100,16 +100,19 @@ var ZjhHandlers = {
 		}
 	},
 
-	[zhajinhua_msgs.ZhajinhuaGiveupResp] : function(param) {
+	[zhajinhua_msgs.ZhajinhuaGiveupResp] : function(param:zhajinhua.IZhajinhuaGiveupResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
 			man.MyInfo.Sate = ZjhFighterState.qipai;
 		}
 	},
 
-	[zhajinhua_msgs.ZhajinhuaLookResp] : function(param) {
+	[zhajinhua_msgs.ZhajinhuaLookResp] : function(param:zhajinhua.IZhajinhuaLookResp) {
 		var man = ZjhMgr.getInstance().getPlayer(param.UserId);
 		if(man) {
+			if(!isNil(param.Cards)) {
+				man.Cards = param.Cards;
+			}
 			man.IsSee = true;
 		}
 	},
