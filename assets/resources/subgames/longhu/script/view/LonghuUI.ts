@@ -47,6 +47,7 @@ export default class LonghuUI extends BaseComponent {
 
         AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
+		this.m_ui.lab_hname.getComponent(cc.Label).string = LoginUser.getInstance().Name;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 
 		this.initContext();
