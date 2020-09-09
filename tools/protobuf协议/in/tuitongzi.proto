@@ -15,15 +15,23 @@ message TuitongziSceneResp{
   repeated int64 MyBets = 5;      //个人在各下注区的总下注额
   PlayerListInfo AllPlayers = 7;  //玩家列表
   int32  RemainCount = 8;		  //剩余张数
+  int32 StartArea = 9;
 }
 
 //状态
 // 服务端推送
-
-//(准备)
-message TuitongziStateStartResp {
+//(空闲)
+message TuitongziStateFreeResp {
   TimeInfo Times = 1;
 }
+
+//(开始 - 定庄)
+message TuitongziStateStartResp {
+  TimeInfo Times = 1;
+  int32 StartArea = 2;//开始发牌区域
+  bytes  Dice = 3;//两个骰子点数(决定起始发牌区域)
+}
+
 
 //(下注)
 message TuitongziStatePlayingResp {
@@ -56,7 +64,7 @@ message TuitongziBetResp{
 
 //开奖
 message TuitongziOpenResp{
-  bytes AwardArea = 1;    //各区域胜负：1胜，0负
+  bytes AwardArea = 1;    //各区域胜负：1胜，0负, 2平
   CardInfo BankerCard = 2;    //天
   CardInfo ShunCard = 3;    //顺
   CardInfo TianCard = 4;    //天

@@ -7,13 +7,13 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.tuitongzi = (function() {
+$root.qzcowcow = (function() {
 
-    var tuitongzi = {};
+    var qzcowcow = {};
 
-    tuitongzi.TuitongziSceneResp = (function() {
+    qzcowcow.QzcowcowSceneResp = (function() {
 
-        function TuitongziSceneResp(properties) {
+        function QzcowcowSceneResp(properties) {
             this.Chips = [];
             this.AwardAreas = [];
             this.AreaBets = [];
@@ -24,21 +24,20 @@ $root.tuitongzi = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        TuitongziSceneResp.prototype.Inning = "";
-        TuitongziSceneResp.prototype.Chips = $util.emptyArray;
-        TuitongziSceneResp.prototype.AwardAreas = $util.emptyArray;
-        TuitongziSceneResp.prototype.AreaBets = $util.emptyArray;
-        TuitongziSceneResp.prototype.MyBets = $util.emptyArray;
-        TuitongziSceneResp.prototype.AllPlayers = null;
-        TuitongziSceneResp.prototype.RemainCount = 0;
-        TuitongziSceneResp.prototype.StartArea = 0;
+        QzcowcowSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        QzcowcowSceneResp.prototype.Chips = $util.emptyArray;
+        QzcowcowSceneResp.prototype.AwardAreas = $util.emptyArray;
+        QzcowcowSceneResp.prototype.AreaBets = $util.emptyArray;
+        QzcowcowSceneResp.prototype.MyBets = $util.emptyArray;
+        QzcowcowSceneResp.prototype.Inning = "";
+        QzcowcowSceneResp.prototype.AllPlayers = null;
+        QzcowcowSceneResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        TuitongziSceneResp.create = function create(properties) {
-            return new TuitongziSceneResp(properties);
+        QzcowcowSceneResp.create = function create(properties) {
+            return new QzcowcowSceneResp(properties);
         };
 
-        TuitongziSceneResp.encode = function encode(message, writer) {
+        QzcowcowSceneResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
@@ -68,29 +67,24 @@ $root.tuitongzi = (function() {
                 writer.uint32(50).string(message.Inning);
             if (message.AllPlayers != null && Object.hasOwnProperty.call(message, "AllPlayers"))
                 $root.gamecomm.PlayerListInfo.encode(message.AllPlayers, writer.uint32(58).fork()).ldelim();
-            if (message.RemainCount != null && Object.hasOwnProperty.call(message, "RemainCount"))
-                writer.uint32(64).int32(message.RemainCount);
-            if (message.StartArea != null && Object.hasOwnProperty.call(message, "StartArea"))
-                writer.uint32(72).int32(message.StartArea);
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(64).uint64(message.HostID);
             return writer;
         };
 
-        TuitongziSceneResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowSceneResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziSceneResp.decode = function decode(reader, length) {
+        QzcowcowSceneResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziSceneResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowSceneResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
                     message.TimeStamp = reader.int64();
-                    break;
-                case 6:
-                    message.Inning = reader.string();
                     break;
                 case 2:
                     if (!(message.Chips && message.Chips.length))
@@ -127,14 +121,14 @@ $root.tuitongzi = (function() {
                     } else
                         message.MyBets.push(reader.int64());
                     break;
+                case 6:
+                    message.Inning = reader.string();
+                    break;
                 case 7:
                     message.AllPlayers = $root.gamecomm.PlayerListInfo.decode(reader, reader.uint32());
                     break;
                 case 8:
-                    message.RemainCount = reader.int32();
-                    break;
-                case 9:
-                    message.StartArea = reader.int32();
+                    message.HostID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -144,21 +138,18 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziSceneResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowSceneResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziSceneResp.verify = function verify(message) {
+        QzcowcowSceneResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
                     return "TimeStamp: integer|Long expected";
-            if (message.Inning != null && message.hasOwnProperty("Inning"))
-                if (!$util.isString(message.Inning))
-                    return "Inning: string expected";
             if (message.Chips != null && message.hasOwnProperty("Chips")) {
                 if (!Array.isArray(message.Chips))
                     return "Chips: array expected";
@@ -187,24 +178,24 @@ $root.tuitongzi = (function() {
                     if (!$util.isInteger(message.MyBets[i]) && !(message.MyBets[i] && $util.isInteger(message.MyBets[i].low) && $util.isInteger(message.MyBets[i].high)))
                         return "MyBets: integer|Long[] expected";
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers")) {
                 var error = $root.gamecomm.PlayerListInfo.verify(message.AllPlayers);
                 if (error)
                     return "AllPlayers." + error;
             }
-            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
-                if (!$util.isInteger(message.RemainCount))
-                    return "RemainCount: integer expected";
-            if (message.StartArea != null && message.hasOwnProperty("StartArea"))
-                if (!$util.isInteger(message.StartArea))
-                    return "StartArea: integer expected";
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
             return null;
         };
 
-        TuitongziSceneResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziSceneResp)
+        QzcowcowSceneResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowSceneResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziSceneResp();
+            var message = new $root.qzcowcow.QzcowcowSceneResp();
             if (object.TimeStamp != null)
                 if ($util.Long)
                     (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
@@ -214,18 +205,16 @@ $root.tuitongzi = (function() {
                     message.TimeStamp = object.TimeStamp;
                 else if (typeof object.TimeStamp === "object")
                     message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
-            if (object.Inning != null)
-                message.Inning = String(object.Inning);
             if (object.Chips) {
                 if (!Array.isArray(object.Chips))
-                    throw TypeError(".tuitongzi.TuitongziSceneResp.Chips: array expected");
+                    throw TypeError(".qzcowcow.QzcowcowSceneResp.Chips: array expected");
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
             }
             if (object.AwardAreas) {
                 if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".tuitongzi.TuitongziSceneResp.AwardAreas: array expected");
+                    throw TypeError(".qzcowcow.QzcowcowSceneResp.AwardAreas: array expected");
                 message.AwardAreas = [];
                 for (var i = 0; i < object.AwardAreas.length; ++i)
                     if (typeof object.AwardAreas[i] === "string")
@@ -235,7 +224,7 @@ $root.tuitongzi = (function() {
             }
             if (object.AreaBets) {
                 if (!Array.isArray(object.AreaBets))
-                    throw TypeError(".tuitongzi.TuitongziSceneResp.AreaBets: array expected");
+                    throw TypeError(".qzcowcow.QzcowcowSceneResp.AreaBets: array expected");
                 message.AreaBets = [];
                 for (var i = 0; i < object.AreaBets.length; ++i)
                     if ($util.Long)
@@ -249,7 +238,7 @@ $root.tuitongzi = (function() {
             }
             if (object.MyBets) {
                 if (!Array.isArray(object.MyBets))
-                    throw TypeError(".tuitongzi.TuitongziSceneResp.MyBets: array expected");
+                    throw TypeError(".qzcowcow.QzcowcowSceneResp.MyBets: array expected");
                 message.MyBets = [];
                 for (var i = 0; i < object.MyBets.length; ++i)
                     if ($util.Long)
@@ -261,19 +250,26 @@ $root.tuitongzi = (function() {
                     else if (typeof object.MyBets[i] === "object")
                         message.MyBets[i] = new $util.LongBits(object.MyBets[i].low >>> 0, object.MyBets[i].high >>> 0).toNumber();
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             if (object.AllPlayers != null) {
                 if (typeof object.AllPlayers !== "object")
-                    throw TypeError(".tuitongzi.TuitongziSceneResp.AllPlayers: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowSceneResp.AllPlayers: object expected");
                 message.AllPlayers = $root.gamecomm.PlayerListInfo.fromObject(object.AllPlayers);
             }
-            if (object.RemainCount != null)
-                message.RemainCount = object.RemainCount | 0;
-            if (object.StartArea != null)
-                message.StartArea = object.StartArea | 0;
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             return message;
         };
 
-        TuitongziSceneResp.toObject = function toObject(message, options) {
+        QzcowcowSceneResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -291,8 +287,11 @@ $root.tuitongzi = (function() {
                     object.TimeStamp = options.longs === String ? "0" : 0;
                 object.Inning = "";
                 object.AllPlayers = null;
-                object.RemainCount = 0;
-                object.StartArea = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -329,36 +328,37 @@ $root.tuitongzi = (function() {
                 object.Inning = message.Inning;
             if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers"))
                 object.AllPlayers = $root.gamecomm.PlayerListInfo.toObject(message.AllPlayers, options);
-            if (message.RemainCount != null && message.hasOwnProperty("RemainCount"))
-                object.RemainCount = message.RemainCount;
-            if (message.StartArea != null && message.hasOwnProperty("StartArea"))
-                object.StartArea = message.StartArea;
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             return object;
         };
 
-        TuitongziSceneResp.prototype.toJSON = function toJSON() {
+        QzcowcowSceneResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziSceneResp;
+        return QzcowcowSceneResp;
     })();
 
-    tuitongzi.TuitongziStateFreeResp = (function() {
+    qzcowcow.QzcowcowStateFreeResp = (function() {
 
-        function TuitongziStateFreeResp(properties) {
+        function QzcowcowStateFreeResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziStateFreeResp.prototype.Times = null;
+        QzcowcowStateFreeResp.prototype.Times = null;
 
-        TuitongziStateFreeResp.create = function create(properties) {
-            return new TuitongziStateFreeResp(properties);
+        QzcowcowStateFreeResp.create = function create(properties) {
+            return new QzcowcowStateFreeResp(properties);
         };
 
-        TuitongziStateFreeResp.encode = function encode(message, writer) {
+        QzcowcowStateFreeResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -366,14 +366,14 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziStateFreeResp.decode = function decode(reader, length) {
+        QzcowcowStateFreeResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStateFreeResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateFreeResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -388,13 +388,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziStateFreeResp.verify = function verify(message) {
+        QzcowcowStateFreeResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -405,19 +405,19 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziStateFreeResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStateFreeResp)
+        QzcowcowStateFreeResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateFreeResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziStateFreeResp();
+            var message = new $root.qzcowcow.QzcowcowStateFreeResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateFreeResp.Times: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowStateFreeResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        TuitongziStateFreeResp.toObject = function toObject(message, options) {
+        QzcowcowStateFreeResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -428,50 +428,47 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziStateFreeResp.prototype.toJSON = function toJSON() {
+        QzcowcowStateFreeResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziStateFreeResp;
+        return QzcowcowStateFreeResp;
     })();
 
-    tuitongzi.TuitongziStateStartResp = (function() {
+    qzcowcow.QzcowcowStateStartResp = (function() {
 
-        function TuitongziStateStartResp(properties) {
+        function QzcowcowStateStartResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziStateStartResp.prototype.Times = null;
-        TuitongziStateStartResp.prototype.StartArea = 0;
-        TuitongziStateStartResp.prototype.Dice = $util.newBuffer([]);
+        QzcowcowStateStartResp.prototype.Times = null;
+        QzcowcowStateStartResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        TuitongziStateStartResp.create = function create(properties) {
-            return new TuitongziStateStartResp(properties);
+        QzcowcowStateStartResp.create = function create(properties) {
+            return new QzcowcowStateStartResp(properties);
         };
 
-        TuitongziStateStartResp.encode = function encode(message, writer) {
+        QzcowcowStateStartResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            if (message.StartArea != null && Object.hasOwnProperty.call(message, "StartArea"))
-                writer.uint32(16).int32(message.StartArea);
-            if (message.Dice != null && Object.hasOwnProperty.call(message, "Dice"))
-                writer.uint32(26).bytes(message.Dice);
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(16).uint64(message.HostID);
             return writer;
         };
 
-        TuitongziStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziStateStartResp.decode = function decode(reader, length) {
+        QzcowcowStateStartResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStateStartResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateStartResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -479,10 +476,7 @@ $root.tuitongzi = (function() {
                     message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.StartArea = reader.int32();
-                    break;
-                case 3:
-                    message.Dice = reader.bytes();
+                    message.HostID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -492,13 +486,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziStateStartResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowStateStartResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziStateStartResp.verify = function verify(message) {
+        QzcowcowStateStartResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -506,81 +500,78 @@ $root.tuitongzi = (function() {
                 if (error)
                     return "Times." + error;
             }
-            if (message.StartArea != null && message.hasOwnProperty("StartArea"))
-                if (!$util.isInteger(message.StartArea))
-                    return "StartArea: integer expected";
-            if (message.Dice != null && message.hasOwnProperty("Dice"))
-                if (!(message.Dice && typeof message.Dice.length === "number" || $util.isString(message.Dice)))
-                    return "Dice: buffer expected";
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
             return null;
         };
 
-        TuitongziStateStartResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStateStartResp)
+        QzcowcowStateStartResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateStartResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziStateStartResp();
+            var message = new $root.qzcowcow.QzcowcowStateStartResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateStartResp.Times: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowStateStartResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
-            if (object.StartArea != null)
-                message.StartArea = object.StartArea | 0;
-            if (object.Dice != null)
-                if (typeof object.Dice === "string")
-                    $util.base64.decode(object.Dice, message.Dice = $util.newBuffer($util.base64.length(object.Dice)), 0);
-                else if (object.Dice.length)
-                    message.Dice = object.Dice;
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             return message;
         };
 
-        TuitongziStateStartResp.toObject = function toObject(message, options) {
+        QzcowcowStateStartResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
                 object.Times = null;
-                object.StartArea = 0;
-                if (options.bytes === String)
-                    object.Dice = "";
-                else {
-                    object.Dice = [];
-                    if (options.bytes !== Array)
-                        object.Dice = $util.newBuffer(object.Dice);
-                }
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
             }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
-            if (message.StartArea != null && message.hasOwnProperty("StartArea"))
-                object.StartArea = message.StartArea;
-            if (message.Dice != null && message.hasOwnProperty("Dice"))
-                object.Dice = options.bytes === String ? $util.base64.encode(message.Dice, 0, message.Dice.length) : options.bytes === Array ? Array.prototype.slice.call(message.Dice) : message.Dice;
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             return object;
         };
 
-        TuitongziStateStartResp.prototype.toJSON = function toJSON() {
+        QzcowcowStateStartResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziStateStartResp;
+        return QzcowcowStateStartResp;
     })();
 
-    tuitongzi.TuitongziStatePlayingResp = (function() {
+    qzcowcow.QzcowcowStatePlayingResp = (function() {
 
-        function TuitongziStatePlayingResp(properties) {
+        function QzcowcowStatePlayingResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziStatePlayingResp.prototype.Times = null;
+        QzcowcowStatePlayingResp.prototype.Times = null;
 
-        TuitongziStatePlayingResp.create = function create(properties) {
-            return new TuitongziStatePlayingResp(properties);
+        QzcowcowStatePlayingResp.create = function create(properties) {
+            return new QzcowcowStatePlayingResp(properties);
         };
 
-        TuitongziStatePlayingResp.encode = function encode(message, writer) {
+        QzcowcowStatePlayingResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -588,14 +579,14 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziStatePlayingResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowStatePlayingResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziStatePlayingResp.decode = function decode(reader, length) {
+        QzcowcowStatePlayingResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStatePlayingResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStatePlayingResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -610,13 +601,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziStatePlayingResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowStatePlayingResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziStatePlayingResp.verify = function verify(message) {
+        QzcowcowStatePlayingResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -627,19 +618,19 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziStatePlayingResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStatePlayingResp)
+        QzcowcowStatePlayingResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStatePlayingResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziStatePlayingResp();
+            var message = new $root.qzcowcow.QzcowcowStatePlayingResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStatePlayingResp.Times: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowStatePlayingResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        TuitongziStatePlayingResp.toObject = function toObject(message, options) {
+        QzcowcowStatePlayingResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -650,47 +641,47 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziStatePlayingResp.prototype.toJSON = function toJSON() {
+        QzcowcowStatePlayingResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziStatePlayingResp;
+        return QzcowcowStatePlayingResp;
     })();
 
-    tuitongzi.TuitongziStateOpenResp = (function() {
+    qzcowcow.QzcowcowStateOpenResp = (function() {
 
-        function TuitongziStateOpenResp(properties) {
+        function QzcowcowStateOpenResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziStateOpenResp.prototype.Times = null;
-        TuitongziStateOpenResp.prototype.OpenInfo = null;
+        QzcowcowStateOpenResp.prototype.Times = null;
+        QzcowcowStateOpenResp.prototype.OpenInfo = null;
 
-        TuitongziStateOpenResp.create = function create(properties) {
-            return new TuitongziStateOpenResp(properties);
+        QzcowcowStateOpenResp.create = function create(properties) {
+            return new QzcowcowStateOpenResp(properties);
         };
 
-        TuitongziStateOpenResp.encode = function encode(message, writer) {
+        QzcowcowStateOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
             if (message.OpenInfo != null && Object.hasOwnProperty.call(message, "OpenInfo"))
-                $root.tuitongzi.TuitongziOpenResp.encode(message.OpenInfo, writer.uint32(18).fork()).ldelim();
+                $root.qzcowcow.QzcowcowOpenResp.encode(message.OpenInfo, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
-        TuitongziStateOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowStateOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziStateOpenResp.decode = function decode(reader, length) {
+        QzcowcowStateOpenResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStateOpenResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateOpenResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -698,7 +689,7 @@ $root.tuitongzi = (function() {
                     message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.OpenInfo = $root.tuitongzi.TuitongziOpenResp.decode(reader, reader.uint32());
+                    message.OpenInfo = $root.qzcowcow.QzcowcowOpenResp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -708,13 +699,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziStateOpenResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowStateOpenResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziStateOpenResp.verify = function verify(message) {
+        QzcowcowStateOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -723,31 +714,31 @@ $root.tuitongzi = (function() {
                     return "Times." + error;
             }
             if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo")) {
-                var error = $root.tuitongzi.TuitongziOpenResp.verify(message.OpenInfo);
+                var error = $root.qzcowcow.QzcowcowOpenResp.verify(message.OpenInfo);
                 if (error)
                     return "OpenInfo." + error;
             }
             return null;
         };
 
-        TuitongziStateOpenResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStateOpenResp)
+        QzcowcowStateOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateOpenResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziStateOpenResp();
+            var message = new $root.qzcowcow.QzcowcowStateOpenResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateOpenResp.Times: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowStateOpenResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             if (object.OpenInfo != null) {
                 if (typeof object.OpenInfo !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateOpenResp.OpenInfo: object expected");
-                message.OpenInfo = $root.tuitongzi.TuitongziOpenResp.fromObject(object.OpenInfo);
+                    throw TypeError(".qzcowcow.QzcowcowStateOpenResp.OpenInfo: object expected");
+                message.OpenInfo = $root.qzcowcow.QzcowcowOpenResp.fromObject(object.OpenInfo);
             }
             return message;
         };
 
-        TuitongziStateOpenResp.toObject = function toObject(message, options) {
+        QzcowcowStateOpenResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -758,33 +749,33 @@ $root.tuitongzi = (function() {
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
             if (message.OpenInfo != null && message.hasOwnProperty("OpenInfo"))
-                object.OpenInfo = $root.tuitongzi.TuitongziOpenResp.toObject(message.OpenInfo, options);
+                object.OpenInfo = $root.qzcowcow.QzcowcowOpenResp.toObject(message.OpenInfo, options);
             return object;
         };
 
-        TuitongziStateOpenResp.prototype.toJSON = function toJSON() {
+        QzcowcowStateOpenResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziStateOpenResp;
+        return QzcowcowStateOpenResp;
     })();
 
-    tuitongzi.TuitongziStateOverResp = (function() {
+    qzcowcow.QzcowcowStateOverResp = (function() {
 
-        function TuitongziStateOverResp(properties) {
+        function QzcowcowStateOverResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziStateOverResp.prototype.Times = null;
+        QzcowcowStateOverResp.prototype.Times = null;
 
-        TuitongziStateOverResp.create = function create(properties) {
-            return new TuitongziStateOverResp(properties);
+        QzcowcowStateOverResp.create = function create(properties) {
+            return new QzcowcowStateOverResp(properties);
         };
 
-        TuitongziStateOverResp.encode = function encode(message, writer) {
+        QzcowcowStateOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
@@ -792,14 +783,14 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziStateOverResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowStateOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziStateOverResp.decode = function decode(reader, length) {
+        QzcowcowStateOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStateOverResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -814,13 +805,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziStateOverResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowStateOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziStateOverResp.verify = function verify(message) {
+        QzcowcowStateOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Times != null && message.hasOwnProperty("Times")) {
@@ -831,19 +822,19 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziStateOverResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStateOverResp)
+        QzcowcowStateOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateOverResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziStateOverResp();
+            var message = new $root.qzcowcow.QzcowcowStateOverResp();
             if (object.Times != null) {
                 if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateOverResp.Times: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowStateOverResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
             return message;
         };
 
-        TuitongziStateOverResp.toObject = function toObject(message, options) {
+        QzcowcowStateOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -854,54 +845,54 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziStateOverResp.prototype.toJSON = function toJSON() {
+        QzcowcowStateOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziStateOverResp;
+        return QzcowcowStateOverResp;
     })();
 
-    tuitongzi.TuitongziBetReq = (function() {
+    qzcowcow.QzcowcowBetReq = (function() {
 
-        function TuitongziBetReq(properties) {
+        function QzcowcowBetReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziBetReq.prototype.BetArea = 0;
-        TuitongziBetReq.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        QzcowcowBetReq.prototype.BetArea = 0;
+        QzcowcowBetReq.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        TuitongziBetReq.create = function create(properties) {
-            return new TuitongziBetReq(properties);
+        QzcowcowBetReq.create = function create(properties) {
+            return new QzcowcowBetReq(properties);
         };
 
-        TuitongziBetReq.encode = function encode(message, writer) {
+        QzcowcowBetReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
-                writer.uint32(8).int32(message.BetArea);
+                writer.uint32(16).int32(message.BetArea);
             if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
-                writer.uint32(16).int64(message.BetScore);
+                writer.uint32(24).int64(message.BetScore);
             return writer;
         };
 
-        TuitongziBetReq.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowBetReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziBetReq.decode = function decode(reader, length) {
+        QzcowcowBetReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziBetReq();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowBetReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
+                case 2:
                     message.BetArea = reader.int32();
                     break;
-                case 2:
+                case 3:
                     message.BetScore = reader.int64();
                     break;
                 default:
@@ -912,13 +903,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziBetReq.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowBetReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziBetReq.verify = function verify(message) {
+        QzcowcowBetReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
@@ -930,10 +921,10 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziBetReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziBetReq)
+        QzcowcowBetReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowBetReq)
                 return object;
-            var message = new $root.tuitongzi.TuitongziBetReq();
+            var message = new $root.qzcowcow.QzcowcowBetReq();
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -948,7 +939,7 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziBetReq.toObject = function toObject(message, options) {
+        QzcowcowBetReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -970,35 +961,35 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziBetReq.prototype.toJSON = function toJSON() {
+        QzcowcowBetReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziBetReq;
+        return QzcowcowBetReq;
     })();
 
-    tuitongzi.TuitongziBetResp = (function() {
+    qzcowcow.QzcowcowBetResp = (function() {
 
-        function TuitongziBetResp(properties) {
+        function QzcowcowBetResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziBetResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        TuitongziBetResp.prototype.BetArea = 0;
-        TuitongziBetResp.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        QzcowcowBetResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        QzcowcowBetResp.prototype.BetArea = 0;
+        QzcowcowBetResp.prototype.BetScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        TuitongziBetResp.create = function create(properties) {
-            return new TuitongziBetResp(properties);
+        QzcowcowBetResp.create = function create(properties) {
+            return new QzcowcowBetResp(properties);
         };
 
-        TuitongziBetResp.encode = function encode(message, writer) {
+        QzcowcowBetResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
             if (message.BetArea != null && Object.hasOwnProperty.call(message, "BetArea"))
                 writer.uint32(16).int32(message.BetArea);
             if (message.BetScore != null && Object.hasOwnProperty.call(message, "BetScore"))
@@ -1006,19 +997,19 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziBetResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowBetResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziBetResp.decode = function decode(reader, length) {
+        QzcowcowBetResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziBetResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowBetResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserID = reader.uint64();
+                    message.UserId = reader.uint64();
                     break;
                 case 2:
                     message.BetArea = reader.int32();
@@ -1034,18 +1025,18 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziBetResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowBetResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziBetResp.verify = function verify(message) {
+        QzcowcowBetResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
                 if (!$util.isInteger(message.BetArea))
                     return "BetArea: integer expected";
@@ -1055,19 +1046,19 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziBetResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziBetResp)
+        QzcowcowBetResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowBetResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziBetResp();
-            if (object.UserID != null)
+            var message = new $root.qzcowcow.QzcowcowBetResp();
+            if (object.UserId != null)
                 if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
             if (object.BetArea != null)
                 message.BetArea = object.BetArea | 0;
             if (object.BetScore != null)
@@ -1082,16 +1073,16 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziBetResp.toObject = function toObject(message, options) {
+        QzcowcowBetResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.UserID = options.longs === String ? "0" : 0;
+                    object.UserId = options.longs === String ? "0" : 0;
                 object.BetArea = 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -1099,11 +1090,11 @@ $root.tuitongzi = (function() {
                 } else
                     object.BetScore = options.longs === String ? "0" : 0;
             }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
                 else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
             if (message.BetArea != null && message.hasOwnProperty("BetArea"))
                 object.BetArea = message.BetArea;
             if (message.BetScore != null && message.hasOwnProperty("BetScore"))
@@ -1114,56 +1105,59 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziBetResp.prototype.toJSON = function toJSON() {
+        QzcowcowBetResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziBetResp;
+        return QzcowcowBetResp;
     })();
 
-    tuitongzi.TuitongziOpenResp = (function() {
+    qzcowcow.QzcowcowOpenResp = (function() {
 
-        function TuitongziOpenResp(properties) {
+        function QzcowcowOpenResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziOpenResp.prototype.AwardArea = $util.newBuffer([]);
-        TuitongziOpenResp.prototype.BankerCard = null;
-        TuitongziOpenResp.prototype.ShunCard = null;
-        TuitongziOpenResp.prototype.TianCard = null;
-        TuitongziOpenResp.prototype.DiCard = null;
+        QzcowcowOpenResp.prototype.AwardArea = $util.newBuffer([]);
+        QzcowcowOpenResp.prototype.BankerCard = null;
+        QzcowcowOpenResp.prototype.TianCard = null;
+        QzcowcowOpenResp.prototype.XuanCard = null;
+        QzcowcowOpenResp.prototype.DiCard = null;
+        QzcowcowOpenResp.prototype.HuangCard = null;
 
-        TuitongziOpenResp.create = function create(properties) {
-            return new TuitongziOpenResp(properties);
+        QzcowcowOpenResp.create = function create(properties) {
+            return new QzcowcowOpenResp(properties);
         };
 
-        TuitongziOpenResp.encode = function encode(message, writer) {
+        QzcowcowOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
                 writer.uint32(10).bytes(message.AwardArea);
             if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
                 $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(18).fork()).ldelim();
-            if (message.ShunCard != null && Object.hasOwnProperty.call(message, "ShunCard"))
-                $root.gamecomm.CardInfo.encode(message.ShunCard, writer.uint32(26).fork()).ldelim();
             if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
-                $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(34).fork()).ldelim();
+                $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(26).fork()).ldelim();
+            if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
+                $root.gamecomm.CardInfo.encode(message.XuanCard, writer.uint32(34).fork()).ldelim();
             if (message.DiCard != null && Object.hasOwnProperty.call(message, "DiCard"))
                 $root.gamecomm.CardInfo.encode(message.DiCard, writer.uint32(42).fork()).ldelim();
+            if (message.HuangCard != null && Object.hasOwnProperty.call(message, "HuangCard"))
+                $root.gamecomm.CardInfo.encode(message.HuangCard, writer.uint32(50).fork()).ldelim();
             return writer;
         };
 
-        TuitongziOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowOpenResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziOpenResp.decode = function decode(reader, length) {
+        QzcowcowOpenResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziOpenResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowOpenResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1174,13 +1168,16 @@ $root.tuitongzi = (function() {
                     message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 3:
-                    message.ShunCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 4:
-                    message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    message.XuanCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 case 5:
                     message.DiCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.HuangCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1190,13 +1187,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziOpenResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowOpenResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziOpenResp.verify = function verify(message) {
+        QzcowcowOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
@@ -1207,28 +1204,33 @@ $root.tuitongzi = (function() {
                 if (error)
                     return "BankerCard." + error;
             }
-            if (message.ShunCard != null && message.hasOwnProperty("ShunCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.ShunCard);
-                if (error)
-                    return "ShunCard." + error;
-            }
             if (message.TianCard != null && message.hasOwnProperty("TianCard")) {
                 var error = $root.gamecomm.CardInfo.verify(message.TianCard);
                 if (error)
                     return "TianCard." + error;
+            }
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.XuanCard);
+                if (error)
+                    return "XuanCard." + error;
             }
             if (message.DiCard != null && message.hasOwnProperty("DiCard")) {
                 var error = $root.gamecomm.CardInfo.verify(message.DiCard);
                 if (error)
                     return "DiCard." + error;
             }
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard")) {
+                var error = $root.gamecomm.CardInfo.verify(message.HuangCard);
+                if (error)
+                    return "HuangCard." + error;
+            }
             return null;
         };
 
-        TuitongziOpenResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziOpenResp)
+        QzcowcowOpenResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowOpenResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziOpenResp();
+            var message = new $root.qzcowcow.QzcowcowOpenResp();
             if (object.AwardArea != null)
                 if (typeof object.AwardArea === "string")
                     $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
@@ -1236,28 +1238,33 @@ $root.tuitongzi = (function() {
                     message.AwardArea = object.AwardArea;
             if (object.BankerCard != null) {
                 if (typeof object.BankerCard !== "object")
-                    throw TypeError(".tuitongzi.TuitongziOpenResp.BankerCard: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.BankerCard: object expected");
                 message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
-            }
-            if (object.ShunCard != null) {
-                if (typeof object.ShunCard !== "object")
-                    throw TypeError(".tuitongzi.TuitongziOpenResp.ShunCard: object expected");
-                message.ShunCard = $root.gamecomm.CardInfo.fromObject(object.ShunCard);
             }
             if (object.TianCard != null) {
                 if (typeof object.TianCard !== "object")
-                    throw TypeError(".tuitongzi.TuitongziOpenResp.TianCard: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.TianCard: object expected");
                 message.TianCard = $root.gamecomm.CardInfo.fromObject(object.TianCard);
+            }
+            if (object.XuanCard != null) {
+                if (typeof object.XuanCard !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.XuanCard: object expected");
+                message.XuanCard = $root.gamecomm.CardInfo.fromObject(object.XuanCard);
             }
             if (object.DiCard != null) {
                 if (typeof object.DiCard !== "object")
-                    throw TypeError(".tuitongzi.TuitongziOpenResp.DiCard: object expected");
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.DiCard: object expected");
                 message.DiCard = $root.gamecomm.CardInfo.fromObject(object.DiCard);
+            }
+            if (object.HuangCard != null) {
+                if (typeof object.HuangCard !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.HuangCard: object expected");
+                message.HuangCard = $root.gamecomm.CardInfo.fromObject(object.HuangCard);
             }
             return message;
         };
 
-        TuitongziOpenResp.toObject = function toObject(message, options) {
+        QzcowcowOpenResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1270,84 +1277,87 @@ $root.tuitongzi = (function() {
                         object.AwardArea = $util.newBuffer(object.AwardArea);
                 }
                 object.BankerCard = null;
-                object.ShunCard = null;
                 object.TianCard = null;
+                object.XuanCard = null;
                 object.DiCard = null;
+                object.HuangCard = null;
             }
             if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
                 object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
             if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
                 object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
-            if (message.ShunCard != null && message.hasOwnProperty("ShunCard"))
-                object.ShunCard = $root.gamecomm.CardInfo.toObject(message.ShunCard, options);
             if (message.TianCard != null && message.hasOwnProperty("TianCard"))
                 object.TianCard = $root.gamecomm.CardInfo.toObject(message.TianCard, options);
+            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
+                object.XuanCard = $root.gamecomm.CardInfo.toObject(message.XuanCard, options);
             if (message.DiCard != null && message.hasOwnProperty("DiCard"))
                 object.DiCard = $root.gamecomm.CardInfo.toObject(message.DiCard, options);
+            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
+                object.HuangCard = $root.gamecomm.CardInfo.toObject(message.HuangCard, options);
             return object;
         };
 
-        TuitongziOpenResp.prototype.toJSON = function toJSON() {
+        QzcowcowOpenResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziOpenResp;
+        return QzcowcowOpenResp;
     })();
 
-    tuitongzi.TuitongziCheckoutResp = (function() {
+    qzcowcow.QzcowcowOverResp = (function() {
 
-        function TuitongziCheckoutResp(properties) {
-            this.Acquires = [];
+        function QzcowcowOverResp(properties) {
+            this.TotalSettlement = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziCheckoutResp.prototype.MyAcquire = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        TuitongziCheckoutResp.prototype.Acquires = $util.emptyArray;
+        QzcowcowOverResp.prototype.MySettlement = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        QzcowcowOverResp.prototype.TotalSettlement = $util.emptyArray;
 
-        TuitongziCheckoutResp.create = function create(properties) {
-            return new TuitongziCheckoutResp(properties);
+        QzcowcowOverResp.create = function create(properties) {
+            return new QzcowcowOverResp(properties);
         };
 
-        TuitongziCheckoutResp.encode = function encode(message, writer) {
+        QzcowcowOverResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.MyAcquire != null && Object.hasOwnProperty.call(message, "MyAcquire"))
-                writer.uint32(8).int64(message.MyAcquire);
-            if (message.Acquires != null && message.Acquires.length) {
+            if (message.MySettlement != null && Object.hasOwnProperty.call(message, "MySettlement"))
+                writer.uint32(8).int64(message.MySettlement);
+            if (message.TotalSettlement != null && message.TotalSettlement.length) {
                 writer.uint32(18).fork();
-                for (var i = 0; i < message.Acquires.length; ++i)
-                    writer.int64(message.Acquires[i]);
+                for (var i = 0; i < message.TotalSettlement.length; ++i)
+                    writer.int64(message.TotalSettlement[i]);
                 writer.ldelim();
             }
             return writer;
         };
 
-        TuitongziCheckoutResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowOverResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziCheckoutResp.decode = function decode(reader, length) {
+        QzcowcowOverResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziCheckoutResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowOverResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.MyAcquire = reader.int64();
+                    message.MySettlement = reader.int64();
                     break;
                 case 2:
-                    if (!(message.Acquires && message.Acquires.length))
-                        message.Acquires = [];
+                    if (!(message.TotalSettlement && message.TotalSettlement.length))
+                        message.TotalSettlement = [];
                     if ((tag & 7) === 2) {
                         var end2 = reader.uint32() + reader.pos;
                         while (reader.pos < end2)
-                            message.Acquires.push(reader.int64());
+                            message.TotalSettlement.push(reader.int64());
                     } else
-                        message.Acquires.push(reader.int64());
+                        message.TotalSettlement.push(reader.int64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1357,109 +1367,109 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziCheckoutResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowOverResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziCheckoutResp.verify = function verify(message) {
+        QzcowcowOverResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
-                if (!$util.isInteger(message.MyAcquire) && !(message.MyAcquire && $util.isInteger(message.MyAcquire.low) && $util.isInteger(message.MyAcquire.high)))
-                    return "MyAcquire: integer|Long expected";
-            if (message.Acquires != null && message.hasOwnProperty("Acquires")) {
-                if (!Array.isArray(message.Acquires))
-                    return "Acquires: array expected";
-                for (var i = 0; i < message.Acquires.length; ++i)
-                    if (!$util.isInteger(message.Acquires[i]) && !(message.Acquires[i] && $util.isInteger(message.Acquires[i].low) && $util.isInteger(message.Acquires[i].high)))
-                        return "Acquires: integer|Long[] expected";
+            if (message.MySettlement != null && message.hasOwnProperty("MySettlement"))
+                if (!$util.isInteger(message.MySettlement) && !(message.MySettlement && $util.isInteger(message.MySettlement.low) && $util.isInteger(message.MySettlement.high)))
+                    return "MySettlement: integer|Long expected";
+            if (message.TotalSettlement != null && message.hasOwnProperty("TotalSettlement")) {
+                if (!Array.isArray(message.TotalSettlement))
+                    return "TotalSettlement: array expected";
+                for (var i = 0; i < message.TotalSettlement.length; ++i)
+                    if (!$util.isInteger(message.TotalSettlement[i]) && !(message.TotalSettlement[i] && $util.isInteger(message.TotalSettlement[i].low) && $util.isInteger(message.TotalSettlement[i].high)))
+                        return "TotalSettlement: integer|Long[] expected";
             }
             return null;
         };
 
-        TuitongziCheckoutResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziCheckoutResp)
+        QzcowcowOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowOverResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziCheckoutResp();
-            if (object.MyAcquire != null)
+            var message = new $root.qzcowcow.QzcowcowOverResp();
+            if (object.MySettlement != null)
                 if ($util.Long)
-                    (message.MyAcquire = $util.Long.fromValue(object.MyAcquire)).unsigned = false;
-                else if (typeof object.MyAcquire === "string")
-                    message.MyAcquire = parseInt(object.MyAcquire, 10);
-                else if (typeof object.MyAcquire === "number")
-                    message.MyAcquire = object.MyAcquire;
-                else if (typeof object.MyAcquire === "object")
-                    message.MyAcquire = new $util.LongBits(object.MyAcquire.low >>> 0, object.MyAcquire.high >>> 0).toNumber();
-            if (object.Acquires) {
-                if (!Array.isArray(object.Acquires))
-                    throw TypeError(".tuitongzi.TuitongziCheckoutResp.Acquires: array expected");
-                message.Acquires = [];
-                for (var i = 0; i < object.Acquires.length; ++i)
+                    (message.MySettlement = $util.Long.fromValue(object.MySettlement)).unsigned = false;
+                else if (typeof object.MySettlement === "string")
+                    message.MySettlement = parseInt(object.MySettlement, 10);
+                else if (typeof object.MySettlement === "number")
+                    message.MySettlement = object.MySettlement;
+                else if (typeof object.MySettlement === "object")
+                    message.MySettlement = new $util.LongBits(object.MySettlement.low >>> 0, object.MySettlement.high >>> 0).toNumber();
+            if (object.TotalSettlement) {
+                if (!Array.isArray(object.TotalSettlement))
+                    throw TypeError(".qzcowcow.QzcowcowOverResp.TotalSettlement: array expected");
+                message.TotalSettlement = [];
+                for (var i = 0; i < object.TotalSettlement.length; ++i)
                     if ($util.Long)
-                        (message.Acquires[i] = $util.Long.fromValue(object.Acquires[i])).unsigned = false;
-                    else if (typeof object.Acquires[i] === "string")
-                        message.Acquires[i] = parseInt(object.Acquires[i], 10);
-                    else if (typeof object.Acquires[i] === "number")
-                        message.Acquires[i] = object.Acquires[i];
-                    else if (typeof object.Acquires[i] === "object")
-                        message.Acquires[i] = new $util.LongBits(object.Acquires[i].low >>> 0, object.Acquires[i].high >>> 0).toNumber();
+                        (message.TotalSettlement[i] = $util.Long.fromValue(object.TotalSettlement[i])).unsigned = false;
+                    else if (typeof object.TotalSettlement[i] === "string")
+                        message.TotalSettlement[i] = parseInt(object.TotalSettlement[i], 10);
+                    else if (typeof object.TotalSettlement[i] === "number")
+                        message.TotalSettlement[i] = object.TotalSettlement[i];
+                    else if (typeof object.TotalSettlement[i] === "object")
+                        message.TotalSettlement[i] = new $util.LongBits(object.TotalSettlement[i].low >>> 0, object.TotalSettlement[i].high >>> 0).toNumber();
             }
             return message;
         };
 
-        TuitongziCheckoutResp.toObject = function toObject(message, options) {
+        QzcowcowOverResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.arrays || options.defaults)
-                object.Acquires = [];
+                object.TotalSettlement = [];
             if (options.defaults)
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
-                    object.MyAcquire = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.MySettlement = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.MyAcquire = options.longs === String ? "0" : 0;
-            if (message.MyAcquire != null && message.hasOwnProperty("MyAcquire"))
-                if (typeof message.MyAcquire === "number")
-                    object.MyAcquire = options.longs === String ? String(message.MyAcquire) : message.MyAcquire;
+                    object.MySettlement = options.longs === String ? "0" : 0;
+            if (message.MySettlement != null && message.hasOwnProperty("MySettlement"))
+                if (typeof message.MySettlement === "number")
+                    object.MySettlement = options.longs === String ? String(message.MySettlement) : message.MySettlement;
                 else
-                    object.MyAcquire = options.longs === String ? $util.Long.prototype.toString.call(message.MyAcquire) : options.longs === Number ? new $util.LongBits(message.MyAcquire.low >>> 0, message.MyAcquire.high >>> 0).toNumber() : message.MyAcquire;
-            if (message.Acquires && message.Acquires.length) {
-                object.Acquires = [];
-                for (var j = 0; j < message.Acquires.length; ++j)
-                    if (typeof message.Acquires[j] === "number")
-                        object.Acquires[j] = options.longs === String ? String(message.Acquires[j]) : message.Acquires[j];
+                    object.MySettlement = options.longs === String ? $util.Long.prototype.toString.call(message.MySettlement) : options.longs === Number ? new $util.LongBits(message.MySettlement.low >>> 0, message.MySettlement.high >>> 0).toNumber() : message.MySettlement;
+            if (message.TotalSettlement && message.TotalSettlement.length) {
+                object.TotalSettlement = [];
+                for (var j = 0; j < message.TotalSettlement.length; ++j)
+                    if (typeof message.TotalSettlement[j] === "number")
+                        object.TotalSettlement[j] = options.longs === String ? String(message.TotalSettlement[j]) : message.TotalSettlement[j];
                     else
-                        object.Acquires[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Acquires[j]) : options.longs === Number ? new $util.LongBits(message.Acquires[j].low >>> 0, message.Acquires[j].high >>> 0).toNumber() : message.Acquires[j];
+                        object.TotalSettlement[j] = options.longs === String ? $util.Long.prototype.toString.call(message.TotalSettlement[j]) : options.longs === Number ? new $util.LongBits(message.TotalSettlement[j].low >>> 0, message.TotalSettlement[j].high >>> 0).toNumber() : message.TotalSettlement[j];
             }
             return object;
         };
 
-        TuitongziCheckoutResp.prototype.toJSON = function toJSON() {
+        QzcowcowOverResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziCheckoutResp;
+        return QzcowcowOverResp;
     })();
 
-    tuitongzi.TuitongziHostReq = (function() {
+    qzcowcow.QzcowcowHostReq = (function() {
 
-        function TuitongziHostReq(properties) {
+        function QzcowcowHostReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziHostReq.prototype.IsWant = false;
+        QzcowcowHostReq.prototype.IsWant = false;
 
-        TuitongziHostReq.create = function create(properties) {
-            return new TuitongziHostReq(properties);
+        QzcowcowHostReq.create = function create(properties) {
+            return new QzcowcowHostReq(properties);
         };
 
-        TuitongziHostReq.encode = function encode(message, writer) {
+        QzcowcowHostReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
@@ -1467,14 +1477,14 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziHostReq.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowHostReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziHostReq.decode = function decode(reader, length) {
+        QzcowcowHostReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziHostReq();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1489,13 +1499,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziHostReq.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowHostReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziHostReq.verify = function verify(message) {
+        QzcowcowHostReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.IsWant != null && message.hasOwnProperty("IsWant"))
@@ -1504,16 +1514,16 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziHostReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziHostReq)
+        QzcowcowHostReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowHostReq)
                 return object;
-            var message = new $root.tuitongzi.TuitongziHostReq();
+            var message = new $root.qzcowcow.QzcowcowHostReq();
             if (object.IsWant != null)
                 message.IsWant = Boolean(object.IsWant);
             return message;
         };
 
-        TuitongziHostReq.toObject = function toObject(message, options) {
+        QzcowcowHostReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1524,30 +1534,30 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziHostReq.prototype.toJSON = function toJSON() {
+        QzcowcowHostReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziHostReq;
+        return QzcowcowHostReq;
     })();
 
-    tuitongzi.TuitongziHostResp = (function() {
+    qzcowcow.QzcowcowHostResp = (function() {
 
-        function TuitongziHostResp(properties) {
+        function QzcowcowHostResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        TuitongziHostResp.prototype.IsWant = false;
+        QzcowcowHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        QzcowcowHostResp.prototype.IsWant = false;
 
-        TuitongziHostResp.create = function create(properties) {
-            return new TuitongziHostResp(properties);
+        QzcowcowHostResp.create = function create(properties) {
+            return new QzcowcowHostResp(properties);
         };
 
-        TuitongziHostResp.encode = function encode(message, writer) {
+        QzcowcowHostResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
@@ -1557,14 +1567,14 @@ $root.tuitongzi = (function() {
             return writer;
         };
 
-        TuitongziHostResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowHostResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziHostResp.decode = function decode(reader, length) {
+        QzcowcowHostResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziHostResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1582,13 +1592,13 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziHostResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowHostResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziHostResp.verify = function verify(message) {
+        QzcowcowHostResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.UserID != null && message.hasOwnProperty("UserID"))
@@ -1600,10 +1610,10 @@ $root.tuitongzi = (function() {
             return null;
         };
 
-        TuitongziHostResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziHostResp)
+        QzcowcowHostResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowHostResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziHostResp();
+            var message = new $root.qzcowcow.QzcowcowHostResp();
             if (object.UserID != null)
                 if ($util.Long)
                     (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
@@ -1618,7 +1628,7 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziHostResp.toObject = function toObject(message, options) {
+        QzcowcowHostResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -1640,50 +1650,43 @@ $root.tuitongzi = (function() {
             return object;
         };
 
-        TuitongziHostResp.prototype.toJSON = function toJSON() {
+        QzcowcowHostResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziHostResp;
+        return QzcowcowHostResp;
     })();
 
-    tuitongzi.TuitongziSuperHostReq = (function() {
+    qzcowcow.QzcowcowHostListReq = (function() {
 
-        function TuitongziSuperHostReq(properties) {
+        function QzcowcowHostListReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziSuperHostReq.prototype.IsWant = false;
-
-        TuitongziSuperHostReq.create = function create(properties) {
-            return new TuitongziSuperHostReq(properties);
+        QzcowcowHostListReq.create = function create(properties) {
+            return new QzcowcowHostListReq(properties);
         };
 
-        TuitongziSuperHostReq.encode = function encode(message, writer) {
+        QzcowcowHostListReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(8).bool(message.IsWant);
             return writer;
         };
 
-        TuitongziSuperHostReq.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowHostListReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziSuperHostReq.decode = function decode(reader, length) {
+        QzcowcowHostListReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziSuperHostReq();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostListReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1:
-                    message.IsWant = reader.bool();
-                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -1692,90 +1695,89 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziSuperHostReq.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowHostListReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziSuperHostReq.verify = function verify(message) {
+        QzcowcowHostListReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
             return null;
         };
 
-        TuitongziSuperHostReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziSuperHostReq)
+        QzcowcowHostListReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowHostListReq)
                 return object;
-            var message = new $root.tuitongzi.TuitongziSuperHostReq();
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
+            return new $root.qzcowcow.QzcowcowHostListReq();
         };
 
-        TuitongziSuperHostReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsWant = false;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
+        QzcowcowHostListReq.toObject = function toObject() {
+            return {};
         };
 
-        TuitongziSuperHostReq.prototype.toJSON = function toJSON() {
+        QzcowcowHostListReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziSuperHostReq;
+        return QzcowcowHostListReq;
     })();
 
-    tuitongzi.TuitongziSuperHostResp = (function() {
+    qzcowcow.QzcowcowHostListResp = (function() {
 
-        function TuitongziSuperHostResp(properties) {
+        function QzcowcowHostListResp(properties) {
+            this.Waitlist = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TuitongziSuperHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        TuitongziSuperHostResp.prototype.IsWant = false;
+        QzcowcowHostListResp.prototype.CurHost = null;
+        QzcowcowHostListResp.prototype.Waitlist = $util.emptyArray;
 
-        TuitongziSuperHostResp.create = function create(properties) {
-            return new TuitongziSuperHostResp(properties);
+        QzcowcowHostListResp.create = function create(properties) {
+            return new QzcowcowHostListResp(properties);
         };
 
-        TuitongziSuperHostResp.encode = function encode(message, writer) {
+        QzcowcowHostListResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(16).bool(message.IsWant);
+            if (message.CurHost != null && Object.hasOwnProperty.call(message, "CurHost"))
+                $root.gamecomm.PlayerInfo.encode(message.CurHost, writer.uint32(10).fork()).ldelim();
+            if (message.Waitlist != null && message.Waitlist.length) {
+                writer.uint32(18).fork();
+                for (var i = 0; i < message.Waitlist.length; ++i)
+                    writer.uint64(message.Waitlist[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
-        TuitongziSuperHostResp.encodeDelimited = function encodeDelimited(message, writer) {
+        QzcowcowHostListResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        TuitongziSuperHostResp.decode = function decode(reader, length) {
+        QzcowcowHostListResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziSuperHostResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostListResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.UserID = reader.uint64();
+                    message.CurHost = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.IsWant = reader.bool();
+                    if (!(message.Waitlist && message.Waitlist.length))
+                        message.Waitlist = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.Waitlist.push(reader.uint64());
+                    } else
+                        message.Waitlist.push(reader.uint64());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1785,72 +1787,85 @@ $root.tuitongzi = (function() {
             return message;
         };
 
-        TuitongziSuperHostResp.decodeDelimited = function decodeDelimited(reader) {
+        QzcowcowHostListResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        TuitongziSuperHostResp.verify = function verify(message) {
+        QzcowcowHostListResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
+            if (message.CurHost != null && message.hasOwnProperty("CurHost")) {
+                var error = $root.gamecomm.PlayerInfo.verify(message.CurHost);
+                if (error)
+                    return "CurHost." + error;
+            }
+            if (message.Waitlist != null && message.hasOwnProperty("Waitlist")) {
+                if (!Array.isArray(message.Waitlist))
+                    return "Waitlist: array expected";
+                for (var i = 0; i < message.Waitlist.length; ++i)
+                    if (!$util.isInteger(message.Waitlist[i]) && !(message.Waitlist[i] && $util.isInteger(message.Waitlist[i].low) && $util.isInteger(message.Waitlist[i].high)))
+                        return "Waitlist: integer|Long[] expected";
+            }
             return null;
         };
 
-        TuitongziSuperHostResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziSuperHostResp)
+        QzcowcowHostListResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowHostListResp)
                 return object;
-            var message = new $root.tuitongzi.TuitongziSuperHostResp();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
+            var message = new $root.qzcowcow.QzcowcowHostListResp();
+            if (object.CurHost != null) {
+                if (typeof object.CurHost !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowHostListResp.CurHost: object expected");
+                message.CurHost = $root.gamecomm.PlayerInfo.fromObject(object.CurHost);
+            }
+            if (object.Waitlist) {
+                if (!Array.isArray(object.Waitlist))
+                    throw TypeError(".qzcowcow.QzcowcowHostListResp.Waitlist: array expected");
+                message.Waitlist = [];
+                for (var i = 0; i < object.Waitlist.length; ++i)
+                    if ($util.Long)
+                        (message.Waitlist[i] = $util.Long.fromValue(object.Waitlist[i])).unsigned = true;
+                    else if (typeof object.Waitlist[i] === "string")
+                        message.Waitlist[i] = parseInt(object.Waitlist[i], 10);
+                    else if (typeof object.Waitlist[i] === "number")
+                        message.Waitlist[i] = object.Waitlist[i];
+                    else if (typeof object.Waitlist[i] === "object")
+                        message.Waitlist[i] = new $util.LongBits(object.Waitlist[i].low >>> 0, object.Waitlist[i].high >>> 0).toNumber(true);
+            }
             return message;
         };
 
-        TuitongziSuperHostResp.toObject = function toObject(message, options) {
+        QzcowcowHostListResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.IsWant = false;
+            if (options.arrays || options.defaults)
+                object.Waitlist = [];
+            if (options.defaults)
+                object.CurHost = null;
+            if (message.CurHost != null && message.hasOwnProperty("CurHost"))
+                object.CurHost = $root.gamecomm.PlayerInfo.toObject(message.CurHost, options);
+            if (message.Waitlist && message.Waitlist.length) {
+                object.Waitlist = [];
+                for (var j = 0; j < message.Waitlist.length; ++j)
+                    if (typeof message.Waitlist[j] === "number")
+                        object.Waitlist[j] = options.longs === String ? String(message.Waitlist[j]) : message.Waitlist[j];
+                    else
+                        object.Waitlist[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Waitlist[j]) : options.longs === Number ? new $util.LongBits(message.Waitlist[j].low >>> 0, message.Waitlist[j].high >>> 0).toNumber(true) : message.Waitlist[j];
             }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
             return object;
         };
 
-        TuitongziSuperHostResp.prototype.toJSON = function toJSON() {
+        QzcowcowHostListResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TuitongziSuperHostResp;
+        return QzcowcowHostListResp;
     })();
 
-    return tuitongzi;
+    return qzcowcow;
 })();
 
 module.exports = $root;
