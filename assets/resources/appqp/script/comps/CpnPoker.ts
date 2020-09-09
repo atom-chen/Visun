@@ -10,8 +10,8 @@ const {ccclass, property} = cc._decorator;
 export default class CpnPoker extends cc.Component {
 
     private _code:number = 0;
-    private _state:boolean = false;
     private _curFace:boolean = true;
+    private _state:boolean = false;
     private _originY:number = 0;
     private _selectY:number = 30;
     private _flipAct = null;

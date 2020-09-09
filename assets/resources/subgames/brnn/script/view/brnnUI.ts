@@ -310,6 +310,7 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowHostListResp(param:brcowcow.IBrcowcowHostListResp) {
+		if(isNil(param)) { return; }
 		var curZj:gamecomm.IPlayerInfo = param.CurHost;
 		if(curZj) {
 			PlayerMgr.getInstance().updateInfo(curZj.UserID, curZj);

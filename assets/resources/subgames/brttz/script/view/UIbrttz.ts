@@ -1,5 +1,4 @@
 import BaseComponent from "../../../../../kernel/view/BaseComponent";
-import SimplePool from "../../../../../kernel/basic/pool/SimplePool";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
@@ -22,14 +21,11 @@ import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import CpnHandMajhong from "../../../../appqp/script/comps/CpnHandMajhong";
 
 
 var margin = { rx:100, ry:65 };
-var testdata = [ 
-	{AreaId:0,Money:23425},
-	{AreaId:1,Money:24354}, 
-	{AreaId:2,Money:22365}, 
-];
+
 
 const {ccclass, property} = cc._decorator;
 
@@ -151,15 +147,25 @@ export default class UIbrttz extends BaseComponent {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+
 		this.clearBets();
 		this.setWinAreas([]);
+		this.m_ui.CpnHandMajhong0.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong1.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong2.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong3.getComponent(CpnHandMajhong).clearCards();
 	}
 
 	private TuitongziStatePlayingResp(param:tuitongzi.ITuitongziStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+
 		this.setWinAreas([]);
+		this.m_ui.CpnHandMajhong0.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong1.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong2.getComponent(CpnHandMajhong).clearCards();
+		this.m_ui.CpnHandMajhong3.getComponent(CpnHandMajhong).clearCards();
 
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
@@ -190,7 +196,10 @@ export default class UIbrttz extends BaseComponent {
 
 	private TuitongziOpenResp(param:tuitongzi.ITuitongziOpenResp) {
 		this.setWinAreas(param.AwardArea);
-		
+		this.m_ui.CpnHandMajhong0.getComponent(CpnHandMajhong).resetCards(param.ShunCard.Cards).playOpen();
+		this.m_ui.CpnHandMajhong1.getComponent(CpnHandMajhong).resetCards(param.TianCard.Cards).playOpen();
+		this.m_ui.CpnHandMajhong2.getComponent(CpnHandMajhong).resetCards(param.DiCard.Cards).playOpen();
+		this.m_ui.CpnHandMajhong3.getComponent(CpnHandMajhong).resetCards(param.BankerCard.Cards).playOpen();
 	}
 
 	private TuitongziCheckoutResp(param:tuitongzi.ITuitongziCheckoutResp) {
