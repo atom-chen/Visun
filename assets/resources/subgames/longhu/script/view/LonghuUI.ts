@@ -28,8 +28,8 @@ var testdata = [
 	{AreaId:12,Money:14354},
 ];
 
-var margin = { left:70,right:70,bottom:28,top:100 };
-var margin03 = { left:138,right:128,bottom:28,top:120 };
+var margin = { rx:20,ry:20,rr:0 };
+var margin03 = { rx:30,ry:30,rr:0 };
 
 const {ccclass, property} = cc._decorator;
 
@@ -38,7 +38,7 @@ export default class LonghuUI extends BaseComponent {
 	_loadedRes:any;
 	_pool:SimplePool = new SimplePool(():cc.Node=>{
 		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.2;
+		obj.scale = 0.12;
 		return obj;
     });
 	
