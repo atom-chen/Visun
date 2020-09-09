@@ -20,6 +20,8 @@ import { baccarat_msgs } from "../proto/net_baccarat";
 import { zhajinhua_msgs } from "../proto/net_zhajinhua";
 import { tuitongzi_msgs } from "../proto/net_tuitongzi";
 import { tuitongzi } from "../../../../declares/tuitongzi";
+import { tigerXdragon_msgs } from "../proto/net_tigerXdragon";
+import { tigerXdragon } from "../../../../declares/tigerXdragon";
 
 
 var GameHandlers = {
@@ -69,6 +71,13 @@ var GameHandlers = {
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.Brttz);
+    },
+
+    [tigerXdragon_msgs.TigerXdragonSceneResp] : function(param:tigerXdragon.ITigerXdragonSceneResp) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+		GameManager.getInstance().enterGameScene(GameKindEnum.Longhu);
     },
     
     [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {

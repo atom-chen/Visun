@@ -19,9 +19,11 @@ import BrttzMgr from "../model/BrttzMgr";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
-import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil, isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import CpnHandMajhong from "../../../../appqp/script/comps/CpnHandMajhong";
+import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
+import { gamecomm } from "../../../../../../declares/gamecomm";
 
 
 var margin = { rx:100, ry:65 };
@@ -54,6 +56,7 @@ export default class UIbrttz extends BaseComponent {
     }
 
     onDestroy(){
+		ResPool.unload(ViewDefine.CpnChip);
 		super.onDestroy();
 	}
 
@@ -254,6 +257,23 @@ export default class UIbrttz extends BaseComponent {
 		}
 	}
 
+	private GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			LoginUser.getInstance().Gold = param.Gold;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
+			//this.refreshZhuang();
+			if(!isEmpty(param.AlterGold)) {
+				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
+			}
+		} 
+
+		//PlayerMgr.getInstance().updateInfo(param.UserID, {Gold:param.Gold});
+
+		// if(!isNil(BrttzMgr.getInstance().getEnterData()) && BrttzMgr.getInstance().getEnterData().HostID == param.UserID) {
+		// 	this.refreshZhuang();
+		// }
+	}
+
     private initNetEvent() {
 		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziBetResp, this.TuitongziBetResp, this);
 		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziSceneResp, this.TuitongziSceneResp, this);
@@ -263,6 +283,7 @@ export default class UIbrttz extends BaseComponent {
 		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziStateOverResp, this.TuitongziStateOverResp, this);
 		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziOpenResp, this.TuitongziOpenResp, this);
 		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziCheckoutResp, this.TuitongziCheckoutResp, this);
+		EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
 	}
 
     private initUIEvent() {
