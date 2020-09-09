@@ -75,6 +75,13 @@ var GameConfig = {
 		dir: "qznn",
 		viewpath: ViewDefine.UIqznn
 	},
+	[GameKindEnum.TbCowcow] : {
+		GameKind: GameKindEnum.TbCowcow,
+		name: "通比牛牛",
+		icon: "lobby/imgs/gameico/ico_tbnn",
+		dir: "tbnn",
+		viewpath: ViewDefine.UItbnn
+	},
 	[GameKindEnum.Landlord] : {
 		GameKind: GameKindEnum.Landlord,
 		name: "斗地主",

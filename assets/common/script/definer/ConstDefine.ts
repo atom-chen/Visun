@@ -5,10 +5,14 @@ export enum GameKindEnum {
 	Baccarat	= 2001,			//百家乐
 	Toubao		= 2002,			//骰宝
 	BrCowCow 	= 2003,			//百人牛牛
+	Longhu 		= 2004,			//龙虎
+	Brttz		= 2005,			//百人推筒子
 	//对战
 	QzCowcow	= 1001,			//抢庄牛牛
 	Texas		= 1002,			//德州(港式五张)
 	Zhajinhua	= 1003,			//炸金花
+	TbCowcow	= 1005,			//通比牛牛
+	Sangong		= 2006,			//三公
 	//
 	Landlord	= 3001,			//斗地主
 	Ermj		= 3002,			//麻将
@@ -16,15 +20,13 @@ export enum GameKindEnum {
 
 	//
 	Paijiu		= 10900,		//牌九
-	Brttz		= 11000,		//百人推筒子
 	Redpacket	= 10500,		//抢红包
 	BirdBeast	= 10600,		//飞禽走兽
 	Redblack	= 10700,		//红黑
 	BrJinhua 	= 10200,		//百人金花
-	Longhu 		= 10300,		//龙虎
+	
 	//
 	Blackjack	= 20400,		//21点（黑杰克）
-	Sangong		= 20500,		//三公
 	Water13		= 20600,		//13水
 	Qzpaijiu	= 20700,		//抢庄牌九
 	Suoha		= 20800,		//梭哈
