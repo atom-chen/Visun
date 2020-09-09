@@ -71,6 +71,21 @@ var pbfiles = [
 		router:"game",
 		channel:"game"
 	},
+	{
+		name:"tbcowcow", 
+		router:"game",
+		channel:"game"
+	},
+	{
+		name:"qzcowcow", 
+		router:"game",
+		channel:"game"
+	},
+	{
+		name:"sangong", 
+		router:"game",
+		channel:"game"
+	},
 ]
 
 module.exports = {
