@@ -4,6 +4,12 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
+import { sangong_msgs } from "../../../../../common/script/proto/net_sangong";
+import { sangong } from "../../../../../../declares/sangong";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
+import SangongMgr from "../model/SangongMgr";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 
 
 var MAX_PLAYER = 5;
@@ -18,40 +24,19 @@ export default class SangongUI extends BaseComponent {
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		for(var i=0; i<MAX_PLAYER; i++) {
-			this._pnList[i] = {};
-			CommonUtil.traverseNodes(this.m_ui["p"+i], this._pnList[i]);
-		}
-
 		this.initUIEvent();
 		this.initNetEvent();
 
-		this.toStateFight(0);
+		this.SangongSceneResp(SangongMgr.getInstance().getEnterData());
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
-	getNextIndex(curIdx:number) {
-		var nextIdx = curIdx + 1;
-		if(nextIdx >= MAX_PLAYER) { nextIdx = 0; }
-		return nextIdx;
-	}
-
-	toStateFight(idx:number) {
-		//当前操作者倒计时
-		for(var i=0; i<MAX_PLAYER; i++) {
-			this._pnList[i].CpnCircleCD.active = idx===i;
-			if(idx===i) {
-				this._pnList[i].CpnCircleCD.getComponent(CpnCircleCD).setRemainCD(15, 15);
-			}
-		}
-
-		//5秒后下一个
-		TimerManager.delaySecond(5, new CHandler(this, ()=>{
-			this.toStateFight(this.getNextIndex(idx));
-		}))
+	private SangongSceneResp(data:sangong.ISangongSceneResp) {
+		
 	}
 
 	initNetEvent() {
-
+		EventCenter.getInstance().listen(sangong_msgs.SangongSceneResp, this.SangongSceneResp, this);
 	}
 
 	initUIEvent() {

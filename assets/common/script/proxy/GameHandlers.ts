@@ -22,6 +22,10 @@ import { tuitongzi_msgs } from "../proto/net_tuitongzi";
 import { tuitongzi } from "../../../../declares/tuitongzi";
 import { tigerXdragon_msgs } from "../proto/net_tigerXdragon";
 import { tigerXdragon } from "../../../../declares/tigerXdragon";
+import { tbcowcow_msgs } from "../proto/net_tbcowcow";
+import { tbcowcow } from "../../../../declares/tbcowcow";
+import { qzcowcow_msgs } from "../proto/net_qzcowcow";
+import { sangong_msgs } from "../proto/net_sangong";
 
 
 var GameHandlers = {
@@ -45,54 +49,75 @@ var GameHandlers = {
     },
     
     
-	[baccarat_msgs.BaccaratSceneResp] : function(param:baccarat.IBaccaratSceneResp) {
+	[baccarat_msgs.BaccaratSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Baccarat);
     },
     
-    [brtoubao_msgs.BrtoubaoSceneResp] : function(param:brtoubao.IBrtoubaoSceneResp) {
+    [brtoubao_msgs.BrtoubaoSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Toubao);
 	},
 	
-	[brcowcow_msgs.BrcowcowSceneResp] : function(param:brcowcow.IBrcowcowSceneResp) {
+	[brcowcow_msgs.BrcowcowSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
     },
 
-    [tuitongzi_msgs.TuitongziSceneResp] : function(param:tuitongzi.ITuitongziSceneResp) {
+    [tuitongzi_msgs.TuitongziSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.Brttz);
     },
 
-    [tigerXdragon_msgs.TigerXdragonSceneResp] : function(param:tigerXdragon.ITigerXdragonSceneResp) {
+    [tigerXdragon_msgs.TigerXdragonSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.Longhu);
     },
     
-    [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {
+    [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Zhajinhua);
     },
 
-    [landLords_msgs.LandLordsSceneResp] : function(param:landLords.ILandLordsSceneResp) {
+    [landLords_msgs.LandLordsSceneResp] : function(param) {
         GameManager.getInstance().unregistGameModel();
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
         GameManager.getInstance().enterGameScene(GameKindEnum.Landlord);
     },
+
+    [tbcowcow_msgs.TbcowcowSceneResp] : function(param) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.TbCowcow);
+    },
+
+    [qzcowcow_msgs.QzcowcowSceneResp] : function(param) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.QzCowcow);
+    },
+
+    [sangong_msgs.SangongSceneResp] : function(param) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+        GameManager.getInstance().enterGameScene(GameKindEnum.Sangong);
+    }
 
 }
 

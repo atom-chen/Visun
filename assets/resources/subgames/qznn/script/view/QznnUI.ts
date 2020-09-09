@@ -4,6 +4,12 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
+import { qzcowcow_msgs } from "../../../../../common/script/proto/net_qzcowcow";
+import { qzcowcow } from "../../../../../../declares/qzcowcow";
+import QznnMgr from "../model/QznnMgr";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 
 
 var MAX_PLAYER = 5;
@@ -18,40 +24,19 @@ export default class QznnUI extends BaseComponent {
 	onLoad() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		for(var i=0; i<MAX_PLAYER; i++) {
-			this._pnList[i] = {};
-			CommonUtil.traverseNodes(this.m_ui["p"+i], this._pnList[i]);
-		}
-
 		this.initUIEvent();
 		this.initNetEvent();
 
-		this.toStateFight(0);
+		this.QzcowcowSceneResp(QznnMgr.getInstance().getEnterData());
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
-	getNextIndex(curIdx:number) {
-		var nextIdx = curIdx + 1;
-		if(nextIdx >= MAX_PLAYER) { nextIdx = 0; }
-		return nextIdx;
-	}
+	private QzcowcowSceneResp(data:qzcowcow.IQzcowcowSceneResp) {
 
-	toStateFight(idx:number) {
-		//当前操作者倒计时
-		for(var i=0; i<MAX_PLAYER; i++) {
-			this._pnList[i].CpnCircleCD.active = idx===i;
-			if(idx===i) {
-				this._pnList[i].CpnCircleCD.getComponent(CpnCircleCD).setRemainCD(15, 15);
-			}
-		}
-
-		//5秒后下一个
-		TimerManager.delaySecond(5, new CHandler(this, ()=>{
-			this.toStateFight(this.getNextIndex(idx));
-		}))
 	}
 
 	initNetEvent() {
-
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowSceneResp, this.QzcowcowSceneResp, this);
 	}
 
 	initUIEvent() {

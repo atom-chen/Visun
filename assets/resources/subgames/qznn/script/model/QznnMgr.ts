@@ -1,10 +1,9 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
+import { tbcowcow } from "../../../../../../declares/tbcowcow";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 export default class QznnMgr extends ModelBase {
 	private static _instance:QznnMgr = null;
-    private constructor() {
-        super();
-    }
     public static getInstance() : QznnMgr {
         if(!QznnMgr._instance) { QznnMgr._instance = new QznnMgr; }
         return QznnMgr._instance;
@@ -17,5 +16,9 @@ export default class QznnMgr extends ModelBase {
 	}
     on_clear(): void {
 
-	}
+    }
+    
+    getEnterData() : tbcowcow.ITbcowcowSceneResp {
+        return GameManager.getInstance().getEnterData();
+    }
 }

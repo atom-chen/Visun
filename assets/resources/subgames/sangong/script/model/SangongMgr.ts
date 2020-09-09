@@ -1,10 +1,9 @@
 import ModelBase from "../../../../../kernel/model/ModelBase";
+import { sangong } from "../../../../../../declares/sangong";
+import GameManager from "../../../../../common/script/model/GameManager";
 
 export default class SangongMgr extends ModelBase {
 	private static _instance:SangongMgr = null;
-    private constructor() {
-        super();
-    }
     public static getInstance() : SangongMgr {
         if(!SangongMgr._instance) { SangongMgr._instance = new SangongMgr; }
         return SangongMgr._instance;
@@ -17,5 +16,9 @@ export default class SangongMgr extends ModelBase {
 	}
     on_clear(): void {
 
-	}
+    }
+    
+    getEnterData() : sangong.ISangongSceneResp {
+        return GameManager.getInstance().getEnterData();
+    }
 }
