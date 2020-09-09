@@ -85,7 +85,10 @@ export default class UIHall extends BaseComponent {
 
 	private refreshGameButton(bton:cc.Node, gameData:login.IGameItem) {
 		var cfg = GameConfig[gameData.Info.KindID];
-		if(!cfg) { return; }
+		if(!cfg) { 
+			cc.warn("no client GameConfig", gameData.Info.KindID);
+			return; 
+		}
 		Preloader.setNodeSprite(bton.getChildByName("Background").getComponent(cc.Sprite), cfg.icon, this);
 		// if(cfg.spine) {
 		// 	Preloader.showSpineAsync(cfg.spine, 0, "animation", -1, bton, {zIndex:10, x:0, y:-150, scale:0.4});
