@@ -18,6 +18,8 @@ import { gamecomm_msgs } from "../proto/net_gamecomm";
 import { brcowcow_msgs } from "../proto/net_brcowcow";
 import { baccarat_msgs } from "../proto/net_baccarat";
 import { zhajinhua_msgs } from "../proto/net_zhajinhua";
+import { tuitongzi_msgs } from "../proto/net_tuitongzi";
+import { tuitongzi } from "../../../../declares/tuitongzi";
 
 
 var GameHandlers = {
@@ -60,6 +62,13 @@ var GameHandlers = {
         GameManager.getInstance().setEnterData(param);
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
 		GameManager.getInstance().enterGameScene(GameKindEnum.BrCowCow);
+    },
+
+    [tuitongzi_msgs.TuitongziSceneResp] : function(param:tuitongzi.ITuitongziSceneResp) {
+        GameManager.getInstance().unregistGameModel();
+        GameManager.getInstance().setEnterData(param);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(!GameManager.isInGameScene());
+		GameManager.getInstance().enterGameScene(GameKindEnum.Brttz);
     },
     
     [zhajinhua_msgs.ZhajinhuaSceneResp] : function(param:zhajinhua.IZhajinhuaSceneResp) {

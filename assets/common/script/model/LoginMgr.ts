@@ -32,6 +32,7 @@ import SceneManager from "../../../kernel/view/SceneManager";
 import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { brtoubao_packet_define } from "../proto/net_brtoubao";
+import { tuitongzi_packet_define } from "../proto/net_tuitongzi";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -94,6 +95,7 @@ export default class LoginMgr extends ModelBase {
 		g_leafProcessor.registCmds(brcowcow_packet_define);
 		g_leafProcessor.registCmds(zhajinhua_packet_define);
 		g_leafProcessor.registCmds(brtoubao_packet_define);
+		g_leafProcessor.registCmds(tuitongzi_packet_define);
 		g_leafProcessor.getDispatcher().addObserver(NetHandlers);
 		g_leafProcessor.getDispatcher().addObserver(GameHandlers);
 		return g_leafProcessor;

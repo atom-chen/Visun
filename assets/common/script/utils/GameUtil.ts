@@ -65,6 +65,9 @@ export default class GameUtil {
 
 	//获取麻将图片资源路经
 	public static majhongPath(v:MajhongCode) : string {
+		if(v == 0) {
+			return "appqp/imgs/majhong/mjback1";
+		}
 		return "appqp/imgs/majhong/tong"+v;
 	}
 

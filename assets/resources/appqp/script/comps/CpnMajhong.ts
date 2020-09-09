@@ -10,6 +10,7 @@ const {ccclass, property} = cc._decorator;
 export default class CpnMajhong extends cc.Component {
 
     _value: MajhongCode = 1;
+    isFront:boolean = false;
 
     private onResLoaded(err, sf){
         if(err) { cc.warn("error: "+err); return; }
@@ -18,19 +19,29 @@ export default class CpnMajhong extends cc.Component {
         }
     }
 
-    setCode(v:MajhongCode) {
-        this._value = v;
-
-        var res = cc.loader.getRes(GameUtil.majhongPath(v), cc.SpriteFrame);
+    private refresh() {
+        var res = cc.loader.getRes(GameUtil.majhongPath(this._value), cc.SpriteFrame);
         if(res) {
             this.onResLoaded(null, res);
             return;
         }
-        cc.loader.loadRes(GameUtil.majhongPath(v), cc.SpriteFrame, this.onResLoaded.bind(this));
+        cc.loader.loadRes(GameUtil.majhongPath(this._value), cc.SpriteFrame, this.onResLoaded.bind(this));
+    }
+
+    setCode(v:MajhongCode) {
+        this._value = v;
     }
 
     getCode() : number {
         return this._value;
+    }
+
+    setFace(bFront:boolean) {
+        this.isFront = bFront;
+    }
+
+    getFace() : boolean {
+        return this.isFront;
     }
     
 }

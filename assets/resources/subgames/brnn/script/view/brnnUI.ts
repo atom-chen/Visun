@@ -35,19 +35,14 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class BrnnUI extends BaseComponent {
 
-	compBox:CpnChipbox3d = null;
 	_rule:number[] = [5,10,50,100,500];
 	private tmrState = 0;
 	private isJoined = false;
 
 	
-	
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
-
-		this.compBox = this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d);
-		this.compBox.setChipValues(this._rule);
 
 		ResPool.load(ViewDefine.CpnChip);
 
@@ -206,9 +201,9 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowStatePlaying(param:brcowcow.IBrcowcowStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
+		this.setWinAreas([]);
 
 		if(param.Times.OutTime <= 1) {
-			this.setWinAreas([]);
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
 			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {

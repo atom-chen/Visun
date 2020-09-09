@@ -10,6 +10,18 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import { tuitongzi_request, tuitongzi_msgs } from "../../../../../common/script/proto/net_tuitongzi";
+import CpnChipbox2d from "../../../../appqp/script/comps/CpnChipbox2d";
+import UIManager from "../../../../../kernel/view/UIManager";
+import { tuitongzi } from "../../../../../../declares/tuitongzi";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
+import ResPool from "../../../../../kernel/basic/pool/ResPool";
+import BrttzMgr from "../model/BrttzMgr";
+import LoginUser from "../../../../../common/script/model/LoginUser";
+import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
+import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import Preloader from "../../../../../kernel/utils/Preloader";
 
 
 var margin = { rx:100, ry:65 };
@@ -23,120 +35,227 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIbrttz extends BaseComponent {
-
-    _loadedRes:any;
-	_pool:SimplePool = new SimplePool(():cc.Node=>{
-		var obj = cc.instantiate(this._loadedRes);
-		obj.scale = 0.2;
-		return obj;
-    });
 	
+	private isJoined = false;
 	private tmrState = 0;
     _rule:number[] = [5,10,50,100,500];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
-        var self = this;
-		cc.loader.loadRes(ViewDefine.CpnChip, cc.Prefab, function (err, loadedRes) {
-			if(err) { cc.log("error: "+err); return; }
-			if(!cc.isValid(self)) { return; }
-			self._loadedRes = loadedRes;
-        });
-        
+		
+		ResPool.load(ViewDefine.CpnChip);
+		
         this.initUIEvent();
-        this.initNetEvent();
+		this.initNetEvent();
+		
+		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
-        this.toStateReady();
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+
+		this.initContext();
+		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
     }
 
     onDestroy(){
-		this._pool.clear();
 		super.onDestroy();
+	}
+
+	private initContext() {
+		this.setWinAreas([]);
+		var enterData = BrttzMgr.getInstance().getEnterData();
+		if(enterData) {
+			for(var i=0; i<enterData.AreaBets.length; i++) {
+				var areaName = "area"+i;
+				if(this.m_ui[areaName]) {
+					this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[i]);
+					this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[i]);
+				}
+			}
+			if(enterData.Chips && enterData.Chips.length >= 5) {
+				this._rule = enterData.Chips;
+				this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(enterData.Chips);
+			}
+		} else {
+			this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
+		}
+	}
+
+	private setWinAreas(arr:any) {
+		for(var i=2; i>=0; i--) {
+			if(this.m_ui["high"+i]) {
+				var nd = this.m_ui["high"+i];
+				nd.active = !isNil(arr[i]) && arr[i] > 0;
+				if(nd.active) {
+					nd.runAction(cc.blink(1, 3));
+				}
+			}
+		}
+	}
+
+	private clearBets() {
+		BrttzMgr.getInstance().clearBets();
+		
+		var childs = this.m_ui.chipLayer.children;
+		for(var i=childs.length-1; i>=0; i--){
+			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
+		}
+		for(var j=0; j<3; j++) {
+			this.m_ui["area"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
+			this.m_ui["area"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
+		}
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
-    //准备阶段
-	private toStateReady() {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(0);
+	private TuitongziBetResp(param:tuitongzi.ITuitongziBetResp) {
+		if(isNil(param)) { return; }
+		var enterData = BrttzMgr.getInstance().getEnterData();
+		enterData.AreaBets[param.BetArea] += param.BetScore;
+		if(param.UserID == LoginUser.getInstance().UserId) {
+			enterData.MyBets[param.BetArea] += param.BetScore;
+		}
+
+		var areaName = "area"+param.BetArea;
+		if(this.m_ui[areaName]) {
+			this.m_ui[areaName].getChildByName("labTotal").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.AreaBets[param.BetArea]);
+			this.m_ui[areaName].getChildByName("labMe").getComponent(cc.Label).string = CommonUtil.formRealMoney(enterData.MyBets[param.BetArea]);
+		}
+
+		var money = CommonUtil.fixRealMoney(param.BetScore);
+        var nums = GameUtil.parseChip(money, this._rule);
+        var fromObj = this.m_ui.btnPlayerlist; 
+        if(param.UserID == LoginUser.getInstance().UserId) {
+			fromObj = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getChipNodeByValue(money);
+			LoginUser.getInstance().Gold -= param.BetScore;
+			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+			this.isJoined = true;
+        }
+		for(var j in nums) {
+			var chip = ResPool.newObject(ViewDefine.CpnChip);
+			chip.getComponent(CpnChip).setChipValue(nums[j], true);
+			this.m_ui.chipLayer.addChild(chip);
+			chip.__areaId = param.BetArea;
+			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin);
+		}
+		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
+	}
+
+	private TuitongziSceneResp(param:tuitongzi.ITuitongziSceneResp) {
+		this.initContext();
+	}
+
+	private TuitongziStateStartResp(param:tuitongzi.ITuitongziStateStartResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.clearBets();
+		this.setWinAreas([]);
+	}
+
+	private TuitongziStatePlayingResp(param:tuitongzi.ITuitongziStatePlayingResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.setWinAreas([]);
+
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
+	}
+
+	private TuitongziStateOpenResp(param:tuitongzi.ITuitongziStateOpenResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		if(!isNil(param.OpenInfo)) {
+			this.TuitongziOpenResp(param.OpenInfo);
+		}
+	}
+
+	private TuitongziStateOverResp(param:tuitongzi.ITuitongziStateOverResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
+		TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+	}
+
+	private TuitongziOpenResp(param:tuitongzi.ITuitongziOpenResp) {
+		this.setWinAreas(param.AwardArea);
 		
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateBetting();
-		}));
 	}
 
-	//下注阶段
-	private toStateBetting() {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(2);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 10, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(1, 9, new CHandler(this, this.onPlayersBet));
-		TimerManager.loopSecond(10, 1, new CHandler(this, ()=>{
-			this.toStateJiesuan();
-		}));
+	private TuitongziCheckoutResp(param:tuitongzi.ITuitongziCheckoutResp) {
+		this.playCollectChip(param);
 	}
 
-	private playJiesuan() {
+	private playCollectChip(param:tuitongzi.ITuitongziCheckoutResp) {
+		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
+
 		var childs = this.m_ui.chipLayer.children
 		var len = childs.length;
+		var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 		for(var i=len-1; i>=0; i--){
-			this._pool.delObject(childs[i]);
+			childs[i].runAction(cc.sequence(
+				cc.delayTime(0.03*(len-i)),
+				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
+				cc.callFunc(function(obj){
+					ResPool.delObject(ViewDefine.CpnChip, obj);
+				}, childs[i])
+			))
 		}
-		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
-	}
 
-	//结算阶段
-	private toStateJiesuan() {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setState(4);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-
-		this.playJiesuan();
-
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
-		TimerManager.loopSecond(3, 1, new CHandler(this, ()=>{
-			this.toStateReady();
-		}));
-	}
-
-    private onPlayersBet(tmr, param) {
-		CommonUtil.playShake(this.m_ui.btnPlayerlist, 0.2, 1);
-		//飞筹码
-		param = param || testdata;
-		for(var i in param) {
-			var info = param[i];
-			var nums = GameUtil.parseChip(info.Money, this._rule);
-			for(var j in nums) {
-				var chip = this._pool.newObject();
-				chip.getComponent(CpnChip).setChipValue(nums[j], false);
-				this.m_ui.chipLayer.addChild(chip);
-				CommonUtil.bezierTo1(chip, this.m_ui.btnPlayerlist, this.m_ui["area"+info.AreaId], 0.24, parseInt(j)*0.01, margin);
-			}
+		var shouTime = 0.1 + 0.36;
+		if(param.MyAcquire > 0) {
+			var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.MyAcquire), this._rule);
+			var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+			var toPos = CommonUtil.convertSpaceAR(this.m_ui.choumadiban, this.m_ui.chipEffLayer);
+			this.playFly(nums, fromPos, toPos, shouTime);
 		}
-		//播音效
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
-    }
-
+		// if(param.PlayerAcquire > 0) {
+		// 	var nums = GameUtil.splitChip(CommonUtil.fixRealMoney(param.PlayerAcquire), this._rule);
+		// 	var fromPos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipEffLayer);
+		// 	var toPos = CommonUtil.convertSpaceAR(this.m_ui.btnPlayerlist, this.m_ui.chipEffLayer);
+		// 	this.playFly(nums, fromPos, toPos, shouTime);
+		// }
+	}
+	private playFly(nums:Array<number>, fromPos:cc.Vec2, toPos:cc.Vec2, delaySec:number) {
+		for(var j = 0; j<nums.length; j++) {
+			var chip:cc.Node = ResPool.newObject(ViewDefine.CpnChip);
+			chip.getComponent(CpnChip).setChipValue(nums[j], true);
+			this.m_ui.chipEffLayer.addChild(chip);
+			chip.x = fromPos.x;
+			chip.y = fromPos.y;
+			chip.runAction(cc.sequence(
+				cc.place(fromPos),
+				cc.delayTime(delaySec + j*0.08),
+				cc.moveTo(0.25, toPos),
+				cc.callFunc(function(){
+					ResPool.delObject(ViewDefine.CpnChip, this)
+				}, chip)
+			));
+		}
+	}
 
     private initNetEvent() {
-	//	EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziBetResp, this.TuitongziBetResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziSceneResp, this.TuitongziSceneResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziStateStartResp, this.TuitongziStateStartResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziStatePlayingResp, this.TuitongziStatePlayingResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziStateOpenResp, this.TuitongziStateOpenResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziStateOverResp, this.TuitongziStateOverResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziOpenResp, this.TuitongziOpenResp, this);
+		EventCenter.getInstance().listen(tuitongzi_msgs.TuitongziCheckoutResp, this.TuitongziCheckoutResp, this);
 	}
 
-    private onClickArea(areaId:number) {
-		
-	}
-    
     private initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
@@ -149,6 +268,14 @@ export default class UIbrttz extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area2, function(){ this.onClickArea(2); }, this);
-    }
+	}
+	private onClickArea(areaId:number) {
+		var money = this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).getSelectValue();
+        if(!money) {
+            UIManager.toast("请选择下注区域");
+            return;
+        }
+		tuitongzi_request.TuitongziBetReq({BetArea:areaId, BetScore:CommonUtil.toServerMoney(money)});
+	}
     
 }
