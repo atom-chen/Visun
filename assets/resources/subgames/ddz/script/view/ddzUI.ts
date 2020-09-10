@@ -17,6 +17,8 @@ import { landLords } from "../../../../../../declares/landLords";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 
 const MAX_SOLDIER = 3;
 
@@ -390,7 +392,7 @@ export default class DdzUI extends BaseComponent {
 			}
 		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Landlord});
 		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             landLords_request.LandLordsReadyReq({

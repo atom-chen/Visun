@@ -13,6 +13,9 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
+import UIManager from "../../../../../kernel/view/UIManager";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 const MAX_SOLDIER = 5;
@@ -96,8 +99,8 @@ export default class QznnUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             GameManager.getInstance().quitGame();
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){
+			UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.QzCowcow});
 		}, this);
 	}
 	

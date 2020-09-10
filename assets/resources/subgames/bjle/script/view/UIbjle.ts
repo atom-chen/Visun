@@ -24,6 +24,7 @@ import { baccarat } from "../../../../../../declares/baccarat";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 const AREA_XIAN        = 0 //闲家
 const AREA_PING        = 1 //平家
@@ -334,7 +335,7 @@ export default class UIbjle extends BaseComponent {
 			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Baccarat});
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
 			this.onClickArea(this.node2Area(0));

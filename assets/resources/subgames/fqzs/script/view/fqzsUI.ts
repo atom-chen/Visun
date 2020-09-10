@@ -10,6 +10,8 @@ import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var margin = { left:8,right:8,bottom:8,top:8 };
@@ -151,7 +153,7 @@ export default class FqzsUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.BirdBeast});
 		}, this);
 
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);

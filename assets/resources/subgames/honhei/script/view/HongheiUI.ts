@@ -10,6 +10,8 @@ import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var margin = { left:22,right:22,bottom:22,top:54 };
@@ -144,7 +146,7 @@ export default class HongheiUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Redblack});
 		}, this);
 
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);

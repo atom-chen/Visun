@@ -23,6 +23,7 @@ import { isEmpty, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import UIManager from "../../../../../kernel/view/UIManager";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 var margin = { rx:20,ry:20,rr:0 };
@@ -295,7 +296,7 @@ export default class LonghuUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Longhu});
 		}, this);
 
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);

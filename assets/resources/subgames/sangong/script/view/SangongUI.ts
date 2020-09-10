@@ -10,6 +10,9 @@ import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import SangongMgr from "../model/SangongMgr";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var MAX_PLAYER = 5;
@@ -44,7 +47,7 @@ export default class SangongUI extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Sangong});
 		}, this);
 	}
 	

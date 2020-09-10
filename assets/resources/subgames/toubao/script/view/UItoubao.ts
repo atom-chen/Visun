@@ -22,6 +22,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import ResPool from "../../../../../kernel/basic/pool/ResPool";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 var margin = { rx:10, ry:10, rr:0 };
@@ -333,7 +334,7 @@ export default class ToubaoUI extends BaseComponent {
 			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Toubao});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.betBtn0, function(){ this.onClickArea(0); }, this);

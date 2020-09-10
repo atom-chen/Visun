@@ -4,6 +4,9 @@ import GameManager from "../../../../../common/script/model/GameManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var MAX_PLAYER = 3;
@@ -59,7 +62,7 @@ export default class PaodkUI extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Paodekuai});
 		}, this);
 	}
 	

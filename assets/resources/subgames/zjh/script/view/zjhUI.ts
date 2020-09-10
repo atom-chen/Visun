@@ -24,6 +24,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnShandian from "../../../../appqp/script/comps/CpnShandian";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 const MAX_SOLDIER = 5;
@@ -675,7 +676,7 @@ export default class zjhUI extends BaseComponent {
             GameManager.getInstance().quitGame();
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Zhajinhua});
 		}, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_giveup, function(){ 

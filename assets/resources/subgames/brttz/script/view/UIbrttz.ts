@@ -24,6 +24,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import CpnHandMajhong from "../../../../appqp/script/comps/CpnHandMajhong";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 var margin = { rx:100, ry:65 };
@@ -294,7 +295,7 @@ export default class UIbrttz extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Brttz});
 		}, this);
 
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);

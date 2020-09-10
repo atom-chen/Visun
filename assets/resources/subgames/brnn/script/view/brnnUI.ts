@@ -26,6 +26,7 @@ import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import PlayerMgr from "../../../../../common/script/model/PlayerMgr";
 import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
+import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -358,7 +359,7 @@ export default class BrnnUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.BrCowCow});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_sz, function(){ 

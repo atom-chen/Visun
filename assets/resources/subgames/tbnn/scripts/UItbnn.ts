@@ -11,6 +11,9 @@ import CpnPlayer1 from "../../../appqp/script/comps/CpnPlayer1";
 import CpnHandcard2 from "../../../appqp/script/comps/CpnHandcard2";
 import CpnCircleCD from "../../../appqp/script/comps/CpnCircleCD";
 import CpnGameState from "../../../appqp/script/comps/CpnGameState";
+import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
+import ViewDefine from "../../../../common/script/definer/ViewDefine";
+import UIManager from "../../../../kernel/view/UIManager";
 
 
 const MAX_SOLDIER = 5;
@@ -98,7 +101,7 @@ export default class UItbnn extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            GameManager.getInstance().quitGame(true);
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.TbCowcow});
 		}, this);
 	}
 
