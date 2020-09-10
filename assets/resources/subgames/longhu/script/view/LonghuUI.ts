@@ -83,12 +83,21 @@ export default class LonghuUI extends BaseComponent {
 		}
 	}
 
+	private highColor(areaId:number) : cc.Color {
+		if(areaId==0 || areaId==1 || areaId==4) {
+			return cc.color(255,255,0,255);
+		}
+		else if(areaId==2 || (areaId>=5 && areaId<=8)) {
+			return cc.color(0,66,255,255);
+		}
+		return cc.color(255,0,0,255);
+	}
 	private setWinAreas(arr:any, bAni:boolean = false) {
 		for(var i=0; i<MaxAreaCnt; i++) {
 			if(this.m_ui["floor"+i]) {
 				var nd = this.m_ui["floor"+i];
 				var flag = !isNil(arr[i]) && arr[i] > 0;
-				nd.color = flag && cc.color(255,0,0,255) || cc.color(255,255,255,255);
+				nd.color = flag && this.highColor(i) || cc.color(255,255,255,255);
 				if(bAni && flag) {
 					nd.runAction(cc.sequence(cc.fadeTo(0.2, 100),cc.fadeTo(0.2, 255),cc.fadeTo(0.2, 100),cc.fadeTo(0.2, 255)));
 				}
