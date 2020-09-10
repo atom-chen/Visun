@@ -14,7 +14,7 @@ var server_list = {
     },
     jetten: {
         mainHttpUrl: "",
-        leafServer: "ws://127.0.0.1:9950",
+        leafServer: "ws://192.168.1.108:9950",
         chatServer: ""
     },
     mac: {
@@ -25,6 +25,6 @@ var server_list = {
 };
 
 //选定某服
-var ServerConfig = server_list.develop;
+var ServerConfig = server_list.jetten;
 
 export default ServerConfig;

@@ -99,8 +99,8 @@ message TuitongziSuperHostResp {
 }
 
 
-// 从零开始，后面累加1 共13区域
-//    Area_Shun             //顺 (除庄输和庄赢两个区域外,对玩家下注情况进行统计)
+// 从零开始，后面累加1 共4区域
+//    Area_Shun             //顺
 //    Area_Tian            	//天
 //    Area_Di          		//地
-//    Area_Zhuang          	//庄
+//    Area_Zhuang          	//庄(该区域不可下注)
