@@ -8,9 +8,9 @@ export enum GameKindEnum {
 	Longhu 		= 2004,			//龙虎
 	Brttz		= 2005,			//百人推筒子
 	//对战
-	QzCowcow	= 1001,			//抢庄牛牛
 	Texas		= 1002,			//德州(港式五张)
 	Zhajinhua	= 1003,			//炸金花
+	QzCowcow	= 1004,			//抢庄牛牛
 	TbCowcow	= 1005,			//通比牛牛
 	Sangong		= 2006,			//三公
 	//
