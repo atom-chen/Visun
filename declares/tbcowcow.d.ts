@@ -92,7 +92,7 @@ export namespace tbcowcow {
          * @param [length] Message length if known beforehand
          * @returns TbcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         * var $protobuf = protobuf;
          */
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowSceneResp;
 
@@ -101,7 +101,7 @@ export namespace tbcowcow {
          * @param reader Reader or buffer to decode from
          * @returns TbcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         * var $protobuf = protobuf;
          */
         public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowSceneResp;
 
@@ -182,7 +182,7 @@ export namespace tbcowcow {
          * @param [length] Message length if known beforehand
          * @returns TbcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         * var $protobuf = protobuf;
          */
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowStateFreeResp;
 
@@ -191,7 +191,7 @@ export namespace tbcowcow {
          * @param reader Reader or buffer to decode from
          * @returns TbcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         * var $protobuf = protobuf;
          */
         public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowStateFreeResp;
 

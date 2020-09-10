@@ -1,6 +1,11 @@
 syntax = "proto3";
 package tbcowcow;
 import "gamecomm.proto";
+//通比牛牛玩家信息
+message TbcowcowPlayer {
+  PlayerInfo  MyInfo = 1;  //其中State
+  CardInfo Cards = 2;     //
+}
 
 //入场
 message TbcowcowSceneResp {
@@ -16,34 +21,42 @@ message TbcowcowSceneResp {
 
 //状态
 // 服务端推送
-//(空闲 - 喊庄)
+//(空闲 - )
 message TbcowcowStateFreeResp {
   TimeInfo Times = 1;
 }
 
-//(开始 - 定庄)
-message TbcowcowStateStartResp {
-  TimeInfo Times = 1;
-  uint64 HostID = 2;
-}
 
 //(游戏中 - 下注)
 message TbcowcowStatePlayingResp {
   TimeInfo Times = 1;
 }
 
-//(开奖)
+//(发牌)
+message TbcowcowStateDealResp {
+  TimeInfo Times = 1;
+  CardInfo Cards = 2;     // 玩家各自的牌值
+}
+
+//(开奖 -- 比牌结果)
 message TbcowcowStateOpenResp {
   TimeInfo Times = 1;
   TbcowcowOpenResp OpenInfo = 2;
 }
-
 
 //(结束)
 message TbcowcowStateOverResp {
   TimeInfo Times = 1;
 }
 
+
+//准备
+message TbcowcowReadyReq {
+  bool IsReady = 1; // 玩家准备，可以取消准备
+}
+message TbcowcowReadyResp {
+  uint64 UserId = 1;
+}
 
 
 
@@ -61,12 +74,8 @@ message TbcowcowBetResp {
 
 //开牌
 message TbcowcowOpenResp {
-  bytes AwardArea = 1;    //各区域胜负：1胜，0负
-  CardInfo BankerCard = 2;    //天
-  CardInfo TianCard = 3;    //天
-  CardInfo XuanCard = 4;    //玄
-  CardInfo DiCard = 5;    //地
-  CardInfo HuangCard = 6;  //黄
+  uint64 WinnerId = 1;;    //赢家ID
+  repeated TbcowcowPlayer Infos = 2;    //玩家的牌值
 }
 
 //结算
@@ -75,23 +84,3 @@ message TbcowcowOverResp{
   repeated int64 TotalSettlement = 2;  //统计：庄家+各区域输赢钱数额结算
 }
 
-
-//----------------------------------------------------------------------------------
-
-//抢庄
-message TbcowcowHostReq {
-  bool IsWant = 1;  //true上庄 false取消上庄
-}
-message TbcowcowHostResp {
-  uint64 UserID = 1;
-  bool IsWant = 2;  //true上庄 false取消上庄
-}
-
-//待上庄列表
-message TbcowcowHostListReq {
-
-}
-message TbcowcowHostListResp {
-  PlayerInfo CurHost = 1;        //当前庄家
-  repeated uint64 Waitlist = 2;    //待上庄列表
-}
