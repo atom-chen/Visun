@@ -27,6 +27,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 
 var margin = { rx:20,ry:20,rr:0 };
 var margin03 = { rx:30,ry:30,rr:0 };
+var MaxAreaCnt = 13;
 
 
 const {ccclass, property} = cc._decorator;
@@ -82,8 +83,17 @@ export default class LonghuUI extends BaseComponent {
 		}
 	}
 
-	private setWinAreas(arr:any) {
-		
+	private setWinAreas(arr:any, bAni:boolean = false) {
+		for(var i=0; i<MaxAreaCnt; i++) {
+			if(this.m_ui["floor"+i]) {
+				var nd = this.m_ui["floor"+i];
+				var flag = !isNil(arr[i]) && arr[i] > 0;
+				nd.color = flag && cc.color(255,0,0,255) || cc.color(255,255,255,255);
+				if(bAni && flag) {
+					nd.runAction(cc.sequence(cc.fadeTo(0.2, 100),cc.fadeTo(0.2, 255),cc.fadeTo(0.2, 100),cc.fadeTo(0.2, 255)));
+				}
+			}
+		}
 	}
 
 	private clearBets() {
@@ -93,7 +103,7 @@ export default class LonghuUI extends BaseComponent {
 		for(var i=childs.length-1; i>=0; i--){
 			ResPool.delObject(ViewDefine.CpnChip, childs[i]);
 		}
-		for(var j=0; j<13; j++) {
+		for(var j=0; j<MaxAreaCnt; j++) {
 			this.m_ui["floor"+j].getChildByName("labTotal").getComponent(cc.Label).string = "0";
 			this.m_ui["floor"+j].getChildByName("labMe").getComponent(cc.Label).string = "0";
 		}
@@ -202,7 +212,7 @@ export default class LonghuUI extends BaseComponent {
 	}
 
 	private TigerXdragonOpenResp(param:tigerXdragon.ITigerXdragonOpenResp) {
-		this.setWinAreas(param.AwardArea);
+		this.setWinAreas(param.AwardArea, true);
 	}
 
 	private TigerXdragonCheckoutResp(param:tigerXdragon.ITigerXdragonCheckoutResp) {
