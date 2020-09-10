@@ -278,14 +278,14 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
 
-        if(this.quietCheck() && !TimerManager.isValid(this.tmrCheckKickout)) {
-            this.tmrCheckKickout = TimerManager.delaySecond(6, newHandler(function(tmr){
-                if(this.quietCheck()) {
-                    cc.log("长时间未准备踢出场");
-                    GameManager.getInstance().quitGame();
-                }
-            }, this));
-        }
+        // if(this.quietCheck() && !TimerManager.isValid(this.tmrCheckKickout)) {
+        //     this.tmrCheckKickout = TimerManager.delaySecond(6, newHandler(function(tmr){
+        //         if(this.quietCheck()) {
+        //             cc.log("长时间未准备踢出场");
+        //             GameManager.getInstance().quitGame();
+        //         }
+        //     }, this));
+        // }
     }
 
     quietCheck() : boolean {
