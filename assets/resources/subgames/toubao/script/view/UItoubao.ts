@@ -372,7 +372,6 @@ export default class ToubaoUI extends BaseComponent {
             UIManager.toast("请选择下注区域");
             return;
         }
-		cc.log("投", idx);
 		brtoubao_request.BrtoubaoBetReq({BetArea:idx, BetScore:CommonUtil.toServerMoney(money)});
 	}
 

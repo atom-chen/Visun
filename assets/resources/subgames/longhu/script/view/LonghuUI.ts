@@ -16,12 +16,13 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import { tigerXdragon } from "../../../../../../declares/tigerXdragon";
-import { tigerXdragon_msgs } from "../../../../../common/script/proto/net_tigerXdragon";
+import { tigerXdragon_msgs, tigerXdragon_request } from "../../../../../common/script/proto/net_tigerXdragon";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import { isEmpty, isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import UIManager from "../../../../../kernel/view/UIManager";
 
 
 var margin = { rx:20,ry:20,rr:0 };
@@ -293,7 +294,12 @@ export default class LonghuUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.area12, function(){ this.onClickArea(12); }, this);
 	}
 	private onClickArea(areaId:number) {
-		
+		var money = this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).getSelectValue();
+        if(!money) {
+            UIManager.toast("请选择下注区域");
+            return;
+        }
+		tigerXdragon_request.TigerXdragonBetReq({BetArea:areaId, BetScore:CommonUtil.toServerMoney(money)});
 	}
 	
 }
