@@ -5513,6 +5513,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "cardTypeTemplate": {
+      "__uuid__": "712c7942-300b-42df-a793-bb43287bed33"
+    },
     "_id": ""
   },
   {

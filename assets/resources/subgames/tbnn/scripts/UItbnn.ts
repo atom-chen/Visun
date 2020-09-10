@@ -20,6 +20,9 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UItbnn extends BaseComponent {
+    @property(cc.Prefab)
+    cardTypeTemplate: cc.Prefab = null;
+    
     private _pnodes:Array<cc.Node> = [];
     private _playerCpns:Array<CpnPlayer1> = [];
     private _handors:Array<CpnHandcard2> = [];

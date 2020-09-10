@@ -37,3 +37,8 @@ export enum GameKindEnum {
 	//
 	RPG = 99999, 				//（回合制+即时制+格斗）
 }
+
+export enum CardTypeEnum {
+	danpai,
+	duizi,
+}
