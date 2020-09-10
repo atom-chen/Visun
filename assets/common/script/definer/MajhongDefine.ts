@@ -25,5 +25,6 @@ export enum MajhongCode {
 	TIAO_6 = 0x26,
 	TIAO_7 = 0x27,
 	TIAO_8 = 0x28,
-	TIAO_9 = 0x29
+	TIAO_9 = 0x29,
+	BaiBan = 0x0A,
 }

@@ -68,6 +68,13 @@ export default class GameUtil {
 		if(v == 0) {
 			return "appqp/imgs/majhong/mjback1";
 		}
+		if(v===0x0A || v===0x1A || v===0x2A || v===0x3A) {
+			return "appqp/imgs/majhong/baiban1";
+		}
+		if(v>=0x31 && v<=0x39) {
+			var n = v - 0x30;
+			return "appqp/imgs/majhong/tong"+n;
+		}
 		return "appqp/imgs/majhong/tong"+v;
 	}
 
