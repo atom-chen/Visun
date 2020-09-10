@@ -92,9 +92,10 @@ export default class UIHall extends BaseComponent {
 			if(isNil(nd)) {
 				nd = new cc.Node;
 				bton.addChild(nd);
-				nd.addComponent(cc.Label);
+				var comp = nd.addComponent(cc.Label);
+				comp.horizontalAlign = cc.Label.HorizontalAlign.CENTER;
 			}
-			nd.getComponent(cc.Label).string = gameData.Info.Name+"("+gameData.Info.KindID+")";
+			nd.getComponent(cc.Label).string = gameData.Info.Name+"\n("+gameData.Info.KindID+")";
 			return; 
 		}
 		Preloader.setNodeSprite(bton.getChildByName("Background").getComponent(cc.Sprite), cfg.icon, this);
