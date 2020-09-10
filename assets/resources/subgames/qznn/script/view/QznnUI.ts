@@ -12,6 +12,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
+import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 
 
 const MAX_SOLDIER = 5;
@@ -43,8 +44,6 @@ export default class QznnUI extends BaseComponent {
 
 		this.QzcowcowSceneResp(QznnMgr.getInstance().getEnterData());
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
-		
-		this.playFapaiAni();
 	}
 
 	private playFapaiAni() {
@@ -63,8 +62,34 @@ export default class QznnUI extends BaseComponent {
 
 	}
 
+	private QzcowcowStateFreeResp(data:qzcowcow.IQzcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
+	}
+
+	private QzcowcowStateStartResp(data:qzcowcow.IQzcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+		this.playFapaiAni();
+	}
+
+	private QzcowcowStatePlayingResp(data:qzcowcow.IQzcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+	}
+
+	private QzcowcowStateOpenResp(data:qzcowcow.IQzcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
+	}
+
+	private QzcowcowStateOverResp(data:qzcowcow.IQzcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
+	}
+
 	initNetEvent() {
 		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowSceneResp, this.QzcowcowSceneResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStateFreeResp, this.QzcowcowStateFreeResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStateStartResp, this.QzcowcowStateStartResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStatePlayingResp, this.QzcowcowStatePlayingResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStateOpenResp, this.QzcowcowStateOpenResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStateOverResp, this.QzcowcowStateOverResp, this);
 	}
 
 	initUIEvent() {

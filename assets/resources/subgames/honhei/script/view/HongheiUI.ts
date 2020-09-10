@@ -62,7 +62,7 @@ export default class HongheiUI extends BaseComponent {
 
     //准备阶段
 	private toStateReady() {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(0);
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
 
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
@@ -73,7 +73,7 @@ export default class HongheiUI extends BaseComponent {
 
 	//下注阶段
 	private toStateBetting() {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(2);
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
 		TimerManager.delTimer(this.tmrState);
@@ -95,7 +95,7 @@ export default class HongheiUI extends BaseComponent {
 
 	//结算阶段
 	private toStateJiesuan() {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setState(4);
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
 		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
 
 		this.playJiesuan();
