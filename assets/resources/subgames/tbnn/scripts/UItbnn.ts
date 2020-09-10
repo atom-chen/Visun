@@ -10,6 +10,7 @@ import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
 import CpnPlayer1 from "../../../appqp/script/comps/CpnPlayer1";
 import CpnHandcard2 from "../../../appqp/script/comps/CpnHandcard2";
 import CpnCircleCD from "../../../appqp/script/comps/CpnCircleCD";
+import CpnGameState from "../../../appqp/script/comps/CpnGameState";
 
 
 const MAX_SOLDIER = 5;
@@ -44,8 +45,6 @@ export default class UItbnn extends BaseComponent {
         
         this.TbcowcowSceneResp(TbnnMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
-
-        this.playFapaiAni();
     }
 
     private playFapaiAni() {
@@ -64,8 +63,34 @@ export default class UItbnn extends BaseComponent {
 
     }
 
+    private TbcowcowStateFreeResp(data:tbcowcow.ITbcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
+	}
+
+	private TbcowcowStateStartResp(data:tbcowcow.ITbcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+		this.playFapaiAni();
+	}
+
+	private TbcowcowStatePlayingResp(data:tbcowcow.ITbcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+	}
+
+	private TbcowcowStateOpenResp(data:tbcowcow.ITbcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
+	}
+
+	private TbcowcowStateOverResp(data:tbcowcow.ITbcowcowSceneResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
+	}
+
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
+		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateStartResp, this.TbcowcowStateStartResp, this);
+		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStatePlayingResp, this.TbcowcowStatePlayingResp, this);
+		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOpenResp, this.TbcowcowStateOpenResp, this);
+		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOverResp, this.TbcowcowStateOverResp, this);
 	}
 
 	initUIEvent() {
