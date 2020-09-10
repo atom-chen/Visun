@@ -24,6 +24,7 @@ import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import UIManager from "../../../../../kernel/view/UIManager";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import CpnPoker from "../../../../appqp/script/comps/CpnPoker";
 
 
 var margin = { rx:20,ry:20,rr:0 };
@@ -37,11 +38,16 @@ const {ccclass, property} = cc._decorator;
 export default class LonghuUI extends BaseComponent {
 	private isJoined = false;
 	private tmrState = 0;
-    _rule:number[] = [5,10,50,100,500];
+	_rule:number[] = [5,10,50,100,500];
+	private origin0;
+	private origin1;
     
     start () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
+
+		this.origin0 = this.m_ui.CpnPoker0.position;
+		this.origin1 = this.m_ui.CpnPoker1.position;
 		
 		ResPool.load(ViewDefine.CpnChip);
 
@@ -64,6 +70,7 @@ export default class LonghuUI extends BaseComponent {
 
 	private initContext() {
 		this.setWinAreas([]);
+		this.m_ui.cardLayer.active = false;
 		var enterData = LonghuMgr.getInstance().getEnterData();
 		if(enterData) {
 			for(var i=0; i<enterData.AreaBets.length; i++) {
@@ -186,6 +193,7 @@ export default class LonghuUI extends BaseComponent {
 
 		this.clearBets();
 		this.setWinAreas([]);
+		this.m_ui.cardLayer.active = false;
 	}
 
 	private TigerXdragonStatePlayingResp(param:tigerXdragon.ITigerXdragonStatePlayingResp) {
@@ -194,6 +202,7 @@ export default class LonghuUI extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
 
 		this.setWinAreas([]);
+		this.m_ui.cardLayer.active = false;
 
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
@@ -224,6 +233,39 @@ export default class LonghuUI extends BaseComponent {
 
 	private TigerXdragonOpenResp(param:tigerXdragon.ITigerXdragonOpenResp) {
 		this.setWinAreas(param.AwardArea, true);
+		this.m_ui.cardLayer.active = true;
+		if(param.Cards) {
+			var duration = 1;
+			this.m_ui.CpnPoker0.getComponent(CpnPoker).setCode(param.Cards[0]);
+			this.m_ui.CpnPoker0.getComponent(CpnPoker).setFace(true);
+			this.m_ui.CpnPoker0.stopAllActions();
+			this.m_ui.CpnPoker0.scale = 0.1;
+			this.m_ui.CpnPoker0.position = this.origin0;
+			this.m_ui.CpnPoker0.runAction(cc.spawn(
+				cc.scaleTo(duration, 1), 
+				cc.bezierTo(duration, 
+					[
+						new cc.Vec2(this.origin0.x+15,this.origin0.y-20),
+						new cc.Vec2(this.origin0.x+55,this.origin0.y-140), 
+						new cc.Vec2(-110,120)
+					])
+			));
+
+			this.m_ui.CpnPoker1.getComponent(CpnPoker).setCode(param.Cards[1]);
+			this.m_ui.CpnPoker1.getComponent(CpnPoker).setFace(true);
+			this.m_ui.CpnPoker1.stopAllActions();
+			this.m_ui.CpnPoker1.scale = 0.1;
+			this.m_ui.CpnPoker1.position = this.origin1;
+			this.m_ui.CpnPoker1.runAction(cc.spawn(
+				cc.scaleTo(duration, 1), 
+				cc.bezierTo(duration, 
+					[
+						new cc.Vec2(this.origin1.x+15,this.origin1.y-20),
+						new cc.Vec2(this.origin1.x+55,this.origin1.y-140), 
+						new cc.Vec2(110,120)
+					])
+			));
+		}
 	}
 
 	private TigerXdragonCheckoutResp(param:tigerXdragon.ITigerXdragonCheckoutResp) {
