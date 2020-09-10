@@ -86,8 +86,10 @@ export default class ToubaoUI extends BaseComponent {
 				this._rule = enterData.Chips;
 				this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).setChipValues(enterData.Chips);
 			}
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + enterData.Inning;
 		} else {
 			this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).setChipValues(this._rule);
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：";
 		}
 	}
 

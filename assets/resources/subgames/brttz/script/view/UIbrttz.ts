@@ -75,8 +75,10 @@ export default class UIbrttz extends BaseComponent {
 				this._rule = enterData.Chips;
 				this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(enterData.Chips);
 			}
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + enterData.Inning;
 		} else {
 			this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：";
 		}
 	}
 
