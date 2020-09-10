@@ -97,6 +97,7 @@ export default class LonghuUI extends BaseComponent {
 		for(var i=0; i<MaxAreaCnt; i++) {
 			if(this.m_ui["floor"+i]) {
 				var nd = this.m_ui["floor"+i];
+				nd.stopAllActions();
 				var flag = !isNil(arr[i]) && arr[i] > 0;
 				nd.color = flag && this.highColor(i) || cc.color(255,255,255,255);
 				if(bAni && flag) {
