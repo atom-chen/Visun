@@ -33,6 +33,10 @@ import KernelUIDefine from "../../../kernel/basic/defines/KernelUIDefine";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { brtoubao_packet_define } from "../proto/net_brtoubao";
 import { tuitongzi_packet_define } from "../proto/net_tuitongzi";
+import { tigerXdragon_packet_define } from "../proto/net_tigerXdragon";
+import { tbcowcow_packet_define } from "../proto/net_tbcowcow";
+import { qzcowcow_packet_define } from "../proto/net_qzcowcow";
+import { sangong_packet_define } from "../proto/net_sangong";
 
 //登陆管理
 export default class LoginMgr extends ModelBase {
@@ -95,7 +99,11 @@ export default class LoginMgr extends ModelBase {
 		g_leafProcessor.registCmds(brcowcow_packet_define);
 		g_leafProcessor.registCmds(zhajinhua_packet_define);
 		g_leafProcessor.registCmds(brtoubao_packet_define);
+		g_leafProcessor.registCmds(tigerXdragon_packet_define);
 		g_leafProcessor.registCmds(tuitongzi_packet_define);
+		g_leafProcessor.registCmds(tbcowcow_packet_define);
+		g_leafProcessor.registCmds(qzcowcow_packet_define);
+		g_leafProcessor.registCmds(sangong_packet_define);
 		g_leafProcessor.getDispatcher().addObserver(NetHandlers);
 		g_leafProcessor.getDispatcher().addObserver(GameHandlers);
 		return g_leafProcessor;
