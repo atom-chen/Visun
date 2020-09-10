@@ -15,12 +15,24 @@ export default class CpnPaixing extends cc.Component {
 
     private getTypeName():string {
         if(this.gameType == GameKindEnum.BrCowCow) {
+            if(this.pt == 13) {
+                return "五小牛";
+            }
+            else if(this.pt == 12) {
+                return "炸弹";
+            }
+            else if(this.pt == 11) {
+                return "五花牛";
+            }
+
             if(isEmpty(this.pv)) {
                 return "没牛";
             }
+
             if(this.pv == 10) {
                 return "牛牛";
             }
+            
             return "牛"+this.pv;
         }
         return "未知牌型"
