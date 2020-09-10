@@ -226,7 +226,7 @@ export default class LoginMgr extends ModelBase {
 	}
 
 	public quickLogin(bForce:boolean = false){
-		if(!bForce && this.checkLogin(false)) {
+		if(!bForce && this.checkLogin(true)) {
 			return;
 		}
 		var priAccount = LocalCache.getInstance("lusr").read("acc");
