@@ -3,102 +3,102 @@ import { GameKindEnum } from "./ConstDefine";
 var HelpDocDefine = {
 	[GameKindEnum.BrCowCow]: {
 		GameKind: GameKindEnum.BrCowCow,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/>牌型比较：十小 > 五花 > 四花 > 牛牛 > 有牛 > 没牛；<br/>分数比较：牛9 > 牛8 > 牛7 > 牛6 > 牛5 > 牛4 > 牛3 > 牛2 > 牛1。<br/><color=#0fffff>2. 玩法说明</color><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Baccarat] : {
 		GameKind: GameKindEnum.Baccarat,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Redblack] : {
 		GameKind: GameKindEnum.Redblack,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.BirdBeast] : {
 		GameKind: GameKindEnum.BirdBeast,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Toubao] : {
 		GameKind: GameKindEnum.Toubao,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 
 	
 	[GameKindEnum.Zhajinhua] : {
 		GameKind: GameKindEnum.Zhajinhua,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.QzCowcow] : {
 		GameKind: GameKindEnum.QzCowcow,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/>牌型比较：十小 > 五花 > 四花 > 牛牛 > 有牛 > 没牛；<br/>分数比较：牛9 > 牛8 > 牛7 > 牛6 > 牛5 > 牛4 > 牛3 > 牛2 > 牛1。<br/><color=#0fffff>2. 玩法说明</color><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.TbCowcow] : {
 		GameKind: GameKindEnum.TbCowcow,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/>牌型比较：十小 > 五花 > 四花 > 牛牛 > 有牛 > 没牛；<br/>分数比较：牛9 > 牛8 > 牛7 > 牛6 > 牛5 > 牛4 > 牛3 > 牛2 > 牛1。<br/><color=#0fffff>2. 玩法说明</color><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Landlord] : {
 		GameKind: GameKindEnum.Landlord,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Blackjack] : {
 		GameKind: GameKindEnum.Blackjack,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Sangong] : {
 		GameKind: GameKindEnum.Sangong,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Water13] : {
 		GameKind: GameKindEnum.Water13,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Qzpaijiu] : {
 		GameKind: GameKindEnum.Qzpaijiu,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Suoha] : {
 		GameKind: GameKindEnum.Suoha,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Paodekuai] : {
 		GameKind: GameKindEnum.Paodekuai,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Texas] : {
 		GameKind: GameKindEnum.Texas,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Ermj] : {
 		GameKind: GameKindEnum.Ermj,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Buyu] : {
 		GameKind: GameKindEnum.Buyu,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 	[GameKindEnum.Jskb] : {
 		GameKind: GameKindEnum.Jskb,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 
 	[GameKindEnum.RPG] : {
 		GameKind: GameKindEnum.RPG,
-		cont:"1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+		cont:"<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
 	},
 }
 

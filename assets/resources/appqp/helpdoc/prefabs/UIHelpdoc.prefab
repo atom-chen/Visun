@@ -474,7 +474,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 980,
-      "height": 114
+      "height": 199.88
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -551,7 +551,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 980,
-      "height": 114
+      "height": 199.88
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -607,14 +607,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 15,
       "g": 255,
       "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 143.13,
+      "width": 132.91,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -627,7 +627,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -38,
+        -47.879999999999995,
         0,
         0,
         0,
@@ -669,7 +669,7 @@
     "_useOriginalSize": true,
     "_string": "1. 牌型介绍",
     "_N$string": "1. 牌型介绍",
-    "_fontSize": 28,
+    "_fontSize": 26,
     "_lineHeight": 38,
     "_enableWrapText": true,
     "_N$file": null,
@@ -693,7 +693,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "8awyRt+nhKq7eOaac/EE9h",
+    "fileId": "8a8Q+AkXxHsYSbdNK6hkJi",
     "sync": false
   },
   {
@@ -716,14 +716,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 15,
       "g": 255,
       "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 143.13,
+      "width": 132.91,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -736,7 +736,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -76,
+        -123.88,
         0,
         0,
         0,
@@ -778,7 +778,7 @@
     "_useOriginalSize": true,
     "_string": "2. 玩法说明",
     "_N$string": "2. 玩法说明",
-    "_fontSize": 28,
+    "_fontSize": 26,
     "_lineHeight": 38,
     "_enableWrapText": true,
     "_N$file": null,
@@ -802,7 +802,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "62acefwYVJdoNbkRHVXWEY",
+    "fileId": "f4HadxrStKFLibwpyiZKQm",
     "sync": false
   },
   {
@@ -825,14 +825,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
+      "r": 15,
       "g": 255,
       "b": 255,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 143.13,
+      "width": 132.91,
       "height": 47.88
     },
     "_anchorPoint": {
@@ -845,7 +845,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -114,
+        -199.88,
         0,
         0,
         0,
@@ -887,7 +887,7 @@
     "_useOriginalSize": true,
     "_string": "3. 赔率说明",
     "_N$string": "3. 赔率说明",
-    "_fontSize": 28,
+    "_fontSize": 26,
     "_lineHeight": 38,
     "_enableWrapText": true,
     "_N$file": null,
@@ -911,7 +911,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "f7762lT8RI/6mCNvC00Zgm",
+    "fileId": "2cqHQyRyRLNp2LuNGPN5nh",
     "sync": false
   },
   {
@@ -924,9 +924,9 @@
     "_enabled": true,
     "_fontFamily": "Arial",
     "_isSystemFontUsed": true,
-    "_N$string": "1. 牌型介绍\n2. 玩法说明\n3. 赔率说明",
+    "_N$string": "<color=#0fffff>1. 牌型介绍</color><br/><br/><color=#0fffff>2. 玩法说明</color><br/><br/><color=#0fffff>3. 赔率说明</color>",
     "_N$horizontalAlign": 0,
-    "_N$fontSize": 28,
+    "_N$fontSize": 26,
     "_N$font": null,
     "_N$cacheMode": 0,
     "_N$maxWidth": 980,
@@ -1011,7 +1011,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 980,
-      "height": 114
+      "height": 199.88
     },
     "_resize": 1,
     "_N$layoutType": 2,
