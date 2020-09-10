@@ -127,7 +127,6 @@ $root.tbcowcow = (function() {
 
         function TbcowcowSceneResp(properties) {
             this.Chips = [];
-            this.AwardAreas = [];
             this.AreaBets = [];
             this.MyBets = [];
             if (properties)
@@ -138,12 +137,10 @@ $root.tbcowcow = (function() {
 
         TbcowcowSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         TbcowcowSceneResp.prototype.Chips = $util.emptyArray;
-        TbcowcowSceneResp.prototype.AwardAreas = $util.emptyArray;
         TbcowcowSceneResp.prototype.AreaBets = $util.emptyArray;
         TbcowcowSceneResp.prototype.MyBets = $util.emptyArray;
         TbcowcowSceneResp.prototype.Inning = "";
         TbcowcowSceneResp.prototype.AllPlayers = null;
-        TbcowcowSceneResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         TbcowcowSceneResp.create = function create(properties) {
             return new TbcowcowSceneResp(properties);
@@ -160,9 +157,6 @@ $root.tbcowcow = (function() {
                     writer.int32(message.Chips[i]);
                 writer.ldelim();
             }
-            if (message.AwardAreas != null && message.AwardAreas.length)
-                for (var i = 0; i < message.AwardAreas.length; ++i)
-                    writer.uint32(26).bytes(message.AwardAreas[i]);
             if (message.AreaBets != null && message.AreaBets.length) {
                 writer.uint32(34).fork();
                 for (var i = 0; i < message.AreaBets.length; ++i)
@@ -179,8 +173,6 @@ $root.tbcowcow = (function() {
                 writer.uint32(50).string(message.Inning);
             if (message.AllPlayers != null && Object.hasOwnProperty.call(message, "AllPlayers"))
                 $root.gamecomm.PlayerListInfo.encode(message.AllPlayers, writer.uint32(58).fork()).ldelim();
-            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
-                writer.uint32(64).uint64(message.HostID);
             return writer;
         };
 
@@ -208,11 +200,6 @@ $root.tbcowcow = (function() {
                     } else
                         message.Chips.push(reader.int32());
                     break;
-                case 3:
-                    if (!(message.AwardAreas && message.AwardAreas.length))
-                        message.AwardAreas = [];
-                    message.AwardAreas.push(reader.bytes());
-                    break;
                 case 4:
                     if (!(message.AreaBets && message.AreaBets.length))
                         message.AreaBets = [];
@@ -238,9 +225,6 @@ $root.tbcowcow = (function() {
                     break;
                 case 7:
                     message.AllPlayers = $root.gamecomm.PlayerListInfo.decode(reader, reader.uint32());
-                    break;
-                case 8:
-                    message.HostID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -269,13 +253,6 @@ $root.tbcowcow = (function() {
                     if (!$util.isInteger(message.Chips[i]))
                         return "Chips: integer[] expected";
             }
-            if (message.AwardAreas != null && message.hasOwnProperty("AwardAreas")) {
-                if (!Array.isArray(message.AwardAreas))
-                    return "AwardAreas: array expected";
-                for (var i = 0; i < message.AwardAreas.length; ++i)
-                    if (!(message.AwardAreas[i] && typeof message.AwardAreas[i].length === "number" || $util.isString(message.AwardAreas[i])))
-                        return "AwardAreas: buffer[] expected";
-            }
             if (message.AreaBets != null && message.hasOwnProperty("AreaBets")) {
                 if (!Array.isArray(message.AreaBets))
                     return "AreaBets: array expected";
@@ -298,9 +275,6 @@ $root.tbcowcow = (function() {
                 if (error)
                     return "AllPlayers." + error;
             }
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
-                    return "HostID: integer|Long expected";
             return null;
         };
 
@@ -323,16 +297,6 @@ $root.tbcowcow = (function() {
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
-            }
-            if (object.AwardAreas) {
-                if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".tbcowcow.TbcowcowSceneResp.AwardAreas: array expected");
-                message.AwardAreas = [];
-                for (var i = 0; i < object.AwardAreas.length; ++i)
-                    if (typeof object.AwardAreas[i] === "string")
-                        $util.base64.decode(object.AwardAreas[i], message.AwardAreas[i] = $util.newBuffer($util.base64.length(object.AwardAreas[i])), 0);
-                    else if (object.AwardAreas[i].length)
-                        message.AwardAreas[i] = object.AwardAreas[i];
             }
             if (object.AreaBets) {
                 if (!Array.isArray(object.AreaBets))
@@ -369,15 +333,6 @@ $root.tbcowcow = (function() {
                     throw TypeError(".tbcowcow.TbcowcowSceneResp.AllPlayers: object expected");
                 message.AllPlayers = $root.gamecomm.PlayerListInfo.fromObject(object.AllPlayers);
             }
-            if (object.HostID != null)
-                if ($util.Long)
-                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
-                else if (typeof object.HostID === "string")
-                    message.HostID = parseInt(object.HostID, 10);
-                else if (typeof object.HostID === "number")
-                    message.HostID = object.HostID;
-                else if (typeof object.HostID === "object")
-                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -387,7 +342,6 @@ $root.tbcowcow = (function() {
             var object = {};
             if (options.arrays || options.defaults) {
                 object.Chips = [];
-                object.AwardAreas = [];
                 object.AreaBets = [];
                 object.MyBets = [];
             }
@@ -399,11 +353,6 @@ $root.tbcowcow = (function() {
                     object.TimeStamp = options.longs === String ? "0" : 0;
                 object.Inning = "";
                 object.AllPlayers = null;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.HostID = options.longs === String ? "0" : 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -414,11 +363,6 @@ $root.tbcowcow = (function() {
                 object.Chips = [];
                 for (var j = 0; j < message.Chips.length; ++j)
                     object.Chips[j] = message.Chips[j];
-            }
-            if (message.AwardAreas && message.AwardAreas.length) {
-                object.AwardAreas = [];
-                for (var j = 0; j < message.AwardAreas.length; ++j)
-                    object.AwardAreas[j] = options.bytes === String ? $util.base64.encode(message.AwardAreas[j], 0, message.AwardAreas[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardAreas[j]) : message.AwardAreas[j];
             }
             if (message.AreaBets && message.AreaBets.length) {
                 object.AreaBets = [];
@@ -440,11 +384,6 @@ $root.tbcowcow = (function() {
                 object.Inning = message.Inning;
             if (message.AllPlayers != null && message.hasOwnProperty("AllPlayers"))
                 object.AllPlayers = $root.gamecomm.PlayerListInfo.toObject(message.AllPlayers, options);
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (typeof message.HostID === "number")
-                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
-                else
-                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             return object;
         };
 

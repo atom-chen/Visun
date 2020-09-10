@@ -107,9 +107,6 @@ export namespace tbcowcow {
         /** TbcowcowSceneResp Chips */
         Chips?: (number[]|null);
 
-        /** TbcowcowSceneResp AwardAreas */
-        AwardAreas?: (Uint8Array[]|null);
-
         /** TbcowcowSceneResp AreaBets */
         AreaBets?: ((number|Long)[]|null);
 
@@ -121,9 +118,6 @@ export namespace tbcowcow {
 
         /** TbcowcowSceneResp AllPlayers */
         AllPlayers?: (gamecomm.IPlayerListInfo|null);
-
-        /** TbcowcowSceneResp HostID */
-        HostID?: (number|Long|null);
     }
 
     /** Represents a TbcowcowSceneResp. */
@@ -141,9 +135,6 @@ export namespace tbcowcow {
         /** TbcowcowSceneResp Chips. */
         public Chips: number[];
 
-        /** TbcowcowSceneResp AwardAreas. */
-        public AwardAreas: Uint8Array[];
-
         /** TbcowcowSceneResp AreaBets. */
         public AreaBets: (number|Long)[];
 
@@ -155,9 +146,6 @@ export namespace tbcowcow {
 
         /** TbcowcowSceneResp AllPlayers. */
         public AllPlayers?: (gamecomm.IPlayerListInfo|null);
-
-        /** TbcowcowSceneResp HostID. */
-        public HostID: (number|Long);
 
         /**
          * Creates a new TbcowcowSceneResp instance using the specified properties.

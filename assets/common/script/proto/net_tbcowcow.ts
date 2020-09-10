@@ -40,7 +40,7 @@ export var tbcowcow_packet_define = {
 
 export class tbcowcow_request {
     public static TbcowcowPlayer( data:{ MyInfo:any, Cards:any } ) { tbcowcow_packet_define[165].sendToChannel(ChannelDefine.game, data, false); }
-    public static TbcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any, HostID:number } ) { tbcowcow_packet_define[166].sendToChannel(ChannelDefine.game, data, false); }
+    public static TbcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any } ) { tbcowcow_packet_define[166].sendToChannel(ChannelDefine.game, data, false); }
     public static TbcowcowStateFreeResp( data:{ Times:any } ) { tbcowcow_packet_define[167].sendToChannel(ChannelDefine.game, data, false); }
     public static TbcowcowStatePlayingResp( data:{ Times:any } ) { tbcowcow_packet_define[168].sendToChannel(ChannelDefine.game, data, false); }
     public static TbcowcowStateDealResp( data:{ Times:any, Cards:any } ) { tbcowcow_packet_define[169].sendToChannel(ChannelDefine.game, data, false); }
