@@ -4,22 +4,22 @@
 var server_list = {
     publish: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.0.108:9650",
+        leafServer: "ws://192.168.0.108:9950",
         chatServer: ""
     },
     develop: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.1.108:9650",
+        leafServer: "ws://8.129.175.179:9950",
         chatServer: ""
     },
     jetten: {
         mainHttpUrl: "",
-        leafServer: "ws://127.0.0.1:9650",
+        leafServer: "ws://127.0.0.1:9950",
         chatServer: ""
     },
     mac: {
         mainHttpUrl: "",
-        leafServer: "ws://192.168.1.100:9650",
+        leafServer: "ws://192.168.1.100:9950",
         chatServer: ""
     }
 };
