@@ -2,6 +2,102 @@ import * as $protobuf from "protobufjs";
 /** Namespace tbcowcow. */
 export namespace tbcowcow {
 
+    /** Properties of a TbcowcowPlayer. */
+    interface ITbcowcowPlayer {
+
+        /** TbcowcowPlayer MyInfo */
+        MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** TbcowcowPlayer Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a TbcowcowPlayer. */
+    class TbcowcowPlayer implements ITbcowcowPlayer {
+
+        /**
+         * Constructs a new TbcowcowPlayer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: tbcowcow.ITbcowcowPlayer);
+
+        /** TbcowcowPlayer MyInfo. */
+        public MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** TbcowcowPlayer Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new TbcowcowPlayer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TbcowcowPlayer instance
+         */
+        public static create(properties?: tbcowcow.ITbcowcowPlayer): tbcowcow.TbcowcowPlayer;
+
+        /**
+         * Encodes the specified TbcowcowPlayer message. Does not implicitly {@link tbcowcow.TbcowcowPlayer.verify|verify} messages.
+         * @param message TbcowcowPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: tbcowcow.ITbcowcowPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TbcowcowPlayer message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowPlayer.verify|verify} messages.
+         * @param message TbcowcowPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: tbcowcow.ITbcowcowPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TbcowcowPlayer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TbcowcowPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowPlayer;
+
+        /**
+         * Decodes a TbcowcowPlayer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TbcowcowPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowPlayer;
+
+        /**
+         * Verifies a TbcowcowPlayer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TbcowcowPlayer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TbcowcowPlayer
+         */
+        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowPlayer;
+
+        /**
+         * Creates a plain object from a TbcowcowPlayer message. Also converts values to other types if specified.
+         * @param message TbcowcowPlayer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: tbcowcow.TbcowcowPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TbcowcowPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a TbcowcowSceneResp. */
     interface ITbcowcowSceneResp {
 
@@ -92,7 +188,7 @@ export namespace tbcowcow {
          * @param [length] Message length if known beforehand
          * @returns TbcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * var $protobuf = protobuf;
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowSceneResp;
 
@@ -101,7 +197,7 @@ export namespace tbcowcow {
          * @param reader Reader or buffer to decode from
          * @returns TbcowcowSceneResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * var $protobuf = protobuf;
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowSceneResp;
 
@@ -182,7 +278,7 @@ export namespace tbcowcow {
          * @param [length] Message length if known beforehand
          * @returns TbcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * var $protobuf = protobuf;
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowStateFreeResp;
 
@@ -191,7 +287,7 @@ export namespace tbcowcow {
          * @param reader Reader or buffer to decode from
          * @returns TbcowcowStateFreeResp
          * @throws {Error} If the payload is not a reader or valid buffer
-         * var $protobuf = protobuf;
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
         public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowStateFreeResp;
 
@@ -219,102 +315,6 @@ export namespace tbcowcow {
 
         /**
          * Converts this TbcowcowStateFreeResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a TbcowcowStateStartResp. */
-    interface ITbcowcowStateStartResp {
-
-        /** TbcowcowStateStartResp Times */
-        Times?: (gamecomm.ITimeInfo|null);
-
-        /** TbcowcowStateStartResp HostID */
-        HostID?: (number|Long|null);
-    }
-
-    /** Represents a TbcowcowStateStartResp. */
-    class TbcowcowStateStartResp implements ITbcowcowStateStartResp {
-
-        /**
-         * Constructs a new TbcowcowStateStartResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tbcowcow.ITbcowcowStateStartResp);
-
-        /** TbcowcowStateStartResp Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /** TbcowcowStateStartResp HostID. */
-        public HostID: (number|Long);
-
-        /**
-         * Creates a new TbcowcowStateStartResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TbcowcowStateStartResp instance
-         */
-        public static create(properties?: tbcowcow.ITbcowcowStateStartResp): tbcowcow.TbcowcowStateStartResp;
-
-        /**
-         * Encodes the specified TbcowcowStateStartResp message. Does not implicitly {@link tbcowcow.TbcowcowStateStartResp.verify|verify} messages.
-         * @param message TbcowcowStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tbcowcow.ITbcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TbcowcowStateStartResp message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowStateStartResp.verify|verify} messages.
-         * @param message TbcowcowStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tbcowcow.ITbcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TbcowcowStateStartResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TbcowcowStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowStateStartResp;
-
-        /**
-         * Decodes a TbcowcowStateStartResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TbcowcowStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowStateStartResp;
-
-        /**
-         * Verifies a TbcowcowStateStartResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TbcowcowStateStartResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TbcowcowStateStartResp
-         */
-        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowStateStartResp;
-
-        /**
-         * Creates a plain object from a TbcowcowStateStartResp message. Also converts values to other types if specified.
-         * @param message TbcowcowStateStartResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tbcowcow.TbcowcowStateStartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TbcowcowStateStartResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -405,6 +405,102 @@ export namespace tbcowcow {
 
         /**
          * Converts this TbcowcowStatePlayingResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TbcowcowStateDealResp. */
+    interface ITbcowcowStateDealResp {
+
+        /** TbcowcowStateDealResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** TbcowcowStateDealResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a TbcowcowStateDealResp. */
+    class TbcowcowStateDealResp implements ITbcowcowStateDealResp {
+
+        /**
+         * Constructs a new TbcowcowStateDealResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: tbcowcow.ITbcowcowStateDealResp);
+
+        /** TbcowcowStateDealResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** TbcowcowStateDealResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new TbcowcowStateDealResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TbcowcowStateDealResp instance
+         */
+        public static create(properties?: tbcowcow.ITbcowcowStateDealResp): tbcowcow.TbcowcowStateDealResp;
+
+        /**
+         * Encodes the specified TbcowcowStateDealResp message. Does not implicitly {@link tbcowcow.TbcowcowStateDealResp.verify|verify} messages.
+         * @param message TbcowcowStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: tbcowcow.ITbcowcowStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TbcowcowStateDealResp message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowStateDealResp.verify|verify} messages.
+         * @param message TbcowcowStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: tbcowcow.ITbcowcowStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TbcowcowStateDealResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TbcowcowStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowStateDealResp;
+
+        /**
+         * Decodes a TbcowcowStateDealResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TbcowcowStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowStateDealResp;
+
+        /**
+         * Verifies a TbcowcowStateDealResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TbcowcowStateDealResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TbcowcowStateDealResp
+         */
+        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowStateDealResp;
+
+        /**
+         * Creates a plain object from a TbcowcowStateDealResp message. Also converts values to other types if specified.
+         * @param message TbcowcowStateDealResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: tbcowcow.TbcowcowStateDealResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TbcowcowStateDealResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -591,6 +687,186 @@ export namespace tbcowcow {
 
         /**
          * Converts this TbcowcowStateOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TbcowcowReadyReq. */
+    interface ITbcowcowReadyReq {
+
+        /** TbcowcowReadyReq IsReady */
+        IsReady?: (boolean|null);
+    }
+
+    /** Represents a TbcowcowReadyReq. */
+    class TbcowcowReadyReq implements ITbcowcowReadyReq {
+
+        /**
+         * Constructs a new TbcowcowReadyReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: tbcowcow.ITbcowcowReadyReq);
+
+        /** TbcowcowReadyReq IsReady. */
+        public IsReady: boolean;
+
+        /**
+         * Creates a new TbcowcowReadyReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TbcowcowReadyReq instance
+         */
+        public static create(properties?: tbcowcow.ITbcowcowReadyReq): tbcowcow.TbcowcowReadyReq;
+
+        /**
+         * Encodes the specified TbcowcowReadyReq message. Does not implicitly {@link tbcowcow.TbcowcowReadyReq.verify|verify} messages.
+         * @param message TbcowcowReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: tbcowcow.ITbcowcowReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TbcowcowReadyReq message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowReadyReq.verify|verify} messages.
+         * @param message TbcowcowReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: tbcowcow.ITbcowcowReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TbcowcowReadyReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TbcowcowReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowReadyReq;
+
+        /**
+         * Decodes a TbcowcowReadyReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TbcowcowReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowReadyReq;
+
+        /**
+         * Verifies a TbcowcowReadyReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TbcowcowReadyReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TbcowcowReadyReq
+         */
+        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowReadyReq;
+
+        /**
+         * Creates a plain object from a TbcowcowReadyReq message. Also converts values to other types if specified.
+         * @param message TbcowcowReadyReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: tbcowcow.TbcowcowReadyReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TbcowcowReadyReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TbcowcowReadyResp. */
+    interface ITbcowcowReadyResp {
+
+        /** TbcowcowReadyResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents a TbcowcowReadyResp. */
+    class TbcowcowReadyResp implements ITbcowcowReadyResp {
+
+        /**
+         * Constructs a new TbcowcowReadyResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: tbcowcow.ITbcowcowReadyResp);
+
+        /** TbcowcowReadyResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new TbcowcowReadyResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TbcowcowReadyResp instance
+         */
+        public static create(properties?: tbcowcow.ITbcowcowReadyResp): tbcowcow.TbcowcowReadyResp;
+
+        /**
+         * Encodes the specified TbcowcowReadyResp message. Does not implicitly {@link tbcowcow.TbcowcowReadyResp.verify|verify} messages.
+         * @param message TbcowcowReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: tbcowcow.ITbcowcowReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TbcowcowReadyResp message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowReadyResp.verify|verify} messages.
+         * @param message TbcowcowReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: tbcowcow.ITbcowcowReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TbcowcowReadyResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TbcowcowReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowReadyResp;
+
+        /**
+         * Decodes a TbcowcowReadyResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TbcowcowReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowReadyResp;
+
+        /**
+         * Verifies a TbcowcowReadyResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TbcowcowReadyResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TbcowcowReadyResp
+         */
+        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowReadyResp;
+
+        /**
+         * Creates a plain object from a TbcowcowReadyResp message. Also converts values to other types if specified.
+         * @param message TbcowcowReadyResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: tbcowcow.TbcowcowReadyResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TbcowcowReadyResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -797,23 +1073,11 @@ export namespace tbcowcow {
     /** Properties of a TbcowcowOpenResp. */
     interface ITbcowcowOpenResp {
 
-        /** TbcowcowOpenResp AwardArea */
-        AwardArea?: (Uint8Array|null);
+        /** TbcowcowOpenResp WinnerId */
+        WinnerId?: (number|Long|null);
 
-        /** TbcowcowOpenResp BankerCard */
-        BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp TianCard */
-        TianCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp XuanCard */
-        XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp DiCard */
-        DiCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp HuangCard */
-        HuangCard?: (gamecomm.ICardInfo|null);
+        /** TbcowcowOpenResp Infos */
+        Infos?: (tbcowcow.ITbcowcowPlayer[]|null);
     }
 
     /** Represents a TbcowcowOpenResp. */
@@ -825,23 +1089,11 @@ export namespace tbcowcow {
          */
         constructor(properties?: tbcowcow.ITbcowcowOpenResp);
 
-        /** TbcowcowOpenResp AwardArea. */
-        public AwardArea: Uint8Array;
+        /** TbcowcowOpenResp WinnerId. */
+        public WinnerId: (number|Long);
 
-        /** TbcowcowOpenResp BankerCard. */
-        public BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp TianCard. */
-        public TianCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp XuanCard. */
-        public XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp DiCard. */
-        public DiCard?: (gamecomm.ICardInfo|null);
-
-        /** TbcowcowOpenResp HuangCard. */
-        public HuangCard?: (gamecomm.ICardInfo|null);
+        /** TbcowcowOpenResp Infos. */
+        public Infos: tbcowcow.ITbcowcowPlayer[];
 
         /**
          * Creates a new TbcowcowOpenResp instance using the specified properties.
@@ -1005,372 +1257,6 @@ export namespace tbcowcow {
 
         /**
          * Converts this TbcowcowOverResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a TbcowcowHostReq. */
-    interface ITbcowcowHostReq {
-
-        /** TbcowcowHostReq IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a TbcowcowHostReq. */
-    class TbcowcowHostReq implements ITbcowcowHostReq {
-
-        /**
-         * Constructs a new TbcowcowHostReq.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tbcowcow.ITbcowcowHostReq);
-
-        /** TbcowcowHostReq IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new TbcowcowHostReq instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TbcowcowHostReq instance
-         */
-        public static create(properties?: tbcowcow.ITbcowcowHostReq): tbcowcow.TbcowcowHostReq;
-
-        /**
-         * Encodes the specified TbcowcowHostReq message. Does not implicitly {@link tbcowcow.TbcowcowHostReq.verify|verify} messages.
-         * @param message TbcowcowHostReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tbcowcow.ITbcowcowHostReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TbcowcowHostReq message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowHostReq.verify|verify} messages.
-         * @param message TbcowcowHostReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tbcowcow.ITbcowcowHostReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TbcowcowHostReq message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TbcowcowHostReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowHostReq;
-
-        /**
-         * Decodes a TbcowcowHostReq message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TbcowcowHostReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowHostReq;
-
-        /**
-         * Verifies a TbcowcowHostReq message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TbcowcowHostReq message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TbcowcowHostReq
-         */
-        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowHostReq;
-
-        /**
-         * Creates a plain object from a TbcowcowHostReq message. Also converts values to other types if specified.
-         * @param message TbcowcowHostReq
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tbcowcow.TbcowcowHostReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TbcowcowHostReq to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a TbcowcowHostResp. */
-    interface ITbcowcowHostResp {
-
-        /** TbcowcowHostResp UserID */
-        UserID?: (number|Long|null);
-
-        /** TbcowcowHostResp IsWant */
-        IsWant?: (boolean|null);
-    }
-
-    /** Represents a TbcowcowHostResp. */
-    class TbcowcowHostResp implements ITbcowcowHostResp {
-
-        /**
-         * Constructs a new TbcowcowHostResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tbcowcow.ITbcowcowHostResp);
-
-        /** TbcowcowHostResp UserID. */
-        public UserID: (number|Long);
-
-        /** TbcowcowHostResp IsWant. */
-        public IsWant: boolean;
-
-        /**
-         * Creates a new TbcowcowHostResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TbcowcowHostResp instance
-         */
-        public static create(properties?: tbcowcow.ITbcowcowHostResp): tbcowcow.TbcowcowHostResp;
-
-        /**
-         * Encodes the specified TbcowcowHostResp message. Does not implicitly {@link tbcowcow.TbcowcowHostResp.verify|verify} messages.
-         * @param message TbcowcowHostResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tbcowcow.ITbcowcowHostResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TbcowcowHostResp message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowHostResp.verify|verify} messages.
-         * @param message TbcowcowHostResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tbcowcow.ITbcowcowHostResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TbcowcowHostResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TbcowcowHostResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowHostResp;
-
-        /**
-         * Decodes a TbcowcowHostResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TbcowcowHostResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowHostResp;
-
-        /**
-         * Verifies a TbcowcowHostResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TbcowcowHostResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TbcowcowHostResp
-         */
-        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowHostResp;
-
-        /**
-         * Creates a plain object from a TbcowcowHostResp message. Also converts values to other types if specified.
-         * @param message TbcowcowHostResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tbcowcow.TbcowcowHostResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TbcowcowHostResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a TbcowcowHostListReq. */
-    interface ITbcowcowHostListReq {
-    }
-
-    /** Represents a TbcowcowHostListReq. */
-    class TbcowcowHostListReq implements ITbcowcowHostListReq {
-
-        /**
-         * Constructs a new TbcowcowHostListReq.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tbcowcow.ITbcowcowHostListReq);
-
-        /**
-         * Creates a new TbcowcowHostListReq instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TbcowcowHostListReq instance
-         */
-        public static create(properties?: tbcowcow.ITbcowcowHostListReq): tbcowcow.TbcowcowHostListReq;
-
-        /**
-         * Encodes the specified TbcowcowHostListReq message. Does not implicitly {@link tbcowcow.TbcowcowHostListReq.verify|verify} messages.
-         * @param message TbcowcowHostListReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tbcowcow.ITbcowcowHostListReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TbcowcowHostListReq message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowHostListReq.verify|verify} messages.
-         * @param message TbcowcowHostListReq message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tbcowcow.ITbcowcowHostListReq, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TbcowcowHostListReq message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TbcowcowHostListReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowHostListReq;
-
-        /**
-         * Decodes a TbcowcowHostListReq message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TbcowcowHostListReq
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowHostListReq;
-
-        /**
-         * Verifies a TbcowcowHostListReq message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TbcowcowHostListReq message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TbcowcowHostListReq
-         */
-        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowHostListReq;
-
-        /**
-         * Creates a plain object from a TbcowcowHostListReq message. Also converts values to other types if specified.
-         * @param message TbcowcowHostListReq
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tbcowcow.TbcowcowHostListReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TbcowcowHostListReq to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
-    /** Properties of a TbcowcowHostListResp. */
-    interface ITbcowcowHostListResp {
-
-        /** TbcowcowHostListResp CurHost */
-        CurHost?: (gamecomm.IPlayerInfo|null);
-
-        /** TbcowcowHostListResp Waitlist */
-        Waitlist?: ((number|Long)[]|null);
-    }
-
-    /** Represents a TbcowcowHostListResp. */
-    class TbcowcowHostListResp implements ITbcowcowHostListResp {
-
-        /**
-         * Constructs a new TbcowcowHostListResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tbcowcow.ITbcowcowHostListResp);
-
-        /** TbcowcowHostListResp CurHost. */
-        public CurHost?: (gamecomm.IPlayerInfo|null);
-
-        /** TbcowcowHostListResp Waitlist. */
-        public Waitlist: (number|Long)[];
-
-        /**
-         * Creates a new TbcowcowHostListResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TbcowcowHostListResp instance
-         */
-        public static create(properties?: tbcowcow.ITbcowcowHostListResp): tbcowcow.TbcowcowHostListResp;
-
-        /**
-         * Encodes the specified TbcowcowHostListResp message. Does not implicitly {@link tbcowcow.TbcowcowHostListResp.verify|verify} messages.
-         * @param message TbcowcowHostListResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tbcowcow.ITbcowcowHostListResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TbcowcowHostListResp message, length delimited. Does not implicitly {@link tbcowcow.TbcowcowHostListResp.verify|verify} messages.
-         * @param message TbcowcowHostListResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tbcowcow.ITbcowcowHostListResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TbcowcowHostListResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TbcowcowHostListResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tbcowcow.TbcowcowHostListResp;
-
-        /**
-         * Decodes a TbcowcowHostListResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TbcowcowHostListResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tbcowcow.TbcowcowHostListResp;
-
-        /**
-         * Verifies a TbcowcowHostListResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TbcowcowHostListResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TbcowcowHostListResp
-         */
-        public static fromObject(object: { [k: string]: any }): tbcowcow.TbcowcowHostListResp;
-
-        /**
-         * Creates a plain object from a TbcowcowHostListResp message. Also converts values to other types if specified.
-         * @param message TbcowcowHostListResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tbcowcow.TbcowcowHostListResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TbcowcowHostListResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

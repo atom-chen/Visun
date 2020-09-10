@@ -11,6 +11,118 @@ $root.tbcowcow = (function() {
 
     var tbcowcow = {};
 
+    tbcowcow.TbcowcowPlayer = (function() {
+
+        function TbcowcowPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TbcowcowPlayer.prototype.MyInfo = null;
+        TbcowcowPlayer.prototype.Cards = null;
+
+        TbcowcowPlayer.create = function create(properties) {
+            return new TbcowcowPlayer(properties);
+        };
+
+        TbcowcowPlayer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.MyInfo != null && Object.hasOwnProperty.call(message, "MyInfo"))
+                $root.gamecomm.PlayerInfo.encode(message.MyInfo, writer.uint32(10).fork()).ldelim();
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        TbcowcowPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TbcowcowPlayer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowPlayer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.MyInfo = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TbcowcowPlayer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TbcowcowPlayer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.MyInfo != null && message.hasOwnProperty("MyInfo")) {
+                var error = $root.gamecomm.PlayerInfo.verify(message.MyInfo);
+                if (error)
+                    return "MyInfo." + error;
+            }
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.gamecomm.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
+            return null;
+        };
+
+        TbcowcowPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.tbcowcow.TbcowcowPlayer)
+                return object;
+            var message = new $root.tbcowcow.TbcowcowPlayer();
+            if (object.MyInfo != null) {
+                if (typeof object.MyInfo !== "object")
+                    throw TypeError(".tbcowcow.TbcowcowPlayer.MyInfo: object expected");
+                message.MyInfo = $root.gamecomm.PlayerInfo.fromObject(object.MyInfo);
+            }
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".tbcowcow.TbcowcowPlayer.Cards: object expected");
+                message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
+            }
+            return message;
+        };
+
+        TbcowcowPlayer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.MyInfo = null;
+                object.Cards = null;
+            }
+            if (message.MyInfo != null && message.hasOwnProperty("MyInfo"))
+                object.MyInfo = $root.gamecomm.PlayerInfo.toObject(message.MyInfo, options);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
+            return object;
+        };
+
+        TbcowcowPlayer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TbcowcowPlayer;
+    })();
+
     tbcowcow.TbcowcowSceneResp = (function() {
 
         function TbcowcowSceneResp(properties) {
@@ -435,127 +547,6 @@ $root.tbcowcow = (function() {
         return TbcowcowStateFreeResp;
     })();
 
-    tbcowcow.TbcowcowStateStartResp = (function() {
-
-        function TbcowcowStateStartResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TbcowcowStateStartResp.prototype.Times = null;
-        TbcowcowStateStartResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-        TbcowcowStateStartResp.create = function create(properties) {
-            return new TbcowcowStateStartResp(properties);
-        };
-
-        TbcowcowStateStartResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
-                writer.uint32(16).uint64(message.HostID);
-            return writer;
-        };
-
-        TbcowcowStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TbcowcowStateStartResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowStateStartResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.HostID = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TbcowcowStateStartResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TbcowcowStateStartResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.gamecomm.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
-                    return "HostID: integer|Long expected";
-            return null;
-        };
-
-        TbcowcowStateStartResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tbcowcow.TbcowcowStateStartResp)
-                return object;
-            var message = new $root.tbcowcow.TbcowcowStateStartResp();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowStateStartResp.Times: object expected");
-                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
-            }
-            if (object.HostID != null)
-                if ($util.Long)
-                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
-                else if (typeof object.HostID === "string")
-                    message.HostID = parseInt(object.HostID, 10);
-                else if (typeof object.HostID === "number")
-                    message.HostID = object.HostID;
-                else if (typeof object.HostID === "object")
-                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
-            return message;
-        };
-
-        TbcowcowStateStartResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.Times = null;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.HostID = options.longs === String ? "0" : 0;
-            }
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (typeof message.HostID === "number")
-                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
-                else
-                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
-            return object;
-        };
-
-        TbcowcowStateStartResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TbcowcowStateStartResp;
-    })();
-
     tbcowcow.TbcowcowStatePlayingResp = (function() {
 
         function TbcowcowStatePlayingResp(properties) {
@@ -646,6 +637,118 @@ $root.tbcowcow = (function() {
         };
 
         return TbcowcowStatePlayingResp;
+    })();
+
+    tbcowcow.TbcowcowStateDealResp = (function() {
+
+        function TbcowcowStateDealResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TbcowcowStateDealResp.prototype.Times = null;
+        TbcowcowStateDealResp.prototype.Cards = null;
+
+        TbcowcowStateDealResp.create = function create(properties) {
+            return new TbcowcowStateDealResp(properties);
+        };
+
+        TbcowcowStateDealResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        TbcowcowStateDealResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TbcowcowStateDealResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowStateDealResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TbcowcowStateDealResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TbcowcowStateDealResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.gamecomm.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
+            return null;
+        };
+
+        TbcowcowStateDealResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.tbcowcow.TbcowcowStateDealResp)
+                return object;
+            var message = new $root.tbcowcow.TbcowcowStateDealResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".tbcowcow.TbcowcowStateDealResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".tbcowcow.TbcowcowStateDealResp.Cards: object expected");
+                message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
+            }
+            return message;
+        };
+
+        TbcowcowStateDealResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Times = null;
+                object.Cards = null;
+            }
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
+            return object;
+        };
+
+        TbcowcowStateDealResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TbcowcowStateDealResp;
     })();
 
     tbcowcow.TbcowcowStateOpenResp = (function() {
@@ -850,6 +953,194 @@ $root.tbcowcow = (function() {
         };
 
         return TbcowcowStateOverResp;
+    })();
+
+    tbcowcow.TbcowcowReadyReq = (function() {
+
+        function TbcowcowReadyReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TbcowcowReadyReq.prototype.IsReady = false;
+
+        TbcowcowReadyReq.create = function create(properties) {
+            return new TbcowcowReadyReq(properties);
+        };
+
+        TbcowcowReadyReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
+                writer.uint32(8).bool(message.IsReady);
+            return writer;
+        };
+
+        TbcowcowReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TbcowcowReadyReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowReadyReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsReady = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TbcowcowReadyReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TbcowcowReadyReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                if (typeof message.IsReady !== "boolean")
+                    return "IsReady: boolean expected";
+            return null;
+        };
+
+        TbcowcowReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.tbcowcow.TbcowcowReadyReq)
+                return object;
+            var message = new $root.tbcowcow.TbcowcowReadyReq();
+            if (object.IsReady != null)
+                message.IsReady = Boolean(object.IsReady);
+            return message;
+        };
+
+        TbcowcowReadyReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsReady = false;
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                object.IsReady = message.IsReady;
+            return object;
+        };
+
+        TbcowcowReadyReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TbcowcowReadyReq;
+    })();
+
+    tbcowcow.TbcowcowReadyResp = (function() {
+
+        function TbcowcowReadyResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TbcowcowReadyResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        TbcowcowReadyResp.create = function create(properties) {
+            return new TbcowcowReadyResp(properties);
+        };
+
+        TbcowcowReadyResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
+            return writer;
+        };
+
+        TbcowcowReadyResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TbcowcowReadyResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowReadyResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TbcowcowReadyResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TbcowcowReadyResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
+            return null;
+        };
+
+        TbcowcowReadyResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.tbcowcow.TbcowcowReadyResp)
+                return object;
+            var message = new $root.tbcowcow.TbcowcowReadyResp();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        TbcowcowReadyResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            return object;
+        };
+
+        TbcowcowReadyResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TbcowcowReadyResp;
     })();
 
     tbcowcow.TbcowcowBetReq = (function() {
@@ -1115,18 +1406,15 @@ $root.tbcowcow = (function() {
     tbcowcow.TbcowcowOpenResp = (function() {
 
         function TbcowcowOpenResp(properties) {
+            this.Infos = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        TbcowcowOpenResp.prototype.AwardArea = $util.newBuffer([]);
-        TbcowcowOpenResp.prototype.BankerCard = null;
-        TbcowcowOpenResp.prototype.TianCard = null;
-        TbcowcowOpenResp.prototype.XuanCard = null;
-        TbcowcowOpenResp.prototype.DiCard = null;
-        TbcowcowOpenResp.prototype.HuangCard = null;
+        TbcowcowOpenResp.prototype.WinnerId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        TbcowcowOpenResp.prototype.Infos = $util.emptyArray;
 
         TbcowcowOpenResp.create = function create(properties) {
             return new TbcowcowOpenResp(properties);
@@ -1135,18 +1423,11 @@ $root.tbcowcow = (function() {
         TbcowcowOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
-                writer.uint32(10).bytes(message.AwardArea);
-            if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
-                $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(18).fork()).ldelim();
-            if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
-                $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(26).fork()).ldelim();
-            if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
-                $root.gamecomm.CardInfo.encode(message.XuanCard, writer.uint32(34).fork()).ldelim();
-            if (message.DiCard != null && Object.hasOwnProperty.call(message, "DiCard"))
-                $root.gamecomm.CardInfo.encode(message.DiCard, writer.uint32(42).fork()).ldelim();
-            if (message.HuangCard != null && Object.hasOwnProperty.call(message, "HuangCard"))
-                $root.gamecomm.CardInfo.encode(message.HuangCard, writer.uint32(50).fork()).ldelim();
+            if (message.WinnerId != null && Object.hasOwnProperty.call(message, "WinnerId"))
+                writer.uint32(8).uint64(message.WinnerId);
+            if (message.Infos != null && message.Infos.length)
+                for (var i = 0; i < message.Infos.length; ++i)
+                    $root.tbcowcow.TbcowcowPlayer.encode(message.Infos[i], writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -1162,22 +1443,12 @@ $root.tbcowcow = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.AwardArea = reader.bytes();
+                    message.WinnerId = reader.uint64();
                     break;
                 case 2:
-                    message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.XuanCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 5:
-                    message.DiCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 6:
-                    message.HuangCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    if (!(message.Infos && message.Infos.length))
+                        message.Infos = [];
+                    message.Infos.push($root.tbcowcow.TbcowcowPlayer.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1196,33 +1467,17 @@ $root.tbcowcow = (function() {
         TbcowcowOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
-                if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
-                    return "AwardArea: buffer expected";
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.BankerCard);
-                if (error)
-                    return "BankerCard." + error;
-            }
-            if (message.TianCard != null && message.hasOwnProperty("TianCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.TianCard);
-                if (error)
-                    return "TianCard." + error;
-            }
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.XuanCard);
-                if (error)
-                    return "XuanCard." + error;
-            }
-            if (message.DiCard != null && message.hasOwnProperty("DiCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.DiCard);
-                if (error)
-                    return "DiCard." + error;
-            }
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.HuangCard);
-                if (error)
-                    return "HuangCard." + error;
+            if (message.WinnerId != null && message.hasOwnProperty("WinnerId"))
+                if (!$util.isInteger(message.WinnerId) && !(message.WinnerId && $util.isInteger(message.WinnerId.low) && $util.isInteger(message.WinnerId.high)))
+                    return "WinnerId: integer|Long expected";
+            if (message.Infos != null && message.hasOwnProperty("Infos")) {
+                if (!Array.isArray(message.Infos))
+                    return "Infos: array expected";
+                for (var i = 0; i < message.Infos.length; ++i) {
+                    var error = $root.tbcowcow.TbcowcowPlayer.verify(message.Infos[i]);
+                    if (error)
+                        return "Infos." + error;
+                }
             }
             return null;
         };
@@ -1231,35 +1486,24 @@ $root.tbcowcow = (function() {
             if (object instanceof $root.tbcowcow.TbcowcowOpenResp)
                 return object;
             var message = new $root.tbcowcow.TbcowcowOpenResp();
-            if (object.AwardArea != null)
-                if (typeof object.AwardArea === "string")
-                    $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
-                else if (object.AwardArea.length)
-                    message.AwardArea = object.AwardArea;
-            if (object.BankerCard != null) {
-                if (typeof object.BankerCard !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowOpenResp.BankerCard: object expected");
-                message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
-            }
-            if (object.TianCard != null) {
-                if (typeof object.TianCard !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowOpenResp.TianCard: object expected");
-                message.TianCard = $root.gamecomm.CardInfo.fromObject(object.TianCard);
-            }
-            if (object.XuanCard != null) {
-                if (typeof object.XuanCard !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowOpenResp.XuanCard: object expected");
-                message.XuanCard = $root.gamecomm.CardInfo.fromObject(object.XuanCard);
-            }
-            if (object.DiCard != null) {
-                if (typeof object.DiCard !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowOpenResp.DiCard: object expected");
-                message.DiCard = $root.gamecomm.CardInfo.fromObject(object.DiCard);
-            }
-            if (object.HuangCard != null) {
-                if (typeof object.HuangCard !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowOpenResp.HuangCard: object expected");
-                message.HuangCard = $root.gamecomm.CardInfo.fromObject(object.HuangCard);
+            if (object.WinnerId != null)
+                if ($util.Long)
+                    (message.WinnerId = $util.Long.fromValue(object.WinnerId)).unsigned = true;
+                else if (typeof object.WinnerId === "string")
+                    message.WinnerId = parseInt(object.WinnerId, 10);
+                else if (typeof object.WinnerId === "number")
+                    message.WinnerId = object.WinnerId;
+                else if (typeof object.WinnerId === "object")
+                    message.WinnerId = new $util.LongBits(object.WinnerId.low >>> 0, object.WinnerId.high >>> 0).toNumber(true);
+            if (object.Infos) {
+                if (!Array.isArray(object.Infos))
+                    throw TypeError(".tbcowcow.TbcowcowOpenResp.Infos: array expected");
+                message.Infos = [];
+                for (var i = 0; i < object.Infos.length; ++i) {
+                    if (typeof object.Infos[i] !== "object")
+                        throw TypeError(".tbcowcow.TbcowcowOpenResp.Infos: object expected");
+                    message.Infos[i] = $root.tbcowcow.TbcowcowPlayer.fromObject(object.Infos[i]);
+                }
             }
             return message;
         };
@@ -1268,32 +1512,24 @@ $root.tbcowcow = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if (options.bytes === String)
-                    object.AwardArea = "";
-                else {
-                    object.AwardArea = [];
-                    if (options.bytes !== Array)
-                        object.AwardArea = $util.newBuffer(object.AwardArea);
-                }
-                object.BankerCard = null;
-                object.TianCard = null;
-                object.XuanCard = null;
-                object.DiCard = null;
-                object.HuangCard = null;
+            if (options.arrays || options.defaults)
+                object.Infos = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.WinnerId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WinnerId = options.longs === String ? "0" : 0;
+            if (message.WinnerId != null && message.hasOwnProperty("WinnerId"))
+                if (typeof message.WinnerId === "number")
+                    object.WinnerId = options.longs === String ? String(message.WinnerId) : message.WinnerId;
+                else
+                    object.WinnerId = options.longs === String ? $util.Long.prototype.toString.call(message.WinnerId) : options.longs === Number ? new $util.LongBits(message.WinnerId.low >>> 0, message.WinnerId.high >>> 0).toNumber(true) : message.WinnerId;
+            if (message.Infos && message.Infos.length) {
+                object.Infos = [];
+                for (var j = 0; j < message.Infos.length; ++j)
+                    object.Infos[j] = $root.tbcowcow.TbcowcowPlayer.toObject(message.Infos[j], options);
             }
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
-                object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
-            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
-                object.TianCard = $root.gamecomm.CardInfo.toObject(message.TianCard, options);
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
-                object.XuanCard = $root.gamecomm.CardInfo.toObject(message.XuanCard, options);
-            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
-                object.DiCard = $root.gamecomm.CardInfo.toObject(message.DiCard, options);
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
-                object.HuangCard = $root.gamecomm.CardInfo.toObject(message.HuangCard, options);
             return object;
         };
 
@@ -1452,417 +1688,6 @@ $root.tbcowcow = (function() {
         };
 
         return TbcowcowOverResp;
-    })();
-
-    tbcowcow.TbcowcowHostReq = (function() {
-
-        function TbcowcowHostReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TbcowcowHostReq.prototype.IsWant = false;
-
-        TbcowcowHostReq.create = function create(properties) {
-            return new TbcowcowHostReq(properties);
-        };
-
-        TbcowcowHostReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(8).bool(message.IsWant);
-            return writer;
-        };
-
-        TbcowcowHostReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TbcowcowHostReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowHostReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TbcowcowHostReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TbcowcowHostReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        TbcowcowHostReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.tbcowcow.TbcowcowHostReq)
-                return object;
-            var message = new $root.tbcowcow.TbcowcowHostReq();
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        TbcowcowHostReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsWant = false;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        TbcowcowHostReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TbcowcowHostReq;
-    })();
-
-    tbcowcow.TbcowcowHostResp = (function() {
-
-        function TbcowcowHostResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TbcowcowHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        TbcowcowHostResp.prototype.IsWant = false;
-
-        TbcowcowHostResp.create = function create(properties) {
-            return new TbcowcowHostResp(properties);
-        };
-
-        TbcowcowHostResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(16).bool(message.IsWant);
-            return writer;
-        };
-
-        TbcowcowHostResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TbcowcowHostResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowHostResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TbcowcowHostResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TbcowcowHostResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        TbcowcowHostResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tbcowcow.TbcowcowHostResp)
-                return object;
-            var message = new $root.tbcowcow.TbcowcowHostResp();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        TbcowcowHostResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.IsWant = false;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        TbcowcowHostResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TbcowcowHostResp;
-    })();
-
-    tbcowcow.TbcowcowHostListReq = (function() {
-
-        function TbcowcowHostListReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TbcowcowHostListReq.create = function create(properties) {
-            return new TbcowcowHostListReq(properties);
-        };
-
-        TbcowcowHostListReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        TbcowcowHostListReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TbcowcowHostListReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowHostListReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TbcowcowHostListReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TbcowcowHostListReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        TbcowcowHostListReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.tbcowcow.TbcowcowHostListReq)
-                return object;
-            return new $root.tbcowcow.TbcowcowHostListReq();
-        };
-
-        TbcowcowHostListReq.toObject = function toObject() {
-            return {};
-        };
-
-        TbcowcowHostListReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TbcowcowHostListReq;
-    })();
-
-    tbcowcow.TbcowcowHostListResp = (function() {
-
-        function TbcowcowHostListResp(properties) {
-            this.Waitlist = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TbcowcowHostListResp.prototype.CurHost = null;
-        TbcowcowHostListResp.prototype.Waitlist = $util.emptyArray;
-
-        TbcowcowHostListResp.create = function create(properties) {
-            return new TbcowcowHostListResp(properties);
-        };
-
-        TbcowcowHostListResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.CurHost != null && Object.hasOwnProperty.call(message, "CurHost"))
-                $root.gamecomm.PlayerInfo.encode(message.CurHost, writer.uint32(10).fork()).ldelim();
-            if (message.Waitlist != null && message.Waitlist.length) {
-                writer.uint32(18).fork();
-                for (var i = 0; i < message.Waitlist.length; ++i)
-                    writer.uint64(message.Waitlist[i]);
-                writer.ldelim();
-            }
-            return writer;
-        };
-
-        TbcowcowHostListResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TbcowcowHostListResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tbcowcow.TbcowcowHostListResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.CurHost = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    if (!(message.Waitlist && message.Waitlist.length))
-                        message.Waitlist = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.Waitlist.push(reader.uint64());
-                    } else
-                        message.Waitlist.push(reader.uint64());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TbcowcowHostListResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TbcowcowHostListResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.CurHost != null && message.hasOwnProperty("CurHost")) {
-                var error = $root.gamecomm.PlayerInfo.verify(message.CurHost);
-                if (error)
-                    return "CurHost." + error;
-            }
-            if (message.Waitlist != null && message.hasOwnProperty("Waitlist")) {
-                if (!Array.isArray(message.Waitlist))
-                    return "Waitlist: array expected";
-                for (var i = 0; i < message.Waitlist.length; ++i)
-                    if (!$util.isInteger(message.Waitlist[i]) && !(message.Waitlist[i] && $util.isInteger(message.Waitlist[i].low) && $util.isInteger(message.Waitlist[i].high)))
-                        return "Waitlist: integer|Long[] expected";
-            }
-            return null;
-        };
-
-        TbcowcowHostListResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tbcowcow.TbcowcowHostListResp)
-                return object;
-            var message = new $root.tbcowcow.TbcowcowHostListResp();
-            if (object.CurHost != null) {
-                if (typeof object.CurHost !== "object")
-                    throw TypeError(".tbcowcow.TbcowcowHostListResp.CurHost: object expected");
-                message.CurHost = $root.gamecomm.PlayerInfo.fromObject(object.CurHost);
-            }
-            if (object.Waitlist) {
-                if (!Array.isArray(object.Waitlist))
-                    throw TypeError(".tbcowcow.TbcowcowHostListResp.Waitlist: array expected");
-                message.Waitlist = [];
-                for (var i = 0; i < object.Waitlist.length; ++i)
-                    if ($util.Long)
-                        (message.Waitlist[i] = $util.Long.fromValue(object.Waitlist[i])).unsigned = true;
-                    else if (typeof object.Waitlist[i] === "string")
-                        message.Waitlist[i] = parseInt(object.Waitlist[i], 10);
-                    else if (typeof object.Waitlist[i] === "number")
-                        message.Waitlist[i] = object.Waitlist[i];
-                    else if (typeof object.Waitlist[i] === "object")
-                        message.Waitlist[i] = new $util.LongBits(object.Waitlist[i].low >>> 0, object.Waitlist[i].high >>> 0).toNumber(true);
-            }
-            return message;
-        };
-
-        TbcowcowHostListResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.Waitlist = [];
-            if (options.defaults)
-                object.CurHost = null;
-            if (message.CurHost != null && message.hasOwnProperty("CurHost"))
-                object.CurHost = $root.gamecomm.PlayerInfo.toObject(message.CurHost, options);
-            if (message.Waitlist && message.Waitlist.length) {
-                object.Waitlist = [];
-                for (var j = 0; j < message.Waitlist.length; ++j)
-                    if (typeof message.Waitlist[j] === "number")
-                        object.Waitlist[j] = options.longs === String ? String(message.Waitlist[j]) : message.Waitlist[j];
-                    else
-                        object.Waitlist[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Waitlist[j]) : options.longs === Number ? new $util.LongBits(message.Waitlist[j].low >>> 0, message.Waitlist[j].high >>> 0).toNumber(true) : message.Waitlist[j];
-            }
-            return object;
-        };
-
-        TbcowcowHostListResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TbcowcowHostListResp;
     })();
 
     return tbcowcow;

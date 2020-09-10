@@ -74,7 +74,7 @@ message TbcowcowBetResp {
 
 //开牌
 message TbcowcowOpenResp {
-  uint64 WinnerId = 1;;    //赢家ID
+  uint64 WinnerId = 1;   //赢家ID
   repeated TbcowcowPlayer Infos = 2;    //玩家的牌值
 }
 
