@@ -1,9 +1,9 @@
 //-----------------------------
 //游戏状态组件：下注中/开奖中/...
-
+//-----------------------------
 import Preloader from "../../../../kernel/utils/Preloader";
 
-//-----------------------------
+
 const State2Res = [
     "appqp/imgs/games/gst2d_zbz",
     "appqp/imgs/games/gst2d_fpz",
