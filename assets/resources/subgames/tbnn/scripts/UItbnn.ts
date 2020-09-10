@@ -67,7 +67,7 @@ export default class UItbnn extends BaseComponent {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
 	}
 
-	private TbcowcowStateStartResp(data:tbcowcow.ITbcowcowSceneResp) {
+	private TbcowcowStateDealResp(data:tbcowcow.ITbcowcowSceneResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
 		this.playFapaiAni();
 	}
@@ -87,7 +87,7 @@ export default class UItbnn extends BaseComponent {
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
-		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateStartResp, this.TbcowcowStateStartResp, this);
+		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateDealResp, this.TbcowcowStateDealResp, this);
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStatePlayingResp, this.TbcowcowStatePlayingResp, this);
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOpenResp, this.TbcowcowStateOpenResp, this);
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOverResp, this.TbcowcowStateOverResp, this);
