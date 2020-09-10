@@ -542,21 +542,28 @@ export default class zjhUI extends BaseComponent {
             losser = param.HitId;
             winStr = "sprP";
         }
+        
         var idx = this.playerIdx(losser);
         if(idx >= 0) {
             this._stateCpns[idx].bipaishu();
             CommonUtil.grayNode(this._pnodes[idx], true);
             this._playerCpns[idx].setLabGray(true);
         }
+
+        var atkIdx = this.playerIdx(param.AttackerId);
+        if(atkIdx >= 0) {
+            this._cdCpns[atkIdx].setRunning(false);
+        }
+
         var mgr = ZjhMgr.getInstance();
 
         this.playBetAni(param.AttackerId, 100);
-        this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().MinScore);
-        this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(ZjhMgr.getInstance().getEnterData().TotalScore);
+        this.m_ui.labMinBet.getComponent(cc.Label).string = "最低下注：" + CommonUtil.formRealMoney(mgr.getEnterData().MinScore);
+        this.m_ui.labTotalBet.getComponent(cc.Label).string = "总下注：" + CommonUtil.formRealMoney(mgr.getEnterData().TotalScore);
         this.refreshFighterGold(param.AttackerId);
 
-        var manP = ZjhMgr.getInstance().getPlayer(param.AttackerId);
-        var manK = ZjhMgr.getInstance().getPlayer(param.HitId);
+        var manP = mgr.getPlayer(param.AttackerId);
+        var manK = mgr.getPlayer(param.HitId);
         var pkinfo = {
             phead: manP && manP["FaceID"] || 1004,
             khead: manK && manK["FaceID"] || 2006,
