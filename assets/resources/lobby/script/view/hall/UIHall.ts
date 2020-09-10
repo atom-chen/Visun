@@ -16,6 +16,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import { login } from "../../../../../../declares/login";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 
 
 const {ccclass, property} = cc._decorator;
@@ -87,6 +88,13 @@ export default class UIHall extends BaseComponent {
 		var cfg = GameConfig[gameData.Info.KindID];
 		if(!cfg) { 
 			cc.warn("no client GameConfig", gameData.Info.KindID);
+			var nd = bton.getChildByName("_tmpLab_");
+			if(isNil(nd)) {
+				nd = new cc.Node;
+				bton.addChild(nd);
+				nd.addComponent(cc.Label);
+			}
+			nd.getComponent(cc.Label).string = gameData.Info.Name+"("+gameData.Info.KindID+")";
 			return; 
 		}
 		Preloader.setNodeSprite(bton.getChildByName("Background").getComponent(cc.Sprite), cfg.icon, this);
