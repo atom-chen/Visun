@@ -118,6 +118,8 @@ export default class CpnHandcard2 extends cc.Component {
                 childs[i].x = -(itemW + (cnt-1-i) * this.xSpace);
             }
         }
+
+        this.node.width = itemW + cnt * this.xSpace + itemW;
     }
 
     public getPosByIndex(idx:number) : cc.Vec2 {
@@ -134,6 +136,10 @@ export default class CpnHandcard2 extends cc.Component {
             x = -(this.node.children[0].width/2 + this.xSpace*(cnt-1-idx));
         }
         return cc.v2(x, 0);
+    }
+
+    getMidX() {
+        return (0.5 - this.node.anchorX) * this.node.width;
     }
 
 }

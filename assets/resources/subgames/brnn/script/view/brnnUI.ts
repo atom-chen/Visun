@@ -25,6 +25,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import PlayerMgr from "../../../../../common/script/model/PlayerMgr";
+import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -48,6 +49,7 @@ export default class BrnnUI extends BaseComponent {
 
 		this.initNetEvent();
 		this.initUIEvent();
+		this.clearCards();
 
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
@@ -127,6 +129,19 @@ export default class BrnnUI extends BaseComponent {
 		}
 	}
 
+	private clearCards() {
+		this.m_ui.CpnHandcard0.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnPaixing0.getComponent(CpnPaixing).setCardType(-1,-1);
+		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnPaixing1.getComponent(CpnPaixing).setCardType(-1,-1);
+		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnPaixing2.getComponent(CpnPaixing).setCardType(-1,-1);
+		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnPaixing3.getComponent(CpnPaixing).setCardType(-1,-1);
+		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.CpnPaixing4.getComponent(CpnPaixing).setCardType(-1,-1);
+	}
+
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 
@@ -173,11 +188,7 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowStateFree(param:brcowcow.IBrcowcowStateFreeResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
-		this.m_ui.CpnHandcard0.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+		this.clearCards();
 		this.clearBets();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
@@ -186,14 +197,10 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowStateStart(param:brcowcow.IBrcowcowStateStartResp) {
 		BrnnMgr.getInstance().getEnterData().HostID = param.HostID;
 		this.refreshZhuang();
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
+
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
-		this.m_ui.CpnHandcard0.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+		this.clearCards();
 		this.clearBets();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
@@ -233,9 +240,10 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private BrcowcowOpenResp(param:brcowcow.IBrcowcowOpenResp) {
-		var cardlist = [param.TianCard, param.DiCard, param.XuanCard, param.HuangCard, param.BankerCard];
+		var cardlist:Array<gamecomm.ICardInfo> = [param.TianCard, param.DiCard, param.XuanCard, param.HuangCard, param.BankerCard];
 		for(var i = 0; i < cardlist.length; i++) {
 			this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard).resetCards(cardlist[i].Cards, true);
+			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(cardlist[i].CardType, cardlist[i].CardValue);
 		}
 		this.setWinAreas(param.AwardArea);
 	}
