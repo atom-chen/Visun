@@ -12,7 +12,7 @@ const State2Res = [
     "appqp/imgs/games/ust_guopai",
     "appqp/imgs/games/ust_qipai",
     "appqp/imgs/games/ust_suoha",
-    "appqp/imgs/games/ust_bipaishu",
+    "appqp/imgs/games/ust_bishu",
     "appqp/imgs/games/ust_yizhunbei",
 ]
 
