@@ -252,7 +252,7 @@ export default class zjhUI extends BaseComponent {
 
     //准备阶段
     ZhajinhuaStateFreeResp(param:zhajinhua.IZhajinhuaStateFreeResp) {
-        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei();
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
         this.m_ui.opLayer.active = false;
         this.m_ui.readyNode.active = true;
 
@@ -308,7 +308,7 @@ export default class zjhUI extends BaseComponent {
 
     //开始游戏: 播发牌动画
     ZhajinhuaStateStartResp(param:zhajinhua.IZhajinhuaStateStartResp) {
-        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai();
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
         this.m_ui.opLayer.active = false;
         this.m_ui.readyNode.active = false;
         
@@ -402,7 +402,7 @@ export default class zjhUI extends BaseComponent {
 
     //战斗阶段-轮到新操作者
     ZhajinhuaStatePlayingResp(param:zhajinhua.IZhajinhuaStatePlayingResp) {
-        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu();
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
         this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserId;
         this.m_ui.readyNode.active = false;
 
@@ -443,7 +443,7 @@ export default class zjhUI extends BaseComponent {
 
     //结算阶段
     ZhajinhuaStateOverResp(param:zhajinhua.IZhajinhuaStateOverResp) {
-        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang();
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
         this.m_ui.opLayer.active = false;
         this.m_ui.readyNode.active = false;
         for(var i=0; i<MAX_SOLDIER; i++) {
