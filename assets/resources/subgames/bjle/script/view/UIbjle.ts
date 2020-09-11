@@ -190,6 +190,7 @@ export default class UIbjle extends BaseComponent {
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
 			chip.stopAllActions();
+			chip.scale = 0.2;
 			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+this.areaToNode[param.BetArea]], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin[this.areaToNode[param.BetArea]]);
 		}
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
@@ -314,6 +315,7 @@ export default class UIbjle extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipEffLayer.addChild(chip);
 			chip.stopAllActions();
+			chip.scale = 0.2;
 			chip.x = fromPos.x;
 			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(

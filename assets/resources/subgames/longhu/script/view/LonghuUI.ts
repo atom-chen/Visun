@@ -177,6 +177,7 @@ export default class LonghuUI extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.stopAllActions();
+			chip.scale = 0.2;
 			chip.__areaId = param.BetArea;
 			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin);
 		}
@@ -310,6 +311,7 @@ export default class LonghuUI extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipEffLayer.addChild(chip);
 			chip.stopAllActions();
+			chip.scale = 0.2;
 			chip.x = fromPos.x;
 			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
