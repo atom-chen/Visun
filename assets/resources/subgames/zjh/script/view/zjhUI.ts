@@ -279,6 +279,8 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
 
+        UIManager.closeWindow(ViewDefine.UINumInput);
+
         // if(this.quietCheck() && !TimerManager.isValid(this.tmrCheckKickout)) {
         //     this.tmrCheckKickout = TimerManager.delaySecond(6, newHandler(function(tmr){
         //         if(this.quietCheck()) {
@@ -333,6 +335,7 @@ export default class zjhUI extends BaseComponent {
         }
 
         this.playFapaiAni();
+        UIManager.closeWindow(ViewDefine.UINumInput);
     }
     private playFapaiAni() {
         this.ksyxSpn = Preloader.showSpineAsync("appqp/spines/kaishiyouxi/fan", 0, "a", 1, this.node, {zIndex:10, x:0, y:80, scale:0.36}, {
@@ -421,6 +424,7 @@ export default class zjhUI extends BaseComponent {
         CommonUtil.safeDelete(this.ksyxSpn);
         this.ksyxSpn = null;
         this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
+        UIManager.closeWindow(ViewDefine.UINumInput);
     }
 
     //战斗阶段-比牌
@@ -434,6 +438,7 @@ export default class zjhUI extends BaseComponent {
         this.refreshCards(false);
         this.selectBipaiTarget(-1);
         this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
+        UIManager.closeWindow(ViewDefine.UINumInput);
     }
 
     //结算阶段
@@ -451,6 +456,7 @@ export default class zjhUI extends BaseComponent {
         this.refreshCards(true);
         this.selectBipaiTarget(-1);
         this.tmrCheckKickout = TimerManager.delTimer(this.tmrCheckKickout);
+        UIManager.closeWindow(ViewDefine.UINumInput);
     }
 
     //结算数据

@@ -20,15 +20,20 @@ export default class UINumInput extends BaseComponent {
 
     private addV(v:string|number) {
         var s:string = this.m_ui.labValue.getComponent(cc.Label).string;
+
         if(s == "0" && v != ".") {
             s = "";
         }
-        if(s.indexOf(".") >= 0 && v == ".") {
+
+        var dotPos = s.indexOf(".");
+        if(dotPos >= 0 && (v == "." || s.length >= dotPos+3)) {
             return;
         }
+        
         if(v=="." && s == "") {
             s = "0";
         }
+        
         this.m_ui.labValue.getComponent(cc.Label).string = s + v;
     }
 
