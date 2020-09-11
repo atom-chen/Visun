@@ -16,14 +16,15 @@ export default class SimplePool {
 		else {
 			var obj = this._pool[last];
 			this._pool.length = last;
+			obj.stopAllActions();
 			return obj;
 		}
 	}
 
 	public delObject(obj:cc.Node) {
-		if(obj /*&& this._pool.indexOf(obj) < 0*/) {
-			this._pool.push(obj);
+		if(obj && this._pool.indexOf(obj) < 0) {
 			obj.stopAllActions();
+			this._pool.push(obj);
 			obj.removeFromParent(false);
 		}
 	}

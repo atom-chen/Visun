@@ -183,6 +183,7 @@ export default class BrnnUI extends BaseComponent {
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipLayer.addChild(chip);
 			chip.__areaId = param.BetArea;
+			chip.stopAllActions();
 			CommonUtil.lineTo1(chip, fromObj, this.m_ui["area"+param.BetArea], 0.14+0.1*parseInt(j), parseInt(j)*0.01, margin);
 		}
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
@@ -262,6 +263,7 @@ export default class BrnnUI extends BaseComponent {
 		var len = childs.length;
 		var pos = CommonUtil.convertSpaceAR(this.m_ui.collectNode, this.m_ui.chipLayer);
 		for(var i=len-1; i>=0; i--){
+			childs[i].stopAllActions();
 			childs[i].runAction(cc.sequence(
 				cc.delayTime(0.03*(len-i)),
 				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
@@ -290,6 +292,7 @@ export default class BrnnUI extends BaseComponent {
 			var chip:cc.Node = ResPool.newObject(ViewDefine.CpnChip);
 			chip.getComponent(CpnChip).setChipValue(nums[j], true);
 			this.m_ui.chipEffLayer.addChild(chip);
+			chip.stopAllActions();
 			chip.x = fromPos.x;
 			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
