@@ -8,7 +8,7 @@ import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import { zhajinhua_msgs, zhajinhua_request } from "../../../../../common/script/proto/net_zhajinhua";
 import { zhajinhua } from "../../../../../../declares/zhajinhua";
 import ZjhMgr from "../model/ZjhMgr";
-import { isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import CpnPlayer1 from "../../../../appqp/script/comps/CpnPlayer1";
 import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
@@ -473,13 +473,13 @@ export default class zjhUI extends BaseComponent {
                     }
                 }
 
-                var tipStr = "";
-                if(cur.WinScore > 0) {
-                    tipStr += cur.MyInfo.Name + "赢" + cur.WinScore;
-                } else {
-                    tipStr += cur.MyInfo.Name + "输" + cur.WinScore;
-                }
-                UIManager.toast(tipStr);
+                // var tipStr = "";
+                // if(cur.WinScore > 0) {
+                //     tipStr += cur.MyInfo.Name + "赢" + CommonUtil.formRealMoney(cur.WinScore);
+                // } else {
+                //     tipStr += cur.MyInfo.Name + "输" + CommonUtil.formRealMoney(cur.WinScore);
+                // }
+                // UIManager.toast(tipStr);
             }
         }
         this.playJiesuan(param);
@@ -692,7 +692,15 @@ export default class zjhUI extends BaseComponent {
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_add, function(){ 
-            zhajinhua_request.ZhajinhuaRaiseReq({Score:20});
+            UIManager.openPopwnd(ViewDefine.UINumInput, true, function(v:string){
+                var value = parseFloat(v);
+                if(isEmpty(value) || value<0.1) {
+                    UIManager.toast("加注最小金额不得低于0.1元");
+                    return false;
+                }
+                zhajinhua_request.ZhajinhuaRaiseReq({Score:CommonUtil.toServerMoney(value)});
+                return true;
+            })
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 
