@@ -1,5 +1,7 @@
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
+import UIManager from "../../../../kernel/view/UIManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -8,14 +10,20 @@ const {ccclass, property} = cc._decorator;
 export default class UINumInput extends BaseComponent {
 
     private _cb:Function = null;
+    private _minV:number = -1;
+    private _maxV:number = -1;
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
     }
 
-    setViewData(cb:Function) {
+    setViewData(cb:Function, info:any) {
         this._cb = cb;
+        if(info) {
+            this._minV = info.minV;
+            this._maxV = info.maxV;
+        }
     }
 
     private addV(v:string|number) {
@@ -33,13 +41,27 @@ export default class UINumInput extends BaseComponent {
         if(v=="." && s == "") {
             s = "0";
         }
-        
+
+        if(!isNil(this._maxV) && this._maxV > 0) {
+            var newV = parseFloat(s+v);
+            if(!isNil(newV) && newV > this._maxV) {
+                UIManager.toast("输入值不得大于"+this._maxV);
+                return;
+            }
+        }
+
         this.m_ui.labValue.getComponent(cc.Label).string = s + v;
     }
 
     initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_ok, function(){
             var v = this.m_ui.labValue.getComponent(cc.Label).string;
+            var n = parseFloat(v);
+            if(!isNil(this._minV) && this._minV >= 0 && !isNil(n) && n < this._minV) {
+                UIManager.toast("输入值不得小于"+this._minV);
+                return;
+            }
+
             var flag = this._cb(v);
             if(flag) {
                 CommonUtil.safeDelete(this);

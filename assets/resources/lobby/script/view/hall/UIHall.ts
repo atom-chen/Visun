@@ -39,6 +39,7 @@ export default class UIHall extends BaseComponent {
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
 
 		//this.test();
+		//UIManager.openPopwnd(ViewDefine.UINumInput, true, function(v){}, {maxV:1000,minV:1});
 	}
 
 	private LoginResp(param:login.ILoginResp) {
