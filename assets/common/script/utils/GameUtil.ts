@@ -3,6 +3,7 @@ import { isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import CommonUtil from "../../../kernel/utils/CommonUtil";
 import GameConfig from "../definer/GameConfig";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
+import { PokerCode } from "../definer/PokerDefine";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -158,6 +159,19 @@ export default class GameUtil {
 			//	cc.log("---preload---", respath1);
 			//	cc.log("---preload---", respath2);
 			}, GameUtil, i));
+		}
+	}
+
+	static loadPokers() {
+		var n = 3;
+		for(var k in PokerCode) {
+			if(typeof PokerCode[k] == typeof(1)) {
+				n += 2;
+				TimerManager.delayFrame(n, newHandler(function(tmr, kk){
+					cc.loader.loadRes(GameUtil.pokerPath(PokerCode[kk], 1), cc.SpriteFrame);
+				}, GameUtil, k));
+				
+			}
 		}
 	}
 

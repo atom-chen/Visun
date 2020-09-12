@@ -17,6 +17,7 @@ export default class LobbyScene extends BaseComponent {
         LoginMgr.getInstance().quickLogin();
         GameUtil.loadGameIcons();
         GameUtil.loadChipIcons();
+        GameUtil.loadPokers();
     }
 
     start () {
