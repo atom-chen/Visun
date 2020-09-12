@@ -57,10 +57,14 @@ export default class GameUtil {
 	}
 
 	//获取扑克图片资源路经
-	public static pokerPath(v:number|string) : string {
+	public static pokerPath(v:number|string, style:number) : string {
 		if(v===0x0E) { v = 0x4E; }
 		if(v===0x0F) { v = 0x5F; }
-		return "appqp/imgs/pokers/poker_"+v;
+		if(style == 1) {
+			return "appqp/imgs/pokers1/poker1_"+v;
+		} else {
+			cc.warn("no poker style: ", style);
+		}
 	}
 
 	//获取麻将图片资源路经

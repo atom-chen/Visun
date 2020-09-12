@@ -9,6 +9,8 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class CpnPoker extends cc.Component {
 
+    private _pokerStyle:number = 1;
+    private _backStyle:number = 1;
     private _code:number = 0;
     private _curFace:boolean = true;
     private _state:boolean = false;
@@ -27,7 +29,7 @@ export default class CpnPoker extends cc.Component {
     private getResPath() {
         var face = 0;
         if(this._curFace) { face = this._code; }
-        return GameUtil.pokerPath(face);
+        return GameUtil.pokerPath(face, this._pokerStyle);
     }
 
     private refresh() {
@@ -40,17 +42,22 @@ export default class CpnPoker extends cc.Component {
         }
     }
 
-    setCode(v:number) {
-        this._code = v;
+    setPokerStyle(v) {
+        this._pokerStyle = v;
     }
 
-    getCode() : number {
-        return this._code;
+    setCode(v:number) {
+        this._code = v;
+        this.refresh();
     }
 
     setFace(bFront:boolean) {
         this._curFace = bFront;
         this.refresh();
+    }
+
+    getCode() : number {
+        return this._code;
     }
 
     getFace() : boolean {
