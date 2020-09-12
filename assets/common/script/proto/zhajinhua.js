@@ -395,6 +395,7 @@ $root.zhajinhua = (function() {
         ZhajinhuaSceneResp.prototype.Inning = "";
         ZhajinhuaSceneResp.prototype.NoReadyTime = 0;
         ZhajinhuaSceneResp.prototype.LimitScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        ZhajinhuaSceneResp.prototype.TurnCount = 0;
 
         ZhajinhuaSceneResp.create = function create(properties) {
             return new ZhajinhuaSceneResp(properties);
@@ -420,6 +421,8 @@ $root.zhajinhua = (function() {
                 writer.uint32(56).int32(message.NoReadyTime);
             if (message.LimitScore != null && Object.hasOwnProperty.call(message, "LimitScore"))
                 writer.uint32(64).int64(message.LimitScore);
+            if (message.TurnCount != null && Object.hasOwnProperty.call(message, "TurnCount"))
+                writer.uint32(72).int32(message.TurnCount);
             return writer;
         };
 
@@ -459,6 +462,9 @@ $root.zhajinhua = (function() {
                     break;
                 case 8:
                     message.LimitScore = reader.int64();
+                    break;
+                case 9:
+                    message.TurnCount = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -507,6 +513,9 @@ $root.zhajinhua = (function() {
             if (message.LimitScore != null && message.hasOwnProperty("LimitScore"))
                 if (!$util.isInteger(message.LimitScore) && !(message.LimitScore && $util.isInteger(message.LimitScore.low) && $util.isInteger(message.LimitScore.high)))
                     return "LimitScore: integer|Long expected";
+            if (message.TurnCount != null && message.hasOwnProperty("TurnCount"))
+                if (!$util.isInteger(message.TurnCount))
+                    return "TurnCount: integer expected";
             return null;
         };
 
@@ -573,6 +582,8 @@ $root.zhajinhua = (function() {
                     message.LimitScore = object.LimitScore;
                 else if (typeof object.LimitScore === "object")
                     message.LimitScore = new $util.LongBits(object.LimitScore.low >>> 0, object.LimitScore.high >>> 0).toNumber();
+            if (object.TurnCount != null)
+                message.TurnCount = object.TurnCount | 0;
             return message;
         };
 
@@ -610,6 +621,7 @@ $root.zhajinhua = (function() {
                     object.LimitScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.LimitScore = options.longs === String ? "0" : 0;
+                object.TurnCount = 0;
             }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
@@ -645,6 +657,8 @@ $root.zhajinhua = (function() {
                     object.LimitScore = options.longs === String ? String(message.LimitScore) : message.LimitScore;
                 else
                     object.LimitScore = options.longs === String ? $util.Long.prototype.toString.call(message.LimitScore) : options.longs === Number ? new $util.LongBits(message.LimitScore.low >>> 0, message.LimitScore.high >>> 0).toNumber() : message.LimitScore;
+            if (message.TurnCount != null && message.hasOwnProperty("TurnCount"))
+                object.TurnCount = message.TurnCount;
             return object;
         };
 
@@ -1191,6 +1205,93 @@ $root.zhajinhua = (function() {
         };
 
         return ZhajinhuaStateOverResp;
+    })();
+
+    zhajinhua.ZhajinhuaTurnResp = (function() {
+
+        function ZhajinhuaTurnResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ZhajinhuaTurnResp.prototype.TurnCount = 0;
+
+        ZhajinhuaTurnResp.create = function create(properties) {
+            return new ZhajinhuaTurnResp(properties);
+        };
+
+        ZhajinhuaTurnResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.TurnCount != null && Object.hasOwnProperty.call(message, "TurnCount"))
+                writer.uint32(8).int32(message.TurnCount);
+            return writer;
+        };
+
+        ZhajinhuaTurnResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ZhajinhuaTurnResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.zhajinhua.ZhajinhuaTurnResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.TurnCount = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ZhajinhuaTurnResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ZhajinhuaTurnResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.TurnCount != null && message.hasOwnProperty("TurnCount"))
+                if (!$util.isInteger(message.TurnCount))
+                    return "TurnCount: integer expected";
+            return null;
+        };
+
+        ZhajinhuaTurnResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.zhajinhua.ZhajinhuaTurnResp)
+                return object;
+            var message = new $root.zhajinhua.ZhajinhuaTurnResp();
+            if (object.TurnCount != null)
+                message.TurnCount = object.TurnCount | 0;
+            return message;
+        };
+
+        ZhajinhuaTurnResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.TurnCount = 0;
+            if (message.TurnCount != null && message.hasOwnProperty("TurnCount"))
+                object.TurnCount = message.TurnCount;
+            return object;
+        };
+
+        ZhajinhuaTurnResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ZhajinhuaTurnResp;
     })();
 
     zhajinhua.ZhajinhuaDealResp = (function() {

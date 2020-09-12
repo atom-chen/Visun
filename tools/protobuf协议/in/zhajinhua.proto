@@ -38,6 +38,7 @@ message ZhajinhuaSceneResp {
   string Inning = 6;                    // 牌局号
   int32  NoReadyTime = 7;               // 最长不准备
   int64 LimitScore = 8;                 // 上限金币
+  int32 TurnCount = 9;                  // 轮值数
 }
 
 //当前游戏状态： 等待开局，定庄，发牌，战斗（轮到谁），结算
@@ -68,6 +69,11 @@ message ZhajinhuaStateCompareResp {
 message ZhajinhuaStateOverResp {
   TimeInfo Times = 1;
   uint64 WinnerId = 2;        //胜利者ID（除旁者外其他玩家都是输家）
+}
+
+//轮值数
+message ZhajinhuaTurnResp {
+  int32 TurnCount = 1;
 }
 
 

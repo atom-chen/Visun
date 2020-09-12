@@ -250,6 +250,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp LimitScore */
         LimitScore?: (number|Long|null);
+
+        /** ZhajinhuaSceneResp TurnCount */
+        TurnCount?: (number|null);
     }
 
     /** Represents a ZhajinhuaSceneResp. */
@@ -284,6 +287,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaSceneResp LimitScore. */
         public LimitScore: (number|Long);
+
+        /** ZhajinhuaSceneResp TurnCount. */
+        public TurnCount: number;
 
         /**
          * Creates a new ZhajinhuaSceneResp instance using the specified properties.
@@ -819,6 +825,96 @@ export namespace zhajinhua {
 
         /**
          * Converts this ZhajinhuaStateOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ZhajinhuaTurnResp. */
+    interface IZhajinhuaTurnResp {
+
+        /** ZhajinhuaTurnResp TurnCount */
+        TurnCount?: (number|null);
+    }
+
+    /** Represents a ZhajinhuaTurnResp. */
+    class ZhajinhuaTurnResp implements IZhajinhuaTurnResp {
+
+        /**
+         * Constructs a new ZhajinhuaTurnResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: zhajinhua.IZhajinhuaTurnResp);
+
+        /** ZhajinhuaTurnResp TurnCount. */
+        public TurnCount: number;
+
+        /**
+         * Creates a new ZhajinhuaTurnResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ZhajinhuaTurnResp instance
+         */
+        public static create(properties?: zhajinhua.IZhajinhuaTurnResp): zhajinhua.ZhajinhuaTurnResp;
+
+        /**
+         * Encodes the specified ZhajinhuaTurnResp message. Does not implicitly {@link zhajinhua.ZhajinhuaTurnResp.verify|verify} messages.
+         * @param message ZhajinhuaTurnResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: zhajinhua.IZhajinhuaTurnResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ZhajinhuaTurnResp message, length delimited. Does not implicitly {@link zhajinhua.ZhajinhuaTurnResp.verify|verify} messages.
+         * @param message ZhajinhuaTurnResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: zhajinhua.IZhajinhuaTurnResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ZhajinhuaTurnResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ZhajinhuaTurnResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): zhajinhua.ZhajinhuaTurnResp;
+
+        /**
+         * Decodes a ZhajinhuaTurnResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ZhajinhuaTurnResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): zhajinhua.ZhajinhuaTurnResp;
+
+        /**
+         * Verifies a ZhajinhuaTurnResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ZhajinhuaTurnResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ZhajinhuaTurnResp
+         */
+        public static fromObject(object: { [k: string]: any }): zhajinhua.ZhajinhuaTurnResp;
+
+        /**
+         * Creates a plain object from a ZhajinhuaTurnResp message. Also converts values to other types if specified.
+         * @param message ZhajinhuaTurnResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: zhajinhua.ZhajinhuaTurnResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ZhajinhuaTurnResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
