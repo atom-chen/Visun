@@ -8,7 +8,6 @@ import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
-import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brcowcow_msgs, brcowcow_request } from "../../../../../common/script/proto/net_brcowcow";
 import { brcowcow } from "../../../../../../declares/brcowcow";
@@ -27,6 +26,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import PlayerMgr from "../../../../../common/script/model/PlayerMgr";
 import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -47,6 +47,10 @@ export default class BrnnUI extends BaseComponent {
 		CommonUtil.traverseLabels(this.node, this.m_lab);
 
 		ResPool.load(ViewDefine.CpnChip);
+
+		for(var i=0; i<5; i++) {
+			this.m_ui["handor"+i].scale = 0.7;
+		}
 
 		this.initNetEvent();
 		this.initUIEvent();
@@ -133,17 +137,30 @@ export default class BrnnUI extends BaseComponent {
 	}
 
 	private clearCards() {
-		this.m_ui.CpnHandcard0.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.handor0.getComponent(CpnHandcard2).resetCards(null);
 		this.m_ui.CpnPaixing0.getComponent(CpnPaixing).setCardType(-1,-1);
-		this.m_ui.CpnHandcard1.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.handor1.getComponent(CpnHandcard2).resetCards(null);
 		this.m_ui.CpnPaixing1.getComponent(CpnPaixing).setCardType(-1,-1);
-		this.m_ui.CpnHandcard2.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.handor2.getComponent(CpnHandcard2).resetCards(null);
 		this.m_ui.CpnPaixing2.getComponent(CpnPaixing).setCardType(-1,-1);
-		this.m_ui.CpnHandcard3.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.handor3.getComponent(CpnHandcard2).resetCards(null);
 		this.m_ui.CpnPaixing3.getComponent(CpnPaixing).setCardType(-1,-1);
-		this.m_ui.CpnHandcard4.getComponent(CpnHandcard).resetCards(null, false);
+		this.m_ui.handor4.getComponent(CpnHandcard2).resetCards(null);
 		this.m_ui.CpnPaixing4.getComponent(CpnPaixing).setCardType(-1,-1);
 	}
+
+	private playFapaiAni() {
+        var nn = 0;
+        for(var i=0; i<5; i++){
+			this.m_ui["handor"+i].getComponent(CpnHandcard2).resetCards([0,0,0,0,0]);
+			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(-1,-1);
+            var fromPos = CommonUtil.convertSpaceAR(this.m_ui.deingNode, this.m_ui["handor"+i]);
+            for(var j=0; j<5; j++) {
+                nn++;
+                CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this.m_ui["handor"+i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+            }
+        }
+    }
 
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
@@ -204,8 +221,8 @@ export default class BrnnUI extends BaseComponent {
 		this.refreshZhuang();
 
 		this.isJoined = false;
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
-		this.clearCards();
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setFapai();
+		this.playFapaiAni();
 		this.clearBets();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
@@ -247,7 +264,8 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowOpenResp(param:brcowcow.IBrcowcowOpenResp) {
 		var cardlist:Array<gamecomm.ICardInfo> = [param.TianCard, param.DiCard, param.XuanCard, param.HuangCard, param.BankerCard];
 		for(var i = 0; i < cardlist.length; i++) {
-			this.m_ui["CpnHandcard"+i].getComponent(CpnHandcard).resetCards(cardlist[i].Cards, true);
+			this.m_ui["handor"+i].getComponent(CpnHandcard2).resetCards(cardlist[i].Cards);
+			this.m_ui["handor"+i].getComponent(CpnHandcard2).playOpen(true);
 			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(cardlist[i].CardType, cardlist[i].CardValue);
 		}
 		this.setWinAreas(param.AwardArea);
