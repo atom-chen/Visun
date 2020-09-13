@@ -83,6 +83,22 @@ export default class UIHall extends BaseComponent {
 				this.refreshGameButton(bton, arr[0]);
 			}
 		}
+
+		for(var iii in GameConfig) {
+			if(!gameList[iii]) {
+				var testBtn:any = cc.instantiate(this.gameBtn);
+				this.m_ui.content.addChild(testBtn);
+				var tbl : any = {};
+				CommonUtil.traverseNodes(testBtn, tbl);
+				Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), GameConfig[iii].icon, this);
+				testBtn.gameType = GameConfig[iii].GameKind;
+				CommonUtil.addClickEvent(testBtn, function(){
+					GameManager.getInstance().enterGameScene(this.gameType);
+				}, testBtn);
+				testBtn.getComponent(cc.Button).enabled = false;
+				CommonUtil.grayNode(testBtn, true);
+			}
+		}
 	}
 
 	private refreshGameButton(bton:cc.Node, gameData:login.IGameItem) {
@@ -166,6 +182,7 @@ export default class UIHall extends BaseComponent {
 	//----------- tests --------------------------------------------
 
 	private test() {
+		this.m_ui.content.removeAllChildren();
 		for(var i in GameConfig) {
 			var bton:any = cc.instantiate(this.gameBtn);
 			this.m_ui.content.addChild(bton);
