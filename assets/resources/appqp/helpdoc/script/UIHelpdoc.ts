@@ -7,6 +7,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIHelpdoc extends BaseComponent {
+    private _pageConts:Array<string> = [];
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -27,6 +28,7 @@ export default class UIHelpdoc extends BaseComponent {
             this.m_ui["tab"+i].getChildByName("tab_sel").active = idx == i;
             this.m_ui["tab"+i].getChildByName("tab_unsel").active = idx != i;
         }
+        this.m_ui.lab_cont.getComponent(cc.RichText).string = this._pageConts[idx] || "";
     }
 
     setViewData(data) {
@@ -34,7 +36,8 @@ export default class UIHelpdoc extends BaseComponent {
         var cfg = GameConfig[kindId];
         var doc = HelpDocDefine[kindId];
         this.m_ui.lab_title.getComponent(cc.Label).string = cfg && cfg.name || "";
-        this.m_ui.lab_cont.getComponent(cc.RichText).string = doc && doc.cont || "";
+        this._pageConts = [doc.contPx, doc.contRule, doc.contPeilv];
+        this.selectTab(0);
     }
 
 }
