@@ -9389,8 +9389,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -667,
-        -375,
+        -547,
+        347.28,
         0,
         0,
         0,
@@ -9456,8 +9456,8 @@
     "_enabled": true,
     "alignMode": 1,
     "_target": null,
-    "_alignFlags": 12,
-    "_left": 0,
+    "_alignFlags": 9,
+    "_left": 120,
     "_right": 0,
     "_top": 0,
     "_bottom": 0,
@@ -9470,7 +9470,7 @@
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
-    "_originalHeight": 0,
+    "_originalHeight": 27.72,
     "_id": ""
   },
   {
