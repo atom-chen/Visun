@@ -37,13 +37,6 @@ var GameConfig = {
 		dir: "honhei",
 		viewpath: ViewDefine.UIhonghei
 	},
-	[GameKindEnum.BirdBeast] : {
-		GameKind: GameKindEnum.BirdBeast,
-		name: "飞禽走兽",
-		icon: "lobby/imgs/gameico/ico_fqzs",
-		dir: "fqzs",
-		viewpath: ViewDefine.UIfqzs
-	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
 		name: "百人推筒子",
@@ -145,35 +138,49 @@ var GameConfig = {
 		dir: "ermj",
 		viewpath: ViewDefine.UIermj
 	},
-	[GameKindEnum.Buyu] : {
-		GameKind: GameKindEnum.Buyu,
-		name: "捕鱼",
-		icon: "lobby/imgs/gameico/ico_bydr",
-		dir: "buyu",
-		viewpath: ViewDefine.UIbuyu
-	},
+
+	//---------------------------------------------------
+
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
 		name: "二八杠",
 		icon: "lobby/imgs/gameico/ico_erba",
 		dir: "erba",
-		viewpath: ViewDefine.UIerba
+		viewpath: ViewDefine.UIerba,
+		orderv: 1
 	},
-	[GameKindEnum.Jskb] : {
-		GameKind: GameKindEnum.Jskb,
-		name: "极速狂飙",
-		icon: "lobby/imgs/gameico/ico_jskb",
-		dir: "jskb",
-		viewpath: ViewDefine.UIjskb
+	[GameKindEnum.Buyu] : {
+		GameKind: GameKindEnum.Buyu,
+		name: "捕鱼",
+		icon: "lobby/imgs/gameico/ico_bydr",
+		dir: "buyu",
+		viewpath: ViewDefine.UIbuyu,
+		orderv: 3
+	},
+	[GameKindEnum.BirdBeast] : {
+		GameKind: GameKindEnum.BirdBeast,
+		name: "飞禽走兽",
+		icon: "lobby/imgs/gameico/ico_fqzs",
+		dir: "fqzs",
+		viewpath: ViewDefine.UIfqzs,
+		orderv: 2
 	},
 
-	[GameKindEnum.RPG] : {
-		GameKind: GameKindEnum.RPG,
-		name: "RPG",
-		icon: "lobby/imgs/gameico/ico_rpg",
-		dir: "jskb",
-		viewpath: ViewDefine.battle1
-	},
+	// [GameKindEnum.Jskb] : {
+	// 	GameKind: GameKindEnum.Jskb,
+	// 	name: "极速狂飙",
+	// 	icon: "lobby/imgs/gameico/ico_jskb",
+	// 	dir: "jskb",
+	// 	viewpath: ViewDefine.UIjskb
+	// },
+
+	// [GameKindEnum.RPG] : {
+	// 	GameKind: GameKindEnum.RPG,
+	// 	name: "RPG",
+	// 	icon: "lobby/imgs/gameico/ico_rpg",
+	// 	dir: "jskb",
+	// 	viewpath: ViewDefine.battle1
+	// },
 };
 
 export default GameConfig;

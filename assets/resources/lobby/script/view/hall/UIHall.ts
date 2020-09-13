@@ -84,20 +84,37 @@ export default class UIHall extends BaseComponent {
 			}
 		}
 
+		var waitlist = [];
 		for(var iii in GameConfig) {
 			if(!gameList[iii]) {
-				var testBtn:any = cc.instantiate(this.gameBtn);
-				this.m_ui.content.addChild(testBtn);
-				var tbl : any = {};
-				CommonUtil.traverseNodes(testBtn, tbl);
-				Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), GameConfig[iii].icon, this);
-				testBtn.gameType = GameConfig[iii].GameKind;
-				CommonUtil.addClickEvent(testBtn, function(){
-					GameManager.getInstance().enterGameScene(this.gameType);
-				}, testBtn);
-				testBtn.getComponent(cc.Button).enabled = false;
-				CommonUtil.grayNode(testBtn, true);
+				waitlist.push(GameConfig[iii]);
 			}
+		}
+		waitlist.sort(function(a, b){
+			if(!isNil(a.orderv) && !isNil(b.orderv)) {
+				return a.orderv - b.orderv;
+			}
+			if(isNil(a.orderv)) {
+				return -1;
+			}
+			if(isNil(b.orderv)) {
+				return 1;
+			}
+			return -1;
+		});
+		for(var aaa in waitlist) {
+			var cfg = waitlist[aaa];
+			var testBtn:any = cc.instantiate(this.gameBtn);
+			this.m_ui.content.addChild(testBtn);
+			var tbl : any = {};
+			CommonUtil.traverseNodes(testBtn, tbl);
+			Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);
+			testBtn.gameType = cfg.GameKind;
+			CommonUtil.addClickEvent(testBtn, function(){
+				GameManager.getInstance().enterGameScene(this.gameType);
+			}, testBtn);
+			testBtn.getComponent(cc.Button).enabled = false;
+			CommonUtil.grayNode(testBtn, true);
 		}
 	}
 
