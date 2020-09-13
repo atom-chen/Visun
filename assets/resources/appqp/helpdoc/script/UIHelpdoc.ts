@@ -13,7 +13,20 @@ export default class UIHelpdoc extends BaseComponent {
 
         CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
             CommonUtil.safeDelete(this);
-		}, this);
+        }, this);
+        
+        CommonUtil.addClickEvent(this.m_ui.tab0, function(){ this.selectTab(0); }, this);
+        CommonUtil.addClickEvent(this.m_ui.tab1, function(){ this.selectTab(1); }, this);
+        CommonUtil.addClickEvent(this.m_ui.tab2, function(){ this.selectTab(2); }, this);
+
+        this.selectTab(0);
+    }
+
+    private selectTab(idx) {
+        for(var i=0; i<3; i++) {
+            this.m_ui["tab"+i].getChildByName("tab_sel").active = idx == i;
+            this.m_ui["tab"+i].getChildByName("tab_unsel").active = idx != i;
+        }
     }
 
     setViewData(data) {
