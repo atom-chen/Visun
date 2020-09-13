@@ -59,7 +59,7 @@ export default class HongheiUI extends BaseComponent {
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
-		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+	//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
 
     //准备阶段
