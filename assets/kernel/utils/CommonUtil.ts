@@ -808,4 +808,15 @@ export default class CommonUtil {
 		return v * 100;
 	}
 
+
+	public static look3d(nd:cc.Node, skewX:number) {
+		if(!nd) { return; }
+		let k = Math.abs(Math.tan(skewX * Math.PI / 180));
+		let angle = Math.acos((Math.sqrt(4 + k * k) - k) / 2) * 180 / Math.PI;
+		let scale = 2 / (Math.sqrt(4 + k * k) - k);
+		nd.is3DNode = true;
+		nd.eulerAngles = cc.v3(angle, skewX < 0 ? -angle : angle, 0);
+		nd.scale = 2-scale;
+	}
+
 }

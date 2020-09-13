@@ -40,7 +40,12 @@ export default class QznnUI extends BaseComponent {
             this._playerCpns.push(nd.getChildByName("CpnPlayer1").getComponent(CpnPlayer1));
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
             this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
-        }
+		}
+		
+		this._handors[1].set3dLook(15);
+		this._handors[2].set3dLook(15);
+		this._handors[3].set3dLook(-15);
+		this._handors[4].set3dLook(-15);
 
 		this.initUIEvent();
 		this.initNetEvent();

@@ -41,6 +41,8 @@ export default class BrnnUI extends BaseComponent {
 	private tmrState = 0;
 	private isJoined = false;
 
+	private _handors:Array<CpnHandcard2> = [];
+
 	
 	onLoad () {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -50,6 +52,7 @@ export default class BrnnUI extends BaseComponent {
 
 		for(var i=0; i<5; i++) {
 			this.m_ui["handor"+i].scale = 0.7;
+			this._handors[i] = this.m_ui["handor"+i].getComponent(CpnHandcard2);
 		}
 
 		this.initNetEvent();
@@ -152,12 +155,12 @@ export default class BrnnUI extends BaseComponent {
 	private playFapaiAni() {
         var nn = 0;
         for(var i=0; i<5; i++){
-			this.m_ui["handor"+i].getComponent(CpnHandcard2).resetCards([0,0,0,0,0]);
+			this._handors[i].resetCards([0,0,0,0,0]);
 			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(-1,-1);
             var fromPos = CommonUtil.convertSpaceAR(this.m_ui.deingNode, this.m_ui["handor"+i]);
             for(var j=0; j<5; j++) {
                 nn++;
-                CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this.m_ui["handor"+i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.06);
             }
         }
     }
@@ -264,8 +267,8 @@ export default class BrnnUI extends BaseComponent {
 	private BrcowcowOpenResp(param:brcowcow.IBrcowcowOpenResp) {
 		var cardlist:Array<gamecomm.ICardInfo> = [param.TianCard, param.DiCard, param.XuanCard, param.HuangCard, param.BankerCard];
 		for(var i = 0; i < cardlist.length; i++) {
-			this.m_ui["handor"+i].getComponent(CpnHandcard2).resetCards(cardlist[i].Cards);
-			this.m_ui["handor"+i].getComponent(CpnHandcard2).playOpen(true);
+			this._handors[i].resetCards(cardlist[i].Cards);
+			this._handors[i].playOpen(true);
 			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(cardlist[i].CardType, cardlist[i].CardValue);
 		}
 		this.setWinAreas(param.AwardArea);

@@ -1,6 +1,7 @@
 import { PokerCode } from "../../../../common/script/definer/PokerDefine";
 import CpnPoker from "./CpnPoker";
 import { isNil } from "../../../../kernel/utils/GlobalFuncs";
+import CommonUtil from "../../../../kernel/utils/CommonUtil";
 
 const {ccclass, property} = cc._decorator;
 
@@ -10,10 +11,15 @@ export default class CpnHandcard2 extends cc.Component {
     pokerTemplate: cc.Prefab = null;
 
     private xSpace:number = 50;
+    private d3Look:number = 0;
 
     public setXSpace(v:number) {
         this.xSpace = v;
         this.fixPos();
+    }
+
+    public set3dLook(v:number) {
+        this.d3Look = v;
     }
 
     public clearCards() {
@@ -82,6 +88,9 @@ export default class CpnHandcard2 extends cc.Component {
         var comp:CpnPoker = card.getComponent(CpnPoker);
         comp.setCode(cardV);
         this.node.addChild(card);
+        if(this.d3Look != 0) {
+            CommonUtil.look3d(card, this.d3Look);
+        }
         this.fixPos();
         return comp;
     }

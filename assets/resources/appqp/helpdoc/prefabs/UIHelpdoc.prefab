@@ -761,7 +761,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "ebvymDb6xAU5nWdurR/QkI",
+    "fileId": "f3FCZ5a79Do5/pSr/9o5MY",
     "sync": false
   },
   {
@@ -870,7 +870,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "f4CxHWq6lHoaTPZug4HWkA",
+    "fileId": "bf6hw2kPFHlrKTu95nx8IB",
     "sync": false
   },
   {
@@ -1846,7 +1846,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 128,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -1899,7 +1899,7 @@
     "_useOriginalSize": false,
     "_string": "牌型说明",
     "_N$string": "牌型说明",
-    "_fontSize": 40,
+    "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2248,7 +2248,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 128,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -2301,7 +2301,7 @@
     "_useOriginalSize": false,
     "_string": "玩法说明",
     "_N$string": "玩法说明",
-    "_fontSize": 40,
+    "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -2650,7 +2650,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 128,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -2703,7 +2703,7 @@
     "_useOriginalSize": false,
     "_string": "赔率说明",
     "_N$string": "赔率说明",
-    "_fontSize": 40,
+    "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
