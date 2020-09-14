@@ -466,26 +466,16 @@ export default class zjhUI extends BaseComponent {
         if(param.Infos) {
             for(var i in param.Infos) {
                 var cur = param.Infos[i];
-                for(var j in param.Infos[i].Compares) {
-                    var uid = cur.Compares[j];
-                    var idx = this.playerIdx(uid);
-                    if(idx >= 0) {
-                        var cardlist = cur.Cards && cur.Cards.Cards;
-                        if(isNil(cardlist) || cardlist.length <= 0) {
-                            cardlist = ZjhMgr.getInstance().getPlayer(uid).Cards.Cards;
-                        }
-                        this._handors[idx].resetCards(cardlist);
-                        this._handors[idx].playOpen();
+                var uid = cur.MyInfo.UserID;
+                var idx = this.playerIdx(uid);
+                if(idx >= 0) {
+                    var cardlist = cur.Cards && cur.Cards.Cards;
+                    if(isNil(cardlist) || cardlist.length <= 0) {
+                        cardlist =ZjhMgr.getInstance().getPlayer(uid).Cards && ZjhMgr.getInstance().getPlayer(uid).Cards.Cards;
                     }
+                    this._handors[idx].resetCards(cardlist);
+                    this._handors[idx].playOpen();
                 }
-
-                // var tipStr = "";
-                // if(cur.WinScore > 0) {
-                //     tipStr += cur.MyInfo.Name + "赢" + CommonUtil.formRealMoney(cur.WinScore);
-                // } else {
-                //     tipStr += cur.MyInfo.Name + "输" + CommonUtil.formRealMoney(cur.WinScore);
-                // }
-                // UIManager.toast(tipStr);
             }
         }
         this.playJiesuan(param);
