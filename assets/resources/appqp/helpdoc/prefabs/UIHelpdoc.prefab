@@ -331,8 +331,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 700,
-      "height": 490
+      "width": 680,
+      "height": 470
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -343,8 +343,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        125,
-        -29,
+        119,
+        -23,
         0,
         0,
         0,
@@ -402,7 +402,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 660,
+      "width": 640,
       "height": 440
     },
     "_anchorPoint": {
@@ -473,7 +473,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 660,
+      "width": 640,
       "height": 440
     },
     "_anchorPoint": {
@@ -544,7 +544,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 660,
+      "width": 640,
       "height": 85.88
     },
     "_anchorPoint": {
@@ -557,7 +557,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        265,
+        215,
         0,
         0,
         0,
@@ -618,7 +618,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 910,
+      "width": 640,
       "height": 85.88
     },
     "_anchorPoint": {
@@ -630,7 +630,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -330,
+        -320,
         0,
         0,
         0,
@@ -761,7 +761,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "8f91vopU9INpGLzzPEapin",
+    "fileId": "afpDrSEwlMY6O//qsRC7sG",
     "sync": false
   },
   {
@@ -870,7 +870,7 @@
     "asset": {
       "__uuid__": "593a0943-0c29-43ce-b608-4a0a4354f66e"
     },
-    "fileId": "43fdrkJttOY7CVlCvvzEqC",
+    "fileId": "99ULgexYRPbbsMHF0Ufrow",
     "sync": false
   },
   {
@@ -888,7 +888,7 @@
     "_N$fontSize": 26,
     "_N$font": null,
     "_N$cacheMode": 0,
-    "_N$maxWidth": 910,
+    "_N$maxWidth": 640,
     "_N$lineHeight": 38,
     "_N$imageAtlas": null,
     "_N$handleTouchEvent": true,
@@ -969,7 +969,7 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 660,
+      "width": 640,
       "height": 85.88
     },
     "_resize": 1,
@@ -1099,8 +1099,8 @@
     "_alignFlags": 45,
     "_left": 20,
     "_right": 20,
-    "_top": 20,
-    "_bottom": 30,
+    "_top": 10,
+    "_bottom": 20,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1140,7 +1140,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "c861b0c8-cdf5-458b-82c6-7d46a283afd9"
+      "__uuid__": "5657c651-b9c6-4a74-96de-76fce7af3311"
     },
     "_type": 1,
     "_sizeMode": 0,
