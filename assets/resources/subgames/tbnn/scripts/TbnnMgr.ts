@@ -33,6 +33,11 @@ export default class TbnnMgr extends ModelBase {
     }
 
     addPlayer(man:tbcowcow.ITbcowcowPlayer) {
+        if(isNil(man.MyInfo)) {
+            man = {
+                MyInfo:man
+            };
+        }
         if(isNil(this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID])) {
             this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID] = man;
         } else {
