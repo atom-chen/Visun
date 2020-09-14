@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "1f4f5fb9-e491-49ce-946d-b1cb5a5fd4cb",
+  "uuid": "86d52f0b-f148-4545-8d70-5d6c22058b83",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,19 +11,19 @@
   "height": 500,
   "platformSettings": {},
   "subMetas": {
-    "ico_shui13": {
+    "ico_erba": {
       "ver": "1.0.4",
-      "uuid": "b6bf269b-cc9e-4a8e-8066-8cf9ed45a416",
-      "rawTextureUuid": "1f4f5fb9-e491-49ce-946d-b1cb5a5fd4cb",
+      "uuid": "37a9384d-7428-4841-87b1-81d68468aa85",
+      "rawTextureUuid": "86d52f0b-f148-4545-8d70-5d6c22058b83",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
       "offsetX": 0,
-      "offsetY": 2.5,
+      "offsetY": -3,
       "trimX": 0,
-      "trimY": 0,
+      "trimY": 6,
       "width": 500,
-      "height": 495,
+      "height": 494,
       "rawWidth": 500,
       "rawHeight": 500,
       "borderTop": 0,

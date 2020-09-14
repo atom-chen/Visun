@@ -138,13 +138,20 @@ var GameConfig = {
 		dir: "ermj",
 		viewpath: ViewDefine.UIermj
 	},
+	[GameKindEnum.Slwh] : {
+		GameKind: GameKindEnum.Slwh,
+		name: "森林舞会",
+		icon: "lobby/imgs/gameico1/ico_slwh",
+		dir: "slwh",
+		viewpath: ViewDefine.UIslwh
+	},
 
 	//---------------------------------------------------
 
 	[GameKindEnum.Erba] : {
 		GameKind: GameKindEnum.Erba,
 		name: "二八杠",
-		icon: "lobby/imgs/gameico/ico_erba",
+		icon: "lobby/imgs/gameico1/ico_erba",
 		dir: "erba",
 		viewpath: ViewDefine.UIerba,
 		orderv: 1
@@ -152,7 +159,7 @@ var GameConfig = {
 	[GameKindEnum.Buyu] : {
 		GameKind: GameKindEnum.Buyu,
 		name: "捕鱼",
-		icon: "lobby/imgs/gameico/ico_bydr",
+		icon: "lobby/imgs/gameico1/ico_bydr",
 		dir: "buyu",
 		viewpath: ViewDefine.UIbuyu,
 		orderv: 3
@@ -160,7 +167,7 @@ var GameConfig = {
 	[GameKindEnum.BirdBeast] : {
 		GameKind: GameKindEnum.BirdBeast,
 		name: "飞禽走兽",
-		icon: "lobby/imgs/gameico/ico_fqzs",
+		icon: "lobby/imgs/gameico1/ico_fqzs",
 		dir: "fqzs",
 		viewpath: ViewDefine.UIfqzs,
 		orderv: 2
@@ -169,7 +176,7 @@ var GameConfig = {
 	// [GameKindEnum.Jskb] : {
 	// 	GameKind: GameKindEnum.Jskb,
 	// 	name: "极速狂飙",
-	// 	icon: "lobby/imgs/gameico/ico_jskb",
+	// 	icon: "lobby/imgs/gameico1/ico_jskb",
 	// 	dir: "jskb",
 	// 	viewpath: ViewDefine.UIjskb
 	// },
@@ -177,7 +184,7 @@ var GameConfig = {
 	// [GameKindEnum.RPG] : {
 	// 	GameKind: GameKindEnum.RPG,
 	// 	name: "RPG",
-	// 	icon: "lobby/imgs/gameico/ico_rpg",
+	// 	icon: "lobby/imgs/gameico1/ico_rpg",
 	// 	dir: "jskb",
 	// 	viewpath: ViewDefine.battle1
 	// },
