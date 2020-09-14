@@ -29,12 +29,12 @@ import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 
 const MAX_SOLDIER = 5;
 var CMLIST = [
-    "appqp/imgs/chips/cm1", 
-    "appqp/imgs/chips/cm2", 
-    "appqp/imgs/chips/cm3", 
-    "appqp/imgs/chips/cm4", 
-    "appqp/imgs/chips/cm5",
-    "appqp/imgs/chips/cm6"
+    "appqp/imgs/chips1/cm1", 
+    "appqp/imgs/chips1/cm2", 
+    "appqp/imgs/chips1/cm3", 
+    "appqp/imgs/chips1/cm4", 
+    "appqp/imgs/chips1/cm5",
+    "appqp/imgs/chips1/cm6"
 ];
 var CMVLIST = [ 5, 10, 20, 50, 100, 150 ];
 var margin = {rx:100,ry:60,rr:0};
