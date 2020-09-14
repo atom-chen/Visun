@@ -10,6 +10,7 @@ import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
 import { login } from "../../../../declares/login";
 import { login_request } from "../proto/net_login";
+import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
 
 
 //游戏管理器
@@ -196,12 +197,17 @@ export default class GameManager extends ModelBase {
 
 	//跳转到游戏场景
 	public enterGameScene(gameType) {
-		if(!this.clientConfig(gameType)) {
+		var cliCfg = this.clientConfig(gameType);
+		if(!cliCfg) {
 			cc.warn("no client config");
 			return;
 		}
+		if(isEmpty(cliCfg.viewpath)) {
+			UIManager.toast("敬请期待");
+			return;
+		}
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
-			var viewpath = this.clientConfig(gameType).viewpath;
+			var viewpath = cliCfg.viewpath;
 			UIManager.openPanel(viewpath, null);
 		});
 	}

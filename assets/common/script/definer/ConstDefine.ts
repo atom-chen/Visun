@@ -32,9 +32,13 @@ export enum GameKindEnum {
 	Suoha		= 20800,		//梭哈
 	Paodekuai	= 20900,		//跑得快
 	Erba		= 21200,		//二八杠
+	Tuitongzi	= 21300,		//推筒子
+	Jszjh		= 21400,		//极速炸金花
+	K4zqznn		= 21500,		//看四张抢庄牛牛
 	//街机电玩
 	Jskb		= 30200,		//极速狂飙
 	Slwh		= 30300,		//森林舞会
+	Xlch		= 30400,		//血流成河
 	//
 	RPG = 99999, 				//（回合制+即时制+格斗）
 }

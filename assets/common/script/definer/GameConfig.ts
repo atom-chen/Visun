@@ -148,37 +148,62 @@ var GameConfig = {
 
 	//---------------------------------------------------
 
-	[GameKindEnum.Erba] : {
-		GameKind: GameKindEnum.Erba,
-		name: "二八杠",
-		icon: "lobby/imgs/gameico2/ico_erba",
-		dir: "erba",
-		viewpath: ViewDefine.UIerba,
+	[GameKindEnum.Tuitongzi] : {
+		GameKind: GameKindEnum.Tuitongzi,
+		name: "推筒子",
+		icon: "lobby/imgs/gameico2/ico_ttz",
+		dir: "ttz",
+	//	viewpath: ViewDefine.UIbrttz,
 		orderv: 1
 	},
-	[GameKindEnum.Buyu] : {
-		GameKind: GameKindEnum.Buyu,
-		name: "捕鱼",
-		icon: "lobby/imgs/gameico2/ico_bydr",
-		dir: "buyu",
-		viewpath: ViewDefine.UIbuyu,
-		orderv: 3
+	[GameKindEnum.Jszjh] : {
+		GameKind: GameKindEnum.Jszjh,
+		name: "极速炸金花",
+		icon: "lobby/imgs/gameico2/ico_jszjh",
+		dir: "jszjh",
+	//	viewpath: ViewDefine.UIbrttz,
+		orderv: 1
 	},
-	[GameKindEnum.BirdBeast] : {
-		GameKind: GameKindEnum.BirdBeast,
-		name: "飞禽走兽",
-		icon: "lobby/imgs/gameico2/ico_fqzs",
-		dir: "fqzs",
-		viewpath: ViewDefine.UIfqzs,
-		orderv: 2
+	[GameKindEnum.Xlch] : {
+		GameKind: GameKindEnum.Xlch,
+		name: "血流成河",
+		icon: "lobby/imgs/gameico2/ico_xlch",
+		dir: "xlch",
+	//	viewpath: ViewDefine.UIbrttz,
+		orderv: 1
+	},
+	[GameKindEnum.K4zqznn] : {
+		GameKind: GameKindEnum.K4zqznn,
+		name: "看四张抢庄牛牛",
+		icon: "lobby/imgs/gameico2/ico_k4zqznn",
+		dir: "k4zqznn",
+	//	viewpath: ViewDefine.UIbrttz,
+		orderv: 1
 	},
 
-	// [GameKindEnum.Jskb] : {
-	// 	GameKind: GameKindEnum.Jskb,
-	// 	name: "极速狂飙",
-	// 	icon: "lobby/imgs/gameico2/ico_jskb",
-	// 	dir: "jskb",
-	// 	viewpath: ViewDefine.UIjskb
+	// [GameKindEnum.Erba] : {
+	// 	GameKind: GameKindEnum.Erba,
+	// 	name: "二八杠",
+	// 	icon: "lobby/imgs/gameico2/ico_erba",
+	// 	dir: "erba",
+	// 	viewpath: ViewDefine.UIerba,
+	// 	orderv: 1
+	// },
+	// [GameKindEnum.Buyu] : {
+	// 	GameKind: GameKindEnum.Buyu,
+	// 	name: "捕鱼",
+	// 	icon: "lobby/imgs/gameico2/ico_bydr",
+	// 	dir: "buyu",
+	// 	viewpath: ViewDefine.UIbuyu,
+	// 	orderv: 3
+	// },
+	// [GameKindEnum.BirdBeast] : {
+	// 	GameKind: GameKindEnum.BirdBeast,
+	// 	name: "飞禽走兽",
+	// 	icon: "lobby/imgs/gameico2/ico_fqzs",
+	// 	dir: "fqzs",
+	// 	viewpath: ViewDefine.UIfqzs,
+	// 	orderv: 2
 	// },
 
 	// [GameKindEnum.RPG] : {
