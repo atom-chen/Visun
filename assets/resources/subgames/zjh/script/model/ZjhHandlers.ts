@@ -93,6 +93,13 @@ var ZjhHandlers = {
 			man.MyInfo.Sate = ZjhFighterState.bipaishu;
 		}
 
+		if(!isNil(param.AttackerCards) && !isNil(ZjhMgr.getInstance().getPlayer(param.AttackerId))) {
+			ZjhMgr.getInstance().getPlayer(param.AttackerId).Cards = param.AttackerCards;
+		}
+		if(!isNil(param.HitCards) && !isNil(ZjhMgr.getInstance().getPlayer(param.HitId))) {
+			ZjhMgr.getInstance().getPlayer(param.HitId).Cards = param.HitCards;
+		}
+
 		var attacker = ZjhMgr.getInstance().getPlayer(param.AttackerId);
 		if(attacker && param["Score"]) {
 			attacker.MyInfo.Gold -= param["Score"];
