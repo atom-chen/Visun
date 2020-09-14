@@ -1507,7 +1507,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "fcad9330-9660-4b66-9c57-430c57aa80de"
+      "__uuid__": "ad83812e-5f76-4363-bb25-47231139e1d0"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -1622,24 +1622,12 @@
       "b": 120,
       "a": 200
     },
-    "_N$normalSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
-    "_N$pressedSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
-    "pressedSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
-    "_N$hoverSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
-    "hoverSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
-    "_N$disabledSprite": {
-      "__uuid__": "ec70ab23-fc28-4124-9b63-21acbdb4041b"
-    },
+    "_N$normalSprite": null,
+    "_N$pressedSprite": null,
+    "pressedSprite": null,
+    "_N$hoverSprite": null,
+    "hoverSprite": null,
+    "_N$disabledSprite": null,
     "_N$target": {
       "__id__": 31
     },
