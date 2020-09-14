@@ -36,7 +36,9 @@ export default class UIHelpdoc extends BaseComponent {
         var cfg = GameConfig[kindId];
         var doc = HelpDocDefine[kindId];
         this.m_ui.lab_title.getComponent(cc.Label).string = cfg && cfg.name || "";
-        this._pageConts = [doc.contPx, doc.contRule, doc.contPeilv];
+        if(doc) {
+            this._pageConts = [doc.contPx, doc.contRule, doc.contPeilv];
+        }
         this.selectTab(0);
     }
 
