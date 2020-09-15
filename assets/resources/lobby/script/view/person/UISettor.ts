@@ -58,6 +58,8 @@ export default class UISettor extends BaseComponent {
 			CommonUtil.safeDelete(this);
 			LoginMgr.getInstance().logout();
 		}, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ CommonUtil.safeDelete(this); }, this);
 	}
 
 }
