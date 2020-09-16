@@ -228,7 +228,10 @@ export default class QznnUI extends BaseComponent {
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = true;
-		this.m_ui.callNode.active = false;
+        this.m_ui.callNode.active = false;
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowStateCallResp(param:qzcowcow.IQzcowcowStateCallResp) {
@@ -236,28 +239,43 @@ export default class QznnUI extends BaseComponent {
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = false;
-		this.m_ui.callNode.active = true;
+        this.m_ui.callNode.active = true;
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowStateDealResp(param:qzcowcow.IQzcowcowStateDealResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
 		this.showSearching(false);
-		this.playFapaiAni();
+        this.playFapaiAni();
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowStatePlayingResp(param:qzcowcow.IQzcowcowStatePlayingResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowStateOpenResp(param:qzcowcow.IQzcowcowStateOpenResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowStateOverResp(param:qzcowcow.IQzcowcowStateOverResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private QzcowcowOpenResp(param:qzcowcow.IQzcowcowOpenResp) {

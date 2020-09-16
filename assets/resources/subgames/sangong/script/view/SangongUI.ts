@@ -231,6 +231,9 @@ export default class SangongUI extends BaseComponent {
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = true;
 		this.m_ui.callNode.active = false;
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongStateCallResp(param:sangong.ISangongStateCallResp) {
@@ -239,27 +242,42 @@ export default class SangongUI extends BaseComponent {
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = false;
 		this.m_ui.callNode.active = true;
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongStateDealResp(param:sangong.ISangongStateDealResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
 		this.showSearching(false);
 		this.playFapaiAni();
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongStatePlayingResp(param:sangong.ISangongStatePlayingResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
 		this.showSearching(false);
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongStateOpenResp(param:sangong.ISangongStateOpenResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
 		this.showSearching(false);
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongStateOverResp(param:sangong.ISangongStateOverResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
 		this.showSearching(false);
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
 	}
 
 	private SangongOpenResp(param:sangong.ISangongOpenResp) {

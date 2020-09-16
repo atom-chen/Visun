@@ -167,10 +167,6 @@ export default class UItbnn extends BaseComponent {
             this._winloses[i].stopPlay();
             this._pnodes[i].getChildByName("callNode").active = false;
         }
-
-        if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
-        }
     }
     
     private TbcowcowStateDealResp(param:tbcowcow.ITbcowcowStateDealResp) {
@@ -179,7 +175,9 @@ export default class UItbnn extends BaseComponent {
         this.playFapaiAni();
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
-        this.resetCD(param.Times.WaitTime);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
         
         UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
@@ -189,7 +187,9 @@ export default class UItbnn extends BaseComponent {
         this.showSearching(false);
         this.m_ui.opNode.active = true;
         this.m_ui.readyNode.active = false;
-        this.resetCD(param.Times.WaitTime);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
     }
 
@@ -198,7 +198,9 @@ export default class UItbnn extends BaseComponent {
         this.showSearching(false);
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
-        this.resetCD(param.Times.WaitTime);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
         this.TbcowcowOpenResp(param.OpenInfo);
         UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
@@ -208,7 +210,9 @@ export default class UItbnn extends BaseComponent {
         this.showSearching(false);
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
-        this.resetCD(param.Times.WaitTime);
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
     }
     
