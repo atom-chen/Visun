@@ -26,6 +26,17 @@ message SangongStateFreeResp {
   TimeInfo Times = 1;
 }
 
+//(开始 - 喊庄)
+message SangongStateCallResp {
+  TimeInfo Times = 1;
+}
+
+//定庄
+message SangongStateDecideResp {
+  TimeInfo Times = 1;
+  uint64 HostID = 2;
+}
+
 
 //(游戏中 - 下注)
 message SangongStatePlayingResp {

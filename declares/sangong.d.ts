@@ -314,6 +314,192 @@ export namespace sangong {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a SangongStateCallResp. */
+    interface ISangongStateCallResp {
+
+        /** SangongStateCallResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+    }
+
+    /** Represents a SangongStateCallResp. */
+    class SangongStateCallResp implements ISangongStateCallResp {
+
+        /**
+         * Constructs a new SangongStateCallResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongStateCallResp);
+
+        /** SangongStateCallResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /**
+         * Creates a new SangongStateCallResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongStateCallResp instance
+         */
+        public static create(properties?: sangong.ISangongStateCallResp): sangong.SangongStateCallResp;
+
+        /**
+         * Encodes the specified SangongStateCallResp message. Does not implicitly {@link sangong.SangongStateCallResp.verify|verify} messages.
+         * @param message SangongStateCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongStateCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongStateCallResp message, length delimited. Does not implicitly {@link sangong.SangongStateCallResp.verify|verify} messages.
+         * @param message SangongStateCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongStateCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongStateCallResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongStateCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongStateCallResp;
+
+        /**
+         * Decodes a SangongStateCallResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongStateCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongStateCallResp;
+
+        /**
+         * Verifies a SangongStateCallResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongStateCallResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongStateCallResp
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongStateCallResp;
+
+        /**
+         * Creates a plain object from a SangongStateCallResp message. Also converts values to other types if specified.
+         * @param message SangongStateCallResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongStateCallResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongStateCallResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SangongStateDecideResp. */
+    interface ISangongStateDecideResp {
+
+        /** SangongStateDecideResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateDecideResp HostID */
+        HostID?: (number|Long|null);
+    }
+
+    /** Represents a SangongStateDecideResp. */
+    class SangongStateDecideResp implements ISangongStateDecideResp {
+
+        /**
+         * Constructs a new SangongStateDecideResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongStateDecideResp);
+
+        /** SangongStateDecideResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateDecideResp HostID. */
+        public HostID: (number|Long);
+
+        /**
+         * Creates a new SangongStateDecideResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongStateDecideResp instance
+         */
+        public static create(properties?: sangong.ISangongStateDecideResp): sangong.SangongStateDecideResp;
+
+        /**
+         * Encodes the specified SangongStateDecideResp message. Does not implicitly {@link sangong.SangongStateDecideResp.verify|verify} messages.
+         * @param message SangongStateDecideResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongStateDecideResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongStateDecideResp message, length delimited. Does not implicitly {@link sangong.SangongStateDecideResp.verify|verify} messages.
+         * @param message SangongStateDecideResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongStateDecideResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongStateDecideResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongStateDecideResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongStateDecideResp;
+
+        /**
+         * Decodes a SangongStateDecideResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongStateDecideResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongStateDecideResp;
+
+        /**
+         * Verifies a SangongStateDecideResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongStateDecideResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongStateDecideResp
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongStateDecideResp;
+
+        /**
+         * Creates a plain object from a SangongStateDecideResp message. Also converts values to other types if specified.
+         * @param message SangongStateDecideResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongStateDecideResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongStateDecideResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a SangongStatePlayingResp. */
     interface ISangongStatePlayingResp {
 

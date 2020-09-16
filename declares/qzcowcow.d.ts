@@ -314,6 +314,192 @@ export namespace qzcowcow {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a QzcowcowStateCallResp. */
+    interface IQzcowcowStateCallResp {
+
+        /** QzcowcowStateCallResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+    }
+
+    /** Represents a QzcowcowStateCallResp. */
+    class QzcowcowStateCallResp implements IQzcowcowStateCallResp {
+
+        /**
+         * Constructs a new QzcowcowStateCallResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowStateCallResp);
+
+        /** QzcowcowStateCallResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /**
+         * Creates a new QzcowcowStateCallResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowStateCallResp instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowStateCallResp): qzcowcow.QzcowcowStateCallResp;
+
+        /**
+         * Encodes the specified QzcowcowStateCallResp message. Does not implicitly {@link qzcowcow.QzcowcowStateCallResp.verify|verify} messages.
+         * @param message QzcowcowStateCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowStateCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowStateCallResp message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowStateCallResp.verify|verify} messages.
+         * @param message QzcowcowStateCallResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowStateCallResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowStateCallResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowStateCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowStateCallResp;
+
+        /**
+         * Decodes a QzcowcowStateCallResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowStateCallResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowStateCallResp;
+
+        /**
+         * Verifies a QzcowcowStateCallResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowStateCallResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowStateCallResp
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowStateCallResp;
+
+        /**
+         * Creates a plain object from a QzcowcowStateCallResp message. Also converts values to other types if specified.
+         * @param message QzcowcowStateCallResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowStateCallResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowStateCallResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QzcowcowStateDecideResp. */
+    interface IQzcowcowStateDecideResp {
+
+        /** QzcowcowStateDecideResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateDecideResp HostID */
+        HostID?: (number|Long|null);
+    }
+
+    /** Represents a QzcowcowStateDecideResp. */
+    class QzcowcowStateDecideResp implements IQzcowcowStateDecideResp {
+
+        /**
+         * Constructs a new QzcowcowStateDecideResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowStateDecideResp);
+
+        /** QzcowcowStateDecideResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateDecideResp HostID. */
+        public HostID: (number|Long);
+
+        /**
+         * Creates a new QzcowcowStateDecideResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowStateDecideResp instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowStateDecideResp): qzcowcow.QzcowcowStateDecideResp;
+
+        /**
+         * Encodes the specified QzcowcowStateDecideResp message. Does not implicitly {@link qzcowcow.QzcowcowStateDecideResp.verify|verify} messages.
+         * @param message QzcowcowStateDecideResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowStateDecideResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowStateDecideResp message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowStateDecideResp.verify|verify} messages.
+         * @param message QzcowcowStateDecideResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowStateDecideResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowStateDecideResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowStateDecideResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowStateDecideResp;
+
+        /**
+         * Decodes a QzcowcowStateDecideResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowStateDecideResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowStateDecideResp;
+
+        /**
+         * Verifies a QzcowcowStateDecideResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowStateDecideResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowStateDecideResp
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowStateDecideResp;
+
+        /**
+         * Creates a plain object from a QzcowcowStateDecideResp message. Also converts values to other types if specified.
+         * @param message QzcowcowStateDecideResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowStateDecideResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowStateDecideResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a QzcowcowStatePlayingResp. */
     interface IQzcowcowStatePlayingResp {
 

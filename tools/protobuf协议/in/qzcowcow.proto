@@ -26,6 +26,17 @@ message QzcowcowStateFreeResp {
   TimeInfo Times = 1;
 }
 
+//(开始 - 喊庄)
+message QzcowcowStateCallResp {
+  TimeInfo Times = 1;
+}
+
+//定庄
+message QzcowcowStateDecideResp {
+  TimeInfo Times = 1;
+  uint64 HostID = 2;
+}
+
 
 //(游戏中 - 下注)
 message QzcowcowStatePlayingResp {

@@ -514,6 +514,219 @@ $root.qzcowcow = (function() {
         return QzcowcowStateFreeResp;
     })();
 
+    qzcowcow.QzcowcowStateCallResp = (function() {
+
+        function QzcowcowStateCallResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowStateCallResp.prototype.Times = null;
+
+        QzcowcowStateCallResp.create = function create(properties) {
+            return new QzcowcowStateCallResp(properties);
+        };
+
+        QzcowcowStateCallResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        QzcowcowStateCallResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowStateCallResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateCallResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowStateCallResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowStateCallResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            return null;
+        };
+
+        QzcowcowStateCallResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateCallResp)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowStateCallResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowStateCallResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            return message;
+        };
+
+        QzcowcowStateCallResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Times = null;
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            return object;
+        };
+
+        QzcowcowStateCallResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowStateCallResp;
+    })();
+
+    qzcowcow.QzcowcowStateDecideResp = (function() {
+
+        function QzcowcowStateDecideResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowStateDecideResp.prototype.Times = null;
+        QzcowcowStateDecideResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        QzcowcowStateDecideResp.create = function create(properties) {
+            return new QzcowcowStateDecideResp(properties);
+        };
+
+        QzcowcowStateDecideResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(16).uint64(message.HostID);
+            return writer;
+        };
+
+        QzcowcowStateDecideResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowStateDecideResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateDecideResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.HostID = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowStateDecideResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowStateDecideResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
+            return null;
+        };
+
+        QzcowcowStateDecideResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateDecideResp)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowStateDecideResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowStateDecideResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        QzcowcowStateDecideResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Times = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
+            }
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            return object;
+        };
+
+        QzcowcowStateDecideResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowStateDecideResp;
+    })();
+
     qzcowcow.QzcowcowStatePlayingResp = (function() {
 
         function QzcowcowStatePlayingResp(properties) {
