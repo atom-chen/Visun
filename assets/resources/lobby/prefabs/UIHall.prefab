@@ -142,7 +142,7 @@
       "ctor": "Float64Array",
       "array": [
         -667,
-        -20,
+        -10,
         0,
         0,
         0,
@@ -4115,7 +4115,7 @@
     "_texture": {
       "__uuid__": "d0a82d39-bede-46c4-b698-c81ff0dedfff"
     },
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 60,

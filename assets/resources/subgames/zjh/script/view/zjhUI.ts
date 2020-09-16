@@ -691,7 +691,7 @@ export default class zjhUI extends BaseComponent {
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_add, function(){ 
-            UIManager.openPopwnd(ViewDefine.UINumInput, true, function(v:string){
+            UIManager.openPopwnd(ViewDefine.UINumInput, true, newHandler(function(v:string){
                 var value = parseFloat(v);
                 if(isEmpty(value) || value<0.1) {
                     UIManager.toast("加注最小金额不得低于0.1元");
@@ -699,7 +699,7 @@ export default class zjhUI extends BaseComponent {
                 }
                 zhajinhua_request.ZhajinhuaRaiseReq({Score:CommonUtil.toServerMoney(value)});
                 return true;
-            })
+            }, this));
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 

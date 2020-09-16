@@ -627,7 +627,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 192,
+      "width": 160,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -680,7 +680,7 @@
     "_useOriginalSize": false,
     "_string": "个人中心",
     "_N$string": "个人中心",
-    "_fontSize": 48,
+    "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

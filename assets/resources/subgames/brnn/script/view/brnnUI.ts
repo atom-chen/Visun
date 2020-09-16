@@ -238,7 +238,7 @@ export default class BrnnUI extends BaseComponent {
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
 
-			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:160, scale:0.5}, {
+			Preloader.showSpineAsync("appqp/spines/startani/skeleton", 0, "animation", 1, this.node, {zIndex:10, x:0, y:0, scale:0.5}, {
 				on_complete: (sk, trackEntry)=>{
 					CommonUtil.safeDelete(sk);
 				}
@@ -249,6 +249,24 @@ export default class BrnnUI extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
 
+	private BrcowcowStateOpenResp(param:brcowcow.IBrcowcowStateOpenResp) {
+		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
+
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+			
+			Preloader.showSpineAsync("appqp/spines/stopbet/bairenniuniu_tingzhixiazhu", 0, "animation", 1, this.node, {zIndex:10}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
+		
+		if(!isNil(param.OpenInfo)) {
+			this.BrcowcowOpenResp(param.OpenInfo);
+		}
+	}
+
 	private BrcowcowStateOver(param:brcowcow.IBrcowcowStateOverResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
@@ -256,15 +274,8 @@ export default class BrnnUI extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
 
-	private BrcowcowStateOpenResp(param:brcowcow.IBrcowcowStateOpenResp) {
-		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-		if(!isNil(param.OpenInfo)) {
-			this.BrcowcowOpenResp(param.OpenInfo);
-		}
-	}
-
 	private BrcowcowOpenResp(param:brcowcow.IBrcowcowOpenResp) {
+		if(isNil(param)) { return; }
 		var cardlist:Array<gamecomm.ICardInfo> = [param.TianCard, param.DiCard, param.XuanCard, param.HuangCard, param.BankerCard];
 		for(var i = 0; i < cardlist.length; i++) {
 			this._handors[i].resetCards(cardlist[i].Cards);

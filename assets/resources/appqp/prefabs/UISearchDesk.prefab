@@ -268,15 +268,15 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -256,
+        -222,
         67,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0.6,
+        0.6,
         1
       ]
     },
@@ -363,7 +363,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 513.34,
+      "width": 385,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -375,7 +375,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -180,
+        -172,
         67,
         0,
         0,
@@ -416,7 +416,7 @@
     "_useOriginalSize": false,
     "_string": "正在为您配桌，请耐心等待...",
     "_N$string": "正在为您配桌，请耐心等待...",
-    "_fontSize": 40,
+    "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

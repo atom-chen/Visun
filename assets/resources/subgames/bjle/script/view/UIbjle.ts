@@ -237,11 +237,17 @@ export default class UIbjle extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
 
-		this.BaccaratOpenResp(param.OpenInfo);
-
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/stopbet/bairenniuniu_tingzhixiazhu", 0, "animation", 1, this.node, {zIndex:10}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
 		}
+
+		this.BaccaratOpenResp(param.OpenInfo);
 	}
 
 	//结算阶段

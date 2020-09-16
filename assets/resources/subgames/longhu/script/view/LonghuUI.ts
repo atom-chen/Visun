@@ -221,7 +221,17 @@ export default class LonghuUI extends BaseComponent {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+		
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/stopbet/bairenniuniu_tingzhixiazhu", 0, "animation", 1, this.node, {zIndex:10}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
+
 		if(!isNil(param.OpenInfo)) {
 			this.TigerXdragonOpenResp(param.OpenInfo);
 		}

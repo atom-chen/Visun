@@ -642,7 +642,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 96,
+      "width": 80,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -695,7 +695,7 @@
     "_useOriginalSize": false,
     "_string": "设置",
     "_N$string": "设置",
-    "_fontSize": 48,
+    "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,

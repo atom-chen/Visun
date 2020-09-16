@@ -257,12 +257,20 @@ export default class ToubaoUI extends BaseComponent {
 
 	//开拍阶段
 	BrtoubaoStateOpenResp(param:brtoubao.IBrtoubaoStateOpenResp) {
-		AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
-		
-		this.BrtoubaoOpenResp(param.OpenInfo);
-
 		TimerManager.delTimer(this.tmrState);
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		
+		if(param.Times.OutTime <= 1) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/endbet", false);
+
+			Preloader.showSpineAsync("appqp/spines/stopbet/bairenniuniu_tingzhixiazhu", 0, "animation", 1, this.node, {zIndex:10}, {
+				on_complete: (sk, trackEntry)=>{
+					CommonUtil.safeDelete(sk);
+				}
+			});
+		}
+		
+		this.BrtoubaoOpenResp(param.OpenInfo);
 	}
 
 	//结算阶段

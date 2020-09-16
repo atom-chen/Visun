@@ -1,3 +1,4 @@
+import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
@@ -9,7 +10,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class UINumInput extends BaseComponent {
 
-    private _cb:Function = null;
+    private _cb:CHandler = null;
     private _minV:number = -1;
     private _maxV:number = -1;
 
@@ -18,7 +19,7 @@ export default class UINumInput extends BaseComponent {
         this.initUIEvent();
     }
 
-    setViewData(cb:Function, info:any) {
+    setViewData(cb:CHandler, info:any) {
         this._cb = cb;
         if(info) {
             this._minV = info.minV;
@@ -62,7 +63,7 @@ export default class UINumInput extends BaseComponent {
                 return;
             }
 
-            var flag = this._cb(v);
+            var flag = this._cb.invoke(v);
             if(flag) {
                 CommonUtil.safeDelete(this);
             }

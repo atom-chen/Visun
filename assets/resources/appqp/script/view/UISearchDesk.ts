@@ -18,7 +18,7 @@ export default class UISearchDesk extends BaseComponent {
                 cb.invoke();
             }
         }, this);
-        this.m_ui.loading_search.runAction(cc.repeatForever(cc.rotateBy(2, 360)));
+        this.m_ui.loading_search.runAction(cc.repeatForever(cc.rotateBy(3, 360)));
     }
 
     setViewData(cb:CHandler) {
