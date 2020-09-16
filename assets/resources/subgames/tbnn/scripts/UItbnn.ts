@@ -134,6 +134,7 @@ export default class UItbnn extends BaseComponent {
             this._pnodes[idx].active = false;
             return;
         }
+        this._pnodes[idx].active = true;
         if(flag) {
             this.refreshFighter((man.MyInfo as gamecomm.IPlayerInfo).UserID);
         }
@@ -168,16 +169,19 @@ export default class UItbnn extends BaseComponent {
     }
     
     private TbcowcowStateDealResp(param:tbcowcow.ITbcowcowStateDealResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+        this.showSearching(false);
         this.playFapaiAni();
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
+        
         UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private TbcowcowStatePlayingResp(param:tbcowcow.ITbcowcowStatePlayingResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+        this.showSearching(false);
         this.m_ui.opNode.active = true;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
@@ -186,6 +190,7 @@ export default class UItbnn extends BaseComponent {
 
 	private TbcowcowStateOpenResp(param:tbcowcow.ITbcowcowStateOpenResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
+        this.showSearching(false);
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
@@ -195,6 +200,7 @@ export default class UItbnn extends BaseComponent {
 
 	private TbcowcowStateOverResp(param:tbcowcow.ITbcowcowStateOverResp) {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
+        this.showSearching(false);
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
@@ -257,6 +263,19 @@ export default class UItbnn extends BaseComponent {
         TbnnMgr.getInstance().removePlayer(param.UserID);
     }
 
+    showSearching(bSearching:boolean) {
+        if(bSearching) {
+            var myIdx = this.playerIdx(LoginUser.getInstance().UserId);
+            for(var n=0; n<MAX_SOLDIER; n++) {
+                this._pnodes[n].active = n == myIdx;
+            }
+        } else {
+            for(var i=0; i<MAX_SOLDIER; i++) {
+                this.refreshPlayerByIndex(i);
+            }
+        }
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
@@ -280,15 +299,16 @@ export default class UItbnn extends BaseComponent {
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             tbcowcow_request.TbcowcowReadyReq({IsReady:true});
+            this.showSearching(true);
             UIManager.openPopwnd(ViewDefine.UISearchDesk, false, function(){
                 tbcowcow_request.TbcowcowReadyReq({IsReady:false});
             });
         }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
-            gamecomm_request.ChangeTableReq({
-                GameID : GameManager.getInstance().getGameId()
-            });
-        }, this);
+        // CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
+        //     gamecomm_request.ChangeTableReq({
+        //         GameID : GameManager.getInstance().getGameId()
+        //     });
+        // }, this);
 
         CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ 
             tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:100});
