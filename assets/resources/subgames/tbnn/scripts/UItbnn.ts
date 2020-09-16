@@ -13,7 +13,7 @@ import CpnGameState from "../../../appqp/script/comps/CpnGameState";
 import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import UIManager from "../../../../kernel/view/UIManager";
-import { isNil } from "../../../../kernel/utils/GlobalFuncs";
+import { isNil, newHandler } from "../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import { gamecomm } from "../../../../../declares/gamecomm";
 import { gamecomm_msgs, gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
@@ -21,6 +21,7 @@ import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
 import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import TimerManager from "../../../../kernel/basic/timer/TimerManager";
 import Preloader from "../../../../kernel/utils/Preloader";
+import CpnWinLoseMoney from "../../../appqp/script/comps/CpnWinLoseMoney";
 
 
 const MAX_SOLDIER = 5;
@@ -37,6 +38,7 @@ export default class UItbnn extends BaseComponent {
     private _pnodes:Array<cc.Node> = [];
     private _playerCpns:Array<CpnPlayer1> = [];
     private _handors:Array<CpnHandcard2> = [];
+    private _winloses:Array<CpnWinLoseMoney> = [];
     private tmrState = 0;
 
     start () {
@@ -47,6 +49,11 @@ export default class UItbnn extends BaseComponent {
             this._pnodes.push(nd);
             this._playerCpns.push(nd.getChildByName("CpnPlayer1").getComponent(CpnPlayer1));
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
+            this._winloses.push(nd.getChildByName("CpnWinLoseMoney").getComponent(CpnWinLoseMoney));
+        }
+        for(var i=0; i<MAX_SOLDIER; i++) {
+            this._handors[i].resetCards(null);
+            this._winloses[i].stopPlay();
         }
 
 		this.initUIEvent();
@@ -156,6 +163,7 @@ export default class UItbnn extends BaseComponent {
         this.resetCD(param.Times.WaitTime);
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._handors[i].resetCards(null);
+            this._winloses[i].stopPlay();
         }
     }
     
@@ -212,6 +220,10 @@ export default class UItbnn extends BaseComponent {
         } else {
             UIManager.toast("输"+CommonUtil.formRealMoney(-param.MySettlement));
         }
+        var idx = this.playerIdx(LoginUser.getInstance().UserId);
+        if(idx >= 0) {
+            this._winloses[idx].playMoney(param.MySettlement, 55, -1);
+        }
     }
 
     GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
@@ -222,6 +234,9 @@ export default class UItbnn extends BaseComponent {
         var idx = this.playerIdx(param.UserID);
         if(idx >= 0) {
             this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Gold));
+            if(param.AlterGold != 0) {
+                this._winloses[idx].playMoney(param.AlterGold, 55, -1);
+            }
         }
     }
 
