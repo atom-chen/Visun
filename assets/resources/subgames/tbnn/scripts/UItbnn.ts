@@ -261,6 +261,9 @@ export default class UItbnn extends BaseComponent {
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             tbcowcow_request.TbcowcowReadyReq({IsReady:true});
+            UIManager.openPopwnd(ViewDefine.UISearchDesk, false, function(){
+                tbcowcow_request.TbcowcowReadyReq({IsReady:false});
+            });
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
             gamecomm_request.ChangeTableReq({
