@@ -154,6 +154,9 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = true;
         this.resetCD(param.Times.WaitTime);
+        for(var i=0; i<MAX_SOLDIER; i++) {
+            this._handors[i].resetCards(null);
+        }
     }
     
     private TbcowcowStateDealResp(param:tbcowcow.ITbcowcowStateDealResp) {
