@@ -226,7 +226,7 @@ export default class UItbnn extends BaseComponent {
         }
         var idx = this.playerIdx(LoginUser.getInstance().UserId);
         if(idx >= 0) {
-            this._winloses[idx].playMoney(param.MySettlement, 55, -1);
+            this._winloses[idx].playMoney(CommonUtil.fixRealMoney(param.MySettlement), 55, -1);
         }
     }
 
@@ -239,7 +239,7 @@ export default class UItbnn extends BaseComponent {
         if(idx >= 0) {
             this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Gold));
             if(param.AlterGold != 0) {
-                this._winloses[idx].playMoney(param.AlterGold, 55, -1);
+                this._winloses[idx].playMoney(CommonUtil.fixRealMoney(param.AlterGold), 55, -1);
             }
         }
     }
