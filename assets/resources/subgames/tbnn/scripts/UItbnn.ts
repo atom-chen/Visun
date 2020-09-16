@@ -312,9 +312,11 @@ export default class UItbnn extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             tbcowcow_request.TbcowcowReadyReq({IsReady:true});
             this.showSearching(true);
-            UIManager.openPopwnd(ViewDefine.UISearchDesk, false, function(){
+            this.m_ui.readyNode.active = false;
+            UIManager.openPopwnd(ViewDefine.UISearchDesk, false, newHandler(function(){
+                this.m_ui.readyNode.active = true;
                 tbcowcow_request.TbcowcowReadyReq({IsReady:false});
-            });
+            }, this));
         }, this);
         // CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
         //     gamecomm_request.ChangeTableReq({
