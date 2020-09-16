@@ -3,7 +3,6 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import CHandler from "../../../../../kernel/basic/datastruct/CHandler";
-import CpnCircleCD from "../../../../appqp/script/comps/CpnCircleCD";
 import { qzcowcow_msgs, qzcowcow_request } from "../../../../../common/script/proto/net_qzcowcow";
 import { qzcowcow } from "../../../../../../declares/qzcowcow";
 import QznnMgr from "../model/QznnMgr";
@@ -68,22 +67,6 @@ export default class QznnUI extends BaseComponent {
 
 		this.QzcowcowSceneResp(QznnMgr.getInstance().getEnterData());
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
-	}
-
-	private refreshBtns() {
-		for(var i=1; i<this._grabBeiList.length; i++) {
-			var btnName = "btn_grab_"+i;
-			if(this.m_ui[btnName]) {
-				this.m_ui[btnName].getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = this._grabBeiList[i]+"倍";
-			}
-		}
-
-		for(var i=0; i<this._betBeiList.length; i++) {
-			var btnName = "btn_bet_"+i;
-			if(this.m_ui[btnName]) {
-				this.m_ui[btnName].getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = this._betBeiList[i]+"倍";
-			}
-		}
 	}
 
 	//玩家的UI位置
@@ -161,6 +144,47 @@ export default class QznnUI extends BaseComponent {
             }
         }
     }
+
+    playDingzhuang(BankerID:number, bAni:boolean) {
+		this.m_ui.zhuang.stopAllActions();
+
+        if(BankerID < 0) {
+            this.m_ui.zhuang.position = this.originZpos;
+            return;
+        }
+
+        var idx = this.playerIdx(BankerID);
+        if(idx >= 0) {
+            var dstPos = cc.v3(this._pnodes[idx].position);
+            dstPos.x += 50;
+            dstPos.y += 75;
+            if(bAni) {
+                this.m_ui.zhuang.position = this.originZpos;
+                this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
+            } else {
+                this.m_ui.zhuang.position = dstPos;
+            }
+        } else {
+            this.m_ui.zhuang.position = this.originZpos;
+        }
+    }
+    
+    private refreshBtns() {
+		for(var i=1; i<this._grabBeiList.length; i++) {
+			var btnName = "btn_grab_"+i;
+			if(this.m_ui[btnName]) {
+				this.m_ui[btnName].getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = this._grabBeiList[i]+"倍";
+			}
+		}
+
+		for(var i=0; i<this._betBeiList.length; i++) {
+			var btnName = "btn_bet_"+i;
+			if(this.m_ui[btnName]) {
+				this.m_ui[btnName].getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = this._betBeiList[i]+"倍";
+			}
+		}
+    }
+    
 
 	private QzcowcowSceneResp(param:qzcowcow.IQzcowcowSceneResp) {
 		if(isNil(param)) { return; }
@@ -304,30 +328,6 @@ export default class QznnUI extends BaseComponent {
 		if(isNil(param)) { return; }
 		QznnMgr.getInstance().getEnterData().HostID = param.UserID;
 		this.playDingzhuang(param.UserID, true);
-	}
-
-	playDingzhuang(BankerID:number, bAni:boolean) {
-		this.m_ui.zhuang.stopAllActions();
-
-        if(BankerID < 0) {
-            this.m_ui.zhuang.position = this.originZpos;
-            return;
-        }
-
-        var idx = this.playerIdx(BankerID);
-        if(idx >= 0) {
-            var dstPos = cc.v3(this._pnodes[idx].position);
-            dstPos.x += 50;
-            dstPos.y += 75;
-            if(bAni) {
-                this.m_ui.zhuang.position = this.originZpos;
-                this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
-            } else {
-                this.m_ui.zhuang.position = dstPos;
-            }
-        } else {
-            this.m_ui.zhuang.position = this.originZpos;
-        }
 	}
 
 	initNetEvent() {
