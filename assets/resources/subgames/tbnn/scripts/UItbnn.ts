@@ -51,13 +51,11 @@ export default class UItbnn extends BaseComponent {
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
             this._winloses.push(nd.getChildByName("CpnWinLoseMoney").getComponent(CpnWinLoseMoney));
         }
-        for(var i=0; i<MAX_SOLDIER; i++) {
-            this._handors[i].resetCards(null);
-            this._winloses[i].stopPlay();
-        }
 
 		this.initUIEvent();
         this.initNetEvent();
+        
+        this.TbcowcowStateFreeResp(null);
         
         this.TbcowcowSceneResp(TbnnMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
@@ -161,10 +159,15 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = true;
-        this.resetCD(param.Times.WaitTime);
+        
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._handors[i].resetCards(null);
             this._winloses[i].stopPlay();
+            this._pnodes[i].getChildByName("callNode").active = false;
+        }
+
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
         }
     }
     
@@ -276,6 +279,14 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
+    TbcowcowBetResp(param:tbcowcow.ITbcowcowBetResp) {
+        if(isNil(param)) { return; }
+        var idx = this.playerIdx(param.UserId);
+        if(idx < 0) { return; }
+        this._pnodes[idx].getChildByName("callNode").active = true;
+        this._pnodes[idx].getChildByName("callNode").getComponent(cc.Label).string = param.BetScore+"倍";
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
@@ -288,6 +299,7 @@ export default class UItbnn extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowBetResp, this.TbcowcowBetResp, this);
 	}
 
 	initUIEvent() {
@@ -311,19 +323,19 @@ export default class UItbnn extends BaseComponent {
         // }, this);
 
         CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:100});
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:1});
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_bet2, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:200});
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:2});
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_bet3, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:300});
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:3});
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_bet4, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:400});
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:4});
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:500});
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:5});
         }, this);
 	}
 
