@@ -16,7 +16,7 @@ import UIManager from "../../../../kernel/view/UIManager";
 import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import { gamecomm } from "../../../../../declares/gamecomm";
-import { gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs, gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
 import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
 import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import TimerManager from "../../../../kernel/basic/timer/TimerManager";
@@ -214,6 +214,17 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
+    GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
+        var man = TbnnMgr.getInstance().getPlayer(param.UserID);
+        if(man) {
+            (man.MyInfo as gamecomm.IPlayerInfo).Gold = param.Gold;
+        }
+        var idx = this.playerIdx(param.UserID);
+        if(idx >= 0) {
+            this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney(param.Gold));
+        }
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
@@ -223,6 +234,7 @@ export default class UItbnn extends BaseComponent {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOverResp, this.TbcowcowStateOverResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOpenResp, this.TbcowcowOpenResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOverResp, this.TbcowcowOverResp, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
 	}
 
 	initUIEvent() {
