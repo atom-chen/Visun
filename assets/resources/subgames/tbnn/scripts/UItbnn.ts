@@ -244,6 +244,19 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
+    EnterGameResp(param:gamecomm.IEnterGameResp) {
+        TbnnMgr.getInstance().addPlayer(param.UserInfo);
+        this.refreshFighter(param.UserInfo.UserID);
+    }
+
+    ExitGameResp(param:gamecomm.IExitGameResp) {
+        var idx = this.playerIdx(param.UserID);
+        if(idx >= 0) {
+            this._pnodes[idx].active = false;
+        }
+        TbnnMgr.getInstance().removePlayer(param.UserID);
+    }
+
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateFreeResp, this.TbcowcowStateFreeResp, this);
@@ -254,6 +267,8 @@ export default class UItbnn extends BaseComponent {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOpenResp, this.TbcowcowOpenResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOverResp, this.TbcowcowOverResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.GoldChangeInfo, this.GoldChangeInfo, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
+        EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
 	}
 
 	initUIEvent() {
