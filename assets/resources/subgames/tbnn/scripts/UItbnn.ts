@@ -331,7 +331,7 @@ export default class UItbnn extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ this.sendBet(5); }, this);
     }
     sendBet(bei:number) {
-        var money = CommonUtil.toServerMoney(TbnnMgr.getInstance().getDizhu());
+        var money = CommonUtil.toServerMoney(TbnnMgr.getInstance().getDizhu()) * bei;
         tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:money});
     }
 
