@@ -2,14 +2,13 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../common/script/model/GameManager";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
-import { tbcowcow_msgs } from "../../../../common/script/proto/net_tbcowcow";
+import { tbcowcow_msgs, tbcowcow_packet_define, tbcowcow_request } from "../../../../common/script/proto/net_tbcowcow";
 import { tbcowcow } from "../../../../../declares/tbcowcow";
 import TbnnMgr from "./TbnnMgr";
 import ProcessorMgr from "../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../common/script/definer/ChannelDefine";
 import CpnPlayer1 from "../../../appqp/script/comps/CpnPlayer1";
 import CpnHandcard2 from "../../../appqp/script/comps/CpnHandcard2";
-import CpnCircleCD from "../../../appqp/script/comps/CpnCircleCD";
 import CpnGameState from "../../../appqp/script/comps/CpnGameState";
 import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
@@ -17,6 +16,11 @@ import UIManager from "../../../../kernel/view/UIManager";
 import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import { gamecomm } from "../../../../../declares/gamecomm";
+import { gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
+import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
+import CHandler from "../../../../kernel/basic/datastruct/CHandler";
+import TimerManager from "../../../../kernel/basic/timer/TimerManager";
+import Preloader from "../../../../kernel/utils/Preloader";
 
 
 const MAX_SOLDIER = 5;
@@ -33,7 +37,7 @@ export default class UItbnn extends BaseComponent {
     private _pnodes:Array<cc.Node> = [];
     private _playerCpns:Array<CpnPlayer1> = [];
     private _handors:Array<CpnHandcard2> = [];
-    private _cdCpns:Array<CpnCircleCD> = [];
+    private tmrState = 0;
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -43,7 +47,6 @@ export default class UItbnn extends BaseComponent {
             this._pnodes.push(nd);
             this._playerCpns.push(nd.getChildByName("CpnPlayer1").getComponent(CpnPlayer1));
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
-            this._cdCpns.push(nd.getChildByName("CpnCircleCD").getComponent(CpnCircleCD));
         }
 
 		this.initUIEvent();
@@ -51,6 +54,15 @@ export default class UItbnn extends BaseComponent {
         
         this.TbcowcowSceneResp(TbnnMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+    }
+
+    private onStateTimer(tmr:BaseTimer) {
+		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+    }
+    
+    private resetCD(WaitTime) {
+        TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, WaitTime, new CHandler(this, this.onStateTimer), true);
     }
 
     //玩家的UI位置
@@ -103,7 +115,7 @@ export default class UItbnn extends BaseComponent {
             this._playerCpns[idx].setName((man.MyInfo as gamecomm.IPlayerInfo).Name);
             this._playerCpns[idx].setMoneyStr(CommonUtil.formRealMoney((man.MyInfo as gamecomm.IPlayerInfo).Gold));
             this._playerCpns[idx].setHeadImg((man.MyInfo as gamecomm.IPlayerInfo).FaceID);
-            this._handors[idx].resetCards(man.Cards.Cards);
+            this._handors[idx].resetCards(man.Cards && man.Cards.Cards);
             this._handors[idx].playOpen(false);
         }
     }
@@ -125,9 +137,9 @@ export default class UItbnn extends BaseComponent {
 
         TbnnMgr.delInstance();
         TbnnMgr.getInstance();
-        if(param.AllPlayers) {
-            for(var ii in param.AllPlayers) {
-                TbnnMgr.getInstance().addPlayer(param.AllPlayers[ii]);
+        if(param.AllPlayers && param.AllPlayers.AllInfos) {
+            for(var ii in param.AllPlayers.AllInfos) {
+                TbnnMgr.getInstance().addPlayer(param.AllPlayers.AllInfos[ii]);
             }
         }
 
@@ -137,26 +149,67 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
-    private TbcowcowStateFreeResp(data:tbcowcow.ITbcowcowSceneResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
-	}
-
-	private TbcowcowStateDealResp(data:tbcowcow.ITbcowcowSceneResp) {
+    private TbcowcowStateFreeResp(param:tbcowcow.ITbcowcowStateFreeResp) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
+        this.m_ui.opNode.active = false;
+        this.m_ui.readyNode.active = true;
+        this.resetCD(param.Times.WaitTime);
+    }
+    
+    private TbcowcowStateDealResp(param:tbcowcow.ITbcowcowStateDealResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
-		this.playFapaiAni();
+        this.playFapaiAni();
+        this.m_ui.opNode.active = false;
+        this.m_ui.readyNode.active = false;
+        this.resetCD(param.Times.WaitTime);
 	}
 
-	private TbcowcowStatePlayingResp(data:tbcowcow.ITbcowcowSceneResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+	private TbcowcowStatePlayingResp(param:tbcowcow.ITbcowcowStatePlayingResp) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+        this.m_ui.opNode.active = true;
+        this.m_ui.readyNode.active = false;
+        this.resetCD(param.Times.WaitTime);
+    }
+
+	private TbcowcowStateOpenResp(param:tbcowcow.ITbcowcowStateOpenResp) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
+        this.m_ui.opNode.active = false;
+        this.m_ui.readyNode.active = false;
+        this.resetCD(param.Times.WaitTime);
+        this.TbcowcowOpenResp(param.OpenInfo);
 	}
 
-	private TbcowcowStateOpenResp(data:tbcowcow.ITbcowcowSceneResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
-	}
+	private TbcowcowStateOverResp(param:tbcowcow.ITbcowcowStateOverResp) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
+        this.m_ui.opNode.active = false;
+        this.m_ui.readyNode.active = false;
+        this.resetCD(param.Times.WaitTime);
+    }
+    
+    private TbcowcowOpenResp(param:tbcowcow.ITbcowcowOpenResp) {
+        if(isNil(param)) { return; }
+        var idx = this.playerIdx(param.WinnerId);
+        if(idx >= 0) {
+            Preloader.showSpineAsync("appqp/spines/headflower/ky_lhd_js", 0, "1", 3, this._pnodes[idx], {y:20, scale:1.12});
+        }
+        if(param.Infos) {
+            for(var i in param.Infos) {
+                var pos = this.playerIdx(param.Infos[i].MyInfo.UserID);
+                if(pos >= 0) {
+                    this._handors[pos].resetCards(param.Infos[i].Cards && param.Infos[i].Cards.Cards);
+                    this._handors[pos].playOpen(true);
+                }
+            }
+        }
+    }
 
-	private TbcowcowStateOverResp(data:tbcowcow.ITbcowcowSceneResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
-	}
+    private TbcowcowOverResp(param:tbcowcow.ITbcowcowOverResp) {
+        if(param.MySettlement > 0) {
+            UIManager.toast("赢"+CommonUtil.formRealMoney(param.MySettlement));
+        } else {
+            UIManager.toast("输"+CommonUtil.formRealMoney(-param.MySettlement));
+        }
+    }
 
     initNetEvent() {
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowSceneResp, this.TbcowcowSceneResp, this);
@@ -164,7 +217,9 @@ export default class UItbnn extends BaseComponent {
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateDealResp, this.TbcowcowStateDealResp, this);
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStatePlayingResp, this.TbcowcowStatePlayingResp, this);
 		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOpenResp, this.TbcowcowStateOpenResp, this);
-		EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOverResp, this.TbcowcowStateOverResp, this);
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowStateOverResp, this.TbcowcowStateOverResp, this);
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOpenResp, this.TbcowcowOpenResp, this);
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowOverResp, this.TbcowcowOverResp, this);
 	}
 
 	initUIEvent() {
@@ -173,7 +228,31 @@ export default class UItbnn extends BaseComponent {
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
             UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.TbCowcow});
-		}, this);
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
+            tbcowcow_request.TbcowcowReadyReq({IsReady:true});
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
+            gamecomm_request.ChangeTableReq({
+                GameID : GameManager.getInstance().getGameId()
+            });
+        }, this);
+
+        CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ 
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:100});
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet2, function(){ 
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:200});
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet3, function(){ 
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:300});
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet4, function(){ 
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:400});
+        }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ 
+            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:500});
+        }, this);
 	}
 
 }

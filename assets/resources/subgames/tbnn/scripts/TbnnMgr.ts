@@ -32,16 +32,15 @@ export default class TbnnMgr extends ModelBase {
         this._players = {};
     }
 
-    addPlayer(man:tbcowcow.ITbcowcowPlayer) {
-        if(isNil(man.MyInfo)) {
-            man = {
-                MyInfo:man
+    addPlayer(man:gamecomm.IPlayerInfo) {
+        if(isNil(man)) { return; }
+        if(isNil(this._players[man.UserID])) {
+            this._players[man.UserID] = {
+                MyInfo: man,
+                Cards: null,
             };
-        }
-        if(isNil(this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID])) {
-            this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID] = man;
         } else {
-            CommonUtil.simpleCopy(this._players[(man.MyInfo as gamecomm.IPlayerInfo).UserID], man);
+            CommonUtil.simpleCopy(this._players[man.UserID].MyInfo, man);
         }
     }
 
