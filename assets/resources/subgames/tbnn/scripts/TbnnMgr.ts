@@ -49,11 +49,13 @@ export default class TbnnMgr extends ModelBase {
     }
 
     removePlayer(uid:number) {
+        if(isNil(uid)) { return; }
         this._players[uid] = null;
         delete this._players[uid];
 	}
 
 	getPlayer(uid:number) : tbcowcow.ITbcowcowPlayer {
+        if(isNil(uid)) { return null; }
 		return this._players[uid];
     }
 

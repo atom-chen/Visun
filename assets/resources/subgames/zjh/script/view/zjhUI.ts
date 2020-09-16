@@ -605,11 +605,13 @@ export default class zjhUI extends BaseComponent {
 
         if(BankerID < 0) {
             this.m_ui.zhuang.position = this._zhuangPos;
+            this.m_ui.zhuang.active = false;
             return;
         }
 
         var idx = this.playerIdx(BankerID);
         if(idx >= 0) {
+            this.m_ui.zhuang.active = true;
             var dstPos = cc.v3(this._pnodes[idx].position);
             dstPos.x += 50;
             dstPos.y += 75;
@@ -621,6 +623,7 @@ export default class zjhUI extends BaseComponent {
             }
         } else {
             this.m_ui.zhuang.position = this._zhuangPos;
+            this.m_ui.zhuang.active = false;
         }
     }
 

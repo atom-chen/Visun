@@ -85,20 +85,6 @@ export default class UItbnn extends BaseComponent {
         return this.playerIndex(p);
     }
 
-    private playFapaiAni() {
-        var nn = 0;
-        for(var i=0; i<MAX_SOLDIER; i++){
-            if(this.getPlayerByIndex(i)) {
-                this._handors[i].resetCards([0,0,0,0,0]);
-                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-                for(var j=0; j<CARD_CNT; j++) {
-                    nn++;
-                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
-                }
-            }
-        }
-    }
-
     getPlayerByIndex(idx:number) : tbcowcow.ITbcowcowPlayer {
         if(idx < 0) { return null; }
         var mans = TbnnMgr.getInstance().getPlayerList();
@@ -138,6 +124,21 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
+
+    private playFapaiAni() {
+        var nn = 0;
+        for(var i=0; i<MAX_SOLDIER; i++){
+            if(this.getPlayerByIndex(i)) {
+                this._handors[i].resetCards([0,0,0,0,0]);
+                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                for(var j=0; j<CARD_CNT; j++) {
+                    nn++;
+                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                }
+            }
+        }
+    }
+
     private TbcowcowSceneResp(param:tbcowcow.ITbcowcowSceneResp) {
         if(isNil(param)) { return; }
 
@@ -148,6 +149,7 @@ export default class UItbnn extends BaseComponent {
                 TbnnMgr.getInstance().addPlayer(param.AllPlayers.AllInfos[ii]);
             }
         }
+        
         this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + TbnnMgr.getInstance().getDizhu();
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
         for(var n=0; n<MAX_SOLDIER; n++) {

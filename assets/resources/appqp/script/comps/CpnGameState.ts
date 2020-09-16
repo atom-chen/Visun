@@ -52,6 +52,14 @@ export default class CpnGameState extends cc.Component {
         this.setCurState(0, b2d);
     }
 
+    setQiangzhuang(b2d:boolean = false) {
+        this.setCurState(-1, b2d);
+    }
+
+    setJiaofen(b2d:boolean = false) {
+        this.setCurState(-1, b2d);
+    }
+
     setFapai(b2d:boolean = false) {
         this.setCurState(1, b2d);
     }
