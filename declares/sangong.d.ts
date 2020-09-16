@@ -2,6 +2,102 @@ import * as $protobuf from "protobufjs";
 /** Namespace sangong. */
 export namespace sangong {
 
+    /** Properties of a SangongPlayer. */
+    interface ISangongPlayer {
+
+        /** SangongPlayer MyInfo */
+        MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** SangongPlayer Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a SangongPlayer. */
+    class SangongPlayer implements ISangongPlayer {
+
+        /**
+         * Constructs a new SangongPlayer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongPlayer);
+
+        /** SangongPlayer MyInfo. */
+        public MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** SangongPlayer Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new SangongPlayer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongPlayer instance
+         */
+        public static create(properties?: sangong.ISangongPlayer): sangong.SangongPlayer;
+
+        /**
+         * Encodes the specified SangongPlayer message. Does not implicitly {@link sangong.SangongPlayer.verify|verify} messages.
+         * @param message SangongPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongPlayer message, length delimited. Does not implicitly {@link sangong.SangongPlayer.verify|verify} messages.
+         * @param message SangongPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongPlayer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongPlayer;
+
+        /**
+         * Decodes a SangongPlayer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongPlayer;
+
+        /**
+         * Verifies a SangongPlayer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongPlayer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongPlayer
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongPlayer;
+
+        /**
+         * Creates a plain object from a SangongPlayer message. Also converts values to other types if specified.
+         * @param message SangongPlayer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a SangongSceneResp. */
     interface ISangongSceneResp {
 
@@ -10,9 +106,6 @@ export namespace sangong {
 
         /** SangongSceneResp Chips */
         Chips?: (number[]|null);
-
-        /** SangongSceneResp AwardAreas */
-        AwardAreas?: (Uint8Array[]|null);
 
         /** SangongSceneResp AreaBets */
         AreaBets?: ((number|Long)[]|null);
@@ -44,9 +137,6 @@ export namespace sangong {
 
         /** SangongSceneResp Chips. */
         public Chips: number[];
-
-        /** SangongSceneResp AwardAreas. */
-        public AwardAreas: Uint8Array[];
 
         /** SangongSceneResp AreaBets. */
         public AreaBets: (number|Long)[];
@@ -224,102 +314,6 @@ export namespace sangong {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a SangongStateStartResp. */
-    interface ISangongStateStartResp {
-
-        /** SangongStateStartResp Times */
-        Times?: (gamecomm.ITimeInfo|null);
-
-        /** SangongStateStartResp HostID */
-        HostID?: (number|Long|null);
-    }
-
-    /** Represents a SangongStateStartResp. */
-    class SangongStateStartResp implements ISangongStateStartResp {
-
-        /**
-         * Constructs a new SangongStateStartResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: sangong.ISangongStateStartResp);
-
-        /** SangongStateStartResp Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /** SangongStateStartResp HostID. */
-        public HostID: (number|Long);
-
-        /**
-         * Creates a new SangongStateStartResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns SangongStateStartResp instance
-         */
-        public static create(properties?: sangong.ISangongStateStartResp): sangong.SangongStateStartResp;
-
-        /**
-         * Encodes the specified SangongStateStartResp message. Does not implicitly {@link sangong.SangongStateStartResp.verify|verify} messages.
-         * @param message SangongStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: sangong.ISangongStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified SangongStateStartResp message, length delimited. Does not implicitly {@link sangong.SangongStateStartResp.verify|verify} messages.
-         * @param message SangongStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: sangong.ISangongStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a SangongStateStartResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns SangongStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongStateStartResp;
-
-        /**
-         * Decodes a SangongStateStartResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns SangongStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongStateStartResp;
-
-        /**
-         * Verifies a SangongStateStartResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a SangongStateStartResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns SangongStateStartResp
-         */
-        public static fromObject(object: { [k: string]: any }): sangong.SangongStateStartResp;
-
-        /**
-         * Creates a plain object from a SangongStateStartResp message. Also converts values to other types if specified.
-         * @param message SangongStateStartResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: sangong.SangongStateStartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this SangongStateStartResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a SangongStatePlayingResp. */
     interface ISangongStatePlayingResp {
 
@@ -405,6 +399,102 @@ export namespace sangong {
 
         /**
          * Converts this SangongStatePlayingResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SangongStateDealResp. */
+    interface ISangongStateDealResp {
+
+        /** SangongStateDealResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateDealResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a SangongStateDealResp. */
+    class SangongStateDealResp implements ISangongStateDealResp {
+
+        /**
+         * Constructs a new SangongStateDealResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongStateDealResp);
+
+        /** SangongStateDealResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateDealResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new SangongStateDealResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongStateDealResp instance
+         */
+        public static create(properties?: sangong.ISangongStateDealResp): sangong.SangongStateDealResp;
+
+        /**
+         * Encodes the specified SangongStateDealResp message. Does not implicitly {@link sangong.SangongStateDealResp.verify|verify} messages.
+         * @param message SangongStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongStateDealResp message, length delimited. Does not implicitly {@link sangong.SangongStateDealResp.verify|verify} messages.
+         * @param message SangongStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongStateDealResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongStateDealResp;
+
+        /**
+         * Decodes a SangongStateDealResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongStateDealResp;
+
+        /**
+         * Verifies a SangongStateDealResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongStateDealResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongStateDealResp
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongStateDealResp;
+
+        /**
+         * Creates a plain object from a SangongStateDealResp message. Also converts values to other types if specified.
+         * @param message SangongStateDealResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongStateDealResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongStateDealResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -591,6 +681,186 @@ export namespace sangong {
 
         /**
          * Converts this SangongStateOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SangongReadyReq. */
+    interface ISangongReadyReq {
+
+        /** SangongReadyReq IsReady */
+        IsReady?: (boolean|null);
+    }
+
+    /** Represents a SangongReadyReq. */
+    class SangongReadyReq implements ISangongReadyReq {
+
+        /**
+         * Constructs a new SangongReadyReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongReadyReq);
+
+        /** SangongReadyReq IsReady. */
+        public IsReady: boolean;
+
+        /**
+         * Creates a new SangongReadyReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongReadyReq instance
+         */
+        public static create(properties?: sangong.ISangongReadyReq): sangong.SangongReadyReq;
+
+        /**
+         * Encodes the specified SangongReadyReq message. Does not implicitly {@link sangong.SangongReadyReq.verify|verify} messages.
+         * @param message SangongReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongReadyReq message, length delimited. Does not implicitly {@link sangong.SangongReadyReq.verify|verify} messages.
+         * @param message SangongReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongReadyReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongReadyReq;
+
+        /**
+         * Decodes a SangongReadyReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongReadyReq;
+
+        /**
+         * Verifies a SangongReadyReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongReadyReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongReadyReq
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongReadyReq;
+
+        /**
+         * Creates a plain object from a SangongReadyReq message. Also converts values to other types if specified.
+         * @param message SangongReadyReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongReadyReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongReadyReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SangongReadyResp. */
+    interface ISangongReadyResp {
+
+        /** SangongReadyResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents a SangongReadyResp. */
+    class SangongReadyResp implements ISangongReadyResp {
+
+        /**
+         * Constructs a new SangongReadyResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: sangong.ISangongReadyResp);
+
+        /** SangongReadyResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new SangongReadyResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SangongReadyResp instance
+         */
+        public static create(properties?: sangong.ISangongReadyResp): sangong.SangongReadyResp;
+
+        /**
+         * Encodes the specified SangongReadyResp message. Does not implicitly {@link sangong.SangongReadyResp.verify|verify} messages.
+         * @param message SangongReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: sangong.ISangongReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SangongReadyResp message, length delimited. Does not implicitly {@link sangong.SangongReadyResp.verify|verify} messages.
+         * @param message SangongReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: sangong.ISangongReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SangongReadyResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SangongReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): sangong.SangongReadyResp;
+
+        /**
+         * Decodes a SangongReadyResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SangongReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): sangong.SangongReadyResp;
+
+        /**
+         * Verifies a SangongReadyResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SangongReadyResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SangongReadyResp
+         */
+        public static fromObject(object: { [k: string]: any }): sangong.SangongReadyResp;
+
+        /**
+         * Creates a plain object from a SangongReadyResp message. Also converts values to other types if specified.
+         * @param message SangongReadyResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: sangong.SangongReadyResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SangongReadyResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -797,23 +1067,11 @@ export namespace sangong {
     /** Properties of a SangongOpenResp. */
     interface ISangongOpenResp {
 
-        /** SangongOpenResp AwardArea */
-        AwardArea?: (Uint8Array|null);
+        /** SangongOpenResp WinnerId */
+        WinnerId?: (number|Long|null);
 
-        /** SangongOpenResp BankerCard */
-        BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp TianCard */
-        TianCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp XuanCard */
-        XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp DiCard */
-        DiCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp HuangCard */
-        HuangCard?: (gamecomm.ICardInfo|null);
+        /** SangongOpenResp Infos */
+        Infos?: (sangong.ISangongPlayer[]|null);
     }
 
     /** Represents a SangongOpenResp. */
@@ -825,23 +1083,11 @@ export namespace sangong {
          */
         constructor(properties?: sangong.ISangongOpenResp);
 
-        /** SangongOpenResp AwardArea. */
-        public AwardArea: Uint8Array;
+        /** SangongOpenResp WinnerId. */
+        public WinnerId: (number|Long);
 
-        /** SangongOpenResp BankerCard. */
-        public BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp TianCard. */
-        public TianCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp XuanCard. */
-        public XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp DiCard. */
-        public DiCard?: (gamecomm.ICardInfo|null);
-
-        /** SangongOpenResp HuangCard. */
-        public HuangCard?: (gamecomm.ICardInfo|null);
+        /** SangongOpenResp Infos. */
+        public Infos: sangong.ISangongPlayer[];
 
         /**
          * Creates a new SangongOpenResp instance using the specified properties.

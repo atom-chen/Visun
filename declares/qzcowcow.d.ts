@@ -2,6 +2,102 @@ import * as $protobuf from "protobufjs";
 /** Namespace qzcowcow. */
 export namespace qzcowcow {
 
+    /** Properties of a QzcowcowPlayer. */
+    interface IQzcowcowPlayer {
+
+        /** QzcowcowPlayer MyInfo */
+        MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** QzcowcowPlayer Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a QzcowcowPlayer. */
+    class QzcowcowPlayer implements IQzcowcowPlayer {
+
+        /**
+         * Constructs a new QzcowcowPlayer.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowPlayer);
+
+        /** QzcowcowPlayer MyInfo. */
+        public MyInfo?: (gamecomm.IPlayerInfo|null);
+
+        /** QzcowcowPlayer Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new QzcowcowPlayer instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowPlayer instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowPlayer): qzcowcow.QzcowcowPlayer;
+
+        /**
+         * Encodes the specified QzcowcowPlayer message. Does not implicitly {@link qzcowcow.QzcowcowPlayer.verify|verify} messages.
+         * @param message QzcowcowPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowPlayer message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowPlayer.verify|verify} messages.
+         * @param message QzcowcowPlayer message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowPlayer, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowPlayer message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowPlayer;
+
+        /**
+         * Decodes a QzcowcowPlayer message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowPlayer
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowPlayer;
+
+        /**
+         * Verifies a QzcowcowPlayer message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowPlayer message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowPlayer
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowPlayer;
+
+        /**
+         * Creates a plain object from a QzcowcowPlayer message. Also converts values to other types if specified.
+         * @param message QzcowcowPlayer
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowPlayer, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowPlayer to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a QzcowcowSceneResp. */
     interface IQzcowcowSceneResp {
 
@@ -10,9 +106,6 @@ export namespace qzcowcow {
 
         /** QzcowcowSceneResp Chips */
         Chips?: (number[]|null);
-
-        /** QzcowcowSceneResp AwardAreas */
-        AwardAreas?: (Uint8Array[]|null);
 
         /** QzcowcowSceneResp AreaBets */
         AreaBets?: ((number|Long)[]|null);
@@ -44,9 +137,6 @@ export namespace qzcowcow {
 
         /** QzcowcowSceneResp Chips. */
         public Chips: number[];
-
-        /** QzcowcowSceneResp AwardAreas. */
-        public AwardAreas: Uint8Array[];
 
         /** QzcowcowSceneResp AreaBets. */
         public AreaBets: (number|Long)[];
@@ -224,102 +314,6 @@ export namespace qzcowcow {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a QzcowcowStateStartResp. */
-    interface IQzcowcowStateStartResp {
-
-        /** QzcowcowStateStartResp Times */
-        Times?: (gamecomm.ITimeInfo|null);
-
-        /** QzcowcowStateStartResp HostID */
-        HostID?: (number|Long|null);
-    }
-
-    /** Represents a QzcowcowStateStartResp. */
-    class QzcowcowStateStartResp implements IQzcowcowStateStartResp {
-
-        /**
-         * Constructs a new QzcowcowStateStartResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: qzcowcow.IQzcowcowStateStartResp);
-
-        /** QzcowcowStateStartResp Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /** QzcowcowStateStartResp HostID. */
-        public HostID: (number|Long);
-
-        /**
-         * Creates a new QzcowcowStateStartResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns QzcowcowStateStartResp instance
-         */
-        public static create(properties?: qzcowcow.IQzcowcowStateStartResp): qzcowcow.QzcowcowStateStartResp;
-
-        /**
-         * Encodes the specified QzcowcowStateStartResp message. Does not implicitly {@link qzcowcow.QzcowcowStateStartResp.verify|verify} messages.
-         * @param message QzcowcowStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: qzcowcow.IQzcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified QzcowcowStateStartResp message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowStateStartResp.verify|verify} messages.
-         * @param message QzcowcowStateStartResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: qzcowcow.IQzcowcowStateStartResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a QzcowcowStateStartResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns QzcowcowStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowStateStartResp;
-
-        /**
-         * Decodes a QzcowcowStateStartResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns QzcowcowStateStartResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowStateStartResp;
-
-        /**
-         * Verifies a QzcowcowStateStartResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a QzcowcowStateStartResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns QzcowcowStateStartResp
-         */
-        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowStateStartResp;
-
-        /**
-         * Creates a plain object from a QzcowcowStateStartResp message. Also converts values to other types if specified.
-         * @param message QzcowcowStateStartResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: qzcowcow.QzcowcowStateStartResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this QzcowcowStateStartResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a QzcowcowStatePlayingResp. */
     interface IQzcowcowStatePlayingResp {
 
@@ -405,6 +399,102 @@ export namespace qzcowcow {
 
         /**
          * Converts this QzcowcowStatePlayingResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QzcowcowStateDealResp. */
+    interface IQzcowcowStateDealResp {
+
+        /** QzcowcowStateDealResp Times */
+        Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateDealResp Cards */
+        Cards?: (gamecomm.ICardInfo|null);
+    }
+
+    /** Represents a QzcowcowStateDealResp. */
+    class QzcowcowStateDealResp implements IQzcowcowStateDealResp {
+
+        /**
+         * Constructs a new QzcowcowStateDealResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowStateDealResp);
+
+        /** QzcowcowStateDealResp Times. */
+        public Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateDealResp Cards. */
+        public Cards?: (gamecomm.ICardInfo|null);
+
+        /**
+         * Creates a new QzcowcowStateDealResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowStateDealResp instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowStateDealResp): qzcowcow.QzcowcowStateDealResp;
+
+        /**
+         * Encodes the specified QzcowcowStateDealResp message. Does not implicitly {@link qzcowcow.QzcowcowStateDealResp.verify|verify} messages.
+         * @param message QzcowcowStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowStateDealResp message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowStateDealResp.verify|verify} messages.
+         * @param message QzcowcowStateDealResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowStateDealResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowStateDealResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowStateDealResp;
+
+        /**
+         * Decodes a QzcowcowStateDealResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowStateDealResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowStateDealResp;
+
+        /**
+         * Verifies a QzcowcowStateDealResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowStateDealResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowStateDealResp
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowStateDealResp;
+
+        /**
+         * Creates a plain object from a QzcowcowStateDealResp message. Also converts values to other types if specified.
+         * @param message QzcowcowStateDealResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowStateDealResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowStateDealResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -591,6 +681,186 @@ export namespace qzcowcow {
 
         /**
          * Converts this QzcowcowStateOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QzcowcowReadyReq. */
+    interface IQzcowcowReadyReq {
+
+        /** QzcowcowReadyReq IsReady */
+        IsReady?: (boolean|null);
+    }
+
+    /** Represents a QzcowcowReadyReq. */
+    class QzcowcowReadyReq implements IQzcowcowReadyReq {
+
+        /**
+         * Constructs a new QzcowcowReadyReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowReadyReq);
+
+        /** QzcowcowReadyReq IsReady. */
+        public IsReady: boolean;
+
+        /**
+         * Creates a new QzcowcowReadyReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowReadyReq instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowReadyReq): qzcowcow.QzcowcowReadyReq;
+
+        /**
+         * Encodes the specified QzcowcowReadyReq message. Does not implicitly {@link qzcowcow.QzcowcowReadyReq.verify|verify} messages.
+         * @param message QzcowcowReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowReadyReq message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowReadyReq.verify|verify} messages.
+         * @param message QzcowcowReadyReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowReadyReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowReadyReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowReadyReq;
+
+        /**
+         * Decodes a QzcowcowReadyReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowReadyReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowReadyReq;
+
+        /**
+         * Verifies a QzcowcowReadyReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowReadyReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowReadyReq
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowReadyReq;
+
+        /**
+         * Creates a plain object from a QzcowcowReadyReq message. Also converts values to other types if specified.
+         * @param message QzcowcowReadyReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowReadyReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowReadyReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a QzcowcowReadyResp. */
+    interface IQzcowcowReadyResp {
+
+        /** QzcowcowReadyResp UserId */
+        UserId?: (number|Long|null);
+    }
+
+    /** Represents a QzcowcowReadyResp. */
+    class QzcowcowReadyResp implements IQzcowcowReadyResp {
+
+        /**
+         * Constructs a new QzcowcowReadyResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: qzcowcow.IQzcowcowReadyResp);
+
+        /** QzcowcowReadyResp UserId. */
+        public UserId: (number|Long);
+
+        /**
+         * Creates a new QzcowcowReadyResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns QzcowcowReadyResp instance
+         */
+        public static create(properties?: qzcowcow.IQzcowcowReadyResp): qzcowcow.QzcowcowReadyResp;
+
+        /**
+         * Encodes the specified QzcowcowReadyResp message. Does not implicitly {@link qzcowcow.QzcowcowReadyResp.verify|verify} messages.
+         * @param message QzcowcowReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: qzcowcow.IQzcowcowReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified QzcowcowReadyResp message, length delimited. Does not implicitly {@link qzcowcow.QzcowcowReadyResp.verify|verify} messages.
+         * @param message QzcowcowReadyResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: qzcowcow.IQzcowcowReadyResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a QzcowcowReadyResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns QzcowcowReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): qzcowcow.QzcowcowReadyResp;
+
+        /**
+         * Decodes a QzcowcowReadyResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns QzcowcowReadyResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): qzcowcow.QzcowcowReadyResp;
+
+        /**
+         * Verifies a QzcowcowReadyResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a QzcowcowReadyResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns QzcowcowReadyResp
+         */
+        public static fromObject(object: { [k: string]: any }): qzcowcow.QzcowcowReadyResp;
+
+        /**
+         * Creates a plain object from a QzcowcowReadyResp message. Also converts values to other types if specified.
+         * @param message QzcowcowReadyResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: qzcowcow.QzcowcowReadyResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this QzcowcowReadyResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -797,23 +1067,11 @@ export namespace qzcowcow {
     /** Properties of a QzcowcowOpenResp. */
     interface IQzcowcowOpenResp {
 
-        /** QzcowcowOpenResp AwardArea */
-        AwardArea?: (Uint8Array|null);
+        /** QzcowcowOpenResp WinnerId */
+        WinnerId?: (number|Long|null);
 
-        /** QzcowcowOpenResp BankerCard */
-        BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp TianCard */
-        TianCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp XuanCard */
-        XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp DiCard */
-        DiCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp HuangCard */
-        HuangCard?: (gamecomm.ICardInfo|null);
+        /** QzcowcowOpenResp Infos */
+        Infos?: (qzcowcow.IQzcowcowPlayer[]|null);
     }
 
     /** Represents a QzcowcowOpenResp. */
@@ -825,23 +1083,11 @@ export namespace qzcowcow {
          */
         constructor(properties?: qzcowcow.IQzcowcowOpenResp);
 
-        /** QzcowcowOpenResp AwardArea. */
-        public AwardArea: Uint8Array;
+        /** QzcowcowOpenResp WinnerId. */
+        public WinnerId: (number|Long);
 
-        /** QzcowcowOpenResp BankerCard. */
-        public BankerCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp TianCard. */
-        public TianCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp XuanCard. */
-        public XuanCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp DiCard. */
-        public DiCard?: (gamecomm.ICardInfo|null);
-
-        /** QzcowcowOpenResp HuangCard. */
-        public HuangCard?: (gamecomm.ICardInfo|null);
+        /** QzcowcowOpenResp Infos. */
+        public Infos: qzcowcow.IQzcowcowPlayer[];
 
         /**
          * Creates a new QzcowcowOpenResp instance using the specified properties.

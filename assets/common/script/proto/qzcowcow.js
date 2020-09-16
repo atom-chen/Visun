@@ -11,11 +11,122 @@ $root.qzcowcow = (function() {
 
     var qzcowcow = {};
 
+    qzcowcow.QzcowcowPlayer = (function() {
+
+        function QzcowcowPlayer(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowPlayer.prototype.MyInfo = null;
+        QzcowcowPlayer.prototype.Cards = null;
+
+        QzcowcowPlayer.create = function create(properties) {
+            return new QzcowcowPlayer(properties);
+        };
+
+        QzcowcowPlayer.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.MyInfo != null && Object.hasOwnProperty.call(message, "MyInfo"))
+                $root.gamecomm.PlayerInfo.encode(message.MyInfo, writer.uint32(10).fork()).ldelim();
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        QzcowcowPlayer.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowPlayer.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowPlayer();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.MyInfo = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowPlayer.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowPlayer.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.MyInfo != null && message.hasOwnProperty("MyInfo")) {
+                var error = $root.gamecomm.PlayerInfo.verify(message.MyInfo);
+                if (error)
+                    return "MyInfo." + error;
+            }
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.gamecomm.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
+            return null;
+        };
+
+        QzcowcowPlayer.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowPlayer)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowPlayer();
+            if (object.MyInfo != null) {
+                if (typeof object.MyInfo !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowPlayer.MyInfo: object expected");
+                message.MyInfo = $root.gamecomm.PlayerInfo.fromObject(object.MyInfo);
+            }
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowPlayer.Cards: object expected");
+                message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
+            }
+            return message;
+        };
+
+        QzcowcowPlayer.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.MyInfo = null;
+                object.Cards = null;
+            }
+            if (message.MyInfo != null && message.hasOwnProperty("MyInfo"))
+                object.MyInfo = $root.gamecomm.PlayerInfo.toObject(message.MyInfo, options);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
+            return object;
+        };
+
+        QzcowcowPlayer.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowPlayer;
+    })();
+
     qzcowcow.QzcowcowSceneResp = (function() {
 
         function QzcowcowSceneResp(properties) {
             this.Chips = [];
-            this.AwardAreas = [];
             this.AreaBets = [];
             this.MyBets = [];
             if (properties)
@@ -26,7 +137,6 @@ $root.qzcowcow = (function() {
 
         QzcowcowSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         QzcowcowSceneResp.prototype.Chips = $util.emptyArray;
-        QzcowcowSceneResp.prototype.AwardAreas = $util.emptyArray;
         QzcowcowSceneResp.prototype.AreaBets = $util.emptyArray;
         QzcowcowSceneResp.prototype.MyBets = $util.emptyArray;
         QzcowcowSceneResp.prototype.Inning = "";
@@ -48,9 +158,6 @@ $root.qzcowcow = (function() {
                     writer.int32(message.Chips[i]);
                 writer.ldelim();
             }
-            if (message.AwardAreas != null && message.AwardAreas.length)
-                for (var i = 0; i < message.AwardAreas.length; ++i)
-                    writer.uint32(26).bytes(message.AwardAreas[i]);
             if (message.AreaBets != null && message.AreaBets.length) {
                 writer.uint32(34).fork();
                 for (var i = 0; i < message.AreaBets.length; ++i)
@@ -95,11 +202,6 @@ $root.qzcowcow = (function() {
                             message.Chips.push(reader.int32());
                     } else
                         message.Chips.push(reader.int32());
-                    break;
-                case 3:
-                    if (!(message.AwardAreas && message.AwardAreas.length))
-                        message.AwardAreas = [];
-                    message.AwardAreas.push(reader.bytes());
                     break;
                 case 4:
                     if (!(message.AreaBets && message.AreaBets.length))
@@ -157,13 +259,6 @@ $root.qzcowcow = (function() {
                     if (!$util.isInteger(message.Chips[i]))
                         return "Chips: integer[] expected";
             }
-            if (message.AwardAreas != null && message.hasOwnProperty("AwardAreas")) {
-                if (!Array.isArray(message.AwardAreas))
-                    return "AwardAreas: array expected";
-                for (var i = 0; i < message.AwardAreas.length; ++i)
-                    if (!(message.AwardAreas[i] && typeof message.AwardAreas[i].length === "number" || $util.isString(message.AwardAreas[i])))
-                        return "AwardAreas: buffer[] expected";
-            }
             if (message.AreaBets != null && message.hasOwnProperty("AreaBets")) {
                 if (!Array.isArray(message.AreaBets))
                     return "AreaBets: array expected";
@@ -211,16 +306,6 @@ $root.qzcowcow = (function() {
                 message.Chips = [];
                 for (var i = 0; i < object.Chips.length; ++i)
                     message.Chips[i] = object.Chips[i] | 0;
-            }
-            if (object.AwardAreas) {
-                if (!Array.isArray(object.AwardAreas))
-                    throw TypeError(".qzcowcow.QzcowcowSceneResp.AwardAreas: array expected");
-                message.AwardAreas = [];
-                for (var i = 0; i < object.AwardAreas.length; ++i)
-                    if (typeof object.AwardAreas[i] === "string")
-                        $util.base64.decode(object.AwardAreas[i], message.AwardAreas[i] = $util.newBuffer($util.base64.length(object.AwardAreas[i])), 0);
-                    else if (object.AwardAreas[i].length)
-                        message.AwardAreas[i] = object.AwardAreas[i];
             }
             if (object.AreaBets) {
                 if (!Array.isArray(object.AreaBets))
@@ -275,7 +360,6 @@ $root.qzcowcow = (function() {
             var object = {};
             if (options.arrays || options.defaults) {
                 object.Chips = [];
-                object.AwardAreas = [];
                 object.AreaBets = [];
                 object.MyBets = [];
             }
@@ -302,11 +386,6 @@ $root.qzcowcow = (function() {
                 object.Chips = [];
                 for (var j = 0; j < message.Chips.length; ++j)
                     object.Chips[j] = message.Chips[j];
-            }
-            if (message.AwardAreas && message.AwardAreas.length) {
-                object.AwardAreas = [];
-                for (var j = 0; j < message.AwardAreas.length; ++j)
-                    object.AwardAreas[j] = options.bytes === String ? $util.base64.encode(message.AwardAreas[j], 0, message.AwardAreas[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardAreas[j]) : message.AwardAreas[j];
             }
             if (message.AreaBets && message.AreaBets.length) {
                 object.AreaBets = [];
@@ -435,127 +514,6 @@ $root.qzcowcow = (function() {
         return QzcowcowStateFreeResp;
     })();
 
-    qzcowcow.QzcowcowStateStartResp = (function() {
-
-        function QzcowcowStateStartResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        QzcowcowStateStartResp.prototype.Times = null;
-        QzcowcowStateStartResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-
-        QzcowcowStateStartResp.create = function create(properties) {
-            return new QzcowcowStateStartResp(properties);
-        };
-
-        QzcowcowStateStartResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
-                writer.uint32(16).uint64(message.HostID);
-            return writer;
-        };
-
-        QzcowcowStateStartResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        QzcowcowStateStartResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateStartResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    message.HostID = reader.uint64();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        QzcowcowStateStartResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        QzcowcowStateStartResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.gamecomm.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
-                    return "HostID: integer|Long expected";
-            return null;
-        };
-
-        QzcowcowStateStartResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.qzcowcow.QzcowcowStateStartResp)
-                return object;
-            var message = new $root.qzcowcow.QzcowcowStateStartResp();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowStateStartResp.Times: object expected");
-                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
-            }
-            if (object.HostID != null)
-                if ($util.Long)
-                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
-                else if (typeof object.HostID === "string")
-                    message.HostID = parseInt(object.HostID, 10);
-                else if (typeof object.HostID === "number")
-                    message.HostID = object.HostID;
-                else if (typeof object.HostID === "object")
-                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
-            return message;
-        };
-
-        QzcowcowStateStartResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                object.Times = null;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.HostID = options.longs === String ? "0" : 0;
-            }
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (typeof message.HostID === "number")
-                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
-                else
-                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
-            return object;
-        };
-
-        QzcowcowStateStartResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return QzcowcowStateStartResp;
-    })();
-
     qzcowcow.QzcowcowStatePlayingResp = (function() {
 
         function QzcowcowStatePlayingResp(properties) {
@@ -646,6 +604,118 @@ $root.qzcowcow = (function() {
         };
 
         return QzcowcowStatePlayingResp;
+    })();
+
+    qzcowcow.QzcowcowStateDealResp = (function() {
+
+        function QzcowcowStateDealResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowStateDealResp.prototype.Times = null;
+        QzcowcowStateDealResp.prototype.Cards = null;
+
+        QzcowcowStateDealResp.create = function create(properties) {
+            return new QzcowcowStateDealResp(properties);
+        };
+
+        QzcowcowStateDealResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
+                $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.Cards != null && Object.hasOwnProperty.call(message, "Cards"))
+                $root.gamecomm.CardInfo.encode(message.Cards, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        QzcowcowStateDealResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowStateDealResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowStateDealResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Cards = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowStateDealResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowStateDealResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Times != null && message.hasOwnProperty("Times")) {
+                var error = $root.gamecomm.TimeInfo.verify(message.Times);
+                if (error)
+                    return "Times." + error;
+            }
+            if (message.Cards != null && message.hasOwnProperty("Cards")) {
+                var error = $root.gamecomm.CardInfo.verify(message.Cards);
+                if (error)
+                    return "Cards." + error;
+            }
+            return null;
+        };
+
+        QzcowcowStateDealResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowStateDealResp)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowStateDealResp();
+            if (object.Times != null) {
+                if (typeof object.Times !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowStateDealResp.Times: object expected");
+                message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
+            }
+            if (object.Cards != null) {
+                if (typeof object.Cards !== "object")
+                    throw TypeError(".qzcowcow.QzcowcowStateDealResp.Cards: object expected");
+                message.Cards = $root.gamecomm.CardInfo.fromObject(object.Cards);
+            }
+            return message;
+        };
+
+        QzcowcowStateDealResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Times = null;
+                object.Cards = null;
+            }
+            if (message.Times != null && message.hasOwnProperty("Times"))
+                object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.Cards != null && message.hasOwnProperty("Cards"))
+                object.Cards = $root.gamecomm.CardInfo.toObject(message.Cards, options);
+            return object;
+        };
+
+        QzcowcowStateDealResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowStateDealResp;
     })();
 
     qzcowcow.QzcowcowStateOpenResp = (function() {
@@ -850,6 +920,194 @@ $root.qzcowcow = (function() {
         };
 
         return QzcowcowStateOverResp;
+    })();
+
+    qzcowcow.QzcowcowReadyReq = (function() {
+
+        function QzcowcowReadyReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowReadyReq.prototype.IsReady = false;
+
+        QzcowcowReadyReq.create = function create(properties) {
+            return new QzcowcowReadyReq(properties);
+        };
+
+        QzcowcowReadyReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.IsReady != null && Object.hasOwnProperty.call(message, "IsReady"))
+                writer.uint32(8).bool(message.IsReady);
+            return writer;
+        };
+
+        QzcowcowReadyReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowReadyReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowReadyReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.IsReady = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowReadyReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowReadyReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                if (typeof message.IsReady !== "boolean")
+                    return "IsReady: boolean expected";
+            return null;
+        };
+
+        QzcowcowReadyReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowReadyReq)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowReadyReq();
+            if (object.IsReady != null)
+                message.IsReady = Boolean(object.IsReady);
+            return message;
+        };
+
+        QzcowcowReadyReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.IsReady = false;
+            if (message.IsReady != null && message.hasOwnProperty("IsReady"))
+                object.IsReady = message.IsReady;
+            return object;
+        };
+
+        QzcowcowReadyReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowReadyReq;
+    })();
+
+    qzcowcow.QzcowcowReadyResp = (function() {
+
+        function QzcowcowReadyResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowReadyResp.prototype.UserId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        QzcowcowReadyResp.create = function create(properties) {
+            return new QzcowcowReadyResp(properties);
+        };
+
+        QzcowcowReadyResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserId != null && Object.hasOwnProperty.call(message, "UserId"))
+                writer.uint32(8).uint64(message.UserId);
+            return writer;
+        };
+
+        QzcowcowReadyResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowReadyResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowReadyResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserId = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowReadyResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowReadyResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (!$util.isInteger(message.UserId) && !(message.UserId && $util.isInteger(message.UserId.low) && $util.isInteger(message.UserId.high)))
+                    return "UserId: integer|Long expected";
+            return null;
+        };
+
+        QzcowcowReadyResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowReadyResp)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowReadyResp();
+            if (object.UserId != null)
+                if ($util.Long)
+                    (message.UserId = $util.Long.fromValue(object.UserId)).unsigned = true;
+                else if (typeof object.UserId === "string")
+                    message.UserId = parseInt(object.UserId, 10);
+                else if (typeof object.UserId === "number")
+                    message.UserId = object.UserId;
+                else if (typeof object.UserId === "object")
+                    message.UserId = new $util.LongBits(object.UserId.low >>> 0, object.UserId.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        QzcowcowReadyResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserId = options.longs === String ? "0" : 0;
+            if (message.UserId != null && message.hasOwnProperty("UserId"))
+                if (typeof message.UserId === "number")
+                    object.UserId = options.longs === String ? String(message.UserId) : message.UserId;
+                else
+                    object.UserId = options.longs === String ? $util.Long.prototype.toString.call(message.UserId) : options.longs === Number ? new $util.LongBits(message.UserId.low >>> 0, message.UserId.high >>> 0).toNumber(true) : message.UserId;
+            return object;
+        };
+
+        QzcowcowReadyResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowReadyResp;
     })();
 
     qzcowcow.QzcowcowBetReq = (function() {
@@ -1115,18 +1373,15 @@ $root.qzcowcow = (function() {
     qzcowcow.QzcowcowOpenResp = (function() {
 
         function QzcowcowOpenResp(properties) {
+            this.Infos = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        QzcowcowOpenResp.prototype.AwardArea = $util.newBuffer([]);
-        QzcowcowOpenResp.prototype.BankerCard = null;
-        QzcowcowOpenResp.prototype.TianCard = null;
-        QzcowcowOpenResp.prototype.XuanCard = null;
-        QzcowcowOpenResp.prototype.DiCard = null;
-        QzcowcowOpenResp.prototype.HuangCard = null;
+        QzcowcowOpenResp.prototype.WinnerId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        QzcowcowOpenResp.prototype.Infos = $util.emptyArray;
 
         QzcowcowOpenResp.create = function create(properties) {
             return new QzcowcowOpenResp(properties);
@@ -1135,18 +1390,11 @@ $root.qzcowcow = (function() {
         QzcowcowOpenResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.AwardArea != null && Object.hasOwnProperty.call(message, "AwardArea"))
-                writer.uint32(10).bytes(message.AwardArea);
-            if (message.BankerCard != null && Object.hasOwnProperty.call(message, "BankerCard"))
-                $root.gamecomm.CardInfo.encode(message.BankerCard, writer.uint32(18).fork()).ldelim();
-            if (message.TianCard != null && Object.hasOwnProperty.call(message, "TianCard"))
-                $root.gamecomm.CardInfo.encode(message.TianCard, writer.uint32(26).fork()).ldelim();
-            if (message.XuanCard != null && Object.hasOwnProperty.call(message, "XuanCard"))
-                $root.gamecomm.CardInfo.encode(message.XuanCard, writer.uint32(34).fork()).ldelim();
-            if (message.DiCard != null && Object.hasOwnProperty.call(message, "DiCard"))
-                $root.gamecomm.CardInfo.encode(message.DiCard, writer.uint32(42).fork()).ldelim();
-            if (message.HuangCard != null && Object.hasOwnProperty.call(message, "HuangCard"))
-                $root.gamecomm.CardInfo.encode(message.HuangCard, writer.uint32(50).fork()).ldelim();
+            if (message.WinnerId != null && Object.hasOwnProperty.call(message, "WinnerId"))
+                writer.uint32(8).uint64(message.WinnerId);
+            if (message.Infos != null && message.Infos.length)
+                for (var i = 0; i < message.Infos.length; ++i)
+                    $root.qzcowcow.QzcowcowPlayer.encode(message.Infos[i], writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -1162,22 +1410,12 @@ $root.qzcowcow = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.AwardArea = reader.bytes();
+                    message.WinnerId = reader.uint64();
                     break;
                 case 2:
-                    message.BankerCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 3:
-                    message.TianCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 4:
-                    message.XuanCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 5:
-                    message.DiCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
-                    break;
-                case 6:
-                    message.HuangCard = $root.gamecomm.CardInfo.decode(reader, reader.uint32());
+                    if (!(message.Infos && message.Infos.length))
+                        message.Infos = [];
+                    message.Infos.push($root.qzcowcow.QzcowcowPlayer.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1196,33 +1434,17 @@ $root.qzcowcow = (function() {
         QzcowcowOpenResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
-                if (!(message.AwardArea && typeof message.AwardArea.length === "number" || $util.isString(message.AwardArea)))
-                    return "AwardArea: buffer expected";
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.BankerCard);
-                if (error)
-                    return "BankerCard." + error;
-            }
-            if (message.TianCard != null && message.hasOwnProperty("TianCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.TianCard);
-                if (error)
-                    return "TianCard." + error;
-            }
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.XuanCard);
-                if (error)
-                    return "XuanCard." + error;
-            }
-            if (message.DiCard != null && message.hasOwnProperty("DiCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.DiCard);
-                if (error)
-                    return "DiCard." + error;
-            }
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard")) {
-                var error = $root.gamecomm.CardInfo.verify(message.HuangCard);
-                if (error)
-                    return "HuangCard." + error;
+            if (message.WinnerId != null && message.hasOwnProperty("WinnerId"))
+                if (!$util.isInteger(message.WinnerId) && !(message.WinnerId && $util.isInteger(message.WinnerId.low) && $util.isInteger(message.WinnerId.high)))
+                    return "WinnerId: integer|Long expected";
+            if (message.Infos != null && message.hasOwnProperty("Infos")) {
+                if (!Array.isArray(message.Infos))
+                    return "Infos: array expected";
+                for (var i = 0; i < message.Infos.length; ++i) {
+                    var error = $root.qzcowcow.QzcowcowPlayer.verify(message.Infos[i]);
+                    if (error)
+                        return "Infos." + error;
+                }
             }
             return null;
         };
@@ -1231,35 +1453,24 @@ $root.qzcowcow = (function() {
             if (object instanceof $root.qzcowcow.QzcowcowOpenResp)
                 return object;
             var message = new $root.qzcowcow.QzcowcowOpenResp();
-            if (object.AwardArea != null)
-                if (typeof object.AwardArea === "string")
-                    $util.base64.decode(object.AwardArea, message.AwardArea = $util.newBuffer($util.base64.length(object.AwardArea)), 0);
-                else if (object.AwardArea.length)
-                    message.AwardArea = object.AwardArea;
-            if (object.BankerCard != null) {
-                if (typeof object.BankerCard !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowOpenResp.BankerCard: object expected");
-                message.BankerCard = $root.gamecomm.CardInfo.fromObject(object.BankerCard);
-            }
-            if (object.TianCard != null) {
-                if (typeof object.TianCard !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowOpenResp.TianCard: object expected");
-                message.TianCard = $root.gamecomm.CardInfo.fromObject(object.TianCard);
-            }
-            if (object.XuanCard != null) {
-                if (typeof object.XuanCard !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowOpenResp.XuanCard: object expected");
-                message.XuanCard = $root.gamecomm.CardInfo.fromObject(object.XuanCard);
-            }
-            if (object.DiCard != null) {
-                if (typeof object.DiCard !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowOpenResp.DiCard: object expected");
-                message.DiCard = $root.gamecomm.CardInfo.fromObject(object.DiCard);
-            }
-            if (object.HuangCard != null) {
-                if (typeof object.HuangCard !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowOpenResp.HuangCard: object expected");
-                message.HuangCard = $root.gamecomm.CardInfo.fromObject(object.HuangCard);
+            if (object.WinnerId != null)
+                if ($util.Long)
+                    (message.WinnerId = $util.Long.fromValue(object.WinnerId)).unsigned = true;
+                else if (typeof object.WinnerId === "string")
+                    message.WinnerId = parseInt(object.WinnerId, 10);
+                else if (typeof object.WinnerId === "number")
+                    message.WinnerId = object.WinnerId;
+                else if (typeof object.WinnerId === "object")
+                    message.WinnerId = new $util.LongBits(object.WinnerId.low >>> 0, object.WinnerId.high >>> 0).toNumber(true);
+            if (object.Infos) {
+                if (!Array.isArray(object.Infos))
+                    throw TypeError(".qzcowcow.QzcowcowOpenResp.Infos: array expected");
+                message.Infos = [];
+                for (var i = 0; i < object.Infos.length; ++i) {
+                    if (typeof object.Infos[i] !== "object")
+                        throw TypeError(".qzcowcow.QzcowcowOpenResp.Infos: object expected");
+                    message.Infos[i] = $root.qzcowcow.QzcowcowPlayer.fromObject(object.Infos[i]);
+                }
             }
             return message;
         };
@@ -1268,32 +1479,24 @@ $root.qzcowcow = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if (options.bytes === String)
-                    object.AwardArea = "";
-                else {
-                    object.AwardArea = [];
-                    if (options.bytes !== Array)
-                        object.AwardArea = $util.newBuffer(object.AwardArea);
-                }
-                object.BankerCard = null;
-                object.TianCard = null;
-                object.XuanCard = null;
-                object.DiCard = null;
-                object.HuangCard = null;
+            if (options.arrays || options.defaults)
+                object.Infos = [];
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.WinnerId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.WinnerId = options.longs === String ? "0" : 0;
+            if (message.WinnerId != null && message.hasOwnProperty("WinnerId"))
+                if (typeof message.WinnerId === "number")
+                    object.WinnerId = options.longs === String ? String(message.WinnerId) : message.WinnerId;
+                else
+                    object.WinnerId = options.longs === String ? $util.Long.prototype.toString.call(message.WinnerId) : options.longs === Number ? new $util.LongBits(message.WinnerId.low >>> 0, message.WinnerId.high >>> 0).toNumber(true) : message.WinnerId;
+            if (message.Infos && message.Infos.length) {
+                object.Infos = [];
+                for (var j = 0; j < message.Infos.length; ++j)
+                    object.Infos[j] = $root.qzcowcow.QzcowcowPlayer.toObject(message.Infos[j], options);
             }
-            if (message.AwardArea != null && message.hasOwnProperty("AwardArea"))
-                object.AwardArea = options.bytes === String ? $util.base64.encode(message.AwardArea, 0, message.AwardArea.length) : options.bytes === Array ? Array.prototype.slice.call(message.AwardArea) : message.AwardArea;
-            if (message.BankerCard != null && message.hasOwnProperty("BankerCard"))
-                object.BankerCard = $root.gamecomm.CardInfo.toObject(message.BankerCard, options);
-            if (message.TianCard != null && message.hasOwnProperty("TianCard"))
-                object.TianCard = $root.gamecomm.CardInfo.toObject(message.TianCard, options);
-            if (message.XuanCard != null && message.hasOwnProperty("XuanCard"))
-                object.XuanCard = $root.gamecomm.CardInfo.toObject(message.XuanCard, options);
-            if (message.DiCard != null && message.hasOwnProperty("DiCard"))
-                object.DiCard = $root.gamecomm.CardInfo.toObject(message.DiCard, options);
-            if (message.HuangCard != null && message.hasOwnProperty("HuangCard"))
-                object.HuangCard = $root.gamecomm.CardInfo.toObject(message.HuangCard, options);
             return object;
         };
 

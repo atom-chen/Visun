@@ -2,48 +2,61 @@ syntax = "proto3";
 package qzcowcow;
 import "gamecomm.proto";
 
+//通比牛牛玩家信息
+message QzcowcowPlayer {
+  PlayerInfo  MyInfo = 1;  //其中State
+  CardInfo Cards = 2;     //
+}
+
 //入场
 message QzcowcowSceneResp {
-  int64 TimeStamp = 1;        //时间戳
-  repeated int32 Chips = 2;      //筹码
-  repeated bytes AwardAreas = 3;    //开奖记录(路单)
-  repeated int64 AreaBets = 4;    //各下注区当前总下注额
-  repeated int64 MyBets = 5;      //我在各下注区的总下注额
-  string Inning = 6;               // 牌局号
-  PlayerListInfo AllPlayers = 7;  //玩家列表
-  uint64 HostID = 8;
+  int64 TimeStamp = 1;              //时间戳
+  repeated int32 Chips = 2;         //筹码
+  repeated int64 AreaBets = 4;      //各下注区当前总下注额
+  repeated int64 MyBets = 5;        //我在各下注区的总下注额
+  string Inning = 6;                // 牌局号
+  PlayerListInfo AllPlayers = 7;    //玩家列表
+  uint64 HostID = 8;              //庄家ID
 }
 
 //状态
 // 服务端推送
-//(空闲 - 喊庄)
+//(空闲 - )
 message QzcowcowStateFreeResp {
   TimeInfo Times = 1;
 }
 
-//(开始 - 定庄)
-message QzcowcowStateStartResp {
-  TimeInfo Times = 1;
-  uint64 HostID = 2;
-}
 
 //(游戏中 - 下注)
 message QzcowcowStatePlayingResp {
   TimeInfo Times = 1;
 }
 
-//(开奖)
+//(发牌)
+message QzcowcowStateDealResp {
+  TimeInfo Times = 1;
+  CardInfo Cards = 2;     // 玩家各自的牌值
+}
+
+//(开奖 -- 比牌结果)
 message QzcowcowStateOpenResp {
   TimeInfo Times = 1;
   QzcowcowOpenResp OpenInfo = 2;
 }
-
 
 //(结束)
 message QzcowcowStateOverResp {
   TimeInfo Times = 1;
 }
 
+
+//准备
+message QzcowcowReadyReq {
+  bool IsReady = 1; // 玩家准备，可以取消准备
+}
+message QzcowcowReadyResp {
+  uint64 UserId = 1;
+}
 
 
 
@@ -61,12 +74,8 @@ message QzcowcowBetResp {
 
 //开牌
 message QzcowcowOpenResp {
-  bytes AwardArea = 1;    //各区域胜负：1胜，0负
-  CardInfo BankerCard = 2;    //天
-  CardInfo TianCard = 3;    //天
-  CardInfo XuanCard = 4;    //玄
-  CardInfo DiCard = 5;    //地
-  CardInfo HuangCard = 6;  //黄
+  uint64 WinnerId = 1;   //赢家ID
+  repeated QzcowcowPlayer Infos = 2;    //玩家的牌值
 }
 
 //结算
