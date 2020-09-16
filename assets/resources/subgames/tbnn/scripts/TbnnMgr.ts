@@ -27,6 +27,10 @@ export default class TbnnMgr extends ModelBase {
 	getEnterData() : tbcowcow.ITbcowcowSceneResp {
         return GameManager.getInstance().getEnterData();
     }
+
+    getDizhu() : number {
+        return 1;
+    }
 	
 	clearPlayers() {
         this._players = {};

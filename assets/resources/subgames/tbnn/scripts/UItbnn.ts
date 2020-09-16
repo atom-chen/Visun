@@ -2,7 +2,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../common/script/model/GameManager";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
-import { tbcowcow_msgs, tbcowcow_packet_define, tbcowcow_request } from "../../../../common/script/proto/net_tbcowcow";
+import { tbcowcow_msgs, tbcowcow_request } from "../../../../common/script/proto/net_tbcowcow";
 import { tbcowcow } from "../../../../../declares/tbcowcow";
 import TbnnMgr from "./TbnnMgr";
 import ProcessorMgr from "../../../../kernel/net/processor/ProcessorMgr";
@@ -16,7 +16,7 @@ import UIManager from "../../../../kernel/view/UIManager";
 import { isNil, newHandler } from "../../../../kernel/utils/GlobalFuncs";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import { gamecomm } from "../../../../../declares/gamecomm";
-import { gamecomm_msgs, gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
+import { gamecomm_msgs } from "../../../../common/script/proto/net_gamecomm";
 import { BaseTimer } from "../../../../kernel/basic/timer/BaseTimer";
 import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import TimerManager from "../../../../kernel/basic/timer/TimerManager";
@@ -148,7 +148,7 @@ export default class UItbnn extends BaseComponent {
                 TbnnMgr.getInstance().addPlayer(param.AllPlayers.AllInfos[ii]);
             }
         }
-
+        this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + TbnnMgr.getInstance().getDizhu();
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshPlayerByIndex(n);
@@ -324,21 +324,15 @@ export default class UItbnn extends BaseComponent {
         //     });
         // }, this);
 
-        CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:1});
-        }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet2, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:2});
-        }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet3, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:3});
-        }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet4, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:4});
-        }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ 
-            tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:5});
-        }, this);
-	}
+        CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ this.sendBet(1); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet2, function(){ this.sendBet(2); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet3, function(){ this.sendBet(3); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet4, function(){ this.sendBet(4); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ this.sendBet(5); }, this);
+    }
+    sendBet(bei:number) {
+        var money = CommonUtil.toServerMoney(TbnnMgr.getInstance().getDizhu());
+        tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:money});
+    }
 
 }
