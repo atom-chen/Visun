@@ -56,7 +56,7 @@ export default class UItbnn extends BaseComponent {
         this.initNetEvent();
         
         this.TbcowcowStateFreeResp(null);
-        
+
         this.TbcowcowSceneResp(TbnnMgr.getInstance().getEnterData());
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
     }
@@ -274,7 +274,7 @@ export default class UItbnn extends BaseComponent {
             }
         } else {
             for(var i=0; i<MAX_SOLDIER; i++) {
-                this.refreshPlayerByIndex(i);
+                this.refreshPlayerByIndex(i, false);
             }
         }
     }
