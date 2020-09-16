@@ -173,6 +173,7 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private TbcowcowStatePlayingResp(param:tbcowcow.ITbcowcowStatePlayingResp) {
@@ -180,6 +181,7 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.opNode.active = true;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
     }
 
 	private TbcowcowStateOpenResp(param:tbcowcow.ITbcowcowStateOpenResp) {
@@ -188,6 +190,7 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
         this.TbcowcowOpenResp(param.OpenInfo);
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private TbcowcowStateOverResp(param:tbcowcow.ITbcowcowStateOverResp) {
@@ -195,6 +198,7 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.opNode.active = false;
         this.m_ui.readyNode.active = false;
         this.resetCD(param.Times.WaitTime);
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
     }
     
     private TbcowcowOpenResp(param:tbcowcow.ITbcowcowOpenResp) {
