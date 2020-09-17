@@ -35,7 +35,7 @@ export default class CpnRollNotice extends cc.Component {
             nd.anchorY = 0.5;
             nd.x = this.node.width;
             nd.color = this.noticeColor;
-            cpn.fontSize = 24;
+            cpn.fontSize = 20;
             cpn.verticalAlign = cc.Label.VerticalAlign.CENTER;
             cpn.string = info.Content;
             this.node.addChild(nd);
