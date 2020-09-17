@@ -32,6 +32,7 @@ export default class ViewDefine {
 	public static UIdian21 = "subgames/dian21/prefabs/UIdian21";
 	public static UIerba = "subgames/erba/prefabs/UIerba";
 	public static UIhonghei = "subgames/honhei/prefabs/UIHonghei";
+	public static UIRedblack = "subgames/redblack/prefabs/UIRedblack";
 	public static UIjskb = "subgames/jskb/prefabs/UIjskb";
 	public static UIlonghu = "subgames/longhu/prefabs/UIlonghu";
 	public static UIpaijiu = "subgames/paijiu/prefabs/UIpaijiu";

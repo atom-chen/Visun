@@ -35,7 +35,7 @@ var GameConfig = {
 		name: "红黑大战",
 		icon: "lobby/imgs/gameico2/ico_redblack",
 		dir: "honhei",
-		viewpath: ViewDefine.UIhonghei
+		viewpath: ViewDefine.UIRedblack
 	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
