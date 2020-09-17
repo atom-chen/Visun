@@ -17,6 +17,7 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import { login } from "../../../../../../declares/login";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
+import NoticeMgr from "../../../../../common/script/model/NoticeMgr";
 
 
 const {ccclass, property} = cc._decorator;
@@ -39,6 +40,8 @@ export default class UIHall extends BaseComponent {
 		this.m_ui.btn_fs.active = !cc.sys.isNative;
 
 		//this.test();
+		NoticeMgr.getInstance().addNotice("公告测试，我来自哈拉呀星系", true);
+		NoticeMgr.getInstance().addNotice("今晚6点11分维护，别瞎几把玩", true);
 	}
 
 	private LoginResp(param:login.ILoginResp) {
