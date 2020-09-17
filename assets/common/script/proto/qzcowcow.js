@@ -617,6 +617,7 @@ $root.qzcowcow = (function() {
 
         QzcowcowStateDecideResp.prototype.Times = null;
         QzcowcowStateDecideResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        QzcowcowStateDecideResp.prototype.Multiple = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         QzcowcowStateDecideResp.create = function create(properties) {
             return new QzcowcowStateDecideResp(properties);
@@ -629,6 +630,8 @@ $root.qzcowcow = (function() {
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
             if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
                 writer.uint32(16).uint64(message.HostID);
+            if (message.Multiple != null && Object.hasOwnProperty.call(message, "Multiple"))
+                writer.uint32(24).int64(message.Multiple);
             return writer;
         };
 
@@ -648,6 +651,9 @@ $root.qzcowcow = (function() {
                     break;
                 case 2:
                     message.HostID = reader.uint64();
+                    break;
+                case 3:
+                    message.Multiple = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -674,6 +680,9 @@ $root.qzcowcow = (function() {
             if (message.HostID != null && message.hasOwnProperty("HostID"))
                 if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
                     return "HostID: integer|Long expected";
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (!$util.isInteger(message.Multiple) && !(message.Multiple && $util.isInteger(message.Multiple.low) && $util.isInteger(message.Multiple.high)))
+                    return "Multiple: integer|Long expected";
             return null;
         };
 
@@ -695,6 +704,15 @@ $root.qzcowcow = (function() {
                     message.HostID = object.HostID;
                 else if (typeof object.HostID === "object")
                     message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            if (object.Multiple != null)
+                if ($util.Long)
+                    (message.Multiple = $util.Long.fromValue(object.Multiple)).unsigned = false;
+                else if (typeof object.Multiple === "string")
+                    message.Multiple = parseInt(object.Multiple, 10);
+                else if (typeof object.Multiple === "number")
+                    message.Multiple = object.Multiple;
+                else if (typeof object.Multiple === "object")
+                    message.Multiple = new $util.LongBits(object.Multiple.low >>> 0, object.Multiple.high >>> 0).toNumber();
             return message;
         };
 
@@ -709,6 +727,11 @@ $root.qzcowcow = (function() {
                     object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.HostID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Multiple = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Multiple = options.longs === String ? "0" : 0;
             }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
@@ -717,6 +740,11 @@ $root.qzcowcow = (function() {
                     object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
                 else
                     object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (typeof message.Multiple === "number")
+                    object.Multiple = options.longs === String ? String(message.Multiple) : message.Multiple;
+                else
+                    object.Multiple = options.longs === String ? $util.Long.prototype.toString.call(message.Multiple) : options.longs === Number ? new $util.LongBits(message.Multiple.low >>> 0, message.Multiple.high >>> 0).toNumber() : message.Multiple;
             return object;
         };
 

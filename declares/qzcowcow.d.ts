@@ -412,6 +412,9 @@ export namespace qzcowcow {
 
         /** QzcowcowStateDecideResp HostID */
         HostID?: (number|Long|null);
+
+        /** QzcowcowStateDecideResp Multiple */
+        Multiple?: (number|Long|null);
     }
 
     /** Represents a QzcowcowStateDecideResp. */
@@ -428,6 +431,9 @@ export namespace qzcowcow {
 
         /** QzcowcowStateDecideResp HostID. */
         public HostID: (number|Long);
+
+        /** QzcowcowStateDecideResp Multiple. */
+        public Multiple: (number|Long);
 
         /**
          * Creates a new QzcowcowStateDecideResp instance using the specified properties.

@@ -51,7 +51,7 @@ export class qzcowcow_request {
     public static QzcowcowSceneResp( data:{ TimeStamp:number, Chips:number[], AreaBets:number[], MyBets:number[], Inning:string, AllPlayers:any, HostID:number } ) { qzcowcow_packet_define[180].sendToChannel(ChannelDefine.game, data, false); }
     public static QzcowcowStateFreeResp( data:{ Times:any } ) { qzcowcow_packet_define[181].sendToChannel(ChannelDefine.game, data, false); }
     public static QzcowcowStateCallResp( data:{ Times:any } ) { qzcowcow_packet_define[182].sendToChannel(ChannelDefine.game, data, false); }
-    public static QzcowcowStateDecideResp( data:{ Times:any, HostID:number } ) { qzcowcow_packet_define[183].sendToChannel(ChannelDefine.game, data, false); }
+    public static QzcowcowStateDecideResp( data:{ Times:any, HostID:number, Multiple:number } ) { qzcowcow_packet_define[183].sendToChannel(ChannelDefine.game, data, false); }
     public static QzcowcowStatePlayingResp( data:{ Times:any } ) { qzcowcow_packet_define[184].sendToChannel(ChannelDefine.game, data, false); }
     public static QzcowcowStateDealResp( data:{ Times:any, Cards:any } ) { qzcowcow_packet_define[185].sendToChannel(ChannelDefine.game, data, false); }
     public static QzcowcowStateOpenResp( data:{ Times:any, OpenInfo:any } ) { qzcowcow_packet_define[186].sendToChannel(ChannelDefine.game, data, false); }

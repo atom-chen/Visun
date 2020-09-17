@@ -35,6 +35,7 @@ message QzcowcowStateCallResp {
 message QzcowcowStateDecideResp {
   TimeInfo Times = 1;
   uint64 HostID = 2;
+  int64 Multiple = 3;  //相同倍数 可用作
 }
 
 
