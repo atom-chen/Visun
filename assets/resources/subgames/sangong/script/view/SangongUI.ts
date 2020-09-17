@@ -243,7 +243,10 @@ export default class SangongUI extends BaseComponent {
     
     private SangongStateDealResp(param:sangong.ISangongStateDealResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+		this.m_ui.callNode.active = false;
 		this.playFapaiAni();
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
