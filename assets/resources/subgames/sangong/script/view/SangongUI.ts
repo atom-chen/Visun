@@ -226,10 +226,20 @@ export default class SangongUI extends BaseComponent {
 		}
 		
 		this.playDingzhuang(-99, false);
-	}
-
-	private SangongStateDecideResp(param:sangong.ISangongStateDecideResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setQiangzhuang(true);
+    }
+    
+    private SangongStateDealResp(param:sangong.ISangongStateDealResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+		this.showSearching(false);
+		this.playFapaiAni();
+		if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+    }
+    
+    private SangongStateCallResp(param:sangong.ISangongStateCallResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setJiaofen(true);
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = true;
@@ -237,50 +247,58 @@ export default class SangongUI extends BaseComponent {
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
-	private SangongStateCallResp(param:sangong.ISangongStateCallResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setJiaofen(true);
+	private SangongStateDecideResp(param:sangong.ISangongStateDecideResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setQiangzhuang(true);
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = false;
-		this.m_ui.callNode.active = true;
+		this.m_ui.callNode.active = false;
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
-	}
-
-	private SangongStateDealResp(param:sangong.ISangongStateDealResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
-		this.showSearching(false);
-		this.playFapaiAni();
-		if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
-        }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+        
+        this.playDingzhuang(param.HostID, true);
 	}
 
 	private SangongStatePlayingResp(param:sangong.ISangongStatePlayingResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = true;
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private SangongStateOpenResp(param:sangong.ISangongStateOpenResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = false;
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+        this.SangongOpenResp(param.OpenInfo);
 	}
 
 	private SangongStateOverResp(param:sangong.ISangongStateOverResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
-		this.showSearching(false);
+        this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = false;
 		if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private SangongOpenResp(param:sangong.ISangongOpenResp) {
@@ -399,14 +417,15 @@ export default class SangongUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_bet_4, function(){ this.sendBet(4); }, this);
 	}
 
-	private sendGrab(bei:number) {
-		var want = bei > 0;
+	private sendGrab(idx:number) {
+		var want = idx > 0;
 		sangong_request.SangongHostReq({
 			IsWant: want
 		});
 	}
 
-	private sendBet(bei:number) {
+	private sendBet(idx:number) {
+		var bei = this._betBeiList[idx];
 		var money = CommonUtil.toServerMoney(SangongMgr.getInstance().getDizhu()) * bei;
 		sangong_request.SangongBetReq({
 			BetArea:0,
