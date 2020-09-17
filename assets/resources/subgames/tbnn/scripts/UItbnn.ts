@@ -61,15 +61,6 @@ export default class UItbnn extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
     }
 
-    private onStateTimer(tmr:BaseTimer) {
-		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
-    }
-    
-    private resetCD(WaitTime) {
-        TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, WaitTime, new CHandler(this, this.onStateTimer), true);
-    }
-
     //玩家的UI位置
     private playerIndex(player:tbcowcow.ITbcowcowPlayer) : number {
 		if(isNil(player)){ return -1; }
@@ -124,16 +115,27 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
+    
+    private onStateTimer(tmr:BaseTimer) {
+		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+    }
+    
+    private resetCD(WaitTime) {
+        TimerManager.delTimer(this.tmrState);
+		this.tmrState = TimerManager.loopSecond(1, WaitTime, new CHandler(this, this.onStateTimer), true);
+    }
 
     private playFapaiAni() {
         var nn = 0;
         for(var i=0; i<MAX_SOLDIER; i++){
             if(this.getPlayerByIndex(i)) {
                 this._handors[i].resetCards([0,0,0,0,0]);
-                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-                for(var j=0; j<CARD_CNT; j++) {
-                    nn++;
-                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                if(!isNil(this.getPlayerByIndex(i))) {
+                    var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                    for(var j=0; j<CARD_CNT; j++) {
+                        nn++;
+                        CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                    }
                 }
             }
         }

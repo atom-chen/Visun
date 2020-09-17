@@ -137,10 +137,12 @@ export default class QznnUI extends BaseComponent {
         var nn = 0;
         for(var i=0; i<MAX_SOLDIER; i++){
             this._handors[i].resetCards([0,0,0,0,0]);
-            var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-            for(var j=0; j<CARD_CNT; j++) {
-                nn++;
-                CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+            if(!isNil(this.getPlayerByIndex(i))) {
+                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                for(var j=0; j<CARD_CNT; j++) {
+                    nn++;
+                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                }
             }
         }
     }
@@ -156,8 +158,14 @@ export default class QznnUI extends BaseComponent {
         var idx = this.playerIdx(BankerID);
         if(idx >= 0) {
             var dstPos = cc.v3(this._pnodes[idx].position);
-            dstPos.x += 50;
-            dstPos.y += 75;
+            if(idx==0) {
+                dstPos.x += -35;
+                dstPos.y += 60;
+            } else {
+                dstPos.x += 50;
+                dstPos.y += 75;
+            }
+            
             if(bAni) {
                 this.m_ui.zhuang.position = this.originZpos;
                 this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
@@ -206,6 +214,7 @@ export default class QznnUI extends BaseComponent {
 		this.playDingzhuang(QznnMgr.getInstance().getEnterData().HostID, false);
 	}
 
+    //准备阶段
 	private QzcowcowStateFreeResp(param:qzcowcow.IQzcowcowSceneResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
 		this.m_ui.readyNode.active = true;
@@ -221,10 +230,22 @@ export default class QznnUI extends BaseComponent {
 		}
 		
 		this.playDingzhuang(-99, false);
-	}
-
-	private QzcowcowStateDecideResp(param:qzcowcow.IQzcowcowStateDecideResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setQiangzhuang(true);
+    }
+    
+    //发牌阶段
+    private QzcowcowStateDealResp(param:qzcowcow.IQzcowcowStateDealResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
+		this.showSearching(false);
+        this.playFapaiAni();
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+    }
+    
+    //喊庄阶段
+    private QzcowcowStateCallResp(param:qzcowcow.IQzcowcowStateCallResp) {
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setJiaofen(true);
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = true;
@@ -232,50 +253,64 @@ export default class QznnUI extends BaseComponent {
         if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
-	private QzcowcowStateCallResp(param:qzcowcow.IQzcowcowStateCallResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setJiaofen(true);
+    //定妆阶段
+	private QzcowcowStateDecideResp(param:qzcowcow.IQzcowcowStateDecideResp) {
+        QznnMgr.getInstance().getEnterData().HostID = param.HostID;
+
+		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setQiangzhuang(true);
 		this.showSearching(false);
 		this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = false;
+        if(param && param.Times) {
+            this.resetCD(param.Times.WaitTime);
+        }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+        
+        this.playDingzhuang(param.HostID, true);
+	}
+
+    //下注阶段
+	private QzcowcowStatePlayingResp(param:qzcowcow.IQzcowcowStatePlayingResp) {
+        this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
+        this.showSearching(false);
+        this.m_ui.readyNode.active = false;
 		this.m_ui.grabNode.active = false;
         this.m_ui.callNode.active = true;
         if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
-	private QzcowcowStateDealResp(param:qzcowcow.IQzcowcowStateDealResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setFapai(true);
-		this.showSearching(false);
-        this.playFapaiAni();
-        if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
-        }
-	}
-
-	private QzcowcowStatePlayingResp(param:qzcowcow.IQzcowcowStatePlayingResp) {
-		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setXiazhu(true);
-        this.showSearching(false);
-        if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
-        }
-	}
-
+    //开牌结算阶段
 	private QzcowcowStateOpenResp(param:qzcowcow.IQzcowcowStateOpenResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setKaipai(true);
         this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = false;
         if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
+        this.QzcowcowOpenResp(param.OpenInfo);
 	}
 
+    //开牌结算阶段
 	private QzcowcowStateOverResp(param:qzcowcow.IQzcowcowStateOverResp) {
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setPaijiang(true);
         this.showSearching(false);
+        this.m_ui.readyNode.active = false;
+		this.m_ui.grabNode.active = false;
+        this.m_ui.callNode.active = false;
         if(param && param.Times) {
             this.resetCD(param.Times.WaitTime);
         }
+        UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
 
 	private QzcowcowOpenResp(param:qzcowcow.IQzcowcowOpenResp) {
@@ -339,14 +374,16 @@ export default class QznnUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
-        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = param.BetScore/100+"倍";
-	}
-	
-	QzcowcowHostResp(param:qzcowcow.IQzcowcowHostResp) {
-		if(isNil(param)) { return; }
-		QznnMgr.getInstance().getEnterData().HostID = param.UserID;
-		this.playDingzhuang(param.UserID, true);
-	}
+        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "下注"+param.BetScore/100+"倍";
+    }
+    
+    QzcowcowCallResp(param:qzcowcow.IQzcowcowCallResp) {
+        if(isNil(param)) { return; }
+        var idx = this.playerIdx(param.UserID);
+        if(idx < 0) { return; }
+        this._pnodes[idx].getChildByName("callScoreNode").active = true;
+        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "喊庄"+param.Multiple+"倍";
+    }
 
 	initNetEvent() {
 		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowSceneResp, this.QzcowcowSceneResp, this);
@@ -363,7 +400,7 @@ export default class QznnUI extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
         EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowBetResp, this.QzcowcowBetResp, this);
-		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowHostResp, this.QzcowcowHostResp, this);
+		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowCallResp, this.QzcowcowCallResp, this);
 	}
 
 	showSearching(bSearching:boolean) {
@@ -409,14 +446,15 @@ export default class QznnUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_bet_4, function(){ this.sendBet(4); }, this);
 	}
 
-	private sendGrab(bei:number) {
-		var want = bei > 0;
-		qzcowcow_request.QzcowcowHostReq({
-			IsWant: want
+	private sendGrab(idx:number) {
+        var bei = this._grabBeiList[idx];
+		qzcowcow_request.QzcowcowCallReq({
+			Multiple: bei
 		});
 	}
 
-	private sendBet(bei:number) {
+	private sendBet(idx:number) {
+        var bei = this._betBeiList[idx];
 		var money = CommonUtil.toServerMoney(QznnMgr.getInstance().getDizhu()) * bei;
 		qzcowcow_request.QzcowcowBetReq({
 			BetArea:0,
