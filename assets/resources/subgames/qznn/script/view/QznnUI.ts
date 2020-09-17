@@ -22,6 +22,7 @@ import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
 
 
 const MAX_SOLDIER = 5;
@@ -196,7 +197,6 @@ export default class QznnUI extends BaseComponent {
 
 	private QzcowcowSceneResp(param:qzcowcow.IQzcowcowSceneResp) {
 		if(isNil(param)) { return; }
-
         QznnMgr.delInstance();
         QznnMgr.getInstance();
         if(param.AllPlayers && param.AllPlayers.AllInfos) {
@@ -205,8 +205,11 @@ export default class QznnUI extends BaseComponent {
             }
 		}
 		
-	//	this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + QznnMgr.getInstance().getDizhu();
+        var curGame = GameManager.getInstance().getRunningGameData();
+        this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
+    //    this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + curGame.Info.LessScore;
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshPlayerByIndex(n);
 		}

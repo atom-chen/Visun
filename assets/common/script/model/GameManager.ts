@@ -97,6 +97,25 @@ export default class GameManager extends ModelBase {
 		return tbl;
 	}
 
+	public getGameData(gameId:number) : login.IGameItem {
+		for(var n in this.gameArr) {
+			for(var j in this.gameArr[n]) {
+				if(gameId == this.gameArr[n][j].ID) {
+					return this.gameArr[n][j]
+				}
+			}
+		}
+		return null;
+	}
+
+	public getRunningGameData() : login.IGameItem {
+		if(isEmpty(this.gameId)) {
+			return null;
+		}
+		return this.getGameData(this.gameId);
+	}
+
+	
 
 	//获取子游戏的客户端配置
 	public clientConfig(gameType:string|number) : any{

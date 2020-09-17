@@ -22,6 +22,7 @@ import CHandler from "../../../../kernel/basic/datastruct/CHandler";
 import TimerManager from "../../../../kernel/basic/timer/TimerManager";
 import Preloader from "../../../../kernel/utils/Preloader";
 import CpnWinLoseMoney from "../../../appqp/script/comps/CpnWinLoseMoney";
+import GameUtil from "../../../../common/script/utils/GameUtil";
 
 
 const MAX_SOLDIER = 5;
@@ -115,7 +116,7 @@ export default class UItbnn extends BaseComponent {
         }
     }
 
-    
+
     private onStateTimer(tmr:BaseTimer) {
 		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
     }
@@ -143,7 +144,6 @@ export default class UItbnn extends BaseComponent {
 
     private TbcowcowSceneResp(param:tbcowcow.ITbcowcowSceneResp) {
         if(isNil(param)) { return; }
-
         TbnnMgr.delInstance();
         TbnnMgr.getInstance();
         if(param.AllPlayers && param.AllPlayers.AllInfos) {
@@ -151,9 +151,12 @@ export default class UItbnn extends BaseComponent {
                 TbnnMgr.getInstance().addPlayer(param.AllPlayers.AllInfos[ii]);
             }
         }
-        
-        this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + TbnnMgr.getInstance().getDizhu();
+
+        var curGame = GameManager.getInstance().getRunningGameData();
+        this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
+        this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + curGame.Info.LessScore;
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshPlayerByIndex(n);
         }

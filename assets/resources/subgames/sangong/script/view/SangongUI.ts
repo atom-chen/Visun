@@ -21,6 +21,7 @@ import TimerManager from "../../../../../kernel/basic/timer/TimerManager";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import Preloader from "../../../../../kernel/utils/Preloader";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
 
 
 const MAX_SOLDIER = 5;
@@ -41,7 +42,7 @@ export default class SangongUI extends BaseComponent {
 	private _grabBeiList = [0, 2, 4, 8];
 	private _betBeiList = [1, 2, 4, 8, 16];
 
-	onLoad() {
+	start() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
 		for(var i = 0; i <= 4; i++) {
@@ -190,7 +191,6 @@ export default class SangongUI extends BaseComponent {
 
 	private SangongSceneResp(param:sangong.ISangongSceneResp) {
 		if(isNil(param)) { return; }
-
         SangongMgr.delInstance();
         SangongMgr.getInstance();
         if(param.AllPlayers && param.AllPlayers.AllInfos) {
@@ -199,8 +199,11 @@ export default class SangongUI extends BaseComponent {
             }
 		}
 		
-	//	this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + QznnMgr.getInstance().getDizhu();
+        var curGame = GameManager.getInstance().getRunningGameData();
+        this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
+    //    this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + curGame.Info.LessScore;
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+        
         for(var n=0; n<MAX_SOLDIER; n++) {
             this.refreshPlayerByIndex(n);
 		}

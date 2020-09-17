@@ -136,6 +136,25 @@ export default class GameUtil {
 		));
 	}
 
+	static roomNameByLevel(lvl:number) {
+		if(isNil(lvl)) { lvl = 0; }
+		if(lvl==0) {
+			return "体验房";
+		} else if(lvl==1) {
+			return "初级房";
+		} else if(lvl==2) {
+			return "中级房";
+		} else if(lvl==3) {
+			return "高级房";
+		} else if(lvl==4) {
+			return "至尊房";
+		} else if(lvl==5) {
+			return "王者房";
+		} else if(lvl==6) {
+			return "赌神房";
+		}
+	}
+
 	static loadGameIcons() {
 		var i = 1;
 		for(var k in GameConfig) {

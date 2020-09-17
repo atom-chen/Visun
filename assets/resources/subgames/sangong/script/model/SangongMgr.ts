@@ -28,7 +28,7 @@ export default class SangongMgr extends ModelBase {
     }
 
     getDizhu() : number {
-        return 1;
+        return GameManager.getInstance().getRunningGameData().Info.LessScore;
     }
 	
 	clearPlayers() {
