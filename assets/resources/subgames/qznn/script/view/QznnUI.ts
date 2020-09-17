@@ -273,6 +273,7 @@ export default class QznnUI extends BaseComponent {
         }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
         
+        QznnMgr.getInstance().getEnterData().HostID = param.HostID;
         this.playDingzhuang(param.HostID, true);
 	}
 

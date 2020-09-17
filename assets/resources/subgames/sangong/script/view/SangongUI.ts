@@ -52,7 +52,12 @@ export default class SangongUI extends BaseComponent {
 			this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
 			this._winloses.push(nd.getChildByName("CpnWinLoseMoney").getComponent(CpnWinLoseMoney));
 		}
-		this.originZpos = this.m_ui.cpzhuang.position;
+        this.originZpos = this.m_ui.cpzhuang.position;
+        
+        this._handors[1].set3dLook(15);
+		this._handors[2].set3dLook(15);
+		this._handors[3].set3dLook(-15);
+		this._handors[4].set3dLook(-15);
 
 		this.refreshBtns();
 
@@ -155,8 +160,14 @@ export default class SangongUI extends BaseComponent {
         var idx = this.playerIdx(BankerID);
         if(idx >= 0) {
             var dstPos = cc.v3(this._pnodes[idx].position);
-            dstPos.x += 50;
-            dstPos.y += 75;
+            if(idx==0) {
+                dstPos.x += -35;
+                dstPos.y += 60;
+            } else {
+                dstPos.x += 50;
+                dstPos.y += 75;
+            }
+            
             if(bAni) {
                 this.m_ui.zhuang.position = this.originZpos;
                 this.m_ui.zhuang.runAction(cc.moveTo(0.3, cc.v2(dstPos.x, dstPos.y)));
@@ -227,7 +238,7 @@ export default class SangongUI extends BaseComponent {
             this._pnodes[i].getChildByName("callScoreNode").active = false;
 		}
 		
-		this.playDingzhuang(-99, false);
+        this.playDingzhuang(-99, false);
     }
     
     private SangongStateDealResp(param:sangong.ISangongStateDealResp) {
@@ -263,6 +274,7 @@ export default class SangongUI extends BaseComponent {
         }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
         
+        SangongMgr.getInstance().getEnterData().HostID = param.HostID;
         this.playDingzhuang(param.HostID, true);
 	}
 
@@ -368,9 +380,11 @@ export default class SangongUI extends BaseComponent {
 	}
 	
 	SangongHostResp(param:sangong.ISangongHostResp) {
-		if(isNil(param)) { return; }
-		SangongMgr.getInstance().getEnterData().HostID = param.UserID;
-		this.playDingzhuang(param.UserID, true);
+        if(isNil(param)) { return; }
+        if(param.IsWant) {
+            SangongMgr.getInstance().getEnterData().HostID = param.UserID;
+            this.playDingzhuang(param.UserID, true);
+        }
 	}
 
 	initNetEvent() {
