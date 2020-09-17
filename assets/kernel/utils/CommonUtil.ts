@@ -276,9 +276,9 @@ export default class CommonUtil {
 		}
 		return v.toString();
 	}
-	static formatTime(nS) : string {
-		if(isNil(nS)) { return ""; }
-		var now = new Date(parseInt(nS) * 1000);
+	static formatTime(nSecond) : string {
+		if(isNil(nSecond)) { return ""; }
+		var now = new Date(parseInt(nSecond) * 1000);
 		var year = now.getFullYear();
 		var month = this.fixNum(now.getMonth() + 1);
 		var date = this.fixNum(now.getDate());

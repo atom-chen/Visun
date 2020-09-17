@@ -6,6 +6,7 @@ export default class ViewDefine {
 	public static UIpk = "appqp/prefabs/UIpk";
 	public static UINumInput = "appqp/prefabs/UINumInput";
 	public static UISearchDesk = "appqp/prefabs/UISearchDesk";
+	public static UIGameRecord1 = "appqp/prefabs/UIGameRecord1";
 	//
 	public static UIHelpdoc = "appqp/helpdoc/prefabs/UIHelpdoc";
 	//lobby
