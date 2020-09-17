@@ -134,10 +134,12 @@ export default class SangongUI extends BaseComponent {
         var nn = 0;
         for(var i=0; i<MAX_SOLDIER; i++){
             this._handors[i].resetCards([0,0,0,0,0]);
-            var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-            for(var j=0; j<CARD_CNT; j++) {
-                nn++;
-                CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+            if(!isNil(this.getPlayerByIndex(i))) {
+                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                for(var j=0; j<CARD_CNT; j++) {
+                    nn++;
+                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                }
             }
         }
 	}
