@@ -13,16 +13,15 @@ export default class CpnChipbox2d extends BaseComponent {
 
     private selectedIndex:number = 1;
     private _values:Array<number> = null;
+    private chipPathFlag:boolean = false;
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
-
         CommonUtil.addClickEvent(this.m_ui.chip0, function(){ this.onSelect(0); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip1, function(){ this.onSelect(1); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip2, function(){ this.onSelect(2); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip3, function(){ this.onSelect(3); }, this);
         CommonUtil.addClickEvent(this.m_ui.chip4, function(){ this.onSelect(4); }, this);
-        
         this.setSelectedIndex(1);
     }
 
@@ -53,6 +52,14 @@ export default class CpnChipbox2d extends BaseComponent {
         this.onSelect(v);
     }
 
+    public getIndexByMoney(v:number) : number {
+        for(var i=this._values.length-1; i>=0; i--) {
+            if(v == this._values[i]) {
+                return i+1;
+            }
+        }
+        return -1;
+    }
     
     public getSelectValue() : number {
         return this._values[this.selectedIndex];
@@ -61,7 +68,6 @@ export default class CpnChipbox2d extends BaseComponent {
     public getSelectedNode() : cc.Node {
         return this.m_ui["chip"+this.selectedIndex];
     }
-
     
     public setChipValues(values:number[]) {
         if(!this._values) {
@@ -76,7 +82,7 @@ export default class CpnChipbox2d extends BaseComponent {
     }
 
     private setChipValue(index:number, v:number) {
-        var respath = GameUtil.chipPath(v, false);
+        var respath = GameUtil.chipPath(v, this.chipPathFlag);
         var res = cc.loader.getRes(respath, cc.SpriteFrame);
         if(res){ 
             this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;

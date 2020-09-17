@@ -12,7 +12,8 @@ const {ccclass, property} = cc._decorator;
 export default class CpnChipbox3d extends BaseComponent {
 
     private selectedIndex:number = 1;
-    private _values = null;
+    private _values:Array<number> = null;
+    private chipPathFlag:boolean = true;
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -31,6 +32,15 @@ export default class CpnChipbox3d extends BaseComponent {
 
     public getChipNode(idx:number) : cc.Node {
         return this.m_ui["chip"+idx];
+    }
+
+    public getChipNodeByValue(v:number) : cc.Node {
+        var idx = this._values.indexOf(v);
+        if(idx >= 0) {
+            return this.m_ui["chip"+idx];
+        } else {
+            return this.m_ui.chip0;
+        }
     }
 
     public getSelectedIndex() : number {
@@ -55,13 +65,8 @@ export default class CpnChipbox3d extends BaseComponent {
         return this._values[this.selectedIndex];
     }
 
-    public getChipNodeByValue(v:number) : cc.Node {
-        var idx = this._values.indexOf(v);
-        if(idx >= 0) {
-            return this.m_ui["chip"+idx];
-        } else {
-            return this.m_ui.chip0;
-        }
+    public getSelectedNode() : cc.Node {
+        return this.m_ui["chip"+this.selectedIndex];
     }
      
     public setChipValues(values:number[]) {
@@ -77,7 +82,7 @@ export default class CpnChipbox3d extends BaseComponent {
     }
 
     private setChipValue(index:number, v:number) {
-        var respath = GameUtil.chipPath(v, true);
+        var respath = GameUtil.chipPath(v, this.chipPathFlag);
         var res = cc.loader.getRes(respath, cc.SpriteFrame);
         if(res){ 
             this.m_ui["chip"+index].getComponent(cc.Sprite).spriteFrame = res;
