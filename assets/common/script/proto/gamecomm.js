@@ -838,6 +838,178 @@ $root.gamecomm = (function() {
         return AreaInfo;
     })();
 
+    gamecomm.InningInfo = (function() {
+
+        function InningInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        InningInfo.prototype.Number = "";
+        InningInfo.prototype.Name = "";
+        InningInfo.prototype.Level = 0;
+        InningInfo.prototype.Payoff = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        InningInfo.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        InningInfo.create = function create(properties) {
+            return new InningInfo(properties);
+        };
+
+        InningInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Number != null && Object.hasOwnProperty.call(message, "Number"))
+                writer.uint32(10).string(message.Number);
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(18).string(message.Name);
+            if (message.Level != null && Object.hasOwnProperty.call(message, "Level"))
+                writer.uint32(24).int32(message.Level);
+            if (message.Payoff != null && Object.hasOwnProperty.call(message, "Payoff"))
+                writer.uint32(32).int64(message.Payoff);
+            if (message.TimeStamp != null && Object.hasOwnProperty.call(message, "TimeStamp"))
+                writer.uint32(40).int64(message.TimeStamp);
+            return writer;
+        };
+
+        InningInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        InningInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.InningInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Number = reader.string();
+                    break;
+                case 2:
+                    message.Name = reader.string();
+                    break;
+                case 3:
+                    message.Level = reader.int32();
+                    break;
+                case 4:
+                    message.Payoff = reader.int64();
+                    break;
+                case 5:
+                    message.TimeStamp = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        InningInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        InningInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                if (!$util.isString(message.Number))
+                    return "Number: string expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            if (message.Level != null && message.hasOwnProperty("Level"))
+                if (!$util.isInteger(message.Level))
+                    return "Level: integer expected";
+            if (message.Payoff != null && message.hasOwnProperty("Payoff"))
+                if (!$util.isInteger(message.Payoff) && !(message.Payoff && $util.isInteger(message.Payoff.low) && $util.isInteger(message.Payoff.high)))
+                    return "Payoff: integer|Long expected";
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (!$util.isInteger(message.TimeStamp) && !(message.TimeStamp && $util.isInteger(message.TimeStamp.low) && $util.isInteger(message.TimeStamp.high)))
+                    return "TimeStamp: integer|Long expected";
+            return null;
+        };
+
+        InningInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.InningInfo)
+                return object;
+            var message = new $root.gamecomm.InningInfo();
+            if (object.Number != null)
+                message.Number = String(object.Number);
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            if (object.Level != null)
+                message.Level = object.Level | 0;
+            if (object.Payoff != null)
+                if ($util.Long)
+                    (message.Payoff = $util.Long.fromValue(object.Payoff)).unsigned = false;
+                else if (typeof object.Payoff === "string")
+                    message.Payoff = parseInt(object.Payoff, 10);
+                else if (typeof object.Payoff === "number")
+                    message.Payoff = object.Payoff;
+                else if (typeof object.Payoff === "object")
+                    message.Payoff = new $util.LongBits(object.Payoff.low >>> 0, object.Payoff.high >>> 0).toNumber();
+            if (object.TimeStamp != null)
+                if ($util.Long)
+                    (message.TimeStamp = $util.Long.fromValue(object.TimeStamp)).unsigned = false;
+                else if (typeof object.TimeStamp === "string")
+                    message.TimeStamp = parseInt(object.TimeStamp, 10);
+                else if (typeof object.TimeStamp === "number")
+                    message.TimeStamp = object.TimeStamp;
+                else if (typeof object.TimeStamp === "object")
+                    message.TimeStamp = new $util.LongBits(object.TimeStamp.low >>> 0, object.TimeStamp.high >>> 0).toNumber();
+            return message;
+        };
+
+        InningInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Number = "";
+                object.Name = "";
+                object.Level = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Payoff = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Payoff = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.TimeStamp = options.longs === String ? "0" : 0;
+            }
+            if (message.Number != null && message.hasOwnProperty("Number"))
+                object.Number = message.Number;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            if (message.Level != null && message.hasOwnProperty("Level"))
+                object.Level = message.Level;
+            if (message.Payoff != null && message.hasOwnProperty("Payoff"))
+                if (typeof message.Payoff === "number")
+                    object.Payoff = options.longs === String ? String(message.Payoff) : message.Payoff;
+                else
+                    object.Payoff = options.longs === String ? $util.Long.prototype.toString.call(message.Payoff) : options.longs === Number ? new $util.LongBits(message.Payoff.low >>> 0, message.Payoff.high >>> 0).toNumber() : message.Payoff;
+            if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
+                if (typeof message.TimeStamp === "number")
+                    object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
+                else
+                    object.TimeStamp = options.longs === String ? $util.Long.prototype.toString.call(message.TimeStamp) : options.longs === Number ? new $util.LongBits(message.TimeStamp.low >>> 0, message.TimeStamp.high >>> 0).toNumber() : message.TimeStamp;
+            return object;
+        };
+
+        InningInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return InningInfo;
+    })();
+
     gamecomm.PlayerListInfo = (function() {
 
         function PlayerListInfo(properties) {
@@ -2280,6 +2452,216 @@ $root.gamecomm = (function() {
         };
 
         return BeOutResp;
+    })();
+
+    gamecomm.GetInningsInfoReq = (function() {
+
+        function GetInningsInfoReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetInningsInfoReq.prototype.GameID = 0;
+
+        GetInningsInfoReq.create = function create(properties) {
+            return new GetInningsInfoReq(properties);
+        };
+
+        GetInningsInfoReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint32(message.GameID);
+            return writer;
+        };
+
+        GetInningsInfoReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetInningsInfoReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GetInningsInfoReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetInningsInfoReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetInningsInfoReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID))
+                    return "GameID: integer expected";
+            return null;
+        };
+
+        GetInningsInfoReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.GetInningsInfoReq)
+                return object;
+            var message = new $root.gamecomm.GetInningsInfoReq();
+            if (object.GameID != null)
+                message.GameID = object.GameID >>> 0;
+            return message;
+        };
+
+        GetInningsInfoReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.GameID = 0;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                object.GameID = message.GameID;
+            return object;
+        };
+
+        GetInningsInfoReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetInningsInfoReq;
+    })();
+
+    gamecomm.GetInningsInfoResp = (function() {
+
+        function GetInningsInfoResp(properties) {
+            this.Innings = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GetInningsInfoResp.prototype.Innings = $util.emptyArray;
+        GetInningsInfoResp.prototype.PageNum = 0;
+
+        GetInningsInfoResp.create = function create(properties) {
+            return new GetInningsInfoResp(properties);
+        };
+
+        GetInningsInfoResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Innings != null && message.Innings.length)
+                for (var i = 0; i < message.Innings.length; ++i)
+                    $root.gamecomm.InningInfo.encode(message.Innings[i], writer.uint32(10).fork()).ldelim();
+            if (message.PageNum != null && Object.hasOwnProperty.call(message, "PageNum"))
+                writer.uint32(16).int32(message.PageNum);
+            return writer;
+        };
+
+        GetInningsInfoResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GetInningsInfoResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.gamecomm.GetInningsInfoResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Innings && message.Innings.length))
+                        message.Innings = [];
+                    message.Innings.push($root.gamecomm.InningInfo.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.PageNum = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GetInningsInfoResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GetInningsInfoResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Innings != null && message.hasOwnProperty("Innings")) {
+                if (!Array.isArray(message.Innings))
+                    return "Innings: array expected";
+                for (var i = 0; i < message.Innings.length; ++i) {
+                    var error = $root.gamecomm.InningInfo.verify(message.Innings[i]);
+                    if (error)
+                        return "Innings." + error;
+                }
+            }
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                if (!$util.isInteger(message.PageNum))
+                    return "PageNum: integer expected";
+            return null;
+        };
+
+        GetInningsInfoResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.gamecomm.GetInningsInfoResp)
+                return object;
+            var message = new $root.gamecomm.GetInningsInfoResp();
+            if (object.Innings) {
+                if (!Array.isArray(object.Innings))
+                    throw TypeError(".gamecomm.GetInningsInfoResp.Innings: array expected");
+                message.Innings = [];
+                for (var i = 0; i < object.Innings.length; ++i) {
+                    if (typeof object.Innings[i] !== "object")
+                        throw TypeError(".gamecomm.GetInningsInfoResp.Innings: object expected");
+                    message.Innings[i] = $root.gamecomm.InningInfo.fromObject(object.Innings[i]);
+                }
+            }
+            if (object.PageNum != null)
+                message.PageNum = object.PageNum | 0;
+            return message;
+        };
+
+        GetInningsInfoResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Innings = [];
+            if (options.defaults)
+                object.PageNum = 0;
+            if (message.Innings && message.Innings.length) {
+                object.Innings = [];
+                for (var j = 0; j < message.Innings.length; ++j)
+                    object.Innings[j] = $root.gamecomm.InningInfo.toObject(message.Innings[j], options);
+            }
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                object.PageNum = message.PageNum;
+            return object;
+        };
+
+        GetInningsInfoResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetInningsInfoResp;
     })();
 
     return gamecomm;

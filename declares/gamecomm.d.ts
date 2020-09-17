@@ -503,6 +503,120 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of an InningInfo. */
+    interface IInningInfo {
+
+        /** InningInfo Number */
+        Number?: (string|null);
+
+        /** InningInfo Name */
+        Name?: (string|null);
+
+        /** InningInfo Level */
+        Level?: (number|null);
+
+        /** InningInfo Payoff */
+        Payoff?: (number|Long|null);
+
+        /** InningInfo TimeStamp */
+        TimeStamp?: (number|Long|null);
+    }
+
+    /** Represents an InningInfo. */
+    class InningInfo implements IInningInfo {
+
+        /**
+         * Constructs a new InningInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IInningInfo);
+
+        /** InningInfo Number. */
+        public Number: string;
+
+        /** InningInfo Name. */
+        public Name: string;
+
+        /** InningInfo Level. */
+        public Level: number;
+
+        /** InningInfo Payoff. */
+        public Payoff: (number|Long);
+
+        /** InningInfo TimeStamp. */
+        public TimeStamp: (number|Long);
+
+        /**
+         * Creates a new InningInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns InningInfo instance
+         */
+        public static create(properties?: gamecomm.IInningInfo): gamecomm.InningInfo;
+
+        /**
+         * Encodes the specified InningInfo message. Does not implicitly {@link gamecomm.InningInfo.verify|verify} messages.
+         * @param message InningInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IInningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified InningInfo message, length delimited. Does not implicitly {@link gamecomm.InningInfo.verify|verify} messages.
+         * @param message InningInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IInningInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an InningInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns InningInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.InningInfo;
+
+        /**
+         * Decodes an InningInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns InningInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.InningInfo;
+
+        /**
+         * Verifies an InningInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an InningInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns InningInfo
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.InningInfo;
+
+        /**
+         * Creates a plain object from an InningInfo message. Also converts values to other types if specified.
+         * @param message InningInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.InningInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this InningInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a PlayerListInfo. */
     interface IPlayerListInfo {
 
@@ -1674,6 +1788,192 @@ export namespace gamecomm {
 
         /**
          * Converts this BeOutResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GetInningsInfoReq. */
+    interface IGetInningsInfoReq {
+
+        /** GetInningsInfoReq GameID */
+        GameID?: (number|null);
+    }
+
+    /** Represents a GetInningsInfoReq. */
+    class GetInningsInfoReq implements IGetInningsInfoReq {
+
+        /**
+         * Constructs a new GetInningsInfoReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGetInningsInfoReq);
+
+        /** GetInningsInfoReq GameID. */
+        public GameID: number;
+
+        /**
+         * Creates a new GetInningsInfoReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GetInningsInfoReq instance
+         */
+        public static create(properties?: gamecomm.IGetInningsInfoReq): gamecomm.GetInningsInfoReq;
+
+        /**
+         * Encodes the specified GetInningsInfoReq message. Does not implicitly {@link gamecomm.GetInningsInfoReq.verify|verify} messages.
+         * @param message GetInningsInfoReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGetInningsInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GetInningsInfoReq message, length delimited. Does not implicitly {@link gamecomm.GetInningsInfoReq.verify|verify} messages.
+         * @param message GetInningsInfoReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGetInningsInfoReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GetInningsInfoReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GetInningsInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GetInningsInfoReq;
+
+        /**
+         * Decodes a GetInningsInfoReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GetInningsInfoReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GetInningsInfoReq;
+
+        /**
+         * Verifies a GetInningsInfoReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GetInningsInfoReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GetInningsInfoReq
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GetInningsInfoReq;
+
+        /**
+         * Creates a plain object from a GetInningsInfoReq message. Also converts values to other types if specified.
+         * @param message GetInningsInfoReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GetInningsInfoReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GetInningsInfoReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GetInningsInfoResp. */
+    interface IGetInningsInfoResp {
+
+        /** GetInningsInfoResp Innings */
+        Innings?: (gamecomm.IInningInfo[]|null);
+
+        /** GetInningsInfoResp PageNum */
+        PageNum?: (number|null);
+    }
+
+    /** Represents a GetInningsInfoResp. */
+    class GetInningsInfoResp implements IGetInningsInfoResp {
+
+        /**
+         * Constructs a new GetInningsInfoResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGetInningsInfoResp);
+
+        /** GetInningsInfoResp Innings. */
+        public Innings: gamecomm.IInningInfo[];
+
+        /** GetInningsInfoResp PageNum. */
+        public PageNum: number;
+
+        /**
+         * Creates a new GetInningsInfoResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GetInningsInfoResp instance
+         */
+        public static create(properties?: gamecomm.IGetInningsInfoResp): gamecomm.GetInningsInfoResp;
+
+        /**
+         * Encodes the specified GetInningsInfoResp message. Does not implicitly {@link gamecomm.GetInningsInfoResp.verify|verify} messages.
+         * @param message GetInningsInfoResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGetInningsInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GetInningsInfoResp message, length delimited. Does not implicitly {@link gamecomm.GetInningsInfoResp.verify|verify} messages.
+         * @param message GetInningsInfoResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGetInningsInfoResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GetInningsInfoResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GetInningsInfoResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GetInningsInfoResp;
+
+        /**
+         * Decodes a GetInningsInfoResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GetInningsInfoResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GetInningsInfoResp;
+
+        /**
+         * Verifies a GetInningsInfoResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GetInningsInfoResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GetInningsInfoResp
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GetInningsInfoResp;
+
+        /**
+         * Creates a plain object from a GetInningsInfoResp message. Also converts values to other types if specified.
+         * @param message GetInningsInfoResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GetInningsInfoResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GetInningsInfoResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

@@ -3,17 +3,17 @@ package gamecomm;
 
 //该协议文件不提供 req 和 resp 注:如需使用,请在子游戏协议中嵌套相关协议.
 enum PlayerState {
-   	PlayerLookOn    = 0; 	 //旁观(可作为刚入场时的初始状态)
-	PlayerSitDown   = 1;     //坐下(此状态下，才能参与游戏)
-	PlayerAgree     = 2;     //同意(可作为准备状态)
-	PlayerCall      = 3;     //叫分
-	PlayerPlaying   = 4;     //游戏
-	PlayerPickUp    = 5;     //托管
-	PlayerStandUp   = 6;     //站起(可作为结束状态)
-	PlayerGiveUp   	= 7;     //放弃
-	PlayerCompareLose   = 8; //比牌失败
-	PlayerFollow   	= 9; 	 //跟牌
-	PlayerRaise   	= 10; 	 //加注
+  PlayerLookOn = 0;   //旁观(可作为刚入场时的初始状态)
+  PlayerSitDown = 1;     //坐下(此状态下，才能参与游戏)
+  PlayerAgree = 2;     //同意(可作为准备状态)
+  PlayerCall = 3;     //叫分
+  PlayerPlaying = 4;     //游戏
+  PlayerPickUp = 5;     //托管
+  PlayerStandUp = 6;     //站起(可作为结束状态)
+  PlayerGiveUp = 7;     //放弃
+  PlayerCompareLose = 8; //比牌失败
+  PlayerFollow = 9;   //跟牌
+  PlayerRaise = 10;   //加注
 }
 
 
@@ -61,10 +61,23 @@ message AreaInfo {
   int64 AcquireGold = 4;  //输赢情况
 }
 
+//牌局信息
+message InningInfo{
+  string Number = 1;//牌局编号
+  string Name = 2;//游戏名称
+  int32  Level = 3;//游戏等级
+  int64 Payoff = 4;//结算
+  int64 TimeStamp = 5;//时间戳
+}
+
+
 //玩家列表(信息)
 message PlayerListInfo {
   repeated PlayerInfo AllInfos = 1; //所有玩家信息
 }
+
+
+
 //金币变化通知
 message GoldChangeInfo {
   uint64 UserID = 1;
@@ -139,7 +152,14 @@ message BeOutResp {
   string Hints = 4;    //被踢出的原因
 }
 
-
+//获取游戏记录
+message GetInningsInfoReq{
+  uint32 GameID = 1; //游戏标识 =0时,表示所有参与过的游戏
+}
+message GetInningsInfoResp{
+  repeated InningInfo Innings = 1;//牌局信息
+  int32 PageNum = 2;//页码 默认20条一页
+}
 
 
 /*
