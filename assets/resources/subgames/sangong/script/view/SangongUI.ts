@@ -42,6 +42,8 @@ export default class SangongUI extends BaseComponent {
 	private _grabBeiList = [0, 2, 4, 8];
 	private _betBeiList = [1, 2, 4, 8, 16];
 
+    private yazi:cc.Node = null;
+
 	start() {
 		CommonUtil.traverseNodes(this.node, this.m_ui);
 
@@ -58,6 +60,8 @@ export default class SangongUI extends BaseComponent {
 		this._handors[2].set3dLook(15);
 		this._handors[3].set3dLook(-15);
 		this._handors[4].set3dLook(-15);
+
+        TimerManager.delayFrame(10, newHandler(this.createYazi, this));
 
 		this.refreshBtns();
 
@@ -199,7 +203,37 @@ export default class SangongUI extends BaseComponent {
                 this.refreshPlayerByIndex(i, false);
             }
         }
-	}
+    }
+    
+    createYazi() {
+        this.yazi = this.yazi || Preloader.showSpineAsync("subgames/sangong/spines/duke", 0, "duke", -1, this.m_ui.yaziarea, {x:this.m_ui.yaziarea.width/2, y:-80, scale:0.5});
+        TimerManager.loopSecond(101, -1, newHandler(function(){
+            var wid2 = this.m_ui.yaziarea.width/2;
+            var roads = [];
+            if(this.yazi.x > 0) {
+                this.yazi.scaleX = 0.5;
+                var v0 = cc.v2(wid2, -CommonUtil.getRandomInt(45, 125));
+                this.yazi.x = v0.x;
+                this.yazi.y = v0.y;
+                for(var i=0; i<4; i++) {
+                    roads.push(v0);
+                    roads.push(cc.v2(wid2-500, -CommonUtil.getRandomInt(45, 125)));
+                    roads.push(cc.v2(-wid2, -CommonUtil.getRandomInt(45, 125)));
+                }
+            } else {
+                this.yazi.scaleX = -0.5;
+                var v1 = cc.v2(wid2, -CommonUtil.getRandomInt(45, 125));
+                this.yazi.x = v1.x;
+                this.yazi.y = v1.y;
+                for(var i=0; i<4; i++) {
+                    roads.push(v1);
+                    roads.push(cc.v2(-wid2+500, -CommonUtil.getRandomInt(45, 125)));
+                    roads.push(cc.v2(wid2, -CommonUtil.getRandomInt(45, 125)));
+                }
+            }
+            this.yazi.runAction(cc.bezierTo(100, roads));
+        }, this), true);
+    }
 
 
 	private SangongSceneResp(param:sangong.ISangongSceneResp) {
