@@ -1323,6 +1323,237 @@ $root.qzcowcow = (function() {
         return QzcowcowReadyResp;
     })();
 
+    qzcowcow.QzcowcowCallReq = (function() {
+
+        function QzcowcowCallReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowCallReq.prototype.Multiple = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        QzcowcowCallReq.create = function create(properties) {
+            return new QzcowcowCallReq(properties);
+        };
+
+        QzcowcowCallReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Multiple != null && Object.hasOwnProperty.call(message, "Multiple"))
+                writer.uint32(8).int64(message.Multiple);
+            return writer;
+        };
+
+        QzcowcowCallReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowCallReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowCallReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Multiple = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowCallReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowCallReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (!$util.isInteger(message.Multiple) && !(message.Multiple && $util.isInteger(message.Multiple.low) && $util.isInteger(message.Multiple.high)))
+                    return "Multiple: integer|Long expected";
+            return null;
+        };
+
+        QzcowcowCallReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowCallReq)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowCallReq();
+            if (object.Multiple != null)
+                if ($util.Long)
+                    (message.Multiple = $util.Long.fromValue(object.Multiple)).unsigned = false;
+                else if (typeof object.Multiple === "string")
+                    message.Multiple = parseInt(object.Multiple, 10);
+                else if (typeof object.Multiple === "number")
+                    message.Multiple = object.Multiple;
+                else if (typeof object.Multiple === "object")
+                    message.Multiple = new $util.LongBits(object.Multiple.low >>> 0, object.Multiple.high >>> 0).toNumber();
+            return message;
+        };
+
+        QzcowcowCallReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Multiple = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Multiple = options.longs === String ? "0" : 0;
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (typeof message.Multiple === "number")
+                    object.Multiple = options.longs === String ? String(message.Multiple) : message.Multiple;
+                else
+                    object.Multiple = options.longs === String ? $util.Long.prototype.toString.call(message.Multiple) : options.longs === Number ? new $util.LongBits(message.Multiple.low >>> 0, message.Multiple.high >>> 0).toNumber() : message.Multiple;
+            return object;
+        };
+
+        QzcowcowCallReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowCallReq;
+    })();
+
+    qzcowcow.QzcowcowCallResp = (function() {
+
+        function QzcowcowCallResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        QzcowcowCallResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        QzcowcowCallResp.prototype.Multiple = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        QzcowcowCallResp.create = function create(properties) {
+            return new QzcowcowCallResp(properties);
+        };
+
+        QzcowcowCallResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
+                writer.uint32(8).uint64(message.UserID);
+            if (message.Multiple != null && Object.hasOwnProperty.call(message, "Multiple"))
+                writer.uint32(16).int64(message.Multiple);
+            return writer;
+        };
+
+        QzcowcowCallResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        QzcowcowCallResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowCallResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.UserID = reader.uint64();
+                    break;
+                case 2:
+                    message.Multiple = reader.int64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        QzcowcowCallResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        QzcowcowCallResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
+                    return "UserID: integer|Long expected";
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (!$util.isInteger(message.Multiple) && !(message.Multiple && $util.isInteger(message.Multiple.low) && $util.isInteger(message.Multiple.high)))
+                    return "Multiple: integer|Long expected";
+            return null;
+        };
+
+        QzcowcowCallResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.qzcowcow.QzcowcowCallResp)
+                return object;
+            var message = new $root.qzcowcow.QzcowcowCallResp();
+            if (object.UserID != null)
+                if ($util.Long)
+                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
+                else if (typeof object.UserID === "string")
+                    message.UserID = parseInt(object.UserID, 10);
+                else if (typeof object.UserID === "number")
+                    message.UserID = object.UserID;
+                else if (typeof object.UserID === "object")
+                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
+            if (object.Multiple != null)
+                if ($util.Long)
+                    (message.Multiple = $util.Long.fromValue(object.Multiple)).unsigned = false;
+                else if (typeof object.Multiple === "string")
+                    message.Multiple = parseInt(object.Multiple, 10);
+                else if (typeof object.Multiple === "number")
+                    message.Multiple = object.Multiple;
+                else if (typeof object.Multiple === "object")
+                    message.Multiple = new $util.LongBits(object.Multiple.low >>> 0, object.Multiple.high >>> 0).toNumber();
+            return message;
+        };
+
+        QzcowcowCallResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.UserID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.Multiple = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.Multiple = options.longs === String ? "0" : 0;
+            }
+            if (message.UserID != null && message.hasOwnProperty("UserID"))
+                if (typeof message.UserID === "number")
+                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
+                else
+                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
+            if (message.Multiple != null && message.hasOwnProperty("Multiple"))
+                if (typeof message.Multiple === "number")
+                    object.Multiple = options.longs === String ? String(message.Multiple) : message.Multiple;
+                else
+                    object.Multiple = options.longs === String ? $util.Long.prototype.toString.call(message.Multiple) : options.longs === Number ? new $util.LongBits(message.Multiple.low >>> 0, message.Multiple.high >>> 0).toNumber() : message.Multiple;
+            return object;
+        };
+
+        QzcowcowCallResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return QzcowcowCallResp;
+    })();
+
     qzcowcow.QzcowcowBetReq = (function() {
 
         function QzcowcowBetReq(properties) {
@@ -1868,417 +2099,6 @@ $root.qzcowcow = (function() {
         };
 
         return QzcowcowOverResp;
-    })();
-
-    qzcowcow.QzcowcowHostReq = (function() {
-
-        function QzcowcowHostReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        QzcowcowHostReq.prototype.IsWant = false;
-
-        QzcowcowHostReq.create = function create(properties) {
-            return new QzcowcowHostReq(properties);
-        };
-
-        QzcowcowHostReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(8).bool(message.IsWant);
-            return writer;
-        };
-
-        QzcowcowHostReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        QzcowcowHostReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        QzcowcowHostReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        QzcowcowHostReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        QzcowcowHostReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.qzcowcow.QzcowcowHostReq)
-                return object;
-            var message = new $root.qzcowcow.QzcowcowHostReq();
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        QzcowcowHostReq.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.IsWant = false;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        QzcowcowHostReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return QzcowcowHostReq;
-    })();
-
-    qzcowcow.QzcowcowHostResp = (function() {
-
-        function QzcowcowHostResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        QzcowcowHostResp.prototype.UserID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        QzcowcowHostResp.prototype.IsWant = false;
-
-        QzcowcowHostResp.create = function create(properties) {
-            return new QzcowcowHostResp(properties);
-        };
-
-        QzcowcowHostResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.UserID != null && Object.hasOwnProperty.call(message, "UserID"))
-                writer.uint32(8).uint64(message.UserID);
-            if (message.IsWant != null && Object.hasOwnProperty.call(message, "IsWant"))
-                writer.uint32(16).bool(message.IsWant);
-            return writer;
-        };
-
-        QzcowcowHostResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        QzcowcowHostResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.UserID = reader.uint64();
-                    break;
-                case 2:
-                    message.IsWant = reader.bool();
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        QzcowcowHostResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        QzcowcowHostResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (!$util.isInteger(message.UserID) && !(message.UserID && $util.isInteger(message.UserID.low) && $util.isInteger(message.UserID.high)))
-                    return "UserID: integer|Long expected";
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                if (typeof message.IsWant !== "boolean")
-                    return "IsWant: boolean expected";
-            return null;
-        };
-
-        QzcowcowHostResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.qzcowcow.QzcowcowHostResp)
-                return object;
-            var message = new $root.qzcowcow.QzcowcowHostResp();
-            if (object.UserID != null)
-                if ($util.Long)
-                    (message.UserID = $util.Long.fromValue(object.UserID)).unsigned = true;
-                else if (typeof object.UserID === "string")
-                    message.UserID = parseInt(object.UserID, 10);
-                else if (typeof object.UserID === "number")
-                    message.UserID = object.UserID;
-                else if (typeof object.UserID === "object")
-                    message.UserID = new $util.LongBits(object.UserID.low >>> 0, object.UserID.high >>> 0).toNumber(true);
-            if (object.IsWant != null)
-                message.IsWant = Boolean(object.IsWant);
-            return message;
-        };
-
-        QzcowcowHostResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.UserID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.UserID = options.longs === String ? "0" : 0;
-                object.IsWant = false;
-            }
-            if (message.UserID != null && message.hasOwnProperty("UserID"))
-                if (typeof message.UserID === "number")
-                    object.UserID = options.longs === String ? String(message.UserID) : message.UserID;
-                else
-                    object.UserID = options.longs === String ? $util.Long.prototype.toString.call(message.UserID) : options.longs === Number ? new $util.LongBits(message.UserID.low >>> 0, message.UserID.high >>> 0).toNumber(true) : message.UserID;
-            if (message.IsWant != null && message.hasOwnProperty("IsWant"))
-                object.IsWant = message.IsWant;
-            return object;
-        };
-
-        QzcowcowHostResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return QzcowcowHostResp;
-    })();
-
-    qzcowcow.QzcowcowHostListReq = (function() {
-
-        function QzcowcowHostListReq(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        QzcowcowHostListReq.create = function create(properties) {
-            return new QzcowcowHostListReq(properties);
-        };
-
-        QzcowcowHostListReq.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            return writer;
-        };
-
-        QzcowcowHostListReq.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        QzcowcowHostListReq.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostListReq();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        QzcowcowHostListReq.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        QzcowcowHostListReq.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            return null;
-        };
-
-        QzcowcowHostListReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.qzcowcow.QzcowcowHostListReq)
-                return object;
-            return new $root.qzcowcow.QzcowcowHostListReq();
-        };
-
-        QzcowcowHostListReq.toObject = function toObject() {
-            return {};
-        };
-
-        QzcowcowHostListReq.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return QzcowcowHostListReq;
-    })();
-
-    qzcowcow.QzcowcowHostListResp = (function() {
-
-        function QzcowcowHostListResp(properties) {
-            this.Waitlist = [];
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        QzcowcowHostListResp.prototype.CurHost = null;
-        QzcowcowHostListResp.prototype.Waitlist = $util.emptyArray;
-
-        QzcowcowHostListResp.create = function create(properties) {
-            return new QzcowcowHostListResp(properties);
-        };
-
-        QzcowcowHostListResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.CurHost != null && Object.hasOwnProperty.call(message, "CurHost"))
-                $root.gamecomm.PlayerInfo.encode(message.CurHost, writer.uint32(10).fork()).ldelim();
-            if (message.Waitlist != null && message.Waitlist.length) {
-                writer.uint32(18).fork();
-                for (var i = 0; i < message.Waitlist.length; ++i)
-                    writer.uint64(message.Waitlist[i]);
-                writer.ldelim();
-            }
-            return writer;
-        };
-
-        QzcowcowHostListResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        QzcowcowHostListResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.qzcowcow.QzcowcowHostListResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.CurHost = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
-                    break;
-                case 2:
-                    if (!(message.Waitlist && message.Waitlist.length))
-                        message.Waitlist = [];
-                    if ((tag & 7) === 2) {
-                        var end2 = reader.uint32() + reader.pos;
-                        while (reader.pos < end2)
-                            message.Waitlist.push(reader.uint64());
-                    } else
-                        message.Waitlist.push(reader.uint64());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        QzcowcowHostListResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        QzcowcowHostListResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.CurHost != null && message.hasOwnProperty("CurHost")) {
-                var error = $root.gamecomm.PlayerInfo.verify(message.CurHost);
-                if (error)
-                    return "CurHost." + error;
-            }
-            if (message.Waitlist != null && message.hasOwnProperty("Waitlist")) {
-                if (!Array.isArray(message.Waitlist))
-                    return "Waitlist: array expected";
-                for (var i = 0; i < message.Waitlist.length; ++i)
-                    if (!$util.isInteger(message.Waitlist[i]) && !(message.Waitlist[i] && $util.isInteger(message.Waitlist[i].low) && $util.isInteger(message.Waitlist[i].high)))
-                        return "Waitlist: integer|Long[] expected";
-            }
-            return null;
-        };
-
-        QzcowcowHostListResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.qzcowcow.QzcowcowHostListResp)
-                return object;
-            var message = new $root.qzcowcow.QzcowcowHostListResp();
-            if (object.CurHost != null) {
-                if (typeof object.CurHost !== "object")
-                    throw TypeError(".qzcowcow.QzcowcowHostListResp.CurHost: object expected");
-                message.CurHost = $root.gamecomm.PlayerInfo.fromObject(object.CurHost);
-            }
-            if (object.Waitlist) {
-                if (!Array.isArray(object.Waitlist))
-                    throw TypeError(".qzcowcow.QzcowcowHostListResp.Waitlist: array expected");
-                message.Waitlist = [];
-                for (var i = 0; i < object.Waitlist.length; ++i)
-                    if ($util.Long)
-                        (message.Waitlist[i] = $util.Long.fromValue(object.Waitlist[i])).unsigned = true;
-                    else if (typeof object.Waitlist[i] === "string")
-                        message.Waitlist[i] = parseInt(object.Waitlist[i], 10);
-                    else if (typeof object.Waitlist[i] === "number")
-                        message.Waitlist[i] = object.Waitlist[i];
-                    else if (typeof object.Waitlist[i] === "object")
-                        message.Waitlist[i] = new $util.LongBits(object.Waitlist[i].low >>> 0, object.Waitlist[i].high >>> 0).toNumber(true);
-            }
-            return message;
-        };
-
-        QzcowcowHostListResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.arrays || options.defaults)
-                object.Waitlist = [];
-            if (options.defaults)
-                object.CurHost = null;
-            if (message.CurHost != null && message.hasOwnProperty("CurHost"))
-                object.CurHost = $root.gamecomm.PlayerInfo.toObject(message.CurHost, options);
-            if (message.Waitlist && message.Waitlist.length) {
-                object.Waitlist = [];
-                for (var j = 0; j < message.Waitlist.length; ++j)
-                    if (typeof message.Waitlist[j] === "number")
-                        object.Waitlist[j] = options.longs === String ? String(message.Waitlist[j]) : message.Waitlist[j];
-                    else
-                        object.Waitlist[j] = options.longs === String ? $util.Long.prototype.toString.call(message.Waitlist[j]) : options.longs === Number ? new $util.LongBits(message.Waitlist[j].low >>> 0, message.Waitlist[j].high >>> 0).toNumber(true) : message.Waitlist[j];
-            }
-            return object;
-        };
-
-        QzcowcowHostListResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return QzcowcowHostListResp;
     })();
 
     return qzcowcow;

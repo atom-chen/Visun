@@ -69,7 +69,14 @@ message QzcowcowReadyResp {
   uint64 UserId = 1;
 }
 
-
+//喊庄
+message QzcowcowCallReq {
+  int64 Multiple = 1;        //喊庄倍数
+}
+message QzcowcowCallResp {
+  uint64 UserID = 1;
+  int64 Multiple = 2;        //喊庄倍数
+}
 
 //下注
 message QzcowcowBetReq {
@@ -95,23 +102,3 @@ message QzcowcowOverResp{
   repeated int64 TotalSettlement = 2;  //统计：庄家+各区域输赢钱数额结算
 }
 
-
-//----------------------------------------------------------------------------------
-
-//抢庄
-message QzcowcowHostReq {
-  bool IsWant = 1;  //true上庄 false取消上庄
-}
-message QzcowcowHostResp {
-  uint64 UserID = 1;
-  bool IsWant = 2;  //true上庄 false取消上庄
-}
-
-//待上庄列表
-message QzcowcowHostListReq {
-
-}
-message QzcowcowHostListResp {
-  PlayerInfo CurHost = 1;        //当前庄家
-  repeated uint64 Waitlist = 2;    //待上庄列表
-}
