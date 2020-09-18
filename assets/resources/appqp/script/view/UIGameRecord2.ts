@@ -1,4 +1,5 @@
 import { gamecomm } from "../../../../../declares/gamecomm";
+import GameManager from "../../../../common/script/model/GameManager";
 import { gamecomm_msgs, gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
@@ -9,7 +10,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class UIGameRecord1 extends BaseComponent {
+export default class UIGameRecord2 extends BaseComponent {
 
     @property(cc.Prefab)
     listItem: cc.Prefab = null;
@@ -26,21 +27,42 @@ export default class UIGameRecord1 extends BaseComponent {
         }, this);
 
         EventCenter.getInstance().listen(gamecomm_msgs.GetInningsInfoResp, this.refleshList, this);
+
+        this.refleshTabs();
     }
 
-    private setViewData(gameType:number) {
-        if(isEmpty(gameType)) {
+    private refleshTabs() {
+        var gamelist = GameManager.getInstance().getGameList();
+        if(isNil(gamelist) || gamelist.length <= 0) {
             return;
         }
-
-        this._gameType = gameType;
-        gamecomm_request.GetInningsInfoReq({GameID:gameType});
+        var allbtns = [];
+        for(var i=0; i<gamelist.length; i++) {
+            var item = this.m_ui.tab_btn;
+            if(i != 0) {
+                item = cc.instantiate(this.m_ui.tab_btn);
+                this.m_ui.contentLeft.addChild(item);
+            }
+            item.getChildByName("labGameName").getComponent(cc.Label).string = gamelist[i].Info.Name;
+            item["gameData"] = gamelist[i];
+            CommonUtil.addClickEvent(item, function(){
+                gamecomm_request.GetInningsInfoReq({GameID:this.gameData.ID});
+                for(var j in allbtns) {
+                    allbtns[j].getChildByName("tab1_sel").active = allbtns[j]===this;
+                    allbtns[j].getChildByName("tab1_unsel").active = allbtns[j]!==this;
+                }
+            }, item);
+            allbtns.push(item);
+            allbtns[i].getChildByName("tab1_sel").active = i==0;
+            allbtns[i].getChildByName("tab1_unsel").active = i!=0;
+        }
+        gamecomm_request.GetInningsInfoReq({GameID:gamelist[0].ID});
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
+        this.m_ui.content.removeAllChildren(true);
         if(isNil(param)) { return; }
         var info = param.Innings;
-        this.m_ui.content.removeAllChildren(true);
         var len = info.length;
         var Order = 0;
         for(var i=len-1; i>=0; i--) {
