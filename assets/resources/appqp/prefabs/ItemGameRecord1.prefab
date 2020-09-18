@@ -219,7 +219,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 283.78,
+      "width": 206.38,
       "height": 27.72
     },
     "_anchorPoint": {
@@ -272,7 +272,7 @@
     "_useOriginalSize": false,
     "_string": "wsfdwp35293egiyzaqp432d2",
     "_N$string": "wsfdwp35293egiyzaqp432d2",
-    "_fontSize": 22,
+    "_fontSize": 16,
     "_lineHeight": 22,
     "_enableWrapText": true,
     "_N$file": null,
