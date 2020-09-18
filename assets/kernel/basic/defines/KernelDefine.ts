@@ -39,6 +39,7 @@ export enum HOT_STATE {
 // 网络连接状态
 export enum ConnState {
 	unconnect = 0, 	//尚未连接
+	
 	connecting,		//正在连接
 	connectsucc,	//连接成功
 	connectfail,	//连接失败

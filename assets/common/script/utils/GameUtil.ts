@@ -1,6 +1,5 @@
 import { MajhongCode } from "../definer/MajhongDefine";
 import { isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
-import CommonUtil from "../../../kernel/utils/CommonUtil";
 import GameConfig from "../definer/GameConfig";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { PokerCode } from "../definer/PokerDefine";
@@ -69,18 +68,28 @@ export default class GameUtil {
 	}
 
 	//获取麻将图片资源路经
-	public static majhongPath(v:MajhongCode) : string {
+	public static majhongPath(v:number) : string {
 		if(v == 0) {
 			return "appqp/imgs/majhong/mjback1";
 		}
 		if(v===0x0A || v===0x1A || v===0x2A || v===0x3A) {
 			return "appqp/imgs/majhong/baiban1";
 		}
+
 		if(v>=0x31 && v<=0x39) {
 			var n = v - 0x30;
 			return "appqp/imgs/majhong/tong"+n;
 		}
-		return "appqp/imgs/majhong/tong"+v;
+
+		if(v >= MajhongCode.TONG_1 && v <= MajhongCode.TONG_9) {
+			return "appqp/imgs/majhong/tong"+v;
+		}
+		else if(v >= MajhongCode.WAN_1 && v <= MajhongCode.WAN_9) {
+			return "appqp/imgs/majhong/wan"+v;
+		}
+		else {
+			return "appqp/imgs/majhong/tiao"+v;
+		}
 	}
 
 	//设置头像图片
@@ -155,7 +164,11 @@ export default class GameUtil {
 		}
 	}
 
+	//------游戏通用资源预加载----------------------------------------------------
+	private static flagGameIcons = false;
 	static loadGameIcons() {
+		if(this.flagGameIcons){return;}
+		this.flagGameIcons = true;
 		var i = 1;
 		for(var k in GameConfig) {
 			i += 2;
@@ -166,7 +179,10 @@ export default class GameUtil {
 		}
 	}
 
+	private static flagChipIcons = false;
 	static loadChipIcons() {
+		if(this.flagChipIcons){ return; }
+		this.flagChipIcons = true;
 		var n = 2;
 		for(var i in GameUtil.CHIP_RULE) {
 			n += 2;
@@ -181,7 +197,10 @@ export default class GameUtil {
 		}
 	}
 
+	private static flagPokers = false;
 	static loadPokers() {
+		if(this.flagPokers){ return; }
+		this.flagPokers = true;
 		var n = 3;
 		for(var k in PokerCode) {
 			if(typeof PokerCode[k] == typeof(1)) {
@@ -189,9 +208,31 @@ export default class GameUtil {
 				TimerManager.delayFrame(n, newHandler(function(tmr, kk){
 					cc.loader.loadRes(GameUtil.pokerPath(PokerCode[kk], 1), cc.SpriteFrame);
 				}, GameUtil, k));
-				
 			}
 		}
+	}
+
+	private static flagMj = false;
+	static loadMj() {
+		if(this.flagMj){ return; }
+		this.flagMj = true;
+		var n = 4;
+		for(var k in MajhongCode) {
+			if(typeof MajhongCode[k] == typeof(1)) {
+				n += 4;
+				TimerManager.delayFrame(n, newHandler(function(tmr, kk){
+					//@ts-ignore
+					cc.loader.loadRes(GameUtil.majhongPath(MajhongCode[kk]), cc.SpriteFrame);
+				}, GameUtil, k));
+			}
+		}
+	}
+
+	static loadAllGameRes() {
+		GameUtil.loadGameIcons();
+        GameUtil.loadChipIcons();
+        GameUtil.loadPokers();
+        GameUtil.loadMj();
 	}
 
 }

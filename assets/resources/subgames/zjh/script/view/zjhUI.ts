@@ -83,7 +83,10 @@ export default class zjhUI extends BaseComponent {
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
         //预加载
-        cc.loader.loadRes(ViewDefine.UIpk, cc.Prefab)
+        cc.loader.loadRes(ViewDefine.UIpk, cc.Prefab);
+
+        var curGame = GameManager.getInstance().getRunningGameData();
+		this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
     }
 
     onDestroy() {
@@ -252,6 +255,11 @@ export default class zjhUI extends BaseComponent {
 
     //准备阶段
     ZhajinhuaStateFreeResp(param:zhajinhua.IZhajinhuaStateFreeResp) {
+        if(param) {
+            ZjhMgr.getInstance().getEnterData().Inning = param.Inning;
+            this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+        }
+        
         this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
         this.m_ui.opLayer.active = false;
         this.m_ui.readyNode.active = true;

@@ -15,9 +15,7 @@ export default class LobbyScene extends BaseComponent {
         UIManager.openPanel(ViewDefine.UIHall, null);
         LoginMgr.getInstance().connectServer();
         LoginMgr.getInstance().quickLogin();
-        GameUtil.loadGameIcons();
-        GameUtil.loadChipIcons();
-        GameUtil.loadPokers();
+        GameUtil.loadAllGameRes();
     }
 
     start () {

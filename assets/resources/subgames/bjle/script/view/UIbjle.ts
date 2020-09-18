@@ -73,6 +73,9 @@ export default class UIbjle extends BaseComponent {
 		
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+
+		var curGame = GameManager.getInstance().getRunningGameData();
+		this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
 	}
 
 	node2Area(v:number) : number {
@@ -152,7 +155,7 @@ export default class UIbjle extends BaseComponent {
 		}
 	}
 	
-	private GoldChangeInfo(param:gamecomm.GoldChangeInfo) {
+	private GoldChangeInfo(param:gamecomm.IGoldChangeInfo) {
 		if(param.UserID == LoginUser.getInstance().UserId) {
 			LoginUser.getInstance().Gold = param.Gold;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
@@ -162,7 +165,7 @@ export default class UIbjle extends BaseComponent {
 		} 
 	}
 
-    private BaccaratBetResp(param:baccarat.BaccaratBetResp) {
+    private BaccaratBetResp(param:baccarat.IBaccaratBetResp) {
 		var enterData = BjleMgr.getInstance().getEnterData();
 		enterData.AreaBets[param.BetArea] += param.BetScore;
 		if(param.UserID == LoginUser.getInstance().UserId) {
@@ -197,10 +200,15 @@ export default class UIbjle extends BaseComponent {
     }
 
 	//准备阶段
-	private BaccaratStateStartResp(param) {
+	private BaccaratStateStartResp(param:baccarat.IBaccaratStateStartResp) {
+		if(param) {
+			BjleMgr.getInstance().getEnterData().Inning = param.Inning;
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+			TimerManager.delTimer(this.tmrState);
+			this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		}
+		
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
 		this.clearBets();
@@ -209,11 +217,11 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//下注阶段
-	private BaccaratStatePlayingResp(param:baccarat.BaccaratStatePlayingResp) {
+	private BaccaratStatePlayingResp(param:baccarat.IBaccaratStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = false;
 		this.setWinAreas([]);
 		this.m_ui.CpnHandcardZ.getComponent(CpnHandcard).resetCards([], false);
@@ -230,11 +238,11 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//开牌阶段
-	private BaccaratStateOpenResp(param:baccarat.BaccaratStateOpenResp) {
+	private BaccaratStateOpenResp(param:baccarat.IBaccaratStateOpenResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setKaipai();
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, 3, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
 		this.m_ui.cardLayer.active = true;
 
 		if(param.Times.OutTime <= 1) {
@@ -251,7 +259,7 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	//结算阶段
-	private BaccaratStateOverResp(param) {
+	private BaccaratStateOverResp(param:baccarat.IBaccaratStateOverResp) {
 		this.isJoined = false;
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setPaijiang();
 	}

@@ -21,12 +21,17 @@ export default class LeafWsProcessor extends BaseProcessor {
 
 	public sendMessage(cmd: number | string, buff: any): boolean 
 	{
+		var curState = this._channel.getState();
 		if (this.isNetHolded()) {
 			cc.log(cc.js.formatStr("%s [push send] %s(%d) bytes:%d", this._name, this._cmds[cmd].debugName(), cmd, buff.length));
 			this._send_list.push(buff);
-			if(this._channel.getState() === ConnState.reconnectfail || this._channel.getState() === ConnState.connectfail) {
+			if(curState === ConnState.reconnectfail || curState === ConnState.connectfail) {
 				EventCenter.getInstance().fire(KernelEvent.NET_STATE, this._channel);
 			}
+			return false;
+		}
+		if(curState === ConnState.unconnect) {
+			EventCenter.getInstance().fire(KernelEvent.NET_STATE, this._channel);
 			return false;
 		}
 

@@ -61,6 +61,9 @@ export default class LonghuUI extends BaseComponent {
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+
+		var curGame = GameManager.getInstance().getRunningGameData();
+		this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
     }
 
     onDestroy(){
@@ -189,10 +192,14 @@ export default class LonghuUI extends BaseComponent {
 	}
 
 	private TigerXdragonStateStartResp(param:tigerXdragon.ITigerXdragonStateStartResp) {
+		if(param) {
+			LonghuMgr.getInstance().getEnterData().Inning = param.Inning;
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+			TimerManager.delTimer(this.tmrState);
+			this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		}
+		
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
-
 		this.clearBets();
 		this.setWinAreas([]);
 		this.m_ui.cardLayer.active = false;

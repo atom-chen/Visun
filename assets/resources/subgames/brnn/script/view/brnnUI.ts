@@ -65,6 +65,9 @@ export default class BrnnUI extends BaseComponent {
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+
+		var curGame = GameManager.getInstance().getRunningGameData();
+		this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
 	}
 
 	onDestroy(){
@@ -221,6 +224,9 @@ export default class BrnnUI extends BaseComponent {
 
 	private BrcowcowStateStart(param:brcowcow.IBrcowcowStateStartResp) {
 		BrnnMgr.getInstance().getEnterData().HostID = param.HostID;
+		BrnnMgr.getInstance().getEnterData().Inning = param.Inning;
+		
+		this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
 		this.refreshZhuang();
 
 		this.isJoined = false;

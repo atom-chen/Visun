@@ -63,6 +63,9 @@ export default class ToubaoUI extends BaseComponent {
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+
+		var curGame = GameManager.getInstance().getRunningGameData();
+		this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
 	}
 
 	onDestroy(){
@@ -225,13 +228,18 @@ export default class ToubaoUI extends BaseComponent {
 
 	//准备阶段
 	BrtoubaoStateStartResp(param:brtoubao.IBrtoubaoStateStartResp) {
+		if(param) {
+			ToubaoMgr.getInstance().getEnterData().Inning = param.Inning;
+			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+			TimerManager.delTimer(this.tmrState);
+			this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
+		}
+		
 		this.m_ui.tzNode.active = false;
 		this.m_ui.hg_shaibao.getComponent(sp.Skeleton).setAnimation(0, "shake", false);
 		this.isJoined = false;
 		this.clearBets();
 		this.setWinAreas([]);
-		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
 	}
 
 	//下注阶段

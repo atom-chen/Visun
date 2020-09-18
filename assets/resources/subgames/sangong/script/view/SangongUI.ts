@@ -259,6 +259,11 @@ export default class SangongUI extends BaseComponent {
 	}
 
 	private SangongStateFreeResp(param:sangong.ISangongSceneResp) {
+        if(param){
+            SangongMgr.getInstance().getEnterData().Inning = param.Inning;
+            this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
+        }
+        
 		this.m_ui.CpnGameState2d.getComponent(CpnGameState).setZhunbei(true);
 		this.m_ui.readyNode.active = true;
 		this.m_ui.grabNode.active = false;
