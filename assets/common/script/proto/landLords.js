@@ -246,6 +246,7 @@ $root.landLords = (function() {
 
         LandLordsSceneResp.prototype.TimeStamp = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
         LandLordsSceneResp.prototype.Players = $util.emptyArray;
+        LandLordsSceneResp.prototype.Inning = "";
 
         LandLordsSceneResp.create = function create(properties) {
             return new LandLordsSceneResp(properties);
@@ -259,6 +260,8 @@ $root.landLords = (function() {
             if (message.Players != null && message.Players.length)
                 for (var i = 0; i < message.Players.length; ++i)
                     $root.landLords.LandLordsPlayer.encode(message.Players[i], writer.uint32(18).fork()).ldelim();
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(26).string(message.Inning);
             return writer;
         };
 
@@ -280,6 +283,9 @@ $root.landLords = (function() {
                     if (!(message.Players && message.Players.length))
                         message.Players = [];
                     message.Players.push($root.landLords.LandLordsPlayer.decode(reader, reader.uint32()));
+                    break;
+                case 3:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -310,6 +316,9 @@ $root.landLords = (function() {
                         return "Players." + error;
                 }
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -336,6 +345,8 @@ $root.landLords = (function() {
                     message.Players[i] = $root.landLords.LandLordsPlayer.fromObject(object.Players[i]);
                 }
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -345,12 +356,14 @@ $root.landLords = (function() {
             var object = {};
             if (options.arrays || options.defaults)
                 object.Players = [];
-            if (options.defaults)
+            if (options.defaults) {
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
                     object.TimeStamp = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.TimeStamp = options.longs === String ? "0" : 0;
+                object.Inning = "";
+            }
             if (message.TimeStamp != null && message.hasOwnProperty("TimeStamp"))
                 if (typeof message.TimeStamp === "number")
                     object.TimeStamp = options.longs === String ? String(message.TimeStamp) : message.TimeStamp;
@@ -361,6 +374,8 @@ $root.landLords = (function() {
                 for (var j = 0; j < message.Players.length; ++j)
                     object.Players[j] = $root.landLords.LandLordsPlayer.toObject(message.Players[j], options);
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 
@@ -473,6 +488,7 @@ $root.landLords = (function() {
         }
 
         LandLordsStateStartResp.prototype.Times = null;
+        LandLordsStateStartResp.prototype.Inning = "";
 
         LandLordsStateStartResp.create = function create(properties) {
             return new LandLordsStateStartResp(properties);
@@ -483,6 +499,8 @@ $root.landLords = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(18).string(message.Inning);
             return writer;
         };
 
@@ -499,6 +517,9 @@ $root.landLords = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -522,6 +543,9 @@ $root.landLords = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -534,6 +558,8 @@ $root.landLords = (function() {
                     throw TypeError(".landLords.LandLordsStateStartResp.Times: object expected");
                 message.Times = $root.go.TimeInfo.fromObject(object.Times);
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -541,10 +567,14 @@ $root.landLords = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                object.Inning = "";
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.go.TimeInfo.toObject(message.Times, options);
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 

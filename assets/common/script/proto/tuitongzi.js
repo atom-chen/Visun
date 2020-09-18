@@ -343,98 +343,6 @@ $root.tuitongzi = (function() {
         return TuitongziSceneResp;
     })();
 
-    tuitongzi.TuitongziStateFreeResp = (function() {
-
-        function TuitongziStateFreeResp(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        TuitongziStateFreeResp.prototype.Times = null;
-
-        TuitongziStateFreeResp.create = function create(properties) {
-            return new TuitongziStateFreeResp(properties);
-        };
-
-        TuitongziStateFreeResp.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
-                $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
-            return writer;
-        };
-
-        TuitongziStateFreeResp.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        TuitongziStateFreeResp.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.tuitongzi.TuitongziStateFreeResp();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        TuitongziStateFreeResp.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        TuitongziStateFreeResp.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.Times != null && message.hasOwnProperty("Times")) {
-                var error = $root.go.TimeInfo.verify(message.Times);
-                if (error)
-                    return "Times." + error;
-            }
-            return null;
-        };
-
-        TuitongziStateFreeResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.tuitongzi.TuitongziStateFreeResp)
-                return object;
-            var message = new $root.tuitongzi.TuitongziStateFreeResp();
-            if (object.Times != null) {
-                if (typeof object.Times !== "object")
-                    throw TypeError(".tuitongzi.TuitongziStateFreeResp.Times: object expected");
-                message.Times = $root.go.TimeInfo.fromObject(object.Times);
-            }
-            return message;
-        };
-
-        TuitongziStateFreeResp.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults)
-                object.Times = null;
-            if (message.Times != null && message.hasOwnProperty("Times"))
-                object.Times = $root.go.TimeInfo.toObject(message.Times, options);
-            return object;
-        };
-
-        TuitongziStateFreeResp.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return TuitongziStateFreeResp;
-    })();
-
     tuitongzi.TuitongziStateStartResp = (function() {
 
         function TuitongziStateStartResp(properties) {
@@ -447,6 +355,7 @@ $root.tuitongzi = (function() {
         TuitongziStateStartResp.prototype.Times = null;
         TuitongziStateStartResp.prototype.StartArea = 0;
         TuitongziStateStartResp.prototype.Dice = $util.newBuffer([]);
+        TuitongziStateStartResp.prototype.Inning = "";
 
         TuitongziStateStartResp.create = function create(properties) {
             return new TuitongziStateStartResp(properties);
@@ -461,6 +370,8 @@ $root.tuitongzi = (function() {
                 writer.uint32(16).int32(message.StartArea);
             if (message.Dice != null && Object.hasOwnProperty.call(message, "Dice"))
                 writer.uint32(26).bytes(message.Dice);
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(34).string(message.Inning);
             return writer;
         };
 
@@ -483,6 +394,9 @@ $root.tuitongzi = (function() {
                     break;
                 case 3:
                     message.Dice = reader.bytes();
+                    break;
+                case 4:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -512,6 +426,9 @@ $root.tuitongzi = (function() {
             if (message.Dice != null && message.hasOwnProperty("Dice"))
                 if (!(message.Dice && typeof message.Dice.length === "number" || $util.isString(message.Dice)))
                     return "Dice: buffer expected";
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -531,6 +448,8 @@ $root.tuitongzi = (function() {
                     $util.base64.decode(object.Dice, message.Dice = $util.newBuffer($util.base64.length(object.Dice)), 0);
                 else if (object.Dice.length)
                     message.Dice = object.Dice;
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -548,6 +467,7 @@ $root.tuitongzi = (function() {
                     if (options.bytes !== Array)
                         object.Dice = $util.newBuffer(object.Dice);
                 }
+                object.Inning = "";
             }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.go.TimeInfo.toObject(message.Times, options);
@@ -555,6 +475,8 @@ $root.tuitongzi = (function() {
                 object.StartArea = message.StartArea;
             if (message.Dice != null && message.hasOwnProperty("Dice"))
                 object.Dice = options.bytes === String ? $util.base64.encode(message.Dice, 0, message.Dice.length) : options.bytes === Array ? Array.prototype.slice.call(message.Dice) : message.Dice;
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 

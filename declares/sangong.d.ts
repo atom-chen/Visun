@@ -229,6 +229,9 @@ export namespace sangong {
 
         /** SangongStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateFreeResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a SangongStateFreeResp. */
@@ -242,6 +245,9 @@ export namespace sangong {
 
         /** SangongStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** SangongStateFreeResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new SangongStateFreeResp instance using the specified properties.

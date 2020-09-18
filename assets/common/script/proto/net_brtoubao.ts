@@ -40,7 +40,7 @@ export var brtoubao_packet_define = {
 
 export class brtoubao_request {
     public static BrtoubaoSceneResp( data:{ TimeStamp:number, Inning:string, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], AllPlayers:any } ) { brtoubao_packet_define[129].sendToChannel(ChannelDefine.game, data, false); }
-    public static BrtoubaoStateStartResp( data:{ Times:any } ) { brtoubao_packet_define[130].sendToChannel(ChannelDefine.game, data, false); }
+    public static BrtoubaoStateStartResp( data:{ Times:any, Inning:string } ) { brtoubao_packet_define[130].sendToChannel(ChannelDefine.game, data, false); }
     public static BrtoubaoStatePlayingResp( data:{ Times:any } ) { brtoubao_packet_define[131].sendToChannel(ChannelDefine.game, data, false); }
     public static BrtoubaoStateOpenResp( data:{ Times:any, OpenInfo:any } ) { brtoubao_packet_define[132].sendToChannel(ChannelDefine.game, data, false); }
     public static BrtoubaoStateOverResp( data:{ Times:any } ) { brtoubao_packet_define[133].sendToChannel(ChannelDefine.game, data, false); }

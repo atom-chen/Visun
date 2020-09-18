@@ -20,16 +20,12 @@ message TuitongziSceneResp{
 
 //状态
 // 服务端推送
-//(空闲)
-message TuitongziStateFreeResp {
-  TimeInfo Times = 1;
-}
-
 //(开始 - 定庄)
 message TuitongziStateStartResp {
   TimeInfo Times = 1;
   int32 StartArea = 2;//开始发牌区域
   bytes  Dice = 3;//两个骰子点数(决定起始发牌区域)
+  string Inning = 4;               // 牌局号
 }
 
 

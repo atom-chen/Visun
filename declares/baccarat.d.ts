@@ -133,6 +133,9 @@ export namespace baccarat {
 
         /** BaccaratStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** BaccaratStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a BaccaratStateStartResp. */
@@ -146,6 +149,9 @@ export namespace baccarat {
 
         /** BaccaratStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** BaccaratStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new BaccaratStateStartResp instance using the specified properties.

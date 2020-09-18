@@ -229,6 +229,9 @@ export namespace qzcowcow {
 
         /** QzcowcowStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateFreeResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a QzcowcowStateFreeResp. */
@@ -242,6 +245,9 @@ export namespace qzcowcow {
 
         /** QzcowcowStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** QzcowcowStateFreeResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new QzcowcowStateFreeResp instance using the specified properties.

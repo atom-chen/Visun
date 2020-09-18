@@ -142,6 +142,9 @@ export namespace landLords {
 
         /** LandLordsSceneResp Players */
         Players?: (landLords.ILandLordsPlayer[]|null);
+
+        /** LandLordsSceneResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a LandLordsSceneResp. */
@@ -158,6 +161,9 @@ export namespace landLords {
 
         /** LandLordsSceneResp Players. */
         public Players: landLords.ILandLordsPlayer[];
+
+        /** LandLordsSceneResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new LandLordsSceneResp instance using the specified properties.
@@ -325,6 +331,9 @@ export namespace landLords {
 
         /** LandLordsStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** LandLordsStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a LandLordsStateStartResp. */
@@ -338,6 +347,9 @@ export namespace landLords {
 
         /** LandLordsStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** LandLordsStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new LandLordsStateStartResp instance using the specified properties.

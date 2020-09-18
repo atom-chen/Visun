@@ -25,6 +25,7 @@ message BrcowcowStateFreeResp {
 message BrcowcowStateStartResp {
   TimeInfo Times = 1;
   uint64 HostID = 2;
+  string Inning = 3;               // 牌局号
 }
 
 //(游戏中 - 下注)

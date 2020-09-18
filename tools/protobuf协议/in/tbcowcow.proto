@@ -22,6 +22,7 @@ message TbcowcowSceneResp {
 //(空闲 - )
 message TbcowcowStateFreeResp {
   TimeInfo Times = 1;
+  string Inning = 2;               // 牌局号
 }
 
 

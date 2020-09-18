@@ -40,7 +40,7 @@ export var tigerXdragon_packet_define = {
 
 export class tigerXdragon_request {
     public static TigerXdragonSceneResp( data:{ TimeStamp:number, Inning:string, Chips:number[], AwardAreas:any[], AreaBets:number[], MyBets:number[], AllPlayers:any } ) { tigerXdragon_packet_define[142].sendToChannel(ChannelDefine.game, data, false); }
-    public static TigerXdragonStateStartResp( data:{ Times:any } ) { tigerXdragon_packet_define[143].sendToChannel(ChannelDefine.game, data, false); }
+    public static TigerXdragonStateStartResp( data:{ Times:any, Inning:string } ) { tigerXdragon_packet_define[143].sendToChannel(ChannelDefine.game, data, false); }
     public static TigerXdragonStatePlayingResp( data:{ Times:any } ) { tigerXdragon_packet_define[144].sendToChannel(ChannelDefine.game, data, false); }
     public static TigerXdragonStateOpenResp( data:{ Times:any, OpenInfo:any } ) { tigerXdragon_packet_define[145].sendToChannel(ChannelDefine.game, data, false); }
     public static TigerXdragonStateOverResp( data:{ Times:any } ) { tigerXdragon_packet_define[146].sendToChannel(ChannelDefine.game, data, false); }

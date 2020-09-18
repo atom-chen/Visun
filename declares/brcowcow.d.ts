@@ -232,6 +232,9 @@ export namespace brcowcow {
 
         /** BrcowcowStateStartResp HostID */
         HostID?: (number|Long|null);
+
+        /** BrcowcowStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a BrcowcowStateStartResp. */
@@ -248,6 +251,9 @@ export namespace brcowcow {
 
         /** BrcowcowStateStartResp HostID. */
         public HostID: (number|Long);
+
+        /** BrcowcowStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new BrcowcowStateStartResp instance using the specified properties.

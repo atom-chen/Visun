@@ -64,7 +64,7 @@ export class zhajinhua_request {
     public static ZhajinhuaPlayer( data:{ MyInfo:any, IsSee:any, RecentScore:number, TotalScore:number, Cards:any, Compares:number[], WinScore:number } ) { zhajinhua_packet_define[105].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGameZjhResp( data:{ Player:any, GameID:number } ) { zhajinhua_packet_define[106].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaSceneResp( data:{ TimeStamp:number, TotalScore:number, MinScore:number, Banker:number, Fighters:any[], Inning:string, NoReadyTime:number, LimitScore:number, TurnCount:number } ) { zhajinhua_packet_define[107].sendToChannel(ChannelDefine.game, data, false); }
-    public static ZhajinhuaStateFreeResp( data:{ Times:any } ) { zhajinhua_packet_define[108].sendToChannel(ChannelDefine.game, data, false); }
+    public static ZhajinhuaStateFreeResp( data:{ Times:any, Inning:string } ) { zhajinhua_packet_define[108].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateStartResp( data:{ Times:any } ) { zhajinhua_packet_define[109].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStatePlayingResp( data:{ Times:any, UserID:number } ) { zhajinhua_packet_define[110].sendToChannel(ChannelDefine.game, data, false); }
     public static ZhajinhuaStateCompareResp( data:{ Times:any, Info:any } ) { zhajinhua_packet_define[111].sendToChannel(ChannelDefine.game, data, false); }

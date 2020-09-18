@@ -432,6 +432,7 @@ $root.qzcowcow = (function() {
         }
 
         QzcowcowStateFreeResp.prototype.Times = null;
+        QzcowcowStateFreeResp.prototype.Inning = "";
 
         QzcowcowStateFreeResp.create = function create(properties) {
             return new QzcowcowStateFreeResp(properties);
@@ -442,6 +443,8 @@ $root.qzcowcow = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.go.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(18).string(message.Inning);
             return writer;
         };
 
@@ -458,6 +461,9 @@ $root.qzcowcow = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.go.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -481,6 +487,9 @@ $root.qzcowcow = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -493,6 +502,8 @@ $root.qzcowcow = (function() {
                     throw TypeError(".qzcowcow.QzcowcowStateFreeResp.Times: object expected");
                 message.Times = $root.go.TimeInfo.fromObject(object.Times);
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -500,10 +511,14 @@ $root.qzcowcow = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                object.Inning = "";
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.go.TimeInfo.toObject(message.Times, options);
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 

@@ -56,9 +56,9 @@ export var landLords_packet_define = {
 
 export class landLords_request {
     public static LandLordsPlayer( data:{ UserID:number, ChairID:number, CardsLen:number, Cards:any, IsBanker:any, IsTrustee:any, Name:string, Gold:number } ) { landLords_packet_define[59].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsSceneResp( data:{ TimeStamp:number, Players:any[] } ) { landLords_packet_define[60].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsSceneResp( data:{ TimeStamp:number, Players:any[], Inning:string } ) { landLords_packet_define[60].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStateFreeResp( data:{ Times:any } ) { landLords_packet_define[61].sendToChannel(ChannelDefine.game, data, false); }
-    public static LandLordsStateStartResp( data:{ Times:any } ) { landLords_packet_define[62].sendToChannel(ChannelDefine.game, data, false); }
+    public static LandLordsStateStartResp( data:{ Times:any, Inning:string } ) { landLords_packet_define[62].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStateCallResp( data:{ Times:any, UserID:number } ) { landLords_packet_define[63].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStatePlayingResp( data:{ Times:any, LastChairID:number, LastCards:any } ) { landLords_packet_define[64].sendToChannel(ChannelDefine.game, data, false); }
     public static LandLordsStateOverResp( data:{ Times:any } ) { landLords_packet_define[65].sendToChannel(ChannelDefine.game, data, false); }

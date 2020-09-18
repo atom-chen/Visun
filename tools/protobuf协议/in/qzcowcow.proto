@@ -24,6 +24,7 @@ message QzcowcowSceneResp {
 //(空闲 - )
 message QzcowcowStateFreeResp {
   TimeInfo Times = 1;
+  string Inning = 2;               // 牌局号
 }
 
 //(开始 - 喊庄)

@@ -133,6 +133,9 @@ export namespace brtoubao {
 
         /** BrtoubaoStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** BrtoubaoStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a BrtoubaoStateStartResp. */
@@ -146,6 +149,9 @@ export namespace brtoubao {
 
         /** BrtoubaoStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** BrtoubaoStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new BrtoubaoStateStartResp instance using the specified properties.

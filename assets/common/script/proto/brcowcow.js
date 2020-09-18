@@ -446,6 +446,7 @@ $root.brcowcow = (function() {
 
         BrcowcowStateStartResp.prototype.Times = null;
         BrcowcowStateStartResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        BrcowcowStateStartResp.prototype.Inning = "";
 
         BrcowcowStateStartResp.create = function create(properties) {
             return new BrcowcowStateStartResp(properties);
@@ -458,6 +459,8 @@ $root.brcowcow = (function() {
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
             if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
                 writer.uint32(16).uint64(message.HostID);
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(26).string(message.Inning);
             return writer;
         };
 
@@ -477,6 +480,9 @@ $root.brcowcow = (function() {
                     break;
                 case 2:
                     message.HostID = reader.uint64();
+                    break;
+                case 3:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -503,6 +509,9 @@ $root.brcowcow = (function() {
             if (message.HostID != null && message.hasOwnProperty("HostID"))
                 if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
                     return "HostID: integer|Long expected";
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -524,6 +533,8 @@ $root.brcowcow = (function() {
                     message.HostID = object.HostID;
                 else if (typeof object.HostID === "object")
                     message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -538,6 +549,7 @@ $root.brcowcow = (function() {
                     object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.HostID = options.longs === String ? "0" : 0;
+                object.Inning = "";
             }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
@@ -546,6 +558,8 @@ $root.brcowcow = (function() {
                     object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
                 else
                     object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 

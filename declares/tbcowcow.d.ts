@@ -223,6 +223,9 @@ export namespace tbcowcow {
 
         /** TbcowcowStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** TbcowcowStateFreeResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a TbcowcowStateFreeResp. */
@@ -236,6 +239,9 @@ export namespace tbcowcow {
 
         /** TbcowcowStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** TbcowcowStateFreeResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new TbcowcowStateFreeResp instance using the specified properties.

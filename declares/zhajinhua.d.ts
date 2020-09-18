@@ -367,6 +367,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaStateFreeResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateFreeResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a ZhajinhuaStateFreeResp. */
@@ -380,6 +383,9 @@ export namespace zhajinhua {
 
         /** ZhajinhuaStateFreeResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** ZhajinhuaStateFreeResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new ZhajinhuaStateFreeResp instance using the specified properties.

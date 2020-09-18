@@ -325,6 +325,7 @@ $root.baccarat = (function() {
         }
 
         BaccaratStateStartResp.prototype.Times = null;
+        BaccaratStateStartResp.prototype.Inning = "";
 
         BaccaratStateStartResp.create = function create(properties) {
             return new BaccaratStateStartResp(properties);
@@ -335,6 +336,8 @@ $root.baccarat = (function() {
                 writer = $Writer.create();
             if (message.Times != null && Object.hasOwnProperty.call(message, "Times"))
                 $root.gamecomm.TimeInfo.encode(message.Times, writer.uint32(10).fork()).ldelim();
+            if (message.Inning != null && Object.hasOwnProperty.call(message, "Inning"))
+                writer.uint32(18).string(message.Inning);
             return writer;
         };
 
@@ -351,6 +354,9 @@ $root.baccarat = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.Times = $root.gamecomm.TimeInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.Inning = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -374,6 +380,9 @@ $root.baccarat = (function() {
                 if (error)
                     return "Times." + error;
             }
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                if (!$util.isString(message.Inning))
+                    return "Inning: string expected";
             return null;
         };
 
@@ -386,6 +395,8 @@ $root.baccarat = (function() {
                     throw TypeError(".baccarat.BaccaratStateStartResp.Times: object expected");
                 message.Times = $root.gamecomm.TimeInfo.fromObject(object.Times);
             }
+            if (object.Inning != null)
+                message.Inning = String(object.Inning);
             return message;
         };
 
@@ -393,10 +404,14 @@ $root.baccarat = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.Times = null;
+                object.Inning = "";
+            }
             if (message.Times != null && message.hasOwnProperty("Times"))
                 object.Times = $root.gamecomm.TimeInfo.toObject(message.Times, options);
+            if (message.Inning != null && message.hasOwnProperty("Inning"))
+                object.Inning = message.Inning;
             return object;
         };
 

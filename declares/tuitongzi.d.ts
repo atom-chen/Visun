@@ -140,96 +140,6 @@ export namespace tuitongzi {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a TuitongziStateFreeResp. */
-    interface ITuitongziStateFreeResp {
-
-        /** TuitongziStateFreeResp Times */
-        Times?: (gamecomm.ITimeInfo|null);
-    }
-
-    /** Represents a TuitongziStateFreeResp. */
-    class TuitongziStateFreeResp implements ITuitongziStateFreeResp {
-
-        /**
-         * Constructs a new TuitongziStateFreeResp.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: tuitongzi.ITuitongziStateFreeResp);
-
-        /** TuitongziStateFreeResp Times. */
-        public Times?: (gamecomm.ITimeInfo|null);
-
-        /**
-         * Creates a new TuitongziStateFreeResp instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns TuitongziStateFreeResp instance
-         */
-        public static create(properties?: tuitongzi.ITuitongziStateFreeResp): tuitongzi.TuitongziStateFreeResp;
-
-        /**
-         * Encodes the specified TuitongziStateFreeResp message. Does not implicitly {@link tuitongzi.TuitongziStateFreeResp.verify|verify} messages.
-         * @param message TuitongziStateFreeResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: tuitongzi.ITuitongziStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified TuitongziStateFreeResp message, length delimited. Does not implicitly {@link tuitongzi.TuitongziStateFreeResp.verify|verify} messages.
-         * @param message TuitongziStateFreeResp message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: tuitongzi.ITuitongziStateFreeResp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a TuitongziStateFreeResp message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns TuitongziStateFreeResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): tuitongzi.TuitongziStateFreeResp;
-
-        /**
-         * Decodes a TuitongziStateFreeResp message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns TuitongziStateFreeResp
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): tuitongzi.TuitongziStateFreeResp;
-
-        /**
-         * Verifies a TuitongziStateFreeResp message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a TuitongziStateFreeResp message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns TuitongziStateFreeResp
-         */
-        public static fromObject(object: { [k: string]: any }): tuitongzi.TuitongziStateFreeResp;
-
-        /**
-         * Creates a plain object from a TuitongziStateFreeResp message. Also converts values to other types if specified.
-         * @param message TuitongziStateFreeResp
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: tuitongzi.TuitongziStateFreeResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this TuitongziStateFreeResp to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a TuitongziStateStartResp. */
     interface ITuitongziStateStartResp {
 
@@ -241,6 +151,9 @@ export namespace tuitongzi {
 
         /** TuitongziStateStartResp Dice */
         Dice?: (Uint8Array|null);
+
+        /** TuitongziStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a TuitongziStateStartResp. */
@@ -260,6 +173,9 @@ export namespace tuitongzi {
 
         /** TuitongziStateStartResp Dice. */
         public Dice: Uint8Array;
+
+        /** TuitongziStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new TuitongziStateStartResp instance using the specified properties.

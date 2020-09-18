@@ -133,6 +133,9 @@ export namespace tigerXdragon {
 
         /** TigerXdragonStateStartResp Times */
         Times?: (gamecomm.ITimeInfo|null);
+
+        /** TigerXdragonStateStartResp Inning */
+        Inning?: (string|null);
     }
 
     /** Represents a TigerXdragonStateStartResp. */
@@ -146,6 +149,9 @@ export namespace tigerXdragon {
 
         /** TigerXdragonStateStartResp Times. */
         public Times?: (gamecomm.ITimeInfo|null);
+
+        /** TigerXdragonStateStartResp Inning. */
+        public Inning: string;
 
         /**
          * Creates a new TigerXdragonStateStartResp instance using the specified properties.
