@@ -21,7 +21,8 @@ export default class UIRoom extends BaseComponent {
     }
 
     setViewData(items:Array<login.IGameItem>) {
-        this.m_lab.lab_roomname.string = items[0].Info.Name;
+        var cfg = GameConfig[items[0].Info.KindID];
+        this.m_lab.lab_roomname.string = cfg && cfg.name || items[0].Info.Name;
 
         for(var i=0; i<4; i++) {
             var idx = i+1;

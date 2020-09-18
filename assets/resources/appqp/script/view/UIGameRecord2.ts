@@ -1,4 +1,5 @@
 import { gamecomm } from "../../../../../declares/gamecomm";
+import GameConfig from "../../../../common/script/definer/GameConfig";
 import GameManager from "../../../../common/script/model/GameManager";
 import { gamecomm_msgs, gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
 import GameUtil from "../../../../common/script/utils/GameUtil";
@@ -43,7 +44,8 @@ export default class UIGameRecord2 extends BaseComponent {
                 item = cc.instantiate(this.m_ui.tab_btn);
                 this.m_ui.contentLeft.addChild(item);
             }
-            item.getChildByName("labGameName").getComponent(cc.Label).string = gamelist[i].Info.Name;
+            var cfg = GameConfig[gamelist[i].Info.KindID];
+            item.getChildByName("labGameName").getComponent(cc.Label).string = cfg && cfg.name || gamelist[i].Info.Name;
             item["gameData"] = gamelist[i];
             CommonUtil.addClickEvent(item, function(){
                 gamecomm_request.GetInningsInfoReq({GameID:this.gameData.ID});

@@ -4,7 +4,7 @@ import ViewDefine from "./ViewDefine";
 var GameConfig = {
 	[GameKindEnum.BrCowCow] : {
 		GameKind: GameKindEnum.BrCowCow,
-		name: "百人牛牛",
+		name: "万人牛牛",
 		icon: "lobby/imgs/gameico2/ico_brnn",
 		sdir: "brnn",
 		viewpath: ViewDefine.UIbrnn
@@ -39,14 +39,14 @@ var GameConfig = {
 	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
-		name: "百人推筒子",
+		name: "万人推筒子",
 		icon: "lobby/imgs/gameico2/ico_brttz",
 		sdir: "jskb",
 		viewpath: ViewDefine.UIbrttz
 	},
 	[GameKindEnum.Toubao] : {
 		GameKind: GameKindEnum.Toubao,
-		name: "骰宝",
+		name: "万人骰宝",
 		icon: "lobby/imgs/gameico2/ico_brtb",
 		sdir: "saibao",
 		viewpath: ViewDefine.UItoubao
