@@ -386,7 +386,7 @@ export default class QznnUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
-        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "下注"+param.BetScore/100+"倍";
+        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "下注"+param.BetScore+"倍";
     }
     
     QzcowcowCallResp(param:qzcowcow.IQzcowcowCallResp) {

@@ -418,7 +418,7 @@ export default class SangongUI extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
-        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = param.BetScore/100+"倍";
+        this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = param.BetScore+"倍";
 	}
 	
 	SangongHostResp(param:sangong.ISangongHostResp) {
