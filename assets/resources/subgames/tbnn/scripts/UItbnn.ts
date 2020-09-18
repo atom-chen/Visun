@@ -41,6 +41,7 @@ export default class UItbnn extends BaseComponent {
     private _handors:Array<CpnHandcard2> = [];
     private _winloses:Array<CpnWinLoseMoney> = [];
     private tmrState = 0;
+    private _betBeiList = [1, 2, 3, 4, 5];
 
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -52,6 +53,8 @@ export default class UItbnn extends BaseComponent {
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
             this._winloses.push(nd.getChildByName("CpnWinLoseMoney").getComponent(CpnWinLoseMoney));
         }
+
+        this.refreshBtns();
 
 		this.initUIEvent();
         this.initNetEvent();
@@ -140,6 +143,15 @@ export default class UItbnn extends BaseComponent {
                 }
             }
         }
+    }
+
+    private refreshBtns() {
+		for(var i=0; i<this._betBeiList.length; i++) {
+			var btnName = "btn_bet_"+i;
+			if(this.m_ui[btnName]) {
+				this.m_ui[btnName].getChildByName("Background").getChildByName("Label").getComponent(cc.Label).string = this._betBeiList[i]+"倍";
+			}
+		}
     }
 
     private TbcowcowSceneResp(param:tbcowcow.ITbcowcowSceneResp) {
@@ -343,15 +355,14 @@ export default class UItbnn extends BaseComponent {
         //     });
         // }, this);
 
-        CommonUtil.addClickEvent(this.m_ui.btn_bet1, function(){ this.sendBet(1); }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet2, function(){ this.sendBet(2); }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet3, function(){ this.sendBet(3); }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet4, function(){ this.sendBet(4); }, this);
-        CommonUtil.addClickEvent(this.m_ui.btn_bet5, function(){ this.sendBet(5); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet_0, function(){ this.sendBet(0); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet_1, function(){ this.sendBet(1); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet_2, function(){ this.sendBet(2); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet_3, function(){ this.sendBet(3); }, this);
+        CommonUtil.addClickEvent(this.m_ui.btn_bet_4, function(){ this.sendBet(4); }, this);
     }
-    sendBet(bei:number) {
-        var money = CommonUtil.toServerMoney(TbnnMgr.getInstance().getDizhu()) * bei;
-        tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:money});
+    sendBet(idx:number) {
+        tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:this._betBeiList[idx]});
     }
 
 }

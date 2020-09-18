@@ -7139,7 +7139,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_bet1",
+    "_name": "btn_bet_0",
     "_objFlags": 0,
     "_parent": {
       "__id__": 197
@@ -7540,7 +7540,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_bet2",
+    "_name": "btn_bet_1",
     "_objFlags": 0,
     "_parent": {
       "__id__": 197
@@ -7941,7 +7941,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_bet3",
+    "_name": "btn_bet_2",
     "_objFlags": 0,
     "_parent": {
       "__id__": 197
@@ -8342,7 +8342,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_bet4",
+    "_name": "btn_bet_3",
     "_objFlags": 0,
     "_parent": {
       "__id__": 197
@@ -8743,7 +8743,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_bet5",
+    "_name": "btn_bet_4",
     "_objFlags": 0,
     "_parent": {
       "__id__": 197
