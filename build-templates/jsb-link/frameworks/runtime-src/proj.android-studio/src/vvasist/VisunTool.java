@@ -2,26 +2,12 @@ package vvasist;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Base64;
-import android.util.Log;
 import android.widget.Toast;
 
 import org.cocos2dx.javascript.AppActivity;
-import org.cocos2dx.lib.Cocos2dxEditBox;
 import org.cocos2dx.lib.Cocos2dxJavascriptJavaBridge;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 
 public class VisunTool {
