@@ -19,6 +19,7 @@ export default class UIGameRecord2 extends BaseComponent {
     private _gameType = 0;
     private winColor = cc.color(7,123,38,255);
     private loseColor = cc.color(218,32,32,255);
+    private allData = {};
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -38,6 +39,7 @@ export default class UIGameRecord2 extends BaseComponent {
             return;
         }
         var allbtns = [];
+        var self = this;
         for(var i=0; i<gamelist.length; i++) {
             var item = this.m_ui.tab_btn;
             if(i != 0) {
@@ -48,10 +50,14 @@ export default class UIGameRecord2 extends BaseComponent {
             item.getChildByName("labGameName").getComponent(cc.Label).string = cfg && cfg.name || gamelist[i].Info.Name;
             item["gameData"] = gamelist[i];
             CommonUtil.addClickEvent(item, function(){
-                gamecomm_request.GetInningsInfoReq({GameID:this.gameData.ID});
                 for(var j in allbtns) {
                     allbtns[j].getChildByName("tab1_sel").active = allbtns[j]===this;
                     allbtns[j].getChildByName("tab1_unsel").active = allbtns[j]!==this;
+                }
+                if(self.allData[this.gameData.ID]) {
+                    self.refleshList(self.allData[this.gameData.ID]);
+                } else {
+                    gamecomm_request.GetInningsInfoReq({GameID:this.gameData.ID});
                 }
             }, item);
             allbtns.push(item);
@@ -64,6 +70,9 @@ export default class UIGameRecord2 extends BaseComponent {
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
         this.m_ui.content.removeAllChildren(true);
         if(isNil(param)) { return; }
+        if(param["GameId"]) {
+            this.allData[param["GameId"]] = param;
+        }
         var info = param.Innings;
         var len = info.length;
         var Order = 0;
@@ -81,6 +90,21 @@ export default class UIGameRecord2 extends BaseComponent {
                 item.getChildByName("lab_win").color = this.winColor;
             }
         }
+    }
+
+    getTestData() : gamecomm.IGetInningsInfoResp {
+        var info:gamecomm.IGetInningsInfoResp = {};
+        info.Innings = [];
+        for(var i=0; i<20; i++) {
+            var item:gamecomm.IInningInfo = {};
+            item.Name = "";
+            item.Level = CommonUtil.getRandomInt(0,6);
+            item.Number = "xg325easgi325eajfiea654gija325a";
+            item.Payoff = CommonUtil.getRandomInt(1000, 10000)-5000;
+            item.TimeStamp = (new Date()).valueOf() / 1000 + i;
+            info.Innings[i] = item;
+        }
+        return info;
     }
 
 }
