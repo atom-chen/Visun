@@ -154,7 +154,7 @@ export default class UItbnn extends BaseComponent {
 
         var curGame = GameManager.getInstance().getRunningGameData();
         this.m_ui.labroomname.getComponent(cc.Label).string = "房间类型：" + GameUtil.roomNameByLevel(curGame.Info.Level);
-        this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + curGame.Info.LessScore;
+        this.m_ui.labDizhu.getComponent(cc.Label).string = "底注：" + CommonUtil.formRealMoney(curGame.Info.LessScore);
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
 
         for(var n=0; n<MAX_SOLDIER; n++) {
