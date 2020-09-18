@@ -11,7 +11,7 @@ import CpnChipbox3d from "../../../../appqp/script/comps/CpnChipbox3d";
 import CpnChip from "../../../../appqp/script/comps/CpnChip";
 import { brtoubao } from "../../../../../../declares/brtoubao";
 import Preloader from "../../../../../kernel/utils/Preloader";
-import { isNil, isEmpty, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil, isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
 import { brtoubao_request, brtoubao_msgs } from "../../../../../common/script/proto/net_brtoubao";
 import UIManager from "../../../../../kernel/view/UIManager";
 import EventCenter from "../../../../../kernel/basic/event/EventCenter";

@@ -289,6 +289,7 @@ export default class BrnnUI extends BaseComponent {
 		if(isNil(param)) { return; }
 		this.playCollectChip(param);
 	}
+	
 	private playCollectChip(param:brcowcow.IBrcowcowOverResp) {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 

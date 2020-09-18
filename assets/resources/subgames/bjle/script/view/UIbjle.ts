@@ -284,6 +284,7 @@ export default class UIbjle extends BaseComponent {
 		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
 		this.playCollectChip(param);
 	}
+	
     private playCollectChip(param:baccarat.IBaccaratCheckoutResp) {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/collect", false);
 

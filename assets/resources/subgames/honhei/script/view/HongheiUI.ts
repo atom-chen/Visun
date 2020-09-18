@@ -131,13 +131,8 @@ export default class HongheiUI extends BaseComponent {
 		AudioManager.getInstance().playEffectAsync("appqp/audios/chipmove", false);
     }
 
-
     private initNetEvent() {
 	//	EventCenter.getInstance().listen(brcowcow_msgs.RespBrcowcowBet, this.onRespBrcowcowBet, this);
-	}
-
-    private onClickArea(areaId:number) {
-		
 	}
     
     private initUIEvent() {
@@ -152,6 +147,9 @@ export default class HongheiUI extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.area0, function(){ this.onClickArea(0); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area1, function(){ this.onClickArea(1); }, this);
 		CommonUtil.addClickEvent(this.m_ui.area2, function(){ this.onClickArea(2); }, this);
+	}
+	private onClickArea(areaId:number) {
+		
 	}
 	
 }
