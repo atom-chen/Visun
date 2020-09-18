@@ -387,6 +387,9 @@ export default class QznnUI extends BaseComponent {
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
         this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "下注"+param.BetScore+"倍";
+        if(param.UserId == LoginUser.getInstance().UserId) {
+            this.m_ui.callNode.active = false;
+        }
     }
     
     QzcowcowCallResp(param:qzcowcow.IQzcowcowCallResp) {
@@ -395,6 +398,9 @@ export default class QznnUI extends BaseComponent {
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
         this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = "喊庄"+param.Multiple+"倍";
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            this.m_ui.grabNode.active = false;
+        }
     }
 
 	initNetEvent() {

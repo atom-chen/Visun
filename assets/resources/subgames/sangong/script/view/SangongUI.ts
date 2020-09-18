@@ -419,6 +419,9 @@ export default class SangongUI extends BaseComponent {
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callScoreNode").active = true;
         this._pnodes[idx].getChildByName("callScoreNode").getComponent(cc.Label).string = param.BetScore+"倍";
+        if(param.UserId == LoginUser.getInstance().UserId) {
+            this.m_ui.callNode.active = false;
+        }
 	}
 	
 	SangongHostResp(param:sangong.ISangongHostResp) {
@@ -426,6 +429,9 @@ export default class SangongUI extends BaseComponent {
         if(param.IsWant) {
             SangongMgr.getInstance().getEnterData().HostID = param.UserID;
             this.playDingzhuang(param.UserID, true);
+        }
+        if(param.UserID == LoginUser.getInstance().UserId) {
+            this.m_ui.grabNode.active = false;
         }
 	}
 

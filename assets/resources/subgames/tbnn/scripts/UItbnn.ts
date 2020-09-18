@@ -312,7 +312,7 @@ export default class UItbnn extends BaseComponent {
         var idx = this.playerIdx(param.UserId);
         if(idx < 0) { return; }
         this._pnodes[idx].getChildByName("callNode").active = true;
-        this._pnodes[idx].getChildByName("callNode").getComponent(cc.Label).string = param.BetScore/100+"倍";
+        this._pnodes[idx].getChildByName("callNode").getComponent(cc.Label).string = param.BetScore+"倍";
         if(param.UserId == LoginUser.getInstance().UserId) {
             this.m_ui.opNode.active = false;
         }
