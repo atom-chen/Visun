@@ -47,12 +47,12 @@ var verifyCallback = function(path, asset) {
 export default class HotUpdator {
 	private static _all_updators:{[key: string]: HotUpdator;} = {};
 
-	private _id:string;
-	private _manifestUrl:string;
-	private _finishCallback:Function;
-	private _progressCallback:Function;
+	private _id:string = "";
+	private _manifestUrl:string = "";
+	private _finishCallback:Function = null;
+	private _progressCallback:Function = null;
 	private _curState:HOT_STATE = HOT_STATE.READY;
-	private _am:any;
+	private _am:any = null;
 	private _canRetry:boolean = false;
 	private _storagePath:string = "";
 
@@ -87,6 +87,10 @@ export default class HotUpdator {
 	}
 
 	private initAm() {
+		if (!cc.sys.isNative) {
+			return;
+		}
+
 		if(this._am) { return; }
 
 		//@ts-ignore
@@ -164,6 +168,11 @@ export default class HotUpdator {
 		this._is_checking = false;
 	}
 	public checkUpdate(checkListener:Function) {
+		if (!cc.sys.isNative) {
+			checkListener(false);
+			return;
+		}
+
 		if(this._is_checking) {
 			cc.log("正在检查更新");
             return;
@@ -321,7 +330,7 @@ export default class HotUpdator {
 	}
 
 	public beginUpdate() {
-		if (!cc.sys.isNative) {
+		if(!cc.sys.isNative) {
 			this.onFail();
 			return;
 		}
