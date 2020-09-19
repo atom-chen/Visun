@@ -57,7 +57,6 @@ export default class HotupdateScene extends BaseComponent {
 	}
 
 	protected enterGame() {
-		this.byteProgress.node.active = false;
 		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 	}
 
