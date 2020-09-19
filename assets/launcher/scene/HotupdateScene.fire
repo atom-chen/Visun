@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        359.4005425705421,
+        324.7595264191645,
         0,
         0,
         0,
@@ -993,7 +993,7 @@
       "__id__": 25
     },
     "_name": "UILoading",
-    "_active": true,
+    "_active": false,
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",

@@ -8,6 +8,7 @@ import SceneManager from "../../kernel/view/SceneManager";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 import PlatformUtil from "../../kernel/utils/PlatformUtil";
 
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -29,7 +30,6 @@ export default class HotupdateScene extends BaseComponent {
 		
 		KernelUIDefine.GameScene.name = "GameScene";
         KernelUIDefine.LobbyScene.name = "LobbyScene";
-    //    KernelUIDefine.LobbyScene.name = "EnvelopeScene";
         KernelUIDefine.HotupdateScene.name = "HotupdateScene";
         KernelUIDefine.ConfirmDlg = "launcher/prefabs/ConfirmDlg";
         KernelUIDefine.UIToast = "launcher/prefabs/UIToast";
@@ -37,8 +37,8 @@ export default class HotupdateScene extends BaseComponent {
 		
 		this.fileProgress.progress = 0;
 		this.byteProgress.progress = 0;
-		var bNoHot = true;
-		if ( bNoHot || !cc.sys.isNative ) {
+
+		if (!cc.sys.isNative) {
 			this.enterGame();
 		} 
 		else {

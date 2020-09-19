@@ -3,6 +3,9 @@ import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelEvent from "../../kernel/basic/defines/KernelEvent";
 import TimerManager from "../../kernel/basic/timer/TimerManager";
 import EcsSystem from "../../kernel/ecs/EcsSystem";
+import { newHandler } from "../../kernel/utils/GlobalFuncs";
+import PlatformUtil from "../../kernel/utils/PlatformUtil";
+import UIManager from "../../kernel/view/UIManager";
 
 
 export default class InitLogic {
@@ -38,10 +41,16 @@ export default class InitLogic {
         EcsSystem.start(node);
 	}
 
+    private static tmrId = -1;
 	private static onKeyDown (event:any) {
         if(event.keyCode===cc.macro.KEY.back || event.keyCode===cc.macro.KEY.escape) {
             cc.log("返回键");
-            EventCenter.getInstance().fire(KernelEvent.keyboard_esc);
+            if(TimerManager.isValid(this.tmrId)) {
+                PlatformUtil.exitApp();
+            } else {
+                UIManager.toast("再按一次退出程序");
+                this.tmrId = TimerManager.delaySecond(1, newHandler(function(tmr){}, this));
+            }
         }
 	}
 	

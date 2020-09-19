@@ -18,29 +18,25 @@ export default class UILoading extends cc.Component {
     private _tmr: number = 0;
 
     onLoad () {
-        LoadCenter.getInstance().retainNodeRes(this.node);
-        cc.log("显示加载页");
-        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_BEGIN, this.onBeforeSwitch, this);
-        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_PROGRESS, this.onProgress, this);
-        EventCenter.getInstance().listen(KernelEvent.UI_LOADING_FINISH, this.onHideView, this);
+        cc.log("UIloading.onLoad");
         this.loading.node.runAction(cc.repeatForever(cc.rotateBy(1, 360)));
     }
 
-    private onBeforeSwitch() {
+    onUiLoadingBegin() {
         this._tmr = TimerManager.delTimer(this._tmr);
-        this.node.active = true;
+        this.node.active = true && !cc.sys.isNative;
         this.labelProgress.string = "";
     }
 
-    private onProgress(sub:number, total:number) {
+    onUiLoadingProgress(sub:number, total:number) {
         this._tmr = TimerManager.delTimer(this._tmr);
         this.labelProgress.string = sub + "/" + total;
         if(sub===total || total == 0) {
-            this._tmr = TimerManager.delayFrame(2, new CHandler(this, this.onHideView));
+            this._tmr = TimerManager.delayFrame(2, new CHandler(this, this.onUiLoadingFinish));
         }
     }
 
-    private onHideView() {
+    onUiLoadingFinish() {
         this._tmr = TimerManager.delTimer(this._tmr);
         this.node.active = false;
     }

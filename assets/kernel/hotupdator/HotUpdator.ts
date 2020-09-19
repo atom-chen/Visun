@@ -81,7 +81,7 @@ export default class HotUpdator {
 		this._progressCallback = progressCallback;
 
 		if(cc.sys.isNative) {
-			this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/' + this._id);
+			this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/');
 			cc.log('Storage path for remote asset : ' + this._storagePath);
 		}
 	}
@@ -286,7 +286,7 @@ export default class HotUpdator {
 			//@ts-ignore
 			var searchPaths = jsb.fileUtils.getSearchPaths() || [];
 			var newPaths = this._am.getLocalManifest().getSearchPaths();
-			if(newPaths){
+			if(newPaths && newPaths.length > 0){
 				console.log("--------resetSearchPaths:");
 				console.log(JSON.stringify(newPaths));
 				Array.prototype.unshift.apply(searchPaths, newPaths);
@@ -297,6 +297,8 @@ export default class HotUpdator {
 				console.log("---------resetSearchPaths: null");
 			}
 		}
+
+		jsb.fileUtils.addSearchPath(this._storagePath, true);
 
 		cc.log("-----------热更完毕：成功---------------");
 		this._curState = HOT_STATE.SUCCESS;
