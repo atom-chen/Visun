@@ -5,7 +5,6 @@ import { HOT_STATE } from "../../kernel/basic/defines/KernelDefine";
 import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
-import Adaptor from "../../kernel/adaptor/Adaptor";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 import PlatformUtil from "../../kernel/utils/PlatformUtil";
 
@@ -26,8 +25,6 @@ export default class HotupdateScene extends BaseComponent {
 
 
 	onLoad () {
-	//	Adaptor.setFullScreen(true);
-	//	Adaptor.adaptScreen();
 		PlatformUtil.setOrientation(true);
 		
 		KernelUIDefine.GameScene.name = "GameScene";
