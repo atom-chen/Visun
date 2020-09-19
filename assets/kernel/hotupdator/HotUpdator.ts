@@ -1,7 +1,7 @@
 //---------------------------------
 // 热更
 //---------------------------------
-import { HOT_STATE } from "../basic/defines/KernelDefine";
+import { HOT_FAIL_REASON, HOT_STATE } from "../basic/defines/KernelDefine";
 import UIManager from "../view/UIManager";
 
 
@@ -216,6 +216,8 @@ export default class HotUpdator {
 	protected updateCb(event:any) {
 		var needRestart = false;
 		var failed = false;
+		var reason = HOT_FAIL_REASON.not_need_update;
+
 		switch (event.getEventCode())
 		{
 			//@ts-ignore
@@ -233,6 +235,7 @@ export default class HotUpdator {
 			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
 				cc.log('updateCb No local manifest file found, hot update skipped.');
 				failed = true;
+				reason = HOT_FAIL_REASON.err_no_local_manifest;
 				break;
 			//@ts-ignore
 			case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
@@ -240,11 +243,13 @@ export default class HotUpdator {
 			case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
 				cc.log('updateCb Fail to download manifest file, hot update skipped.');
 				failed = true;
+				reason = HOT_FAIL_REASON.ERROR_PARSE_MANIFEST;
 				break;
 			//@ts-ignore
 			case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
 				cc.log('updateCb Already up to date with the latest remote version.');
 				failed = true;
+				reason = HOT_FAIL_REASON.not_need_update;
 				break;
 			//@ts-ignore
 			case jsb.EventAssetsManager.UPDATE_FINISHED:
@@ -265,13 +270,14 @@ export default class HotUpdator {
 			case jsb.EventAssetsManager.ERROR_DECOMPRESS:
 				cc.log(event.getMessage());
 				failed = true;
+				reason = HOT_FAIL_REASON.ERROR_DECOMPRESS;
 				break;
 			default:
 				break;
 		}
 
 		if (failed) {
-			this.onFail();
+			this.onFail(reason);
 		}
 
 		if (needRestart) {
@@ -280,6 +286,8 @@ export default class HotUpdator {
 	}
 
 	protected onSuccess() {
+		this._canRetry = false;
+
 		if(this._am){
 			this._am.setEventCallback(null);
 			//@ts-ignore
@@ -311,7 +319,7 @@ export default class HotUpdator {
 		cc.game.restart();
 	}
 
-	protected onFail() {
+	protected onFail(reason:HOT_FAIL_REASON) {
 		cc.log("------------热更完毕：失败--------------");
 		if(this._am){
 			this._am.setEventCallback(null);
@@ -332,7 +340,7 @@ export default class HotUpdator {
 
 	public beginUpdate() {
 		if(!cc.sys.isNative) {
-			this.onFail();
+			this.onFail(HOT_FAIL_REASON.not_need_update);
 			return;
 		}
 
@@ -343,18 +351,19 @@ export default class HotUpdator {
 
 		cc.log("---------hotupdate begin-----------");
 		this._curState = HOT_STATE.UPDATING;
+		this._canRetry = false;
 		this.notifyProgress(this._curState, 0, 0);
 
 		this.initAm();
 
 		if(!this._am) {
 			cc.log("更新失败：创建更新器失败");
-			this.onFail();
+			this.onFail(HOT_FAIL_REASON.err_create_am);
 		}
 			
         if (!this.loadLocalManifest()) {
 			cc.log("更新失败：本地manifest不存在");
-			this.onFail();
+			this.onFail(HOT_FAIL_REASON.err_no_local_manifest);
             return;
         }
 
@@ -363,19 +372,23 @@ export default class HotUpdator {
 	}
 
 	protected retry() {
-		if(this._canRetry && !this.isUpdating()) {
+		if(this._canRetry) {
 			var self = this;
-			UIManager.openDialog("hotretry", "更新失败，是否重试？", 2, (menuId:number)=>{
-				if(menuId===1){
-					if(self._canRetry && !self.isUpdating()) {
+			UIManager.openDialog("hotretry", "有些许资源更新失败，是否重试？", 2, (menuId:number)=>{
+				if(menuId===1) {
+					if(self._canRetry) {
 						cc.log('Retry failed Assets...');
 						self._canRetry = false;
 						self._am.downloadFailedAssets();
 					} else {
-						self.onFail();
+						if(self._curState == HOT_STATE.SUCCESS) {
+							self.onSuccess();
+						} else {
+							self.onFail(HOT_FAIL_REASON.err_down_res);
+						}
 					}
 				} else {
-					self.onFail();
+					self.onFail(HOT_FAIL_REASON.err_down_res);
 				}
 			});
 		}

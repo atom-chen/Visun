@@ -35,6 +35,15 @@ export enum HOT_STATE {
 	LOADINGRES = 7,		//加载资源
 }
 
+export enum HOT_FAIL_REASON {
+	not_need_update,
+	err_create_am,
+	err_no_local_manifest,
+	err_down_res,
+	ERROR_PARSE_MANIFEST,
+	ERROR_DECOMPRESS
+}
+
 // 网络连接状态
 export enum ConnState {
 	unconnect = 0, 	//尚未连接
