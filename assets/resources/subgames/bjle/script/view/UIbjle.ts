@@ -25,6 +25,7 @@ import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 
 const AREA_XIAN        = 0 //闲家
 const AREA_PING        = 1 //平家
@@ -68,6 +69,7 @@ export default class UIbjle extends BaseComponent {
 		this.initNetEvent();
 		
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 
         ResPool.load(ViewDefine.CpnChip);
 		
@@ -160,7 +162,7 @@ export default class UIbjle extends BaseComponent {
 			LoginUser.getInstance().Gold = param.Gold;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
 			if(!isEmpty(param.AlterGold)) {
-				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
+				this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.AlterGold), 60, 3);
 			}
 		} 
 	}
@@ -289,7 +291,8 @@ export default class UIbjle extends BaseComponent {
 		this.isJoined = false;
 		LoginUser.getInstance().Gold += param.MyAcquire;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
-		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.MyAcquire), 60, 5);
+		
 		this.playCollectChip(param);
 	}
 	

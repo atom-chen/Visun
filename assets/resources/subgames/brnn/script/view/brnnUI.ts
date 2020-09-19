@@ -27,6 +27,7 @@ import PlayerMgr from "../../../../../common/script/model/PlayerMgr";
 import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
+import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -62,6 +63,7 @@ export default class BrnnUI extends BaseComponent {
 		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
 
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
@@ -353,7 +355,7 @@ export default class BrnnUI extends BaseComponent {
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
 			this.refreshZhuang();
 			if(!isEmpty(param.AlterGold)) {
-				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
+				this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.AlterGold), 60, 3);
 			}
 		} 
 

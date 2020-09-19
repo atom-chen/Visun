@@ -23,6 +23,7 @@ import { gamecomm } from "../../../../../../declares/gamecomm";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import ResPool from "../../../../../kernel/basic/pool/ResPool";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 
 
 var margin = { rx:10, ry:10, rr:0 };
@@ -53,7 +54,7 @@ export default class ToubaoUI extends BaseComponent {
 		}
 
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
-
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 		ResPool.load(ViewDefine.CpnChip);
 
 		this.initNetEvent();
@@ -319,7 +320,7 @@ export default class ToubaoUI extends BaseComponent {
 	BrtoubaoCheckoutResp(param:brtoubao.IBrtoubaoCheckoutResp) {
 		LoginUser.getInstance().Gold += param.MyAcquire;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
-		GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.MyAcquire), cc.v3(0,0,0), cc.v2(0, 60));
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.MyAcquire), 60, 3);
 		this.playCollectChip(param);
 	}
 
@@ -328,7 +329,7 @@ export default class ToubaoUI extends BaseComponent {
 			LoginUser.getInstance().Gold = param.Gold;
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
 			if(!isEmpty(param.AlterGold)) {
-				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
+				this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.AlterGold), 60, 5);
 			}
 		} 
 	}

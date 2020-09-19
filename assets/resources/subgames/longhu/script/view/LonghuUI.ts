@@ -25,6 +25,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import UIManager from "../../../../../kernel/view/UIManager";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnPoker from "../../../../appqp/script/comps/CpnPoker";
+import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 
 
 var margin = { rx:20,ry:20,rr:0 };
@@ -58,6 +59,7 @@ export default class LonghuUI extends BaseComponent {
 
 		this.m_ui.lab_hname.getComponent(cc.Label).string = LoginUser.getInstance().Name;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
+		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
@@ -141,7 +143,7 @@ export default class LonghuUI extends BaseComponent {
 			this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(param.Gold);
 			//this.refreshZhuang();
 			if(!isEmpty(param.AlterGold)) {
-				GameUtil.playAddMoney(this.m_ui.lab_magic_money, CommonUtil.fixRealMoney(param.AlterGold), cc.v3(0,0,0), cc.v2(0, 60));
+				this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).playMoney(CommonUtil.fixRealMoney(param.AlterGold), 60, 3);
 			}
 		} 
 
