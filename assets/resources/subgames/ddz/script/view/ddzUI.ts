@@ -392,7 +392,7 @@ export default class DdzUI extends BaseComponent {
 			}
 		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Landlord});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Landlord});
 		}, this);
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             landLords_request.LandLordsReadyReq({

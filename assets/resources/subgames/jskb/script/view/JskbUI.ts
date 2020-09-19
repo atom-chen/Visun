@@ -18,7 +18,7 @@ export default class JskbUI extends BaseComponent {
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Jskb});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Jskb});
 		}, this);
 	}
 	

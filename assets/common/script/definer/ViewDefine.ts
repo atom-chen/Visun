@@ -10,6 +10,7 @@ export default class ViewDefine {
 	public static UIGameRecord2 = "appqp/prefabs/UIGameRecord2";
 	//
 	public static UIHelpdoc = "appqp/helpdoc/prefabs/UIHelpdoc";
+	public static UIHelpdoc2 = "appqp/helpdoc/prefabs/UIHelpdoc2";
 	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIHall = "lobby/prefabs/UIHall";

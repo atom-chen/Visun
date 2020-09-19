@@ -17,7 +17,7 @@ export default class Dian21UI extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Blackjack});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Blackjack});
 		}, this);
 	}
 	

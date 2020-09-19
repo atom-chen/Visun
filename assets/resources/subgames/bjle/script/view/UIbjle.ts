@@ -358,7 +358,7 @@ export default class UIbjle extends BaseComponent {
 			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Baccarat});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Baccarat});
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.button0, function(){ 
 			this.onClickArea(this.node2Area(0));

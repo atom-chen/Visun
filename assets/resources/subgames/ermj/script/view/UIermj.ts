@@ -18,7 +18,7 @@ export default class UIermj extends BaseComponent {
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Ermj});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Ermj});
 		}, this);
     }
 

@@ -683,7 +683,7 @@ export default class zjhUI extends BaseComponent {
             GameManager.getInstance().quitGame();
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Zhajinhua});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Zhajinhua});
 		}, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_giveup, function(){ 

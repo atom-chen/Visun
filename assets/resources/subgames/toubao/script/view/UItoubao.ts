@@ -357,7 +357,7 @@ export default class ToubaoUI extends BaseComponent {
 			}
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Toubao});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Toubao});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.betBtn0, function(){ this.onClickArea(0); }, this);

@@ -439,7 +439,7 @@ export default class QznnUI extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){
-			UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.QzCowcow});
+			UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.QzCowcow});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 

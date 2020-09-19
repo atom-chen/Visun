@@ -18,7 +18,7 @@ export default class ErbaUI extends BaseComponent {
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Erba});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Erba});
 		}, this);
 	}
 	

@@ -458,7 +458,7 @@ export default class SangongUI extends BaseComponent {
             GameManager.getInstance().quitGame();
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.Sangong});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Sangong});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 

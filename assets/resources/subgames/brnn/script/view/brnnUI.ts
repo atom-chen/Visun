@@ -405,7 +405,7 @@ export default class BrnnUI extends BaseComponent {
 		}, this);
 		
 		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc, true, {kindId:GameKindEnum.BrCowCow});
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.BrCowCow});
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_sz, function(){ 
