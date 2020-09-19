@@ -79,10 +79,9 @@ export default class HotUpdator {
 		this._manifestUrl = manifestUrl;
 		this._finishCallback = finishCallback;
 		this._progressCallback = progressCallback;
-
 		if(cc.sys.isNative) {
-			this._storagePath = ((jsb.fileUtils ? jsb.fileUtils.getWritablePath() : '/') + 'hotupdate/');
-			cc.log('Storage path for remote asset : ' + this._storagePath);
+			this._storagePath = jsb.fileUtils.getWritablePath() + 'hotupdate/';
+			cc.log('热更目录: ' + this._storagePath);
 		}
 	}
 
