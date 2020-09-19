@@ -28,11 +28,15 @@ export default class LonghuMgr extends ModelBase {
     clearBets() {
         var enterData = this.getEnterData();
 		if(enterData) {
-			for(var i=0; i<enterData.AreaBets.length; i++) {
-				enterData.AreaBets[i] = 0;
+			if(enterData.AreaBets) {
+				for(var i=0; i<enterData.AreaBets.length; i++) {
+					enterData.AreaBets[i] = 0;
+				}
 			}
-			for(var i=0; i<enterData.MyBets.length; i++) {
-				enterData.MyBets[i] = 0;
+			if(enterData.MyBets) {
+				for(var i=0; i<enterData.MyBets.length; i++) {
+					enterData.MyBets[i] = 0;
+				}
 			}
 		}
 	}
