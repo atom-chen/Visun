@@ -8,6 +8,7 @@ import { ConnState } from "../../basic/defines/KernelDefine";
 import EventCenter from "../../basic/event/EventCenter";
 import KernelEvent from "../../basic/defines/KernelEvent";
 import CommonUtil from "../../utils/CommonUtil";
+import GlobalData from "../../utils/GlobalData";
 
 
 const HEAD_SIZE = 2;
@@ -71,7 +72,11 @@ export default class LeafWsProcessor extends BaseProcessor {
 			cc.log(CommonUtil.deepClone(data));
 		}
 
+		cc.log(this._paused, GlobalData.isInBackgroud, this._fire_list.length);
 		if(this._paused) {
+			if(GlobalData.isInBackgroud && this._fire_list.length >= 3) {
+				this._channel.disconnect();
+			}
 			this._fire_list.push({cmd:cmd,data:data});
 		} else {
 			this._dispatcher.fire(cmd, data);

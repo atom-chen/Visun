@@ -1,11 +1,11 @@
 import EventCenter from "../../kernel/basic/event/EventCenter";
 import Adaptor from "../../kernel/adaptor/Adaptor";
-import KernelEvent from "../../kernel/basic/defines/KernelEvent";
 import TimerManager from "../../kernel/basic/timer/TimerManager";
 import EcsSystem from "../../kernel/ecs/EcsSystem";
 import { newHandler } from "../../kernel/utils/GlobalFuncs";
 import PlatformUtil from "../../kernel/utils/PlatformUtil";
 import UIManager from "../../kernel/view/UIManager";
+import GlobalData from "../../kernel/utils/GlobalData";
 
 
 export default class InitLogic {
@@ -17,6 +17,7 @@ export default class InitLogic {
         this._inited = true;
 
 		cc.game.on(cc.game.EVENT_HIDE, ()=>{
+            GlobalData.isInBackgroud = true;
             InitLogic._hideTime = (new Date()).getTime();
             console.log("游戏进入后台", InitLogic._hideTime);
             cc.audioEngine.pauseAll();
@@ -24,6 +25,7 @@ export default class InitLogic {
         });
         
         cc.game.on(cc.game.EVENT_SHOW, ()=>{
+            GlobalData.isInBackgroud = false;
             var passedTime = (new Date()).getTime() - InitLogic._hideTime;
             console.log("游戏进入前台", passedTime);
             cc.audioEngine.resumeAll();

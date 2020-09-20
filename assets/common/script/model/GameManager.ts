@@ -150,6 +150,7 @@ export default class GameManager extends ModelBase {
 	//获取子游戏热更器
 	public getUpdator(gameKind:number|string) : HotUpdator {
 		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean, reason:number)=>{
+			cc.log("热更完成回调：", bSucc, reason);
 			if(!bSucc) {
 				if(reason==HOT_FAIL_REASON.not_need_update) {
 					GameManager.getInstance().doEnter();

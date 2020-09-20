@@ -20,10 +20,15 @@ var NetHandlers = {
         }
     },
 
-    [login_msgs.ReconnectResp] : function(param:login.IReconnectResp) {
-        LogicCenter.getInstance().clear();
-        LogicCenter.getInstance().init();
+    [login_msgs.ResultResp] : function(param: login.ResultResp) {
+        UIManager.toast(param.Hints);
+    },
 
+    [login_msgs.ResultPopResp] : function(param: login.ResultPopResp) {
+        UIManager.openDialog(param.Title, param.Hints, 1, null, param.Title);
+    },
+
+    [login_msgs.ReconnectResp] : function(param:login.IReconnectResp) {
         LoginUser.getInstance().UserId = param.MainInfo.UserInfo.UserID;
         CommonUtil.simpleCopy(LoginUser.getInstance(), param.MainInfo.UserInfo);
 
@@ -42,14 +47,6 @@ var NetHandlers = {
                 });
             }
         }
-    },
-
-    [login_msgs.ResultResp] : function(param: login.ResultResp) {
-        UIManager.toast(param.Hints);
-    },
-
-    [login_msgs.ResultPopResp] : function(param: login.ResultPopResp) {
-        UIManager.openDialog(param.Title, param.Hints, 1, null, param.Title);
     },
 
     [login_msgs.RegisterResp] : function(param:login.RegisterResp) {

@@ -29,18 +29,16 @@ export default class WsChannel implements IChannel {
 	constructor(name:string) {
 		this._name = name;
 		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
-			//this.disconnect();
+			this.setPaused(true);
 		}, this);
 		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function (passedTime) {
-			// if(passedTime > 1000) {
-			// 	this.force_reconnect();
-			// } else {
-			// 	if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
-			// 		this.notifyState();
-			// 	}
-			// }
-			if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
-				this.notifyState();
+			this.setPaused(false);
+			if(passedTime >= 2000) {
+				this.force_reconnect();
+			} else {
+				if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
+					this.notifyState();
+				}
 			}
 		}, this);
 	}
@@ -63,14 +61,14 @@ export default class WsChannel implements IChannel {
 
 		this._reconnectTimes = MAX_RECONNECT;
 
-		if(this._onConnSuccess) {
-			this._onConnSuccess.invoke();
-			this._onConnSuccess = null;
-		}
-		this._onConnFail = null;
+		this._dataProcessor.setPaused(false);
 
-		this._dataProcessor.flushRecvlist();
-		this._dataProcessor.flushSendlist();
+		var onSucc = this._onConnSuccess;
+		this._onConnSuccess = null;
+		this._onConnFail = null;
+		if(onSucc) {
+			onSucc.invoke();
+		}
 
 		this.notifyState();
 
@@ -238,10 +236,11 @@ export default class WsChannel implements IChannel {
 				this.do_connect();
 			}
 		} else {
+			var onFail = this._onConnFail;
+			this._onConnFail = null;
 			this._onConnSuccess = null;
-			if(this._onConnFail) {
-				this._onConnFail.invoke();
-				this._onConnFail = null;
+			if(onFail) {
+				onFail.invoke();
 			}
 
 			if(this._curState == ConnState.connecting) {
@@ -321,7 +320,7 @@ export default class WsChannel implements IChannel {
 
 
 
-	public setPaused(bPause:boolean) : void
+	private setPaused(bPause:boolean) : void
 	{
 		if(this._dataProcessor) {
 			this._dataProcessor.setPaused(bPause);

@@ -74,6 +74,14 @@ export default class BaseProcessor implements IProcessor {
 		this._fire_list = [];
 	}
 
+	public lenSendList() : number {
+		return this._send_list.length;
+	}
+
+	public lenRecvList() : number {
+		return this._fire_list.length;
+	}
+
 	setPaused(bPause:boolean) : void
 	{
 		this._paused = bPause;
@@ -131,7 +139,8 @@ export default class BaseProcessor implements IProcessor {
 
 	public sendHeartBeat() : void
 	{
-		if(this._heatBeatFunc)
+		if(this._heatBeatFunc) {
 			this._heatBeatFunc();
+		}
 	}
 }
