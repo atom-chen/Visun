@@ -33,10 +33,16 @@ export default class AppNode extends cc.Component {
         cc.log("loading begin...", loadingType);
         this._tmr = TimerManager.delTimer(this._tmr);
         this.m_ui.UILoading.active = true;
+        this.labProg.string = "";
         this.m_ui.bg0.active = loadingType === 2;
         this.m_ui.bg1.active = loadingType === 1;
-        this.labProg.string = "";
+
+        // this.m_ui.sprLoading.active = loadingType === 1;
+        // if(loadingType===1) {
+        //     this.m_ui.sprLoading.runAction(cc.repeatForever(cc.rotateBy(1, 360)));
+        // }
         this.m_ui.sprLoading.runAction(cc.repeatForever(cc.rotateBy(1, 360)));
+
         TimerManager.delayFrame(2, newHandler(function(tmr){
             var comp:cc.Widget = this.m_ui.UILoading.getComponent(cc.Widget);
             comp.updateAlignment();
