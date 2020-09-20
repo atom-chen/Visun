@@ -106,8 +106,8 @@ function genHotPackage() {
 		assets: {},
 		searchPaths: []
 	};
-	var g_dest = hot_cfg.srcDir;	//输出目录
-	var g_src = hot_cfg.dstDir;		//输入目录
+	var g_dest = hot_cfg.dstDir;	//输出目录
+	var g_src = hot_cfg.srcDir;		//输入目录
 	
 	//先清空输出目录
 	deleteDirectory(g_dest);
@@ -155,18 +155,25 @@ var sysType = os.type();
 console.log("当前平台: ", sysType);
 
 if(sysType == "Darwin") {
-	var projPath = "/users/liuhaopeng/Documents/Visun/";
-	exec("/Applications/CocosCreator/Creator/2.3.4/CocosCreator.app/Contents/MacOS/CocosCreator --path " + projPath + " --build \"platform=android;debug=true\"",
-	(err, std_out, std_err)=>{
-		if(err) {
-			console.log("------构建失败------");
-			console.log(std_out);
-			console.log("error: ", std_err);
-		} else {
-			console.log("------构建成功------");
-			console.log(std_out);
-			console.log("error: ", std_err);
-			genHotPackage();
-		}
-	})
+
+	var willBuild = false;
+	if(willBuild) {
+		var projPath = "/users/liuhaopeng/Documents/Visun/";
+		exec("/Applications/CocosCreator/Creator/2.3.4/CocosCreator.app/Contents/MacOS/CocosCreator --path " + projPath + " --build \"platform=android;debug=true\"",
+		(err, std_out, std_err)=>{
+			if(err) {
+				console.log("------构建失败------");
+				console.log(std_out);
+				console.log("error: ", std_err);
+			} else {
+				console.log("------构建成功------");
+				console.log(std_out);
+				console.log("error: ", std_err);
+				genHotPackage();
+			}
+		});
+	} else {
+		genHotPackage();
+	}
+	
 }
