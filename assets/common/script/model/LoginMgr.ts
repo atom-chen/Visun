@@ -265,7 +265,7 @@ export default class LoginMgr extends ModelBase {
 		if(leafChan) {
 			leafChan.close();
 		}
-		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, function(){
+		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 0, function(){
 			TimerManager.delayFrame(5, newHandler(function(){
 				LoginMgr.getInstance().checkLogin(true);
 			}, null));

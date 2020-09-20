@@ -123,13 +123,13 @@ export default class GameManager extends ModelBase {
 	//------------------------------------------------------------------------
 
 	//获取子游戏的客户端配置
-	public clientConfig(gameType:string|number) : any {
-		return GameConfig[gameType];
+	public clientConfig(gameKind:number|string) : any {
+		return GameConfig[gameKind];
 	}
 
 	//游戏是否存在
-	public isGameExist(gameType:string|number) : boolean {
-		var cfg = this.clientConfig(gameType);
+	public isGameExist(gameKind:number|string) : boolean {
+		var cfg = this.clientConfig(gameKind);
 		if(!cfg) {
 			return false;
 		}
@@ -140,7 +140,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	//游戏是否已下载好
-	public isGameDownloaded(gameKind:string|number) : boolean {
+	public isGameDownloaded(gameKind:number|string) : boolean {
 		var cfg = this.clientConfig(gameKind);
 		if(!cfg) { return false; }
 		if(isEmpty(cfg.viewpath)) { return false; }
@@ -148,7 +148,7 @@ export default class GameManager extends ModelBase {
 	}
 
 	//获取子游戏热更器
-	public getUpdator(gameKind:string|number) : HotUpdator {
+	public getUpdator(gameKind:number|string) : HotUpdator {
 		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean, reason:number)=>{
 			if(!bSucc) {
 				if(reason==HOT_FAIL_REASON.not_need_update) {
@@ -167,12 +167,12 @@ export default class GameManager extends ModelBase {
 		}, null);
 	}
 
-	public downGame(gameType:string|number) {
+	public downGame(gameKind:number|string) {
 		if(cc.sys.isNative) {
-			var updator = this.getUpdator(gameType);
+			var updator = this.getUpdator(gameKind);
 			updator.beginUpdate();
 		} else {
-			var cfg = this.clientConfig(gameType);
+			var cfg = this.clientConfig(gameKind);
 			cc.loader.loadRes(cfg.viewpath, cc.Prefab, (err,rsc)=>{
 				GameManager.getInstance().doEnter();
 			});
@@ -211,7 +211,7 @@ export default class GameManager extends ModelBase {
 	public quitGame(bForce?:boolean) {
 		gamecomm_request.ExitGameReq({GameID:this.gameId});
 		if(bForce) {
-			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 0);
 		} else {
 		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
@@ -219,6 +219,9 @@ export default class GameManager extends ModelBase {
 	
 	//进入游戏的唯一入口
 	public enterGame(gameId:number) {
+		if(!LoginMgr.getInstance().checkLogin(true)) {
+			return;
+		}
 		this.willGame = gameId;
 		var serverData = this.getGameData(gameId);
 		var gameKind = serverData.Info.KindID;
@@ -254,8 +257,8 @@ export default class GameManager extends ModelBase {
 	}
 
 	//跳转到游戏场景
-	public enterGameScene(gameType) {
-		var cliCfg = this.clientConfig(gameType);
+	public enterGameScene(gameKind:number|string) {
+		var cliCfg = this.clientConfig(gameKind);
 		if(!cliCfg) {
 			cc.warn("no client config");
 			return;
@@ -264,7 +267,7 @@ export default class GameManager extends ModelBase {
 			UIManager.toast("敬请期待");
 			return;
 		}
-		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
+		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, 0, ()=>{
 			var viewpath = cliCfg.viewpath;
 			UIManager.openPanel(viewpath, null);
 			TimerManager.delayFrame(5, newHandler(function(){

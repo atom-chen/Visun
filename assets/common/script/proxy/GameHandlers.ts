@@ -24,13 +24,13 @@ var GameHandlers = {
 
     [gamecomm_msgs.BeOutResp] : function(param:gamecomm.IBeOutResp) {
         UIManager.openDialog("cfg_kick", "你被踢出房间："+param.Hints, 1, function(){
-            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 0);
         });
     },
 
     [gamecomm_msgs.ExitGameResp] : function(param:gamecomm.IExitGameResp) {
         if(param.UserID == LoginUser.getInstance().UserId) {
-            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+            SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 0);
         }
     },
 

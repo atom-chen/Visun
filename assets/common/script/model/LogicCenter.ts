@@ -24,10 +24,6 @@ export default class LogicCenter {
         //初始化Http协议
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
         HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
-        
-        EventCenter.getInstance().listen(KernelEvent.SCENE_AFTER_SWITCH, function(){
-            UIManager.onSceneAfterSwitch();
-        }, this);
     }
     
     public static getInstance() : LogicCenter {

@@ -68,7 +68,7 @@ export default class HotupdateScene extends BaseComponent {
 	}
 
 	protected enterGame() {
-		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 1);
 	}
 
 	protected getLocalManifestPath() : string
