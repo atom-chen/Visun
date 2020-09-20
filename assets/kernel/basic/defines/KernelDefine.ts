@@ -36,6 +36,7 @@ export enum HOT_STATE {
 }
 
 export enum HOT_FAIL_REASON {
+	successed,
 	not_need_update,
 	err_create_am,
 	err_no_local_manifest,

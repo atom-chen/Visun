@@ -10,9 +10,11 @@ import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
 import { login } from "../../../../declares/login";
 import { login_request } from "../proto/net_login";
-import { isEmpty, newHandler } from "../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import AudioManager from "../../../kernel/audio/AudioManager";
+import { HOT_FAIL_REASON } from "../../../kernel/basic/defines/KernelDefine";
+import PlatformUtil from "../../../kernel/utils/PlatformUtil";
 
 
 //游戏管理器
@@ -47,9 +49,10 @@ export default class GameManager extends ModelBase {
 
 	private roomsInfo:Array<login.IRoomInfo> = [];
 	private gameArr:{[key:number]:Array<login.IGameItem>} = {};
-	private gameId:number = 0;
+	private gameId:number = -1;
 	private enterData = null;
 	private gameModal = null;
+	private willGame = -1;
 
 	public pullAll() {
 		var roomsInfo = this.getRoomsInfo();
@@ -117,61 +120,63 @@ export default class GameManager extends ModelBase {
 		return this.getGameData(this.gameId);
 	}
 
-	
+	//------------------------------------------------------------------------
 
 	//获取子游戏的客户端配置
-	public clientConfig(gameType:string|number) : any{
+	public clientConfig(gameType:string|number) : any {
 		return GameConfig[gameType];
 	}
 
-	
-	//游戏是否已下载好
-	public isGameExist(gameKind:string|number) : boolean {
+	//游戏是否存在
+	public isGameExist(gameType:string|number) : boolean {
+		var cfg = this.clientConfig(gameType);
+		if(!cfg) {
+			return false;
+		}
+		if(isEmpty(cfg.viewpath)) {
+			return false;
+		}
 		return true;
+	}
+
+	//游戏是否已下载好
+	public isGameDownloaded(gameKind:string|number) : boolean {
+		var cfg = this.clientConfig(gameKind);
+		if(!cfg) { return false; }
+		if(isEmpty(cfg.viewpath)) { return false; }
+		return !isNil(cc.loader.getRes(cfg.viewpath, cc.Prefab));
 	}
 
 	//获取子游戏热更器
 	public getUpdator(gameKind:string|number) : HotUpdator {
-		if(!GameConfig[gameKind]) {
-			return null;
-		}
-		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean)=>{}, null);
-	}
-
-	//检测是否可进入某游戏
-	public canEnterGame(gameType:string|number) : boolean {
-		var cfg = this.clientConfig(gameType);
-		if(!cfg) {
-			UIManager.toast("敬请期待");
-			return false;
-		}
-		var updator = this.getUpdator(cfg.GameKind);
-		if(updator) {
-			if(updator.isUpdating()) {
-				UIManager.toast("正在更新中，请稍等");
-				return false;
+		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean, reason:number)=>{
+			if(!bSucc) {
+				if(reason==HOT_FAIL_REASON.not_need_update) {
+					GameManager.getInstance().doEnter();
+				} else {
+					var gamename = GameManager.getInstance().clientConfig(gameKind).name;
+					UIManager.openDialog("hotfailenter", gamename+"更新失败，是否依然进入游戏", 2, function(mnuId:number){
+						if(mnuId == 1){
+							GameManager.getInstance().doEnter();
+						} else {
+							//PlatformUtil.exitApp();
+						}
+					});
+				}
 			}
-		}
-		if(!this.isGameExist(cfg.GameKind)) {
-			UIManager.toast("游戏不存在 "+cfg.GameKind);
-			return false;
-		}
-		return LoginMgr.getInstance().checkLogin(true);
+		}, null);
 	}
 
-
-	//退出游戏的唯一出口
-	public quitGame(bForce?:boolean) {
-		gamecomm_request.ExitGameReq({GameID:this.gameId});
-		if(bForce) {
-			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+	public downGame(gameType:string|number) {
+		if(cc.sys.isNative) {
+			var updator = this.getUpdator(gameType);
+			updator.beginUpdate();
 		} else {
-		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+			var cfg = this.clientConfig(gameType);
+			cc.loader.loadRes(cfg.viewpath, cc.Prefab, (err,rsc)=>{
+				GameManager.getInstance().doEnter();
+			});
 		}
-	}
-
-	public setGameId(v:number) {
-		this.gameId = v;
 	}
 
 	public getGameId() : number {
@@ -200,20 +205,52 @@ export default class GameManager extends ModelBase {
 			this.gameModal = null;
             cc.log("unregist game model");
         }
-    }
+	}
+	
+	//退出游戏的唯一出口
+	public quitGame(bForce?:boolean) {
+		gamecomm_request.ExitGameReq({GameID:this.gameId});
+		if(bForce) {
+			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		} else {
+		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
+		}
+	}
 	
 	//进入游戏的唯一入口
-	public enterGame(gameType:number) {
-		// if( !this.canEnterGame(gameType) ) {
-		// 	return;
-		// }
-		cc.log("enterGame: ", gameType)
+	public enterGame(gameId:number) {
+		this.willGame = gameId;
+		var serverData = this.getGameData(gameId);
+		var gameKind = serverData.Info.KindID;
+		cc.log("enterGame: ", gameId, gameKind);
 
-		this.setGameId(gameType);
+		if(!this.isGameExist(gameKind)) {
+			UIManager.toast("敬请期待");
+			return;
+		}
 
-		gamecomm_request.EnterGameReq({
-            GameID: gameType
-        });
+		if(!this.isGameDownloaded(gameKind)) {
+			UIManager.toast("正在下载中，请耐心等待");
+			this.downGame(gameKind);
+			return;
+		}
+
+		var updator = this.getUpdator(gameKind);
+		if(updator.isUpdating()) {
+			UIManager.toast("正在更新中，请耐心等待");
+			return;
+		}
+
+		this.doEnter();
+	}
+
+	public doEnter() {
+		if(this.willGame > 0) {
+			this.gameId = this.willGame;
+			gamecomm_request.EnterGameReq({
+				GameID: this.gameId
+			});
+		}
 	}
 
 	//跳转到游戏场景

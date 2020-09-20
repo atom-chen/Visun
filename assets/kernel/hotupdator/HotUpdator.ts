@@ -61,10 +61,12 @@ export default class HotUpdator {
 
 
 
-	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null) : HotUpdator {
+	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)) : HotUpdator {
 		if(!HotUpdator._all_updators[id]){
 			HotUpdator._all_updators[id] = new HotUpdator(id, manifestUrl, finishCallback, progressCallback);
 		}
+		HotUpdator._all_updators[id]._finishCallback = finishCallback;
+		HotUpdator._all_updators[id]._progressCallback = progressCallback;
 		return HotUpdator._all_updators[id];
 	}
 
@@ -72,8 +74,16 @@ export default class HotUpdator {
 		return HotUpdator._all_updators[id];
 	}
 
+	public setFinishCallback(finishCallback:(bSucc:boolean, reason:number)=>void) {
+		this._finishCallback = finishCallback;
+	}
 
-	private constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null) {
+	public setProgressCallback(progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)) {
+		this._progressCallback = progressCallback;
+	}
+
+
+	private constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null) {
 		this._curState = HOT_STATE.READY;
 		this._id = id;
 		this._manifestUrl = manifestUrl;
@@ -312,7 +322,7 @@ export default class HotUpdator {
 		this.notifyProgress(HOT_STATE.SUCCESS, 100, 100);
 
 		if(this._finishCallback) {
-			this._finishCallback(true);
+			this._finishCallback(true, HOT_FAIL_REASON.successed);
 		}
 
 		cc.audioEngine.stopAll();
@@ -327,11 +337,14 @@ export default class HotUpdator {
 		this._curState = HOT_STATE.FAIL;
 		this.notifyProgress(HOT_STATE.FAIL, 100, 100);
 		if(this._finishCallback) {
-			this._finishCallback(false);
+			this._finishCallback(false, reason);
 		}
 	}
 
 	public isUpdating() : boolean {
+		if(!cc.sys.isNative) {
+			return false;
+		}
 		if(this._am && this._curState!==HOT_STATE.READY && this._curState!==HOT_STATE.SUCCESS && this._curState!==HOT_STATE.FAIL) {
 			return true;
 		}

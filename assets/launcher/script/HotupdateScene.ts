@@ -1,12 +1,13 @@
 //---------------------------------
 // 热更界面
 //---------------------------------
-import { HOT_STATE } from "../../kernel/basic/defines/KernelDefine";
+import { HOT_FAIL_REASON, HOT_STATE } from "../../kernel/basic/defines/KernelDefine";
 import BaseComponent from "../../kernel/view/BaseComponent";
 import HotUpdator from "../../kernel/hotupdator/HotUpdator";
 import SceneManager from "../../kernel/view/SceneManager";
 import KernelUIDefine from "../../kernel/basic/defines/KernelUIDefine";
 import PlatformUtil from "../../kernel/utils/PlatformUtil";
+import UIManager from "../../kernel/view/UIManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -40,17 +41,27 @@ export default class HotupdateScene extends BaseComponent {
 
 		if (!cc.sys.isNative) {
 			this.enterGame();
-		} 
-		else {
+		} else {
+			var self = this;
 			var hotter = HotUpdator.create("main", this.getLocalManifestPath(), 
-			(bSucc:boolean) => {
+			(bSucc:boolean, reason:number) => {
 				if(!bSucc){
-					this.enterGame();
+					if(reason==HOT_FAIL_REASON.not_need_update) {
+						self.enterGame();
+					} else {
+						UIManager.openDialog("hotfailenter", "更新失败，是否依然进入游戏", 2, function(mnuId:number){
+							if(mnuId == 1){
+								self.enterGame();
+							} else {
+								PlatformUtil.exitApp();
+							}
+						});
+					}
 				}
 			}, 
 			(nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
-				this.fileProgress.progress = progressByFile;
-				this.byteProgress.progress = progressByBytes;
+				self.fileProgress.progress = progressByFile;
+				self.byteProgress.progress = progressByBytes;
 			});
 			hotter.beginUpdate();
 		}
