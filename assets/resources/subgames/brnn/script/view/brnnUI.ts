@@ -165,7 +165,7 @@ export default class BrnnUI extends BaseComponent {
             var fromPos = CommonUtil.convertSpaceAR(this.m_ui.deingNode, this.m_ui["handor"+i]);
             for(var j=0; j<5; j++) {
                 nn++;
-                CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.06);
+                CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
             }
         }
     }

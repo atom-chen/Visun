@@ -38,13 +38,22 @@ export default class UIbrttz extends BaseComponent {
 	
 	private isJoined = false;
 	private tmrState = 0;
-    _rule:number[] = [5,10,50,100,500];
+	_rule:number[] = [5,10,50,100,500];
+	
+	private _handors:Array<CpnHandMajhong> = [];
     
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 		CommonUtil.traverseLabels(this.node, this.m_lab);
 		
 		ResPool.load(ViewDefine.CpnChip);
+
+		for(var i=0; i<4; i++) {
+			if(i==3) {
+				this.m_ui["CpnHandMajhong"+i].scale = 0.7;
+			}
+			this._handors[i] = this.m_ui["CpnHandMajhong"+i].getComponent(CpnHandMajhong);
+		}
 		
         this.initUIEvent();
 		this.initNetEvent();
@@ -113,6 +122,24 @@ export default class UIbrttz extends BaseComponent {
 		}
 	}
 
+	private playFapaiAni(bAni:boolean) {
+        var nn = 0;
+        for(var i=0; i<4; i++){
+			this._handors[i].resetCards([0,0]);
+            var fromPos = CommonUtil.convertSpaceAR(this.m_ui.deingNode, this.m_ui["CpnHandMajhong"+i]);
+            for(var j=0; j<2; j++) {
+				nn++;
+				this.m_ui["CpnHandMajhong"+i].children[j].stopAllActions();
+				if(bAni) {
+					CommonUtil.bezierTo3(this.m_ui["CpnHandMajhong"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
+				}
+                else {
+					this.m_ui["CpnHandMajhong"+i].children[j].setPosition(this._handors[i].getPosByIndex(j));
+				}
+            }
+        }
+    }
+
 	private onStateTimer(tmr:BaseTimer) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
 	}
@@ -167,10 +194,9 @@ export default class UIbrttz extends BaseComponent {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setZhunbei();
 		this.clearBets();
 		this.setWinAreas([]);
-		this.m_ui.CpnHandMajhong0.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong1.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong2.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong3.getComponent(CpnHandMajhong).clearCards();
+		if(param && param.Times.WaitTime >= 1) {
+			this.playFapaiAni(true);
+		}
 	}
 
 	private TuitongziStatePlayingResp(param:tuitongzi.ITuitongziStatePlayingResp) {
@@ -179,10 +205,7 @@ export default class UIbrttz extends BaseComponent {
 		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
 
 		this.setWinAreas([]);
-		this.m_ui.CpnHandMajhong0.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong1.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong2.getComponent(CpnHandMajhong).clearCards();
-		this.m_ui.CpnHandMajhong3.getComponent(CpnHandMajhong).clearCards();
+		this.playFapaiAni(false);
 
 		if(param.Times.OutTime <= 1) {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/startbet", false);
