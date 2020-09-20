@@ -156,10 +156,17 @@ console.log("当前平台: ", sysType);
 
 if(sysType == "Darwin") {
 	var projPath = "/users/liuhaopeng/Documents/Visun/";
-	exec("/Applications/CocosCreator/Creator/2.3.4/CocosCreator.app/Contents/MacOS/CocosCreator --path " + projPath + " --build platform=android;debug=true",
+	exec("/Applications/CocosCreator/Creator/2.3.4/CocosCreator.app/Contents/MacOS/CocosCreator --path " + projPath + " --build \"platform=android;debug=true\"",
 	(err, std_out, std_err)=>{
-		console.log("------构建完毕------");
-		console.log(std_err, std_err);
-		genHotPackage();
+		if(err) {
+			console.log("------构建失败------");
+			console.log(std_out);
+			console.log("error: ", std_err);
+		} else {
+			console.log("------构建成功------");
+			console.log(std_out);
+			console.log("error: ", std_err);
+			genHotPackage();
+		}
 	})
 }
