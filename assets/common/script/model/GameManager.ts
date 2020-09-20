@@ -167,15 +167,24 @@ export default class GameManager extends ModelBase {
 		}, null);
 	}
 
+	private downings = {};
 	public downGame(gameKind:number|string) {
+		if(this.isGameDownloaded(gameKind)) { 
+			return; 
+		}
+
 		if(cc.sys.isNative) {
 			var updator = this.getUpdator(gameKind);
 			updator.beginUpdate();
 		} else {
-			var cfg = this.clientConfig(gameKind);
-			cc.loader.loadRes(cfg.viewpath, cc.Prefab, (err,rsc)=>{
-				GameManager.getInstance().doEnter();
-			});
+			if(!this.downings[gameKind]) {
+				this.downings[gameKind] = true;
+				var cfg = this.clientConfig(gameKind);
+				cc.loader.loadRes(cfg.viewpath, cc.Prefab, (err,rsc)=>{
+					GameManager.getInstance().doEnter();
+					GameManager.getInstance().downings[gameKind] = false;
+				});
+			}
 		}
 	}
 
@@ -258,15 +267,11 @@ export default class GameManager extends ModelBase {
 
 	//跳转到游戏场景
 	public enterGameScene(gameKind:number|string) {
-		var cliCfg = this.clientConfig(gameKind);
-		if(!cliCfg) {
-			cc.warn("no client config");
-			return;
-		}
-		if(isEmpty(cliCfg.viewpath)) {
+		if(!this.isGameExist(gameKind)) { 
 			UIManager.toast("敬请期待");
-			return;
+			return; 
 		}
+		var cliCfg = this.clientConfig(gameKind);
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, 0, ()=>{
 			var viewpath = cliCfg.viewpath;
 			UIManager.openPanel(viewpath, null);

@@ -93,11 +93,12 @@ export default class BaseProcessor implements IProcessor {
 		if(this._fire_list.length <= 0) { return; }
 
 		cc.log(this._name, "flush firelist", this._fire_list.length);
-		for(var i=0, len=this._fire_list.length; i<len; i++){
-			this._dispatcher.fire(this._fire_list[i].cmd, this._fire_list[i].data);
+		var cur = this._fire_list[0];
+		this._fire_list.splice(0, 1);
+		if(cur) {
+			this._dispatcher.fire(cur.cmd, cur.data);
 		}
-		this._fire_list.length = 0;
-		this._fire_list = [];
+		this.flushRecvlist();
 	}
 
 	public flushSendlist() : void
