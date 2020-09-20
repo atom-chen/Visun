@@ -1,1 +1,0 @@
-node version_generator.js
