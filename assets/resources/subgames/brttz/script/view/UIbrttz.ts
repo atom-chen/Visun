@@ -320,7 +320,7 @@ export default class UIbrttz extends BaseComponent {
 			chip.y = fromPos.y;
 			chip.runAction(cc.sequence(
 				cc.place(fromPos),
-				cc.delayTime(delaySec + j*0.08),
+				cc.delayTime(delaySec + j*0.03),
 				cc.moveTo(0.25, toPos),
 				cc.callFunc(function(){
 					ResPool.delObject(ViewDefine.CpnChip, this)
