@@ -91,9 +91,28 @@ export default class UIbrttz extends BaseComponent {
 				this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(enterData.Chips);
 			}
 			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + enterData.Inning;
+			this.initChips(enterData.AreaBets);
 		} else {
 			this.m_ui.CpnChipbox2d.getComponent(CpnChipbox2d).setChipValues(this._rule);
 			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：";
+		}
+	}
+	private initChips(AreaBets:Array<number>) {
+		if(isNil(AreaBets)) { return; }
+		for(var i=AreaBets.length-1; i>=0; i--) {
+			var money = CommonUtil.fixRealMoney(AreaBets[i]);
+			var nums = GameUtil.parseChip(money, this._rule);
+			for(var j in nums) {
+				var chip = ResPool.newObject(ViewDefine.CpnChip);
+				chip.getComponent(CpnChip).setChipValue(nums[j], true);
+				this.m_ui.chipLayer.addChild(chip);
+				chip.__areaId = i;
+				chip.stopAllActions();
+				chip.scale = 0.2;
+				var pos = CommonUtil.getRandPos(this.m_ui.chipLayer, chip, this.m_ui["area"+i], margin);
+				chip.x = pos.x;
+				chip.y = pos.y;
+			}
 		}
 	}
 
@@ -266,8 +285,8 @@ export default class UIbrttz extends BaseComponent {
 		for(var i=len-1; i>=0; i--){
 			childs[i].stopAllActions();
 			childs[i].runAction(cc.sequence(
-				cc.delayTime(0.03*(len-i)),
-				cc.moveTo(0.3, cc.v2(pos.x, pos.y)),
+				cc.delayTime(0.03*(len-i)/4),
+				cc.moveTo(0.25, cc.v2(pos.x, pos.y)),
 				cc.callFunc(function(obj){
 					ResPool.delObject(ViewDefine.CpnChip, obj);
 				}, childs[i])
