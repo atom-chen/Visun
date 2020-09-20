@@ -6,11 +6,11 @@
 	"optimizeHotUpdate" : false,
 	"useDebugKeystore" : true,
 	"template" : "link",
-	"apiLevel" : "android-29",
+	"apiLevel" : "android-28",
 	"appABIs" : ["armeabi-v7a"],
 	"md5Cache" : false,
 	"encryptJs" : false,
 	"xxteaKey" : "LIKEvisun1@3",
-	"zipCompressJs" : true,
-	"autoCompile" : true
+	"zipCompressJs" : false,
+	"autoCompile" : false
 }

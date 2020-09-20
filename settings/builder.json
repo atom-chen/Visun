@@ -21,7 +21,7 @@
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
   "optimizeHotUpdate": false,
   "orientation": {
@@ -52,7 +52,7 @@
     "packageName": "org.cocos2d.fingerqp"
   },
   "ios": {
-    "packageName": "org.cocos2d.demo"
+    "packageName": "org.cocos2d.fingerqp"
   },
   "mac": {
     "packageName": "org.cocos2d.demo"

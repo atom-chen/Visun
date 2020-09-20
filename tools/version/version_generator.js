@@ -2,7 +2,9 @@ var fs = require('fs');
 var path = require('path');
 var crypto = require('crypto');
 var hot_cfg = require("./hot_cfg");
-
+const { exec } = require('child_process');
+const os = require('os');
+const { stdout } = require('process');
 
 //接口：遍历目录
 function readDirectory (dir, obj, rootSrc) {
@@ -147,4 +149,17 @@ function genHotPackage() {
 	});
 }
 
-genHotPackage();
+//------------------------------------------------------------------------
+
+var sysType = os.type();
+console.log("当前平台: ", sysType);
+
+if(sysType == "Darwin") {
+	var projPath = "/users/liuhaopeng/Documents/Visun/";
+	exec("/Applications/CocosCreator/Creator/2.3.4/CocosCreator.app/Contents/MacOS/CocosCreator --path " + projPath + " --build platform=android;debug=true",
+	(err, std_out, std_err)=>{
+		console.log("------构建完毕------");
+		console.log(std_err, std_err);
+		genHotPackage();
+	})
+}
