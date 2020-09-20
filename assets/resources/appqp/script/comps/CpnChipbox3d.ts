@@ -4,6 +4,7 @@
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import GameUtil from "../../../../common/script/utils/GameUtil";
+import AudioManager from "../../../../kernel/audio/AudioManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -28,6 +29,7 @@ export default class CpnChipbox3d extends BaseComponent {
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
         this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x;
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
     }
 
     public getChipNode(idx:number) : cc.Node {

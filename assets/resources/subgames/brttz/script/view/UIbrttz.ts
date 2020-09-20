@@ -58,8 +58,6 @@ export default class UIbrttz extends BaseComponent {
         this.initUIEvent();
 		this.initNetEvent();
 		
-		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
-
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 
@@ -151,6 +149,7 @@ export default class UIbrttz extends BaseComponent {
 				this.m_ui["CpnHandMajhong"+i].children[j].stopAllActions();
 				if(bAni) {
 					CommonUtil.bezierTo3(this.m_ui["CpnHandMajhong"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
+					AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
 				}
                 else {
 					this.m_ui["CpnHandMajhong"+i].children[j].setPosition(this._handors[i].getPosByIndex(j));
@@ -159,8 +158,11 @@ export default class UIbrttz extends BaseComponent {
         }
     }
 
-	private onStateTimer(tmr:BaseTimer) {
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		if(bSound) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
 	}
 
 	private TuitongziBetResp(param:tuitongzi.ITuitongziBetResp) {
@@ -221,7 +223,7 @@ export default class UIbrttz extends BaseComponent {
 	private TuitongziStatePlayingResp(param:tuitongzi.ITuitongziStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer, true), true);
 
 		this.setWinAreas([]);
 		this.playFapaiAni(false);

@@ -59,8 +59,6 @@ export default class LonghuUI extends BaseComponent {
         this.initUIEvent();
         this.initNetEvent();
 
-        AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
-
 		this.m_ui.lab_hname.getComponent(cc.Label).string = LoginUser.getInstance().Name;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
@@ -154,8 +152,11 @@ export default class LonghuUI extends BaseComponent {
 		}
 	}
 
-	private onStateTimer(tmr:BaseTimer) {
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		if(bSound) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
 	}
 
 
@@ -257,7 +258,7 @@ export default class LonghuUI extends BaseComponent {
 	private TigerXdragonStatePlayingResp(param:tigerXdragon.ITigerXdragonStatePlayingResp) {
 		this.m_ui.CpnGameState.getComponent(CpnGameState).setXiazhu();
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer, true), true);
 
 		this.setWinAreas([]);
 		this.playFapaiAni(false, this.m_ui.CpnPoker0, this.origin0, this.dst0);

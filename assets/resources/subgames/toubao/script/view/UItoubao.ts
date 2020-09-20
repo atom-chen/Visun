@@ -60,8 +60,6 @@ export default class ToubaoUI extends BaseComponent {
 		this.initNetEvent();
 		this.initUIEvent();
 
-		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
-
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 
@@ -117,8 +115,11 @@ export default class ToubaoUI extends BaseComponent {
 		}
 	}
 
-	private onStateTimer(tmr:BaseTimer) {
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		if(bSound) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
 	}
 
 	private playTipBetting() {
@@ -280,7 +281,7 @@ export default class ToubaoUI extends BaseComponent {
 		}
 		
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, param.Times.WaitTime, new CHandler(this, this.onStateTimer, true), true);
 	}
 
 	//开拍阶段

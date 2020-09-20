@@ -60,8 +60,6 @@ export default class BrnnUI extends BaseComponent {
 		this.initUIEvent();
 		this.clearCards();
 
-		AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
-
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();
 
@@ -183,19 +181,18 @@ export default class BrnnUI extends BaseComponent {
 			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(-1,-1);
             var fromPos = CommonUtil.convertSpaceAR(this.m_ui.deingNode, this.m_ui["handor"+i]);
             for(var j=0; j<5; j++) {
-                nn++;
+				nn++;
+				AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
                 CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
             }
         }
     }
 
-	private onStateTimer(tmr:BaseTimer) {
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
-
-		if(tmr.getRemainTimes() < 3) {
-			AudioManager.getInstance().playEffectAsync("appqp/audios/lastsecond", false);
-		} 
-		AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		if(bSound){
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
 	}
 
 	private BrcowcowBetResp(param:brcowcow.IBrcowcowBetResp) {
@@ -273,7 +270,7 @@ export default class BrnnUI extends BaseComponent {
 		}
 
 		TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, (param.Times as gamecomm.ITimeInfo).WaitTime, new CHandler(this, this.onStateTimer, true), true);
 	}
 
 	private BrcowcowStateOpenResp(param:brcowcow.IBrcowcowStateOpenResp) {

@@ -148,7 +148,8 @@ export default class UIbjle extends BaseComponent {
 	}
 
 	private onStateTimer(tmr:BaseTimer) {
-		//	this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		// this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		// AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
 	}
 
 	private setWinAreas(arr:any) {

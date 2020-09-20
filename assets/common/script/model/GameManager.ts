@@ -10,7 +10,9 @@ import EventCenter from "../../../kernel/basic/event/EventCenter";
 import EventDefine from "../definer/EventDefine";
 import { login } from "../../../../declares/login";
 import { login_request } from "../proto/net_login";
-import { isEmpty } from "../../../kernel/utils/GlobalFuncs";
+import { isEmpty, newHandler } from "../../../kernel/utils/GlobalFuncs";
+import TimerManager from "../../../kernel/basic/timer/TimerManager";
+import AudioManager from "../../../kernel/audio/AudioManager";
 
 
 //游戏管理器
@@ -228,6 +230,9 @@ export default class GameManager extends ModelBase {
 		SceneManager.turn2Scene(KernelUIDefine.GameScene.name, ()=>{
 			var viewpath = cliCfg.viewpath;
 			UIManager.openPanel(viewpath, null);
+			TimerManager.delayFrame(5, newHandler(function(){
+				AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
+			}, this));
 		});
 	}
 

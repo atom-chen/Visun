@@ -25,6 +25,7 @@ import GameUtil from "../../../../../common/script/utils/GameUtil";
 import CpnShandian from "../../../../appqp/script/comps/CpnShandian";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 const MAX_SOLDIER = 5;
@@ -362,6 +363,7 @@ export default class zjhUI extends BaseComponent {
                     for(var j=0; j<3; j++) {
                         nn++;
                         CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                        AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
                     }
                 } else {
                     this._handors[i].resetCards(null);

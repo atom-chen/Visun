@@ -100,8 +100,11 @@ export default class UIRedbalck extends BaseComponent {
         }
     }
 
-	private onStateTimer(tmr:BaseTimer) {
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
 		this.m_lab.lab_cd.string = tmr.getRemainTimes().toString();
+		if(bSound) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
 	}
 	
 	private RedblackBetResp(param:redblack.IRedblackBetResp) {

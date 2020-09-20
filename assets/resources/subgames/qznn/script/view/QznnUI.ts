@@ -23,6 +23,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 const MAX_SOLDIER = 5;
@@ -67,7 +68,7 @@ export default class QznnUI extends BaseComponent {
 		this.QzcowcowStateFreeResp(null);
 
 		this.QzcowcowSceneResp(QznnMgr.getInstance().getEnterData());
-		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
+        ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
 	}
 
 	//玩家的UI位置
@@ -125,13 +126,16 @@ export default class QznnUI extends BaseComponent {
 	}
 	
 
-	private onStateTimer(tmr:BaseTimer) {
-		this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+	private onStateTimer(tmr:BaseTimer, bSound:boolean=false) {
+        this.m_ui.lab_cd.getComponent(cc.Label).string = tmr.getRemainTimes().toString();
+        if(bSound) {
+			AudioManager.getInstance().playEffectAsync("appqp/audios/countdown", false);
+		}
     }
     
-    private resetCD(WaitTime) {
+    private resetCD(WaitTime:number, bSound:boolean=false) {
         TimerManager.delTimer(this.tmrState);
-		this.tmrState = TimerManager.loopSecond(1, WaitTime, new CHandler(this, this.onStateTimer), true);
+		this.tmrState = TimerManager.loopSecond(1, WaitTime, new CHandler(this, this.onStateTimer, bSound), true);
 	}
 	
 	private playFapaiAni() {
@@ -143,6 +147,7 @@ export default class QznnUI extends BaseComponent {
                 for(var j=0; j<CARD_CNT; j++) {
                     nn++;
                     CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                    AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
                 }
             }
         }
@@ -262,7 +267,7 @@ export default class QznnUI extends BaseComponent {
 		this.m_ui.grabNode.active = true;
         this.m_ui.callNode.active = false;
         if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
+            this.resetCD(param.Times.WaitTime, true);
         }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
@@ -293,7 +298,7 @@ export default class QznnUI extends BaseComponent {
 		this.m_ui.grabNode.active = false;
         this.m_ui.callNode.active = true;
         if(param && param.Times) {
-            this.resetCD(param.Times.WaitTime);
+            this.resetCD(param.Times.WaitTime, true);
         }
         UIManager.closeWindow(ViewDefine.UISearchDesk);
 	}
