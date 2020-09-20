@@ -21,7 +21,6 @@ export enum GameKindEnum {
 	//
 	Paijiu		= 10900,		//牌九
 	Redpacket	= 10500,		//抢红包
-	BirdBeast	= 10600,		//飞禽走兽
 	Redblack	= 10700,		//红黑
 	BrJinhua 	= 10200,		//百人金花
 	
@@ -31,7 +30,6 @@ export enum GameKindEnum {
 	Qzpaijiu	= 20700,		//抢庄牌九
 	Suoha		= 20800,		//梭哈
 	Paodekuai	= 20900,		//跑得快
-	Erba		= 21200,		//二八杠
 	Tuitongzi	= 21300,		//推筒子
 	Jszjh		= 21400,		//极速炸金花
 	K4zqznn		= 21500,		//看四张抢庄牛牛

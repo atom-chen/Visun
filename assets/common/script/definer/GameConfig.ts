@@ -181,14 +181,6 @@ var GameConfig = {
 		orderv: 1
 	},
 
-	// [GameKindEnum.Erba] : {
-	// 	GameKind: GameKindEnum.Erba,
-	// 	name: "二八杠",
-	// 	icon: "lobby/imgs/gameico2/ico_erba",
-	// 	sdir: "erba",
-	// 	viewpath: ViewDefine.UIerba,
-	// 	orderv: 1
-	// },
 	// [GameKindEnum.Buyu] : {
 	// 	GameKind: GameKindEnum.Buyu,
 	// 	name: "捕鱼",
@@ -196,14 +188,6 @@ var GameConfig = {
 	// 	sdir: "buyu",
 	// 	viewpath: ViewDefine.UIbuyu,
 	// 	orderv: 3
-	// },
-	// [GameKindEnum.BirdBeast] : {
-	// 	GameKind: GameKindEnum.BirdBeast,
-	// 	name: "飞禽走兽",
-	// 	icon: "lobby/imgs/gameico2/ico_fqzs",
-	// 	sdir: "fqzs",
-	// 	viewpath: ViewDefine.UIfqzs,
-	// 	orderv: 2
 	// },
 
 	// [GameKindEnum.RPG] : {

@@ -26,13 +26,11 @@ export default class ViewDefine {
 	//subgames
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
-	public static UIfqzs = "subgames/fqzs/prefabs/UIfqzs";
 	public static UIzjh = "subgames/zjh/prefabs/UIzjh";
 	public static UIbjle = "subgames/bjle/prefabs/UIbjle";
 	public static UIbuyu = "subgames/buyu/prefabs/UIbuyu";
 	public static UItexas = "subgames/dezhou/prefabs/UItexas";
 	public static UIdian21 = "subgames/dian21/prefabs/UIdian21";
-	public static UIerba = "subgames/erba/prefabs/UIerba";
 	public static UIhonghei = "subgames/honhei/prefabs/UIHonghei";
 	public static UIRedblack = "subgames/redblack/prefabs/UIRedblack";
 	public static UIjskb = "subgames/jskb/prefabs/UIjskb";
