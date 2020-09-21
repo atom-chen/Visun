@@ -24,6 +24,7 @@ import Preloader from "../../../../kernel/utils/Preloader";
 import CpnWinLoseMoney from "../../../appqp/script/comps/CpnWinLoseMoney";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import AudioManager from "../../../../kernel/audio/AudioManager";
+import CpnPaixing from "../../../appqp/script/comps/CpnPaixing";
 
 
 const MAX_SOLDIER = 5;
@@ -40,6 +41,7 @@ export default class UItbnn extends BaseComponent {
     private _pnodes:Array<cc.Node> = [];
     private _playerCpns:Array<CpnPlayer1> = [];
     private _handors:Array<CpnHandcard2> = [];
+    private _pxCpns:Array<CpnPaixing> = [];
     private _winloses:Array<CpnWinLoseMoney> = [];
     private tmrState = 0;
     private _betBeiList = [1, 2, 3, 4, 5];
@@ -53,6 +55,7 @@ export default class UItbnn extends BaseComponent {
             this._playerCpns.push(nd.getChildByName("CpnPlayer1").getComponent(CpnPlayer1));
             this._handors.push(nd.getChildByName("CpnHandcard2").getComponent(CpnHandcard2));
             this._winloses.push(nd.getChildByName("CpnWinLoseMoney").getComponent(CpnWinLoseMoney));
+            this._pxCpns.push(nd.getChildByName("CpnPaixing1").getComponent(CpnPaixing));
         }
 
         this.refreshBtns();
@@ -104,6 +107,7 @@ export default class UItbnn extends BaseComponent {
             this._playerCpns[idx].setHeadImg((man.MyInfo as gamecomm.IPlayerInfo).FaceID);
             this._handors[idx].resetCards(man.Cards && man.Cards.Cards);
             this._handors[idx].playOpen(false);
+            this._pxCpns[idx].setCardType(-1,-1);
         }
     }
 
@@ -138,6 +142,7 @@ export default class UItbnn extends BaseComponent {
         for(var i=0; i<MAX_SOLDIER; i++){
             if(this.getPlayerByIndex(i)) {
                 this._handors[i].resetCards([0,0,0,0,0]);
+                this._pxCpns[i].setCardType(-1,-1);
                 if(!isNil(this.getPlayerByIndex(i))) {
                     var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
                     for(var j=0; j<CARD_CNT; j++) {
@@ -191,6 +196,7 @@ export default class UItbnn extends BaseComponent {
         
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._handors[i].resetCards(null);
+            this._pxCpns[i].setCardType(-1,-1);
             this._winloses[i].stopPlay();
             this._pnodes[i].getChildByName("callNode").active = false;
         }
@@ -253,8 +259,10 @@ export default class UItbnn extends BaseComponent {
             for(var i in param.Infos) {
                 var pos = this.playerIdx(param.Infos[i].MyInfo.UserID);
                 if(pos >= 0) {
-                    this._handors[pos].resetCards(param.Infos[i].Cards && param.Infos[i].Cards.Cards);
+                    var card:gamecomm.ICardInfo = param.Infos[i].Cards;
+                    this._handors[pos].resetCards(card && card.Cards);
                     this._handors[pos].playOpen(true);
+                    this._pxCpns[i].setCardType(card && card.CardType, card && card.CardValue);
                 }
             }
         }
