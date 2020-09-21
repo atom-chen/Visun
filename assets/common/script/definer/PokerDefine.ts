@@ -56,6 +56,24 @@ export enum PokerCode {
 	FK_A = 0x01
 }
 
+export enum PokerValueEnum {
+	VALUE_A = 0x01,
+	VALUE_2 = 0x02,
+	VALUE_3 = 0x03,
+	VALUE_4 = 0x04,
+	VALUE_5 = 0x05,
+	VALUE_6 = 0x06,
+	VALUE_7 = 0x07,
+	VALUE_8 = 0x08,
+	VALUE_9 = 0x09,
+	VALUE_10 = 0x0A,
+	VALUE_J = 0x0B,
+	VALUE_Q = 0x0C,
+	VALUE_K = 0x0D,
+	VALUE_QUEEN = 0x0E,
+	VALUE_KING = 0x0F,
+}
+
 //花色
 export enum PokerColor {
 	HT = 3,
@@ -133,4 +151,12 @@ export function pokerName(code:PokerCode) : string
 	var strColor:string = pokerColorName(code);
 	var strValue:string = pokerValueName(code);
 	return strColor + strValue;
+}
+
+export function pokersName(codes:Array<number>|Uint8Array) : string {
+	var name = "";
+	for(var i in codes) {
+		name += pokerName(codes[i]) + " ";
+	}
+	return name;
 }

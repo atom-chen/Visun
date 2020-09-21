@@ -35,13 +35,28 @@ export default class CpnPaixing extends cc.Component {
             
             return "牛"+this.pv;
         }
+        else if(this.gameType == GameKindEnum.Zhajinhua) {
+            if(this.pt==0) {
+                return "散牌";
+            } else if(this.pt==1) {
+                return "对子";
+            } else if(this.pt==2) {
+                return "顺子";
+            } else if(this.pt==3) {
+                return "金花";
+            } else if(this.pt==4) {
+                return "顺金";
+            } else if(this.pt==5) {
+                return "豹子";
+            }
+        }
         return "未知牌型"
     }
 
     setCardType(tp:number, v:number) {
         this.pt = tp;
         this.pv = v;
-        if(isNil(this.pt) || isNil(this.pv) || this.pt==-1 || this.pv===-1) {
+        if( (isNil(this.pt) && isNil(this.pv)) || (this.pt==-1 && this.pv===-1) ) {
             this.node.active = false;
             return;
         }

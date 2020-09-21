@@ -1,5 +1,3 @@
-import { gamecomm } from "../../../../../../declares/gamecomm";
-
 export enum ZjhGameState {
 	ready,
 	started,
