@@ -42,8 +42,10 @@ var NetHandlers = {
             GameManager.getInstance().enterGame(param.InGameID);
         } else {
             if(SceneManager.curSceneName == KernelUIDefine.GameScene.name) {
-                UIManager.openDialog("dlg_game_miss", "游戏已解散", 1, function(){
-                    GameManager.getInstance().quitGame(true);
+                UIManager.openDialog("dlg_game_miss", "游戏已解散", 2, function(mnuId:number){
+                    if(mnuId == 1) {
+                        GameManager.getInstance().quitGame(true);
+                    }
                 });
             }
         }
