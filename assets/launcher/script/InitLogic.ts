@@ -55,6 +55,11 @@ export default class InitLogic {
                 this.tmrId = TimerManager.delaySecond(1, newHandler(function(tmr){}, this));
             }
         }
+        
+        //测试重连用，正式版须移除
+        if(event.keyCode===cc.macro.KEY.f1) {
+            EventCenter.getInstance().fire(KernelEvent.keyboard, event.keyCode);
+        }
 	}
 	
 }

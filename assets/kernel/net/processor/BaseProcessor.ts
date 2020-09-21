@@ -24,6 +24,12 @@ export default class BaseProcessor implements IProcessor {
 		this._name = name;
 		EventCenter.getInstance().listen(KernelEvent.EnterBackground, this.onEnterBackground, this);
 		EventCenter.getInstance().listen(KernelEvent.EnterForground, this.onEnterForground, this);
+		EventCenter.getInstance().listen(KernelEvent.keyboard, this.testReconnect, this);
+	}
+
+	private testReconnect(v) {
+		cc.log("测试断线重连");
+		this._channel.force_reconnect();
 	}
 
 	private onEnterBackground() {
@@ -32,7 +38,7 @@ export default class BaseProcessor implements IProcessor {
 
 	private onEnterForground(passedTime:number) {
 		this.setPaused(false);
-		
+
 		if(passedTime >= 2000 && !this._keepConnOnBackground) {
 			this._channel.force_reconnect();
 		} else {
