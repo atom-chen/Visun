@@ -33,7 +33,7 @@ export default class ConfirmDlg extends BaseComponent {
 	public setViewData(dlgType:number, callback:(menuId:number)=>void, content:string, title:string|null=null, okTxt:string|null=null, cancelTxt:string|null=null) 
 	{
 		this._callback = callback;
-		this.m_ui.labelContent.getComponent(cc.Label).string = content;
+		this.m_ui.labContent.getComponent(cc.RichText).string = content;
 		if(title){ this.m_ui.labelTitle.getComponent(cc.Label).string = title; }
 		if(dlgType == 1) {
 			this.m_ui.btn_no.active = false;
