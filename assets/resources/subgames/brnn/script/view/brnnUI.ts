@@ -183,7 +183,7 @@ export default class BrnnUI extends BaseComponent {
             for(var j=0; j<5; j++) {
 				nn++;
 				CommonUtil.bezierTo3(this.m_ui["handor"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
-				TimerManager.delaySecond(nn*0.05, newHandler(function(){
+				TimerManager.delaySecond(nn*0.04, newHandler(function(){
 					AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
 				}, this));
             }
