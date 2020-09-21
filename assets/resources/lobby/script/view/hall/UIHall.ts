@@ -18,6 +18,7 @@ import { login } from "../../../../../../declares/login";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import NoticeMgr from "../../../../../common/script/model/NoticeMgr";
+import EventDefine from "../../../../../common/script/definer/EventDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -51,6 +52,19 @@ export default class UIHall extends BaseComponent {
 	private initNetEvents() {
 		EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
 		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
+		EventCenter.getInstance().listen(EventDefine.down_progress, this.onDownProgress, this);
+	}
+
+	private onDownProgress(gameKind:number|string, curCnt:number, totalCnt:number) {
+		var chalds = this.m_ui.content.children;
+		for(var i in chalds) {
+			if(chalds[i]["game_kind"] == gameKind) {
+				chalds[i].getChildByName("labDown").active = true;
+				var nn = GameManager.getInstance().getDownProgress(gameKind) * 100;
+				chalds[i].getChildByName("labDown").getComponent(cc.Label).string = "下载中："+parseInt(nn.toString())+"/"+100;
+				break;
+			}
+		}
 	}
 
 	private refleshGameList() {
@@ -63,6 +77,7 @@ export default class UIHall extends BaseComponent {
 			var arr = gameList[KindID];
 
 			var bton = cc.instantiate(this.gameBtn);
+			bton["game_kind"] = KindID;
 
 			if(arr.length == 1) {
 				bton["gameData"] = arr[0];
@@ -84,6 +99,8 @@ export default class UIHall extends BaseComponent {
 				this.m_ui.content.addChild(bton);
 				this.refreshGameButton(bton, arr[0]);
 			}
+
+			bton.getChildByName("labDown").active = GameManager.getInstance().isDowning(KindID);
 		}
 
 		var waitlist = [];
@@ -108,6 +125,8 @@ export default class UIHall extends BaseComponent {
 			var cfg = waitlist[aaa];
 			var testBtn:any = cc.instantiate(this.gameBtn);
 			this.m_ui.content.addChild(testBtn);
+			testBtn["game_kind"] = cfg.GameKind;
+			testBtn.getChildByName("labDown").active = GameManager.getInstance().isDowning(cfg.GameKind);
 			var tbl : any = {};
 			CommonUtil.traverseNodes(testBtn, tbl);
 			Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);

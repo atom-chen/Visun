@@ -59,6 +59,9 @@ export default class HotUpdator {
 	private _is_checking:boolean = false;
 	private _checkListener:Function = null;
 
+	private _progressCur:number = 0;
+	private _progressTotal:number = 0;
+
 
 
 	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)) : HotUpdator {
@@ -216,10 +219,20 @@ export default class HotUpdator {
 
 
 
-	protected notifyProgress(nowState:HOT_STATE, progressByFile:number, progressByBytes:number) {
-		cc.log("...热更进度...", this._curState, nowState, progressByFile, progressByBytes);
+	protected notifyProgress(nowState:HOT_STATE, curCnt:number, totalCnt:number) {
+		cc.log("...热更进度...", this._curState, nowState, curCnt, totalCnt);
+		this._progressCur = curCnt;
+		this._progressTotal = totalCnt;
 		if(this._progressCallback) {
-			this._progressCallback(this._curState, progressByFile, progressByBytes);
+			this._progressCallback(this._curState, curCnt, totalCnt);
+		}
+	}
+
+	public getProgress() : number {
+		if(this._progressTotal==0) {
+			return 0;
+		} else {
+			return this._progressCur/this._progressTotal;
 		}
 	}
 
@@ -232,14 +245,11 @@ export default class HotUpdator {
 		{
 			//@ts-ignore
 			case jsb.EventAssetsManager.UPDATE_PROGRESSION:
+				var msg = event.getMessage();
+				if (msg) { cc.log('Updated file: ' + msg); }
 				cc.log("progress by file: " + event.getDownloadedFiles() + ' / ' + event.getTotalFiles());
 				cc.log("progress by byte: " + event.getDownloadedBytes() + ' / ' + event.getTotalBytes());
-				var msg = event.getMessage();
-				if (msg) {
-					cc.log('Updated file: ' + msg);
-					cc.log(event.getPercent()/100 + '% : ' + msg);
-				}
-				this.notifyProgress(HOT_STATE.UPDATING, event.getPercentByFile(), event.getPercent());
+				this.notifyProgress(HOT_STATE.UPDATING, event.getDownloadedFiles(), event.getTotalFiles());
 				break;
 			//@ts-ignore
 			case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
@@ -335,7 +345,11 @@ export default class HotUpdator {
 			this._am.setEventCallback(null);
 		}
 		this._curState = HOT_STATE.FAIL;
-		this.notifyProgress(HOT_STATE.FAIL, 100, 100);
+		if(reason == HOT_FAIL_REASON.not_need_update) {
+			this.notifyProgress(HOT_STATE.FAIL, 100, 100);
+		} else {
+			this.notifyProgress(HOT_STATE.FAIL, 0, 0);
+		}
 		if(this._finishCallback) {
 			this._finishCallback(false, reason);
 		}

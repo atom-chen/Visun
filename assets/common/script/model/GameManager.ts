@@ -13,7 +13,7 @@ import { login_request } from "../proto/net_login";
 import { isEmpty, isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import AudioManager from "../../../kernel/audio/AudioManager";
-import { HOT_FAIL_REASON } from "../../../kernel/basic/defines/KernelDefine";
+import { HOT_FAIL_REASON, HOT_STATE } from "../../../kernel/basic/defines/KernelDefine";
 import PlatformUtil from "../../../kernel/utils/PlatformUtil";
 
 
@@ -149,7 +149,8 @@ export default class GameManager extends ModelBase {
 
 	//获取子游戏热更器
 	public getUpdator(gameKind:number|string) : HotUpdator {
-		return HotUpdator.create(gameKind.toString(), "", (bSucc:boolean, reason:number)=>{
+		return HotUpdator.create(gameKind.toString(), "", 
+		(bSucc:boolean, reason:number)=>{
 			cc.log("热更完成回调：", bSucc, reason);
 			if(!bSucc) {
 				if(reason==HOT_FAIL_REASON.not_need_update) {
@@ -165,10 +166,33 @@ export default class GameManager extends ModelBase {
 					});
 				}
 			}
-		}, null);
+		},
+		(nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>{
+			cc.log(gameKind, nowState, progressByFile, progressByBytes);
+			EventCenter.getInstance().fire(EventDefine.down_progress, gameKind, progressByFile, progressByBytes);
+		});
+	}
+
+	getDownProgress(gameKind:number|string) : number {
+		if(cc.sys.isNative) {
+			var updator = HotUpdator.getUpdator(gameKind.toString());
+			return updator.getProgress();
+		} else {
+			return this.downProgress[gameKind] || 0;
+		}
+	}
+
+	isDowning(gameKind:number|string) : boolean {
+		if(cc.sys.isNative) {
+			var updator = HotUpdator.getUpdator(gameKind.toString());
+			return updator.isUpdating();
+		} else {
+			return this.downings[gameKind] === true;
+		}
 	}
 
 	private downings = {};
+	private downProgress = {};
 	public downGame(gameKind:number|string) {
 		if(this.isGameDownloaded(gameKind)) { 
 			return; 
@@ -180,8 +204,16 @@ export default class GameManager extends ModelBase {
 		} else {
 			if(!this.downings[gameKind]) {
 				this.downings[gameKind] = true;
+				this.downProgress[gameKind] = 0;
 				var cfg = this.clientConfig(gameKind);
-				cc.loader.loadRes(cfg.viewpath, cc.Prefab, (err,rsc)=>{
+				cc.loader.loadRes(cfg.viewpath, cc.Prefab, (curCnt, totalCnt)=>{
+					if(totalCnt==0) {
+						this.downProgress[gameKind] = 0;
+					} else {
+						this.downProgress[gameKind] = curCnt/totalCnt;
+					}
+					EventCenter.getInstance().fire(EventDefine.down_progress, gameKind, curCnt, totalCnt);
+				}, (err,rsc)=>{
 					GameManager.getInstance().doEnter();
 					GameManager.getInstance().downings[gameKind] = false;
 				});
@@ -243,7 +275,7 @@ export default class GameManager extends ModelBase {
 		}
 
 		if(!this.isGameDownloaded(gameKind)) {
-			UIManager.toast("正在下载中，请耐心等待");
+			cc.log("正在下载中，请耐心等待");
 			this.downGame(gameKind);
 			return;
 		}
