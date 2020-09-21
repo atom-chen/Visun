@@ -148,7 +148,9 @@ export default class UItbnn extends BaseComponent {
                     for(var j=0; j<CARD_CNT; j++) {
                         nn++;
                         CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
-                        AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
+                        TimerManager.delaySecond(nn*0.06, newHandler(function(){
+                            AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
+                        }, this));
                     }
                 }
             }

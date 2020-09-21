@@ -19,7 +19,7 @@ import BrttzMgr from "../model/BrttzMgr";
 import LoginUser from "../../../../../common/script/model/LoginUser";
 import ProcessorMgr from "../../../../../kernel/net/processor/ProcessorMgr";
 import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
-import { isNil, isEmpty } from "../../../../../kernel/utils/GlobalFuncs";
+import { isNil, isEmpty, newHandler } from "../../../../../kernel/utils/GlobalFuncs";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import CpnHandMajhong from "../../../../appqp/script/comps/CpnHandMajhong";
 import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
@@ -149,7 +149,9 @@ export default class UIbrttz extends BaseComponent {
 				this.m_ui["CpnHandMajhong"+i].children[j].stopAllActions();
 				if(bAni) {
 					CommonUtil.bezierTo3(this.m_ui["CpnHandMajhong"+i].children[j], fromPos, this._handors[i].getPosByIndex(j), 0.4, nn*0.03);
-					AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
+					TimerManager.delaySecond(nn*0.06, newHandler(function(){
+						AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
+					}, this));
 				}
                 else {
 					this.m_ui["CpnHandMajhong"+i].children[j].setPosition(this._handors[i].getPosByIndex(j));
