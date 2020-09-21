@@ -14,7 +14,6 @@ import { isEmpty, isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import AudioManager from "../../../kernel/audio/AudioManager";
 import { HOT_FAIL_REASON, HOT_STATE } from "../../../kernel/basic/defines/KernelDefine";
-import PlatformUtil from "../../../kernel/utils/PlatformUtil";
 
 
 //游戏管理器
@@ -176,6 +175,7 @@ export default class GameManager extends ModelBase {
 	getDownProgress(gameKind:number|string) : number {
 		if(cc.sys.isNative) {
 			var updator = HotUpdator.getUpdator(gameKind.toString());
+			if(!updator){ return 0; }
 			return updator.getProgress();
 		} else {
 			return this.downProgress[gameKind] || 0;
@@ -185,6 +185,7 @@ export default class GameManager extends ModelBase {
 	isDowning(gameKind:number|string) : boolean {
 		if(cc.sys.isNative) {
 			var updator = HotUpdator.getUpdator(gameKind.toString());
+			if(!updator){ return false; }
 			return updator.isUpdating();
 		} else {
 			return this.downings[gameKind] === true;
