@@ -114,7 +114,7 @@ export default class BaseProcessor implements IProcessor {
 		return this._fire_list.length;
 	}
 
-	setPaused(bPause:boolean) : void
+	public setPaused(bPause:boolean) : void
 	{
 		this._paused = bPause;
 		this.flushRecvlist();
