@@ -15,10 +15,7 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class HotupdateScene extends BaseComponent {
 	@property(cc.ProgressBar)
-	byteProgress: cc.ProgressBar = null;
-
-	@property(cc.ProgressBar)
-	fileProgress: cc.ProgressBar = null;
+	barProg: cc.ProgressBar = null;
 
 	@property({
 		type: cc.Asset
@@ -36,8 +33,7 @@ export default class HotupdateScene extends BaseComponent {
         KernelUIDefine.UIToast = "launcher/prefabs/UIToast";
 		KernelUIDefine.UILoading = "launcher/scene/UILoading";
 		
-		this.fileProgress.progress = 0;
-		this.byteProgress.progress = 0;
+		this.barProg.progress = 0;
 
 		if (!cc.sys.isNative) {
 			this.enterGame();
@@ -59,9 +55,12 @@ export default class HotupdateScene extends BaseComponent {
 					}
 				}
 			}, 
-			(nowState:HOT_STATE, progressByFile:number, progressByBytes:number) => {
-				self.fileProgress.progress = progressByFile;
-				self.byteProgress.progress = progressByBytes;
+			(nowState:HOT_STATE, curCnt:number, totalCnt:number) => {
+				if(totalCnt == 0) {
+					this.barProg.progress = 0;
+				} else {
+					self.barProg.progress = curCnt/totalCnt;
+				}
 			});
 			hotter.beginUpdate();
 		}
