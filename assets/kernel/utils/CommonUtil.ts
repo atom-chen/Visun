@@ -101,6 +101,7 @@ export default class CommonUtil {
 
 	//给节点添加点击事件
 	public static addClickEvent(target:cc.Node, callback:Function, thisObj?:any, arg?:any) {
+		if(isNil(target)) { return; }
 		target.on(cc.Node.EventType.TOUCH_END, callback, thisObj);
 	}
 

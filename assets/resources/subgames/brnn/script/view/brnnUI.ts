@@ -28,6 +28,7 @@ import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -55,6 +56,8 @@ export default class BrnnUI extends BaseComponent {
 			this.m_ui["handor"+i].scale = 0.7;
 			this._handors[i] = this.m_ui["handor"+i].getComponent(CpnHandcard2);
 		}
+
+		this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.BrCowCow, GameManager.getInstance().getGameId());
 
 		this.initNetEvent();
 		this.initUIEvent();
