@@ -483,7 +483,8 @@ export default class QznnUI extends BaseComponent {
         var bei = this._grabBeiList[idx];
 		qzcowcow_request.QzcowcowCallReq({
 			Multiple: bei
-		});
+        });
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 	}
 
 	private sendBet(idx:number) {
@@ -491,7 +492,8 @@ export default class QznnUI extends BaseComponent {
 		qzcowcow_request.QzcowcowBetReq({
 			BetArea:0,
 			BetScore:bei
-		});
+        });
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 	}
 	
 }

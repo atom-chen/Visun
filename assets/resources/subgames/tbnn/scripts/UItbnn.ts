@@ -378,6 +378,7 @@ export default class UItbnn extends BaseComponent {
     }
     sendBet(idx:number) {
         tbcowcow_request.TbcowcowBetReq({BetArea:0, BetScore:this._betBeiList[idx]});
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
     }
 
 }

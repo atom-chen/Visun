@@ -692,14 +692,17 @@ export default class zjhUI extends BaseComponent {
         
         CommonUtil.addClickEvent(this.m_ui.btn_giveup, function(){ 
             zhajinhua_request.ZhajinhuaGiveupReq({});
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_look, function(){ 
             zhajinhua_request.ZhajinhuaLookReq({});
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_follow, function(){ 
             zhajinhua_request.ZhajinhuaFollowReq({});
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_add, function(){ 
@@ -712,6 +715,7 @@ export default class zjhUI extends BaseComponent {
                 zhajinhua_request.ZhajinhuaRaiseReq({Score:CommonUtil.toServerMoney(value)});
                 return true;
             }, this));
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_compare, function(){ 
@@ -721,16 +725,19 @@ export default class zjhUI extends BaseComponent {
             }
             zhajinhua_request.ZhajinhuaCompareReq({HitId:this._bipaiTarget});
             this.selectBipaiTarget(-1);
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){
             zhajinhua_request.ZhajinhuaReadyReq({IsReady:true});
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
 
         CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
             gamecomm_request.ChangeTableReq({
                 GameID : GameManager.getInstance().getGameId()
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
 
         CommonUtil.addClickEvent(this.m_ui.p0.getChildByName("CpnPlayer"), function(){ this.selectBipaiTarget(0); }, this);

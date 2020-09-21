@@ -19,6 +19,7 @@ import ChannelDefine from "../../../../../common/script/definer/ChannelDefine";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 const MAX_SOLDIER = 3;
 
@@ -408,36 +409,43 @@ export default class DdzUI extends BaseComponent {
             landLords_request.LandLordsOutCardReq({
                 Cards: this._myHandor.getSelectedCards(),
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_pass, function(){ 
             landLords_request.LandLordsOutCardReq({
                 Cards: [],
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score0, function(){ 
             landLords_request.LandLordsCallReq({
                 Score:0
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score1, function(){ 
             landLords_request.LandLordsCallReq({
                 Score:1
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score2, function(){ 
             landLords_request.LandLordsCallReq({
                 Score:2
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_score3, function(){ 
             landLords_request.LandLordsCallReq({
                 Score:3
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_double, function(){ 
             landLords_request.LandLordsDoubleReq({
                 Number:2
             });
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
         }, this);
         CommonUtil.addClickEvent(this.m_ui.btn_auto, function(){ 
             var hero = DDzMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);

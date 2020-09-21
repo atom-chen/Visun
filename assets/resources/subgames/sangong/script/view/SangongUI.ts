@@ -492,7 +492,8 @@ export default class SangongUI extends BaseComponent {
 		var want = idx > 0;
 		sangong_request.SangongHostReq({
 			IsWant: want
-		});
+        });
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 	}
 
 	private sendBet(idx:number) {
@@ -500,7 +501,8 @@ export default class SangongUI extends BaseComponent {
 		sangong_request.SangongBetReq({
 			BetArea:0,
 			BetScore:bei
-		});
+        });
+        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 	}
 	
 }
