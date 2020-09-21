@@ -5,6 +5,8 @@ import IChannel from "./IChannel";
 import IProcessor from "../processor/IProcessor";
 import { ConnState } from "../../basic/defines/KernelDefine";
 import CHandler from "../../basic/datastruct/CHandler";
+import KernelEvent from "../../basic/defines/KernelEvent";
+import EventCenter from "../../basic/event/EventCenter";
 
 
 export default class HttpChannel implements IChannel {
@@ -15,6 +17,11 @@ export default class HttpChannel implements IChannel {
     constructor(name:string) {
         this._name = name;
     }
+
+    notifyState() : void
+	{
+		EventCenter.getInstance().fire(KernelEvent.NET_STATE, this);
+	}
 
     public setProcessor(porcessor: IProcessor): void 
     {

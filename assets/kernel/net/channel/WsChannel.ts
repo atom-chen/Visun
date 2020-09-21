@@ -28,22 +28,9 @@ export default class WsChannel implements IChannel {
 
 	constructor(name:string) {
 		this._name = name;
-		EventCenter.getInstance().listen(cc.game.EVENT_HIDE, function () {
-			this.setPaused(true);
-		}, this);
-		EventCenter.getInstance().listen(cc.game.EVENT_SHOW, function (passedTime) {
-			this.setPaused(false);
-			if(passedTime >= 2000) {
-				this.force_reconnect();
-			} else {
-				if(this._curState===ConnState.connectfail || this._curState === ConnState.reconnectfail) {
-					this.notifyState();
-				}
-			}
-		}, this);
 	}
 
-	private notifyState() : void
+	notifyState() : void
 	{
 		EventCenter.getInstance().fire(KernelEvent.NET_STATE, this);
 	}
@@ -61,7 +48,8 @@ export default class WsChannel implements IChannel {
 
 		this._reconnectTimes = MAX_RECONNECT;
 
-		this._dataProcessor.setPaused(false);
+		this._dataProcessor.flushRecvlist();
+		this._dataProcessor.flushSendlist();
 
 		var onSucc = this._onConnSuccess;
 		this._onConnSuccess = null;
@@ -178,6 +166,7 @@ export default class WsChannel implements IChannel {
 	}
 
 	public disconnect() {
+		cc.log("主动断开网络连接");
 		this._reconnectTimes = 0;
 		this.stopHeartBeat();
 		this.clear_ws();
@@ -316,15 +305,6 @@ export default class WsChannel implements IChannel {
 	{
 		TimerManager.delTimer(this._heartTmr);
 		this._heartTmr = null;
-	}
-
-
-
-	private setPaused(bPause:boolean) : void
-	{
-		if(this._dataProcessor) {
-			this._dataProcessor.setPaused(bPause);
-		}
 	}
 
 	public getProcessor() : IProcessor

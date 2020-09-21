@@ -25,4 +25,5 @@ export default interface IChannel {
     destroy() : void;
     getName() : string;
     getProcessor() : IProcessor;
+    notifyState() : void;
 }

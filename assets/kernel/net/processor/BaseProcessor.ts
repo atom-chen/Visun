@@ -6,6 +6,8 @@ import IChannel from "../channel/IChannel";
 import SingleDispatcher from "../../basic/event/SingleDispatcher";
 import { ConnState } from "../../basic/defines/KernelDefine";
 import PacketInterface from "../packet/PacketInterface";
+import KernelEvent from "../../basic/defines/KernelEvent";
+import EventCenter from "../../basic/event/EventCenter";
 
 export default class BaseProcessor implements IProcessor {
 	protected _name: string = "";
@@ -16,9 +18,33 @@ export default class BaseProcessor implements IProcessor {
 	protected _fire_list = [];
 	protected _cmds: Array<PacketInterface> = [];
 	protected _heatBeatFunc: Function = null;
+	protected _keepConnOnBackground: boolean = false;
 	
 	public constructor(name:string) {
 		this._name = name;
+		EventCenter.getInstance().listen(KernelEvent.EnterBackground, this.onEnterBackground, this);
+		EventCenter.getInstance().listen(KernelEvent.EnterForground, this.onEnterForground, this);
+	}
+
+	private onEnterBackground() {
+		this.setPaused(true);
+	}
+
+	private onEnterForground(passedTime:number) {
+		this.setPaused(false);
+		
+		if(passedTime >= 2000 && !this._keepConnOnBackground) {
+			this._channel.force_reconnect();
+		} else {
+			var netState = this._channel.getState();
+			if(netState===ConnState.connectfail || netState === ConnState.reconnectfail) {
+				this._channel.notifyState();
+			}
+		}
+	}
+
+	setKeepConnOnBackground(bKeep:boolean) : void {
+		this._keepConnOnBackground = bKeep;
 	}
 
 	public getDispatcher() : SingleDispatcher

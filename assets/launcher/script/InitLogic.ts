@@ -6,6 +6,7 @@ import { newHandler } from "../../kernel/utils/GlobalFuncs";
 import PlatformUtil from "../../kernel/utils/PlatformUtil";
 import UIManager from "../../kernel/view/UIManager";
 import GlobalData from "../../kernel/utils/GlobalData";
+import KernelEvent from "../../kernel/basic/defines/KernelEvent";
 
 
 export default class InitLogic {
@@ -21,7 +22,7 @@ export default class InitLogic {
             InitLogic._hideTime = (new Date()).getTime();
             console.log("游戏进入后台", InitLogic._hideTime);
             cc.audioEngine.pauseAll();
-            EventCenter.getInstance().fire(cc.game.EVENT_HIDE);
+            EventCenter.getInstance().fire(KernelEvent.EnterBackground);
         });
         
         cc.game.on(cc.game.EVENT_SHOW, ()=>{
@@ -29,7 +30,7 @@ export default class InitLogic {
             var passedTime = (new Date()).getTime() - InitLogic._hideTime;
             console.log("游戏进入前台", passedTime);
             cc.audioEngine.resumeAll();
-            EventCenter.getInstance().fire(cc.game.EVENT_SHOW, passedTime);
+            EventCenter.getInstance().fire(KernelEvent.EnterForground, passedTime);
             TimerManager.amend(passedTime);
         });
 

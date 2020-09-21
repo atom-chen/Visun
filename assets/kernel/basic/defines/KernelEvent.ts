@@ -2,6 +2,8 @@
 // 事件名
 //---------------------------------
 var KernelEvent = {
+	EnterBackground: "EnterBackground",
+	EnterForground: "EnterForground",
 	keyboard_esc : "keyboard_esc",
 	recv_proto : "recv_proto",
 	NET_STATE : "NET_STATE",

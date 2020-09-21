@@ -46,6 +46,15 @@ export default class LeafWsProcessor extends BaseProcessor {
 
 	public onrecvBuff(buff: any): void 
 	{
+		if(GlobalData.isInBackgroud && !this._keepConnOnBackground) {
+			cc.log("length of this._fire_list: ", this._fire_list.length);
+			if(this._fire_list.length >= 2) {
+				cc.log("后台保持连接开关已关闭，断开网络连接");
+				this._channel.disconnect();
+				return;
+			}
+		}
+
 		//解析包头
 		var bytes = new Uint8Array(buff);
 		var memStream = new MemoryStream(HEAD_SIZE);
@@ -72,11 +81,7 @@ export default class LeafWsProcessor extends BaseProcessor {
 			cc.log(CommonUtil.deepClone(data));
 		}
 
-		cc.log(this._paused, GlobalData.isInBackgroud, this._fire_list.length);
 		if(this._paused) {
-			if(GlobalData.isInBackgroud && this._fire_list.length >= 3) {
-				this._channel.disconnect();
-			}
 			this._fire_list.push({cmd:cmd,data:data});
 		} else {
 			this._dispatcher.fire(cmd, data);

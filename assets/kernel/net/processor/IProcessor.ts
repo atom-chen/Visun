@@ -18,6 +18,7 @@ export default interface IProcessor {
     setHeartbeatFunc(func:Function) : void;
     sendHeartBeat() : void;
     
+    setKeepConnOnBackground(bKeep:boolean) : void;
     setPaused(bPause:boolean) : void;
     flushSendlist() : void;
     flushRecvlist() : void;
