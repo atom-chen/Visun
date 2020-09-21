@@ -15,6 +15,7 @@ export default class CpnChipbox2d extends BaseComponent {
     private selectedIndex:number = 1;
     private _values:Array<number> = null;
     private chipPathFlag:boolean = false;
+    private bFirst = true;
 
     onLoad() {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -29,7 +30,11 @@ export default class CpnChipbox2d extends BaseComponent {
     private onSelect(idx:number) {
         this.selectedIndex = idx; 
         this.m_ui.hilightSpr.x = this.m_ui["chip"+idx].x;
-        AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
+        if(this.bFirst) {
+            this.bFirst = false;
+        } else {
+            AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
+        }
     }
 
     public getChipNode(idx:number) : cc.Node {
