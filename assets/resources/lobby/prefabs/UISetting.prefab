@@ -2407,7 +2407,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 149.38,
+      "width": 162.73,
       "height": 30.24
     },
     "_anchorPoint": {
@@ -2458,8 +2458,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "版本号：1.7.0",
-    "_N$string": "版本号：1.7.0",
+    "_string": "版本号：1.12.0",
+    "_N$string": "版本号：1.12.0",
     "_fontSize": 24,
     "_lineHeight": 24,
     "_enableWrapText": true,

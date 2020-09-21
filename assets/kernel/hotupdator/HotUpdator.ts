@@ -64,7 +64,7 @@ export default class HotUpdator {
 
 
 
-	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)) : HotUpdator {
+	public static create(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, curCnt:number, totalCnt:number)=>void)) : HotUpdator {
 		if(!HotUpdator._all_updators[id]){
 			HotUpdator._all_updators[id] = new HotUpdator(id, manifestUrl, finishCallback, progressCallback);
 		}
@@ -81,12 +81,12 @@ export default class HotUpdator {
 		this._finishCallback = finishCallback;
 	}
 
-	public setProgressCallback(progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)) {
+	public setProgressCallback(progressCallback:((nowState:HOT_STATE, curCnt:number, totalCnt:number)=>void)) {
 		this._progressCallback = progressCallback;
 	}
 
 
-	private constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, progressByFile:number, progressByBytes:number)=>void)|null) {
+	private constructor(id:string, manifestUrl:string, finishCallback:(bSucc:boolean, reason:number)=>void, progressCallback:((nowState:HOT_STATE, curCnt:number, totalCnt:number)=>void)|null) {
 		this._curState = HOT_STATE.READY;
 		this._id = id;
 		this._manifestUrl = manifestUrl;
