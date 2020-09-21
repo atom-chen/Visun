@@ -310,7 +310,7 @@ export default class GameManager extends ModelBase {
 			var viewpath = cliCfg.viewpath;
 			UIManager.openPanel(viewpath, null);
 			TimerManager.delayFrame(5, newHandler(function(){
-				AudioManager.getInstance().playMusicAsync("appqp/audios/music_bg", true);
+				AudioManager.getInstance().playMusicAsync("appqp/audios/music_game", true);
 			}, this));
 		});
 	}

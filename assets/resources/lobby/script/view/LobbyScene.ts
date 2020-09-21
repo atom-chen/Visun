@@ -25,7 +25,7 @@ export default class LobbyScene extends BaseComponent {
         AudioManager.getInstance().enableMusic(LocalCache.getInstance("pub").read("music", 1)==1);
         AudioManager.getInstance().enableEffects(LocalCache.getInstance("pub").read("effect", 1)==1);
 
-        AudioManager.getInstance().playMusicAsync("lobby/music/denglu", true);
+        AudioManager.getInstance().playMusicAsync("appqp/audios/music_hall", true);
     }
 
 }
