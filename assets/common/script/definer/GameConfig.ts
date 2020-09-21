@@ -80,7 +80,8 @@ var GameConfig = {
 		name: "斗地主",
 		icon: "lobby/imgs/gameico2/ico_ddz",
 		sdir: "ddz",
-		viewpath: ViewDefine.UIddz
+		viewpath: ViewDefine.UIddz,
+		bgm_music: "appqp/audios/music_ddz"
 	},
 	[GameKindEnum.Blackjack] : {
 		GameKind: GameKindEnum.Blackjack,
