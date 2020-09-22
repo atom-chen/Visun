@@ -28,7 +28,7 @@ export default class AppNode extends cc.Component {
         EventCenter.getInstance().listen(KernelEvent.UI_LOADING_PROGRESS, this.onUiLoadingProgress, this);
         EventCenter.getInstance().listen(KernelEvent.UI_LOADING_FINISH, this.onUiLoadingFinish, this);
 
-        this.m_ui.UILoading.active = !cc.sys.isNative;
+        this.m_ui.UILoading.active = false;
     }
 
     onUiLoadingBegin(loadingType:number) {
