@@ -70,9 +70,10 @@ export default class HotupdateScene extends BaseComponent {
 			if(reason==HOT_FAIL_REASON.not_need_update) {
 				this.enterGame();
 			} else {
+				var self = this;
 				UIManager.openDialog("hotfailenter", "更新失败，是否依然进入游戏", 2, function(mnuId:number){
 					if(mnuId == 1){
-						this.enterGame();
+						self.enterGame();
 					} else {
 						PlatformUtil.exitApp();
 					}
