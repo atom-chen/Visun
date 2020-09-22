@@ -68,7 +68,11 @@ export default class UIGameRecord2 extends BaseComponent {
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
-        this.m_ui.content.removeAllChildren(true);
+        var childs = this.m_ui.content.children;
+        for(var n=childs.length-1; n>=0; n--) {
+            childs[n].active = false;
+        }
+
         if(isNil(param)) { return; }
         if(param["GameId"]) {
             this.allData[param["GameId"]] = param;
@@ -77,8 +81,13 @@ export default class UIGameRecord2 extends BaseComponent {
         var len = info.length;
         var Order = 0;
         for(var i=len-1; i>=0; i--) {
-            var item = item = cc.instantiate(this.listItem);
-            this.m_ui.content.addChild(item);
+            var item = childs[len-i-1];
+            if(item) {
+                item.active = true;
+            } else {
+                item = cc.instantiate(this.listItem);
+                this.m_ui.content.addChild(item);
+            }
             Order++;
             var data = info[i];
             item.getChildByName("lab_no").getComponent(cc.Label).string = ""+Order;
@@ -88,23 +97,10 @@ export default class UIGameRecord2 extends BaseComponent {
             item.getChildByName("lab_time").getComponent(cc.Label).string = CommonUtil.formatTime(data.TimeStamp);
             if(data.Payoff >= 0) {
                 item.getChildByName("lab_win").color = this.winColor;
+            } else {
+                item.getChildByName("lab_win").color = this.loseColor;
             }
         }
-    }
-
-    getTestData() : gamecomm.IGetInningsInfoResp {
-        var info:gamecomm.IGetInningsInfoResp = {};
-        info.Innings = [];
-        for(var i=0; i<20; i++) {
-            var item:gamecomm.IInningInfo = {};
-            item.Name = "";
-            item.Level = CommonUtil.getRandomInt(0,6);
-            item.Number = "xg325easgi325eajfiea654gija325a";
-            item.Payoff = CommonUtil.getRandomInt(1000, 10000)-5000;
-            item.TimeStamp = (new Date()).valueOf() / 1000 + i;
-            info.Innings[i] = item;
-        }
-        return info;
     }
 
 }
