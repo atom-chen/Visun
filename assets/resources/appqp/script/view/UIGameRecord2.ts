@@ -20,6 +20,7 @@ export default class UIGameRecord2 extends BaseComponent {
     private winColor = cc.color(7,123,38,255);
     private loseColor = cc.color(218,32,32,255);
     private allData = {};
+    private itemPool = new cc.NodePool;
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -31,6 +32,10 @@ export default class UIGameRecord2 extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.GetInningsInfoResp, this.refleshList, this);
 
         this.refleshTabs();
+    }
+
+    onDestroy() {
+        this.itemPool.clear();
     }
 
     private refleshTabs() {
@@ -68,7 +73,11 @@ export default class UIGameRecord2 extends BaseComponent {
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
-        this.m_ui.content.removeAllChildren(true);
+        var childs = this.m_ui.content.children;
+        for(var i = childs.length; i>=0; i--) {
+            this.itemPool.put(childs[i]);
+        }
+        
         if(isNil(param)) { return; }
         if(param["GameId"]) {
             this.allData[param["GameId"]] = param;
@@ -77,7 +86,12 @@ export default class UIGameRecord2 extends BaseComponent {
         var len = info.length;
         var Order = 0;
         for(var i=len-1; i>=0; i--) {
-            var item = item = cc.instantiate(this.listItem);
+            var item = null;
+            if(this.itemPool.size()>0) {
+                item = this.itemPool.get();
+            } else {
+                item = cc.instantiate(this.listItem);
+            }
             this.m_ui.content.addChild(item);
             Order++;
             var data = info[i];
@@ -90,21 +104,6 @@ export default class UIGameRecord2 extends BaseComponent {
                 item.getChildByName("lab_win").color = this.winColor;
             }
         }
-    }
-
-    getTestData() : gamecomm.IGetInningsInfoResp {
-        var info:gamecomm.IGetInningsInfoResp = {};
-        info.Innings = [];
-        for(var i=0; i<20; i++) {
-            var item:gamecomm.IInningInfo = {};
-            item.Name = "";
-            item.Level = CommonUtil.getRandomInt(0,6);
-            item.Number = "xg325easgi325eajfiea654gija325a";
-            item.Payoff = CommonUtil.getRandomInt(1000, 10000)-5000;
-            item.TimeStamp = (new Date()).valueOf() / 1000 + i;
-            info.Innings[i] = item;
-        }
-        return info;
     }
 
 }
