@@ -18,6 +18,8 @@ export default class HotupdateScene extends BaseComponent {
 	barProg: cc.ProgressBar = null;
 	@property(cc.Label)
 	labHottip: cc.Label = null;
+	@property(cc.RichText)
+	labDbg: cc.RichText = null;
 
 	@property({
 		type: cc.Asset
@@ -119,8 +121,18 @@ export default class HotupdateScene extends BaseComponent {
 		if (cc.loader.md5Pipe) {
 			url = cc.loader.md5Pipe.transformURL(url);
 		}
-		cc.log("local manifest path: ", url);
+		this.addDbgStr("local manifest path: "+url);
+		if(jsb){
+			this.addDbgStr(jsb.fileUtils.fullPathForFilename(url));
+		}
 		return url;
+	}
+
+	private addDbgStr(str:string) {
+		cc.log(str);
+		if(this.labDbg) {
+			this.labDbg.string += "\n"+str;
+		}
 	}
 	
 }

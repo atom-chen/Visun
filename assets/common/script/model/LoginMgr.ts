@@ -75,7 +75,9 @@ export default class LoginMgr extends ModelBase {
                         }
                     });
                 } else if(chan.getState()===ConnState.reconnectsucc) {
-					LoginMgr.reconnect();
+					if(LoginMgr.getInstance().checkLogin(false)) {
+						LoginMgr.reconnect();
+					}
 				}
             }
         }, this);

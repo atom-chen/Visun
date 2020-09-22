@@ -340,14 +340,15 @@ export default class HotUpdator {
 	}
 
 	protected onFail(reason:HOT_FAIL_REASON) {
-		cc.log("------------热更完毕：失败--------------");
 		if(this._am){
 			this._am.setEventCallback(null);
 		}
 		this._curState = HOT_STATE.FAIL;
 		if(reason == HOT_FAIL_REASON.not_need_update) {
+			cc.log("------------热更完毕：无需更新--------------");
 			this.notifyProgress(HOT_STATE.FAIL, 100, 100);
 		} else {
+			cc.log("------------热更完毕：失败--------------");
 			this.notifyProgress(HOT_STATE.FAIL, 0, 0);
 		}
 		if(this._finishCallback) {
