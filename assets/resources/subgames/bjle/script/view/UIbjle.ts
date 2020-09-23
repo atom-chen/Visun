@@ -26,6 +26,7 @@ import CpnHandcard from "../../../../appqp/script/comps/CpnHandcard";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 const AREA_XIAN        = 0 //闲家
 const AREA_PING        = 1 //平家
@@ -67,6 +68,8 @@ export default class UIbjle extends BaseComponent {
 
         this.initUIEvents();
 		this.initNetEvent();
+
+		this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Baccarat, GameManager.getInstance().getGameId());
 		
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().getMoney());
 		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();

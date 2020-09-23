@@ -23,6 +23,7 @@ import CpnGameState from "../../../../appqp/script/comps/CpnGameState";
 import Preloader from "../../../../../kernel/utils/Preloader";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 const MAX_SOLDIER = 5;
@@ -64,7 +65,9 @@ export default class SangongUI extends BaseComponent {
 
         TimerManager.delayFrame(10, newHandler(this.createYazi, this));
 
-		this.refreshBtns();
+        this.refreshBtns();
+        
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Sangong, GameManager.getInstance().getGameId());
 
 		this.SangongStateFreeResp(null);
 

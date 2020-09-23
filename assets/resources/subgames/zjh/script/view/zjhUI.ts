@@ -28,6 +28,7 @@ import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
 import { RuleZjh } from "../model/RuleZjh";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 const MAX_SOLDIER = 5;
@@ -79,6 +80,8 @@ export default class zjhUI extends BaseComponent {
         for(var n=0; n<MAX_SOLDIER; n++) {
             this._pnodes[n].active = false;
         }
+
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Zhajinhua, GameManager.getInstance().getGameId());
 
         ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).getDispatcher().addObserver(ZjhHandlers);
 

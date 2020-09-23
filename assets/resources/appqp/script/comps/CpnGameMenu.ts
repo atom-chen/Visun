@@ -38,14 +38,14 @@ export default class CpnGameMenu extends BaseComponent {
 			UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:this.gameKind});
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_record, function(){
-			UIManager.openPopwnd(ViewDefine.UIGameRecord2, true);
+			UIManager.openPopwnd(ViewDefine.UIGameRecord2, true, {gameId:this.gameId, kindId:this.gameKind});
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_feedback, function(){
 			UIManager.openPopwnd(ViewDefine.UIKefu, true);
 		}, this);
-		CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
-			GameManager.getInstance().quitGame();
-		}, this);
+		// CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
+		// 	GameManager.getInstance().quitGame();
+		// }, this);
 	}
 
 }

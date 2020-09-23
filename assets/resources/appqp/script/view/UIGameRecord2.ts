@@ -29,14 +29,23 @@ export default class UIGameRecord2 extends BaseComponent {
         }, this);
 
         EventCenter.getInstance().listen(gamecomm_msgs.GetInningsInfoResp, this.refleshList, this);
-
-        this.refleshTabs();
     }
 
-    private refleshTabs() {
+    setViewData(info) {
+        if(info) {
+            this.refleshTabs(info.gameId);
+        } else {
+            this.refleshTabs(null);
+        }
+    }
+
+    private refleshTabs(selectId) {
         var gamelist = GameManager.getInstance().getGameList();
         if(isNil(gamelist) || gamelist.length <= 0) {
             return;
+        }
+        if(isNil(selectId)) {
+            selectId = gamelist[0].ID;
         }
         var allbtns = [];
         var self = this;
@@ -61,10 +70,10 @@ export default class UIGameRecord2 extends BaseComponent {
                 }
             }, item);
             allbtns.push(item);
-            allbtns[i].getChildByName("tab1_sel").active = i==0;
-            allbtns[i].getChildByName("tab1_unsel").active = i!=0;
+            allbtns[i].getChildByName("tab1_sel").active = gamelist[i].ID==selectId;
+            allbtns[i].getChildByName("tab1_unsel").active = gamelist[i].ID!=selectId;
         }
-        gamecomm_request.GetInningsInfoReq({GameID:gamelist[0].ID});
+        gamecomm_request.GetInningsInfoReq({GameID:selectId});
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {

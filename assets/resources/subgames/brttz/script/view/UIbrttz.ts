@@ -26,6 +26,7 @@ import { gamecomm_msgs } from "../../../../../common/script/proto/net_gamecomm";
 import { gamecomm } from "../../../../../../declares/gamecomm";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 var margin = { rx:100, ry:65 };
@@ -57,6 +58,8 @@ export default class UIbrttz extends BaseComponent {
 		
         this.initUIEvent();
 		this.initNetEvent();
+
+		this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Brttz, GameManager.getInstance().getGameId());
 		
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);
 		this.m_ui.CpnWinLoseMoney.getComponent(CpnWinLoseMoney).stopPlay();

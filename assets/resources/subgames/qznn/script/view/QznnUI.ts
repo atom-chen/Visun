@@ -25,6 +25,7 @@ import { BaseTimer } from "../../../../../kernel/basic/timer/BaseTimer";
 import GameUtil from "../../../../../common/script/utils/GameUtil";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import CpnPaixing from "../../../../appqp/script/comps/CpnPaixing";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 const MAX_SOLDIER = 5;
@@ -66,7 +67,9 @@ export default class QznnUI extends BaseComponent {
 		this.refreshBtns();
 
 		this.initUIEvent();
-		this.initNetEvent();
+        this.initNetEvent();
+        
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.QzCowcow, GameManager.getInstance().getGameId());
 
 		this.QzcowcowStateFreeResp(null);
 

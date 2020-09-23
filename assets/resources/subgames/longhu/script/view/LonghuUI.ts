@@ -26,6 +26,7 @@ import UIManager from "../../../../../kernel/view/UIManager";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnPoker from "../../../../appqp/script/comps/CpnPoker";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 var margin = { rx:20,ry:20,rr:0 };
@@ -57,7 +58,9 @@ export default class LonghuUI extends BaseComponent {
 		ResPool.load(ViewDefine.CpnChip);
 
         this.initUIEvent();
-        this.initNetEvent();
+		this.initNetEvent();
+		
+		this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Longhu, GameManager.getInstance().getGameId());
 
 		this.m_ui.lab_hname.getComponent(cc.Label).string = LoginUser.getInstance().Name;
 		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(LoginUser.getInstance().Gold);

@@ -25,6 +25,7 @@ import CpnWinLoseMoney from "../../../appqp/script/comps/CpnWinLoseMoney";
 import GameUtil from "../../../../common/script/utils/GameUtil";
 import AudioManager from "../../../../kernel/audio/AudioManager";
 import CpnPaixing from "../../../appqp/script/comps/CpnPaixing";
+import CpnGameMenu from "../../../appqp/script/comps/CpnGameMenu";
 
 
 const MAX_SOLDIER = 5;
@@ -62,6 +63,8 @@ export default class UItbnn extends BaseComponent {
 
 		this.initUIEvent();
         this.initNetEvent();
+
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Baccarat, GameManager.getInstance().getGameId());
         
         this.TbcowcowStateFreeResp(null);
 

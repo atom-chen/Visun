@@ -20,6 +20,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../../common/script/definer/ViewDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 const MAX_SOLDIER = 3;
 
@@ -48,6 +49,8 @@ export default class DdzUI extends BaseComponent {
         this.initNetEvent();
         this.initUIEvent();
         this._myHandor.initSlideTouch();
+
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Landlord, GameManager.getInstance().getGameId());
         
         this.refreshPlayers();
         this.toStateReady();

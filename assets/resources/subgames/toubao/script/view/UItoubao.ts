@@ -24,6 +24,7 @@ import LoginUser from "../../../../../common/script/model/LoginUser";
 import ResPool from "../../../../../kernel/basic/pool/ResPool";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 
 var margin = { rx:10, ry:10, rr:0 };
@@ -59,6 +60,8 @@ export default class ToubaoUI extends BaseComponent {
 
 		this.initNetEvent();
 		this.initUIEvent();
+
+		this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Toubao, GameManager.getInstance().getGameId());
 
 		this.initContext();
 		ProcessorMgr.getInstance().getProcessor(ChannelDefine.game).setPaused(false);
