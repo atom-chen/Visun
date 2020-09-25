@@ -6,7 +6,7 @@ import BaseComponent from "../../../../kernel/view/BaseComponent";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class UIHelpdoc extends BaseComponent {
+export default class UIHelpdoc1 extends BaseComponent {
     private _pageConts:Array<string> = [];
 
     onLoad () {
