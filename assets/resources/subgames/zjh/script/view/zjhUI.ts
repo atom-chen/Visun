@@ -436,6 +436,11 @@ export default class zjhUI extends BaseComponent {
         this.m_ui.opLayer.active = param.UserID == LoginUser.getInstance().UserId;
         this.m_ui.readyNode.active = false;
 
+        if(param.UserID==LoginUser.getInstance().UserId) {
+            var hero = ZjhMgr.getInstance().getPlayer(LoginUser.getInstance().UserId);
+            this.m_ui.btn_look.active = !(hero && hero.IsSee);
+        }
+
         var idx = this.playerIdx(param.UserID);
 
         this.refreshCards(false);
@@ -613,6 +618,7 @@ export default class zjhUI extends BaseComponent {
             this._handors[idx].resetCards(man.Cards.Cards);
             this._handors[idx].playOpen();
             this._pxCpns[idx].setCardType(RuleZjh.parseCardType(man.Cards.Cards), -1);
+            this.m_ui.btn_look.active = false;
         }
     }
 
