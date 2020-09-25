@@ -820,4 +820,8 @@ export default class CommonUtil {
 		nd.scale = 2-scale;
 	}
 
+	public static render2Tex() {
+		
+	}
+
 }
