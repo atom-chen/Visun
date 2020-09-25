@@ -146,6 +146,13 @@ var GameConfig = {
 		sdir: "slwh",
 		viewpath: ViewDefine.UIslwh
 	},
+	[GameKindEnum.K4zqznn] : {
+		GameKind: GameKindEnum.K4zqznn,
+		name: "看四张抢庄牛牛",
+		icon: "lobby/imgs/gameico2/ico_k4zqznn",
+		sdir: "k4zqznn",
+		viewpath: ViewDefine.UIk4zqznn,
+	},
 
 	//---------------------------------------------------
 
@@ -173,14 +180,7 @@ var GameConfig = {
 	//	viewpath: ViewDefine.UIbrttz,
 		orderv: 1
 	},
-	[GameKindEnum.K4zqznn] : {
-		GameKind: GameKindEnum.K4zqznn,
-		name: "看四张抢庄牛牛",
-		icon: "lobby/imgs/gameico2/ico_k4zqznn",
-		sdir: "k4zqznn",
-	//	viewpath: ViewDefine.UIbrttz,
-		orderv: 1
-	},
+	
 
 	// [GameKindEnum.Buyu] : {
 	// 	GameKind: GameKindEnum.Buyu,
