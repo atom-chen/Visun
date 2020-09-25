@@ -5,6 +5,7 @@ import GameConfig from "../../../../../common/script/definer/GameConfig";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import UIManager from "../../../../../kernel/view/UIManager";
 import { login } from "../../../../../../declares/login";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 const {ccclass, property} = cc._decorator;
 
@@ -23,6 +24,8 @@ export default class UIRoom extends BaseComponent {
     setViewData(items:Array<login.IGameItem>) {
         var cfg = GameConfig[items[0].Info.KindID];
         this.m_lab.lab_roomname.string = cfg && cfg.name || items[0].Info.Name;
+
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(items[0].Info.KindID, items[0].ID);
 
         for(var i=0; i<4; i++) {
             var idx = i+1;
