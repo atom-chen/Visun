@@ -32,7 +32,7 @@ export default class CpnGameMenu extends BaseComponent {
 			this.m_ui.itemBg.active = !this.m_ui.itemBg.active;
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_shezhi, function(){
-			UIManager.openPopwnd(ViewDefine.UISetting, true);
+			UIManager.openPopwnd(ViewDefine.UISetting2, true);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_help, function(){
 			UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:this.gameKind});

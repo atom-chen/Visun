@@ -208,7 +208,7 @@ export default class UIHall extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
-			UIManager.openPopwnd(ViewDefine.UISetting, true);
+			UIManager.openPopwnd(ViewDefine.UISetting2, true);
 		}, this);
 		//游戏记录
 		CommonUtil.addClickEvent(this.m_ui.btn_game_record, function(){ 

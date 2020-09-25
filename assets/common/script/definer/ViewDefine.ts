@@ -15,6 +15,7 @@ export default class ViewDefine {
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIHall = "lobby/prefabs/UIHall";
 	public static UISetting = "lobby/prefabs/UISetting";
+	public static UISetting2 = "lobby/prefabs/UISetting2";
 	public static UISafebox = "lobby/prefabs/UISafebox";
 	public static UIEmail = "lobby/prefabs/UIEmail";
 	public static UIShop = "lobby/prefabs/UIShop";
