@@ -23,6 +23,7 @@ export default class ViewDefine {
 	public static UIWithdraw = "lobby/prefabs/UIWithdraw";
 	public static UISpread = "lobby/prefabs/UISpread";
 	public static UIPerson = "lobby/prefabs/UIPerson";
+	public static UINotices = "lobby/prefabs/UINotices";
 	public static UIRoom = "lobby/prefabs/UIRoom";
 	//subgames
 	public static UIddz = "subgames/ddz/prefabs/UIddz";

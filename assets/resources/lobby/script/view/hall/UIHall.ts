@@ -214,6 +214,10 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_game_record, function(){ 
 			UIManager.openPopwnd(ViewDefine.UIGameRecord2, true);
 		}, this);
+		//公告
+		CommonUtil.addClickEvent(this.m_ui.btn_notice, function(){ 
+			UIManager.openPopwnd(ViewDefine.UINotices, true);
+		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
 			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
