@@ -1,6 +1,6 @@
 {
   "ver": "2.3.4",
-  "uuid": "5cf4a4ea-66bf-4532-8712-8fed17bda959",
+  "uuid": "7165be50-b0fd-4d35-ac57-0ecc2d5bfa12",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,19 +11,19 @@
   "height": 84,
   "platformSettings": {},
   "subMetas": {
-    "chouma500": {
+    "cmz_100": {
       "ver": "1.0.4",
-      "uuid": "0855adf7-0252-4b40-81c5-e6932178b4a0",
-      "rawTextureUuid": "5cf4a4ea-66bf-4532-8712-8fed17bda959",
+      "uuid": "205e0f5d-3189-4fe5-b028-2d233c01bc16",
+      "rawTextureUuid": "7165be50-b0fd-4d35-ac57-0ecc2d5bfa12",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
       "offsetX": 0.5,
-      "offsetY": 0,
+      "offsetY": -0.5,
       "trimX": 1,
-      "trimY": 0,
+      "trimY": 1,
       "width": 78,
-      "height": 84,
+      "height": 83,
       "rawWidth": 79,
       "rawHeight": 84,
       "borderTop": 0,
