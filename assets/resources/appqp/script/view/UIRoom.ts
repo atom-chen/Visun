@@ -1,7 +1,7 @@
 import GameConfig from "../../../../common/script/definer/GameConfig";
 import GameManager from "../../../../common/script/model/GameManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
-import { isNil } from "../../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil } from "../../../../kernel/utils/GlobalFuncs";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import { login } from "../../../../../declares/login";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
@@ -16,6 +16,8 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UIRoom extends BaseComponent {
+    private gameId;
+    private kindId;
 
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
@@ -42,7 +44,10 @@ export default class UIRoom extends BaseComponent {
 		}, this);
 		//游戏记录
 		CommonUtil.addClickEvent(this.m_ui.btn_game_record, function(){ 
-			UIManager.openPopwnd(ViewDefine.UIGameRecord2, true);
+            if(isEmpty(this.gameId) || isEmpty(this.kindId)) {
+                return;
+            }
+			UIManager.openPopwnd(ViewDefine.UIGameRecord1, true, {kindId:this.kindId,gameId:this.gameId});
 		}, this);
 		//公告
 		CommonUtil.addClickEvent(this.m_ui.btn_notice, function(){ 
@@ -58,6 +63,8 @@ export default class UIRoom extends BaseComponent {
         if(isNil(items)) { return; }
         var cfg = GameConfig[items[0].Info.KindID];
         this.m_lab.lab_roomname.string = cfg && cfg.name || items[0].Info.Name;
+        this.gameId = items[0].ID;
+        this.kindId = items[0].Info.KindID;
 
         var rrx = this.m_ui.rlist.x;
         if(items.length <= 1) {
