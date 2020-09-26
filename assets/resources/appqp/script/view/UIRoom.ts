@@ -64,9 +64,9 @@ export default class UIRoom extends BaseComponent {
             UIManager.openPopwnd(ViewDefine.UIGameRecord1, true, {kindId:this.kindId,gameId:this.gameId});
             AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
-		//公告
-		CommonUtil.addClickEvent(this.m_ui.btn_notice, function(){ 
-            UIManager.openPopwnd(ViewDefine.UINotices, true);
+		//帮助
+		CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
+            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:this.kindId});
             AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//全屏
