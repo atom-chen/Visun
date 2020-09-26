@@ -14,7 +14,6 @@ export default class UIGameRecord1 extends BaseComponent {
     @property(cc.Prefab)
     listItem: cc.Prefab = null;
 
-    private _gameType = 0;
     private winColor = cc.color(7,123,38,255);
     private loseColor = cc.color(218,32,32,255);
 
@@ -28,13 +27,11 @@ export default class UIGameRecord1 extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.GetInningsInfoResp, this.refleshList, this);
     }
 
-    private setViewData(gameType:number) {
-        if(isEmpty(gameType)) {
+    private setViewData(info) {
+        if(isEmpty(info.gameId)) {
             return;
         }
-
-        this._gameType = gameType;
-        gamecomm_request.GetInningsInfoReq({GameID:gameType});
+        gamecomm_request.GetInningsInfoReq({GameID:info.gameId});
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
@@ -55,6 +52,8 @@ export default class UIGameRecord1 extends BaseComponent {
             item.getChildByName("lab_time").getComponent(cc.Label).string = CommonUtil.formatTime(data.TimeStamp);
             if(data.Payoff >= 0) {
                 item.getChildByName("lab_win").color = this.winColor;
+            } else {
+                item.getChildByName("lab_win").color = this.loseColor;
             }
         }
     }
