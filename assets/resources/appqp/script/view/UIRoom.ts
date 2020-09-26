@@ -3,11 +3,13 @@ import GameManager from "../../../../common/script/model/GameManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
 import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
-import CpnGameMenu from "../comps/CpnGameMenu";
 import { login } from "../../../../../declares/login";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import Adaptor from "../../../../kernel/adaptor/Adaptor";
 import UIManager from "../../../../kernel/view/UIManager";
+import LoginUser from "../../../../common/script/model/LoginUser";
+import { login_msgs } from "../../../../common/script/proto/net_login";
+import EventCenter from "../../../../kernel/basic/event/EventCenter";
 
 
 const {ccclass, property} = cc._decorator;
@@ -19,7 +21,16 @@ export default class UIRoom extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traverseLabels(this.node, this.m_lab);
         this.initUIEvent();
+        var hero = LoginUser.getInstance();
+        this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
+        EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
+        EventCenter.getInstance().listen(login_msgs.ReconnectResp, this.LoginResp, this);
     }
+
+    private LoginResp(param:login.ILoginResp) {
+		var hero = LoginUser.getInstance();
+		this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
+	}
 
     initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
@@ -47,15 +58,15 @@ export default class UIRoom extends BaseComponent {
         var cfg = GameConfig[items[0].Info.KindID];
         this.m_lab.lab_roomname.string = cfg && cfg.name || items[0].Info.Name;
 
-        for(var i=0; i<4; i++) {
-            var idx = i+1;
-            var btn = this.m_ui["button"+idx];
+        for(var i=0; i<6; i++) {
+            var btn = this.m_ui["button"+i];
             if(items[i]) {
                 btn["gameData"] = items[i];
                 CommonUtil.addClickEvent(btn, function(){
                     GameManager.getInstance().enterGame(this.gameData.ID);
                 }, btn);
-                this.m_lab["Label"+idx].string = ""+(items[i].Info.EnterScore/100);
+                btn.getChildByName("lab_zhunru").getComponent(cc.Label).string = ""+(items[i].Info.EnterScore/100);
+                btn.getChildByName("lab_dizhu").getComponent(cc.Label).string = ""+(items[i].Info.LessScore/100);
             }
             btn.active = !isNil(items[i]);
         }
@@ -64,12 +75,8 @@ export default class UIRoom extends BaseComponent {
     }
 
     runEnterAni() {
-        for(var i=1; i<=4; i++) {
-            var btn = this.m_ui["button"+i];
-            var oldPos = btn.position;
-            btn.y = -1000;
-            btn.runAction(cc.moveTo(0.15, cc.v2(oldPos.x, oldPos.y)));
-        }
+        this.m_ui.rlist.scale = 0.1;
+        this.m_ui.rlist.runAction(cc.scaleTo(0.25, 1))
     }
 
 }

@@ -51,6 +51,7 @@ export default class UIHall extends BaseComponent {
 
 	private initNetEvents() {
 		EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
+		EventCenter.getInstance().listen(login_msgs.ReconnectResp, this.LoginResp, this);
 		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 		EventCenter.getInstance().listen(EventDefine.down_progress, this.onDownProgress, this);
 	}
@@ -79,7 +80,7 @@ export default class UIHall extends BaseComponent {
 			var bton = cc.instantiate(this.gameBtn);
 			bton["game_kind"] = KindID;
 
-			if(arr.length == 1) {
+			if(arr.length == -99) {
 				bton["gameData"] = arr[0];
 	
 				CommonUtil.addClickEvent(bton, function(){ 
@@ -89,7 +90,7 @@ export default class UIHall extends BaseComponent {
 				this.m_ui.content.addChild(bton);
 				this.refreshGameButton(bton, arr[0]);
 			} 
-			else if(arr.length > 1) {
+			else if(arr.length >= 1) {
 				bton["gameData"] = arr;
 	
 				CommonUtil.addClickEvent(bton, function(){ 

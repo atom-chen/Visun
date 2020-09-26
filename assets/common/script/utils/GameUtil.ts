@@ -148,19 +148,19 @@ export default class GameUtil {
 	static roomNameByLevel(lvl:number) {
 		if(isNil(lvl)) { lvl = 0; }
 		if(lvl==0) {
-			return "体验房";
+			return "新手场";
 		} else if(lvl==1) {
-			return "初级房";
+			return "初级场";
 		} else if(lvl==2) {
-			return "中级房";
+			return "中级场";
 		} else if(lvl==3) {
-			return "高级房";
+			return "高级场";
 		} else if(lvl==4) {
-			return "至尊房";
+			return "至尊场";
 		} else if(lvl==5) {
-			return "王者房";
+			return "王者场";
 		} else if(lvl==6) {
-			return "赌神房";
+			return "赌神场";
 		}
 	}
 
