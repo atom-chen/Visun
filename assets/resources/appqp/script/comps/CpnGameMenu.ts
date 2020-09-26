@@ -2,6 +2,7 @@ import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
+import { isNil } from "../../../../kernel/utils/GlobalFuncs";
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import UIManager from "../../../../kernel/view/UIManager";
 
@@ -20,6 +21,13 @@ export default class CpnGameMenu extends BaseComponent {
 	}
 
 	setGameInfo(kindId:GameKindEnum, gameId:number) {
+		var curGame = GameManager.getInstance().getRunningGameData();
+		if(isNil(kindId)) {
+			kindId = curGame.Info.KindID;
+		}
+		if(isNil(gameId)) {
+			gameId = curGame.ID;
+		}
 		this.gameKind = kindId;
 		this.gameId = gameId;
 	}
