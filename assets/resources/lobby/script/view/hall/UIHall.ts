@@ -225,7 +225,7 @@ export default class UIHall extends BaseComponent {
 		//客服
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 		//	if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIKefu, true); 
+			UIManager.openPopwnd(ViewDefine.UIKefu, false); 
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//推广

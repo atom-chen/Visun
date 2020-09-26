@@ -51,7 +51,7 @@ export default class CpnGameMenu extends BaseComponent {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_feedback, function(){
-			UIManager.openPopwnd(ViewDefine.UIKefu, true);
+			UIManager.openPopwnd(ViewDefine.UIKefu, false);
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
