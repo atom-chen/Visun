@@ -26,12 +26,17 @@ export default class CpnBrnnLudan extends BaseComponent {
         }
         this.m_ui.bbbb.active = true;
         var len = data.length-1;
+        var idx = 0;
         for(var i=len; i>=0; i--) {
             var item = this.m_ui.bbbb;
-            if(i != len-1) {
-                item = cc.instantiate(this.m_ui.bbbb);
-                this.m_ui.content.addChild(item);
+            if(idx != 0) {
+                item = this.m_ui.content.children[idx];
+                if(!item) {
+                    item = cc.instantiate(this.m_ui.bbbb);
+                    this.m_ui.content.addChild(item);
+                }
             }
+            idx++;
 
             for(var j=0; j<4; j++) {
                 var respath = "appqp/imgs/games/ic_dui";
