@@ -322,7 +322,7 @@ export default class BrnnUI extends BaseComponent {
 		this.setWinAreas(param.AwardArea);
 
 		var enterData = BrnnMgr.getInstance().getEnterData();
-		enterData.AwardAreas.push(param.AwardArea);
+		enterData.AwardAreas.push(CommonUtil.cloneArray(param.AwardArea) as Uint8Array);
 		this.refreshLudan();
 	}
 

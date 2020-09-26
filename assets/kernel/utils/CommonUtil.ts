@@ -564,6 +564,15 @@ export default class CommonUtil {
 		return true;
 	}
 
+	static cloneArray(src:Uint8Array|any[]) : Uint8Array|Array<any> {
+		var dst = [];
+		if(isNil(src)) { return dst; }
+		for(var i in src) {
+			dst.push(src[i]);
+		}
+		return dst;
+	}
+
 	//-----------------------------------------------------------------------------
 
 	//将一个节点，从fromPos位置，移动到toPos位置，用时为duration秒
