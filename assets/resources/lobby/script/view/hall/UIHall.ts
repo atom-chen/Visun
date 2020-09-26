@@ -75,7 +75,14 @@ export default class UIHall extends BaseComponent {
 		var gameList = GameManager.getInstance().gamesByKindId();
 		if(!gameList) { return; }
 
-		for(var KindID in gameList) {
+		var gameArr = [];
+		for(var kid in gameList) {
+			gameArr.push(kid);
+		}
+		GameUtil.sortByKey(gameArr);
+
+		for(var xx in gameArr) {
+			var KindID = gameArr[xx];
 			var arr = gameList[KindID];
 
 			var bton = cc.instantiate(this.gameBtn);
@@ -107,6 +114,7 @@ export default class UIHall extends BaseComponent {
 			bton.getChildByName("labDown").active = GameManager.getInstance().isDowning(KindID);
 		}
 
+		//no ser data
 		var waitlist = [];
 		for(var iii in GameConfig) {
 			if(!gameList[iii]) {

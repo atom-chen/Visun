@@ -3,6 +3,7 @@ import { isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import GameConfig from "../definer/GameConfig";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { PokerCode } from "../definer/PokerDefine";
+import { login } from "../../../../declares/login";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -162,6 +163,43 @@ export default class GameUtil {
 		} else if(lvl==6) {
 			return "赌神场";
 		}
+	}
+
+	static sortGames(gamelist:Array<login.IGameItem>) {
+		gamelist.sort(function(aa, bb){
+			var a = GameConfig[aa.Info.KindID];
+			var b = GameConfig[bb.Info.KindID];
+			if(!isNil(a.orderv) && !isNil(b.orderv)) {
+				return a.orderv - b.orderv;
+			}
+			if(isNil(a.orderv)) {
+				return -1;
+			}
+			if(isNil(b.orderv)) {
+				return 1;
+			}
+			return -1;
+		});
+	}
+
+	static sortByKey(keyArr:Array<any>) {
+		keyArr.sort(function(aa, bb){
+			var a = GameConfig[aa];
+			var b = GameConfig[bb];
+			if(isNil(a) || isNil(b)) {
+				return 0;
+			}
+			if(!isNil(a.orderv) && !isNil(b.orderv)) {
+				return a.orderv - b.orderv;
+			}
+			if(isNil(a.orderv)) {
+				return -1;
+			}
+			if(isNil(b.orderv)) {
+				return 1;
+			}
+			return -1;
+		});
 	}
 
 	//------游戏通用资源预加载----------------------------------------------------
