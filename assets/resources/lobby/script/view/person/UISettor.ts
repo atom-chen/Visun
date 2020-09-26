@@ -3,6 +3,8 @@ import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import LocalCache from "../../../../../kernel/localcache/LocalCache";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
 import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import GameUtil from "../../../../../common/script/utils/GameUtil";
+import { GameModeEnum } from "../../../../../common/script/definer/ConstDefine";
 
 const {ccclass, property} = cc._decorator;
 
@@ -35,7 +37,12 @@ export default class UISettor extends BaseComponent {
 
 		this.refreshMusic();
 		this.refreshEffect();
-		
+		this.refreshModeStr();
+
+		this.initUIEvent();
+	}
+
+	initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_music, function(){
 			if(LocalCache.getInstance("pub").read("music", 1)==1) {
 				LocalCache.getInstance("pub").write("music", 0);
@@ -60,6 +67,33 @@ export default class UISettor extends BaseComponent {
 		}, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ CommonUtil.safeDelete(this); }, this);
+
+		CommonUtil.addClickEvent(this.m_ui.btn_gamemode, this.resetGameMode, this);
+	}
+
+	resetGameMode() {
+		var mode = GameUtil.getGameMode() + 1;
+		if(mode >= 3) {
+			mode = 0;
+		}
+
+		GameUtil.setGameMode(mode);
+
+		this.refreshModeStr();
+	}
+
+	refreshModeStr() {
+		var mode = GameUtil.getGameMode();
+
+		if(mode == GameModeEnum.qipaishi) {
+			this.m_ui.lab_gamemode.getComponent(cc.Label).string = "棋牌室模式";
+		}
+		else if(mode == GameModeEnum.ziyunying) {
+			this.m_ui.lab_gamemode.getComponent(cc.Label).string = "自运营模式";
+		}
+		else if(mode == GameModeEnum.guakao) {
+			this.m_ui.lab_gamemode.getComponent(cc.Label).string = "代运营模式";
+		}
 	}
 
 }
