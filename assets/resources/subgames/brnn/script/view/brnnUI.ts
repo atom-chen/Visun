@@ -29,6 +29,7 @@ import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
 import CpnHandcard2 from "../../../../appqp/script/comps/CpnHandcard2";
 import CpnWinLoseMoney from "../../../../appqp/script/comps/CpnWinLoseMoney";
 import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
+import CpnBrnnLudan from "./CpnBrnnLudan";
 
 
 var margin = { rx:50,ry:50,rr:0 };
@@ -95,6 +96,8 @@ export default class BrnnUI extends BaseComponent {
 			}
 			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + enterData.Inning;
 			this.initChips(enterData.AreaBets);
+
+			TimerManager.delayFrame(2, newHandler(this.refreshLudan, this));
 		} else {
 			this.m_ui.CpnChipbox3d.getComponent(CpnChipbox3d).setChipValues(this._rule);
 			this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：";
@@ -121,6 +124,11 @@ export default class BrnnUI extends BaseComponent {
 				chip.y = pos.y;
 			}
 		}
+	}
+
+	private refreshLudan() {
+		var enterData = BrnnMgr.getInstance().getEnterData();
+		this.m_ui.CpnLudan.getComponent(CpnBrnnLudan).reflesh(enterData.AwardAreas);
 	}
 
 	private refreshZhuang() {
