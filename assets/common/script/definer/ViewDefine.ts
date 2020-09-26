@@ -8,6 +8,7 @@ export default class ViewDefine {
 	public static UISearchDesk = "appqp/prefabs/UISearchDesk";
 	public static UIGameRecord1 = "appqp/prefabs/UIGameRecord1";
 	public static UIGameRecord2 = "appqp/prefabs/UIGameRecord2";
+	public static UIRoom = "appqp/prefabs/UIRoom";
 	//
 	public static UIHelpdoc = "appqp/helpdoc/prefabs/UIHelpdoc";
 	public static UIHelpdoc2 = "appqp/helpdoc/prefabs/UIHelpdoc2";
@@ -24,7 +25,6 @@ export default class ViewDefine {
 	public static UISpread = "lobby/prefabs/UISpread";
 	public static UIPerson = "lobby/prefabs/UIPerson";
 	public static UINotices = "lobby/prefabs/UINotices";
-	public static UIRoom = "lobby/prefabs/UIRoom";
 	//subgames
 	public static UIddz = "subgames/ddz/prefabs/UIddz";
 	public static UIbrnn = "subgames/brnn/prefabs/UIbrnn";
