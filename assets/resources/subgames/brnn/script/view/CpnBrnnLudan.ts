@@ -25,12 +25,13 @@ export default class CpnBrnnLudan extends BaseComponent {
             return;
         }
         this.m_ui.bbbb.active = true;
-        var len = data.length-1;
+        var lasdData = data.length-1;
+        var childs = this.m_ui.content.children;
         var idx = 0;
-        for(var i=len; i>=0; i--) {
+        for(var i=lasdData; i>=0; i--) {
             var item = this.m_ui.bbbb;
             if(idx != 0) {
-                item = this.m_ui.content.children[idx];
+                item = childs[idx];
                 if(!item) {
                     item = cc.instantiate(this.m_ui.bbbb);
                     this.m_ui.content.addChild(item);
@@ -44,6 +45,12 @@ export default class CpnBrnnLudan extends BaseComponent {
                     respath = "appqp/imgs/games/ic_cuo";
                 }
                 item.getChildByName("item"+j).getComponent(cc.Sprite).spriteFrame = cc.loader.getRes(respath, cc.SpriteFrame);
+            }
+        }
+        for(var n=childs.length-1; n>lasdData; n--) {
+            childs[n].active = false;
+            if(n!=0) {
+                childs[n].destroy();
             }
         }
     }
