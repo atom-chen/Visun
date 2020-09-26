@@ -20,6 +20,7 @@ import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import NoticeMgr from "../../../../../common/script/model/NoticeMgr";
 import EventDefine from "../../../../../common/script/definer/EventDefine";
 import AudioManager from "../../../../../kernel/audio/AudioManager";
+import { GameKindEnum, GameModeEnum } from "../../../../../common/script/definer/ConstDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -92,7 +93,11 @@ export default class UIHall extends BaseComponent {
 				bton["gameData"] = arr[0];
 	
 				CommonUtil.addClickEvent(bton, function(){ 
-					GameManager.getInstance().enterGame(this.gameData.ID);
+					if(GameUtil.getGameMode()==GameModeEnum.qipaishi) {
+						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, this.gameData);
+					} else {
+						GameManager.getInstance().enterGame(this.gameData.ID);
+					}
 					AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 				}, bton);
 	
@@ -103,7 +108,11 @@ export default class UIHall extends BaseComponent {
 				bton["gameData"] = arr;
 	
 				CommonUtil.addClickEvent(bton, function(){ 
-					UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData);
+					if(GameUtil.getGameMode()==GameModeEnum.qipaishi) {
+						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, this.gameData[0]);
+					} else {
+						UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData);
+					}
 					AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 				}, bton);
 	

@@ -4,6 +4,9 @@ import GameConfig from "../definer/GameConfig";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { PokerCode } from "../definer/PokerDefine";
 import { login } from "../../../../declares/login";
+import { GameModeEnum } from "../definer/ConstDefine";
+import EventCenter from "../../../kernel/basic/event/EventCenter";
+import EventDefine from "../definer/EventDefine";
 
 export default class GameUtil {
 	public static CHIP_RULE = [1,5,10,20,50,100,200,500,1000,5000,10000];
@@ -200,6 +203,15 @@ export default class GameUtil {
 			}
 			return -1;
 		});
+	}
+
+	private static curGameMode = GameModeEnum.qipaishi;
+	static setGameMode(mode:GameModeEnum) {
+		this.curGameMode = mode;
+		EventCenter.getInstance().fire(EventDefine.game_mode_chg, mode);
+	}
+	static getGameMode() : GameModeEnum {
+		return this.curGameMode;
 	}
 
 	//------游戏通用资源预加载----------------------------------------------------

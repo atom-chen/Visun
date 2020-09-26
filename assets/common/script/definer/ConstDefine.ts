@@ -1,5 +1,11 @@
 export const CLIENT_VERSION = "1.0.0";
 
+export enum GameModeEnum {
+	qipaishi,
+	ziyunying,
+	guakao,
+}
+
 export enum GameKindEnum {
 	//百人
 	Baccarat	= 2001,			//百家乐
