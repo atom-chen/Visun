@@ -10,6 +10,7 @@ import UIManager from "../../../../kernel/view/UIManager";
 import LoginUser from "../../../../common/script/model/LoginUser";
 import { login_msgs } from "../../../../common/script/proto/net_login";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
+import AudioManager from "../../../../kernel/audio/AudioManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -37,21 +38,25 @@ export default class UIRoom extends BaseComponent {
     initUIEvent() {
         CommonUtil.addClickEvent(this.m_ui.btn_close, ()=>{
             CommonUtil.safeDelete(this);
+            AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
         }, this);
         //设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
-			UIManager.openPopwnd(ViewDefine.UISetting2, true);
+            UIManager.openPopwnd(ViewDefine.UISetting2, true);
+            AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//游戏记录
 		CommonUtil.addClickEvent(this.m_ui.btn_game_record, function(){ 
             if(isEmpty(this.gameId) || isEmpty(this.kindId)) {
                 return;
             }
-			UIManager.openPopwnd(ViewDefine.UIGameRecord1, true, {kindId:this.kindId,gameId:this.gameId});
+            UIManager.openPopwnd(ViewDefine.UIGameRecord1, true, {kindId:this.kindId,gameId:this.gameId});
+            AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//公告
 		CommonUtil.addClickEvent(this.m_ui.btn_notice, function(){ 
-			UIManager.openPopwnd(ViewDefine.UINotices, true);
+            UIManager.openPopwnd(ViewDefine.UINotices, true);
+            AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

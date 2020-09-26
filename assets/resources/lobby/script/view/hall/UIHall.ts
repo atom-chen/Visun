@@ -19,6 +19,7 @@ import Preloader from "../../../../../kernel/utils/Preloader";
 import { isNil } from "../../../../../kernel/utils/GlobalFuncs";
 import NoticeMgr from "../../../../../common/script/model/NoticeMgr";
 import EventDefine from "../../../../../common/script/definer/EventDefine";
+import AudioManager from "../../../../../kernel/audio/AudioManager";
 
 
 const {ccclass, property} = cc._decorator;
@@ -181,43 +182,46 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_safebox, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UISafebox, true); 
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//邮件
 		CommonUtil.addClickEvent(this.m_ui.btn_email, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UIEmail, true); 
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//商店
 		CommonUtil.addClickEvent(this.m_ui.btn_shop, function(){ 
 			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UIShop, true); 
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//客服
 		CommonUtil.addClickEvent(this.m_ui.btn_kefu, function(){ 
 		//	if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UIKefu, true); 
-		}, this);
-		//提现
-		CommonUtil.addClickEvent(this.m_ui.btn_withdraw, function(){ 
-			if(!LoginMgr.getInstance().checkLogin(true)) { return; }
-			UIManager.openPopwnd(ViewDefine.UIWithdraw, true); 
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//推广
 		CommonUtil.addClickEvent(this.m_ui.btn_spread, function(){ 
 		//	if(!LoginMgr.getInstance().checkLogin(true)) { return; }
 			UIManager.openPopwnd(ViewDefine.UISpread, true); 
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){ 
 			UIManager.openPopwnd(ViewDefine.UISetting2, true);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//游戏记录
 		CommonUtil.addClickEvent(this.m_ui.btn_game_record, function(){ 
 			UIManager.openPopwnd(ViewDefine.UIGameRecord2, true);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//公告
 		CommonUtil.addClickEvent(this.m_ui.btn_notice, function(){ 
 			UIManager.openPopwnd(ViewDefine.UINotices, true);
+			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
