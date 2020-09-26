@@ -56,6 +56,12 @@ export default class UIHall extends BaseComponent {
 		EventCenter.getInstance().listen(login_msgs.ReconnectResp, this.LoginResp, this);
 		EventCenter.getInstance().listen(login_msgs.EnterRoomResp, this.refleshGameList, this);
 		EventCenter.getInstance().listen(EventDefine.down_progress, this.onDownProgress, this);
+		EventCenter.getInstance().listen(EventDefine.game_mode_chg, this.onGameModeChg, this, true);
+	}
+
+	onGameModeChg(mode) {
+		var curMode = GameUtil.getGameMode();
+		this.m_ui.btn_shop.active = curMode == GameModeEnum.ziyunying;
 	}
 
 	private onDownProgress(gameKind:number|string, curCnt:number, totalCnt:number) {

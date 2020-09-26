@@ -4,7 +4,7 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class CpnRollNotice extends cc.Component {
-    private spaceX = 100;
+    private spaceX = 160;
     private noticeColor = cc.color(200,200,200,255);
     
     update (dt) {

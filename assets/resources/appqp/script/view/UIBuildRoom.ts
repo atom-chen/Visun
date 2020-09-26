@@ -1,4 +1,5 @@
 import { login } from "../../../../../declares/login";
+import EventDefine from "../../../../common/script/definer/EventDefine";
 import GameConfig from "../../../../common/script/definer/GameConfig";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
@@ -23,12 +24,21 @@ export default class UIBuildRoom extends BaseComponent {
     onLoad () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         this.initUIEvent();
+        this.initNetEvent();
         this.m_ui.btn_fs.active = !cc.sys.isNative;
         var hero = LoginUser.getInstance();
         this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
+        this.selectTab(1);
+    }
+
+    initNetEvent() {
         EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
         EventCenter.getInstance().listen(login_msgs.ReconnectResp, this.LoginResp, this);
-        this.selectTab(1);
+        EventCenter.getInstance().listen(EventDefine.game_mode_chg, this.onGameModeChg, this);
+    }
+
+    onGameModeChg(mode) {
+        CommonUtil.safeDelete(this);
     }
 
     private LoginResp(param:login.ILoginResp) {

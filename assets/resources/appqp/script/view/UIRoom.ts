@@ -11,6 +11,7 @@ import LoginUser from "../../../../common/script/model/LoginUser";
 import { login_msgs } from "../../../../common/script/proto/net_login";
 import EventCenter from "../../../../kernel/basic/event/EventCenter";
 import AudioManager from "../../../../kernel/audio/AudioManager";
+import EventDefine from "../../../../common/script/definer/EventDefine";
 
 
 const {ccclass, property} = cc._decorator;
@@ -24,11 +25,20 @@ export default class UIRoom extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traverseLabels(this.node, this.m_lab);
         this.initUIEvent();
+        this.initNetEvent();
         this.m_ui.btn_fs.active = !cc.sys.isNative;
         var hero = LoginUser.getInstance();
         this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
+    }
+
+    initNetEvent() {
         EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
         EventCenter.getInstance().listen(login_msgs.ReconnectResp, this.LoginResp, this);
+        EventCenter.getInstance().listen(EventDefine.game_mode_chg, this.onGameModeChg, this);
+    }
+
+    onGameModeChg(mode) {
+        CommonUtil.safeDelete(this);
     }
 
     private LoginResp(param:login.ILoginResp) {
