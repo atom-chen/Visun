@@ -86,6 +86,7 @@ export default class UIHall extends BaseComponent {
 	
 				CommonUtil.addClickEvent(bton, function(){ 
 					GameManager.getInstance().enterGame(this.gameData.ID);
+					AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 				}, bton);
 	
 				this.m_ui.content.addChild(bton);
@@ -95,7 +96,8 @@ export default class UIHall extends BaseComponent {
 				bton["gameData"] = arr;
 	
 				CommonUtil.addClickEvent(bton, function(){ 
-					UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData)
+					UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData);
+					AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 				}, bton);
 	
 				this.m_ui.content.addChild(bton);
@@ -135,6 +137,7 @@ export default class UIHall extends BaseComponent {
 			testBtn.gameType = cfg.GameKind;
 			CommonUtil.addClickEvent(testBtn, function(){
 				GameManager.getInstance().enterGameScene(this.gameType);
+				AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
 			}, testBtn);
 			testBtn.getComponent(cc.Button).enabled = false;
 			CommonUtil.grayNode(testBtn, true);

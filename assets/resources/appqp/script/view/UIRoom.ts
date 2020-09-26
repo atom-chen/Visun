@@ -84,6 +84,7 @@ export default class UIRoom extends BaseComponent {
                 btn["gameData"] = items[i];
                 CommonUtil.addClickEvent(btn, function(){
                     GameManager.getInstance().enterGame(this.gameData.ID);
+                    AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
                 }, btn);
                 btn.getChildByName("lab_zhunru").getComponent(cc.Label).string = ""+(items[i].Info.EnterScore/100);
                 btn.getChildByName("lab_dizhu").getComponent(cc.Label).string = ""+(items[i].Info.LessScore/100);
