@@ -2,9 +2,6 @@ import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
 import CommonUtil from "../../../../kernel/utils/CommonUtil";
-//-----------------------------
-//
-//-----------------------------
 import BaseComponent from "../../../../kernel/view/BaseComponent";
 import UIManager from "../../../../kernel/view/UIManager";
 
@@ -43,9 +40,9 @@ export default class CpnGameMenu extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.mnu_feedback, function(){
 			UIManager.openPopwnd(ViewDefine.UIKefu, true);
 		}, this);
-		// CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
-		// 	GameManager.getInstance().quitGame();
-		// }, this);
+		CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
+			GameManager.getInstance().quitGame();
+		}, this);
 	}
 
 }
