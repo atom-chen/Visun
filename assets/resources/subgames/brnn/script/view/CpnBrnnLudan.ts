@@ -25,9 +25,10 @@ export default class CpnBrnnLudan extends BaseComponent {
             return;
         }
         this.m_ui.bbbb.active = true;
-        for(var i=0; i<data.length; i++) {
+        var len = data.length-1;
+        for(var i=len; i>=0; i--) {
             var item = this.m_ui.bbbb;
-            if(i != 0) {
+            if(i != len-1) {
                 item = cc.instantiate(this.m_ui.bbbb);
                 this.m_ui.content.addChild(item);
             }

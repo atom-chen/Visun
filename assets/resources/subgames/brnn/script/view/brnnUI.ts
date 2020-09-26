@@ -320,6 +320,10 @@ export default class BrnnUI extends BaseComponent {
 			this.m_ui["CpnPaixing"+i].getComponent(CpnPaixing).setCardType(cardlist[i].CardType, cardlist[i].CardValue);
 		}
 		this.setWinAreas(param.AwardArea);
+
+		var enterData = BrnnMgr.getInstance().getEnterData();
+		enterData.AwardAreas.push(param.AwardArea);
+		this.refreshLudan();
 	}
 
 	private BrcowcowOverResp(param:brcowcow.IBrcowcowOverResp) {
