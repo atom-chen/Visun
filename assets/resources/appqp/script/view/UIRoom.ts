@@ -24,6 +24,7 @@ export default class UIRoom extends BaseComponent {
         CommonUtil.traverseNodes(this.node, this.m_ui);
         CommonUtil.traverseLabels(this.node, this.m_lab);
         this.initUIEvent();
+        this.m_ui.btn_fs.active = !cc.sys.isNative;
         var hero = LoginUser.getInstance();
         this.m_ui.lab_hmoney.getComponent(cc.Label).string = CommonUtil.formRealMoney(hero.getMoney());
         EventCenter.getInstance().listen(login_msgs.LoginResp, this.LoginResp, this);
