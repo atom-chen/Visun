@@ -20,10 +20,10 @@ export default class ViewDefine {
 	public static UISetting2 = "lobby/prefabs/UISetting2";
 	public static UISafebox = "lobby/prefabs/UISafebox";
 	public static UIEmail = "lobby/prefabs/UIEmail";
-	public static UIShop = "lobby/prefabs/UIShop";
-	public static UIKefu = "lobby/prefabs/UIKefu";
-	public static UISpread = "lobby/prefabs/UISpread";
-	public static UIPerson = "lobby/prefabs/UIPerson";
+	public static UIShop = "lobby/prefabs/UIShop2";
+	public static UIKefu = "lobby/prefabs/UIKefu2";
+	public static UISpread = "lobby/prefabs/UISpread2";
+	public static UIPerson = "lobby/prefabs/UIPerson2";
 	public static UINotices = "lobby/prefabs/UINotices";
 	public static UIChgNick = "lobby/prefabs/UIChgNick";
 	//subgames
