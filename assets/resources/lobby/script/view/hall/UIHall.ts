@@ -253,6 +253,10 @@ export default class UIHall extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 
 			Adaptor.setFullScreen(!Adaptor.isFullScreen()); 
 		}, this);
+		//昵称
+		CommonUtil.addClickEvent(this.m_ui.userNode, function(){ 
+			UIManager.openPopwnd(ViewDefine.UIChgNick, false);
+		}, this);
 	}
 
 
