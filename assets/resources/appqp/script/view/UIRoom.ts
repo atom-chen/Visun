@@ -55,8 +55,16 @@ export default class UIRoom extends BaseComponent {
     }
 
     setViewData(items:Array<login.IGameItem>) {
+        if(isNil(items)) { return; }
         var cfg = GameConfig[items[0].Info.KindID];
         this.m_lab.lab_roomname.string = cfg && cfg.name || items[0].Info.Name;
+
+        var rrx = this.m_ui.rlist.x;
+        if(items.length <= 1) {
+            this.m_ui.rlist.x = rrx+100;
+        } else if (items.length <= 2) {
+            this.m_ui.rlist.x = rrx+60;
+        }
 
         for(var i=0; i<6; i++) {
             var btn = this.m_ui["button"+i];
