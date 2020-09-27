@@ -94,12 +94,20 @@ export default class UIBuildRoom extends BaseComponent {
             this.m_ui.buildNode.active = true;
             this.m_ui.joinNode.active = false;
             this.m_ui.btn_build.getChildByName("tab_sel").active = true;
+            this.m_ui.btn_build.getChildByName("tab_unsel").active = false;
+            this.m_ui.btn_build.getChildByName("labTtt").color = cc.color(250,51,93,255);
             this.m_ui.btn_join.getChildByName("tab_sel").active = false;
+            this.m_ui.btn_join.getChildByName("tab_unsel").active = true;
+            this.m_ui.btn_join.getChildByName("labTtt").color = cc.color(166,166,166,166);
         } else {
             this.m_ui.buildNode.active = false;
             this.m_ui.joinNode.active = true;
             this.m_ui.btn_build.getChildByName("tab_sel").active = false;
+            this.m_ui.btn_build.getChildByName("tab_unsel").active = true;
+            this.m_ui.btn_build.getChildByName("labTtt").color = cc.color(166,166,166,166);
             this.m_ui.btn_join.getChildByName("tab_sel").active = true;
+            this.m_ui.btn_join.getChildByName("tab_unsel").active = false;
+            this.m_ui.btn_join.getChildByName("labTtt").color = cc.color(250,51,93,255);
         }
     }
 
