@@ -1,0 +1,193 @@
+import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
+
+var HelpDocDefine = {
+	[GameKindEnum.BrCowCow]: {
+		GameKind: GameKindEnum.BrCowCow,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"", imgcont:["brnn/cont_all"] },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Longhu] : {
+		GameKind: GameKindEnum.Longhu,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Baccarat] : {
+		GameKind: GameKindEnum.Baccarat,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Redpacket] : {
+		GameKind: GameKindEnum.Redpacket,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Redblack] : {
+		GameKind: GameKindEnum.Redblack,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Jszjh] : {
+		GameKind: GameKindEnum.Jszjh,	
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Brttz] : {
+		GameKind: GameKindEnum.Brttz,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Toubao] : {
+		GameKind: GameKindEnum.Toubao,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+
+	
+	[GameKindEnum.Zhajinhua] : {
+		GameKind: GameKindEnum.Zhajinhua,
+		TabList:[
+			{ name:"牌型", cont:"", imgcont:["zjh/zjh_paixing"] },
+			{ name:"玩法", cont:"", imgcont:["zjh/zjh_wanfa"] },
+			{ name:"赔率", cont:"", imgcont:["zjh/zjh_peilv"] },
+		]
+	},
+	[GameKindEnum.QzCowcow] : {
+		GameKind: GameKindEnum.QzCowcow,
+		TabList:[
+			{ name:"牌型", cont:"", imgcont:["qznn/txt_pxsf","qznn/cont_pxsf","qznn/txt_pxdx","qznn/cont_pxdx","qznn/txt_pxbs","qznn/cont_pxbs"] },
+			{ name:"玩法", cont:"", imgcont:["qznn/wanfa"] },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.TbCowcow] : {
+		GameKind: GameKindEnum.TbCowcow,
+		TabList:[
+			{ name:"牌型", cont:"", imgcont:["tbnn/txt_pxsf","tbnn/cont_pxsf","tbnn/txt_pxdx","tbnn/cont_pxdx"] },
+			{ name:"玩法", cont:"", imgcont:["tbnn/wanfa"] },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Landlord] : {
+		GameKind: GameKindEnum.Landlord,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Blackjack] : {
+		GameKind: GameKindEnum.Blackjack,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Sangong] : {
+		GameKind: GameKindEnum.Sangong,
+		TabList:[
+			{ name:"牌型", cont:"", imgcont:["sangong/txt_pxsf","sangong/cont_pxsf","newline","sangong/txt_pxdx","sangong/cont_pxdx","newline","sangong/txt_pxbs","sangong/cont_pxbs"] },
+			{ name:"玩法", cont:"", imgcont:["sangong/txt_wfjs","sangong/wanfa"] },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Water13] : {
+		GameKind: GameKindEnum.Water13,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Qzpaijiu] : {
+		GameKind: GameKindEnum.Qzpaijiu,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Suoha] : {
+		GameKind: GameKindEnum.Suoha,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Paodekuai] : {
+		GameKind: GameKindEnum.Paodekuai,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Texas] : {
+		GameKind: GameKindEnum.Texas,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Ermj] : {
+		GameKind: GameKindEnum.Ermj,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Buyu] : {
+		GameKind: GameKindEnum.Buyu,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Tuitongzi] : {
+		GameKind: GameKindEnum.Tuitongzi,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+	[GameKindEnum.Jskb] : {
+		GameKind: GameKindEnum.Jskb,
+		TabList:[
+			{ name:"牌型", cont:"" },
+			{ name:"玩法", cont:"" },
+			{ name:"赔率", cont:"" },
+		]
+	},
+
+}
+
+export default HelpDocDefine;
