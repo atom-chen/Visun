@@ -62,7 +62,7 @@ export default class UIEmail extends BaseComponent {
 		var contNode = this.m_ui.contNode;
 		var info = this.findEmailData(emailId);
 		contNode.getChildByName("labTitle").getComponent(cc.Label).string = info.Title;
-		contNode.getChildByName("labSender").getComponent(cc.Label).string = info.Sender;
+		contNode.getChildByName("labSender").getComponent(cc.Label).string = "发送人：" + info.Sender;
 		contNode.getChildByName("labTime").getComponent(cc.Label).string = CommonUtil.formatTime(info.Timestamp);
 		contNode.getChildByName("rchCont").getComponent(cc.RichText).string = info.Content;
 		var childs = this.m_ui.contentLeft.children;
@@ -72,6 +72,8 @@ export default class UIEmail extends BaseComponent {
 			} else {
 				childs[i].color = cc.color(111,111,111,255);
 			}
+			childs[i].getChildByName("tab_sel").active = childs[i]["_email_id_"] == emailId;
+			childs[i].getChildByName("tab_unsel").active = childs[i]["_email_id_"] != emailId;
 		}
 	}
 
@@ -88,8 +90,8 @@ export default class UIEmail extends BaseComponent {
 	}
 
 	testData() : Array<EmailInfo> {
-		var emailList = [];
-		for(var i=0; i<10; i++) {
+		var emailList:Array<EmailInfo> = [];
+		for(var i=0; i<1; i++) {
 			var email = new EmailInfo;
 			email.Id = i;
 			email.Title = "邮件"+i;
@@ -100,6 +102,8 @@ export default class UIEmail extends BaseComponent {
 			email.Content = "啊啊啊啊啊"+i;
 			emailList.push(email);
 		}
+		emailList[0].Title = "欢迎加入";
+		emailList[0].Content = "欢迎加入“<color=#13A020>指尖棋牌</c>”！";
 		return emailList;
 	}
 

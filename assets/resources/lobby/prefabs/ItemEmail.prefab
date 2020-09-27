@@ -53,7 +53,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 220,
-      "height": 80
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -73,7 +73,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
@@ -91,7 +91,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "tab1_unsel",
+    "_name": "tab_unsel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -117,7 +117,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 220,
-      "height": 80
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -198,7 +198,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "tab1_sel",
+    "_name": "tab_sel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -224,7 +224,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 220,
-      "height": 80
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -306,7 +306,7 @@
   {
     "__type__": "cc.Node",
     "_name": "labEmailTitle",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -383,7 +383,7 @@
     "_useOriginalSize": false,
     "_string": "邮件标题",
     "_N$string": "邮件标题",
-    "_fontSize": 22,
+    "_fontSize": 20,
     "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
@@ -413,7 +413,7 @@
   {
     "__type__": "cc.Node",
     "_name": "labEmailType",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -490,7 +490,7 @@
     "_useOriginalSize": false,
     "_string": "邮件类型",
     "_N$string": "邮件类型",
-    "_fontSize": 20,
+    "_fontSize": 18,
     "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
@@ -520,7 +520,7 @@
   {
     "__type__": "cc.Node",
     "_name": "labEmailState",
-    "_objFlags": 512,
+    "_objFlags": 0,
     "_parent": {
       "__id__": 1
     },
@@ -549,14 +549,14 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 1,
       "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        50,
+        88,
         -18,
         0,
         0,
@@ -597,7 +597,7 @@
     "_useOriginalSize": false,
     "_string": "未读",
     "_N$string": "未读",
-    "_fontSize": 22,
+    "_fontSize": 20,
     "_lineHeight": 24,
     "_enableWrapText": false,
     "_N$file": null,
@@ -606,7 +606,7 @@
     "_batchAsBitmap": false,
     "_styleFlags": 0,
     "_underlineHeight": 0,
-    "_N$horizontalAlign": 0,
+    "_N$horizontalAlign": 2,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
