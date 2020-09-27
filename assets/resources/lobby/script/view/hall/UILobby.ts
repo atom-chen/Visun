@@ -151,7 +151,7 @@ export default class UILobby extends BaseComponent {
 		}, this);
 		//设置
 		CommonUtil.addClickEvent(this.m_ui.btn_menu, function(){
-			UIManager.openPopwnd(ViewDefine.UISetting, true);
+			UIManager.openPopwnd(ViewDefine.UISetting1, true);
 		}, this);
 		//全屏
 		CommonUtil.addClickEvent(this.m_ui.btn_fs, function(){ 

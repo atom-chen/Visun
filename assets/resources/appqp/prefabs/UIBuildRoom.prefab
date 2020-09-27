@@ -2415,7 +2415,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lab111",
+    "_name": "txt_cjfj",
     "_objFlags": 0,
     "_parent": {
       "__id__": 55
@@ -2440,8 +2440,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 128,
-      "height": 50.4
+      "width": 249,
+      "height": 69
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2453,14 +2453,14 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        3,
+        4,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0.7,
+        0.7,
         1
       ]
     },
@@ -2478,7 +2478,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2490,23 +2490,23 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
-    "_string": "创建房间",
-    "_N$string": "创建房间",
-    "_fontSize": 32,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "7d442579-6105-40b3-a878-db1dc5774966"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -2517,7 +2517,7 @@
     "asset": {
       "__uuid__": "91d3823b-7ad2-4129-b86d-f96f1b7f4f6c"
     },
-    "fileId": "famveGKZ9E+oqJXr3o2KAy",
+    "fileId": "e58Hu0JZlFVrTHSZU6WNi6",
     "sync": false
   },
   {
@@ -2781,7 +2781,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lab111",
+    "_name": "txt_jrfj",
     "_objFlags": 0,
     "_parent": {
       "__id__": 64
@@ -2806,8 +2806,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 128,
-      "height": 50.4
+      "width": 249,
+      "height": 69
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2819,14 +2819,14 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        3,
+        4,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
+        0.7,
+        0.7,
         1
       ]
     },
@@ -2844,7 +2844,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2856,23 +2856,23 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
-    "_string": "加入房间",
-    "_N$string": "加入房间",
-    "_fontSize": 32,
-    "_lineHeight": 40,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "5298f42e-3b1e-446a-92d0-84f44f8ad60b"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -2883,7 +2883,7 @@
     "asset": {
       "__uuid__": "91d3823b-7ad2-4129-b86d-f96f1b7f4f6c"
     },
-    "fileId": "c8TPPYml5CHI9sppffmpDO",
+    "fileId": "62TWhRsjhKp7UDYR1idCUe",
     "sync": false
   },
   {

@@ -10,13 +10,12 @@ export default class ViewDefine {
 	public static UIGameRecord2 = "appqp/prefabs/UIGameRecord2";
 	public static UIRoom = "appqp/prefabs/UIRoom";
 	public static UIBuildRoom = "appqp/prefabs/UIBuildRoom";
-	//
 	public static UIHelpdoc = "appqp/helpdoc/prefabs/UIHelpdoc";
 	public static UIHelpdoc2 = "appqp/helpdoc/prefabs/UIHelpdoc2";
 	//lobby
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIHall = "lobby/prefabs/UIHall";
-	public static UISetting = "lobby/prefabs/UISetting";
+	public static UISetting1 = "lobby/prefabs/UISetting";
 	public static UISetting2 = "lobby/prefabs/UISetting2";
 	public static UISafebox = "lobby/prefabs/UISafebox";
 	public static UIEmail = "lobby/prefabs/UIEmail";
