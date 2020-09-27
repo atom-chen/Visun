@@ -54,6 +54,10 @@ export default class UIHelpdoc2 extends BaseComponent {
     }
 
     setViewData(data) {
+        if(isNil(data)) {
+            return;
+        }
+        
         this.kindId = data.kindId;
 
         var cfg = GameConfig[this.kindId];
