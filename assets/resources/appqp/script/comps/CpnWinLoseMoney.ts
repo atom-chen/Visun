@@ -22,7 +22,7 @@ export default class CpnWinLoseMoney extends cc.Component {
         }
         dstNode.active = true;
         dstNode.getComponent(cc.Label).string = strV;
-        cc.log("play money change: ", strV);
+        // cc.log("play money change: ", strV);
         dstNode.stopAllActions();
         dstNode.y = 0;
         if(keepTime > 0) {
