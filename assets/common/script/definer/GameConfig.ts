@@ -175,6 +175,14 @@ var GameConfig = {
 		viewpath: ViewDefine.UIk4zqznn,
 		orderv: 1
 	},
+	[GameKindEnum.Jszjh] : {
+		GameKind: GameKindEnum.Jszjh,
+		name: "极速炸金花",
+		icon: "lobby/imgs/gameico2/ico_jszjh",
+		sdir: "jszjh",
+		viewpath: ViewDefine.UIjszjh,
+		orderv: 1
+	},
 
 	//---------------------------------------------------
 
@@ -183,14 +191,6 @@ var GameConfig = {
 		name: "推筒子",
 		icon: "lobby/imgs/gameico2/ico_ttz",
 		sdir: "ttz",
-	//	viewpath: ViewDefine.UIbrttz,
-		orderv: 10
-	},
-	[GameKindEnum.Jszjh] : {
-		GameKind: GameKindEnum.Jszjh,
-		name: "极速炸金花",
-		icon: "lobby/imgs/gameico2/ico_jszjh",
-		sdir: "jszjh",
 	//	viewpath: ViewDefine.UIbrttz,
 		orderv: 10
 	},
