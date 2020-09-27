@@ -155,14 +155,16 @@ export default class GameManager extends ModelBase {
 				if(reason==HOT_FAIL_REASON.not_need_update) {
 					GameManager.getInstance().doEnter();
 				} else {
-					var gamename = GameManager.getInstance().clientConfig(gameKind).name;
-					UIManager.openDialog("hotfailenter", gamename+"更新失败，是否依然进入游戏 reason:"+reason, 2, function(mnuId:number){
-						if(mnuId == 1){
-							GameManager.getInstance().doEnter();
-						} else {
-							//PlatformUtil.exitApp();
-						}
-					});
+					if(reason==HOT_FAIL_REASON.err_no_local_manifest) {
+						GameManager.getInstance().doEnter();
+					} else {
+						var gamename = GameManager.getInstance().clientConfig(gameKind).name;
+						UIManager.openDialog("hotfailenter", gamename+"更新失败，是否依然进入游戏 reason:"+reason, 2, function(mnuId:number){
+							if(mnuId == 1){
+								GameManager.getInstance().doEnter();
+							}
+						});
+					}
 				}
 			}
 		},
