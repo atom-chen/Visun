@@ -64,6 +64,11 @@ export default class UIHelpdoc2 extends BaseComponent {
 
         this.m_ui.label_title.getComponent(cc.Label).string = cfg && cfg.name || "";
         
+        var doc = HelpDocDefine[this.kindId];
+        if(doc && doc.bgColor) {
+            this.m_ui.contBg.color = doc.bgColor
+        }
+        
         this.selectTab(0);
     }
 

@@ -3,6 +3,7 @@ import { GameKindEnum } from "../../../../common/script/definer/ConstDefine";
 var HelpDocDefine = {
 	[GameKindEnum.BrCowCow]: {
 		GameKind: GameKindEnum.BrCowCow,
+		bgColor:cc.color(20,20,20,255),
 		TabList:[
 			{ name:"牌型", cont:"" },
 			{ name:"玩法", cont:"", imgcont:["brnn/cont_all"] },
@@ -19,9 +20,10 @@ var HelpDocDefine = {
 	},
 	[GameKindEnum.Baccarat] : {
 		GameKind: GameKindEnum.Baccarat,
+		bgColor:cc.color(20,20,20,255),
 		TabList:[
 			{ name:"牌型", cont:"" },
-			{ name:"玩法", cont:"" },
+			{ name:"玩法", cont:"", imgcont:["bjle/cont_all"] },
 			{ name:"赔率", cont:"" },
 		]
 	},
@@ -77,16 +79,18 @@ var HelpDocDefine = {
 	},
 	[GameKindEnum.QzCowcow] : {
 		GameKind: GameKindEnum.QzCowcow,
+		bgColor:cc.color(20,20,20,255),
 		TabList:[
-			{ name:"牌型", cont:"", imgcont:["qznn/txt_pxsf","qznn/cont_pxsf","qznn/txt_pxdx","qznn/cont_pxdx","qznn/txt_pxbs","qznn/cont_pxbs"] },
+			{ name:"牌型", cont:"", imgcont:["qznn/txt_pxsf","qznn/cont_pxsf","newline","qznn/txt_pxdx","qznn/cont_pxdx","newline","qznn/txt_pxbs","qznn/cont_pxbs"] },
 			{ name:"玩法", cont:"", imgcont:["qznn/wanfa"] },
 			{ name:"赔率", cont:"" },
 		]
 	},
 	[GameKindEnum.TbCowcow] : {
 		GameKind: GameKindEnum.TbCowcow,
+		bgColor:cc.color(20,20,20,255),
 		TabList:[
-			{ name:"牌型", cont:"", imgcont:["tbnn/txt_pxsf","tbnn/cont_pxsf","tbnn/txt_pxdx","tbnn/cont_pxdx"] },
+			{ name:"牌型", cont:"", imgcont:["tbnn/txt_pxsf","tbnn/cont_pxsf","newline","tbnn/txt_pxdx","tbnn/cont_pxdx"] },
 			{ name:"玩法", cont:"", imgcont:["tbnn/wanfa"] },
 			{ name:"赔率", cont:"" },
 		]
