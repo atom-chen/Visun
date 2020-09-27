@@ -99,6 +99,7 @@ export default class UIjszjh extends BaseComponent {
     //
     toStateReady() {
         this._cpnGameState.setZhunbei(true);
+        this.m_ui.readyNode.active = true;
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._handors[i].resetCards(null);
             this._pxCpns[i].setCardType(-1,-1);
@@ -111,6 +112,7 @@ export default class UIjszjh extends BaseComponent {
 
     toStateDeing() {
         this._cpnGameState.setFapai(true);
+        this.m_ui.readyNode.active = false;
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._userStateCpns[i].idle();
         }
@@ -122,6 +124,7 @@ export default class UIjszjh extends BaseComponent {
 
     toStateOpen() {
         this._cpnGameState.setKaipai(true);
+        this.m_ui.readyNode.active = false;
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._handors[i].resetCards([0x01,0x01,0x01]);
             this._handors[i].playOpen(true);
@@ -135,6 +138,7 @@ export default class UIjszjh extends BaseComponent {
 
     toStateJiesuan() {
         this._cpnGameState.setPaijiang(true);
+        this.m_ui.readyNode.active = false;
         for(var i=0; i<MAX_SOLDIER; i++) {
             this._winloses[i].playMoney(CommonUtil.getRandomInt(500,1000)-750, 50, 3);
         }
