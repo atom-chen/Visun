@@ -52,6 +52,7 @@ export default class GameManager extends ModelBase {
 	private enterData = null;
 	private gameModal = null;
 	private willGame = -1;
+	private loginEnter = -1;
 
 	public pullAll() {
 		var roomsInfo = this.getRoomsInfo();
@@ -75,6 +76,14 @@ export default class GameManager extends ModelBase {
 
 	public setGameArr(roomNum:number, data:Array<login.IGameItem>) {
 		this.gameArr[roomNum] = data;
+		if(this.loginEnter > 0) {
+			var serverData = this.getGameData(this.loginEnter);
+			if(serverData) {
+				var ttt = this.loginEnter;
+				this.loginEnter = -1;
+				this.enterGame(ttt);
+			}
+		}
 	}
 
 	public getGameArr(roomNum:number) : Array<login.IGameItem> {
@@ -117,6 +126,10 @@ export default class GameManager extends ModelBase {
 			return null;
 		}
 		return this.getGameData(this.gameId);
+	}
+
+	public setLoginEnter(gameId:number) {
+		this.loginEnter = gameId;
 	}
 
 	//------------------------------------------------------------------------
@@ -269,7 +282,7 @@ export default class GameManager extends ModelBase {
 		}
 		
 		var serverData = this.getGameData(gameId);
-		
+
 		if(isNil(serverData)) {
 			return;
 		}

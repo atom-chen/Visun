@@ -69,6 +69,7 @@ var NetHandlers = {
         UIManager.toast("登陆成功");
 
         if(param.InGameID && param.InGameID > 0) {
+            GameManager.getInstance().setLoginEnter(param.InGameID);
             GameManager.getInstance().enterGame(param.InGameID);
         }
     },
