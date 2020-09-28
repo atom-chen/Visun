@@ -52,5 +52,6 @@ export default class ViewDefine {
 	public static UIslwh = "subgames/slwh/prefabs/UIslwh";
 	public static UIk4zqznn = "subgames/k4zqznn/prefabs/UIk4zqznn";
 	public static UIjszjh = "subgames/jszjh/prefabs/UIjszjh";
+	public static UIxlch = "subgames/xlch/prefabs/UIxlch";
 	public static battle1 = "subgames/rpg/prefabs/battle1";
 }

@@ -183,6 +183,14 @@ var GameConfig = {
 		viewpath: ViewDefine.UIjszjh,
 		orderv: 1
 	},
+	[GameKindEnum.Xlch] : {
+		GameKind: GameKindEnum.Xlch,
+		name: "血流成河",
+		icon: "lobby/imgs/gameico2/ico_xlch",
+		sdir: "xlch",
+		viewpath: ViewDefine.UIxlch,
+		orderv: 1
+	},
 
 	//---------------------------------------------------
 
@@ -191,14 +199,6 @@ var GameConfig = {
 		name: "推筒子",
 		icon: "lobby/imgs/gameico2/ico_ttz",
 		sdir: "ttz",
-	//	viewpath: ViewDefine.UIbrttz,
-		orderv: 10
-	},
-	[GameKindEnum.Xlch] : {
-		GameKind: GameKindEnum.Xlch,
-		name: "血流成河",
-		icon: "lobby/imgs/gameico2/ico_xlch",
-		sdir: "xlch",
 	//	viewpath: ViewDefine.UIbrttz,
 		orderv: 10
 	},
