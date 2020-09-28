@@ -267,8 +267,15 @@ export default class GameManager extends ModelBase {
 		if(!LoginMgr.getInstance().checkLogin(true)) {
 			return;
 		}
-		this.willGame = gameId;
+		
 		var serverData = this.getGameData(gameId);
+		
+		if(isNil(serverData)) {
+			return;
+		}
+
+		this.willGame = gameId;
+
 		var gameKind = serverData.Info.KindID;
 		cc.log("enterGame: ", gameId, gameKind);
 
