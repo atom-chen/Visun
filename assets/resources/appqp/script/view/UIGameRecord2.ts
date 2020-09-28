@@ -66,14 +66,19 @@ export default class UIGameRecord2 extends BaseComponent {
                 if(self.allData[this.gameData.ID]) {
                     self.refleshList(self.allData[this.gameData.ID]);
                 } else {
-                    gamecomm_request.GetInningsInfoReq({GameID:this.gameData.ID});
+                    self.reqData(this.gameData.ID);
                 }
             }, item);
             allbtns.push(item);
             allbtns[i].getChildByName("tab1_sel").active = gamelist[i].ID==selectId;
             allbtns[i].getChildByName("tab1_unsel").active = gamelist[i].ID!=selectId;
         }
-        gamecomm_request.GetInningsInfoReq({GameID:selectId});
+        this.reqData(selectId);
+    }
+
+    reqData(gid:number) {
+        if(isEmpty(gid)) { return; }
+        gamecomm_request.GetInningsInfoReq({GameID:gid});
     }
 
     private refleshList(param:gamecomm.IGetInningsInfoResp) {
