@@ -65,7 +65,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_slwh",
 		sdir: "slwh",
 		viewpath: ViewDefine.UIslwh,
-		orderv: 1
+		orderv: 2
 	},
 
 	//对战
@@ -191,18 +191,17 @@ var GameConfig = {
 		viewpath: ViewDefine.UIxlch,
 		orderv: 1
 	},
-
-	//---------------------------------------------------
-
 	[GameKindEnum.Tuitongzi] : {
 		GameKind: GameKindEnum.Tuitongzi,
 		name: "推筒子",
 		icon: "lobby/imgs/gameico2/ico_ttz",
 		sdir: "ttz",
-	//	viewpath: ViewDefine.UIbrttz,
-		orderv: 10
+		viewpath: ViewDefine.UIttz,
+		orderv: 1
 	},
-	
+
+
+	//---------------------------------------------------
 
 	// [GameKindEnum.Buyu] : {
 	// 	GameKind: GameKindEnum.Buyu,
