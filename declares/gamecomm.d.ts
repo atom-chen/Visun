@@ -17,6 +17,14 @@ export namespace gamecomm {
         PlayerRaise = 10
     }
 
+    /** GameModel enum. */
+    enum GameModel {
+        General = 0,
+        Fight = 1,
+        Multiplayer = 2,
+        RoomCard = 3
+    }
+
     /** Properties of a PlayerInfo. */
     interface IPlayerInfo {
 
@@ -180,6 +188,132 @@ export namespace gamecomm {
 
         /**
          * Converts this PlayerInfo to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a ConfigInfo. */
+    interface IConfigInfo {
+
+        /** ConfigInfo Name */
+        Name?: (string|null);
+
+        /** ConfigInfo Key */
+        Key?: (string|null);
+
+        /** ConfigInfo EnterScore */
+        EnterScore?: (number|null);
+
+        /** ConfigInfo LessScore */
+        LessScore?: (number|null);
+
+        /** ConfigInfo PlayScore */
+        PlayScore?: (number|null);
+
+        /** ConfigInfo Amount */
+        Amount?: (number|null);
+
+        /** ConfigInfo HostID */
+        HostID?: (number|Long|null);
+    }
+
+    /** Represents a ConfigInfo. */
+    class ConfigInfo implements IConfigInfo {
+
+        /**
+         * Constructs a new ConfigInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IConfigInfo);
+
+        /** ConfigInfo Name. */
+        public Name: string;
+
+        /** ConfigInfo Key. */
+        public Key: string;
+
+        /** ConfigInfo EnterScore. */
+        public EnterScore: number;
+
+        /** ConfigInfo LessScore. */
+        public LessScore: number;
+
+        /** ConfigInfo PlayScore. */
+        public PlayScore: number;
+
+        /** ConfigInfo Amount. */
+        public Amount: number;
+
+        /** ConfigInfo HostID. */
+        public HostID: (number|Long);
+
+        /**
+         * Creates a new ConfigInfo instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ConfigInfo instance
+         */
+        public static create(properties?: gamecomm.IConfigInfo): gamecomm.ConfigInfo;
+
+        /**
+         * Encodes the specified ConfigInfo message. Does not implicitly {@link gamecomm.ConfigInfo.verify|verify} messages.
+         * @param message ConfigInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IConfigInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ConfigInfo message, length delimited. Does not implicitly {@link gamecomm.ConfigInfo.verify|verify} messages.
+         * @param message ConfigInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IConfigInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ConfigInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ConfigInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.ConfigInfo;
+
+        /**
+         * Decodes a ConfigInfo message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ConfigInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.ConfigInfo;
+
+        /**
+         * Verifies a ConfigInfo message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ConfigInfo message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ConfigInfo
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.ConfigInfo;
+
+        /**
+         * Creates a plain object from a ConfigInfo message. Also converts values to other types if specified.
+         * @param message ConfigInfo
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.ConfigInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ConfigInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -1121,11 +1255,212 @@ export namespace gamecomm {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a SettingGameReq. */
+    interface ISettingGameReq {
+
+        /** SettingGameReq Model */
+        Model?: (gamecomm.GameModel|null);
+
+        /** SettingGameReq KindID */
+        KindID?: (number|null);
+
+        /** SettingGameReq Info */
+        Info?: (gamecomm.IConfigInfo|null);
+    }
+
+    /** Represents a SettingGameReq. */
+    class SettingGameReq implements ISettingGameReq {
+
+        /**
+         * Constructs a new SettingGameReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.ISettingGameReq);
+
+        /** SettingGameReq Model. */
+        public Model: gamecomm.GameModel;
+
+        /** SettingGameReq KindID. */
+        public KindID: number;
+
+        /** SettingGameReq Info. */
+        public Info?: (gamecomm.IConfigInfo|null);
+
+        /**
+         * Creates a new SettingGameReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingGameReq instance
+         */
+        public static create(properties?: gamecomm.ISettingGameReq): gamecomm.SettingGameReq;
+
+        /**
+         * Encodes the specified SettingGameReq message. Does not implicitly {@link gamecomm.SettingGameReq.verify|verify} messages.
+         * @param message SettingGameReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingGameReq message, length delimited. Does not implicitly {@link gamecomm.SettingGameReq.verify|verify} messages.
+         * @param message SettingGameReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingGameReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.SettingGameReq;
+
+        /**
+         * Decodes a SettingGameReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.SettingGameReq;
+
+        /**
+         * Verifies a SettingGameReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingGameReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingGameReq
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.SettingGameReq;
+
+        /**
+         * Creates a plain object from a SettingGameReq message. Also converts values to other types if specified.
+         * @param message SettingGameReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.SettingGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingGameReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SettingGameResp. */
+    interface ISettingGameResp {
+
+        /** SettingGameResp GameID */
+        GameID?: (number|null);
+
+        /** SettingGameResp Info */
+        Info?: (gamecomm.IConfigInfo|null);
+    }
+
+    /** Represents a SettingGameResp. */
+    class SettingGameResp implements ISettingGameResp {
+
+        /**
+         * Constructs a new SettingGameResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.ISettingGameResp);
+
+        /** SettingGameResp GameID. */
+        public GameID: number;
+
+        /** SettingGameResp Info. */
+        public Info?: (gamecomm.IConfigInfo|null);
+
+        /**
+         * Creates a new SettingGameResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingGameResp instance
+         */
+        public static create(properties?: gamecomm.ISettingGameResp): gamecomm.SettingGameResp;
+
+        /**
+         * Encodes the specified SettingGameResp message. Does not implicitly {@link gamecomm.SettingGameResp.verify|verify} messages.
+         * @param message SettingGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingGameResp message, length delimited. Does not implicitly {@link gamecomm.SettingGameResp.verify|verify} messages.
+         * @param message SettingGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingGameResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.SettingGameResp;
+
+        /**
+         * Decodes a SettingGameResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.SettingGameResp;
+
+        /**
+         * Verifies a SettingGameResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingGameResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingGameResp
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.SettingGameResp;
+
+        /**
+         * Creates a plain object from a SettingGameResp message. Also converts values to other types if specified.
+         * @param message SettingGameResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.SettingGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingGameResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of an EnterGameReq. */
     interface IEnterGameReq {
 
         /** EnterGameReq GameID */
         GameID?: (number|null);
+
+        /** EnterGameReq GameKey */
+        GameKey?: (string|null);
     }
 
     /** Represents an EnterGameReq. */
@@ -1139,6 +1474,9 @@ export namespace gamecomm {
 
         /** EnterGameReq GameID. */
         public GameID: number;
+
+        /** EnterGameReq GameKey. */
+        public GameKey: string;
 
         /**
          * Creates a new EnterGameReq instance using the specified properties.

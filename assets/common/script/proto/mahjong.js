@@ -951,6 +951,15 @@ $root.go = (function() {
         return values;
     })();
 
+    go.GameModel = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "General"] = 0;
+        values[valuesById[1] = "Fight"] = 1;
+        values[valuesById[2] = "Multiplayer"] = 2;
+        values[valuesById[3] = "RoomCard"] = 3;
+        return values;
+    })();
+
     go.PlayerInfo = (function() {
 
         function PlayerInfo(properties) {
@@ -1319,6 +1328,192 @@ $root.go = (function() {
         };
 
         return PlayerInfo;
+    })();
+
+    go.ConfigInfo = (function() {
+
+        function ConfigInfo(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ConfigInfo.prototype.Name = "";
+        ConfigInfo.prototype.Key = "";
+        ConfigInfo.prototype.EnterScore = 0;
+        ConfigInfo.prototype.LessScore = 0;
+        ConfigInfo.prototype.PlayScore = 0;
+        ConfigInfo.prototype.Amount = 0;
+        ConfigInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        ConfigInfo.create = function create(properties) {
+            return new ConfigInfo(properties);
+        };
+
+        ConfigInfo.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(10).string(message.Name);
+            if (message.Key != null && Object.hasOwnProperty.call(message, "Key"))
+                writer.uint32(18).string(message.Key);
+            if (message.EnterScore != null && Object.hasOwnProperty.call(message, "EnterScore"))
+                writer.uint32(24).uint32(message.EnterScore);
+            if (message.LessScore != null && Object.hasOwnProperty.call(message, "LessScore"))
+                writer.uint32(32).uint32(message.LessScore);
+            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
+                writer.uint32(40).int32(message.Amount);
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(48).uint64(message.HostID);
+            if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
+                writer.uint32(64).uint32(message.PlayScore);
+            return writer;
+        };
+
+        ConfigInfo.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ConfigInfo.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.ConfigInfo();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Name = reader.string();
+                    break;
+                case 2:
+                    message.Key = reader.string();
+                    break;
+                case 3:
+                    message.EnterScore = reader.uint32();
+                    break;
+                case 4:
+                    message.LessScore = reader.uint32();
+                    break;
+                case 8:
+                    message.PlayScore = reader.uint32();
+                    break;
+                case 5:
+                    message.Amount = reader.int32();
+                    break;
+                case 6:
+                    message.HostID = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ConfigInfo.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ConfigInfo.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            if (message.Key != null && message.hasOwnProperty("Key"))
+                if (!$util.isString(message.Key))
+                    return "Key: string expected";
+            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
+                if (!$util.isInteger(message.EnterScore))
+                    return "EnterScore: integer expected";
+            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
+                if (!$util.isInteger(message.LessScore))
+                    return "LessScore: integer expected";
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                if (!$util.isInteger(message.PlayScore))
+                    return "PlayScore: integer expected";
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                if (!$util.isInteger(message.Amount))
+                    return "Amount: integer expected";
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
+            return null;
+        };
+
+        ConfigInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.ConfigInfo)
+                return object;
+            var message = new $root.go.ConfigInfo();
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            if (object.Key != null)
+                message.Key = String(object.Key);
+            if (object.EnterScore != null)
+                message.EnterScore = object.EnterScore >>> 0;
+            if (object.LessScore != null)
+                message.LessScore = object.LessScore >>> 0;
+            if (object.PlayScore != null)
+                message.PlayScore = object.PlayScore >>> 0;
+            if (object.Amount != null)
+                message.Amount = object.Amount | 0;
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        ConfigInfo.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Name = "";
+                object.Key = "";
+                object.EnterScore = 0;
+                object.LessScore = 0;
+                object.Amount = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
+                object.PlayScore = 0;
+            }
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            if (message.Key != null && message.hasOwnProperty("Key"))
+                object.Key = message.Key;
+            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
+                object.EnterScore = message.EnterScore;
+            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
+                object.LessScore = message.LessScore;
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                object.Amount = message.Amount;
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                object.PlayScore = message.PlayScore;
+            return object;
+        };
+
+        ConfigInfo.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ConfigInfo;
     })();
 
     go.CardInfo = (function() {
@@ -2620,6 +2815,257 @@ $root.go = (function() {
         return GameRecordList;
     })();
 
+    go.SettingGameReq = (function() {
+
+        function SettingGameReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SettingGameReq.prototype.Model = 0;
+        SettingGameReq.prototype.KindID = 0;
+        SettingGameReq.prototype.Info = null;
+
+        SettingGameReq.create = function create(properties) {
+            return new SettingGameReq(properties);
+        };
+
+        SettingGameReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Model != null && Object.hasOwnProperty.call(message, "Model"))
+                writer.uint32(8).int32(message.Model);
+            if (message.KindID != null && Object.hasOwnProperty.call(message, "KindID"))
+                writer.uint32(16).uint32(message.KindID);
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.go.ConfigInfo.encode(message.Info, writer.uint32(26).fork()).ldelim();
+            return writer;
+        };
+
+        SettingGameReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SettingGameReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.SettingGameReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Model = reader.int32();
+                    break;
+                case 2:
+                    message.KindID = reader.uint32();
+                    break;
+                case 3:
+                    message.Info = $root.go.ConfigInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SettingGameReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SettingGameReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Model != null && message.hasOwnProperty("Model"))
+                switch (message.Model) {
+                default:
+                    return "Model: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            if (message.KindID != null && message.hasOwnProperty("KindID"))
+                if (!$util.isInteger(message.KindID))
+                    return "KindID: integer expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.go.ConfigInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        SettingGameReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.SettingGameReq)
+                return object;
+            var message = new $root.go.SettingGameReq();
+            switch (object.Model) {
+            case "General":
+            case 0:
+                message.Model = 0;
+                break;
+            case "Fight":
+            case 1:
+                message.Model = 1;
+                break;
+            case "Multiplayer":
+            case 2:
+                message.Model = 2;
+                break;
+            case "RoomCard":
+            case 3:
+                message.Model = 3;
+                break;
+            }
+            if (object.KindID != null)
+                message.KindID = object.KindID >>> 0;
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".go.SettingGameReq.Info: object expected");
+                message.Info = $root.go.ConfigInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        SettingGameReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Model = options.enums === String ? "General" : 0;
+                object.KindID = 0;
+                object.Info = null;
+            }
+            if (message.Model != null && message.hasOwnProperty("Model"))
+                object.Model = options.enums === String ? $root.go.GameModel[message.Model] : message.Model;
+            if (message.KindID != null && message.hasOwnProperty("KindID"))
+                object.KindID = message.KindID;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.go.ConfigInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        SettingGameReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SettingGameReq;
+    })();
+
+    go.SettingGameResp = (function() {
+
+        function SettingGameResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SettingGameResp.prototype.GameID = 0;
+        SettingGameResp.prototype.Info = null;
+
+        SettingGameResp.create = function create(properties) {
+            return new SettingGameResp(properties);
+        };
+
+        SettingGameResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint32(message.GameID);
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.go.ConfigInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        SettingGameResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SettingGameResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.SettingGameResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint32();
+                    break;
+                case 2:
+                    message.Info = $root.go.ConfigInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SettingGameResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SettingGameResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID))
+                    return "GameID: integer expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.go.ConfigInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        SettingGameResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.SettingGameResp)
+                return object;
+            var message = new $root.go.SettingGameResp();
+            if (object.GameID != null)
+                message.GameID = object.GameID >>> 0;
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".go.SettingGameResp.Info: object expected");
+                message.Info = $root.go.ConfigInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        SettingGameResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.GameID = 0;
+                object.Info = null;
+            }
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                object.GameID = message.GameID;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.go.ConfigInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        SettingGameResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SettingGameResp;
+    })();
+
     go.EnterGameReq = (function() {
 
         function EnterGameReq(properties) {
@@ -2630,6 +3076,7 @@ $root.go = (function() {
         }
 
         EnterGameReq.prototype.GameID = 0;
+        EnterGameReq.prototype.GameKey = "";
 
         EnterGameReq.create = function create(properties) {
             return new EnterGameReq(properties);
@@ -2640,6 +3087,8 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
+            if (message.GameKey != null && Object.hasOwnProperty.call(message, "GameKey"))
+                writer.uint32(18).string(message.GameKey);
             return writer;
         };
 
@@ -2656,6 +3105,9 @@ $root.go = (function() {
                 switch (tag >>> 3) {
                 case 1:
                     message.GameID = reader.uint32();
+                    break;
+                case 2:
+                    message.GameKey = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2677,6 +3129,9 @@ $root.go = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID))
                     return "GameID: integer expected";
+            if (message.GameKey != null && message.hasOwnProperty("GameKey"))
+                if (!$util.isString(message.GameKey))
+                    return "GameKey: string expected";
             return null;
         };
 
@@ -2686,6 +3141,8 @@ $root.go = (function() {
             var message = new $root.go.EnterGameReq();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
+            if (object.GameKey != null)
+                message.GameKey = String(object.GameKey);
             return message;
         };
 
@@ -2693,10 +3150,14 @@ $root.go = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
+            if (options.defaults) {
                 object.GameID = 0;
+                object.GameKey = "";
+            }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 object.GameID = message.GameID;
+            if (message.GameKey != null && message.hasOwnProperty("GameKey"))
+                object.GameKey = message.GameKey;
             return object;
         };
 
