@@ -4,6 +4,8 @@
 // data_struct : 包体数据结构
 //----------------------------------------------------
 import MemoryStream from "../../basic/datastruct/MemoryStream";
+import KernelEvent from "../../basic/defines/KernelEvent";
+import EventCenter from "../../basic/event/EventCenter";
 import ChannelMgr from "../channel/ChannelMgr";
 import PacketInterface from "./PacketInterface";
 
@@ -91,6 +93,8 @@ export default class LeafWsPacket implements PacketInterface{
 				}
 				catch(err) {
 					cc.warn("unpack fail", cmd, err);
+					//解析协议失败意味着协议有更新，尝试热更
+					EventCenter.getInstance().fire(KernelEvent.ERR_UNPACK_NETDATA);
 				}
 			}
 		}

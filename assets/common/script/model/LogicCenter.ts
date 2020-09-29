@@ -12,6 +12,7 @@ import HallRespond from "../proxy/HallRespond";
 import EventCenter from "../../../kernel/basic/event/EventCenter";
 import KernelEvent from "../../../kernel/basic/defines/KernelEvent";
 import UIManager from "../../../kernel/view/UIManager";
+import HotUpdator from "../../../kernel/hotupdator/HotUpdator";
 
 
 //模块管理器
@@ -24,6 +25,16 @@ export default class LogicCenter {
         //初始化Http协议
         HttpCore.setMainUrl(ServerConfig.mainHttpUrl);
         HttpCore.registProcotol(http_rules, HallRequest, HallRespond);
+        EventCenter.getInstance().listen(KernelEvent.ERR_UNPACK_NETDATA, function(){
+            if(cc.sys.isNative) {
+                var hotor = HotUpdator.getUpdator("main");
+                if(hotor) {
+                    hotor.beginUpdate();
+                }
+            } else {
+                UIManager.openDialog("cfm_rega", "检测到更新，请刷新网页重新进入", 1, null);
+            }
+        }, this);
     }
     
     public static getInstance() : LogicCenter {
