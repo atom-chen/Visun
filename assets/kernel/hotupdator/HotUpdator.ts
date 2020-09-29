@@ -126,6 +126,10 @@ export default class HotUpdator {
 		//@ts-ignore
 		if (this._am.getState() === jsb.AssetsManager.State.UNINITED) {
 			var url = this.getLocalManifestPath();
+			if(url===null || url===undefined || url=="") {
+				cc.warn("热更文件不存在", this._id, url);
+				return false;
+			}
 			this._am.loadLocalManifest(url);
 		}
 		if (!this._am.getLocalManifest() || !this._am.getLocalManifest().isLoaded()) {
