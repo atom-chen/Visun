@@ -35,13 +35,17 @@ export default class CpnDice extends BaseComponent {
         this.stepLen--;
         if(this.stepLen > 0) { return; }
         this.stepLen = 2;
-        this.curFrame++;
+        
+        var flag = false;
         if(this.curFrame >= this.totalFrame) {
             this.curFrame = this.totalFrame;
             this.bFinished = true;
-            Preloader.setNodeSprite(this.node.getComponent(cc.Sprite), "appqp/imgs/mj_dice/dice"+this.diceValue, this);
+            flag = Preloader.setNodeSprite(this.node.getComponent(cc.Sprite), "appqp/imgs/mj_dice/dice"+this.diceValue, this);
         } else {
-            Preloader.setNodeSprite(this.node.getComponent(cc.Sprite), "appqp/imgs/mj_dice/"+DICEIMGS[this.curFrame], this);
+            flag = Preloader.setNodeSprite(this.node.getComponent(cc.Sprite), "appqp/imgs/mj_dice/"+DICEIMGS[this.curFrame], this);
+        }
+        if(flag) {
+            this.curFrame++;
         }
     }
 

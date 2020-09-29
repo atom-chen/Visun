@@ -1,5 +1,5 @@
 import { MajhongCode } from "../definer/MajhongDefine";
-import { isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
+import { isEmpty, isNil, newHandler } from "../../../kernel/utils/GlobalFuncs";
 import GameConfig from "../definer/GameConfig";
 import TimerManager from "../../../kernel/basic/timer/TimerManager";
 import { PokerCode } from "../definer/PokerDefine";
@@ -93,6 +93,21 @@ export default class GameUtil {
 		}
 		else {
 			return "appqp/imgs/majhong/tiao"+v;
+		}
+	}
+
+	public static majongFace(v:number) : string {
+		if(isEmpty(v)) { return ""; }
+		if(v >= MajhongCode.TONG_1 && v <= MajhongCode.TONG_9) {
+			return "appqp/imgs/mjcards/lcards/tong"+v;
+		}
+		else if(v >= MajhongCode.WAN_1 && v <= MajhongCode.WAN_9) {
+			v = v-16;
+			return "appqp/imgs/mjcards/lcards/wan"+v;
+		}
+		else {
+			v = v-32;
+			return "appqp/imgs/mjcards/lcards/tiao"+v;
 		}
 	}
 
@@ -278,11 +293,18 @@ export default class GameUtil {
 		}
 	}
 
+	static loadDice() {
+		for(var i=1; i<=6; i++) {
+			cc.loader.loadRes("appqp/imgs/mj_dice/dice"+i, cc.SpriteFrame);
+		}
+	}
+
 	static loadAllGameRes() {
 		GameUtil.loadGameIcons();
         GameUtil.loadChipIcons();
         GameUtil.loadPokers();
-        GameUtil.loadMj();
+		GameUtil.loadMj();
+		this.loadDice();
 	}
 
 }

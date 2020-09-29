@@ -4,11 +4,11 @@ import CommonUtil from "./CommonUtil";
 export default class Preloader {
 	static resDispatcher = new EventCenter();
 
-	static setNodeSprite(spr:cc.Sprite, respath:string, delegateObj:any) {
+	static setNodeSprite(spr:cc.Sprite, respath:string, delegateObj:any) : boolean {
 		var rsc = cc.loader.getRes(respath, cc.SpriteFrame);
         if(rsc) {
 			spr.spriteFrame = rsc;
-			return;
+			return true;
 		}
 		this.resDispatcher.listen(respath, function(sf){ 
 			spr.spriteFrame = sf;
@@ -17,6 +17,7 @@ export default class Preloader {
 			if(err){ cc.log(err); return; }
 			Preloader.resDispatcher.triger(respath, r);
 		});
+		return false;
 	}
 
 	/*
