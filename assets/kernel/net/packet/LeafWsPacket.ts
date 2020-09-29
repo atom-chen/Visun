@@ -94,7 +94,7 @@ export default class LeafWsPacket implements PacketInterface{
 				catch(err) {
 					cc.warn("unpack fail", cmd, err);
 					//解析协议失败意味着协议有更新，尝试热更
-					EventCenter.getInstance().fire(KernelEvent.ERR_UNPACK_NETDATA);
+					EventCenter.getInstance().triger(KernelEvent.ERR_UNPACK_NETDATA);
 				}
 			}
 		}
