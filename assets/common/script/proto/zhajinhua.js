@@ -280,7 +280,7 @@ $root.zhajinhua = (function() {
         }
 
         EnterGameZjhResp.prototype.Player = null;
-        EnterGameZjhResp.prototype.GameID = 0;
+        EnterGameZjhResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         EnterGameZjhResp.create = function create(properties) {
             return new EnterGameZjhResp(properties);
@@ -292,7 +292,7 @@ $root.zhajinhua = (function() {
             if (message.Player != null && Object.hasOwnProperty.call(message, "Player"))
                 $root.zhajinhua.ZhajinhuaPlayer.encode(message.Player, writer.uint32(10).fork()).ldelim();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
-                writer.uint32(16).uint32(message.GameID);
+                writer.uint32(16).uint64(message.GameID);
             return writer;
         };
 
@@ -311,7 +311,7 @@ $root.zhajinhua = (function() {
                     message.Player = $root.zhajinhua.ZhajinhuaPlayer.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.GameID = reader.uint32();
+                    message.GameID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -336,8 +336,8 @@ $root.zhajinhua = (function() {
                     return "Player." + error;
             }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (!$util.isInteger(message.GameID))
-                    return "GameID: integer expected";
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
             return null;
         };
 
@@ -351,7 +351,14 @@ $root.zhajinhua = (function() {
                 message.Player = $root.zhajinhua.ZhajinhuaPlayer.fromObject(object.Player);
             }
             if (object.GameID != null)
-                message.GameID = object.GameID >>> 0;
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -361,12 +368,19 @@ $root.zhajinhua = (function() {
             var object = {};
             if (options.defaults) {
                 object.Player = null;
-                object.GameID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
             }
             if (message.Player != null && message.hasOwnProperty("Player"))
                 object.Player = $root.zhajinhua.ZhajinhuaPlayer.toObject(message.Player, options);
             if (message.GameID != null && message.hasOwnProperty("GameID"))
-                object.GameID = message.GameID;
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
             return object;
         };
 

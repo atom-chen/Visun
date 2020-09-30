@@ -24,7 +24,7 @@ message ZhajinhuaPlayer {
 
 message EnterGameZjhResp {
   ZhajinhuaPlayer Player = 1;
-  uint32 GameID = 2; //游戏标识
+  uint64 GameID = 2; //游戏标识
 }
 
 

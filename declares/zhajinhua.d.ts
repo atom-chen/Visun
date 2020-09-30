@@ -135,7 +135,7 @@ export namespace zhajinhua {
         Player?: (zhajinhua.IZhajinhuaPlayer|null);
 
         /** EnterGameZjhResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
     }
 
     /** Represents an EnterGameZjhResp. */
@@ -151,7 +151,7 @@ export namespace zhajinhua {
         public Player?: (zhajinhua.IZhajinhuaPlayer|null);
 
         /** EnterGameZjhResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /**
          * Creates a new EnterGameZjhResp instance using the specified properties.
