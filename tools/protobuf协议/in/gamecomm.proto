@@ -37,20 +37,20 @@ message PlayerInfo {
   PlayerState Sate = 8; // 状态
   uint64 PlatformID = 9; // 平台ID 0:无效
   uint32 RoomNum = 10; // 房间号 0:无效
-  uint32 GameID = 11; // 所在游戏ID 0:无效
+  uint64 GameID = 11; // 所在游戏ID 0:无效
   uint32 TableID = 12; // 所在桌号ID 0:不提供
   uint32 ChairID = 13; // 所在椅子ID 0:不提供
 }
 
 //游戏配置信息(房卡模式时 可用)
 message ConfigInfo {
-  string Name = 1; //名称
-  string Key = 2;  //密钥
-  uint32 EnterScore = 3;//入场积分
-  uint32 LessScore = 4;//底注(最低下注)
-  uint32 PlayScore = 5;//游戏积分(筹码)
-  int32 Amount = 6;//总局数
-  int32 MaxChair = 7;//最大座位数
+  string Name = 1;        //名称(桌子)
+  string Password = 2;    //密码
+  uint32 EnterScore = 3;  //入场积分
+  uint32 LessScore = 4;   //底注(最低下注)
+  uint32 PlayScore = 5;   //游戏积分(筹码)
+  int32 Amount = 6;       //总局数
+  int32 MaxChair = 7;     //最大座位数
 }
 
 //牌信息
@@ -136,7 +136,7 @@ message SettingGameReq {
   ConfigInfo Info = 4;//配置信息
 }
 message SettingGameResp { //广播给所有在线玩家
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
   uint64 HostID = 2;//房主ID
   ConfigInfo Info = 3;//配置信息(此处 游戏密钥为空值 即不带回密钥)
 }
@@ -144,30 +144,30 @@ message SettingGameResp { //广播给所有在线玩家
 
 //进入游戏
 message EnterGameReq {
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
   string GameKey = 2; //游戏密钥（非房卡模式时==空）
 }
 message EnterGameResp {
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
   PlayerInfo UserInfo = 2;//玩家信息
 }
 
 //退出游戏
 message ExitGameReq {
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
 }
 message ExitGameResp {
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
   uint64 UserID = 2;
 }
 
 
 //换桌
 message ChangeTableReq {
-  uint32 GameID = 1; //游戏标识
+  uint64 GameID = 1; //游戏标识
 }
 message ChangeTableResp {
-  uint32 GameID = 1; //游戏ID
+  uint64 GameID = 1; //游戏ID
   uint32 TableID = 2; //桌子ID
   uint64 UserID = 3;  //玩家ID
 
@@ -177,14 +177,14 @@ message ChangeTableResp {
 //踢出
 message BeOutResp {
   uint64 UserID = 1;  //玩家ID
-  uint32 GameID = 2; //游戏标识
+  uint64 GameID = 2; //游戏标识
   uint32 Code = 3;    //操作码 0:时间到被剔除 1:刷子
   string Hints = 4;    //被踢出的原因
 }
 
 //获取游戏记录
 message GetInningsInfoReq{
-  uint32 GameID = 1; //游戏标识 =0时,表示所有参与过的游戏
+  uint64 GameID = 1; //游戏标识 =0时,表示所有参与过的游戏
 }
 message GetInningsInfoResp{
   repeated InningInfo Innings = 1;//牌局信息

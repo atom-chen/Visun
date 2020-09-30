@@ -765,7 +765,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        GameItem.prototype.ID = 0;
+        GameItem.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         GameItem.prototype.Info = null;
 
         GameItem.create = function create(properties) {
@@ -776,7 +776,7 @@ $root.login = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
-                writer.uint32(8).uint32(message.ID);
+                writer.uint32(8).uint64(message.ID);
             if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
                 $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
             return writer;
@@ -794,7 +794,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.ID = reader.uint32();
+                    message.ID = reader.uint64();
                     break;
                 case 2:
                     message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
@@ -817,8 +817,8 @@ $root.login = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.ID != null && message.hasOwnProperty("ID"))
-                if (!$util.isInteger(message.ID))
-                    return "ID: integer expected";
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
             if (message.Info != null && message.hasOwnProperty("Info")) {
                 var error = $root.login.GameInfo.verify(message.Info);
                 if (error)
@@ -832,7 +832,14 @@ $root.login = (function() {
                 return object;
             var message = new $root.login.GameItem();
             if (object.ID != null)
-                message.ID = object.ID >>> 0;
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = true;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber(true);
             if (object.Info != null) {
                 if (typeof object.Info !== "object")
                     throw TypeError(".login.GameItem.Info: object expected");
@@ -846,11 +853,18 @@ $root.login = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.ID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
                 object.Info = null;
             }
             if (message.ID != null && message.hasOwnProperty("ID"))
-                object.ID = message.ID;
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber(true) : message.ID;
             if (message.Info != null && message.hasOwnProperty("Info"))
                 object.Info = $root.login.GameInfo.toObject(message.Info, options);
             return object;
@@ -1887,7 +1901,7 @@ $root.login = (function() {
         }
 
         LoginResp.prototype.MainInfo = null;
-        LoginResp.prototype.InGameID = 0;
+        LoginResp.prototype.InGameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         LoginResp.create = function create(properties) {
             return new LoginResp(properties);
@@ -1899,7 +1913,7 @@ $root.login = (function() {
             if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
             if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
-                writer.uint32(16).uint32(message.InGameID);
+                writer.uint32(16).uint64(message.InGameID);
             return writer;
         };
 
@@ -1918,7 +1932,7 @@ $root.login = (function() {
                     message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.InGameID = reader.uint32();
+                    message.InGameID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1943,8 +1957,8 @@ $root.login = (function() {
                     return "MainInfo." + error;
             }
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
-                if (!$util.isInteger(message.InGameID))
-                    return "InGameID: integer expected";
+                if (!$util.isInteger(message.InGameID) && !(message.InGameID && $util.isInteger(message.InGameID.low) && $util.isInteger(message.InGameID.high)))
+                    return "InGameID: integer|Long expected";
             return null;
         };
 
@@ -1958,7 +1972,14 @@ $root.login = (function() {
                 message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
             }
             if (object.InGameID != null)
-                message.InGameID = object.InGameID >>> 0;
+                if ($util.Long)
+                    (message.InGameID = $util.Long.fromValue(object.InGameID)).unsigned = true;
+                else if (typeof object.InGameID === "string")
+                    message.InGameID = parseInt(object.InGameID, 10);
+                else if (typeof object.InGameID === "number")
+                    message.InGameID = object.InGameID;
+                else if (typeof object.InGameID === "object")
+                    message.InGameID = new $util.LongBits(object.InGameID.low >>> 0, object.InGameID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -1968,12 +1989,19 @@ $root.login = (function() {
             var object = {};
             if (options.defaults) {
                 object.MainInfo = null;
-                object.InGameID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.InGameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.InGameID = options.longs === String ? "0" : 0;
             }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
-                object.InGameID = message.InGameID;
+                if (typeof message.InGameID === "number")
+                    object.InGameID = options.longs === String ? String(message.InGameID) : message.InGameID;
+                else
+                    object.InGameID = options.longs === String ? $util.Long.prototype.toString.call(message.InGameID) : options.longs === Number ? new $util.LongBits(message.InGameID.low >>> 0, message.InGameID.high >>> 0).toNumber(true) : message.InGameID;
             return object;
         };
 
@@ -2239,7 +2267,7 @@ $root.login = (function() {
         }
 
         ReconnectResp.prototype.MainInfo = null;
-        ReconnectResp.prototype.InGameID = 0;
+        ReconnectResp.prototype.InGameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         ReconnectResp.create = function create(properties) {
             return new ReconnectResp(properties);
@@ -2251,7 +2279,7 @@ $root.login = (function() {
             if (message.MainInfo != null && Object.hasOwnProperty.call(message, "MainInfo"))
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
             if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
-                writer.uint32(16).uint32(message.InGameID);
+                writer.uint32(16).uint64(message.InGameID);
             return writer;
         };
 
@@ -2270,7 +2298,7 @@ $root.login = (function() {
                     message.MainInfo = $root.login.MasterInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    message.InGameID = reader.uint32();
+                    message.InGameID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2295,8 +2323,8 @@ $root.login = (function() {
                     return "MainInfo." + error;
             }
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
-                if (!$util.isInteger(message.InGameID))
-                    return "InGameID: integer expected";
+                if (!$util.isInteger(message.InGameID) && !(message.InGameID && $util.isInteger(message.InGameID.low) && $util.isInteger(message.InGameID.high)))
+                    return "InGameID: integer|Long expected";
             return null;
         };
 
@@ -2310,7 +2338,14 @@ $root.login = (function() {
                 message.MainInfo = $root.login.MasterInfo.fromObject(object.MainInfo);
             }
             if (object.InGameID != null)
-                message.InGameID = object.InGameID >>> 0;
+                if ($util.Long)
+                    (message.InGameID = $util.Long.fromValue(object.InGameID)).unsigned = true;
+                else if (typeof object.InGameID === "string")
+                    message.InGameID = parseInt(object.InGameID, 10);
+                else if (typeof object.InGameID === "number")
+                    message.InGameID = object.InGameID;
+                else if (typeof object.InGameID === "object")
+                    message.InGameID = new $util.LongBits(object.InGameID.low >>> 0, object.InGameID.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -2320,12 +2355,19 @@ $root.login = (function() {
             var object = {};
             if (options.defaults) {
                 object.MainInfo = null;
-                object.InGameID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.InGameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.InGameID = options.longs === String ? "0" : 0;
             }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
-                object.InGameID = message.InGameID;
+                if (typeof message.InGameID === "number")
+                    object.InGameID = options.longs === String ? String(message.InGameID) : message.InGameID;
+                else
+                    object.InGameID = options.longs === String ? $util.Long.prototype.toString.call(message.InGameID) : options.longs === Number ? new $util.LongBits(message.InGameID.low >>> 0, message.InGameID.high >>> 0).toNumber(true) : message.InGameID;
             return object;
         };
 

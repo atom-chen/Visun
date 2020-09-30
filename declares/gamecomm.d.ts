@@ -62,7 +62,7 @@ export namespace gamecomm {
         RoomNum?: (number|null);
 
         /** PlayerInfo GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** PlayerInfo TableID */
         TableID?: (number|null);
@@ -114,7 +114,7 @@ export namespace gamecomm {
         public RoomNum: number;
 
         /** PlayerInfo GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** PlayerInfo TableID. */
         public TableID: number;
@@ -199,8 +199,8 @@ export namespace gamecomm {
         /** ConfigInfo Name */
         Name?: (string|null);
 
-        /** ConfigInfo Key */
-        Key?: (string|null);
+        /** ConfigInfo Password */
+        Password?: (string|null);
 
         /** ConfigInfo EnterScore */
         EnterScore?: (number|null);
@@ -230,8 +230,8 @@ export namespace gamecomm {
         /** ConfigInfo Name. */
         public Name: string;
 
-        /** ConfigInfo Key. */
-        public Key: string;
+        /** ConfigInfo Password. */
+        public Password: string;
 
         /** ConfigInfo EnterScore. */
         public EnterScore: number;
@@ -1361,7 +1361,7 @@ export namespace gamecomm {
     interface ISettingGameResp {
 
         /** SettingGameResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** SettingGameResp HostID */
         HostID?: (number|Long|null);
@@ -1380,7 +1380,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.ISettingGameResp);
 
         /** SettingGameResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** SettingGameResp HostID. */
         public HostID: (number|Long);
@@ -1463,7 +1463,7 @@ export namespace gamecomm {
     interface IEnterGameReq {
 
         /** EnterGameReq GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** EnterGameReq GameKey */
         GameKey?: (string|null);
@@ -1479,7 +1479,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IEnterGameReq);
 
         /** EnterGameReq GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** EnterGameReq GameKey. */
         public GameKey: string;
@@ -1559,7 +1559,7 @@ export namespace gamecomm {
     interface IEnterGameResp {
 
         /** EnterGameResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** EnterGameResp UserInfo */
         UserInfo?: (gamecomm.IPlayerInfo|null);
@@ -1575,7 +1575,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IEnterGameResp);
 
         /** EnterGameResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** EnterGameResp UserInfo. */
         public UserInfo?: (gamecomm.IPlayerInfo|null);
@@ -1655,7 +1655,7 @@ export namespace gamecomm {
     interface IExitGameReq {
 
         /** ExitGameReq GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
     }
 
     /** Represents an ExitGameReq. */
@@ -1668,7 +1668,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IExitGameReq);
 
         /** ExitGameReq GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /**
          * Creates a new ExitGameReq instance using the specified properties.
@@ -1745,7 +1745,7 @@ export namespace gamecomm {
     interface IExitGameResp {
 
         /** ExitGameResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** ExitGameResp UserID */
         UserID?: (number|Long|null);
@@ -1761,7 +1761,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IExitGameResp);
 
         /** ExitGameResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** ExitGameResp UserID. */
         public UserID: (number|Long);
@@ -1841,7 +1841,7 @@ export namespace gamecomm {
     interface IChangeTableReq {
 
         /** ChangeTableReq GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
     }
 
     /** Represents a ChangeTableReq. */
@@ -1854,7 +1854,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IChangeTableReq);
 
         /** ChangeTableReq GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /**
          * Creates a new ChangeTableReq instance using the specified properties.
@@ -1931,7 +1931,7 @@ export namespace gamecomm {
     interface IChangeTableResp {
 
         /** ChangeTableResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** ChangeTableResp TableID */
         TableID?: (number|null);
@@ -1950,7 +1950,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IChangeTableResp);
 
         /** ChangeTableResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** ChangeTableResp TableID. */
         public TableID: number;
@@ -2036,7 +2036,7 @@ export namespace gamecomm {
         UserID?: (number|Long|null);
 
         /** BeOutResp GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
 
         /** BeOutResp Code */
         Code?: (number|null);
@@ -2058,7 +2058,7 @@ export namespace gamecomm {
         public UserID: (number|Long);
 
         /** BeOutResp GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /** BeOutResp Code. */
         public Code: number;
@@ -2141,7 +2141,7 @@ export namespace gamecomm {
     interface IGetInningsInfoReq {
 
         /** GetInningsInfoReq GameID */
-        GameID?: (number|null);
+        GameID?: (number|Long|null);
     }
 
     /** Represents a GetInningsInfoReq. */
@@ -2154,7 +2154,7 @@ export namespace gamecomm {
         constructor(properties?: gamecomm.IGetInningsInfoReq);
 
         /** GetInningsInfoReq GameID. */
-        public GameID: number;
+        public GameID: (number|Long);
 
         /**
          * Creates a new GetInningsInfoReq instance using the specified properties.

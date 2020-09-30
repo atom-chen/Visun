@@ -54,7 +54,7 @@ message GameInfo{
 
 //子游戏（信息）
 message GameItem{
-  uint32 ID = 1;    //即:GameID
+  uint64 ID = 1;    //即:GameID
   GameInfo Info = 2;//子游戏
 }
 
@@ -119,7 +119,7 @@ message LoginReq{
 }
 message LoginResp{
   MasterInfo MainInfo = 1;
-  uint32 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
+  uint64 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
 }
 //异地
 message AllopatricResp{
@@ -136,7 +136,7 @@ message ReconnectReq{
 }
 message ReconnectResp{
   MasterInfo MainInfo = 1;
-  uint32 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
+  uint64 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
 }
 
 

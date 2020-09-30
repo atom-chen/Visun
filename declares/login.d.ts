@@ -462,7 +462,7 @@ export namespace login {
     interface IGameItem {
 
         /** GameItem ID */
-        ID?: (number|null);
+        ID?: (number|Long|null);
 
         /** GameItem Info */
         Info?: (login.IGameInfo|null);
@@ -478,7 +478,7 @@ export namespace login {
         constructor(properties?: login.IGameItem);
 
         /** GameItem ID. */
-        public ID: number;
+        public ID: (number|Long);
 
         /** GameItem Info. */
         public Info?: (login.IGameInfo|null);
@@ -1317,7 +1317,7 @@ export namespace login {
         MainInfo?: (login.IMasterInfo|null);
 
         /** LoginResp InGameID */
-        InGameID?: (number|null);
+        InGameID?: (number|Long|null);
     }
 
     /** Represents a LoginResp. */
@@ -1333,7 +1333,7 @@ export namespace login {
         public MainInfo?: (login.IMasterInfo|null);
 
         /** LoginResp InGameID. */
-        public InGameID: number;
+        public InGameID: (number|Long);
 
         /**
          * Creates a new LoginResp instance using the specified properties.
@@ -1611,7 +1611,7 @@ export namespace login {
         MainInfo?: (login.IMasterInfo|null);
 
         /** ReconnectResp InGameID */
-        InGameID?: (number|null);
+        InGameID?: (number|Long|null);
     }
 
     /** Represents a ReconnectResp. */
@@ -1627,7 +1627,7 @@ export namespace login {
         public MainInfo?: (login.IMasterInfo|null);
 
         /** ReconnectResp InGameID. */
-        public InGameID: number;
+        public InGameID: (number|Long);
 
         /**
          * Creates a new ReconnectResp instance using the specified properties.
