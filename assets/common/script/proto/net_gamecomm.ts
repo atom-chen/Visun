@@ -58,7 +58,7 @@ export var gamecomm_packet_define = {
 
 export class gamecomm_request {
     public static PlayerInfo( data:{ UserID:number, Name:string, FaceID:number, Age:number, Sex:number, Gold:number, Level:number, Account:string, Sate:any, PlatformID:number, RoomNum:number, GameID:number, TableID:number, ChairID:number } ) { gamecomm_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
-    public static ConfigInfo( data:{ Name:string, Key:string, EnterScore:number, LessScore:number, PlayScore:number, Amount:number, HostID:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static ConfigInfo( data:{ Name:string, Key:string, EnterScore:number, LessScore:number, PlayScore:number, Amount:number, MaxChair:number } ) { gamecomm_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static CardInfo( data:{ Cards:any, CardType:number, CardValue:number } ) { gamecomm_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static TimeInfo( data:{ TimeStamp:number, WaitTime:number, OutTime:number, TotalTime:number } ) { gamecomm_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static AreaInfo( data:{ ID:number, MyGold:number, TotalGold:number, AcquireGold:number } ) { gamecomm_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
@@ -69,7 +69,7 @@ export class gamecomm_request {
     public static GameRecord( data:{ CardInfo:any, IsWon:any } ) { gamecomm_packet_define[29].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[30].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingGameReq( data:{ Model:any, KindID:number, Info:any } ) { gamecomm_packet_define[31].sendToChannel(ChannelDefine.game, data, false); }
-    public static SettingGameResp( data:{ GameID:number, Info:any } ) { gamecomm_packet_define[32].sendToChannel(ChannelDefine.game, data, false); }
+    public static SettingGameResp( data:{ GameID:number, HostID:number, Info:any } ) { gamecomm_packet_define[32].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGameReq( data:{ GameID:number, GameKey:string } ) { gamecomm_packet_define[33].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterGameResp( data:{ GameID:number, UserInfo:any } ) { gamecomm_packet_define[34].sendToChannel(ChannelDefine.game, data, false); }
     public static ExitGameReq( data:{ GameID:number } ) { gamecomm_packet_define[35].sendToChannel(ChannelDefine.game, data, false); }

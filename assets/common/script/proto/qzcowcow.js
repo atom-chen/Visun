@@ -2561,7 +2561,7 @@ $root.go = (function() {
         ConfigInfo.prototype.LessScore = 0;
         ConfigInfo.prototype.PlayScore = 0;
         ConfigInfo.prototype.Amount = 0;
-        ConfigInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ConfigInfo.prototype.MaxChair = 0;
 
         ConfigInfo.create = function create(properties) {
             return new ConfigInfo(properties);
@@ -2578,12 +2578,12 @@ $root.go = (function() {
                 writer.uint32(24).uint32(message.EnterScore);
             if (message.LessScore != null && Object.hasOwnProperty.call(message, "LessScore"))
                 writer.uint32(32).uint32(message.LessScore);
-            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
-                writer.uint32(40).int32(message.Amount);
-            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
-                writer.uint32(48).uint64(message.HostID);
             if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
-                writer.uint32(64).uint32(message.PlayScore);
+                writer.uint32(40).uint32(message.PlayScore);
+            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
+                writer.uint32(48).int32(message.Amount);
+            if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
+                writer.uint32(56).int32(message.MaxChair);
             return writer;
         };
 
@@ -2610,14 +2610,14 @@ $root.go = (function() {
                 case 4:
                     message.LessScore = reader.uint32();
                     break;
-                case 8:
+                case 5:
                     message.PlayScore = reader.uint32();
                     break;
-                case 5:
+                case 6:
                     message.Amount = reader.int32();
                     break;
-                case 6:
-                    message.HostID = reader.uint64();
+                case 7:
+                    message.MaxChair = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2654,9 +2654,9 @@ $root.go = (function() {
             if (message.Amount != null && message.hasOwnProperty("Amount"))
                 if (!$util.isInteger(message.Amount))
                     return "Amount: integer expected";
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
-                    return "HostID: integer|Long expected";
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                if (!$util.isInteger(message.MaxChair))
+                    return "MaxChair: integer expected";
             return null;
         };
 
@@ -2676,15 +2676,8 @@ $root.go = (function() {
                 message.PlayScore = object.PlayScore >>> 0;
             if (object.Amount != null)
                 message.Amount = object.Amount | 0;
-            if (object.HostID != null)
-                if ($util.Long)
-                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
-                else if (typeof object.HostID === "string")
-                    message.HostID = parseInt(object.HostID, 10);
-                else if (typeof object.HostID === "number")
-                    message.HostID = object.HostID;
-                else if (typeof object.HostID === "object")
-                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            if (object.MaxChair != null)
+                message.MaxChair = object.MaxChair | 0;
             return message;
         };
 
@@ -2697,13 +2690,9 @@ $root.go = (function() {
                 object.Key = "";
                 object.EnterScore = 0;
                 object.LessScore = 0;
-                object.Amount = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.HostID = options.longs === String ? "0" : 0;
                 object.PlayScore = 0;
+                object.Amount = 0;
+                object.MaxChair = 0;
             }
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
@@ -2713,15 +2702,12 @@ $root.go = (function() {
                 object.EnterScore = message.EnterScore;
             if (message.LessScore != null && message.hasOwnProperty("LessScore"))
                 object.LessScore = message.LessScore;
-            if (message.Amount != null && message.hasOwnProperty("Amount"))
-                object.Amount = message.Amount;
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (typeof message.HostID === "number")
-                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
-                else
-                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
                 object.PlayScore = message.PlayScore;
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                object.Amount = message.Amount;
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                object.MaxChair = message.MaxChair;
             return object;
         };
 
@@ -4056,7 +4042,7 @@ $root.go = (function() {
             if (message.KindID != null && Object.hasOwnProperty.call(message, "KindID"))
                 writer.uint32(16).uint32(message.KindID);
             if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.go.ConfigInfo.encode(message.Info, writer.uint32(26).fork()).ldelim();
+                $root.go.ConfigInfo.encode(message.Info, writer.uint32(34).fork()).ldelim();
             return writer;
         };
 
@@ -4077,7 +4063,7 @@ $root.go = (function() {
                 case 2:
                     message.KindID = reader.uint32();
                     break;
-                case 3:
+                case 4:
                     message.Info = $root.go.ConfigInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -4185,6 +4171,7 @@ $root.go = (function() {
         }
 
         SettingGameResp.prototype.GameID = 0;
+        SettingGameResp.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         SettingGameResp.prototype.Info = null;
 
         SettingGameResp.create = function create(properties) {
@@ -4196,8 +4183,10 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint32(message.GameID);
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(16).uint64(message.HostID);
             if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.go.ConfigInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+                $root.go.ConfigInfo.encode(message.Info, writer.uint32(26).fork()).ldelim();
             return writer;
         };
 
@@ -4216,6 +4205,9 @@ $root.go = (function() {
                     message.GameID = reader.uint32();
                     break;
                 case 2:
+                    message.HostID = reader.uint64();
+                    break;
+                case 3:
                     message.Info = $root.go.ConfigInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -4238,6 +4230,9 @@ $root.go = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID))
                     return "GameID: integer expected";
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
             if (message.Info != null && message.hasOwnProperty("Info")) {
                 var error = $root.go.ConfigInfo.verify(message.Info);
                 if (error)
@@ -4252,6 +4247,15 @@ $root.go = (function() {
             var message = new $root.go.SettingGameResp();
             if (object.GameID != null)
                 message.GameID = object.GameID >>> 0;
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
             if (object.Info != null) {
                 if (typeof object.Info !== "object")
                     throw TypeError(".go.SettingGameResp.Info: object expected");
@@ -4266,10 +4270,20 @@ $root.go = (function() {
             var object = {};
             if (options.defaults) {
                 object.GameID = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
                 object.Info = null;
             }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 object.GameID = message.GameID;
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
             if (message.Info != null && message.hasOwnProperty("Info"))
                 object.Info = $root.go.ConfigInfo.toObject(message.Info, options);
             return object;

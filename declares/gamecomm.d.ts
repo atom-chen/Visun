@@ -214,8 +214,8 @@ export namespace gamecomm {
         /** ConfigInfo Amount */
         Amount?: (number|null);
 
-        /** ConfigInfo HostID */
-        HostID?: (number|Long|null);
+        /** ConfigInfo MaxChair */
+        MaxChair?: (number|null);
     }
 
     /** Represents a ConfigInfo. */
@@ -245,8 +245,8 @@ export namespace gamecomm {
         /** ConfigInfo Amount. */
         public Amount: number;
 
-        /** ConfigInfo HostID. */
-        public HostID: (number|Long);
+        /** ConfigInfo MaxChair. */
+        public MaxChair: number;
 
         /**
          * Creates a new ConfigInfo instance using the specified properties.
@@ -1363,6 +1363,9 @@ export namespace gamecomm {
         /** SettingGameResp GameID */
         GameID?: (number|null);
 
+        /** SettingGameResp HostID */
+        HostID?: (number|Long|null);
+
         /** SettingGameResp Info */
         Info?: (gamecomm.IConfigInfo|null);
     }
@@ -1378,6 +1381,9 @@ export namespace gamecomm {
 
         /** SettingGameResp GameID. */
         public GameID: number;
+
+        /** SettingGameResp HostID. */
+        public HostID: (number|Long);
 
         /** SettingGameResp Info. */
         public Info?: (gamecomm.IConfigInfo|null);

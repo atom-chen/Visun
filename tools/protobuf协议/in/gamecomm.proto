@@ -17,7 +17,7 @@ enum PlayerState {
 }
 enum GameModel {
   General = 0;
-  Fight = 1;         //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
+  Fight = 1;          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
   Multiplayer = 2;    //百人类
   RoomCard = 3;       //房卡模式
 }
@@ -48,9 +48,9 @@ message ConfigInfo {
   string Key = 2;  //密钥
   uint32 EnterScore = 3;//入场积分
   uint32 LessScore = 4;//底注(最低下注)
-  uint32 PlayScore = 8;//游戏积分(筹码)
-  int32 Amount = 5;//总局数
-  uint64 HostID = 6;//房主ID
+  uint32 PlayScore = 5;//游戏积分(筹码)
+  int32 Amount = 6;//总局数
+  int32 MaxChair = 7;//最大座位数
 }
 
 //牌信息
@@ -133,11 +133,12 @@ message GameRecordList {
 message SettingGameReq {
   GameModel Model = 1;//游戏模式 (房卡 == 3 == RoomCard)
   uint32 KindID = 2; //游戏种类
-  ConfigInfo Info = 3;//配置信息
+  ConfigInfo Info = 4;//配置信息
 }
 message SettingGameResp { //广播给所有在线玩家
   uint32 GameID = 1; //游戏标识
-  ConfigInfo Info = 2;//配置信息(此处 游戏密钥为空值 即不带回密钥)
+  uint64 HostID = 2;//房主ID
+  ConfigInfo Info = 3;//配置信息(此处 游戏密钥为空值 即不带回密钥)
 }
 
 
