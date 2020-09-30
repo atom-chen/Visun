@@ -3,23 +3,33 @@ package gamecomm;
 
 //该协议文件不提供 req 和 resp 注:如需使用,请在子游戏协议中嵌套相关协议.
 enum PlayerState {
-  PlayerLookOn = 0;   //旁观(可作为刚入场时的初始状态)
-  PlayerSitDown = 1;     //坐下(此状态下，才能参与游戏)
-  PlayerAgree = 2;     //同意(可作为准备状态)
-  PlayerCall = 3;     //叫分
-  PlayerPlaying = 4;     //游戏
-  PlayerPickUp = 5;     //托管
-  PlayerStandUp = 6;     //站起(可作为结束状态)
-  PlayerGiveUp = 7;     //放弃
-  PlayerCompareLose = 8; //比牌失败
-  PlayerFollow = 9;   //跟牌
-  PlayerRaise = 10;   //加注
+  PlayerLookOn = 0;         //旁观(可作为刚入场时的初始状态)
+  PlayerSitDown = 1;        //坐下(此状态下，才能参与游戏)
+  PlayerAgree = 2;          //同意(可作为准备状态)
+  PlayerPickUp = 3;         //托管
+  PlayerCall = 4;           //叫分
+  PlayerPlaying = 5;        //游戏
+  PlayerFollow = 6;         //跟牌
+  PlayerRaise = 7;          //加注
+  PlayerLook = 8;           //看牌
+  PlayerCompare = 9;        //比牌
+  PlayerCompareLose = 10;   //比牌失败 
+  PlayerOutCard = 11;       //出牌
+  PlayerPass = 12;          //过牌|要不起
+  PlayerGiveUp = 98;        //弃牌
+  PlayerStandUp = 99;       //站起(可作为结束状态)
 }
 enum GameModel {
   General = 0;
   Fight = 1;          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
-  Multiplayer = 2;    //百人类
-  RoomCard = 3;       //房卡模式
+  Multiplayer = 2;    //百人类型
+  RoomCard = 3;       //房卡类型
+  Guess = 4;          //竞猜类型
+  GamesCity = 5;      //电玩城类型
+  DualMeet = 6;       //电竞类型
+  Sport = 7;          //体育类型
+  Smart = 8;          //益智休闲
+  RPG = 9;            //RPG类型
 }
 
 
@@ -135,7 +145,7 @@ message SettingGameReq {
   uint32 KindID = 2; //游戏种类
   ConfigInfo Info = 4;//配置信息
 }
-message SettingGameResp { //广播给所有在线玩家
+message SettingGameResp {//广播给所有在线玩家
   uint64 GameID = 1; //游戏标识
   uint64 HostID = 2;//房主ID
   ConfigInfo Info = 3;//配置信息(此处 游戏密钥为空值 即不带回密钥)

@@ -7,14 +7,18 @@ export namespace gamecomm {
         PlayerLookOn = 0,
         PlayerSitDown = 1,
         PlayerAgree = 2,
-        PlayerCall = 3,
-        PlayerPlaying = 4,
-        PlayerPickUp = 5,
-        PlayerStandUp = 6,
-        PlayerGiveUp = 7,
-        PlayerCompareLose = 8,
-        PlayerFollow = 9,
-        PlayerRaise = 10
+        PlayerPickUp = 3,
+        PlayerCall = 4,
+        PlayerPlaying = 5,
+        PlayerFollow = 6,
+        PlayerRaise = 7,
+        PlayerLook = 8,
+        PlayerCompare = 9,
+        PlayerCompareLose = 10,
+        PlayerOutCard = 11,
+        PlayerPass = 12,
+        PlayerGiveUp = 98,
+        PlayerStandUp = 99
     }
 
     /** GameModel enum. */
@@ -22,7 +26,13 @@ export namespace gamecomm {
         General = 0,
         Fight = 1,
         Multiplayer = 2,
-        RoomCard = 3
+        RoomCard = 3,
+        Guess = 4,
+        GamesCity = 5,
+        DualMeet = 6,
+        Sport = 7,
+        Smart = 8,
+        RPG = 9
     }
 
     /** Properties of a PlayerInfo. */

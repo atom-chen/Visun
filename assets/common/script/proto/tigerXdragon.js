@@ -1666,14 +1666,18 @@ $root.go = (function() {
         values[valuesById[0] = "PlayerLookOn"] = 0;
         values[valuesById[1] = "PlayerSitDown"] = 1;
         values[valuesById[2] = "PlayerAgree"] = 2;
-        values[valuesById[3] = "PlayerCall"] = 3;
-        values[valuesById[4] = "PlayerPlaying"] = 4;
-        values[valuesById[5] = "PlayerPickUp"] = 5;
-        values[valuesById[6] = "PlayerStandUp"] = 6;
-        values[valuesById[7] = "PlayerGiveUp"] = 7;
-        values[valuesById[8] = "PlayerCompareLose"] = 8;
-        values[valuesById[9] = "PlayerFollow"] = 9;
-        values[valuesById[10] = "PlayerRaise"] = 10;
+        values[valuesById[3] = "PlayerPickUp"] = 3;
+        values[valuesById[4] = "PlayerCall"] = 4;
+        values[valuesById[5] = "PlayerPlaying"] = 5;
+        values[valuesById[6] = "PlayerFollow"] = 6;
+        values[valuesById[7] = "PlayerRaise"] = 7;
+        values[valuesById[8] = "PlayerLook"] = 8;
+        values[valuesById[9] = "PlayerCompare"] = 9;
+        values[valuesById[10] = "PlayerCompareLose"] = 10;
+        values[valuesById[11] = "PlayerOutCard"] = 11;
+        values[valuesById[12] = "PlayerPass"] = 12;
+        values[valuesById[98] = "PlayerGiveUp"] = 98;
+        values[valuesById[99] = "PlayerStandUp"] = 99;
         return values;
     })();
 
@@ -1683,6 +1687,12 @@ $root.go = (function() {
         values[valuesById[1] = "Fight"] = 1;
         values[valuesById[2] = "Multiplayer"] = 2;
         values[valuesById[3] = "RoomCard"] = 3;
+        values[valuesById[4] = "Guess"] = 4;
+        values[valuesById[5] = "GamesCity"] = 5;
+        values[valuesById[6] = "DualMeet"] = 6;
+        values[valuesById[7] = "Sport"] = 7;
+        values[valuesById[8] = "Smart"] = 8;
+        values[valuesById[9] = "RPG"] = 9;
         return values;
     })();
 
@@ -1857,6 +1867,10 @@ $root.go = (function() {
                 case 8:
                 case 9:
                 case 10:
+                case 11:
+                case 12:
+                case 98:
+                case 99:
                     break;
                 }
             if (message.PlatformID != null && message.hasOwnProperty("PlatformID"))
@@ -1924,37 +1938,53 @@ $root.go = (function() {
             case 2:
                 message.Sate = 2;
                 break;
-            case "PlayerCall":
+            case "PlayerPickUp":
             case 3:
                 message.Sate = 3;
                 break;
-            case "PlayerPlaying":
+            case "PlayerCall":
             case 4:
                 message.Sate = 4;
                 break;
-            case "PlayerPickUp":
+            case "PlayerPlaying":
             case 5:
                 message.Sate = 5;
                 break;
-            case "PlayerStandUp":
+            case "PlayerFollow":
             case 6:
                 message.Sate = 6;
                 break;
-            case "PlayerGiveUp":
+            case "PlayerRaise":
             case 7:
                 message.Sate = 7;
                 break;
-            case "PlayerCompareLose":
+            case "PlayerLook":
             case 8:
                 message.Sate = 8;
                 break;
-            case "PlayerFollow":
+            case "PlayerCompare":
             case 9:
                 message.Sate = 9;
                 break;
-            case "PlayerRaise":
+            case "PlayerCompareLose":
             case 10:
                 message.Sate = 10;
+                break;
+            case "PlayerOutCard":
+            case 11:
+                message.Sate = 11;
+                break;
+            case "PlayerPass":
+            case 12:
+                message.Sate = 12;
+                break;
+            case "PlayerGiveUp":
+            case 98:
+                message.Sate = 98;
+                break;
+            case "PlayerStandUp":
+            case 99:
+                message.Sate = 99;
                 break;
             }
             if (object.PlatformID != null)
@@ -3615,6 +3645,12 @@ $root.go = (function() {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
                     break;
                 }
             if (message.KindID != null && message.hasOwnProperty("KindID"))
@@ -3648,6 +3684,30 @@ $root.go = (function() {
             case "RoomCard":
             case 3:
                 message.Model = 3;
+                break;
+            case "Guess":
+            case 4:
+                message.Model = 4;
+                break;
+            case "GamesCity":
+            case 5:
+                message.Model = 5;
+                break;
+            case "DualMeet":
+            case 6:
+                message.Model = 6;
+                break;
+            case "Sport":
+            case 7:
+                message.Model = 7;
+                break;
+            case "Smart":
+            case 8:
+                message.Model = 8;
+                break;
+            case "RPG":
+            case 9:
+                message.Model = 9;
                 break;
             }
             if (object.KindID != null)
