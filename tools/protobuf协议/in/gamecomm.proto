@@ -68,7 +68,7 @@ message ConfigInfo {
   uint32 PlayScore = 5;   //游戏积分(筹码)
   uint32 MaxChair = 7;    //最大座位数
   uint32 Amount = 6;      //总局数
-  int32 Commission = 8;   //税收(百分比)
+  uint32 Commission = 8;  //税收(百分比)
 }
 
 //牌信息

@@ -2300,7 +2300,7 @@ $root.go = (function() {
             if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
                 writer.uint32(56).uint32(message.MaxChair);
             if (message.Commission != null && Object.hasOwnProperty.call(message, "Commission"))
-                writer.uint32(64).int32(message.Commission);
+                writer.uint32(64).uint32(message.Commission);
             return writer;
         };
 
@@ -2337,7 +2337,7 @@ $root.go = (function() {
                     message.Amount = reader.uint32();
                     break;
                 case 8:
-                    message.Commission = reader.int32();
+                    message.Commission = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2402,7 +2402,7 @@ $root.go = (function() {
             if (object.Amount != null)
                 message.Amount = object.Amount >>> 0;
             if (object.Commission != null)
-                message.Commission = object.Commission | 0;
+                message.Commission = object.Commission >>> 0;
             return message;
         };
 
