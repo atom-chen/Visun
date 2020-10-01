@@ -14,8 +14,15 @@ enum PlayerState {
   PlayerLook = 8;           //看牌
   PlayerCompare = 9;        //比牌
   PlayerCompareLose = 10;   //比牌失败
-  PlayerOutCard = 11;       //出牌
+  PlayerOutCard = 11;       //出牌|摊牌
   PlayerPass = 12;          //过牌|要不起
+  PlayerChi = 13;           //吃
+  PlayerPong = 14;          //碰
+  PlayerMingGang = 15;      //明杠
+  PlayerAnGang = 16;        //暗杠
+  PlayerTing = 17;          //听
+  PlayerHu = 18;            //胡
+  PlayerZiMo = 19;          //自摸
   PlayerGiveUp = 98;        //弃牌
   PlayerStandUp = 99;       //站起(可作为结束状态)
 }

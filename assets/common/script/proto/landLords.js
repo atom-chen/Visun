@@ -2467,6 +2467,13 @@ $root.go = (function() {
         values[valuesById[10] = "PlayerCompareLose"] = 10;
         values[valuesById[11] = "PlayerOutCard"] = 11;
         values[valuesById[12] = "PlayerPass"] = 12;
+        values[valuesById[13] = "PlayerChi"] = 13;
+        values[valuesById[14] = "PlayerPong"] = 14;
+        values[valuesById[15] = "PlayerMingGang"] = 15;
+        values[valuesById[16] = "PlayerAnGang"] = 16;
+        values[valuesById[17] = "PlayerTing"] = 17;
+        values[valuesById[18] = "PlayerHu"] = 18;
+        values[valuesById[19] = "PlayerZiMo"] = 19;
         values[valuesById[98] = "PlayerGiveUp"] = 98;
         values[valuesById[99] = "PlayerStandUp"] = 99;
         return values;
@@ -2660,6 +2667,13 @@ $root.go = (function() {
                 case 10:
                 case 11:
                 case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
                 case 98:
                 case 99:
                     break;
@@ -2768,6 +2782,34 @@ $root.go = (function() {
             case "PlayerPass":
             case 12:
                 message.Sate = 12;
+                break;
+            case "PlayerChi":
+            case 13:
+                message.Sate = 13;
+                break;
+            case "PlayerPong":
+            case 14:
+                message.Sate = 14;
+                break;
+            case "PlayerMingGang":
+            case 15:
+                message.Sate = 15;
+                break;
+            case "PlayerAnGang":
+            case 16:
+                message.Sate = 16;
+                break;
+            case "PlayerTing":
+            case 17:
+                message.Sate = 17;
+                break;
+            case "PlayerHu":
+            case 18:
+                message.Sate = 18;
+                break;
+            case "PlayerZiMo":
+            case 19:
+                message.Sate = 19;
                 break;
             case "PlayerGiveUp":
             case 98:

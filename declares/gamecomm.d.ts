@@ -17,6 +17,13 @@ export namespace gamecomm {
         PlayerCompareLose = 10,
         PlayerOutCard = 11,
         PlayerPass = 12,
+        PlayerChi = 13,
+        PlayerPong = 14,
+        PlayerMingGang = 15,
+        PlayerAnGang = 16,
+        PlayerTing = 17,
+        PlayerHu = 18,
+        PlayerZiMo = 19,
         PlayerGiveUp = 98,
         PlayerStandUp = 99
     }
