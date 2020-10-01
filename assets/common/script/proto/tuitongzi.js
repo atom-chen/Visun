@@ -2274,8 +2274,9 @@ $root.go = (function() {
         ConfigInfo.prototype.EnterScore = 0;
         ConfigInfo.prototype.LessScore = 0;
         ConfigInfo.prototype.PlayScore = 0;
-        ConfigInfo.prototype.Amount = 0;
         ConfigInfo.prototype.MaxChair = 0;
+        ConfigInfo.prototype.Amount = 0;
+        ConfigInfo.prototype.Commission = 0;
 
         ConfigInfo.create = function create(properties) {
             return new ConfigInfo(properties);
@@ -2295,9 +2296,11 @@ $root.go = (function() {
             if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
                 writer.uint32(40).uint32(message.PlayScore);
             if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
-                writer.uint32(48).int32(message.Amount);
+                writer.uint32(48).uint32(message.Amount);
             if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
-                writer.uint32(56).int32(message.MaxChair);
+                writer.uint32(56).uint32(message.MaxChair);
+            if (message.Commission != null && Object.hasOwnProperty.call(message, "Commission"))
+                writer.uint32(64).int32(message.Commission);
             return writer;
         };
 
@@ -2327,11 +2330,14 @@ $root.go = (function() {
                 case 5:
                     message.PlayScore = reader.uint32();
                     break;
-                case 6:
-                    message.Amount = reader.int32();
-                    break;
                 case 7:
-                    message.MaxChair = reader.int32();
+                    message.MaxChair = reader.uint32();
+                    break;
+                case 6:
+                    message.Amount = reader.uint32();
+                    break;
+                case 8:
+                    message.Commission = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2365,12 +2371,15 @@ $root.go = (function() {
             if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
                 if (!$util.isInteger(message.PlayScore))
                     return "PlayScore: integer expected";
-            if (message.Amount != null && message.hasOwnProperty("Amount"))
-                if (!$util.isInteger(message.Amount))
-                    return "Amount: integer expected";
             if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
                 if (!$util.isInteger(message.MaxChair))
                     return "MaxChair: integer expected";
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                if (!$util.isInteger(message.Amount))
+                    return "Amount: integer expected";
+            if (message.Commission != null && message.hasOwnProperty("Commission"))
+                if (!$util.isInteger(message.Commission))
+                    return "Commission: integer expected";
             return null;
         };
 
@@ -2388,10 +2397,12 @@ $root.go = (function() {
                 message.LessScore = object.LessScore >>> 0;
             if (object.PlayScore != null)
                 message.PlayScore = object.PlayScore >>> 0;
-            if (object.Amount != null)
-                message.Amount = object.Amount | 0;
             if (object.MaxChair != null)
-                message.MaxChair = object.MaxChair | 0;
+                message.MaxChair = object.MaxChair >>> 0;
+            if (object.Amount != null)
+                message.Amount = object.Amount >>> 0;
+            if (object.Commission != null)
+                message.Commission = object.Commission | 0;
             return message;
         };
 
@@ -2407,6 +2418,7 @@ $root.go = (function() {
                 object.PlayScore = 0;
                 object.Amount = 0;
                 object.MaxChair = 0;
+                object.Commission = 0;
             }
             if (message.Name != null && message.hasOwnProperty("Name"))
                 object.Name = message.Name;
@@ -2422,6 +2434,8 @@ $root.go = (function() {
                 object.Amount = message.Amount;
             if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
                 object.MaxChair = message.MaxChair;
+            if (message.Commission != null && message.hasOwnProperty("Commission"))
+                object.Commission = message.Commission;
             return object;
         };
 

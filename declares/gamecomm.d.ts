@@ -228,11 +228,14 @@ export namespace gamecomm {
         /** ConfigInfo PlayScore */
         PlayScore?: (number|null);
 
+        /** ConfigInfo MaxChair */
+        MaxChair?: (number|null);
+
         /** ConfigInfo Amount */
         Amount?: (number|null);
 
-        /** ConfigInfo MaxChair */
-        MaxChair?: (number|null);
+        /** ConfigInfo Commission */
+        Commission?: (number|null);
     }
 
     /** Represents a ConfigInfo. */
@@ -259,11 +262,14 @@ export namespace gamecomm {
         /** ConfigInfo PlayScore. */
         public PlayScore: number;
 
+        /** ConfigInfo MaxChair. */
+        public MaxChair: number;
+
         /** ConfigInfo Amount. */
         public Amount: number;
 
-        /** ConfigInfo MaxChair. */
-        public MaxChair: number;
+        /** ConfigInfo Commission. */
+        public Commission: number;
 
         /**
          * Creates a new ConfigInfo instance using the specified properties.
