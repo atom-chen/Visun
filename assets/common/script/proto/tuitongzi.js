@@ -1784,9 +1784,9 @@ $root.go = (function() {
         values[valuesById[0] = "PlayerLookOn"] = 0;
         values[valuesById[1] = "PlayerSitDown"] = 1;
         values[valuesById[2] = "PlayerAgree"] = 2;
-        values[valuesById[3] = "PlayerPickUp"] = 3;
-        values[valuesById[4] = "PlayerCall"] = 4;
-        values[valuesById[5] = "PlayerPlaying"] = 5;
+        values[valuesById[3] = "PlayerPlaying"] = 3;
+        values[valuesById[4] = "PlayerPickUp"] = 4;
+        values[valuesById[5] = "PlayerCall"] = 5;
         values[valuesById[6] = "PlayerFollow"] = 6;
         values[valuesById[7] = "PlayerRaise"] = 7;
         values[valuesById[8] = "PlayerLook"] = 8;
@@ -2056,15 +2056,15 @@ $root.go = (function() {
             case 2:
                 message.Sate = 2;
                 break;
-            case "PlayerPickUp":
+            case "PlayerPlaying":
             case 3:
                 message.Sate = 3;
                 break;
-            case "PlayerCall":
+            case "PlayerPickUp":
             case 4:
                 message.Sate = 4;
                 break;
-            case "PlayerPlaying":
+            case "PlayerCall":
             case 5:
                 message.Sate = 5;
                 break;
