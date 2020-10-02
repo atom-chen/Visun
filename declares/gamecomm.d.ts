@@ -2345,4 +2345,190 @@ export namespace gamecomm {
          */
         public toJSON(): { [k: string]: any };
     }
+
+    /** Properties of a GameOverReq. */
+    interface IGameOverReq {
+
+        /** GameOverReq GameID */
+        GameID?: (number|Long|null);
+    }
+
+    /** Represents a GameOverReq. */
+    class GameOverReq implements IGameOverReq {
+
+        /**
+         * Constructs a new GameOverReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGameOverReq);
+
+        /** GameOverReq GameID. */
+        public GameID: (number|Long);
+
+        /**
+         * Creates a new GameOverReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameOverReq instance
+         */
+        public static create(properties?: gamecomm.IGameOverReq): gamecomm.GameOverReq;
+
+        /**
+         * Encodes the specified GameOverReq message. Does not implicitly {@link gamecomm.GameOverReq.verify|verify} messages.
+         * @param message GameOverReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGameOverReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameOverReq message, length delimited. Does not implicitly {@link gamecomm.GameOverReq.verify|verify} messages.
+         * @param message GameOverReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGameOverReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameOverReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameOverReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameOverReq;
+
+        /**
+         * Decodes a GameOverReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameOverReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameOverReq;
+
+        /**
+         * Verifies a GameOverReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameOverReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameOverReq
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GameOverReq;
+
+        /**
+         * Creates a plain object from a GameOverReq message. Also converts values to other types if specified.
+         * @param message GameOverReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GameOverReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameOverReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameOverResp. */
+    interface IGameOverResp {
+
+        /** GameOverResp Innings */
+        Innings?: (gamecomm.IInningInfo[]|null);
+
+        /** GameOverResp PageNum */
+        PageNum?: (number|null);
+    }
+
+    /** Represents a GameOverResp. */
+    class GameOverResp implements IGameOverResp {
+
+        /**
+         * Constructs a new GameOverResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: gamecomm.IGameOverResp);
+
+        /** GameOverResp Innings. */
+        public Innings: gamecomm.IInningInfo[];
+
+        /** GameOverResp PageNum. */
+        public PageNum: number;
+
+        /**
+         * Creates a new GameOverResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameOverResp instance
+         */
+        public static create(properties?: gamecomm.IGameOverResp): gamecomm.GameOverResp;
+
+        /**
+         * Encodes the specified GameOverResp message. Does not implicitly {@link gamecomm.GameOverResp.verify|verify} messages.
+         * @param message GameOverResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: gamecomm.IGameOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameOverResp message, length delimited. Does not implicitly {@link gamecomm.GameOverResp.verify|verify} messages.
+         * @param message GameOverResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: gamecomm.IGameOverResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameOverResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameOverResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): gamecomm.GameOverResp;
+
+        /**
+         * Decodes a GameOverResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameOverResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): gamecomm.GameOverResp;
+
+        /**
+         * Verifies a GameOverResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameOverResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameOverResp
+         */
+        public static fromObject(object: { [k: string]: any }): gamecomm.GameOverResp;
+
+        /**
+         * Creates a plain object from a GameOverResp message. Also converts values to other types if specified.
+         * @param message GameOverResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: gamecomm.GameOverResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameOverResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
 }

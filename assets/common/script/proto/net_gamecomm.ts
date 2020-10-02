@@ -29,6 +29,8 @@ export enum gamecomm_msgs {
     BeOutResp = 39,
     GetInningsInfoReq = 40,
     GetInningsInfoResp = 41,
+    GameOverReq = 42,
+    GameOverResp = 43,
 }
 
 export var gamecomm_packet_define = {
@@ -54,6 +56,8 @@ export var gamecomm_packet_define = {
     39: new LeafWsPacket(39, gamecomm.BeOutResp, "gamecomm.BeOutResp"),
     40: new LeafWsPacket(40, gamecomm.GetInningsInfoReq, "gamecomm.GetInningsInfoReq"),
     41: new LeafWsPacket(41, gamecomm.GetInningsInfoResp, "gamecomm.GetInningsInfoResp"),
+    42: new LeafWsPacket(42, gamecomm.GameOverReq, "gamecomm.GameOverReq"),
+    43: new LeafWsPacket(43, gamecomm.GameOverResp, "gamecomm.GameOverResp"),
 }
 
 export class gamecomm_request {
@@ -79,5 +83,7 @@ export class gamecomm_request {
     public static BeOutResp( data:{ UserID:number, GameID:number, Code:number, Hints:string } ) { gamecomm_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
     public static GetInningsInfoReq( data:{ GameID:number } ) { gamecomm_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
     public static GetInningsInfoResp( data:{ Innings:any[], PageNum:number } ) { gamecomm_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameOverReq( data:{ GameID:number } ) { gamecomm_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameOverResp( data:{ Innings:any[], PageNum:number } ) { gamecomm_packet_define[43].sendToChannel(ChannelDefine.game, data, false); }
 }
 

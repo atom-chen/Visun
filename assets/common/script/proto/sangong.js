@@ -5687,6 +5687,230 @@ $root.go = (function() {
         return GetInningsInfoResp;
     })();
 
+    go.GameOverReq = (function() {
+
+        function GameOverReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameOverReq.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        GameOverReq.create = function create(properties) {
+            return new GameOverReq(properties);
+        };
+
+        GameOverReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint64(message.GameID);
+            return writer;
+        };
+
+        GameOverReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameOverReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameOverReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameOverReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameOverReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
+            return null;
+        };
+
+        GameOverReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.GameOverReq)
+                return object;
+            var message = new $root.go.GameOverReq();
+            if (object.GameID != null)
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        GameOverReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
+            return object;
+        };
+
+        GameOverReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameOverReq;
+    })();
+
+    go.GameOverResp = (function() {
+
+        function GameOverResp(properties) {
+            this.Innings = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameOverResp.prototype.Innings = $util.emptyArray;
+        GameOverResp.prototype.PageNum = 0;
+
+        GameOverResp.create = function create(properties) {
+            return new GameOverResp(properties);
+        };
+
+        GameOverResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Innings != null && message.Innings.length)
+                for (var i = 0; i < message.Innings.length; ++i)
+                    $root.go.InningInfo.encode(message.Innings[i], writer.uint32(10).fork()).ldelim();
+            if (message.PageNum != null && Object.hasOwnProperty.call(message, "PageNum"))
+                writer.uint32(16).int32(message.PageNum);
+            return writer;
+        };
+
+        GameOverResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameOverResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.go.GameOverResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Innings && message.Innings.length))
+                        message.Innings = [];
+                    message.Innings.push($root.go.InningInfo.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.PageNum = reader.int32();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameOverResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameOverResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Innings != null && message.hasOwnProperty("Innings")) {
+                if (!Array.isArray(message.Innings))
+                    return "Innings: array expected";
+                for (var i = 0; i < message.Innings.length; ++i) {
+                    var error = $root.go.InningInfo.verify(message.Innings[i]);
+                    if (error)
+                        return "Innings." + error;
+                }
+            }
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                if (!$util.isInteger(message.PageNum))
+                    return "PageNum: integer expected";
+            return null;
+        };
+
+        GameOverResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.go.GameOverResp)
+                return object;
+            var message = new $root.go.GameOverResp();
+            if (object.Innings) {
+                if (!Array.isArray(object.Innings))
+                    throw TypeError(".go.GameOverResp.Innings: array expected");
+                message.Innings = [];
+                for (var i = 0; i < object.Innings.length; ++i) {
+                    if (typeof object.Innings[i] !== "object")
+                        throw TypeError(".go.GameOverResp.Innings: object expected");
+                    message.Innings[i] = $root.go.InningInfo.fromObject(object.Innings[i]);
+                }
+            }
+            if (object.PageNum != null)
+                message.PageNum = object.PageNum | 0;
+            return message;
+        };
+
+        GameOverResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Innings = [];
+            if (options.defaults)
+                object.PageNum = 0;
+            if (message.Innings && message.Innings.length) {
+                object.Innings = [];
+                for (var j = 0; j < message.Innings.length; ++j)
+                    object.Innings[j] = $root.go.InningInfo.toObject(message.Innings[j], options);
+            }
+            if (message.PageNum != null && message.hasOwnProperty("PageNum"))
+                object.PageNum = message.PageNum;
+            return object;
+        };
+
+        GameOverResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameOverResp;
+    })();
+
     return go;
 })();
 

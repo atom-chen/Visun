@@ -188,7 +188,6 @@ message ChangeTableResp {
   uint64 GameID = 1; //游戏ID
   uint32 TableID = 2; //桌子ID
   uint64 UserID = 3;  //玩家ID
-
 }
 
 
@@ -208,6 +207,16 @@ message GetInningsInfoResp{
   repeated InningInfo Innings = 1;//牌局信息
   int32 PageNum = 2;//页码 默认20条一页
 }
+
+//请求游戏结束
+message GameOverReq {
+  uint64 GameID = 1; //游戏标识
+}
+message GameOverResp {
+  repeated InningInfo Innings = 1;//牌局信息
+  int32 PageNum = 2;//页码 默认20条一页;
+}
+
 
 
 /*
