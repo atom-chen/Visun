@@ -3687,7 +3687,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editCont",
+    "_name": "editRoomName",
     "_objFlags": 0,
     "_parent": {
       "__id__": 88
@@ -4399,7 +4399,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editCont",
+    "_name": "editPswd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 108
@@ -5111,7 +5111,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editNum",
+    "_name": "editDizhu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 128
@@ -5598,7 +5598,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editNum",
+    "_name": "editTotal",
     "_objFlags": 0,
     "_parent": {
       "__id__": 141
@@ -6085,7 +6085,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editNum",
+    "_name": "editJushu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 154
@@ -6454,7 +6454,7 @@
         "__id__": 190
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 210

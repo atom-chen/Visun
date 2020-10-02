@@ -6,6 +6,19 @@ export enum GameModeEnum {
 	guakao,
 }
 
+export enum GameModel {
+	General = 0,
+	Fight = 1,          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
+	Multiplayer = 2,    //百人类型
+	RoomCard = 3,       //房卡类型
+	Guess = 4,          //竞猜类型
+	GamesCity = 5,      //电玩城类型
+	DualMeet = 6,       //电竞类型
+	Sport = 7,          //体育类型
+	Smart = 8,          //益智休闲
+	RPG = 9,            //RPG类型
+  }
+
 export enum GameKindEnum {
 	//百人
 	Baccarat	= 2001,			//百家乐

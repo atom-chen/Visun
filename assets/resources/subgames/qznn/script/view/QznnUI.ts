@@ -30,6 +30,7 @@ import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 const MAX_SOLDIER = 5;
 const CARD_CNT = 5;
+const HAS_SEARCHING = false;
 
 
 const {ccclass, property} = cc._decorator;
@@ -226,6 +227,7 @@ export default class QznnUI extends BaseComponent {
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
 
         for(var n=0; n<MAX_SOLDIER; n++) {
+            this._pnodes[n].getChildByName("ust_yizhunbei").active = false;
             this.refreshPlayerByIndex(n);
 		}
 		this.refreshBtns();
@@ -421,6 +423,16 @@ export default class QznnUI extends BaseComponent {
         }
     }
 
+    QzcowcowReadyResp(param:qzcowcow.IQzcowcowReadyResp) {
+        if(param.UserId==LoginUser.getInstance().UserId) {
+            this.m_ui.readyNode.active = false;
+        }
+        var idx = this.playerIdx(param.UserId);
+        if(idx>=0) {
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = true;
+        }
+    }
+
 	initNetEvent() {
 		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowSceneResp, this.QzcowcowSceneResp, this);
 		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowStateFreeResp, this.QzcowcowStateFreeResp, this);
@@ -436,10 +448,12 @@ export default class QznnUI extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
         EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowBetResp, this.QzcowcowBetResp, this);
-		EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowCallResp, this.QzcowcowCallResp, this);
+        EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowCallResp, this.QzcowcowCallResp, this);
+        EventCenter.getInstance().listen(qzcowcow_msgs.QzcowcowReadyResp, this.QzcowcowReadyResp, this);
 	}
 
 	showSearching(bSearching:boolean) {
+        if(!HAS_SEARCHING) { return; }
         if(bSearching) {
             var myIdx = this.playerIdx(LoginUser.getInstance().UserId);
             for(var n=0; n<MAX_SOLDIER; n++) {
@@ -463,11 +477,13 @@ export default class QznnUI extends BaseComponent {
 		CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             qzcowcow_request.QzcowcowReadyReq({IsReady:true});
             this.showSearching(true);
-            this.m_ui.readyNode.active = false;
-            UIManager.openPopwnd(ViewDefine.UISearchDesk, false, newHandler(function(){
-                this.m_ui.readyNode.active = true;
-                qzcowcow_request.QzcowcowReadyReq({IsReady:false});
-            }, this));
+            if(HAS_SEARCHING) {
+                this.m_ui.readyNode.active = false;
+                UIManager.openPopwnd(ViewDefine.UISearchDesk, false, newHandler(function(){
+                    this.m_ui.readyNode.active = true;
+                    qzcowcow_request.QzcowcowReadyReq({IsReady:false});
+                }, this));
+            }
         }, this);
 
 		CommonUtil.addClickEvent(this.m_ui.btn_grab_0, function(){ this.sendGrab(0); }, this);

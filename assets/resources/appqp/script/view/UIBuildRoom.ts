@@ -1,9 +1,12 @@
+import { gamecomm } from "../../../../../declares/gamecomm";
 import { login } from "../../../../../declares/login";
+import { GameModel } from "../../../../common/script/definer/ConstDefine";
 import EventDefine from "../../../../common/script/definer/EventDefine";
 import GameConfig from "../../../../common/script/definer/GameConfig";
 import ViewDefine from "../../../../common/script/definer/ViewDefine";
 import GameManager from "../../../../common/script/model/GameManager";
 import LoginUser from "../../../../common/script/model/LoginUser";
+import { gamecomm_request } from "../../../../common/script/proto/net_gamecomm";
 import { login_msgs } from "../../../../common/script/proto/net_login";
 import Adaptor from "../../../../kernel/adaptor/Adaptor";
 import AudioManager from "../../../../kernel/audio/AudioManager";
@@ -76,6 +79,20 @@ export default class UIBuildRoom extends BaseComponent {
         
         //进入游戏
 		CommonUtil.addClickEvent(this.m_ui.btn_ok1, function(){ 
+            var info:gamecomm.IConfigInfo = {};
+            info.Amount = parseInt(this.m_ui.editJushu.getChildByName("labNum").getComponent(cc.Label).string);
+            info.Commission = 0.05;
+            info.MaxChair = 5;
+            info.PlayScore = parseFloat(this.m_ui.editTotal.getChildByName("labNum").getComponent(cc.Label).string);
+            info.LessScore = parseFloat(this.m_ui.editDizhu.getChildByName("labNum").getComponent(cc.Label).string);
+            info.EnterScore = 500;
+            info.Password = this.m_ui.editPswd.getComponent(cc.EditBox).string;
+            info.Name = this.m_ui.editRoomName.getComponent(cc.EditBox).string;
+            gamecomm_request.SettingGameReq({
+                Model:GameModel.RoomCard,
+                KindID:this.kindId,
+                Info:info
+            });
 			GameManager.getInstance().enterGame(this.gameId);
         }, this);
         

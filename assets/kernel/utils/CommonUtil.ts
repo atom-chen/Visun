@@ -826,7 +826,12 @@ export default class CommonUtil {
 		let scale = 2 / (Math.sqrt(4 + k * k) - k);
 		nd.is3DNode = true;
 		nd.eulerAngles = cc.v3(angle, skewX < 0 ? -angle : angle, 0);
-		nd.scale = 2-scale;
+		nd.scaleX = 2-scale;
+		if(skewX>0) {
+			nd.scaleY = (2-scale)*(1-skewX/128);
+		} else {
+			nd.scaleY = (2-scale)*(1+skewX/128);
+		}
 	}
 
 	public static render2Tex() {
