@@ -2039,11 +2039,8 @@ export namespace login {
     /** Properties of a SettingGameResp. */
     interface ISettingGameResp {
 
-        /** SettingGameResp GameID */
-        GameID?: (number|Long|null);
-
-        /** SettingGameResp Info */
-        Info?: (login.IGameInfo|null);
+        /** SettingGameResp Item */
+        Item?: (login.IGameItem|null);
     }
 
     /** Represents a SettingGameResp. */
@@ -2055,11 +2052,8 @@ export namespace login {
          */
         constructor(properties?: login.ISettingGameResp);
 
-        /** SettingGameResp GameID. */
-        public GameID: (number|Long);
-
-        /** SettingGameResp Info. */
-        public Info?: (login.IGameInfo|null);
+        /** SettingGameResp Item. */
+        public Item?: (login.IGameItem|null);
 
         /**
          * Creates a new SettingGameResp instance using the specified properties.

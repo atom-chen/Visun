@@ -182,8 +182,7 @@ message SettingGameReq {
   GameInfo Info = 2;//配置信息
 }
 message SettingGameResp {
-  uint64 GameID = 1; //游戏标识
-  GameInfo Info = 2;//配置信息(此处 游戏密钥为空值 即不带回密钥)
+  GameItem Item = 1;
 }
 
 

@@ -2898,8 +2898,7 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SettingGameResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        SettingGameResp.prototype.Info = null;
+        SettingGameResp.prototype.Item = null;
 
         SettingGameResp.create = function create(properties) {
             return new SettingGameResp(properties);
@@ -2908,10 +2907,8 @@ $root.login = (function() {
         SettingGameResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
-                writer.uint32(8).uint64(message.GameID);
-            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            if (message.Item != null && Object.hasOwnProperty.call(message, "Item"))
+                $root.login.GameItem.encode(message.Item, writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
@@ -2927,10 +2924,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.GameID = reader.uint64();
-                    break;
-                case 2:
-                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
+                    message.Item = $root.login.GameItem.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2949,13 +2943,10 @@ $root.login = (function() {
         SettingGameResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
-                    return "GameID: integer|Long expected";
-            if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.login.GameInfo.verify(message.Info);
+            if (message.Item != null && message.hasOwnProperty("Item")) {
+                var error = $root.login.GameItem.verify(message.Item);
                 if (error)
-                    return "Info." + error;
+                    return "Item." + error;
             }
             return null;
         };
@@ -2964,19 +2955,10 @@ $root.login = (function() {
             if (object instanceof $root.login.SettingGameResp)
                 return object;
             var message = new $root.login.SettingGameResp();
-            if (object.GameID != null)
-                if ($util.Long)
-                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
-                else if (typeof object.GameID === "string")
-                    message.GameID = parseInt(object.GameID, 10);
-                else if (typeof object.GameID === "number")
-                    message.GameID = object.GameID;
-                else if (typeof object.GameID === "object")
-                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
-            if (object.Info != null) {
-                if (typeof object.Info !== "object")
-                    throw TypeError(".login.SettingGameResp.Info: object expected");
-                message.Info = $root.login.GameInfo.fromObject(object.Info);
+            if (object.Item != null) {
+                if (typeof object.Item !== "object")
+                    throw TypeError(".login.SettingGameResp.Item: object expected");
+                message.Item = $root.login.GameItem.fromObject(object.Item);
             }
             return message;
         };
@@ -2985,21 +2967,10 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.GameID = options.longs === String ? "0" : 0;
-                object.Info = null;
-            }
-            if (message.GameID != null && message.hasOwnProperty("GameID"))
-                if (typeof message.GameID === "number")
-                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
-                else
-                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
-            if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.login.GameInfo.toObject(message.Info, options);
+            if (options.defaults)
+                object.Item = null;
+            if (message.Item != null && message.hasOwnProperty("Item"))
+                object.Item = $root.login.GameItem.toObject(message.Item, options);
             return object;
         };
 

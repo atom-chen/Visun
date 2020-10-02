@@ -73,7 +73,7 @@ export class login_request {
     public static EnterRoomReq( data:{ RoomNum:number, RoomKey:string } ) { login_packet_define[15].sendToChannel(ChannelDefine.game, data, false); }
     public static EnterRoomResp( data:{ RoomNum:number, Games:any } ) { login_packet_define[16].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingGameReq( data:{ Info:any } ) { login_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
-    public static SettingGameResp( data:{ GameID:number, Info:any } ) { login_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
+    public static SettingGameResp( data:{ Item:any } ) { login_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
 }
