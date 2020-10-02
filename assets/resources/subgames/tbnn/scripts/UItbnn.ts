@@ -30,6 +30,7 @@ import CpnGameMenu from "../../../appqp/script/comps/CpnGameMenu";
 
 const MAX_SOLDIER = 5;
 const CARD_CNT = 5;
+const HAS_SEARCHING = false;
 
 
 const {ccclass, property} = cc._decorator;
@@ -188,6 +189,7 @@ export default class UItbnn extends BaseComponent {
         this.m_ui.labgameuuid.getComponent(cc.Label).string = "牌局号：" + param.Inning;
 
         for(var n=0; n<MAX_SOLDIER; n++) {
+            this._pnodes[n].getChildByName("ust_yizhunbei").active = false;
             this.refreshPlayerByIndex(n);
         }
     }
@@ -315,19 +317,6 @@ export default class UItbnn extends BaseComponent {
         TbnnMgr.getInstance().removePlayer(param.UserID);
     }
 
-    showSearching(bSearching:boolean) {
-        if(bSearching) {
-            var myIdx = this.playerIdx(LoginUser.getInstance().UserId);
-            for(var n=0; n<MAX_SOLDIER; n++) {
-                this._pnodes[n].active = n == myIdx;
-            }
-        } else {
-            for(var i=0; i<MAX_SOLDIER; i++) {
-                this.refreshPlayerByIndex(i, false);
-            }
-        }
-    }
-
     TbcowcowBetResp(param:tbcowcow.ITbcowcowBetResp) {
         if(isNil(param)) { return; }
         var idx = this.playerIdx(param.UserId);
@@ -336,6 +325,16 @@ export default class UItbnn extends BaseComponent {
         this._pnodes[idx].getChildByName("callNode").getComponent(cc.Label).string = param.BetScore+"倍";
         if(param.UserId == LoginUser.getInstance().UserId) {
             this.m_ui.opNode.active = false;
+        }
+    }
+
+    TbcowcowReadyResp(param:tbcowcow.ITbcowcowReadyResp) {
+        if(param.UserId==LoginUser.getInstance().UserId) {
+            this.m_ui.readyNode.active = false;
+        }
+        var idx = this.playerIdx(param.UserId);
+        if(idx>=0) {
+            this._pnodes[idx].getChildByName("ust_yizhunbei").active = true;
         }
     }
 
@@ -352,7 +351,22 @@ export default class UItbnn extends BaseComponent {
         EventCenter.getInstance().listen(gamecomm_msgs.EnterGameResp, this.EnterGameResp, this);
         EventCenter.getInstance().listen(gamecomm_msgs.ExitGameResp, this.ExitGameResp, this);
         EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowBetResp, this.TbcowcowBetResp, this);
-	}
+        EventCenter.getInstance().listen(tbcowcow_msgs.TbcowcowReadyResp, this.TbcowcowReadyResp, this);
+    }
+    
+    showSearching(bSearching:boolean) {
+        if(!HAS_SEARCHING) { return; }
+        if(bSearching) {
+            var myIdx = this.playerIdx(LoginUser.getInstance().UserId);
+            for(var n=0; n<MAX_SOLDIER; n++) {
+                this._pnodes[n].active = n == myIdx;
+            }
+        } else {
+            for(var i=0; i<MAX_SOLDIER; i++) {
+                this.refreshPlayerByIndex(i, false);
+            }
+        }
+    }
 
 	initUIEvent() {
 		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
@@ -364,11 +378,13 @@ export default class UItbnn extends BaseComponent {
         CommonUtil.addClickEvent(this.m_ui.btn_ready, function(){ 
             tbcowcow_request.TbcowcowReadyReq({IsReady:true});
             this.showSearching(true);
-            this.m_ui.readyNode.active = false;
-            UIManager.openPopwnd(ViewDefine.UISearchDesk, false, newHandler(function(){
-                this.m_ui.readyNode.active = true;
-                tbcowcow_request.TbcowcowReadyReq({IsReady:false});
-            }, this));
+            if(HAS_SEARCHING) {
+                this.m_ui.readyNode.active = false;
+                UIManager.openPopwnd(ViewDefine.UISearchDesk, false, newHandler(function(){
+                    this.m_ui.readyNode.active = true;
+                    tbcowcow_request.TbcowcowReadyReq({IsReady:false});
+                }, this));
+            }
         }, this);
         // CommonUtil.addClickEvent(this.m_ui.btn_chgdesk, function(){
         //     gamecomm_request.ChangeTableReq({
