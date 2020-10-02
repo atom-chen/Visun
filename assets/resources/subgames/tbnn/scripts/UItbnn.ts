@@ -59,6 +59,11 @@ export default class UItbnn extends BaseComponent {
             this._pxCpns.push(nd.getChildByName("CpnPaixing1").getComponent(CpnPaixing));
         }
 
+        this._handors[1].set3dLook(15);
+		this._handors[2].set3dLook(15);
+		this._handors[3].set3dLook(-15);
+		this._handors[4].set3dLook(-15);
+
         this.refreshBtns();
 
 		this.initUIEvent();
@@ -143,18 +148,16 @@ export default class UItbnn extends BaseComponent {
     private playFapaiAni() {
         var nn = 0;
         for(var i=0; i<MAX_SOLDIER; i++){
-            if(this.getPlayerByIndex(i)) {
-                this._handors[i].resetCards([0,0,0,0,0]);
-                this._pxCpns[i].setCardType(-1,-1);
-                if(!isNil(this.getPlayerByIndex(i))) {
-                    var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
-                    for(var j=0; j<CARD_CNT; j++) {
-                        nn++;
-                        CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
-                        TimerManager.delaySecond(nn*0.06, newHandler(function(){
-                            AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
-                        }, this));
-                    }
+            this._handors[i].resetCards([0,0,0,0,0]);
+            this._pxCpns[i].setCardType(-1,-1);
+            if(!isNil(this.getPlayerByIndex(i))) {
+                var fromPos = CommonUtil.convertSpaceAR(this.m_ui.cpzhuang, this._handors[i].node);
+                for(var j=0; j<CARD_CNT; j++) {
+                    nn++;
+                    CommonUtil.bezierTo3(this._handors[i].node.children[j], fromPos, this._handors[i].getComponent(CpnHandcard2).getPosByIndex(j), 0.4, nn*0.06);
+                    TimerManager.delaySecond(nn*0.06, newHandler(function(){
+                        AudioManager.getInstance().playEffectAsync("appqp/audios/deal", false);
+                    }, this));
                 }
             }
         }
