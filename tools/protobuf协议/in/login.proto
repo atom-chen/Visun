@@ -2,6 +2,28 @@ syntax = "proto3";
 package login;
 
 
+enum GameState {
+  Init = 0;     //初始化
+  Open = 1;     //开场
+  Maintain = 2; //维修
+  Clear = 3;    //清场(当前局结束后,清空所有场景信息)
+  Stop = 4;     //停运(再次启动时，以当前局的场景信息继续运作)
+  Close = 5;    //关闭
+}
+enum GameType {
+  General = 0;
+  Fight = 1;          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
+  Multiplayer = 2;    //百人类型
+  RoomCard = 3;       //房卡类型
+  Guess = 4;          //竞猜类型
+  GamesCity = 5;      //电玩城类型
+  DualMeet = 6;       //电竞类型
+  Sport = 7;          //体育类型
+  Smart = 8;          //益智休闲
+  RPG = 9;            //RPG类型
+}
+
+
 /////////////info//////////////////
 //个人信息
 message UserInfo{
@@ -41,21 +63,26 @@ message RoomInfo{
 
 //游戏信息
 message GameInfo{
-  uint32 Type = 1;        //游戏类型
+  GameType Type = 1;      //游戏类型
   uint32 KindID = 2;      //游戏标识
   uint32 Level = 3;       //游戏类别 0:普通 1:中级 2:高级 3:积分排位 4:淘汰制排位
   string Name = 4;        //游戏名称
   uint32 EnterScore = 5;    //进 场 分
   uint32 LessScore = 6;     //坐 下 分
   uint32 MaxOnline = 7;     //在线人数
-  uint32 State = 8;         //状态
+  GameState State = 8;      //游戏状态(注:运行状态,并非场景状态)
   uint32 Commission = 9;    //税收（百分比数，即为1==1%）
+  int64  PlayScore = 10;    //携带积分
+  uint64 HostID = 11;       //房主ID
+  string Password = 12;     //游戏密钥
+  uint32 MaxChair = 13;     //最大座位数(=0时,默认不受限)
+  uint32 Amount = 14;       //总局数(=0时,默认不受限)
 }
 
 //子游戏（信息）
 message GameItem{
   uint64 ID = 1;    //即:GameID
-  GameInfo Info = 2;//子游戏
+  GameInfo Info = 2;//子游戏 注:不提供游戏密钥信息
 }
 
 
@@ -123,7 +150,7 @@ message LoginResp{
 }
 //异地
 message AllopatricResp{
-    uint64 UserId = 1;
+  uint64 UserId = 1;
 }
 
 
@@ -140,9 +167,6 @@ message ReconnectResp{
 }
 
 
-
-
-
 //进入房间
 message EnterRoomReq{
   uint32 RoomNum = 1;      //房间号码
@@ -151,6 +175,15 @@ message EnterRoomReq{
 message EnterRoomResp{
   uint32 RoomNum = 1;      //房间号码
   GameList Games = 2;
+}
+
+//配置游戏(房卡模式)
+message SettingGameReq {
+  GameInfo Info = 2;//配置信息
+}
+message SettingGameResp {
+  uint64 GameID = 1; //游戏标识
+  GameInfo Info = 2;//配置信息(此处 游戏密钥为空值 即不带回密钥)
 }
 
 

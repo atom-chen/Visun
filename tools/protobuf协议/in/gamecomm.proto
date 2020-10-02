@@ -26,18 +26,6 @@ enum PlayerState {
   PlayerGiveUp = 98;        //弃牌
   PlayerStandUp = 99;       //站起(可作为结束状态)
 }
-enum GameModel {
-  General = 0;
-  Fight = 1;          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
-  Multiplayer = 2;    //百人类型
-  RoomCard = 3;       //房卡类型
-  Guess = 4;          //竞猜类型
-  GamesCity = 5;      //电玩城类型
-  DualMeet = 6;       //电竞类型
-  Sport = 7;          //体育类型
-  Smart = 8;          //益智休闲
-  RPG = 9;            //RPG类型
-}
 
 
 
@@ -57,18 +45,6 @@ message PlayerInfo {
   uint64 GameID = 11; // 所在游戏ID 0:无效
   uint32 TableID = 12; // 所在桌号ID 0:不提供
   uint32 ChairID = 13; // 所在椅子ID 0:不提供
-}
-
-//游戏配置信息(房卡模式时 可用)
-message ConfigInfo {
-  string Name = 1;        //名称(桌子)
-  string Password = 2;    //密码
-  uint32 EnterScore = 3;  //入场积分
-  uint32 LessScore = 4;   //底注(最低下注)
-  uint32 PlayScore = 5;   //游戏积分(筹码)
-  uint32 MaxChair = 7;    //最大座位数
-  uint32 Amount = 6;      //总局数
-  uint32 Commission = 8;  //税收(百分比)
 }
 
 //牌信息
@@ -147,19 +123,6 @@ message GameRecordList {
 
 
 //-----------------------------------------------------------------------------------------
-//配置游戏
-message SettingGameReq {
-  GameModel Model = 1;//游戏模式 (房卡 == 3 == RoomCard)
-  uint32 KindID = 2; //游戏种类
-  ConfigInfo Info = 4;//配置信息
-}
-message SettingGameResp {//广播给所有在线玩家
-  uint64 GameID = 1; //游戏标识
-  uint64 HostID = 2;//房主ID
-  ConfigInfo Info = 3;//配置信息(此处 游戏密钥为空值 即不带回密钥)
-}
-
-
 //进入游戏
 message EnterGameReq {
   uint64 GameID = 1; //游戏标识
@@ -208,7 +171,7 @@ message GetInningsInfoResp{
   int32 PageNum = 2;//页码 默认20条一页
 }
 
-//请求游戏结束
+//请求游戏结束（注:返回牌局记录后,游戏随即销毁）
 message GameOverReq {
   uint64 GameID = 1; //游戏标识
 }

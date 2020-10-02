@@ -11,6 +11,32 @@ $root.login = (function() {
 
     var login = {};
 
+    login.GameState = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Init"] = 0;
+        values[valuesById[1] = "Open"] = 1;
+        values[valuesById[2] = "Maintain"] = 2;
+        values[valuesById[3] = "Clear"] = 3;
+        values[valuesById[4] = "Stop"] = 4;
+        values[valuesById[5] = "Close"] = 5;
+        return values;
+    })();
+
+    login.GameType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "General"] = 0;
+        values[valuesById[1] = "Fight"] = 1;
+        values[valuesById[2] = "Multiplayer"] = 2;
+        values[valuesById[3] = "RoomCard"] = 3;
+        values[valuesById[4] = "Guess"] = 4;
+        values[valuesById[5] = "GamesCity"] = 5;
+        values[valuesById[6] = "DualMeet"] = 6;
+        values[valuesById[7] = "Sport"] = 7;
+        values[valuesById[8] = "Smart"] = 8;
+        values[valuesById[9] = "RPG"] = 9;
+        return values;
+    })();
+
     login.UserInfo = (function() {
 
         function UserInfo(properties) {
@@ -574,6 +600,11 @@ $root.login = (function() {
         GameInfo.prototype.MaxOnline = 0;
         GameInfo.prototype.State = 0;
         GameInfo.prototype.Commission = 0;
+        GameInfo.prototype.PlayScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameInfo.prototype.Password = "";
+        GameInfo.prototype.MaxChair = 0;
+        GameInfo.prototype.Amount = 0;
 
         GameInfo.create = function create(properties) {
             return new GameInfo(properties);
@@ -583,7 +614,7 @@ $root.login = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
-                writer.uint32(8).uint32(message.Type);
+                writer.uint32(8).int32(message.Type);
             if (message.KindID != null && Object.hasOwnProperty.call(message, "KindID"))
                 writer.uint32(16).uint32(message.KindID);
             if (message.Level != null && Object.hasOwnProperty.call(message, "Level"))
@@ -597,9 +628,19 @@ $root.login = (function() {
             if (message.MaxOnline != null && Object.hasOwnProperty.call(message, "MaxOnline"))
                 writer.uint32(56).uint32(message.MaxOnline);
             if (message.State != null && Object.hasOwnProperty.call(message, "State"))
-                writer.uint32(64).uint32(message.State);
+                writer.uint32(64).int32(message.State);
             if (message.Commission != null && Object.hasOwnProperty.call(message, "Commission"))
                 writer.uint32(72).uint32(message.Commission);
+            if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
+                writer.uint32(80).int64(message.PlayScore);
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(88).uint64(message.HostID);
+            if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
+                writer.uint32(98).string(message.Password);
+            if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
+                writer.uint32(104).uint32(message.MaxChair);
+            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
+                writer.uint32(112).uint32(message.Amount);
             return writer;
         };
 
@@ -615,7 +656,7 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Type = reader.uint32();
+                    message.Type = reader.int32();
                     break;
                 case 2:
                     message.KindID = reader.uint32();
@@ -636,10 +677,25 @@ $root.login = (function() {
                     message.MaxOnline = reader.uint32();
                     break;
                 case 8:
-                    message.State = reader.uint32();
+                    message.State = reader.int32();
                     break;
                 case 9:
                     message.Commission = reader.uint32();
+                    break;
+                case 10:
+                    message.PlayScore = reader.int64();
+                    break;
+                case 11:
+                    message.HostID = reader.uint64();
+                    break;
+                case 12:
+                    message.Password = reader.string();
+                    break;
+                case 13:
+                    message.MaxChair = reader.uint32();
+                    break;
+                case 14:
+                    message.Amount = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -659,8 +715,21 @@ $root.login = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Type != null && message.hasOwnProperty("Type"))
-                if (!$util.isInteger(message.Type))
-                    return "Type: integer expected";
+                switch (message.Type) {
+                default:
+                    return "Type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    break;
+                }
             if (message.KindID != null && message.hasOwnProperty("KindID"))
                 if (!$util.isInteger(message.KindID))
                     return "KindID: integer expected";
@@ -680,11 +749,35 @@ $root.login = (function() {
                 if (!$util.isInteger(message.MaxOnline))
                     return "MaxOnline: integer expected";
             if (message.State != null && message.hasOwnProperty("State"))
-                if (!$util.isInteger(message.State))
-                    return "State: integer expected";
+                switch (message.State) {
+                default:
+                    return "State: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
             if (message.Commission != null && message.hasOwnProperty("Commission"))
                 if (!$util.isInteger(message.Commission))
                     return "Commission: integer expected";
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                if (!$util.isInteger(message.PlayScore) && !(message.PlayScore && $util.isInteger(message.PlayScore.low) && $util.isInteger(message.PlayScore.high)))
+                    return "PlayScore: integer|Long expected";
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                if (!$util.isString(message.Password))
+                    return "Password: string expected";
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                if (!$util.isInteger(message.MaxChair))
+                    return "MaxChair: integer expected";
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                if (!$util.isInteger(message.Amount))
+                    return "Amount: integer expected";
             return null;
         };
 
@@ -692,8 +785,48 @@ $root.login = (function() {
             if (object instanceof $root.login.GameInfo)
                 return object;
             var message = new $root.login.GameInfo();
-            if (object.Type != null)
-                message.Type = object.Type >>> 0;
+            switch (object.Type) {
+            case "General":
+            case 0:
+                message.Type = 0;
+                break;
+            case "Fight":
+            case 1:
+                message.Type = 1;
+                break;
+            case "Multiplayer":
+            case 2:
+                message.Type = 2;
+                break;
+            case "RoomCard":
+            case 3:
+                message.Type = 3;
+                break;
+            case "Guess":
+            case 4:
+                message.Type = 4;
+                break;
+            case "GamesCity":
+            case 5:
+                message.Type = 5;
+                break;
+            case "DualMeet":
+            case 6:
+                message.Type = 6;
+                break;
+            case "Sport":
+            case 7:
+                message.Type = 7;
+                break;
+            case "Smart":
+            case 8:
+                message.Type = 8;
+                break;
+            case "RPG":
+            case 9:
+                message.Type = 9;
+                break;
+            }
             if (object.KindID != null)
                 message.KindID = object.KindID >>> 0;
             if (object.Level != null)
@@ -706,10 +839,58 @@ $root.login = (function() {
                 message.LessScore = object.LessScore >>> 0;
             if (object.MaxOnline != null)
                 message.MaxOnline = object.MaxOnline >>> 0;
-            if (object.State != null)
-                message.State = object.State >>> 0;
+            switch (object.State) {
+            case "Init":
+            case 0:
+                message.State = 0;
+                break;
+            case "Open":
+            case 1:
+                message.State = 1;
+                break;
+            case "Maintain":
+            case 2:
+                message.State = 2;
+                break;
+            case "Clear":
+            case 3:
+                message.State = 3;
+                break;
+            case "Stop":
+            case 4:
+                message.State = 4;
+                break;
+            case "Close":
+            case 5:
+                message.State = 5;
+                break;
+            }
             if (object.Commission != null)
                 message.Commission = object.Commission >>> 0;
+            if (object.PlayScore != null)
+                if ($util.Long)
+                    (message.PlayScore = $util.Long.fromValue(object.PlayScore)).unsigned = false;
+                else if (typeof object.PlayScore === "string")
+                    message.PlayScore = parseInt(object.PlayScore, 10);
+                else if (typeof object.PlayScore === "number")
+                    message.PlayScore = object.PlayScore;
+                else if (typeof object.PlayScore === "object")
+                    message.PlayScore = new $util.LongBits(object.PlayScore.low >>> 0, object.PlayScore.high >>> 0).toNumber();
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            if (object.Password != null)
+                message.Password = String(object.Password);
+            if (object.MaxChair != null)
+                message.MaxChair = object.MaxChair >>> 0;
+            if (object.Amount != null)
+                message.Amount = object.Amount >>> 0;
             return message;
         };
 
@@ -718,18 +899,31 @@ $root.login = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.Type = 0;
+                object.Type = options.enums === String ? "General" : 0;
                 object.KindID = 0;
                 object.Level = 0;
                 object.Name = "";
                 object.EnterScore = 0;
                 object.LessScore = 0;
                 object.MaxOnline = 0;
-                object.State = 0;
+                object.State = options.enums === String ? "Init" : 0;
                 object.Commission = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.PlayScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlayScore = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
+                object.Password = "";
+                object.MaxChair = 0;
+                object.Amount = 0;
             }
             if (message.Type != null && message.hasOwnProperty("Type"))
-                object.Type = message.Type;
+                object.Type = options.enums === String ? $root.login.GameType[message.Type] : message.Type;
             if (message.KindID != null && message.hasOwnProperty("KindID"))
                 object.KindID = message.KindID;
             if (message.Level != null && message.hasOwnProperty("Level"))
@@ -743,9 +937,25 @@ $root.login = (function() {
             if (message.MaxOnline != null && message.hasOwnProperty("MaxOnline"))
                 object.MaxOnline = message.MaxOnline;
             if (message.State != null && message.hasOwnProperty("State"))
-                object.State = message.State;
+                object.State = options.enums === String ? $root.login.GameState[message.State] : message.State;
             if (message.Commission != null && message.hasOwnProperty("Commission"))
                 object.Commission = message.Commission;
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                if (typeof message.PlayScore === "number")
+                    object.PlayScore = options.longs === String ? String(message.PlayScore) : message.PlayScore;
+                else
+                    object.PlayScore = options.longs === String ? $util.Long.prototype.toString.call(message.PlayScore) : options.longs === Number ? new $util.LongBits(message.PlayScore.low >>> 0, message.PlayScore.high >>> 0).toNumber() : message.PlayScore;
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                object.Password = message.Password;
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                object.MaxChair = message.MaxChair;
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                object.Amount = message.Amount;
             return object;
         };
 
@@ -2585,6 +2795,219 @@ $root.login = (function() {
         };
 
         return EnterRoomResp;
+    })();
+
+    login.SettingGameReq = (function() {
+
+        function SettingGameReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SettingGameReq.prototype.Info = null;
+
+        SettingGameReq.create = function create(properties) {
+            return new SettingGameReq(properties);
+        };
+
+        SettingGameReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        SettingGameReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SettingGameReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingGameReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 2:
+                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SettingGameReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SettingGameReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.GameInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        SettingGameReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.SettingGameReq)
+                return object;
+            var message = new $root.login.SettingGameReq();
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.SettingGameReq.Info: object expected");
+                message.Info = $root.login.GameInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        SettingGameReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.Info = null;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.GameInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        SettingGameReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SettingGameReq;
+    })();
+
+    login.SettingGameResp = (function() {
+
+        function SettingGameResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SettingGameResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        SettingGameResp.prototype.Info = null;
+
+        SettingGameResp.create = function create(properties) {
+            return new SettingGameResp(properties);
+        };
+
+        SettingGameResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint64(message.GameID);
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        SettingGameResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SettingGameResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingGameResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint64();
+                    break;
+                case 2:
+                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SettingGameResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SettingGameResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.GameInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        SettingGameResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.SettingGameResp)
+                return object;
+            var message = new $root.login.SettingGameResp();
+            if (object.GameID != null)
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.SettingGameResp.Info: object expected");
+                message.Info = $root.login.GameInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        SettingGameResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
+                object.Info = null;
+            }
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.GameInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        SettingGameResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return SettingGameResp;
     })();
 
     login.ResultResp = (function() {

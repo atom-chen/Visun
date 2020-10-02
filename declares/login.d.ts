@@ -2,6 +2,30 @@ import * as $protobuf from "protobufjs";
 /** Namespace login. */
 export namespace login {
 
+    /** GameState enum. */
+    enum GameState {
+        Init = 0,
+        Open = 1,
+        Maintain = 2,
+        Clear = 3,
+        Stop = 4,
+        Close = 5
+    }
+
+    /** GameType enum. */
+    enum GameType {
+        General = 0,
+        Fight = 1,
+        Multiplayer = 2,
+        RoomCard = 3,
+        Guess = 4,
+        GamesCity = 5,
+        DualMeet = 6,
+        Sport = 7,
+        Smart = 8,
+        RPG = 9
+    }
+
     /** Properties of a UserInfo. */
     interface IUserInfo {
 
@@ -324,7 +348,7 @@ export namespace login {
     interface IGameInfo {
 
         /** GameInfo Type */
-        Type?: (number|null);
+        Type?: (login.GameType|null);
 
         /** GameInfo KindID */
         KindID?: (number|null);
@@ -345,10 +369,25 @@ export namespace login {
         MaxOnline?: (number|null);
 
         /** GameInfo State */
-        State?: (number|null);
+        State?: (login.GameState|null);
 
         /** GameInfo Commission */
         Commission?: (number|null);
+
+        /** GameInfo PlayScore */
+        PlayScore?: (number|Long|null);
+
+        /** GameInfo HostID */
+        HostID?: (number|Long|null);
+
+        /** GameInfo Password */
+        Password?: (string|null);
+
+        /** GameInfo MaxChair */
+        MaxChair?: (number|null);
+
+        /** GameInfo Amount */
+        Amount?: (number|null);
     }
 
     /** Represents a GameInfo. */
@@ -361,7 +400,7 @@ export namespace login {
         constructor(properties?: login.IGameInfo);
 
         /** GameInfo Type. */
-        public Type: number;
+        public Type: login.GameType;
 
         /** GameInfo KindID. */
         public KindID: number;
@@ -382,10 +421,25 @@ export namespace login {
         public MaxOnline: number;
 
         /** GameInfo State. */
-        public State: number;
+        public State: login.GameState;
 
         /** GameInfo Commission. */
         public Commission: number;
+
+        /** GameInfo PlayScore. */
+        public PlayScore: (number|Long);
+
+        /** GameInfo HostID. */
+        public HostID: (number|Long);
+
+        /** GameInfo Password. */
+        public Password: string;
+
+        /** GameInfo MaxChair. */
+        public MaxChair: number;
+
+        /** GameInfo Amount. */
+        public Amount: number;
 
         /**
          * Creates a new GameInfo instance using the specified properties.
@@ -1887,6 +1941,192 @@ export namespace login {
 
         /**
          * Converts this EnterRoomResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SettingGameReq. */
+    interface ISettingGameReq {
+
+        /** SettingGameReq Info */
+        Info?: (login.IGameInfo|null);
+    }
+
+    /** Represents a SettingGameReq. */
+    class SettingGameReq implements ISettingGameReq {
+
+        /**
+         * Constructs a new SettingGameReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ISettingGameReq);
+
+        /** SettingGameReq Info. */
+        public Info?: (login.IGameInfo|null);
+
+        /**
+         * Creates a new SettingGameReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingGameReq instance
+         */
+        public static create(properties?: login.ISettingGameReq): login.SettingGameReq;
+
+        /**
+         * Encodes the specified SettingGameReq message. Does not implicitly {@link login.SettingGameReq.verify|verify} messages.
+         * @param message SettingGameReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingGameReq message, length delimited. Does not implicitly {@link login.SettingGameReq.verify|verify} messages.
+         * @param message SettingGameReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingGameReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingGameReq;
+
+        /**
+         * Decodes a SettingGameReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingGameReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingGameReq;
+
+        /**
+         * Verifies a SettingGameReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingGameReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingGameReq
+         */
+        public static fromObject(object: { [k: string]: any }): login.SettingGameReq;
+
+        /**
+         * Creates a plain object from a SettingGameReq message. Also converts values to other types if specified.
+         * @param message SettingGameReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.SettingGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingGameReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SettingGameResp. */
+    interface ISettingGameResp {
+
+        /** SettingGameResp GameID */
+        GameID?: (number|Long|null);
+
+        /** SettingGameResp Info */
+        Info?: (login.IGameInfo|null);
+    }
+
+    /** Represents a SettingGameResp. */
+    class SettingGameResp implements ISettingGameResp {
+
+        /**
+         * Constructs a new SettingGameResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ISettingGameResp);
+
+        /** SettingGameResp GameID. */
+        public GameID: (number|Long);
+
+        /** SettingGameResp Info. */
+        public Info?: (login.IGameInfo|null);
+
+        /**
+         * Creates a new SettingGameResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingGameResp instance
+         */
+        public static create(properties?: login.ISettingGameResp): login.SettingGameResp;
+
+        /**
+         * Encodes the specified SettingGameResp message. Does not implicitly {@link login.SettingGameResp.verify|verify} messages.
+         * @param message SettingGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingGameResp message, length delimited. Does not implicitly {@link login.SettingGameResp.verify|verify} messages.
+         * @param message SettingGameResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingGameResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingGameResp;
+
+        /**
+         * Decodes a SettingGameResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingGameResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingGameResp;
+
+        /**
+         * Verifies a SettingGameResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingGameResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingGameResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.SettingGameResp;
+
+        /**
+         * Creates a plain object from a SettingGameResp message. Also converts values to other types if specified.
+         * @param message SettingGameResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.SettingGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingGameResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
