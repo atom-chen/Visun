@@ -3455,7 +3455,7 @@
         "__id__": 154
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 167
@@ -6454,7 +6454,7 @@
         "__id__": 190
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 210
@@ -6686,7 +6686,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editCont",
+    "_name": "editJoinName",
     "_objFlags": 0,
     "_parent": {
       "__id__": 170
@@ -7398,7 +7398,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "editCont",
+    "_name": "editJoinPswd",
     "_objFlags": 0,
     "_parent": {
       "__id__": 190

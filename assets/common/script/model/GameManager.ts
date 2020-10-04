@@ -52,6 +52,7 @@ export default class GameManager extends ModelBase {
 	private enterData = null;
 	private gameModal = null;
 	private willGame = -1;
+	private willBuildGame = null;
 	private loginEnter = -1;
 
 	public pullAll() {
@@ -274,6 +275,36 @@ export default class GameManager extends ModelBase {
 		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
 	}
+
+	public enterBuildGame(info:login.IGameInfo) {
+		if(!LoginMgr.getInstance().checkLogin(true)) {
+			return;
+		}
+
+		this.willBuildGame = info;
+		this.willGame = -1;
+
+		var gameKind = info.KindID;
+
+		if(!this.isGameExist(gameKind)) {
+			UIManager.toast("敬请期待");
+			return;
+		}
+
+		if(!this.isGameDownloaded(gameKind)) {
+			cc.log("正在下载中，请耐心等待");
+			this.downGame(gameKind);
+			return;
+		}
+
+		var updator = this.getUpdator(gameKind);
+		if(updator.isUpdating()) {
+			UIManager.toast("正在更新中，请耐心等待");
+			return;
+		}
+
+		this.doEnter();
+	}
 	
 	//进入游戏的唯一入口
 	public enterGame(gameId:number) {
@@ -288,6 +319,7 @@ export default class GameManager extends ModelBase {
 		}
 
 		this.willGame = gameId;
+		this.willBuildGame = null;
 
 		var gameKind = serverData.Info.KindID;
 		cc.log("enterGame: ", gameId, gameKind);
@@ -316,7 +348,13 @@ export default class GameManager extends ModelBase {
 		if(this.willGame > 0) {
 			this.gameId = this.willGame;
 			gamecomm_request.EnterGameReq({
-				GameID: this.gameId
+				GameID: this.gameId,
+				GameKey: ""
+			});
+		} 
+		else if(this.willBuildGame) {
+			login_request.SettingGameReq({
+				Info:this.willBuildGame
 			});
 		}
 	}

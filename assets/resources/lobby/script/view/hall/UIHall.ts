@@ -62,6 +62,7 @@ export default class UIHall extends BaseComponent {
 	onGameModeChg(mode) {
 		var curMode = GameUtil.getGameMode();
 		this.m_ui.btn_shop.active = curMode == GameModeEnum.ziyunying;
+		this.refleshGameList();
 	}
 
 	private onDownProgress(gameKind:number|string, curCnt:number, totalCnt:number) {
@@ -76,9 +77,45 @@ export default class UIHall extends BaseComponent {
 		}
 	}
 
-	private refleshGameList() {
-		this.m_ui.content.removeAllChildren();
+	private refleshAsFankaMode() {
+		var gameList = {};
 
+		//no ser data
+		var waitlist = [];
+		for(var iii in GameConfig) {
+			if(!gameList[iii]) {
+				waitlist.push(GameConfig[iii]);
+			}
+		}
+		waitlist.sort(function(a, b){
+			if(!isNil(a.orderv) && !isNil(b.orderv)) {
+				return a.orderv - b.orderv;
+			}
+			if(isNil(a.orderv)) {
+				return -1;
+			}
+			if(isNil(b.orderv)) {
+				return 1;
+			}
+			return -1;
+		});
+		for(var aaa in waitlist) {
+			var cfg = waitlist[aaa];
+			var testBtn:any = cc.instantiate(this.gameBtn);
+			this.m_ui.content.addChild(testBtn);
+			testBtn["game_kind"] = cfg.GameKind;
+			testBtn.getChildByName("labDown").active = GameManager.getInstance().isDowning(cfg.GameKind);
+			var tbl : any = {};
+			CommonUtil.traverseNodes(testBtn, tbl);
+			Preloader.setNodeSprite(tbl.Background.getComponent(cc.Sprite), cfg.icon, this);
+			CommonUtil.addClickEvent(testBtn, function(){
+				UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, {GameKind: this.game_kind});
+				AudioManager.getInstance().playEffectAsync("appqp/audios/selectchip",false);
+			}, testBtn);
+			testBtn.getChildByName("labDown").active = GameManager.getInstance().isDowning(cfg.GameKind);
+		}
+	}
+	private refleshAsNormalMode() {
 		var gameList = GameManager.getInstance().gamesByKindId();
 		if(!gameList) { return; }
 
@@ -100,7 +137,7 @@ export default class UIHall extends BaseComponent {
 	
 				CommonUtil.addClickEvent(bton, function(){ 
 					if(GameUtil.getGameMode()==GameModeEnum.qipaishi) {
-						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, this.gameData);
+						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, {GameKind: this.game_kind});
 					} else {
 						GameManager.getInstance().enterGame(this.gameData.ID);
 					}
@@ -115,7 +152,7 @@ export default class UIHall extends BaseComponent {
 	
 				CommonUtil.addClickEvent(bton, function(){ 
 					if(GameUtil.getGameMode()==GameModeEnum.qipaishi) {
-						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, this.gameData[0]);
+						UIManager.openPopwnd(ViewDefine.UIBuildRoom, false, {GameKind: this.game_kind});
 					} else {
 						UIManager.openPopwnd(ViewDefine.UIRoom, false, this.gameData);
 					}
@@ -164,6 +201,15 @@ export default class UIHall extends BaseComponent {
 			}, testBtn);
 			testBtn.getComponent(cc.Button).enabled = false;
 			CommonUtil.grayNode(testBtn, true);
+		}
+	}
+
+	private refleshGameList() {
+		this.m_ui.content.removeAllChildren();
+		if(GameUtil.getGameMode()==GameModeEnum.qipaishi) {
+			this.refleshAsFankaMode();
+		} else {
+			this.refleshAsNormalMode();
 		}
 	}
 

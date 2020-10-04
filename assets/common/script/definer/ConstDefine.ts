@@ -6,7 +6,7 @@ export enum GameModeEnum {
 	guakao,
 }
 
-export enum GameModel {
+export enum GameTypeEnum {
 	General = 0,
 	Fight = 1,          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
 	Multiplayer = 2,    //百人类型
@@ -17,7 +17,7 @@ export enum GameModel {
 	Sport = 7,          //体育类型
 	Smart = 8,          //益智休闲
 	RPG = 9,            //RPG类型
-  }
+}
 
 export enum GameKindEnum {
 	//百人
