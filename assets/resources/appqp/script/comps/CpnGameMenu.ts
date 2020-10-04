@@ -39,22 +39,27 @@ export default class CpnGameMenu extends BaseComponent {
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_shezhi, function(){
+			this.m_ui.itemBg.active = false;
 			UIManager.openPopwnd(ViewDefine.UISetting2, true);
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_help, function(){
+			this.m_ui.itemBg.active = false;
 			UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:this.gameKind});
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_record, function(){
+			this.m_ui.itemBg.active = false;
 			UIManager.openPopwnd(ViewDefine.UIGameRecord1, true, {gameId:this.gameId, kindId:this.gameKind});
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_feedback, function(){
+			this.m_ui.itemBg.active = false;
 			UIManager.openPopwnd(ViewDefine.UIKefu, false);
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
 		CommonUtil.addClickEvent(this.m_ui.mnu_back, function(){
+			this.m_ui.itemBg.active = false;
 			GameManager.getInstance().quitGame();
 			AudioManager.getInstance().playEffectAsync("appqp/audios/wnd_open",false);
 		}, this);
