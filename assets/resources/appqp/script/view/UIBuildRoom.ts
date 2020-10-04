@@ -124,7 +124,7 @@ export default class UIBuildRoom extends BaseComponent {
             UIManager.toast("请输入房间密码");
             return;
         }
-
+        UIManager.toast("缺少加入房间协议");
     }
 
     onBtnEnter() {
