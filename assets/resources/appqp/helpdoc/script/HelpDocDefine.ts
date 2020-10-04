@@ -162,7 +162,7 @@ var HelpDocDefine = {
 	[GameKindEnum.Ermj] : {
 		GameKind: GameKindEnum.Ermj,
 		TabList:[
-			{ name:"牌型", cont:"" },
+			{ name:"牌型", cont:"", imgcont:["ermj/ermj_tab_guize","ermj/ermj_cont_guize","newline","ermj/ermj_tab_fanxin","ermj/ermj_fanxin_01","ermj/ermj_fanxin_02","ermj/ermj_fanxin_03","ermj/ermj_fanxin_04","ermj/ermj_fanxin_05","ermj/ermj_fanxin_06","ermj/ermj_fanxin_07","ermj/ermj_fanxin_08","ermj/ermj_fanxin_09","ermj/ermj_fanxin_10","ermj/ermj_fanxin_11","ermj/ermj_fanxin_12","newline","ermj/ermj_tab_jiesuan","ermj/ermj_cont_jiesuan"] },
 			{ name:"玩法", cont:"" },
 			{ name:"赔率", cont:"" },
 		]
