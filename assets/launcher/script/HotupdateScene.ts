@@ -99,10 +99,9 @@ export default class HotupdateScene extends BaseComponent {
 
 	protected enterGame() {
 		this.refleshHottip("加载资源中");
-		var hallPrefab = "lobby/prefabs/UIHall";
-		var loginPrefab = "appqp/prefabs/UILogin";
 		var self = this;
-		cc.loader.loadResArray([loginPrefab,hallPrefab], cc.Prefab, (curCnt:number, totalCnt:number)=>{
+		var prefabList = ["lobby/prefabs/UIHall", "lobby/prefabs/UILogin"];
+		cc.loader.loadResArray(prefabList, cc.Prefab, (curCnt:number, totalCnt:number)=>{
 			if(totalCnt==0) {
 				self.refleshBar(0);
 			} else {

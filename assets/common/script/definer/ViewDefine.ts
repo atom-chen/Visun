@@ -2,7 +2,6 @@
 export default class ViewDefine {
 	//appqp
 	public static CpnChip = "appqp/prefabs/CpnChip";
-	public static UILogin = "appqp/prefabs/UILogin";
 	public static UIpk = "appqp/prefabs/UIpk";
 	public static UINumInput = "appqp/prefabs/UINumInput";
 	public static UISearchDesk = "appqp/prefabs/UISearchDesk";
@@ -13,6 +12,7 @@ export default class ViewDefine {
 	public static UIHelpdoc = "appqp/helpdoc/prefabs/UIHelpdoc";
 	public static UIHelpdoc2 = "appqp/helpdoc/prefabs/UIHelpdoc2";
 	//lobby
+	public static UILogin = "lobby/prefabs/UILogin";
 	public static UILobby = "lobby/prefabs/UILobby";
 	public static UIHall = "lobby/prefabs/UIHall";
 	public static UISetting1 = "lobby/prefabs/UISetting";

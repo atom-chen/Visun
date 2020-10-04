@@ -1,10 +1,8 @@
-import BaseComponent from "../../../../kernel/view/BaseComponent";
-import CommonUtil from "../../../../kernel/utils/CommonUtil";
-import EventCenter from "../../../../kernel/basic/event/EventCenter";
-import { login_msgs } from "../../../../common/script/proto/net_login";
-import LoginMgr from "../../../../common/script/model/LoginMgr";
-import TimerManager from "../../../../kernel/basic/timer/TimerManager";
-import { newHandler } from "../../../../kernel/utils/GlobalFuncs";
+import LoginMgr from "../../../../../common/script/model/LoginMgr";
+import { login_msgs } from "../../../../../common/script/proto/net_login";
+import EventCenter from "../../../../../kernel/basic/event/EventCenter";
+import CommonUtil from "../../../../../kernel/utils/CommonUtil";
+import BaseComponent from "../../../../../kernel/view/BaseComponent";
 
 
 const {ccclass, property} = cc._decorator;
@@ -38,12 +36,6 @@ export default class LoginUI extends BaseComponent {
         }, this);
         //登陆按钮
         CommonUtil.addClickEvent(this.m_ui.btn_login, function(){
-            var name = this.editName.string;
-            var pswd = this.editPswd.string;
-            LoginMgr.getInstance().leafLogin(name, pswd);
-        }, this);
-        //游客登陆按钮
-        CommonUtil.addClickEvent(this.m_ui.btn_youke, function(){
             var name = this.editName.string;
             var pswd = this.editPswd.string;
             LoginMgr.getInstance().leafLogin(name, pswd);
