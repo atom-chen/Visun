@@ -1587,8 +1587,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 66,
-      "height": 35.28
+      "width": 60,
+      "height": 30.24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1640,8 +1640,8 @@
     "_useOriginalSize": false,
     "_string": "发送者",
     "_N$string": "发送者",
-    "_fontSize": 22,
-    "_lineHeight": 28,
+    "_fontSize": 20,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1694,8 +1694,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 204.28,
-      "height": 35.28
+      "width": 185.71,
+      "height": 30.24
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1747,8 +1747,8 @@
     "_useOriginalSize": false,
     "_string": "2020-09-28 12:24:52",
     "_N$string": "2020-09-28 12:24:52",
-    "_fontSize": 22,
-    "_lineHeight": 28,
+    "_fontSize": 20,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -1948,7 +1948,7 @@
     "asset": {
       "__uuid__": "080caa00-7a2f-4960-97f6-566a6334f442"
     },
-    "fileId": "f3XWWrOoNNvq6RXoio1L+B",
+    "fileId": "35ujUuUsNCIJzqLxfRWa5f",
     "sync": false
   },
   {
@@ -2056,7 +2056,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "labddd",
+    "_name": "txt_shanchu",
     "_objFlags": 0,
     "_parent": {
       "__id__": 52
@@ -2081,8 +2081,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 52,
-      "height": 35.28
+      "width": 64,
+      "height": 42
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2119,7 +2119,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Label",
+    "__type__": "cc.Sprite",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -2131,23 +2131,23 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_useOriginalSize": false,
-    "_string": "删除",
-    "_N$string": "删除",
-    "_fontSize": 26,
-    "_lineHeight": 28,
-    "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
-    "_spacingX": 0,
-    "_batchAsBitmap": false,
-    "_styleFlags": 0,
-    "_underlineHeight": 0,
-    "_N$horizontalAlign": 1,
-    "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
-    "_N$cacheMode": 0,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "6710656c-e0ea-4673-8f01-31740e24d044"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
     "_id": ""
   },
   {
@@ -2158,7 +2158,7 @@
     "asset": {
       "__uuid__": "080caa00-7a2f-4960-97f6-566a6334f442"
     },
-    "fileId": "14ND9i2ehOP5/U0r8RcVAM",
+    "fileId": "53SzibbzRFvIqscmA2NpGJ",
     "sync": false
   },
   {
