@@ -9,7 +9,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_brnn",
 		sdir: "brnn",
 		viewpath: ViewDefine.UIbrnn,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Longhu] : {
 		GameKind: GameKindEnum.Longhu,
@@ -17,7 +17,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_longhu",
 		sdir: "longhu",
 		viewpath: ViewDefine.UIlonghu,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Baccarat] : {
 		GameKind: GameKindEnum.Baccarat,
@@ -25,7 +25,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_bjl",
 		sdir: "bjle",
 		viewpath: ViewDefine.UIbjle,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Redpacket] : {
 		GameKind: GameKindEnum.Redpacket,
@@ -33,7 +33,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_qhb",
 		sdir: "redbag",
 		viewpath: ViewDefine.UIredbag,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Redblack] : {
 		GameKind: GameKindEnum.Redblack,
@@ -41,7 +41,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_redblack",
 		sdir: "redblack",
 		viewpath: ViewDefine.UIRedblack,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Brttz] : {
 		GameKind: GameKindEnum.Brttz,
@@ -49,7 +49,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_brttz",
 		sdir: "jskb",
 		viewpath: ViewDefine.UIbrttz,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Toubao] : {
 		GameKind: GameKindEnum.Toubao,
@@ -57,7 +57,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_brtb",
 		sdir: "saibao",
 		viewpath: ViewDefine.UItoubao,
-		orderv: 2
+		orderv: 3
 	},
 	[GameKindEnum.Slwh] : {
 		GameKind: GameKindEnum.Slwh,
@@ -65,7 +65,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_slwh",
 		sdir: "slwh",
 		viewpath: ViewDefine.UIslwh,
-		orderv: 2
+		orderv: 3
 	},
 
 	//对战
@@ -76,7 +76,7 @@ var GameConfig = {
 		spine: "lobby/spines/zhajinhua/skeleton",
 		sdir: "zjh",
 		viewpath: ViewDefine.UIzjh,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.QzCowcow] : {
 		GameKind: GameKindEnum.QzCowcow,
@@ -84,7 +84,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_qznn",
 		sdir: "qznn",
 		viewpath: ViewDefine.UIqznn,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.TbCowcow] : {
 		GameKind: GameKindEnum.TbCowcow,
@@ -92,7 +92,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_tbnn",
 		sdir: "tbnn",
 		viewpath: ViewDefine.UItbnn,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Landlord] : {
 		GameKind: GameKindEnum.Landlord,
@@ -101,7 +101,7 @@ var GameConfig = {
 		sdir: "ddz",
 		viewpath: ViewDefine.UIddz,
 		bgm_music: "appqp/audios/music_ddz",
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Blackjack] : {
 		GameKind: GameKindEnum.Blackjack,
@@ -109,7 +109,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_dian21",
 		sdir: "dian21",
 		viewpath: ViewDefine.UIdian21,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Sangong] : {
 		GameKind: GameKindEnum.Sangong,
@@ -117,7 +117,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_sangong",
 		sdir: "sangong",
 		viewpath: ViewDefine.UIsangong,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Water13] : {
 		GameKind: GameKindEnum.Water13,
@@ -125,15 +125,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_shui13",
 		sdir: "shui13",
 		viewpath: ViewDefine.UIshui13,
-		orderv: 1
-	},
-	[GameKindEnum.Qzpaijiu] : {
-		GameKind: GameKindEnum.Qzpaijiu,
-		name: "抢庄牌九",
-		icon: "lobby/imgs/gameico2/ico_qzpj",
-		sdir: "qzpj",
-		viewpath: ViewDefine.UIpaijiu,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Suoha] : {
 		GameKind: GameKindEnum.Suoha,
@@ -141,7 +133,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_suoha",
 		sdir: "suoha",
 		viewpath: ViewDefine.UIsuoha,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Paodekuai] : {
 		GameKind: GameKindEnum.Paodekuai,
@@ -149,7 +141,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_pdk",
 		sdir: "paodk",
 		viewpath: ViewDefine.UIpdk,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Texas] : {
 		GameKind: GameKindEnum.Texas,
@@ -157,15 +149,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_dzpk",
 		sdir: "paodk",
 		viewpath: ViewDefine.UItexas,
-		orderv: 1
-	},
-	[GameKindEnum.Ermj] : {
-		GameKind: GameKindEnum.Ermj,
-		name: "二人麻将",
-		icon: "lobby/imgs/gameico2/ico_ermj",
-		sdir: "ermj",
-		viewpath: ViewDefine.UIermj,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.K4zqznn] : {
 		GameKind: GameKindEnum.K4zqznn,
@@ -173,7 +157,7 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_k4zqznn",
 		sdir: "k4zqznn",
 		viewpath: ViewDefine.UIk4zqznn,
-		orderv: 1
+		orderv: 2
 	},
 	[GameKindEnum.Jszjh] : {
 		GameKind: GameKindEnum.Jszjh,
@@ -181,8 +165,9 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_jszjh",
 		sdir: "jszjh",
 		viewpath: ViewDefine.UIjszjh,
-		orderv: 1
+		orderv: 2
 	},
+	//麻将
 	[GameKindEnum.Xlch] : {
 		GameKind: GameKindEnum.Xlch,
 		name: "血流成河",
@@ -197,6 +182,22 @@ var GameConfig = {
 		icon: "lobby/imgs/gameico2/ico_ttz",
 		sdir: "ttz",
 		viewpath: ViewDefine.UIttz,
+		orderv: 1
+	},
+	[GameKindEnum.Ermj] : {
+		GameKind: GameKindEnum.Ermj,
+		name: "二人麻将",
+		icon: "lobby/imgs/gameico2/ico_ermj",
+		sdir: "ermj",
+		viewpath: ViewDefine.UIermj,
+		orderv: 1
+	},
+	[GameKindEnum.Qzpaijiu] : {
+		GameKind: GameKindEnum.Qzpaijiu,
+		name: "抢庄牌九",
+		icon: "lobby/imgs/gameico2/ico_qzpj",
+		sdir: "qzpj",
+		viewpath: ViewDefine.UIpaijiu,
 		orderv: 1
 	},
 
