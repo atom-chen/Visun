@@ -2,8 +2,7 @@ import BaseComponent from "../../../../../kernel/view/BaseComponent";
 import CommonUtil from "../../../../../kernel/utils/CommonUtil";
 import GameManager from "../../../../../common/script/model/GameManager";
 import { GameKindEnum } from "../../../../../common/script/definer/ConstDefine";
-import ViewDefine from "../../../../../common/script/definer/ViewDefine";
-import UIManager from "../../../../../kernel/view/UIManager";
+import CpnGameMenu from "../../../../appqp/script/comps/CpnGameMenu";
 
 const {ccclass, property} = cc._decorator;
 
@@ -13,13 +12,7 @@ export default class UIermj extends BaseComponent {
     start () {
         CommonUtil.traverseNodes(this.node, this.m_ui);
 
-		CommonUtil.addClickEvent(this.m_ui.btn_close, function(){ 
-            GameManager.getInstance().quitGame();
-        }, this);
-        
-        CommonUtil.addClickEvent(this.m_ui.btn_help, function(){ 
-            UIManager.openPopwnd(ViewDefine.UIHelpdoc2, true, {kindId:GameKindEnum.Ermj});
-		}, this);
+        this.m_ui.CpnGameMenu.getComponent(CpnGameMenu).setGameInfo(GameKindEnum.Ermj, GameManager.getInstance().getGameId());
     }
 
 }
