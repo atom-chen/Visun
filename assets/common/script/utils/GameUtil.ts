@@ -200,7 +200,7 @@ export default class GameUtil {
 		});
 	}
 
-	static sortByKey(keyArr:Array<any>) {
+	static sortGameKind(keyArr:Array<any>) {
 		keyArr.sort(function(aa, bb){
 			var a = GameConfig[aa];
 			var b = GameConfig[bb];

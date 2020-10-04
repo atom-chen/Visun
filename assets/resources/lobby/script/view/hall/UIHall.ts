@@ -123,7 +123,7 @@ export default class UIHall extends BaseComponent {
 		for(var kid in gameList) {
 			gameArr.push(kid);
 		}
-		GameUtil.sortByKey(gameArr);
+		GameUtil.sortGameKind(gameArr);
 
 		for(var xx in gameArr) {
 			var KindID = gameArr[xx];
