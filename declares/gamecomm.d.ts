@@ -1143,6 +1143,9 @@ export namespace gamecomm {
 
         /** EnterGameReq Password */
         Password?: (string|null);
+
+        /** EnterGameReq ChairNum */
+        ChairNum?: (number|null);
     }
 
     /** Represents an EnterGameReq. */
@@ -1162,6 +1165,9 @@ export namespace gamecomm {
 
         /** EnterGameReq Password. */
         public Password: string;
+
+        /** EnterGameReq ChairNum. */
+        public ChairNum: number;
 
         /**
          * Creates a new EnterGameReq instance using the specified properties.
@@ -1243,6 +1249,9 @@ export namespace gamecomm {
         /** EnterGameResp TableNum */
         TableNum?: (number|null);
 
+        /** EnterGameResp ChairNum */
+        ChairNum?: (number|null);
+
         /** EnterGameResp UserInfo */
         UserInfo?: (gamecomm.IPlayerInfo|null);
     }
@@ -1261,6 +1270,9 @@ export namespace gamecomm {
 
         /** EnterGameResp TableNum. */
         public TableNum: number;
+
+        /** EnterGameResp ChairNum. */
+        public ChairNum: number;
 
         /** EnterGameResp UserInfo. */
         public UserInfo?: (gamecomm.IPlayerInfo|null);

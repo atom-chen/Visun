@@ -1788,6 +1788,7 @@ $root.gamecomm = (function() {
         EnterGameReq.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         EnterGameReq.prototype.TableNum = 0;
         EnterGameReq.prototype.Password = "";
+        EnterGameReq.prototype.ChairNum = 0;
 
         EnterGameReq.create = function create(properties) {
             return new EnterGameReq(properties);
@@ -1802,6 +1803,8 @@ $root.gamecomm = (function() {
                 writer.uint32(16).uint32(message.TableNum);
             if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
                 writer.uint32(26).string(message.Password);
+            if (message.ChairNum != null && Object.hasOwnProperty.call(message, "ChairNum"))
+                writer.uint32(32).uint32(message.ChairNum);
             return writer;
         };
 
@@ -1824,6 +1827,9 @@ $root.gamecomm = (function() {
                     break;
                 case 3:
                     message.Password = reader.string();
+                    break;
+                case 4:
+                    message.ChairNum = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1851,6 +1857,9 @@ $root.gamecomm = (function() {
             if (message.Password != null && message.hasOwnProperty("Password"))
                 if (!$util.isString(message.Password))
                     return "Password: string expected";
+            if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
+                if (!$util.isInteger(message.ChairNum))
+                    return "ChairNum: integer expected";
             return null;
         };
 
@@ -1871,6 +1880,8 @@ $root.gamecomm = (function() {
                 message.TableNum = object.TableNum >>> 0;
             if (object.Password != null)
                 message.Password = String(object.Password);
+            if (object.ChairNum != null)
+                message.ChairNum = object.ChairNum >>> 0;
             return message;
         };
 
@@ -1886,6 +1897,7 @@ $root.gamecomm = (function() {
                     object.GameID = options.longs === String ? "0" : 0;
                 object.TableNum = 0;
                 object.Password = "";
+                object.ChairNum = 0;
             }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (typeof message.GameID === "number")
@@ -1896,6 +1908,8 @@ $root.gamecomm = (function() {
                 object.TableNum = message.TableNum;
             if (message.Password != null && message.hasOwnProperty("Password"))
                 object.Password = message.Password;
+            if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
+                object.ChairNum = message.ChairNum;
             return object;
         };
 
@@ -1917,6 +1931,7 @@ $root.gamecomm = (function() {
 
         EnterGameResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         EnterGameResp.prototype.TableNum = 0;
+        EnterGameResp.prototype.ChairNum = 0;
         EnterGameResp.prototype.UserInfo = null;
 
         EnterGameResp.create = function create(properties) {
@@ -1930,8 +1945,10 @@ $root.gamecomm = (function() {
                 writer.uint32(8).uint64(message.GameID);
             if (message.TableNum != null && Object.hasOwnProperty.call(message, "TableNum"))
                 writer.uint32(16).uint32(message.TableNum);
+            if (message.ChairNum != null && Object.hasOwnProperty.call(message, "ChairNum"))
+                writer.uint32(24).uint32(message.ChairNum);
             if (message.UserInfo != null && Object.hasOwnProperty.call(message, "UserInfo"))
-                $root.gamecomm.PlayerInfo.encode(message.UserInfo, writer.uint32(26).fork()).ldelim();
+                $root.gamecomm.PlayerInfo.encode(message.UserInfo, writer.uint32(34).fork()).ldelim();
             return writer;
         };
 
@@ -1953,6 +1970,9 @@ $root.gamecomm = (function() {
                     message.TableNum = reader.uint32();
                     break;
                 case 3:
+                    message.ChairNum = reader.uint32();
+                    break;
+                case 4:
                     message.UserInfo = $root.gamecomm.PlayerInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -1978,6 +1998,9 @@ $root.gamecomm = (function() {
             if (message.TableNum != null && message.hasOwnProperty("TableNum"))
                 if (!$util.isInteger(message.TableNum))
                     return "TableNum: integer expected";
+            if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
+                if (!$util.isInteger(message.ChairNum))
+                    return "ChairNum: integer expected";
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo")) {
                 var error = $root.gamecomm.PlayerInfo.verify(message.UserInfo);
                 if (error)
@@ -2001,6 +2024,8 @@ $root.gamecomm = (function() {
                     message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
             if (object.TableNum != null)
                 message.TableNum = object.TableNum >>> 0;
+            if (object.ChairNum != null)
+                message.ChairNum = object.ChairNum >>> 0;
             if (object.UserInfo != null) {
                 if (typeof object.UserInfo !== "object")
                     throw TypeError(".gamecomm.EnterGameResp.UserInfo: object expected");
@@ -2020,6 +2045,7 @@ $root.gamecomm = (function() {
                 } else
                     object.GameID = options.longs === String ? "0" : 0;
                 object.TableNum = 0;
+                object.ChairNum = 0;
                 object.UserInfo = null;
             }
             if (message.GameID != null && message.hasOwnProperty("GameID"))
@@ -2029,6 +2055,8 @@ $root.gamecomm = (function() {
                     object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
             if (message.TableNum != null && message.hasOwnProperty("TableNum"))
                 object.TableNum = message.TableNum;
+            if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
+                object.ChairNum = message.ChairNum;
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
                 object.UserInfo = $root.gamecomm.PlayerInfo.toObject(message.UserInfo, options);
             return object;

@@ -131,11 +131,13 @@ message EnterGameReq {
   uint64 GameID = 1;          //游戏 ID
   uint32 TableNum = 2;        //桌子编号
   string Password = 3;        //房间密钥
+  uint32 ChairNum = 4;        //椅子编号(可选) 注: =0时,将由系统分配.
 }
 message EnterGameResp {
   uint64 GameID = 1;          //游戏标识
   uint32 TableNum = 2;        //桌子编号
-  PlayerInfo UserInfo = 3;    //玩家信息
+  uint32 ChairNum = 3;        //椅子编号(不满足req的此项时,将由系统分配,并返回提示)
+  PlayerInfo UserInfo = 4;    //玩家信息
 }
 
 //退出游戏
