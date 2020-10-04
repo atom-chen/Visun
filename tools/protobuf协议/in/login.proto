@@ -1,24 +1,36 @@
 syntax = "proto3";
 package login;
 
-//登录次序说明:
-//1、个人信息登录--->房间列表
-//2、房间登录--->游戏列表(桌子列表)
-//3、游戏登录(进桌)--->游戏场景
+//次序说明(流程):
+//1、个人信息登录--->游戏分类列表
+//2、选择游戏类别--->游戏列表
+//3、选择游戏--->牌桌列表
+//4'、新增牌桌(配置游戏信息)--->牌桌信息  [非必选]
+//4、选择牌桌(或座位)--->游戏场景
+//5.1'、玩家准备                      [游戏为对战类时必选]
+//5.1、游戏开始
+//5.2、游戏中
+//5.3、游戏结算
+//5.4、游戏结束 --->5.1 || --->6(即:达到最大局数,退出游戏)
+//6、退出游戏
 
-enum GameState {
+
+//////////////////////////////enum////////////////////////////////////////////////////
+//桌子状态
+enum TableState {
   Init = 0;     //初始化
-  Open = 1;     //开场
+  Open = 1;     //开启
   Maintain = 2; //维修
   Clear = 3;    //清场(当前局结束后,清空所有场景信息)
   Stop = 4;     //停运(再次启动时，以当前局的场景信息继续运作)
   Close = 5;    //关闭
 }
+//游戏类型
 enum GameType {
   General = 0;
   Fight = 1;          //对战类(两个或两个以上玩家同桌博弈，如三公、诈金花、牛牛)
   Multiplayer = 2;    //百人类型
-  RoomCard = 3;       //房卡类型
+  TableCard = 3;      //房卡类型
   Guess = 4;          //竞猜类型
   GamesCity = 5;      //电玩城类型
   DualMeet = 6;       //电竞类型
@@ -26,6 +38,18 @@ enum GameType {
   Smart = 8;          //益智休闲
   RPG = 9;            //RPG类型
 }
+//游戏场景
+enum GameScene {
+  Free = 0;           //空闲
+  Start = 1;          //开始
+  Call = 2;           //叫分
+  Decide = 3;         //定庄
+  Playing = 4;        //游戏中
+  Opening = 5;        //开奖
+  Over = 6;           //结算
+  Closing = 7;        //关闭
+}
+
 
 
 /////////////info//////////////////
@@ -54,69 +78,98 @@ message UserInfo{
   string ClientAddr = 19;     //连接地址(当前实际IP)
   string ServerAddr = 20;     //(跳转至该地址 由登录服务返回的真实服务器地址)
   string MachineCode = 21;    //机器序列
-
-
 }
-//房间信息
-message RoomInfo{
-  uint32 RoomNum = 1;       //房间号码
-  string RoomKey = 2;       //房间钥匙
-  string RoomName = 3;      //房间名称
-  GameList Games = 4;       //游戏列表
+
+//桌子信息
+message TableInfo{
+  uint64 HostID = 1;       //房主ID
+  string Name = 2;         //桌子名称
+  string Password = 3;     //桌子密钥
+  TableState State = 4;    //桌子状态
+
+  uint32 EnterScore = 5;   //进 场 分
+  uint32 LessScore = 6;    //坐 下 分
+  int64  PlayScore = 7;    //携带积分
+  uint32 Commission = 8;   //税收（百分比数，即为1==1%）
+
+  uint32 MaxChair = 9;     //最大座位数 (=0时,默认不受限)
+  uint32 Amount = 10;      //总 局 数  (=0时,默认不受限)
+  uint32 MaxOnline = 11;   //在线人数
 }
 
 //游戏信息
 message GameInfo{
   GameType Type = 1;      //游戏类型
-  uint32 KindID = 2;      //游戏标识
+  uint64 KindID = 2;      //游戏种类标识
   uint32 Level = 3;       //游戏类别 0:普通 1:中级 2:高级 3:积分排位 4:淘汰制排位
-  string Name = 4;        //游戏名称
-  uint32 EnterScore = 5;    //进 场 分
-  uint32 LessScore = 6;     //坐 下 分
-  uint32 MaxOnline = 7;     //在线人数
-  GameState State = 8;      //游戏状态(注:运行状态,并非场景状态)
-  uint32 Commission = 9;    //税收（百分比数，即为1==1%）
-  int64  PlayScore = 10;    //携带积分
-  uint64 HostID = 11;       //房主ID
-  string Password = 12;     //游戏密钥
-  uint32 MaxChair = 13;     //最大座位数(=0时,默认不受限)
-  uint32 Amount = 14;       //总局数(=0时,默认不受限)
+  GameScene Scene = 4;    //游戏场景
 }
-
-//子游戏（信息）
-message GameItem{
-  uint64 ID = 1;    //即:GameID
-  GameInfo Info = 2;//子游戏 注:不提供游戏密钥信息
-}
-
 
 //主页信息
 message MasterInfo{
   UserInfo UserInfo = 1;          //用户信息
-  repeated RoomInfo RoomsInfo = 2;//房间号列表【普通用户,敲一下门就可以进来，但是没有修改房间配置的权限，只有带钥匙的，才可以进行房间修改，即房主权限】
+  ClassList Classes = 2;          //分类列表
   TaskList Tasks = 3;             //任务列表
 }
 
-/////////////list//////////////////////////////////
-//任务信息
+
+
+/////////////////item/////////////////////////////////
+//任务项
 message TaskItem{
   uint32 TaskID = 1;
-  uint32 Twice = 2; //实现次数
-  string Hints = 3;//提示语 “恭喜 祝贺”之类
+  uint32 Twice = 2;     //实现次数
+  string Hints = 3;     //提示语 “恭喜 祝贺”之类
 }
 
+//分类项
+message ClassItem{
+  uint32 Num = 1;
+  string Name = 2;      //分类名称
+  string Key = 3;       //分类密钥(自定义分类可用)
+}
+
+
+//子游戏
+message GameItem{
+  uint64 ID = 1;    //即:GameID(=0 无效游戏)
+  GameInfo Info = 2;//子游戏 注:不提供游戏密钥信息
+}
+
+
+//桌子
+message TableItem{
+  uint64 GameID = 1;         //游戏ID
+  uint32 TableNum = 2;       //桌子号码(=0 无效桌子)
+  TableInfo Info = 3;        //桌子信息
+}
+
+
+/////////////list//////////////////////////////////
 //任务列表
 message TaskList{
   repeated TaskItem Task = 1;
 }
+
+//分类列表
+message ClassList{
+  repeated ClassItem classify = 1;
+}
+
 //游戏列表
 message GameList{
-  repeated GameItem Items = 1;//子游戏
+  repeated GameItem Items = 1;
+}
+
+//桌子列表
+message TableList{
+  repeated TableItem Items = 1;
 }
 
 
-
-/////////////entrance///////////////////////////////////
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
 //注册
 message RegisterReq{
   string Name = 1;            //用户
@@ -151,6 +204,7 @@ message LoginReq{
 message LoginResp{
   MasterInfo MainInfo = 1;
   uint64 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
+  uint64 InTableNum = 3;   //所在桌子ID(=0时,没有进桌)
 }
 //异地
 message AllopatricResp{
@@ -160,34 +214,46 @@ message AllopatricResp{
 
 //重连
 message ReconnectReq{
-  string Account = 1;    //账号
-  string Password = 2;    //密码
-  string MachineCode = 3;  //机器码
-  uint64 PlatformID = 4; //需要注明平台ID (测试用: id == 1)
+  string Account = 1;       //账号
+  string Password = 2;      //密码
+  string MachineCode = 3;   //机器码
+  uint64 PlatformID = 4;    //需要注明平台ID (测试用: id == 1)
 }
 message ReconnectResp{
   MasterInfo MainInfo = 1;
   uint64 InGameID = 2;     //所在游戏ID(=0时,不在任何游戏中)
+  uint64 InTableNum = 3;   //所在桌子ID(=0时,没有进桌)
 }
 
 
-//进入房间
-message EnterRoomReq{
-  uint32 RoomNum = 1;      //房间号码
-  string RoomKey = 2;      //房间钥匙
+//选择分类
+message ChooseClassReq{
+  uint32 Num = 1;           //分类编号
+  string TableKey = 2;       //分类密钥
 }
-message EnterRoomResp{
-  uint32 RoomNum = 1;      //房间号码
-  GameList Games = 2;
+message ChooseClassResp{
+  uint32 Num = 1;           //分类编号
+  GameList Games = 2;       //游戏列表
+}
+
+
+//选择游戏
+message ChooseGameReq{
+  uint64 GameID = 1;         //游戏ID
+}
+message ChooseGameResp{
+  uint64 GameID = 1;         //游戏ID
+  TableList Tables = 2;      //桌子列表
 }
 
 //配置游戏(房卡模式)
-message SettingGameReq {
-  GameInfo Info = 2;//配置信息
+message SettingTableReq {
+  TableInfo Info = 1;//配置信息
 }
-message SettingGameResp {
-  GameItem Item = 1;
+message SettingTableResp {
+  TableItem Item = 1;
 }
+
 
 
 //////////////result////////////////////////////////////

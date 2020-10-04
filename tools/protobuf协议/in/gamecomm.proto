@@ -123,14 +123,19 @@ message GameRecordList {
 
 
 //-----------------------------------------------------------------------------------------
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
+/////////////[优秀如你]-->Req:请求 Resp:反馈<--[交互专用]///////////////////////////////////
 //进入游戏
 message EnterGameReq {
-  uint64 GameID = 1; //游戏标识
-  string GameKey = 2; //游戏密钥（非房卡模式时==空）
+  uint64 GameID = 1;          //游戏 ID
+  uint32 TableNum = 2;        //桌子编号
+  string Password = 3;        //房间密钥
 }
 message EnterGameResp {
-  uint64 GameID = 1; //游戏标识
-  PlayerInfo UserInfo = 2;//玩家信息
+  uint64 GameID = 1;          //游戏标识
+  uint32 TableNum = 2;        //桌子编号
+  PlayerInfo UserInfo = 3;    //玩家信息
 }
 
 //退出游戏
@@ -149,7 +154,7 @@ message ChangeTableReq {
 }
 message ChangeTableResp {
   uint64 GameID = 1; //游戏ID
-  uint32 TableID = 2; //桌子ID
+  uint32 TableNum = 2; //桌子ID
   uint64 UserID = 3;  //玩家ID
 }
 

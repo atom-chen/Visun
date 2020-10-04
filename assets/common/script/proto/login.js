@@ -11,7 +11,7 @@ $root.login = (function() {
 
     var login = {};
 
-    login.GameState = (function() {
+    login.TableState = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Init"] = 0;
         values[valuesById[1] = "Open"] = 1;
@@ -27,13 +27,26 @@ $root.login = (function() {
         values[valuesById[0] = "General"] = 0;
         values[valuesById[1] = "Fight"] = 1;
         values[valuesById[2] = "Multiplayer"] = 2;
-        values[valuesById[3] = "RoomCard"] = 3;
+        values[valuesById[3] = "TableCard"] = 3;
         values[valuesById[4] = "Guess"] = 4;
         values[valuesById[5] = "GamesCity"] = 5;
         values[valuesById[6] = "DualMeet"] = 6;
         values[valuesById[7] = "Sport"] = 7;
         values[valuesById[8] = "Smart"] = 8;
         values[valuesById[9] = "RPG"] = 9;
+        return values;
+    })();
+
+    login.GameScene = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Free"] = 0;
+        values[valuesById[1] = "Start"] = 1;
+        values[valuesById[2] = "Call"] = 2;
+        values[valuesById[3] = "Decide"] = 3;
+        values[valuesById[4] = "Playing"] = 4;
+        values[valuesById[5] = "Opening"] = 5;
+        values[valuesById[6] = "Over"] = 6;
+        values[valuesById[7] = "Closing"] = 7;
         return values;
     })();
 
@@ -447,60 +460,102 @@ $root.login = (function() {
         return UserInfo;
     })();
 
-    login.RoomInfo = (function() {
+    login.TableInfo = (function() {
 
-        function RoomInfo(properties) {
+        function TableInfo(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        RoomInfo.prototype.RoomNum = 0;
-        RoomInfo.prototype.RoomKey = "";
-        RoomInfo.prototype.RoomName = "";
-        RoomInfo.prototype.Games = null;
+        TableInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        TableInfo.prototype.Name = "";
+        TableInfo.prototype.Password = "";
+        TableInfo.prototype.State = 0;
+        TableInfo.prototype.EnterScore = 0;
+        TableInfo.prototype.LessScore = 0;
+        TableInfo.prototype.PlayScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        TableInfo.prototype.Commission = 0;
+        TableInfo.prototype.MaxChair = 0;
+        TableInfo.prototype.Amount = 0;
+        TableInfo.prototype.MaxOnline = 0;
 
-        RoomInfo.create = function create(properties) {
-            return new RoomInfo(properties);
+        TableInfo.create = function create(properties) {
+            return new TableInfo(properties);
         };
 
-        RoomInfo.encode = function encode(message, writer) {
+        TableInfo.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
-                writer.uint32(8).uint32(message.RoomNum);
-            if (message.RoomKey != null && Object.hasOwnProperty.call(message, "RoomKey"))
-                writer.uint32(18).string(message.RoomKey);
-            if (message.RoomName != null && Object.hasOwnProperty.call(message, "RoomName"))
-                writer.uint32(26).string(message.RoomName);
-            if (message.Games != null && Object.hasOwnProperty.call(message, "Games"))
-                $root.login.GameList.encode(message.Games, writer.uint32(34).fork()).ldelim();
+            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
+                writer.uint32(8).uint64(message.HostID);
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(18).string(message.Name);
+            if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
+                writer.uint32(26).string(message.Password);
+            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
+                writer.uint32(32).int32(message.State);
+            if (message.EnterScore != null && Object.hasOwnProperty.call(message, "EnterScore"))
+                writer.uint32(40).uint32(message.EnterScore);
+            if (message.LessScore != null && Object.hasOwnProperty.call(message, "LessScore"))
+                writer.uint32(48).uint32(message.LessScore);
+            if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
+                writer.uint32(56).int64(message.PlayScore);
+            if (message.Commission != null && Object.hasOwnProperty.call(message, "Commission"))
+                writer.uint32(64).uint32(message.Commission);
+            if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
+                writer.uint32(72).uint32(message.MaxChair);
+            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
+                writer.uint32(80).uint32(message.Amount);
+            if (message.MaxOnline != null && Object.hasOwnProperty.call(message, "MaxOnline"))
+                writer.uint32(88).uint32(message.MaxOnline);
             return writer;
         };
 
-        RoomInfo.encodeDelimited = function encodeDelimited(message, writer) {
+        TableInfo.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        RoomInfo.decode = function decode(reader, length) {
+        TableInfo.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.RoomInfo();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TableInfo();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.RoomNum = reader.uint32();
+                    message.HostID = reader.uint64();
                     break;
                 case 2:
-                    message.RoomKey = reader.string();
+                    message.Name = reader.string();
                     break;
                 case 3:
-                    message.RoomName = reader.string();
+                    message.Password = reader.string();
                     break;
                 case 4:
-                    message.Games = $root.login.GameList.decode(reader, reader.uint32());
+                    message.State = reader.int32();
+                    break;
+                case 5:
+                    message.EnterScore = reader.uint32();
+                    break;
+                case 6:
+                    message.LessScore = reader.uint32();
+                    break;
+                case 7:
+                    message.PlayScore = reader.int64();
+                    break;
+                case 8:
+                    message.Commission = reader.uint32();
+                    break;
+                case 9:
+                    message.MaxChair = reader.uint32();
+                    break;
+                case 10:
+                    message.Amount = reader.uint32();
+                    break;
+                case 11:
+                    message.MaxOnline = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -510,76 +565,188 @@ $root.login = (function() {
             return message;
         };
 
-        RoomInfo.decodeDelimited = function decodeDelimited(reader) {
+        TableInfo.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        RoomInfo.verify = function verify(message) {
+        TableInfo.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                if (!$util.isInteger(message.RoomNum))
-                    return "RoomNum: integer expected";
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                if (!$util.isString(message.RoomKey))
-                    return "RoomKey: string expected";
-            if (message.RoomName != null && message.hasOwnProperty("RoomName"))
-                if (!$util.isString(message.RoomName))
-                    return "RoomName: string expected";
-            if (message.Games != null && message.hasOwnProperty("Games")) {
-                var error = $root.login.GameList.verify(message.Games);
-                if (error)
-                    return "Games." + error;
-            }
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
+                    return "HostID: integer|Long expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                if (!$util.isString(message.Password))
+                    return "Password: string expected";
+            if (message.State != null && message.hasOwnProperty("State"))
+                switch (message.State) {
+                default:
+                    return "State: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
+                if (!$util.isInteger(message.EnterScore))
+                    return "EnterScore: integer expected";
+            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
+                if (!$util.isInteger(message.LessScore))
+                    return "LessScore: integer expected";
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                if (!$util.isInteger(message.PlayScore) && !(message.PlayScore && $util.isInteger(message.PlayScore.low) && $util.isInteger(message.PlayScore.high)))
+                    return "PlayScore: integer|Long expected";
+            if (message.Commission != null && message.hasOwnProperty("Commission"))
+                if (!$util.isInteger(message.Commission))
+                    return "Commission: integer expected";
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                if (!$util.isInteger(message.MaxChair))
+                    return "MaxChair: integer expected";
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                if (!$util.isInteger(message.Amount))
+                    return "Amount: integer expected";
+            if (message.MaxOnline != null && message.hasOwnProperty("MaxOnline"))
+                if (!$util.isInteger(message.MaxOnline))
+                    return "MaxOnline: integer expected";
             return null;
         };
 
-        RoomInfo.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.RoomInfo)
+        TableInfo.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.TableInfo)
                 return object;
-            var message = new $root.login.RoomInfo();
-            if (object.RoomNum != null)
-                message.RoomNum = object.RoomNum >>> 0;
-            if (object.RoomKey != null)
-                message.RoomKey = String(object.RoomKey);
-            if (object.RoomName != null)
-                message.RoomName = String(object.RoomName);
-            if (object.Games != null) {
-                if (typeof object.Games !== "object")
-                    throw TypeError(".login.RoomInfo.Games: object expected");
-                message.Games = $root.login.GameList.fromObject(object.Games);
+            var message = new $root.login.TableInfo();
+            if (object.HostID != null)
+                if ($util.Long)
+                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
+                else if (typeof object.HostID === "string")
+                    message.HostID = parseInt(object.HostID, 10);
+                else if (typeof object.HostID === "number")
+                    message.HostID = object.HostID;
+                else if (typeof object.HostID === "object")
+                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            if (object.Password != null)
+                message.Password = String(object.Password);
+            switch (object.State) {
+            case "Init":
+            case 0:
+                message.State = 0;
+                break;
+            case "Open":
+            case 1:
+                message.State = 1;
+                break;
+            case "Maintain":
+            case 2:
+                message.State = 2;
+                break;
+            case "Clear":
+            case 3:
+                message.State = 3;
+                break;
+            case "Stop":
+            case 4:
+                message.State = 4;
+                break;
+            case "Close":
+            case 5:
+                message.State = 5;
+                break;
             }
+            if (object.EnterScore != null)
+                message.EnterScore = object.EnterScore >>> 0;
+            if (object.LessScore != null)
+                message.LessScore = object.LessScore >>> 0;
+            if (object.PlayScore != null)
+                if ($util.Long)
+                    (message.PlayScore = $util.Long.fromValue(object.PlayScore)).unsigned = false;
+                else if (typeof object.PlayScore === "string")
+                    message.PlayScore = parseInt(object.PlayScore, 10);
+                else if (typeof object.PlayScore === "number")
+                    message.PlayScore = object.PlayScore;
+                else if (typeof object.PlayScore === "object")
+                    message.PlayScore = new $util.LongBits(object.PlayScore.low >>> 0, object.PlayScore.high >>> 0).toNumber();
+            if (object.Commission != null)
+                message.Commission = object.Commission >>> 0;
+            if (object.MaxChair != null)
+                message.MaxChair = object.MaxChair >>> 0;
+            if (object.Amount != null)
+                message.Amount = object.Amount >>> 0;
+            if (object.MaxOnline != null)
+                message.MaxOnline = object.MaxOnline >>> 0;
             return message;
         };
 
-        RoomInfo.toObject = function toObject(message, options) {
+        TableInfo.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.RoomNum = 0;
-                object.RoomKey = "";
-                object.RoomName = "";
-                object.Games = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.HostID = options.longs === String ? "0" : 0;
+                object.Name = "";
+                object.Password = "";
+                object.State = options.enums === String ? "Init" : 0;
+                object.EnterScore = 0;
+                object.LessScore = 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.PlayScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.PlayScore = options.longs === String ? "0" : 0;
+                object.Commission = 0;
+                object.MaxChair = 0;
+                object.Amount = 0;
+                object.MaxOnline = 0;
             }
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                object.RoomNum = message.RoomNum;
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                object.RoomKey = message.RoomKey;
-            if (message.RoomName != null && message.hasOwnProperty("RoomName"))
-                object.RoomName = message.RoomName;
-            if (message.Games != null && message.hasOwnProperty("Games"))
-                object.Games = $root.login.GameList.toObject(message.Games, options);
+            if (message.HostID != null && message.hasOwnProperty("HostID"))
+                if (typeof message.HostID === "number")
+                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
+                else
+                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            if (message.Password != null && message.hasOwnProperty("Password"))
+                object.Password = message.Password;
+            if (message.State != null && message.hasOwnProperty("State"))
+                object.State = options.enums === String ? $root.login.TableState[message.State] : message.State;
+            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
+                object.EnterScore = message.EnterScore;
+            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
+                object.LessScore = message.LessScore;
+            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
+                if (typeof message.PlayScore === "number")
+                    object.PlayScore = options.longs === String ? String(message.PlayScore) : message.PlayScore;
+                else
+                    object.PlayScore = options.longs === String ? $util.Long.prototype.toString.call(message.PlayScore) : options.longs === Number ? new $util.LongBits(message.PlayScore.low >>> 0, message.PlayScore.high >>> 0).toNumber() : message.PlayScore;
+            if (message.Commission != null && message.hasOwnProperty("Commission"))
+                object.Commission = message.Commission;
+            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
+                object.MaxChair = message.MaxChair;
+            if (message.Amount != null && message.hasOwnProperty("Amount"))
+                object.Amount = message.Amount;
+            if (message.MaxOnline != null && message.hasOwnProperty("MaxOnline"))
+                object.MaxOnline = message.MaxOnline;
             return object;
         };
 
-        RoomInfo.prototype.toJSON = function toJSON() {
+        TableInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return RoomInfo;
+        return TableInfo;
     })();
 
     login.GameInfo = (function() {
@@ -592,19 +759,9 @@ $root.login = (function() {
         }
 
         GameInfo.prototype.Type = 0;
-        GameInfo.prototype.KindID = 0;
+        GameInfo.prototype.KindID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
         GameInfo.prototype.Level = 0;
-        GameInfo.prototype.Name = "";
-        GameInfo.prototype.EnterScore = 0;
-        GameInfo.prototype.LessScore = 0;
-        GameInfo.prototype.MaxOnline = 0;
-        GameInfo.prototype.State = 0;
-        GameInfo.prototype.Commission = 0;
-        GameInfo.prototype.PlayScore = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        GameInfo.prototype.HostID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameInfo.prototype.Password = "";
-        GameInfo.prototype.MaxChair = 0;
-        GameInfo.prototype.Amount = 0;
+        GameInfo.prototype.Scene = 0;
 
         GameInfo.create = function create(properties) {
             return new GameInfo(properties);
@@ -616,31 +773,11 @@ $root.login = (function() {
             if (message.Type != null && Object.hasOwnProperty.call(message, "Type"))
                 writer.uint32(8).int32(message.Type);
             if (message.KindID != null && Object.hasOwnProperty.call(message, "KindID"))
-                writer.uint32(16).uint32(message.KindID);
+                writer.uint32(16).uint64(message.KindID);
             if (message.Level != null && Object.hasOwnProperty.call(message, "Level"))
                 writer.uint32(24).uint32(message.Level);
-            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
-                writer.uint32(34).string(message.Name);
-            if (message.EnterScore != null && Object.hasOwnProperty.call(message, "EnterScore"))
-                writer.uint32(40).uint32(message.EnterScore);
-            if (message.LessScore != null && Object.hasOwnProperty.call(message, "LessScore"))
-                writer.uint32(48).uint32(message.LessScore);
-            if (message.MaxOnline != null && Object.hasOwnProperty.call(message, "MaxOnline"))
-                writer.uint32(56).uint32(message.MaxOnline);
-            if (message.State != null && Object.hasOwnProperty.call(message, "State"))
-                writer.uint32(64).int32(message.State);
-            if (message.Commission != null && Object.hasOwnProperty.call(message, "Commission"))
-                writer.uint32(72).uint32(message.Commission);
-            if (message.PlayScore != null && Object.hasOwnProperty.call(message, "PlayScore"))
-                writer.uint32(80).int64(message.PlayScore);
-            if (message.HostID != null && Object.hasOwnProperty.call(message, "HostID"))
-                writer.uint32(88).uint64(message.HostID);
-            if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
-                writer.uint32(98).string(message.Password);
-            if (message.MaxChair != null && Object.hasOwnProperty.call(message, "MaxChair"))
-                writer.uint32(104).uint32(message.MaxChair);
-            if (message.Amount != null && Object.hasOwnProperty.call(message, "Amount"))
-                writer.uint32(112).uint32(message.Amount);
+            if (message.Scene != null && Object.hasOwnProperty.call(message, "Scene"))
+                writer.uint32(32).int32(message.Scene);
             return writer;
         };
 
@@ -659,43 +796,13 @@ $root.login = (function() {
                     message.Type = reader.int32();
                     break;
                 case 2:
-                    message.KindID = reader.uint32();
+                    message.KindID = reader.uint64();
                     break;
                 case 3:
                     message.Level = reader.uint32();
                     break;
                 case 4:
-                    message.Name = reader.string();
-                    break;
-                case 5:
-                    message.EnterScore = reader.uint32();
-                    break;
-                case 6:
-                    message.LessScore = reader.uint32();
-                    break;
-                case 7:
-                    message.MaxOnline = reader.uint32();
-                    break;
-                case 8:
-                    message.State = reader.int32();
-                    break;
-                case 9:
-                    message.Commission = reader.uint32();
-                    break;
-                case 10:
-                    message.PlayScore = reader.int64();
-                    break;
-                case 11:
-                    message.HostID = reader.uint64();
-                    break;
-                case 12:
-                    message.Password = reader.string();
-                    break;
-                case 13:
-                    message.MaxChair = reader.uint32();
-                    break;
-                case 14:
-                    message.Amount = reader.uint32();
+                    message.Scene = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -731,53 +838,25 @@ $root.login = (function() {
                     break;
                 }
             if (message.KindID != null && message.hasOwnProperty("KindID"))
-                if (!$util.isInteger(message.KindID))
-                    return "KindID: integer expected";
+                if (!$util.isInteger(message.KindID) && !(message.KindID && $util.isInteger(message.KindID.low) && $util.isInteger(message.KindID.high)))
+                    return "KindID: integer|Long expected";
             if (message.Level != null && message.hasOwnProperty("Level"))
                 if (!$util.isInteger(message.Level))
                     return "Level: integer expected";
-            if (message.Name != null && message.hasOwnProperty("Name"))
-                if (!$util.isString(message.Name))
-                    return "Name: string expected";
-            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
-                if (!$util.isInteger(message.EnterScore))
-                    return "EnterScore: integer expected";
-            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
-                if (!$util.isInteger(message.LessScore))
-                    return "LessScore: integer expected";
-            if (message.MaxOnline != null && message.hasOwnProperty("MaxOnline"))
-                if (!$util.isInteger(message.MaxOnline))
-                    return "MaxOnline: integer expected";
-            if (message.State != null && message.hasOwnProperty("State"))
-                switch (message.State) {
+            if (message.Scene != null && message.hasOwnProperty("Scene"))
+                switch (message.Scene) {
                 default:
-                    return "State: enum value expected";
+                    return "Scene: enum value expected";
                 case 0:
                 case 1:
                 case 2:
                 case 3:
                 case 4:
                 case 5:
+                case 6:
+                case 7:
                     break;
                 }
-            if (message.Commission != null && message.hasOwnProperty("Commission"))
-                if (!$util.isInteger(message.Commission))
-                    return "Commission: integer expected";
-            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
-                if (!$util.isInteger(message.PlayScore) && !(message.PlayScore && $util.isInteger(message.PlayScore.low) && $util.isInteger(message.PlayScore.high)))
-                    return "PlayScore: integer|Long expected";
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (!$util.isInteger(message.HostID) && !(message.HostID && $util.isInteger(message.HostID.low) && $util.isInteger(message.HostID.high)))
-                    return "HostID: integer|Long expected";
-            if (message.Password != null && message.hasOwnProperty("Password"))
-                if (!$util.isString(message.Password))
-                    return "Password: string expected";
-            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
-                if (!$util.isInteger(message.MaxChair))
-                    return "MaxChair: integer expected";
-            if (message.Amount != null && message.hasOwnProperty("Amount"))
-                if (!$util.isInteger(message.Amount))
-                    return "Amount: integer expected";
             return null;
         };
 
@@ -798,7 +877,7 @@ $root.login = (function() {
             case 2:
                 message.Type = 2;
                 break;
-            case "RoomCard":
+            case "TableCard":
             case 3:
                 message.Type = 3;
                 break;
@@ -828,69 +907,50 @@ $root.login = (function() {
                 break;
             }
             if (object.KindID != null)
-                message.KindID = object.KindID >>> 0;
+                if ($util.Long)
+                    (message.KindID = $util.Long.fromValue(object.KindID)).unsigned = true;
+                else if (typeof object.KindID === "string")
+                    message.KindID = parseInt(object.KindID, 10);
+                else if (typeof object.KindID === "number")
+                    message.KindID = object.KindID;
+                else if (typeof object.KindID === "object")
+                    message.KindID = new $util.LongBits(object.KindID.low >>> 0, object.KindID.high >>> 0).toNumber(true);
             if (object.Level != null)
                 message.Level = object.Level >>> 0;
-            if (object.Name != null)
-                message.Name = String(object.Name);
-            if (object.EnterScore != null)
-                message.EnterScore = object.EnterScore >>> 0;
-            if (object.LessScore != null)
-                message.LessScore = object.LessScore >>> 0;
-            if (object.MaxOnline != null)
-                message.MaxOnline = object.MaxOnline >>> 0;
-            switch (object.State) {
-            case "Init":
+            switch (object.Scene) {
+            case "Free":
             case 0:
-                message.State = 0;
+                message.Scene = 0;
                 break;
-            case "Open":
+            case "Start":
             case 1:
-                message.State = 1;
+                message.Scene = 1;
                 break;
-            case "Maintain":
+            case "Call":
             case 2:
-                message.State = 2;
+                message.Scene = 2;
                 break;
-            case "Clear":
+            case "Decide":
             case 3:
-                message.State = 3;
+                message.Scene = 3;
                 break;
-            case "Stop":
+            case "Playing":
             case 4:
-                message.State = 4;
+                message.Scene = 4;
                 break;
-            case "Close":
+            case "Opening":
             case 5:
-                message.State = 5;
+                message.Scene = 5;
+                break;
+            case "Over":
+            case 6:
+                message.Scene = 6;
+                break;
+            case "Closing":
+            case 7:
+                message.Scene = 7;
                 break;
             }
-            if (object.Commission != null)
-                message.Commission = object.Commission >>> 0;
-            if (object.PlayScore != null)
-                if ($util.Long)
-                    (message.PlayScore = $util.Long.fromValue(object.PlayScore)).unsigned = false;
-                else if (typeof object.PlayScore === "string")
-                    message.PlayScore = parseInt(object.PlayScore, 10);
-                else if (typeof object.PlayScore === "number")
-                    message.PlayScore = object.PlayScore;
-                else if (typeof object.PlayScore === "object")
-                    message.PlayScore = new $util.LongBits(object.PlayScore.low >>> 0, object.PlayScore.high >>> 0).toNumber();
-            if (object.HostID != null)
-                if ($util.Long)
-                    (message.HostID = $util.Long.fromValue(object.HostID)).unsigned = true;
-                else if (typeof object.HostID === "string")
-                    message.HostID = parseInt(object.HostID, 10);
-                else if (typeof object.HostID === "number")
-                    message.HostID = object.HostID;
-                else if (typeof object.HostID === "object")
-                    message.HostID = new $util.LongBits(object.HostID.low >>> 0, object.HostID.high >>> 0).toNumber(true);
-            if (object.Password != null)
-                message.Password = String(object.Password);
-            if (object.MaxChair != null)
-                message.MaxChair = object.MaxChair >>> 0;
-            if (object.Amount != null)
-                message.Amount = object.Amount >>> 0;
             return message;
         };
 
@@ -900,62 +960,25 @@ $root.login = (function() {
             var object = {};
             if (options.defaults) {
                 object.Type = options.enums === String ? "General" : 0;
-                object.KindID = 0;
-                object.Level = 0;
-                object.Name = "";
-                object.EnterScore = 0;
-                object.LessScore = 0;
-                object.MaxOnline = 0;
-                object.State = options.enums === String ? "Init" : 0;
-                object.Commission = 0;
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.PlayScore = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.PlayScore = options.longs === String ? "0" : 0;
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, true);
-                    object.HostID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    object.KindID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
-                    object.HostID = options.longs === String ? "0" : 0;
-                object.Password = "";
-                object.MaxChair = 0;
-                object.Amount = 0;
+                    object.KindID = options.longs === String ? "0" : 0;
+                object.Level = 0;
+                object.Scene = options.enums === String ? "Free" : 0;
             }
             if (message.Type != null && message.hasOwnProperty("Type"))
                 object.Type = options.enums === String ? $root.login.GameType[message.Type] : message.Type;
             if (message.KindID != null && message.hasOwnProperty("KindID"))
-                object.KindID = message.KindID;
+                if (typeof message.KindID === "number")
+                    object.KindID = options.longs === String ? String(message.KindID) : message.KindID;
+                else
+                    object.KindID = options.longs === String ? $util.Long.prototype.toString.call(message.KindID) : options.longs === Number ? new $util.LongBits(message.KindID.low >>> 0, message.KindID.high >>> 0).toNumber(true) : message.KindID;
             if (message.Level != null && message.hasOwnProperty("Level"))
                 object.Level = message.Level;
-            if (message.Name != null && message.hasOwnProperty("Name"))
-                object.Name = message.Name;
-            if (message.EnterScore != null && message.hasOwnProperty("EnterScore"))
-                object.EnterScore = message.EnterScore;
-            if (message.LessScore != null && message.hasOwnProperty("LessScore"))
-                object.LessScore = message.LessScore;
-            if (message.MaxOnline != null && message.hasOwnProperty("MaxOnline"))
-                object.MaxOnline = message.MaxOnline;
-            if (message.State != null && message.hasOwnProperty("State"))
-                object.State = options.enums === String ? $root.login.GameState[message.State] : message.State;
-            if (message.Commission != null && message.hasOwnProperty("Commission"))
-                object.Commission = message.Commission;
-            if (message.PlayScore != null && message.hasOwnProperty("PlayScore"))
-                if (typeof message.PlayScore === "number")
-                    object.PlayScore = options.longs === String ? String(message.PlayScore) : message.PlayScore;
-                else
-                    object.PlayScore = options.longs === String ? $util.Long.prototype.toString.call(message.PlayScore) : options.longs === Number ? new $util.LongBits(message.PlayScore.low >>> 0, message.PlayScore.high >>> 0).toNumber() : message.PlayScore;
-            if (message.HostID != null && message.hasOwnProperty("HostID"))
-                if (typeof message.HostID === "number")
-                    object.HostID = options.longs === String ? String(message.HostID) : message.HostID;
-                else
-                    object.HostID = options.longs === String ? $util.Long.prototype.toString.call(message.HostID) : options.longs === Number ? new $util.LongBits(message.HostID.low >>> 0, message.HostID.high >>> 0).toNumber(true) : message.HostID;
-            if (message.Password != null && message.hasOwnProperty("Password"))
-                object.Password = message.Password;
-            if (message.MaxChair != null && message.hasOwnProperty("MaxChair"))
-                object.MaxChair = message.MaxChair;
-            if (message.Amount != null && message.hasOwnProperty("Amount"))
-                object.Amount = message.Amount;
+            if (message.Scene != null && message.hasOwnProperty("Scene"))
+                object.Scene = options.enums === String ? $root.login.GameScene[message.Scene] : message.Scene;
             return object;
         };
 
@@ -966,131 +989,9 @@ $root.login = (function() {
         return GameInfo;
     })();
 
-    login.GameItem = (function() {
-
-        function GameItem(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        GameItem.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        GameItem.prototype.Info = null;
-
-        GameItem.create = function create(properties) {
-            return new GameItem(properties);
-        };
-
-        GameItem.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
-                writer.uint32(8).uint64(message.ID);
-            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
-            return writer;
-        };
-
-        GameItem.encodeDelimited = function encodeDelimited(message, writer) {
-            return this.encode(message, writer).ldelim();
-        };
-
-        GameItem.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameItem();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1:
-                    message.ID = reader.uint64();
-                    break;
-                case 2:
-                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
-                    break;
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        GameItem.decodeDelimited = function decodeDelimited(reader) {
-            if (!(reader instanceof $Reader))
-                reader = new $Reader(reader);
-            return this.decode(reader, reader.uint32());
-        };
-
-        GameItem.verify = function verify(message) {
-            if (typeof message !== "object" || message === null)
-                return "object expected";
-            if (message.ID != null && message.hasOwnProperty("ID"))
-                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
-                    return "ID: integer|Long expected";
-            if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.login.GameInfo.verify(message.Info);
-                if (error)
-                    return "Info." + error;
-            }
-            return null;
-        };
-
-        GameItem.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.GameItem)
-                return object;
-            var message = new $root.login.GameItem();
-            if (object.ID != null)
-                if ($util.Long)
-                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = true;
-                else if (typeof object.ID === "string")
-                    message.ID = parseInt(object.ID, 10);
-                else if (typeof object.ID === "number")
-                    message.ID = object.ID;
-                else if (typeof object.ID === "object")
-                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber(true);
-            if (object.Info != null) {
-                if (typeof object.Info !== "object")
-                    throw TypeError(".login.GameItem.Info: object expected");
-                message.Info = $root.login.GameInfo.fromObject(object.Info);
-            }
-            return message;
-        };
-
-        GameItem.toObject = function toObject(message, options) {
-            if (!options)
-                options = {};
-            var object = {};
-            if (options.defaults) {
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, true);
-                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.ID = options.longs === String ? "0" : 0;
-                object.Info = null;
-            }
-            if (message.ID != null && message.hasOwnProperty("ID"))
-                if (typeof message.ID === "number")
-                    object.ID = options.longs === String ? String(message.ID) : message.ID;
-                else
-                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber(true) : message.ID;
-            if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.login.GameInfo.toObject(message.Info, options);
-            return object;
-        };
-
-        GameItem.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return GameItem;
-    })();
-
     login.MasterInfo = (function() {
 
         function MasterInfo(properties) {
-            this.RoomsInfo = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1098,7 +999,7 @@ $root.login = (function() {
         }
 
         MasterInfo.prototype.UserInfo = null;
-        MasterInfo.prototype.RoomsInfo = $util.emptyArray;
+        MasterInfo.prototype.Classes = null;
         MasterInfo.prototype.Tasks = null;
 
         MasterInfo.create = function create(properties) {
@@ -1110,9 +1011,8 @@ $root.login = (function() {
                 writer = $Writer.create();
             if (message.UserInfo != null && Object.hasOwnProperty.call(message, "UserInfo"))
                 $root.login.UserInfo.encode(message.UserInfo, writer.uint32(10).fork()).ldelim();
-            if (message.RoomsInfo != null && message.RoomsInfo.length)
-                for (var i = 0; i < message.RoomsInfo.length; ++i)
-                    $root.login.RoomInfo.encode(message.RoomsInfo[i], writer.uint32(18).fork()).ldelim();
+            if (message.Classes != null && Object.hasOwnProperty.call(message, "Classes"))
+                $root.login.ClassList.encode(message.Classes, writer.uint32(18).fork()).ldelim();
             if (message.Tasks != null && Object.hasOwnProperty.call(message, "Tasks"))
                 $root.login.TaskList.encode(message.Tasks, writer.uint32(26).fork()).ldelim();
             return writer;
@@ -1133,9 +1033,7 @@ $root.login = (function() {
                     message.UserInfo = $root.login.UserInfo.decode(reader, reader.uint32());
                     break;
                 case 2:
-                    if (!(message.RoomsInfo && message.RoomsInfo.length))
-                        message.RoomsInfo = [];
-                    message.RoomsInfo.push($root.login.RoomInfo.decode(reader, reader.uint32()));
+                    message.Classes = $root.login.ClassList.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.Tasks = $root.login.TaskList.decode(reader, reader.uint32());
@@ -1162,14 +1060,10 @@ $root.login = (function() {
                 if (error)
                     return "UserInfo." + error;
             }
-            if (message.RoomsInfo != null && message.hasOwnProperty("RoomsInfo")) {
-                if (!Array.isArray(message.RoomsInfo))
-                    return "RoomsInfo: array expected";
-                for (var i = 0; i < message.RoomsInfo.length; ++i) {
-                    var error = $root.login.RoomInfo.verify(message.RoomsInfo[i]);
-                    if (error)
-                        return "RoomsInfo." + error;
-                }
+            if (message.Classes != null && message.hasOwnProperty("Classes")) {
+                var error = $root.login.ClassList.verify(message.Classes);
+                if (error)
+                    return "Classes." + error;
             }
             if (message.Tasks != null && message.hasOwnProperty("Tasks")) {
                 var error = $root.login.TaskList.verify(message.Tasks);
@@ -1188,15 +1082,10 @@ $root.login = (function() {
                     throw TypeError(".login.MasterInfo.UserInfo: object expected");
                 message.UserInfo = $root.login.UserInfo.fromObject(object.UserInfo);
             }
-            if (object.RoomsInfo) {
-                if (!Array.isArray(object.RoomsInfo))
-                    throw TypeError(".login.MasterInfo.RoomsInfo: array expected");
-                message.RoomsInfo = [];
-                for (var i = 0; i < object.RoomsInfo.length; ++i) {
-                    if (typeof object.RoomsInfo[i] !== "object")
-                        throw TypeError(".login.MasterInfo.RoomsInfo: object expected");
-                    message.RoomsInfo[i] = $root.login.RoomInfo.fromObject(object.RoomsInfo[i]);
-                }
+            if (object.Classes != null) {
+                if (typeof object.Classes !== "object")
+                    throw TypeError(".login.MasterInfo.Classes: object expected");
+                message.Classes = $root.login.ClassList.fromObject(object.Classes);
             }
             if (object.Tasks != null) {
                 if (typeof object.Tasks !== "object")
@@ -1210,19 +1099,15 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
-                object.RoomsInfo = [];
             if (options.defaults) {
                 object.UserInfo = null;
+                object.Classes = null;
                 object.Tasks = null;
             }
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
                 object.UserInfo = $root.login.UserInfo.toObject(message.UserInfo, options);
-            if (message.RoomsInfo && message.RoomsInfo.length) {
-                object.RoomsInfo = [];
-                for (var j = 0; j < message.RoomsInfo.length; ++j)
-                    object.RoomsInfo[j] = $root.login.RoomInfo.toObject(message.RoomsInfo[j], options);
-            }
+            if (message.Classes != null && message.hasOwnProperty("Classes"))
+                object.Classes = $root.login.ClassList.toObject(message.Classes, options);
             if (message.Tasks != null && message.hasOwnProperty("Tasks"))
                 object.Tasks = $root.login.TaskList.toObject(message.Tasks, options);
             return object;
@@ -1351,6 +1236,378 @@ $root.login = (function() {
         return TaskItem;
     })();
 
+    login.ClassItem = (function() {
+
+        function ClassItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ClassItem.prototype.Num = 0;
+        ClassItem.prototype.Name = "";
+        ClassItem.prototype.Key = "";
+
+        ClassItem.create = function create(properties) {
+            return new ClassItem(properties);
+        };
+
+        ClassItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Num != null && Object.hasOwnProperty.call(message, "Num"))
+                writer.uint32(8).uint32(message.Num);
+            if (message.Name != null && Object.hasOwnProperty.call(message, "Name"))
+                writer.uint32(18).string(message.Name);
+            if (message.Key != null && Object.hasOwnProperty.call(message, "Key"))
+                writer.uint32(26).string(message.Key);
+            return writer;
+        };
+
+        ClassItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ClassItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ClassItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Num = reader.uint32();
+                    break;
+                case 2:
+                    message.Name = reader.string();
+                    break;
+                case 3:
+                    message.Key = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ClassItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ClassItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                if (!$util.isInteger(message.Num))
+                    return "Num: integer expected";
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                if (!$util.isString(message.Name))
+                    return "Name: string expected";
+            if (message.Key != null && message.hasOwnProperty("Key"))
+                if (!$util.isString(message.Key))
+                    return "Key: string expected";
+            return null;
+        };
+
+        ClassItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ClassItem)
+                return object;
+            var message = new $root.login.ClassItem();
+            if (object.Num != null)
+                message.Num = object.Num >>> 0;
+            if (object.Name != null)
+                message.Name = String(object.Name);
+            if (object.Key != null)
+                message.Key = String(object.Key);
+            return message;
+        };
+
+        ClassItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.Num = 0;
+                object.Name = "";
+                object.Key = "";
+            }
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                object.Num = message.Num;
+            if (message.Name != null && message.hasOwnProperty("Name"))
+                object.Name = message.Name;
+            if (message.Key != null && message.hasOwnProperty("Key"))
+                object.Key = message.Key;
+            return object;
+        };
+
+        ClassItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ClassItem;
+    })();
+
+    login.GameItem = (function() {
+
+        function GameItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        GameItem.prototype.ID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        GameItem.prototype.Info = null;
+
+        GameItem.create = function create(properties) {
+            return new GameItem(properties);
+        };
+
+        GameItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.ID != null && Object.hasOwnProperty.call(message, "ID"))
+                writer.uint32(8).uint64(message.ID);
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        GameItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        GameItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.GameItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.ID = reader.uint64();
+                    break;
+                case 2:
+                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        GameItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        GameItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (!$util.isInteger(message.ID) && !(message.ID && $util.isInteger(message.ID.low) && $util.isInteger(message.ID.high)))
+                    return "ID: integer|Long expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.GameInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        GameItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.GameItem)
+                return object;
+            var message = new $root.login.GameItem();
+            if (object.ID != null)
+                if ($util.Long)
+                    (message.ID = $util.Long.fromValue(object.ID)).unsigned = true;
+                else if (typeof object.ID === "string")
+                    message.ID = parseInt(object.ID, 10);
+                else if (typeof object.ID === "number")
+                    message.ID = object.ID;
+                else if (typeof object.ID === "object")
+                    message.ID = new $util.LongBits(object.ID.low >>> 0, object.ID.high >>> 0).toNumber(true);
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.GameItem.Info: object expected");
+                message.Info = $root.login.GameInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        GameItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.ID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.ID = options.longs === String ? "0" : 0;
+                object.Info = null;
+            }
+            if (message.ID != null && message.hasOwnProperty("ID"))
+                if (typeof message.ID === "number")
+                    object.ID = options.longs === String ? String(message.ID) : message.ID;
+                else
+                    object.ID = options.longs === String ? $util.Long.prototype.toString.call(message.ID) : options.longs === Number ? new $util.LongBits(message.ID.low >>> 0, message.ID.high >>> 0).toNumber(true) : message.ID;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.GameInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        GameItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GameItem;
+    })();
+
+    login.TableItem = (function() {
+
+        function TableItem(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TableItem.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        TableItem.prototype.TableNum = 0;
+        TableItem.prototype.Info = null;
+
+        TableItem.create = function create(properties) {
+            return new TableItem(properties);
+        };
+
+        TableItem.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint64(message.GameID);
+            if (message.TableNum != null && Object.hasOwnProperty.call(message, "TableNum"))
+                writer.uint32(16).uint32(message.TableNum);
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.TableInfo.encode(message.Info, writer.uint32(26).fork()).ldelim();
+            return writer;
+        };
+
+        TableItem.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TableItem.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TableItem();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint64();
+                    break;
+                case 2:
+                    message.TableNum = reader.uint32();
+                    break;
+                case 3:
+                    message.Info = $root.login.TableInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TableItem.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TableItem.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
+            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
+                if (!$util.isInteger(message.TableNum))
+                    return "TableNum: integer expected";
+            if (message.Info != null && message.hasOwnProperty("Info")) {
+                var error = $root.login.TableInfo.verify(message.Info);
+                if (error)
+                    return "Info." + error;
+            }
+            return null;
+        };
+
+        TableItem.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.TableItem)
+                return object;
+            var message = new $root.login.TableItem();
+            if (object.GameID != null)
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
+            if (object.TableNum != null)
+                message.TableNum = object.TableNum >>> 0;
+            if (object.Info != null) {
+                if (typeof object.Info !== "object")
+                    throw TypeError(".login.TableItem.Info: object expected");
+                message.Info = $root.login.TableInfo.fromObject(object.Info);
+            }
+            return message;
+        };
+
+        TableItem.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
+                object.TableNum = 0;
+                object.Info = null;
+            }
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
+            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
+                object.TableNum = message.TableNum;
+            if (message.Info != null && message.hasOwnProperty("Info"))
+                object.Info = $root.login.TableInfo.toObject(message.Info, options);
+            return object;
+        };
+
+        TableItem.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TableItem;
+    })();
+
     login.TaskList = (function() {
 
         function TaskList(properties) {
@@ -1459,6 +1716,114 @@ $root.login = (function() {
         return TaskList;
     })();
 
+    login.ClassList = (function() {
+
+        function ClassList(properties) {
+            this.classify = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ClassList.prototype.classify = $util.emptyArray;
+
+        ClassList.create = function create(properties) {
+            return new ClassList(properties);
+        };
+
+        ClassList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.classify != null && message.classify.length)
+                for (var i = 0; i < message.classify.length; ++i)
+                    $root.login.ClassItem.encode(message.classify[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        ClassList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ClassList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ClassList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.classify && message.classify.length))
+                        message.classify = [];
+                    message.classify.push($root.login.ClassItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ClassList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ClassList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.classify != null && message.hasOwnProperty("classify")) {
+                if (!Array.isArray(message.classify))
+                    return "classify: array expected";
+                for (var i = 0; i < message.classify.length; ++i) {
+                    var error = $root.login.ClassItem.verify(message.classify[i]);
+                    if (error)
+                        return "classify." + error;
+                }
+            }
+            return null;
+        };
+
+        ClassList.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ClassList)
+                return object;
+            var message = new $root.login.ClassList();
+            if (object.classify) {
+                if (!Array.isArray(object.classify))
+                    throw TypeError(".login.ClassList.classify: array expected");
+                message.classify = [];
+                for (var i = 0; i < object.classify.length; ++i) {
+                    if (typeof object.classify[i] !== "object")
+                        throw TypeError(".login.ClassList.classify: object expected");
+                    message.classify[i] = $root.login.ClassItem.fromObject(object.classify[i]);
+                }
+            }
+            return message;
+        };
+
+        ClassList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.classify = [];
+            if (message.classify && message.classify.length) {
+                object.classify = [];
+                for (var j = 0; j < message.classify.length; ++j)
+                    object.classify[j] = $root.login.ClassItem.toObject(message.classify[j], options);
+            }
+            return object;
+        };
+
+        ClassList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ClassList;
+    })();
+
     login.GameList = (function() {
 
         function GameList(properties) {
@@ -1565,6 +1930,114 @@ $root.login = (function() {
         };
 
         return GameList;
+    })();
+
+    login.TableList = (function() {
+
+        function TableList(properties) {
+            this.Items = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        TableList.prototype.Items = $util.emptyArray;
+
+        TableList.create = function create(properties) {
+            return new TableList(properties);
+        };
+
+        TableList.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Items != null && message.Items.length)
+                for (var i = 0; i < message.Items.length; ++i)
+                    $root.login.TableItem.encode(message.Items[i], writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        TableList.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        TableList.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.TableList();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.Items && message.Items.length))
+                        message.Items = [];
+                    message.Items.push($root.login.TableItem.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        TableList.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        TableList.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.Items != null && message.hasOwnProperty("Items")) {
+                if (!Array.isArray(message.Items))
+                    return "Items: array expected";
+                for (var i = 0; i < message.Items.length; ++i) {
+                    var error = $root.login.TableItem.verify(message.Items[i]);
+                    if (error)
+                        return "Items." + error;
+                }
+            }
+            return null;
+        };
+
+        TableList.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.TableList)
+                return object;
+            var message = new $root.login.TableList();
+            if (object.Items) {
+                if (!Array.isArray(object.Items))
+                    throw TypeError(".login.TableList.Items: array expected");
+                message.Items = [];
+                for (var i = 0; i < object.Items.length; ++i) {
+                    if (typeof object.Items[i] !== "object")
+                        throw TypeError(".login.TableList.Items: object expected");
+                    message.Items[i] = $root.login.TableItem.fromObject(object.Items[i]);
+                }
+            }
+            return message;
+        };
+
+        TableList.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.Items = [];
+            if (message.Items && message.Items.length) {
+                object.Items = [];
+                for (var j = 0; j < message.Items.length; ++j)
+                    object.Items[j] = $root.login.TableItem.toObject(message.Items[j], options);
+            }
+            return object;
+        };
+
+        TableList.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TableList;
     })();
 
     login.RegisterReq = (function() {
@@ -2112,6 +2585,7 @@ $root.login = (function() {
 
         LoginResp.prototype.MainInfo = null;
         LoginResp.prototype.InGameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        LoginResp.prototype.InTableNum = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         LoginResp.create = function create(properties) {
             return new LoginResp(properties);
@@ -2124,6 +2598,8 @@ $root.login = (function() {
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
             if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
                 writer.uint32(16).uint64(message.InGameID);
+            if (message.InTableNum != null && Object.hasOwnProperty.call(message, "InTableNum"))
+                writer.uint32(24).uint64(message.InTableNum);
             return writer;
         };
 
@@ -2143,6 +2619,9 @@ $root.login = (function() {
                     break;
                 case 2:
                     message.InGameID = reader.uint64();
+                    break;
+                case 3:
+                    message.InTableNum = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2169,6 +2648,9 @@ $root.login = (function() {
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
                 if (!$util.isInteger(message.InGameID) && !(message.InGameID && $util.isInteger(message.InGameID.low) && $util.isInteger(message.InGameID.high)))
                     return "InGameID: integer|Long expected";
+            if (message.InTableNum != null && message.hasOwnProperty("InTableNum"))
+                if (!$util.isInteger(message.InTableNum) && !(message.InTableNum && $util.isInteger(message.InTableNum.low) && $util.isInteger(message.InTableNum.high)))
+                    return "InTableNum: integer|Long expected";
             return null;
         };
 
@@ -2190,6 +2672,15 @@ $root.login = (function() {
                     message.InGameID = object.InGameID;
                 else if (typeof object.InGameID === "object")
                     message.InGameID = new $util.LongBits(object.InGameID.low >>> 0, object.InGameID.high >>> 0).toNumber(true);
+            if (object.InTableNum != null)
+                if ($util.Long)
+                    (message.InTableNum = $util.Long.fromValue(object.InTableNum)).unsigned = true;
+                else if (typeof object.InTableNum === "string")
+                    message.InTableNum = parseInt(object.InTableNum, 10);
+                else if (typeof object.InTableNum === "number")
+                    message.InTableNum = object.InTableNum;
+                else if (typeof object.InTableNum === "object")
+                    message.InTableNum = new $util.LongBits(object.InTableNum.low >>> 0, object.InTableNum.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -2204,6 +2695,11 @@ $root.login = (function() {
                     object.InGameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.InGameID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.InTableNum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.InTableNum = options.longs === String ? "0" : 0;
             }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
@@ -2212,6 +2708,11 @@ $root.login = (function() {
                     object.InGameID = options.longs === String ? String(message.InGameID) : message.InGameID;
                 else
                     object.InGameID = options.longs === String ? $util.Long.prototype.toString.call(message.InGameID) : options.longs === Number ? new $util.LongBits(message.InGameID.low >>> 0, message.InGameID.high >>> 0).toNumber(true) : message.InGameID;
+            if (message.InTableNum != null && message.hasOwnProperty("InTableNum"))
+                if (typeof message.InTableNum === "number")
+                    object.InTableNum = options.longs === String ? String(message.InTableNum) : message.InTableNum;
+                else
+                    object.InTableNum = options.longs === String ? $util.Long.prototype.toString.call(message.InTableNum) : options.longs === Number ? new $util.LongBits(message.InTableNum.low >>> 0, message.InTableNum.high >>> 0).toNumber(true) : message.InTableNum;
             return object;
         };
 
@@ -2478,6 +2979,7 @@ $root.login = (function() {
 
         ReconnectResp.prototype.MainInfo = null;
         ReconnectResp.prototype.InGameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ReconnectResp.prototype.InTableNum = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
         ReconnectResp.create = function create(properties) {
             return new ReconnectResp(properties);
@@ -2490,6 +2992,8 @@ $root.login = (function() {
                 $root.login.MasterInfo.encode(message.MainInfo, writer.uint32(10).fork()).ldelim();
             if (message.InGameID != null && Object.hasOwnProperty.call(message, "InGameID"))
                 writer.uint32(16).uint64(message.InGameID);
+            if (message.InTableNum != null && Object.hasOwnProperty.call(message, "InTableNum"))
+                writer.uint32(24).uint64(message.InTableNum);
             return writer;
         };
 
@@ -2509,6 +3013,9 @@ $root.login = (function() {
                     break;
                 case 2:
                     message.InGameID = reader.uint64();
+                    break;
+                case 3:
+                    message.InTableNum = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2535,6 +3042,9 @@ $root.login = (function() {
             if (message.InGameID != null && message.hasOwnProperty("InGameID"))
                 if (!$util.isInteger(message.InGameID) && !(message.InGameID && $util.isInteger(message.InGameID.low) && $util.isInteger(message.InGameID.high)))
                     return "InGameID: integer|Long expected";
+            if (message.InTableNum != null && message.hasOwnProperty("InTableNum"))
+                if (!$util.isInteger(message.InTableNum) && !(message.InTableNum && $util.isInteger(message.InTableNum.low) && $util.isInteger(message.InTableNum.high)))
+                    return "InTableNum: integer|Long expected";
             return null;
         };
 
@@ -2556,6 +3066,15 @@ $root.login = (function() {
                     message.InGameID = object.InGameID;
                 else if (typeof object.InGameID === "object")
                     message.InGameID = new $util.LongBits(object.InGameID.low >>> 0, object.InGameID.high >>> 0).toNumber(true);
+            if (object.InTableNum != null)
+                if ($util.Long)
+                    (message.InTableNum = $util.Long.fromValue(object.InTableNum)).unsigned = true;
+                else if (typeof object.InTableNum === "string")
+                    message.InTableNum = parseInt(object.InTableNum, 10);
+                else if (typeof object.InTableNum === "number")
+                    message.InTableNum = object.InTableNum;
+                else if (typeof object.InTableNum === "object")
+                    message.InTableNum = new $util.LongBits(object.InTableNum.low >>> 0, object.InTableNum.high >>> 0).toNumber(true);
             return message;
         };
 
@@ -2570,6 +3089,11 @@ $root.login = (function() {
                     object.InGameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.InGameID = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.InTableNum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.InTableNum = options.longs === String ? "0" : 0;
             }
             if (message.MainInfo != null && message.hasOwnProperty("MainInfo"))
                 object.MainInfo = $root.login.MasterInfo.toObject(message.MainInfo, options);
@@ -2578,6 +3102,11 @@ $root.login = (function() {
                     object.InGameID = options.longs === String ? String(message.InGameID) : message.InGameID;
                 else
                     object.InGameID = options.longs === String ? $util.Long.prototype.toString.call(message.InGameID) : options.longs === Number ? new $util.LongBits(message.InGameID.low >>> 0, message.InGameID.high >>> 0).toNumber(true) : message.InGameID;
+            if (message.InTableNum != null && message.hasOwnProperty("InTableNum"))
+                if (typeof message.InTableNum === "number")
+                    object.InTableNum = options.longs === String ? String(message.InTableNum) : message.InTableNum;
+                else
+                    object.InTableNum = options.longs === String ? $util.Long.prototype.toString.call(message.InTableNum) : options.longs === Number ? new $util.LongBits(message.InTableNum.low >>> 0, message.InTableNum.high >>> 0).toNumber(true) : message.InTableNum;
             return object;
         };
 
@@ -2588,48 +3117,48 @@ $root.login = (function() {
         return ReconnectResp;
     })();
 
-    login.EnterRoomReq = (function() {
+    login.ChooseClassReq = (function() {
 
-        function EnterRoomReq(properties) {
+        function ChooseClassReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        EnterRoomReq.prototype.RoomNum = 0;
-        EnterRoomReq.prototype.RoomKey = "";
+        ChooseClassReq.prototype.Num = 0;
+        ChooseClassReq.prototype.TableKey = "";
 
-        EnterRoomReq.create = function create(properties) {
-            return new EnterRoomReq(properties);
+        ChooseClassReq.create = function create(properties) {
+            return new ChooseClassReq(properties);
         };
 
-        EnterRoomReq.encode = function encode(message, writer) {
+        ChooseClassReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
-                writer.uint32(8).uint32(message.RoomNum);
-            if (message.RoomKey != null && Object.hasOwnProperty.call(message, "RoomKey"))
-                writer.uint32(18).string(message.RoomKey);
+            if (message.Num != null && Object.hasOwnProperty.call(message, "Num"))
+                writer.uint32(8).uint32(message.Num);
+            if (message.TableKey != null && Object.hasOwnProperty.call(message, "TableKey"))
+                writer.uint32(18).string(message.TableKey);
             return writer;
         };
 
-        EnterRoomReq.encodeDelimited = function encodeDelimited(message, writer) {
+        ChooseClassReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        EnterRoomReq.decode = function decode(reader, length) {
+        ChooseClassReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.EnterRoomReq();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ChooseClassReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.RoomNum = reader.uint32();
+                    message.Num = reader.uint32();
                     break;
                 case 2:
-                    message.RoomKey = reader.string();
+                    message.TableKey = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2639,96 +3168,96 @@ $root.login = (function() {
             return message;
         };
 
-        EnterRoomReq.decodeDelimited = function decodeDelimited(reader) {
+        ChooseClassReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        EnterRoomReq.verify = function verify(message) {
+        ChooseClassReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                if (!$util.isInteger(message.RoomNum))
-                    return "RoomNum: integer expected";
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                if (!$util.isString(message.RoomKey))
-                    return "RoomKey: string expected";
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                if (!$util.isInteger(message.Num))
+                    return "Num: integer expected";
+            if (message.TableKey != null && message.hasOwnProperty("TableKey"))
+                if (!$util.isString(message.TableKey))
+                    return "TableKey: string expected";
             return null;
         };
 
-        EnterRoomReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.EnterRoomReq)
+        ChooseClassReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ChooseClassReq)
                 return object;
-            var message = new $root.login.EnterRoomReq();
-            if (object.RoomNum != null)
-                message.RoomNum = object.RoomNum >>> 0;
-            if (object.RoomKey != null)
-                message.RoomKey = String(object.RoomKey);
+            var message = new $root.login.ChooseClassReq();
+            if (object.Num != null)
+                message.Num = object.Num >>> 0;
+            if (object.TableKey != null)
+                message.TableKey = String(object.TableKey);
             return message;
         };
 
-        EnterRoomReq.toObject = function toObject(message, options) {
+        ChooseClassReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.RoomNum = 0;
-                object.RoomKey = "";
+                object.Num = 0;
+                object.TableKey = "";
             }
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                object.RoomNum = message.RoomNum;
-            if (message.RoomKey != null && message.hasOwnProperty("RoomKey"))
-                object.RoomKey = message.RoomKey;
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                object.Num = message.Num;
+            if (message.TableKey != null && message.hasOwnProperty("TableKey"))
+                object.TableKey = message.TableKey;
             return object;
         };
 
-        EnterRoomReq.prototype.toJSON = function toJSON() {
+        ChooseClassReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return EnterRoomReq;
+        return ChooseClassReq;
     })();
 
-    login.EnterRoomResp = (function() {
+    login.ChooseClassResp = (function() {
 
-        function EnterRoomResp(properties) {
+        function ChooseClassResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        EnterRoomResp.prototype.RoomNum = 0;
-        EnterRoomResp.prototype.Games = null;
+        ChooseClassResp.prototype.Num = 0;
+        ChooseClassResp.prototype.Games = null;
 
-        EnterRoomResp.create = function create(properties) {
-            return new EnterRoomResp(properties);
+        ChooseClassResp.create = function create(properties) {
+            return new ChooseClassResp(properties);
         };
 
-        EnterRoomResp.encode = function encode(message, writer) {
+        ChooseClassResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.RoomNum != null && Object.hasOwnProperty.call(message, "RoomNum"))
-                writer.uint32(8).uint32(message.RoomNum);
+            if (message.Num != null && Object.hasOwnProperty.call(message, "Num"))
+                writer.uint32(8).uint32(message.Num);
             if (message.Games != null && Object.hasOwnProperty.call(message, "Games"))
                 $root.login.GameList.encode(message.Games, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
-        EnterRoomResp.encodeDelimited = function encodeDelimited(message, writer) {
+        ChooseClassResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        EnterRoomResp.decode = function decode(reader, length) {
+        ChooseClassResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.EnterRoomResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ChooseClassResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.RoomNum = reader.uint32();
+                    message.Num = reader.uint32();
                     break;
                 case 2:
                     message.Games = $root.login.GameList.decode(reader, reader.uint32());
@@ -2741,18 +3270,18 @@ $root.login = (function() {
             return message;
         };
 
-        EnterRoomResp.decodeDelimited = function decodeDelimited(reader) {
+        ChooseClassResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        EnterRoomResp.verify = function verify(message) {
+        ChooseClassResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                if (!$util.isInteger(message.RoomNum))
-                    return "RoomNum: integer expected";
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                if (!$util.isInteger(message.Num))
+                    return "Num: integer expected";
             if (message.Games != null && message.hasOwnProperty("Games")) {
                 var error = $root.login.GameList.verify(message.Games);
                 if (error)
@@ -2761,78 +3290,78 @@ $root.login = (function() {
             return null;
         };
 
-        EnterRoomResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.EnterRoomResp)
+        ChooseClassResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ChooseClassResp)
                 return object;
-            var message = new $root.login.EnterRoomResp();
-            if (object.RoomNum != null)
-                message.RoomNum = object.RoomNum >>> 0;
+            var message = new $root.login.ChooseClassResp();
+            if (object.Num != null)
+                message.Num = object.Num >>> 0;
             if (object.Games != null) {
                 if (typeof object.Games !== "object")
-                    throw TypeError(".login.EnterRoomResp.Games: object expected");
+                    throw TypeError(".login.ChooseClassResp.Games: object expected");
                 message.Games = $root.login.GameList.fromObject(object.Games);
             }
             return message;
         };
 
-        EnterRoomResp.toObject = function toObject(message, options) {
+        ChooseClassResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.RoomNum = 0;
+                object.Num = 0;
                 object.Games = null;
             }
-            if (message.RoomNum != null && message.hasOwnProperty("RoomNum"))
-                object.RoomNum = message.RoomNum;
+            if (message.Num != null && message.hasOwnProperty("Num"))
+                object.Num = message.Num;
             if (message.Games != null && message.hasOwnProperty("Games"))
                 object.Games = $root.login.GameList.toObject(message.Games, options);
             return object;
         };
 
-        EnterRoomResp.prototype.toJSON = function toJSON() {
+        ChooseClassResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return EnterRoomResp;
+        return ChooseClassResp;
     })();
 
-    login.SettingGameReq = (function() {
+    login.ChooseGameReq = (function() {
 
-        function SettingGameReq(properties) {
+        function ChooseGameReq(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SettingGameReq.prototype.Info = null;
+        ChooseGameReq.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
 
-        SettingGameReq.create = function create(properties) {
-            return new SettingGameReq(properties);
+        ChooseGameReq.create = function create(properties) {
+            return new ChooseGameReq(properties);
         };
 
-        SettingGameReq.encode = function encode(message, writer) {
+        ChooseGameReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.login.GameInfo.encode(message.Info, writer.uint32(18).fork()).ldelim();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint64(message.GameID);
             return writer;
         };
 
-        SettingGameReq.encodeDelimited = function encodeDelimited(message, writer) {
+        ChooseGameReq.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        SettingGameReq.decode = function decode(reader, length) {
+        ChooseGameReq.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingGameReq();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ChooseGameReq();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 2:
-                    message.Info = $root.login.GameInfo.decode(reader, reader.uint32());
+                case 1:
+                    message.GameID = reader.uint64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2842,89 +3371,311 @@ $root.login = (function() {
             return message;
         };
 
-        SettingGameReq.decodeDelimited = function decodeDelimited(reader) {
+        ChooseGameReq.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        SettingGameReq.verify = function verify(message) {
+        ChooseGameReq.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
+            return null;
+        };
+
+        ChooseGameReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ChooseGameReq)
+                return object;
+            var message = new $root.login.ChooseGameReq();
+            if (object.GameID != null)
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        ChooseGameReq.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
+            return object;
+        };
+
+        ChooseGameReq.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ChooseGameReq;
+    })();
+
+    login.ChooseGameResp = (function() {
+
+        function ChooseGameResp(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        ChooseGameResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        ChooseGameResp.prototype.Tables = null;
+
+        ChooseGameResp.create = function create(properties) {
+            return new ChooseGameResp(properties);
+        };
+
+        ChooseGameResp.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
+                writer.uint32(8).uint64(message.GameID);
+            if (message.Tables != null && Object.hasOwnProperty.call(message, "Tables"))
+                $root.login.TableList.encode(message.Tables, writer.uint32(18).fork()).ldelim();
+            return writer;
+        };
+
+        ChooseGameResp.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        ChooseGameResp.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.ChooseGameResp();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.GameID = reader.uint64();
+                    break;
+                case 2:
+                    message.Tables = $root.login.TableList.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        ChooseGameResp.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        ChooseGameResp.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
+                    return "GameID: integer|Long expected";
+            if (message.Tables != null && message.hasOwnProperty("Tables")) {
+                var error = $root.login.TableList.verify(message.Tables);
+                if (error)
+                    return "Tables." + error;
+            }
+            return null;
+        };
+
+        ChooseGameResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.ChooseGameResp)
+                return object;
+            var message = new $root.login.ChooseGameResp();
+            if (object.GameID != null)
+                if ($util.Long)
+                    (message.GameID = $util.Long.fromValue(object.GameID)).unsigned = true;
+                else if (typeof object.GameID === "string")
+                    message.GameID = parseInt(object.GameID, 10);
+                else if (typeof object.GameID === "number")
+                    message.GameID = object.GameID;
+                else if (typeof object.GameID === "object")
+                    message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
+            if (object.Tables != null) {
+                if (typeof object.Tables !== "object")
+                    throw TypeError(".login.ChooseGameResp.Tables: object expected");
+                message.Tables = $root.login.TableList.fromObject(object.Tables);
+            }
+            return message;
+        };
+
+        ChooseGameResp.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.GameID = options.longs === String ? "0" : 0;
+                object.Tables = null;
+            }
+            if (message.GameID != null && message.hasOwnProperty("GameID"))
+                if (typeof message.GameID === "number")
+                    object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
+                else
+                    object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
+            if (message.Tables != null && message.hasOwnProperty("Tables"))
+                object.Tables = $root.login.TableList.toObject(message.Tables, options);
+            return object;
+        };
+
+        ChooseGameResp.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return ChooseGameResp;
+    })();
+
+    login.SettingTableReq = (function() {
+
+        function SettingTableReq(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        SettingTableReq.prototype.Info = null;
+
+        SettingTableReq.create = function create(properties) {
+            return new SettingTableReq(properties);
+        };
+
+        SettingTableReq.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
+                $root.login.TableInfo.encode(message.Info, writer.uint32(10).fork()).ldelim();
+            return writer;
+        };
+
+        SettingTableReq.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        SettingTableReq.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingTableReq();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.Info = $root.login.TableInfo.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        SettingTableReq.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        SettingTableReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.login.GameInfo.verify(message.Info);
+                var error = $root.login.TableInfo.verify(message.Info);
                 if (error)
                     return "Info." + error;
             }
             return null;
         };
 
-        SettingGameReq.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.SettingGameReq)
+        SettingTableReq.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.SettingTableReq)
                 return object;
-            var message = new $root.login.SettingGameReq();
+            var message = new $root.login.SettingTableReq();
             if (object.Info != null) {
                 if (typeof object.Info !== "object")
-                    throw TypeError(".login.SettingGameReq.Info: object expected");
-                message.Info = $root.login.GameInfo.fromObject(object.Info);
+                    throw TypeError(".login.SettingTableReq.Info: object expected");
+                message.Info = $root.login.TableInfo.fromObject(object.Info);
             }
             return message;
         };
 
-        SettingGameReq.toObject = function toObject(message, options) {
+        SettingTableReq.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
                 object.Info = null;
             if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.login.GameInfo.toObject(message.Info, options);
+                object.Info = $root.login.TableInfo.toObject(message.Info, options);
             return object;
         };
 
-        SettingGameReq.prototype.toJSON = function toJSON() {
+        SettingTableReq.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return SettingGameReq;
+        return SettingTableReq;
     })();
 
-    login.SettingGameResp = (function() {
+    login.SettingTableResp = (function() {
 
-        function SettingGameResp(properties) {
+        function SettingTableResp(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SettingGameResp.prototype.Item = null;
+        SettingTableResp.prototype.Item = null;
 
-        SettingGameResp.create = function create(properties) {
-            return new SettingGameResp(properties);
+        SettingTableResp.create = function create(properties) {
+            return new SettingTableResp(properties);
         };
 
-        SettingGameResp.encode = function encode(message, writer) {
+        SettingTableResp.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.Item != null && Object.hasOwnProperty.call(message, "Item"))
-                $root.login.GameItem.encode(message.Item, writer.uint32(10).fork()).ldelim();
+                $root.login.TableItem.encode(message.Item, writer.uint32(10).fork()).ldelim();
             return writer;
         };
 
-        SettingGameResp.encodeDelimited = function encodeDelimited(message, writer) {
+        SettingTableResp.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
-        SettingGameResp.decode = function decode(reader, length) {
+        SettingTableResp.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingGameResp();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.login.SettingTableResp();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Item = $root.login.GameItem.decode(reader, reader.uint32());
+                    message.Item = $root.login.TableItem.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2934,51 +3685,51 @@ $root.login = (function() {
             return message;
         };
 
-        SettingGameResp.decodeDelimited = function decodeDelimited(reader) {
+        SettingTableResp.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
-        SettingGameResp.verify = function verify(message) {
+        SettingTableResp.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.Item != null && message.hasOwnProperty("Item")) {
-                var error = $root.login.GameItem.verify(message.Item);
+                var error = $root.login.TableItem.verify(message.Item);
                 if (error)
                     return "Item." + error;
             }
             return null;
         };
 
-        SettingGameResp.fromObject = function fromObject(object) {
-            if (object instanceof $root.login.SettingGameResp)
+        SettingTableResp.fromObject = function fromObject(object) {
+            if (object instanceof $root.login.SettingTableResp)
                 return object;
-            var message = new $root.login.SettingGameResp();
+            var message = new $root.login.SettingTableResp();
             if (object.Item != null) {
                 if (typeof object.Item !== "object")
-                    throw TypeError(".login.SettingGameResp.Item: object expected");
-                message.Item = $root.login.GameItem.fromObject(object.Item);
+                    throw TypeError(".login.SettingTableResp.Item: object expected");
+                message.Item = $root.login.TableItem.fromObject(object.Item);
             }
             return message;
         };
 
-        SettingGameResp.toObject = function toObject(message, options) {
+        SettingTableResp.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
             if (options.defaults)
                 object.Item = null;
             if (message.Item != null && message.hasOwnProperty("Item"))
-                object.Item = $root.login.GameItem.toObject(message.Item, options);
+                object.Item = $root.login.TableItem.toObject(message.Item, options);
             return object;
         };
 
-        SettingGameResp.prototype.toJSON = function toJSON() {
+        SettingTableResp.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return SettingGameResp;
+        return SettingTableResp;
     })();
 
     login.ResultResp = (function() {

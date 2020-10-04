@@ -2,8 +2,8 @@ import * as $protobuf from "protobufjs";
 /** Namespace login. */
 export namespace login {
 
-    /** GameState enum. */
-    enum GameState {
+    /** TableState enum. */
+    enum TableState {
         Init = 0,
         Open = 1,
         Maintain = 2,
@@ -17,13 +17,25 @@ export namespace login {
         General = 0,
         Fight = 1,
         Multiplayer = 2,
-        RoomCard = 3,
+        TableCard = 3,
         Guess = 4,
         GamesCity = 5,
         DualMeet = 6,
         Sport = 7,
         Smart = 8,
         RPG = 9
+    }
+
+    /** GameScene enum. */
+    enum GameScene {
+        Free = 0,
+        Start = 1,
+        Call = 2,
+        Decide = 3,
+        Playing = 4,
+        Opening = 5,
+        Over = 6,
+        Closing = 7
     }
 
     /** Properties of a UserInfo. */
@@ -236,109 +248,151 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a RoomInfo. */
-    interface IRoomInfo {
+    /** Properties of a TableInfo. */
+    interface ITableInfo {
 
-        /** RoomInfo RoomNum */
-        RoomNum?: (number|null);
+        /** TableInfo HostID */
+        HostID?: (number|Long|null);
 
-        /** RoomInfo RoomKey */
-        RoomKey?: (string|null);
+        /** TableInfo Name */
+        Name?: (string|null);
 
-        /** RoomInfo RoomName */
-        RoomName?: (string|null);
+        /** TableInfo Password */
+        Password?: (string|null);
 
-        /** RoomInfo Games */
-        Games?: (login.IGameList|null);
+        /** TableInfo State */
+        State?: (login.TableState|null);
+
+        /** TableInfo EnterScore */
+        EnterScore?: (number|null);
+
+        /** TableInfo LessScore */
+        LessScore?: (number|null);
+
+        /** TableInfo PlayScore */
+        PlayScore?: (number|Long|null);
+
+        /** TableInfo Commission */
+        Commission?: (number|null);
+
+        /** TableInfo MaxChair */
+        MaxChair?: (number|null);
+
+        /** TableInfo Amount */
+        Amount?: (number|null);
+
+        /** TableInfo MaxOnline */
+        MaxOnline?: (number|null);
     }
 
-    /** Represents a RoomInfo. */
-    class RoomInfo implements IRoomInfo {
+    /** Represents a TableInfo. */
+    class TableInfo implements ITableInfo {
 
         /**
-         * Constructs a new RoomInfo.
+         * Constructs a new TableInfo.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IRoomInfo);
+        constructor(properties?: login.ITableInfo);
 
-        /** RoomInfo RoomNum. */
-        public RoomNum: number;
+        /** TableInfo HostID. */
+        public HostID: (number|Long);
 
-        /** RoomInfo RoomKey. */
-        public RoomKey: string;
+        /** TableInfo Name. */
+        public Name: string;
 
-        /** RoomInfo RoomName. */
-        public RoomName: string;
+        /** TableInfo Password. */
+        public Password: string;
 
-        /** RoomInfo Games. */
-        public Games?: (login.IGameList|null);
+        /** TableInfo State. */
+        public State: login.TableState;
+
+        /** TableInfo EnterScore. */
+        public EnterScore: number;
+
+        /** TableInfo LessScore. */
+        public LessScore: number;
+
+        /** TableInfo PlayScore. */
+        public PlayScore: (number|Long);
+
+        /** TableInfo Commission. */
+        public Commission: number;
+
+        /** TableInfo MaxChair. */
+        public MaxChair: number;
+
+        /** TableInfo Amount. */
+        public Amount: number;
+
+        /** TableInfo MaxOnline. */
+        public MaxOnline: number;
 
         /**
-         * Creates a new RoomInfo instance using the specified properties.
+         * Creates a new TableInfo instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns RoomInfo instance
+         * @returns TableInfo instance
          */
-        public static create(properties?: login.IRoomInfo): login.RoomInfo;
+        public static create(properties?: login.ITableInfo): login.TableInfo;
 
         /**
-         * Encodes the specified RoomInfo message. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
-         * @param message RoomInfo message or plain object to encode
+         * Encodes the specified TableInfo message. Does not implicitly {@link login.TableInfo.verify|verify} messages.
+         * @param message TableInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.ITableInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified RoomInfo message, length delimited. Does not implicitly {@link login.RoomInfo.verify|verify} messages.
-         * @param message RoomInfo message or plain object to encode
+         * Encodes the specified TableInfo message, length delimited. Does not implicitly {@link login.TableInfo.verify|verify} messages.
+         * @param message TableInfo message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IRoomInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.ITableInfo, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer.
+         * Decodes a TableInfo message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns RoomInfo
+         * @returns TableInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.RoomInfo;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.TableInfo;
 
         /**
-         * Decodes a RoomInfo message from the specified reader or buffer, length delimited.
+         * Decodes a TableInfo message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns RoomInfo
+         * @returns TableInfo
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.RoomInfo;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.TableInfo;
 
         /**
-         * Verifies a RoomInfo message.
+         * Verifies a TableInfo message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a RoomInfo message from a plain object. Also converts values to their respective internal types.
+         * Creates a TableInfo message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns RoomInfo
+         * @returns TableInfo
          */
-        public static fromObject(object: { [k: string]: any }): login.RoomInfo;
+        public static fromObject(object: { [k: string]: any }): login.TableInfo;
 
         /**
-         * Creates a plain object from a RoomInfo message. Also converts values to other types if specified.
-         * @param message RoomInfo
+         * Creates a plain object from a TableInfo message. Also converts values to other types if specified.
+         * @param message TableInfo
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.RoomInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.TableInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this RoomInfo to JSON.
+         * Converts this TableInfo to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -351,43 +405,13 @@ export namespace login {
         Type?: (login.GameType|null);
 
         /** GameInfo KindID */
-        KindID?: (number|null);
+        KindID?: (number|Long|null);
 
         /** GameInfo Level */
         Level?: (number|null);
 
-        /** GameInfo Name */
-        Name?: (string|null);
-
-        /** GameInfo EnterScore */
-        EnterScore?: (number|null);
-
-        /** GameInfo LessScore */
-        LessScore?: (number|null);
-
-        /** GameInfo MaxOnline */
-        MaxOnline?: (number|null);
-
-        /** GameInfo State */
-        State?: (login.GameState|null);
-
-        /** GameInfo Commission */
-        Commission?: (number|null);
-
-        /** GameInfo PlayScore */
-        PlayScore?: (number|Long|null);
-
-        /** GameInfo HostID */
-        HostID?: (number|Long|null);
-
-        /** GameInfo Password */
-        Password?: (string|null);
-
-        /** GameInfo MaxChair */
-        MaxChair?: (number|null);
-
-        /** GameInfo Amount */
-        Amount?: (number|null);
+        /** GameInfo Scene */
+        Scene?: (login.GameScene|null);
     }
 
     /** Represents a GameInfo. */
@@ -403,43 +427,13 @@ export namespace login {
         public Type: login.GameType;
 
         /** GameInfo KindID. */
-        public KindID: number;
+        public KindID: (number|Long);
 
         /** GameInfo Level. */
         public Level: number;
 
-        /** GameInfo Name. */
-        public Name: string;
-
-        /** GameInfo EnterScore. */
-        public EnterScore: number;
-
-        /** GameInfo LessScore. */
-        public LessScore: number;
-
-        /** GameInfo MaxOnline. */
-        public MaxOnline: number;
-
-        /** GameInfo State. */
-        public State: login.GameState;
-
-        /** GameInfo Commission. */
-        public Commission: number;
-
-        /** GameInfo PlayScore. */
-        public PlayScore: (number|Long);
-
-        /** GameInfo HostID. */
-        public HostID: (number|Long);
-
-        /** GameInfo Password. */
-        public Password: string;
-
-        /** GameInfo MaxChair. */
-        public MaxChair: number;
-
-        /** GameInfo Amount. */
-        public Amount: number;
+        /** GameInfo Scene. */
+        public Scene: login.GameScene;
 
         /**
          * Creates a new GameInfo instance using the specified properties.
@@ -512,110 +506,14 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a GameItem. */
-    interface IGameItem {
-
-        /** GameItem ID */
-        ID?: (number|Long|null);
-
-        /** GameItem Info */
-        Info?: (login.IGameInfo|null);
-    }
-
-    /** Represents a GameItem. */
-    class GameItem implements IGameItem {
-
-        /**
-         * Constructs a new GameItem.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: login.IGameItem);
-
-        /** GameItem ID. */
-        public ID: (number|Long);
-
-        /** GameItem Info. */
-        public Info?: (login.IGameInfo|null);
-
-        /**
-         * Creates a new GameItem instance using the specified properties.
-         * @param [properties] Properties to set
-         * @returns GameItem instance
-         */
-        public static create(properties?: login.IGameItem): login.GameItem;
-
-        /**
-         * Encodes the specified GameItem message. Does not implicitly {@link login.GameItem.verify|verify} messages.
-         * @param message GameItem message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameItem message, length delimited. Does not implicitly {@link login.GameItem.verify|verify} messages.
-         * @param message GameItem message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameItem message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameItem;
-
-        /**
-         * Decodes a GameItem message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameItem
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameItem;
-
-        /**
-         * Verifies a GameItem message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameItem message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameItem
-         */
-        public static fromObject(object: { [k: string]: any }): login.GameItem;
-
-        /**
-         * Creates a plain object from a GameItem message. Also converts values to other types if specified.
-         * @param message GameItem
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: login.GameItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameItem to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-    }
-
     /** Properties of a MasterInfo. */
     interface IMasterInfo {
 
         /** MasterInfo UserInfo */
         UserInfo?: (login.IUserInfo|null);
 
-        /** MasterInfo RoomsInfo */
-        RoomsInfo?: (login.IRoomInfo[]|null);
+        /** MasterInfo Classes */
+        Classes?: (login.IClassList|null);
 
         /** MasterInfo Tasks */
         Tasks?: (login.ITaskList|null);
@@ -633,8 +531,8 @@ export namespace login {
         /** MasterInfo UserInfo. */
         public UserInfo?: (login.IUserInfo|null);
 
-        /** MasterInfo RoomsInfo. */
-        public RoomsInfo: login.IRoomInfo[];
+        /** MasterInfo Classes. */
+        public Classes?: (login.IClassList|null);
 
         /** MasterInfo Tasks. */
         public Tasks?: (login.ITaskList|null);
@@ -812,6 +710,306 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ClassItem. */
+    interface IClassItem {
+
+        /** ClassItem Num */
+        Num?: (number|null);
+
+        /** ClassItem Name */
+        Name?: (string|null);
+
+        /** ClassItem Key */
+        Key?: (string|null);
+    }
+
+    /** Represents a ClassItem. */
+    class ClassItem implements IClassItem {
+
+        /**
+         * Constructs a new ClassItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IClassItem);
+
+        /** ClassItem Num. */
+        public Num: number;
+
+        /** ClassItem Name. */
+        public Name: string;
+
+        /** ClassItem Key. */
+        public Key: string;
+
+        /**
+         * Creates a new ClassItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ClassItem instance
+         */
+        public static create(properties?: login.IClassItem): login.ClassItem;
+
+        /**
+         * Encodes the specified ClassItem message. Does not implicitly {@link login.ClassItem.verify|verify} messages.
+         * @param message ClassItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ClassItem message, length delimited. Does not implicitly {@link login.ClassItem.verify|verify} messages.
+         * @param message ClassItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IClassItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ClassItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ClassItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ClassItem;
+
+        /**
+         * Decodes a ClassItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ClassItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ClassItem;
+
+        /**
+         * Verifies a ClassItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ClassItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ClassItem
+         */
+        public static fromObject(object: { [k: string]: any }): login.ClassItem;
+
+        /**
+         * Creates a plain object from a ClassItem message. Also converts values to other types if specified.
+         * @param message ClassItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.ClassItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ClassItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a GameItem. */
+    interface IGameItem {
+
+        /** GameItem ID */
+        ID?: (number|Long|null);
+
+        /** GameItem Info */
+        Info?: (login.IGameInfo|null);
+    }
+
+    /** Represents a GameItem. */
+    class GameItem implements IGameItem {
+
+        /**
+         * Constructs a new GameItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IGameItem);
+
+        /** GameItem ID. */
+        public ID: (number|Long);
+
+        /** GameItem Info. */
+        public Info?: (login.IGameInfo|null);
+
+        /**
+         * Creates a new GameItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns GameItem instance
+         */
+        public static create(properties?: login.IGameItem): login.GameItem;
+
+        /**
+         * Encodes the specified GameItem message. Does not implicitly {@link login.GameItem.verify|verify} messages.
+         * @param message GameItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified GameItem message, length delimited. Does not implicitly {@link login.GameItem.verify|verify} messages.
+         * @param message GameItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IGameItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a GameItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.GameItem;
+
+        /**
+         * Decodes a GameItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns GameItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.GameItem;
+
+        /**
+         * Verifies a GameItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a GameItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns GameItem
+         */
+        public static fromObject(object: { [k: string]: any }): login.GameItem;
+
+        /**
+         * Creates a plain object from a GameItem message. Also converts values to other types if specified.
+         * @param message GameItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.GameItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this GameItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TableItem. */
+    interface ITableItem {
+
+        /** TableItem GameID */
+        GameID?: (number|Long|null);
+
+        /** TableItem TableNum */
+        TableNum?: (number|null);
+
+        /** TableItem Info */
+        Info?: (login.ITableInfo|null);
+    }
+
+    /** Represents a TableItem. */
+    class TableItem implements ITableItem {
+
+        /**
+         * Constructs a new TableItem.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ITableItem);
+
+        /** TableItem GameID. */
+        public GameID: (number|Long);
+
+        /** TableItem TableNum. */
+        public TableNum: number;
+
+        /** TableItem Info. */
+        public Info?: (login.ITableInfo|null);
+
+        /**
+         * Creates a new TableItem instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TableItem instance
+         */
+        public static create(properties?: login.ITableItem): login.TableItem;
+
+        /**
+         * Encodes the specified TableItem message. Does not implicitly {@link login.TableItem.verify|verify} messages.
+         * @param message TableItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ITableItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TableItem message, length delimited. Does not implicitly {@link login.TableItem.verify|verify} messages.
+         * @param message TableItem message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ITableItem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TableItem message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TableItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.TableItem;
+
+        /**
+         * Decodes a TableItem message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TableItem
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.TableItem;
+
+        /**
+         * Verifies a TableItem message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TableItem message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TableItem
+         */
+        public static fromObject(object: { [k: string]: any }): login.TableItem;
+
+        /**
+         * Creates a plain object from a TableItem message. Also converts values to other types if specified.
+         * @param message TableItem
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.TableItem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TableItem to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a TaskList. */
     interface ITaskList {
 
@@ -902,6 +1100,96 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a ClassList. */
+    interface IClassList {
+
+        /** ClassList classify */
+        classify?: (login.IClassItem[]|null);
+    }
+
+    /** Represents a ClassList. */
+    class ClassList implements IClassList {
+
+        /**
+         * Constructs a new ClassList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.IClassList);
+
+        /** ClassList classify. */
+        public classify: login.IClassItem[];
+
+        /**
+         * Creates a new ClassList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns ClassList instance
+         */
+        public static create(properties?: login.IClassList): login.ClassList;
+
+        /**
+         * Encodes the specified ClassList message. Does not implicitly {@link login.ClassList.verify|verify} messages.
+         * @param message ClassList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.IClassList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified ClassList message, length delimited. Does not implicitly {@link login.ClassList.verify|verify} messages.
+         * @param message ClassList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.IClassList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a ClassList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns ClassList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ClassList;
+
+        /**
+         * Decodes a ClassList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns ClassList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ClassList;
+
+        /**
+         * Verifies a ClassList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a ClassList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns ClassList
+         */
+        public static fromObject(object: { [k: string]: any }): login.ClassList;
+
+        /**
+         * Creates a plain object from a ClassList message. Also converts values to other types if specified.
+         * @param message ClassList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.ClassList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this ClassList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Properties of a GameList. */
     interface IGameList {
 
@@ -987,6 +1275,96 @@ export namespace login {
 
         /**
          * Converts this GameList to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a TableList. */
+    interface ITableList {
+
+        /** TableList Items */
+        Items?: (login.ITableItem[]|null);
+    }
+
+    /** Represents a TableList. */
+    class TableList implements ITableList {
+
+        /**
+         * Constructs a new TableList.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ITableList);
+
+        /** TableList Items. */
+        public Items: login.ITableItem[];
+
+        /**
+         * Creates a new TableList instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns TableList instance
+         */
+        public static create(properties?: login.ITableList): login.TableList;
+
+        /**
+         * Encodes the specified TableList message. Does not implicitly {@link login.TableList.verify|verify} messages.
+         * @param message TableList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ITableList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified TableList message, length delimited. Does not implicitly {@link login.TableList.verify|verify} messages.
+         * @param message TableList message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ITableList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a TableList message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns TableList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.TableList;
+
+        /**
+         * Decodes a TableList message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns TableList
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.TableList;
+
+        /**
+         * Verifies a TableList message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a TableList message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns TableList
+         */
+        public static fromObject(object: { [k: string]: any }): login.TableList;
+
+        /**
+         * Creates a plain object from a TableList message. Also converts values to other types if specified.
+         * @param message TableList
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.TableList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this TableList to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -1372,6 +1750,9 @@ export namespace login {
 
         /** LoginResp InGameID */
         InGameID?: (number|Long|null);
+
+        /** LoginResp InTableNum */
+        InTableNum?: (number|Long|null);
     }
 
     /** Represents a LoginResp. */
@@ -1388,6 +1769,9 @@ export namespace login {
 
         /** LoginResp InGameID. */
         public InGameID: (number|Long);
+
+        /** LoginResp InTableNum. */
+        public InTableNum: (number|Long);
 
         /**
          * Creates a new LoginResp instance using the specified properties.
@@ -1666,6 +2050,9 @@ export namespace login {
 
         /** ReconnectResp InGameID */
         InGameID?: (number|Long|null);
+
+        /** ReconnectResp InTableNum */
+        InTableNum?: (number|Long|null);
     }
 
     /** Represents a ReconnectResp. */
@@ -1682,6 +2069,9 @@ export namespace login {
 
         /** ReconnectResp InGameID. */
         public InGameID: (number|Long);
+
+        /** ReconnectResp InTableNum. */
+        public InTableNum: (number|Long);
 
         /**
          * Creates a new ReconnectResp instance using the specified properties.
@@ -1754,373 +2144,559 @@ export namespace login {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of an EnterRoomReq. */
-    interface IEnterRoomReq {
+    /** Properties of a ChooseClassReq. */
+    interface IChooseClassReq {
 
-        /** EnterRoomReq RoomNum */
-        RoomNum?: (number|null);
+        /** ChooseClassReq Num */
+        Num?: (number|null);
 
-        /** EnterRoomReq RoomKey */
-        RoomKey?: (string|null);
+        /** ChooseClassReq TableKey */
+        TableKey?: (string|null);
     }
 
-    /** Represents an EnterRoomReq. */
-    class EnterRoomReq implements IEnterRoomReq {
+    /** Represents a ChooseClassReq. */
+    class ChooseClassReq implements IChooseClassReq {
 
         /**
-         * Constructs a new EnterRoomReq.
+         * Constructs a new ChooseClassReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IEnterRoomReq);
+        constructor(properties?: login.IChooseClassReq);
 
-        /** EnterRoomReq RoomNum. */
-        public RoomNum: number;
+        /** ChooseClassReq Num. */
+        public Num: number;
 
-        /** EnterRoomReq RoomKey. */
-        public RoomKey: string;
+        /** ChooseClassReq TableKey. */
+        public TableKey: string;
 
         /**
-         * Creates a new EnterRoomReq instance using the specified properties.
+         * Creates a new ChooseClassReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns EnterRoomReq instance
+         * @returns ChooseClassReq instance
          */
-        public static create(properties?: login.IEnterRoomReq): login.EnterRoomReq;
+        public static create(properties?: login.IChooseClassReq): login.ChooseClassReq;
 
         /**
-         * Encodes the specified EnterRoomReq message. Does not implicitly {@link login.EnterRoomReq.verify|verify} messages.
-         * @param message EnterRoomReq message or plain object to encode
+         * Encodes the specified ChooseClassReq message. Does not implicitly {@link login.ChooseClassReq.verify|verify} messages.
+         * @param message ChooseClassReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IEnterRoomReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IChooseClassReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified EnterRoomReq message, length delimited. Does not implicitly {@link login.EnterRoomReq.verify|verify} messages.
-         * @param message EnterRoomReq message or plain object to encode
+         * Encodes the specified ChooseClassReq message, length delimited. Does not implicitly {@link login.ChooseClassReq.verify|verify} messages.
+         * @param message ChooseClassReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IEnterRoomReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IChooseClassReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes an EnterRoomReq message from the specified reader or buffer.
+         * Decodes a ChooseClassReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns EnterRoomReq
+         * @returns ChooseClassReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.EnterRoomReq;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ChooseClassReq;
 
         /**
-         * Decodes an EnterRoomReq message from the specified reader or buffer, length delimited.
+         * Decodes a ChooseClassReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns EnterRoomReq
+         * @returns ChooseClassReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.EnterRoomReq;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ChooseClassReq;
 
         /**
-         * Verifies an EnterRoomReq message.
+         * Verifies a ChooseClassReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates an EnterRoomReq message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChooseClassReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns EnterRoomReq
+         * @returns ChooseClassReq
          */
-        public static fromObject(object: { [k: string]: any }): login.EnterRoomReq;
+        public static fromObject(object: { [k: string]: any }): login.ChooseClassReq;
 
         /**
-         * Creates a plain object from an EnterRoomReq message. Also converts values to other types if specified.
-         * @param message EnterRoomReq
+         * Creates a plain object from a ChooseClassReq message. Also converts values to other types if specified.
+         * @param message ChooseClassReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.EnterRoomReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ChooseClassReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this EnterRoomReq to JSON.
+         * Converts this ChooseClassReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of an EnterRoomResp. */
-    interface IEnterRoomResp {
+    /** Properties of a ChooseClassResp. */
+    interface IChooseClassResp {
 
-        /** EnterRoomResp RoomNum */
-        RoomNum?: (number|null);
+        /** ChooseClassResp Num */
+        Num?: (number|null);
 
-        /** EnterRoomResp Games */
+        /** ChooseClassResp Games */
         Games?: (login.IGameList|null);
     }
 
-    /** Represents an EnterRoomResp. */
-    class EnterRoomResp implements IEnterRoomResp {
+    /** Represents a ChooseClassResp. */
+    class ChooseClassResp implements IChooseClassResp {
 
         /**
-         * Constructs a new EnterRoomResp.
+         * Constructs a new ChooseClassResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.IEnterRoomResp);
+        constructor(properties?: login.IChooseClassResp);
 
-        /** EnterRoomResp RoomNum. */
-        public RoomNum: number;
+        /** ChooseClassResp Num. */
+        public Num: number;
 
-        /** EnterRoomResp Games. */
+        /** ChooseClassResp Games. */
         public Games?: (login.IGameList|null);
 
         /**
-         * Creates a new EnterRoomResp instance using the specified properties.
+         * Creates a new ChooseClassResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns EnterRoomResp instance
+         * @returns ChooseClassResp instance
          */
-        public static create(properties?: login.IEnterRoomResp): login.EnterRoomResp;
+        public static create(properties?: login.IChooseClassResp): login.ChooseClassResp;
 
         /**
-         * Encodes the specified EnterRoomResp message. Does not implicitly {@link login.EnterRoomResp.verify|verify} messages.
-         * @param message EnterRoomResp message or plain object to encode
+         * Encodes the specified ChooseClassResp message. Does not implicitly {@link login.ChooseClassResp.verify|verify} messages.
+         * @param message ChooseClassResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.IEnterRoomResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IChooseClassResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified EnterRoomResp message, length delimited. Does not implicitly {@link login.EnterRoomResp.verify|verify} messages.
-         * @param message EnterRoomResp message or plain object to encode
+         * Encodes the specified ChooseClassResp message, length delimited. Does not implicitly {@link login.ChooseClassResp.verify|verify} messages.
+         * @param message ChooseClassResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.IEnterRoomResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IChooseClassResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes an EnterRoomResp message from the specified reader or buffer.
+         * Decodes a ChooseClassResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns EnterRoomResp
+         * @returns ChooseClassResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.EnterRoomResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ChooseClassResp;
 
         /**
-         * Decodes an EnterRoomResp message from the specified reader or buffer, length delimited.
+         * Decodes a ChooseClassResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns EnterRoomResp
+         * @returns ChooseClassResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.EnterRoomResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ChooseClassResp;
 
         /**
-         * Verifies an EnterRoomResp message.
+         * Verifies a ChooseClassResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates an EnterRoomResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChooseClassResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns EnterRoomResp
+         * @returns ChooseClassResp
          */
-        public static fromObject(object: { [k: string]: any }): login.EnterRoomResp;
+        public static fromObject(object: { [k: string]: any }): login.ChooseClassResp;
 
         /**
-         * Creates a plain object from an EnterRoomResp message. Also converts values to other types if specified.
-         * @param message EnterRoomResp
+         * Creates a plain object from a ChooseClassResp message. Also converts values to other types if specified.
+         * @param message ChooseClassResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.EnterRoomResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ChooseClassResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this EnterRoomResp to JSON.
+         * Converts this ChooseClassResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a SettingGameReq. */
-    interface ISettingGameReq {
+    /** Properties of a ChooseGameReq. */
+    interface IChooseGameReq {
 
-        /** SettingGameReq Info */
-        Info?: (login.IGameInfo|null);
+        /** ChooseGameReq GameID */
+        GameID?: (number|Long|null);
     }
 
-    /** Represents a SettingGameReq. */
-    class SettingGameReq implements ISettingGameReq {
+    /** Represents a ChooseGameReq. */
+    class ChooseGameReq implements IChooseGameReq {
 
         /**
-         * Constructs a new SettingGameReq.
+         * Constructs a new ChooseGameReq.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.ISettingGameReq);
+        constructor(properties?: login.IChooseGameReq);
 
-        /** SettingGameReq Info. */
-        public Info?: (login.IGameInfo|null);
+        /** ChooseGameReq GameID. */
+        public GameID: (number|Long);
 
         /**
-         * Creates a new SettingGameReq instance using the specified properties.
+         * Creates a new ChooseGameReq instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns SettingGameReq instance
+         * @returns ChooseGameReq instance
          */
-        public static create(properties?: login.ISettingGameReq): login.SettingGameReq;
+        public static create(properties?: login.IChooseGameReq): login.ChooseGameReq;
 
         /**
-         * Encodes the specified SettingGameReq message. Does not implicitly {@link login.SettingGameReq.verify|verify} messages.
-         * @param message SettingGameReq message or plain object to encode
+         * Encodes the specified ChooseGameReq message. Does not implicitly {@link login.ChooseGameReq.verify|verify} messages.
+         * @param message ChooseGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IChooseGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SettingGameReq message, length delimited. Does not implicitly {@link login.SettingGameReq.verify|verify} messages.
-         * @param message SettingGameReq message or plain object to encode
+         * Encodes the specified ChooseGameReq message, length delimited. Does not implicitly {@link login.ChooseGameReq.verify|verify} messages.
+         * @param message ChooseGameReq message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.ISettingGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IChooseGameReq, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a SettingGameReq message from the specified reader or buffer.
+         * Decodes a ChooseGameReq message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns SettingGameReq
+         * @returns ChooseGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingGameReq;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ChooseGameReq;
 
         /**
-         * Decodes a SettingGameReq message from the specified reader or buffer, length delimited.
+         * Decodes a ChooseGameReq message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns SettingGameReq
+         * @returns ChooseGameReq
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingGameReq;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ChooseGameReq;
 
         /**
-         * Verifies a SettingGameReq message.
+         * Verifies a ChooseGameReq message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a SettingGameReq message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChooseGameReq message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns SettingGameReq
+         * @returns ChooseGameReq
          */
-        public static fromObject(object: { [k: string]: any }): login.SettingGameReq;
+        public static fromObject(object: { [k: string]: any }): login.ChooseGameReq;
 
         /**
-         * Creates a plain object from a SettingGameReq message. Also converts values to other types if specified.
-         * @param message SettingGameReq
+         * Creates a plain object from a ChooseGameReq message. Also converts values to other types if specified.
+         * @param message ChooseGameReq
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.SettingGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ChooseGameReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this SettingGameReq to JSON.
+         * Converts this ChooseGameReq to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a SettingGameResp. */
-    interface ISettingGameResp {
+    /** Properties of a ChooseGameResp. */
+    interface IChooseGameResp {
 
-        /** SettingGameResp Item */
-        Item?: (login.IGameItem|null);
+        /** ChooseGameResp GameID */
+        GameID?: (number|Long|null);
+
+        /** ChooseGameResp Tables */
+        Tables?: (login.ITableList|null);
     }
 
-    /** Represents a SettingGameResp. */
-    class SettingGameResp implements ISettingGameResp {
+    /** Represents a ChooseGameResp. */
+    class ChooseGameResp implements IChooseGameResp {
 
         /**
-         * Constructs a new SettingGameResp.
+         * Constructs a new ChooseGameResp.
          * @param [properties] Properties to set
          */
-        constructor(properties?: login.ISettingGameResp);
+        constructor(properties?: login.IChooseGameResp);
 
-        /** SettingGameResp Item. */
-        public Item?: (login.IGameItem|null);
+        /** ChooseGameResp GameID. */
+        public GameID: (number|Long);
+
+        /** ChooseGameResp Tables. */
+        public Tables?: (login.ITableList|null);
 
         /**
-         * Creates a new SettingGameResp instance using the specified properties.
+         * Creates a new ChooseGameResp instance using the specified properties.
          * @param [properties] Properties to set
-         * @returns SettingGameResp instance
+         * @returns ChooseGameResp instance
          */
-        public static create(properties?: login.ISettingGameResp): login.SettingGameResp;
+        public static create(properties?: login.IChooseGameResp): login.ChooseGameResp;
 
         /**
-         * Encodes the specified SettingGameResp message. Does not implicitly {@link login.SettingGameResp.verify|verify} messages.
-         * @param message SettingGameResp message or plain object to encode
+         * Encodes the specified ChooseGameResp message. Does not implicitly {@link login.ChooseGameResp.verify|verify} messages.
+         * @param message ChooseGameResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: login.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: login.IChooseGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified SettingGameResp message, length delimited. Does not implicitly {@link login.SettingGameResp.verify|verify} messages.
-         * @param message SettingGameResp message or plain object to encode
+         * Encodes the specified ChooseGameResp message, length delimited. Does not implicitly {@link login.ChooseGameResp.verify|verify} messages.
+         * @param message ChooseGameResp message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: login.ISettingGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: login.IChooseGameResp, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a SettingGameResp message from the specified reader or buffer.
+         * Decodes a ChooseGameResp message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns SettingGameResp
+         * @returns ChooseGameResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingGameResp;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.ChooseGameResp;
 
         /**
-         * Decodes a SettingGameResp message from the specified reader or buffer, length delimited.
+         * Decodes a ChooseGameResp message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns SettingGameResp
+         * @returns ChooseGameResp
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingGameResp;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.ChooseGameResp;
 
         /**
-         * Verifies a SettingGameResp message.
+         * Verifies a ChooseGameResp message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a SettingGameResp message from a plain object. Also converts values to their respective internal types.
+         * Creates a ChooseGameResp message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns SettingGameResp
+         * @returns ChooseGameResp
          */
-        public static fromObject(object: { [k: string]: any }): login.SettingGameResp;
+        public static fromObject(object: { [k: string]: any }): login.ChooseGameResp;
 
         /**
-         * Creates a plain object from a SettingGameResp message. Also converts values to other types if specified.
-         * @param message SettingGameResp
+         * Creates a plain object from a ChooseGameResp message. Also converts values to other types if specified.
+         * @param message ChooseGameResp
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: login.SettingGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: login.ChooseGameResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this SettingGameResp to JSON.
+         * Converts this ChooseGameResp to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SettingTableReq. */
+    interface ISettingTableReq {
+
+        /** SettingTableReq Info */
+        Info?: (login.ITableInfo|null);
+    }
+
+    /** Represents a SettingTableReq. */
+    class SettingTableReq implements ISettingTableReq {
+
+        /**
+         * Constructs a new SettingTableReq.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ISettingTableReq);
+
+        /** SettingTableReq Info. */
+        public Info?: (login.ITableInfo|null);
+
+        /**
+         * Creates a new SettingTableReq instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingTableReq instance
+         */
+        public static create(properties?: login.ISettingTableReq): login.SettingTableReq;
+
+        /**
+         * Encodes the specified SettingTableReq message. Does not implicitly {@link login.SettingTableReq.verify|verify} messages.
+         * @param message SettingTableReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ISettingTableReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingTableReq message, length delimited. Does not implicitly {@link login.SettingTableReq.verify|verify} messages.
+         * @param message SettingTableReq message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ISettingTableReq, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingTableReq message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingTableReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingTableReq;
+
+        /**
+         * Decodes a SettingTableReq message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingTableReq
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingTableReq;
+
+        /**
+         * Verifies a SettingTableReq message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingTableReq message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingTableReq
+         */
+        public static fromObject(object: { [k: string]: any }): login.SettingTableReq;
+
+        /**
+         * Creates a plain object from a SettingTableReq message. Also converts values to other types if specified.
+         * @param message SettingTableReq
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.SettingTableReq, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingTableReq to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a SettingTableResp. */
+    interface ISettingTableResp {
+
+        /** SettingTableResp Item */
+        Item?: (login.ITableItem|null);
+    }
+
+    /** Represents a SettingTableResp. */
+    class SettingTableResp implements ISettingTableResp {
+
+        /**
+         * Constructs a new SettingTableResp.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: login.ISettingTableResp);
+
+        /** SettingTableResp Item. */
+        public Item?: (login.ITableItem|null);
+
+        /**
+         * Creates a new SettingTableResp instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns SettingTableResp instance
+         */
+        public static create(properties?: login.ISettingTableResp): login.SettingTableResp;
+
+        /**
+         * Encodes the specified SettingTableResp message. Does not implicitly {@link login.SettingTableResp.verify|verify} messages.
+         * @param message SettingTableResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: login.ISettingTableResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified SettingTableResp message, length delimited. Does not implicitly {@link login.SettingTableResp.verify|verify} messages.
+         * @param message SettingTableResp message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: login.ISettingTableResp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a SettingTableResp message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns SettingTableResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): login.SettingTableResp;
+
+        /**
+         * Decodes a SettingTableResp message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns SettingTableResp
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): login.SettingTableResp;
+
+        /**
+         * Verifies a SettingTableResp message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a SettingTableResp message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns SettingTableResp
+         */
+        public static fromObject(object: { [k: string]: any }): login.SettingTableResp;
+
+        /**
+         * Creates a plain object from a SettingTableResp message. Also converts values to other types if specified.
+         * @param message SettingTableResp
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: login.SettingTableResp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this SettingTableResp to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };

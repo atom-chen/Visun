@@ -1138,8 +1138,11 @@ export namespace gamecomm {
         /** EnterGameReq GameID */
         GameID?: (number|Long|null);
 
-        /** EnterGameReq GameKey */
-        GameKey?: (string|null);
+        /** EnterGameReq TableNum */
+        TableNum?: (number|null);
+
+        /** EnterGameReq Password */
+        Password?: (string|null);
     }
 
     /** Represents an EnterGameReq. */
@@ -1154,8 +1157,11 @@ export namespace gamecomm {
         /** EnterGameReq GameID. */
         public GameID: (number|Long);
 
-        /** EnterGameReq GameKey. */
-        public GameKey: string;
+        /** EnterGameReq TableNum. */
+        public TableNum: number;
+
+        /** EnterGameReq Password. */
+        public Password: string;
 
         /**
          * Creates a new EnterGameReq instance using the specified properties.
@@ -1234,6 +1240,9 @@ export namespace gamecomm {
         /** EnterGameResp GameID */
         GameID?: (number|Long|null);
 
+        /** EnterGameResp TableNum */
+        TableNum?: (number|null);
+
         /** EnterGameResp UserInfo */
         UserInfo?: (gamecomm.IPlayerInfo|null);
     }
@@ -1249,6 +1258,9 @@ export namespace gamecomm {
 
         /** EnterGameResp GameID. */
         public GameID: (number|Long);
+
+        /** EnterGameResp TableNum. */
+        public TableNum: number;
 
         /** EnterGameResp UserInfo. */
         public UserInfo?: (gamecomm.IPlayerInfo|null);
@@ -1606,8 +1618,8 @@ export namespace gamecomm {
         /** ChangeTableResp GameID */
         GameID?: (number|Long|null);
 
-        /** ChangeTableResp TableID */
-        TableID?: (number|null);
+        /** ChangeTableResp TableNum */
+        TableNum?: (number|null);
 
         /** ChangeTableResp UserID */
         UserID?: (number|Long|null);
@@ -1625,8 +1637,8 @@ export namespace gamecomm {
         /** ChangeTableResp GameID. */
         public GameID: (number|Long);
 
-        /** ChangeTableResp TableID. */
-        public TableID: number;
+        /** ChangeTableResp TableNum. */
+        public TableNum: number;
 
         /** ChangeTableResp UserID. */
         public UserID: (number|Long);
