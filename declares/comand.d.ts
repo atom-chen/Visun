@@ -5,14 +5,14 @@ export namespace comand {
     /** Properties of a PacketData. */
     interface IPacketData {
 
-        /** PacketData MainID */
-        MainID?: (number|null);
-
-        /** PacketData SubID */
-        SubID?: (number|null);
+        /** PacketData MsgID */
+        MsgID?: (number|null);
 
         /** PacketData TransData */
         TransData?: (Uint8Array|null);
+
+        /** PacketData PageNum */
+        PageNum?: (number|null);
     }
 
     /** Represents a PacketData. */
@@ -24,14 +24,14 @@ export namespace comand {
          */
         constructor(properties?: comand.IPacketData);
 
-        /** PacketData MainID. */
-        public MainID: number;
-
-        /** PacketData SubID. */
-        public SubID: number;
+        /** PacketData MsgID. */
+        public MsgID: number;
 
         /** PacketData TransData. */
         public TransData: Uint8Array;
+
+        /** PacketData PageNum. */
+        public PageNum: number;
 
         /**
          * Creates a new PacketData instance using the specified properties.

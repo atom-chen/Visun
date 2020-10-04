@@ -15,6 +15,6 @@ export var comand_packet_define = {
 }
 
 export class comand_request {
-    public static PacketData( data:{ MainID:number, SubID:number, TransData:any } ) { comand_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static PacketData( data:{ MsgID:number, TransData:any, PageNum:number } ) { comand_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
 }
 
