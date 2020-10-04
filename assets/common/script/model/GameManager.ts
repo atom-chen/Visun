@@ -194,7 +194,7 @@ export default class GameManager extends ModelBase {
 			if(!updator){ return 0; }
 			return updator.getProgress();
 		} else {
-			return this.downProgress[gameKind] || 0;
+			return GameManager.downProgress[gameKind] || 0;
 		}
 	}
 
@@ -204,12 +204,12 @@ export default class GameManager extends ModelBase {
 			if(!updator){ return false; }
 			return updator.isUpdating();
 		} else {
-			return this.downings[gameKind] === true;
+			return GameManager.downings[gameKind] === true;
 		}
 	}
 
-	private downings = {};
-	private downProgress = {};
+	private static downings = {};
+	private static downProgress = {};
 	public downGame(gameKind:number|string) {
 		if(this.isGameDownloaded(gameKind)) { 
 			return; 
@@ -219,20 +219,20 @@ export default class GameManager extends ModelBase {
 			var updator = this.getUpdator(gameKind);
 			updator.beginUpdate();
 		} else {
-			if(!this.downings[gameKind]) {
-				this.downings[gameKind] = true;
-				this.downProgress[gameKind] = 0;
+			if(!GameManager.downings[gameKind]) {
+				GameManager.downings[gameKind] = true;
+				GameManager.downProgress[gameKind] = 0;
 				var cfg = this.clientConfig(gameKind);
 				cc.loader.loadRes(cfg.viewpath, cc.Prefab, (curCnt, totalCnt)=>{
 					if(totalCnt==0) {
-						this.downProgress[gameKind] = 0;
+						GameManager.downProgress[gameKind] = 0;
 					} else {
-						this.downProgress[gameKind] = curCnt/totalCnt;
+						GameManager.downProgress[gameKind] = curCnt/totalCnt;
 					}
 					EventCenter.getInstance().fire(EventDefine.down_progress, gameKind, curCnt, totalCnt);
 				}, (err,rsc)=>{
 					GameManager.getInstance().doEnter();
-					GameManager.getInstance().downings[gameKind] = false;
+					GameManager.downings[gameKind] = false;
 				});
 			}
 		}
@@ -271,8 +271,6 @@ export default class GameManager extends ModelBase {
 		gamecomm_request.ExitGameReq({GameID:this.gameId});
 		if(bForce) {
 			SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name, 0);
-		} else {
-		//	SceneManager.turn2Scene(KernelUIDefine.LobbyScene.name);
 		}
 	}
 
