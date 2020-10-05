@@ -87,7 +87,7 @@ export class login_request {
     public static ReconnectReq( data:{ Account:string, Password:string, MachineCode:string, PlatformID:number } ) { login_packet_define[17].sendToChannel(ChannelDefine.game, data, false); }
     public static ReconnectResp( data:{ MainInfo:any, InGameID:number, InTableNum:number } ) { login_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseClassReq( data:{ Num:number, TableKey:string } ) { login_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
-    public static ChooseClassResp( data:{ Num:number, Games:any } ) { login_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
+    public static ChooseClassResp( data:{ Games:any } ) { login_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseGameReq( data:{ Info:any } ) { login_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseGameResp( data:{ Tables:any } ) { login_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingTableReq( data:{ Info:any } ) { login_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }

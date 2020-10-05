@@ -65,8 +65,8 @@ export class gamecomm_request {
     public static PlayerRecord( data:{ User:any, Twice:number, Ranking:number, Bankroll:number, WinLos:number } ) { gamecomm_packet_define[35].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecord( data:{ CardInfo:any, IsWon:any } ) { gamecomm_packet_define[36].sendToChannel(ChannelDefine.game, data, false); }
     public static GameRecordList( data:{ list:any[] } ) { gamecomm_packet_define[37].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterGameReq( data:{ GameID:number, TableNum:number, Password:string, ChairNum:number } ) { gamecomm_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
-    public static EnterGameResp( data:{ GameID:number, TableNum:number, ChairNum:number, UserInfo:any } ) { gamecomm_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterGameReq( data:{ GameID:number, Password:string, ChairNum:number } ) { gamecomm_packet_define[38].sendToChannel(ChannelDefine.game, data, false); }
+    public static EnterGameResp( data:{ GameID:number, ChairNum:number, UserInfo:any } ) { gamecomm_packet_define[39].sendToChannel(ChannelDefine.game, data, false); }
     public static ExitGameReq( data:{ GameID:number } ) { gamecomm_packet_define[40].sendToChannel(ChannelDefine.game, data, false); }
     public static ExitGameResp( data:{ GameID:number, UserID:number } ) { gamecomm_packet_define[41].sendToChannel(ChannelDefine.game, data, false); }
     public static ChangeTableReq( data:{ GameID:number } ) { gamecomm_packet_define[42].sendToChannel(ChannelDefine.game, data, false); }

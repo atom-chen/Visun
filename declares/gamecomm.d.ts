@@ -1138,9 +1138,6 @@ export namespace gamecomm {
         /** EnterGameReq GameID */
         GameID?: (number|Long|null);
 
-        /** EnterGameReq TableNum */
-        TableNum?: (number|null);
-
         /** EnterGameReq Password */
         Password?: (string|null);
 
@@ -1159,9 +1156,6 @@ export namespace gamecomm {
 
         /** EnterGameReq GameID. */
         public GameID: (number|Long);
-
-        /** EnterGameReq TableNum. */
-        public TableNum: number;
 
         /** EnterGameReq Password. */
         public Password: string;
@@ -1246,9 +1240,6 @@ export namespace gamecomm {
         /** EnterGameResp GameID */
         GameID?: (number|Long|null);
 
-        /** EnterGameResp TableNum */
-        TableNum?: (number|null);
-
         /** EnterGameResp ChairNum */
         ChairNum?: (number|null);
 
@@ -1267,9 +1258,6 @@ export namespace gamecomm {
 
         /** EnterGameResp GameID. */
         public GameID: (number|Long);
-
-        /** EnterGameResp TableNum. */
-        public TableNum: number;
 
         /** EnterGameResp ChairNum. */
         public ChairNum: number;

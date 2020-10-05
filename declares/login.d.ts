@@ -2249,9 +2249,6 @@ export namespace login {
     /** Properties of a ChooseClassResp. */
     interface IChooseClassResp {
 
-        /** ChooseClassResp Num */
-        Num?: (number|null);
-
         /** ChooseClassResp Games */
         Games?: (login.IGameList|null);
     }
@@ -2264,9 +2261,6 @@ export namespace login {
          * @param [properties] Properties to set
          */
         constructor(properties?: login.IChooseClassResp);
-
-        /** ChooseClassResp Num. */
-        public Num: number;
 
         /** ChooseClassResp Games. */
         public Games?: (login.IGameList|null);

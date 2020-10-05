@@ -125,7 +125,7 @@ message TaskItem{
 
 //分类项
 message ClassItem{
-  uint32 Num = 1;       //序号(界面排序参考项:非必要)
+  uint32 Num = 1;       //序号[必要项]
   string Name = 2;      //分类名称
   string Key = 3;       //分类密钥(自定义分类可用)
 }
@@ -133,14 +133,14 @@ message ClassItem{
 
 //子游戏
 message GameItem{
-  uint32 Num = 1;       //序号
+  uint32 Num = 1;       //序号 (界面排序参考项:非必要)
   GameInfo Info = 2;    //游戏信息
 }
 
 
 //桌子
 message TableItem{
-  uint32 Num = 1;        //序号
+  uint32 Num = 1;        //序号 (界面排序参考项:非必要)
   uint64 GameID = 2;     //游戏ID
   TableInfo Info = 3;    //桌子信息
 }
@@ -226,24 +226,23 @@ message ReconnectResp{
   uint64 InTableNum = 3;   //所在桌子ID(=0时,没有进桌)
 }
 
-
+////////////////////////////////////////////////////
 //选择分类
 message ChooseClassReq{
   uint32 Num = 1;           //分类编号
   string TableKey = 2;      //分类密钥
 }
 message ChooseClassResp{
-  uint32 Num = 1;           //分类编号
-  GameList Games = 2;       //游戏列表
+  GameList Games = 1;       //游戏列表
 }
 
 
 //选择游戏
 message ChooseGameReq{
-  GameInfo Info = 1;         //游戏(kindID不可缺省)
+  GameInfo Info = 1;         //游戏(kindID level不可缺省)
 }
 message ChooseGameResp{
-  TableList Tables = 1;      //桌子列表
+  TableList Tables = 1;      //牌桌列表
 }
 
 //配置游戏(房卡模式)

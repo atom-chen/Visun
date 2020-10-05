@@ -2710,7 +2710,6 @@ $root.go = (function() {
         }
 
         EnterGameReq.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        EnterGameReq.prototype.TableNum = 0;
         EnterGameReq.prototype.Password = "";
         EnterGameReq.prototype.ChairNum = 0;
 
@@ -2723,12 +2722,10 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint64(message.GameID);
-            if (message.TableNum != null && Object.hasOwnProperty.call(message, "TableNum"))
-                writer.uint32(16).uint32(message.TableNum);
             if (message.Password != null && Object.hasOwnProperty.call(message, "Password"))
-                writer.uint32(26).string(message.Password);
+                writer.uint32(18).string(message.Password);
             if (message.ChairNum != null && Object.hasOwnProperty.call(message, "ChairNum"))
-                writer.uint32(32).uint32(message.ChairNum);
+                writer.uint32(24).uint32(message.ChairNum);
             return writer;
         };
 
@@ -2747,12 +2744,9 @@ $root.go = (function() {
                     message.GameID = reader.uint64();
                     break;
                 case 2:
-                    message.TableNum = reader.uint32();
-                    break;
-                case 3:
                     message.Password = reader.string();
                     break;
-                case 4:
+                case 3:
                     message.ChairNum = reader.uint32();
                     break;
                 default:
@@ -2775,9 +2769,6 @@ $root.go = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
                     return "GameID: integer|Long expected";
-            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
-                if (!$util.isInteger(message.TableNum))
-                    return "TableNum: integer expected";
             if (message.Password != null && message.hasOwnProperty("Password"))
                 if (!$util.isString(message.Password))
                     return "Password: string expected";
@@ -2800,8 +2791,6 @@ $root.go = (function() {
                     message.GameID = object.GameID;
                 else if (typeof object.GameID === "object")
                     message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
-            if (object.TableNum != null)
-                message.TableNum = object.TableNum >>> 0;
             if (object.Password != null)
                 message.Password = String(object.Password);
             if (object.ChairNum != null)
@@ -2819,7 +2808,6 @@ $root.go = (function() {
                     object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.GameID = options.longs === String ? "0" : 0;
-                object.TableNum = 0;
                 object.Password = "";
                 object.ChairNum = 0;
             }
@@ -2828,8 +2816,6 @@ $root.go = (function() {
                     object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
                 else
                     object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
-            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
-                object.TableNum = message.TableNum;
             if (message.Password != null && message.hasOwnProperty("Password"))
                 object.Password = message.Password;
             if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
@@ -2854,7 +2840,6 @@ $root.go = (function() {
         }
 
         EnterGameResp.prototype.GameID = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
-        EnterGameResp.prototype.TableNum = 0;
         EnterGameResp.prototype.ChairNum = 0;
         EnterGameResp.prototype.UserInfo = null;
 
@@ -2867,12 +2852,10 @@ $root.go = (function() {
                 writer = $Writer.create();
             if (message.GameID != null && Object.hasOwnProperty.call(message, "GameID"))
                 writer.uint32(8).uint64(message.GameID);
-            if (message.TableNum != null && Object.hasOwnProperty.call(message, "TableNum"))
-                writer.uint32(16).uint32(message.TableNum);
             if (message.ChairNum != null && Object.hasOwnProperty.call(message, "ChairNum"))
-                writer.uint32(24).uint32(message.ChairNum);
+                writer.uint32(16).uint32(message.ChairNum);
             if (message.UserInfo != null && Object.hasOwnProperty.call(message, "UserInfo"))
-                $root.go.PlayerInfo.encode(message.UserInfo, writer.uint32(34).fork()).ldelim();
+                $root.go.PlayerInfo.encode(message.UserInfo, writer.uint32(26).fork()).ldelim();
             return writer;
         };
 
@@ -2891,12 +2874,9 @@ $root.go = (function() {
                     message.GameID = reader.uint64();
                     break;
                 case 2:
-                    message.TableNum = reader.uint32();
-                    break;
-                case 3:
                     message.ChairNum = reader.uint32();
                     break;
-                case 4:
+                case 3:
                     message.UserInfo = $root.go.PlayerInfo.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2919,9 +2899,6 @@ $root.go = (function() {
             if (message.GameID != null && message.hasOwnProperty("GameID"))
                 if (!$util.isInteger(message.GameID) && !(message.GameID && $util.isInteger(message.GameID.low) && $util.isInteger(message.GameID.high)))
                     return "GameID: integer|Long expected";
-            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
-                if (!$util.isInteger(message.TableNum))
-                    return "TableNum: integer expected";
             if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
                 if (!$util.isInteger(message.ChairNum))
                     return "ChairNum: integer expected";
@@ -2946,8 +2923,6 @@ $root.go = (function() {
                     message.GameID = object.GameID;
                 else if (typeof object.GameID === "object")
                     message.GameID = new $util.LongBits(object.GameID.low >>> 0, object.GameID.high >>> 0).toNumber(true);
-            if (object.TableNum != null)
-                message.TableNum = object.TableNum >>> 0;
             if (object.ChairNum != null)
                 message.ChairNum = object.ChairNum >>> 0;
             if (object.UserInfo != null) {
@@ -2968,7 +2943,6 @@ $root.go = (function() {
                     object.GameID = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.GameID = options.longs === String ? "0" : 0;
-                object.TableNum = 0;
                 object.ChairNum = 0;
                 object.UserInfo = null;
             }
@@ -2977,8 +2951,6 @@ $root.go = (function() {
                     object.GameID = options.longs === String ? String(message.GameID) : message.GameID;
                 else
                     object.GameID = options.longs === String ? $util.Long.prototype.toString.call(message.GameID) : options.longs === Number ? new $util.LongBits(message.GameID.low >>> 0, message.GameID.high >>> 0).toNumber(true) : message.GameID;
-            if (message.TableNum != null && message.hasOwnProperty("TableNum"))
-                object.TableNum = message.TableNum;
             if (message.ChairNum != null && message.hasOwnProperty("ChairNum"))
                 object.ChairNum = message.ChairNum;
             if (message.UserInfo != null && message.hasOwnProperty("UserInfo"))
