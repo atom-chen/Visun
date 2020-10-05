@@ -229,25 +229,26 @@ message ReconnectResp{
 ////////////////////////////////////////////////////
 //选择分类
 message ChooseClassReq{
-  uint32 Num = 1;           //分类编号
-  string TableKey = 2;      //分类密钥
+  uint32 Num = 1;             //分类编号
+  string TableKey = 2;        //分类密钥
 }
 message ChooseClassResp{
-  GameList Games = 1;       //游戏列表
+  GameList Games = 1;         //游戏列表
 }
 
 
 //选择游戏
 message ChooseGameReq{
-  GameInfo Info = 1;         //游戏(kindID level不可缺省)
+  GameInfo Info = 1;          //游戏(kindID level不可缺省)
 }
 message ChooseGameResp{
-  TableList Tables = 1;      //牌桌列表
+  TableList Tables = 1;       //牌桌列表
 }
 
 //配置游戏(房卡模式)
 message SettingTableReq {
-  TableInfo Info = 1;//配置信息
+  GameInfo GInfo = 1;         //游戏信息
+  TableInfo TInfo = 2;        //桌子信息
 }
 message SettingTableResp {
   TableItem Item = 1;

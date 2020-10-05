@@ -90,7 +90,7 @@ export class login_request {
     public static ChooseClassResp( data:{ Games:any } ) { login_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseGameReq( data:{ Info:any } ) { login_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseGameResp( data:{ Tables:any } ) { login_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
-    public static SettingTableReq( data:{ Info:any } ) { login_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
+    public static SettingTableReq( data:{ GInfo:any, TInfo:any } ) { login_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingTableResp( data:{ Item:any } ) { login_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultPopResp( data:{ Flag:number, Title:string, Hints:string } ) { login_packet_define[26].sendToChannel(ChannelDefine.game, data, false); }

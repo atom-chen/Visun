@@ -3504,7 +3504,8 @@ $root.login = (function() {
                         this[keys[i]] = properties[keys[i]];
         }
 
-        SettingTableReq.prototype.Info = null;
+        SettingTableReq.prototype.GInfo = null;
+        SettingTableReq.prototype.TInfo = null;
 
         SettingTableReq.create = function create(properties) {
             return new SettingTableReq(properties);
@@ -3513,8 +3514,10 @@ $root.login = (function() {
         SettingTableReq.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.Info != null && Object.hasOwnProperty.call(message, "Info"))
-                $root.login.TableInfo.encode(message.Info, writer.uint32(10).fork()).ldelim();
+            if (message.GInfo != null && Object.hasOwnProperty.call(message, "GInfo"))
+                $root.login.GameInfo.encode(message.GInfo, writer.uint32(10).fork()).ldelim();
+            if (message.TInfo != null && Object.hasOwnProperty.call(message, "TInfo"))
+                $root.login.TableInfo.encode(message.TInfo, writer.uint32(18).fork()).ldelim();
             return writer;
         };
 
@@ -3530,7 +3533,10 @@ $root.login = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.Info = $root.login.TableInfo.decode(reader, reader.uint32());
+                    message.GInfo = $root.login.GameInfo.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.TInfo = $root.login.TableInfo.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -3549,10 +3555,15 @@ $root.login = (function() {
         SettingTableReq.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.Info != null && message.hasOwnProperty("Info")) {
-                var error = $root.login.TableInfo.verify(message.Info);
+            if (message.GInfo != null && message.hasOwnProperty("GInfo")) {
+                var error = $root.login.GameInfo.verify(message.GInfo);
                 if (error)
-                    return "Info." + error;
+                    return "GInfo." + error;
+            }
+            if (message.TInfo != null && message.hasOwnProperty("TInfo")) {
+                var error = $root.login.TableInfo.verify(message.TInfo);
+                if (error)
+                    return "TInfo." + error;
             }
             return null;
         };
@@ -3561,10 +3572,15 @@ $root.login = (function() {
             if (object instanceof $root.login.SettingTableReq)
                 return object;
             var message = new $root.login.SettingTableReq();
-            if (object.Info != null) {
-                if (typeof object.Info !== "object")
-                    throw TypeError(".login.SettingTableReq.Info: object expected");
-                message.Info = $root.login.TableInfo.fromObject(object.Info);
+            if (object.GInfo != null) {
+                if (typeof object.GInfo !== "object")
+                    throw TypeError(".login.SettingTableReq.GInfo: object expected");
+                message.GInfo = $root.login.GameInfo.fromObject(object.GInfo);
+            }
+            if (object.TInfo != null) {
+                if (typeof object.TInfo !== "object")
+                    throw TypeError(".login.SettingTableReq.TInfo: object expected");
+                message.TInfo = $root.login.TableInfo.fromObject(object.TInfo);
             }
             return message;
         };
@@ -3573,10 +3589,14 @@ $root.login = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.Info = null;
-            if (message.Info != null && message.hasOwnProperty("Info"))
-                object.Info = $root.login.TableInfo.toObject(message.Info, options);
+            if (options.defaults) {
+                object.GInfo = null;
+                object.TInfo = null;
+            }
+            if (message.GInfo != null && message.hasOwnProperty("GInfo"))
+                object.GInfo = $root.login.GameInfo.toObject(message.GInfo, options);
+            if (message.TInfo != null && message.hasOwnProperty("TInfo"))
+                object.TInfo = $root.login.TableInfo.toObject(message.TInfo, options);
             return object;
         };
 

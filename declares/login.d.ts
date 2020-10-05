@@ -2519,8 +2519,11 @@ export namespace login {
     /** Properties of a SettingTableReq. */
     interface ISettingTableReq {
 
-        /** SettingTableReq Info */
-        Info?: (login.ITableInfo|null);
+        /** SettingTableReq GInfo */
+        GInfo?: (login.IGameInfo|null);
+
+        /** SettingTableReq TInfo */
+        TInfo?: (login.ITableInfo|null);
     }
 
     /** Represents a SettingTableReq. */
@@ -2532,8 +2535,11 @@ export namespace login {
          */
         constructor(properties?: login.ISettingTableReq);
 
-        /** SettingTableReq Info. */
-        public Info?: (login.ITableInfo|null);
+        /** SettingTableReq GInfo. */
+        public GInfo?: (login.IGameInfo|null);
+
+        /** SettingTableReq TInfo. */
+        public TInfo?: (login.ITableInfo|null);
 
         /**
          * Creates a new SettingTableReq instance using the specified properties.
