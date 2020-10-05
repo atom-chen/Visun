@@ -69,12 +69,12 @@ export var login_packet_define = {
 export class login_request {
     public static UserInfo( data:{ UserID:number, Name:string, Account:string, Password:string, FaceID:number, Gender:number, Age:number, VIP:number, Level:number, Gold:number, PassPortID:string, RealName:string, PhoneNum:string, Email:string, Address:string, Identity:string, AgentID:number, ReferralCode:string, ClientAddr:string, ServerAddr:string, MachineCode:string } ) { login_packet_define[0].sendToChannel(ChannelDefine.game, data, false); }
     public static TableInfo( data:{ HostID:number, Name:string, Password:string, State:any, EnterScore:number, LessScore:number, PlayScore:number, Commission:number, MaxChair:number, Amount:number, MaxOnline:number } ) { login_packet_define[1].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameInfo( data:{ Type:any, KindID:number, Level:number, Scene:any } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameInfo( data:{ Type:any, KindID:number, Level:number, Scene:any, Name:string } ) { login_packet_define[2].sendToChannel(ChannelDefine.game, data, false); }
     public static MasterInfo( data:{ UserInfo:any, Classes:any, Tasks:any } ) { login_packet_define[3].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskItem( data:{ TaskID:number, Twice:number, Hints:string } ) { login_packet_define[4].sendToChannel(ChannelDefine.game, data, false); }
     public static ClassItem( data:{ Num:number, Name:string, Key:string } ) { login_packet_define[5].sendToChannel(ChannelDefine.game, data, false); }
-    public static GameItem( data:{ ID:number, Info:any } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
-    public static TableItem( data:{ GameID:number, TableNum:number, Info:any } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
+    public static GameItem( data:{ Num:number, Info:any } ) { login_packet_define[6].sendToChannel(ChannelDefine.game, data, false); }
+    public static TableItem( data:{ Num:number, GameID:number, Info:any } ) { login_packet_define[7].sendToChannel(ChannelDefine.game, data, false); }
     public static TaskList( data:{ Task:any[] } ) { login_packet_define[8].sendToChannel(ChannelDefine.game, data, false); }
     public static ClassList( data:{ classify:any[] } ) { login_packet_define[9].sendToChannel(ChannelDefine.game, data, false); }
     public static GameList( data:{ Items:any[] } ) { login_packet_define[10].sendToChannel(ChannelDefine.game, data, false); }
@@ -88,8 +88,8 @@ export class login_request {
     public static ReconnectResp( data:{ MainInfo:any, InGameID:number, InTableNum:number } ) { login_packet_define[18].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseClassReq( data:{ Num:number, TableKey:string } ) { login_packet_define[19].sendToChannel(ChannelDefine.game, data, false); }
     public static ChooseClassResp( data:{ Num:number, Games:any } ) { login_packet_define[20].sendToChannel(ChannelDefine.game, data, false); }
-    public static ChooseGameReq( data:{ GameID:number } ) { login_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
-    public static ChooseGameResp( data:{ GameID:number, Tables:any } ) { login_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
+    public static ChooseGameReq( data:{ Info:any } ) { login_packet_define[21].sendToChannel(ChannelDefine.game, data, false); }
+    public static ChooseGameResp( data:{ Tables:any } ) { login_packet_define[22].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingTableReq( data:{ Info:any } ) { login_packet_define[23].sendToChannel(ChannelDefine.game, data, false); }
     public static SettingTableResp( data:{ Item:any } ) { login_packet_define[24].sendToChannel(ChannelDefine.game, data, false); }
     public static ResultResp( data:{ State:number, Hints:string } ) { login_packet_define[25].sendToChannel(ChannelDefine.game, data, false); }

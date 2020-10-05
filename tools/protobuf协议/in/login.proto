@@ -83,7 +83,7 @@ message UserInfo{
 //桌子信息
 message TableInfo{
   uint64 HostID = 1;       //房主ID
-  string Name = 2;         //桌子名称
+  string Name = 2;         //桌子名称：如李寻欢 李诚等
   string Password = 3;     //桌子密钥
   TableState State = 4;    //桌子状态
 
@@ -103,6 +103,7 @@ message GameInfo{
   uint64 KindID = 2;      //游戏种类标识
   uint32 Level = 3;       //游戏类别 0:普通 1:中级 2:高级 3:积分排位 4:淘汰制排位
   GameScene Scene = 4;    //游戏场景
+  string Name = 5;        //游戏名称：如高级麻将房 四川麻将 广东麻将 跑胡子等等
 }
 
 //主页信息
@@ -124,7 +125,7 @@ message TaskItem{
 
 //分类项
 message ClassItem{
-  uint32 Num = 1;
+  uint32 Num = 1;       //序号(界面排序参考项:非必要)
   string Name = 2;      //分类名称
   string Key = 3;       //分类密钥(自定义分类可用)
 }
@@ -132,16 +133,16 @@ message ClassItem{
 
 //子游戏
 message GameItem{
-  uint64 ID = 1;    //即:GameID(=0 无效游戏)
-  GameInfo Info = 2;//子游戏 注:不提供游戏密钥信息
+  uint32 Num = 1;       //序号
+  GameInfo Info = 2;    //游戏信息
 }
 
 
 //桌子
 message TableItem{
-  uint64 GameID = 1;         //游戏ID
-  uint32 TableNum = 2;       //桌子号码(=0 无效桌子)
-  TableInfo Info = 3;        //桌子信息
+  uint32 Num = 1;        //序号
+  uint64 GameID = 2;     //游戏ID
+  TableInfo Info = 3;    //桌子信息
 }
 
 
@@ -229,7 +230,7 @@ message ReconnectResp{
 //选择分类
 message ChooseClassReq{
   uint32 Num = 1;           //分类编号
-  string TableKey = 2;       //分类密钥
+  string TableKey = 2;      //分类密钥
 }
 message ChooseClassResp{
   uint32 Num = 1;           //分类编号
@@ -239,11 +240,10 @@ message ChooseClassResp{
 
 //选择游戏
 message ChooseGameReq{
-  uint64 GameID = 1;         //游戏ID
+  GameInfo Info = 1;         //游戏(kindID不可缺省)
 }
 message ChooseGameResp{
-  uint64 GameID = 1;         //游戏ID
-  TableList Tables = 2;      //桌子列表
+  TableList Tables = 1;      //桌子列表
 }
 
 //配置游戏(房卡模式)

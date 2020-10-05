@@ -412,6 +412,9 @@ export namespace login {
 
         /** GameInfo Scene */
         Scene?: (login.GameScene|null);
+
+        /** GameInfo Name */
+        Name?: (string|null);
     }
 
     /** Represents a GameInfo. */
@@ -434,6 +437,9 @@ export namespace login {
 
         /** GameInfo Scene. */
         public Scene: login.GameScene;
+
+        /** GameInfo Name. */
+        public Name: string;
 
         /**
          * Creates a new GameInfo instance using the specified properties.
@@ -815,8 +821,8 @@ export namespace login {
     /** Properties of a GameItem. */
     interface IGameItem {
 
-        /** GameItem ID */
-        ID?: (number|Long|null);
+        /** GameItem Num */
+        Num?: (number|null);
 
         /** GameItem Info */
         Info?: (login.IGameInfo|null);
@@ -831,8 +837,8 @@ export namespace login {
          */
         constructor(properties?: login.IGameItem);
 
-        /** GameItem ID. */
-        public ID: (number|Long);
+        /** GameItem Num. */
+        public Num: number;
 
         /** GameItem Info. */
         public Info?: (login.IGameInfo|null);
@@ -911,11 +917,11 @@ export namespace login {
     /** Properties of a TableItem. */
     interface ITableItem {
 
+        /** TableItem Num */
+        Num?: (number|null);
+
         /** TableItem GameID */
         GameID?: (number|Long|null);
-
-        /** TableItem TableNum */
-        TableNum?: (number|null);
 
         /** TableItem Info */
         Info?: (login.ITableInfo|null);
@@ -930,11 +936,11 @@ export namespace login {
          */
         constructor(properties?: login.ITableItem);
 
+        /** TableItem Num. */
+        public Num: number;
+
         /** TableItem GameID. */
         public GameID: (number|Long);
-
-        /** TableItem TableNum. */
-        public TableNum: number;
 
         /** TableItem Info. */
         public Info?: (login.ITableInfo|null);
@@ -2339,8 +2345,8 @@ export namespace login {
     /** Properties of a ChooseGameReq. */
     interface IChooseGameReq {
 
-        /** ChooseGameReq GameID */
-        GameID?: (number|Long|null);
+        /** ChooseGameReq Info */
+        Info?: (login.IGameInfo|null);
     }
 
     /** Represents a ChooseGameReq. */
@@ -2352,8 +2358,8 @@ export namespace login {
          */
         constructor(properties?: login.IChooseGameReq);
 
-        /** ChooseGameReq GameID. */
-        public GameID: (number|Long);
+        /** ChooseGameReq Info. */
+        public Info?: (login.IGameInfo|null);
 
         /**
          * Creates a new ChooseGameReq instance using the specified properties.
@@ -2429,9 +2435,6 @@ export namespace login {
     /** Properties of a ChooseGameResp. */
     interface IChooseGameResp {
 
-        /** ChooseGameResp GameID */
-        GameID?: (number|Long|null);
-
         /** ChooseGameResp Tables */
         Tables?: (login.ITableList|null);
     }
@@ -2444,9 +2447,6 @@ export namespace login {
          * @param [properties] Properties to set
          */
         constructor(properties?: login.IChooseGameResp);
-
-        /** ChooseGameResp GameID. */
-        public GameID: (number|Long);
 
         /** ChooseGameResp Tables. */
         public Tables?: (login.ITableList|null);
